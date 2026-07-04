@@ -1,0 +1,53 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "gemma_execution_authorized": false,
+    "harness_execution_authorized": false,
+    "model_execution_authorized": false,
+    "runtime_authorized": false,
+    "scoring_authorized": false,
+    "source_emission_authorized": false,
+    "training_authorized": false
+  },
+  "failure_taxonomy": [
+    "syntax_failure",
+    "dependency_import_failure",
+    "symbol_binding_failure",
+    "runtime_contract_failure",
+    "test_assertion_failure",
+    "timeout_failure",
+    "unknown_runtime_failure"
+  ],
+  "failures": [],
+  "phases": [
+    "prepare",
+    "verify",
+    "normalize_failure",
+    "repair_decision",
+    "reverify_or_abstain"
+  ],
+  "repair_actions": [
+    "REPAIR_PATCH",
+    "REPAIR_IMPORT",
+    "REPAIR_SYMBOL_BINDING",
+    "REPAIR_CONTRACT",
+    "RETRIEVE_MORE",
+    "ABSTAIN_UNSAFE",
+    "ACCEPT_VERIFIED"
+  ],
+  "verifier_inputs": [
+    "candidate_patch",
+    "bounded_decoder_output",
+    "repo_state_packet",
+    "runtime_trace_packet",
+    "dependency_capability_card"
+  ],
+  "verifier_outputs": [
+    "syntax_result",
+    "test_result",
+    "runtime_trace_packet",
+    "failure_type",
+    "repair_route",
+    "accept_reject_state"
+  ]
+}

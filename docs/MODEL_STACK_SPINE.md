@@ -52,6 +52,58 @@ observe -> orient -> plan -> act -> verify -> repair -> learn
 
 Each model family must have a concrete input, output, validator, and authority boundary.
 
+
+## Low-Level Training Mechanics Layer
+
+Stage8698 re-grepped Codex sessions for foundational AI/training mechanics so these concepts do not get lost behind high-level module names. These are not optional theory notes; they are the substrate that determines whether the recovered 100M maintainer can be trained, audited, and debugged correctly.
+
+| Mechanic | Role in the 100M maintainer | Current recovery status |
+| --- | --- | --- |
+| Tensor shape / dtype / device | Prevent invalid batches, broken masks, bad head dimensions, CPU/GPU mismatches | indexed / partially executable |
+| MatMul / dot product / linear projection | Core of embeddings, attention projections, MLPs, classifiers, retrieval heads | indexed / partially executable |
+| Embeddings / tokenizer / vocab | Converts structured text/code/control tokens into trainable vectors; guards vocab compatibility | indexed / partially executable |
+| Attention / QKV / masks | Routes evidence across tokens; controls causal vs encoder-decoder visibility | indexed / partially executable |
+| Positional encoding / RoPE | Preserves token/order/location information for code, traces, and graph packets | indexed / partially executable |
+| MLP / activation / normalization | Per-token feature transformation; stability through GELU/SiLU and LayerNorm/RMSNorm | indexed / partially executable |
+| Logits / CE / loss masks | Converts predictions into supervised gradients while keeping decoder/denoise/runtime losses closed unless authorized | indexed / partially executable |
+| Autograd / backward / gradients | Explains how failures change parameters; required for gradient norm and attribution telemetry | indexed / partially executable |
+| Optimizer / scheduler | Controls parameter updates; AdamW, warmup, cosine, weight decay must be logged in training cards | indexed / partially executable |
+| Dataset / dataloader / batching | Preserves split boundaries, row ordering controls, collate rules, loss masks, and caps | indexed / partially executable |
+| Checkpoint / seed / reproducibility | Required for repeatable probes and rollback; no final checkpoint export unless explicitly authorized | indexed / partially executable |
+| Mixed precision / memory | Needed for efficient training, but currently documented-not-executable; do not depend on it for correctness yet | documented-not-executable |
+| Calibration / entropy / confidence | Supports abstain/retrieve/correct thresholds and high-confidence wrong detection | indexed / partially executable |
+| Activation / logit interpretability | Needed for activation cache/probe/logit-lens work; currently documented-not-executable beyond telemetry metrics | documented-not-executable |
+| State-space / selective scan / Mamba | Future repo-stream compressor after context/retrieval packets stabilize | indexed concept, executable compressor still missing |
+| GNN / graph message passing | Future learned repo-graph encoder; graph substrate exists, executable GNN encoder still missing | documented-not-executable |
+| Denoise / diffusion | Repair trajectory for bad outputs, masked spans, verifier failures | indexed / partially executable |
+| Dataset cartography / attribution | Future dataset-example dynamics and influence layer for curriculum compiler | indexed / partially executable |
+
+### Practical Rule
+
+Before reopening any training probe, the run card must be able to answer:
+
+```text
+what tensors entered the model
+what shapes and masks they had
+which logits were supervised
+which losses were enabled
+which gradients were produced
+which optimizer/scheduler settings updated parameters
+which telemetry proves the model learned or failed
+```
+
+If a run cannot answer those, it is not evidence for model intelligence. It is only an uncontrolled execution attempt.
+
+### Current Low-Level Gaps
+
+Stage8698 found no concept group that exists in sessions but is totally absent from recovery. The remaining low-level gaps are narrower:
+
+- `mixed_precision_memory`: documented, but no executable memory/mixed-precision policy module yet.
+- `activation_interpretability`: documented and telemetry-adjacent, but no activation cache, patching, logit-lens, or gradient-attribution module yet.
+- `graph_gnn`: repo graphs exist, but no executable GNN/message-passing encoder module yet.
+
+These should stay behind telemetry/runtime recovery. Do not build GNN/Mamba/mixed-precision training before the deterministic context packer, telemetry, and verifier loop are stable.
+
 ## Canonical Stack
 
 | Layer | Model / module family | Primary job | Output |

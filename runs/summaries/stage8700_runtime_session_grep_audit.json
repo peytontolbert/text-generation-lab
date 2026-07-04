@@ -1,0 +1,78 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "categories": {
+    "runtime_authority_gate": {
+      "local_files_hit_count": 319,
+      "session_total_hits": 25,
+      "status": "recovered_as_closed_authority_contract"
+    },
+    "runtime_contract": {
+      "local_files_hit_count": 7,
+      "session_total_hits": 8,
+      "status": "partially_recovered"
+    },
+    "runtime_execution_smoke": {
+      "local_files_hit_count": 4,
+      "session_total_hits": 5,
+      "status": "partially_recovered"
+    },
+    "runtime_forbidden_paths": {
+      "local_files_hit_count": 23,
+      "session_total_hits": 2,
+      "status": "partially_recovered"
+    },
+    "runtime_safety_cleanup": {
+      "local_files_hit_count": 33,
+      "session_total_hits": 1,
+      "status": "partially_recovered"
+    },
+    "runtime_trace_failure": {
+      "local_files_hit_count": 38,
+      "session_total_hits": 10,
+      "status": "recovered_as_trace_normalizer"
+    },
+    "runtime_verifier_loop": {
+      "local_files_hit_count": 18,
+      "session_total_hits": 10,
+      "status": "session_evidence_found_but_executable_loop_missing"
+    }
+  },
+  "created_at_utc": "2026-07-04T22:11:36Z",
+  "decision": "Targeted Codex-session runtime grep found runtime authority/contract/trace evidence already partially recovered, but the executable runtime verifier loop remains missing and must stay closed.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "categories": 7,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "missing_or_partial_categories": [
+      "runtime_verifier_loop"
+    ],
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authority_opened": false,
+    "runtime_authorized": false,
+    "runtime_verifier_loop_recovered": false,
+    "scoring_authorized_next": false,
+    "session_files_scanned": 150,
+    "source_emission_authorized": false
+  },
+  "name": "stage8700_runtime_session_grep_audit",
+  "next_best_step": "Recover runtime_verifier_loop as a non-executing contract first, then executable verifier harness only after explicit authorization; keep data mining/training/runtime closed.",
+  "passed": true,
+  "stage": 8700,
+  "stage_name": "stage8700_runtime_session_grep_audit"
+}
