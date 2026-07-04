@@ -1,0 +1,473 @@
+{
+  "artifacts": {
+    "lineage": "configs/software_maintainer/source_inventory_lineage_registry_stage8663.json",
+    "normalizer": "configs/software_maintainer/shared_feature_normalizer_stage8664.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T20:14:57Z",
+  "decision": "Recovered manifests fail leakage/locked-eval boundary controls.",
+  "metrics": {
+    "cross_split_exact_visible_input_hashes_report_only": 1080,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [
+      "visible_target_hits:360"
+    ],
+    "forbidden_rows": 0,
+    "locked_ref_hits": 0,
+    "manifests": 7,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "rows_total": 4308,
+    "runtime_authorized": false,
+    "visible_target_hits": 360
+  },
+  "next_best_step": "Run retrieval baseline card and then apply these controls to new graph/symbol candidate builders.",
+  "passed": false,
+  "per_manifest": [
+    {
+      "exists": true,
+      "forbidden_authority_or_loss_true": 0,
+      "input_hash_collisions_cross_split": 0,
+      "locked_ref_hits": 0,
+      "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+      "rows": 360,
+      "visible_target_hits": 360
+    },
+    {
+      "exists": true,
+      "forbidden_authority_or_loss_true": 0,
+      "input_hash_collisions_cross_split": 0,
+      "locked_ref_hits": 0,
+      "manifest": "runs/local/artifacts/stage8636_edit_localization_neutral_manifest/edit_localization_neutral_manifest.jsonl",
+      "rows": 504,
+      "visible_target_hits": 0
+    },
+    {
+      "exists": true,
+      "forbidden_authority_or_loss_true": 0,
+      "input_hash_collisions_cross_split": 0,
+      "locked_ref_hits": 0,
+      "manifest": "runs/local/artifacts/stage8638_patch_operator_neutral_manifest/patch_operator_neutral_manifest.jsonl",
+      "rows": 864,
+      "visible_target_hits": 0
+    },
+    {
+      "exists": true,
+      "forbidden_authority_or_loss_true": 0,
+      "input_hash_collisions_cross_split": 0,
+      "locked_ref_hits": 0,
+      "manifest": "runs/local/artifacts/stage8643_verifier_repair_neutral_manifest/verifier_repair_neutral_manifest.jsonl",
+      "rows": 648,
+      "visible_target_hits": 0
+    },
+    {
+      "exists": true,
+      "forbidden_authority_or_loss_true": 0,
+      "input_hash_collisions_cross_split": 0,
+      "locked_ref_hits": 0,
+      "manifest": "runs/local/artifacts/stage8645_bounded_decoder_arguments_neutral_manifest/bounded_decoder_arguments_neutral_manifest.jsonl",
+      "rows": 504,
+      "visible_target_hits": 0
+    },
+    {
+      "exists": true,
+      "forbidden_authority_or_loss_true": 0,
+      "input_hash_collisions_cross_split": 0,
+      "locked_ref_hits": 0,
+      "manifest": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+      "rows": 360,
+      "visible_target_hits": 0
+    },
+    {
+      "exists": true,
+      "forbidden_authority_or_loss_true": 0,
+      "input_hash_collisions_cross_split": 0,
+      "locked_ref_hits": 0,
+      "manifest": "runs/local/artifacts/stage8618_symbol_binding_counterfactual_with_test_patch/combined_symbol_binding_candidates.jsonl",
+      "rows": 1068,
+      "visible_target_hits": 0
+    }
+  ],
+  "samples": {
+    "cross_split_exact_visible_input_hashes": [
+      {
+        "input_hash": "0baa0de832d49dc7843ca78294e6f33c3a5029238b1abdbec51c8a67db44f5e2",
+        "sample_row_ids": [
+          "stage8630_train_python_parse_config_use_whitelist_import",
+          "stage8630_eval_python_parse_config_use_whitelist_import",
+          "stage8630_strict_python_parse_config_use_whitelist_import"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "90b3cb9e92eb7134fc8b81f381feafa036b1a5e1fd3cdf766a18f91735b9a202",
+        "sample_row_ids": [
+          "stage8630_train_python_parse_config_build_on_top",
+          "stage8630_eval_python_parse_config_build_on_top",
+          "stage8630_strict_python_parse_config_build_on_top"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "3a3f9adfd573fc74883dadf02138a6c08dbb0704f6410d15134bfb6f3977a43a",
+        "sample_row_ids": [
+          "stage8630_train_python_parse_config_build_from_scratch",
+          "stage8630_eval_python_parse_config_build_from_scratch",
+          "stage8630_strict_python_parse_config_build_from_scratch"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "1a0a48fcabdbd52d5ce5e9d7046d475f548f8b026871a55d434adfc38df0ad87",
+        "sample_row_ids": [
+          "stage8630_train_python_parse_config_retrieve_more",
+          "stage8630_eval_python_parse_config_retrieve_more",
+          "stage8630_strict_python_parse_config_retrieve_more"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "d46600a9fda690b7c5f43369bcfe8f8aa6a6750cc1cf1b6bbe06a75189ecfba1",
+        "sample_row_ids": [
+          "stage8630_train_python_parse_config_abstain_unsafe",
+          "stage8630_eval_python_parse_config_abstain_unsafe",
+          "stage8630_strict_python_parse_config_abstain_unsafe"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "a880bc6f57a134b26cc31fa001bce5764e5df6c0b4f558e31e5baa234f239764",
+        "sample_row_ids": [
+          "stage8630_train_python_validate_input_use_whitelist_import",
+          "stage8630_eval_python_validate_input_use_whitelist_import",
+          "stage8630_strict_python_validate_input_use_whitelist_import"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "06cc1554bd7d89a5528df3f98e53ceeb16395a8d42b969aff6efd3432f91bb27",
+        "sample_row_ids": [
+          "stage8630_train_python_validate_input_build_on_top",
+          "stage8630_eval_python_validate_input_build_on_top",
+          "stage8630_strict_python_validate_input_build_on_top"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "48038d30e6a82a9be30c258771b675c58a26d550777e5d142f295365554eb99e",
+        "sample_row_ids": [
+          "stage8630_train_python_validate_input_build_from_scratch",
+          "stage8630_eval_python_validate_input_build_from_scratch",
+          "stage8630_strict_python_validate_input_build_from_scratch"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "a6ebf129ddd3d6a3e1568b13dc4a7ba4c2159de729538dd0c26bcbbcce1ea4a9",
+        "sample_row_ids": [
+          "stage8630_train_python_validate_input_retrieve_more",
+          "stage8630_eval_python_validate_input_retrieve_more",
+          "stage8630_strict_python_validate_input_retrieve_more"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "e3d45cb78e40b69455bb74a935a218e28ebb274f02dddaecdbb7217c0ea4a0ac",
+        "sample_row_ids": [
+          "stage8630_train_python_validate_input_abstain_unsafe",
+          "stage8630_eval_python_validate_input_abstain_unsafe",
+          "stage8630_strict_python_validate_input_abstain_unsafe"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "3ef0f165c7b428d311bd5bee3d2d46328e0199437ec4456a177a66145257ecc9",
+        "sample_row_ids": [
+          "stage8630_train_python_format_report_use_whitelist_import",
+          "stage8630_eval_python_format_report_use_whitelist_import",
+          "stage8630_strict_python_format_report_use_whitelist_import"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "c6aef4a3d3ffc7fb6211f345b7ef32602adb9074ab37ffde98c23cf866a87fa2",
+        "sample_row_ids": [
+          "stage8630_train_python_format_report_build_on_top",
+          "stage8630_eval_python_format_report_build_on_top",
+          "stage8630_strict_python_format_report_build_on_top"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "8475d7436089461dc23f8b33f7270e5853d59ba1b6d80be5f435f9d8d44a0a7e",
+        "sample_row_ids": [
+          "stage8630_train_python_format_report_build_from_scratch",
+          "stage8630_eval_python_format_report_build_from_scratch",
+          "stage8630_strict_python_format_report_build_from_scratch"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "505911351879d8a811b928e1dc5cc908481722d689bba33a2f2bc2bba78cd1b3",
+        "sample_row_ids": [
+          "stage8630_train_python_format_report_retrieve_more",
+          "stage8630_eval_python_format_report_retrieve_more",
+          "stage8630_strict_python_format_report_retrieve_more"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "ecc58b449f0e58420567622bbf4478088b0bdd23f311fc965f2d1bfc804dcc01",
+        "sample_row_ids": [
+          "stage8630_train_python_format_report_abstain_unsafe",
+          "stage8630_eval_python_format_report_abstain_unsafe",
+          "stage8630_strict_python_format_report_abstain_unsafe"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "83718fa89fc2b5eb31e6b51b583d402b0b6e01c161059f4d337696671e108297",
+        "sample_row_ids": [
+          "stage8630_train_python_load_records_use_whitelist_import",
+          "stage8630_eval_python_load_records_use_whitelist_import",
+          "stage8630_strict_python_load_records_use_whitelist_import"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "641a9d23d47abc7ebc8e0f599ca75ca04e2d1bc2794bd998e47f9604769e9e83",
+        "sample_row_ids": [
+          "stage8630_train_python_load_records_build_on_top",
+          "stage8630_eval_python_load_records_build_on_top",
+          "stage8630_strict_python_load_records_build_on_top"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "4f75b4ed79ca33c7eda7552585e4ba5dcad81509dcf6e4e9c0e2b44222834782",
+        "sample_row_ids": [
+          "stage8630_train_python_load_records_build_from_scratch",
+          "stage8630_eval_python_load_records_build_from_scratch",
+          "stage8630_strict_python_load_records_build_from_scratch"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "b57e7b0801c83bbce5080536ea796183e92a7c2629e3a6c4102472f8573016e9",
+        "sample_row_ids": [
+          "stage8630_train_python_load_records_retrieve_more",
+          "stage8630_eval_python_load_records_retrieve_more",
+          "stage8630_strict_python_load_records_retrieve_more"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      },
+      {
+        "input_hash": "1e87be2784a40f3c2c6226c66d4cdcadb681221693f78d648e0d38ea8a2b52a5",
+        "sample_row_ids": [
+          "stage8630_train_python_load_records_abstain_unsafe",
+          "stage8630_eval_python_load_records_abstain_unsafe",
+          "stage8630_strict_python_load_records_abstain_unsafe"
+        ],
+        "splits": [
+          "eval",
+          "strict",
+          "train"
+        ]
+      }
+    ],
+    "forbidden_rows": [],
+    "locked_ref_hits": [],
+    "visible_target_hits": [
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_parse_config_use_whitelist_import",
+        "target_string": "approved_exact_dependency_visible"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_parse_config_build_on_top",
+        "target_string": "approved_partial_dependency_visible"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_parse_config_build_from_scratch",
+        "target_string": "no_relevant_approved_dependency"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_parse_config_retrieve_more",
+        "target_string": "dependency_or_source_context_missing"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_parse_config_abstain_unsafe",
+        "target_string": "dependency_blocked_or_policy_unsafe"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_validate_input_use_whitelist_import",
+        "target_string": "approved_exact_dependency_visible"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_validate_input_build_on_top",
+        "target_string": "approved_partial_dependency_visible"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_validate_input_build_from_scratch",
+        "target_string": "no_relevant_approved_dependency"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_validate_input_retrieve_more",
+        "target_string": "dependency_or_source_context_missing"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_validate_input_abstain_unsafe",
+        "target_string": "dependency_blocked_or_policy_unsafe"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_format_report_use_whitelist_import",
+        "target_string": "approved_exact_dependency_visible"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_format_report_build_on_top",
+        "target_string": "approved_partial_dependency_visible"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_format_report_build_from_scratch",
+        "target_string": "no_relevant_approved_dependency"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_format_report_retrieve_more",
+        "target_string": "dependency_or_source_context_missing"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_format_report_abstain_unsafe",
+        "target_string": "dependency_blocked_or_policy_unsafe"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_load_records_use_whitelist_import",
+        "target_string": "approved_exact_dependency_visible"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_load_records_build_on_top",
+        "target_string": "approved_partial_dependency_visible"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_load_records_build_from_scratch",
+        "target_string": "no_relevant_approved_dependency"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_load_records_retrieve_more",
+        "target_string": "dependency_or_source_context_missing"
+      },
+      {
+        "manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+        "row_id": "stage8630_train_python_load_records_abstain_unsafe",
+        "target_string": "dependency_blocked_or_policy_unsafe"
+      }
+    ]
+  },
+  "stage": 8665,
+  "stage_name": "stage8665_manifest_leakage_locked_eval_boundary"
+}

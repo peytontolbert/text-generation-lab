@@ -1,0 +1,235 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T20:15:10Z",
+  "decision": "BM25 text evidence baseline beats metadata-only and evidence-removed baselines.",
+  "metrics": {
+    "bm25_mrr_at5": 0.9311666666666674,
+    "bm25_top1_exact": 0.8908333333333334,
+    "bm25_top5_recall": 0.9866666666666667,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "docs": 1200,
+    "evidence_removed_top5_recall": 0.004166666666666667,
+    "failures": [],
+    "metadata_only_top1_exact": 0.060833333333333336,
+    "metadata_only_top5_recall": 0.13666666666666666,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "retrieval_lift_top5_over_metadata": 0.8500000000000001,
+    "retrieval_lift_top5_over_removed": 0.9825,
+    "runtime_authorized": false
+  },
+  "next_best_step": "Build graph/symbol candidate retrieval cards using this baseline shape, then add dense/rerank once source rows are normalized.",
+  "passed": true,
+  "samples": {
+    "metadata_examples": [
+      {
+        "meta_top1": false,
+        "query": "study benchmark relaunch reproducibility_mode experiments will logging agent_args n_jobs script your agents you changes agentlab agent_4o",
+        "target": "AgentLab:main.py",
+        "top_ids": [
+          "AgentLab:src/agentlab/agents/agent_args.py",
+          "AgentLab:src/agentlab/experiments/study.py",
+          "AgentLab:src/agentlab/agents/tapeagent/experiments/run_gaia.py",
+          "BrowserGym:browsergym/experiments/src/browsergym/experiments/benchmark/utils.py",
+          "BrowserGym:browsergym/experiments/src/browsergym/experiments/benchmark/configs.py"
+        ]
+      },
+      {
+        "meta_top1": false,
+        "query": "benchmark study config logging parallel_backend script bgym gpt_4_1 tooluseagentargs agent_configs env_args relaunch n_jobs sequential experiments copy",
+        "target": "AgentLab:main_workarena_debug.py",
+        "top_ids": [
+          "AgentLab:src/agentlab/experiments/study.py",
+          "BrowserGym:browsergym/experiments/src/bgym/__init__.py",
+          "BrowserGym:browsergym/experiments/src/browsergym/experiments/benchmark/utils.py",
+          "BrowserGym:browsergym/experiments/src/browsergym/experiments/benchmark/configs.py",
+          "BrowserGym:browsergym/experiments/src/browsergym/experiments/benchmark/base.py"
+        ]
+      },
+      {
+        "meta_top1": false,
+        "query": "study _genericagent mini workarena base_dir exp_paths _01 openai full_paths exp_path full_path pathlib agentlab experiments home toolkit",
+        "target": "AgentLab:add_study_to_repro_journal.py",
+        "top_ids": [
+          "AgentLab:src/agentlab/experiments/study.py",
+          "AgentLab:experiments/run_osworld.py",
+          "AgentLab:src/agentlab/experiments/reproduce_study.py",
+          "AgentLab:src/agentlab/experiments/multi_server.py",
+          "AgentLab:src/agentlab/experiments/exp_utils.py"
+        ]
+      },
+      {
+        "meta_top1": false,
+        "query": "main assert parent subprocess sys pytest test_main_script_execution miniwob_tiny_test str result pathlib mark pricy should trigger agent_4o_mini",
+        "target": "AgentLab:tests/test_main.py",
+        "top_ids": [
+          "AgentLab:main.py",
+          "M2PT:m2pt/main.py",
+          "EE-LLM:tasks/main.py",
+          "CodeT:CodeT/main.py",
+          "EE-LLM:tools/retro/main.py"
+        ]
+      },
+      {
+        "meta_top1": false,
+        "query": "agentlab make_exp_args agent_4o exp_args ui_assistant agents generic_agent test_make_exp_args basic unit test detect refactoring errors https www",
+        "target": "AgentLab:tests/test_ui_assistant.py",
+        "top_ids": [
+          "AgentLab:src/agentlab/agents/generic_agent/generic_agent.py",
+          "AgentLab:src/agentlab/agents/generic_agent/reproducibility_agent.py",
+          "AgentLab:src/agentlab/agents/generic_agent/__init__.py",
+          "AgentLab:src/agentlab/agents/generic_agent/generic_agent_prompt.py",
+          "AgentLab:src/agentlab/agents/generic_agent/tmlr_config.py"
+        ]
+      },
+      {
+        "meta_top1": false,
+        "query": "messages time text message content print num_threads thread_id thread futures anthropic usage make_message cache_control test_rate_limit_single rate",
+        "target": "AgentLab:tests/verify_rate_limit_anthropic.py",
+        "top_ids": [
+          "MetaGPT:metagpt/__init__.py",
+          "MetaGPT:metagpt/schema.py",
+          "MetaGPT:metagpt/environment.py",
+          "MetaGPT:metagpt/const.py",
+          "MetaGPT:metagpt/llm.py"
+        ]
+      },
+      {
+        "meta_top1": false,
+        "query": "assert result args test_code test image overlay_utils mouse_click name plt fill start_index stop_index select_option function_name img",
+        "target": "AgentLab:tests/analyze/test_overlay_utils.py",
+        "top_ids": [
+          "Human3R:src/dust3r/utils/image.py",
+          "AgentLab:src/agentlab/experiments/args.py",
+          "AgentLab:src/agentlab/analyze/overlay_utils.py",
+          "BOLAA:webshop/test.py",
+          "Human3R:src/croco/stereoflow/test.py"
+        ]
+      },
+      {
+        "meta_top1": false,
+        "query": "sentinel summary assert study_dir get_study_summary shutil isinstance dataframe from_cache tempfile test_get_study_summary tmp_dir test_study study_dir_original parent pathlib",
+        "target": "AgentLab:tests/analyze/test_inspect_results.py",
+        "top_ids": [
+          "AgentLab:tests/experiments/test_study.py",
+          "MetaGPT:metagpt/__init__.py",
+          "MetaGPT:metagpt/schema.py",
+          "MetaGPT:metagpt/environment.py",
+          "MetaGPT:metagpt/const.py"
+        ]
+      }
+    ],
+    "text_examples": [
+      {
+        "query": "study benchmark relaunch reproducibility_mode experiments will logging agent_args n_jobs script your agents you changes agentlab agent_4o",
+        "target": "AgentLab:main.py",
+        "text_top1": true,
+        "top_ids": [
+          "AgentLab:main.py",
+          "AgentLab:main_workarena_debug.py",
+          "AgentLab:src/agentlab/experiments/study.py",
+          "AgentLab:experiments/run_osworld.py",
+          "AgentLab:tutorials/2_eval_on_miniwob/experiment.py"
+        ]
+      },
+      {
+        "query": "benchmark study config logging parallel_backend script bgym gpt_4_1 tooluseagentargs agent_configs env_args relaunch n_jobs sequential experiments copy",
+        "target": "AgentLab:main_workarena_debug.py",
+        "text_top1": true,
+        "top_ids": [
+          "AgentLab:main_workarena_debug.py",
+          "AgentLab:experiments/run_osworld.py",
+          "AgentLab:main.py",
+          "AgentLab:tutorials/2_eval_on_miniwob/experiment.py",
+          "AgentLab:src/agentlab/agents/hitl_agent/launch_hint_ui.py"
+        ]
+      },
+      {
+        "query": "study _genericagent mini workarena base_dir exp_paths _01 openai full_paths exp_path full_path pathlib agentlab experiments home toolkit",
+        "target": "AgentLab:add_study_to_repro_journal.py",
+        "text_top1": true,
+        "top_ids": [
+          "AgentLab:add_study_to_repro_journal.py",
+          "AgentLab:src/agentlab/agents/hitl_agent/launch_hint_ui.py",
+          "AgentLab:tutorials/2_eval_on_miniwob/experiment.py",
+          "AgentLab:main_workarena_debug.py",
+          "AgentLab:src/agentlab/agents/generic_agent/agent_configs.py"
+        ]
+      },
+      {
+        "query": "main assert parent subprocess sys pytest test_main_script_execution miniwob_tiny_test str result pathlib mark pricy should trigger agent_4o_mini",
+        "target": "AgentLab:tests/test_main.py",
+        "text_top1": true,
+        "top_ids": [
+          "AgentLab:tests/test_main.py",
+          "AgentLab:tests/experiments/test_launch_exp.py",
+          "AgentLab:tests/experiments/test_reproducibility_util.py",
+          "AgentLab:tests/llm/test_tracking.py",
+          "AgentLab:tests/llm/test_chat_api.py"
+        ]
+      },
+      {
+        "query": "agentlab make_exp_args agent_4o exp_args ui_assistant agents generic_agent test_make_exp_args basic unit test detect refactoring errors https www",
+        "target": "AgentLab:tests/test_ui_assistant.py",
+        "text_top1": true,
+        "top_ids": [
+          "AgentLab:tests/test_ui_assistant.py",
+          "AgentLab:src/agentlab/ui_assistant.py",
+          "AgentLab:tests/agents/test_agent.py",
+          "BrowserGym:demo_agent/run_demo.py",
+          "AgentLab:main.py"
+        ]
+      },
+      {
+        "query": "messages time text message content print num_threads thread_id thread futures anthropic usage make_message cache_control test_rate_limit_single rate",
+        "target": "AgentLab:tests/verify_rate_limit_anthropic.py",
+        "text_top1": true,
+        "top_ids": [
+          "AgentLab:tests/verify_rate_limit_anthropic.py",
+          "AgentLab:src/agentlab/llm/llm_utils.py",
+          "AgentLab:tests/llm/test_response_api.py",
+          "AgentLab:src/agentlab/llm/chat_api.py",
+          "AgentLab:src/agentlab/llm/litellm_api.py"
+        ]
+      },
+      {
+        "query": "assert result args test_code test image overlay_utils mouse_click name plt fill start_index stop_index select_option function_name img",
+        "target": "AgentLab:tests/analyze/test_overlay_utils.py",
+        "text_top1": true,
+        "top_ids": [
+          "AgentLab:tests/analyze/test_overlay_utils.py",
+          "AgentLab:src/agentlab/analyze/overlay_utils.py",
+          "BrowserGym:browsergym/core/src/browsergym/core/action/highlevel.py",
+          "AgentLab:src/agentlab/agents/agent_utils.py",
+          "CREMA:lavis/processors/randaugment.py"
+        ]
+      },
+      {
+        "query": "sentinel summary assert study_dir get_study_summary shutil isinstance dataframe from_cache tempfile test_get_study_summary tmp_dir test_study study_dir_original parent pathlib",
+        "target": "AgentLab:tests/analyze/test_inspect_results.py",
+        "text_top1": true,
+        "top_ids": [
+          "AgentLab:tests/analyze/test_inspect_results.py",
+          "AgentLab:tests/experiments/test_launch_exp.py",
+          "AgentLab:tests/experiments/test_reproducibility_util.py",
+          "AgentLab:src/agentlab/analyze/archive_studies.py",
+          "AgentLab:tests/agents/test_agent.py"
+        ]
+      }
+    ]
+  },
+  "stage": 8666,
+  "stage_name": "stage8666_repo_span_bm25_retrieval_baseline"
+}

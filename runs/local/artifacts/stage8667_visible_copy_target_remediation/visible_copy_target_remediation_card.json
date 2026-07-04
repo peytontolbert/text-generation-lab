@@ -1,0 +1,37 @@
+{
+  "artifacts": {
+    "copy_target_remediation_jsonl": "runs/local/artifacts/stage8667_visible_copy_target_remediation/copy_target_remediation.jsonl",
+    "source_manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T20:16:04Z",
+  "decision": "Visible target hits are confined to a direct copy field and must be moved from semantic CE to explicit copy-field supervision before training. Stage8665 remains correctly failed until builders apply this remediation.",
+  "metrics": {
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "intent_rows_with_visible_repo_dependency_copy": 360,
+    "model_execution_authorized_next": false,
+    "patched_loss_recommendations": 360,
+    "promotion_ready": false,
+    "route_counts": {
+      "ROUTE_VISIBLE_COPY_FIELD": 360
+    },
+    "runtime_authorized": false,
+    "unexpected_noncopy_repo_dependency_targets": 0
+  },
+  "next_best_step": "Patch future intent_to_build builders so visible copy fields use repo_dependency_policy_copy_ce or deterministic copy routing, not semantic repo_dependency_policy_ce. Then rerun Stage8665 leakage boundary.",
+  "passed": true,
+  "stage": 8667,
+  "stage_name": "stage8667_visible_copy_target_remediation"
+}
