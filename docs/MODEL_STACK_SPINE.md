@@ -73,7 +73,7 @@ Stage8698 re-grepped Codex sessions for foundational AI/training mechanics so th
 | Mixed precision / memory | Needed for efficient training, but currently documented-not-executable; do not depend on it for correctness yet | documented-not-executable |
 | Calibration / entropy / confidence | Supports abstain/retrieve/correct thresholds and high-confidence wrong detection | indexed / partially executable |
 | Activation / logit interpretability | Needed for activation cache/probe/logit-lens work; currently documented-not-executable beyond telemetry metrics | documented-not-executable |
-| State-space / selective scan / Mamba | Future repo-stream compressor after context/retrieval packets stabilize | indexed concept, executable compressor still missing |
+| State-space / selective scan / Mamba | Repo-stream compression scaffold after context/retrieval packets stabilize; actual Mamba training still closed | ready_partial deterministic compressor |
 | GNN / graph message passing | Future learned repo-graph encoder; graph substrate exists, executable GNN encoder still missing | documented-not-executable |
 | Denoise / diffusion | Repair trajectory for bad outputs, masked spans, verifier failures | indexed / partially executable |
 | Dataset cartography / attribution | Future dataset-example dynamics and influence layer for curriculum compiler | indexed / partially executable |
@@ -409,3 +409,9 @@ This backup must include:
 - the recovery summary that created the registry
 - a manifest with hashes
 
+
+### State-Space Compressor Boundary
+
+Stage8708 recovers `state_space_repo_state_compressor.py` as a deterministic selective-scan-style support module. It compresses repo/log/history events into a fixed-size `compressed_repo_state` packet with retrieval hints, contamination blocking, budget dropping, and deterministic state hashes.
+
+This is not Mamba training and does not authorize long-context model execution. It is the interface layer required before any future SSM/Mamba module can be trained safely.
