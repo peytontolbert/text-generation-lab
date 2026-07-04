@@ -1,0 +1,454 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "components": {
+    "active_learning_uncertainty_sampler": {
+      "local_status": "not_implemented",
+      "next": "Use Stage7923-style confidence/margin diagnostics to drive 1m expansion cells.",
+      "outputs": [
+        "uncertainty_score",
+        "margin",
+        "entropy",
+        "sample_priority",
+        "cell_gap"
+      ],
+      "pipeline_phase": "curriculum_expansion",
+      "recovered_refs": [
+        "configs/software_maintainer/support_systems_recovery_index_stage8653.json",
+        "configs/software_maintainer/action_feature_registry.json"
+      ],
+      "role": "Prioritize new rows from uncertain/high-margin-conflict cells rather than bulk random mining."
+    },
+    "contamination_leakage_detector": {
+      "local_status": "implemented_in_many_audits_needs_unified_module",
+      "next": "Consolidate shortcut/leak audits into a shared library used by all builders.",
+      "outputs": [
+        "target_leak_flag",
+        "heldout_overlap",
+        "label_coded_id",
+        "body_leak_flag",
+        "contamination_route"
+      ],
+      "pipeline_phase": "dataset_quality",
+      "recovered_refs": [
+        "scripts/shortcut_baseline_audit.py",
+        "scripts/objective_row_judge.py",
+        "configs/software_maintainer/action_feature_registry.json"
+      ],
+      "role": "Detect target leakage, heldout contamination, label-coded IDs, direct target fields, and source/body leakage."
+    },
+    "context_window_packer": {
+      "local_status": "missing",
+      "next": "Build context-packing rows that teach retrieve/compress/drop decisions before long-context model work.",
+      "outputs": [
+        "context_budget",
+        "span_priority",
+        "packed_slots",
+        "compression_reason",
+        "dropped_evidence"
+      ],
+      "pipeline_phase": "context_packing",
+      "recovered_refs": [
+        "/arxiv/repositories/deepset-ai__haystack/docs-website/docs/pipeline-components/retrievers/sentencewindowretrieval.mdx",
+        "/arxiv/TOLBERT_BRAIN/scripts/split_spans_by_paragraph.py"
+      ],
+      "role": "Compress and arrange evidence from repo graph, retrieval, source spans, memory, and task state under fixed encoder limits."
+    },
+    "cost_budget_scheduler": {
+      "local_status": "partially_implemented_needs_scheduler",
+      "next": "Convert budget evidence cards into an explicit scheduler/ranker module.",
+      "outputs": [
+        "budget_ok",
+        "budget_class",
+        "tool_call_budget",
+        "decoder_budget_ok",
+        "stop_or_retrieve_route"
+      ],
+      "pipeline_phase": "agent_control",
+      "recovered_refs": [
+        "/arxiv/agentkernel_recovery/stage8629_recovery_completion_queue/recovery_completion_queue.json",
+        "configs/software_maintainer/action_feature_registry.json"
+      ],
+      "role": "Control token, retrieval, tool-call, and test budgets as part of the transition policy."
+    },
+    "coverage_test_selection": {
+      "local_status": "reference_recovered_not_integrated",
+      "next": "Add no-execution coverage/test-selection cards for symbol-binding and patch-operator objectives.",
+      "outputs": [
+        "symbol_coverage",
+        "test_candidate_ids",
+        "coverage_gap",
+        "targeted_test_plan"
+      ],
+      "pipeline_phase": "verification_planning",
+      "recovered_refs": [
+        "/arxiv/TOLBERT_BRAIN/scripts/code_graph.py",
+        "/arxiv/repositories/Aider-AI__aider/benchmark/swe_bench.py"
+      ],
+      "role": "Map changed symbols to likely tests using coverage and repo graph features before runtime is opened."
+    },
+    "dedup_near_duplicate_minhash": {
+      "local_status": "partially_implemented_needs_near_duplicate_layer",
+      "next": "Add MinHash/simhash neighbor checks to every scale-manifest gate.",
+      "outputs": [
+        "exact_hash",
+        "semantic_key",
+        "near_duplicate_cluster",
+        "split_overlap_flag"
+      ],
+      "pipeline_phase": "dataset_quality",
+      "recovered_refs": [
+        "configs/software_maintainer/action_feature_registry.json",
+        "/arxiv/agentkernel_recovery/recovered_objective_builders_8630_8639/stage8638_patch_operator_neutral_manifest/build_stage8638_patch_operator_neutral_manifest.py"
+      ],
+      "role": "Detect exact, semantic-key, and near-duplicate rows across train/eval/strict splits to avoid leakage and overcounted scale."
+    },
+    "drift_canary_regression_monitor": {
+      "local_status": "missing_as_first_class_monitor",
+      "next": "Create cross-spine canaries from recovered stage clusters before scale expansion.",
+      "outputs": [
+        "canary_slice",
+        "regression_delta",
+        "forgotten_skill",
+        "promotion_block_reason"
+      ],
+      "pipeline_phase": "training_governance",
+      "recovered_refs": [
+        "runs/local/artifacts/reconstructed_stage_registry.json",
+        "/arxiv/agentkernel_recovery/stage8624_central_graph_recovery/docs/CENTRAL_RESEARCH_GRAPH_STAGE8622.md"
+      ],
+      "role": "Track whether new stages solve new gaps while preserving older 5k/6k/7k/8k lessons."
+    },
+    "eval_harness_metrics_reporter": {
+      "local_status": "fragmented_across_stage_summaries",
+      "next": "Use one metric-card schema across support modules, objectives, and training probes.",
+      "outputs": [
+        "metric_card",
+        "slice_pass_rate",
+        "failure_cluster",
+        "artifact_paths",
+        "promotion_decision"
+      ],
+      "pipeline_phase": "evaluation",
+      "recovered_refs": [
+        "/arxiv/TOLBERT_BRAIN/scripts/eval_flat_baseline.py",
+        "/arxiv/TOLBERT_BRAIN/scripts/eval_hierarchical_classification.py",
+        "/arxiv/TOLBERT_BRAIN/scripts/eval_zero_shot_cross_domain.py",
+        "/arxiv/TOLBERT_BRAIN/scripts/eval_retrieval.py"
+      ],
+      "role": "Standardize benchmark/run metrics so frontier comparisons are factual and not narrative-only."
+    },
+    "flaky_test_detector": {
+      "local_status": "missing",
+      "next": "Add failure-stability metadata before using runtime failures as repair labels.",
+      "outputs": [
+        "flake_signature",
+        "rerun_needed",
+        "failure_stability",
+        "route_to_holdout"
+      ],
+      "pipeline_phase": "verification_planning",
+      "recovered_refs": [
+        "/arxiv/repositories/Aider-AI__aider/benchmark/test_benchmark.py",
+        "/arxiv/repositories/Aider-AI__aider/benchmark/benchmark.py"
+      ],
+      "role": "Separate model/patch failures from unstable test outcomes before training failure labels are emitted."
+    },
+    "golden_locked_eval_suite": {
+      "local_status": "missing_as_central_contract",
+      "next": "Define fixed promotion/regression slices separate from dev-failure mining pools.",
+      "outputs": [
+        "locked_eval_id",
+        "regression_slice",
+        "promotion_delta",
+        "leakage_boundary"
+      ],
+      "pipeline_phase": "evaluation",
+      "recovered_refs": [
+        "/arxiv/repositories/Aider-AI__aider/benchmark/benchmark.py",
+        "/arxiv/repositories/Aider-AI__aider/benchmark/swe_bench.py",
+        "/arxiv/datasets/ScaleAI--SWE-Atlas-QnA/rubric_evaluation_config.yaml"
+      ],
+      "role": "Maintain locked regression/hidden-style eval slices that are never mined back into training data."
+    },
+    "hybrid_retrieval_fusion": {
+      "local_status": "references_recovered_not_integrated",
+      "next": "Build no-authority retrieval fusion card before source-backed graph/symbol manifests.",
+      "outputs": [
+        "bm25_score",
+        "dense_score",
+        "rerank_score",
+        "rrf_rank",
+        "mmr_diversity",
+        "evidence_source_ids"
+      ],
+      "pipeline_phase": "evidence_retrieval",
+      "recovered_refs": [
+        "/arxiv/repositories/camel-ai__camel/camel/retrievers/bm25_retriever.py",
+        "/arxiv/repositories/camel-ai__camel/camel/retrievers/vector_retriever.py",
+        "/arxiv/repositories/camel-ai__camel/test/retrievers/test_hybrid_retriever.py",
+        "/arxiv/repositories/RAG_Techniques/all_rag_techniques_runnable_scripts/fusion_retrieval.py",
+        "/arxiv/repositories/deepset-ai__haystack/docs-website/docs/pipeline-components/joiners/documentjoiner.mdx"
+      ],
+      "role": "Fuse lexical, dense, and reranker evidence so graph/symbol objectives do not depend on one fragile retrieval channel."
+    },
+    "lost_in_middle_context_ranker": {
+      "local_status": "not_implemented",
+      "next": "Create context-packing audit with evidence-present/evidence-dropped counterfactual rows.",
+      "outputs": [
+        "packed_context_order",
+        "window_priority",
+        "dropped_span_reason"
+      ],
+      "pipeline_phase": "context_packing",
+      "recovered_refs": [
+        "/arxiv/repositories/deepset-ai__haystack/docs-website/docs/pipeline-components/rankers/lostinthemiddleranker.mdx",
+        "/arxiv/repositories/deepset-ai__haystack/docs-website/docs/pipeline-components/retrievers/sentencewindowretrieval.mdx"
+      ],
+      "role": "Order retrieved evidence into a bounded context window so high-value source spans are not buried in the middle."
+    },
+    "memory_retrieval_evaluator": {
+      "local_status": "reference_recovered_not_integrated",
+      "next": "Add memory quality gates before promoting mined traces into reusable skills.",
+      "outputs": [
+        "memory_hit_quality",
+        "staleness",
+        "memory_contamination_flag",
+        "skill_reuse_score"
+      ],
+      "pipeline_phase": "agent_memory",
+      "recovered_refs": [
+        "/arxiv/repositories/Agent_Memory_Techniques/all_techniques/28_memory_evaluation/memory_evaluation.ipynb",
+        "/arxiv/repositories/Agent_Memory_Techniques/all_techniques/29_memory_benchmarks_LoCoMo/memory_benchmarks_locomo.ipynb"
+      ],
+      "role": "Evaluate whether stored traces/skills are useful, stale, duplicated, or contaminating heldout objectives."
+    },
+    "mutation_adversarial_test_generator": {
+      "local_status": "concept_recovered_needs_tooling",
+      "next": "Generate paired counterfactual rows for every active transition cell.",
+      "outputs": [
+        "mutation_type",
+        "expected_guard",
+        "hard_negative_pair",
+        "repair_target"
+      ],
+      "pipeline_phase": "hard_negative_generation",
+      "recovered_refs": [
+        "/arxiv/agentkernel_recovery/recovered_objective_builders_8630_8639/stage8638_patch_operator_neutral_manifest/build_stage8638_patch_operator_neutral_manifest.py",
+        "/arxiv/repositories/Aider-AI__aider/benchmark/benchmark.py"
+      ],
+      "role": "Create adversarial corruptions, wrong imports, wrong symbols, and near-miss patches that force robust transition learning."
+    },
+    "patch_minimality_complexity_meter": {
+      "local_status": "not_implemented_as_unified_gate",
+      "next": "Make minimality a patch-head and verifier-repair gate before body emission is reopened.",
+      "outputs": [
+        "diff_size",
+        "files_changed",
+        "complexity_delta",
+        "public_api_touch",
+        "minimality_score"
+      ],
+      "pipeline_phase": "patch_quality",
+      "recovered_refs": [
+        "/arxiv/repositories/Aider-AI__aider/benchmark/benchmark.py",
+        "/arxiv/repositories/OpenAutoCoder__Agentless"
+      ],
+      "role": "Score candidate edits for minimality, locality, complexity growth, and public API risk."
+    },
+    "query_expansion_rewriter": {
+      "local_status": "reference_recovered_not_integrated",
+      "next": "Add query-expansion rows only after shortcut audit proves expansions do not encode target labels.",
+      "outputs": [
+        "query_variants",
+        "query_source_bits",
+        "expansion_reason"
+      ],
+      "pipeline_phase": "evidence_retrieval",
+      "recovered_refs": [
+        "/arxiv/repositories/RAG_Techniques/all_rag_techniques_runnable_scripts/adaptive_retrieval.py",
+        "/arxiv/repositories/deepset-ai__haystack/docs-website/docs/pipeline-components/query/queryexpander.mdx"
+      ],
+      "role": "Generate controlled alternate search queries from intent, symbol, error, and API hints without leaking target labels."
+    },
+    "rubric_llm_judge_calibrator": {
+      "local_status": "concept_recovered_needs_calibration_gate",
+      "next": "Require judge/verifier disagreement accounting for any synthetic expansion or teacher label.",
+      "outputs": [
+        "rubric_score",
+        "judge_confidence",
+        "verifier_disagreement",
+        "manual_review_route"
+      ],
+      "pipeline_phase": "evaluation_and_dataset_judge",
+      "recovered_refs": [
+        "/arxiv/datasets/ScaleAI--SWE-Atlas-QnA/rubric_evaluation_config.yaml",
+        "configs/software_maintainer/action_feature_registry.json"
+      ],
+      "role": "Use rubrics and verifier disagreement as calibration signals, not as sole truth labels."
+    },
+    "schema_drift_detector": {
+      "local_status": "lesson_recovered_not_generalized",
+      "next": "Make alias parity a hard gate before every controller, graph, symbol, and decoder manifest.",
+      "outputs": [
+        "feature_alias_map",
+        "unknown_feature_keys",
+        "canonical_feature_keys",
+        "alias_parity_pass"
+      ],
+      "pipeline_phase": "feature_surface_stability",
+      "recovered_refs": [
+        "runs/summaries/stage8060_v27_post_gap_controller_reentry_readiness.json",
+        "configs/software_maintainer/action_feature_registry.json"
+      ],
+      "role": "Detect old/new feature naming drift before model/controller handoff; Stage8058 failed until this was normalized."
+    },
+    "secret_pii_leak_detector": {
+      "local_status": "not_implemented_as_first_class_gate",
+      "next": "Wire as a pre-judge corpus gate and a post-render gate before any source/body path opens.",
+      "outputs": [
+        "secret_pattern_bits",
+        "pii_pattern_bits",
+        "redaction_route",
+        "leak_block_reason"
+      ],
+      "pipeline_phase": "source_ingestion_and_output_safety",
+      "recovered_refs": [
+        "/arxiv/repositories/CheatSheetSeries/cheatsheets/Secrets_Management_Cheat_Sheet.md",
+        "/arxiv/repositories/CheatSheetSeries/cheatsheets/RAG_Security_Cheat_Sheet.md"
+      ],
+      "role": "Reject or redact secrets/PII in raw mined data, model-visible context, decoder targets, and final rendered outputs."
+    },
+    "source_inventory_lineage_tracker": {
+      "local_status": "planned_stage8655a_not_built",
+      "next": "Implement Stage8655a as a reusable lineage tracker, not a one-off inventory.",
+      "outputs": [
+        "source_id",
+        "content_hash",
+        "transform_chain",
+        "split_eligibility",
+        "lineage_card"
+      ],
+      "pipeline_phase": "source_ingestion",
+      "recovered_refs": [
+        "configs/software_maintainer/source_backed_graph_symbol_binding_recovery_plan_stage8655.json",
+        "/arxiv/TOLBERT_BRAIN/data/repos/nodes_repos.jsonl",
+        "/arxiv/TOLBERT_BRAIN/data/repos/spans_repos.jsonl"
+      ],
+      "role": "Record source origin, hash, license, split eligibility, and transformation lineage for every mined row."
+    },
+    "source_provenance_license_security_filter": {
+      "local_status": "missing_for_1m_scale",
+      "next": "Make source lineage mandatory for all 1m+ expansion manifests.",
+      "outputs": [
+        "source_license",
+        "security_policy_present",
+        "allowed_import_source",
+        "provenance_hash"
+      ],
+      "pipeline_phase": "source_ingestion",
+      "recovered_refs": [
+        "/arxiv/repositories/CheatSheetSeries/cheatsheets/Software_Supply_Chain_Security_Cheat_Sheet.md",
+        "/arxiv/repositories/CheatSheetSeries/cheatsheets/AI_Agent_Security_Cheat_Sheet.md",
+        "/arxiv/repositories/modelcontextprotocol__servers/SECURITY.md"
+      ],
+      "role": "Filter mined corpus rows by source lineage, license/security metadata, and allowed import provenance before curriculum admission."
+    },
+    "static_analysis_security_scanner": {
+      "local_status": "partially_implemented_scaffold",
+      "next": "Unify static analyzer outputs into the dataset judge route card.",
+      "outputs": [
+        "syntax_ok",
+        "import_allowed",
+        "unsafe_pattern_bits",
+        "static_failure_type"
+      ],
+      "pipeline_phase": "symbolic_verification",
+      "recovered_refs": [
+        "/arxiv/TOLBERT_BRAIN/scripts/code_graph.py",
+        "/arxiv/repositories/CheatSheetSeries/cheatsheets/AI_Agent_Security_Cheat_Sheet.md"
+      ],
+      "role": "Run syntax, AST, import, lint/type/security feature extraction without executing untrusted code."
+    },
+    "tool_action_trajectory_analyzer": {
+      "local_status": "sources_recovered_not_mined",
+      "next": "Mine traces into finite action/state rows only after lineage and leakage gates pass.",
+      "outputs": [
+        "action_sequence",
+        "phase_state",
+        "failure_reason",
+        "repair_transition",
+        "trajectory_quality"
+      ],
+      "pipeline_phase": "agent_trace_learning",
+      "recovered_refs": [
+        "/arxiv/datasets/nvidia--Open-SWE-Traces",
+        "/arxiv/repositories/SWE-agent__SWE-agent",
+        "/arxiv/repositories/Aider-AI__aider"
+      ],
+      "role": "Convert SWE-agent/Aider/Open-SWE traces into observe-orient-act transition labels and failure diagnoses."
+    },
+    "weak_supervision_label_model": {
+      "local_status": "missing",
+      "next": "Add label-model manifest before accepting large synthetic/teacher-mined labels.",
+      "outputs": [
+        "label_votes",
+        "label_confidence",
+        "conflict_reason",
+        "abstain_route"
+      ],
+      "pipeline_phase": "dataset_labeling",
+      "recovered_refs": [
+        "configs/software_maintainer/action_feature_registry.json",
+        "scripts/objective_row_judge.py"
+      ],
+      "role": "Combine heuristic, verifier, teacher, retrieval, and judge votes into calibrated labels with abstain routes."
+    }
+  },
+  "created_at_utc": "2026-07-04T19:46:52Z",
+  "decision": "Recovered additional support modules that are necessary for 1m+ scale curriculum expansion, source-backed graph/symbol learning, context packing, eval governance, and safe mining. This is no-authority indexing only.",
+  "metrics": {
+    "additional_support_components": 24,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "missing_recovered_refs": {},
+    "model_execution_authorized_next": false,
+    "overlap_with_stage8653": [],
+    "pipeline_phases": [
+      "agent_control",
+      "agent_memory",
+      "agent_trace_learning",
+      "context_packing",
+      "curriculum_expansion",
+      "dataset_labeling",
+      "dataset_quality",
+      "evaluation",
+      "evaluation_and_dataset_judge",
+      "evidence_retrieval",
+      "feature_surface_stability",
+      "hard_negative_generation",
+      "patch_quality",
+      "source_ingestion",
+      "source_ingestion_and_output_safety",
+      "symbolic_verification",
+      "training_governance",
+      "verification_planning"
+    ],
+    "promotion_ready": false,
+    "runtime_authorized": false
+  },
+  "next_best_step": "Attach Stage8656 modules to the central graph, then implement source inventory, shared feature normalization, retrieval fusion, contamination/leakage, and locked-eval cards before any training reopen.",
+  "passed": true,
+  "stage": 8656,
+  "stage_name": "stage8656_additional_support_modules_recovery_index"
+}

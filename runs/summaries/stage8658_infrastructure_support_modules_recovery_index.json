@@ -1,0 +1,253 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "components": {
+    "arxiv_repo_paper_crosslinker": {
+      "local_status": "session_recovered_concept_needs_rebuild",
+      "next": "Keep as retrieval-source enrichment, not direct model training data.",
+      "outputs": [
+        "paper_repo_similarity",
+        "paper_cluster",
+        "related_repo",
+        "concept_source_link"
+      ],
+      "pipeline_phase": "knowledge_retrieval",
+      "recovered_refs": [
+        "/home/peyton/.codex/sessions/2025/11/26/rollout-2025-11-26T00-55-44-019abda8-c0d8-7803-8a77-1e0fcf0dc577.jsonl",
+        "/arxiv/TOLBERT_BRAIN/scripts/eval_retrieval.py"
+      ],
+      "role": "Link repos, papers, model concepts, and implementation references in one retrieval space for training-data/source discovery."
+    },
+    "benchmark_task_pack_manager": {
+      "local_status": "reference_recovered_not_integrated",
+      "next": "Pair with golden_locked_eval_suite before any promotion-ready claim.",
+      "outputs": [
+        "task_pack_id",
+        "slice_tags",
+        "thresholds",
+        "rotation_policy",
+        "regression_block"
+      ],
+      "pipeline_phase": "evaluation",
+      "recovered_refs": [
+        "/arxiv/repositories/Aider-AI__aider/benchmark/benchmark.py",
+        "/arxiv/repositories/deepeval/deepeval/benchmarks/base_benchmark.py",
+        "/arxiv/datasets/ScaleAI--SWE-Atlas-QnA/rubric_evaluation_config.yaml"
+      ],
+      "role": "Maintain benchmark packs, task rotations, and regression thresholds for software-maintainer skills."
+    },
+    "concrete_trace_profiler": {
+      "local_status": "reference_recovered_not_integrated",
+      "next": "Use for trainer/probe debug once model execution is authorized, not before.",
+      "outputs": [
+        "op_trace",
+        "shape_trace",
+        "flop_count",
+        "resource_hotspot",
+        "failure_site"
+      ],
+      "pipeline_phase": "model_interpretability_and_runtime",
+      "recovered_refs": [
+        "/arxiv/repositories/nni/nni/common/concrete_trace_utils/concrete_tracer.py",
+        "/arxiv/repositories/nni/nni/common/concrete_trace_utils/flop_utils.py",
+        "/arxiv/repositories/cutlass/include/cutlass/trace.h"
+      ],
+      "role": "Trace model/tool computation graphs and resource use to catch shape/device/control-flow mistakes and expensive paths."
+    },
+    "eval_trace_to_dataset_patch_loop": {
+      "local_status": "missing_as_first_class_loop",
+      "next": "Add dataset_patch records to every failure-cluster resolution stage.",
+      "outputs": [
+        "failure_cluster",
+        "dataset_operation",
+        "source_failures",
+        "expected_metric_delta",
+        "patch_status"
+      ],
+      "pipeline_phase": "curriculum_compiler",
+      "recovered_refs": [
+        "/arxiv/repositories/deepeval/docs/public/img/confident-trace-to-dataset.png",
+        "/arxiv/repositories/deepeval/deepeval/dataset/test_run_tracer.py"
+      ],
+      "role": "Convert observed eval traces and failures into auditable add/remove/relabel/rebalance dataset operations."
+    },
+    "hpo_nas_sweeper": {
+      "local_status": "reference_recovered_not_integrated",
+      "next": "Only enable after locked eval/canary monitor exists.",
+      "outputs": [
+        "sweep_id",
+        "trial_config",
+        "metric_delta",
+        "selected_config",
+        "rejected_config_reason"
+      ],
+      "pipeline_phase": "training_engineering",
+      "recovered_refs": [
+        "/arxiv/repositories/nni/nni/nas/benchmark/evaluator.py",
+        "/arxiv/repositories/nni/docs/source/hpo/hpo_benchmark.rst",
+        "/arxiv/repositories/nni/examples/nas/benchmarks/nasbench201.sh"
+      ],
+      "role": "Track controlled hyperparameter and architecture sweeps under reproducible benchmark cards rather than ad hoc stage changes."
+    },
+    "knowledge_graph_memory_store": {
+      "local_status": "reference_recovered_not_integrated",
+      "next": "Bind central graph nodes to durable memory keys before trace-mined skill promotion.",
+      "outputs": [
+        "memory_node",
+        "memory_edge",
+        "entity_id",
+        "relationship_type",
+        "retrieval_path"
+      ],
+      "pipeline_phase": "agent_memory",
+      "recovered_refs": [
+        "/arxiv/repositories/modelcontextprotocol__servers/src/memory/index.ts",
+        "/arxiv/repositories/modelcontextprotocol__servers/src/memory/README.md",
+        "/arxiv/repositories/modelcontextprotocol__servers/src/memory/__tests__/knowledge-graph.test.ts"
+      ],
+      "role": "Persist skills, source facts, tool outcomes, and repo entities as typed graph memories with retrieval/update semantics."
+    },
+    "latency_resource_observability": {
+      "local_status": "missing_as_unified_telemetry",
+      "next": "Integrate with cost_budget_scheduler and eval metric cards.",
+      "outputs": [
+        "latency_ms",
+        "memory_peak",
+        "token_count",
+        "tool_cost",
+        "budget_violation"
+      ],
+      "pipeline_phase": "runtime_governance",
+      "recovered_refs": [
+        "/arxiv/repositories/deepeval/deepeval/tracing/trace_context.py",
+        "/arxiv/repositories/nni/nni/common/concrete_trace_utils/flop_utils.py"
+      ],
+      "role": "Track latency, memory, token, and tool costs so the controller learns bounded maintenance rather than unlimited search."
+    },
+    "model_compression_quantization_fusion": {
+      "local_status": "future_efficiency_track",
+      "next": "Do not optimize deployment until transition/data gates stop failing.",
+      "outputs": [
+        "quantization_mode",
+        "fusion_pattern",
+        "latency_delta",
+        "accuracy_delta"
+      ],
+      "pipeline_phase": "deployment_efficiency",
+      "recovered_refs": [
+        "/arxiv/repositories/nni/docs/source/compression/fusion_compress.rst",
+        "/arxiv/repositories/cutlass/examples/13_two_tensor_op_fusion/README.md",
+        "/arxiv/repositories/cutlass/examples/37_gemm_layernorm_gemm_fusion/gemm_layernorm.cu"
+      ],
+      "role": "Recover quantization/fusion/compression references for small-model deployment after correctness gates pass."
+    },
+    "neural_longterm_memory_module": {
+      "local_status": "concept_recovered_not_current_architecture",
+      "next": "Keep as V2.8+ architecture track after source-backed transition objectives are stable.",
+      "outputs": [
+        "memory_state",
+        "retrieval_state",
+        "compression_loss",
+        "staleness_score"
+      ],
+      "pipeline_phase": "model_architecture",
+      "recovered_refs": [
+        "/arxiv/repositories/titans-pytorch/titans_pytorch/neural_memory.py",
+        "/arxiv/repositories/titans-pytorch/titans_pytorch/memory_models.py"
+      ],
+      "role": "Explore compressed long-horizon state/memory modules that can summarize repo/task history before bounded attention decoding."
+    },
+    "repository_universe_builder": {
+      "local_status": "session_recovered_concept_needs_rebuild",
+      "next": "Rebuild as source inventory extension after Stage8655a.",
+      "outputs": [
+        "repo_vector",
+        "entity_embedding",
+        "repo_knn_edge",
+        "universe_manifest"
+      ],
+      "pipeline_phase": "source_ingestion",
+      "recovered_refs": [
+        "/home/peyton/.codex/sessions/2025/11/26/rollout-2025-11-26T00-55-44-019abda8-c0d8-7803-8a77-1e0fcf0dc577.jsonl",
+        "/arxiv/TOLBERT_BRAIN/scripts/repo_graph.py",
+        "/arxiv/TOLBERT_BRAIN/modules/program_graph.py"
+      ],
+      "role": "Build heterogeneous repo/file/symbol embeddings, graph edges, and repo similarity for source-backed curriculum sampling."
+    },
+    "skill_tool_registry": {
+      "local_status": "missing_as_training_surface",
+      "next": "Create tool/action ontology rows for observe-orient-act trajectory training.",
+      "outputs": [
+        "tool_id",
+        "skill_id",
+        "allowed_action",
+        "permission_boundary",
+        "tool_failure_mode"
+      ],
+      "pipeline_phase": "agent_tooling",
+      "recovered_refs": [
+        "/arxiv/repositories/modelcontextprotocol__servers/src/git/README.md",
+        "/arxiv/repositories/modelcontextprotocol__servers/src/fetch/README.md",
+        "/arxiv/repositories/modelcontextprotocol__servers/src/memory/README.md"
+      ],
+      "role": "Index available tools, skills, actions, schemas, permissions, and failure modes as structured tool-selection context."
+    },
+    "traced_eval_observability": {
+      "local_status": "reference_recovered_not_integrated",
+      "next": "Define a trace schema shared by dataset judge, eval harness, and curriculum compiler.",
+      "outputs": [
+        "trace_id",
+        "span_tree",
+        "metric_events",
+        "failure_packet",
+        "dataset_patch_link"
+      ],
+      "pipeline_phase": "evaluation_observability",
+      "recovered_refs": [
+        "/arxiv/repositories/deepeval/deepeval/tracing/trace_context.py",
+        "/arxiv/repositories/deepeval/deepeval/tracing/trace_test_manager.py",
+        "/arxiv/repositories/deepeval/skills/deepeval-tracing/LICENSE"
+      ],
+      "role": "Capture structured eval spans, tool calls, inputs, outputs, and metric attribution so failures compile into dataset patches instead of narrative notes."
+    }
+  },
+  "created_at_utc": "2026-07-04T19:46:12Z",
+  "decision": "Recovered infrastructure support modules required to make the training loop observable, reproducible, memory-aware, and governed. This is no-authority indexing only.",
+  "metrics": {
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "infrastructure_support_components": 12,
+    "missing_recovered_refs": {},
+    "model_execution_authorized_next": false,
+    "pipeline_phases": [
+      "agent_memory",
+      "agent_tooling",
+      "curriculum_compiler",
+      "deployment_efficiency",
+      "evaluation",
+      "evaluation_observability",
+      "knowledge_retrieval",
+      "model_architecture",
+      "model_interpretability_and_runtime",
+      "runtime_governance",
+      "source_ingestion",
+      "training_engineering"
+    ],
+    "promotion_ready": false,
+    "runtime_authorized": false
+  },
+  "next_best_step": "Attach Stage8658 to the central graph, then prioritize traced-eval, source-lineage, benchmark-pack, and tool-registry schemas before training or runtime reopen.",
+  "passed": true,
+  "stage": 8658,
+  "stage_name": "stage8658_infrastructure_support_modules_recovery_index"
+}

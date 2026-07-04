@@ -1,0 +1,694 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "controls": {
+    "leakage": {
+      "label_visibility_block": {
+        "blocked_if": [
+          "target_label_visible",
+          "label_coded_id",
+          "direct_target_field_visible",
+          "clean_state_used_as_input"
+        ],
+        "must_check": [
+          "target label absent from model_input",
+          "clean_state not included in corrupted/model input",
+          "label-coded graph IDs disallowed",
+          "direct target fields disallowed"
+        ]
+      },
+      "secret_pii_security": {
+        "blocked_if": [
+          "secret_pattern_present",
+          "pii_pattern_present",
+          "unknown_license_without_review"
+        ],
+        "must_check": [
+          "secret pattern scan",
+          "PII pattern scan",
+          "license/security source status"
+        ]
+      },
+      "shortcut_proxy_audit": {
+        "blocked_if": [
+          "shortcut_dominated_feature",
+          "metadata_only_beats_retrieval",
+          "count_proxy_solves_target"
+        ],
+        "must_check": [
+          "single-feature baselines below ceilings",
+          "metadata-only baseline below evidence-present",
+          "proxy counts cannot solve labels"
+        ]
+      },
+      "source_body_boundary": {
+        "blocked_if": [
+          "raw_source_body_export_requested",
+          "body_leak_flag",
+          "source_emission_authorized"
+        ],
+        "must_check": [
+          "raw source bodies not exported to decoder targets",
+          "source snippets are evidence spans only",
+          "source/body emission authority remains closed"
+        ]
+      },
+      "split_contamination": {
+        "blocked_if": [
+          "train_eval_duplicate",
+          "source_split_leak",
+          "heldout_overlap",
+          "locked_eval_source_used_for_training"
+        ],
+        "must_check": [
+          "exact hash overlap zero",
+          "semantic key overlap zero",
+          "near-duplicate clusters split-safe",
+          "locked/hidden eval never mined"
+        ]
+      }
+    },
+    "locked_eval": {
+      "benchmark_pack_policy": {
+        "blocked_if": [
+          "unversioned_eval",
+          "threshold_missing",
+          "rubric_without_calibration"
+        ],
+        "required": [
+          "task_pack_id",
+          "slice_tags",
+          "thresholds",
+          "rotation_policy",
+          "artifact_paths"
+        ]
+      },
+      "eval_split_policy": {
+        "rules": [
+          "dev_failure_mining may generate dataset patches",
+          "locked_regression is promotion-only",
+          "hidden_final is never used for mining or prompt generation",
+          "training sources must record lineage"
+        ],
+        "sets": [
+          "train",
+          "dev_failure_mining",
+          "locked_regression",
+          "hidden_final"
+        ]
+      },
+      "promotion_gate": {
+        "blocked_if": [
+          "locked_regression_drop",
+          "canary_forgotten_skill",
+          "missing_metric_card",
+          "hidden_eval_contamination"
+        ],
+        "required": [
+          "target slice improves",
+          "old canaries non-regress",
+          "locked eval leakage zero",
+          "benchmark task pack metrics emitted"
+        ]
+      },
+      "trace_to_dataset_boundary": {
+        "allowed": [
+          "dev-failure trace to dataset patch",
+          "judge/verifier disagreement to review queue"
+        ],
+        "forbidden": [
+          "locked eval trace to training row",
+          "hidden eval trace to synthetic prompt",
+          "benchmark answer as decoder target"
+        ]
+      }
+    },
+    "loss_authority": {
+      "allowed_now": [
+        "lineage_inventory_audit",
+        "feature_normalization_audit",
+        "shortcut_baseline_audit",
+        "retrieval_baseline_audit",
+        "locked_eval_manifest_audit"
+      ],
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "forbidden_now": [
+        "decoder_ce",
+        "denoise_ce",
+        "runtime_reward",
+        "body_source_training",
+        "controller_merge",
+        "promotion_scoring"
+      ]
+    },
+    "retrieval": {
+      "context_packing_card": {
+        "blocked_if": [
+          "critical_span_dropped_without_reason",
+          "lost_in_middle_risk_unmeasured",
+          "context_budget_missing"
+        ],
+        "metrics": [
+          "source_span_kept",
+          "critical_span_rank_bucket",
+          "dropped_evidence_reason_present",
+          "context_budget_ok"
+        ]
+      },
+      "counterfactual_evidence_card": {
+        "blocked_if": [
+          "evidence_removed_rows_do_not_drop",
+          "wrong_evidence_accepted",
+          "missing_evidence_not_routed"
+        ],
+        "metrics": [
+          "evidence_present_accuracy",
+          "evidence_removed_drop",
+          "wrong_evidence_reject_rate",
+          "retrieve_more_rate_on_missing_evidence"
+        ]
+      },
+      "query_expansion_card": {
+        "blocked_if": [
+          "query_expansion_encodes_label",
+          "expansion_degrades_retrieval",
+          "expansion_shortcut_over_ceiling"
+        ],
+        "metrics": [
+          "query_variant_count",
+          "expansion_source_bits",
+          "expansion_lift",
+          "expansion_shortcut_baseline"
+        ]
+      },
+      "retrieval_baseline_card": {
+        "blocked_if": [
+          "no_evidence_retrieved_for_positive_rows",
+          "metadata_only_beats_retrieval",
+          "retrieval_disagreement_unrouted"
+        ],
+        "metrics": [
+          "bm25_top1_exact",
+          "bm25_top5_recall",
+          "dense_top1_exact",
+          "dense_top5_recall",
+          "hybrid_rrf_top5_recall",
+          "rerank_top1_exact"
+        ]
+      }
+    }
+  },
+  "created_at_utc": "2026-07-04T19:54:07Z",
+  "decision": "Recovered a single no-authority control contract tying source lineage, leakage blocking, retrieval evidence, context packing, and locked-eval governance together before any training/runtime reopen.",
+  "metrics": {
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "leakage_control_cards": 5,
+    "locked_eval_control_cards": 4,
+    "missing_sources": {},
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "retrieval_control_cards": 4,
+    "runtime_authorized": false,
+    "source_counts": {
+      "agent_trace_sources": {
+        "directories": 4,
+        "entries": 4,
+        "existing": 4,
+        "files": 0,
+        "parquet_files": 84
+      },
+      "code_curriculum_sources": {
+        "directories": 4,
+        "entries": 4,
+        "existing": 4,
+        "files": 0,
+        "parquet_files": 96
+      },
+      "locked_eval_sources": {
+        "directories": 0,
+        "entries": 5,
+        "existing": 5,
+        "files": 5,
+        "parquet_files": 0
+      },
+      "observability_sources": {
+        "directories": 0,
+        "entries": 3,
+        "existing": 3,
+        "files": 3,
+        "parquet_files": 0
+      },
+      "repo_graph_sources": {
+        "directories": 0,
+        "entries": 7,
+        "existing": 7,
+        "files": 7,
+        "parquet_files": 0
+      },
+      "retrieval_sources": {
+        "directories": 1,
+        "entries": 9,
+        "existing": 9,
+        "files": 8,
+        "parquet_files": 4
+      },
+      "safety_security_sources": {
+        "directories": 0,
+        "entries": 4,
+        "existing": 4,
+        "files": 4,
+        "parquet_files": 0
+      }
+    },
+    "source_groups": 7
+  },
+  "next_best_step": "Implement Stage8660a/8660b concrete source inventory and shared feature normalizer libraries, then run retrieval and leakage baseline cards on graph/symbol candidate rows.",
+  "passed": true,
+  "source_inventory": {
+    "agent_trace_sources": [
+      {
+        "exists": true,
+        "file_count": 265,
+        "jsonl_files": 0,
+        "kind": "directory",
+        "parquet_files": 84,
+        "path": "/arxiv/datasets/nvidia--Open-SWE-Traces",
+        "readme_present": true,
+        "sample_files": [
+          "/arxiv/datasets/nvidia--Open-SWE-Traces/sweagent_tools.json",
+          "/arxiv/datasets/nvidia--Open-SWE-Traces/.gitattributes",
+          "/arxiv/datasets/nvidia--Open-SWE-Traces/README.md",
+          "/arxiv/datasets/nvidia--Open-SWE-Traces/openhands_tools.json",
+          "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_sweagent_trajectories/train-00001-of-00023.parquet",
+          "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_sweagent_trajectories/train-00015-of-00023.parquet",
+          "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_sweagent_trajectories/train-00022-of-00023.parquet",
+          "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_sweagent_trajectories/train-00013-of-00023.parquet"
+        ]
+      },
+      {
+        "exists": true,
+        "file_count": 438,
+        "jsonl_files": 1,
+        "kind": "directory",
+        "parquet_files": 0,
+        "path": "/arxiv/repositories/SWE-agent__SWE-agent",
+        "readme_present": true,
+        "sample_files": [
+          "/arxiv/repositories/SWE-agent__SWE-agent/.pre-commit-config.yaml",
+          "/arxiv/repositories/SWE-agent__SWE-agent/.gitignore",
+          "/arxiv/repositories/SWE-agent__SWE-agent/codecov.yml",
+          "/arxiv/repositories/SWE-agent__SWE-agent/LICENSE",
+          "/arxiv/repositories/SWE-agent__SWE-agent/README.md",
+          "/arxiv/repositories/SWE-agent__SWE-agent/mlc_config.json",
+          "/arxiv/repositories/SWE-agent__SWE-agent/CONTRIBUTING.md",
+          "/arxiv/repositories/SWE-agent__SWE-agent/pyproject.toml"
+        ]
+      },
+      {
+        "exists": true,
+        "file_count": 728,
+        "jsonl_files": 1,
+        "kind": "directory",
+        "parquet_files": 0,
+        "path": "/arxiv/repositories/Aider-AI__aider",
+        "readme_present": true,
+        "sample_files": [
+          "/arxiv/repositories/Aider-AI__aider/.pre-commit-config.yaml",
+          "/arxiv/repositories/Aider-AI__aider/CNAME",
+          "/arxiv/repositories/Aider-AI__aider/requirements.txt",
+          "/arxiv/repositories/Aider-AI__aider/.gitignore",
+          "/arxiv/repositories/Aider-AI__aider/README.md",
+          "/arxiv/repositories/Aider-AI__aider/HISTORY.md",
+          "/arxiv/repositories/Aider-AI__aider/LICENSE.txt",
+          "/arxiv/repositories/Aider-AI__aider/CONTRIBUTING.md"
+        ]
+      },
+      {
+        "exists": true,
+        "file_count": 66,
+        "jsonl_files": 0,
+        "kind": "directory",
+        "parquet_files": 0,
+        "path": "/arxiv/repositories/OpenAutoCoder__Agentless",
+        "readme_present": true,
+        "sample_files": [
+          "/arxiv/repositories/OpenAutoCoder__Agentless/.pre-commit-config.yaml",
+          "/arxiv/repositories/OpenAutoCoder__Agentless/requirements.txt",
+          "/arxiv/repositories/OpenAutoCoder__Agentless/.gitignore",
+          "/arxiv/repositories/OpenAutoCoder__Agentless/LICENSE",
+          "/arxiv/repositories/OpenAutoCoder__Agentless/README.md",
+          "/arxiv/repositories/OpenAutoCoder__Agentless/README_swebench.md",
+          "/arxiv/repositories/OpenAutoCoder__Agentless/classification/load_filtered_benchmark.py",
+          "/arxiv/repositories/OpenAutoCoder__Agentless/classification/README.md"
+        ]
+      }
+    ],
+    "code_curriculum_sources": [
+      {
+        "exists": true,
+        "file_count": 157,
+        "jsonl_files": 0,
+        "kind": "directory",
+        "parquet_files": 50,
+        "path": "/arxiv/datasets/nvidia--OpenCodeInstruct",
+        "readme_present": true,
+        "sample_files": [
+          "/arxiv/datasets/nvidia--OpenCodeInstruct/.gitattributes",
+          "/arxiv/datasets/nvidia--OpenCodeInstruct/README.md",
+          "/arxiv/datasets/nvidia--OpenCodeInstruct/data/train-00015-of-00050.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeInstruct/data/train-00022-of-00050.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeInstruct/data/train-00040-of-00050.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeInstruct/data/train-00020-of-00050.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeInstruct/data/train-00036-of-00050.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeInstruct/data/train-00000-of-00050.parquet"
+        ]
+      },
+      {
+        "exists": true,
+        "file_count": 127,
+        "jsonl_files": 0,
+        "kind": "directory",
+        "parquet_files": 40,
+        "path": "/arxiv/datasets/nvidia--OpenCodeReasoning",
+        "readme_present": true,
+        "sample_files": [
+          "/arxiv/datasets/nvidia--OpenCodeReasoning/.gitattributes",
+          "/arxiv/datasets/nvidia--OpenCodeReasoning/README.md",
+          "/arxiv/datasets/nvidia--OpenCodeReasoning/split_0/train-00015-of-00030.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeReasoning/split_0/train-00026-of-00030.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeReasoning/split_0/train-00017-of-00030.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeReasoning/split_0/train-00022-of-00030.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeReasoning/split_0/train-00010-of-00030.parquet",
+          "/arxiv/datasets/nvidia--OpenCodeReasoning/split_0/train-00002-of-00030.parquet"
+        ]
+      },
+      {
+        "exists": true,
+        "file_count": 25,
+        "jsonl_files": 0,
+        "kind": "directory",
+        "parquet_files": 6,
+        "path": "/arxiv/datasets/google--code_x_glue_cc_code_refinement",
+        "readme_present": true,
+        "sample_files": [
+          "/arxiv/datasets/google--code_x_glue_cc_code_refinement/.gitattributes",
+          "/arxiv/datasets/google--code_x_glue_cc_code_refinement/README.md",
+          "/arxiv/datasets/google--code_x_glue_cc_code_refinement/medium/train-00000-of-00001.parquet",
+          "/arxiv/datasets/google--code_x_glue_cc_code_refinement/medium/validation-00000-of-00001.parquet",
+          "/arxiv/datasets/google--code_x_glue_cc_code_refinement/medium/test-00000-of-00001.parquet",
+          "/arxiv/datasets/google--code_x_glue_cc_code_refinement/small/train-00000-of-00001.parquet",
+          "/arxiv/datasets/google--code_x_glue_cc_code_refinement/small/validation-00000-of-00001.parquet",
+          "/arxiv/datasets/google--code_x_glue_cc_code_refinement/small/test-00000-of-00001.parquet"
+        ]
+      },
+      {
+        "exists": true,
+        "file_count": 10,
+        "jsonl_files": 1,
+        "kind": "directory",
+        "parquet_files": 0,
+        "path": "/arxiv/datasets/lazarus19--Vibe-Coding-Instruct-V2",
+        "readme_present": true,
+        "sample_files": [
+          "/arxiv/datasets/lazarus19--Vibe-Coding-Instruct-V2/.gitattributes",
+          "/arxiv/datasets/lazarus19--Vibe-Coding-Instruct-V2/README.md",
+          "/arxiv/datasets/lazarus19--Vibe-Coding-Instruct-V2/dataset.jsonl",
+          "/arxiv/datasets/lazarus19--Vibe-Coding-Instruct-V2/.cache/huggingface/.gitignore",
+          "/arxiv/datasets/lazarus19--Vibe-Coding-Instruct-V2/.cache/huggingface/download/README.md.lock",
+          "/arxiv/datasets/lazarus19--Vibe-Coding-Instruct-V2/.cache/huggingface/download/.gitattributes.lock",
+          "/arxiv/datasets/lazarus19--Vibe-Coding-Instruct-V2/.cache/huggingface/download/README.md.metadata",
+          "/arxiv/datasets/lazarus19--Vibe-Coding-Instruct-V2/.cache/huggingface/download/dataset.jsonl.lock"
+        ]
+      }
+    ],
+    "locked_eval_sources": [
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/Aider-AI__aider/benchmark/benchmark.py",
+        "sha256_prefix64k": "ba350b7b3ebcc9da6f588c0724dade552791b3c5edd9f16641eadb5931de9c30",
+        "size_bytes": 34621,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/Aider-AI__aider/benchmark/swe_bench.py",
+        "sha256_prefix64k": "07f0616e4aed0e762c7d1a146e684e5511b478692113519662eeec03b045fd26",
+        "size_bytes": 3621,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/datasets/ScaleAI--SWE-Atlas-QnA/rubric_evaluation_config.yaml",
+        "sha256_prefix64k": "74e3c4d94c64b93225c5f2c1479d17309af08501270f46f628a0b10a08fe5ef9",
+        "size_bytes": 11180,
+        "suffix": ".yaml"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/datasets/ScaleAI--SWE-Atlas-QnA/data/test-00000-of-00001.parquet",
+        "sha256_prefix64k": "db8615f6b926ad71ae6b2f95259a40a701f7bffe8426aacb0ed2b8aa181bf374",
+        "size_bytes": 999069,
+        "suffix": ".parquet"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/deepeval/deepeval/benchmarks/base_benchmark.py",
+        "sha256_prefix64k": "50afdbec3589843272a2200b05ec69cec7fdadfb3d5f67bcc83dd6753a220ec0",
+        "size_bytes": 877,
+        "suffix": ".py"
+      }
+    ],
+    "observability_sources": [
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/deepeval/deepeval/tracing/trace_context.py",
+        "sha256_prefix64k": "925490d665ccadd8832f35e3d874c7d81c7025ed6cd18e64aa662813a48073c5",
+        "size_bytes": 3790,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/deepeval/deepeval/dataset/test_run_tracer.py",
+        "sha256_prefix64k": "46220dabcef8de5d03d4cd052ae411374e6fd3ec4ee0161d529d711e31d2180a",
+        "size_bytes": 2514,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/modelcontextprotocol__servers/src/memory/index.ts",
+        "sha256_prefix64k": "e30dc27c8f84deaceb209ba6d75fe00e905dceeeda07ad304e7786fc4d13f18f",
+        "size_bytes": 15962,
+        "suffix": ".ts"
+      }
+    ],
+    "repo_graph_sources": [
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/TOLBERT_BRAIN/data/repos/nodes_repos.jsonl",
+        "sha256_prefix64k": "617d6929878861fd680a691d2e05c410111bbd81baa51cac5bd7c7e37138cd8d",
+        "size_bytes": 24544067,
+        "suffix": ".jsonl"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/TOLBERT_BRAIN/data/repos/spans_repos.jsonl",
+        "sha256_prefix64k": "8c4eae7f4f5a62545f49889f70080f492ca39f392e72a86df03a6fec33910455",
+        "size_bytes": 824497817,
+        "suffix": ".jsonl"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/TOLBERT_BRAIN/data/repos/level_sizes_repos.json",
+        "sha256_prefix64k": "07a0c6c184414b36dd072b3f306b9f9914203cd2cf732e6ab6a0031aa35861bf",
+        "size_bytes": 81,
+        "suffix": ".json"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/TOLBERT_BRAIN/scripts/codegraph_core.py",
+        "sha256_prefix64k": "27d2c9fbe4b62cf66c684b76a8ffba2ba3dad061314037a111259361fe252990",
+        "size_bytes": 7986,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/TOLBERT_BRAIN/scripts/code_graph.py",
+        "sha256_prefix64k": "e28a996e3c22e28318f33e970701e56c53d2becd271f9615a0269e11078879c6",
+        "size_bytes": 46016,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/TOLBERT_BRAIN/scripts/repo_graph.py",
+        "sha256_prefix64k": "cbc0aa5dcdb8bd7bf8e739e35d1190516934c4d470257d2017a31f88c0b7f173",
+        "size_bytes": 28246,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/TOLBERT_BRAIN/modules/program_graph.py",
+        "sha256_prefix64k": "f32dd991ecbf9067178a3703b1be0d4601f339d20349172993dd1ae4f9bfc3c3",
+        "size_bytes": 3017,
+        "suffix": ".py"
+      }
+    ],
+    "retrieval_sources": [
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/TOLBERT_BRAIN/scripts/retrieval_sandbox.py",
+        "sha256_prefix64k": "b68b70c9ea6c6aba9d3f05037746f5eeb17e0f74463e69017bbec4723d33d142",
+        "size_bytes": 10207,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/TOLBERT_BRAIN/scripts/eval_retrieval.py",
+        "sha256_prefix64k": "0618a8d31a4435c8ec1cfe19fb3dee05f16a905b73db22e3a3ea623292149c00",
+        "size_bytes": 14324,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "file_count": 19,
+        "jsonl_files": 0,
+        "kind": "directory",
+        "parquet_files": 4,
+        "path": "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv",
+        "readme_present": true,
+        "sample_files": [
+          "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv/.gitattributes",
+          "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv/README.md",
+          "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv/data/train-00000-of-00002.parquet",
+          "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv/data/train-00001-of-00002.parquet",
+          "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv/data/validation-00000-of-00001.parquet",
+          "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv/data/test-00000-of-00001.parquet",
+          "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv/.cache/huggingface/.gitignore",
+          "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv/.cache/huggingface/download/README.md.lock"
+        ]
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/camel-ai__camel/camel/retrievers/bm25_retriever.py",
+        "sha256_prefix64k": "b7d62d34413f6fac03326d1e1c1c9211ef1ebaebf43566f3c97b8c636ea5527f",
+        "size_bytes": 5156,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/camel-ai__camel/camel/retrievers/vector_retriever.py",
+        "sha256_prefix64k": "1e4c7b098fc2d6fcf508cd73d27ed8c197e2d35d23d5110fbc8ae5e1846fa8fd",
+        "size_bytes": 11051,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/camel-ai__camel/test/retrievers/test_hybrid_retriever.py",
+        "sha256_prefix64k": "aa3004d38b36e4a1f3554eac8b2a0edfee618a4dde2130945aced645f33c9ff3",
+        "size_bytes": 2454,
+        "suffix": ".py"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/deepset-ai__haystack/docs-website/docs/pipeline-components/joiners/documentjoiner.mdx",
+        "sha256_prefix64k": "0b6bc4e639d8ad941541380af063a2430bbfd943786105386fe97e553b5875f4",
+        "size_bytes": 9455,
+        "suffix": ".mdx"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/deepset-ai__haystack/docs-website/docs/pipeline-components/rankers/lostinthemiddleranker.mdx",
+        "sha256_prefix64k": "c07f7b400a0cfc08955b094bcbeec76c4f07a838d5e02650cde11ea27edb1200",
+        "size_bytes": 4980,
+        "suffix": ".mdx"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/deepset-ai__haystack/docs-website/docs/pipeline-components/retrievers/sentencewindowretrieval.mdx",
+        "sha256_prefix64k": "cb0ba8a501992a3bbca162acfb02846994ec2121bfeff6625733f94d6c61b087",
+        "size_bytes": 3951,
+        "suffix": ".mdx"
+      }
+    ],
+    "safety_security_sources": [
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/CheatSheetSeries/cheatsheets/Secrets_Management_Cheat_Sheet.md",
+        "sha256_prefix64k": "098b2e35ca5b9846bb35cb80fa9eef59aa97d76e10a12a5ff25b121f2c5770bd",
+        "size_bytes": 64687,
+        "suffix": ".md"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/CheatSheetSeries/cheatsheets/RAG_Security_Cheat_Sheet.md",
+        "sha256_prefix64k": "e48ca77c8cd69bc9a102facf64cc826a75c9f53253a3eda2e90d45d18ba07d72",
+        "size_bytes": 28096,
+        "suffix": ".md"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/CheatSheetSeries/cheatsheets/Software_Supply_Chain_Security_Cheat_Sheet.md",
+        "sha256_prefix64k": "d75f515a2518562968355b343879fb9184c5f1e9db276e0509b4455c65f4ab10",
+        "size_bytes": 21517,
+        "suffix": ".md"
+      },
+      {
+        "exists": true,
+        "kind": "file",
+        "path": "/arxiv/repositories/CheatSheetSeries/cheatsheets/AI_Agent_Security_Cheat_Sheet.md",
+        "sha256_prefix64k": "dfe501361389fc747d9f07d4b102f60ddd261dbbcc6898e313f0182550d904d6",
+        "size_bytes": 30215,
+        "suffix": ".md"
+      }
+    ]
+  },
+  "stage": 8660,
+  "stage_name": "stage8660_leakage_retrieval_locked_eval_control_contract"
+}
