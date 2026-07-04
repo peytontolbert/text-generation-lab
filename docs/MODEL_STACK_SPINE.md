@@ -450,3 +450,20 @@ Rubrics and LLM/teacher judges are not ground truth. High-confidence judge/verif
 Stage8718-8719 recover `operator_codelength_interface.py` as the operator inventory and candidate-choice measurement layer. It restores the software-maintainer operator categories, probability normalization, target NLL bits, uniform baseline bits, compression gain, regret, exact choice, and bits-per-row metrics.
 
 Accuracy alone is not sufficient for future choice probes. Any neural selector or bounded decoder candidate-selection probe must report codelength/compression metrics before promotion. This interface is non-executing and opens no scoring, training, runtime, Gemma, or promotion authority.
+
+## Stage8720 Forgotten Vital Module Queue
+
+Stage8720 separates already-recovered support modules from high-value concepts that are still concept-only or contract-missing. These are not authorization gates for training; they are recovery targets that should be rebuilt before broad mining/training resumes.
+
+Priority queue:
+
+1. `cross_encoder_reranker_calibration` - calibrated task/evidence pair reranking after BM25/dense/hybrid retrieval.
+2. `dataset_cartography_active_learning` - confidence, variability, forgetting, difficulty, hard/easy/redundant row accounting for 1M+ scale-up.
+3. `training_data_attribution_influence` - helpful/harmful/nearest training row accounting for failure-to-data repair.
+4. `fusion_logits_forward_pass_contract` - no-execution contract for combining structured heads, retrieval confidence, verifier signals, and decoder logits.
+5. `moe_lora_adapter_router_contract` - task/language/repo specialist routing with abstain fallback.
+6. `denoise_diffusion_repair_contract` - masked-span repair loop and verifier-guided remasking contract before denoise CE can reopen.
+7. `adversarial_hard_negative_generator` - shortcut/proxy/leakage counterexample generator for dataset judge hardening.
+8. `confidence_ood_head_contract` - head-level confidence/OOD threshold, Brier/ECE, and high-confidence-wrong gates.
+9. `structured_data_operation_curriculum` - table/JSON/graph/AST/log/workflow/memory operation curriculum using state + schema + addressing + operator + validator.
+10. `semantic_equivalence_metamorphic_verifier` - equivalence, property, metamorphic, and API compatibility verifier contracts.
