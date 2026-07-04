@@ -1,0 +1,343 @@
+{
+  "artifacts": {
+    "doc": "docs/RECOVERED_MODULE_SUBMODULE_READINESS_AUDIT_STAGE8680.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T21:04:37Z",
+  "decision": "Module/submodule recovery is not complete. Data mining and training remain closed until unified ranker, cluster/slice detector, shared control helpers, and telemetry/interp modules are rebuilt and attached to the graph.",
+  "metrics": {
+    "blocking_missing_or_partial_modules": [
+      "structured_dataset_junk_ranker",
+      "objective_row_judge",
+      "curriculum_compiler",
+      "cluster_slice_near_duplicate_detector",
+      "dataset_cartography_active_learning",
+      "context_packer_lost_in_middle_memory_retrieval",
+      "source_backed_edit_localization",
+      "source_backed_patch_operator",
+      "source_backed_verifier_repair",
+      "bounded_decoder_ce_probe",
+      "training_telemetry",
+      "gradient_activation_interpretability",
+      "confidence_calibration_ood_heads",
+      "runtime_verifier_loop"
+    ],
+    "data_mining_allowed": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "highest_priority_next_modules": [
+      "unified_dataset_junk_ood_ranker_v1",
+      "cluster_slice_near_duplicate_detector",
+      "shared_feature_normalizer_importable_library",
+      "locked_eval_source_exclusion_helper",
+      "training_telemetry_internal_interpretability"
+    ],
+    "model_execution_authorized_next": false,
+    "modules_reviewed": 29,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "status_counts": {
+      "candidate_ready_no_training": 1,
+      "closed_partial": 1,
+      "missing": 7,
+      "missing_closed": 1,
+      "partial": 5,
+      "ready": 4,
+      "ready_partial": 10
+    },
+    "training_allowed": false
+  },
+  "modules": [
+    {
+      "files": [
+        "scripts/safe_cleanup.py",
+        "scripts/safe_paths.py",
+        "scripts/artifact_paths.py",
+        "configs/storage/focused_storage_policy_v1.json"
+      ],
+      "gap": null,
+      "name": "safe_storage_cleanup",
+      "next": "Keep as only cleanup path; never write training outputs to /arxiv.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "scripts/build_stage7678_v27_stage_registry.py",
+        "scripts/authority_gate.py",
+        "configs/schema/stage_summary_schema.json"
+      ],
+      "gap": null,
+      "name": "stage_registry_authority_gate",
+      "next": "Keep all execution/training authority closed until explicit gate.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "scripts/build_stage8622_central_research_graph.py",
+        "runs/local/artifacts/stage8678_symbol_binding_repair_graph_attachment/central_research_graph_with_symbol_binding_repair.json"
+      ],
+      "gap": "Graph exists and is current through Stage8678, but module readiness statuses are still narrative rather than enforced by a graph validator.",
+      "name": "central_research_graph",
+      "next": "Add module readiness validator over graph nodes.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "configs/software_maintainer/source_inventory_lineage_registry_stage8663.json",
+        "scripts/build_stage8663_source_inventory_lineage_registry.py"
+      ],
+      "gap": null,
+      "name": "source_inventory_lineage",
+      "next": "Require source_id/lineage_hash in every source-backed builder.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "configs/software_maintainer/shared_feature_normalizer_stage8664.json",
+        "scripts/build_stage8664_shared_feature_normalizer_audit.py"
+      ],
+      "gap": "Alias map exists, but no shared importable feature-normalizer library is used by all builders yet.",
+      "name": "shared_feature_normalizer",
+      "next": "Create scripts/feature_normalizer.py and make builders call it.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "configs/software_maintainer/leakage_retrieval_locked_eval_control_contract_stage8660.json",
+        "scripts/audit_stage8665_manifest_leakage_locked_eval_boundary.py",
+        "scripts/audit_stage8669_patched_manifest_leakage_locked_eval_boundary.py"
+      ],
+      "gap": "Controls exist, but locked source exclusion is not yet a reusable helper used by every builder.",
+      "name": "leakage_locked_eval_controls",
+      "next": "Create shared locked-eval/source-exclusion helper.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "scripts/audit_stage8666_repo_span_bm25_retrieval_baseline.py",
+        "scripts/audit_stage8671_dense_hybrid_retrieval_baseline.py"
+      ],
+      "gap": "BM25/dense/hybrid baselines exist; cross-encoder reranker and calibration are missing.",
+      "name": "retrieval_baselines",
+      "next": "Build cross-encoder/rerank calibration card after ranker/cluster gates.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "scripts/build_stage8672_locked_benchmark_pack_manifest.py",
+        "runs/summaries/stage8672_locked_benchmark_pack_manifest.json"
+      ],
+      "gap": "Locked packs exist, but train builders do not all share a reusable exclusion function.",
+      "name": "locked_benchmark_packs",
+      "next": "Wire locked packs into every future builder audit.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "scripts/shortcut_baseline_audit.py",
+        "tests/test_judge_and_shortcuts.py"
+      ],
+      "gap": null,
+      "name": "shortcut_baseline_audits",
+      "next": "Require per-objective shortcut cards before model probes.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "scripts/structured_dataset_junk_ranker.py",
+        "tests/test_judge_and_shortcuts.py"
+      ],
+      "gap": "Deterministic single-row route scorer exists. Missing unified dataset_junk_ood_ranker_v1 over all objectives with OOD score, reason bits, loss eligibility, source lineage, locked eval, cluster ids, and calibration fields.",
+      "name": "structured_dataset_junk_ranker",
+      "next": "Build Stage8681 unified dataset_junk_ood_ranker_v1.",
+      "status": "partial"
+    },
+    {
+      "files": [
+        "scripts/objective_row_judge.py"
+      ],
+      "gap": "Judge emits route/loss-mask features for row objects, but duplicates some ranker logic and is not unified with central ranker.",
+      "name": "objective_row_judge",
+      "next": "Merge into dataset_junk_ood_ranker_v1 or wrap it as compatibility layer.",
+      "status": "partial"
+    },
+    {
+      "files": [
+        "scripts/curriculum_compiler.py",
+        "scripts/audit_curriculum_compiler_outputs.py",
+        "tests/test_curriculum_compiler.py"
+      ],
+      "gap": "Route-to-objective and loss-mask compiler exists, but lacks counterfactual sibling enforcement, cluster/split dedup, source lineage checks, and locked-eval exclusion as first-class inputs.",
+      "name": "curriculum_compiler",
+      "next": "Upgrade compiler after ranker and cluster detectors exist.",
+      "status": "partial"
+    },
+    {
+      "files": [
+        "scripts/loss_mask_card.py",
+        "configs/schema/loss_mask.schema.json"
+      ],
+      "gap": "Loss mask schema/helpers exist; every manifest still needs an enforced card before training.",
+      "name": "loss_mask_cards",
+      "next": "Require loss-card generation in each builder.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "scripts/counterfactual_obligation_audit.py"
+      ],
+      "gap": "Audit helper exists, but source-backed graph/symbol rows are not yet rich enough for all sibling obligations.",
+      "name": "counterfactual_obligation_audit",
+      "next": "Wire to source-backed builders after cluster/ranker gates.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [],
+      "gap": "No executable module for exact hash + semantic key + MinHash/simhash + source lineage cluster + failure cluster + split overlap + undercovered cell cards.",
+      "name": "cluster_slice_near_duplicate_detector",
+      "next": "Build Stage8682 cluster/slice/near-duplicate detector before data mining.",
+      "status": "missing"
+    },
+    {
+      "files": [],
+      "gap": "Only recovered as research requirement; no confidence/variability/forgetting/difficulty sampler module.",
+      "name": "dataset_cartography_active_learning",
+      "next": "Build after first native probe telemetry exists.",
+      "status": "missing"
+    },
+    {
+      "files": [],
+      "gap": "Named in graph/support registry, but no executable context packer, lost-in-middle ranker, or memory retrieval evaluator.",
+      "name": "context_packer_lost_in_middle_memory_retrieval",
+      "next": "Build before large repo context packets or long-context probes.",
+      "status": "missing"
+    },
+    {
+      "files": [
+        "scripts/build_stage8674_source_backed_symbol_binding_candidate_manifest.py",
+        "scripts/audit_stage8675_source_backed_symbol_binding_candidate_manifest.py",
+        "scripts/build_stage8676_source_backed_symbol_binding_shortcut_repair_manifest.py",
+        "scripts/audit_stage8677_source_backed_symbol_binding_shortcut_repair.py",
+        "scripts/audit_stage8677_source_backed_symbol_binding_shortcut_repair_manifest.py"
+      ],
+      "gap": "Validated seed exists: 80 rows, 16 per action, zero shortcut cells. But test-query counterexamples are thin and row count should not increase until more are mined/constructed.",
+      "name": "source_backed_symbol_binding",
+      "next": "Mine/construct more query_kind=test counterexamples only after support modules are complete.",
+      "status": "candidate_ready_no_training"
+    },
+    {
+      "files": [],
+      "gap": "Recovered neutral objective exists, but no source-backed builder with lineage/retrieval/leakage/shortcut controls.",
+      "name": "source_backed_edit_localization",
+      "next": "Build after ranker/cluster detectors.",
+      "status": "missing"
+    },
+    {
+      "files": [],
+      "gap": "Recovered neutral objective exists, but no source-backed builder with lineage/retrieval/leakage/shortcut controls.",
+      "name": "source_backed_patch_operator",
+      "next": "Build after edit localization source-backed path.",
+      "status": "missing"
+    },
+    {
+      "files": [],
+      "gap": "Recovered neutral objective exists, but no source-backed builder with lineage/retrieval/leakage/shortcut controls.",
+      "name": "source_backed_verifier_repair",
+      "next": "Build after patch operator source-backed path.",
+      "status": "missing"
+    },
+    {
+      "files": [
+        "scripts/build_stage8645_bounded_decoder_arguments_neutral_manifest.py",
+        "scripts/audit_stage8646_bounded_decoder_arguments_shortcut_baseline.py"
+      ],
+      "gap": "Objective exists and audited, but should not reconnect to decoder until upstream source-backed state modules and ranker/cluster gates pass.",
+      "name": "bounded_decoder_argument_surface",
+      "next": "Keep closed.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "scripts/build_stage8564_v27_bounded_decoder_ce_candidate_package_design.py",
+        "scripts/build_stage8566_v27_bounded_decoder_ce_probe_wrapper_design.py",
+        "scripts/build_stage8568_v27_bounded_decoder_ce_loss_mask_reopen_design.py",
+        "legacy_src/scripts/train_agentkernel_lite_encdec.py"
+      ],
+      "gap": "Trainer supports closed-boundary tiny probe contracts and an explicitly gated execution path, but decoder generation quality telemetry remains shallow and actual execution remains unauthorized.",
+      "name": "bounded_decoder_ce_probe",
+      "next": "Do not execute until support modules and source-backed state objectives are complete.",
+      "status": "closed_partial"
+    },
+    {
+      "files": [
+        "scripts/training_telemetry.py",
+        "legacy_src/agentkernel_lite/training_loop.py"
+      ],
+      "gap": "Contract artifacts and some probe outputs exist. Missing full per-token loss maps, field margins/entropy for every row, activation caches, gradient influence, and robust failure bucket attribution.",
+      "name": "training_telemetry",
+      "next": "Implement native probe telemetry module before any measured training.",
+      "status": "partial"
+    },
+    {
+      "files": [],
+      "gap": "No current activation patching/probe-cache module for recovered objectives; gradient norms exist only as tiny training-loop fields, not as row influence or attribution.",
+      "name": "gradient_activation_interpretability",
+      "next": "Build after telemetry contract hardens.",
+      "status": "missing"
+    },
+    {
+      "files": [
+        "legacy_src/agentkernel_lite/modeling_transformer.py"
+      ],
+      "gap": "Transformer has OOD/confidence policy heads, but no calibration card, OOD objective manifest, or threshold audit.",
+      "name": "confidence_calibration_ood_heads",
+      "next": "Add OOD/confidence calibration objectives after ranker/cluster layer.",
+      "status": "partial"
+    },
+    {
+      "files": [
+        "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "legacy_src/agentkernel_lite/modeling_transformer.py",
+        "configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json"
+      ],
+      "gap": "Target config/tokenizer pointer and transformer implementation exist; full 100M execution remains closed and unproven after recovery.",
+      "name": "model_architecture_100m",
+      "next": "Keep to shape/config audits only until training plane passes.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+        "tests/test_recovered_trainer_contract.py"
+      ],
+      "gap": "CLI enforces modes and gates; execution requires explicit authorization flag. Needs additional tests for every support module handoff before training.",
+      "name": "safe_trainer_cli",
+      "next": "Do not authorize execution yet.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "configs/runtime_profiles/repo_verifier.json"
+      ],
+      "gap": "Runtime profile exists, but verifier execution/harness/runtime are closed and no active tool loop is rebuilt.",
+      "name": "runtime_verifier_loop",
+      "next": "Keep closed until post-decoder measured stage.",
+      "status": "missing_closed"
+    }
+  ],
+  "next_best_step": "Build Stage8681 unified_dataset_junk_ood_ranker_v1, then Stage8682 cluster_slice_near_duplicate_detector, before any data recovery/mining or model training.",
+  "passed": false,
+  "stage": 8680,
+  "stage_name": "stage8680_recovered_module_submodule_readiness_audit"
+}
