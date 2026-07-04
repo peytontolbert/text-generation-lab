@@ -1,0 +1,136 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "graph_kind_counts": {
+    "action_label": 19,
+    "anti_cheat_rule": 5,
+    "architecture_layer": 11,
+    "authority_flag": 10,
+    "baseline_gate": 7,
+    "behavior_value_label": 14,
+    "binding_action": 6,
+    "build_mode": 3,
+    "contract": 3,
+    "control_label": 8,
+    "counterfactual_obligation": 21,
+    "curriculum_route": 9,
+    "dataset_judge_signal": 16,
+    "dataset_source": 28,
+    "derived_field": 4,
+    "doc": 11,
+    "edit_target": 7,
+    "evidence_label": 5,
+    "final_objective": 1,
+    "fusion_input": 13,
+    "fusion_output": 2,
+    "gate_feature": 18,
+    "graph_family": 6,
+    "hard_negative_requirement": 8,
+    "loop_phase": 7,
+    "loss": 8,
+    "manifest_output": 8,
+    "mining_must_remain_closed_until": 10,
+    "mining_required_card": 10,
+    "model_family": 19,
+    "model_signal": 55,
+    "next_step": 37,
+    "objective_family": 13,
+    "patch_operator": 12,
+    "recovery_source": 3,
+    "registry": 2,
+    "repo_graph_edge_type": 18,
+    "repo_graph_node_type": 17,
+    "software_build_action": 13,
+    "stage": 36,
+    "structured_field": 22,
+    "training_blockers_before_mining": 9,
+    "verifier_repair_action": 9
+  },
+  "interpretation": "The architecture variables needed for the effective 100M model are back. The next gap is safe integration into the trainer and regeneration/verification of the bounded decoder CE manifest, not more architecture guessing.",
+  "metrics": {
+    "authority_flag_nodes": 10,
+    "central_graph_kinds": 43,
+    "central_graph_nodes": 543,
+    "model_family_nodes": 19,
+    "objective_family_nodes": 13,
+    "recovered_model_variable_count": 17,
+    "required_before_training_count": 6,
+    "stage8630_passed": true,
+    "stage8631_passed": true,
+    "structured_field_nodes": 22
+  },
+  "objective_chain": [
+    "intent_to_build_strategy",
+    "repo_state_graph_v1",
+    "symbol_binding",
+    "edit_localization",
+    "patch_operator",
+    "verifier_repair",
+    "bounded_decoder_arguments",
+    "bounded_decoder_ce",
+    "output_repair_denoise",
+    "controlled_harness_later"
+  ],
+  "recovered_variables": {
+    "agent_controller_dim": 128,
+    "agent_intent_labels": 18,
+    "agent_policy_heads": true,
+    "d_ff": 2048,
+    "d_model": 640,
+    "max_position_embeddings": 4096,
+    "model_family": "agentkernel_lite_encdec_v1",
+    "n_heads": 10,
+    "n_layers": 6,
+    "parameter_count_estimated_local": 102599944,
+    "parameter_count_preserved": 102654362,
+    "retrieval_head_dim": 128,
+    "rope_theta": 1000000.0,
+    "scalar_invariant_rank": 32,
+    "tokenizer_kind": "agentkernel-bpe",
+    "tokenizer_vocab_size": 1506,
+    "vocab_size": 1506
+  },
+  "required_before_training": [
+    {
+      "item": "wire transformer implementation behind safe trainer wrapper",
+      "reason": "local transformer module exists, but trainer execution path still uses contract scaffold and has no authorized model execution",
+      "status": "missing"
+    },
+    {
+      "item": "bounded decoder CE manifest availability",
+      "reason": "candidate package was recovered through Stage8580 history, but current rebuild still needs regenerated local rows/loss-mask card before execution",
+      "status": "partial"
+    },
+    {
+      "item": "agentkernel BPE tokenizer artifact",
+      "reason": "target tokenizer metadata recovered; concrete tokenizer files must be located or rebuilt from dataset text before full training",
+      "status": "partial"
+    },
+    {
+      "item": "runtime loss-mask enforcement",
+      "reason": "safe command surface validates masks in contract-only mode; real loss computation must be connected to row masks before execution",
+      "status": "partial"
+    },
+    {
+      "item": "telemetry artifacts",
+      "reason": "telemetry filenames and stubs exist; real row token loss/logit/module delta artifacts require tiny authorized execution",
+      "status": "present_contract_only"
+    },
+    {
+      "item": "central graph objective coverage",
+      "reason": "central graph lists policy, graph, binding, localization, operator, verifier, bounded decoder, denoise, and promotion families",
+      "status": "present"
+    }
+  ],
+  "stage": 8632
+}

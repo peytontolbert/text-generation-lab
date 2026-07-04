@@ -1,0 +1,81 @@
+{
+  "artifacts": {
+    "cell_card": "runs/local/artifacts/stage8618_symbol_binding_counterfactual_with_test_patch/cell_card.json",
+    "combined_candidate_card": "runs/local/artifacts/stage8618_symbol_binding_counterfactual_with_test_patch/combined_candidate_card.json",
+    "combined_candidates": "runs/local/artifacts/stage8618_symbol_binding_counterfactual_with_test_patch/combined_symbol_binding_candidates.jsonl",
+    "counterfactual_manifest": "runs/local/artifacts/stage8618_symbol_binding_counterfactual_with_test_patch/symbol_binding_counterfactual_with_test_patch.jsonl"
+  },
+  "gates": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_enabled_rows": 0,
+    "model_execution_authorized_next": false,
+    "model_ready_training_rows": 0,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "transition_head_training_authorized_next": false,
+    "true_test_bind_available": 24
+  },
+  "metrics": {
+    "action_counts": {
+      "ABSTAIN_UNBOUND": 48,
+      "BIND_CALL_TO_SYMBOL": 44,
+      "BIND_IMPORT_TO_MODULE": 48,
+      "BIND_TEST_TO_SYMBOL": 24,
+      "RETRIEVE_MORE": 184
+    },
+    "base_rows": 947,
+    "combined_action_counts": {
+      "ABSTAIN_UNBOUND": 80,
+      "BIND_CALL_TO_SYMBOL": 263,
+      "BIND_IMPORT_TO_MODULE": 25,
+      "BIND_TEST_TO_SYMBOL": 121,
+      "RETRIEVE_MORE": 579
+    },
+    "combined_query_kind_counts": {
+      "callsite": 838,
+      "import": 105,
+      "test": 125
+    },
+    "combined_rows": 1068,
+    "groups": 116,
+    "loss_enabled_rows": 0,
+    "model_ready_training_rows": 0,
+    "obligation_counts": {
+      "CONTRASTIVE_BOUNDARY_SIBLING": 116,
+      "EVIDENCE_REMOVED_OR_RETRIEVE": 116,
+      "POSITIVE_ORIGINAL": 116
+    },
+    "output_rows": 348,
+    "query_kind_counts": {
+      "callsite": 132,
+      "import": 144,
+      "test": 72
+    },
+    "selected_source_action_counts": {
+      "ABSTAIN_UNBOUND": 24,
+      "BIND_CALL_TO_SYMBOL": 24,
+      "BIND_IMPORT_TO_MODULE": 24,
+      "BIND_TEST_TO_SYMBOL": 24,
+      "RETRIEVE_MORE": 24
+    },
+    "source_rows": 1068,
+    "split_counts": {
+      "eval": 69,
+      "strict_eval": 84,
+      "train": 195
+    },
+    "stage8617_test_patch_rows": 121,
+    "true_test_bind_available": 24
+  },
+  "name": "stage8618_reconstructed_symbol_binding_counterfactual_with_test_patch",
+  "next_best_step": "Audit Stage8618 for shortcut baselines and action/query coverage. If still baseline-dominated, add contrastive same-query test retrieve and test-bind near-miss rows before enabling symbol_binding_ce.",
+  "passed": true,
+  "stage": 8618,
+  "summary": "Merged Stage8617 true BIND_TEST_TO_SYMBOL rows with the recovered symbol-binding candidate surface and rebuilt closed-authority counterfactual obligations."
+}

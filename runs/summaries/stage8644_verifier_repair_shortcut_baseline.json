@@ -1,0 +1,80 @@
+{
+  "artifacts": {
+    "audit_card": "runs/local/artifacts/stage8644_verifier_repair_shortcut_baseline/shortcut_baseline_card.json",
+    "audit_script": "scripts/audit_stage8644_verifier_repair_shortcut_baseline.py",
+    "audited_manifest": "runs/local/artifacts/stage8643_verifier_repair_neutral_manifest/verifier_repair_neutral_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "decision": "Shortcut audit only. Verifier signal is treated as semantic evidence; non-evidence proxies must remain below ceiling.",
+  "metrics": {
+    "allowed_evidence_baselines": {
+      "verifier_signal": 1.0,
+      "verifier_signal+packet_visibility_bits": 1.0
+    },
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "combo_baselines": {
+      "budget_bits": 0.1111111111111111,
+      "language+context_key": 0.1111111111111111,
+      "packet_visibility_bits": 0.1111111111111111,
+      "verifier_signal+packet_visibility_bits": 1.0
+    },
+    "label_counts": {
+      "DIAGNOSE_FAILURE": 72,
+      "LOCALIZE_FAILURE": 72,
+      "REPAIR_API_CALL": 72,
+      "REPAIR_ASSERTION": 72,
+      "REPAIR_IMPORT": 72,
+      "REPAIR_SYNTAX": 72,
+      "RERUN_VERIFIER": 72,
+      "RETRIEVE_MORE": 72,
+      "ROLLBACK_OR_ABSTAIN": 72
+    },
+    "majority_baseline": 0.1111111111111111,
+    "max_proxy_combo": 0.1111111111111111,
+    "max_proxy_single": 0.1111111111111111,
+    "passed": true,
+    "proxy_baseline_ceiling": 0.66,
+    "rows": 648,
+    "single_feature_baselines": {
+      "context_key": 0.1111111111111111,
+      "decoder_budget_ok": 0.1111111111111111,
+      "file_extension": 0.1111111111111111,
+      "language": 0.1111111111111111,
+      "log_available": 0.1111111111111111,
+      "max_repair_steps": 0.1111111111111111,
+      "patch_context": 0.1111111111111111,
+      "patch_summary_visible": 0.1111111111111111,
+      "runtime_execution_authorized": 0.1111111111111111,
+      "runtime_reward_allowed": 0.1111111111111111,
+      "source_location_visible": 0.1111111111111111,
+      "test_name_visible": 0.1111111111111111,
+      "verifier_signal": 1.0
+    }
+  },
+  "next_best_step": "Build label-vocab/hash and telemetry contract cards for structured probe manifests before execution consideration.",
+  "passed": true,
+  "stage": 8644,
+  "stage_name": "stage8644_verifier_repair_shortcut_baseline"
+}

@@ -1,0 +1,157 @@
+{
+  "version": "v1_reconstructed_stage8613",
+  "purpose": "Recovered mining contract for restarting /arxiv data mining without losing prior curriculum safeguards.",
+  "mining_must_remain_closed_until": [
+    "source corpus inventory exists",
+    "dataset judge route exists",
+    "objective family is declared",
+    "authority card is closed",
+    "loss mask card exists",
+    "counterfactual sibling obligation is declared",
+    "shortcut baseline audit is declared",
+    "duplicate semantic key check is declared",
+    "split policy is declared",
+    "telemetry contract is declared"
+  ],
+  "semantic_presentation_surfaces": [
+    "maintainer_answer",
+    "repair_plan",
+    "bounded_patch_hunk",
+    "test_plan",
+    "repo_qa_answer",
+    "retrieve_more_answer",
+    "abstain_unsafe_answer",
+    "verifier_failure_summary",
+    "symbol_binding_decision",
+    "edit_localization_decision",
+    "patch_operator_decision"
+  ],
+  "user_intent_fields": [
+    "intent_type",
+    "requested_output_type",
+    "target_language",
+    "repo_scope",
+    "allowed_imports",
+    "blocked_imports",
+    "available_repositories",
+    "file_creation_allowed",
+    "modify_existing_allowed",
+    "test_required",
+    "verification_mode",
+    "risk_tolerance",
+    "budget_constraints"
+  ],
+  "intent_types": [
+    "repo_qa",
+    "repo_repair",
+    "code_generation",
+    "test_generation",
+    "config_update",
+    "dependency_decision",
+    "debug_failure",
+    "maintainer_explanation"
+  ],
+  "build_strategy_labels": [
+    "USE_WHITELIST_IMPORT",
+    "BUILD_ON_TOP",
+    "BUILD_FROM_SCRATCH"
+  ],
+  "semantic_action_labels": [
+    "SAFE",
+    "UNSAFE",
+    "RETRIEVE",
+    "HOLD_LONG_OUTPUT",
+    "REPAIR_INTERNAL_LEAK",
+    "REPAIR_SHORT_OUTPUT",
+    "GENERATE_REPAIR_PLAN",
+    "GENERATE_BOUNDED_CODE",
+    "RUN_VERIFIER",
+    "REPAIR_PATCH",
+    "FINISH"
+  ],
+  "mining_families": {
+    "repo_capability_catalog": {
+      "source": "/arxiv/repositories",
+      "outputs": ["repo language/build/test/doc capability rows"],
+      "forbidden": ["raw source body in model input", "authority true rows"]
+    },
+    "intent_to_build_strategy": {
+      "source": "/arxiv/datasets + repository capability catalog",
+      "outputs": ["user intent to build mode/import policy/file plan rows"],
+      "required_counterfactuals": ["same intent with allowed import removed", "same intent with dependency blocked", "same intent with available repo added"]
+    },
+    "symbol_binding": {
+      "source": "/arxiv/repositories",
+      "outputs": ["call/import/test/failure to symbol/module/retrieve decisions"],
+      "required_counterfactuals": ["positive bind", "evidence removed retrieve", "contrastive near binding"],
+      "current_gap": "true BIND_TEST_TO_SYMBOL coverage"
+    },
+    "edit_localization": {
+      "source": "/arxiv/repositories",
+      "outputs": ["intent/evidence to target file/symbol/config/test"],
+      "required_counterfactuals": ["same intent wrong file", "same evidence missing target", "same graph shape different target"]
+    },
+    "patch_operator": {
+      "source": "/arxiv/repositories + verified repair traces",
+      "outputs": ["localized edit need to edit operator"],
+      "required_counterfactuals": ["same target different operator", "same operator different target", "retrieve/abstain controls"]
+    },
+    "verifier_repair": {
+      "source": "test logs, baseline verifier discovery, failure traces",
+      "outputs": ["failure type to repair/rerun/retrieve/rollback action"],
+      "required_counterfactuals": ["same failure with passing baseline", "same patch with failing verifier", "no verifier available hold"]
+    },
+    "bounded_decoder_arguments": {
+      "source": "operator rows that pass structured gates",
+      "outputs": ["small argument text only"],
+      "required_counterfactuals": ["decode allowed", "retrieve required", "hold long output"]
+    },
+    "output_repair_denoise": {
+      "source": "failed decoder outputs and verifier feedback",
+      "outputs": ["leaky/short/repetitive/wrong-surface output to clean output"],
+      "required_counterfactuals": ["bad output", "clean repair", "unsafe or unrecoverable hold"]
+    }
+  },
+  "mining_required_cards": [
+    "source_inventory_card",
+    "route_card",
+    "authority_card",
+    "loss_mask_card",
+    "counterfactual_obligation_card",
+    "shortcut_baseline_card",
+    "duplicate_semantic_key_card",
+    "split_overlap_card",
+    "budget_evidence_card",
+    "telemetry_contract_card"
+  ],
+  "hard_negative_requirements": [
+    "same surface with wrong action",
+    "same graph shape with different target",
+    "missing evidence routed retrieve",
+    "budget bad routed hold",
+    "internal token routed repair/negative",
+    "short output routed repair",
+    "verifier unavailable routed hold/retrieve",
+    "allowed import vs blocked import contrast"
+  ],
+  "baseline_gates": [
+    "majority baseline recorded",
+    "single-feature baseline below ceiling",
+    "combo-feature baseline below ceiling",
+    "query id alone does not solve target",
+    "degree profile alone does not solve target",
+    "surface marker alone does not solve surface",
+    "requested output type alone does not solve target"
+  ],
+  "training_blockers_before_mining": [
+    "mining script absent for objective family",
+    "no no-op/dry-run mode",
+    "no read-only source guarantee",
+    "no route/judge integration",
+    "no counterfactual sibling construction",
+    "no shortcut audit",
+    "no authority card",
+    "no duplicate semantic key audit",
+    "no telemetry contract"
+  ]
+}

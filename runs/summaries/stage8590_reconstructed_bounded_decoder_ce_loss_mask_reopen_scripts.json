@@ -1,0 +1,37 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "decoder_ce_training_authorized": false,
+    "model_execution_authorized": false,
+    "real_candidate_manifest_available": false,
+    "scripts_present": true,
+    "toy_loss_mask_reopen_test_passed": true
+  },
+  "metrics": {
+    "decoder_ce_training_attempted": false,
+    "loss_mask_audit_present": true,
+    "loss_mask_builder_present": true,
+    "model_execution_attempted": false,
+    "py_compile_passed": true,
+    "pytest_passed": 29,
+    "real_stage8568_candidate_rows_recovered": false,
+    "script_contract_tested_with_toy_candidates": true
+  },
+  "next_best_step": "recover or rebuild bounded decoder CE candidate rows, then run loss-mask reopen design/audit on real candidates before final pre-execution audit",
+  "notes": "Recovered Stage8568/8569 loss-mask reopen builder/audit scripts. They select budget-safe KEEP_BOUNDED_DECODER candidates, emit decoder_ce-only loss masks, and audit caps/authority/token lengths. Original candidate rows still need recovery or reconstruction.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8590,
+  "stage_name": "stage8590_reconstructed_bounded_decoder_ce_loss_mask_reopen_scripts"
+}

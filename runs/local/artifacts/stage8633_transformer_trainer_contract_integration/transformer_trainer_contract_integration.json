@@ -1,0 +1,30 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "implementation_choices": [
+    "scaffold",
+    "transformer"
+  ],
+  "interpretation": "The safe trainer command surface can now point at the recovered transformer implementation in contract-only mode. This is not execution authority; it only prevents the recovered transformer from being disconnected from the training control plane.",
+  "metrics": {
+    "authority_opened": 0,
+    "model_execution_attempted": false,
+    "tests_passed": 34,
+    "tests_skipped": 2,
+    "trainer_implementation_flag_present": true,
+    "transformer_contract_records_without_execution": true
+  },
+  "stage": 8633,
+  "trainer": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+  "transformer_module": "legacy_src/agentkernel_lite/modeling_transformer.py"
+}

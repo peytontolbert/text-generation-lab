@@ -1,0 +1,818 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "decoder_ce_rows": 0,
+  "decoder_ce_training_authorized": false,
+  "denoise_ce_rows": 0,
+  "errors": [],
+  "family_cards": {
+    "bounded_decoder_arguments": {
+      "authority_rows": 0,
+      "fields": {
+        "action_sequence": {
+          "label_count": 7,
+          "labels": {
+            "HOLD_LONG_OUTPUT": 72,
+            "PACKAGE_CALL_ARG": 72,
+            "PACKAGE_IDENTIFIER_ARG": 72,
+            "PACKAGE_IMPORT_ARG": 72,
+            "PACKAGE_LITERAL_ARG": 72,
+            "PACKAGE_PATH_ARG": 72,
+            "RETRIEVE_MORE": 72
+          }
+        },
+        "file_plan": {
+          "label_count": 7,
+          "labels": {
+            "package arg_call as structured bounded decoder argument without enabling decoder_ce": 72,
+            "package arg_import as structured bounded decoder argument without enabling decoder_ce": 72,
+            "package arg_literal as structured bounded decoder argument without enabling decoder_ce": 72,
+            "package arg_name as structured bounded decoder argument without enabling decoder_ce": 72,
+            "package arg_path as structured bounded decoder argument without enabling decoder_ce": 72,
+            "package hold_long_output as structured bounded decoder argument without enabling decoder_ce": 72,
+            "package retrieve_more as structured bounded decoder argument without enabling decoder_ce": 72
+          }
+        }
+      },
+      "loss_counts": {
+        "action_sequence_ce": 504,
+        "allowed_import_policy_ce": 0,
+        "blocked_import_policy_ce": 0,
+        "build_mode_ce": 0,
+        "decoder_ce": 0,
+        "denoise_ce": 0,
+        "edit_localization_ce": 0,
+        "file_plan_ce": 504,
+        "patch_operator_ce": 0,
+        "repair_surface_ce": 0,
+        "repo_dependency_policy_ce": 0,
+        "runtime_reward": 0,
+        "surface_role_ce": 0,
+        "symbol_binding_ce": 0,
+        "verifier_repair_ce": 0
+      },
+      "missing_label_examples": [],
+      "path": "runs/local/artifacts/stage8645_bounded_decoder_arguments_neutral_manifest/bounded_decoder_arguments_neutral_manifest.jsonl",
+      "rows": 504,
+      "sha256": "9134582915b35b2fe66f0b49031c0678e26737056a6bb82111f8cf7b19620ed4",
+      "shortcut_audit_passed": true,
+      "split_counts": {
+        "eval": 168,
+        "strict_eval": 168,
+        "train": 168
+      }
+    },
+    "edit_localization": {
+      "authority_rows": 0,
+      "fields": {
+        "action_sequence": {
+          "label_count": 7,
+          "labels": {
+            "ABSTAIN_UNBOUND": 72,
+            "BIND_SYMBOL > READ_SYMBOL > PLAN_PATCH": 72,
+            "READ_CONFIG > LOCALIZE_CONFIG_FIELD > PLAN_PATCH": 72,
+            "READ_ENTRYPOINT > LOCALIZE_ENTRY_FLOW > PLAN_PATCH": 72,
+            "READ_FILE > LOCALIZE_FILE > PLAN_PATCH": 72,
+            "READ_TEST > LOCALIZE_ASSERTION > PLAN_TEST_PATCH": 72,
+            "SEARCH_REPO > READ_MORE_CONTEXT": 72
+          }
+        },
+        "edit_localization": {
+          "label_count": 7,
+          "labels": {
+            "ABSTAIN_UNBOUND": 72,
+            "RETRIEVE_MORE": 72,
+            "TARGET_CONFIG": 72,
+            "TARGET_ENTRYPOINT": 72,
+            "TARGET_FILE": 72,
+            "TARGET_SYMBOL": 72,
+            "TARGET_TEST": 72
+          }
+        },
+        "file_plan": {
+          "label_count": 7,
+          "labels": {
+            "localize abstain_unbound through visible evidence and keep patch bounded": 72,
+            "localize retrieve_more through visible evidence and keep patch bounded": 72,
+            "localize target_config through visible evidence and keep patch bounded": 72,
+            "localize target_entrypoint through visible evidence and keep patch bounded": 72,
+            "localize target_file through visible evidence and keep patch bounded": 72,
+            "localize target_symbol through visible evidence and keep patch bounded": 72,
+            "localize target_test through visible evidence and keep patch bounded": 72
+          }
+        }
+      },
+      "loss_counts": {
+        "action_sequence_ce": 504,
+        "allowed_import_policy_ce": 0,
+        "blocked_import_policy_ce": 0,
+        "build_mode_ce": 0,
+        "decoder_ce": 0,
+        "denoise_ce": 0,
+        "edit_localization_ce": 504,
+        "file_plan_ce": 504,
+        "patch_operator_ce": 0,
+        "repair_surface_ce": 0,
+        "repo_dependency_policy_ce": 0,
+        "runtime_reward": 0,
+        "surface_role_ce": 0,
+        "symbol_binding_ce": 0,
+        "verifier_repair_ce": 0
+      },
+      "missing_label_examples": [],
+      "path": "runs/local/artifacts/stage8636_edit_localization_neutral_manifest/edit_localization_neutral_manifest.jsonl",
+      "rows": 504,
+      "sha256": "c5758d01aabee2e5deb4338e47dfd01081098a49a02d2c8bf7b7a03c11a53162",
+      "shortcut_audit_passed": true,
+      "split_counts": {
+        "eval": 168,
+        "strict_eval": 168,
+        "train": 168
+      }
+    },
+    "intent_to_build_strategy": {
+      "authority_rows": 0,
+      "fields": {
+        "action_sequence": {
+          "label_count": 5,
+          "labels": {
+            "BUILD_FROM_SCRATCH > CREATE_FILE > CREATE_TEST > RUN_VERIFIER": 72,
+            "REJECT_IMPORT": 72,
+            "SEARCH_ALLOWED_REPO > READ_ALLOWED_SOURCE": 72,
+            "SEARCH_ALLOWED_REPO > READ_ALLOWED_SOURCE > BUILD_WRAPPER > CREATE_TEST > RUN_VERIFIER": 72,
+            "SELECT_IMPORT > READ_ALLOWED_SOURCE > BUILD_WRAPPER > CREATE_TEST > RUN_VERIFIER": 72
+          }
+        },
+        "allowed_import_policy": {
+          "label_count": 2,
+          "labels": {
+            "ALLOW_VISIBLE_APPROVED_IMPORT": 144,
+            "NO_APPROVED_IMPORT_USE": 216
+          }
+        },
+        "blocked_import_policy": {
+          "label_count": 2,
+          "labels": {
+            "NO_BLOCKED_IMPORT_REQUESTED": 288,
+            "REJECT_BLOCKED_IMPORT": 72
+          }
+        },
+        "build_mode": {
+          "label_count": 5,
+          "labels": {
+            "ABSTAIN_UNSAFE": 72,
+            "BUILD_FROM_SCRATCH": 72,
+            "BUILD_ON_TOP": 72,
+            "RETRIEVE_MORE": 72,
+            "USE_WHITELIST_IMPORT": 72
+          }
+        },
+        "file_plan": {
+          "label_count": 5,
+          "labels": {
+            "build adapter layer using visible helper behavior and add focused test": 72,
+            "create wrapper around approved dependency and targeted smoke test": 72,
+            "do not generate code; report blocked dependency or unsafe request": 72,
+            "implement local function from visible requirements and add deterministic test": 72,
+            "retrieve missing source or docs before choosing build path": 72
+          }
+        },
+        "repo_dependency_policy": {
+          "label_count": 5,
+          "labels": {
+            "approved_exact_dependency_visible": 72,
+            "approved_partial_dependency_visible": 72,
+            "dependency_blocked_or_policy_unsafe": 72,
+            "dependency_or_source_context_missing": 72,
+            "no_relevant_approved_dependency": 72
+          }
+        }
+      },
+      "loss_counts": {
+        "action_sequence_ce": 360,
+        "allowed_import_policy_ce": 360,
+        "blocked_import_policy_ce": 360,
+        "build_mode_ce": 360,
+        "decoder_ce": 0,
+        "denoise_ce": 0,
+        "edit_localization_ce": 0,
+        "file_plan_ce": 360,
+        "patch_operator_ce": 0,
+        "repair_surface_ce": 0,
+        "repo_dependency_policy_ce": 360,
+        "runtime_reward": 0,
+        "surface_role_ce": 0,
+        "symbol_binding_ce": 0,
+        "verifier_repair_ce": 0
+      },
+      "missing_label_examples": [],
+      "path": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
+      "rows": 360,
+      "sha256": "b6f04c9bc7292aa80935ea04c415d84d603f7e117bdd03543c28ea5caa84a0bb",
+      "shortcut_audit_passed": true,
+      "split_counts": {
+        "eval": 120,
+        "strict_eval": 120,
+        "train": 120
+      }
+    },
+    "output_repair_denoise": {
+      "authority_rows": 0,
+      "fields": {
+        "action_sequence": {
+          "label_count": 5,
+          "labels": {
+            "ABSTAIN_UNRECOVERABLE": 72,
+            "EXPAND_FROM_STRUCTURED_STATE > VERIFY_SURFACE": 72,
+            "MASK_INTERNAL_TOKENS > RENDER_SAFE_SURFACE": 72,
+            "MASK_REPEATED_SPANS > RENDER_SAFE_SURFACE": 72,
+            "RESELECT_SURFACE > RENDER_SAFE_SURFACE": 72
+          }
+        },
+        "file_plan": {
+          "label_count": 5,
+          "labels": {
+            "route abstain_unrecoverable without enabling denoise_ce or decoder_ce": 72,
+            "route repair_internal_leak without enabling denoise_ce or decoder_ce": 72,
+            "route repair_repetition without enabling denoise_ce or decoder_ce": 72,
+            "route repair_short_output without enabling denoise_ce or decoder_ce": 72,
+            "route repair_wrong_surface without enabling denoise_ce or decoder_ce": 72
+          }
+        },
+        "repair_surface": {
+          "label_count": 5,
+          "labels": {
+            "ABSTAIN_UNRECOVERABLE": 72,
+            "REPAIR_INTERNAL_LEAK": 72,
+            "REPAIR_REPETITION": 72,
+            "REPAIR_SHORT_OUTPUT": 72,
+            "REPAIR_WRONG_SURFACE": 72
+          }
+        }
+      },
+      "loss_counts": {
+        "action_sequence_ce": 360,
+        "allowed_import_policy_ce": 0,
+        "blocked_import_policy_ce": 0,
+        "build_mode_ce": 0,
+        "decoder_ce": 0,
+        "denoise_ce": 0,
+        "edit_localization_ce": 0,
+        "file_plan_ce": 360,
+        "patch_operator_ce": 0,
+        "repair_surface_ce": 360,
+        "repo_dependency_policy_ce": 0,
+        "runtime_reward": 0,
+        "surface_role_ce": 0,
+        "symbol_binding_ce": 0,
+        "verifier_repair_ce": 0
+      },
+      "missing_label_examples": [],
+      "path": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+      "rows": 360,
+      "sha256": "184e1a6bb65ab11a342f2fa8ee1b70798867a6f265fee13d8867a5f762c0895a",
+      "shortcut_audit_passed": true,
+      "split_counts": {
+        "eval": 120,
+        "strict_eval": 120,
+        "train": 120
+      }
+    },
+    "patch_operator": {
+      "authority_rows": 0,
+      "fields": {
+        "action_sequence": {
+          "label_count": 12,
+          "labels": {
+            "ABSTAIN_UNSAFE": 72,
+            "CHECK_IMPORT_POLICY > PLAN_IMPORT_ADD": 72,
+            "INSPECT_PATCH > PLAN_ROLLBACK": 72,
+            "PLAN_NEW_FILE > PLAN_TEST": 72,
+            "READ_ALLOWED_SOURCE > PLAN_ADAPTER": 72,
+            "READ_CALLSITE > PLAN_CALL_WRAP": 72,
+            "READ_CONFIG > PLAN_CONFIG_UPDATE": 72,
+            "READ_FILE > PLAN_INSERT_FUNCTION": 72,
+            "READ_SYMBOL > PLAN_EXPR_REPLACE": 72,
+            "READ_SYMBOL > PLAN_SYMBOL_EDIT": 72,
+            "READ_TESTS > PLAN_TEST_ADD": 72,
+            "SEARCH_REPO > READ_MORE_CONTEXT": 72
+          }
+        },
+        "file_plan": {
+          "label_count": 12,
+          "labels": {
+            "apply abstain_unsafe only after verifier-visible target stays bounded": 72,
+            "apply add_import only after verifier-visible target stays bounded": 72,
+            "apply add_test_case only after verifier-visible target stays bounded": 72,
+            "apply build_adapter only after verifier-visible target stays bounded": 72,
+            "apply create_file only after verifier-visible target stays bounded": 72,
+            "apply insert_function only after verifier-visible target stays bounded": 72,
+            "apply modify_existing_symbol only after verifier-visible target stays bounded": 72,
+            "apply replace_expr only after verifier-visible target stays bounded": 72,
+            "apply retrieve_more only after verifier-visible target stays bounded": 72,
+            "apply rollback_patch only after verifier-visible target stays bounded": 72,
+            "apply update_config_field only after verifier-visible target stays bounded": 72,
+            "apply wrap_call only after verifier-visible target stays bounded": 72
+          }
+        },
+        "patch_operator": {
+          "label_count": 12,
+          "labels": {
+            "ABSTAIN_UNSAFE": 72,
+            "ADD_IMPORT": 72,
+            "ADD_TEST_CASE": 72,
+            "BUILD_ADAPTER": 72,
+            "CREATE_FILE": 72,
+            "INSERT_FUNCTION": 72,
+            "MODIFY_EXISTING_SYMBOL": 72,
+            "REPLACE_EXPR": 72,
+            "RETRIEVE_MORE": 72,
+            "ROLLBACK_PATCH": 72,
+            "UPDATE_CONFIG_FIELD": 72,
+            "WRAP_CALL": 72
+          }
+        }
+      },
+      "loss_counts": {
+        "action_sequence_ce": 864,
+        "allowed_import_policy_ce": 0,
+        "blocked_import_policy_ce": 0,
+        "build_mode_ce": 0,
+        "decoder_ce": 0,
+        "denoise_ce": 0,
+        "edit_localization_ce": 0,
+        "file_plan_ce": 864,
+        "patch_operator_ce": 864,
+        "repair_surface_ce": 0,
+        "repo_dependency_policy_ce": 0,
+        "runtime_reward": 0,
+        "surface_role_ce": 0,
+        "symbol_binding_ce": 0,
+        "verifier_repair_ce": 0
+      },
+      "missing_label_examples": [],
+      "path": "runs/local/artifacts/stage8638_patch_operator_neutral_manifest/patch_operator_neutral_manifest.jsonl",
+      "rows": 864,
+      "sha256": "e2e22858dd87fd3f806b7dceae6ad811b7c8ae2d86773aed3051746eef71d5fa",
+      "shortcut_audit_passed": true,
+      "split_counts": {
+        "eval": 288,
+        "strict_eval": 288,
+        "train": 288
+      }
+    },
+    "verifier_repair": {
+      "authority_rows": 0,
+      "fields": {
+        "action_sequence": {
+          "label_count": 9,
+          "labels": {
+            "READ_ASSERTION > PLAN_ASSERTION_REPAIR": 72,
+            "READ_CALLSITE > PLAN_API_CALL_REPAIR": 72,
+            "READ_FAILURE_LOCATION > LOCALIZE_FAILURE": 72,
+            "READ_IMPORT_ERROR > PLAN_IMPORT_REPAIR": 72,
+            "READ_SYNTAX_ERROR > PLAN_SYNTAX_REPAIR": 72,
+            "READ_VERIFIER_LOG > CLASSIFY_FAILURE": 72,
+            "RERUN_VERIFIER": 72,
+            "ROLLBACK_OR_ABSTAIN": 72,
+            "SEARCH_REPO > READ_MORE_CONTEXT": 72
+          }
+        },
+        "file_plan": {
+          "label_count": 9,
+          "labels": {
+            "handle diagnose_failure from verifier evidence without executing runtime": 72,
+            "handle localize_failure from verifier evidence without executing runtime": 72,
+            "handle repair_api_call from verifier evidence without executing runtime": 72,
+            "handle repair_assertion from verifier evidence without executing runtime": 72,
+            "handle repair_import from verifier evidence without executing runtime": 72,
+            "handle repair_syntax from verifier evidence without executing runtime": 72,
+            "handle rerun_verifier from verifier evidence without executing runtime": 72,
+            "handle retrieve_more from verifier evidence without executing runtime": 72,
+            "handle rollback_or_abstain from verifier evidence without executing runtime": 72
+          }
+        },
+        "verifier_repair": {
+          "label_count": 9,
+          "labels": {
+            "DIAGNOSE_FAILURE": 72,
+            "LOCALIZE_FAILURE": 72,
+            "REPAIR_API_CALL": 72,
+            "REPAIR_ASSERTION": 72,
+            "REPAIR_IMPORT": 72,
+            "REPAIR_SYNTAX": 72,
+            "RERUN_VERIFIER": 72,
+            "RETRIEVE_MORE": 72,
+            "ROLLBACK_OR_ABSTAIN": 72
+          }
+        }
+      },
+      "loss_counts": {
+        "action_sequence_ce": 648,
+        "allowed_import_policy_ce": 0,
+        "blocked_import_policy_ce": 0,
+        "build_mode_ce": 0,
+        "decoder_ce": 0,
+        "denoise_ce": 0,
+        "edit_localization_ce": 0,
+        "file_plan_ce": 648,
+        "patch_operator_ce": 0,
+        "repair_surface_ce": 0,
+        "repo_dependency_policy_ce": 0,
+        "runtime_reward": 0,
+        "surface_role_ce": 0,
+        "symbol_binding_ce": 0,
+        "verifier_repair_ce": 648
+      },
+      "missing_label_examples": [],
+      "path": "runs/local/artifacts/stage8643_verifier_repair_neutral_manifest/verifier_repair_neutral_manifest.jsonl",
+      "rows": 648,
+      "sha256": "72fb2d6e2bd19f93b5c8d929d9e71318431921596ac981e37f27ec5737615976",
+      "shortcut_audit_passed": true,
+      "split_counts": {
+        "eval": 216,
+        "strict_eval": 216,
+        "train": 216
+      }
+    }
+  },
+  "global_label_vocabs": {
+    "action_sequence": {
+      "fits_head_capacity": true,
+      "head_capacity": 64,
+      "label_count": 43,
+      "label_counts": {
+        "ABSTAIN_UNBOUND": 72,
+        "ABSTAIN_UNRECOVERABLE": 72,
+        "ABSTAIN_UNSAFE": 72,
+        "BIND_SYMBOL > READ_SYMBOL > PLAN_PATCH": 72,
+        "BUILD_FROM_SCRATCH > CREATE_FILE > CREATE_TEST > RUN_VERIFIER": 72,
+        "CHECK_IMPORT_POLICY > PLAN_IMPORT_ADD": 72,
+        "EXPAND_FROM_STRUCTURED_STATE > VERIFY_SURFACE": 72,
+        "HOLD_LONG_OUTPUT": 72,
+        "INSPECT_PATCH > PLAN_ROLLBACK": 72,
+        "MASK_INTERNAL_TOKENS > RENDER_SAFE_SURFACE": 72,
+        "MASK_REPEATED_SPANS > RENDER_SAFE_SURFACE": 72,
+        "PACKAGE_CALL_ARG": 72,
+        "PACKAGE_IDENTIFIER_ARG": 72,
+        "PACKAGE_IMPORT_ARG": 72,
+        "PACKAGE_LITERAL_ARG": 72,
+        "PACKAGE_PATH_ARG": 72,
+        "PLAN_NEW_FILE > PLAN_TEST": 72,
+        "READ_ALLOWED_SOURCE > PLAN_ADAPTER": 72,
+        "READ_ASSERTION > PLAN_ASSERTION_REPAIR": 72,
+        "READ_CALLSITE > PLAN_API_CALL_REPAIR": 72,
+        "READ_CALLSITE > PLAN_CALL_WRAP": 72,
+        "READ_CONFIG > LOCALIZE_CONFIG_FIELD > PLAN_PATCH": 72,
+        "READ_CONFIG > PLAN_CONFIG_UPDATE": 72,
+        "READ_ENTRYPOINT > LOCALIZE_ENTRY_FLOW > PLAN_PATCH": 72,
+        "READ_FAILURE_LOCATION > LOCALIZE_FAILURE": 72,
+        "READ_FILE > LOCALIZE_FILE > PLAN_PATCH": 72,
+        "READ_FILE > PLAN_INSERT_FUNCTION": 72,
+        "READ_IMPORT_ERROR > PLAN_IMPORT_REPAIR": 72,
+        "READ_SYMBOL > PLAN_EXPR_REPLACE": 72,
+        "READ_SYMBOL > PLAN_SYMBOL_EDIT": 72,
+        "READ_SYNTAX_ERROR > PLAN_SYNTAX_REPAIR": 72,
+        "READ_TEST > LOCALIZE_ASSERTION > PLAN_TEST_PATCH": 72,
+        "READ_TESTS > PLAN_TEST_ADD": 72,
+        "READ_VERIFIER_LOG > CLASSIFY_FAILURE": 72,
+        "REJECT_IMPORT": 72,
+        "RERUN_VERIFIER": 72,
+        "RESELECT_SURFACE > RENDER_SAFE_SURFACE": 72,
+        "RETRIEVE_MORE": 72,
+        "ROLLBACK_OR_ABSTAIN": 72,
+        "SEARCH_ALLOWED_REPO > READ_ALLOWED_SOURCE": 72,
+        "SEARCH_ALLOWED_REPO > READ_ALLOWED_SOURCE > BUILD_WRAPPER > CREATE_TEST > RUN_VERIFIER": 72,
+        "SEARCH_REPO > READ_MORE_CONTEXT": 216,
+        "SELECT_IMPORT > READ_ALLOWED_SOURCE > BUILD_WRAPPER > CREATE_TEST > RUN_VERIFIER": 72
+      },
+      "labels": {
+        "ABSTAIN_UNBOUND": 0,
+        "ABSTAIN_UNRECOVERABLE": 1,
+        "ABSTAIN_UNSAFE": 2,
+        "BIND_SYMBOL > READ_SYMBOL > PLAN_PATCH": 3,
+        "BUILD_FROM_SCRATCH > CREATE_FILE > CREATE_TEST > RUN_VERIFIER": 4,
+        "CHECK_IMPORT_POLICY > PLAN_IMPORT_ADD": 5,
+        "EXPAND_FROM_STRUCTURED_STATE > VERIFY_SURFACE": 6,
+        "HOLD_LONG_OUTPUT": 7,
+        "INSPECT_PATCH > PLAN_ROLLBACK": 8,
+        "MASK_INTERNAL_TOKENS > RENDER_SAFE_SURFACE": 9,
+        "MASK_REPEATED_SPANS > RENDER_SAFE_SURFACE": 10,
+        "PACKAGE_CALL_ARG": 11,
+        "PACKAGE_IDENTIFIER_ARG": 12,
+        "PACKAGE_IMPORT_ARG": 13,
+        "PACKAGE_LITERAL_ARG": 14,
+        "PACKAGE_PATH_ARG": 15,
+        "PLAN_NEW_FILE > PLAN_TEST": 16,
+        "READ_ALLOWED_SOURCE > PLAN_ADAPTER": 17,
+        "READ_ASSERTION > PLAN_ASSERTION_REPAIR": 18,
+        "READ_CALLSITE > PLAN_API_CALL_REPAIR": 19,
+        "READ_CALLSITE > PLAN_CALL_WRAP": 20,
+        "READ_CONFIG > LOCALIZE_CONFIG_FIELD > PLAN_PATCH": 21,
+        "READ_CONFIG > PLAN_CONFIG_UPDATE": 22,
+        "READ_ENTRYPOINT > LOCALIZE_ENTRY_FLOW > PLAN_PATCH": 23,
+        "READ_FAILURE_LOCATION > LOCALIZE_FAILURE": 24,
+        "READ_FILE > LOCALIZE_FILE > PLAN_PATCH": 25,
+        "READ_FILE > PLAN_INSERT_FUNCTION": 26,
+        "READ_IMPORT_ERROR > PLAN_IMPORT_REPAIR": 27,
+        "READ_SYMBOL > PLAN_EXPR_REPLACE": 28,
+        "READ_SYMBOL > PLAN_SYMBOL_EDIT": 29,
+        "READ_SYNTAX_ERROR > PLAN_SYNTAX_REPAIR": 30,
+        "READ_TEST > LOCALIZE_ASSERTION > PLAN_TEST_PATCH": 31,
+        "READ_TESTS > PLAN_TEST_ADD": 32,
+        "READ_VERIFIER_LOG > CLASSIFY_FAILURE": 33,
+        "REJECT_IMPORT": 34,
+        "RERUN_VERIFIER": 35,
+        "RESELECT_SURFACE > RENDER_SAFE_SURFACE": 36,
+        "RETRIEVE_MORE": 37,
+        "ROLLBACK_OR_ABSTAIN": 38,
+        "SEARCH_ALLOWED_REPO > READ_ALLOWED_SOURCE": 39,
+        "SEARCH_ALLOWED_REPO > READ_ALLOWED_SOURCE > BUILD_WRAPPER > CREATE_TEST > RUN_VERIFIER": 40,
+        "SEARCH_REPO > READ_MORE_CONTEXT": 41,
+        "SELECT_IMPORT > READ_ALLOWED_SOURCE > BUILD_WRAPPER > CREATE_TEST > RUN_VERIFIER": 42
+      }
+    },
+    "allowed_import_policy": {
+      "fits_head_capacity": true,
+      "head_capacity": 4,
+      "label_count": 2,
+      "label_counts": {
+        "ALLOW_VISIBLE_APPROVED_IMPORT": 144,
+        "NO_APPROVED_IMPORT_USE": 216
+      },
+      "labels": {
+        "ALLOW_VISIBLE_APPROVED_IMPORT": 0,
+        "NO_APPROVED_IMPORT_USE": 1
+      }
+    },
+    "blocked_import_policy": {
+      "fits_head_capacity": true,
+      "head_capacity": 4,
+      "label_count": 2,
+      "label_counts": {
+        "NO_BLOCKED_IMPORT_REQUESTED": 288,
+        "REJECT_BLOCKED_IMPORT": 72
+      },
+      "labels": {
+        "NO_BLOCKED_IMPORT_REQUESTED": 0,
+        "REJECT_BLOCKED_IMPORT": 1
+      }
+    },
+    "build_mode": {
+      "fits_head_capacity": true,
+      "head_capacity": 5,
+      "label_count": 5,
+      "label_counts": {
+        "ABSTAIN_UNSAFE": 72,
+        "BUILD_FROM_SCRATCH": 72,
+        "BUILD_ON_TOP": 72,
+        "RETRIEVE_MORE": 72,
+        "USE_WHITELIST_IMPORT": 72
+      },
+      "labels": {
+        "ABSTAIN_UNSAFE": 0,
+        "BUILD_FROM_SCRATCH": 1,
+        "BUILD_ON_TOP": 2,
+        "RETRIEVE_MORE": 3,
+        "USE_WHITELIST_IMPORT": 4
+      }
+    },
+    "edit_localization": {
+      "fits_head_capacity": true,
+      "head_capacity": 7,
+      "label_count": 7,
+      "label_counts": {
+        "ABSTAIN_UNBOUND": 72,
+        "RETRIEVE_MORE": 72,
+        "TARGET_CONFIG": 72,
+        "TARGET_ENTRYPOINT": 72,
+        "TARGET_FILE": 72,
+        "TARGET_SYMBOL": 72,
+        "TARGET_TEST": 72
+      },
+      "labels": {
+        "ABSTAIN_UNBOUND": 0,
+        "RETRIEVE_MORE": 1,
+        "TARGET_CONFIG": 2,
+        "TARGET_ENTRYPOINT": 3,
+        "TARGET_FILE": 4,
+        "TARGET_SYMBOL": 5,
+        "TARGET_TEST": 6
+      }
+    },
+    "file_plan": {
+      "fits_head_capacity": true,
+      "head_capacity": 64,
+      "label_count": 45,
+      "label_counts": {
+        "apply abstain_unsafe only after verifier-visible target stays bounded": 72,
+        "apply add_import only after verifier-visible target stays bounded": 72,
+        "apply add_test_case only after verifier-visible target stays bounded": 72,
+        "apply build_adapter only after verifier-visible target stays bounded": 72,
+        "apply create_file only after verifier-visible target stays bounded": 72,
+        "apply insert_function only after verifier-visible target stays bounded": 72,
+        "apply modify_existing_symbol only after verifier-visible target stays bounded": 72,
+        "apply replace_expr only after verifier-visible target stays bounded": 72,
+        "apply retrieve_more only after verifier-visible target stays bounded": 72,
+        "apply rollback_patch only after verifier-visible target stays bounded": 72,
+        "apply update_config_field only after verifier-visible target stays bounded": 72,
+        "apply wrap_call only after verifier-visible target stays bounded": 72,
+        "build adapter layer using visible helper behavior and add focused test": 72,
+        "create wrapper around approved dependency and targeted smoke test": 72,
+        "do not generate code; report blocked dependency or unsafe request": 72,
+        "handle diagnose_failure from verifier evidence without executing runtime": 72,
+        "handle localize_failure from verifier evidence without executing runtime": 72,
+        "handle repair_api_call from verifier evidence without executing runtime": 72,
+        "handle repair_assertion from verifier evidence without executing runtime": 72,
+        "handle repair_import from verifier evidence without executing runtime": 72,
+        "handle repair_syntax from verifier evidence without executing runtime": 72,
+        "handle rerun_verifier from verifier evidence without executing runtime": 72,
+        "handle retrieve_more from verifier evidence without executing runtime": 72,
+        "handle rollback_or_abstain from verifier evidence without executing runtime": 72,
+        "implement local function from visible requirements and add deterministic test": 72,
+        "localize abstain_unbound through visible evidence and keep patch bounded": 72,
+        "localize retrieve_more through visible evidence and keep patch bounded": 72,
+        "localize target_config through visible evidence and keep patch bounded": 72,
+        "localize target_entrypoint through visible evidence and keep patch bounded": 72,
+        "localize target_file through visible evidence and keep patch bounded": 72,
+        "localize target_symbol through visible evidence and keep patch bounded": 72,
+        "localize target_test through visible evidence and keep patch bounded": 72,
+        "package arg_call as structured bounded decoder argument without enabling decoder_ce": 72,
+        "package arg_import as structured bounded decoder argument without enabling decoder_ce": 72,
+        "package arg_literal as structured bounded decoder argument without enabling decoder_ce": 72,
+        "package arg_name as structured bounded decoder argument without enabling decoder_ce": 72,
+        "package arg_path as structured bounded decoder argument without enabling decoder_ce": 72,
+        "package hold_long_output as structured bounded decoder argument without enabling decoder_ce": 72,
+        "package retrieve_more as structured bounded decoder argument without enabling decoder_ce": 72,
+        "retrieve missing source or docs before choosing build path": 72,
+        "route abstain_unrecoverable without enabling denoise_ce or decoder_ce": 72,
+        "route repair_internal_leak without enabling denoise_ce or decoder_ce": 72,
+        "route repair_repetition without enabling denoise_ce or decoder_ce": 72,
+        "route repair_short_output without enabling denoise_ce or decoder_ce": 72,
+        "route repair_wrong_surface without enabling denoise_ce or decoder_ce": 72
+      },
+      "labels": {
+        "apply abstain_unsafe only after verifier-visible target stays bounded": 0,
+        "apply add_import only after verifier-visible target stays bounded": 1,
+        "apply add_test_case only after verifier-visible target stays bounded": 2,
+        "apply build_adapter only after verifier-visible target stays bounded": 3,
+        "apply create_file only after verifier-visible target stays bounded": 4,
+        "apply insert_function only after verifier-visible target stays bounded": 5,
+        "apply modify_existing_symbol only after verifier-visible target stays bounded": 6,
+        "apply replace_expr only after verifier-visible target stays bounded": 7,
+        "apply retrieve_more only after verifier-visible target stays bounded": 8,
+        "apply rollback_patch only after verifier-visible target stays bounded": 9,
+        "apply update_config_field only after verifier-visible target stays bounded": 10,
+        "apply wrap_call only after verifier-visible target stays bounded": 11,
+        "build adapter layer using visible helper behavior and add focused test": 12,
+        "create wrapper around approved dependency and targeted smoke test": 13,
+        "do not generate code; report blocked dependency or unsafe request": 14,
+        "handle diagnose_failure from verifier evidence without executing runtime": 15,
+        "handle localize_failure from verifier evidence without executing runtime": 16,
+        "handle repair_api_call from verifier evidence without executing runtime": 17,
+        "handle repair_assertion from verifier evidence without executing runtime": 18,
+        "handle repair_import from verifier evidence without executing runtime": 19,
+        "handle repair_syntax from verifier evidence without executing runtime": 20,
+        "handle rerun_verifier from verifier evidence without executing runtime": 21,
+        "handle retrieve_more from verifier evidence without executing runtime": 22,
+        "handle rollback_or_abstain from verifier evidence without executing runtime": 23,
+        "implement local function from visible requirements and add deterministic test": 24,
+        "localize abstain_unbound through visible evidence and keep patch bounded": 25,
+        "localize retrieve_more through visible evidence and keep patch bounded": 26,
+        "localize target_config through visible evidence and keep patch bounded": 27,
+        "localize target_entrypoint through visible evidence and keep patch bounded": 28,
+        "localize target_file through visible evidence and keep patch bounded": 29,
+        "localize target_symbol through visible evidence and keep patch bounded": 30,
+        "localize target_test through visible evidence and keep patch bounded": 31,
+        "package arg_call as structured bounded decoder argument without enabling decoder_ce": 32,
+        "package arg_import as structured bounded decoder argument without enabling decoder_ce": 33,
+        "package arg_literal as structured bounded decoder argument without enabling decoder_ce": 34,
+        "package arg_name as structured bounded decoder argument without enabling decoder_ce": 35,
+        "package arg_path as structured bounded decoder argument without enabling decoder_ce": 36,
+        "package hold_long_output as structured bounded decoder argument without enabling decoder_ce": 37,
+        "package retrieve_more as structured bounded decoder argument without enabling decoder_ce": 38,
+        "retrieve missing source or docs before choosing build path": 39,
+        "route abstain_unrecoverable without enabling denoise_ce or decoder_ce": 40,
+        "route repair_internal_leak without enabling denoise_ce or decoder_ce": 41,
+        "route repair_repetition without enabling denoise_ce or decoder_ce": 42,
+        "route repair_short_output without enabling denoise_ce or decoder_ce": 43,
+        "route repair_wrong_surface without enabling denoise_ce or decoder_ce": 44
+      }
+    },
+    "patch_operator": {
+      "fits_head_capacity": true,
+      "head_capacity": 12,
+      "label_count": 12,
+      "label_counts": {
+        "ABSTAIN_UNSAFE": 72,
+        "ADD_IMPORT": 72,
+        "ADD_TEST_CASE": 72,
+        "BUILD_ADAPTER": 72,
+        "CREATE_FILE": 72,
+        "INSERT_FUNCTION": 72,
+        "MODIFY_EXISTING_SYMBOL": 72,
+        "REPLACE_EXPR": 72,
+        "RETRIEVE_MORE": 72,
+        "ROLLBACK_PATCH": 72,
+        "UPDATE_CONFIG_FIELD": 72,
+        "WRAP_CALL": 72
+      },
+      "labels": {
+        "ABSTAIN_UNSAFE": 0,
+        "ADD_IMPORT": 1,
+        "ADD_TEST_CASE": 2,
+        "BUILD_ADAPTER": 3,
+        "CREATE_FILE": 4,
+        "INSERT_FUNCTION": 5,
+        "MODIFY_EXISTING_SYMBOL": 6,
+        "REPLACE_EXPR": 7,
+        "RETRIEVE_MORE": 8,
+        "ROLLBACK_PATCH": 9,
+        "UPDATE_CONFIG_FIELD": 10,
+        "WRAP_CALL": 11
+      }
+    },
+    "repair_surface": {
+      "fits_head_capacity": true,
+      "head_capacity": 8,
+      "label_count": 5,
+      "label_counts": {
+        "ABSTAIN_UNRECOVERABLE": 72,
+        "REPAIR_INTERNAL_LEAK": 72,
+        "REPAIR_REPETITION": 72,
+        "REPAIR_SHORT_OUTPUT": 72,
+        "REPAIR_WRONG_SURFACE": 72
+      },
+      "labels": {
+        "ABSTAIN_UNRECOVERABLE": 0,
+        "REPAIR_INTERNAL_LEAK": 1,
+        "REPAIR_REPETITION": 2,
+        "REPAIR_SHORT_OUTPUT": 3,
+        "REPAIR_WRONG_SURFACE": 4
+      }
+    },
+    "repo_dependency_policy": {
+      "fits_head_capacity": true,
+      "head_capacity": 5,
+      "label_count": 5,
+      "label_counts": {
+        "approved_exact_dependency_visible": 72,
+        "approved_partial_dependency_visible": 72,
+        "dependency_blocked_or_policy_unsafe": 72,
+        "dependency_or_source_context_missing": 72,
+        "no_relevant_approved_dependency": 72
+      },
+      "labels": {
+        "approved_exact_dependency_visible": 0,
+        "approved_partial_dependency_visible": 1,
+        "dependency_blocked_or_policy_unsafe": 2,
+        "dependency_or_source_context_missing": 3,
+        "no_relevant_approved_dependency": 4
+      }
+    },
+    "verifier_repair": {
+      "fits_head_capacity": true,
+      "head_capacity": 9,
+      "label_count": 9,
+      "label_counts": {
+        "DIAGNOSE_FAILURE": 72,
+        "LOCALIZE_FAILURE": 72,
+        "REPAIR_API_CALL": 72,
+        "REPAIR_ASSERTION": 72,
+        "REPAIR_IMPORT": 72,
+        "REPAIR_SYNTAX": 72,
+        "RERUN_VERIFIER": 72,
+        "RETRIEVE_MORE": 72,
+        "ROLLBACK_OR_ABSTAIN": 72
+      },
+      "labels": {
+        "DIAGNOSE_FAILURE": 0,
+        "LOCALIZE_FAILURE": 1,
+        "REPAIR_API_CALL": 2,
+        "REPAIR_ASSERTION": 3,
+        "REPAIR_IMPORT": 4,
+        "REPAIR_SYNTAX": 5,
+        "RERUN_VERIFIER": 6,
+        "RETRIEVE_MORE": 7,
+        "ROLLBACK_OR_ABSTAIN": 8
+      }
+    }
+  },
+  "model_execution_authorized": false,
+  "next_best_step": "Add target-config compatibility and full-size non-instantiating parameter/tokenizer/head audit; still do not recover or mine data.",
+  "passed": true,
+  "runtime_reward_rows": 0,
+  "stage": 8649,
+  "stage_name": "stage8649_aggregate_structured_curriculum_contract",
+  "total_rows": 3240
+}

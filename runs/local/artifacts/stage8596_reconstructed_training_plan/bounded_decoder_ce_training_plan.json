@@ -1,0 +1,67 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "caps": {
+    "batch_size": 2,
+    "max_decoder_tokens": 768,
+    "max_eval_rows": 16,
+    "max_steps": 16,
+    "max_strict_rows": 16,
+    "max_train_rows": 32
+  },
+  "execution_authorized": false,
+  "losses": {
+    "decoder_ce_weight": 1.0,
+    "denoise_weight": 0.0,
+    "runtime_reward_weight": 0.0,
+    "structured_aux_weight": 0.0
+  },
+  "manifests": [
+    "runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_loss_mask/rows.jsonl"
+  ],
+  "mode": "bounded_decoder_ce_probe",
+  "model_config": "configs/model/agentkernel_100m_seq2seq.json",
+  "model_summary": {
+    "architecture": "seq2seq",
+    "parameter_target": "100m",
+    "structured_heads": [
+      "structured_policy_heads",
+      "decoder_logits",
+      "confidence_ood_heads"
+    ]
+  },
+  "next_best_step": "audit this training plan before any trainer execution implementation is used",
+  "plan_name": "stage8596_reconstructed_bounded_decoder_training_plan",
+  "required_audits": [
+    "authority_gate",
+    "loss_mask_card",
+    "shortcut_or_route_audit",
+    "final_pre_execution_audit",
+    "telemetry_artifact_contract"
+  ],
+  "required_telemetry": [
+    "loss_by_step.jsonl",
+    "eval_loss_by_checkpoint.jsonl",
+    "row_field_logits.jsonl",
+    "row_field_losses.jsonl",
+    "row_token_loss.jsonl",
+    "module_delta_norms.json",
+    "failure_bucket_card.json",
+    "cleanup_proof.json"
+  ],
+  "tokenizer_config": "configs/tokenizer/byte_tokenizer.json",
+  "tokenizer_summary": {
+    "max_decoder_tokens": 768,
+    "tokenizer_type": "byte"
+  }
+}

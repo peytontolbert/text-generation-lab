@@ -1,0 +1,284 @@
+{
+  "gates": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_capability_claim_ready": false,
+    "decoder_ce_training_authorized_next": false,
+    "full_training_ready": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "structured_training_ready": false,
+    "transition_head_training_authorized_next": false
+  },
+  "metrics": {
+    "bounded_decoder_contract_only_ready": true,
+    "decoder_capability_claim_ready": false,
+    "file_presence": {
+      "action_registry": true,
+      "curriculum_compiler": true,
+      "dataset_judge": true,
+      "loss_mask": true,
+      "trainer": true,
+      "training_loop": true
+    },
+    "full_training_ready": false,
+    "missing_blocks_decoder_claims_count": 0,
+    "missing_blocks_training_count": 3,
+    "missing_required_count": 1,
+    "placeholder_gaps": [
+      "sample_generation_audit_placeholder_only"
+    ],
+    "requirements": [
+      {
+        "checked_files": [
+          "trainer",
+          "curriculum_compiler",
+          "action_registry"
+        ],
+        "found_terms": [
+          "decoder_ce_training_authorized_next",
+          "runtime_authorized",
+          "gemma_execution_authorized_next",
+          "promotion_ready"
+        ],
+        "missing_terms": [],
+        "name": "closed_authority_flags",
+        "present": true,
+        "severity": "required"
+      },
+      {
+        "checked_files": [
+          "trainer",
+          "loss_mask",
+          "curriculum_compiler"
+        ],
+        "found_terms": [
+          "loss_mask",
+          "validate_loss_mask_row",
+          "decoder_ce",
+          "denoise_ce",
+          "runtime_reward"
+        ],
+        "missing_terms": [],
+        "name": "loss_mask_enforcement",
+        "present": true,
+        "severity": "required"
+      },
+      {
+        "checked_files": [
+          "dataset_judge",
+          "curriculum_compiler",
+          "action_registry"
+        ],
+        "found_terms": [
+          "KEEP_STRUCTURED",
+          "KEEP_BOUNDED_DECODER",
+          "HOLD_LONG_OUTPUT",
+          "USE_FOR_DENOISE_REPAIR",
+          "NEEDS_RETRIEVAL"
+        ],
+        "missing_terms": [],
+        "name": "dataset_judge_routes",
+        "present": true,
+        "severity": "required"
+      },
+      {
+        "checked_files": [
+          "dataset_judge",
+          "action_registry"
+        ],
+        "found_terms": [
+          "target_over_decoder_budget",
+          "decoder_budget_ok",
+          "effective_decode_allowed",
+          "deterministic_budget_ok"
+        ],
+        "missing_terms": [],
+        "name": "deterministic_budget_overlay",
+        "present": true,
+        "severity": "required"
+      },
+      {
+        "checked_files": [
+          "curriculum_compiler",
+          "action_registry"
+        ],
+        "found_terms": [
+          "symbol_binding",
+          "edit_localization",
+          "patch_operator",
+          "verifier_repair",
+          "bounded_decoder_ce"
+        ],
+        "missing_terms": [],
+        "name": "software_maintenance_objectives",
+        "present": true,
+        "severity": "required"
+      },
+      {
+        "checked_files": [
+          "trainer",
+          "curriculum_compiler",
+          "dataset_judge",
+          "action_registry"
+        ],
+        "found_terms": [
+          "counterfactual",
+          "evidence_removed"
+        ],
+        "missing_terms": [
+          "contradictory",
+          "mixed_replay"
+        ],
+        "name": "counterfactual_obligations",
+        "present": false,
+        "severity": "missing_blocks_training"
+      },
+      {
+        "checked_files": [
+          "trainer"
+        ],
+        "found_terms": [
+          "structured_policy_probe",
+          "symbol_binding_probe",
+          "edit_localization_probe",
+          "patch_operator_probe",
+          "verifier_repair_probe"
+        ],
+        "missing_terms": [],
+        "name": "structured_mode_validators",
+        "present": true,
+        "severity": "required"
+      },
+      {
+        "checked_files": [
+          "trainer"
+        ],
+        "found_terms": [
+          "validate_structured_probe",
+          "STRUCTURED_MODE_ALLOWED_LOSSES",
+          "symbol_binding_probe",
+          "patch_operator_probe"
+        ],
+        "missing_terms": [],
+        "name": "non_decoder_mode_contracts",
+        "present": true,
+        "severity": "required"
+      },
+      {
+        "checked_files": [
+          "trainer",
+          "training_loop"
+        ],
+        "found_terms": [
+          "row_token_loss",
+          "failure_bucket_card",
+          "module_delta_norms",
+          "grad_norm",
+          "eval_loss_by_checkpoint"
+        ],
+        "missing_terms": [],
+        "name": "training_error_attribution",
+        "present": true,
+        "severity": "required"
+      },
+      {
+        "checked_files": [
+          "trainer",
+          "training_loop"
+        ],
+        "found_terms": [],
+        "missing_terms": [
+          "row_field_logits",
+          "row_field_losses",
+          "field_exact_by_split",
+          "field_exact_by_cell",
+          "confusion_matrix"
+        ],
+        "name": "structured_failure_telemetry",
+        "present": false,
+        "severity": "missing_blocks_training"
+      },
+      {
+        "checked_files": [
+          "trainer",
+          "training_loop"
+        ],
+        "found_terms": [
+          "short_output_probe",
+          "repetition_probe",
+          "internal_leak_probe",
+          "sample_generation_audit"
+        ],
+        "missing_terms": [],
+        "name": "decoder_quality_telemetry",
+        "present": true,
+        "severity": "required"
+      },
+      {
+        "checked_files": [
+          "training_loop"
+        ],
+        "found_terms": [
+          "generation audit not implemented",
+          "sampling disabled"
+        ],
+        "missing_terms": [],
+        "name": "actual_sample_generation_audit",
+        "present": true,
+        "severity": "missing_blocks_decoder_claims"
+      },
+      {
+        "checked_files": [
+          "trainer",
+          "curriculum_compiler"
+        ],
+        "found_terms": [
+          "manifest_hash",
+          "row_ids"
+        ],
+        "missing_terms": [
+          "schema_hash",
+          "audited"
+        ],
+        "name": "schema_hash_or_manifest_lock",
+        "present": false,
+        "severity": "missing_blocks_training"
+      },
+      {
+        "checked_files": [
+          "trainer",
+          "action_registry"
+        ],
+        "found_terms": [
+          "repo_graph_probe",
+          "repo_state_graph_v1"
+        ],
+        "missing_terms": [
+          "graph_input"
+        ],
+        "name": "repo_graph_training_path",
+        "present": false,
+        "severity": "required"
+      }
+    ],
+    "structured_training_ready": false
+  },
+  "missing_important_elements": [
+    "counterfactual sibling enforcement exists in trainer contract, but real compiler manifests still need materialized sibling groups",
+    "structured per-field logits/losses/confusion telemetry is missing",
+    "manifest hash is present for trainer contracts, but schema hash/registry lock is still incomplete",
+    "sample generation audit is placeholder-only in the tiny bounded CE loop",
+    "Stage8604 symbol-binding rows are leak-clean but not balanced or counterfactual-complete"
+  ],
+  "name": "stage8606_reconstructed_training_stack_recovery_gap_audit",
+  "next_best_step": "Patch the compiler/trainer with counterfactual obligation checks and structured probe validators before enabling any symbol-binding or software-maintenance structured training loss.",
+  "passed": true,
+  "stage": 8606,
+  "summary": "Audited recovered trainer, curriculum compiler, dataset judge, loss-mask card, and maintainer registry against the 100M software-maintainer training contract. The stack is safe and partially restored, but full structured training is still blocked by missing counterfactual enforcement, non-decoder probe validators, structured telemetry, and manifest/schema lock checks."
+}

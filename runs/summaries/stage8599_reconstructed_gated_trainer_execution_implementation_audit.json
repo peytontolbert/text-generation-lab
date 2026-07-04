@@ -1,0 +1,36 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "batch_size_flag_present": true,
+    "decoder_ce_training_authorized": false,
+    "default_execution_requires_gate": true,
+    "execution_gate_flag_present": true,
+    "learning_rate_flag_present": true,
+    "model_execution_authorized": false,
+    "training_loop_imports_in_runtime": true
+  },
+  "metrics": {
+    "decoder_ce_training_authorized": false,
+    "default_execution_requires_gate": true,
+    "execution_gate_flag_present": true,
+    "model_execution_authorized": false,
+    "training_loop_imports_in_runtime": true
+  },
+  "next_best_step": "if desired, create a separate explicit authorization stage for one tiny bounded decoder CE execution; otherwise continue rebuilding upstream real row bodies",
+  "notes": "Restored actual tiny bounded decoder CE training-loop implementation and wired it into the trainer behind --execution-authorized-for-recovery-probe. No execution was run; default trainer path still refuses execution.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8599,
+  "stage_name": "stage8599_reconstructed_gated_trainer_execution_implementation_audit"
+}

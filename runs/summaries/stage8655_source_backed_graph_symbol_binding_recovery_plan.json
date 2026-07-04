@@ -1,0 +1,292 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "build_order": [
+    {
+      "action": "sample/read source schemas only; emit inventory; no model/runtime",
+      "name": "source_inventory",
+      "stage": "8655a"
+    },
+    {
+      "action": "write common feature normalizer for graph/symbol rows; audit alias parity",
+      "name": "shared_feature_extractor",
+      "stage": "8655b"
+    },
+    {
+      "action": "build BM25/dense/hybrid retrieval cards over candidate evidence; no training",
+      "name": "retrieval_baseline",
+      "stage": "8655c"
+    },
+    {
+      "action": "emit opaque repo_state_graph_v1 rows with graph shortcut card",
+      "name": "graph_enrichment_manifest",
+      "stage": "8655d"
+    },
+    {
+      "action": "emit balanced symbol binding rows with counterfactual obligations",
+      "name": "symbol_binding_manifest",
+      "stage": "8655e"
+    },
+    {
+      "action": "train-free deterministic/logistic-ready ranker card; route bad rows before loss",
+      "name": "junk_ranker_gate",
+      "stage": "8655f"
+    },
+    {
+      "action": "aggregate all cards; only then propose a tiny structured-head training candidate",
+      "name": "aggregate_readiness",
+      "stage": "8655g"
+    }
+  ],
+  "created_at_utc": "2026-07-04T19:38:43Z",
+  "decision": "Source-backed repo graph and symbol-binding recovery now has a concrete no-authority plan using retrieval baselines, shared feature extraction, shortcut audits, counterfactual obligations, and junk/risk/OOD routing before training.",
+  "gate_cards": {
+    "bm25_dense_retrieval_baseline_card": {
+      "baselines": [
+        "bm25_top1_exact",
+        "bm25_top5_recall",
+        "dense_top1_exact",
+        "dense_top5_recall",
+        "hybrid_reciprocal_rank_fusion_recall"
+      ],
+      "blocked_if": [
+        "no_evidence_retrieved_for_positive_rows",
+        "evidence_removed_rows_do_not_drop",
+        "metadata_only_beats_retrieval"
+      ],
+      "purpose": "Measure lexical and dense evidence before training symbol binding or graph rows."
+    },
+    "graph_shortcut_card": {
+      "baselines": [
+        "majority_action",
+        "query_kind",
+        "node_type",
+        "edge_type",
+        "degree_bucket",
+        "query_node_id",
+        "graph_shape",
+        "source_dataset_id"
+      ],
+      "blocked_if": [
+        "label_coded_id",
+        "degree_profile_solves_target",
+        "query_node_id_solves_target"
+      ],
+      "ceilings": {
+        "degree_bucket": 0.66,
+        "graph_shape": 0.66,
+        "majority_action": 0.45,
+        "query_kind": 0.66,
+        "query_node_id": 0.66
+      },
+      "purpose": "Block graph rows if degree/query/node IDs solve labels."
+    },
+    "junk_risk_ood_ranker_card": {
+      "blocked_if": [
+        "ranker_route_missing",
+        "high_risk_row_kept_positive",
+        "ood_source_without_review"
+      ],
+      "features": [
+        "missing_evidence",
+        "duplicate_semantic_key",
+        "split_overlap",
+        "shortcut_dominated_feature",
+        "teacher_verifier_disagreement",
+        "source_schema_drift",
+        "retrieval_disagreement",
+        "degree_only_solution_risk"
+      ],
+      "purpose": "Route bad/ambiguous rows before loss.",
+      "routes": [
+        "KEEP_STRUCTURED",
+        "NEEDS_RETRIEVAL",
+        "QUARANTINE_LABEL_CONFLICT",
+        "DROP_DUPLICATE",
+        "NEEDS_HUMAN_REVIEW"
+      ]
+    },
+    "loss_authority_card": {
+      "allowed_losses": [
+        "symbol_binding_ce",
+        "action_sequence_ce",
+        "file_plan_ce"
+      ],
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "forbidden_losses": [
+        "decoder_ce",
+        "denoise_ce",
+        "runtime_reward"
+      ],
+      "purpose": "Keep this as structured-only until gates pass."
+    },
+    "shared_feature_extraction_card": {
+      "blocked_if": [
+        "target_label_visible",
+        "feature_name_not_in_registry",
+        "old_packet_alias_unmapped"
+      ],
+      "features": [
+        "opaque_repo_id",
+        "opaque_graph_id",
+        "opaque_node_id",
+        "node_type",
+        "edge_type",
+        "degree_bucket",
+        "query_kind",
+        "evidence_present",
+        "direct_evidence_present",
+        "retrieval_score_bucket",
+        "bm25_rank_bucket",
+        "dense_rank_bucket",
+        "target_hidden",
+        "authority_closed"
+      ],
+      "purpose": "Normalize feature names before mining so Stage8058-style feature drift cannot recur."
+    },
+    "source_inventory_card": {
+      "blocked_if": [
+        "source_missing",
+        "schema_unknown",
+        "source_role_not_allowed",
+        "raw_source_body_export_requested"
+      ],
+      "purpose": "Declare exact source roots, file counts, schema samples, and allowed roles before extracting rows.",
+      "required_outputs": [
+        "source_id",
+        "source_role",
+        "path_exists",
+        "row_count_or_file_count",
+        "schema_keys",
+        "license_or_unknown",
+        "allowed_objectives"
+      ]
+    },
+    "split_dedup_cluster_card": {
+      "blocked_if": [
+        "train_eval_duplicate",
+        "single_cluster_dominates_cell",
+        "source_split_leak"
+      ],
+      "checks": [
+        "semantic_key_unique",
+        "split_overlap_zero",
+        "minhash_or_hash_near_duplicate_group",
+        "cluster_cell_coverage",
+        "source_distribution_by_split"
+      ],
+      "purpose": "Prevent leakage and redundant islands before scale."
+    },
+    "symbol_binding_counterfactual_card": {
+      "blocked_if": [
+        "missing_retrieve_counterfactual",
+        "missing_near_negative",
+        "missing_BIND_TEST_TO_SYMBOL_floor",
+        "action_imbalance"
+      ],
+      "obligations": [
+        "positive_bind",
+        "evidence_removed_retrieve",
+        "near_binding_negative",
+        "same_query_kind_different_target",
+        "same_graph_shape_different_target",
+        "test_to_symbol_positive",
+        "failure_to_symbol_positive"
+      ],
+      "purpose": "Guarantee real transition learning instead of positive-only memorization."
+    }
+  },
+  "metrics": {
+    "build_steps": 7,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gate_cards": 8,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "source_groups": 4
+  },
+  "next_best_step": "Implement Stage8655a source inventory and Stage8655b shared feature normalizer, then build retrieval baseline cards before emitting any new training manifest.",
+  "passed": true,
+  "source_existence": {
+    "agent_trace_sources": {
+      "/arxiv/datasets/nvidia--Open-SWE-Traces": true,
+      "/arxiv/repositories/Aider-AI__aider": true,
+      "/arxiv/repositories/OpenAutoCoder__Agentless": true,
+      "/arxiv/repositories/SWE-agent__SWE-agent": true
+    },
+    "judge_sources": {
+      "configs/software_maintainer/action_feature_registry.json": true,
+      "configs/software_maintainer/support_systems_recovery_index_stage8653.json": true,
+      "scripts/objective_row_judge.py": true,
+      "scripts/shortcut_baseline_audit.py": true
+    },
+    "repo_graph_sources": {
+      "/arxiv/TOLBERT_BRAIN/data/repos/nodes_repos.jsonl": true,
+      "/arxiv/TOLBERT_BRAIN/data/repos/spans_repos.jsonl": true,
+      "/arxiv/TOLBERT_BRAIN/modules/program_graph.py": true,
+      "/arxiv/TOLBERT_BRAIN/scripts/code_graph.py": true,
+      "/arxiv/TOLBERT_BRAIN/scripts/codegraph_core.py": true,
+      "/arxiv/TOLBERT_BRAIN/scripts/repo_graph.py": true
+    },
+    "retrieval_sources": {
+      "/arxiv/TOLBERT_BRAIN/scripts/eval_retrieval.py": true,
+      "/arxiv/TOLBERT_BRAIN/scripts/retrieval_sandbox.py": true,
+      "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv": true,
+      "/arxiv/repositories/FlagEmbedding/FlagEmbedding/inference/auto_reranker.py": true,
+      "/arxiv/repositories/camel-ai__camel/camel/retrievers/bm25_retriever.py": true
+    }
+  },
+  "source_sets": {
+    "agent_trace_sources": [
+      "/arxiv/datasets/nvidia--Open-SWE-Traces",
+      "/arxiv/repositories/SWE-agent__SWE-agent",
+      "/arxiv/repositories/Aider-AI__aider",
+      "/arxiv/repositories/OpenAutoCoder__Agentless"
+    ],
+    "judge_sources": [
+      "scripts/objective_row_judge.py",
+      "scripts/shortcut_baseline_audit.py",
+      "configs/software_maintainer/action_feature_registry.json",
+      "configs/software_maintainer/support_systems_recovery_index_stage8653.json"
+    ],
+    "repo_graph_sources": [
+      "/arxiv/TOLBERT_BRAIN/data/repos/nodes_repos.jsonl",
+      "/arxiv/TOLBERT_BRAIN/data/repos/spans_repos.jsonl",
+      "/arxiv/TOLBERT_BRAIN/scripts/codegraph_core.py",
+      "/arxiv/TOLBERT_BRAIN/scripts/code_graph.py",
+      "/arxiv/TOLBERT_BRAIN/scripts/repo_graph.py",
+      "/arxiv/TOLBERT_BRAIN/modules/program_graph.py"
+    ],
+    "retrieval_sources": [
+      "/arxiv/TOLBERT_BRAIN/scripts/retrieval_sandbox.py",
+      "/arxiv/TOLBERT_BRAIN/scripts/eval_retrieval.py",
+      "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv",
+      "/arxiv/repositories/camel-ai__camel/camel/retrievers/bm25_retriever.py",
+      "/arxiv/repositories/FlagEmbedding/FlagEmbedding/inference/auto_reranker.py"
+    ]
+  },
+  "stage": 8655,
+  "stage_name": "stage8655_source_backed_graph_symbol_binding_recovery_plan"
+}

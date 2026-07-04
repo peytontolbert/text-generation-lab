@@ -1,0 +1,70 @@
+{
+  "artifacts": {
+    "contract_manifest": "runs/local/artifacts/stage8607_structured_probe_contract_patch/symbol_binding_contract_manifest.jsonl",
+    "counterfactual_audit_script": "scripts/counterfactual_obligation_audit.py",
+    "trainer": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "trainer_contract_output": "runs/local/artifacts/stage8607_structured_probe_contract_patch/trainer_contract_output/probe_contract_audit.json"
+  },
+  "gates": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "counterfactual_obligation_gate_present": true,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "structured_probe_contract_validator_present": true,
+    "transition_head_training_authorized_next": false,
+    "unsafe_loss_rows": 0
+  },
+  "metrics": {
+    "allowed_losses": [
+      "symbol_binding_ce"
+    ],
+    "authority_rows": 0,
+    "contract_rows": 9,
+    "counterfactual_obligations_complete": true,
+    "loss_counts": {
+      "action_sequence_ce": 0,
+      "allowed_import_policy_ce": 0,
+      "blocked_import_policy_ce": 0,
+      "build_mode_ce": 0,
+      "decoder_ce": 0,
+      "denoise_ce": 0,
+      "edit_localization_ce": 0,
+      "file_plan_ce": 0,
+      "patch_operator_ce": 0,
+      "repair_surface_ce": 0,
+      "repo_dependency_policy_ce": 0,
+      "runtime_reward": 0,
+      "surface_role_ce": 0,
+      "symbol_binding_ce": 9,
+      "verifier_repair_ce": 0
+    },
+    "mode": "symbol_binding_probe",
+    "model_execution_attempted": false,
+    "split_counts": {
+      "eval": 3,
+      "other": 0,
+      "strict_eval": 3,
+      "train": 3
+    },
+    "unsafe_loss_rows": 0
+  },
+  "name": "stage8607_reconstructed_structured_probe_contract_patch",
+  "next_best_step": "Build balanced symbol-binding counterfactual patch rows from /arxiv repositories, then compile a model-ready symbol_binding_probe manifest with symbol_binding_ce enabled only after shortcut/counterfactual audits pass.",
+  "passed": true,
+  "remaining_gaps": [
+    "Stage8604 real symbol-binding candidates still need balance and counterfactual siblings before loss enablement",
+    "structured per-field logits/losses/confusion telemetry still missing from actual model execution path",
+    "manifest/schema hash lock still incomplete",
+    "sample generation audit remains placeholder-only for bounded decoder loop"
+  ],
+  "stage": 8607,
+  "summary": "Patched recovered trainer to validate closed-boundary structured probe modes, including symbol_binding_probe loss masks and optional counterfactual obligation audit. Contract-only smoke passed with no model execution."
+}

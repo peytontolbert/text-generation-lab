@@ -1,0 +1,49 @@
+{
+  "gates": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "empty_target_does_not_fallback_to_row_id": true,
+    "gemma_execution_authorized_next": false,
+    "graph_features_present": true,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "row_id_absent_from_model_input": true,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "target_label_absent_from_model_input": true,
+    "transition_head_training_authorized_next": false
+  },
+  "metrics": {
+    "batch_shapes": {
+      "error": "module 'torch' has no attribute 'full'"
+    },
+    "checks": {
+      "byte_tokenizer_has_bos_eos": true,
+      "decoder_input_shifted_one_shorter": true,
+      "decoder_target_uses_decoder_text": true,
+      "empty_target_does_not_fallback_to_row_id": true,
+      "graph_edge_features_present": true,
+      "graph_id_absent_from_model_input": true,
+      "graph_node_features_present": true,
+      "loss_mask_decoder_ce_present": true,
+      "node_id_absent_from_model_input": true,
+      "query_kind_present": true,
+      "query_node_id_absent_from_model_input": true,
+      "row_id_absent_from_model_input": true,
+      "target_label_absent_from_model_input": true
+    },
+    "decoder_target": "Inspect the failing test and apply a minimal patch.",
+    "empty_target": "",
+    "failing_checks": [],
+    "row_text_preview": "language=python | objective=symbol_binding | query.kind=callsite | query.call_shape=medium | query.source_file_is_test=False | graph.node_type_count.file=1 | graph.node_type_count.repo=1 | graph.node_feature_count.file.definition_count_bucket.2=1 | graph.node_feature_count.file.is_test.False=1 | graph.node_feature_count.repo.language_family.python=1 | graph.edge_type_count.contains=1",
+    "tensor_batch_executed": false
+  },
+  "name": "stage8608_reconstructed_training_tiny_details_audit",
+  "next_best_step": "Patch bounded decoder contract validation to reject empty decoder targets and add manifest/schema hash locks.",
+  "passed": true,
+  "stage": 8608,
+  "summary": "Audited training-critical serialization, target fallback, byte tokenization, decoder shift, and loss mask details. This stage guards against row-id leakage and graph evidence loss in recovered probes."
+}

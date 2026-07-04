@@ -1,0 +1,62 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage8635_transformer_bounded_decoder_final_pre_execution_audit/final_pre_execution_audit.json",
+    "manifest": "runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_loss_mask/rows.jsonl",
+    "transformer_module": "legacy_src/agentkernel_lite/modeling_transformer.py"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "authority_closed": true,
+    "authority_rows_zero": true,
+    "contract_probe_passed": true,
+    "contract_selected_transformer": true,
+    "decoder_ce_only": true,
+    "decoder_ce_training_authority_closed": true,
+    "manifest_exists": true,
+    "manifest_rows_64": true,
+    "model_execution_attempted_false": true,
+    "model_execution_authority_closed": true,
+    "over_cap_rows_zero": true,
+    "split_caps_match": true,
+    "target_refs_present": true,
+    "trainer_exists": true,
+    "trainer_help_has_required_flags": true,
+    "transformer_audit_passed": true,
+    "transformer_module_present": true
+  },
+  "metrics": {
+    "actual_execution_authorized_next": false,
+    "authority_rows": 0,
+    "empty_target_ref_rows": 0,
+    "eval_rows": 16,
+    "implementation_is_transformer": true,
+    "manifest_rows": 64,
+    "model_execution_attempted": false,
+    "other_rows": 0,
+    "over_cap_rows": 0,
+    "stage8631_transformer_audit_passed": true,
+    "stage8634_contract_passed": true,
+    "strict_rows": 16,
+    "train_rows": 32,
+    "trainer_help_missing_flags": 0,
+    "transformer_module_present": true,
+    "unsafe_loss_rows": 0
+  },
+  "next_best_step": "If the user explicitly authorizes it later, design a tiny execution enablement stage for the recovered transformer; otherwise regenerate higher-quality bounded decoder rows from real repo-state graph/objective data first.",
+  "notes": "Rows are reconstructed replacement rows. Use this as control-plane recovery, not a quality claim.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8635,
+  "stage_name": "stage8635_reconstructed_transformer_bounded_decoder_final_pre_execution_audit"
+}

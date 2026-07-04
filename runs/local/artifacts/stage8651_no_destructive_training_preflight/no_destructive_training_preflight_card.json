@@ -1,0 +1,69 @@
+{
+  "allowed_destructive_files": [
+    "scripts/safe_cleanup.py",
+    "scripts/safe_paths.py",
+    "tests/test_safe_cleanup.py"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "decoder_ce_training_authorized": false,
+  "destructive_token_hits": [
+    {
+      "path": "scripts/safe_cleanup.py",
+      "token": "shutil.rmtree"
+    },
+    {
+      "path": "scripts/safe_cleanup.py",
+      "token": ".unlink("
+    },
+    {
+      "path": "scripts/audit_stage8651_no_destructive_training_preflight.py",
+      "token": "shutil.rmtree"
+    },
+    {
+      "path": "scripts/audit_stage8651_no_destructive_training_preflight.py",
+      "token": ".unlink("
+    },
+    {
+      "path": "scripts/safe_paths.py",
+      "token": "shutil.rmtree"
+    },
+    {
+      "path": "scripts/safe_paths.py",
+      "token": "rm -rf"
+    },
+    {
+      "path": "tests/test_safe_cleanup.py",
+      "token": "shutil.rmtree"
+    },
+    {
+      "path": "tests/test_safe_cleanup.py",
+      "token": ".unlink("
+    }
+  ],
+  "errors": [],
+  "gates": {
+    "destructive_tokens_allowlisted": true,
+    "safe_cleanup_tests_pass": true,
+    "safe_paths_forbids_repo_root": true,
+    "safe_paths_refuses_symlink": true,
+    "safe_paths_requires_marker": true,
+    "trainer_uses_safe_cleanup_only": true
+  },
+  "model_execution_authorized": false,
+  "next_best_step": "Prepare non-executing structured probe enablement card; execution remains closed until user/stage authorization.",
+  "passed": true,
+  "safe_cleanup_test_output": "........                                                                 [100%]\n8 passed in 0.18s",
+  "stage": 8651,
+  "stage_name": "stage8651_no_destructive_training_preflight"
+}

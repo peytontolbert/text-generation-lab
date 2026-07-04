@@ -1,0 +1,50 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "checkpoint_written": false,
+    "decoder_ce_training_authorized": false,
+    "decoder_logits_shape_ok": true,
+    "loss_is_finite": true,
+    "model_execution_authorized": false,
+    "optimizer_step_attempted": false,
+    "rows_loaded": true,
+    "structured_logits_present": true,
+    "torch_import_ok": true
+  },
+  "metrics": {
+    "checkpoint_written": false,
+    "decoder_logits_shape": [
+      4,
+      73,
+      259
+    ],
+    "input_shape": [
+      4,
+      128
+    ],
+    "loss_is_finite": true,
+    "model_forward_loss_smoke_passed": true,
+    "optimizer_step_attempted": false,
+    "rows": 4,
+    "structured_head_count": 11,
+    "torch_runtime": "/home/peyton/miniconda3/envs/code_assist_runtime/bin/python",
+    "training_attempted": false
+  },
+  "next_best_step": "wire model forward/loss implementation into trainer behind explicit tiny execution authorization; backward/optimizer still not restored",
+  "notes": "Restored importable PyTorch model/batching scaffold and verified forward/loss smoke under no_grad in the code_assist_runtime environment. This is not a training run and not a recovered original 100M checkpoint.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8598,
+  "stage_name": "stage8598_reconstructed_model_forward_loss_smoke_audit"
+}

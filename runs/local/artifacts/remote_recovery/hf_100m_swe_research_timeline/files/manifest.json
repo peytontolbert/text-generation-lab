@@ -1,0 +1,63 @@
+{
+  "artifact_kind": "agentkernel_lite_research_timeline_export",
+  "created_utc": "2026-06-27T18:59:53.810439+00:00",
+  "dataset_name": "100m_swe_research_timeline",
+  "fields": [
+    "event_id",
+    "stage",
+    "name",
+    "created_utc",
+    "source_counts",
+    "primary_sources",
+    "source_text",
+    "source_bundle_json",
+    "has_script",
+    "has_doc",
+    "has_summary",
+    "has_ledger",
+    "has_artifact",
+    "summary_path",
+    "summary_name",
+    "summary_objective",
+    "summary_claim_scope",
+    "summary_decision",
+    "summary_gates",
+    "summary_metrics",
+    "summary_outputs",
+    "summary_inputs",
+    "summary_raw_json",
+    "ledger_raw_json",
+    "summary_records_json",
+    "ledger_records_json",
+    "doc_records_json",
+    "script_records_json",
+    "artifact_records_json"
+  ],
+  "notes": [
+    "This export uses the full unique stage-id union across scripts, docs, summaries, artifacts, and ledgers.",
+    "Rows are one-per-stage-id and ordered numerically; the parquet is a single-table viewer-friendly export with bundled source JSON strings.",
+    "The verified unique stage-id union in this workspace is smaller than the raw 6k stage ceiling; the manifest reports the actual covered stages."
+  ],
+  "source_dirs": {
+    "artifacts": "runs/local/artifacts",
+    "docs": "docs",
+    "scripts": "scripts",
+    "summaries": "runs/summaries"
+  },
+  "source_kind_counts": {
+    "artifact_file": 60246,
+    "doc": 73,
+    "script": 4140,
+    "summary": 5147
+  },
+  "source_ledgers": [
+    "runs/pocketpal_seq2seq_runs.jsonl",
+    "runs/ledgers/pocketpal_seq2seq_runs.jsonl"
+  ],
+  "stage_count": 5615,
+  "stage_max": 6158,
+  "stage_min": 1,
+  "summary_source_count": 5147,
+  "window_row_count": 5615,
+  "window_size": 3
+}

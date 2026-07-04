@@ -1,0 +1,70 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "authority_rows": 0,
+  "errors": [],
+  "forbidden_loss_examples": [],
+  "forbidden_loss_rows": 0,
+  "gates": {
+    "authority_closed": true,
+    "losses_match_objective": true,
+    "rows_present": true
+  },
+  "objective_cards": {
+    "bounded_decoder_ce": {
+      "enabled_loss_counts": {
+        "decoder_ce": 1
+      },
+      "rows": 1
+    },
+    "denoise_repair": {
+      "enabled_loss_counts": {},
+      "rows": 1
+    },
+    "long_output_holdout": {
+      "enabled_loss_counts": {},
+      "rows": 1
+    },
+    "negative_control": {
+      "enabled_loss_counts": {
+        "action_sequence_ce": 1
+      },
+      "rows": 1
+    },
+    "retrieval_control": {
+      "enabled_loss_counts": {
+        "action_sequence_ce": 1
+      },
+      "rows": 1
+    },
+    "structured_state": {
+      "enabled_loss_counts": {
+        "action_sequence_ce": 1,
+        "allowed_import_policy_ce": 1,
+        "blocked_import_policy_ce": 1,
+        "build_mode_ce": 1,
+        "edit_localization_ce": 1,
+        "file_plan_ce": 1,
+        "patch_operator_ce": 1,
+        "repair_surface_ce": 1,
+        "repo_dependency_policy_ce": 1,
+        "surface_role_ce": 1,
+        "symbol_binding_ce": 1,
+        "verifier_repair_ce": 1
+      },
+      "rows": 1
+    }
+  },
+  "passed": true,
+  "rows": 6
+}

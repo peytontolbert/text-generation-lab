@@ -1,0 +1,49 @@
+{
+  "artifacts": {
+    "contract_stdout": "runs/local/artifacts/stage8634_transformer_bounded_decoder_contract_probe/contract_stdout.json",
+    "manifest": "runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_loss_mask/rows.jsonl",
+    "probe_contract_audit": "runs/local/artifacts/stage8634_transformer_bounded_decoder_contract_probe/probe_contract_audit.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "authority_rows_zero": true,
+    "contract_probe_passed": true,
+    "decoder_ce_only": true,
+    "decoder_ce_training_authorized": false,
+    "manifest_exists": true,
+    "model_execution_authorized": false,
+    "over_cap_rows_zero": true,
+    "transformer_selected_without_execution": true,
+    "unsafe_loss_rows_zero": true
+  },
+  "metrics": {
+    "authority_rows": 0,
+    "contract_passed": true,
+    "eval_rows": 16,
+    "implementation_is_transformer": true,
+    "model_execution_attempted": false,
+    "over_cap_rows": 0,
+    "reconstructed_replacement_rows": true,
+    "rows": 64,
+    "strict_rows": 16,
+    "train_rows": 32,
+    "unsafe_loss_rows": 0
+  },
+  "next_best_step": "Run a final non-executing pre-execution audit that explicitly references the recovered transformer module and reconstructed bounded decoder rows; execution remains closed.",
+  "notes": "This validates current transformer/trainer/manifest contract plumbing only. Rows are reconstructed replacements, not original Stage8568 bodies.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8634,
+  "stage_name": "stage8634_reconstructed_transformer_bounded_decoder_contract_probe"
+}

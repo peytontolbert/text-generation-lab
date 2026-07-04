@@ -1,0 +1,58 @@
+{
+  "artifacts": {
+    "audit_card": "runs/local/artifacts/stage8617_symbol_binding_test_patch/audit_card.json",
+    "manifest": "runs/local/artifacts/stage8617_symbol_binding_test_patch/symbol_binding_test_patch_rows.jsonl"
+  },
+  "gates": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_enabled_rows": 0,
+    "model_execution_authorized_next": false,
+    "model_ready_training_rows": 0,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "transition_head_training_authorized_next": false
+  },
+  "metrics": {
+    "authority_rows": 0,
+    "binding_action_counts": {
+      "BIND_TEST_TO_SYMBOL": 121
+    },
+    "decoder_ce_rows": 0,
+    "endpoint_failures": 0,
+    "label_id_leak_rows": 0,
+    "majority_action_baseline_exact": 1.0,
+    "model_ready_training_rows": 0,
+    "query_kind_action_baseline_exact": 1.0,
+    "query_kind_counts": {
+      "test": 121
+    },
+    "query_node_id_repeat_exact": 0,
+    "raw_source_rows": 0,
+    "repo_count": 16,
+    "rows": 121,
+    "seed_candidate_rows_only": true,
+    "split_counts": {
+      "eval": 29,
+      "strict_eval": 24,
+      "train": 68
+    },
+    "stage8617_binding_action_counts": {
+      "BIND_TEST_TO_SYMBOL": 121
+    },
+    "stage8617_loss_enabled_rows": 0,
+    "stage8617_query_kind_counts": {
+      "test": 121
+    }
+  },
+  "name": "stage8617_reconstructed_symbol_binding_test_patch",
+  "next_best_step": "Merge Stage8617 test-bind candidates with Stage8604 rows, rebuild symbol-binding counterfactual obligations, then rerun readiness and shortcut audits before any symbol_binding_ce training.",
+  "passed": true,
+  "stage": 8617,
+  "summary": "Mined closed-authority test-file call bindings to recover true BIND_TEST_TO_SYMBOL seed rows. Rows remain candidates only; all losses and authority stay closed pending counterfactual/audit stages."
+}

@@ -1,0 +1,34 @@
+# Generated Python/cache files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Local virtualenvs and editor state
+.venv/
+venv/
+.env
+.DS_Store
+
+# Model weights, checkpoints, and large binary training products
+*.pt
+*.pth
+*.bin
+*.onnx
+*.safetensors
+*.ckpt
+*.parquet
+*.arrow
+*.npy
+*.npz
+
+# Probe checkpoint directories are never source backups
+runs/local/probes/**/checkpoints/
+runs/local/artifacts/**/checkpoints/
+
+# Hugging Face / remote recovered heavy datasets belong on HF or /arxiv, not GitHub
+runs/local/artifacts/remote_recovery/hf_100m_swe_research_timeline/files/*.parquet
+
+# Keep recovery source, docs, configs, summaries, and JSON/JSONL manifests tracked.

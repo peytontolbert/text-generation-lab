@@ -1,0 +1,150 @@
+{
+  "stage": 8600,
+  "name": "stage8600_reconstructed_arxiv_corpus_index_and_maintainer_registry",
+  "passed": true,
+  "summary": "Read-only recovery index for /arxiv/datasets and /arxiv/repositories plus canonical software-maintainer action/feature registry. This restores the local source substrate for rebuilding typed 100M maintainer curriculum manifests without reopening training or decoder authority.",
+  "artifacts": {
+    "arxiv_index_dir": "runs/local/artifacts/stage8600_arxiv_corpus_index",
+    "dataset_inventory": "runs/local/artifacts/stage8600_arxiv_corpus_index/dataset_inventory.json",
+    "dataset_files": "runs/local/artifacts/stage8600_arxiv_corpus_index/dataset_files.jsonl",
+    "repository_inventory": "runs/local/artifacts/stage8600_arxiv_corpus_index/repository_inventory.json",
+    "repository_summaries": "runs/local/artifacts/stage8600_arxiv_corpus_index/repository_summaries.jsonl",
+    "candidate_training_sources": "runs/local/artifacts/stage8600_arxiv_corpus_index/candidate_training_sources.json",
+    "action_feature_registry": "configs/software_maintainer/action_feature_registry.json",
+    "action_feature_registry_doc": "docs/SOFTWARE_MAINTAINER_ACTION_FEATURE_REGISTRY.md",
+    "arxiv_recovery_doc": "docs/ARXIV_CORPUS_RECOVERY_INDEX.md"
+  },
+  "dataset_inventory": {
+    "datasets_root": "/arxiv/datasets",
+    "dataset_files_indexed": 2530,
+    "dataset_scan_truncated": false,
+    "dataset_suffix_counts": {
+      ".csv": 1,
+      ".gz": 1,
+      ".json": 23,
+      ".jsonl": 87,
+      ".md": 39,
+      ".parquet": 2376,
+      ".tar": 1,
+      ".zip": 2
+    },
+    "software_maintenance_name_hits": 450,
+    "internal_marker_name_hits": 0
+  },
+  "repository_inventory": {
+    "repositories_root": "/arxiv/repositories",
+    "repo_dirs_seen": 607,
+    "repo_dirs_indexed": 500,
+    "truncated_repo_scans": 16,
+    "language_file_counts": {
+      "c_family": 142527,
+      "config": 97919,
+      "docs": 102540,
+      "go": 82634,
+      "java_jvm": 88190,
+      "python": 151171,
+      "rust": 32446,
+      "shell": 11441,
+      "web_js_ts_html": 150695
+    },
+    "build_file_counts": {
+      "CMakeLists.txt": 1216,
+      "Cargo.lock": 57,
+      "Cargo.toml": 589,
+      "Makefile": 790,
+      "Pipfile": 12,
+      "build.gradle": 219,
+      "build.gradle.kts": 66,
+      "go.mod": 217,
+      "go.sum": 184,
+      "meson.build": 119,
+      "package-lock.json": 126,
+      "package.json": 1243,
+      "pnpm-lock.yaml": 53,
+      "poetry.lock": 13,
+      "pom.xml": 223,
+      "pyproject.toml": 691,
+      "requirements.txt": 908,
+      "setup.cfg": 39,
+      "setup.py": 246,
+      "yarn.lock": 57
+    },
+    "recommended_curriculum_use_counts": {
+      "bounded_decoder_arguments": 465,
+      "edit_localization": 381,
+      "intent_to_build_strategy": 436,
+      "maintainer_qa": 496,
+      "patch_operator": 465,
+      "repo_capability_catalog": 496,
+      "repo_state_graph_v1": 436,
+      "symbol_binding": 381,
+      "verifier_repair": 381
+    }
+  },
+  "recovered_maintainer_curriculum_map": {
+    "active_hierarchy": [
+      "intent_to_build_strategy",
+      "repo_state_graph_v1",
+      "symbol_binding",
+      "edit_localization",
+      "patch_operator",
+      "verifier_repair",
+      "bounded_decoder_arguments",
+      "bounded_decoder_ce",
+      "output_repair_denoise",
+      "controlled_harness"
+    ],
+    "build_modes": [
+      "USE_WHITELIST_IMPORT",
+      "BUILD_ON_TOP",
+      "BUILD_FROM_SCRATCH"
+    ],
+    "dataset_routes": [
+      "KEEP_STRUCTURED",
+      "KEEP_BOUNDED_DECODER",
+      "HOLD_LONG_OUTPUT",
+      "USE_FOR_DENOISE_REPAIR",
+      "USE_AS_NEGATIVE",
+      "NEEDS_RETRIEVAL",
+      "QUARANTINE_LABEL_CONFLICT",
+      "DROP_DUPLICATE",
+      "NEEDS_HUMAN_REVIEW"
+    ],
+    "core_graph_layers_restored": [
+      "repo capability catalog",
+      "repo graph nodes and edges",
+      "symbol binding actions",
+      "edit localization targets",
+      "patch operators",
+      "verifier repair actions",
+      "bounded decoder reopen contract",
+      "loss routing by curriculum route"
+    ]
+  },
+  "gates": {
+    "arxiv_sources_modified": false,
+    "read_only_inventory": true,
+    "action_feature_registry_present": true,
+    "arxiv_corpus_artifacts_present": true,
+    "candidate_sources_require_schema_audit": true,
+    "raw_arxiv_training_blocked": true,
+    "body_emission_authorized": false,
+    "source_emission_authorized": false,
+    "runtime_authorized": false,
+    "model_execution_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "transition_head_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "scoring_authorized_next": false,
+    "controller_complete_merge_authorized_next": false,
+    "promotion_ready": false
+  },
+  "next_best_step": "Build repo_capability_catalog and repo_state_graph_v1 seed manifests from the indexed /arxiv repositories using deterministic read-only extraction, then run shortcut/authority audits before any training probe.",
+  "notes": [
+    "The /arxiv repository corpus has enough build/test/doc/language coverage to rebuild the maintainer substrate.",
+    "The next compiler step must produce typed manifests, not raw codegen rows.",
+    "Long outputs, raw source blobs, and HTML/doc fragments remain holdout or structured evidence unless explicitly budget-clean.",
+    "All model execution and decoder CE authority remains closed."
+  ]
+}

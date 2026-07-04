@@ -1,0 +1,70 @@
+{
+  "properties": {
+    "authority": {
+      "properties": {
+        "body_emission_authorized": {
+          "type": "boolean"
+        },
+        "controller_complete_merge_authorized_next": {
+          "type": "boolean"
+        },
+        "decoder_ce_training_authorized_next": {
+          "type": "boolean"
+        },
+        "gemma_execution_authorized_next": {
+          "type": "boolean"
+        },
+        "harness_execution_authorized_next": {
+          "type": "boolean"
+        },
+        "model_execution_authorized_next": {
+          "type": "boolean"
+        },
+        "promotion_ready": {
+          "type": "boolean"
+        },
+        "runtime_authorized": {
+          "type": "boolean"
+        },
+        "scoring_authorized_next": {
+          "type": "boolean"
+        },
+        "source_emission_authorized": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "model_execution_authorized_next",
+        "decoder_ce_training_authorized_next",
+        "runtime_authorized",
+        "source_emission_authorized",
+        "body_emission_authorized",
+        "gemma_execution_authorized_next",
+        "harness_execution_authorized_next",
+        "scoring_authorized_next",
+        "controller_complete_merge_authorized_next",
+        "promotion_ready"
+      ],
+      "type": "object"
+    },
+    "next_best_step": {
+      "type": "string"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "stage": {
+      "type": "integer"
+    },
+    "stage_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "stage",
+    "stage_name",
+    "passed",
+    "authority"
+  ],
+  "type": "object"
+}

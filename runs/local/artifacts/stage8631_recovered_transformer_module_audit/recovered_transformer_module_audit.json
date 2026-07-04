@@ -1,0 +1,48 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "interpretation": "Recovered local transformer/rotary module is now present for shape/interface audits. It remains non-executing until a later explicit probe authorization.",
+  "marker_hits": {
+    "agent_intent_head": true,
+    "agent_policy_heads": true,
+    "apply_rotary": true,
+    "cross_attention": true,
+    "decoder_ce_loss": true,
+    "decoder_layer": true,
+    "encoder_layer": true,
+    "parameter_estimator": true,
+    "retrieval_doc_head": true,
+    "retrieval_query_head": true,
+    "rotary_embedding": true,
+    "scaled_dot_product_attention": true,
+    "structured_heads": true,
+    "transformer_config": true,
+    "transformer_model": true
+  },
+  "metrics": {
+    "estimate_to_preserved_ratio": 0.999469891011548,
+    "estimated_local_transformer_parameter_count": 102599944,
+    "missing_marker_count": 0,
+    "required_marker_count": 15,
+    "required_marker_hits": 15,
+    "target_d_model": 640,
+    "target_heads": 10,
+    "target_layers": 6,
+    "target_parameter_count": 102654362,
+    "target_vocab_size": 1506
+  },
+  "missing_markers": [],
+  "module": "legacy_src/agentkernel_lite/modeling_transformer.py",
+  "passed": true,
+  "target_config": "configs/model/agentkernel_100m_seq2seq_recovered_target.json"
+}

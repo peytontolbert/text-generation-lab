@@ -1,0 +1,92 @@
+{
+  "bytes": 58775830,
+  "last_stage_rows_sample": [
+    {
+      "name": "stage6149_repo_skill_multitag_library",
+      "stage": 6149,
+      "summary_claim_scope": "multi_source_repo_skill_library_for_v2_semantic_retrieval_not_native_not_runtime_not_promotion",
+      "summary_decision": "{\"native_training_authorized\": false, \"next_best_step\": \"Run a retrieval benchmark over V2 prompt/query families; train retrieval/ranking or bounded slot heads only if retrieval passes.\", \"promotion_ready\": false, \"runtime_authorized\": false, \"skill_multitag_library_ready\": true}",
+      "summary_name": "stage6149_repo_skill_multitag_library",
+      "summary_objective": ""
+    },
+    {
+      "name": "stage6150_repo_skill_retrieval_benchmark",
+      "stage": 6150,
+      "summary_claim_scope": "repo_skill_library_retrieval_benchmark_not_native_not_runtime_not_promotion",
+      "summary_decision": "{\"native_training_authorized\": false, \"next_best_step\": \"If passed, attach Stage6149 as V2 skill_library/procedural_memory reference and build prompt-to-skill retrieval/ranking rows. If failed, add graph-neighbor and semantic-from-chunks context before native training.\", \"promotion_ready\": false, \"repo_skill_retrieval_reference_passed\": true, \"runtime_authorized\": false}",
+      "summary_name": "stage6150_repo_skill_retrieval_benchmark",
+      "summary_objective": ""
+    },
+    {
+      "name": "stage6151_prompt_to_skill_ranking_package",
+      "stage": 6151,
+      "summary_claim_scope": "v2_prompt_to_skill_retrieval_ranking_package_not_native_not_runtime_not_promotion",
+      "summary_decision": "{\"native_training_authorized\": false, \"next_best_step\": \"Run a feature-reference or native task-isolated ranker audit for v2_prompt_to_skill_candidate_ranking, then attach as procedural-memory retrieval only if heldout ranking beats lexical baseline without accept authority.\", \"promotion_ready\": false, \"prompt_to_skill_ranking_package_ready\": false, \"runtime_authorized\": false}",
+      "summary_name": "stage6151_prompt_to_skill_ranking_package",
+      "summary_objective": ""
+    },
+    {
+      "name": "stage6152_tag_routed_prompt_to_skill_package",
+      "stage": 6152,
+      "summary_claim_scope": "tag_routed_prompt_to_skill_training_package_not_native_not_runtime_not_promotion",
+      "summary_decision": "{\"native_training_authorized\": false, \"next_best_step\": \"Train/audit a task-isolated prompt-to-skill ranker using tag-routed candidates. Separately train/preserve the upstream semantic tag router; do not use target_tags at inference.\", \"promotion_ready\": false, \"runtime_authorized\": false, \"tag_routed_prompt_to_skill_package_ready\": true}",
+      "summary_name": "stage6152_tag_routed_prompt_to_skill_package",
+      "summary_objective": ""
+    },
+    {
+      "name": "stage6153_tag_routed_prompt_to_skill_loader_audit",
+      "stage": 6153,
+      "summary_claim_scope": "loader_and_leakage_audit_for_tag_routed_prompt_to_skill_package_not_native_not_runtime_not_promotion",
+      "summary_decision": "{\"native_training_authorized\": false, \"next_best_step\": \"Create a task-isolated train plan for prompt-to-skill ranking and separately preserve/refresh the upstream semantic tag router.\", \"promotion_ready\": false, \"runtime_authorized\": false, \"tag_routed_prompt_to_skill_loader_passed\": true}",
+      "summary_name": "stage6153_tag_routed_prompt_to_skill_loader_audit",
+      "summary_objective": ""
+    },
+    {
+      "name": "stage6154_prompt_to_skill_feature_ranker",
+      "stage": 6154,
+      "summary_claim_scope": "feature_reference_for_prompt_to_skill_ranker_not_native_not_runtime_not_promotion",
+      "summary_decision": "{\"native_training_authorized\": false, \"next_best_step\": \"If passed, create a bounded native train plan for v2_tag_routed_prompt_to_skill_candidate_ranking; keep Stage6154 as the non-authoritative reference baseline.\", \"promotion_ready\": false, \"prompt_to_skill_feature_ranker_passed\": false, \"runtime_authorized\": false}",
+      "summary_name": "stage6154_prompt_to_skill_feature_ranker",
+      "summary_objective": ""
+    },
+    {
+      "name": "stage6155_prompt_to_skill_query_local_ranker",
+      "stage": 6155,
+      "summary_claim_scope": "query_local_feature_reference_for_prompt_to_skill_retrieval_not_native_not_runtime_not_promotion",
+      "summary_decision": "{\"native_training_authorized\": false, \"next_best_step\": \"Create bounded native train plan for query-local prompt-to-skill ranking and wire Stage6149 as V2 procedural-memory reference.\", \"promotion_ready\": false, \"query_local_prompt_to_skill_ranker_passed\": true, \"runtime_authorized\": false}",
+      "summary_name": "stage6155_prompt_to_skill_query_local_ranker",
+      "summary_objective": ""
+    },
+    {
+      "name": "stage6156_prompt_to_skill_native_train_plan",
+      "stage": 6156,
+      "summary_claim_scope": "bounded_native_train_plan_for_v2_prompt_to_skill_ranking_not_training_not_runtime_not_promotion",
+      "summary_decision": "{\"native_training_authorized\": false, \"next_best_step\": \"Run Stage6156 loader smoke, then Stage6157 bounded training if loader passes.\", \"promotion_ready\": false, \"prompt_to_skill_native_train_plan_ready\": true, \"runtime_authorized\": false}",
+      "summary_name": "stage6156_prompt_to_skill_native_train_plan",
+      "summary_objective": ""
+    },
+    {
+      "name": "stage6157",
+      "stage": 6157,
+      "summary_claim_scope": "",
+      "summary_decision": "",
+      "summary_name": "",
+      "summary_objective": ""
+    },
+    {
+      "name": "audit_stage6158_prompt_to_skill_native_constrained_rank",
+      "stage": 6158,
+      "summary_claim_scope": "",
+      "summary_decision": "",
+      "summary_name": "",
+      "summary_objective": ""
+    }
+  ],
+  "metadata_num_rows": 5615,
+  "num_row_groups": 1,
+  "parquet_schema": "<pyarrow._parquet.ParquetSchema object at 0x7a0b0fff6c00>\nrequired group field_id=-1 schema {\n  optional binary field_id=-1 event_id (String);\n  optional int64 field_id=-1 stage;\n  optional binary field_id=-1 name (String);\n  optional binary field_id=-1 created_utc (String);\n  optional binary field_id=-1 source_counts (String);\n  optional binary field_id=-1 primary_sources (String);\n  optional binary field_id=-1 source_text (String);\n  optional binary field_id=-1 source_bundle_json (String);\n  optional boolean field_id=-1 has_script;\n  optional boolean field_id=-1 has_doc;\n  optional boolean field_id=-1 has_summary;\n  optional boolean field_id=-1 has_ledger;\n  optional boolean field_id=-1 has_artifact;\n  optional binary field_id=-1 summary_path (String);\n  optional binary field_id=-1 summary_name (String);\n  optional binary field_id=-1 summary_objective (String);\n  optional binary field_id=-1 summary_claim_scope (String);\n  optional binary field_id=-1 summary_decision (String);\n  optional binary field_id=-1 summary_gates (String);\n  optional binary field_id=-1 summary_metrics (String);\n  optional binary field_id=-1 summary_outputs (String);\n  optional binary field_id=-1 summary_inputs (String);\n  optional binary field_id=-1 summary_raw_json (String);\n  optional binary field_id=-1 ledger_raw_json (String);\n  optional binary field_id=-1 summary_records_json (String);\n  optional binary field_id=-1 ledger_records_json (String);\n  optional binary field_id=-1 doc_records_json (String);\n  optional binary field_id=-1 script_records_json (String);\n  optional binary field_id=-1 artifact_records_json (String);\n}\n",
+  "path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/remote_recovery/hf_100m_swe_research_timeline/files/train.parquet",
+  "sha256": "4effdb90e8887d8aac75141c0d0612eaeb4487ea0737560ea1828f0932fa2af1",
+  "stage_max_from_parquet": 6158,
+  "stage_min_from_parquet": 1
+}

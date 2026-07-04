@@ -1,0 +1,107 @@
+{
+  "stage": 8615,
+  "name": "stage8615_reconstructed_recovered_variable_ledger",
+  "passed": true,
+  "summary": "Recovered maintainer-training variables from recent Codex session archives and restored them into the software-maintainer action/feature registry and durable documentation.",
+  "inputs": {
+    "sessions_root": "/home/peyton/.codex/sessions",
+    "raw_ledger": "runs/local/artifacts/stage8615_recovered_variable_ledger/recovered_variable_ledger.json",
+    "filtered_ledger": "runs/local/artifacts/stage8615_recovered_variable_ledger/maintainer_filtered_ledger.json"
+  },
+  "outputs": {
+    "doc": "docs/RECOVERED_VARIABLE_LEDGER_STAGE8615.md",
+    "registry": "configs/software_maintainer/action_feature_registry.json",
+    "artifacts_dir": "runs/local/artifacts/stage8615_recovered_variable_ledger"
+  },
+  "metrics": {
+    "files_scanned": 260,
+    "files_with_hits": 260,
+    "bucket_counts": {
+      "decoder": 5269,
+      "semantic_presentation": 4394,
+      "verifier_loop": 4019,
+      "routing_authority": 3275,
+      "mining_judge": 2660,
+      "training_telemetry": 2275,
+      "counterfactual": 495,
+      "software_graph": 247
+    },
+    "recovered_behavior_value_labels": 14,
+    "recovered_control_labels": 8,
+    "recovered_evidence_labels": 5,
+    "recovered_graph_family_labels": 6,
+    "maintainer_filtered_top_label": "SOURCE_AUDIT",
+    "maintainer_filtered_top_label_count": 1814,
+    "current_training_authorized_rows": 0,
+    "current_decoder_authorized_rows": 0
+  },
+  "recovered_variable_groups": {
+    "behavior_value": [
+      "BV_ACCEPT_READY",
+      "BV_NEEDS_VERIFIER",
+      "BV_REJECT_OR_ABSTAIN",
+      "BV_FALSE_ACCEPT_RISK",
+      "CANDIDATE_PASS_VERIFIED",
+      "CANDIDATE_NEEDS_TEST",
+      "CANDIDATE_FAIL_BEHAVIOR",
+      "CANDIDATE_FAIL_INTERFACE",
+      "NO_VERIFY",
+      "SELECT_NO_VERIFY",
+      "SELECT_COPY_VERIFY",
+      "SELECT_GEN_EDIT_VERIFY",
+      "COPY_VERIFY",
+      "GEN_EDIT_VERIFY"
+    ],
+    "control": [
+      "ACTION_HOLD",
+      "ACTION_REJECT",
+      "CONTROL_HOLD_FOR_MORE_EVIDENCE",
+      "CONTROL_REPAIR_OR_ABSTAIN",
+      "CONTROL_REJECT_MISSING_RETURN_BEHAVIOR",
+      "CONTROL_REJECT_TRIVIAL_CANDIDATE",
+      "CONTROL_REJECT_MISSING_CALL_FEATURES",
+      "CLOSED_LOOP_NEXT_ACTION"
+    ],
+    "evidence": [
+      "EVIDENCE_HOLD",
+      "EVIDENCE_FAILURE",
+      "EVIDENCE_FAIL_BEHAVIOR",
+      "EVIDENCE_FAIL_INTERFACE",
+      "EVIDENCE_NEEDS_TEST"
+    ],
+    "graph_family": [
+      "GRAPH_DATA_RUNTIME_IO",
+      "GRAPH_INTERFACE_BOUNDARY",
+      "GRAPH_MODEL_TRAIN_EVAL",
+      "GRAPH_AGENT_TOOLING",
+      "GRAPH_GENERIC_LIBRARY",
+      "GRAPH_TEST_VERIFIER"
+    ]
+  },
+  "interpretation": [
+    "Recovered variables show the missing training map includes behavior-value policy, verifier-backed candidate selection, HOLD/REJECT control, graph family routing, semantic presentation, and calibration telemetry.",
+    "The software-maintainer rebuild must not reduce to symbol binding plus bounded decoder; it needs candidate verification, selector/top-k policy, action-value counterfactuals, and semantic presentation fields.",
+    "Recovered evidence improves mining design but does not authorize broad mining or model execution."
+  ],
+  "next_best_step": "Use the recovered variable ledger to rebuild missing miners and objectives: BIND_TEST_TO_SYMBOL rows, intent/build strategy with semantic presentation fields, verifier/candidate selector objectives, and graph-family-aware repo graph mining. Keep broad mining and training closed until each objective has counterfactual obligations, shortcut audits, loss cards, and telemetry.",
+  "authority": {
+    "model_execution_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "runtime_authorized": false,
+    "source_emission_authorized": false,
+    "body_emission_authorized": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "scoring_authorized_next": false,
+    "controller_complete_merge_authorized_next": false,
+    "promotion_ready": false
+  },
+  "gates": {
+    "artifact_ledger_present": true,
+    "durable_doc_written": true,
+    "action_feature_registry_updated": true,
+    "authority_rows_remain_closed": true,
+    "training_authorized": false,
+    "broad_mining_authorized": false
+  }
+}

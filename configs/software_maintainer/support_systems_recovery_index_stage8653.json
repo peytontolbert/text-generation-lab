@@ -1,0 +1,413 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "components": {
+    "bias_shortcut_audit": {
+      "local_status": "implemented_for_current_recovered_objectives",
+      "next": "Generalize shortcut audit config per objective and require it in every scale-import PR.",
+      "outputs": [
+        "single_feature_baseline",
+        "combo_feature_baseline",
+        "shortcut_blocker"
+      ],
+      "pipeline_phase": [
+        "judge",
+        "compile"
+      ],
+      "recovered_refs": [
+        "scripts/shortcut_baseline_audit.py",
+        "runs/summaries/stage8650_aggregate_structured_curriculum_gate.json",
+        "/arxiv/agentkernel_recovery/stage8628_useful_recovery_integration/central_research_graph_with_useful_recoveries.json"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true
+      ],
+      "role": "Detect metadata-only, count-only, label-proxy, surface-marker, graph-degree, node-id, and target-leak shortcuts."
+    },
+    "cluster_slice_detection": {
+      "local_status": "not_implemented",
+      "next": "Cluster row embeddings/features after source-backed graph/symbol-binding rows exist; use clusters to guide expansion, not to label targets.",
+      "outputs": [
+        "cluster_id",
+        "slice_gap",
+        "near_duplicate_group",
+        "failure_cluster"
+      ],
+      "pipeline_phase": [
+        "compile",
+        "learn"
+      ],
+      "recovered_refs": [
+        "/arxiv/repositories/Learning-with-Holographic-Reduced-Representations/attention-xml/deepxml/cluster.py",
+        "/arxiv/repositories/Learning-with-Holographic-Reduced-Representations/xml-cnn/utils/fiddle_clusters.py",
+        "/arxiv/repositories/Fuser/runtime/cluster.cu"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true
+      ],
+      "role": "Find repeated failure clusters, duplicate semantic keys, near-duplicate data islands, and undercovered curriculum cells."
+    },
+    "confidence_margin_entropy_calibration": {
+      "local_status": "telemetry_contract_only",
+      "next": "Add to structured finite-head probes before decode; learned confidence cannot authorize source/body emission.",
+      "outputs": [
+        "calibrated_confidence",
+        "entropy",
+        "margin",
+        "abstain_threshold"
+      ],
+      "pipeline_phase": [
+        "verify",
+        "act"
+      ],
+      "recovered_refs": [
+        "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "/arxiv/code/model_stack_spine/model_family_stack_registry.json"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true
+      ],
+      "role": "Convert logits/margins/entropy/evidence state into abstention thresholds and no-wrong-accept gates."
+    },
+    "cross_encoder_reranker": {
+      "local_status": "schema_only",
+      "next": "Use after BM25+dense recall baseline exists; never let reranker confidence authorize decode alone.",
+      "outputs": [
+        "reranked_evidence",
+        "evidence_sufficiency_score"
+      ],
+      "pipeline_phase": [
+        "orient"
+      ],
+      "recovered_refs": [
+        "/arxiv/repositories/FlagEmbedding/FlagEmbedding/inference/auto_reranker.py",
+        "/arxiv/repositories/FlagEmbedding/research/reranker/modeling.py",
+        "/arxiv/repositories/FlagEmbedding/scripts/add_reranker_score.py"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true
+      ],
+      "role": "Re-rank retrieved file/symbol/test/log candidates against the exact user intent or verifier failure."
+    },
+    "curriculum_compiler": {
+      "local_status": "partially_implemented_scaffold",
+      "next": "Connect it to the Stage8653 support features and require one compiler patch per training-data expansion.",
+      "outputs": [
+        "dataset_patch",
+        "counterfactual_obligations",
+        "scale_plan",
+        "blocked_reason"
+      ],
+      "pipeline_phase": [
+        "compile",
+        "learn"
+      ],
+      "recovered_refs": [
+        "scripts/curriculum_compiler.py",
+        "scripts/audit_curriculum_compiler_outputs.py",
+        "docs/recovery_v27_100m/03_curriculum_compiler_and_dataset_judge.md"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true
+      ],
+      "role": "Compile eval failures and dataset gaps into row operations: add, remove, relabel, rebalance, quarantine, counterfactual, or route change."
+    },
+    "dataset_cartography_dynamics": {
+      "local_status": "concept_recovered_no_current_probe_authority",
+      "next": "Add to next tiny probe telemetry only after graph/symbol/ranker gates pass.",
+      "outputs": [
+        "confidence_mean",
+        "confidence_variability",
+        "forgetting_count",
+        "hard_or_noisy_flag"
+      ],
+      "pipeline_phase": [
+        "train",
+        "learn"
+      ],
+      "recovered_refs": [
+        "docs/recovery_v27_100m/03_curriculum_compiler_and_dataset_judge.md",
+        "runs/summaries/reconstructed_from_sessions/stage8584_reconstructed_from_session_index.json"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true
+      ],
+      "role": "Track confidence/variability/forgetting/token-loss over training to identify easy, ambiguous, hard, mislabeled, and high-value rows."
+    },
+    "embedding_retrieval": {
+      "local_status": "references_recovered_not_wired_to_curriculum_rows",
+      "next": "Attach retrieval evidence packets plus evidence-removed controls to every scaled curriculum row.",
+      "outputs": [
+        "embedding_top_k",
+        "dense_similarity",
+        "retrieval_confidence"
+      ],
+      "pipeline_phase": [
+        "observe",
+        "orient"
+      ],
+      "recovered_refs": [
+        "/arxiv/TOLBERT_BRAIN/scripts/retrieval_sandbox.py",
+        "/arxiv/TOLBERT_BRAIN/scripts/eval_retrieval.py",
+        "/arxiv/repositories/EE-LLM/tools/bert_embedding/embed.py",
+        "/arxiv/repositories/FlagEmbedding/research/baai_general_embedding/README.md"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "role": "Dense evidence retrieval for semantically similar code, issue text, test failures, and docs."
+    },
+    "feature_detectors_static": {
+      "local_status": "partially_implemented",
+      "next": "Promote feature extraction to a shared library so all builders use identical feature names and avoid Stage8058-style feature drift.",
+      "outputs": [
+        "gate_features",
+        "dataset_judge_signals",
+        "shortcut_features"
+      ],
+      "pipeline_phase": [
+        "judge",
+        "compile"
+      ],
+      "recovered_refs": [
+        "configs/software_maintainer/action_feature_registry.json",
+        "scripts/objective_row_judge.py",
+        "scripts/shortcut_baseline_audit.py"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true
+      ],
+      "role": "Deterministic feature extraction from rows: budget flags, leak flags, long blob, internal token, missing evidence, import policy, graph degree, surface markers."
+    },
+    "junk_risk_ood_ranker": {
+      "local_status": "missing_unified_ranker",
+      "next": "Build the first ranker as deterministic/logistic/GBDT card over judged rows before any large 1M expansion.",
+      "outputs": [
+        "junk_ranker_route",
+        "risk_score",
+        "ood_score",
+        "reason_bits"
+      ],
+      "pipeline_phase": [
+        "judge",
+        "verify",
+        "compile"
+      ],
+      "recovered_refs": [
+        "/arxiv/repositories/dclm/baselines/train_fasttext_classifier.py",
+        "/arxiv/repositories/Python/machine_learning/gradient_boosting_classifier.py",
+        "/arxiv/repositories/Python/machine_learning/xgboost_classifier.py",
+        "/arxiv/repositories/NousResearch__hermes-agent/agent/error_classifier.py",
+        "/arxiv/repository_library/models/tier1_metadata/metadata_category_classifier.py"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "role": "Route rows/candidates as keep, denoise, retrieve, quarantine, hold-long, or negative using transparent features."
+    },
+    "lexical_bm25_retrieval": {
+      "local_status": "not_implemented_as_first_class_gate",
+      "next": "Create a no-training BM25/source-grounding baseline card for repo_state_graph and symbol_binding rows.",
+      "outputs": [
+        "bm25_top_k",
+        "lexical_evidence_score",
+        "missing_lexical_evidence_flag"
+      ],
+      "pipeline_phase": [
+        "observe",
+        "orient"
+      ],
+      "recovered_refs": [
+        "/arxiv/repositories/pyserini/docs/experiments-beir-fusion.md",
+        "/arxiv/repositories/RAG_Techniques/all_rag_techniques_runnable_scripts/fusion_retrieval.py",
+        "/arxiv/repositories/JARVIS/easytool/easytool/toolbench_retrieve.py"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true
+      ],
+      "role": "Cheap source grounding baseline over repo files, symbols, tests, docs, and logs. Must beat/compare against embedding retrieval before neural retrieval is trusted."
+    },
+    "ngram_repetition_style_detectors": {
+      "local_status": "reference_recovered_not_integrated",
+      "next": "Add as non-authority junk/ranker features for decoder and denoise rows.",
+      "outputs": [
+        "ngram_prior",
+        "repetition_score",
+        "style_anomaly_score"
+      ],
+      "pipeline_phase": [
+        "judge",
+        "verify",
+        "repair"
+      ],
+      "recovered_refs": [
+        "/arxiv/repositories/Python/strings/ngram.py",
+        "/arxiv/repositories/llama.cpp/common/ngram-cache.cpp",
+        "/arxiv/repositories/fairseq/fairseq/ngram_repeat_block.py",
+        "/arxiv/repositories/vllm/benchmarks/benchmark_ngram_proposer.py"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "role": "Detect local syntax/style priors, repetition loops, degenerate spans, unusual token transitions, and repo-style mismatches."
+    },
+    "reservoir_source_sampler": {
+      "local_status": "missing_for_1m_scale",
+      "next": "Build source inventory cards and per-objective sampling quotas before any 1M expansion.",
+      "outputs": [
+        "source_inventory_card",
+        "sampled_rows",
+        "coverage_by_cell",
+        "source_quality_score"
+      ],
+      "pipeline_phase": [
+        "compile"
+      ],
+      "recovered_refs": [
+        "/arxiv/datasets/nvidia--Open-SWE-Traces",
+        "/arxiv/datasets/ScaleAI--SWE-Atlas-QnA",
+        "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv",
+        "/arxiv/datasets/nvidia--OpenCodeInstruct"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "role": "Sample from large /arxiv and public datasets into balanced objective cells without raw-volume drift."
+    },
+    "symbolic_verifier_stack": {
+      "local_status": "objective_rows_restored_but_runtime_closed",
+      "next": "Keep runtime closed; use verifier-shaped rows until sandbox execution contracts are rebuilt.",
+      "outputs": [
+        "pass_fail",
+        "failure_type",
+        "repair_signal",
+        "acceptance_blocker"
+      ],
+      "pipeline_phase": [
+        "verify",
+        "repair"
+      ],
+      "recovered_refs": [
+        "runs/summaries/stage8643_verifier_repair_neutral_manifest.json",
+        "runs/summaries/stage8644_verifier_repair_shortcut_baseline.json",
+        "/arxiv/repositories/CodeT/DIVERSE/code/verifier_train.yaml"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true,
+        true
+      ],
+      "role": "Exact external checks: parser, AST, lint, type, import resolution, test selection, verifier logs, and patch acceptance signals."
+    },
+    "teacher_verifier_disagreement_detector": {
+      "local_status": "judge_signal_exists_not_full_detector",
+      "next": "Require disagreement rows to quarantine or human-review, never train as positives.",
+      "outputs": [
+        "label_conflict",
+        "teacher_verifier_disagreement",
+        "quarantine_route"
+      ],
+      "pipeline_phase": [
+        "judge",
+        "compile"
+      ],
+      "recovered_refs": [
+        "configs/software_maintainer/action_feature_registry.json",
+        "scripts/objective_row_judge.py"
+      ],
+      "recovered_refs_exists": [
+        true,
+        true
+      ],
+      "role": "Detect conflicts between teacher labels, verifier signals, source evidence, and deterministic judges."
+    },
+    "training_data_attribution": {
+      "local_status": "concept_recovered_not_implemented",
+      "next": "Start with nearest-neighbor attribution over row features/embeddings before expensive influence-function methods.",
+      "outputs": [
+        "helpful_examples",
+        "harmful_examples",
+        "missing_neighbor_signal"
+      ],
+      "pipeline_phase": [
+        "learn"
+      ],
+      "recovered_refs": [
+        "docs/recovery_v27_100m/03_curriculum_compiler_and_dataset_judge.md"
+      ],
+      "recovered_refs_exists": [
+        true
+      ],
+      "role": "Map failed evals back to helpful/harmful/missing training rows for targeted dataset edits."
+    }
+  },
+  "created_at_utc": "2026-07-04T19:32:20Z",
+  "decision": "Support systems for the maintainer curriculum are recovered as a no-authority index. The next gain is integrating retrieval, feature detectors, rankers, shortcut audits, clustering, and source sampling into one compiler path before training scale-up.",
+  "metrics": {
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "local_status_counts": {
+      "concept_recovered_no_current_probe_authority": 1,
+      "concept_recovered_not_implemented": 1,
+      "implemented_for_current_recovered_objectives": 1,
+      "judge_signal_exists_not_full_detector": 1,
+      "missing_for_1m_scale": 1,
+      "missing_unified_ranker": 1,
+      "not_implemented": 1,
+      "not_implemented_as_first_class_gate": 1,
+      "objective_rows_restored_but_runtime_closed": 1,
+      "partially_implemented": 1,
+      "partially_implemented_scaffold": 1,
+      "reference_recovered_not_integrated": 1,
+      "references_recovered_not_wired_to_curriculum_rows": 1,
+      "schema_only": 1,
+      "telemetry_contract_only": 1
+    },
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "support_components": 15,
+    "training_authorized": false
+  },
+  "next_best_step": "Build Stage8654 source-backed graph/symbol-binding recovery plan that uses BM25/dense retrieval baselines, feature detectors, shortcut audits, and junk/risk/OOD ranker cards before any training candidate.",
+  "passed": true,
+  "stage": 8653,
+  "stage_name": "stage8653_support_systems_recovery_index"
+}

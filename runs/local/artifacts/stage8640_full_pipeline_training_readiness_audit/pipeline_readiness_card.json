@@ -1,0 +1,94 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers_before_training": [
+    "authorized runtime path is still tiny-probe scale, not full 100M target-config execution",
+    "structured non-decoder probe execution loops are not implemented; only bounded decoder CE tiny loop exists",
+    "generation quality telemetry is still placeholder until an explicitly authorized measured generation probe exists",
+    "row-token CE telemetry records target metadata but not full per-token loss maps for every evaluated row",
+    "full target BPE tokenizer is recovered as a pointer, but copied/materialized local tokenizer package and hash gate are not yet enforced by trainer",
+    "stage8630/8636/8638 objective rows are reconstructed neutral manifests, not final mined data",
+    "near-shortcut graph-topology counterbalancing still needs to be enforced before scaling graph objectives"
+  ],
+  "decoder_ce_training_authorized": false,
+  "do_not_do_next": [
+    "do not recover/mine data yet",
+    "do not run decoder CE training",
+    "do not run model execution without a new explicit authorization stage",
+    "do not open runtime/source/body/Gemma/harness/scoring"
+  ],
+  "file_presence": {
+    "control_plane": {
+      "scripts/authority_gate.py": true,
+      "scripts/counterfactual_obligation_audit.py": true,
+      "scripts/loss_mask_card.py": true,
+      "scripts/safe_cleanup.py": true,
+      "scripts/safe_paths.py": true,
+      "scripts/shortcut_baseline_audit.py": true
+    },
+    "judge_compiler": {
+      "scripts/audit_curriculum_compiler_outputs.py": true,
+      "scripts/curriculum_compiler.py": true,
+      "scripts/objective_row_judge.py": true,
+      "scripts/structured_dataset_junk_ranker.py": true
+    },
+    "model_path": {
+      "configs/model/agentkernel_100m_seq2seq_recovered_target.json": true,
+      "configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json": true,
+      "legacy_src/agentkernel_lite/modeling_transformer.py": true
+    },
+    "objective_scripts": {
+      "scripts/audit_stage8639_patch_operator_shortcut_baseline.py": true,
+      "scripts/build_stage8630_intent_to_build_neutral_manifest.py": true,
+      "scripts/build_stage8636_edit_localization_neutral_manifest.py": true,
+      "scripts/build_stage8638_patch_operator_neutral_manifest.py": true
+    },
+    "trainer_path": {
+      "legacy_src/agentkernel_lite/training_data.py": true,
+      "legacy_src/agentkernel_lite/training_loop.py": true,
+      "legacy_src/scripts/train_agentkernel_lite_encdec.py": true
+    }
+  },
+  "gates": {
+    "authority_closed": true,
+    "batcher_has_bpe_wrapper": true,
+    "control_plane_files_present": true,
+    "judge_compiler_files_present": true,
+    "loop_has_transformer_runtime_path": true,
+    "loop_uses_selected_tokenizer": true,
+    "recovered_1506_tokenizer_pointer_present": true,
+    "target_100m_config_present": true,
+    "trainer_has_implementation_selector": true,
+    "trainer_has_tokenizer_selector": true,
+    "trainer_passes_implementation_to_loop": true,
+    "trainer_passes_tokenizer_to_loop": true,
+    "transformer_has_decoder_ce_loss": true,
+    "transformer_has_retrieval_heads": true,
+    "transformer_has_rope": true,
+    "transformer_has_structured_heads": true,
+    "transformer_module_present": true
+  },
+  "model_execution_authorized": false,
+  "next_best_step": "Patch the trainer/runtime audits to enforce recovered tokenizer hash, full target-config compatibility, structured probe execution modes, and real telemetry requirements before any data recovery or mining.",
+  "passed": true,
+  "ready_for_100m_training": false,
+  "recovered_now": [
+    "safe trainer command surface with implementation selector",
+    "tiny recovered-transformer runtime path behind explicit execution gate",
+    "1506-vocab AgentKernel BPE tokenizer pointer and trainer selection flags",
+    "dataset judge/curriculum compiler/loss-mask/counterfactual contracts",
+    "intent-to-build, edit-localization, and patch-operator neutral structured objective builders"
+  ],
+  "stage": 8640,
+  "stage_name": "stage8640_full_pipeline_training_readiness_audit"
+}

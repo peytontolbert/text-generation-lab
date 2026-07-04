@@ -1,0 +1,347 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "components": {
+    "activation_logit_interpretability": {
+      "local_evidence": [
+        "docs/MODEL_STACK_SPINE.md",
+        "runs/summaries/stage8621_reconstructed_model_family_schema_recovery.json"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Add token-loss, module-delta, gradient norm, logit margin, entropy, and activation-cache hooks to next tiny probe only; no broad SAE work yet.",
+      "recovered_refs": [
+        "/arxiv/code/model_stack_spine/MODEL_FAMILY_SCHEMA_RECOVERY_STAGE8621.md"
+      ],
+      "recovered_refs_exists": [
+        "True"
+      ],
+      "status": "telemetry_contracts_exist_no_activation_patch_module"
+    },
+    "decoder_only_causal": {
+      "local_evidence": [
+        "runs/summaries/stage8591_reconstructed_bounded_decoder_ce_candidate_row_recovery_status.json",
+        "docs/CURRENT_RESEARCH_SPINE_RECONSTRUCTED.md"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Reopen only as tiny bounded probe after budget-clean and contentful-output gates.",
+      "recovered_refs": [
+        "/arxiv/repositories/llm.c",
+        "/arxiv/repositories/flash-attention/assets/gpt2_training_curve.jpg"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True"
+      ],
+      "status": "bounded_candidate_role_only_training_closed"
+    },
+    "denoise_diffusion": {
+      "local_evidence": [
+        "runs/summaries/stage8647_output_repair_denoise_neutral_manifest.json",
+        "runs/summaries/stage8648_output_repair_denoise_shortcut_baseline.json"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Use as repair-route curriculum first. Only later train masked denoise on bad_output -> repaired_output pairs.",
+      "recovered_refs": [
+        "/arxiv/repositories/denoising-diffusion-pytorch/denoising_diffusion_pytorch/denoising_diffusion_pytorch.py",
+        "/arxiv/repositories/denoising-diffusion-pytorch/denoising_diffusion_pytorch/denoising_diffusion_pytorch_1d.py",
+        "/arxiv/repositories/diffusers/scripts/convert_vq_diffusion_to_diffusers.py",
+        "/arxiv/repositories/google-research/diffusion_distillation/diffusion_distillation.ipynb"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True",
+        "True",
+        "True"
+      ],
+      "status": "objective_restored_but_denoise_ce_closed"
+    },
+    "encoder_decoder_seq2seq": {
+      "local_evidence": [
+        "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "docs/SCRIPTS_AND_CONFIGS_RECOVERY_INVENTORY.md",
+        "runs/summaries/stage8649_aggregate_structured_curriculum_contract.json"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True",
+        "True"
+      ],
+      "next": "Use for structured transition heads and bounded arguments only until graph/symbol/data-ranker gates pass.",
+      "recovered_refs": [
+        "/arxiv/repositories/bert/create_pretraining_data.py",
+        "/arxiv/repositories/unilm/beit2/PRETRAINING.md"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True"
+      ],
+      "status": "current_student_family_recovered"
+    },
+    "encoder_only_retriever_reranker": {
+      "local_evidence": [
+        "configs/software_maintainer/model_family_stack_registry.json",
+        "docs/recovery_v27_100m/03_curriculum_compiler_and_dataset_judge.md"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Attach retrieval evidence packets and evidence-removed controls to every scaled row.",
+      "recovered_refs": [
+        "/arxiv/repositories/bert/run_classifier.py",
+        "/arxiv/repositories/google-research/cubert/run_classifier.py",
+        "/arxiv/datasets/google--code_x_glue_tc_nl_code_search_adv"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True",
+        "True"
+      ],
+      "status": "reference_recovered_source_grounding_not_wired_to_all_objectives"
+    },
+    "fusion_logits_forward_pass": {
+      "local_evidence": [
+        "docs/MODEL_STACK_SPINE.md",
+        "docs/recovery_v27_100m/01_model_stack_architecture.md"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Define a no-execution fusion contract: structured logits + deterministic gates + evidence confidence + verifier result. Implement only after each component is calibrated.",
+      "recovered_refs": [
+        "/arxiv/repository_library/models/tier5_cross_domain/adapter_fusion.py",
+        "/arxiv/repository_library/models/experiments/c5_adapter_fusion.json",
+        "/arxiv/repositories/Fuser/csrc/fusion.cpp",
+        "/arxiv/repositories/RAG_Techniques/all_rag_techniques_runnable_scripts/fusion_retrieval.py"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True",
+        "True",
+        "True"
+      ],
+      "status": "schema_only_no_local_module"
+    },
+    "gan_adversarial_hard_negative": {
+      "local_evidence": [
+        "configs/software_maintainer/model_family_stack_registry.json"
+      ],
+      "local_evidence_exists": [
+        "True"
+      ],
+      "next": "Use to generate adversarial shortcut rows after junk/ranker exists; not part of production decode.",
+      "recovered_refs": [
+        "/arxiv/code/model_stack_spine/MODEL_STACK_SPINE.md"
+      ],
+      "recovered_refs_exists": [
+        "True"
+      ],
+      "status": "schema_only_use_for_dataset_not_generation"
+    },
+    "gnn_repo_graph": {
+      "local_evidence": [
+        "runs/summaries/reconstructed_from_sessions/stage8539_reconstructed_from_session_index.json",
+        "runs/summaries/stage8650_aggregate_structured_curriculum_gate.json"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Repair repo_state_graph_v1 enrichment with opaque IDs, source-backed nodes/edges, and degree/query-node shortcut audits.",
+      "recovered_refs": [
+        "/arxiv/TOLBERT_BRAIN/scripts/codegraph_core.py",
+        "/arxiv/TOLBERT_BRAIN/scripts/code_graph.py",
+        "/arxiv/TOLBERT_BRAIN/scripts/repo_graph.py",
+        "/arxiv/TOLBERT_BRAIN/modules/program_graph.py",
+        "/arxiv/TOLBERT_BRAIN/data/repos/nodes_repos.jsonl",
+        "/arxiv/TOLBERT_BRAIN/data/repos/spans_repos.jsonl"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True",
+        "True",
+        "True",
+        "True",
+        "True"
+      ],
+      "status": "graph_seed_exists_but_encoder_not_implemented"
+    },
+    "heads_blocks_layers_mlp": {
+      "local_evidence": [
+        "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "configs/model/agentkernel_100m_seq2seq.json",
+        "runs/summaries/stage8650_target_config_compatibility_audit.json"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True",
+        "True"
+      ],
+      "next": "Add non-instantiating parameter/head/layer audit into the aggregate gate before training.",
+      "recovered_refs": [
+        "/arxiv/repositories/Python/machine_learning/multilayer_perceptron_classifier.py",
+        "/arxiv/repository_library/python_algorithms/machine_learning/multilayer_perceptron_classifier.py"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True"
+      ],
+      "status": "target_config_recovered_but_no_fresh_param_probe_after_8650"
+    },
+    "linear_tree_mlp_classifiers": {
+      "local_evidence": [
+        "configs/software_maintainer/model_family_stack_registry.json",
+        "docs/recovery_v27_100m/03_curriculum_compiler_and_dataset_judge.md"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Build explicit junk/risk/OOD classifier cards over source-backed rows before scaling.",
+      "recovered_refs": [
+        "/arxiv/repositories/dclm/baselines/train_fasttext_classifier.py",
+        "/arxiv/repositories/Python/machine_learning/gradient_boosting_classifier.py",
+        "/arxiv/repositories/Python/machine_learning/xgboost_classifier.py",
+        "/arxiv/repositories/NousResearch__hermes-agent/agent/error_classifier.py",
+        "/arxiv/repository_library/models/tier1_metadata/metadata_category_classifier.py"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True",
+        "True",
+        "True",
+        "True"
+      ],
+      "status": "concept_and_refs_recovered_not_unified_as_junk_ranker"
+    },
+    "moe_lora_adapters": {
+      "local_evidence": [
+        "configs/software_maintainer/model_family_stack_registry.json"
+      ],
+      "local_evidence_exists": [
+        "True"
+      ],
+      "next": "Only add adapters after task/language slice gates are reliable.",
+      "recovered_refs": [
+        "/arxiv/repository_library/models/tier5_cross_domain/adapter_fusion.py",
+        "/arxiv/repository_library/models/experiments/c5_adapter_fusion.json"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True"
+      ],
+      "status": "schema_only_refs_recovered"
+    },
+    "ngram_markov": {
+      "local_evidence": [
+        "configs/software_maintainer/model_family_stack_registry.json",
+        "docs/MODEL_STACK_SPINE.md"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Implement as dataset/ranker feature: local syntax prior, repetition risk, style anomaly. Do not make it an authority signal.",
+      "recovered_refs": [
+        "/arxiv/repositories/Python/strings/ngram.py",
+        "/arxiv/repositories/llama.cpp/common/ngram-cache.cpp",
+        "/arxiv/repositories/llama.cpp/common/ngram-map.cpp",
+        "/arxiv/repositories/fairseq/fairseq/ngram_repeat_block.py"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True",
+        "True",
+        "True"
+      ],
+      "status": "reference_recovered_not_integrated"
+    },
+    "state_space_mamba": {
+      "local_evidence": [
+        "configs/software_maintainer/model_family_stack_registry.json",
+        "docs/MODEL_STACK_SPINE.md"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Define repo_stream -> compressed_repo_state packet first; no Mamba training until graph/retrieval packets are stable.",
+      "recovered_refs": [
+        "/arxiv/repositories/mamba.py/examples/example_e2e_training.ipynb",
+        "/arxiv/repositories/mamba.py/assets/training_vs_seqlen_d_state_var.png"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True"
+      ],
+      "status": "reference_recovered_no_local_compressor"
+    },
+    "transition_functions": {
+      "local_evidence": [
+        "runs/summaries/stage8650_aggregate_structured_curriculum_gate.json",
+        "docs/recovery_v27_100m/03_curriculum_compiler_and_dataset_judge.md"
+      ],
+      "local_evidence_exists": [
+        "True",
+        "True"
+      ],
+      "next": "Keep as finite structured heads until source-backed graph/symbol-binding are repaired.",
+      "recovered_refs": [
+        "/arxiv/agentkernel_recovery/stage8624_central_graph_recovery/docs/CURRENT_RESEARCH_SPINE_RECONSTRUCTED.md",
+        "/arxiv/agentkernel_recovery/stage8629_recovery_completion_queue/recovery_completion_queue.jsonl"
+      ],
+      "recovered_refs_exists": [
+        "True",
+        "True"
+      ],
+      "status": "partially_implemented_structured_heads"
+    }
+  },
+  "created_at_utc": "2026-07-04T19:23:12Z",
+  "decision": "The concepts are recovered and mostly indexed, but several are reference/schema only. Do not treat model-stack coverage as implementation readiness.",
+  "metrics": {
+    "component_count": 14,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "implemented_or_partial": [
+      "transition_functions",
+      "gnn_repo_graph",
+      "encoder_decoder_seq2seq"
+    ],
+    "implemented_or_partial_count": 3,
+    "model_execution_authorized_next": false,
+    "schema_or_reference_only": [
+      "ngram_markov",
+      "fusion_logits_forward_pass",
+      "state_space_mamba",
+      "moe_lora_adapters",
+      "gan_adversarial_hard_negative"
+    ],
+    "schema_or_reference_only_count": 5,
+    "training_authorized": false
+  },
+  "next_best_step": "Create source-backed graph/symbol-binding rows and a junk/ranker classifier gate before adding any fusion, Mamba, GNN encoder, or denoise training.",
+  "passed": true,
+  "stage": 8651,
+  "stage_name": "stage8651_model_component_recovery_coverage_audit"
+}

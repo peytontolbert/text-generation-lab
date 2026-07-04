@@ -1,0 +1,56 @@
+{
+  "artifacts": {
+    "doc": "docs/PRESERVED_100M_MANIFEST_RECOVERY_STAGE8628.md",
+    "recovery": "runs/local/artifacts/stage8628_preserved_100m_manifest_recovery/preserved_100m_manifest_recovery.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "authority_closed": true,
+    "checkpoint_references_only": true,
+    "model_weights_not_loaded": true,
+    "no_model_execution": true,
+    "preserved_manifests_recovered": true
+  },
+  "metrics": {
+    "checkpoint_weight_references": 4,
+    "eval_dataset_paths_recovered": 2,
+    "freeze_patterns": {
+      "encoder=False decoder=False tok=False": 1,
+      "encoder=False decoder=True tok=True": 1,
+      "encoder=None decoder=None tok=None": 1,
+      "encoder=True decoder=False tok=False": 1
+    },
+    "manifest_paths_expected": 4,
+    "manifest_paths_missing": 0,
+    "manifest_paths_recovered": 4,
+    "model_families": {
+      "agentkernel_lite_encdec_v1": 4
+    },
+    "parameter_counts": {
+      "102654362": 4
+    },
+    "presets": {
+      "None": 1,
+      "agentkernel-lite-100m": 3
+    },
+    "replaced_surface_count": 12,
+    "train_dataset_paths_recovered": 2
+  },
+  "next_best_step": "Use preserved 100M config metadata to audit current trainer/model reconstruction, while keeping execution closed.",
+  "notes": "Recovered exact old 100M seq2seq shape and historical run metadata from preserved manifests.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8628,
+  "stage_name": "stage8628_reconstructed_preserved_100m_manifest_recovery"
+}

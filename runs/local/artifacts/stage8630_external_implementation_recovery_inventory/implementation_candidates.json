@@ -1,0 +1,2766 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "candidates": [
+    {
+      "architecture_score": 6,
+      "curriculum_score": 1,
+      "exists": true,
+      "line_count": 59,
+      "marker_hit_count": 7,
+      "marker_hits": {
+        "agent_policy_heads": true,
+        "bpe_tokenizer": true,
+        "causal_mask": true,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": true,
+        "safe_softmax": true,
+        "scalar_invariant": true,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "agent_policy_heads": [
+          {
+            "line": 58,
+            "text": "agent_policy_heads: bool = False"
+          }
+        ],
+        "bpe_tokenizer": [
+          {
+            "line": 13,
+            "text": "vocab_size: int"
+          }
+        ],
+        "causal_mask": [
+          {
+            "line": 33,
+            "text": "masking: str = \"build_causal_mask\""
+          }
+        ],
+        "retrieval_heads": [
+          {
+            "line": 52,
+            "text": "# Optional encoder-side retrieval heads. When enabled, the encoder can emit"
+          },
+          {
+            "line": 55,
+            "text": "retrieval_head_dim: Optional[int] = None"
+          },
+          {
+            "line": 57,
+            "text": "# scalar policy/calibration outputs such as OOD and retrieval coverage."
+          }
+        ],
+        "rotary_or_rope": [
+          {
+            "line": 17,
+            "text": "rope_theta: float = 1e6"
+          },
+          {
+            "line": 32,
+            "text": "positional: str = \"apply_rotary\""
+          },
+          {
+            "line": 38,
+            "text": "# HF rope scaling (optional)"
+          },
+          {
+            "line": 39,
+            "text": "rope_scaling_type: Optional[str] = None"
+          },
+          {
+            "line": 40,
+            "text": "rope_scaling_factor: Optional[float] = None"
+          },
+          {
+            "line": 41,
+            "text": "rope_scaling_original_max_position_embeddings: Optional[int] = None"
+          },
+          {
+            "line": 42,
+            "text": "rope_scaling_low_freq_factor: Optional[float] = None"
+          },
+          {
+            "line": 43,
+            "text": "rope_scaling_high_freq_factor: Optional[float] = None"
+          },
+          {
+            "line": 44,
+            "text": "# HF rotary attention scaling (applied to cos/sin)"
+          },
+          {
+            "line": 45,
+            "text": "rope_attention_scaling: Optional[float] = None"
+          }
+        ],
+        "safe_softmax": [
+          {
+            "line": 34,
+            "text": "softmax: str = \"safe_softmax\""
+          }
+        ],
+        "scalar_invariant": [
+          {
+            "line": 57,
+            "text": "# scalar policy/calibration outputs such as OOD and retrieval coverage."
+          }
+        ]
+      },
+      "path": "/data/transformer_10/specs/config.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 25,
+      "sha256": "0e4a1fd9550db945320de524bc85a423f3ba6d2a653f49bdc6979e36a6570b78",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 3,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 2227,
+      "marker_hit_count": 4,
+      "marker_hits": {
+        "agent_policy_heads": true,
+        "bpe_tokenizer": true,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": true,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "agent_policy_heads": [
+          {
+            "line": 1076,
+            "text": "def _agent_policy_head_loss(model: torch.nn.Module, batch: dict[str, torch.Tensor]) -> torch.Tensor:"
+          },
+          {
+            "line": 1077,
+            "text": "if not hasattr(model, \"agent_policy_logits\"):"
+          },
+          {
+            "line": 1079,
+            "text": "logits = model.agent_policy_logits(batch[\"enc_input_ids\"], batch[\"enc_attention_mask\"])"
+          },
+          {
+            "line": 1125,
+            "text": "policy_head_loss_weight: float = 0.0,"
+          },
+          {
+            "line": 1222,
+            "text": "if float(policy_head_loss_weight) > 0.0:"
+          },
+          {
+            "line": 1223,
+            "text": "policy_loss = _agent_policy_head_loss(model, batch)"
+          },
+          {
+            "line": 1232,
+            "text": "+ float(policy_head_loss_weight) * policy_loss"
+          },
+          {
+            "line": 1255,
+            "text": "policy_head_loss_weight: float = 0.0,"
+          },
+          {
+            "line": 1290,
+            "text": "policy_head_loss_weight=float(policy_head_loss_weight),"
+          },
+          {
+            "line": 1527,
+            "text": "and not key.startswith(\"agent_policy_heads.\")"
+          },
+          {
+            "line": 1542,
+            "text": "and not key.startswith(\"agent_policy_heads.\")"
+          },
+          {
+            "line": 1581,
+            "text": "if bool(getattr(config, \"agent_policy_heads\", False)):"
+          }
+        ],
+        "bpe_tokenizer": [
+          {
+            "line": 34,
+            "text": "class ByteTokenizer:"
+          },
+          {
+            "line": 39,
+            "text": "vocab_size = 260"
+          },
+          {
+            "line": 64,
+            "text": "(path / \"tokenizer_config.json\").write_text("
+          },
+          {
+            "line": 67,
+            "text": "\"tokenizer_kind\": \"byte_fallback_v1\","
+          },
+          {
+            "line": 72,
+            "text": "\"vocab_size\": self.vocab_size,"
+          },
+          {
+            "line": 80,
+            "text": "class LocalBpeTokenizer:"
+          },
+          {
+            "line": 212,
+            "text": "def __init__(self, tokenizer) -> None:"
+          },
+          {
+            "line": 213,
+            "text": "self.tokenizer = tokenizer"
+          },
+          {
+            "line": 214,
+            "text": "self.pad_token_id = int(tokenizer.token_to_id(self.pad_token))"
+          },
+          {
+            "line": 215,
+            "text": "self.bos_token_id = int(tokenizer.token_to_id(self.bos_token))"
+          },
+          {
+            "line": 216,
+            "text": "self.eos_token_id = int(tokenizer.token_to_id(self.eos_token))"
+          },
+          {
+            "line": 217,
+            "text": "self.unk_token_id = int(tokenizer.token_to_id(self.unk_token))"
+          }
+        ],
+        "retrieval_heads": [
+          {
+            "line": 114,
+            "text": "\"<AK_ABSTRACT_RETRIEVAL>\","
+          },
+          {
+            "line": 120,
+            "text": "\"<AK_NO_RETRIEVAL>\","
+          },
+          {
+            "line": 121,
+            "text": "\"<AK_RETRIEVE_NEW>\","
+          },
+          {
+            "line": 122,
+            "text": "\"<AK_RETRIEVAL_PAIR>\","
+          },
+          {
+            "line": 140,
+            "text": "\"<AK_RETRIEVE>\","
+          },
+          {
+            "line": 174,
+            "text": "\"<AK_RETRIEVE_AGAIN>\","
+          },
+          {
+            "line": 177,
+            "text": "\"<AK_ACTION_SPACE_RETRIEVAL>\","
+          },
+          {
+            "line": 442,
+            "text": "max_retrieval_query_tokens: int = 96,"
+          },
+          {
+            "line": 443,
+            "text": "max_retrieval_doc_tokens: int = 256,"
+          },
+          {
+            "line": 444,
+            "text": "max_retrieval_negatives: int = 0,"
+          },
+          {
+            "line": 457,
+            "text": "self.max_retrieval_query_tokens = int(max_retrieval_query_tokens)"
+          },
+          {
+            "line": 458,
+            "text": "self.max_retrieval_doc_tokens = int(max_retrieval_doc_tokens)"
+          }
+        ],
+        "scalar_invariant": [
+          {
+            "line": 1528,
+            "text": "and not key.startswith(\"encoder_scalar_control.\")"
+          },
+          {
+            "line": 1529,
+            "text": "and not key.startswith(\"decoder_scalar_control.\")"
+          },
+          {
+            "line": 1543,
+            "text": "and not key.startswith(\"encoder_scalar_control.\")"
+          },
+          {
+            "line": 1544,
+            "text": "and not key.startswith(\"decoder_scalar_control.\")"
+          },
+          {
+            "line": 1706,
+            "text": "config.scalar_invariant_control = bool(getattr(args, \"scalar_invariant_control\", 0))"
+          },
+          {
+            "line": 1707,
+            "text": "config.scalar_invariant_rank = int(getattr(args, \"scalar_invariant_rank\", 32) or 32)"
+          },
+          {
+            "line": 1708,
+            "text": "config.scalar_invariant_epsilon = float(getattr(args, \"scalar_invariant_epsilon\", 0.05) or 0.05)"
+          },
+          {
+            "line": 1709,
+            "text": "config.scalar_invariant_smoothing_steps = int(getattr(args, \"scalar_invariant_smoothing_steps\", 1) or 0)"
+          },
+          {
+            "line": 1710,
+            "text": "config.scalar_invariant_apply_encoder = bool(getattr(args, \"scalar_invariant_apply_encoder\", 1))"
+          },
+          {
+            "line": 1711,
+            "text": "config.scalar_invariant_apply_decoder = bool(getattr(args, \"scalar_invariant_apply_decoder\", 0))"
+          },
+          {
+            "line": 1754,
+            "text": "\"scalar_invariant_control\": bool(args.scalar_invariant_control),"
+          },
+          {
+            "line": 1755,
+            "text": "\"scalar_invariant_rank\": int(args.scalar_invariant_rank),"
+          }
+        ]
+      },
+      "path": "/data/agentkernel/scripts/train_agentkernel_lite_encdec.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 14,
+      "sha256": "58091c0f0a5492ff88e061a520da207d14282d422d2349de1b796a2d5bc189bd",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 2,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 4522,
+      "marker_hit_count": 3,
+      "marker_hits": {
+        "agent_policy_heads": true,
+        "bpe_tokenizer": true,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "agent_policy_heads": [
+          {
+            "line": 1439,
+            "text": "def _agent_policy_head_loss(model: torch.nn.Module, batch: dict[str, torch.Tensor]) -> torch.Tensor:"
+          },
+          {
+            "line": 1440,
+            "text": "if not hasattr(model, \"agent_policy_logits\"):"
+          },
+          {
+            "line": 1442,
+            "text": "logits = model.agent_policy_logits(batch[\"enc_input_ids\"], batch[\"enc_attention_mask\"])"
+          },
+          {
+            "line": 1469,
+            "text": "def _agent_intent_head_loss(model: torch.nn.Module, batch: dict[str, torch.Tensor]) -> torch.Tensor:"
+          },
+          {
+            "line": 2038,
+            "text": "policy_head_loss_weight: float = 0.0,"
+          },
+          {
+            "line": 2039,
+            "text": "intent_head_loss_weight: float = 0.0,"
+          },
+          {
+            "line": 2341,
+            "text": "if float(policy_head_loss_weight) > 0.0:"
+          },
+          {
+            "line": 2342,
+            "text": "policy_loss = _agent_policy_head_loss(model, batch)"
+          },
+          {
+            "line": 2343,
+            "text": "intent_head_loss = next(model.parameters()).new_tensor(0.0)"
+          },
+          {
+            "line": 2344,
+            "text": "if float(intent_head_loss_weight) > 0.0:"
+          },
+          {
+            "line": 2345,
+            "text": "intent_head_loss = _agent_intent_head_loss(model, batch)"
+          },
+          {
+            "line": 2401,
+            "text": "float(policy_head_loss_weight) * policy_loss"
+          }
+        ],
+        "bpe_tokenizer": [
+          {
+            "line": 35,
+            "text": "class ByteTokenizer:"
+          },
+          {
+            "line": 40,
+            "text": "vocab_size = 260"
+          },
+          {
+            "line": 65,
+            "text": "(path / \"tokenizer_config.json\").write_text("
+          },
+          {
+            "line": 68,
+            "text": "\"tokenizer_kind\": \"byte_fallback_v1\","
+          },
+          {
+            "line": 73,
+            "text": "\"vocab_size\": self.vocab_size,"
+          },
+          {
+            "line": 81,
+            "text": "class LocalBpeTokenizer:"
+          },
+          {
+            "line": 212,
+            "text": "def __init__(self, tokenizer) -> None:"
+          },
+          {
+            "line": 213,
+            "text": "self.tokenizer = tokenizer"
+          },
+          {
+            "line": 214,
+            "text": "self.pad_token_id = int(tokenizer.token_to_id(self.pad_token))"
+          },
+          {
+            "line": 215,
+            "text": "self.bos_token_id = int(tokenizer.token_to_id(self.bos_token))"
+          },
+          {
+            "line": 216,
+            "text": "self.eos_token_id = int(tokenizer.token_to_id(self.eos_token))"
+          },
+          {
+            "line": 217,
+            "text": "self.unk_token_id = int(tokenizer.token_to_id(self.unk_token))"
+          }
+        ],
+        "retrieval_heads": [
+          {
+            "line": 109,
+            "text": "\"<AK_ABSTRACT_RETRIEVAL>\","
+          },
+          {
+            "line": 115,
+            "text": "\"<AK_NO_RETRIEVAL>\","
+          },
+          {
+            "line": 116,
+            "text": "\"<AK_RETRIEVE_NEW>\","
+          },
+          {
+            "line": 117,
+            "text": "\"<AK_RETRIEVAL_PAIR>\","
+          },
+          {
+            "line": 156,
+            "text": "\"<AK_RETRIEVE>\","
+          },
+          {
+            "line": 182,
+            "text": "\"<AK_RETRIEVE_AGAIN>\","
+          },
+          {
+            "line": 185,
+            "text": "\"<AK_ACTION_SPACE_RETRIEVAL>\","
+          },
+          {
+            "line": 442,
+            "text": "max_retrieval_query_tokens: int = 96,"
+          },
+          {
+            "line": 443,
+            "text": "max_retrieval_doc_tokens: int = 256,"
+          },
+          {
+            "line": 444,
+            "text": "max_retrieval_negatives: int = 0,"
+          },
+          {
+            "line": 457,
+            "text": "self.max_retrieval_query_tokens = int(max_retrieval_query_tokens)"
+          },
+          {
+            "line": 458,
+            "text": "self.max_retrieval_doc_tokens = int(max_retrieval_doc_tokens)"
+          }
+        ]
+      },
+      "path": "/data/agent_kernel_lite/scripts/train_agentkernel_lite_encdec.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 10,
+      "sha256": "ec4c5a06ad2b16291e8ef39c35710bafd326b293b9e39602c451d2e1a4128afe",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 2,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 3564,
+      "marker_hit_count": 3,
+      "marker_hits": {
+        "agent_policy_heads": true,
+        "bpe_tokenizer": true,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "agent_policy_heads": [
+          {
+            "line": 1242,
+            "text": "def _agent_policy_head_loss(model: torch.nn.Module, batch: dict[str, torch.Tensor]) -> torch.Tensor:"
+          },
+          {
+            "line": 1243,
+            "text": "if not hasattr(model, \"agent_policy_logits\"):"
+          },
+          {
+            "line": 1245,
+            "text": "logits = model.agent_policy_logits(batch[\"enc_input_ids\"], batch[\"enc_attention_mask\"])"
+          },
+          {
+            "line": 1272,
+            "text": "def _agent_intent_head_loss(model: torch.nn.Module, batch: dict[str, torch.Tensor]) -> torch.Tensor:"
+          },
+          {
+            "line": 1583,
+            "text": "policy_head_loss_weight: float = 0.0,"
+          },
+          {
+            "line": 1584,
+            "text": "intent_head_loss_weight: float = 0.0,"
+          },
+          {
+            "line": 1816,
+            "text": "if float(policy_head_loss_weight) > 0.0:"
+          },
+          {
+            "line": 1817,
+            "text": "policy_loss = _agent_policy_head_loss(model, batch)"
+          },
+          {
+            "line": 1818,
+            "text": "intent_head_loss = next(model.parameters()).new_tensor(0.0)"
+          },
+          {
+            "line": 1819,
+            "text": "if float(intent_head_loss_weight) > 0.0:"
+          },
+          {
+            "line": 1820,
+            "text": "intent_head_loss = _agent_intent_head_loss(model, batch)"
+          },
+          {
+            "line": 1876,
+            "text": "float(policy_head_loss_weight) * policy_loss"
+          }
+        ],
+        "bpe_tokenizer": [
+          {
+            "line": 35,
+            "text": "class ByteTokenizer:"
+          },
+          {
+            "line": 40,
+            "text": "vocab_size = 260"
+          },
+          {
+            "line": 65,
+            "text": "(path / \"tokenizer_config.json\").write_text("
+          },
+          {
+            "line": 68,
+            "text": "\"tokenizer_kind\": \"byte_fallback_v1\","
+          },
+          {
+            "line": 73,
+            "text": "\"vocab_size\": self.vocab_size,"
+          },
+          {
+            "line": 81,
+            "text": "class LocalBpeTokenizer:"
+          },
+          {
+            "line": 212,
+            "text": "def __init__(self, tokenizer) -> None:"
+          },
+          {
+            "line": 213,
+            "text": "self.tokenizer = tokenizer"
+          },
+          {
+            "line": 214,
+            "text": "self.pad_token_id = int(tokenizer.token_to_id(self.pad_token))"
+          },
+          {
+            "line": 215,
+            "text": "self.bos_token_id = int(tokenizer.token_to_id(self.bos_token))"
+          },
+          {
+            "line": 216,
+            "text": "self.eos_token_id = int(tokenizer.token_to_id(self.eos_token))"
+          },
+          {
+            "line": 217,
+            "text": "self.unk_token_id = int(tokenizer.token_to_id(self.unk_token))"
+          }
+        ],
+        "retrieval_heads": [
+          {
+            "line": 109,
+            "text": "\"<AK_ABSTRACT_RETRIEVAL>\","
+          },
+          {
+            "line": 115,
+            "text": "\"<AK_NO_RETRIEVAL>\","
+          },
+          {
+            "line": 116,
+            "text": "\"<AK_RETRIEVE_NEW>\","
+          },
+          {
+            "line": 117,
+            "text": "\"<AK_RETRIEVAL_PAIR>\","
+          },
+          {
+            "line": 156,
+            "text": "\"<AK_RETRIEVE>\","
+          },
+          {
+            "line": 182,
+            "text": "\"<AK_RETRIEVE_AGAIN>\","
+          },
+          {
+            "line": 185,
+            "text": "\"<AK_ACTION_SPACE_RETRIEVAL>\","
+          },
+          {
+            "line": 442,
+            "text": "max_retrieval_query_tokens: int = 96,"
+          },
+          {
+            "line": 443,
+            "text": "max_retrieval_doc_tokens: int = 256,"
+          },
+          {
+            "line": 444,
+            "text": "max_retrieval_negatives: int = 0,"
+          },
+          {
+            "line": 457,
+            "text": "self.max_retrieval_query_tokens = int(max_retrieval_query_tokens)"
+          },
+          {
+            "line": 458,
+            "text": "self.max_retrieval_doc_tokens = int(max_retrieval_doc_tokens)"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/train_agentkernel_lite_encdec.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 10,
+      "sha256": "71ea00f56ef55d7922de43f40f5a5344e16d9796d382a55e5be211ae7f3f1176",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 2,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 280,
+      "marker_hit_count": 2,
+      "marker_hits": {
+        "agent_policy_heads": true,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "agent_policy_heads": [
+          {
+            "line": 266,
+            "text": "\"policy_heads\": \"confidence/retrieval/ood/verification/action-validity targets\","
+          }
+        ],
+        "retrieval_heads": [
+          {
+            "line": 107,
+            "text": "operator = _one_line(row.get(\"primitive_type\"), limit=80) or \"retrieved_skill\""
+          },
+          {
+            "line": 112,
+            "text": "\"content\": \"<AK_RETRIEVE> <AK_RET_SKILLS> <AK_VERIFY>\","
+          },
+          {
+            "line": 126,
+            "text": "\"<AK_CHAT> <AK_RETRIEVE> PocketPal local controller skill selection.\","
+          },
+          {
+            "line": 130,
+            "text": "\"Retrieval policy: auto\","
+          },
+          {
+            "line": 132,
+            "text": "\"Action policy: retrieve_then_constrain\","
+          },
+          {
+            "line": 134,
+            "text": "\"<AK_CONTEXT> Installed local skill catalog is available through retrieval.\","
+          },
+          {
+            "line": 172,
+            "text": "\"expected_content\": \"<AK_RETRIEVE>\","
+          },
+          {
+            "line": 182,
+            "text": "\"retrieval_coverage_target\": 0.92,"
+          },
+          {
+            "line": 183,
+            "text": "\"retrieval_doc_text\": doc,"
+          },
+          {
+            "line": 184,
+            "text": "\"retrieval_loss_weight\": 1.0,"
+          },
+          {
+            "line": 185,
+            "text": "\"retrieval_negative_doc_texts\": json.dumps(negative_docs, ensure_ascii=False),"
+          },
+          {
+            "line": 186,
+            "text": "\"retrieval_query_text\": _skill_query(row),"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_v202_hybrid_controller_operator_dataset.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 10,
+      "sha256": "6431fb606807ad6e700249877d739278b84ec02610eb77343a462f9958d90423",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 2,
+      "curriculum_score": 1,
+      "exists": true,
+      "line_count": 162,
+      "marker_hit_count": 3,
+      "marker_hits": {
+        "agent_policy_heads": true,
+        "bpe_tokenizer": true,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "agent_policy_heads": [
+          {
+            "line": 53,
+            "text": "if bool(getattr(cfg, \"agent_policy_heads\", False)):"
+          },
+          {
+            "line": 54,
+            "text": "self.agent_policy_heads = nn.ModuleDict("
+          },
+          {
+            "line": 66,
+            "text": "self.agent_policy_heads = None"
+          },
+          {
+            "line": 119,
+            "text": "def agent_policy_logits("
+          },
+          {
+            "line": 124,
+            "text": "if self.agent_policy_heads is None:"
+          },
+          {
+            "line": 127,
+            "text": "return {name: head(pooled).squeeze(-1).float() for name, head in self.agent_policy_heads.items()}"
+          }
+        ],
+        "bpe_tokenizer": [
+          {
+            "line": 24,
+            "text": "vocab_size: int | None = None,"
+          },
+          {
+            "line": 29,
+            "text": "vocab = vocab_size if vocab_size is not None else cfg.vocab_size"
+          }
+        ],
+        "retrieval_heads": [
+          {
+            "line": 46,
+            "text": "retrieval_head_dim = int(getattr(cfg, \"retrieval_head_dim\", None) or 0)"
+          },
+          {
+            "line": 47,
+            "text": "if retrieval_head_dim > 0:"
+          },
+          {
+            "line": 48,
+            "text": "self.retrieval_query_head = nn.Linear(cfg.d_model, retrieval_head_dim, bias=False)"
+          },
+          {
+            "line": 49,
+            "text": "self.retrieval_doc_head = nn.Linear(cfg.d_model, retrieval_head_dim, bias=False)"
+          },
+          {
+            "line": 51,
+            "text": "self.retrieval_query_head = None"
+          },
+          {
+            "line": 52,
+            "text": "self.retrieval_doc_head = None"
+          },
+          {
+            "line": 57,
+            "text": "\"retrieval_coverage\": nn.Linear(cfg.d_model, 1),"
+          },
+          {
+            "line": 99,
+            "text": "def retrieval_query_embedding("
+          },
+          {
+            "line": 105,
+            "text": "if self.retrieval_query_head is not None:"
+          },
+          {
+            "line": 106,
+            "text": "pooled = self.retrieval_query_head(pooled)"
+          },
+          {
+            "line": 109,
+            "text": "def retrieval_doc_embedding("
+          },
+          {
+            "line": 115,
+            "text": "if self.retrieval_doc_head is not None:"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/runtime/seq2seq.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 9,
+      "sha256": "8c7dada550a021ab27a2c693ad8db61eb472f04431972b30e8a511f2fdcac0c3",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 2,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 532,
+      "marker_hit_count": 2,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": true,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": true
+      },
+      "marker_lines": {
+        "rotary_or_rope": [
+          {
+            "line": 13,
+            "text": "from runtime.positional import resolve_rope_embedding, resolve_rope_seq_len"
+          },
+          {
+            "line": 17,
+            "text": "apply_rotary as runtime_apply_rotary,"
+          },
+          {
+            "line": 36,
+            "text": "\"\"\"Projection-internal self-attention supporting MHA/GQA, optional RoPE."
+          },
+          {
+            "line": 46,
+            "text": "use_rope: bool | None = None,"
+          },
+          {
+            "line": 47,
+            "text": "rope_theta: float | None = None,"
+          },
+          {
+            "line": 69,
+            "text": "self.use_rope = bool(use_rope if use_rope is not None else getattr(cfg, \"use_rope\", True))"
+          },
+          {
+            "line": 70,
+            "text": "self.rope_theta = float(rope_theta if rope_theta is not None else getattr(cfg, \"rope_theta\", 1e6))"
+          },
+          {
+            "line": 72,
+            "text": "self.rope_scaling_type = getattr(cfg, \"rope_scaling_type\", None)"
+          },
+          {
+            "line": 73,
+            "text": "self.rope_scaling_factor = getattr(cfg, \"rope_scaling_factor\", None)"
+          },
+          {
+            "line": 74,
+            "text": "self.rope_scaling_original_max_position_embeddings = getattr(cfg, \"rope_scaling_original_max_position_embeddings\", None)"
+          },
+          {
+            "line": 75,
+            "text": "self.rope_scaling_low_freq_factor = getattr(cfg, \"rope_scaling_low_freq_factor\", None)"
+          },
+          {
+            "line": 76,
+            "text": "self.rope_scaling_high_freq_factor = getattr(cfg, \"rope_scaling_high_freq_factor\", None)"
+          }
+        ],
+        "transformer_attention": [
+          {
+            "line": 9,
+            "text": "from runtime.attention import _read_backend_from_env_or_file, scaled_dot_product_attention, select_attention_backend"
+          },
+          {
+            "line": 479,
+            "text": "out = scaled_dot_product_attention("
+          }
+        ]
+      },
+      "path": "/data/transformer_10/runtime/attention_modules.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 8,
+      "sha256": "256a77112f02ce59fb8f3f39af71274cab2414708a3066b94a766372e032cfb6",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 3,
+      "exists": true,
+      "line_count": 436,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 80,
+            "text": "\"retrieval_query_text\": \"\","
+          },
+          {
+            "line": 81,
+            "text": "\"retrieval_doc_text\": \"\","
+          },
+          {
+            "line": 82,
+            "text": "\"retrieval_loss_weight\": 0.0,"
+          },
+          {
+            "line": 133,
+            "text": "\"Retrieval policy: use_current_context_first\\n\""
+          },
+          {
+            "line": 168,
+            "text": "\"Retrieval policy: current_context_only\\n\""
+          },
+          {
+            "line": 212,
+            "text": "\"Retrieval policy: use_current_context_first\\n\""
+          },
+          {
+            "line": 249,
+            "text": "\"Retrieval policy: use_failure_memory\\n\""
+          },
+          {
+            "line": 305,
+            "text": "\"Retrieval policy: use_memory_when_relevant\\n\""
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage51_local_agentkernel_trace_curriculum.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 7,
+      "sha256": "f3304fb24afd5ed4d0f43c97877ba31f4c011dcddc80fcbfb40e2f260fa3f990",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 3,
+      "exists": true,
+      "line_count": 356,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 130,
+            "text": "\"Retrieval policy: current_context_only\\n\""
+          },
+          {
+            "line": 155,
+            "text": "\"retrieval_query_text\": \"\","
+          },
+          {
+            "line": 156,
+            "text": "\"retrieval_doc_text\": \"\","
+          },
+          {
+            "line": 157,
+            "text": "\"retrieval_loss_weight\": 0.0,"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage52_counterfactual_slot_transform_curriculum.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 7,
+      "sha256": "05927f05a174cca881dbc7db4c22cb24cab23b8a227aff833640944d7027fef1",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 3,
+      "exists": true,
+      "line_count": 259,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 58,
+            "text": "\"Retrieval policy: current_context_only\\n\""
+          },
+          {
+            "line": 100,
+            "text": "\"retrieval_query_text\": \"\","
+          },
+          {
+            "line": 101,
+            "text": "\"retrieval_doc_text\": \"\","
+          },
+          {
+            "line": 102,
+            "text": "\"retrieval_loss_weight\": 0.0,"
+          },
+          {
+            "line": 107,
+            "text": "\"retrieval_coverage_target\": 1.0,"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage54_world_compression_curriculum.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 7,
+      "sha256": "57819b8cf2aa1120a2c6e80755599df284365abfa4130fcb724a129297a87177",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 3,
+      "exists": true,
+      "line_count": 326,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 57,
+            "text": "\"Retrieval policy: auto\","
+          },
+          {
+            "line": 117,
+            "text": "\"retrieval_coverage_target\": 0.1,"
+          },
+          {
+            "line": 118,
+            "text": "\"retrieval_doc_text\": content,"
+          },
+          {
+            "line": 119,
+            "text": "\"retrieval_loss_weight\": 0.2,"
+          },
+          {
+            "line": 120,
+            "text": "\"retrieval_query_text\": user_text,"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage61_slot_operator_curriculum.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 7,
+      "sha256": "2d2eb5a131d2fc8bc8156c5af97ff15c710f5abe25771dca0553fe8bf832e8b1",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 2409,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 46,
+            "text": "retrieval_influenced: bool = False,"
+          },
+          {
+            "line": 58,
+            "text": "\"selected_retrieval_span_id\": None,"
+          },
+          {
+            "line": 59,
+            "text": "\"retrieval_influenced\": bool(retrieval_influenced),"
+          },
+          {
+            "line": 70,
+            "text": "retrieval_influenced: bool = False,"
+          },
+          {
+            "line": 72,
+            "text": "selected_retrieval_span_id: str | None = None,"
+          },
+          {
+            "line": 78,
+            "text": "if selected_retrieval_span_id is not None:"
+          },
+          {
+            "line": 79,
+            "text": "payload[\"selected_retrieval_span_id\"] = selected_retrieval_span_id"
+          },
+          {
+            "line": 80,
+            "text": "if retrieval_influenced:"
+          },
+          {
+            "line": 81,
+            "text": "payload[\"retrieval_influenced\"] = True"
+          },
+          {
+            "line": 105,
+            "text": "retrieval_influenced=bool(reason_text),"
+          },
+          {
+            "line": 125,
+            "text": "retrieval_influenced=bool(reason_text),"
+          },
+          {
+            "line": 136,
+            "text": "retrieval_influenced=bool(reason_text),"
+          }
+        ]
+      },
+      "path": "/data/agent_kernel_lite/scripts/build_agentkernel_lite_encdec_dataset.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 6,
+      "sha256": "b153a22be3acc803eda76c626a260ed1bfb02b741fdfa22bf28bf41a01b4e4bb",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 2409,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 46,
+            "text": "retrieval_influenced: bool = False,"
+          },
+          {
+            "line": 58,
+            "text": "\"selected_retrieval_span_id\": None,"
+          },
+          {
+            "line": 59,
+            "text": "\"retrieval_influenced\": bool(retrieval_influenced),"
+          },
+          {
+            "line": 70,
+            "text": "retrieval_influenced: bool = False,"
+          },
+          {
+            "line": 72,
+            "text": "selected_retrieval_span_id: str | None = None,"
+          },
+          {
+            "line": 78,
+            "text": "if selected_retrieval_span_id is not None:"
+          },
+          {
+            "line": 79,
+            "text": "payload[\"selected_retrieval_span_id\"] = selected_retrieval_span_id"
+          },
+          {
+            "line": 80,
+            "text": "if retrieval_influenced:"
+          },
+          {
+            "line": 81,
+            "text": "payload[\"retrieval_influenced\"] = True"
+          },
+          {
+            "line": 105,
+            "text": "retrieval_influenced=bool(reason_text),"
+          },
+          {
+            "line": 125,
+            "text": "retrieval_influenced=bool(reason_text),"
+          },
+          {
+            "line": 136,
+            "text": "retrieval_influenced=bool(reason_text),"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_agentkernel_lite_encdec_dataset.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 6,
+      "sha256": "b153a22be3acc803eda76c626a260ed1bfb02b741fdfa22bf28bf41a01b4e4bb",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 240,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 41,
+            "text": "(\"Set up local retrieval for my notes.\", \"1. Choose the note folders.\\n2. Remove private files that should be skipped.\\n3. Import the folders locally.\\n4. Test retrieval with sample questions.\"),"
+          },
+          {
+            "line": 47,
+            "text": "(\"Ideas for making a private assistant more useful.\", \"1. Add per-agent memory collections\\n2. Let users choose tool permissions\\n3. Show clear source links for retrieved answers\"),"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage50_source_binding_curriculum.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 6,
+      "sha256": "4248665975dc0ebb14681c81d0ada44e0f982a2a714c3d32c1bcdd5c53bf6386",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 110,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 39,
+            "text": "def _augment(row: dict[str, Any], *, weight: float, retrieval_weight: float) -> dict[str, Any]:"
+          },
+          {
+            "line": 42,
+            "text": "out[\"retrieval_query_text\"] = str(row.get(\"encoder_text\", \"\") or \"\")"
+          },
+          {
+            "line": 43,
+            "text": "out[\"retrieval_doc_text\"] = doc"
+          },
+          {
+            "line": 44,
+            "text": "out[\"retrieval_loss_weight\"] = float(retrieval_weight)"
+          },
+          {
+            "line": 46,
+            "text": "out[\"source_type\"] = \"pocketpal_stage55_state_retrieval_curriculum\""
+          },
+          {
+            "line": 72,
+            "text": "parser.add_argument(\"--output-dir\", default=\"tmp/pocketpal_stage55_state_retrieval_curriculum\")"
+          },
+          {
+            "line": 74,
+            "text": "parser.add_argument(\"--retrieval-weight\", type=float, default=2.5)"
+          },
+          {
+            "line": 80,
+            "text": "rows = [_augment(row, weight=float(args.weight), retrieval_weight=float(args.retrieval_weight)) for row in _read_jsonl(Path(manifest[\"train_dataset_path\"]))]"
+          },
+          {
+            "line": 94,
+            "text": "\"objective\": \"pocketpal_stage55_state_retrieval_curriculum\","
+          },
+          {
+            "line": 101,
+            "text": "\"state_retrieval\": True,"
+          },
+          {
+            "line": 102,
+            "text": "\"retrieval_doc\": \"canonical latent state string\","
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage55_state_retrieval_curriculum.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 6,
+      "sha256": "330829735904e8576e8d55a6814c56f83a040e39d05dcd4ff81772b0e382df2f",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 195,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 55,
+            "text": "\"Retrieval policy: auto\\n\""
+          },
+          {
+            "line": 133,
+            "text": "\"Can you verify whether retrieval is enabled?\","
+          },
+          {
+            "line": 134,
+            "text": "\"Question: Can you verify whether retrieval is enabled?\","
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage63_routing_boundary_curriculum.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 6,
+      "sha256": "51f745c9af07eb320907862aae538a4a1c20320adfb93d9616a5f7e08fe214fd",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 197,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": true,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "retrieval_heads": [
+          {
+            "line": 50,
+            "text": "out[\"retrieval_loss_weight\"] = 0.0"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_v203_decoder_failure_replay.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 6,
+      "sha256": "839adfe9ddd673e70a2ce0e34ec5c0d258bfe8e2225f5b2f7d301f82886847db",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 400,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": true,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "rotary_or_rope": [
+          {
+            "line": 102,
+            "text": "use_rope=overrides.pop(\"use_rope\", True),"
+          },
+          {
+            "line": 103,
+            "text": "rope_theta=overrides.pop(\"rope_theta\", getattr(cfg, \"rope_theta\", 1e6)),"
+          },
+          {
+            "line": 113,
+            "text": "use_rope=bc.use_rope,"
+          },
+          {
+            "line": 114,
+            "text": "rope_theta=bc.rope_theta,"
+          },
+          {
+            "line": 131,
+            "text": "use_rope=overrides.pop(\"use_rope\", False),"
+          },
+          {
+            "line": 132,
+            "text": "rope_theta=overrides.pop(\"rope_theta\", getattr(cfg, \"rope_theta\", 1e6)),"
+          },
+          {
+            "line": 142,
+            "text": "use_rope=bc.use_rope,"
+          },
+          {
+            "line": 143,
+            "text": "rope_theta=bc.rope_theta,"
+          },
+          {
+            "line": 152,
+            "text": "bc = block_cfg or build_block_config_from_model(cfg, use_rope=False)"
+          },
+          {
+            "line": 162,
+            "text": "use_rope=False,"
+          },
+          {
+            "line": 213,
+            "text": "use_rope=False,"
+          },
+          {
+            "line": 214,
+            "text": "rope_theta=bc.rope_theta,"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/runtime/block_modules.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 4,
+      "sha256": "b0c3a39cc4e1848df7a2fad1b8ee907c5052df10177b264bfdc2b4168cc98ed2",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 612,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": true,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "causal_mask": [
+          {
+            "line": 19,
+            "text": "build_dilated_causal_mask,"
+          },
+          {
+            "line": 22,
+            "text": "build_sliding_window_causal_mask,"
+          },
+          {
+            "line": 270,
+            "text": "pattern = build_sliding_window_causal_mask("
+          },
+          {
+            "line": 339,
+            "text": "pattern = build_dilated_causal_mask("
+          }
+        ]
+      },
+      "path": "/data/transformer_10/runtime/blocks.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 4,
+      "sha256": "e88d61de5c9f91251a3228fa6043de7cc0672aa894562e0ebca187267224bf85",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 220,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": true
+      },
+      "marker_lines": {
+        "transformer_attention": [
+          {
+            "line": 82,
+            "text": "def scaled_dot_product_attention("
+          },
+          {
+            "line": 134,
+            "text": "return torch.nn.functional.scaled_dot_product_attention("
+          },
+          {
+            "line": 139,
+            "text": "return torch.nn.functional.scaled_dot_product_attention("
+          },
+          {
+            "line": 178,
+            "text": "return torch.nn.functional.scaled_dot_product_attention("
+          },
+          {
+            "line": 190,
+            "text": "return torch.nn.functional.scaled_dot_product_attention("
+          },
+          {
+            "line": 196,
+            "text": "return torch.nn.functional.scaled_dot_product_attention("
+          },
+          {
+            "line": 215,
+            "text": "return torch.nn.functional.scaled_dot_product_attention("
+          }
+        ]
+      },
+      "path": "/data/transformer_10/runtime/attention.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 4,
+      "sha256": "b9d2df49dac5536a5c0781a41c495e641f64969a0955d19a2297c7bf9c6e49f5",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 511,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": true,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "rotary_or_rope": [
+          {
+            "line": 7,
+            "text": "from runtime.ops import apply_rotary as runtime_apply_rotary"
+          },
+          {
+            "line": 8,
+            "text": "from runtime.ops import resolve_rotary_embedding as runtime_resolve_rotary_embedding"
+          },
+          {
+            "line": 11,
+            "text": "def _rope_inv_freq(head_dim: int, device=None, base_theta: float = 1e6) -> torch.Tensor:"
+          },
+          {
+            "line": 18,
+            "text": "def build_rope_cache(seq_len: int, head_dim: int, device=None, base_theta: float = 1e6):"
+          },
+          {
+            "line": 20,
+            "text": "raise ValueError(\"RoPE head_dim must be even\")"
+          },
+          {
+            "line": 22,
+            "text": "inv_freq = _rope_inv_freq(head_dim, device=device, base_theta=base_theta)"
+          },
+          {
+            "line": 28,
+            "text": "def apply_rotary(q: torch.Tensor, k: torch.Tensor, cos: torch.Tensor, sin: torch.Tensor):"
+          },
+          {
+            "line": 29,
+            "text": "return runtime_apply_rotary(q, k, cos, sin)"
+          },
+          {
+            "line": 32,
+            "text": "def apply_rotary_scaled(q: torch.Tensor, k: torch.Tensor, cos: torch.Tensor, sin: torch.Tensor, scale: float):"
+          },
+          {
+            "line": 33,
+            "text": "q_out, k_out = apply_rotary(q, k, cos, sin)"
+          },
+          {
+            "line": 37,
+            "text": "def rope_ntk_scaling("
+          },
+          {
+            "line": 60,
+            "text": "def rope_yarn_factors("
+          }
+        ]
+      },
+      "path": "/data/transformer_10/runtime/positional.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 4,
+      "sha256": "defbe4858c3bf3ef034b2bd71137dda4ccbbcdf182dbf17c93eec521f75dc17e",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 1,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 346,
+      "marker_hit_count": 1,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": true,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {
+        "causal_mask": [
+          {
+            "line": 4,
+            "text": "def build_causal_mask(seq_len: int, device=None, dtype=torch.bool) -> torch.Tensor:"
+          },
+          {
+            "line": 26,
+            "text": "causal_mask: torch.Tensor | None = None,  # (T,S) or (T,T)"
+          },
+          {
+            "line": 32,
+            "text": "- causal_mask: True means masked; shape (T,S)."
+          },
+          {
+            "line": 37,
+            "text": "if causal_mask is not None:"
+          },
+          {
+            "line": 38,
+            "text": "device = causal_mask.device"
+          },
+          {
+            "line": 39,
+            "text": "cm = causal_mask.to(torch.bool).view(1, 1, tgt_len, src_len)"
+          },
+          {
+            "line": 56,
+            "text": "def build_sliding_window_causal_mask(seq_len: int, window_size: int, device=None, dtype=torch.bool) -> torch.Tensor:"
+          },
+          {
+            "line": 135,
+            "text": "def build_block_causal_mask(seq_len: int, block: int, device=None, dtype=torch.bool) -> torch.Tensor:"
+          },
+          {
+            "line": 148,
+            "text": "def build_dilated_causal_mask(seq_len: int, window: int, dilation: int, device=None, dtype=torch.bool) -> torch.Tensor:"
+          },
+          {
+            "line": 267,
+            "text": "def create_causal_mask("
+          },
+          {
+            "line": 321,
+            "text": "causal_bool = build_causal_mask(S, device=device, dtype=torch.bool)  # (S,S)"
+          }
+        ]
+      },
+      "path": "/data/transformer_10/tensor/masking.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 4,
+      "sha256": "7832c76516d678f07298bb9aa84fbe5eb1d9be029ba53ddb1b5909d30588fd7f",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 2,
+      "exists": true,
+      "line_count": 123,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/pocketpal_content_operators.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 2,
+      "sha256": "ca71b00572383848c180075337859c50c120adafc1435ed4cd26699d8faaab85",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 1,
+      "exists": true,
+      "line_count": 75,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/pocketpal_source_slots.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 1,
+      "sha256": "d88006e3eafd8ca88ac5373899c65fa33310fe29b2241c64d8b5a12beab32b32",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 1,
+      "exists": true,
+      "line_count": 132,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage53_operator_distill_curriculum.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 1,
+      "sha256": "1f38acf7645e099f0f3366f66a34abd4e9e65aa4ce8204eae0272334b8e4d670",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 31,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/runtime/attention_factory.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "959bf14d6681eb1be09beadc5f4103a50178fbf9b4ce6fb105aa3e0a41103573",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 6,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/tensor/positional.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "27909f626f10cadf678fae0b0d275eaf467a06fc61b52b4ebb55b37e57941a52",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 93,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/tensor/mlp.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "8e6be47f4bf2d91065177bee82337653428a7af2d794a3e4ec2fc1f7dfa58f78",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 335,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/tensor/norms.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "cc8f3f920c6eb9f31386ab9a8f436c764146d9a7789a967e01c388ddcfc732b5",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 6,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/model/seq2seq.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "2e8ec19174cd6f955f41ef203541aded22cffc2a9562066730d24aba0cd62380",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 6,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/model/heads.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "2421632fc11265a5b0be369703bdd0318c3793eab283e21102b3a62e95ea8bba",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 6,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/model/encoder.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "9b021af22a792be10f5ba05601d83a399fa0cbd74a940881c90fbc63af4a2fd9",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 6,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/model/causal.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "4434e54482aa37004619057fa2f83b2f07bf44e8ba67a79c2de5def6e93aa5ae",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 233,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/pocketpal_structured_decode.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "f5b50de5feb78a2a0301bd372c74e77a06a3d9904dd0075f8bcd25561963aa90",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 126,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/diagnose_pocketpal_decoder_collapse.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "9a060c6cea7aa9b9f855042516aa602e41a857517152611d02714005b19a9a75",
+      "trainer_score": 0
+    },
+    {
+      "architecture_score": 0,
+      "curriculum_score": 0,
+      "exists": true,
+      "line_count": 137,
+      "marker_hit_count": 0,
+      "marker_hits": {
+        "agent_policy_heads": false,
+        "bpe_tokenizer": false,
+        "causal_mask": false,
+        "config_class": false,
+        "loss_mask": false,
+        "model_class": false,
+        "retrieval_heads": false,
+        "rotary_or_rope": false,
+        "safe_softmax": false,
+        "scalar_invariant": false,
+        "stage8580_flags": false,
+        "structured_aux": false,
+        "transformer_attention": false
+      },
+      "marker_lines": {},
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/filter_pocketpal_decoder_attractors.py",
+      "readable": true,
+      "required_stage8580_flags_missing": [
+        "--cleanup-checkpoints-after-probe",
+        "--decoder-ce-weight",
+        "--denoise-weight",
+        "--manifest",
+        "--max-strict-rows",
+        "--mode",
+        "--no-final-checkpoint-export",
+        "--require-loss-mask-enforcement-audit",
+        "--structured-aux-weight"
+      ],
+      "required_stage8580_flags_present": [],
+      "score": 0,
+      "sha256": "2908c4bb47859535f8acdc4fe0976d6cbc015c31d463a6f1b578910ea7a46786",
+      "trainer_score": 0
+    }
+  ],
+  "interpretation": "This stage is recovery inventory only. It does not copy code, instantiate the model, run training, or authorize decoder CE.",
+  "metrics": {
+    "architecture_candidates": 5,
+    "candidate_paths": 36,
+    "curriculum_candidates": 8,
+    "readable_candidates": 36,
+    "target_d_model": 640,
+    "target_heads": 10,
+    "target_layers": 6,
+    "target_parameter_count": 102654362,
+    "target_vocab_size": 1506,
+    "trainer_flag_candidates": 0
+  },
+  "purpose": "Recover exact implementation sources for the preserved 100M transformer/rotary model, safe trainer command surface, and curriculum builders.",
+  "stage": 8630,
+  "target_config": "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+  "top_architecture_candidates": [
+    "/data/transformer_10/specs/config.py",
+    "/data/transformer_10/runtime/attention_modules.py",
+    "/data/transformer_10/runtime/block_modules.py",
+    "/data/transformer_10/runtime/attention.py",
+    "/data/transformer_10/runtime/positional.py"
+  ],
+  "top_curriculum_candidates": [
+    "/data/transformer_10/specs/config.py",
+    "/data/agentkernel/scripts/train_agentkernel_lite_encdec.py",
+    "/data/agent_kernel_lite/scripts/train_agentkernel_lite_encdec.py",
+    "/data/transformer_10/scripts/agent_kernel_lite/train_agentkernel_lite_encdec.py",
+    "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_v202_hybrid_controller_operator_dataset.py",
+    "/data/transformer_10/runtime/seq2seq.py",
+    "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage51_local_agentkernel_trace_curriculum.py",
+    "/data/transformer_10/scripts/agent_kernel_lite/build_pocketpal_stage52_counterfactual_slot_transform_curriculum.py"
+  ],
+  "top_trainer_candidates": []
+}

@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage8629_current_model_vs_preserved_target/current_model_vs_preserved_target_audit.json",
+    "doc": "docs/CURRENT_MODEL_VS_PRESERVED_TARGET_AUDIT_STAGE8629.md",
+    "target_config": "configs/model/agentkernel_100m_seq2seq_recovered_target.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "authority_closed": true,
+    "current_scaffold_not_confused_with_target": true,
+    "gap_audit_written": true,
+    "model_execution_authorized": false,
+    "training_blocked_until_target_impl_recovered": true
+  },
+  "metrics": {
+    "current_execution_authorized": false,
+    "mismatch_count": 9,
+    "scaffold_hidden_size": 192,
+    "scaffold_layers": 2,
+    "scaffold_uses_gru": true,
+    "scaffold_uses_transformer_attention": false,
+    "scaffold_vocab_size": 259,
+    "target_d_model": 640,
+    "target_execution_authorized": false,
+    "target_layers": 6,
+    "target_parameter_count": 102654362,
+    "target_vocab_size": 1506
+  },
+  "next_best_step": "Recover or rebuild the transformer/rotary AgentKernel Lite 100M implementation and tokenizer compatibility path before any real training.",
+  "notes": "Current model code is a safe interface scaffold; preserved manifests define the target 102M architecture.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8629,
+  "stage_name": "stage8629_reconstructed_current_model_vs_preserved_target_audit"
+}

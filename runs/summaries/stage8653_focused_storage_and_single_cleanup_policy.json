@@ -1,0 +1,92 @@
+{
+  "allowed_destructive_files": [
+    "scripts/audit_stage8651_no_destructive_training_preflight.py",
+    "scripts/safe_cleanup.py",
+    "scripts/safe_paths.py",
+    "tests/test_safe_cleanup.py"
+  ],
+  "arxiv_policy": {
+    "cleanup_allowed": false,
+    "delete_allowed": false,
+    "read_allowed_for_recovery": true,
+    "role": "durable backup and recovery source",
+    "training_output_allowed": false,
+    "write_allowed_only_for_explicit_backup": true
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "canonical_artifact_paths_module": "scripts/artifact_paths.py",
+  "decoder_ce_training_authorized": false,
+  "destructive_token_hits": [
+    {
+      "path": "scripts/safe_cleanup.py",
+      "token": "shutil.rmtree"
+    },
+    {
+      "path": "scripts/safe_cleanup.py",
+      "token": ".unlink("
+    },
+    {
+      "path": "scripts/audit_stage8651_no_destructive_training_preflight.py",
+      "token": "shutil.rmtree"
+    },
+    {
+      "path": "scripts/audit_stage8651_no_destructive_training_preflight.py",
+      "token": ".unlink("
+    },
+    {
+      "path": "scripts/safe_paths.py",
+      "token": "shutil.rmtree"
+    },
+    {
+      "path": "scripts/safe_paths.py",
+      "token": "rm -rf"
+    },
+    {
+      "path": "tests/test_safe_cleanup.py",
+      "token": "shutil.rmtree"
+    },
+    {
+      "path": "tests/test_safe_cleanup.py",
+      "token": ".unlink("
+    }
+  ],
+  "errors": [],
+  "focused_roots": {
+    "configs": "configs",
+    "docs": "docs",
+    "probe_outputs": "runs/local/probes",
+    "scripts": "scripts",
+    "stage_artifacts": "runs/local/artifacts",
+    "stage_summaries": "runs/summaries",
+    "tests": "tests"
+  },
+  "gates": {
+    "arxiv_backup_only": true,
+    "arxiv_forbidden_cleanup_target": true,
+    "destructive_tokens_allowlisted": true,
+    "focused_roots_present": true,
+    "focused_storage_policy_present": true,
+    "no_extra_cleanup_scripts": true,
+    "single_cleanup_entrypoint": true,
+    "storage_and_cleanup_tests_pass": true
+  },
+  "model_execution_authorized": false,
+  "next_best_step": "Use scripts/artifact_paths.py for all new summaries/artifacts/probes and keep scripts/safe_cleanup.py as the only cleanup entrypoint; no training or mining is authorized by this stage.",
+  "passed": true,
+  "pytest_output": "...............                                                          [100%]\n15 passed in 0.19s",
+  "safe_path_module": "scripts/safe_paths.py",
+  "single_cleanup_entrypoint": "scripts/safe_cleanup.py",
+  "stage": 8653,
+  "stage_name": "stage8653_focused_storage_and_single_cleanup_policy"
+}

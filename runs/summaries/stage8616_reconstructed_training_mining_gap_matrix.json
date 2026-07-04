@@ -1,0 +1,66 @@
+{
+  "stage": 8616,
+  "name": "stage8616_reconstructed_training_mining_gap_matrix",
+  "passed": true,
+  "summary": "Converted Stage8615 recovered variables plus local script inventory into an explicit objective-by-objective mining/training readiness matrix.",
+  "inputs": {
+    "stage8615_ledger": "docs/RECOVERED_VARIABLE_LEDGER_STAGE8615.md",
+    "mining_contract": "configs/software_maintainer/mining_contract_v1.json",
+    "script_inventory": "local scripts/legacy_src/configs/docs file inventory"
+  },
+  "outputs": {
+    "doc": "docs/RECOVERED_TRAINING_MINING_GAP_MATRIX_STAGE8616.md",
+    "matrix": "runs/local/artifacts/stage8616_recovered_training_mining_gap_matrix/training_mining_gap_matrix.json"
+  },
+  "metrics": {
+    "objective_rows": 10,
+    "executable_recovered_objectives": [
+      "repo_capability_catalog",
+      "repo_state_graph_v1",
+      "symbol_binding"
+    ],
+    "partial_executable_objectives": [
+      "symbol_binding"
+    ],
+    "concept_recovered_not_executable_objectives": [
+      "intent_to_build_strategy",
+      "edit_localization",
+      "patch_operator",
+      "verifier_repair",
+      "bounded_decoder_arguments",
+      "output_repair_denoise"
+    ],
+    "candidate_package_not_authorized_objectives": [
+      "bounded_decoder_ce"
+    ],
+    "safe_limited_mining_count": 3,
+    "broad_mining_ready": false,
+    "model_training_ready": false,
+    "decoder_ce_ready": false
+  },
+  "interpretation": [
+    "The recovered research spine is much richer after Stage8615, but executable objective-specific mining remains incomplete.",
+    "Current safe mining is limited to repo capability/graph seed work and targeted BIND_TEST_TO_SYMBOL symbol-binding patching.",
+    "Intent-to-build, edit-localization, patch-operator, verifier-repair, bounded-decoder-argument, and output-repair-denoise miners still need rebuilding before broad mining."
+  ],
+  "next_best_step": "Rebuild the missing objective-specific miners and audits, starting with true BIND_TEST_TO_SYMBOL coverage and the intent-to-build neutral masked miner. Do not start broad /arxiv mining or training yet.",
+  "authority": {
+    "model_execution_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "runtime_authorized": false,
+    "source_emission_authorized": false,
+    "body_emission_authorized": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "scoring_authorized_next": false,
+    "controller_complete_merge_authorized_next": false,
+    "promotion_ready": false
+  },
+  "gates": {
+    "gap_matrix_written": true,
+    "concept_vs_executable_status_separated": true,
+    "broad_mining_authorized": false,
+    "training_authorized": false,
+    "decoder_ce_authorized": false
+  }
+}

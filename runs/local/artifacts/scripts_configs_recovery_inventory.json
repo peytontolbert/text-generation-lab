@@ -1,0 +1,428 @@
+{
+  "items": [
+    {
+      "notes": "",
+      "path": "scripts/safe_paths.py",
+      "phase": "safety",
+      "priority": "P0",
+      "purpose": "Path validation primitives for cleanup; refuses repo root, /, /data, output parent, and symlink escapes.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "scripts/safe_cleanup.py",
+      "phase": "safety",
+      "priority": "P0",
+      "purpose": "Only allowed cleanup entrypoint; removes checkpoint children under marked output dirs only.",
+      "status": "present"
+    },
+    {
+      "notes": "8 tests currently pass.",
+      "path": "tests/test_safe_cleanup.py",
+      "phase": "safety",
+      "priority": "P0",
+      "purpose": "Safety regression tests for cleanup path rules.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "docs/NO_DESTRUCTIVE_COMMANDS_POLICY.md",
+      "phase": "safety",
+      "priority": "P0",
+      "purpose": "Written policy blocking destructive shell cleanup and broad deletes.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage7678_v27_stage_registry.py",
+      "phase": "control_plane",
+      "priority": "P0",
+      "purpose": "Non-destructive reconstructed stage registry over runs/summaries/*.json.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "scripts/stage_summary_schema.py",
+      "phase": "control_plane",
+      "priority": "P0",
+      "purpose": "Canonical stage summary schema and authority flag validation.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "scripts/authority_gate.py",
+      "phase": "control_plane",
+      "priority": "P0",
+      "purpose": "Shared gate checks for model/runtime/body/Gemma/harness/scoring/controller authority.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "scripts/loss_mask_card.py",
+      "phase": "control_plane",
+      "priority": "P0",
+      "purpose": "Loss-mask card builder/validator connecting row routes to enabled losses.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "scripts/shortcut_baseline_audit.py",
+      "phase": "control_plane",
+      "priority": "P1",
+      "purpose": "Generic single-feature/combo shortcut audit utility.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "scripts/structured_dataset_junk_ranker.py",
+      "phase": "control_plane",
+      "priority": "P1",
+      "purpose": "Objective-aware deterministic dataset judge and route/risk scorer.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "scripts/curriculum_compiler.py",
+      "phase": "control_plane",
+      "priority": "P1",
+      "purpose": "Consumes judge routes and emits objective-specific manifests.",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/reconstruct_stage_summaries_from_sessions.py",
+      "phase": "control_plane",
+      "priority": "P1",
+      "purpose": "Session-log recovery helper to rebuild JSON stage summaries from archived logs.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8522_v27_intent_to_build_strategy_neutral_objective_manifest.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "intent_to_build_strategy manifest builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8529_v27_intent_to_build_strategy_model_ready_manifest_gate.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "intent-to-build model-ready/shortcut/authority audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8536_v27_repo_state_graph_seed_manifest.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "repo_state_graph_v1 seed manifest builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8539_v27_repo_state_graph_seed_audit_after_label_patch.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "repo graph seed audit with opaque IDs and leak checks",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8540_v27_repo_state_graph_symbol_binding_objective_manifest.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "symbol binding objective builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8543_v27_repo_state_graph_symbol_binding_objective_audit_after_patch.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "symbol binding shortcut/endpoint/authority audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8544_v27_repo_state_graph_edit_localization_objective_manifest.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "edit localization objective builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8545_v27_repo_state_graph_edit_localization_objective_audit.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "edit localization audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8546_v27_repo_state_graph_patch_operator_objective_manifest.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "patch operator objective builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8547_v27_repo_state_graph_patch_operator_objective_audit.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "patch operator audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8548_v27_repo_state_graph_verifier_repair_objective_manifest.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "verifier repair objective builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8549_v27_repo_state_graph_verifier_repair_objective_audit.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "verifier repair audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8550_v27_repo_state_graph_bounded_decoder_argument_manifest.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "bounded decoder argument manifest builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8553_v27_bounded_decoder_argument_audit_after_target_patch.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "bounded decoder argument audit after target patch",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8564_v27_bounded_decoder_ce_candidate_package_design.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "bounded decoder CE candidate package design builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8565_v27_bounded_decoder_ce_candidate_package_design_audit.py",
+      "phase": "data_plane",
+      "priority": "P1",
+      "purpose": "bounded decoder CE candidate package design audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+      "phase": "training_plane",
+      "priority": "P0",
+      "purpose": "100M seq2seq trainer entrypoint with structured heads and bounded decoder CE probe mode.",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8566_v27_bounded_decoder_ce_probe_wrapper_design.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "bounded decoder CE wrapper design builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8567_v27_bounded_decoder_ce_probe_wrapper_design_audit.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "wrapper design audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8568_v27_bounded_decoder_ce_loss_mask_reopen_design.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "loss-mask reopen design for tiny bounded decoder CE",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8569_v27_bounded_decoder_ce_loss_mask_reopen_design_audit.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "loss-mask reopen audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8570_v27_bounded_decoder_ce_trainer_command_static_design.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "trainer command static design",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8571_v27_bounded_decoder_ce_trainer_command_static_audit.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "trainer command static audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8572_v27_bounded_decoder_ce_artifact_retention_cleanup_contract.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "artifact retention/cleanup contract builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8573_v27_bounded_decoder_ce_artifact_retention_cleanup_contract_audit.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "cleanup contract audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/build_stage8578_v27_bounded_decoder_ce_tiny_probe_execution_manifest.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "tiny probe execution manifest builder",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8579_v27_bounded_decoder_ce_tiny_probe_execution_manifest_audit.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "tiny probe manifest audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "scripts/audit_stage8583_v27_bounded_decoder_ce_patched_final_pre_execution_audit.py",
+      "phase": "training_plane",
+      "priority": "P1",
+      "purpose": "patched final pre-execution audit",
+      "status": "missing"
+    },
+    {
+      "notes": "",
+      "path": "configs/runtime_profiles/repo_verifier.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "Runtime profile recovered in registry list; must remain non-executing until authorized.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "configs/runtime_profiles/system_light.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "System light runtime/profile config recovered in registry list.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "configs/runtime_profiles/torch_model.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "Torch model runtime/profile config recovered in registry list.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "configs/model/agentkernel_100m_seq2seq.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "100M seq2seq model config for structured heads and bounded decoder.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "configs/tokenizer/byte_tokenizer.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "Byte-level tokenizer config used in decoder probes; needed for target budget checks.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "configs/schema/stage_summary_schema.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "Machine-readable stage summary and authority schema.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "configs/schema/repo_state_graph_v1.schema.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "Node/edge schema for repo_state_graph_v1.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "configs/schema/loss_mask.schema.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "Loss-mask schema for row-level gradient routing.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "configs/schema/manifest_row.schema.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "Canonical manifest row schema.",
+      "status": "present"
+    },
+    {
+      "notes": "",
+      "path": "configs/probes/bounded_decoder_ce_probe.json",
+      "phase": "config_plane",
+      "priority": "P1",
+      "purpose": "Tiny bounded decoder CE probe caps/config.",
+      "status": "present"
+    },
+    {
+      "notes": "Do not copy blindly; inspect and adapt through safety contract.",
+      "path": "/data/agentkernel/scripts/train_agentkernel_lite_encdec.py",
+      "phase": "external_recovery_source",
+      "priority": "P1",
+      "purpose": "possible external recovery source for trainer",
+      "status": "exists"
+    },
+    {
+      "notes": "Do not copy blindly; inspect and adapt through safety contract.",
+      "path": "/data/agent_kernel_lite/scripts/train_agentkernel_lite_encdec.py",
+      "phase": "external_recovery_source",
+      "priority": "P1",
+      "purpose": "possible external recovery source for trainer",
+      "status": "exists"
+    },
+    {
+      "notes": "Do not copy blindly; inspect and adapt through safety contract.",
+      "path": "/data/transformer_10/scripts/agent_kernel_lite/train_agentkernel_lite_encdec.py",
+      "phase": "external_recovery_source",
+      "priority": "P1",
+      "purpose": "possible external recovery source for trainer",
+      "status": "exists"
+    }
+  ]
+}

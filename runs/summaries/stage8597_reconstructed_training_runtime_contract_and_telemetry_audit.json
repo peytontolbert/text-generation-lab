@@ -1,0 +1,41 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "authority_closed": true,
+    "checkpoint_export_forbidden": true,
+    "decoder_ce_training_authorized": false,
+    "model_execution_authorized": false,
+    "model_forward_not_falsely_restored": true,
+    "optimizer_step_not_falsely_restored": true,
+    "required_components_present": true,
+    "required_telemetry_present": true
+  },
+  "metrics": {
+    "checkpoint_export_forbidden": true,
+    "model_execution_attempted": false,
+    "model_forward_restored": false,
+    "optimizer_step_restored": false,
+    "required_components_present": true,
+    "required_telemetry_present": true,
+    "runtime_contract_audit_passed": true,
+    "runtime_contract_present": true,
+    "telemetry_artifacts_emitted": 13
+  },
+  "next_best_step": "restore tiny model forward/backward implementation behind explicit authorization; keep checkpoint export and execution closed until then",
+  "notes": "Restored the non-executing 100M training runtime contract and telemetry artifact surface. Dataset/loss/telemetry/checkpoint contracts are specified; model forward/backward and optimizer execution are still not restored.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8597,
+  "stage_name": "stage8597_reconstructed_training_runtime_contract_and_telemetry_audit"
+}

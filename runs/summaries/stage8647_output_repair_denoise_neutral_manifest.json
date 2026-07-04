@@ -1,0 +1,76 @@
+{
+  "artifacts": {
+    "audit_card": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/audit_card.json",
+    "builder": "scripts/build_stage8647_output_repair_denoise_neutral_manifest.py",
+    "manifest": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T19:16:10Z",
+  "decision": "Output-repair/denoise builder restored as repair-route classification only. denoise_ce and decoder_ce remain disabled.",
+  "metrics": {
+    "authority_row_count": 0,
+    "decoder_ce_rows": 0,
+    "denoise_ce_rows": 0,
+    "leak_row_count": 0,
+    "leak_rows": [],
+    "loss_counts": {
+      "action_sequence_ce": 360,
+      "allowed_import_policy_ce": 0,
+      "blocked_import_policy_ce": 0,
+      "build_mode_ce": 0,
+      "decoder_ce": 0,
+      "denoise_ce": 0,
+      "edit_localization_ce": 0,
+      "file_plan_ce": 360,
+      "patch_operator_ce": 0,
+      "repair_surface_ce": 360,
+      "repo_dependency_policy_ce": 0,
+      "runtime_reward": 0,
+      "surface_role_ce": 0,
+      "symbol_binding_ce": 0,
+      "verifier_repair_ce": 0
+    },
+    "passed": true,
+    "per_split_repair_balanced": true,
+    "repair_signal_counts": {
+      "degenerate_repetition_visible": 72,
+      "internal_token_leak_visible": 72,
+      "short_output_visible": 72,
+      "unsafe_or_unrecoverable_visible": 72,
+      "wrong_surface_visible": 72
+    },
+    "rows": 360,
+    "split_repair_counts": {
+      "eval:ABSTAIN_UNRECOVERABLE": 24,
+      "eval:REPAIR_INTERNAL_LEAK": 24,
+      "eval:REPAIR_REPETITION": 24,
+      "eval:REPAIR_SHORT_OUTPUT": 24,
+      "eval:REPAIR_WRONG_SURFACE": 24,
+      "strict:ABSTAIN_UNRECOVERABLE": 24,
+      "strict:REPAIR_INTERNAL_LEAK": 24,
+      "strict:REPAIR_REPETITION": 24,
+      "strict:REPAIR_SHORT_OUTPUT": 24,
+      "strict:REPAIR_WRONG_SURFACE": 24,
+      "train:ABSTAIN_UNRECOVERABLE": 24,
+      "train:REPAIR_INTERNAL_LEAK": 24,
+      "train:REPAIR_REPETITION": 24,
+      "train:REPAIR_SHORT_OUTPUT": 24,
+      "train:REPAIR_WRONG_SURFACE": 24
+    }
+  },
+  "next_best_step": "Run shortcut baselines over output-repair corrupted_state before any denoise-training candidate consideration.",
+  "passed": true,
+  "stage": 8647,
+  "stage_name": "stage8647_output_repair_denoise_neutral_manifest"
+}

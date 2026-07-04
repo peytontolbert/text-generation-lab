@@ -1,0 +1,153 @@
+{
+  "gates": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "empty_decoder_targets_rejected": true,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "manifest_hash_present": true,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "transition_head_training_authorized_next": false
+  },
+  "metrics": {
+    "checks": {
+      "empty_contract_failed": true,
+      "empty_error_reported": true,
+      "empty_target_rows_counted": true,
+      "manifest_hash_present": true,
+      "model_execution_attempted_false": true,
+      "row_ids_present": true,
+      "valid_contract_passed": true
+    },
+    "empty_contract": {
+      "authority_row_ids": [],
+      "authority_rows": 0,
+      "caps": {
+        "max_decoder_tokens": 64,
+        "max_eval_rows": 0,
+        "max_steps": 0,
+        "max_strict_rows": 0,
+        "max_train_rows": 1
+      },
+      "cleanup_requested": true,
+      "empty_target_row_ids": [
+        "empty_decoder_row"
+      ],
+      "empty_target_rows": 1,
+      "errors": [
+        "empty decoder target rows present: 1"
+      ],
+      "final_checkpoint_export_disabled": true,
+      "final_model_save_skipped": true,
+      "loss_counts": {
+        "action_sequence_ce": 0,
+        "allowed_import_policy_ce": 0,
+        "blocked_import_policy_ce": 0,
+        "build_mode_ce": 0,
+        "decoder_ce": 1,
+        "denoise_ce": 0,
+        "edit_localization_ce": 0,
+        "file_plan_ce": 0,
+        "patch_operator_ce": 0,
+        "repair_surface_ce": 0,
+        "repo_dependency_policy_ce": 0,
+        "runtime_reward": 0,
+        "surface_role_ce": 0,
+        "symbol_binding_ce": 0,
+        "verifier_repair_ce": 0
+      },
+      "manifest": "runs/local/artifacts/stage8609_bounded_decoder_contract_detail_audit/empty.jsonl",
+      "manifest_sha256": "ee9ac0a83cb942f7082247d70972c985b0a74dffd9517e83e8baee39ab9862af",
+      "mode": "bounded_decoder_ce_probe",
+      "model_execution_attempted": false,
+      "over_cap_row_ids": [],
+      "over_cap_rows": 0,
+      "passed": false,
+      "row_ids": [
+        "empty_decoder_row"
+      ],
+      "rows": 1,
+      "split_counts": {
+        "eval": 0,
+        "other": 0,
+        "strict_eval": 0,
+        "train": 1
+      },
+      "unsafe_loss_row_examples": [],
+      "unsafe_loss_rows": 0,
+      "weights": {
+        "decoder_ce_weight": 1.0,
+        "denoise_weight": 0.0,
+        "structured_aux_weight": 0.0
+      }
+    },
+    "valid_contract": {
+      "authority_row_ids": [],
+      "authority_rows": 0,
+      "caps": {
+        "max_decoder_tokens": 64,
+        "max_eval_rows": 0,
+        "max_steps": 0,
+        "max_strict_rows": 0,
+        "max_train_rows": 1
+      },
+      "cleanup_requested": true,
+      "empty_target_row_ids": [],
+      "empty_target_rows": 0,
+      "errors": [],
+      "final_checkpoint_export_disabled": true,
+      "final_model_save_skipped": true,
+      "loss_counts": {
+        "action_sequence_ce": 0,
+        "allowed_import_policy_ce": 0,
+        "blocked_import_policy_ce": 0,
+        "build_mode_ce": 0,
+        "decoder_ce": 1,
+        "denoise_ce": 0,
+        "edit_localization_ce": 0,
+        "file_plan_ce": 0,
+        "patch_operator_ce": 0,
+        "repair_surface_ce": 0,
+        "repo_dependency_policy_ce": 0,
+        "runtime_reward": 0,
+        "surface_role_ce": 0,
+        "symbol_binding_ce": 0,
+        "verifier_repair_ce": 0
+      },
+      "manifest": "runs/local/artifacts/stage8609_bounded_decoder_contract_detail_audit/valid.jsonl",
+      "manifest_sha256": "920f87a12bc1eca9ac905e8d6fa5ea160b89450f7c9aa04db229bb266023b7ba",
+      "mode": "bounded_decoder_ce_probe",
+      "model_execution_attempted": false,
+      "over_cap_row_ids": [],
+      "over_cap_rows": 0,
+      "passed": true,
+      "row_ids": [
+        "valid_decoder_row"
+      ],
+      "rows": 1,
+      "split_counts": {
+        "eval": 0,
+        "other": 0,
+        "strict_eval": 0,
+        "train": 1
+      },
+      "unsafe_loss_row_examples": [],
+      "unsafe_loss_rows": 0,
+      "weights": {
+        "decoder_ce_weight": 1.0,
+        "denoise_weight": 0.0,
+        "structured_aux_weight": 0.0
+      }
+    }
+  },
+  "name": "stage8609_reconstructed_bounded_decoder_contract_tiny_detail_patch",
+  "next_best_step": "Add structured per-field telemetry and build balanced counterfactual symbol-binding rows before training.",
+  "passed": true,
+  "stage": 8609,
+  "summary": "Patched bounded decoder trainer contract to record manifest hashes/row IDs and reject empty decoder targets before any model execution."
+}

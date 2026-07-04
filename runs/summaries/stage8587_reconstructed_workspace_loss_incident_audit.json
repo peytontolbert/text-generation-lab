@@ -1,0 +1,119 @@
+{
+  "architecture_one_line": "Safe control plane -> typed software-state datasets -> structured transition heads -> bounded decoder -> verifier repair loop -> scale under dataset judge",
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "bounded_decoder_ce_branch_state": {
+    "candidate_package_passed": true,
+    "candidate_package_stage": 8565,
+    "intended_eval_rows": 16,
+    "intended_loss_mask_rows": 64,
+    "intended_max_steps": 16,
+    "intended_strict_rows": 16,
+    "intended_train_rows": 32,
+    "known_probe_process_before_loss": {
+      "command_mode": "bounded_decoder_ce_probe",
+      "elapsed_when_seen": "01:37",
+      "output_dir": "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8584_v27_bounded_decoder_ce_tiny_probe_execution",
+      "pid": 901894,
+      "process_seen_running": true,
+      "reason": "artifacts and workspace were destroyed; safety and telemetry proof invalidated",
+      "valid_as_promotion_signal": false
+    }
+  },
+  "incident_observations_from_session_archive": {
+    "likely_failure_class": "cleanup or output handling targeted repo root or incorrectly resolved parent path",
+    "missing_after_incident": [
+      "scripts/build_stage7678_v27_stage_registry.py",
+      "runs/summaries",
+      "runs/local/probes/stage8584_v27_bounded_decoder_ce_tiny_probe_execution",
+      "stage8586 summary",
+      "stage8584 probe output",
+      ".git"
+    ],
+    "searched_locations_without_recovery": [
+      "/data",
+      "/data/tmp"
+    ],
+    "workspace_empty_after_probe_exit": true,
+    "workspace_listing_after_incident": [
+      ".",
+      ".."
+    ]
+  },
+  "incident_type": "workspace_loss_after_unsafe_cleanup",
+  "latest_pre_incident_known_frontier": {
+    "actual_tiny_execution_authorized": true,
+    "authority_scope": "tiny bounded decoder CE probe only; body/runtime/Gemma/harness/source remained closed",
+    "next_authorized": "retry the tiny bounded decoder CE probe exactly once with the repo-root patched command",
+    "passed": true,
+    "stage": 8586,
+    "stage_name": "stage8586_v27_bounded_decoder_ce_repo_root_command_patch_audit"
+  },
+  "next_best_step": "rebuild safe cleanup utilities and tests before any trainer or model execution",
+  "passed": false,
+  "reconstructed_from": "visible_conversation_context_after_workspace_loss",
+  "recovered_stage8580_to_8586_chain": [
+    "stage8580_v27_bounded_decoder_ce_final_pre_execution_audit",
+    "stage8581_v27_bounded_decoder_ce_trainer_command_surface_patch",
+    "stage8582_v27_bounded_decoder_ce_trainer_command_surface_patch_audit",
+    "stage8583_v27_bounded_decoder_ce_patched_final_pre_execution_audit",
+    "stage8584_v27_bounded_decoder_ce_tiny_probe_execution_outcome",
+    "stage8585_v27_bounded_decoder_ce_repo_root_command_patch",
+    "stage8586_v27_bounded_decoder_ce_repo_root_command_patch_audit"
+  ],
+  "recovery_priority": [
+    "restore safety docs",
+    "rebuild safe path and cleanup utilities",
+    "add cleanup tests",
+    "rebuild stage registry",
+    "reconstruct stage summaries",
+    "rebuild dataset judge and shortcut audits",
+    "rebuild repo_state_graph_v1 schema",
+    "rebuild objective manifest builders",
+    "rebuild trainer with safe modes",
+    "rerun non-executing audits",
+    "only then run tiny probe"
+  ],
+  "safety_contract_required_before_training": {
+    "cleanup_requires_marker_file": true,
+    "cleanup_requires_run_id": true,
+    "cleanup_tests_required": true,
+    "never_delete_data_root": true,
+    "never_delete_output_parent": true,
+    "never_delete_repo_root": true,
+    "never_delete_slash": true,
+    "no_symlink_escape": true,
+    "only_delete_checkpoint_children_under_output_dir": true
+  },
+  "stage": 8587,
+  "stage8580_failure_reason": {
+    "artifact_cleanup_paths_writable": false,
+    "loss_mask_enforcement_runtime_assertions_available": false,
+    "missing_required_flags": [
+      "--cleanup-checkpoints-after-probe",
+      "--decoder-ce-weight",
+      "--denoise-weight",
+      "--manifest",
+      "--max-strict-rows",
+      "--mode",
+      "--no-final-checkpoint-export",
+      "--require-loss-mask-enforcement-audit",
+      "--structured-aux-weight"
+    ],
+    "trainer_entrypoint": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "trainer_entrypoint_supports_required_flags": false
+  },
+  "stage_name": "stage8587_reconstructed_workspace_loss_incident_audit",
+  "summary": "The workspace was destroyed by an unsafe cleanup path during the v2.7 100M bounded decoder branch. This summary is reconstructed from available context and exists to preserve the research/control-plane state and prevent unsafe resumption.",
+  "workspace": "/data/agentkernel-seq2seq-text-lab"
+}

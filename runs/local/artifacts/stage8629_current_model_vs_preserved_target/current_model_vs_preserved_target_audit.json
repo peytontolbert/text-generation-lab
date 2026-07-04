@@ -1,0 +1,45 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "classification": "gap_audit_passed_training_still_blocked",
+  "current_config": "configs/model/agentkernel_100m_seq2seq.json",
+  "interpretation": "The current implementation is a safe tiny scaffold for interface tests. It must not be mistaken for the recovered 102M target architecture.",
+  "metrics": {
+    "current_execution_authorized": false,
+    "mismatch_count": 9,
+    "scaffold_hidden_size": 192,
+    "scaffold_layers": 2,
+    "scaffold_uses_gru": true,
+    "scaffold_uses_transformer_attention": false,
+    "scaffold_vocab_size": 259,
+    "target_d_model": 640,
+    "target_execution_authorized": false,
+    "target_layers": 6,
+    "target_parameter_count": 102654362,
+    "target_vocab_size": 1506
+  },
+  "mismatches": [
+    "current config uses generic/rebuilt model family, not recovered agentkernel_lite_encdec_v1",
+    "current model implementation is GRU scaffold, not recovered transformer/rotary 100M target",
+    "hidden size mismatch: scaffold 192 vs target d_model 640",
+    "vocab size mismatch: scaffold 259 vs target vocab 1506",
+    "layer count mismatch: scaffold 2 vs target layers 6",
+    "implementation missing recovered feature: has_rotary",
+    "implementation missing recovered feature: has_agent_policy_heads",
+    "implementation missing recovered feature: has_retrieval_heads",
+    "implementation missing recovered feature: has_scalar_invariant"
+  ],
+  "model_impl": "legacy_src/agentkernel_lite/modeling.py",
+  "passed": true,
+  "target_config": "configs/model/agentkernel_100m_seq2seq_recovered_target.json"
+}

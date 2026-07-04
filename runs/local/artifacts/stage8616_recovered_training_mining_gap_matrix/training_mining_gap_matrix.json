@@ -1,0 +1,188 @@
+{
+  "stage": 8616,
+  "name": "stage8616_reconstructed_training_mining_gap_matrix",
+  "passed": true,
+  "purpose": "Separate recovered concepts from executable mining/training readiness after Stage8615 variable recovery.",
+  "objectives": [
+    {
+      "objective": "repo_capability_catalog",
+      "status": "executable_recovered",
+      "scripts_present": [
+        "scripts/index_arxiv_software_corpus.py",
+        "scripts/build_stage8601_arxiv_repo_capability_and_graph_seed.py",
+        "scripts/audit_stage8602_arxiv_repo_capability_graph_seed.py"
+      ],
+      "safe_next": "continue read-only catalog/seed audits only",
+      "blocker": null,
+      "present_paths_verified": [
+        "scripts/index_arxiv_software_corpus.py",
+        "scripts/build_stage8601_arxiv_repo_capability_and_graph_seed.py",
+        "scripts/audit_stage8602_arxiv_repo_capability_graph_seed.py"
+      ],
+      "missing_declared_paths": []
+    },
+    {
+      "objective": "repo_state_graph_v1",
+      "status": "seed_executable_recovered",
+      "scripts_present": [
+        "scripts/build_stage8601_arxiv_repo_capability_and_graph_seed.py",
+        "scripts/audit_stage8602_arxiv_repo_capability_graph_seed.py"
+      ],
+      "safe_next": "extend graph families only behind no-leak/opaque-id audit",
+      "blocker": "full repo graph miners for edge families are not restored",
+      "present_paths_verified": [
+        "scripts/build_stage8601_arxiv_repo_capability_and_graph_seed.py",
+        "scripts/audit_stage8602_arxiv_repo_capability_graph_seed.py"
+      ],
+      "missing_declared_paths": []
+    },
+    {
+      "objective": "symbol_binding",
+      "status": "partial_executable_recovered",
+      "scripts_present": [
+        "scripts/build_stage8603_arxiv_symbol_binding_candidates.py",
+        "scripts/build_stage8610_symbol_binding_counterfactual_patch.py",
+        "scripts/audit_stage8611_symbol_binding_counterfactual_patch.py"
+      ],
+      "safe_next": "mine true BIND_TEST_TO_SYMBOL rows only",
+      "blocker": "BIND_TEST_TO_SYMBOL and test query coverage still missing; query/action baseline 0.4928 in Stage8611",
+      "present_paths_verified": [
+        "scripts/build_stage8603_arxiv_symbol_binding_candidates.py",
+        "scripts/build_stage8610_symbol_binding_counterfactual_patch.py",
+        "scripts/audit_stage8611_symbol_binding_counterfactual_patch.py"
+      ],
+      "missing_declared_paths": []
+    },
+    {
+      "objective": "intent_to_build_strategy",
+      "status": "concept_recovered_not_executable",
+      "scripts_present": [],
+      "needed_script_family": [
+        "build_intent_to_build_neutral_objective_manifest",
+        "audit_intent_to_build_shortcut_baselines"
+      ],
+      "safe_next": "rebuild neutral masked intent miner with semantic presentation fields",
+      "blocker": "no executable miner/audit restored; must avoid first_action/plan_keyword/import-count shortcuts",
+      "present_paths_verified": [],
+      "missing_declared_paths": []
+    },
+    {
+      "objective": "edit_localization",
+      "status": "concept_recovered_not_executable",
+      "scripts_present": [],
+      "needed_script_family": [
+        "build_edit_localization_objective_manifest",
+        "audit_edit_localization_shortcut_baselines"
+      ],
+      "safe_next": "rebuild from graph+binding rows after symbol-binding test coverage passes",
+      "blocker": "no executable miner/audit restored",
+      "present_paths_verified": [],
+      "missing_declared_paths": []
+    },
+    {
+      "objective": "patch_operator",
+      "status": "concept_recovered_not_executable",
+      "scripts_present": [],
+      "needed_script_family": [
+        "build_patch_operator_objective_manifest",
+        "audit_patch_operator_shortcut_baselines"
+      ],
+      "safe_next": "rebuild after edit localization using edit algebra labels",
+      "blocker": "no executable miner/audit restored",
+      "present_paths_verified": [],
+      "missing_declared_paths": []
+    },
+    {
+      "objective": "verifier_repair",
+      "status": "concept_recovered_not_executable",
+      "scripts_present": [],
+      "needed_script_family": [
+        "build_verifier_repair_objective_manifest",
+        "audit_verifier_repair_shortcut_baselines"
+      ],
+      "safe_next": "rebuild from baseline-valid verifier/failure logs only",
+      "blocker": "no executable miner/audit restored; runtime verification remains closed",
+      "present_paths_verified": [],
+      "missing_declared_paths": []
+    },
+    {
+      "objective": "bounded_decoder_arguments",
+      "status": "concept_recovered_not_executable",
+      "scripts_present": [],
+      "needed_script_family": [
+        "build_bounded_decoder_argument_manifest",
+        "audit_bounded_decoder_argument_budget_target"
+      ],
+      "safe_next": "rebuild only from passed structured operator/verifier rows",
+      "blocker": "no executable miner/audit restored",
+      "present_paths_verified": [],
+      "missing_declared_paths": []
+    },
+    {
+      "objective": "bounded_decoder_ce",
+      "status": "candidate_package_recovered_not_authorized",
+      "scripts_present": [
+        "scripts/build_stage8564_v27_bounded_decoder_ce_candidate_package_design.py",
+        "scripts/audit_stage8565_v27_bounded_decoder_ce_candidate_package_design_audit.py",
+        "scripts/build_stage8568_v27_bounded_decoder_ce_loss_mask_reopen_design.py",
+        "scripts/audit_stage8569_v27_bounded_decoder_ce_loss_mask_reopen_design_audit.py",
+        "scripts/audit_stage8583_v27_bounded_decoder_ce_patched_final_pre_execution_audit.py"
+      ],
+      "safe_next": "non-executing audit only",
+      "blocker": "decoder CE execution authority remains closed; source structured rows upstream are incomplete",
+      "present_paths_verified": [
+        "scripts/build_stage8564_v27_bounded_decoder_ce_candidate_package_design.py",
+        "scripts/audit_stage8565_v27_bounded_decoder_ce_candidate_package_design_audit.py",
+        "scripts/build_stage8568_v27_bounded_decoder_ce_loss_mask_reopen_design.py",
+        "scripts/audit_stage8569_v27_bounded_decoder_ce_loss_mask_reopen_design_audit.py",
+        "scripts/audit_stage8583_v27_bounded_decoder_ce_patched_final_pre_execution_audit.py"
+      ],
+      "missing_declared_paths": []
+    },
+    {
+      "objective": "output_repair_denoise",
+      "status": "concept_recovered_not_executable",
+      "scripts_present": [],
+      "needed_script_family": [
+        "build_output_repair_denoise_manifest",
+        "audit_output_repair_denoise_quality"
+      ],
+      "safe_next": "rebuild only after measured bounded decoder failures exist",
+      "blocker": "no real decoder output failures from current rebuild; generation/training closed",
+      "present_paths_verified": [],
+      "missing_declared_paths": []
+    }
+  ],
+  "global_training_status": {
+    "broad_mining_ready": false,
+    "model_training_ready": false,
+    "decoder_ce_ready": false,
+    "safe_limited_mining": [
+      "repo_capability_catalog",
+      "repo_state_graph_v1 seed/catalog audits",
+      "symbol_binding BIND_TEST_TO_SYMBOL patch"
+    ]
+  },
+  "must_recover_before_broad_mining": [
+    "intent_to_build_strategy miner and shortcut audit",
+    "edit_localization miner and shortcut audit",
+    "patch_operator miner and shortcut audit",
+    "verifier_repair miner and baseline-valid verifier contract",
+    "bounded_decoder_argument miner and budget/target audit",
+    "output_repair_denoise miner after measured decoder failures",
+    "objective-specific counterfactual sibling materialization",
+    "objective-specific loss cards and telemetry cards"
+  ],
+  "authority": {
+    "model_execution_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "runtime_authorized": false,
+    "source_emission_authorized": false,
+    "body_emission_authorized": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "scoring_authorized_next": false,
+    "controller_complete_merge_authorized_next": false,
+    "promotion_ready": false
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "artifacts": {
+    "cell_card": "runs/local/artifacts/stage8610_symbol_binding_counterfactual_patch/cell_card.json",
+    "manifest": "runs/local/artifacts/stage8610_symbol_binding_counterfactual_patch/symbol_binding_counterfactual_patch.jsonl"
+  },
+  "gates": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_enabled_rows": 0,
+    "model_execution_authorized_next": false,
+    "model_ready_training_rows": 0,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "transition_head_training_authorized_next": false,
+    "true_test_bind_available": 0
+  },
+  "metrics": {
+    "action_counts": {
+      "ABSTAIN_UNBOUND": 48,
+      "BIND_CALL_TO_SYMBOL": 44,
+      "BIND_IMPORT_TO_MODULE": 48,
+      "RETRIEVE_MORE": 136
+    },
+    "groups": 92,
+    "loss_enabled_rows": 0,
+    "model_ready_training_rows": 0,
+    "obligation_counts": {
+      "CONTRASTIVE_BOUNDARY_SIBLING": 92,
+      "EVIDENCE_REMOVED_OR_RETRIEVE": 92,
+      "POSITIVE_ORIGINAL": 92
+    },
+    "output_rows": 276,
+    "query_kind_counts": {
+      "callsite": 132,
+      "import": 144
+    },
+    "selected_source_action_counts": {
+      "ABSTAIN_UNBOUND": 24,
+      "BIND_CALL_TO_SYMBOL": 24,
+      "BIND_IMPORT_TO_MODULE": 24,
+      "RETRIEVE_MORE": 24
+    },
+    "source_rows": 947,
+    "split_counts": {
+      "eval": 51,
+      "strict_eval": 69,
+      "train": 156
+    },
+    "true_test_bind_available": 0
+  },
+  "name": "stage8610_reconstructed_symbol_binding_counterfactual_patch",
+  "next_best_step": "Audit counterfactual completeness and shortcut baselines; then patch true BIND_TEST_TO_SYMBOL coverage before enabling symbol_binding_ce.",
+  "passed": true,
+  "stage": 8610,
+  "summary": "Built a closed-authority symbol-binding counterfactual patch manifest from Stage8604 candidates. Rows materialize positive, retrieve/evidence-removed, and contrastive sibling obligations but keep training loss disabled pending shortcut/readiness audits."
+}

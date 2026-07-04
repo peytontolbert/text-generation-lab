@@ -1,0 +1,149 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T19:18:45Z",
+  "decision": "Recovered structured objectives pass as a no-authority curriculum scaffold. This is not a training gate: graph enrichment, symbol binding, source-backed expansion, and data-ranker gates remain required.",
+  "metrics": {
+    "authority_open_rows": [],
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "hard_blockers_before_training": [
+      "repo_state_graph_v1 enrichment remains source-sparse/synthetic-small",
+      "symbol_binding remains partial and imbalance-prone",
+      "source-backed expansion and junk/ranker gates are not yet attached to the recovered objectives",
+      "native model/training/decode/runtime authority is still intentionally closed"
+    ],
+    "max_proxy_baseline_seen": 0.42857142857142855,
+    "model_execution_authorized_next": false,
+    "objective_failures": [],
+    "objectives_checked": 6,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "total_manifest_rows": 3240
+  },
+  "next_best_step": "Repair symbol_binding and repo_state_graph_v1 enrichment, then attach source-backed reservoir sampling plus junk/ranker gates before any training candidate.",
+  "objectives": {
+    "bounded_decoder_arguments": {
+      "authority_open": {
+        "manifest": {},
+        "shortcut": {}
+      },
+      "manifest_passed": true,
+      "manifest_summary": "runs/summaries/stage8645_bounded_decoder_arguments_neutral_manifest.json",
+      "max_proxy_combo": 0.42857142857142855,
+      "max_proxy_single": 0.2857142857142857,
+      "passed": true,
+      "required_loss_closed": {
+        "decoder_ce": true,
+        "runtime_reward": true
+      },
+      "rows": 504,
+      "shortcut_passed": true,
+      "shortcut_summary": "runs/summaries/stage8646_bounded_decoder_arguments_shortcut_baseline.json"
+    },
+    "edit_localization": {
+      "authority_open": {
+        "manifest": {},
+        "shortcut": {}
+      },
+      "manifest_passed": true,
+      "manifest_summary": "runs/summaries/stage8636_edit_localization_neutral_manifest.json",
+      "max_proxy_combo": 0.14285714285714285,
+      "max_proxy_single": 0.14285714285714285,
+      "passed": true,
+      "required_loss_closed": {
+        "decoder_ce": true,
+        "runtime_reward": true
+      },
+      "rows": 504,
+      "shortcut_passed": true,
+      "shortcut_summary": "runs/summaries/stage8637_edit_localization_shortcut_baseline.json"
+    },
+    "intent_to_build_strategy": {
+      "authority_open": {
+        "manifest": {},
+        "shortcut": {}
+      },
+      "manifest_passed": true,
+      "manifest_summary": "runs/summaries/stage8630_intent_to_build_neutral_manifest.json",
+      "max_proxy_combo": 0.2,
+      "max_proxy_single": 0.2,
+      "passed": true,
+      "required_loss_closed": {
+        "decoder_ce": true,
+        "runtime_reward": true
+      },
+      "rows": 360,
+      "shortcut_passed": true,
+      "shortcut_summary": "runs/summaries/stage8631_intent_to_build_shortcut_baseline.json"
+    },
+    "output_repair_denoise": {
+      "authority_open": {
+        "manifest": {},
+        "shortcut": {}
+      },
+      "manifest_passed": true,
+      "manifest_summary": "runs/summaries/stage8647_output_repair_denoise_neutral_manifest.json",
+      "max_proxy_combo": 0.20833333333333334,
+      "max_proxy_single": 0.20833333333333334,
+      "passed": true,
+      "required_loss_closed": {
+        "decoder_ce": true,
+        "denoise_ce": true,
+        "runtime_reward": true
+      },
+      "rows": 360,
+      "shortcut_passed": true,
+      "shortcut_summary": "runs/summaries/stage8648_output_repair_denoise_shortcut_baseline.json"
+    },
+    "patch_operator": {
+      "authority_open": {
+        "manifest": {},
+        "shortcut": {}
+      },
+      "manifest_passed": true,
+      "manifest_summary": "runs/summaries/stage8638_patch_operator_neutral_manifest.json",
+      "max_proxy_combo": 0.08333333333333333,
+      "max_proxy_single": 0.08333333333333333,
+      "passed": true,
+      "required_loss_closed": {
+        "decoder_ce": true,
+        "runtime_reward": true
+      },
+      "rows": 864,
+      "shortcut_passed": true,
+      "shortcut_summary": "runs/summaries/stage8639_patch_operator_shortcut_baseline.json"
+    },
+    "verifier_repair": {
+      "authority_open": {
+        "manifest": {},
+        "shortcut": {}
+      },
+      "manifest_passed": true,
+      "manifest_summary": "runs/summaries/stage8643_verifier_repair_neutral_manifest.json",
+      "max_proxy_combo": 0.1111111111111111,
+      "max_proxy_single": 0.1111111111111111,
+      "passed": true,
+      "required_loss_closed": {
+        "decoder_ce": true,
+        "runtime_reward": true
+      },
+      "rows": 648,
+      "shortcut_passed": true,
+      "shortcut_summary": "runs/summaries/stage8644_verifier_repair_shortcut_baseline.json"
+    }
+  },
+  "passed": true,
+  "stage": 8650,
+  "stage_name": "stage8650_aggregate_structured_curriculum_gate"
+}

@@ -1,0 +1,52 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "artifact_cleanup_paths_writable": true,
+    "decoder_ce_training_authorized": false,
+    "final_checkpoint_export_authorized": false,
+    "gemma_authorized": false,
+    "loss_mask_enforcement_runtime_assertions_available": true,
+    "model_execution_authorized": false,
+    "runtime_authorized": false,
+    "trainer_entrypoint_supports_required_flags": true
+  },
+  "metrics": {
+    "actual_training_implemented": false,
+    "checkpoint_export_supported": false,
+    "contract_only_mode_supported": true,
+    "model_execution_attempted": false,
+    "py_compile_passed": true,
+    "pytest_passed": 25,
+    "safe_cleanup_dry_run_supported": true,
+    "stage8580_required_flags_supported": true,
+    "supported_modes": [
+      "structured_policy_probe",
+      "repo_graph_probe",
+      "symbol_binding_probe",
+      "edit_localization_probe",
+      "patch_operator_probe",
+      "verifier_repair_probe",
+      "bounded_decoder_ce_probe",
+      "denoise_repair_probe"
+    ],
+    "trainer_entrypoint_present": true,
+    "trainer_path": "legacy_src/scripts/train_agentkernel_lite_encdec.py"
+  },
+  "next_best_step": "rebuild bounded decoder CE wrapper/audit scripts against the non-executing trainer contract before any execution authorization",
+  "notes": "Recovered trainer is a closed-boundary scaffold: it validates bounded_decoder_ce_probe manifests, caps, loss masks, and cleanup dry-run safety, then refuses model execution unless a later real implementation is rebuilt and authorized.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8588,
+  "stage_name": "stage8588_reconstructed_bounded_decoder_ce_trainer_contract_scaffold"
+}

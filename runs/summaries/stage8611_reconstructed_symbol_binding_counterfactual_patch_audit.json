@@ -1,0 +1,87 @@
+{
+  "gates": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "counterfactual_obligations_complete": true,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "model_ready_training_rows": 0,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_blocked_by_missing_test_bind": true,
+    "training_blocked_by_shortcut_baseline": false,
+    "transition_head_training_authorized_next": false
+  },
+  "metrics": {
+    "action_counts": {
+      "ABSTAIN_UNBOUND": 48,
+      "BIND_CALL_TO_SYMBOL": 44,
+      "BIND_IMPORT_TO_MODULE": 48,
+      "RETRIEVE_MORE": 136
+    },
+    "counterfactual_card": {
+      "counterfactual_obligations_complete": true,
+      "groups": 92,
+      "missing_group_row_examples": [],
+      "missing_group_rows": 0,
+      "missing_obligation_group_examples": [],
+      "missing_obligation_groups": 0,
+      "objective_counts": {
+        "symbol_binding": 276
+      },
+      "obligation_counts": {
+        "CONTRASTIVE_BOUNDARY_SIBLING": 92,
+        "EVIDENCE_REMOVED_OR_RETRIEVE": 92,
+        "POSITIVE_ORIGINAL": 92
+      },
+      "rows": 276
+    },
+    "loss_enabled_rows": 0,
+    "majority_action_baseline_exact": 0.4928,
+    "missing_actions": [
+      "BIND_TEST_TO_SYMBOL"
+    ],
+    "missing_query_kinds": [
+      "test"
+    ],
+    "missing_split_action_cells": [
+      "train:BIND_TEST_TO_SYMBOL",
+      "eval:BIND_TEST_TO_SYMBOL",
+      "strict_eval:BIND_TEST_TO_SYMBOL"
+    ],
+    "missing_split_query_cells": [
+      "train:test",
+      "eval:test",
+      "strict_eval:test"
+    ],
+    "model_ready": false,
+    "model_ready_training_rows": 0,
+    "obligation_counts": {
+      "CONTRASTIVE_BOUNDARY_SIBLING": 92,
+      "EVIDENCE_REMOVED_OR_RETRIEVE": 92,
+      "POSITIVE_ORIGINAL": 92
+    },
+    "query_kind_action_baseline_exact": 0.4928,
+    "query_kind_counts": {
+      "callsite": 132,
+      "import": 144
+    },
+    "rows": 276,
+    "split_counts": {
+      "eval": 51,
+      "strict_eval": 69,
+      "train": 156
+    },
+    "training_blocked_by_missing_test_bind": true,
+    "training_blocked_by_shortcut_baseline": false
+  },
+  "name": "stage8611_reconstructed_symbol_binding_counterfactual_patch_audit",
+  "next_best_step": "Mine real test-to-symbol binding examples from /arxiv repositories using test name, import, and call evidence, then rebalance query/action cells.",
+  "passed": true,
+  "stage": 8611,
+  "summary": "Audited Stage8610 symbol-binding counterfactual patch. Counterfactual obligations are complete, but training remains blocked because true BIND_TEST_TO_SYMBOL/test-query coverage is missing and query-kind baseline remains high."
+}

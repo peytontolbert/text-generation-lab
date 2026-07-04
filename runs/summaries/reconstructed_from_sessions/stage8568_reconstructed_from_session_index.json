@@ -1,0 +1,30 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "current_authority_forced_closed": true,
+    "reconstructed_from_session_index": true
+  },
+  "metrics": {
+    "snippet_chars": 1640,
+    "source_kind": "agent_message",
+    "source_line": 4122,
+    "source_session": "/home/peyton/.codex/sessions/2026/06/28/rollout-2026-06-28T17-09-02-019f0f34-bdb2-7c93-ba8f-92e8f0fc1e5c.jsonl"
+  },
+  "next_best_step": "reconstructed from session index; rerun original audit before using for authorization",
+  "notes": "The retried probe is still running. Current live process: ```text pid: 901894 elapsed: 01:37 command: train_agentkernel_lite_encdec.py --mode bounded_decoder_ce_probe output dir: /data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8584_v27_bounded_decoder_ce_tiny_probe_execution ``` Registry frontier is still: ```text latest stage: 8586 name: stage8586_v27_bounded_decoder_ce_repo_root_command_patch_audit passed: true next: retry tiny bounded decoder CE probe exactly once ``` So there is not yet a completed Stage8587/outcome summary. ## What This Means The retry has cleared the previous immediate preflight issue. The current command includes the patched surface: ```text --repo-root /data/agentkernel-seq2seq-text-lab --mode bounded_decoder_ce_probe --manifest stage8568...loss_mask_design.jsonl --max-train-rows 32 --max-eval-rows 16 --max-strict-rows 16 --max-steps 16 --decoder-ce-weight 1.0 --structured-aux-weight 0.0 --denoise-weight 0.0 --require-loss-mask-enforcement-audit --cleanup-checkpoints-after-probe --no-final-checkpoint-export --skip-final-model-save 1 ``` That is the intended tiny measurement scope. ## Do Not Conclude Yet Wait for process exit, then audit artifacts before judging success. Required post-run checks: ```text exit code == 0 loss_by_step exists eval_loss_by_checkpoint exists row_token_loss exists sample generation audit exists short-output probe exists internal leak probe exists module_delta_norms exists cleanup proof exists no final checkpoint export no runtime/body/source/Gemma/harness artifacts ``` If it exits cleanly, next stage should be an execution outcome audit, not a scale-up.",
+  "passed": true,
+  "reconstructed": true,
+  "stage": 8568,
+  "stage_name": "stage8568"
+}

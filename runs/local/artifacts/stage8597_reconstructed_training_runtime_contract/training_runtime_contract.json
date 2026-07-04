@@ -1,0 +1,75 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "components": {
+    "bounded_decoder_batcher": {
+      "contract": "batch input_state/target_ref rows; never copy raw target text into encoder input"
+    },
+    "checkpoint_policy": {
+      "contract": "no final checkpoint export; temporary checkpoints only under marked output_dir/checkpoints"
+    },
+    "loss_mask_enforcer": {
+      "contract": "compute only row-authorized losses; forbidden losses must be exactly zero contribution"
+    },
+    "manifest_dataset": {
+      "contract": "load JSONL rows, split by train/eval/strict_eval, enforce row caps before batching"
+    },
+    "model_forward": {
+      "contract": "100M seq2seq forward over encoder packet and bounded decoder targets",
+      "status": "not_reimplemented"
+    },
+    "optimizer_step": {
+      "contract": "zero_grad -> backward -> clip/log grad norms -> step; disabled until execution authorization",
+      "status": "not_reimplemented"
+    },
+    "telemetry_writer": {
+      "contract": "write loss, eval, token, gate, sample, delta, cleanup artifacts every probe"
+    },
+    "tokenizer": {
+      "contract": "encode/decode UTF-8 bytes; preserve budget accounting; no learned tokenizer required",
+      "kind": "byte"
+    }
+  },
+  "contract_name": "agentkernel_100m_training_runtime_contract_v1",
+  "execution_implementation_status": {
+    "checkpoint_export": "forbidden",
+    "dataset_loader_contract": "specified",
+    "loss_mask_enforcer_contract": "specified",
+    "model_forward": "not_restored",
+    "optimizer_step": "not_restored",
+    "telemetry_writer_contract": "specified"
+  },
+  "mode": "bounded_decoder_ce_probe",
+  "module_delta_expectations": {
+    "decoder_delta": "nonzero_allowed",
+    "runtime_or_export_delta": "not_applicable",
+    "structured_heads_delta": "near_zero"
+  },
+  "next_best_step": "rebuild telemetry writer and tiny model forward/backward only after this contract is audited",
+  "plan_name": "stage8596_reconstructed_bounded_decoder_training_plan",
+  "required_telemetry": [
+    "loss_by_step.jsonl",
+    "eval_loss_by_checkpoint.jsonl",
+    "row_field_logits.jsonl",
+    "row_field_losses.jsonl",
+    "row_token_loss.jsonl",
+    "eos_length_audit.json",
+    "short_output_probe.json",
+    "repetition_probe.json",
+    "internal_leak_probe.json",
+    "sample_generation_audit.json",
+    "module_delta_norms.json",
+    "failure_bucket_card.json",
+    "cleanup_proof.json"
+  ]
+}
