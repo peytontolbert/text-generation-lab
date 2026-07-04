@@ -1,0 +1,64 @@
+{
+  "authority": {
+    "controller_merge": false,
+    "decoder_ce": false,
+    "gemma": false,
+    "model_native_execution": false,
+    "promotion": false,
+    "runtime": false,
+    "source_body": false
+  },
+  "checks": {
+    "compile": {
+      "cmd": [
+        "/home/peyton/miniconda3/bin/python",
+        "-m",
+        "py_compile",
+        "legacy_src/scripts/train_agentkernel_lite_encdec.py"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "default_transformer": true,
+    "embeds_guard": true,
+    "imports_guard": true,
+    "scaffold_rejection_test_present": true,
+    "tests": {
+      "cmd": [
+        "/home/peyton/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_recovered_trainer_contract.py",
+        "tests/test_target_implementation_guard.py"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "...........                                                              [100%]\n11 passed in 0.59s\n"
+    }
+  },
+  "created_at": "2026-07-04T21:47:46.706094+00:00",
+  "metrics": {
+    "authority_rows": 0,
+    "decoder_ce_training_authorized_next": 0,
+    "gemma_authorized": 0,
+    "model_execution_authorized_next": 0,
+    "promotion_authorized": 0,
+    "runtime_authorized": 0,
+    "source_body_authorized": 0
+  },
+  "name": "stage8693_v27_trainer_implementation_guard_integration",
+  "next_best_step": "Recover context packer/lost-in-middle/memory retrieval evaluator, then training telemetry.",
+  "passed": true,
+  "remaining_missing_modules": [
+    "runtime_verifier_loop",
+    "context_packer_lost_in_middle_memory_retrieval",
+    "state_space_repo_state_compressor",
+    "rubric_llm_judge_calibrator",
+    "training_telemetry"
+  ],
+  "stage": 8693
+}

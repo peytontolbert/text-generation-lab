@@ -157,6 +157,20 @@ def test_contract_records_transformer_implementation_without_execution(tmp_path:
     assert card["implementation_contract"]["scaffold"] is False
 
 
+
+
+def test_contract_rejects_scaffold_for_recovered_target(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.jsonl"
+    write_manifest(manifest)
+    cmd = base_cmd(tmp_path, manifest) + ["--implementation", "scaffold", "--contract-only"]
+    result = subprocess.run(cmd, text=True, capture_output=True)
+    assert result.returncode == 1
+    card = json.loads(result.stdout)
+    assert card["passed"] is False
+    assert card["implementation"] == "scaffold"
+    assert card["implementation_contract"]["target_implementation_guard"]["allowed_for_recovered_100m_target"] is False
+    assert "recovered 100M target requires implementation=transformer" in card["errors"]
+
 def test_tokenizer_contract_records_recovered_bpe_pointer(tmp_path: Path) -> None:
     manifest = tmp_path / "manifest.jsonl"
     write_manifest(manifest)

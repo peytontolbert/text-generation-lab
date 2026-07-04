@@ -1,0 +1,101 @@
+{
+  "call_nodes": [
+    {
+      "call_node_id": "call_e7fbd5180ab365e8",
+      "name": "main",
+      "node_kind": "caller_scope"
+    },
+    {
+      "call_node_id": "call_8d331fd5a6047677",
+      "name": "Greeter",
+      "node_kind": "callee_reference"
+    },
+    {
+      "arg_count": 0,
+      "call_node_id": "call_d6ce4325b075e836",
+      "caller": "main",
+      "keyword_count": 0,
+      "name": "Greeter",
+      "node_kind": "callsite",
+      "span": {
+        "col_offset": 14,
+        "end_col_offset": 23,
+        "end_lineno": 12,
+        "lineno": 12
+      }
+    },
+    {
+      "call_node_id": "call_39a9f549c782b5b6",
+      "name": "greeter.hello",
+      "node_kind": "callee_reference"
+    },
+    {
+      "arg_count": 1,
+      "call_node_id": "call_6e388e8fcd442e70",
+      "caller": "main",
+      "keyword_count": 0,
+      "name": "greeter.hello",
+      "node_kind": "callsite",
+      "span": {
+        "col_offset": 11,
+        "end_col_offset": 35,
+        "end_lineno": 13,
+        "lineno": 13
+      }
+    },
+    {
+      "call_node_id": "call_515277e74a2e9265",
+      "name": "str",
+      "node_kind": "callee_reference"
+    },
+    {
+      "arg_count": 1,
+      "call_node_id": "call_251c16c479b53152",
+      "caller": "main",
+      "keyword_count": 0,
+      "name": "str",
+      "node_kind": "callsite",
+      "span": {
+        "col_offset": 25,
+        "end_col_offset": 34,
+        "end_lineno": 13,
+        "lineno": 13
+      }
+    }
+  ],
+  "edges": [
+    {
+      "dst": "call_d6ce4325b075e836",
+      "edge_type": "contains_callsite",
+      "src": "call_e7fbd5180ab365e8"
+    },
+    {
+      "dst": "call_8d331fd5a6047677",
+      "edge_type": "calls_reference",
+      "src": "call_d6ce4325b075e836"
+    },
+    {
+      "dst": "call_6e388e8fcd442e70",
+      "edge_type": "contains_callsite",
+      "src": "call_e7fbd5180ab365e8"
+    },
+    {
+      "dst": "call_39a9f549c782b5b6",
+      "edge_type": "calls_reference",
+      "src": "call_6e388e8fcd442e70"
+    },
+    {
+      "dst": "call_251c16c479b53152",
+      "edge_type": "contains_callsite",
+      "src": "call_e7fbd5180ab365e8"
+    },
+    {
+      "dst": "call_515277e74a2e9265",
+      "edge_type": "calls_reference",
+      "src": "call_251c16c479b53152"
+    }
+  ],
+  "failures": [],
+  "language_family": "python",
+  "source_hash": "c959596eb4f88fd86e966f88de97bb0ba7a350241207632dc202c67f825dde63"
+}

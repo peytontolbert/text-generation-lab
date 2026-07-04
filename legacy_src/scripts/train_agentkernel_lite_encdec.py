@@ -16,6 +16,7 @@ from loss_mask_card import LOSS_KEYS, normalize_loss_mask, read_jsonl, validate_
 from counterfactual_obligation_audit import audit_rows as audit_counterfactual_rows
 from safe_cleanup import safe_cleanup_checkpoints
 from safe_paths import UnsafePathError
+from target_implementation_guard import evaluate_implementation_selection
 
 
 SUPPORTED_MODES = (
@@ -129,8 +130,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--implementation",
         choices=("scaffold", "transformer"),
-        default="scaffold",
-        help="Select recovered model implementation for authorized probes. Contract-only mode records this choice but does not instantiate the model.",
+        default="transformer",
+        help=(
+            "Select recovered model implementation for authorized probes. The recovered 100M target "
+            "contract requires transformer; scaffold is retained only for legacy interface tests."
+        ),
     )
     parser.add_argument("--tokenizer-json", type=Path, default=None, help="Optional recovered tokenizer.json for authorized probes; default is byte fallback.")
     parser.add_argument("--tokenizer-config", type=Path, default=None, help="Optional tokenizer_config.json paired with --tokenizer-json.")
@@ -195,7 +199,10 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
     over_cap_rows: list[str] = []
     unsafe_loss_rows: list[dict[str, Any]] = []
     empty_target_rows: list[str] = []
+    implementation_guard = evaluate_implementation_selection(str(getattr(args, "implementation", "transformer")))
 
+    if not implementation_guard["allowed_for_recovered_100m_target"]:
+        errors.extend(str(error) for error in implementation_guard["errors"])
     if args.decoder_ce_weight <= 0:
         errors.append("bounded decoder CE probe requires --decoder-ce-weight > 0")
     if args.structured_aux_weight != 0:
@@ -272,9 +279,10 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
             "structured_aux_weight": args.structured_aux_weight,
             "denoise_weight": args.denoise_weight,
         },
-        "implementation": str(getattr(args, "implementation", "scaffold")),
+        "implementation": str(getattr(args, "implementation", "transformer")),
         "implementation_contract": {
-            "scaffold": bool(getattr(args, "implementation", "scaffold") == "scaffold"),
+            "target_implementation_guard": implementation_guard,
+            "scaffold": bool(getattr(args, "implementation", "transformer") == "scaffold"),
             "transformer_module": "legacy_src/agentkernel_lite/modeling_transformer.py",
             "transformer_execution_requires_explicit_authorization": True,
         },
@@ -306,7 +314,10 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
     loss_counts = {key: 0 for key in LOSS_KEYS}
     authority_rows: list[str] = []
     unsafe_loss_rows: list[dict[str, Any]] = []
+    implementation_guard = evaluate_implementation_selection(str(getattr(args, "implementation", "transformer")))
 
+    if not implementation_guard["allowed_for_recovered_100m_target"]:
+        errors.extend(str(error) for error in implementation_guard["errors"])
     if args.decoder_ce_weight != 0:
         errors.append("structured probes require --decoder-ce-weight 0")
     if args.mode != "denoise_repair_probe" and args.denoise_weight != 0:
@@ -388,9 +399,10 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
             "structured_aux_weight": args.structured_aux_weight,
             "denoise_weight": args.denoise_weight,
         },
-        "implementation": str(getattr(args, "implementation", "scaffold")),
+        "implementation": str(getattr(args, "implementation", "transformer")),
         "implementation_contract": {
-            "scaffold": bool(getattr(args, "implementation", "scaffold") == "scaffold"),
+            "target_implementation_guard": implementation_guard,
+            "scaffold": bool(getattr(args, "implementation", "transformer") == "scaffold"),
             "transformer_module": "legacy_src/agentkernel_lite/modeling_transformer.py",
             "transformer_execution_requires_explicit_authorization": True,
         },
