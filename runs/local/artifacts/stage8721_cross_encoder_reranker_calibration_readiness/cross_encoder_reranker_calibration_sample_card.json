@@ -1,0 +1,167 @@
+{
+  "authority": {
+    "model_execution": false,
+    "runtime": false,
+    "scoring_authorized": false,
+    "source_body_emission": false,
+    "training": false
+  },
+  "blocked_rows": 1,
+  "brier": 0.38371319024574996,
+  "ece": 0.32707774999999994,
+  "exact": 0.5,
+  "high_confidence_wrong_rows": 1,
+  "labeled_rows": 4,
+  "mean_probability": 0.60119725,
+  "pair_cards": [
+    {
+      "authority": {
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "correct": true,
+      "features": {
+        "evidence_token_count": 9,
+        "exact_phrase_match": false,
+        "freshness_score": 0.0,
+        "grounding_score": 0.8,
+        "jaccard": 0.25,
+        "leak_flags": [],
+        "locked_flags": [],
+        "overlap_count": 3,
+        "path_or_symbol_match": true,
+        "retrieval_score": 0.9,
+        "source_type": "source",
+        "task_token_count": 6
+      },
+      "label_relevant": true,
+      "predicted_relevant": true,
+      "reasons": [],
+      "reranker_logit": 1.855,
+      "reranker_probability": 0.864713,
+      "route": "KEEP_RETRIEVAL_PAIR",
+      "row_id": "relevant_source"
+    },
+    {
+      "authority": {
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "correct": true,
+      "features": {
+        "evidence_token_count": 7,
+        "exact_phrase_match": false,
+        "freshness_score": 0.0,
+        "grounding_score": 0.0,
+        "jaccard": 0.0,
+        "leak_flags": [],
+        "locked_flags": [],
+        "overlap_count": 0,
+        "path_or_symbol_match": false,
+        "retrieval_score": 0.05,
+        "source_type": "doc",
+        "task_token_count": 6
+      },
+      "label_relevant": false,
+      "predicted_relevant": false,
+      "reasons": [],
+      "reranker_logit": -1.1625,
+      "reranker_probability": 0.238213,
+      "route": "LOW_RELEVANCE_PAIR",
+      "row_id": "irrelevant_doc"
+    },
+    {
+      "authority": {
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "correct": false,
+      "features": {
+        "evidence_token_count": 4,
+        "exact_phrase_match": false,
+        "freshness_score": 0.0,
+        "grounding_score": 0.0,
+        "jaccard": 0.0,
+        "leak_flags": [
+          "clean_state",
+          "expected_answer",
+          "target_body"
+        ],
+        "locked_flags": [
+          "hidden_eval",
+          "locked_eval",
+          "promotion_only"
+        ],
+        "overlap_count": 0,
+        "path_or_symbol_match": false,
+        "retrieval_score": 0.0,
+        "source_type": "source",
+        "task_token_count": 3
+      },
+      "label_relevant": true,
+      "predicted_relevant": false,
+      "reasons": [
+        "leak_marker_present",
+        "locked_eval_or_hidden_marker"
+      ],
+      "reranker_logit": -0.8,
+      "reranker_probability": 0.310026,
+      "route": "BLOCK_LEAK_OR_LOCKED",
+      "row_id": "locked_leak"
+    },
+    {
+      "authority": {
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "correct": false,
+      "features": {
+        "evidence_token_count": 2,
+        "exact_phrase_match": true,
+        "freshness_score": 0.0,
+        "grounding_score": 1.0,
+        "jaccard": 1.0,
+        "leak_flags": [],
+        "locked_flags": [],
+        "overlap_count": 2,
+        "path_or_symbol_match": true,
+        "retrieval_score": 1.0,
+        "source_type": "source",
+        "task_token_count": 2
+      },
+      "label_relevant": false,
+      "predicted_relevant": true,
+      "reasons": [
+        "high_confidence_wrong"
+      ],
+      "reranker_logit": 4.8,
+      "reranker_probability": 0.991837,
+      "route": "CALIBRATION_REVIEW",
+      "row_id": "confident_wrong"
+    }
+  ],
+  "reason_counts": {
+    "high_confidence_wrong": 1,
+    "leak_marker_present": 1,
+    "locked_eval_or_hidden_marker": 1
+  },
+  "route_counts": {
+    "BLOCK_LEAK_OR_LOCKED": 1,
+    "CALIBRATION_REVIEW": 1,
+    "KEEP_RETRIEVAL_PAIR": 1,
+    "LOW_RELEVANCE_PAIR": 1
+  },
+  "rows": 4
+}

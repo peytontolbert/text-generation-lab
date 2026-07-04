@@ -1,0 +1,180 @@
+{
+  "authority": {
+    "decoder_ce": false,
+    "denoise_ce": false,
+    "model_execution": false,
+    "runtime": false,
+    "scoring_authorized": false,
+    "source_body_emission": false,
+    "training": false
+  },
+  "decisions": [
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "decoder_ce_authorized": false,
+      "decoder_shadow_allowed": true,
+      "fused_confidence": 0.852,
+      "model_execution_authorized": false,
+      "reasons": [],
+      "route": "ALLOW_BOUNDED_DECODER_SHADOW",
+      "row_id": "ok",
+      "safe_route": true,
+      "signals": {
+        "authority_true": false,
+        "decoder_budget_ok": true,
+        "decoder_confidence": 0.8,
+        "decoder_schema_ok": true,
+        "entropy": 0.0,
+        "high_confidence_wrong": false,
+        "internal_leak": false,
+        "ood_score": 0.1,
+        "retrieval_confidence": 0.9,
+        "retrieval_coverage": 0.88,
+        "row_id": "ok",
+        "structured_confidence": 0.92,
+        "structured_margin": 0.0,
+        "verifier_confidence": 0.8,
+        "verifier_failure": "",
+        "verifier_pass": true
+      }
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "decoder_ce_authorized": false,
+      "decoder_shadow_allowed": false,
+      "fused_confidence": 0.38,
+      "model_execution_authorized": false,
+      "reasons": [
+        "retrieval_confidence_low",
+        "retrieval_coverage_low"
+      ],
+      "route": "RETRIEVE_MORE",
+      "row_id": "retrieve",
+      "safe_route": true,
+      "signals": {
+        "authority_true": false,
+        "decoder_budget_ok": true,
+        "decoder_confidence": 0.0,
+        "decoder_schema_ok": true,
+        "entropy": 0.0,
+        "high_confidence_wrong": false,
+        "internal_leak": false,
+        "ood_score": 0.0,
+        "retrieval_confidence": 0.2,
+        "retrieval_coverage": 0.3,
+        "row_id": "retrieve",
+        "structured_confidence": 0.9,
+        "structured_margin": 0.0,
+        "verifier_confidence": 0.0,
+        "verifier_failure": "",
+        "verifier_pass": true
+      }
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "decoder_ce_authorized": false,
+      "decoder_shadow_allowed": false,
+      "fused_confidence": 0.675,
+      "model_execution_authorized": false,
+      "reasons": [
+        "verifier_failure:symbol_binding_failure"
+      ],
+      "route": "REPAIR_STRUCTURED",
+      "row_id": "repair",
+      "safe_route": true,
+      "signals": {
+        "authority_true": false,
+        "decoder_budget_ok": true,
+        "decoder_confidence": 0.0,
+        "decoder_schema_ok": true,
+        "entropy": 0.0,
+        "high_confidence_wrong": false,
+        "internal_leak": false,
+        "ood_score": 0.0,
+        "retrieval_confidence": 0.9,
+        "retrieval_coverage": 0.9,
+        "row_id": "repair",
+        "structured_confidence": 0.9,
+        "structured_margin": 0.0,
+        "verifier_confidence": 0.0,
+        "verifier_failure": "symbol_binding_failure",
+        "verifier_pass": false
+      }
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "decoder_ce_authorized": false,
+      "decoder_shadow_allowed": false,
+      "fused_confidence": 0.75,
+      "model_execution_authorized": false,
+      "reasons": [
+        "authority_true",
+        "decoder_budget_not_ok",
+        "decoder_schema_not_ok",
+        "internal_leak"
+      ],
+      "route": "ABSTAIN_UNSAFE",
+      "row_id": "abstain",
+      "safe_route": true,
+      "signals": {
+        "authority_true": true,
+        "decoder_budget_ok": false,
+        "decoder_confidence": 0.0,
+        "decoder_schema_ok": false,
+        "entropy": 0.0,
+        "high_confidence_wrong": false,
+        "internal_leak": true,
+        "ood_score": 0.0,
+        "retrieval_confidence": 1.0,
+        "retrieval_coverage": 1.0,
+        "row_id": "abstain",
+        "structured_confidence": 1.0,
+        "structured_margin": 0.0,
+        "verifier_confidence": 0.0,
+        "verifier_failure": "",
+        "verifier_pass": false
+      }
+    }
+  ],
+  "decoder_shadow_rows": 1,
+  "route_counts": {
+    "ABSTAIN_UNSAFE": 1,
+    "ALLOW_BOUNDED_DECODER_SHADOW": 1,
+    "REPAIR_STRUCTURED": 1,
+    "RETRIEVE_MORE": 1
+  },
+  "rows": 4,
+  "unsafe_decisions": 0
+}

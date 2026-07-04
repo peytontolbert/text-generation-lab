@@ -1,0 +1,42 @@
+{
+  "artifacts": {
+    "sample_card": "runs/local/artifacts/stage8727_fusion_logits_forward_pass_contract_readiness/fusion_logits_forward_pass_contract_sample_card.json"
+  },
+  "authority": {
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_authorized": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "source_body_authorized": false,
+    "training_authorized_next": false
+  },
+  "created_at_utc": "2026-07-04T23:33:07Z",
+  "decision": "Recovered no-execution fusion logits/forward-pass contract; it gates decoder shadow access but authorizes no decoder CE or model execution.",
+  "metrics": {
+    "authority_rows": 0,
+    "decoder_ce_training_authorized_next": false,
+    "decoder_shadow_rows": 1,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_authorized": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "routes": {
+      "ABSTAIN_UNSAFE": 1,
+      "ALLOW_BOUNDED_DECODER_SHADOW": 1,
+      "REPAIR_STRUCTURED": 1,
+      "RETRIEVE_MORE": 1
+    },
+    "rows": 4,
+    "runtime_authorized": false,
+    "source_body_authorized": false,
+    "training_authorized_next": false,
+    "unsafe_decisions": 0
+  },
+  "name": "stage8727_fusion_logits_forward_pass_contract_readiness",
+  "next_best_step": "Attach fusion contract to central graph, then recover moe_lora_adapter_router_contract.",
+  "passed": true,
+  "stage": 8727,
+  "stage_name": "stage8727_fusion_logits_forward_pass_contract_readiness"
+}

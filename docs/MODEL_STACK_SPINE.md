@@ -467,3 +467,65 @@ Priority queue:
 8. `confidence_ood_head_contract` - head-level confidence/OOD threshold, Brier/ECE, and high-confidence-wrong gates.
 9. `structured_data_operation_curriculum` - table/JSON/graph/AST/log/workflow/memory operation curriculum using state + schema + addressing + operator + validator.
 10. `semantic_equivalence_metamorphic_verifier` - equivalence, property, metamorphic, and API compatibility verifier contracts.
+
+## Stage8722 Cross-Encoder Reranker Calibration
+
+Recovered as `ready_partial_deterministic_calibration`. This closes the Stage8720 priority-1 gap at the contract level. It does not train a learned cross-encoder; it defines deterministic task/evidence pair features, reranker probability, Brier/ECE calibration metrics, leak/locked-eval blocking, and high-confidence-wrong review routing.
+
+Artifacts:
+
+- `scripts/cross_encoder_reranker_calibration.py`
+- `tests/test_cross_encoder_reranker_calibration.py`
+- `runs/summaries/stage8721_cross_encoder_reranker_calibration_readiness.json`
+- `runs/summaries/stage8722_cross_encoder_reranker_calibration_graph_attachment.json`
+
+Next queue item: `dataset_cartography_active_learning`.
+
+## Stage8724 Dataset Cartography Active Learning
+
+Recovered as `ready_partial_deterministic_sampler`. This closes the Stage8720 priority-2 gap at the contract level. It computes confidence mean, confidence variability, loss mean, loss variability, forgetting events, label-review routing, easy/redundant downsampling, and hard/ambiguous neighbor-generation selection.
+
+Artifacts:
+
+- `scripts/dataset_cartography_active_learning.py`
+- `tests/test_dataset_cartography_active_learning.py`
+- `runs/summaries/stage8723_dataset_cartography_active_learning_readiness.json`
+- `runs/summaries/stage8724_dataset_cartography_active_learning_graph_attachment.json`
+
+Next queue item: `training_data_attribution_influence`.
+
+## Stage8726 Training Data Attribution Influence
+
+Recovered as `ready_partial_deterministic_attribution`. This closes the Stage8720 priority-3 gap at the contract level. It compares eval failures against train rows using token overlap, tag overlap, objective agreement, label agreement/conflict, source trust, label issue score, and loss metadata. It routes neighborhoods as helpful, harmful/conflicting, missing, or weak/ambiguous.
+
+Artifacts:
+
+- `scripts/training_data_attribution_influence.py`
+- `tests/test_training_data_attribution_influence.py`
+- `runs/summaries/stage8725_training_data_attribution_influence_readiness.json`
+- `runs/summaries/stage8726_training_data_attribution_influence_graph_attachment.json`
+
+Next queue item: `fusion_logits_forward_pass_contract`.
+
+## Stage8728 Fusion Logits Forward-Pass Contract
+
+Recovered as `ready_partial_no_execution_contract`. This closes the Stage8720 priority-4 gap at the contract level. It fuses structured-head confidence, retrieval confidence/coverage, verifier pass/failure, decoder budget/schema readiness, and OOD/high-confidence-wrong signals. The fusion route is conservative: unsafe signals win over aggregate confidence.
+
+Routes:
+
+- `ABSTAIN_UNSAFE`
+- `RETRIEVE_MORE`
+- `REPAIR_STRUCTURED`
+- `STRUCTURED_ONLY`
+- `ALLOW_BOUNDED_DECODER_SHADOW`
+
+Important boundary: fusion never authorizes decoder CE or model execution. It can only mark a row as decoder-shadow eligible when all green signals are present.
+
+Artifacts:
+
+- `scripts/fusion_logits_forward_pass_contract.py`
+- `tests/test_fusion_logits_forward_pass_contract.py`
+- `runs/summaries/stage8727_fusion_logits_forward_pass_contract_readiness.json`
+- `runs/summaries/stage8728_fusion_logits_forward_pass_contract_graph_attachment.json`
+
+Next queue item: `moe_lora_adapter_router_contract`.
