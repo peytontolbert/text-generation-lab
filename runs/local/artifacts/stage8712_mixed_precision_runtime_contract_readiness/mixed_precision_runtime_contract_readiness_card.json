@@ -1,0 +1,160 @@
+{
+  "authority": {
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_authorized": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "source_body_authorized": false
+  },
+  "checks": {
+    "compile": {
+      "cmd": [
+        "/home/peyton/miniconda3/bin/python",
+        "-m",
+        "py_compile",
+        "scripts/mixed_precision_runtime_contract.py"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "tests": {
+      "cmd": [
+        "/home/peyton/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_mixed_precision_runtime_contract.py"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "......                                                                   [100%]\n6 passed in 0.18s\n"
+    }
+  },
+  "created_at": "2026-07-04T22:57:41.451213+00:00",
+  "decision": "Mixed-precision runtime contract recovered as ready_partial contract-only; no execution/training authority opened.",
+  "metrics": {
+    "authority_rows": 0,
+    "bf16_contract_total_mb": 198.29765701293945,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_authorized": false,
+    "model_execution_authorized_next": false,
+    "promotion_authorized": false,
+    "runtime_authorized": false,
+    "safe_default_total_mb": 396.5953140258789,
+    "source_body_authorized": false
+  },
+  "name": "stage8712_mixed_precision_runtime_contract_readiness",
+  "next_best_step": "Attach mixed-precision contract to central graph, then recover graph neural repo encoder or judge calibration.",
+  "passed": true,
+  "remaining_missing_modules": [
+    "graph_neural_repo_encoder",
+    "rubric_llm_judge_calibrator"
+  ],
+  "sample_policies": {
+    "bf16_contract_only": {
+      "authority": {
+        "model_execution": false,
+        "runtime": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "errors": [],
+      "memory_estimate": {
+        "activation_mb": 2.5,
+        "grad_scaler_mb": 0.0,
+        "gradient_mb": 0.0,
+        "optimizer_state_mb": 0.0,
+        "parameter_mb": 195.79765701293945,
+        "total_estimated_mb": 198.29765701293945
+      },
+      "passed": true,
+      "precision_bytes": 2.0,
+      "request": {
+        "activation_checkpointing": false,
+        "device": "cuda",
+        "max_memory_mb": 1024,
+        "model_execution_authorized": false,
+        "precision": "bf16",
+        "training_authorized": false,
+        "use_autocast": true,
+        "use_grad_scaler": false
+      },
+      "requires_autocast": false,
+      "requires_grad_scaler": false,
+      "warnings": []
+    },
+    "invalid_fp16_training_without_scaler": {
+      "authority": {
+        "model_execution": false,
+        "runtime": false,
+        "source_body_emission": false,
+        "training": true
+      },
+      "errors": [
+        "fp16 training requires GradScaler"
+      ],
+      "memory_estimate": {
+        "activation_mb": 2.5,
+        "grad_scaler_mb": 0.0,
+        "gradient_mb": 195.79765701293945,
+        "optimizer_state_mb": 783.1906280517578,
+        "parameter_mb": 195.79765701293945,
+        "total_estimated_mb": 1177.2859420776367
+      },
+      "passed": false,
+      "precision_bytes": 2.0,
+      "request": {
+        "activation_checkpointing": false,
+        "device": "cuda",
+        "max_memory_mb": null,
+        "model_execution_authorized": false,
+        "precision": "fp16",
+        "training_authorized": true,
+        "use_autocast": true,
+        "use_grad_scaler": false
+      },
+      "requires_autocast": false,
+      "requires_grad_scaler": true,
+      "warnings": []
+    },
+    "safe_default_fp32": {
+      "authority": {
+        "model_execution": false,
+        "runtime": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "errors": [],
+      "memory_estimate": {
+        "activation_mb": 5.0,
+        "grad_scaler_mb": 0.0,
+        "gradient_mb": 0.0,
+        "optimizer_state_mb": 0.0,
+        "parameter_mb": 391.5953140258789,
+        "total_estimated_mb": 396.5953140258789
+      },
+      "passed": true,
+      "precision_bytes": 4.0,
+      "request": {
+        "activation_checkpointing": false,
+        "device": "cpu",
+        "max_memory_mb": null,
+        "model_execution_authorized": false,
+        "precision": "fp32",
+        "training_authorized": false,
+        "use_autocast": false,
+        "use_grad_scaler": false
+      },
+      "requires_autocast": false,
+      "requires_grad_scaler": false,
+      "warnings": []
+    }
+  },
+  "stage": 8712
+}

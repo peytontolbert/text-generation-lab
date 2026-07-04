@@ -70,11 +70,11 @@ Stage8698 re-grepped Codex sessions for foundational AI/training mechanics so th
 | Optimizer / scheduler | Controls parameter updates; AdamW, warmup, cosine, weight decay must be logged in training cards | indexed / partially executable |
 | Dataset / dataloader / batching | Preserves split boundaries, row ordering controls, collate rules, loss masks, and caps | indexed / partially executable |
 | Checkpoint / seed / reproducibility | Required for repeatable probes and rollback; no final checkpoint export unless explicitly authorized | indexed / partially executable |
-| Mixed precision / memory | Needed for efficient training, but currently documented-not-executable; do not depend on it for correctness yet | documented-not-executable |
+| Mixed precision / memory | Precision and memory policy contract; execution/training still closed unless separately authorized | ready_partial contract-only |
 | Calibration / entropy / confidence | Supports abstain/retrieve/correct thresholds and high-confidence wrong detection | indexed / partially executable |
 | Activation / logit interpretability | Row gradient norms, module delta norms, activation summaries, feature ablations, and activation patch recovery cards for tiny probes | ready_partial deterministic telemetry |
 | State-space / selective scan / Mamba | Repo-stream compression scaffold after context/retrieval packets stabilize; actual Mamba training still closed | ready_partial deterministic compressor |
-| GNN / graph message passing | Future learned repo-graph encoder; graph substrate exists, executable GNN encoder still missing | documented-not-executable |
+| GNN / graph message passing | Deterministic repo graph encoder/message-passing scaffold for node and graph feature packets; learned GNN training closed | ready_partial deterministic encoder |
 | Denoise / diffusion | Repair trajectory for bad outputs, masked spans, verifier failures | indexed / partially executable |
 | Dataset cartography / attribution | Future dataset-example dynamics and influence layer for curriculum compiler | indexed / partially executable |
 
@@ -422,3 +422,17 @@ This is not Mamba training and does not authorize long-context model execution. 
 Stage8710-8711 recover `gradient_activation_interpretability.py` as a non-executing telemetry layer. It defines row gradient norm cards, module delta norm cards, activation cache summaries, feature ablation attribution, and activation patch recovery cards.
 
 This does not authorize model execution. It only defines what the next tiny native probe must emit so failures can be attributed to bad rows, weak features, bad representations, bad heads, loss weighting, or gradient routing.
+
+
+### Mixed-Precision Runtime Boundary
+
+Stage8712 recovers `mixed_precision_runtime_contract.py` as a contract-only policy module. It validates `fp32`, `bf16`, and `fp16` requests, estimates memory, blocks invalid GradScaler/autocast combinations, and records activation-checkpointing intent.
+
+This does not authorize mixed-precision execution or training. It only defines the policy card future probes must satisfy before precision/memory settings can be trusted.
+
+
+### Repo Graph Encoder Boundary
+
+Stage8714-8715 recover `repo_graph_encoder.py` as a deterministic message-passing scaffold over audited repo-state graph packets. It validates endpoint resolution, blocks label-coded graph IDs, hashes node/relation features, emits node embedding hashes and graph embedding hashes, and feeds symbol binding, edit localization, patch operator, verifier repair, and bounded decoder argument objectives.
+
+This is not learned GNN training. It is the graph-feature interface needed before any future GNN encoder can be trained safely.
