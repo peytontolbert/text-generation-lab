@@ -6,6 +6,19 @@ This audit compares the current rebuilt model scaffold against the recovered pre
 
 The current implementation is an interface scaffold, not the recovered 102M target model.
 
+## Supersession Note After Stage8686
+
+Stage8629 remains valid as a historical audit of the old `legacy_src/agentkernel_lite/modeling.py` GRU scaffold. It should not be read as the current recovered transformer status.
+
+Current recovered implementation status from Stage8686:
+
+- `legacy_src/agentkernel_lite/modeling_transformer.py` has `has_rotary=true`
+- `legacy_src/agentkernel_lite/modeling_transformer.py` has `has_agent_policy_heads=true`
+- `legacy_src/agentkernel_lite/modeling_transformer.py` has `has_retrieval_heads=true`
+- `legacy_src/agentkernel_lite/modeling_transformer.py` has `has_scalar_invariant=true`
+
+The remaining control requirement is to block the legacy GRU scaffold from any target 100M training path and require the recovered transformer implementation for target-compatible audits.
+
 ## Key Mismatches
 
 - current config uses generic/rebuilt model family, not recovered agentkernel_lite_encdec_v1
@@ -13,10 +26,10 @@ The current implementation is an interface scaffold, not the recovered 102M targ
 - hidden size mismatch: scaffold 192 vs target d_model 640
 - vocab size mismatch: scaffold 259 vs target vocab 1506
 - layer count mismatch: scaffold 2 vs target layers 6
-- implementation missing recovered feature: has_rotary
-- implementation missing recovered feature: has_agent_policy_heads
-- implementation missing recovered feature: has_retrieval_heads
-- implementation missing recovered feature: has_scalar_invariant
+- legacy GRU scaffold missing recovered feature: has_rotary
+- legacy GRU scaffold missing recovered feature: has_agent_policy_heads
+- legacy GRU scaffold missing recovered feature: has_retrieval_heads
+- legacy GRU scaffold missing recovered feature: has_scalar_invariant
 
 ## Preserved Target
 
@@ -38,7 +51,7 @@ The current implementation is an interface scaffold, not the recovered 102M targ
 
 ## Required Rebuild Implication
 
-Before real 100M training resumes, rebuild or recover the transformer/rotary AgentKernel Lite implementation and tokenizer compatibility path. The current scaffold remains useful for contract tests only.
+Before real 100M training resumes, require the recovered transformer/rotary AgentKernel Lite implementation and tokenizer compatibility path. The legacy GRU scaffold remains useful for contract tests only and must be blocked for target 100M training.
 
 ## Metrics
 

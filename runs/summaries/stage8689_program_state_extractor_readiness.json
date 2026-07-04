@@ -1,0 +1,61 @@
+{
+  "artifacts": {
+    "ast_extractor": "scripts/program_state_ast_cst_extractor.py",
+    "import_dependency_extractor": "scripts/program_state_import_dependency_extractor.py",
+    "sample_ast_packet": "runs/local/artifacts/stage8689_program_state_extractor_readiness/sample_ast_packet.json",
+    "sample_import_dependency_packet": "runs/local/artifacts/stage8689_program_state_extractor_readiness/sample_import_dependency_packet.json",
+    "sample_symbol_packet": "runs/local/artifacts/stage8689_program_state_extractor_readiness/sample_symbol_packet.json",
+    "symbol_extractor": "scripts/program_state_symbol_table_extractor.py",
+    "tests": "tests/test_program_state_extractors.py"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T21:30:48Z",
+  "decision": "Recovered sample-only AST/CST, symbol table, and import/dependency extractor modules for program-state multimodality. They are no-authority support modules and do not authorize data mining or training.",
+  "metrics": {
+    "ast_edges": 49,
+    "ast_nodes": 50,
+    "covered_modalities": [
+      "cst_ast",
+      "symbol_table",
+      "import_export_graph",
+      "dependency_graph"
+    ],
+    "data_mining_allowed": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "dependencies": 2,
+    "dependency_edges": 2,
+    "failures": [],
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "still_missing_modalities": [
+      "type_signature_map_contract",
+      "call_graph_contract",
+      "data_flow_graph_contract",
+      "control_flow_graph_contract",
+      "runtime_stack_trace_normalizer",
+      "patch_history_modality_builder",
+      "cross_modal_alignment_audit",
+      "modality_dropout_ablation_audit"
+    ],
+    "symbol_edges": 7,
+    "symbols": 10,
+    "training_allowed": false
+  },
+  "next_best_step": "Recover type/signature, call graph, data-flow, control-flow, runtime trace, patch-history, and cross-modal alignment modules before /arxiv mining.",
+  "passed": true,
+  "stage": 8689,
+  "stage_name": "stage8689_program_state_extractor_readiness"
+}

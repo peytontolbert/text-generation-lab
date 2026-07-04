@@ -1,0 +1,96 @@
+{
+  "authority": {
+    "controller_merge": false,
+    "decoder_ce": false,
+    "gemma": false,
+    "model_native_execution": false,
+    "promotion": false,
+    "runtime": false,
+    "source_body": false
+  },
+  "checks": {
+    "scaffold": {
+      "allowed_for_recovered_100m_target": false,
+      "errors": [
+        "recovered 100M target requires implementation=transformer",
+        "selected implementation missing recovered features: has_rotary,has_agent_policy_heads,has_retrieval_heads,has_scalar_invariant"
+      ],
+      "features": {
+        "has_agent_policy_heads": false,
+        "has_retrieval_heads": false,
+        "has_rotary": false,
+        "has_scalar_invariant": false
+      },
+      "implementation_path": "/data/agentkernel-seq2seq-text-lab/legacy_src/agentkernel_lite/modeling.py",
+      "missing_features": [
+        "has_rotary",
+        "has_agent_policy_heads",
+        "has_retrieval_heads",
+        "has_scalar_invariant"
+      ],
+      "selected": "scaffold",
+      "target_requires_recovered_transformer": true
+    },
+    "transformer": {
+      "allowed_for_recovered_100m_target": true,
+      "errors": [],
+      "features": {
+        "has_agent_policy_heads": true,
+        "has_retrieval_heads": true,
+        "has_rotary": true,
+        "has_scalar_invariant": true
+      },
+      "implementation_path": "/data/agentkernel-seq2seq-text-lab/legacy_src/agentkernel_lite/modeling_transformer.py",
+      "missing_features": [],
+      "selected": "transformer",
+      "target_requires_recovered_transformer": true
+    },
+    "unknown": {
+      "allowed_for_recovered_100m_target": false,
+      "errors": [
+        "unknown implementation: unknown",
+        "recovered 100M target requires implementation=transformer",
+        "selected implementation missing recovered features: has_rotary,has_agent_policy_heads,has_retrieval_heads,has_scalar_invariant"
+      ],
+      "features": {
+        "has_agent_policy_heads": false,
+        "has_retrieval_heads": false,
+        "has_rotary": false,
+        "has_scalar_invariant": false
+      },
+      "implementation_path": null,
+      "missing_features": [
+        "has_rotary",
+        "has_agent_policy_heads",
+        "has_retrieval_heads",
+        "has_scalar_invariant"
+      ],
+      "selected": "unknown",
+      "target_requires_recovered_transformer": true
+    }
+  },
+  "created_at": "2026-07-04T21:35:59.826961+00:00",
+  "metrics": {
+    "authority_rows": 0,
+    "decoder_ce_authorized": 0,
+    "gemma_authorized": 0,
+    "promotion_authorized": 0,
+    "runtime_authorized": 0,
+    "scaffold_missing_feature_count": 4,
+    "source_body_authorized": 0,
+    "transformer_missing_feature_count": 0
+  },
+  "name": "stage8688_v27_target_implementation_guard_readiness",
+  "next_best_step": "Integrate target_implementation_guard into the bounded trainer contract so recovered target runs cannot silently select the scaffold implementation; then recover context-packer/lost-in-middle.",
+  "passed": true,
+  "remaining_missing_modules": [
+    "runtime_verifier_loop",
+    "context_packer_lost_in_middle_memory_retrieval",
+    "state_space_repo_state_compressor",
+    "rubric_llm_judge_calibrator",
+    "training_telemetry",
+    "trainer_integration_for_target_implementation_guard"
+  ],
+  "stage": 8688,
+  "target_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json"
+}
