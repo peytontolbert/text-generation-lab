@@ -1,0 +1,110 @@
+{
+  "artifacts": {
+    "doc": "docs/MODULE_READINESS_REFRESH_AFTER_PROGRAM_STATE_STAGE8684.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "closed_modules": [
+    "unified_dataset_junk_ood_ranker_v1",
+    "cluster_slice_near_duplicate_detector",
+    "feature_normalizer_importable_helper",
+    "source_lineage_locked_eval_guard",
+    "program_state_multimodality_contract"
+  ],
+  "created_at_utc": "2026-07-04T21:18:29Z",
+  "decision": "Support module recovery improved: unified ranker, cluster detector, feature normalizer helper, source lineage guard, and program-state multimodality contract are now recovered. Data mining remains closed because extractor/alignment modalities and native telemetry are still missing.",
+  "metrics": {
+    "data_mining_allowed": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "newly_closed_count": 5,
+    "newly_closed_or_ready_support_modules": [
+      "unified_dataset_junk_ood_ranker_v1",
+      "cluster_slice_near_duplicate_detector",
+      "feature_normalizer_importable_helper",
+      "source_lineage_locked_eval_guard",
+      "program_state_multimodality_contract"
+    ],
+    "promotion_ready": false,
+    "remaining_blockers": 15,
+    "runtime_authorized": false,
+    "training_allowed": false
+  },
+  "next_best_step": "Recover AST/CST, symbol table, import/dependency, type/signature, test/failure trace, and cross-modal alignment contracts before mining /arxiv data.",
+  "passed": false,
+  "remaining_blockers": [
+    {
+      "name": "AST/CST extractor card",
+      "reason": "program-state modality contract requires concrete syntax tree extraction before source-backed edit/operator scale-up"
+    },
+    {
+      "name": "symbol table extractor card",
+      "reason": "source-backed symbol binding currently uses recovered graph candidates, not a general extractor"
+    },
+    {
+      "name": "import/dependency graph extractor card",
+      "reason": "needed for build strategy, dependency capability cards, and import policy"
+    },
+    {
+      "name": "type/signature extractor card",
+      "reason": "needed for patch operator legality and bounded decoder arguments"
+    },
+    {
+      "name": "call/data/control-flow extractor cards",
+      "reason": "needed for impact, root-cause, data propagation, and edit operator choice"
+    },
+    {
+      "name": "dependency capability card builder",
+      "reason": "portable dependency knowledge is still contract-only"
+    },
+    {
+      "name": "runtime/stack trace normalizer",
+      "reason": "verifier repair and failure-to-symbol binding need normalized trace modality"
+    },
+    {
+      "name": "patch-history modality builder",
+      "reason": "maintainer transformations from diffs/commits are not rebuilt"
+    },
+    {
+      "name": "cross-modal alignment audit",
+      "reason": "modalities must resolve to same opaque repo objects and not leak labels"
+    },
+    {
+      "name": "modality dropout/ablation audit",
+      "reason": "must prove targets are not solved by one shortcut modality"
+    },
+    {
+      "name": "cross-encoder reranker calibration",
+      "reason": "retrieval baselines exist; rerank confidence not calibrated"
+    },
+    {
+      "name": "native training telemetry/internal interpretability",
+      "reason": "row logits/losses exist partially, but activation/gradient attribution and full token CE maps are not complete"
+    },
+    {
+      "name": "source-backed edit localization builder",
+      "reason": "neutral objective exists, source-backed lineage/retrieval version missing"
+    },
+    {
+      "name": "source-backed patch operator builder",
+      "reason": "neutral objective exists, source-backed lineage/retrieval version missing"
+    },
+    {
+      "name": "source-backed verifier repair builder",
+      "reason": "neutral objective exists, source-backed lineage/retrieval version missing"
+    }
+  ],
+  "stage": 8684,
+  "stage_name": "stage8684_module_readiness_refresh_after_program_state_and_support_recovery"
+}

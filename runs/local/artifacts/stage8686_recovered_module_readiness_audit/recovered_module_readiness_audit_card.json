@@ -1,0 +1,359 @@
+{
+  "artifacts": {
+    "current_graph": "runs/local/artifacts/stage8685_shared_helpers_graph_attachment/central_research_graph_with_shared_helpers.json",
+    "doc": "docs/RECOVERED_MODULE_READINESS_AUDIT_STAGE8686.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T21:23:29Z",
+  "decision": "Module recovery improved after Stages8681-8685, but recovery remains incomplete. Mining and training stay closed until context packing, telemetry, interpretability, and source-backed builders are recovered.",
+  "metrics": {
+    "blocking_missing_or_partial_modules": [
+      "curriculum_compiler",
+      "context_packer_lost_in_middle_memory_retrieval",
+      "training_telemetry",
+      "gradient_activation_interpretability",
+      "dataset_cartography_active_learning",
+      "confidence_calibration_ood_heads",
+      "source_backed_edit_localization",
+      "source_backed_patch_operator",
+      "source_backed_verifier_repair",
+      "bounded_decoder_ce_probe",
+      "runtime_verifier_loop"
+    ],
+    "data_mining_allowed": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "graph_edges": 1791,
+    "graph_nodes": 1347,
+    "highest_priority_next_modules": [
+      "context_packer_lost_in_middle_memory_retrieval",
+      "training_telemetry",
+      "gradient_activation_interpretability",
+      "dataset_cartography_active_learning",
+      "source_backed_edit_localization"
+    ],
+    "legacy_scaffold_missing_recovered_features": [
+      "has_rotary",
+      "has_agent_policy_heads",
+      "has_retrieval_heads",
+      "has_scalar_invariant"
+    ],
+    "model_execution_authorized_next": false,
+    "modules_reviewed": 27,
+    "promotion_ready": false,
+    "required_architecture_features": [
+      "has_rotary",
+      "has_agent_policy_heads",
+      "has_retrieval_heads",
+      "has_scalar_invariant"
+    ],
+    "runtime_authorized": false,
+    "status_counts": {
+      "candidate_ready_no_training": 1,
+      "closed_partial": 1,
+      "missing": 6,
+      "missing_closed": 1,
+      "partial": 3,
+      "ready": 9,
+      "ready_partial": 6
+    },
+    "training_allowed": false,
+    "transformer_implementation_features": {
+      "has_agent_policy_heads": true,
+      "has_retrieval_heads": true,
+      "has_rotary": true,
+      "has_scalar_invariant": true
+    },
+    "transformer_missing_recovered_features": []
+  },
+  "modules": [
+    {
+      "files": [
+        "scripts/safe_cleanup.py",
+        "scripts/safe_paths.py",
+        "scripts/artifact_paths.py"
+      ],
+      "gap": null,
+      "name": "safe_storage_cleanup",
+      "next": "Keep as only cleanup path; never write training outputs to /arxiv.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "scripts/authority_gate.py",
+        "runs/local/artifacts/reconstructed_stage_registry.json"
+      ],
+      "gap": null,
+      "name": "stage_registry_authority_gate",
+      "next": "Keep all execution/training authority closed until explicit gate.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "runs/local/artifacts/stage8685_shared_helpers_graph_attachment/central_research_graph_with_shared_helpers.json"
+      ],
+      "gap": "Graph is current through Stage8685, but no module-readiness graph validator exists yet.",
+      "name": "central_research_graph",
+      "next": "Build graph validator after telemetry/context modules are recovered.",
+      "status": "ready_partial"
+    },
+    {
+      "feature_audit": {
+        "required": [
+          "has_rotary",
+          "has_agent_policy_heads",
+          "has_retrieval_heads",
+          "has_scalar_invariant"
+        ],
+        "scaffold": {
+          "has_agent_policy_heads": false,
+          "has_retrieval_heads": false,
+          "has_rotary": false,
+          "has_scalar_invariant": false
+        },
+        "scaffold_missing": [
+          "has_rotary",
+          "has_agent_policy_heads",
+          "has_retrieval_heads",
+          "has_scalar_invariant"
+        ],
+        "transformer": {
+          "has_agent_policy_heads": true,
+          "has_retrieval_heads": true,
+          "has_rotary": true,
+          "has_scalar_invariant": true
+        },
+        "transformer_missing": []
+      },
+      "files": [
+        "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "legacy_src/agentkernel_lite/modeling_transformer.py",
+        "legacy_src/agentkernel_lite/modeling.py"
+      ],
+      "gap": "Recovered transformer implementation contains required features, but legacy GRU scaffold is missing them and must never be selected for 100M training.",
+      "name": "model_architecture_100m_recovered_transformer_features",
+      "next": "Require trainer/runtime audits to select modeling_transformer.py for target 100M runs and block legacy modeling.py for recovered-target training.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "configs/software_maintainer/source_inventory_lineage_registry_stage8663.json",
+        "scripts/build_stage8663_source_inventory_lineage_registry.py"
+      ],
+      "gap": null,
+      "name": "source_inventory_lineage",
+      "next": "Require source_id/lineage_hash in every source-backed builder.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "scripts/feature_normalizer.py",
+        "configs/software_maintainer/shared_feature_normalizer_stage8664.json",
+        "runs/summaries/stage8684_shared_helper_readiness.json"
+      ],
+      "gap": null,
+      "name": "shared_feature_normalizer",
+      "next": "Make all future builders call scripts/feature_normalizer.py instead of local alias logic.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "scripts/source_lineage_guard.py",
+        "configs/software_maintainer/source_inventory_lineage_registry_stage8663.json",
+        "runs/summaries/stage8684_shared_helper_readiness.json"
+      ],
+      "gap": null,
+      "name": "source_lineage_locked_eval_guard",
+      "next": "Make all future source-backed builders call source_lineage_guard before writing train-eligible rows.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "configs/software_maintainer/leakage_retrieval_locked_eval_control_contract_stage8660.json",
+        "scripts/audit_stage8669_patched_manifest_leakage_locked_eval_boundary.py"
+      ],
+      "gap": "Controls and guard exist; future builders still need mandatory import/use enforcement.",
+      "name": "leakage_locked_eval_controls",
+      "next": "Wire helper use into source-backed builder templates.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "runs/summaries/stage8666_repo_span_bm25_retrieval_baseline.json",
+        "runs/summaries/stage8671_dense_hybrid_retrieval_baseline.json"
+      ],
+      "gap": "BM25/dense/hybrid exist; cross-encoder reranker and calibration remain missing.",
+      "name": "retrieval_baselines",
+      "next": "Recover cross-encoder/reranker calibration card after context packer.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "runs/summaries/stage8672_locked_benchmark_pack_manifest.json"
+      ],
+      "gap": "Locked packs exist; helper exists; future builders need hard dependency on helper.",
+      "name": "locked_benchmark_packs",
+      "next": "Enforce source_lineage_guard in every training-candidate builder.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "scripts/shortcut_baseline_audit.py",
+        "scripts/audit_stage8677_source_backed_symbol_binding_shortcut_repair.py"
+      ],
+      "gap": null,
+      "name": "shortcut_baseline_audits",
+      "next": "Require per-objective shortcut cards before model probes.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "scripts/dataset_junk_ood_ranker_v1.py",
+        "runs/summaries/stage8681_unified_dataset_junk_ood_ranker_readiness.json"
+      ],
+      "gap": null,
+      "name": "unified_dataset_junk_ood_ranker_v1",
+      "next": "Use as the single row route/loss eligibility API for future manifests.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "scripts/cluster_slice_near_duplicate_detector.py",
+        "runs/summaries/stage8682_cluster_slice_detector_readiness.json"
+      ],
+      "gap": null,
+      "name": "cluster_slice_near_duplicate_detector",
+      "next": "Use before source-backed expansion to prevent split overlap, semantic duplicates, and unmeasured slice gaps.",
+      "status": "ready"
+    },
+    {
+      "files": [
+        "scripts/curriculum_compiler.py",
+        "scripts/audit_curriculum_compiler_outputs.py",
+        "tests/test_curriculum_compiler.py"
+      ],
+      "gap": "Compiler exists but still lacks mandatory calls to ranker, cluster detector, feature normalizer, and source lineage guard.",
+      "name": "curriculum_compiler",
+      "next": "Patch compiler after telemetry/context recovery so all support modules are wired centrally.",
+      "status": "partial"
+    },
+    {
+      "files": [
+        "scripts/loss_mask_card.py",
+        "configs/schema/loss_mask.schema.json"
+      ],
+      "gap": "Loss card helpers exist, but each future builder must emit a card by contract.",
+      "name": "loss_mask_cards",
+      "next": "Require loss-card generation in source-backed builder template.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "scripts/counterfactual_obligation_audit.py"
+      ],
+      "gap": "Helper exists, but future source-backed rows still need sibling-obligation enforcement.",
+      "name": "counterfactual_obligation_audit",
+      "next": "Wire after source-backed builders have enough row families.",
+      "status": "ready_partial"
+    },
+    {
+      "files": [
+        "runs/summaries/stage8677_source_backed_symbol_binding_shortcut_repair_audit.json",
+        "runs/summaries/stage8678_symbol_binding_repair_graph_attachment.json"
+      ],
+      "gap": "Validated seed exists, but test-query counterexamples are thin and row count should not increase yet.",
+      "name": "source_backed_symbol_binding",
+      "next": "Hold until recovery modules are complete; do not mine yet.",
+      "status": "candidate_ready_no_training"
+    },
+    {
+      "files": [],
+      "gap": "No executable context packer, lost-in-middle ranker, memory retrieval evaluator, or budgeted evidence-packet scorer.",
+      "name": "context_packer_lost_in_middle_memory_retrieval",
+      "next": "Recover context_packer_v1 next before large repo context or source-backed expansion.",
+      "status": "missing"
+    },
+    {
+      "files": [],
+      "gap": "Missing unified telemetry module for row losses, token losses, margins, entropy, gradient norms, module delta norms, and failure buckets.",
+      "name": "training_telemetry",
+      "next": "Recover telemetry schema/module before any native probe or training execution.",
+      "status": "partial"
+    },
+    {
+      "files": [],
+      "gap": "No current activation cache/probe/logit-lens/gradient-attribution module wired to recovered objectives.",
+      "name": "gradient_activation_interpretability",
+      "next": "Recover after telemetry schema is in place.",
+      "status": "missing"
+    },
+    {
+      "files": [],
+      "gap": "No confidence/variability/forgetting/difficulty sampler module.",
+      "name": "dataset_cartography_active_learning",
+      "next": "Recover after telemetry exists; depends on per-epoch/per-row metrics.",
+      "status": "missing"
+    },
+    {
+      "files": [
+        "scripts/dataset_junk_ood_ranker_v1.py"
+      ],
+      "gap": "Ranker emits OOD score, but no calibration objective, threshold card, or learned OOD/confidence-head audit exists.",
+      "name": "confidence_calibration_ood_heads",
+      "next": "Recover calibration card after telemetry and native probes.",
+      "status": "partial"
+    },
+    {
+      "files": [],
+      "gap": "Neutral objective exists, but no source-backed builder with lineage/retrieval/leakage/shortcut/ranker/cluster controls.",
+      "name": "source_backed_edit_localization",
+      "next": "Build only after context/telemetry recovery.",
+      "status": "missing"
+    },
+    {
+      "files": [],
+      "gap": "Neutral objective exists, but no source-backed builder with lineage/retrieval/leakage/shortcut/ranker/cluster controls.",
+      "name": "source_backed_patch_operator",
+      "next": "Build after source-backed edit localization.",
+      "status": "missing"
+    },
+    {
+      "files": [],
+      "gap": "Neutral objective exists, but no source-backed builder with lineage/retrieval/leakage/shortcut/ranker/cluster controls.",
+      "name": "source_backed_verifier_repair",
+      "next": "Build after source-backed patch operator.",
+      "status": "missing"
+    },
+    {
+      "files": [
+        "legacy_src/scripts/train_agentkernel_lite_encdec.py"
+      ],
+      "gap": "Trainer path exists, but no execution allowed and telemetry remains incomplete.",
+      "name": "bounded_decoder_ce_probe",
+      "next": "Keep closed until support modules and source-backed state objectives are complete.",
+      "status": "closed_partial"
+    },
+    {
+      "files": [],
+      "gap": "Runtime/harness/verifier execution remains closed; no active tool loop is rebuilt.",
+      "name": "runtime_verifier_loop",
+      "next": "Keep closed until post-decoder measured stage.",
+      "status": "missing_closed"
+    }
+  ],
+  "next_best_step": "Recover context_packer_lost_in_middle_memory_retrieval, then recover training telemetry before native probes or source-backed expansion.",
+  "passed": false,
+  "stage": 8686,
+  "stage_name": "stage8686_recovered_module_readiness_audit"
+}

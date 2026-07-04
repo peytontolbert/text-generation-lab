@@ -1,0 +1,51 @@
+{
+  "artifacts": {
+    "feature_normalizer": "scripts/feature_normalizer.py",
+    "normalized_features": "runs/local/artifacts/stage8684_shared_helper_readiness/stage8676_normalized_features.jsonl",
+    "source_lineage_guard": "runs/local/artifacts/stage8684_shared_helper_readiness/stage8676_source_lineage_guard.jsonl",
+    "tests": "tests/test_feature_normalizer_and_source_guard.py"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T21:17:03Z",
+  "decision": "Recovered shared feature normalizer and source-lineage/locked-eval guard as importable helper libraries. They are ready for builder reuse but do not authorize mining or training.",
+  "metrics": {
+    "alias_count": 43,
+    "blocked_lineage_rows": 0,
+    "data_mining_allowed": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "missing_aliases": [],
+    "model_execution_authorized_next": false,
+    "normalized_feature_hits": 80,
+    "promotion_ready": false,
+    "required_aliases_checked": [
+      "row_id",
+      "split",
+      "semantic_key",
+      "objective_family",
+      "query_kind",
+      "source_file_is_test",
+      "loss_decoder_ce",
+      "authority_runtime"
+    ],
+    "runtime_authorized": false,
+    "stage8676_rows": 80,
+    "training_allowed": false
+  },
+  "next_best_step": "Attach Stage8684 helpers to the central graph, then rerun the recovered module/submodule readiness audit.",
+  "passed": true,
+  "stage": 8684,
+  "stage_name": "stage8684_shared_helper_readiness"
+}

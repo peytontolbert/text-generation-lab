@@ -1,0 +1,72 @@
+{
+  "clusters": {
+    "exact_duplicate_clusters": {},
+    "exact_split_overlaps": {},
+    "near_duplicate_pairs": [
+      {
+        "jaccard": 1.0,
+        "left": "sample_a",
+        "right": "sample_b"
+      }
+    ],
+    "semantic_duplicate_clusters": {
+      "same": [
+        "sample_a",
+        "sample_b"
+      ]
+    },
+    "semantic_split_overlaps": {
+      "same": [
+        "eval",
+        "train"
+      ]
+    },
+    "undercovered_slices": {
+      "{\"action\":\"A\",\"objective\":\"x\",\"query_kind\":\"q\"}": [
+        "sample_c"
+      ],
+      "{\"action\":null,\"objective\":null,\"query_kind\":null}": [
+        "sample_a",
+        "sample_b"
+      ]
+    }
+  },
+  "metrics": {
+    "exact_duplicate_clusters": 0,
+    "exact_split_overlap_clusters": 0,
+    "near_duplicate_pair_checks": 3,
+    "near_duplicate_pairs": 1,
+    "semantic_duplicate_clusters": 1,
+    "semantic_split_overlap_clusters": 1,
+    "slice_clusters": 2,
+    "source_clusters": 1,
+    "undercovered_slices": 2
+  },
+  "row_records": [
+    {
+      "row_hash": "8493d71f05e4420481e982b95ec310a65fed56e68f830cac7325189f3e4502bf",
+      "row_id": "sample_a",
+      "semantic_key": "same",
+      "slice_key": "{\"action\":null,\"objective\":null,\"query_kind\":null}",
+      "source_cluster_key": "{\"nodes\":null,\"old\":null,\"spans\":null}",
+      "split": "train"
+    },
+    {
+      "row_hash": "ea59ce5f4cfea06c36273bef336f96a12a62cd02dbb5caae7e432a0ffa6ebc2c",
+      "row_id": "sample_b",
+      "semantic_key": "same",
+      "slice_key": "{\"action\":null,\"objective\":null,\"query_kind\":null}",
+      "source_cluster_key": "{\"nodes\":null,\"old\":null,\"spans\":null}",
+      "split": "eval"
+    },
+    {
+      "row_hash": "eb0aac91f10b27119665c30cd8a7939d0f062b29502b992cfc02cd30d11c14fe",
+      "row_id": "sample_c",
+      "semantic_key": "{\"action\":\"A\",\"objective\":\"x\",\"query_kind\":\"q\",\"query_node\":null}",
+      "slice_key": "{\"action\":\"A\",\"objective\":\"x\",\"query_kind\":\"q\"}",
+      "source_cluster_key": "{\"nodes\":null,\"old\":null,\"spans\":null}",
+      "split": "train"
+    }
+  ],
+  "rows": 3
+}
