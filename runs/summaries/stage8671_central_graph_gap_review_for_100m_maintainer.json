@@ -1,0 +1,278 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "bm25_baseline_present": true,
+    "central_graph_present": true,
+    "curriculum_compiler_present": true,
+    "graph_declares_cluster_slice": true,
+    "graph_declares_junk_ood": true,
+    "graph_declares_retrieval_fusion": true,
+    "junk_ranker_script_present": true,
+    "shared_feature_normalizer_present": true,
+    "source_lineage_contract_present": true,
+    "training_authority_remains_closed": true
+  },
+  "maturity": {
+    "blocking_gaps_before_training_or_mining": [
+      "Build shared source inventory + feature normalizer libraries into every graph/symbol/intent builder, not just audit artifacts.",
+      "Create unified dataset_junk_ood_ranker_v1 API and route cards: KEEP_STRUCTURED, KEEP_BOUNDED_DECODER, HOLD_LONG_OUTPUT, USE_FOR_DENOISE_REPAIR, USE_AS_NEGATIVE, NEEDS_RETRIEVAL, QUARANTINE, DROP_DUPLICATE.",
+      "Add near-duplicate/cluster slice detector: exact hash, semantic key, MinHash/simhash, failure cluster, split overlap, undercovered cell.",
+      "Add dense retrieval + cross-encoder rerank + hybrid fusion card against the Stage8666 BM25 baseline.",
+      "Materialize locked eval / benchmark packs and enforce source_id exclusion from train builders.",
+      "Rebuild graph/symbol candidate builders to use Stage8663 lineage ids, Stage8664 aliases, Stage8666 retrieval metrics, and Stage8669 copy-routed leakage boundary.",
+      "Add training diagnostics for the first native structured probe: row loss, field logits, margin/entropy, gradient norms, module delta norms, activation/probe cache.",
+      "Do not reopen decoder CE until structured gates, loss masks, telemetry, leakage, retrieval, and locked-eval cards all pass."
+    ],
+    "partial_or_schema_only": [
+      "structured_dataset_junk_ranker exists, but unified deterministic/logistic/GBDT junk/OOD ranker over all active objectives is not yet rebuilt as a central API.",
+      "cluster_slice_detection and near-duplicate MinHash are named in support registry, but no current stage produces cluster_id/failure_cluster/slice_gap cards.",
+      "hybrid retrieval fusion/dense/rerank are referenced, but only BM25 has a current no-authority baseline card.",
+      "confidence/margin/entropy telemetry exists as contract, but no current native probe writes full gradient/activation/parameter attribution for maintainer objectives.",
+      "locked eval policy exists as control contract, but fixed benchmark-pack materialization and split-boundary enforcement are not yet built as reusable cards.",
+      "context packing/lost-in-middle/memory retrieval are referenced but not wired into candidate builders."
+    ],
+    "ready_contracts": [
+      "Stage8663 source inventory lineage registry: source_id/lineage_hash contract exists and indexes 184 parquet files.",
+      "Stage8664 shared feature normalizer: alias map exists and was audited across 4,308 rows.",
+      "Stage8666 BM25 retrieval baseline: top1 0.8908, top5 0.9867, metadata top5 0.1367, evidence-removed top5 0.0042.",
+      "Stage8669 patched leakage boundary: visible_target_hits reduced to 0 after copy-routed intent manifest.",
+      "Stage8653 focused storage policy and single safe cleanup entrypoint are in force."
+    ]
+  },
+  "metrics": {
+    "coverage": {
+      "bounded_decoder_repair": {
+        "hits": 547,
+        "terms": {
+          "bounded_decoder": 162,
+          "decoder_ce": 211,
+          "denoise": 51,
+          "repetition": 15,
+          "short": 108
+        }
+      },
+      "cluster_slice_dedup": {
+        "hits": 90,
+        "terms": {
+          "cluster": 34,
+          "duplicate": 34,
+          "minhash": 8,
+          "semantic_key": 14
+        }
+      },
+      "curriculum_compiler": {
+        "hits": 709,
+        "terms": {
+          "compiler": 185,
+          "counterfactual": 164,
+          "curriculum": 271,
+          "obligation": 89
+        }
+      },
+      "dataset_judge_junk_ranker": {
+        "hits": 232,
+        "terms": {
+          "dataset_judge": 71,
+          "judge_signal": 75,
+          "junk": 34,
+          "ood": 17,
+          "risk": 35
+        }
+      },
+      "feature_normalizer": {
+        "hits": 764,
+        "terms": {
+          "alias": 13,
+          "feature": 746,
+          "normalizer": 5
+        }
+      },
+      "locked_eval_leakage": {
+        "hits": 298,
+        "terms": {
+          "contamination": 20,
+          "copy": 34,
+          "leakage": 98,
+          "locked": 131,
+          "visible": 15
+        }
+      },
+      "memory_context": {
+        "hits": 105,
+        "terms": {
+          "context_window": 8,
+          "lost_in_middle": 9,
+          "memory": 80,
+          "packer": 8
+        }
+      },
+      "repo_state_cognition": {
+        "hits": 598,
+        "terms": {
+          "edit": 149,
+          "patch_operator": 77,
+          "repo_state": 114,
+          "symbol": 200,
+          "verifier_repair": 58
+        }
+      },
+      "retrieval_fusion": {
+        "hits": 285,
+        "terms": {
+          "bm25": 28,
+          "dense": 13,
+          "hybrid_retrieval": 16,
+          "rerank": 27,
+          "retrieval": 201
+        }
+      },
+      "source_lineage": {
+        "hits": 45,
+        "terms": {
+          "lineage": 23,
+          "source_id": 2,
+          "source_inventory": 20
+        }
+      },
+      "tool_runtime_governance": {
+        "hits": 994,
+        "terms": {
+          "authority": 529,
+          "controller": 173,
+          "harness": 101,
+          "runtime": 116,
+          "tool": 75
+        }
+      },
+      "training_diagnostics": {
+        "hits": 129,
+        "terms": {
+          "activation": 0,
+          "calibration": 24,
+          "cartography": 7,
+          "confidence": 48,
+          "gradient": 4,
+          "telemetry": 46
+        }
+      }
+    },
+    "file_status": {
+      "action_feature_registry": {
+        "exists": true,
+        "path": "configs/software_maintainer/action_feature_registry.json"
+      },
+      "additional_support_index": {
+        "exists": true,
+        "path": "configs/software_maintainer/additional_support_modules_recovery_index_stage8656.json"
+      },
+      "bm25_baseline_script": {
+        "exists": true,
+        "path": "scripts/audit_stage8666_repo_span_bm25_retrieval_baseline.py"
+      },
+      "central_graph": {
+        "exists": true,
+        "path": "runs/local/artifacts/stage8670_control_execution_frontier_graph_attachment/central_research_graph_with_control_execution_frontier.json"
+      },
+      "control_contract": {
+        "exists": true,
+        "path": "configs/software_maintainer/leakage_retrieval_locked_eval_control_contract_stage8660.json"
+      },
+      "curriculum_compiler_script": {
+        "exists": true,
+        "path": "scripts/curriculum_compiler.py"
+      },
+      "infrastructure_support_index": {
+        "exists": true,
+        "path": "configs/software_maintainer/infrastructure_support_modules_recovery_index_stage8658.json"
+      },
+      "junk_ranker_script": {
+        "exists": true,
+        "path": "scripts/structured_dataset_junk_ranker.py"
+      },
+      "leakage_boundary_script": {
+        "exists": true,
+        "path": "scripts/audit_stage8669_patched_manifest_leakage_locked_eval_boundary.py"
+      },
+      "objective_judge_script": {
+        "exists": true,
+        "path": "scripts/objective_row_judge.py"
+      },
+      "shared_feature_normalizer": {
+        "exists": true,
+        "path": "configs/software_maintainer/shared_feature_normalizer_stage8664.json"
+      },
+      "shortcut_audit_script": {
+        "exists": true,
+        "path": "scripts/shortcut_baseline_audit.py"
+      },
+      "source_lineage_registry": {
+        "exists": true,
+        "path": "configs/software_maintainer/source_inventory_lineage_registry_stage8663.json"
+      },
+      "support_systems_index": {
+        "exists": true,
+        "path": "configs/software_maintainer/support_systems_recovery_index_stage8653.json"
+      },
+      "training_loop": {
+        "exists": true,
+        "path": "legacy_src/agentkernel_lite/training_loop.py"
+      },
+      "transformer_model": {
+        "exists": true,
+        "path": "legacy_src/agentkernel_lite/modeling_transformer.py"
+      }
+    },
+    "graph_edges": 1758,
+    "graph_nodes": 1329,
+    "node_kinds": {
+      "action_label": 19,
+      "architecture_layer": 11,
+      "authority_flag": 10,
+      "behavior_value_label": 14,
+      "control_card": 16,
+      "counterfactual_obligation": 21,
+      "curriculum_route": 9,
+      "dataset_judge_signal": 16,
+      "dataset_source": 28,
+      "doc": 11,
+      "fusion_input": 13,
+      "gate_feature": 18,
+      "high_value_recovery_source": 500,
+      "mining_must_remain_closed_until": 10,
+      "mining_required_card": 10,
+      "model_family": 19,
+      "model_signal": 55,
+      "next_step": 37,
+      "objective_family": 13,
+      "patch_operator": 12,
+      "recoverable_root": 22,
+      "recovered_placeholder_target": 13,
+      "repo_graph_edge_type": 18,
+      "repo_graph_node_type": 17,
+      "software_build_action": 13,
+      "source_ref": 101,
+      "stage": 37,
+      "structured_field": 22,
+      "support_module": 41,
+      "useful_recovery_source": 43
+    },
+    "reviewed_stage_count": 157,
+    "reviewed_stage_max": 8670,
+    "reviewed_stage_min": 8530
+  },
+  "next_best_step": "Implement Stage8672 unified dataset_junk_ood_ranker_v1 and Stage8673 cluster/near-duplicate slice audit, then Stage8674 dense/rerank retrieval fusion and Stage8675 locked benchmark pack materialization before mining/training reopen.",
+  "passed": true,
+  "stage": 8671,
+  "stage_name": "stage8671_central_graph_gap_review_for_100m_maintainer"
+}
