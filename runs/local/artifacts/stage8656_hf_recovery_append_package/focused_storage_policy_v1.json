@@ -1,0 +1,58 @@
+{
+  "allowed_write_locations": {
+    "configs": "configs",
+    "docs": "docs",
+    "probe_outputs": "runs/local/probes",
+    "scripts": "scripts",
+    "stage_artifacts": "runs/local/artifacts",
+    "stage_summaries": "runs/summaries",
+    "tests": "tests"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "backup_locations": {
+    "/arxiv": {
+      "cleanup_allowed": false,
+      "delete_allowed": false,
+      "read_allowed_for_recovery": true,
+      "role": "durable backup and recovery source",
+      "training_output_allowed": false,
+      "write_allowed_only_for_explicit_backup": true
+    }
+  },
+  "canonical_artifact_paths_module": "scripts/artifact_paths.py",
+  "cleanup_contract": {
+    "dry_run_supported": true,
+    "freehand_cleanup_scripts_allowed": false,
+    "manual_shell_cleanup_allowed": false,
+    "required_parent": "runs/local/probes/<run_id>/checkpoints",
+    "requires_marker_file": ".agentkernel_probe_output",
+    "requires_run_id_match": true,
+    "scope": "temporary checkpoint children only"
+  },
+  "forbidden_cleanup_targets": [
+    "/",
+    "/data",
+    "/arxiv",
+    "/arxiv/datasets",
+    "/arxiv/repositories",
+    "/arxiv/code",
+    "/arxiv/preserved_checkpoints_20260609",
+    "/data/agentkernel-seq2seq-text-lab"
+  ],
+  "policy_name": "agentkernel_focused_storage_policy_v1",
+  "purpose": "Keep JSON, manifests, probe outputs, docs, and configs in stable focused locations; forbid ad hoc cleanup surfaces.",
+  "safe_path_module": "scripts/safe_paths.py",
+  "single_cleanup_entrypoint": "scripts/safe_cleanup.py",
+  "stage": 8653
+}
