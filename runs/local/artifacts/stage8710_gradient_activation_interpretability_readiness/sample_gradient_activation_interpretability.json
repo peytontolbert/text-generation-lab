@@ -1,0 +1,100 @@
+{
+  "activation_patch": {
+    "clean_gold_logit": 3.0,
+    "corrupt_gold_logit": 0.0,
+    "field": "build_mode",
+    "gold_label": "IMPORT",
+    "logit_recovery_fraction": 0.8333333333333334,
+    "patched_gold_logit": 2.5,
+    "patched_layer": "encoder.final",
+    "patched_prediction": "IMPORT",
+    "recovered_prediction": true,
+    "row_id": "r1"
+  },
+  "activation_summary": {
+    "activation_cache_present": true,
+    "layer_count": 2,
+    "layers": {
+      "encoder.0": {
+        "count": 3,
+        "l2_norm": 0.37416573867739417,
+        "max_abs": 0.3,
+        "mean": 0.06666666666666667
+      },
+      "field_head_input": {
+        "count": 2,
+        "l2_norm": 1.0,
+        "max_abs": 1.0,
+        "mean": 0.5
+      }
+    },
+    "row_id": "r1"
+  },
+  "bundle": {
+    "activation_cache_summary_present": true,
+    "activation_patch_present": true,
+    "authority": {
+      "model_execution": false,
+      "runtime": false,
+      "source_body_emission": false,
+      "training": false
+    },
+    "feature_ablation_present": true,
+    "module_delta_norms_present": true,
+    "passed": true,
+    "row_gradient_norms_present": true
+  },
+  "feature_ablation": {
+    "baseline_gold_logit": 2.0,
+    "baseline_gold_prob": 0.7782683188104927,
+    "feature_attribution": [
+      {
+        "ablated_gold_logit": 0.4,
+        "ablated_gold_prob": 0.4147418726680695,
+        "feature_group": "import_evidence",
+        "gold_logit_drop": 1.6,
+        "gold_prob_drop": 0.36352644614242324
+      },
+      {
+        "ablated_gold_logit": 1.9,
+        "ablated_gold_prob": 0.7605329011010041,
+        "feature_group": "language",
+        "gold_logit_drop": 0.10000000000000009,
+        "gold_prob_drop": 0.01773541770948861
+      }
+    ],
+    "field": "build_mode",
+    "gold_label": "IMPORT",
+    "row_id": "r1",
+    "top_feature_group": "import_evidence"
+  },
+  "module_delta": {
+    "decoder_delta_norm": 0.0,
+    "delta_norm_by_module": {
+      "decoder": 0.0,
+      "encoder": 0.10000000000000009
+    },
+    "delta_norm_by_parameter": {
+      "decoder.block.weight": 0.0,
+      "encoder.layer0.weight": 0.10000000000000009
+    },
+    "missing_after": [],
+    "missing_before": [],
+    "parameter_count": 2,
+    "total_delta_norm": 0.10000000000000009
+  },
+  "row_gradient": {
+    "decoder_grad_norm": 0.0,
+    "grad_norm_by_module": {
+      "encoder": 0.223606797749979,
+      "structured_heads": 0.3
+    },
+    "grad_norm_by_parameter": {
+      "encoder.layer0.weight": 0.223606797749979,
+      "structured_heads.action.weight": 0.3
+    },
+    "parameter_count": 2,
+    "row_id": "r1",
+    "total_grad_norm": 0.37416573867739417
+  }
+}
