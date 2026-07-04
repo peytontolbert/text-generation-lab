@@ -1,0 +1,480 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "gates": {
+    "bm25_dense_retrieval_baseline_ready": true,
+    "cluster_slice_detector_still_missing": true,
+    "graph_controls_attached": true,
+    "junk_ood_ranker_still_missing": true,
+    "locked_benchmark_pack_ready": true,
+    "patched_leakage_boundary_ready": true,
+    "shared_feature_normalizer_ready": true,
+    "source_lineage_ready": true,
+    "training_authority_remains_closed": true
+  },
+  "metrics": {
+    "filled_since_stage8671_review": [
+      "Dense retrieval baseline added: dense top5 0.983, BM25 top5 0.998, hybrid RRF top5 0.994 using tfidf_svd fallback.",
+      "Locked benchmark pack manifest added: 5 promotion-only packs, 0 train-eligible packs.",
+      "Retrieval/eval controls attached to graph: 1,332 nodes and 1,764 edges."
+    ],
+    "graph_edges": 1764,
+    "graph_nodes": 1332,
+    "latest_graph": "runs/local/artifacts/stage8673_retrieval_eval_controls_graph_attachment/central_research_graph_with_retrieval_eval_controls.json",
+    "stage_metrics": {
+      "8663": [
+        {
+          "metrics": {
+            "local_datasets_load_check": "blocked_by_local_torch_attribute_error",
+            "other_arxiv_train_parquet_files_are_different_corpora": true,
+            "recovery_config": "recovery_stage8530_8662",
+            "recovery_config_path": "recovery_20260704/stage8530_8662_recovery_summaries.jsonl",
+            "remote_commit": "1a89aa8a0267fad894f926cf38c213dc12a2bd5a",
+            "remote_dataset": "PeytonT/100m_swe_research_timeline",
+            "second_project_local_train_parquet_found": false,
+            "timeline_config": "timeline_stage1_6158",
+            "timeline_config_path": "train.parquet",
+            "timeline_train_parquet_sha256": "4effdb90e8887d8aac75141c0d0612eaeb4487ea0737560ea1828f0932fa2af1"
+          },
+          "next": "Use timeline_stage1_6158 for the original parquet and recovery_stage8530_8662 for the late recovery bridge; keep unrelated /arxiv train.parquet corpora separate or upload to their own datasets only after review.",
+          "passed": true,
+          "path": "runs/summaries/stage8663_hf_multiconfig_viewer_patch.json",
+          "stage_name": "stage8663_hf_multiconfig_viewer_patch"
+        },
+        {
+          "metrics": {
+            "decoder_ce_training_authorized_next": false,
+            "denoise_ce_training_authorized_next": false,
+            "failures": [],
+            "locked_eval_records": 5,
+            "model_execution_authorized_next": false,
+            "non_training_records": 12,
+            "parquet_files_indexed": 184,
+            "promotion_ready": false,
+            "runtime_authorized": false,
+            "source_groups": 7,
+            "source_records": 36,
+            "train_eligible_records": 24
+          },
+          "next": "Use source_id and lineage_hash in all graph/symbol/retrieval candidate rows; locked_eval source_ids must be rejected by training builders.",
+          "passed": true,
+          "path": "runs/summaries/stage8663_source_inventory_lineage_registry.json",
+          "stage_name": "stage8663_source_inventory_lineage_registry"
+        }
+      ],
+      "8664": [
+        {
+          "metrics": {
+            "alias_count": 43,
+            "alias_hits": {
+              "allowed_repository_visible": 360,
+              "authority_body_emission": 4308,
+              "authority_decoder_ce": 4308,
+              "authority_model_execution": 4308,
+              "authority_runtime": 4308,
+              "authority_source_emission": 4308,
+              "blocked_dependency_signal": 360,
+              "call_count_bucket": 1068,
+              "decode_allowed": 3240,
+              "decoder_budget_ok": 3240,
+              "definition_count_bucket": 1068,
+              "degree_bucket": 0,
+              "edge_type": 1068,
+              "encoder_has_internal_token": 3240,
+              "evidence_text": 720,
+              "file_extension": 3240,
+              "graph_id": 1068,
+              "import_count_bucket": 1068,
+              "import_state": 360,
+              "language": 4308,
+              "loss_action_sequence_ce": 3240,
+              "loss_decoder_ce": 4308,
+              "loss_denoise_ce": 4308,
+              "loss_file_plan_ce": 3240,
+              "loss_runtime_reward": 4308,
+              "loss_symbol_binding_ce": 4308,
+              "missing_evidence": 3240,
+              "node_type": 1068,
+              "objective_family": 4308,
+              "path_depth_bucket": 1068,
+              "query_kind": 1068,
+              "query_node_id": 1068,
+              "route": 3240,
+              "row_id": 4308,
+              "semantic_key": 3240,
+              "source_file_is_test": 1068,
+              "source_ref_corpus": 1068,
+              "source_ref_path": 1068,
+              "source_stage": 3240,
+              "split": 4308,
+              "target_has_internal_token": 3240,
+              "target_text_copied_in_encoder": 3240,
+              "target_tokens": 3240
+            },
+            "decoder_ce_training_authorized_next": false,
+            "denoise_ce_training_authorized_next": false,
+            "failures": [],
+            "manifests": 7,
+            "missing_aliases": [],
+            "model_execution_authorized_next": false,
+            "old_authority_alias_hits": 1068,
+            "promotion_ready": false,
+            "rows_total": 4308,
+            "runtime_authorized": false
+          },
+          "next": "Use this alias map in graph/symbol builders and add a hard schema-drift audit for every new manifest.",
+          "passed": true,
+          "path": "runs/summaries/stage8664_shared_feature_normalizer_audit.json",
+          "stage_name": "stage8664_shared_feature_normalizer_audit"
+        }
+      ],
+      "8669": [
+        {
+          "metrics": {
+            "copy_routed_rows": 360,
+            "decoder_ce_training_authorized_next": false,
+            "denoise_ce_training_authorized_next": false,
+            "failures": [],
+            "forbidden_rows": 0,
+            "locked_ref_hits": 0,
+            "model_execution_authorized_next": false,
+            "promotion_ready": false,
+            "rows_total": 4308,
+            "runtime_authorized": false,
+            "visible_target_hits": 0
+          },
+          "next": "Attach Stage8668/8669 decisions to the graph and use copy-routed intent rows for future builders; then continue to dense/rerank retrieval and locked eval pack cards.",
+          "passed": true,
+          "path": "runs/summaries/stage8669_patched_manifest_leakage_locked_eval_boundary.json",
+          "stage_name": "stage8669_patched_manifest_leakage_locked_eval_boundary"
+        }
+      ],
+      "8671": [
+        {
+          "metrics": {
+            "coverage": {
+              "bounded_decoder_repair": {
+                "hits": 547,
+                "terms": {
+                  "bounded_decoder": 162,
+                  "decoder_ce": 211,
+                  "denoise": 51,
+                  "repetition": 15,
+                  "short": 108
+                }
+              },
+              "cluster_slice_dedup": {
+                "hits": 90,
+                "terms": {
+                  "cluster": 34,
+                  "duplicate": 34,
+                  "minhash": 8,
+                  "semantic_key": 14
+                }
+              },
+              "curriculum_compiler": {
+                "hits": 709,
+                "terms": {
+                  "compiler": 185,
+                  "counterfactual": 164,
+                  "curriculum": 271,
+                  "obligation": 89
+                }
+              },
+              "dataset_judge_junk_ranker": {
+                "hits": 232,
+                "terms": {
+                  "dataset_judge": 71,
+                  "judge_signal": 75,
+                  "junk": 34,
+                  "ood": 17,
+                  "risk": 35
+                }
+              },
+              "feature_normalizer": {
+                "hits": 764,
+                "terms": {
+                  "alias": 13,
+                  "feature": 746,
+                  "normalizer": 5
+                }
+              },
+              "locked_eval_leakage": {
+                "hits": 298,
+                "terms": {
+                  "contamination": 20,
+                  "copy": 34,
+                  "leakage": 98,
+                  "locked": 131,
+                  "visible": 15
+                }
+              },
+              "memory_context": {
+                "hits": 105,
+                "terms": {
+                  "context_window": 8,
+                  "lost_in_middle": 9,
+                  "memory": 80,
+                  "packer": 8
+                }
+              },
+              "repo_state_cognition": {
+                "hits": 598,
+                "terms": {
+                  "edit": 149,
+                  "patch_operator": 77,
+                  "repo_state": 114,
+                  "symbol": 200,
+                  "verifier_repair": 58
+                }
+              },
+              "retrieval_fusion": {
+                "hits": 285,
+                "terms": {
+                  "bm25": 28,
+                  "dense": 13,
+                  "hybrid_retrieval": 16,
+                  "rerank": 27,
+                  "retrieval": 201
+                }
+              },
+              "source_lineage": {
+                "hits": 45,
+                "terms": {
+                  "lineage": 23,
+                  "source_id": 2,
+                  "source_inventory": 20
+                }
+              },
+              "tool_runtime_governance": {
+                "hits": 994,
+                "terms": {
+                  "authority": 529,
+                  "controller": 173,
+                  "harness": 101,
+                  "runtime": 116,
+                  "tool": 75
+                }
+              },
+              "training_diagnostics": {
+                "hits": 129,
+                "terms": {
+                  "activation": 0,
+                  "calibration": 24,
+                  "cartography": 7,
+                  "confidence": 48,
+                  "gradient": 4,
+                  "telemetry": 46
+                }
+              }
+            },
+            "file_status": {
+              "action_feature_registry": {
+                "exists": true,
+                "path": "configs/software_maintainer/action_feature_registry.json"
+              },
+              "additional_support_index": {
+                "exists": true,
+                "path": "configs/software_maintainer/additional_support_modules_recovery_index_stage8656.json"
+              },
+              "bm25_baseline_script": {
+                "exists": true,
+                "path": "scripts/audit_stage8666_repo_span_bm25_retrieval_baseline.py"
+              },
+              "central_graph": {
+                "exists": true,
+                "path": "runs/local/artifacts/stage8670_control_execution_frontier_graph_attachment/central_research_graph_with_control_execution_frontier.json"
+              },
+              "control_contract": {
+                "exists": true,
+                "path": "configs/software_maintainer/leakage_retrieval_locked_eval_control_contract_stage8660.json"
+              },
+              "curriculum_compiler_script": {
+                "exists": true,
+                "path": "scripts/curriculum_compiler.py"
+              },
+              "infrastructure_support_index": {
+                "exists": true,
+                "path": "configs/software_maintainer/infrastructure_support_modules_recovery_index_stage8658.json"
+              },
+              "junk_ranker_script": {
+                "exists": true,
+                "path": "scripts/structured_dataset_junk_ranker.py"
+              },
+              "leakage_boundary_script": {
+                "exists": true,
+                "path": "scripts/audit_stage8669_patched_manifest_leakage_locked_eval_boundary.py"
+              },
+              "objective_judge_script": {
+                "exists": true,
+                "path": "scripts/objective_row_judge.py"
+              },
+              "shared_feature_normalizer": {
+                "exists": true,
+                "path": "configs/software_maintainer/shared_feature_normalizer_stage8664.json"
+              },
+              "shortcut_audit_script": {
+                "exists": true,
+                "path": "scripts/shortcut_baseline_audit.py"
+              },
+              "source_lineage_registry": {
+                "exists": true,
+                "path": "configs/software_maintainer/source_inventory_lineage_registry_stage8663.json"
+              },
+              "support_systems_index": {
+                "exists": true,
+                "path": "configs/software_maintainer/support_systems_recovery_index_stage8653.json"
+              },
+              "training_loop": {
+                "exists": true,
+                "path": "legacy_src/agentkernel_lite/training_loop.py"
+              },
+              "transformer_model": {
+                "exists": true,
+                "path": "legacy_src/agentkernel_lite/modeling_transformer.py"
+              }
+            },
+            "graph_edges": 1758,
+            "graph_nodes": 1329,
+            "node_kinds": {
+              "action_label": 19,
+              "architecture_layer": 11,
+              "authority_flag": 10,
+              "behavior_value_label": 14,
+              "control_card": 16,
+              "counterfactual_obligation": 21,
+              "curriculum_route": 9,
+              "dataset_judge_signal": 16,
+              "dataset_source": 28,
+              "doc": 11,
+              "fusion_input": 13,
+              "gate_feature": 18,
+              "high_value_recovery_source": 500,
+              "mining_must_remain_closed_until": 10,
+              "mining_required_card": 10,
+              "model_family": 19,
+              "model_signal": 55,
+              "next_step": 37,
+              "objective_family": 13,
+              "patch_operator": 12,
+              "recoverable_root": 22,
+              "recovered_placeholder_target": 13,
+              "repo_graph_edge_type": 18,
+              "repo_graph_node_type": 17,
+              "software_build_action": 13,
+              "source_ref": 101,
+              "stage": 37,
+              "structured_field": 22,
+              "support_module": 41,
+              "useful_recovery_source": 43
+            },
+            "reviewed_stage_count": 157,
+            "reviewed_stage_max": 8670,
+            "reviewed_stage_min": 8530
+          },
+          "next": "Implement Stage8672 unified dataset_junk_ood_ranker_v1 and Stage8673 cluster/near-duplicate slice audit, then Stage8674 dense/rerank retrieval fusion and Stage8675 locked benchmark pack materialization before mining/training reopen.",
+          "passed": true,
+          "path": "runs/summaries/stage8671_central_graph_gap_review_for_100m_maintainer.json",
+          "stage_name": "stage8671_central_graph_gap_review_for_100m_maintainer"
+        },
+        {
+          "metrics": {
+            "bm25_mrr10": 0.9568500000000004,
+            "bm25_top1": 0.927,
+            "bm25_top5": 0.998,
+            "decoder_ce_training_authorized_next": false,
+            "denoise_ce_training_authorized_next": false,
+            "dense_backend": "tfidf_svd_fallback:ImportError",
+            "dense_mrr10": 0.8840595238095247,
+            "dense_top1": 0.813,
+            "dense_top5": 0.983,
+            "docs": 1000,
+            "failures": [],
+            "hybrid_lift_top5_over_bm25": -0.0040000000000000036,
+            "hybrid_rrf_mrr10": 0.9432178571428576,
+            "hybrid_rrf_top1": 0.905,
+            "hybrid_rrf_top5": 0.994,
+            "model_execution_authorized_next": false,
+            "promotion_ready": false,
+            "runtime_authorized": false
+          },
+          "next": "Use BM25+dense+RRF cards when building source-backed graph/symbol rows; add reranker only after locked benchmark pack is versioned.",
+          "passed": true,
+          "path": "runs/summaries/stage8671_dense_hybrid_retrieval_baseline.json",
+          "stage_name": "stage8671_dense_hybrid_retrieval_baseline"
+        }
+      ],
+      "8672": [
+        {
+          "metrics": {
+            "decoder_ce_training_authorized_next": false,
+            "denoise_ce_training_authorized_next": false,
+            "failures": [],
+            "locked_packs": 5,
+            "model_execution_authorized_next": false,
+            "parsed_score_rows": 0,
+            "promotion_only_packs": 5,
+            "promotion_ready": false,
+            "runtime_authorized": false,
+            "slice_tags": [
+              "calibration_required",
+              "locked_dataset_parquet",
+              "rubric_judge",
+              "software_agent_benchmark",
+              "swe_bench"
+            ],
+            "train_eligible_packs": 0
+          },
+          "next": "Attach locked benchmark packs to graph and use them as promotion-only regression sources; never mine them into train/dev-failure rows.",
+          "passed": true,
+          "path": "runs/summaries/stage8672_locked_benchmark_pack_manifest.json",
+          "stage_name": "stage8672_locked_benchmark_pack_manifest"
+        }
+      ],
+      "8673": [
+        {
+          "metrics": {
+            "added_edges": 6,
+            "added_nodes": 3,
+            "control_execution_nodes": 2,
+            "decoder_ce_training_authorized_next": false,
+            "denoise_ce_training_authorized_next": false,
+            "failures": [],
+            "graph_edges": 1764,
+            "graph_nodes": 1332,
+            "model_execution_authorized_next": false,
+            "promotion_ready": false,
+            "runtime_authorized": false
+          },
+          "next": "Build source-backed graph/symbol candidate manifests using Stage8663 lineage, Stage8664 aliases, Stage8669 leakage pass, Stage8671 retrieval baselines, and Stage8672 locked benchmark boundary.",
+          "passed": true,
+          "path": "runs/summaries/stage8673_retrieval_eval_controls_graph_attachment.json",
+          "stage_name": "stage8673_retrieval_eval_controls_graph_attachment"
+        }
+      ]
+    },
+    "still_open_gaps": [
+      "Unified dataset_junk_ood_ranker_v1 central API over all objective families.",
+      "Cluster/slice/near-duplicate detector with MinHash/simhash and failure clusters.",
+      "Cross-encoder reranker after locked benchmark packs are versioned.",
+      "Source-backed graph/symbol candidate builders using lineage, aliases, retrieval, locked-eval boundaries, and copy-routed leakage pass.",
+      "Native structured probe telemetry: logits, row losses, margins, entropy, gradient norms, module deltas, activation/probe cache.",
+      "Context packing/lost-in-middle/memory retrieval integration.",
+      "Dataset cartography and active-learning sampler for scale-up rows."
+    ]
+  },
+  "next_best_step": "Build Stage8675 unified dataset_junk_ood_ranker_v1, Stage8676 cluster/near-duplicate slice detector, then source-backed graph/symbol candidate builders. Keep training and mining closed until those pass.",
+  "passed": true,
+  "stage": 8674,
+  "stage_name": "stage8674_current_gap_review_after_retrieval_eval_controls"
+}

@@ -1,0 +1,87 @@
+{
+  "artifacts": {
+    "edges_jsonl": "runs/local/artifacts/stage8673_retrieval_eval_controls_graph_attachment/central_research_graph_with_retrieval_eval_controls_edges.jsonl",
+    "graph": "runs/local/artifacts/stage8673_retrieval_eval_controls_graph_attachment/central_research_graph_with_retrieval_eval_controls.json",
+    "nodes_jsonl": "runs/local/artifacts/stage8673_retrieval_eval_controls_graph_attachment/central_research_graph_with_retrieval_eval_controls_nodes.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T20:42:30Z",
+  "decision": "Retrieval baseline and locked benchmark pack controls are attached to the central graph.",
+  "metrics": {
+    "added_edges": 6,
+    "added_nodes": 3,
+    "control_execution_nodes": 2,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "graph_edges": 1764,
+    "graph_nodes": 1332,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false
+  },
+  "next_best_step": "Build source-backed graph/symbol candidate manifests using Stage8663 lineage, Stage8664 aliases, Stage8669 leakage pass, Stage8671 retrieval baselines, and Stage8672 locked benchmark boundary.",
+  "passed": true,
+  "stage": 8673,
+  "stage_name": "stage8673_retrieval_eval_controls_graph_attachment",
+  "statuses": {
+    "stage8671_dense_hybrid_retrieval_baseline": {
+      "metrics": {
+        "bm25_mrr10": 0.9568500000000004,
+        "bm25_top1": 0.927,
+        "bm25_top5": 0.998,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "dense_backend": "tfidf_svd_fallback:ImportError",
+        "dense_mrr10": 0.8840595238095247,
+        "dense_top1": 0.813,
+        "dense_top5": 0.983,
+        "docs": 1000,
+        "failures": [],
+        "hybrid_lift_top5_over_bm25": -0.0040000000000000036,
+        "hybrid_rrf_mrr10": 0.9432178571428576,
+        "hybrid_rrf_top1": 0.905,
+        "hybrid_rrf_top5": 0.994,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false
+      },
+      "passed": true,
+      "summary": "runs/summaries/stage8671_dense_hybrid_retrieval_baseline.json"
+    },
+    "stage8672_locked_benchmark_pack_manifest": {
+      "metrics": {
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "failures": [],
+        "locked_packs": 5,
+        "model_execution_authorized_next": false,
+        "parsed_score_rows": 0,
+        "promotion_only_packs": 5,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "slice_tags": [
+          "calibration_required",
+          "locked_dataset_parquet",
+          "rubric_judge",
+          "software_agent_benchmark",
+          "swe_bench"
+        ],
+        "train_eligible_packs": 0
+      },
+      "passed": true,
+      "summary": "runs/summaries/stage8672_locked_benchmark_pack_manifest.json"
+    }
+  }
+}
