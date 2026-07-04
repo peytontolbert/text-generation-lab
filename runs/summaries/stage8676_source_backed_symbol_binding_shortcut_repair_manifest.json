@@ -1,0 +1,57 @@
+{
+  "artifacts": {
+    "lineage_registry": "configs/software_maintainer/source_inventory_lineage_registry_stage8663.json",
+    "manifest": "runs/local/artifacts/stage8676_source_backed_symbol_binding_shortcut_repair_manifest/source_backed_symbol_binding_shortcut_repair_manifest.jsonl",
+    "retrieval_baseline": "runs/summaries/stage8671_dense_hybrid_retrieval_baseline.json",
+    "source_manifest": "runs/local/artifacts/stage8618_symbol_binding_counterfactual_with_test_patch/combined_symbol_binding_candidates.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-04T20:51:53Z",
+  "decision": "Built a no-authority shortcut-repaired source-backed symbol-binding candidate manifest by down-capping test binding rows and preserving all four available test counterexamples.",
+  "metrics": {
+    "actions": {
+      "ABSTAIN_UNBOUND": 16,
+      "BIND_CALL_TO_SYMBOL": 16,
+      "BIND_IMPORT_TO_MODULE": 16,
+      "BIND_TEST_TO_SYMBOL": 16,
+      "RETRIEVE_MORE": 16
+    },
+    "cap_per_action": 16,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "query_kind_counts": {
+      "callsite": 28,
+      "import": 32,
+      "test": 20
+    },
+    "query_kind_test_action_dist": {
+      "BIND_TEST_TO_SYMBOL": 16,
+      "RETRIEVE_MORE": 4
+    },
+    "query_kind_test_majority": 0.8,
+    "rows": 80,
+    "runtime_authorized": false,
+    "splits": {
+      "eval": 22,
+      "strict_eval": 26,
+      "train": 32
+    }
+  },
+  "next_best_step": "Run Stage8677 audit. If it passes, attach Stage8676/8677 to the central graph; if it fails, mine more test-query counterexamples before any training.",
+  "passed": true,
+  "stage": 8676,
+  "stage_name": "stage8676_source_backed_symbol_binding_shortcut_repair_manifest"
+}
