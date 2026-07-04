@@ -443,3 +443,10 @@ This is not learned GNN training. It is the graph-feature interface needed befor
 Stage8716-8717 recover `rubric_judge_calibrator.py` as a deterministic calibration layer between rubric/teacher judge signals and verifier outcomes. It emits weighted rubric scores, judge confidence, verifier disagreement, manual-review routes, quarantine routes for authority/leak risk, and a mean Brier-style calibration card.
 
 Rubrics and LLM/teacher judges are not ground truth. High-confidence judge/verifier disagreement blocks acceptance and routes to manual review; no scoring, Gemma, model execution, runtime, training, or promotion authority is opened.
+
+
+### Operator/Codelength Interface Boundary
+
+Stage8718-8719 recover `operator_codelength_interface.py` as the operator inventory and candidate-choice measurement layer. It restores the software-maintainer operator categories, probability normalization, target NLL bits, uniform baseline bits, compression gain, regret, exact choice, and bits-per-row metrics.
+
+Accuracy alone is not sufficient for future choice probes. Any neural selector or bounded decoder candidate-selection probe must report codelength/compression metrics before promotion. This interface is non-executing and opens no scoring, training, runtime, Gemma, or promotion authority.

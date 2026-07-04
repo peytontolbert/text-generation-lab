@@ -1,0 +1,1467 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "compile": {
+      "cmd": [
+        "/home/peyton/miniconda3/bin/python",
+        "-m",
+        "py_compile",
+        "scripts/operator_codelength_interface.py"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "tests": {
+      "cmd": [
+        "/home/peyton/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_operator_codelength_interface.py"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "....                                                                     [100%]\n4 passed in 0.18s\n"
+    }
+  },
+  "created_at_utc": "2026-07-04T23:12:46Z",
+  "decision": "Recovered operator inventory and codelength interfaces for candidate selection/compression evaluation; no model execution or scoring authority opened.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "category_count": 15,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "operator_count": 83,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "sample_compression_gain_bits": 2.111031312388744,
+    "sample_exact": 0.5,
+    "sample_rows": 2,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "name": "stage8718_operator_codelength_interface_readiness",
+  "next_best_step": "Attach operator/codelength interfaces to central graph, then run a module gap review before data mining resumes.",
+  "operator_inventory": {
+    "authority": {
+      "model_execution": false,
+      "runtime": false,
+      "scoring_authorized": false,
+      "source_body_emission": false,
+      "training": false
+    },
+    "categories": {
+      "candidate_search": 6,
+      "debug_repair": 5,
+      "environment_tooling": 5,
+      "governance": 4,
+      "instruction_intent": 5,
+      "memory_learning": 5,
+      "planning": 6,
+      "probabilistic_compression": 6,
+      "relationship_graph": 6,
+      "retrieval_context": 6,
+      "semantic_verification": 5,
+      "software_grounding": 6,
+      "synthesis_transform": 6,
+      "validation": 6,
+      "version_control_collaboration": 6
+    },
+    "category_count": 15,
+    "operator_count": 83,
+    "operators": [
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "instruction_intent",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "TASK_INGEST",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "instruction_intent",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "GOAL_EXTRACTION",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "instruction_intent",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CONSTRAINT_EXTRACTION",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "instruction_intent",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "AMBIGUITY_DETECTION",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "instruction_intent",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "ACCEPTANCE_CRITERIA_BUILDER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "software_grounding",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "LANGUAGE_ID",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "software_grounding",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "GRAMMAR_PARSE",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "software_grounding",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "SYMBOL_KIND_CLASSIFIER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "software_grounding",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "DEFINITION_RESOLVER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "software_grounding",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "TYPE_SHAPE_EXTRACTOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "software_grounding",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "API_CONTRACT_EXTRACTOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "relationship_graph",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "FILE_TO_MODULE_MAPPER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "relationship_graph",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "IMPORT_DEPENDENCY_EDGE_BUILDER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "relationship_graph",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CALL_GRAPH_EDGE_BUILDER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "relationship_graph",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "DATAFLOW_EDGE_BUILDER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "relationship_graph",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "TEST_TO_CODE_LINKER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "relationship_graph",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "BLAST_RADIUS_MAPPER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "retrieval_context",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "LEXICAL_RETRIEVER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "retrieval_context",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "STRUCTURAL_RETRIEVER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "retrieval_context",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "NEIGHBORHOOD_RETRIEVER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "retrieval_context",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "HISTORICAL_RETRIEVER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "retrieval_context",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CONTEXT_PACK_ASSEMBLER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "retrieval_context",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "EVIDENCE_RANKER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "planning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "SUBTASK_DECOMPOSER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "planning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "OPERATOR_ROUTER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "planning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "PATCH_SCOPE_PLANNER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "planning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "RISK_ESTIMATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "planning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "FALLBACK_PLANNER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "planning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "TOKEN_BUDGET_PLANNER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "synthesis_transform",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "VERBATIM_COPY",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "synthesis_transform",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "TEMPLATE_INSTANTIATION",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "synthesis_transform",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "LOCAL_SPAN_EDITOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "synthesis_transform",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "BLOCK_REWRITE",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "synthesis_transform",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "IMPORT_DEPENDENCY_FIXER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "synthesis_transform",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "TEST_GENERATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "validation",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "SYNTAX_VALIDATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "validation",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "STATIC_ANALYSIS_RUNNER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "validation",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "BUILD_VALIDATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "validation",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "UNIT_TEST_SELECTOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "validation",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "RUNTIME_SMOKE_RUNNER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "validation",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "REGRESSION_DETECTOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "debug_repair",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "FAILURE_TRIAGE",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "debug_repair",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "ROOT_CAUSE_LOCALIZER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "debug_repair",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "FIX_CANDIDATE_GENERATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "debug_repair",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "FIX_PRIORITIZER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "debug_repair",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "ITERATIVE_REPAIR_CONTROLLER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "governance",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CANDIDATE_SCORER_RERANKER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "governance",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "ABSTAIN_ESCALATE",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "governance",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "RESULT_NARRATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "governance",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "SCOPE_BOUNDARY_ENFORCER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "probabilistic_compression",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CHOICE_PROBABILITY_ESTIMATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "probabilistic_compression",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "TARGET_CODELENGTH_SCORER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "probabilistic_compression",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "ENTROPY_BUDGET_ESTIMATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "probabilistic_compression",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "REGRET_ESTIMATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "probabilistic_compression",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CALIBRATION_CHECKER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "probabilistic_compression",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "COMPRESSION_GAIN_TRACKER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "candidate_search",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CANDIDATE_ENUMERATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "candidate_search",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CANDIDATE_FEATURIZER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "candidate_search",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CANDIDATE_EQUIVALENCE_CHECKER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "candidate_search",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "CANDIDATE_DIVERSITY_CONTROLLER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "candidate_search",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "BEAM_SEARCH_CONTROLLER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "candidate_search",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "ORACLE_LEAKAGE_GUARD",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "memory_learning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "REPO_FACT_STORE",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "memory_learning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "EPISODIC_RUN_MEMORY",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "memory_learning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "SKILL_CACHE_BUILDER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "memory_learning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "RETRIEVAL_UPDATE_OPERATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "memory_learning",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "FORGETTING_CONFLICT_RESOLVER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "semantic_verification",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "SEMANTIC_EQUIVALENCE_CHECKER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "semantic_verification",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "PROPERTY_TEST_BUILDER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "semantic_verification",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "METAMORPHIC_TEST_BUILDER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "semantic_verification",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "API_COMPATIBILITY_CHECKER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "semantic_verification",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "DETERMINISM_CHECKER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "environment_tooling",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "DEPENDENCY_RESOLVER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "environment_tooling",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "ENVIRONMENT_PROBE",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "environment_tooling",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "COMMAND_RISK_CLASSIFIER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "environment_tooling",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "ARTIFACT_LOCATOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "environment_tooling",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "RESOURCE_CONSTRAINT_MONITOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "version_control_collaboration",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "DIRTY_WORKTREE_AUDITOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "version_control_collaboration",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "PATCH_CONFLICT_DETECTOR",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "version_control_collaboration",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "DIFF_EXPLAINER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "version_control_collaboration",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "ROLLBACK_PLANNER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "version_control_collaboration",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "COMMIT_PR_PACKAGER",
+        "output_contract_required": true
+      },
+      {
+        "authority": {
+          "model_execution": false,
+          "runtime": false,
+          "scoring_authorized": false,
+          "source_body_emission": false,
+          "training": false
+        },
+        "category": "version_control_collaboration",
+        "confidence_required": true,
+        "failure_modes_required": true,
+        "input_contract_required": true,
+        "metric_required": true,
+        "operator_id": "HANDOFF_SUMMARY_BUILDER",
+        "output_contract_required": true
+      }
+    ]
+  },
+  "passed": true,
+  "sample_codelength": {
+    "authority": {
+      "model_execution": false,
+      "runtime": false,
+      "scoring_authorized": false,
+      "source_body_emission": false,
+      "training": false
+    },
+    "bits_per_row": 0.9444843438056282,
+    "compression_gain_bits": 2.111031312388744,
+    "exact": 0.5,
+    "model_nll_bits": 1.8889686876112564,
+    "row_cards": [
+      {
+        "best_candidate_bits": 0.15200309344504995,
+        "candidate_count": 4,
+        "compression_gain_bits": 1.84799690655495,
+        "correct": true,
+        "model_nll_bits": 0.15200309344504995,
+        "predicted_index": 1,
+        "regret_vs_perfect_bits": 0.15200309344504995,
+        "row_id": "easy",
+        "target_index": 1,
+        "target_probability": 0.9,
+        "uniform_bits": 2.0
+      },
+      {
+        "best_candidate_bits": 1.3219280948873622,
+        "candidate_count": 4,
+        "compression_gain_bits": 0.26303440583379367,
+        "correct": false,
+        "model_nll_bits": 1.7369655941662063,
+        "predicted_index": 0,
+        "regret_vs_perfect_bits": 1.7369655941662063,
+        "row_id": "hard",
+        "target_index": 1,
+        "target_probability": 0.3,
+        "uniform_bits": 2.0
+      }
+    ],
+    "rows": 2,
+    "uniform_bits": 4.0
+  },
+  "stage": 8718,
+  "stage_name": "stage8718_operator_codelength_interface_readiness"
+}
