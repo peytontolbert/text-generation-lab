@@ -1862,3 +1862,14 @@ Stale graph statuses were reconciled so completed objectives no longer appear as
 - Stage8871 reconciles registry/spine.
 
 Current priority: future commit inventory preflight only if repository walking is explicitly requested; otherwise verifier-guided repair target materialization controls.
+
+## Stage8872-8875 Verifier-Guided Repair Target Materialization
+
+Verifier-guided repair target materialization is now recovered as a closed-boundary target-store control.
+
+- Stage8872 materializes repair targets from audited source-backed verifier-repair rows into a separate target store.
+- Stage8873 audits target refs, hashes, leakage, authority, and closed denoise/runtime gates.
+- Stage8874 attaches the resolved objective to the central graph.
+- Stage8875 reconciles registry/spine.
+
+This does not authorize denoise CE, runtime verifier execution, decoder CE, model execution, source/body emission, Gemma, harness, scoring, mining, or promotion.

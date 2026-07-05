@@ -17,4 +17,4 @@ This stage defines one candidate tiny structured native probe plan and audits th
 
 No model execution, decoder CE, denoise CE, runtime, Gemma, harness/scoring, source/body emission, controller merge, repository mining, or promotion is authorized by this stage.
 
-If the future Stage8872 probe is explicitly run, its output must pass the Stage8862 artifact contract before any metric can be trusted.
+If the future Stage8890 probe is explicitly run, its output must pass the Stage8862 artifact contract before any metric can be trusted.

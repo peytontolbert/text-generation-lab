@@ -20,12 +20,12 @@ MANIFEST = OUT_DIR / "native_probe_preflight_plan.jsonl"
 def build_rows() -> list[dict[str, object]]:
     return [
         {
-            "probe_id": "stage8872_tiny_structured_policy_probe_candidate",
+            "probe_id": "stage8890_tiny_structured_policy_probe_candidate",
             "purpose": "First real tiny native structured probe candidate after Stage8862 telemetry gate recovery.",
             "mode": "structured_policy_probe",
             "objective_family": "intent_to_build_strategy",
             "source_manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl",
-            "output_dir": "runs/local/probes/stage8872_tiny_structured_policy_probe_candidate",
+            "output_dir": "runs/local/probes/stage8890_tiny_structured_policy_probe_candidate",
             "max_train_rows": 32,
             "max_eval_rows": 16,
             "max_strict_rows": 16,
@@ -96,7 +96,7 @@ def main() -> None:
             "doc": str(DOC.relative_to(ROOT)),
         },
         "decision": "Native probe preflight gate passed. This defines a candidate tiny structured probe but does not authorize execution." if passed else "Native probe preflight gate failed.",
-        "next_best_step": "If explicitly authorized, run only the tiny Stage8872 structured-policy probe candidate and immediately audit its output with scripts/native_probe_interpretability_artifact_contract.py. Keep decoder CE closed.",
+        "next_best_step": "If explicitly authorized, run only the tiny Stage8890 structured-policy probe candidate and immediately audit its output with scripts/native_probe_interpretability_artifact_contract.py. Keep decoder CE closed.",
         "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     (OUT_DIR / "native_probe_preflight_gate_card.json").write_text(json.dumps(card, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -121,7 +121,7 @@ def main() -> None:
         "",
         "No model execution, decoder CE, denoise CE, runtime, Gemma, harness/scoring, source/body emission, controller merge, repository mining, or promotion is authorized by this stage.",
         "",
-        "If the future Stage8872 probe is explicitly run, its output must pass the Stage8862 artifact contract before any metric can be trusted.",
+        "If the future Stage8890 probe is explicitly run, its output must pass the Stage8862 artifact contract before any metric can be trusted.",
         "",
     ]), encoding="utf-8")
     print(json.dumps(card, indent=2, sort_keys=True))
