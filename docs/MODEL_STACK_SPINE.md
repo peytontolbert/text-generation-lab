@@ -773,3 +773,115 @@ Artifacts:
 - `runs/summaries/stage8744_source_provenance_license_security_filter_graph_attachment.json`
 
 Next queue item: `contamination_leakage_detector`.
+
+## Stage8745 Support Module Recovery Completion Audit
+
+The Stage8720 forgotten-module queue is complete at contract/scaffold level. Stage8745 audited and backed up the recovered support stack covering reranking, dataset cartography, training-data attribution, logits/forward fusion, MoE/LoRA routing, denoise/diffusion repair, adversarial hard negatives, confidence/OOD heads, structured data operation curriculum, and semantic/metamorphic verification.
+
+Artifacts:
+
+- `runs/summaries/stage8745_support_module_recovery_completion_audit.json`
+- `runs/local/artifacts/stage8745_support_module_recovery_completion_audit/support_module_recovery_completion_cards.json`
+- `/arxiv/agentkernel_recovery/stage8745_support_module_recovery_completion_audit`
+
+Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, or promotion is authorized by this audit.
+
+Next step: run a no-training support-stack integration audit over source lineage, provenance filters, queue modules, and curriculum compiler.
+
+## Stage8747 Contamination Leakage Detector
+
+Recovered as `ready_reusable_no_execution_gate`. This consolidates fragmented leakage checks into a reusable dataset-quality module that emits row-level contamination routes before curriculum builders, dataset rankers, or decoder objectives can consume rows.
+
+Detected routes:
+
+- `PASS_NO_CONTAMINATION`
+- `BLOCK_TARGET_LEAK`
+- `BLOCK_LABEL_CODED_ID`
+- `BLOCK_HELDOUT_OVERLAP`
+- `BLOCK_BODY_OR_SOURCE_LEAK`
+- `REVIEW_SPLIT_OVERLAP`
+- `REVIEW_SUSPICIOUS_PROXY`
+
+Artifacts:
+
+- `scripts/contamination_leakage_detector.py`
+- `tests/test_contamination_leakage_detector.py`
+- `runs/summaries/stage8746_contamination_leakage_detector_readiness.json`
+- `runs/summaries/stage8747_contamination_leakage_detector_graph_attachment.json`
+- `/arxiv/agentkernel_recovery/stage8746_8747_contamination_leakage_detector`
+
+Authority remains closed: no training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next queue item: `golden_locked_eval_suite` and drift/canary regression controls.
+
+## Stage8749 Golden Locked Eval Suite
+
+Recovered as `ready_promotion_only_train_exclusion_contract`. This turns the Stage8672 locked benchmark packs into a reusable helper that validates promotion-only eval packs and exposes locked source IDs that all future builders must exclude from training.
+
+Recovered locked source IDs: `5`.
+
+Artifacts:
+
+- `scripts/golden_locked_eval_suite.py`
+- `tests/test_golden_locked_eval_suite.py`
+- `runs/summaries/stage8748_golden_locked_eval_suite_readiness.json`
+- `runs/summaries/stage8749_golden_locked_eval_suite_graph_attachment.json`
+- `/arxiv/agentkernel_recovery/stage8748_8749_golden_locked_eval_suite`
+
+Authority remains closed: no training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next queue item: `drift_canary_regression_monitor`.
+
+## Stage8751 Drift Canary Regression Monitor
+
+Recovered as `ready_promotion_blocking_contract`. This module preserves old skills by blocking promotion when canary slices regress, locked-eval leakage appears, contamination appears, or metric cards are missing.
+
+Promotion block reasons:
+
+- `regression_drop_exceeded`
+- `below_min_score`
+- `locked_eval_leakage`
+- `contamination_detected`
+- `missing_metric_card`
+
+Artifacts:
+
+- `scripts/drift_canary_regression_monitor.py`
+- `tests/test_drift_canary_regression_monitor.py`
+- `runs/summaries/stage8750_drift_canary_regression_monitor_readiness.json`
+- `runs/summaries/stage8751_drift_canary_regression_monitor_graph_attachment.json`
+- `/arxiv/agentkernel_recovery/stage8750_8751_drift_canary_regression_monitor`
+
+Authority remains closed: no training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next step: support-stack integration audit over source lineage, provenance, contamination, locked eval, canaries, and curriculum compiler.
+
+## Stage8752 Support Stack Integration Audit
+
+Status: `integration_ready` at no-training contract level.
+
+The curriculum compiler now structurally references the recovered gate set through `REQUIRED_RECOVERED_GATE_REFERENCES` and can require row-level `gate_status` via `--require-recovered-gates`. Missing or failed gates route rows to `NEEDS_HUMAN_REVIEW` / `human_review` instead of training objectives.
+
+Recovered compiler gates:
+
+- `source_inventory_lineage`
+- `source_provenance`
+- `contamination_leakage_detector`
+- `golden_locked_eval_suite`
+- `drift_canary_regression_monitor`
+- `cluster_slice_near_duplicate_detector`
+- `dataset_junk_ood_ranker_v1`
+
+Stage8752 audit result: zero missing files, zero missing graph nodes, zero missing compiler references, support tests returncode `0`.
+
+Artifacts:
+
+- `scripts/curriculum_compiler.py`
+- `tests/test_curriculum_compiler.py`
+- `runs/summaries/stage8752_support_stack_integration_audit.json`
+- `runs/local/artifacts/stage8752_support_stack_integration_audit/support_stack_integration_cards.json`
+
+Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next step: run a scale-readiness preflight over a small no-training manifest requiring recovered gates before any mining or training resumes.
+
