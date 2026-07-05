@@ -1841,3 +1841,14 @@ The commit-learning-signal contract is now attached to the central graph and gat
 - Stage8861 reconciles registry/spine.
 
 Next boundary: recover a dry-run commit inventory design. It may define how to inspect repository metadata later, but it still must not walk `/arxiv/repositories`, read commits, emit training rows, train, or open decoder CE.
+
+## Stage8865-8868 Commit Inventory Dry-Run Design
+
+The commit inventory gap is filled as a dry-run design only.
+
+- Stage8865 defines inventory fields, commit metadata fields, caps, and source gates.
+- Stage8866 audits that the design is zero-walk, zero-commit-read, zero-diff-body, zero-patch-body, and zero-training-row.
+- Stage8867 attaches the design to the graph and creates `objective:future_commit_inventory_preflight` as the next missing target.
+- Stage8868 reconciles registry/spine.
+
+Repository walking, commit reads, mining, training, decoder CE, runtime, source/body emission, Gemma, scoring, and promotion remain closed.
