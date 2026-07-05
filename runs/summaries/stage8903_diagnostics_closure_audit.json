@@ -1,0 +1,153 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "closure_dimensions": [
+    "data_quality_and_junk_ood",
+    "source_lineage_provenance_leakage",
+    "locked_eval_and_drift",
+    "schema_and_gate_status",
+    "row_field_logits_confidence_entropy",
+    "row_field_losses_and_confusion",
+    "token_loss_maps_for_decoder",
+    "row_gradient_norms",
+    "activation_summaries",
+    "feature_ablation_attribution",
+    "activation_patch_recovery",
+    "row_dynamics_forgetting",
+    "artifact_contract_validation",
+    "promotion_blocker"
+  ],
+  "created_at_utc": "2026-07-05T20:24:56Z",
+  "decision": "Diagnostics are closed for no-execution readiness: contracts, tests, artifact audits, and promotion blockers exist. Real model claims still require actual run artifacts.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "closure_dimensions": 14,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "model_execution_authorized_now": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "still_requires_real_run_artifacts": 9,
+    "summaries_checked": 7,
+    "summaries_passing": 7,
+    "test_files_checked": 8,
+    "test_files_passing": 8,
+    "training_authorized": false
+  },
+  "next_best_step": "Stop diagnostics hardening unless adding a new diagnostic family. A future authorized probe must emit all required artifacts and pass Stage8902 before metrics are interpreted.",
+  "passed": true,
+  "stage": 8903,
+  "stage_name": "stage8903_diagnostics_closure_audit",
+  "still_requires_real_run_artifacts": [
+    "actual_row_field_logits_jsonl",
+    "actual_row_field_losses_jsonl",
+    "actual_row_gradient_norms_jsonl",
+    "actual_activation_summary_jsonl",
+    "actual_feature_ablation_attribution_jsonl",
+    "actual_activation_patch_recovery_jsonl",
+    "actual_row_dynamics_history_jsonl",
+    "actual_structured_confusion_matrix_json",
+    "actual_row_token_loss_jsonl_for_decoder_claims"
+  ],
+  "summary_checks": [
+    {
+      "name": "telemetry_gap_audit",
+      "passed": true,
+      "path": "runs/summaries/stage8858_model_interpretability_telemetry_gap_audit.json"
+    },
+    {
+      "name": "native_probe_artifact_contract",
+      "passed": true,
+      "path": "runs/summaries/stage8862_native_probe_interpretability_artifact_contract.json"
+    },
+    {
+      "name": "telemetry_gate_matrix",
+      "passed": true,
+      "path": "runs/summaries/stage8893_no_execution_telemetry_gate_matrix.json"
+    },
+    {
+      "name": "transition_schema_contract",
+      "passed": true,
+      "path": "runs/summaries/stage8899_verified_transition_record_schema_contract.json"
+    },
+    {
+      "name": "transition_validation_contract",
+      "passed": true,
+      "path": "runs/summaries/stage8900_verified_transition_record_validation_contract.json"
+    },
+    {
+      "name": "no_mining_compiler_adapter",
+      "passed": true,
+      "path": "runs/summaries/stage8901_verified_transition_record_no_mining_compiler_adapter.json"
+    },
+    {
+      "name": "diagnostic_promotion_gate",
+      "passed": true,
+      "path": "runs/summaries/stage8902_diagnostic_promotion_gate.json"
+    }
+  ],
+  "test_checks": [
+    {
+      "missing_markers": [],
+      "passed": true,
+      "path": "tests/test_native_probe_interpretability_artifact_contract.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "path": "tests/test_diagnostic_promotion_gate.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "path": "tests/test_training_telemetry_metrics.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "path": "tests/test_gradient_activation_interpretability.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "path": "tests/test_dataset_cartography_active_learning.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "path": "tests/test_training_data_attribution_influence.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "path": "tests/test_verified_transition_record_schema_contract.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "path": "tests/test_verified_transition_record_validation_contract.py"
+    }
+  ]
+}

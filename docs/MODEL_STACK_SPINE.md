@@ -1976,3 +1976,17 @@ This does not emit training rows or open execution/losses. It gives future no-mi
 Stage8901 defines the no-mining adapter that turns refs-only candidate transition objects into `verified_transition_record_v1`. It rejects raw source/patch/decoder/runtime/Gemma bodies, keeps authority closed, and keeps all losses disabled by default.
 
 This is the first compiler bridge after the schema contract, but it does not mine data or create trainable rows.
+
+## Stage8902 Diagnostic Promotion Gate
+
+Stage8902 makes diagnostics a promotion blocker: future probe/run outputs are invalid unless mode-specific diagnostic artifacts exist, are non-empty, and pass `native_probe_interpretability_artifact_contract`.
+
+## Stage8903 Diagnostics Closure Audit
+
+Stage8903 closes diagnostics for no-execution readiness. It verifies the telemetry substrate, native artifact contract, no-execution telemetry gate matrix, verified-transition schema/validation/compiler adapter, and diagnostic promotion gate are all present and authority-closed.
+
+This is not a model-quality claim. Any future probe must still emit real diagnostics and pass Stage8902 before metrics can be interpreted.
+
+## Stage8904 Research Library Seed Model Catalog
+
+Stage8902 catalogs research-library/local model candidates. The only direct 100M core-seed candidate is the local AgentKernel Lite encoder-decoder export, pending compatibility audit. Collection models should first be used as frozen teachers, rerankers, retrieval tools, verifier priors, proposal sources, or representation sidecars behind verified-transition-record gates.

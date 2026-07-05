@@ -1,0 +1,233 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "candidates": [
+    {
+      "name": "local_agentkernel_lite_100m_bitnet_v11",
+      "path_or_repo": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11",
+      "risk": "Must not be loaded/trained until architecture/tokenizer/loss-mask compatibility and provenance are audited.",
+      "role": "primary_seed_candidate",
+      "source": "local",
+      "use_for": [
+        "100m_seq2seq_initialization_review",
+        "tokenizer/special-token lineage review",
+        "bounded_decoder_prior_if_compatible"
+      ],
+      "why": "113.5M encoder-decoder AgentKernel Lite export, closest local artifact to the target model size and architecture."
+    },
+    {
+      "name": "PeytonT/repo-state-grounding",
+      "path_or_repo": "PeytonT/repo-state-grounding",
+      "risk": "Use as side teacher/ranker first, not as core generator.",
+      "role": "frozen_or_distilled_structured_teacher",
+      "source": "huggingface_collection",
+      "use_for": [
+        "repo_state_grounding",
+        "state_before/retrieval_context scoring",
+        "VTR gate feature"
+      ],
+      "why": "MiniLM-style text-classification model trained for repo-state grounding; directly aligned with verified_transition_record state evidence."
+    },
+    {
+      "name": "PeytonT/jepa-repo-state",
+      "path_or_repo": "PeytonT/jepa-repo-state",
+      "risk": "Embedding compatibility/calibration required before fusion.",
+      "role": "repo_state_representation_teacher",
+      "source": "huggingface_collection",
+      "use_for": [
+        "state embedding targets",
+        "modality dropout audit",
+        "repo graph compressed representation"
+      ],
+      "why": "Feature-extraction model for repo-state representation; useful for representation distillation into structured heads."
+    },
+    {
+      "name": "PeytonT/cross-encoder-reranker",
+      "path_or_repo": "PeytonT/cross-encoder-reranker",
+      "risk": "Must be calibrated; never use as sole truth source.",
+      "role": "retrieval_reranker_tool",
+      "source": "huggingface_collection",
+      "use_for": [
+        "evidence ranking",
+        "retrieval_context validation",
+        "high-confidence-wrong audit"
+      ],
+      "why": "Cross-encoder reranker maps task/evidence pairs to relevance; matches recovered Stage8721/8722 calibration direction."
+    },
+    {
+      "name": "PeytonT/candidate-row-reranker",
+      "path_or_repo": "PeytonT/candidate-row-reranker",
+      "risk": "Must remain advisory behind deterministic junk/authority gates.",
+      "role": "dataset_judge_support",
+      "source": "huggingface_collection",
+      "use_for": [
+        "candidate route prior",
+        "junk/risk ranking",
+        "active learning queue"
+      ],
+      "why": "Can support objective-aware dataset ranking before rows create gradients."
+    },
+    {
+      "name": "PeytonT/verifier-accept-policy",
+      "path_or_repo": "PeytonT/verifier-accept-policy",
+      "risk": "Cannot replace tests/static analyzers; use only as learned prior.",
+      "role": "verifier_policy_teacher",
+      "source": "huggingface_collection",
+      "use_for": [
+        "verifier_result/value prior",
+        "accept/reject policy",
+        "repair loop scoring"
+      ],
+      "why": "Text-classification model aligned with verification acceptance; useful for reward/value targets after exact verifier checks."
+    },
+    {
+      "name": "PeytonT/span-infill-gate",
+      "path_or_repo": "PeytonT/span-infill-gate",
+      "risk": "Must obey deterministic budget/source authority overlays.",
+      "role": "bounded_decode_gate_teacher",
+      "source": "huggingface_collection",
+      "use_for": [
+        "decode_allowed refinement",
+        "bounded argument gate",
+        "edit span safety"
+      ],
+      "why": "Classifier for whether span infill is appropriate; aligns with bounded decoder and patch-operator phases."
+    },
+    {
+      "name": "PeytonT/bug-localization",
+      "path_or_repo": "PeytonT/bug-localization",
+      "risk": "Needs repo graph symbol-binding calibration.",
+      "role": "edit_localization_teacher",
+      "source": "huggingface_collection",
+      "use_for": [
+        "failure_to_symbol/file priors",
+        "edit localization objective",
+        "repair episode attribution"
+      ],
+      "why": "Repo classifier over bug localization; maps directly to maintenance cognition spine."
+    },
+    {
+      "name": "PeytonT/cross-modal-retrieval",
+      "path_or_repo": "PeytonT/cross-modal-retrieval",
+      "risk": "Retrieval evidence only; not target truth.",
+      "role": "paper_repo_retrieval_teacher",
+      "source": "huggingface_collection",
+      "use_for": [
+        "research_transfer retrieval",
+        "paper_to_repo alignment",
+        "operator card evidence"
+      ],
+      "why": "Feature-extraction model for paper/code retrieval, useful for knowledge-transfer policy."
+    },
+    {
+      "name": "PeytonT/paper-to-code",
+      "path_or_repo": "PeytonT/paper-to-code or /data/repository_library/models/checkpoints/C1",
+      "risk": "Do not distill unverified outputs directly; verifier/source grounding required.",
+      "role": "research_transfer_teacher_not_core_seed",
+      "source": "huggingface_collection/local_adapter_family",
+      "use_for": [
+        "teacher candidate plans",
+        "research_operator_card generation",
+        "paper_to_implementation sketch"
+      ],
+      "why": "FLAN-T5 adapter trained for paper-to-code transfer; useful as synthetic teacher into verified transition records."
+    },
+    {
+      "name": "PeytonT/repo-conditioned-adapter",
+      "path_or_repo": "PeytonT/repo-conditioned-adapter or /data/repository_library/models/checkpoints/C4",
+      "risk": "Base is FLAN-T5-base, not the 100M target; use as teacher/advisory source.",
+      "role": "repo_conditioned_teacher_not_core_seed",
+      "source": "huggingface_collection/local_adapter_family",
+      "use_for": [
+        "repo-conditioned bounded plan/argument suggestions",
+        "adapter-fusion experiments"
+      ],
+      "why": "T5 adapter conditioned on repository information; likely helpful for proposal generation after gates pass."
+    },
+    {
+      "name": "PeytonT/query-rewriter",
+      "path_or_repo": "PeytonT/query-rewriter or /data/repository_library/models/checkpoints/L1",
+      "risk": "Queries must be judged by retrieval utility, not copied into target truth.",
+      "role": "retrieval_policy_teacher",
+      "source": "huggingface_collection/local_adapter_family",
+      "use_for": [
+        "search query generation",
+        "retrieve_context action target",
+        "evidence acquisition traces"
+      ],
+      "why": "Directly supports transition action RETRIEVE_CONTEXT and repository/library search."
+    },
+    {
+      "name": "PeytonT/world-planner-adapter",
+      "path_or_repo": "PeytonT/world-planner-adapter or /data/repository_library/models/checkpoints/U2",
+      "risk": "Use behind verifier and transition-record schema; not a runtime controller yet.",
+      "role": "planner_teacher_not_core_seed",
+      "source": "huggingface_collection/local_adapter_family",
+      "use_for": [
+        "multi-step transition trace proposals",
+        "action sequence prior",
+        "curriculum candidate generation"
+      ],
+      "why": "Planning adapter can propose action traces for verification/mining."
+    },
+    {
+      "name": "PeytonT/unified-knowledge-model",
+      "path_or_repo": "PeytonT/unified-knowledge-model or /data/repository_library/models/checkpoints/U1",
+      "risk": "Too broad for direct student seed; verify outputs and avoid shortcut teacher leakage.",
+      "role": "broad_teacher_reference",
+      "source": "huggingface_collection/local_adapter_family",
+      "use_for": [
+        "teacher comparison",
+        "adapter-fusion baseline",
+        "curriculum candidate proposals"
+      ],
+      "why": "Broad T5 adapter over research-library objectives; may provide useful proposals."
+    },
+    {
+      "name": "local_m1_lite_and_scibert_onnx",
+      "path_or_repo": "/data/repository_library/exports/huggingface/m1_lite_onnx and m1_scibert_merged_onnx",
+      "risk": "Embedding-only; does not replace compiler/verifier.",
+      "role": "paper_embedding_retrieval_tool",
+      "source": "local",
+      "use_for": [
+        "paper/research operator retrieval",
+        "paper universe semantic search",
+        "research_transfer evidence"
+      ],
+      "why": "Distilled/scibert paper embedding models with documented M1 vector space; useful for external retrieval, not generator weights."
+    }
+  ],
+  "decision": {
+    "best_core_seed": [
+      "local_agentkernel_lite_100m_bitnet_v11"
+    ],
+    "default_use": "teacher/tool/ranker/retrieval sidecar unless explicit compatibility audit promotes a model",
+    "do_not_do": [
+      "do not initialize the 100M maintainer from arbitrary T5/LLM adapters",
+      "do not let teacher outputs bypass verified_transition_record_v1 gates",
+      "do not download or execute models in this stage"
+    ]
+  },
+  "hf_collection": "https://huggingface.co/collections/PeytonT/research-library-6a49c589ef4d763f7539b50d",
+  "integration_order": [
+    "inventory local AgentKernel Lite architecture/tokenizer compatibility",
+    "register frozen side teachers/rankers as non-authoritative evidence providers",
+    "add VTR provenance refs for teacher/tool suggestions",
+    "calibrate rerankers/verifier policies before use",
+    "only then consider representation distillation or adapter fusion"
+  ],
+  "local_root": "/data/repository_library",
+  "stage": 8904,
+  "stage_name": "stage8904_research_library_seed_model_catalog"
+}
