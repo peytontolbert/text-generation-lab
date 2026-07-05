@@ -1921,6 +1921,12 @@ Stage8892 records the post-regression-audit branch decision. Without explicit fu
 
 ## Stage8892 No-Execution Telemetry Gate Matrix
 
-Stage8892 verifies concrete regression markers across the no-execution telemetry/gate matrix: curriculum compiler loss masks, native probe preflight, packet telemetry, capture preflight, bounded decoder CE, source-backed target materialization, output-repair denoise controls, verifier-guided repair targets, and inactive authority tickets.
+Stage8893 verifies concrete regression markers across the no-execution telemetry/gate matrix: curriculum compiler loss masks, native probe preflight, packet telemetry, capture preflight, bounded decoder CE, source-backed target materialization, output-repair denoise controls, verifier-guided repair targets, and inactive authority tickets.
+
+This is hardening only. It opens no execution, training, decoder CE, denoise CE, runtime, mining, source/body emission, Gemma, harness, scoring, checkpoint export, controller merge, or promotion.
+
+## Stage8893 No-Execution Telemetry Gate Matrix
+
+Stage8893 verifies concrete regression markers across the no-execution telemetry/gate matrix: curriculum compiler loss masks, native probe preflight, packet telemetry, capture preflight, bounded decoder CE, source-backed target materialization, output-repair denoise controls, verifier-guided repair targets, and inactive authority tickets.
 
 This is hardening only. It opens no execution, training, decoder CE, denoise CE, runtime, mining, source/body emission, Gemma, harness, scoring, checkpoint export, controller merge, or promotion.

@@ -1,0 +1,116 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T19:20:32Z",
+  "decision": "No-execution telemetry/gate matrix passed. Closed compiler, preflight, packet telemetry, decoder, denoise, verifier-target, and inactive-ticket gates have concrete regression markers.",
+  "matrix_checks": [
+    {
+      "exists": true,
+      "gate_name": "curriculum_compiler_loss_gate",
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_curriculum_compiler.py"
+    },
+    {
+      "exists": true,
+      "gate_name": "native_probe_preflight_gate",
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_native_probe_preflight_gate.py"
+    },
+    {
+      "exists": true,
+      "gate_name": "model_output_packet_telemetry_contract",
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_model_output_packet_telemetry_contract_builder.py"
+    },
+    {
+      "exists": true,
+      "gate_name": "model_output_capture_preflight_audit",
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_model_output_capture_preflight_audit.py"
+    },
+    {
+      "exists": true,
+      "gate_name": "closed_bounded_decoder_ce_gate",
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_bounded_decoder_ce_package_gate_builder.py"
+    },
+    {
+      "exists": true,
+      "gate_name": "source_backed_decoder_target_materialization",
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_source_backed_decoder_target_materialization_builder.py"
+    },
+    {
+      "exists": true,
+      "gate_name": "output_repair_denoise_controls",
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_output_repair_denoise_controls_builder.py"
+    },
+    {
+      "exists": true,
+      "gate_name": "verifier_guided_repair_target_materialization",
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_verifier_guided_repair_target_materialization_builder.py"
+    },
+    {
+      "exists": true,
+      "gate_name": "authority_ticket_and_inactive_execution",
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_stage888x_inactive_authority_tickets.py"
+    }
+  ],
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "matrix_gate_count": 9,
+    "matrix_gates_passing": 9,
+    "model_execution_authorized_next": false,
+    "model_execution_authorized_now": false,
+    "promotion_ready": false,
+    "registry_authority_counts_zero": true,
+    "registry_latest_stage_before_update": 8893,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_summaries_checked": 3,
+    "training_authorized": false
+  },
+  "next_best_step": "Keep Stage8890 reserved for explicit future one-run authorization. Continue no-execution hardening only if adding new gates; otherwise choose a deliberate authorization or inventory branch.",
+  "passed": true,
+  "source_summaries": [
+    "runs/summaries/stage8891_no_execution_control_plane_regression_audit.json",
+    "runs/summaries/stage8873_verifier_guided_repair_target_materialization_audit.json",
+    "runs/summaries/stage8809_registry_spine_reconciliation_after_target_materialization.json"
+  ],
+  "stage": 8893,
+  "stage_name": "stage8893_no_execution_telemetry_gate_matrix"
+}
