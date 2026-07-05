@@ -1807,3 +1807,27 @@ The learning-signal contract now has a file-specific dataset/trainer implementat
 - Stage8850 reconciles registry/spine.
 
 Next boundary: recover a code-patch readiness checklist. It should define the exact preconditions before modifying training/data code, but still must not authorize training or decoder CE.
+
+## Stage8851-8854 Learning Signal Code Patch Readiness
+
+The learning-signal implementation plan now has a code-patch readiness checklist, but no code patch, training, or decoder CE is authorized.
+
+- Stage8851 recovered five checklist rows: tests-first contract, training-data patch readiness, training-loop telemetry readiness, telemetry-helper readiness, and transformer mapping readiness.
+- Stage8852 attached the checklist to the central graph as `checklist:learning_signal_code_patch_readiness_v1`.
+- Stage8853 audited the checklist: all global preflights, patch-order steps, required checks, and plan coverage are present; all authority and loss masks remain closed.
+- Stage8854 reconciles registry/spine.
+
+Next boundary: recover a tests-only patch plan before editing implementation files. Decoder CE, model execution, runtime, source/body emission, Gemma, scoring, and promotion remain closed.
+
+## Stage8855 Commit Learning Signal Contract
+
+Commit mining is now represented as a contract, not an open mining job.
+
+- Source unit is not `commit`; it is `causal_edit_unit` derived from file clusters, symbol clusters, hunk groups, or test-code pairs.
+- Hunk relevance must classify edits as `core`, `supporting`, `incidental`, or `noise`.
+- Small commits may provide bounded decoder candidates only after structured labels and gates pass.
+- Medium commits require segmentation before use.
+- Large commits are primarily retrieval, graph, verifier, and decomposition signal; raw large-patch decoder targets remain blocked.
+- Every unit must carry source provenance, contamination status, locked-eval exclusion, gate status, and junk/OOD route.
+
+No `/arxiv/repositories` walk, commit mining, training, decoder CE, runtime, source/body emission, Gemma, scoring, or promotion is authorized by this contract.
