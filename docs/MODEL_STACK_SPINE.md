@@ -969,3 +969,32 @@ Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, 
 
 Next queue item: `eval_trace_to_dataset_patch_loop`, then source-backed builders must emit complete `gate_status` cards.
 
+## Stage8761 Eval Trace To Dataset Patch Loop
+
+Recovered as `ready_partial_failure_to_curriculum_contract`. This closes the audit loop from eval failure attribution back into explicit dataset repair operations.
+
+Dataset patch actions:
+
+- `ADD_COUNTERFACTUAL_NEIGHBOR`
+- `ADD_RETRIEVAL_NEGATIVE`
+- `ADD_BOUNDARY_POSITIVE`
+- `ADD_BOUNDARY_NEGATIVE`
+- `RELABEL_OR_REVIEW`
+- `DOWNWEIGHT_OR_PRUNE`
+- `HOLDOUT_LONG_OUTPUT`
+- `ADD_VERIFIER_REPAIR_ROW`
+- `REQUEST_SOURCE_EVIDENCE`
+
+Purpose: eval failures should not become vague narrative notes. They become typed patch records that the curriculum compiler, dataset judge, adversarial generator, and future source-backed builders can consume.
+
+Artifacts:
+
+- `scripts/eval_trace_to_dataset_patch_loop.py`
+- `tests/test_eval_trace_to_dataset_patch_loop.py`
+- `runs/summaries/stage8760_eval_trace_to_dataset_patch_loop_readiness.json`
+- `runs/summaries/stage8761_eval_trace_to_dataset_patch_loop_graph_attachment.json`
+
+Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next step: update source-backed builders to emit full `gate_status` cards and run a no-training scale-readiness preflight before mining resumes.
+

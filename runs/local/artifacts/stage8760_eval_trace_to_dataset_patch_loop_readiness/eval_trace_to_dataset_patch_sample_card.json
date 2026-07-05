@@ -1,0 +1,214 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_authorized_next": false
+  },
+  "metrics": {
+    "action_counts": {
+      "ADD_COUNTERFACTUAL_NEIGHBOR": 1,
+      "ADD_VERIFIER_REPAIR_ROW": 1,
+      "DOWNWEIGHT_OR_PRUNE": 1,
+      "HOLDOUT_LONG_OUTPUT": 1,
+      "RELABEL_OR_REVIEW": 1,
+      "REQUEST_SOURCE_EVIDENCE": 1
+    },
+    "patches": 6,
+    "recommended_route_counts": {
+      "DROP_DUPLICATE": 1,
+      "HOLD_LONG_OUTPUT": 1,
+      "KEEP_STRUCTURED": 1,
+      "NEEDS_HUMAN_REVIEW": 1,
+      "NEEDS_RETRIEVAL": 1,
+      "USE_FOR_DENOISE_REPAIR": 1
+    },
+    "rows": 6,
+    "valid_patch_actions": 6
+  },
+  "patches": [
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "training_authorized_next": false
+      },
+      "dataset_patch_action": "HOLDOUT_LONG_OUTPUT",
+      "evidence_state": "",
+      "patch_action_valid": true,
+      "patch_id": "patch::long",
+      "prediction": "",
+      "reasons": [
+        "long_or_budget_bad_output"
+      ],
+      "recommended_route": "HOLD_LONG_OUTPUT",
+      "row_id": "long",
+      "source_eval_trace_id": "long",
+      "target": "",
+      "target_surface": ""
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "training_authorized_next": false
+      },
+      "dataset_patch_action": "ADD_VERIFIER_REPAIR_ROW",
+      "evidence_state": "",
+      "patch_action_valid": true,
+      "patch_id": "patch::leak",
+      "prediction": "",
+      "reasons": [
+        "internal_or_surface_leak_failure"
+      ],
+      "recommended_route": "USE_FOR_DENOISE_REPAIR",
+      "row_id": "leak",
+      "source_eval_trace_id": "leak",
+      "target": "",
+      "target_surface": ""
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "training_authorized_next": false
+      },
+      "dataset_patch_action": "REQUEST_SOURCE_EVIDENCE",
+      "evidence_state": "missing",
+      "patch_action_valid": true,
+      "patch_id": "patch::missing",
+      "prediction": "",
+      "reasons": [
+        "missing_or_insufficient_evidence"
+      ],
+      "recommended_route": "NEEDS_RETRIEVAL",
+      "row_id": "missing",
+      "source_eval_trace_id": "missing",
+      "target": "",
+      "target_surface": ""
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "training_authorized_next": false
+      },
+      "dataset_patch_action": "RELABEL_OR_REVIEW",
+      "evidence_state": "",
+      "patch_action_valid": true,
+      "patch_id": "patch::hcw",
+      "prediction": "",
+      "reasons": [
+        "high_confidence_wrong_or_label_conflict"
+      ],
+      "recommended_route": "NEEDS_HUMAN_REVIEW",
+      "row_id": "hcw",
+      "source_eval_trace_id": "hcw",
+      "target": "",
+      "target_surface": ""
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "training_authorized_next": false
+      },
+      "dataset_patch_action": "ADD_COUNTERFACTUAL_NEIGHBOR",
+      "evidence_state": "",
+      "patch_action_valid": true,
+      "patch_id": "patch::polarity",
+      "prediction": "SAFE",
+      "reasons": [
+        "safe_unsafe_boundary_confusion"
+      ],
+      "recommended_route": "KEEP_STRUCTURED",
+      "row_id": "polarity",
+      "source_eval_trace_id": "polarity",
+      "target": "UNSAFE",
+      "target_surface": ""
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "training_authorized_next": false
+      },
+      "dataset_patch_action": "DOWNWEIGHT_OR_PRUNE",
+      "evidence_state": "",
+      "patch_action_valid": true,
+      "patch_id": "patch::dup",
+      "prediction": "",
+      "reasons": [
+        "duplicate_or_harmful_neighbor"
+      ],
+      "recommended_route": "DROP_DUPLICATE",
+      "row_id": "dup",
+      "source_eval_trace_id": "dup",
+      "target": "",
+      "target_surface": ""
+    }
+  ],
+  "rows": 6
+}
