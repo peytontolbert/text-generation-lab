@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "edges_jsonl": "runs/local/artifacts/stage8879_closed_gate_status_reconciliation/central_research_graph_with_closed_gate_status_reconciliation_edges.jsonl",
+    "graph": "runs/local/artifacts/stage8879_closed_gate_status_reconciliation/central_research_graph_with_closed_gate_status_reconciliation.json",
+    "nodes_jsonl": "runs/local/artifacts/stage8879_closed_gate_status_reconciliation/central_research_graph_with_closed_gate_status_reconciliation_nodes.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T07:48:52Z",
+  "decision": "Reconciled bounded decoder CE and denoise repair from stale prerequisite-pending statuses to closed gates with recovered controls. No execution or CE authority opened.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "candidate_nodes": 2,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "graph_edges": 2686,
+    "graph_nodes": 1798,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "model_execution_authorized_now": false,
+    "patched_nodes": 2,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "skipped_nodes": 0,
+    "source_emission_authorized": false,
+    "training_authorized": false
+  },
+  "next_best_step": "Run a fresh central graph gap walk; expected remaining missing node should be optional metadata-only commit inventory preflight unless explicitly requested.",
+  "passed": true,
+  "patched_nodes": [
+    {
+      "id": "objective:bounded_decoder_ce",
+      "new_status": "closed_gate_recovered_awaiting_explicit_tiny_execution_authorization",
+      "old_status": "blocked_by_closed_gate_pending_source_backed_target_materialization",
+      "required_passed_stages": [
+        "stage8803_closed_bounded_decoder_ce_package_gate_audit",
+        "stage8807_source_backed_decoder_target_materialization_audit",
+        "stage8822_registry_spine_reconciliation_after_heldout_non_ce_eval_design",
+        "stage8862_native_probe_interpretability_artifact_contract"
+      ]
+    },
+    {
+      "id": "objective:denoise_repair",
+      "new_status": "closed_gate_recovered_awaiting_dedicated_no_execution_denoise_authorization_review",
+      "old_status": "blocked_by_closed_controls_pending_verifier_guided_materialization",
+      "required_passed_stages": [
+        "stage8811_output_repair_denoise_controls_shortcut_gate",
+        "stage8873_verifier_guided_repair_target_materialization_audit",
+        "stage8731_denoise_diffusion_repair_contract_readiness"
+      ]
+    }
+  ],
+  "skipped_nodes": [],
+  "stage": 8879,
+  "stage_name": "stage8879_closed_gate_status_reconciliation"
+}

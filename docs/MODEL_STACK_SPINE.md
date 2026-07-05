@@ -1879,3 +1879,13 @@ This does not authorize denoise CE, runtime verifier execution, decoder CE, mode
 After verifier-guided repair target controls, stale heldout eval, packet telemetry, packet readiness, and runner static-design blockers were reconciled.
 
 Remaining blockers are closed authority gates or optional metadata-only commit inventory preflight. No training, decoder CE, denoise CE, runtime, source/body emission, Gemma, harness, scoring, mining, or promotion is authorized.
+
+## Stage8879-8881 Final Closed-Gate Recovery Walk
+
+Bounded decoder CE and denoise repair are now reconciled as recovered closed gates rather than missing prerequisite nodes.
+
+- Bounded decoder CE has target controls, heldout non-CE eval controls, closed package gate, and telemetry artifact gate recovered. It still requires explicit tiny execution authorization before any run.
+- Denoise repair has output-repair controls, verifier-guided repair targets, and denoise/diffusion contract recovered. Denoise CE and runtime verifier execution remain closed.
+- The only missing node left by the recovered graph is optional metadata-only commit inventory preflight, which must not run repository walking unless explicitly requested.
+
+This remains no-authority recovery: no model execution, training, decoder CE, denoise CE, runtime, source/body emission, Gemma, harness, scoring, mining, controller merge, memory writes, or promotion is authorized.

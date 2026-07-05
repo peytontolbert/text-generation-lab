@@ -1,0 +1,105 @@
+{
+  "artifacts": {
+    "gap_walk": "runs/local/artifacts/stage8880_final_recovered_gap_walk/final_recovered_gap_walk.json",
+    "graph": "runs/local/artifacts/stage8879_closed_gate_status_reconciliation/central_research_graph_with_closed_gate_status_reconciliation.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "closed_gate_recovered_nodes": [
+    {
+      "id": "objective:bounded_decoder_ce",
+      "kind": "support_or_objective",
+      "name": "bounded_decoder_ce",
+      "status": "closed_gate_recovered_awaiting_explicit_tiny_execution_authorization"
+    },
+    {
+      "id": "objective:denoise_repair",
+      "kind": "support_or_objective",
+      "name": "denoise_repair",
+      "status": "closed_gate_recovered_awaiting_dedicated_no_execution_denoise_authorization_review"
+    }
+  ],
+  "created_at_utc": "2026-07-05T07:51:36Z",
+  "decision": "Recovered graph is now structurally caught up for the 100M software-maintainer control spine. Remaining work is optional explicit authorization review or optional metadata-only inventory preflight, not missing core curriculum modules.",
+  "metrics": {
+    "actionable_unresolved_nodes": 0,
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "closed_gate_recovered_nodes": 2,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "graph_edges": 2686,
+    "graph_nodes": 1798,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "model_execution_authorized_now": false,
+    "optional_missing_nodes": 1,
+    "prioritized_gap_count": 3,
+    "promotion_ready": false,
+    "registry_latest_stage": 8878,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_authorized": false,
+    "unresolved_missing_or_blocked_nodes": 1
+  },
+  "next_best_step": "Stop recovery churn and choose deliberately: explicit tiny structured probe authorization review, optional metadata-only commit inventory preflight, or continue non-executing denoise authorization design. Do not train/run directly.",
+  "optional_missing_nodes": [
+    {
+      "id": "objective:future_commit_inventory_preflight",
+      "kind": "objective",
+      "name": "future_commit_inventory_preflight",
+      "status": "missing_next_recovery_target"
+    }
+  ],
+  "passed": true,
+  "prioritized_gaps": [
+    {
+      "authority_closed": true,
+      "gap_id": "future_commit_inventory_preflight_optional",
+      "next_step": "Only design this if repository walking is explicitly requested; otherwise leave closed.",
+      "node_id": "objective:future_commit_inventory_preflight",
+      "priority": 1
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "tiny_structured_probe_execution_review_optional",
+      "next_step": "If the user explicitly wants execution, create an execution-authorization review card first; do not run directly.",
+      "node_id": "stage8890_tiny_structured_policy_probe_candidate",
+      "priority": 2
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "denoise_authorization_review_optional",
+      "next_step": "Only design a no-execution denoise authorization review; denoise CE/runtime remain closed.",
+      "node_id": "objective:denoise_repair",
+      "priority": 3
+    }
+  ],
+  "stage": 8880,
+  "stage_name": "stage8880_final_recovered_gap_walk",
+  "unresolved_missing_or_blocked_nodes": [
+    {
+      "id": "objective:future_commit_inventory_preflight",
+      "kind": "objective",
+      "name": "future_commit_inventory_preflight",
+      "status": "missing_next_recovery_target"
+    }
+  ]
+}
