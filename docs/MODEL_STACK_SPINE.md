@@ -1701,3 +1701,13 @@ The next decoder-eval boundary is now a design-only capture preflight, not a mod
 - Stage8833 reconciles registry/spine.
 
 Next boundary: audit the capture preflight design. Only after that should a future runner design be considered, and even then it must remain behind explicit model-execution and CE authority gates.
+
+## Stage8834-8836 Capture Preflight Audit
+
+The model-output capture preflight has now passed a closed-authority audit.
+
+- Stage8834 audited 240 preflight rows: zero execution-allowed rows, zero model-output rows, zero artifact-write rows, zero authority openings, and zero loss openings.
+- Stage8835 attached the audit to the graph and introduced `objective:future_model_output_capture_runner_static_design`.
+- Stage8836 reconciles registry/spine.
+
+Next boundary: static runner-interface design only. This should specify CLI flags/artifact paths/assertions for a future capture runner, but still must not run the model or open decoder CE/runtime/Gemma/scoring.
