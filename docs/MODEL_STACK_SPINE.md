@@ -1949,3 +1949,9 @@ Stage8896 adds a no-execution allocator for future stage numbers. It records the
 The 100M software maintainer is governed as a transition kernel, not a parametric encyclopedia. Raw papers/frameworks/repos are too large as direct memory; the curriculum compiler must convert them into canonical software-state transition records, research-operator cards, verifier-grounded repair traces, and retrieval-conditioned action examples.
 
 Weights should store reusable transition operators. Retrieval/tools/verifiers should store and ground long-tail facts. Future mining/training must preserve this division of labor.
+
+## Stage8898 Policy Evolution And Knowledge Transfer
+
+Stage8898 records that the 100M checkpoint is static at inference but evolves through the surrounding verified training loop. The model should learn transition operators, while retrieval/tools/verifiers retain observable long-tail facts.
+
+It also adds the knowledge-transfer policy: unfamiliar papers/APIs/framework details must be compiled into research-operator cards, tests, implementation plans, patch steps, verifier observations, and verified transition records before they create gradients.
