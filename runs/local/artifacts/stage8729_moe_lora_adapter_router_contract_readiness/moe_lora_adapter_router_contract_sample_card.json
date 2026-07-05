@@ -1,0 +1,202 @@
+{
+  "adapter_counts": {
+    "adapter_language_python": 1,
+    "adapter_repo_test_heavy": 1,
+    "adapter_task_repo_repair": 1
+  },
+  "adapter_shadow_rows": 1,
+  "authority": {
+    "adapter_training": false,
+    "checkpoint_export": false,
+    "decoder_ce": false,
+    "denoise_ce": false,
+    "model_execution": false,
+    "promotion_ready": false,
+    "runtime": false,
+    "training": false
+  },
+  "decisions": [
+    {
+      "adapter_shadow_allowed": true,
+      "adapter_training_authorized": false,
+      "authority": {
+        "adapter_training": false,
+        "checkpoint_export": false,
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "promotion_ready": false,
+        "runtime": false,
+        "training": false
+      },
+      "decoder_ce_authorized": false,
+      "model_execution_authorized": false,
+      "reasons": [],
+      "route": "ROUTE_COMPOSED_ADAPTER_SHADOW",
+      "row_id": "composed",
+      "safe_route": true,
+      "selected_adapters": [
+        {
+          "adapter_id": "adapter_language_python",
+          "kind": "language"
+        },
+        {
+          "adapter_id": "adapter_task_repo_repair",
+          "kind": "task"
+        },
+        {
+          "adapter_id": "adapter_repo_test_heavy",
+          "kind": "repo"
+        }
+      ],
+      "signals": {
+        "authority_true": false,
+        "high_confidence_wrong": false,
+        "language_confidence": 0.92,
+        "language_family": "python",
+        "language_slice_ready": true,
+        "leak_or_locked": false,
+        "ood_score": 0.0,
+        "repo_confidence": 0.8,
+        "repo_family": "test_heavy",
+        "repo_slice_ready": true,
+        "row_id": "composed",
+        "surface_role": "unknown",
+        "task_confidence": 0.86,
+        "task_family": "repo_repair",
+        "task_slice_ready": true
+      }
+    },
+    {
+      "adapter_shadow_allowed": false,
+      "adapter_training_authorized": false,
+      "authority": {
+        "adapter_training": false,
+        "checkpoint_export": false,
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "promotion_ready": false,
+        "runtime": false,
+        "training": false
+      },
+      "decoder_ce_authorized": false,
+      "model_execution_authorized": false,
+      "reasons": [
+        "language_slice_not_ready"
+      ],
+      "route": "REQUEST_SLICE_EVIDENCE",
+      "row_id": "slice",
+      "safe_route": true,
+      "selected_adapters": [],
+      "signals": {
+        "authority_true": false,
+        "high_confidence_wrong": false,
+        "language_confidence": 0.84,
+        "language_family": "rust",
+        "language_slice_ready": false,
+        "leak_or_locked": false,
+        "ood_score": 0.0,
+        "repo_confidence": 0.0,
+        "repo_family": "unknown",
+        "repo_slice_ready": false,
+        "row_id": "slice",
+        "surface_role": "unknown",
+        "task_confidence": 0.8,
+        "task_family": "repo_repair",
+        "task_slice_ready": true
+      }
+    },
+    {
+      "adapter_shadow_allowed": false,
+      "adapter_training_authorized": false,
+      "authority": {
+        "adapter_training": false,
+        "checkpoint_export": false,
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "promotion_ready": false,
+        "runtime": false,
+        "training": false
+      },
+      "decoder_ce_authorized": false,
+      "model_execution_authorized": false,
+      "reasons": [
+        "language_adapter_missing"
+      ],
+      "route": "USE_BASE_SHARED",
+      "row_id": "base",
+      "safe_route": true,
+      "selected_adapters": [],
+      "signals": {
+        "authority_true": false,
+        "high_confidence_wrong": false,
+        "language_confidence": 0.9,
+        "language_family": "unknown_lang",
+        "language_slice_ready": true,
+        "leak_or_locked": false,
+        "ood_score": 0.0,
+        "repo_confidence": 0.0,
+        "repo_family": "unknown",
+        "repo_slice_ready": false,
+        "row_id": "base",
+        "surface_role": "unknown",
+        "task_confidence": 0.9,
+        "task_family": "repo_repair",
+        "task_slice_ready": true
+      }
+    },
+    {
+      "adapter_shadow_allowed": false,
+      "adapter_training_authorized": false,
+      "authority": {
+        "adapter_training": false,
+        "checkpoint_export": false,
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "promotion_ready": false,
+        "runtime": false,
+        "training": false
+      },
+      "decoder_ce_authorized": false,
+      "model_execution_authorized": false,
+      "reasons": [
+        "authority_true",
+        "language_confidence_low",
+        "ood_score_high",
+        "task_confidence_low"
+      ],
+      "route": "ABSTAIN_ADAPTER_ROUTE",
+      "row_id": "abstain",
+      "safe_route": true,
+      "selected_adapters": [],
+      "signals": {
+        "authority_true": true,
+        "high_confidence_wrong": false,
+        "language_confidence": 0.0,
+        "language_family": "python",
+        "language_slice_ready": true,
+        "leak_or_locked": false,
+        "ood_score": 0.9,
+        "repo_confidence": 0.0,
+        "repo_family": "unknown",
+        "repo_slice_ready": false,
+        "row_id": "abstain",
+        "surface_role": "unknown",
+        "task_confidence": 0.0,
+        "task_family": "repo_repair",
+        "task_slice_ready": true
+      }
+    }
+  ],
+  "route_counts": {
+    "ABSTAIN_ADAPTER_ROUTE": 1,
+    "REQUEST_SLICE_EVIDENCE": 1,
+    "ROUTE_COMPOSED_ADAPTER_SHADOW": 1,
+    "USE_BASE_SHARED": 1
+  },
+  "rows": 4,
+  "unsafe_decisions": 0
+}

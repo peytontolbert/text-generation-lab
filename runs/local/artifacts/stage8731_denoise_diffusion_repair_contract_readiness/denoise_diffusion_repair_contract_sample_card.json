@@ -1,0 +1,267 @@
+{
+  "authority": {
+    "decoder_ce": false,
+    "denoise_ce": false,
+    "model_execution": false,
+    "runtime": false,
+    "scoring_authorized": false,
+    "source_body_emission": false,
+    "training": false
+  },
+  "decoder_ce_rows": 0,
+  "denoise_candidate_rows": 4,
+  "denoise_ce_rows": 0,
+  "plans": [
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "bad_output_features": {
+        "empty_output": false,
+        "internal_leak": true,
+        "looks_like_wrong_surface": true,
+        "repetition": false,
+        "short_output": true
+      },
+      "decoder_ce_authorized": false,
+      "denoise_candidate_eligible": true,
+      "denoise_ce_authorized": false,
+      "mask_spans": [
+        {
+          "end": 12,
+          "reason": "internal_control_token",
+          "start": 0
+        },
+        {
+          "end": 20,
+          "reason": "internal_control_token",
+          "start": 13
+        }
+      ],
+      "model_execution_authorized": false,
+      "repair_steps": [
+        {
+          "operation": "mask_internal_control_tokens",
+          "remask_policy": "initial_mask",
+          "step": 0,
+          "uses_verifier_feedback": true
+        },
+        {
+          "operation": "mask_internal_control_tokens",
+          "remask_policy": "remask_failed_spans_only",
+          "step": 1,
+          "uses_verifier_feedback": true
+        },
+        {
+          "operation": "mask_internal_control_tokens",
+          "remask_policy": "remask_failed_spans_only",
+          "step": 2,
+          "uses_verifier_feedback": true
+        }
+      ],
+      "route": "REPAIR_INTERNAL_LEAK",
+      "row_id": "leak"
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "bad_output_features": {
+        "empty_output": false,
+        "internal_leak": false,
+        "looks_like_wrong_surface": false,
+        "repetition": false,
+        "short_output": true
+      },
+      "decoder_ce_authorized": false,
+      "denoise_candidate_eligible": true,
+      "denoise_ce_authorized": false,
+      "mask_spans": [
+        {
+          "end": 6,
+          "reason": "missing_semantic_content",
+          "start": 6
+        }
+      ],
+      "model_execution_authorized": false,
+      "repair_steps": [
+        {
+          "operation": "expand_missing_semantic_spans",
+          "remask_policy": "initial_mask",
+          "step": 0,
+          "uses_verifier_feedback": true
+        },
+        {
+          "operation": "expand_missing_semantic_spans",
+          "remask_policy": "remask_failed_spans_only",
+          "step": 1,
+          "uses_verifier_feedback": true
+        },
+        {
+          "operation": "expand_missing_semantic_spans",
+          "remask_policy": "remask_failed_spans_only",
+          "step": 2,
+          "uses_verifier_feedback": true
+        }
+      ],
+      "route": "REPAIR_SHORT_OUTPUT",
+      "row_id": "short"
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "bad_output_features": {
+        "empty_output": false,
+        "internal_leak": false,
+        "looks_like_wrong_surface": false,
+        "repetition": true,
+        "short_output": false
+      },
+      "decoder_ce_authorized": false,
+      "denoise_candidate_eligible": true,
+      "denoise_ce_authorized": false,
+      "mask_spans": [
+        {
+          "end": 29,
+          "reason": "degenerate_repetition",
+          "start": 0
+        }
+      ],
+      "model_execution_authorized": false,
+      "repair_steps": [
+        {
+          "operation": "mask_repeated_spans",
+          "remask_policy": "initial_mask",
+          "step": 0,
+          "uses_verifier_feedback": true
+        },
+        {
+          "operation": "mask_repeated_spans",
+          "remask_policy": "remask_failed_spans_only",
+          "step": 1,
+          "uses_verifier_feedback": true
+        },
+        {
+          "operation": "mask_repeated_spans",
+          "remask_policy": "remask_failed_spans_only",
+          "step": 2,
+          "uses_verifier_feedback": true
+        }
+      ],
+      "route": "REPAIR_REPETITION",
+      "row_id": "repeat"
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "bad_output_features": {
+        "empty_output": false,
+        "internal_leak": false,
+        "looks_like_wrong_surface": true,
+        "repetition": false,
+        "short_output": false
+      },
+      "decoder_ce_authorized": false,
+      "denoise_candidate_eligible": true,
+      "denoise_ce_authorized": false,
+      "mask_spans": [
+        {
+          "end": 39,
+          "reason": "wrong_surface_full_remask",
+          "start": 0
+        }
+      ],
+      "model_execution_authorized": false,
+      "repair_steps": [
+        {
+          "operation": "remask_surface_and_style",
+          "remask_policy": "initial_mask",
+          "step": 0,
+          "uses_verifier_feedback": true
+        },
+        {
+          "operation": "remask_surface_and_style",
+          "remask_policy": "remask_failed_spans_only",
+          "step": 1,
+          "uses_verifier_feedback": true
+        },
+        {
+          "operation": "remask_surface_and_style",
+          "remask_policy": "remask_failed_spans_only",
+          "step": 2,
+          "uses_verifier_feedback": true
+        }
+      ],
+      "route": "REPAIR_WRONG_SURFACE",
+      "row_id": "wrong_surface"
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "bad_output_features": {
+        "empty_output": false,
+        "internal_leak": false,
+        "looks_like_wrong_surface": false,
+        "repetition": false,
+        "short_output": true
+      },
+      "decoder_ce_authorized": false,
+      "denoise_candidate_eligible": false,
+      "denoise_ce_authorized": false,
+      "mask_spans": [],
+      "model_execution_authorized": false,
+      "repair_steps": [
+        {
+          "operation": "abstain_without_denoise",
+          "remask_policy": "initial_mask",
+          "step": 0,
+          "uses_verifier_feedback": true
+        }
+      ],
+      "route": "ABSTAIN_UNRECOVERABLE",
+      "row_id": "abstain"
+    }
+  ],
+  "route_counts": {
+    "ABSTAIN_UNRECOVERABLE": 1,
+    "REPAIR_INTERNAL_LEAK": 1,
+    "REPAIR_REPETITION": 1,
+    "REPAIR_SHORT_OUTPUT": 1,
+    "REPAIR_WRONG_SURFACE": 1
+  },
+  "rows": 5,
+  "unsafe_authority_rows": 0
+}

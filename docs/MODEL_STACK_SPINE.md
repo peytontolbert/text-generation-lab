@@ -529,3 +529,175 @@ Artifacts:
 - `runs/summaries/stage8728_fusion_logits_forward_pass_contract_graph_attachment.json`
 
 Next queue item: `moe_lora_adapter_router_contract`.
+
+## Stage8730 MoE/LoRA Adapter Router Contract
+
+Recovered as `ready_partial_no_execution_contract`. This closes the Stage8720 priority-5 gap at the contract level. It defines conservative shadow routing for task, language, and repo-family specialists without opening adapter training or execution.
+
+Routes:
+
+- `USE_BASE_SHARED`
+- `ROUTE_LANGUAGE_ADAPTER_SHADOW`
+- `ROUTE_TASK_ADAPTER_SHADOW`
+- `ROUTE_REPO_ADAPTER_SHADOW`
+- `ROUTE_COMPOSED_ADAPTER_SHADOW`
+- `REQUEST_SLICE_EVIDENCE`
+- `ABSTAIN_ADAPTER_ROUTE`
+
+Hard rule: adapters are shadow hints only until slice gates are reliable. Authority, leak/locked rows, OOD, high-confidence-wrong signals, missing adapter inventory, or missing slice readiness force abstain, base/shared fallback, or slice-evidence request.
+
+Artifacts:
+
+- `scripts/moe_lora_adapter_router_contract.py`
+- `tests/test_moe_lora_adapter_router_contract.py`
+- `runs/summaries/stage8729_moe_lora_adapter_router_contract_readiness.json`
+- `runs/summaries/stage8730_moe_lora_adapter_router_contract_graph_attachment.json`
+
+Next queue item: `denoise_diffusion_repair_contract`.
+
+## Stage8730 Denoise / Diffusion Repair Contract
+
+Recovered as `ready_partial_no_execution_contract`. This closes the Stage8720 denoise/diffusion repair gap at the contract level. It plans masked-span repair trajectories for bad outputs but does not authorize denoise CE, decoder CE, model execution, or runtime.
+
+Routes:
+
+- `REPAIR_INTERNAL_LEAK`
+- `REPAIR_SHORT_OUTPUT`
+- `REPAIR_REPETITION`
+- `REPAIR_WRONG_SURFACE`
+- `ABSTAIN_UNRECOVERABLE`
+
+The contract emits mask spans, iterative repair steps, verifier-feedback remasking policy, and denoise-candidate eligibility. Authority-true rows force abstain.
+
+Artifacts:
+
+- `scripts/denoise_diffusion_repair_contract.py`
+- `tests/test_denoise_diffusion_repair_contract.py`
+- `runs/summaries/stage8729_denoise_diffusion_repair_contract_readiness.json`
+- `runs/summaries/stage8730_denoise_diffusion_repair_contract_graph_attachment.json`
+
+Next queue item: `adversarial_hard_negative_generator`.
+
+## Stage8733 Adversarial Hard-Negative Generator
+
+Recovered as `ready_partial_no_authority_generator`. This closes the Stage8720 adversarial hard-negative gap at the contract level. It generates audit-only negative rows for shortcut/leakage/proxy hardening. Generated rows are not training positives and all loss/model/runtime/decode authorities remain closed.
+
+Attack types:
+
+- `PROXY_LABEL_SWAP`
+- `EVIDENCE_REMOVED`
+- `LEAK_INJECTION`
+- `DUPLICATE_COLLISION`
+- `MISLEADING_RETRIEVAL`
+
+Artifacts:
+
+- `scripts/adversarial_hard_negative_generator.py`
+- `tests/test_adversarial_hard_negative_generator.py`
+- `runs/summaries/stage8731_adversarial_hard_negative_generator_readiness.json`
+- `runs/summaries/stage8733_adversarial_hard_negative_generator_graph_attachment.json`
+
+Next queue item: `confidence_ood_head_contract`.
+
+## Stage8732 Denoise/Diffusion Repair Contract
+
+Recovered as `ready_partial_no_execution_contract`. This closes the Stage8720 priority-6 gap at the contract level. It defines masked-span repair planning for bad decoder outputs and verifier-guided remasking without opening denoise CE.
+
+Routes:
+
+- `REPAIR_INTERNAL_LEAK`
+- `REPAIR_SHORT_OUTPUT`
+- `REPAIR_REPETITION`
+- `REPAIR_WRONG_SURFACE`
+- `ABSTAIN_UNRECOVERABLE`
+
+Hard rule: the denoise/diffusion layer is a repair-plan contract only. It may identify mask spans and repair steps, but denoise CE, decoder CE, model execution, runtime, source/body emission, Gemma, and promotion remain closed. Authority true forces abstain.
+
+Artifacts:
+
+- `scripts/denoise_diffusion_repair_contract.py`
+- `tests/test_denoise_diffusion_repair_contract.py`
+- `runs/summaries/stage8731_denoise_diffusion_repair_contract_readiness.json`
+- `runs/summaries/stage8732_denoise_diffusion_repair_contract_graph_attachment.json`
+
+Next queue item: `adversarial_hard_negative_generator`.
+
+
+## Stage8734 Adversarial Hard-Negative Generator
+
+Recovered as `ready_partial_no_authority_generator`. This closes the Stage8720 priority-7 gap at the contract level. It generates audit-only hard negatives for shortcut, leakage, duplicate, evidence, and misleading-retrieval probes.
+
+Attack types:
+
+- `PROXY_LABEL_SWAP`
+- `EVIDENCE_REMOVED`
+- `LEAK_INJECTION`
+- `DUPLICATE_COLLISION`
+- `MISLEADING_RETRIEVAL`
+
+Hard rule: generated rows are adversarial negatives for dataset/ranker/audit hardening only. They carry closed authority, disabled loss masks, decode disabled, and expected guard route `BLOCK_OR_RETRIEVE`. They must never be learned as positives.
+
+Artifacts:
+
+- `scripts/adversarial_hard_negative_generator.py`
+- `tests/test_adversarial_hard_negative_generator.py`
+- `runs/summaries/stage8733_adversarial_hard_negative_generator_readiness.json`
+- `runs/summaries/stage8734_adversarial_hard_negative_generator_graph_attachment.json`
+
+Next queue item: `confidence_ood_head_contract`.
+
+## Stage8736 Confidence/OOD Head Contract
+
+Recovered as `ready_partial_no_execution_contract`. This closes the Stage8720 priority-8 gap at the contract level while priority-7 adversarial hard negatives are handled separately. It defines the head-level confidence/OOD schema, Brier/ECE calibration card, margin/entropy thresholds, high-confidence-wrong gate, OOD retrieve route, and authority/leak blocking.
+
+Routes:
+
+- `ACCEPT_CALIBRATED_SHADOW`
+- `ABSTAIN_LOW_CONFIDENCE`
+- `RETRIEVE_OOD_OR_INSUFFICIENT`
+- `REVIEW_HIGH_CONFIDENCE_WRONG`
+- `BLOCK_AUTHORITY_OR_LEAK`
+
+Hard rule: confidence can provide telemetry, review routing, retrieve routing, and shadow acceptance only. It cannot authorize source/body emission, decoder CE, runtime, training, Gemma, scoring, or promotion. High-confidence wrong predictions must route to review. OOD or insufficient evidence must route to retrieve.
+
+Artifacts:
+
+- `scripts/confidence_ood_head_contract.py`
+- `tests/test_confidence_ood_head_contract.py`
+- `runs/summaries/stage8735_confidence_ood_head_contract_readiness.json`
+- `runs/summaries/stage8736_confidence_ood_head_contract_graph_attachment.json`
+
+Next queue item: `structured_data_operation_curriculum`.
+
+## Stage8738 Structured Data Operation Curriculum
+
+Recovered as `ready_partial_curriculum_contract`. This closes the Stage8720 structured-data curriculum gap at the contract level. It defines typed state-transition surfaces for structures beyond raw code text.
+
+Covered structures:
+
+- `table`
+- `json`
+- `graph`
+- `ast`
+- `log_trace`
+- `workflow`
+- `memory`
+
+Required fields for every row:
+
+- `state`
+- `schema`
+- `addressing`
+- `operator`
+- `validator`
+
+Boundary: this is curriculum scaffolding only. It blocks decoder CE, denoise CE, runtime reward, model execution, source/body emission, and promotion.
+
+Artifacts:
+
+- `scripts/structured_data_operation_curriculum.py`
+- `tests/test_structured_data_operation_curriculum.py`
+- `runs/summaries/stage8737_structured_data_operation_curriculum_readiness.json`
+- `runs/summaries/stage8738_structured_data_operation_curriculum_graph_attachment.json`
+
+Next queue item: `semantic_equivalence_metamorphic_verifier`.

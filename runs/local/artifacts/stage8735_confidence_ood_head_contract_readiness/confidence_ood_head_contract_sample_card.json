@@ -1,0 +1,149 @@
+{
+  "authority": {
+    "decoder_ce": false,
+    "denoise_ce": false,
+    "model_execution": false,
+    "promotion_ready": false,
+    "runtime": false,
+    "scoring_authorized": false,
+    "source_body_emission": false,
+    "training": false
+  },
+  "brier": 0.247017,
+  "calibrated_shadow_accept_rows": 1,
+  "decisions": [
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "promotion_ready": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "calibrated_shadow_accept": true,
+      "confidence": 0.918783,
+      "correct": true,
+      "decoder_ce_authorized": false,
+      "entropy": 0.305446,
+      "high_confidence_wrong": false,
+      "margin": 0.868228,
+      "model_execution_authorized": false,
+      "ood_score": 0.1,
+      "pred": "SAFE",
+      "reasons": [],
+      "route": "ACCEPT_CALIBRATED_SHADOW",
+      "row_id": "accept",
+      "safe_route": true,
+      "target": "SAFE",
+      "training_authorized": false
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "promotion_ready": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "calibrated_shadow_accept": false,
+      "confidence": 0.918783,
+      "correct": false,
+      "decoder_ce_authorized": false,
+      "entropy": 0.305446,
+      "high_confidence_wrong": true,
+      "margin": 0.868228,
+      "model_execution_authorized": false,
+      "ood_score": 0.1,
+      "pred": "SAFE",
+      "reasons": [
+        "high_confidence_wrong"
+      ],
+      "route": "REVIEW_HIGH_CONFIDENCE_WRONG",
+      "row_id": "wrong",
+      "safe_route": true,
+      "target": "RETRIEVE",
+      "training_authorized": false
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "promotion_ready": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "calibrated_shadow_accept": false,
+      "confidence": 0.367165,
+      "correct": false,
+      "decoder_ce_authorized": false,
+      "entropy": 0.996973,
+      "high_confidence_wrong": false,
+      "margin": 0.03494,
+      "model_execution_authorized": false,
+      "ood_score": 0.8,
+      "pred": "SAFE",
+      "reasons": [
+        "confidence_low",
+        "entropy_high",
+        "evidence_insufficient",
+        "margin_low",
+        "ood_score_high"
+      ],
+      "route": "RETRIEVE_OOD_OR_INSUFFICIENT",
+      "row_id": "ood",
+      "safe_route": true,
+      "target": "RETRIEVE",
+      "training_authorized": false
+    },
+    {
+      "authority": {
+        "decoder_ce": false,
+        "denoise_ce": false,
+        "model_execution": false,
+        "promotion_ready": false,
+        "runtime": false,
+        "scoring_authorized": false,
+        "source_body_emission": false,
+        "training": false
+      },
+      "calibrated_shadow_accept": false,
+      "confidence": 0.95,
+      "correct": true,
+      "decoder_ce_authorized": false,
+      "entropy": 0.0,
+      "high_confidence_wrong": false,
+      "margin": 0.0,
+      "model_execution_authorized": false,
+      "ood_score": 0.0,
+      "pred": "SAFE",
+      "reasons": [
+        "authority_true",
+        "margin_low"
+      ],
+      "route": "BLOCK_AUTHORITY_OR_LEAK",
+      "row_id": "blocked",
+      "safe_route": true,
+      "target": "SAFE",
+      "training_authorized": false
+    }
+  ],
+  "ece": 0.288683,
+  "high_confidence_wrong_rows": 1,
+  "route_counts": {
+    "ACCEPT_CALIBRATED_SHADOW": 1,
+    "BLOCK_AUTHORITY_OR_LEAK": 1,
+    "RETRIEVE_OOD_OR_INSUFFICIENT": 1,
+    "REVIEW_HIGH_CONFIDENCE_WRONG": 1
+  },
+  "rows": 4,
+  "unsafe_decisions": 0
+}
