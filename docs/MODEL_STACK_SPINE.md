@@ -1681,3 +1681,13 @@ The packet telemetry contract is now audited as schema-ready, but not model-prob
 - Stage8827 reconciles the audit into registry/spine.
 
 Next boundary: build a synthetic no-execution packet validator dry run. It should validate placeholder packets against the contract before any real model output is allowed into the evaluation path.
+
+## Stage8828-8830 Synthetic Packet Validator
+
+The output-packet schema has now been validated with synthetic placeholder packets only.
+
+- Stage8828 generated 240 synthetic placeholder packets and validated all required fields/checks/telemetry with zero real model outputs.
+- Stage8829 attached `validator:synthetic_packet_validator_dry_run_v1` to the graph and introduced `objective:authority_closed_model_output_capture_preflight`.
+- Stage8830 reconciles registry/spine.
+
+Next boundary: design an authority-closed model-output capture preflight. It should specify how future model outputs would be captured into validated packets, but still must not run the model or open decoder CE/runtime/Gemma/scoring.
