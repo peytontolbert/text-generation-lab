@@ -747,3 +747,29 @@ Artifacts:
 - `runs/summaries/stage8742_source_inventory_lineage_tracker_graph_attachment.json`
 
 Next queue item: `source_provenance_license_security_filter`.
+
+## Stage8744 Source Provenance License Security Filter
+
+Recovered as `ready_partial_source_admission_contract`. This pairs with the source lineage tracker to decide whether a source can enter structured curriculum admission, needs review, or must be blocked.
+
+Routes:
+
+- `ALLOW_SOURCE_FOR_STRUCTURED`
+- `ALLOW_SOURCE_FOR_HOLDOUT_ONLY`
+- `HOLD_LICENSE_REVIEW`
+- `HOLD_SECURITY_REVIEW`
+- `BLOCK_SECRET_OR_PII`
+- `BLOCK_LOCKED_EVAL_TRAIN`
+- `BLOCK_DISALLOWED_IMPORT_SOURCE`
+- `BLOCK_MISSING_LINEAGE`
+
+Hard rule: source admission requires lineage, license/security metadata, allowed import provenance when imports are required, and secret/PII screening. Clean sources may become structured candidates only; this does not open decoder CE, runtime, source/body emission, training, Gemma, scoring, or promotion.
+
+Artifacts:
+
+- `scripts/source_provenance_license_security_filter.py`
+- `tests/test_source_provenance_license_security_filter.py`
+- `runs/summaries/stage8743_source_provenance_license_security_filter_readiness.json`
+- `runs/summaries/stage8744_source_provenance_license_security_filter_graph_attachment.json`
+
+Next queue item: `contamination_leakage_detector`.

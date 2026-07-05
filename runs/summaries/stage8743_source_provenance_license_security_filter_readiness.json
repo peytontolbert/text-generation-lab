@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "decisions": "runs/local/artifacts/stage8743_source_provenance_license_security_filter_readiness/source_provenance_filter_decisions.jsonl",
+    "sample_card": "runs/local/artifacts/stage8743_source_provenance_license_security_filter_readiness/source_provenance_license_security_filter_sample_card.json"
+  },
+  "authority": {
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_authorized": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "source_body_authorized": false,
+    "training_authorized_next": false
+  },
+  "created_at_utc": "2026-07-05T00:22:26Z",
+  "decision": "Recovered source provenance/license/security filter. It blocks missing lineage, secrets/PII, locked-eval train requests, and disallowed import sources; license/security gaps route to review.",
+  "metrics": {
+    "authority_rows": 0,
+    "blocked_rows": 2,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_authorized": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "review_rows": 2,
+    "routes": {
+      "ALLOW_SOURCE_FOR_STRUCTURED": 1,
+      "BLOCK_LOCKED_EVAL_TRAIN": 1,
+      "BLOCK_SECRET_OR_PII": 1,
+      "HOLD_LICENSE_REVIEW": 1,
+      "HOLD_SECURITY_REVIEW": 1
+    },
+    "rows": 5,
+    "runtime_authorized": false,
+    "source_body_authorized": false,
+    "train_allowed_rows": 1,
+    "training_authorized_next": false,
+    "unsafe_decisions": 0
+  },
+  "name": "stage8743_source_provenance_license_security_filter_readiness",
+  "next_best_step": "Attach source provenance/license/security filter to central graph, then recover contamination_leakage_detector.",
+  "passed": true,
+  "stage": 8743,
+  "stage_name": "stage8743_source_provenance_license_security_filter_readiness"
+}
