@@ -10,6 +10,7 @@ STAGE_RE = re.compile(r"stage(\d+)")
 AUTH_KEYS = [
     "model_execution_authorized_next",
     "decoder_ce_training_authorized_next",
+    "denoise_ce_training_authorized_next",
     "runtime_authorized",
     "source_emission_authorized",
     "body_emission_authorized",

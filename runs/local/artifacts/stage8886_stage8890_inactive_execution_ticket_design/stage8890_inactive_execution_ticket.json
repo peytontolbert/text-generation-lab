@@ -1,0 +1,103 @@
+{
+  "allowed_loss_weights": {
+    "decoder_ce_weight": 0.0,
+    "denoise_weight": 0.0,
+    "structured_aux_weight": 1.0
+  },
+  "allowed_operations": [],
+  "artifact_scope": {
+    "allowed_write_kinds": [
+      "structured_probe_telemetry_after_future_explicit_authorization_only"
+    ],
+    "forbidden_write_kinds": [
+      "final_checkpoint",
+      "promotion_marker",
+      "runtime_result",
+      "gemma_score",
+      "source_body",
+      "hidden_reference_artifact"
+    ],
+    "no_overwrite_existing": true,
+    "output_root": "runs/local/probes/stage8890_tiny_structured_policy_probe_candidate",
+    "post_run_artifact_gate": {
+      "fail_if_missing_or_empty": true,
+      "mode": "structured_aux_probe",
+      "required": true,
+      "script": "scripts/native_probe_interpretability_artifact_contract.py"
+    },
+    "required_interpretability_artifacts": [
+      "row_field_logits.jsonl",
+      "row_field_losses.jsonl",
+      "row_gradient_norms.jsonl",
+      "activation_summary.jsonl",
+      "feature_ablation_attribution.jsonl",
+      "activation_patch_recovery.jsonl",
+      "row_dynamics_history.jsonl",
+      "module_delta_norms.json",
+      "field_exact_by_cell.json"
+    ]
+  },
+  "audit_log_ref": "runs/summaries/stage8887_stage8890_inactive_execution_ticket_gate_audit.json",
+  "checkpoint_scope": {
+    "cleanup_forbidden_paths": [
+      "/",
+      "/data",
+      "/arxiv",
+      "/data/agentkernel-seq2seq-text-lab"
+    ],
+    "final_checkpoint_export": false,
+    "temporary_checkpoint_cleanup_policy": "safe_cleanup_checkpoints_only"
+  },
+  "command_materialized": false,
+  "dataset_scope": {
+    "max_eval_rows": 16,
+    "max_strict_rows": 16,
+    "max_train_rows": 32,
+    "objective_family": "intent_to_build_strategy",
+    "required_trainable_fields": [
+      "build_mode",
+      "allowed_import_policy",
+      "blocked_import_policy",
+      "repo_dependency_policy",
+      "action_sequence",
+      "file_plan"
+    ],
+    "source_manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl"
+  },
+  "denied_operations": [
+    "load_checkpoint",
+    "run_forward",
+    "decode_tokens",
+    "write_model_output_artifact",
+    "compute_decoder_ce",
+    "compute_denoise_ce",
+    "run_runtime",
+    "call_gemma",
+    "score_output",
+    "emit_source_body",
+    "promote_model"
+  ],
+  "execution_authorized_now": false,
+  "expiry_policy": "single_future_stage_request_only_expires_if_stage8890_plan_changes",
+  "request_scope": "tiny_structured_policy_probe_candidate_only",
+  "requested_stage": 8890,
+  "requested_stage_name": "stage8890_tiny_structured_policy_probe_candidate",
+  "requires_artifact_gate": true,
+  "requires_explicit_user_authorization": true,
+  "requires_fresh_pre_execution_audit": true,
+  "reviewer": "stage8886_design_only_no_execution",
+  "runtime_scope": {
+    "batch_size": 2,
+    "decoder_ce_authorized_now": false,
+    "denoise_ce_authorized_now": false,
+    "implementation": "transformer",
+    "max_decoder_tokens": 64,
+    "max_encoder_tokens": 256,
+    "max_steps": 8,
+    "mode": "structured_policy_probe",
+    "model_execution_authorized_now": false,
+    "runtime_authorized_now": false
+  },
+  "ticket_id": "stage8890_tiny_structured_policy_probe_candidate__draft_inactive",
+  "ticket_status": "DRAFT_INACTIVE"
+}
