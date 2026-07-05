@@ -1,0 +1,109 @@
+{
+  "metrics": {
+    "abstain_rows": 1,
+    "accepted_shadow_rows": 1,
+    "authority_rows": 0,
+    "label_counts": {
+      "ABSTAIN": 1,
+      "COPY_PRIOR": 1,
+      "CORRECT_PRIOR": 1
+    },
+    "review_rows": 1,
+    "route_counts": {
+      "ABSTAIN_NO_WEAK_LABEL": 1,
+      "ACCEPT_WEAK_LABEL_SHADOW": 1,
+      "HOLD_WEAK_LABEL_REVIEW": 1
+    },
+    "rows": 3
+  },
+  "records": [
+    {
+      "authority": {
+        "decoder_ce_authorized": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "contributing_votes": [
+        {
+          "label": "CORRECT_PRIOR",
+          "score": 0.95,
+          "source": "verifier"
+        },
+        {
+          "label": "CORRECT_PRIOR",
+          "score": 0.765,
+          "source": "static_analysis"
+        }
+      ],
+      "invalid_vote_count": 0,
+      "label_scores": {
+        "CORRECT_PRIOR": 1.715
+      },
+      "reasons": [],
+      "row_id": "agree",
+      "weak_label": "CORRECT_PRIOR",
+      "weak_label_confidence": 1.0,
+      "weak_label_margin": 1.0,
+      "weak_label_route": "ACCEPT_WEAK_LABEL_SHADOW"
+    },
+    {
+      "authority": {
+        "decoder_ce_authorized": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "contributing_votes": [
+        {
+          "label": "COPY_PRIOR",
+          "score": 0.455,
+          "source": "teacher"
+        },
+        {
+          "label": "RETRIEVE_MORE",
+          "score": 0.4485,
+          "source": "teacher"
+        }
+      ],
+      "invalid_vote_count": 0,
+      "label_scores": {
+        "COPY_PRIOR": 0.455,
+        "RETRIEVE_MORE": 0.4485
+      },
+      "reasons": [
+        "conflicting_votes",
+        "weak_label_confidence_low",
+        "weak_label_margin_low"
+      ],
+      "row_id": "review",
+      "weak_label": "COPY_PRIOR",
+      "weak_label_confidence": 0.503597,
+      "weak_label_margin": 0.007194,
+      "weak_label_route": "HOLD_WEAK_LABEL_REVIEW"
+    },
+    {
+      "authority": {
+        "decoder_ce_authorized": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "contributing_votes": [],
+      "invalid_vote_count": 1,
+      "label_scores": {},
+      "reasons": [
+        "no_valid_votes",
+        "invalid_or_contaminated_votes",
+        "weak_label_confidence_low",
+        "weak_label_margin_low"
+      ],
+      "row_id": "abstain",
+      "weak_label": "ABSTAIN",
+      "weak_label_confidence": 0.0,
+      "weak_label_margin": 0.0,
+      "weak_label_route": "ABSTAIN_NO_WEAK_LABEL"
+    }
+  ],
+  "rows": 3
+}

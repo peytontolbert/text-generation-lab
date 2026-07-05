@@ -1,0 +1,74 @@
+{
+  "metrics": {
+    "budget_class_counts": {
+      "exhausted": 1,
+      "ok": 2
+    },
+    "budget_ok_rows": 2,
+    "retrieve_rows": 1,
+    "route_counts": {
+      "RETRIEVE_MORE_WITHIN_BUDGET": 1,
+      "STOP_BUDGET_EXHAUSTED": 1,
+      "STOP_VERIFIED_WITHIN_BUDGET": 1
+    },
+    "rows": 3,
+    "stop_rows": 2
+  },
+  "records": [
+    {
+      "budget_class": "ok",
+      "budget_ok": true,
+      "budget_ratios": {
+        "diff_line_ratio": 0.0,
+        "test_ratio": 0.0,
+        "token_ratio": 0.1,
+        "tool_call_ratio": 0.0,
+        "wall_time_ratio": 0.0
+      },
+      "budget_route": "RETRIEVE_MORE_WITHIN_BUDGET",
+      "decoder_budget_ok": true,
+      "max_budget_ratio": 0.1,
+      "row_id": "retrieve",
+      "stop_or_retrieve_route": "RETRIEVE_MORE_WITHIN_BUDGET",
+      "test_budget_ok": true,
+      "tool_call_budget_ok": true
+    },
+    {
+      "budget_class": "exhausted",
+      "budget_ok": false,
+      "budget_ratios": {
+        "diff_line_ratio": 0.0,
+        "test_ratio": 0.0,
+        "token_ratio": 20.0,
+        "tool_call_ratio": 0.0,
+        "wall_time_ratio": 0.0
+      },
+      "budget_route": "STOP_BUDGET_EXHAUSTED",
+      "decoder_budget_ok": false,
+      "max_budget_ratio": 20.0,
+      "row_id": "exhausted",
+      "stop_or_retrieve_route": "STOP_BUDGET_EXHAUSTED",
+      "test_budget_ok": true,
+      "tool_call_budget_ok": true
+    },
+    {
+      "budget_class": "ok",
+      "budget_ok": true,
+      "budget_ratios": {
+        "diff_line_ratio": 0.0,
+        "test_ratio": 0.0,
+        "token_ratio": 0.1,
+        "tool_call_ratio": 0.0,
+        "wall_time_ratio": 0.0
+      },
+      "budget_route": "STOP_VERIFIED_WITHIN_BUDGET",
+      "decoder_budget_ok": true,
+      "max_budget_ratio": 0.1,
+      "row_id": "verified",
+      "stop_or_retrieve_route": "STOP_VERIFIED_WITHIN_BUDGET",
+      "test_budget_ok": true,
+      "tool_call_budget_ok": true
+    }
+  ],
+  "rows": 3
+}

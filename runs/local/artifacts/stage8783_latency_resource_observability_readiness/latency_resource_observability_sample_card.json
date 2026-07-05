@@ -1,0 +1,110 @@
+{
+  "metrics": {
+    "authority_rows": 0,
+    "blocked_rows": 1,
+    "budget_violation_rows": 1,
+    "max_latency_ms": 900.0,
+    "max_memory_peak_mb": 64.0,
+    "max_token_count": 1200.0,
+    "max_tool_call_count": 0.0,
+    "max_tool_cost": 1.0,
+    "mean_latency_ms": 333.333333,
+    "mean_memory_peak_mb": 21.333333,
+    "mean_token_count": 433.333333,
+    "mean_tool_call_count": 0.0,
+    "mean_tool_cost": 0.333333,
+    "pass_rows": 1,
+    "route_counts": {
+      "BLOCK_RESOURCE_BUDGET_VIOLATION": 1,
+      "HOLD_RESOURCE_BUDGET_WARNING": 1,
+      "PASS_RESOURCE_OBSERVABILITY": 1
+    },
+    "rows": 3,
+    "warning_rows": 1
+  },
+  "records": [
+    {
+      "authority": {
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "budget_violation": false,
+      "metrics": {
+        "latency_ms": 100.0,
+        "memory_peak_mb": 64.0,
+        "token_count": 100.0,
+        "tool_call_count": 0.0,
+        "tool_cost": 1.0
+      },
+      "ratios": {
+        "latency_ms": 0.1,
+        "memory_peak_mb": 0.015625,
+        "token_count": 0.1,
+        "tool_call_count": 0.0,
+        "tool_cost": 0.02
+      },
+      "resource_route": "PASS_RESOURCE_OBSERVABILITY",
+      "row_id": "ok",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "authority": {
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "budget_violation": false,
+      "metrics": {
+        "latency_ms": 900.0,
+        "memory_peak_mb": 0.0,
+        "token_count": 0.0,
+        "tool_call_count": 0.0,
+        "tool_cost": 0.0
+      },
+      "ratios": {
+        "latency_ms": 0.9,
+        "memory_peak_mb": 0.0,
+        "token_count": 0.0,
+        "tool_call_count": 0.0,
+        "tool_cost": 0.0
+      },
+      "resource_route": "HOLD_RESOURCE_BUDGET_WARNING",
+      "row_id": "warn",
+      "violations": [],
+      "warnings": [
+        "latency_ms"
+      ]
+    },
+    {
+      "authority": {
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "budget_violation": true,
+      "metrics": {
+        "latency_ms": 0.0,
+        "memory_peak_mb": 0.0,
+        "token_count": 1200.0,
+        "tool_call_count": 0.0,
+        "tool_cost": 0.0
+      },
+      "ratios": {
+        "latency_ms": 0.0,
+        "memory_peak_mb": 0.0,
+        "token_count": 1.2,
+        "tool_call_count": 0.0,
+        "tool_cost": 0.0
+      },
+      "resource_route": "BLOCK_RESOURCE_BUDGET_VIOLATION",
+      "row_id": "block",
+      "violations": [
+        "token_count"
+      ],
+      "warnings": []
+    }
+  ],
+  "rows": 3
+}

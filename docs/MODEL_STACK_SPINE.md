@@ -1148,3 +1148,260 @@ Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, 
 
 Next step: recover source-backed patch operator builder under `gate_status_contract`, then cost/budget scheduler if still missing.
 
+## Stage8774-8776 Source-Backed Patch Operator Candidate Recovery
+
+Recovered source-backed patch operator as candidate-ready, no-training rows under `gate_status_contract`. This extends the recovered maintenance-cognition chain from source-backed edit localization into patch operator selection.
+
+Source path:
+
+- Neutral objective source: `runs/local/artifacts/stage8638_patch_operator_neutral_manifest/patch_operator_neutral_manifest.jsonl`
+- Lineage registry: `configs/software_maintainer/source_inventory_lineage_registry_stage8663.json`
+- Recovered builder: `scripts/source_backed_patch_operator_builder.py`
+
+Stage8774 built:
+
+- rows: `864`
+- operators: `72` each for `MODIFY_EXISTING_SYMBOL`, `INSERT_FUNCTION`, `REPLACE_EXPR`, `WRAP_CALL`, `ADD_IMPORT`, `ADD_TEST_CASE`, `UPDATE_CONFIG_FIELD`, `CREATE_FILE`, `BUILD_ADAPTER`, `ROLLBACK_PATCH`, `RETRIEVE_MORE`, `ABSTAIN_UNSAFE`
+- languages: `216` each for `python`, `typescript`, `rust`, `cpp`
+- splits: `288` each for `train`, `eval`, `strict`
+- complete gate_status rows: `864`
+- training loss rows: `0`
+
+Stage8775 audit passed:
+
+- contamination blocked rows: `0`
+- contamination review rows: `0`
+- schema blocked rows: `0`
+- schema review rows: `0`
+- junk route: `KEEP_STRUCTURED` for `864` rows
+- max single proxy baseline: `0.10185185185185185`
+- max combo proxy baseline: `0.18055555555555555`
+- semantic evidence baseline: `1.0` for allowed operator evidence
+
+Rows remain `CANDIDATE_NEEDS_AUDIT` with no trainable losses. They are not compiler-ready training rows until all recovered gate statuses are explicitly materialized.
+
+Artifacts:
+
+- `scripts/source_backed_patch_operator_builder.py`
+- `tests/test_source_backed_patch_operator_builder.py`
+- `runs/summaries/stage8774_source_backed_patch_operator_candidate_manifest.json`
+- `runs/summaries/stage8775_source_backed_patch_operator_candidate_audit.json`
+- `runs/summaries/stage8776_source_backed_patch_operator_graph_attachment.json`
+
+Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next step: recover source-backed verifier-repair builder under the same gate-status contract.
+
+
+
+## Stage8777-8785 Recovered Support Gates And Central Graph Attachments
+
+Recovered additional support modules that are required before returning to mining or training. These modules do not authorize model execution, training, runtime, source/body emission, scoring, Gemma, controller merge, memory writes, or promotion. They are control-plane and observability components for the 100M software maintainer pipeline.
+
+### Stage8777 Cost Budget Scheduler
+
+Recovered `scripts/cost_budget_scheduler.py` as a no-execution budget router. It evaluates token/tool/test/diff/time budgets and returns conservative routes such as:
+
+- `STOP_BUDGET_EXHAUSTED`
+- `HOLD_BUDGET_REVIEW`
+- `RETRIEVE_MORE_WITHIN_BUDGET`
+- `RETRIEVE_OR_INSPECT_MORE`
+- `STOP_VERIFIED_WITHIN_BUDGET`
+- `CONTINUE_WITHIN_BUDGET`
+
+Readiness metrics:
+
+- sample rows: `3`
+- budget-ok rows: `2`
+- retrieve rows: `1`
+- stop rows: `2`
+- authority rows: `0`
+
+### Stage8778 Static Analysis Security Scanner
+
+Recovered `scripts/static_analysis_security_scanner.py` as a no-runtime deterministic scanner over code/config text fields. It detects high-risk patterns before rows can become decoder or repair data.
+
+Initial risk patterns include:
+
+- `eval` / `exec`
+- `shell=True`
+- `pickle.load` / `pickle.loads`
+- unsafe `yaml.load`
+- SQL string concatenation
+- hardcoded secrets
+- insecure random token generation
+- `DEBUG=True`
+
+Routes:
+
+- `PASS_STATIC_SECURITY_SCAN`
+- `HOLD_SECURITY_REVIEW`
+- `BLOCK_SECURITY_RISK`
+
+Readiness metrics:
+
+- sample rows: `4`
+- pass rows: `1`
+- review rows: `1`
+- blocked rows: `2`
+- finding count: `3`
+- authority rows: `0`
+
+Stage8779 attached both modules to the central graph as support modules for the dataset judge, curriculum compiler, source-backed patch/operator/reviewer objectives, bounded decoder CE, and denoise repair. Graph after attachment:
+
+- nodes: `1715`
+- edges: `2452`
+- authority rows: `0`
+
+### Stage8780 Weak Supervision Label Model
+
+Recovered `scripts/weak_supervision_label_model.py` as a deterministic shadow-only label combiner for verifier, static-analysis, golden-rule, rubric-judge, teacher, retrieval-ranker, and heuristic votes.
+
+It emits:
+
+- weak label
+- confidence
+- margin
+- contributing vote list
+- invalid/contaminated vote count
+- review/abstain route
+
+Routes:
+
+- `ACCEPT_WEAK_LABEL_SHADOW`
+- `HOLD_WEAK_LABEL_REVIEW`
+- `ABSTAIN_NO_WEAK_LABEL`
+
+Readiness metrics:
+
+- sample rows: `3`
+- accepted shadow rows: `1`
+- review rows: `1`
+- abstain rows: `1`
+- authority rows: `0`
+
+Weak labels remain shadow labels. They cannot authorize training rows by themselves.
+
+### Stage8781 Knowledge Graph Memory Store
+
+Recovered `scripts/knowledge_graph_memory_store.py` as a typed no-authority graph-memory scaffold. It supports durable nodes/edges, tag/text retrieval, retrieval path lookup, schema review, and contamination blocking.
+
+Allowed node types:
+
+- `skill`
+- `source_fact`
+- `tool_outcome`
+- `repo_entity`
+- `dataset_patch`
+- `eval_trace`
+- `concept`
+
+Allowed edge types:
+
+- `supports`
+- `derived_from`
+- `used_tool`
+- `touches`
+- `verified_by`
+- `similar_to`
+- `blocks`
+- `supersedes`
+
+Blocked reasons include locked/hidden eval source, contamination risk, and raw source body. Readiness metrics:
+
+- sample rows: `3`
+- sample nodes: `1`
+- sample edges: `0`
+- blocked rows: `1`
+- review rows: `1`
+- authority rows: `0`
+
+Stage8782 attached weak supervision and typed graph memory to the central graph. Graph after attachment:
+
+- nodes: `1718`
+- edges: `2472`
+- authority rows: `0`
+
+### Stage8783 Latency Resource Observability
+
+Recovered `scripts/latency_resource_observability.py` as passive telemetry over latency, memory, token, tool-cost, and tool-call budgets.
+
+It produces routes:
+
+- `PASS_RESOURCE_OBSERVABILITY`
+- `HOLD_RESOURCE_BUDGET_WARNING`
+- `BLOCK_RESOURCE_BUDGET_VIOLATION`
+
+Readiness metrics:
+
+- sample rows: `3`
+- pass rows: `1`
+- warning rows: `1`
+- blocked rows: `1`
+- budget violation rows: `1`
+- authority rows: `0`
+
+This is observability only. It does not execute tools or authorize runtime.
+
+### Stage8784 Repository Universe Builder
+
+Recovered `scripts/repository_universe_builder.py` as a deterministic no-authority repository-universe feature builder. It turns repository metadata summaries into hashed vectors, 3D coordinates, and k-NN repo similarity edges without including raw source.
+
+Readiness metrics:
+
+- sample repos: `3`
+- sample edges: `3`
+- vector dimension: `16`
+- raw source rows: `0`
+- authority rows: `0`
+
+This module supports future `/arxiv/repositories` indexing and program-state multimodality, but it is not a mining authorization.
+
+Stage8785 attached latency/resource observability and repository-universe features to the central graph. Graph after attachment:
+
+- nodes: `1719`
+- edges: `2492`
+- authority rows: `0`
+
+Current next best step remains: recover source-backed verifier-repair builder under `gate_status_contract`, then continue the source-backed objective chain toward bounded decoder CE only after all candidate manifests and audits are restored.
+
+
+### Stage8786-8787 Traced Eval Observability
+
+Recovered `scripts/traced_eval_observability.py` as a no-authority shared trace schema for eval harness, dataset judge, and curriculum compiler handoff.
+
+It validates and records:
+
+- stable trace IDs
+- span trees
+- metric events
+- failure packets
+- dataset-patch eligibility links
+- contamination/locked-eval/hidden-eval/target-answer/raw-source-body blockers
+
+Routes:
+
+- `PASS_EVAL_TRACE`
+- `PASS_FAILURE_TRACE_PACKET`
+- `HOLD_TRACE_SCHEMA_REVIEW`
+- `BLOCK_TRACE_CONTAMINATION`
+
+Readiness metrics:
+
+- sample rows: `4`
+- pass trace rows: `1`
+- failure packet rows: `1`
+- schema review rows: `1`
+- blocked rows: `1`
+- dataset patch eligible rows: `1`
+- authority rows: `0`
+
+Stage8787 attached traced-eval observability to the central graph as a support module for failure attribution, dataset patch loops, cartography/active learning, curriculum compiler, bounded decoder CE, and denoise repair. Graph after attachment:
+
+- nodes: `1719`
+- edges: `2503`
+- authority rows: `0`
+
+This preserves the closed loop:
+
+probe/eval -> traced failure packet -> attribution -> dataset patch queue -> judge/ranker -> curriculum compiler -> next closed-boundary probe.

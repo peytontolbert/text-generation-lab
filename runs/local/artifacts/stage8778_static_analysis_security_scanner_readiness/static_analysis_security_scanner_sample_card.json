@@ -1,0 +1,72 @@
+{
+  "metrics": {
+    "blocked_rows": 2,
+    "finding_count": 3,
+    "high_count": 2,
+    "medium_count": 1,
+    "pass_rows": 1,
+    "review_rows": 1,
+    "route_counts": {
+      "BLOCK_SECURITY_RISK": 2,
+      "HOLD_SECURITY_REVIEW": 1,
+      "PASS_STATIC_SECURITY_SCAN": 1
+    },
+    "rows": 4
+  },
+  "records": [
+    {
+      "finding_count": 0,
+      "findings": [],
+      "high_count": 0,
+      "medium_count": 0,
+      "row_id": "safe",
+      "security_route": "PASS_STATIC_SECURITY_SCAN"
+    },
+    {
+      "finding_count": 1,
+      "findings": [
+        {
+          "line": 1,
+          "rule_id": "debug_true",
+          "severity": "medium",
+          "snippet": "DEBUG = True"
+        }
+      ],
+      "high_count": 0,
+      "medium_count": 1,
+      "row_id": "review",
+      "security_route": "HOLD_SECURITY_REVIEW"
+    },
+    {
+      "finding_count": 1,
+      "findings": [
+        {
+          "line": 1,
+          "rule_id": "python_eval_exec",
+          "severity": "high",
+          "snippet": "eval("
+        }
+      ],
+      "high_count": 1,
+      "medium_count": 0,
+      "row_id": "block_eval",
+      "security_route": "BLOCK_SECURITY_RISK"
+    },
+    {
+      "finding_count": 1,
+      "findings": [
+        {
+          "line": 1,
+          "rule_id": "shell_true",
+          "severity": "high",
+          "snippet": "shell=True"
+        }
+      ],
+      "high_count": 1,
+      "medium_count": 0,
+      "row_id": "block_shell",
+      "security_route": "BLOCK_SECURITY_RISK"
+    }
+  ],
+  "rows": 4
+}

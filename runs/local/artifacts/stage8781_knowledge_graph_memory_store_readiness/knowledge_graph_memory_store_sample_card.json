@@ -1,0 +1,68 @@
+{
+  "edges": [],
+  "metrics": {
+    "authority_rows": 0,
+    "blocked_rows": 1,
+    "edge_count": 0,
+    "edge_types": {},
+    "node_count": 1,
+    "node_types": {
+      "skill": 1
+    },
+    "review_rows": 1,
+    "route_counts": {
+      "BLOCK_MEMORY_CONTAMINATION": 1,
+      "HOLD_MEMORY_SCHEMA_REVIEW": 1,
+      "PASS_MEMORY_NODE_UPSERT": 1
+    }
+  },
+  "nodes": [
+    {
+      "label": "unsafe import repair",
+      "lineage": {},
+      "memory_key": "unsafe import repair",
+      "node_id": "skill_93c2379cedd5d4a81a19",
+      "node_type": "skill",
+      "payload": {},
+      "promotion_authority": false,
+      "tags": [
+        "import",
+        "repair"
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "node": {
+        "label": "unsafe import repair",
+        "lineage": {},
+        "memory_key": "unsafe import repair",
+        "node_id": "skill_93c2379cedd5d4a81a19",
+        "node_type": "skill",
+        "payload": {},
+        "promotion_authority": false,
+        "tags": [
+          "import",
+          "repair"
+        ]
+      },
+      "node_id": "skill_93c2379cedd5d4a81a19",
+      "reasons": [],
+      "route": "PASS_MEMORY_NODE_UPSERT"
+    },
+    {
+      "node_id": null,
+      "reasons": [
+        "locked_eval_source"
+      ],
+      "route": "BLOCK_MEMORY_CONTAMINATION"
+    },
+    {
+      "node_id": null,
+      "reasons": [
+        "unknown_node_type:bad_type"
+      ],
+      "route": "HOLD_MEMORY_SCHEMA_REVIEW"
+    }
+  ]
+}
