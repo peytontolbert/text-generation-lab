@@ -1,0 +1,191 @@
+{
+  "artifacts": {
+    "gap_walk": "runs/local/artifacts/stage8870_reconciled_central_graph_gap_walk/reconciled_central_graph_gap_walk.json",
+    "graph": "runs/local/artifacts/stage8869_stale_graph_status_reconciliation/central_research_graph_with_stale_status_reconciliation.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T07:16:37Z",
+  "decision": "Fresh gap walk after stale-status reconciliation complete. Stale missing nodes are gone; remaining blockers are true closed-boundary gaps.",
+  "metrics": {
+    "arxiv_repository_walk_authorized": false,
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "commit_mining_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "graph_edges": 2679,
+    "graph_nodes": 1794,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "prioritized_gap_count": 4,
+    "promotion_ready": false,
+    "registry_latest_stage": 8871,
+    "resolved_reconciled_nodes": 8,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_authorized": false,
+    "unresolved_missing_or_blocked_nodes": 10
+  },
+  "next_best_step": "Pick one unresolved blocker: future commit inventory preflight if repo walking is explicitly requested, otherwise verifier-guided repair target materialization.",
+  "passed": true,
+  "prioritized_gaps": [
+    {
+      "authority_closed": true,
+      "gap_id": "future_commit_inventory_preflight",
+      "next_step": "Design a bounded metadata-only commit inventory preflight only if repository walking is explicitly requested later.",
+      "node_id": "objective:future_commit_inventory_preflight",
+      "priority": 1
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "verifier_guided_repair_target_materialization",
+      "next_step": "Recover verifier-guided repair target materialization controls; keep denoise CE/runtime closed.",
+      "node_id": "objective:verifier_guided_repair_target_materialization",
+      "priority": 2
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "eval_strict_unique_target_materialization",
+      "next_step": "Recover split-unique eval/strict target materialization or explicitly preserve heldout non-CE boundary.",
+      "node_id": "objective:eval_strict_unique_target_materialization",
+      "priority": 3
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "future_probe_packet_schema_readiness",
+      "next_step": "Reconcile packet-schema nodes with completed Stage8823/8826 path or patch remaining runner-design blockers.",
+      "node_id": "objective:future_model_output_packet_schema",
+      "priority": 4
+    }
+  ],
+  "resolved_reconciled_nodes": [
+    {
+      "id": "objective:model_output_capture_preflight_audit",
+      "name": "model_output_capture_preflight_audit",
+      "previous_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8834_model_output_capture_preflight_design_audit"
+    },
+    {
+      "id": "objective:future_model_output_capture_runner_static_design",
+      "name": "future_model_output_capture_runner_static_design",
+      "previous_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8837_model_output_capture_runner_static_design"
+    },
+    {
+      "id": "objective:future_model_output_capture_authority_ticket_schema",
+      "name": "future_model_output_capture_authority_ticket_schema",
+      "previous_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8840_authority_ticket_schema"
+    },
+    {
+      "id": "objective:authority_ticket_schema_gate_audit",
+      "name": "authority_ticket_schema_gate_audit",
+      "previous_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8842_authority_ticket_schema_gate_audit"
+    },
+    {
+      "id": "objective:learning_signal_dataset_trainer_implementation_plan",
+      "name": "learning_signal_dataset_trainer_implementation_plan",
+      "previous_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8847_learning_signal_implementation_plan"
+    },
+    {
+      "id": "objective:learning_signal_implementation_plan_gate_audit",
+      "name": "learning_signal_implementation_plan_gate_audit",
+      "previous_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8849_learning_signal_implementation_plan_gate_audit"
+    },
+    {
+      "id": "objective:learning_signal_code_patch_readiness_gate_audit",
+      "name": "learning_signal_code_patch_readiness_gate_audit",
+      "previous_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8853_learning_signal_code_patch_readiness_gate_audit"
+    },
+    {
+      "id": "objective:commit_learning_signal_no_mining_gate_audit",
+      "name": "commit_learning_signal_no_mining_gate_audit",
+      "previous_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8860_commit_learning_signal_no_mining_gate_audit"
+    }
+  ],
+  "stage": 8870,
+  "stage_name": "stage8870_reconciled_central_graph_gap_walk",
+  "unresolved_missing_or_blocked_nodes": [
+    {
+      "id": "objective:bounded_decoder_ce",
+      "kind": "support_or_objective",
+      "name": "bounded_decoder_ce",
+      "status": "blocked_by_closed_gate_pending_source_backed_target_materialization"
+    },
+    {
+      "id": "objective:denoise_repair",
+      "kind": "support_or_objective",
+      "name": "denoise_repair",
+      "status": "blocked_by_closed_controls_pending_verifier_guided_materialization"
+    },
+    {
+      "id": "audit:parallel_recovery_readiness",
+      "kind": "audit",
+      "name": "parallel_recovery_readiness_audit",
+      "status": "passed_all_stage8753_missing_real_modules_recovered"
+    },
+    {
+      "id": "objective:verifier_guided_repair_target_materialization",
+      "kind": "objective",
+      "name": "verifier_guided_repair_target_materialization",
+      "status": "missing_next_recovery_target_after_target_text_controls"
+    },
+    {
+      "id": "gap:bounded_decoder_eval_strict_unique_target_materialization",
+      "kind": "gap",
+      "name": "bounded_decoder_eval_strict_unique_target_materialization",
+      "status": "missing_before_probe_ready_ce_package"
+    },
+    {
+      "id": "objective:eval_strict_unique_target_materialization",
+      "kind": "objective",
+      "name": "eval_strict_unique_target_materialization",
+      "status": "missing_recovery_option"
+    },
+    {
+      "id": "objective:future_model_output_packet_schema",
+      "kind": "support_or_objective",
+      "name": "future_model_output_packet_schema",
+      "status": "missing_next_recovery_target"
+    },
+    {
+      "id": "objective:future_probe_packet_readiness_audit",
+      "kind": "support_or_objective",
+      "name": "future_probe_packet_readiness_audit",
+      "status": "missing_next_recovery_target"
+    },
+    {
+      "id": "objective:future_model_output_capture_runner_design",
+      "kind": "objective",
+      "name": "future_model_output_capture_runner_design",
+      "status": "blocked_by_preflight_audit"
+    },
+    {
+      "id": "objective:future_commit_inventory_preflight",
+      "kind": "objective",
+      "name": "future_commit_inventory_preflight",
+      "status": "missing_next_recovery_target"
+    }
+  ]
+}

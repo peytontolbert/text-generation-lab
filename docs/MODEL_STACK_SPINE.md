@@ -1852,3 +1852,13 @@ The commit inventory gap is filled as a dry-run design only.
 - Stage8868 reconciles registry/spine.
 
 Repository walking, commit reads, mining, training, decoder CE, runtime, source/body emission, Gemma, scoring, and promotion remain closed.
+
+## Stage8869-8871 Stale Graph Status Reconciliation
+
+Stale graph statuses were reconciled so completed objectives no longer appear as missing.
+
+- Stage8869 patched 8 stale missing nodes to `resolved_by_reconciled_stage`.
+- Stage8870 reran the graph gap walk and preserved only true unresolved blockers.
+- Stage8871 reconciles registry/spine.
+
+Current priority: future commit inventory preflight only if repository walking is explicitly requested; otherwise verifier-guided repair target materialization controls.
