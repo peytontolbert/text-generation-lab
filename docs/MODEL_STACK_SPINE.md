@@ -1910,3 +1910,7 @@ This does not authorize model execution, training, decoder CE, denoise CE, runti
 ## Stage8889 Metadata Inventory Inactive Ticket
 
 Stage8889 closes the optional metadata-only commit inventory branch as a draft inactive ticket. It performs no repository walk, no commit read, no diff/patch/source body read, no mining, and no training row emission. Future metadata inventory would require a separate explicit ticket with caps.
+
+## Stage8891 No-Execution Control-Plane Regression Audit
+
+Stage8891 records that the recovered authority tickets, metadata-inventory ticket, native probe preflight, cleanup guard, and authority-ticket schema are covered by regression tests. It keeps Stage8890 reserved and opens no execution/training authority.

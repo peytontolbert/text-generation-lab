@@ -1,0 +1,78 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T18:11:22Z",
+  "decision": "No-execution control-plane regression audit passed. Inactive tickets, cleanup guards, native preflight, and authority schema are now protected by tests.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "model_execution_authorized_now": false,
+    "promotion_ready": false,
+    "registry_authority_counts_zero": true,
+    "registry_has_denoise_authority_count": true,
+    "registry_latest_stage_before_update": 8891,
+    "required_test_files": 5,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_summaries_checked": 2,
+    "test_files_with_required_markers": 5,
+    "training_authorized": false
+  },
+  "next_best_step": "Stage8890 remains reserved for explicit future one-run structured probe authorization. Without that authorization, continue only no-execution hardening or documentation.",
+  "passed": true,
+  "source_summaries": [
+    "runs/summaries/stage8887_stage8890_inactive_execution_ticket_gate_audit.json",
+    "runs/summaries/stage8889_metadata_inventory_inactive_ticket_gate.json"
+  ],
+  "stage": 8891,
+  "stage_name": "stage8891_no_execution_control_plane_regression_audit",
+  "test_checks": [
+    {
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_stage888x_inactive_authority_tickets.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_native_probe_preflight_gate.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_safe_cleanup.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_authority_ticket_schema_builder.py"
+    },
+    {
+      "missing_markers": [],
+      "passed": true,
+      "test_file": "tests/test_authority_ticket_schema_gate_audit.py"
+    }
+  ]
+}

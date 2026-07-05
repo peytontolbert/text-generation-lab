@@ -32,6 +32,9 @@ def test_ticket_gate_passes_closed_schema() -> None:
     assert audit["passed"] is True
     assert audit["ticket_gate_pass_rows"] == 1
     assert audit["allowed_operation_rows"] == 0
+    denied_operations = set(rows[0]["example_closed_ticket"]["denied_operations"])
+    assert "compute_decoder_ce" in denied_operations
+    assert "compute_denoise_ce" in denied_operations
 
 
 def test_ticket_gate_catches_missing_denial() -> None:

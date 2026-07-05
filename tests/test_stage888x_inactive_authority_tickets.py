@@ -90,7 +90,7 @@ def test_metadata_inventory_inactive_ticket_reads_nothing_and_protects_arxiv() -
     assert_authority_closed(ticket)
 
 
-def test_stage8889_summary_and_registry_frontier_are_closed() -> None:
+def test_stage8889_summary_and_registry_frontier_remains_closed() -> None:
     summary = load_json("runs/summaries/stage8889_metadata_inventory_inactive_ticket_gate.json")
     registry = load_json("runs/local/artifacts/reconstructed_stage_registry.json")
     assert summary["passed"] is True
@@ -98,6 +98,6 @@ def test_stage8889_summary_and_registry_frontier_are_closed() -> None:
     assert summary["metrics"]["repository_walks_now"] == 0
     assert summary["metrics"]["commit_reads_now"] == 0
     assert summary["metrics"]["training_rows_now"] == 0
-    assert registry["metrics"]["latest_stage"] == 8889
-    assert registry["metrics"]["latest_stage_name"] == "stage8889_metadata_inventory_inactive_ticket_gate"
+    assert registry["metrics"]["latest_stage"] >= 8889
+    assert any(row["stage"] == 8889 and row["stage_name"] == "stage8889_metadata_inventory_inactive_ticket_gate" for row in registry["rows"])
     assert registry["metrics"]["authority_counts"] == {key: 0 for key in AUTHORITY_KEYS}
