@@ -1831,3 +1831,13 @@ Commit mining is now represented as a contract, not an open mining job.
 - Every unit must carry source provenance, contamination status, locked-eval exclusion, gate status, and junk/OOD route.
 
 No `/arxiv/repositories` walk, commit mining, training, decoder CE, runtime, source/body emission, Gemma, scoring, or promotion is authorized by this contract.
+
+## Stage8859-8861 Commit Learning Signal Graph And No-Mining Gate
+
+The commit-learning-signal contract is now attached to the central graph and gated as no-mining.
+
+- Stage8859 attached `contract:commit_learning_signal_v1` to the graph and linked it to source lineage, provenance, contamination, locked-eval, cluster/near-duplicate, and junk/OOD gates.
+- Stage8860 audited all 10 contract rows: route is `CONTRACT_ONLY_NO_MINING`, anti-cheat openings are false, source gate requirements are present, large-commit decoder targets remain blocked, and all authority/loss masks are closed.
+- Stage8861 reconciles registry/spine.
+
+Next boundary: recover a dry-run commit inventory design. It may define how to inspect repository metadata later, but it still must not walk `/arxiv/repositories`, read commits, emit training rows, train, or open decoder CE.

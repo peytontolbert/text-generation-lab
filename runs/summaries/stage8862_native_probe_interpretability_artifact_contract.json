@@ -1,0 +1,48 @@
+{
+  "artifacts": {
+    "doc": "docs/NATIVE_PROBE_INTERPRETABILITY_ARTIFACT_CONTRACT_STAGE8862.md",
+    "gate_script": "scripts/native_probe_interpretability_artifact_contract.py",
+    "patched_trainer_cli": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "patched_trainer_loop": "legacy_src/agentkernel_lite/training_loop.py",
+    "tests": "tests/test_native_probe_interpretability_artifact_contract.py"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "decision": "Native probe telemetry contract patched and audited without opening execution authority.",
+  "implemented": [
+    "richer structured row_field_logits telemetry: confidence, entropy, top-k, high-confidence-wrong",
+    "bounded decoder row_token_loss emits per-position CE maps",
+    "row_gradient_norms emitted with explicit batch_shared scope",
+    "activation_summary emitted for field-head inputs and decoder logits",
+    "feature_ablation_attribution proxy records emitted for evidence groups",
+    "activation_patch_recovery proxy records emitted for current objective field heads",
+    "module_delta_norms now include semantic buckets and decoder delta guard fields",
+    "row_dynamics_history emitted for loss/confidence variance and forgetting/flip counters",
+    "native_probe_interpretability_artifact_contract gate fails missing/empty/schema-shallow artifacts"
+  ],
+  "known_limits": [
+    "row_gradient_norms are batch_shared, not true per-example gradients yet",
+    "feature ablations are deterministic presence proxies until native masked reruns are authorized",
+    "activation patching is a field-head proxy until clean/corrupt layer replacement is added"
+  ],
+  "name": "stage8862_native_probe_interpretability_artifact_contract",
+  "next_best_step": "Run the artifact contract against the first explicitly authorized tiny native probe output; if it fails, treat the probe as invalid rather than interpreting model metrics.",
+  "passed": true,
+  "stage": 8862,
+  "stage_name": "stage8862_native_probe_interpretability_artifact_contract",
+  "tests": {
+    "audit_stage8646_structured_telemetry_contract": "passed",
+    "py_compile": "passed for gate, audit, trainer CLI, and trainer loop",
+    "pytest": "22 passed for native artifact contract, recovered trainer contract, gradient/activation helpers, and telemetry metrics"
+  }
+}

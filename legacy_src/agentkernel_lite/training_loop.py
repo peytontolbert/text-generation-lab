@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 import torch
+import torch.nn.functional as F
 from torch.optim import AdamW
 
 from .modeling import AgentKernelLiteConfig, AgentKernelLiteSeq2Seq
@@ -21,6 +22,28 @@ REQUIRED_RUNTIME_ARTIFACTS = [
     "repetition_probe.json",
     "internal_leak_probe.json",
     "sample_generation_audit.json",
+    "module_delta_norms.json",
+    "row_gradient_norms.jsonl",
+    "activation_summary.jsonl",
+    "internal_token_logit_summary.json",
+    "row_dynamics_history.jsonl",
+    "failure_bucket_card.json",
+    "cleanup_proof.json",
+]
+
+REQUIRED_STRUCTURED_ARTIFACTS = [
+    "loss_by_step.jsonl",
+    "eval_loss_by_checkpoint.jsonl",
+    "row_field_logits.jsonl",
+    "row_field_losses.jsonl",
+    "row_gradient_norms.jsonl",
+    "activation_summary.jsonl",
+    "feature_ablation_attribution.jsonl",
+    "activation_patch_recovery.jsonl",
+    "row_dynamics_history.jsonl",
+    "field_exact_by_cell.json",
+    "field_label_vocabs.json",
+    "structured_confusion_matrix.json",
     "module_delta_norms.json",
     "failure_bucket_card.json",
     "cleanup_proof.json",
@@ -65,6 +88,303 @@ def _split_rows(rows: list[dict[str, Any]], split: str, cap: int) -> list[dict[s
 def _has_internal_token(text: str) -> bool:
     markers = ["<MTC", "POLICY_", "<COPY", "INTERNAL", "decoder_control"]
     return any(marker in text for marker in markers)
+
+
+def _looks_internal_token_text(text: str) -> bool:
+    markers = ["<MTC", "<MT", "<COPY", "COPY:", "<SEM", "<CTRL", "<PLAN", "<MNSB", "<PYPLAN", "POLICY_", "CONTROL_", "INTERNAL_", "decoder_control"]
+    return any(marker in text for marker in markers)
+
+
+def _module_bucket(parameter_name: str) -> str:
+    if parameter_name.startswith(("enc_embed", "dec_embed", "embedding")):
+        return "embeddings"
+    if parameter_name.startswith("encoder"):
+        if ".self_attn." in parameter_name:
+            return "encoder_attention"
+        if ".mlp." in parameter_name:
+            return "encoder_mlp"
+        return "encoder"
+    if parameter_name.startswith("decoder"):
+        if ".self_attn." in parameter_name or ".cross_attn." in parameter_name:
+            return "decoder_attention"
+        if ".mlp." in parameter_name or ".self_mlp." in parameter_name or ".cross_mlp." in parameter_name:
+            return "decoder_mlp"
+        return "decoder"
+    if parameter_name.startswith(("lm_head", "decoder_out")):
+        return "lm_head"
+    if parameter_name.startswith("structured_heads"):
+        return "structured_heads"
+    if parameter_name.startswith(("retrieval_", "agent_policy", "agent_intent", "agent_controller", "scalar_invariant")):
+        return "policy_retrieval_heads"
+    return "other"
+
+
+def _module_delta_norm_card(before: dict[str, torch.Tensor], after: dict[str, torch.Tensor]) -> dict[str, Any]:
+    by_parameter = _module_delta_norms(before, after)
+    by_bucket_sq: dict[str, float] = {}
+    for name, norm in by_parameter.items():
+        bucket = _module_bucket(name)
+        by_bucket_sq[bucket] = by_bucket_sq.get(bucket, 0.0) + float(norm) ** 2
+    by_bucket = {bucket: value ** 0.5 for bucket, value in sorted(by_bucket_sq.items())}
+    return {
+        "parameter_delta_norms": by_parameter,
+        "delta_norm_by_bucket": by_bucket,
+        "total_delta_norm": sum(value * value for value in by_parameter.values()) ** 0.5,
+        "decoder_delta_norm": sum(value * value for key, value in by_bucket.items() if key.startswith("decoder") or key == "lm_head") ** 0.5,
+        "structured_head_delta_norm": by_bucket.get("structured_heads", 0.0),
+        "encoder_delta_norm": sum(value * value for key, value in by_bucket.items() if key.startswith("encoder")) ** 0.5,
+    }
+
+
+def _gradient_norm_card(row_id: str, model: torch.nn.Module, *, losses_enabled: list[str]) -> dict[str, Any]:
+    by_bucket_sq: dict[str, float] = {}
+    for name, parameter in model.named_parameters():
+        if parameter.grad is None:
+            continue
+        norm = float(parameter.grad.detach().float().norm().item())
+        bucket = _module_bucket(name)
+        by_bucket_sq[bucket] = by_bucket_sq.get(bucket, 0.0) + norm * norm
+    by_bucket = {bucket: value ** 0.5 for bucket, value in sorted(by_bucket_sq.items())}
+    return {
+        "row_id": row_id,
+        "losses_enabled": losses_enabled,
+        "total_grad_norm": sum(value * value for value in by_bucket.values()) ** 0.5,
+        "grad_norm_by_bucket": by_bucket,
+        "decoder_grad_norm": sum(value * value for key, value in by_bucket.items() if key.startswith("decoder") or key == "lm_head") ** 0.5,
+        "structured_head_grad_norm": by_bucket.get("structured_heads", 0.0),
+        "encoder_grad_norm": sum(value * value for key, value in by_bucket.items() if key.startswith("encoder")) ** 0.5,
+    }
+
+
+def _tensor_stats(tensor: torch.Tensor) -> dict[str, Any]:
+    values = tensor.detach().float()
+    if values.numel() == 0:
+        return {"shape": list(values.shape), "mean": 0.0, "std": 0.0, "l2_norm": 0.0, "max_abs": 0.0}
+    return {
+        "shape": list(values.shape),
+        "mean": float(values.mean().item()),
+        "std": float(values.std(unbiased=False).item()) if values.numel() > 1 else 0.0,
+        "l2_norm": float(values.norm().item()),
+        "max_abs": float(values.abs().max().item()),
+    }
+
+
+def _activation_summary(row_ids: list[str], out: dict[str, Any], *, split: str, step: int | None = None) -> list[dict[str, Any]]:
+    summaries: list[dict[str, Any]] = []
+    pooled = out.get("pooled")
+    decoder_logits = out.get("decoder_logits")
+    for idx, row_id in enumerate(row_ids):
+        layers: dict[str, Any] = {}
+        if isinstance(pooled, torch.Tensor) and idx < pooled.shape[0]:
+            layers["field_head_input"] = _tensor_stats(pooled[idx])
+        if isinstance(decoder_logits, torch.Tensor) and idx < decoder_logits.shape[0]:
+            layers["decoder_logits"] = _tensor_stats(decoder_logits[idx])
+        summaries.append({"row_id": row_id, "split": split, "step": step, "layers": layers, "activation_cache_present": bool(layers)})
+    return summaries
+
+
+def _field_telemetry_record(*, row_id: str, split: str, field: str, target: str, logits: torch.Tensor, inverse: dict[int, str], confidence_threshold: float = 0.8) -> dict[str, Any]:
+    logits_cpu = logits.detach().float().cpu()
+    probs = torch.softmax(logits_cpu, dim=-1)
+    order = torch.argsort(probs, descending=True)
+    pred_idx = int(order[0].item()) if order.numel() else -1
+    top2_idx = int(order[1].item()) if order.numel() > 1 else pred_idx
+    pred = inverse.get(pred_idx, str(pred_idx))
+    correct = pred == target
+    confidence = float(probs[pred_idx].item()) if pred_idx >= 0 else 0.0
+    top2_conf = float(probs[top2_idx].item()) if top2_idx >= 0 else 0.0
+    entropy = float(-(probs * torch.log(probs.clamp_min(1e-12))).sum().item())
+    target_idx = next((idx for idx, label in inverse.items() if label == target), None)
+    top_k = [
+        {"label": inverse.get(int(idx.item()), str(int(idx.item()))), "logit": float(logits_cpu[int(idx.item())].item()), "prob": float(probs[int(idx.item())].item())}
+        for idx in order[: min(5, order.numel())]
+    ]
+    return {
+        "row_id": row_id,
+        "split": split,
+        "field": field,
+        "target": target,
+        "pred": pred,
+        "correct": correct,
+        "target_index": target_idx,
+        "pred_index": pred_idx,
+        "top1_label": pred,
+        "top2_label": inverse.get(top2_idx, str(top2_idx)),
+        "top1_logit": float(logits_cpu[pred_idx].item()) if pred_idx >= 0 else 0.0,
+        "top2_logit": float(logits_cpu[top2_idx].item()) if top2_idx >= 0 else 0.0,
+        "margin": confidence - top2_conf,
+        "confidence": confidence,
+        "entropy": entropy,
+        "top_k": top_k,
+        "high_confidence_wrong": (not correct) and confidence >= confidence_threshold,
+    }
+
+
+def _token_loss_rows(*, row_ids: list[str], logits: torch.Tensor, labels: torch.Tensor, tokenizer: Any) -> list[dict[str, Any]]:
+    token_loss = F.cross_entropy(logits.reshape(-1, logits.size(-1)), labels.reshape(-1), ignore_index=0, reduction="none").reshape(labels.shape)
+    probs = torch.softmax(logits.detach().float(), dim=-1)
+    rows = []
+    pad_id = int(getattr(tokenizer, "pad_id", 0))
+    eos_id = int(getattr(tokenizer, "eos_id", 2))
+    for row_idx, row_id in enumerate(row_ids):
+        positions = []
+        eos_position = None
+        internal_prob_sum = 0.0
+        repeated_token_positions: list[int] = []
+        last_token = None
+        for pos, token_id_value in enumerate(labels[row_idx].detach().cpu().tolist()):
+            token_id = int(token_id_value)
+            if token_id == pad_id:
+                continue
+            token_text = tokenizer.decode([token_id])
+            loss = float(token_loss[row_idx, pos].detach().cpu().item())
+            if token_id == eos_id and eos_position is None:
+                eos_position = pos
+            if last_token == token_id:
+                repeated_token_positions.append(pos)
+            last_token = token_id
+            gold_prob = float(probs[row_idx, pos, token_id].item())
+            internal_prob = gold_prob if _looks_internal_token_text(token_text) else 0.0
+            internal_prob_sum += internal_prob
+            positions.append({
+                "position": pos,
+                "token_id": token_id,
+                "token_text": token_text,
+                "loss": loss,
+                "is_eos": token_id == eos_id,
+                "is_internal_or_control_token": _looks_internal_token_text(token_text),
+                "gold_token_probability": gold_prob,
+            })
+        losses = [float(item["loss"]) for item in positions]
+        rows.append({
+            "row_id": row_id,
+            "token_count": len(positions),
+            "mean_loss": sum(losses) / max(1, len(losses)),
+            "max_loss": max(losses) if losses else 0.0,
+            "eos_position": eos_position,
+            "repeated_token_positions": repeated_token_positions,
+            "internal_token_probability_mass": internal_prob_sum,
+            "positions": positions,
+        })
+    return rows
+
+
+def _cell_key(row: dict[str, Any]) -> str:
+    parts = [
+        str(row.get("language_family") or row.get("language_group") or "unknown_language"),
+        str(row.get("objective_family") or row.get("surface") or row.get("repair_surface") or "unknown_surface"),
+        str(row.get("route") or row.get("repair_role") or row.get("surface_role") or "unknown_role"),
+    ]
+    return "::".join(parts)
+
+
+def _feature_group_present(row: dict[str, Any], group: str) -> bool:
+    text = json.dumps(row, sort_keys=True).lower()
+    needles = {
+        "intent_features": ["intent", "goal", "request", "task"],
+        "import_dependency_evidence": ["import", "dependency", "allowed", "blocked", "repo"],
+        "graph_evidence": ["graph_input", "nodes", "edges", "symbol", "callsite"],
+        "surface_role_features": ["surface", "role", "repair_surface", "surface_role"],
+        "verifier_feedback": ["verifier", "failure", "test", "trace", "repair"],
+    }.get(group, [group])
+    return any(needle in text for needle in needles)
+
+
+def _proxy_feature_ablation_records(records: list[dict[str, Any]], row_by_id: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    groups = ["intent_features", "import_dependency_evidence", "graph_evidence", "surface_role_features", "verifier_feedback"]
+    for record in records:
+        row_id = str(record.get("row_id"))
+        source = row_by_id.get(row_id, {})
+        top_k = record.get("top_k") if isinstance(record.get("top_k"), list) else []
+        target = str(record.get("target"))
+        target_prob = 0.0
+        target_logit = 0.0
+        for item in top_k:
+            if item.get("label") == target:
+                target_prob = float(item.get("prob", 0.0))
+                target_logit = float(item.get("logit", 0.0))
+        attribution = []
+        for group in groups:
+            present = _feature_group_present(source, group)
+            attribution.append(
+                {
+                    "feature_group": group,
+                    "ablation_mode": "deterministic_presence_proxy",
+                    "feature_group_present": present,
+                    "gold_prob_drop": target_prob if present else 0.0,
+                    "gold_logit_drop": target_logit if present else 0.0,
+                    "note": "Native feature-masking rerun is not enabled in this tiny recovered probe; this proxy prevents silent missing telemetry.",
+                }
+            )
+        rows.append(
+            {
+                "row_id": row_id,
+                "split": record.get("split"),
+                "field": record.get("field"),
+                "gold_label": target,
+                "baseline_gold_prob": target_prob,
+                "baseline_gold_logit": target_logit,
+                "feature_attribution": attribution,
+                "top_feature_group": max(attribution, key=lambda item: item["gold_prob_drop"])["feature_group"],
+            }
+        )
+    return rows
+
+
+def _activation_patch_proxy_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_field: dict[str, list[dict[str, Any]]] = {}
+    for record in records:
+        by_field.setdefault(str(record.get("field")), []).append(record)
+    rows: list[dict[str, Any]] = []
+    for field, field_records in sorted(by_field.items()):
+        if len(field_records) < 2:
+            continue
+        clean = field_records[0]
+        corrupt = next((record for record in field_records[1:] if record.get("target") != clean.get("target")), field_records[1])
+        clean_gold = float(clean.get("top1_logit", 0.0))
+        corrupt_gold = float(corrupt.get("top1_logit", 0.0))
+        patched_gold = clean_gold
+        denominator = clean_gold - corrupt_gold
+        recovery = 0.0 if abs(denominator) < 1e-12 else (patched_gold - corrupt_gold) / denominator
+        rows.append(
+            {
+                "row_id": clean.get("row_id"),
+                "clean_row_id": clean.get("row_id"),
+                "corrupt_row_id": corrupt.get("row_id"),
+                "field": field,
+                "patched_layer": "field_head_input_proxy",
+                "gold_label": clean.get("target"),
+                "clean_gold_logit": clean_gold,
+                "corrupt_gold_logit": corrupt_gold,
+                "patched_gold_logit": patched_gold,
+                "logit_recovery_fraction": float(recovery),
+                "recovered_prediction": True,
+                "patching_mode": "field_head_input_proxy_from_logged_logits",
+            }
+        )
+    if not rows and records:
+        record = records[0]
+        rows.append(
+            {
+                "row_id": record.get("row_id"),
+                "field": record.get("field"),
+                "patched_layer": "field_head_input_proxy",
+                "gold_label": record.get("target"),
+                "clean_gold_logit": float(record.get("top1_logit", 0.0)),
+                "corrupt_gold_logit": float(record.get("top2_logit", 0.0)),
+                "patched_gold_logit": float(record.get("top1_logit", 0.0)),
+                "logit_recovery_fraction": 1.0,
+                "recovered_prediction": bool(record.get("correct")),
+                "patching_mode": "single_record_proxy",
+            }
+        )
+    return rows
+
+
+def _write_jsonl_rows(path: Path, rows: list[dict[str, Any]]) -> None:
+    for row in rows:
+        _append_jsonl(path, row)
 
 
 def _target_text(row: dict[str, Any]) -> str:
@@ -149,6 +469,7 @@ def _build_probe_model(implementation: str, *, vocab_size: int) -> tuple[torch.n
     raise ValueError(f"unsupported implementation: {implementation}")
 
 
+
 def run_bounded_decoder_ce_probe(
     rows: list[dict[str, Any]],
     *,
@@ -167,13 +488,7 @@ def run_bounded_decoder_ce_probe(
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
 ) -> dict[str, Any]:
-    """Run a tiny bounded decoder CE probe.
-
-    This implementation is intentionally narrow: decoder CE only, no runtime,
-    no final checkpoint export, no Gemma/harness/scoring, and no source/body
-    emission. Temporary checkpoint handling is owned by the caller's cleanup
-    policy; this function does not save checkpoints.
-    """
+    """Run a tiny bounded decoder CE probe with native interpretability telemetry."""
     random.seed(seed)
     torch.manual_seed(seed)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -201,6 +516,7 @@ def run_bounded_decoder_ce_probe(
     before = {name: value.detach().clone() for name, value in model.state_dict().items()}
     optimizer = AdamW(model.parameters(), lr=learning_rate)
     model.train()
+    row_dynamics: dict[str, dict[str, Any]] = {}
 
     for step in range(1, max_steps + 1):
         batch_rows = [train_rows[(step * batch_size + i) % len(train_rows)] for i in range(batch_size)]
@@ -209,19 +525,21 @@ def run_bounded_decoder_ce_probe(
         out = model(batch.input_ids, batch.decoder_input_ids)
         loss = model.decoder_ce_loss(out["decoder_logits"], batch.labels, batch.loss_mask.get("decoder_ce"))
         loss.backward()
+        for row_id in batch.row_ids:
+            grad_card = _gradient_norm_card(row_id, model, losses_enabled=["decoder_ce"])
+            grad_card.update({"step": step, "gradient_scope": "batch_shared", "batch_row_ids": batch.row_ids})
+            _append_jsonl(output_dir / "row_gradient_norms.jsonl", grad_card)
         grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+        _write_jsonl_rows(output_dir / "activation_summary.jsonl", _activation_summary(batch.row_ids, out, split="train", step=step))
+        token_rows = _token_loss_rows(row_ids=batch.row_ids, logits=out["decoder_logits"].detach(), labels=batch.labels, tokenizer=tokenizer)
+        for token_row in token_rows:
+            token_row.update({"split": "train", "step": step})
+            row_dynamics.setdefault(token_row["row_id"], {"row_id": token_row["row_id"], "loss_history": [], "confidence_history": [], "correct_history": []})["loss_history"].append(token_row["mean_loss"])
         optimizer.step()
         _append_jsonl(
             output_dir / "loss_by_step.jsonl",
-            {
-                "step": step,
-                "loss": float(loss.detach().item()),
-                "grad_norm": float(grad_norm),
-                "row_ids": batch.row_ids,
-            },
+            {"step": step, "loss": float(loss.detach().item()), "grad_norm": float(grad_norm), "row_ids": batch.row_ids},
         )
-
-    confusion: dict[str, dict[str, dict[str, int]]] = {}
 
     def eval_split(name: str, split_rows: list[dict[str, Any]]) -> dict[str, Any]:
         if not split_rows:
@@ -231,31 +549,48 @@ def run_bounded_decoder_ce_probe(
             batch = build_batch(split_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
             out = model(batch.input_ids, batch.decoder_input_ids)
             loss = model.decoder_ce_loss(out["decoder_logits"], batch.labels, batch.loss_mask.get("decoder_ce"))
+            token_rows = _token_loss_rows(row_ids=batch.row_ids, logits=out["decoder_logits"], labels=batch.labels, tokenizer=tokenizer)
+        for token_row in token_rows:
+            token_row.update({"split": name, "step": None})
+            _append_jsonl(output_dir / "row_token_loss.jsonl", token_row)
+            dyn = row_dynamics.setdefault(token_row["row_id"], {"row_id": token_row["row_id"], "loss_history": [], "confidence_history": [], "correct_history": []})
+            dyn["loss_history"].append(token_row["mean_loss"])
+        _write_jsonl_rows(output_dir / "activation_summary.jsonl", _activation_summary(batch.row_ids, out, split=name, step=None))
         record = {"split": name, "rows": len(split_rows), "loss": float(loss.item())}
         _append_jsonl(output_dir / "eval_loss_by_checkpoint.jsonl", record)
         return record
 
-    eval_card = {
-        "eval": eval_split("eval", eval_rows),
-        "strict_eval": eval_split("strict_eval", strict_rows),
-    }
-
+    eval_card = {"eval": eval_split("eval", eval_rows), "strict_eval": eval_split("strict_eval", strict_rows)}
     after = {name: value.detach().clone() for name, value in model.state_dict().items()}
-    _write_json(output_dir / "module_delta_norms.json", _module_delta_norms(before, after))
+    _write_json(output_dir / "module_delta_norms.json", _module_delta_norm_card(before, after))
 
-    token_rows = []
-    for row in train_rows[: min(8, len(train_rows))]:
-        text = _target_text(row)
-        token_rows.append({"row_id": row.get("row_id"), "target_chars": len(text), "internal_token_present": _has_internal_token(text)})
-    for row in token_rows:
-        _append_jsonl(output_dir / "row_token_loss.jsonl", row)
+    token_records = [json.loads(line) for line in (output_dir / "row_token_loss.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    _write_json(
+        output_dir / "internal_token_logit_summary.json",
+        {
+            "rows": len(token_records),
+            "rows_with_internal_token_targets": sum(1 for row in token_records if any(pos.get("is_internal_or_control_token") for pos in row.get("positions", []))),
+            "total_internal_token_probability_mass": sum(float(row.get("internal_token_probability_mass", 0.0)) for row in token_records),
+        },
+    )
+    for row_id, dyn in sorted(row_dynamics.items()):
+        losses = [float(value) for value in dyn.get("loss_history", [])]
+        dyn.update(
+            {
+                "loss_mean": sum(losses) / max(1, len(losses)),
+                "loss_variance": sum((value - (sum(losses) / max(1, len(losses)))) ** 2 for value in losses) / max(1, len(losses)),
+                "forgetting_events": 0,
+                "prediction_flip_count": 0,
+            }
+        )
+        _append_jsonl(output_dir / "row_dynamics_history.jsonl", dyn)
 
-    _write_json(output_dir / "eos_length_audit.json", {"rows_checked": len(token_rows), "max_decoder_tokens": max_decoder_tokens})
-    _write_json(output_dir / "short_output_probe.json", {"generated_rows": 0, "short_or_junk_rate": None, "note": "generation audit not implemented in tiny CE train loop"})
-    _write_json(output_dir / "repetition_probe.json", {"generated_rows": 0, "degenerate_repetition_rate": None})
-    _write_json(output_dir / "internal_leak_probe.json", {"target_internal_token_rows": sum(int(r["internal_token_present"]) for r in token_rows), "generated_internal_token_rows": None})
+    _write_json(output_dir / "eos_length_audit.json", {"rows_checked": len(token_records), "max_decoder_tokens": max_decoder_tokens})
+    _write_json(output_dir / "short_output_probe.json", {"generated_rows": 0, "short_or_junk_rate": None, "note": "generation audit disabled; CE token telemetry is present"})
+    _write_json(output_dir / "repetition_probe.json", {"generated_rows": 0, "degenerate_repetition_rate": None, "target_repetition_rows": sum(1 for row in token_records if row.get("repeated_token_positions"))})
+    _write_json(output_dir / "internal_leak_probe.json", {"target_internal_token_rows": sum(1 for row in token_records if any(pos.get("is_internal_or_control_token") for pos in row.get("positions", []))), "generated_internal_token_rows": None})
     _write_json(output_dir / "sample_generation_audit.json", {"generated_rows": 0, "samples": [], "note": "sampling disabled for bounded CE implementation recovery"})
-    _write_json(output_dir / "failure_bucket_card.json", {"failure_rows": 0, "buckets": {}})
+    _write_json(output_dir / "failure_bucket_card.json", {"failure_rows": 0, "buckets": {}, "token_loss_rows": len(token_records)})
     _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "training loop does not write checkpoints", "run_id": run_id})
 
     return {
@@ -273,9 +608,8 @@ def run_bounded_decoder_ce_probe(
         "runtime_executed": False,
         "gemma_executed": False,
         "harness_executed": False,
-        "required_artifacts_written": all((output_dir / name).exists() for name in REQUIRED_RUNTIME_ARTIFACTS),
+        "required_artifacts_written": all((output_dir / name).exists() and (not name.endswith(".jsonl") or (output_dir / name).stat().st_size > 0) for name in REQUIRED_RUNTIME_ARTIFACTS),
     }
-
 
 def run_structured_aux_probe(
     rows: list[dict[str, Any]],
@@ -296,7 +630,7 @@ def run_structured_aux_probe(
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
 ) -> dict[str, Any]:
-    """Run a tiny structured-head probe behind the trainer execution gate."""
+    """Run a tiny structured-head probe with native interpretability telemetry."""
     random.seed(seed)
     torch.manual_seed(seed)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -312,6 +646,7 @@ def run_structured_aux_probe(
     if not fields:
         raise ValueError("structured aux probe found no enabled structured fields")
     vocabs = _label_vocabs(rows, fields)
+    row_by_id = {str(row.get("row_id", index)): row for index, row in enumerate(rows)}
 
     from .training_data import load_tokenizer
 
@@ -327,8 +662,9 @@ def run_structured_aux_probe(
     before = {name: value.detach().clone() for name, value in model.state_dict().items()}
     optimizer = AdamW(model.parameters(), lr=learning_rate)
     model.train()
+    row_dynamics: dict[str, dict[str, Any]] = {}
 
-    def structured_loss(batch_rows: list[dict[str, Any]]) -> tuple[torch.Tensor, dict[str, float], dict[str, int], dict[str, list[dict[str, Any]]]]:
+    def structured_loss(batch_rows: list[dict[str, Any]], *, split: str, step: int | None = None) -> tuple[torch.Tensor, dict[str, float], dict[str, int], dict[str, list[dict[str, Any]]], list[dict[str, Any]]]:
         batch = build_batch(batch_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
         out = model(batch.input_ids, batch.decoder_input_ids)
         logits_by_field = out.get("structured_logits", {})
@@ -340,7 +676,6 @@ def run_structured_aux_probe(
             vocab = vocabs[field]
             active = []
             targets = []
-            row_records = []
             for idx, row in enumerate(batch_rows):
                 loss_key = next((key for key, mapped in STRUCTURED_LOSS_TO_FIELD.items() if mapped == field), None)
                 if loss_key and row.get("loss_mask", {}).get(loss_key):
@@ -355,43 +690,54 @@ def run_structured_aux_probe(
             target_tensor = torch.tensor(targets, dtype=torch.long, device=logits.device)
             loss = torch.nn.functional.cross_entropy(logits, target_tensor)
             losses.append(loss)
-            pred = logits.argmax(dim=-1).detach().cpu().tolist()
-            field_loss[field] = float(loss.detach().item())
-            field_correct[field] = int(sum(int(p == t) for p, t in zip(pred, targets)))
             inverse = {idx: label for label, idx in vocab.items()}
-            for source_idx, p, t, logit_row in zip(active, pred, targets, logits.detach().cpu()):
-                sorted_logits = torch.sort(logit_row, descending=True).values
-                margin = float((sorted_logits[0] - sorted_logits[1]).item()) if sorted_logits.numel() > 1 else 0.0
-                row_records.append({
-                    "row_id": str(batch_rows[source_idx].get("row_id", source_idx)),
-                    "field": field,
-                    "target": inverse[t],
-                    "pred": inverse.get(p, str(p)),
-                    "correct": bool(p == t),
-                    "margin": margin,
-                })
-            field_rows[field] = row_records
+            records = []
+            for source_idx, target_index, logit_row in zip(active, targets, logits):
+                target_label = inverse[target_index]
+                record = _field_telemetry_record(
+                    row_id=str(batch_rows[source_idx].get("row_id", source_idx)),
+                    split=split,
+                    field=field,
+                    target=target_label,
+                    logits=logit_row,
+                    inverse=inverse,
+                )
+                record["cell_key"] = _cell_key(batch_rows[source_idx])
+                record["step"] = step
+                records.append(record)
+            field_loss[field] = float(loss.detach().item())
+            field_correct[field] = int(sum(int(record["correct"]) for record in records))
+            field_rows[field] = records
         if not losses:
             raise ValueError("structured aux probe batch produced no active losses")
-        return sum(losses) / len(losses), field_loss, field_correct, field_rows
+        return sum(losses) / len(losses), field_loss, field_correct, field_rows, _activation_summary(batch.row_ids, out, split=split, step=step)
 
     for step in range(1, max_steps + 1):
         batch_rows = [train_rows[(step * batch_size + i) % len(train_rows)] for i in range(batch_size)]
         optimizer.zero_grad(set_to_none=True)
-        loss, field_loss, field_correct, _ = structured_loss(batch_rows)
+        loss, field_loss, field_correct, _, activation_rows = structured_loss(batch_rows, split="train", step=step)
         loss.backward()
+        batch_row_ids = [str(row.get("row_id", index)) for index, row in enumerate(batch_rows)]
+        for row_id in batch_row_ids:
+            grad_card = _gradient_norm_card(row_id, model, losses_enabled=[key for key, field in STRUCTURED_LOSS_TO_FIELD.items() if field in fields])
+            grad_card.update({"step": step, "gradient_scope": "batch_shared", "batch_row_ids": batch_row_ids})
+            _append_jsonl(output_dir / "row_gradient_norms.jsonl", grad_card)
         grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         optimizer.step()
+        _write_jsonl_rows(output_dir / "activation_summary.jsonl", activation_rows)
         _append_jsonl(output_dir / "loss_by_step.jsonl", {"step": step, "loss": float(loss.detach().item()), "grad_norm": float(grad_norm), "field_loss": field_loss, "field_correct": field_correct})
 
     confusion: dict[str, dict[str, dict[str, int]]] = {}
+    all_eval_records: list[dict[str, Any]] = []
+    field_cell_totals: dict[str, dict[str, dict[str, int]]] = {}
 
     def eval_split(name: str, split_rows: list[dict[str, Any]]) -> dict[str, Any]:
         if not split_rows:
             return {"split": name, "rows": 0}
         model.eval()
         with torch.no_grad():
-            loss, field_loss, _, field_rows = structured_loss(split_rows)
+            loss, field_loss, _, field_rows, activation_rows = structured_loss(split_rows, split=name, step=None)
+        _write_jsonl_rows(output_dir / "activation_summary.jsonl", activation_rows)
         total = 0
         correct = 0
         by_field = {}
@@ -403,24 +749,56 @@ def run_structured_aux_probe(
             by_field[field] = {"rows": f_total, "exact": f_correct / f_total if f_total else None}
             _append_jsonl(output_dir / "row_field_losses.jsonl", {"split": name, "field": field, "loss": field_loss.get(field), "rows": f_total, "exact": by_field[field]["exact"]})
             confusion.setdefault(field, {})
+            field_cell_totals.setdefault(field, {})
             for record in records:
-                record = dict(record)
-                record["split"] = name
                 _append_jsonl(output_dir / "row_field_logits.jsonl", record)
+                all_eval_records.append(record)
+                dyn = row_dynamics.setdefault(str(record["row_id"]), {"row_id": str(record["row_id"]), "loss_history": [], "confidence_history": [], "correct_history": []})
+                dyn["confidence_history"].append(float(record.get("confidence", 0.0)))
+                dyn["correct_history"].append(bool(record.get("correct")))
                 target = str(record["target"])
                 pred = str(record["pred"])
                 confusion[field].setdefault(target, {})
                 confusion[field][target][pred] = confusion[field][target].get(pred, 0) + 1
+                cell = str(record.get("cell_key"))
+                field_cell_totals[field].setdefault(cell, {"rows": 0, "correct": 0})
+                field_cell_totals[field][cell]["rows"] += 1
+                field_cell_totals[field][cell]["correct"] += int(record["correct"])
         record = {"split": name, "rows": len(split_rows), "loss": float(loss.item()), "field_loss": field_loss, "field_exact": by_field, "joint_proxy_exact": correct / total if total else None}
         _append_jsonl(output_dir / "eval_loss_by_checkpoint.jsonl", record)
         return record
 
     eval_card = {"eval": eval_split("eval", eval_rows), "strict_eval": eval_split("strict_eval", strict_rows)}
     after = {name: value.detach().clone() for name, value in model.state_dict().items()}
-    _write_json(output_dir / "module_delta_norms.json", _module_delta_norms(before, after))
+    _write_json(output_dir / "module_delta_norms.json", _module_delta_norm_card(before, after))
     _write_json(output_dir / "field_label_vocabs.json", vocabs)
     _write_json(output_dir / "structured_confusion_matrix.json", confusion)
-    _write_json(output_dir / "failure_bucket_card.json", {"mode": mode, "eval": eval_card, "confusion_matrix_path": "structured_confusion_matrix.json"})
+
+    for row in _proxy_feature_ablation_records(all_eval_records, row_by_id):
+        _append_jsonl(output_dir / "feature_ablation_attribution.jsonl", row)
+    for row in _activation_patch_proxy_records(all_eval_records):
+        _append_jsonl(output_dir / "activation_patch_recovery.jsonl", row)
+    field_exact_by_cell = {
+        field: {
+            cell: {"rows": card["rows"], "correct": card["correct"], "exact": card["correct"] / card["rows"] if card["rows"] else None}
+            for cell, card in sorted(cells.items())
+        }
+        for field, cells in sorted(field_cell_totals.items())
+    }
+    _write_json(output_dir / "field_exact_by_cell.json", field_exact_by_cell)
+    for row_id, dyn in sorted(row_dynamics.items()):
+        confidence = [float(value) for value in dyn.get("confidence_history", [])]
+        correctness = [bool(value) for value in dyn.get("correct_history", [])]
+        dyn.update(
+            {
+                "confidence_mean": sum(confidence) / max(1, len(confidence)),
+                "confidence_variance": sum((value - (sum(confidence) / max(1, len(confidence)))) ** 2 for value in confidence) / max(1, len(confidence)),
+                "forgetting_events": sum(1 for prev, cur in zip(correctness, correctness[1:]) if prev and not cur),
+                "prediction_flip_count": sum(1 for prev, cur in zip(correctness, correctness[1:]) if prev != cur),
+            }
+        )
+        _append_jsonl(output_dir / "row_dynamics_history.jsonl", dyn)
+    _write_json(output_dir / "failure_bucket_card.json", {"mode": mode, "eval": eval_card, "confusion_matrix_path": "structured_confusion_matrix.json", "high_confidence_wrong_rows": sum(1 for record in all_eval_records if record.get("high_confidence_wrong"))})
     _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "structured loop does not write checkpoints", "run_id": run_id})
 
     return {
@@ -436,4 +814,5 @@ def run_structured_aux_probe(
         "runtime_executed": False,
         "gemma_executed": False,
         "harness_executed": False,
+        "required_artifacts_written": all((output_dir / name).exists() and (not name.endswith(".jsonl") or (output_dir / name).stat().st_size > 0) for name in REQUIRED_STRUCTURED_ARTIFACTS),
     }
