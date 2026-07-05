@@ -1934,3 +1934,7 @@ This is hardening only. It opens no execution, training, decoder CE, denoise CE,
 ## Stage8894 Registry Frontier Collision Guard
 
 Stage8894 adds a collision guard for the protected frontier band. It prevents duplicate stage numbers/names, keeps reserved Stage8890 unmaterialized, and preserves zero authority counts before adding future no-execution stages.
+
+## Stage8895 Stage8890 Live Authorization Checklist
+
+Stage8895 records the exact checklist required before any future Stage8890 live one-run structured-policy probe ticket. It remains no-execution/no-training and opens no authority.
