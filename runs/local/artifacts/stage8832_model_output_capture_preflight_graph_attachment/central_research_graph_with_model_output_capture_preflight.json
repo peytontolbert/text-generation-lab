@@ -17347,58 +17347,58 @@
       "target": "objective:authority_closed_model_output_capture_preflight"
     },
     {
-      "dst": "objective:authority_closed_model_output_capture_preflight",
-      "edge_type": "unblocked_design_of",
+      "dst": "design:authority_closed_model_output_capture_preflight_v1",
+      "edge_type": "materialized_by_design",
       "evidence_source": "stage8832_model_output_capture_preflight_graph_attachment",
-      "relation": "unblocked_design_of",
-      "source": "validator:synthetic_packet_validator_dry_run_v1",
-      "src": "validator:synthetic_packet_validator_dry_run_v1",
-      "target": "objective:authority_closed_model_output_capture_preflight"
-    },
-    {
-      "dst": "objective:model_output_capture_preflight_audit",
-      "edge_type": "requires_audit",
-      "evidence_source": "stage8832_model_output_capture_preflight_graph_attachment",
-      "relation": "requires_audit",
+      "relation": "materialized_by_design",
       "source": "objective:authority_closed_model_output_capture_preflight",
       "src": "objective:authority_closed_model_output_capture_preflight",
-      "target": "objective:model_output_capture_preflight_audit"
+      "target": "design:authority_closed_model_output_capture_preflight_v1"
     },
     {
-      "dst": "objective:future_model_output_capture_runner_design",
+      "dst": "design:authority_closed_model_output_capture_preflight_v1",
+      "edge_type": "precedes",
+      "evidence_source": "stage8832_model_output_capture_preflight_graph_attachment",
+      "relation": "precedes",
+      "source": "validator:synthetic_packet_validator_dry_run_v1",
+      "src": "validator:synthetic_packet_validator_dry_run_v1",
+      "target": "design:authority_closed_model_output_capture_preflight_v1"
+    },
+    {
+      "dst": "objective:static_capture_preflight_gate_audit",
       "edge_type": "required_before",
       "evidence_source": "stage8832_model_output_capture_preflight_graph_attachment",
       "relation": "required_before",
-      "source": "objective:model_output_capture_preflight_audit",
-      "src": "objective:model_output_capture_preflight_audit",
-      "target": "objective:future_model_output_capture_runner_design"
+      "source": "design:authority_closed_model_output_capture_preflight_v1",
+      "src": "design:authority_closed_model_output_capture_preflight_v1",
+      "target": "objective:static_capture_preflight_gate_audit"
     },
     {
       "dst": "objective:bounded_decoder_ce",
       "edge_type": "required_before_any_model_output_for",
       "evidence_source": "stage8832_model_output_capture_preflight_graph_attachment",
       "relation": "required_before_any_model_output_for",
-      "source": "objective:future_model_output_capture_runner_design",
-      "src": "objective:future_model_output_capture_runner_design",
+      "source": "objective:static_capture_preflight_gate_audit",
+      "src": "objective:static_capture_preflight_gate_audit",
       "target": "objective:bounded_decoder_ce"
     },
     {
-      "dst": "objective:authority_closed_model_output_capture_preflight",
-      "edge_type": "must_capture_fields_for",
+      "dst": "objective:static_capture_preflight_gate_audit",
+      "edge_type": "must_capture_audit_for",
       "evidence_source": "stage8832_model_output_capture_preflight_graph_attachment",
-      "relation": "must_capture_fields_for",
+      "relation": "must_capture_audit_for",
       "source": "support_module:traced_eval_observability",
       "src": "support_module:traced_eval_observability",
-      "target": "objective:authority_closed_model_output_capture_preflight"
+      "target": "objective:static_capture_preflight_gate_audit"
     },
     {
-      "dst": "objective:model_output_capture_preflight_audit",
+      "dst": "objective:static_capture_preflight_gate_audit",
       "edge_type": "guards",
       "evidence_source": "stage8832_model_output_capture_preflight_graph_attachment",
       "relation": "guards",
       "source": "support_module:golden_locked_eval_suite",
       "src": "support_module:golden_locked_eval_suite",
-      "target": "objective:model_output_capture_preflight_audit"
+      "target": "objective:static_capture_preflight_gate_audit"
     }
   ],
   "nodes": [
@@ -37376,7 +37376,6 @@
       "valid_packet_rows": 240
     },
     {
-      "artifact_write_rows": 0,
       "authority": {
         "body_emission_authorized": false,
         "controller_complete_merge_authorized_next": false,
@@ -37391,14 +37390,32 @@
         "source_emission_authorized": false
       },
       "id": "objective:authority_closed_model_output_capture_preflight",
-      "kind": "objective",
-      "model_output_rows": 0,
+      "kind": "support_or_objective",
       "name": "authority_closed_model_output_capture_preflight",
-      "node_type": "objective",
-      "preflight_design_ready_rows": 240,
+      "node_type": "support_or_objective",
       "purpose": "Design the smallest no-training preflight for capturing future model outputs into the validated packet schema without opening CE/runtime/Gemma/scoring.",
-      "ready_for_decoder_ce": false,
-      "ready_for_model_execution": false,
+      "status": "missing_next_recovery_target"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "id": "design:authority_closed_model_output_capture_preflight_v1",
+      "kind": "design",
+      "model_output_rows": 0,
+      "name": "authority_closed_model_output_capture_preflight_v1",
+      "node_type": "design",
+      "ready_for_model_execution_rows": 0,
       "rows": 240,
       "status": "design_ready_no_execution"
     },
@@ -37416,33 +37433,12 @@
         "scoring_authorized_next": false,
         "source_emission_authorized": false
       },
-      "id": "objective:model_output_capture_preflight_audit",
+      "id": "objective:static_capture_preflight_gate_audit",
       "kind": "objective",
-      "name": "model_output_capture_preflight_audit",
+      "name": "static_capture_preflight_gate_audit",
       "node_type": "objective",
-      "purpose": "Audit the authority-closed capture preflight before any runner design is considered.",
+      "purpose": "Static gate over the capture preflight design before any model-output capture path can be considered.",
       "status": "missing_next_recovery_target"
-    },
-    {
-      "authority": {
-        "body_emission_authorized": false,
-        "controller_complete_merge_authorized_next": false,
-        "decoder_ce_training_authorized_next": false,
-        "denoise_ce_training_authorized_next": false,
-        "gemma_execution_authorized_next": false,
-        "harness_execution_authorized_next": false,
-        "model_execution_authorized_next": false,
-        "promotion_ready": false,
-        "runtime_authorized": false,
-        "scoring_authorized_next": false,
-        "source_emission_authorized": false
-      },
-      "id": "objective:future_model_output_capture_runner_design",
-      "kind": "objective",
-      "name": "future_model_output_capture_runner_design",
-      "node_type": "objective",
-      "purpose": "Later no-training runner design for capturing model outputs into packets, still behind explicit authority gates.",
-      "status": "blocked_by_preflight_audit"
     }
   ],
   "version": "stage8832_model_output_capture_preflight_graph_attachment"

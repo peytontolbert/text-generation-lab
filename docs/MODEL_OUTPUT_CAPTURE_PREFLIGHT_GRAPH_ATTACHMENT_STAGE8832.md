@@ -2,8 +2,8 @@
 
 Passed: `True`
 
-Preflight-design-ready rows: `240`
+Preflight rows: `240`
 Model output rows: `0`
-Artifact write rows: `0`
+Ready for model execution rows: `0`
 
-The graph now records the authority-closed model-output capture preflight and its required audit before any runner design.
+The graph now records the authority-closed capture preflight design and static gate audit target.

@@ -1,6 +1,6 @@
 {
   "artifacts": {
-    "manifest": "runs/local/artifacts/stage8831_model_output_capture_preflight_design/model_output_capture_preflight_design.jsonl",
+    "manifest": "runs/local/artifacts/stage8831_model_output_capture_preflight_design/model_output_capture_preflight_design_manifest.jsonl",
     "source": "runs/local/artifacts/stage8828_synthetic_packet_validator_dry_run/synthetic_placeholder_packets.jsonl"
   },
   "authority": {
@@ -16,11 +16,16 @@
     "scoring_authorized_next": false,
     "source_emission_authorized": false
   },
-  "created_at_utc": "2026-07-05T03:51:29Z",
-  "decision": "Designed authority-closed model-output capture preflight with no model output artifacts and no CE/runtime/scoring authority.",
+  "created_at_utc": "2026-07-05T04:19:57Z",
+  "decision": "Defined authority-closed model-output capture preflight design without model execution.",
   "metrics": {
-    "artifact_write_rows": 0,
-    "authority_open_rows": 0,
+    "argument_counts": {
+      "ARG_CALL": 48,
+      "ARG_IMPORT": 48,
+      "ARG_LITERAL": 48,
+      "ARG_NAME": 48,
+      "ARG_PATH": 48
+    },
     "authority_rows": 0,
     "body_emission_authorized": false,
     "controller_complete_merge_authorized_next": false,
@@ -28,16 +33,15 @@
     "denoise_ce_training_authorized_next": false,
     "gemma_execution_authorized_next": false,
     "harness_execution_authorized_next": false,
-    "loss_open_rows": 0,
-    "missing_capture_check_rows": 0,
-    "missing_capture_field_rows": 0,
-    "missing_telemetry_hook_rows": 0,
+    "loss_rows": 0,
+    "missing_blocked_operation_rows": 0,
+    "missing_preflight_field_rows": 0,
     "model_execution_authorized_next": false,
     "model_output_rows": 0,
-    "preflight_design_ready_rows": 240,
+    "probe_ready_rows": 0,
     "promotion_ready": false,
-    "ready_for_decoder_ce": false,
-    "ready_for_model_execution": false,
+    "ready_for_decoder_ce_rows": 0,
+    "ready_for_model_execution_rows": 0,
     "rows": 240,
     "runtime_authorized": false,
     "scoring_authorized_next": false,
@@ -49,7 +53,7 @@
       "strict": 120
     }
   },
-  "next_best_step": "Audit capture preflight design and attach it to the graph. Do not run a model yet.",
+  "next_best_step": "Attach capture preflight design to graph, then build a static preflight gate audit. Keep model execution/training/CE closed.",
   "passed": true,
   "stage": 8831,
   "stage_name": "stage8831_model_output_capture_preflight_design"

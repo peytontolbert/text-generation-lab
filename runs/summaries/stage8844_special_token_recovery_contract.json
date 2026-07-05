@@ -1,0 +1,53 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "counts": {
+    "added_special_tokens": 150,
+    "agentkernel_special_tokens": 146,
+    "copy_user_source_slots": 24
+  },
+  "name": "stage8844_special_token_recovery_contract",
+  "next": "Design unified special-token guard and tokenizer-ID suppression masks across dataset judge, loss-mask compiler, trainer preflight, packet telemetry, and denoise routing. Do not run a model yet.",
+  "next_best_step": "Design unified special-token guard and tokenizer-ID suppression masks across dataset judge, loss-mask compiler, trainer preflight, packet telemetry, and denoise routing. Do not run a model yet.",
+  "passed": true,
+  "stage": 8844,
+  "tokenizer": {
+    "bos_token": "<s>",
+    "bos_token_id": 1,
+    "eos_token": "</s>",
+    "eos_token_id": 2,
+    "kind": "agentkernel_bytelevel_bpe_v1",
+    "pad_token": "<pad>",
+    "pad_token_id": 0,
+    "tokenizer_config_sha256": "0987f58448a3163615eb167d93973fa209d7ccb12dd5c7a35c1e8ab166299be0",
+    "tokenizer_config_source": "/arxiv/preserved_checkpoints_20260609/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/pocketpal_controller_100m_stage1076_direct_answer_full_finetune_v415/tokenizer/tokenizer_config.json",
+    "tokenizer_json_sha256": "c268a145d01e26047d7773d9888c13902ab0cbf0e59da333ba2b686fec4ae324",
+    "tokenizer_json_source": "/arxiv/preserved_checkpoints_20260609/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/pocketpal_controller_100m_stage1076_direct_answer_full_finetune_v415/tokenizer/tokenizer.json",
+    "unk_token": "<unk>",
+    "unk_token_id": 3,
+    "vocab_size": 1506
+  },
+  "training_contract": {
+    "ak_token_policy": "AgentKernel <AK_...> tokens are structural/control vocabulary. They may appear only in authorized structured/control surfaces, not copied accidentally into user-facing final text.",
+    "bounded_decoder_ce_requires": [
+      "tokenizer hash match",
+      "vocab_size 1506",
+      "target lengths within cap",
+      "no legacy internal/control tokens in target",
+      "loss mask permits decoder_ce"
+    ],
+    "byte_fallback_allowed_only_for": "tiny recovery probes with explicit audit",
+    "full_100m_training_tokenizer_required": "agentkernel_bytelevel_bpe_v1 vocab_size=1506",
+    "suppression_warning": "Zero internal-token leak is insufficient; contentful output, short/junk, repetition, EOS/length checks are required.",
+    "user_facing_decoder_target_policy": "No legacy internal/control families may appear in KEEP_BOUNDED_DECODER targets; rows with such tokens route to denoise/negative/quarantine."
+  }
+}

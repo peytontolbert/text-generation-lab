@@ -1,0 +1,81 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "decision": "Recovered tokenizer is checkpoint-compatible and strong for AgentKernel control/evidence/retrieval, but lacks dedicated repo/file/symbol/import/test/failure/patch/operator tokens. Do not expand tokenizer without migration; use structured tensors now.",
+  "future_migration_required_for_token_expansion": [
+    "new tokenizer version",
+    "embedding/head resize",
+    "safe new-token initialization",
+    "hash gate update",
+    "token-ID suppression mask rebuild",
+    "compatibility probes before training"
+  ],
+  "missing_dedicated_software_maintenance_tokens": [
+    "<AK_REPO>",
+    "<AK_FILE>",
+    "<AK_MODULE>",
+    "<AK_SYMBOL>",
+    "<AK_FUNCTION>",
+    "<AK_CLASS>",
+    "<AK_METHOD>",
+    "<AK_IMPORT>",
+    "<AK_CALLSITE>",
+    "<AK_TEST>",
+    "<AK_FIXTURE>",
+    "<AK_CONFIG>",
+    "<AK_ENTRYPOINT>",
+    "<AK_DEPENDENCY>",
+    "<AK_AST>",
+    "<AK_GRAPH_EDGE>",
+    "<AK_FAILURE_LOG>",
+    "<AK_STACK_TRACE>",
+    "<AK_VERIFIER_RESULT>",
+    "<AK_DIFF>",
+    "<AK_PATCH>",
+    "<AK_EDIT_OPERATOR>",
+    "<AK_BUILD_MODE>",
+    "<AK_ALLOWED_IMPORT>",
+    "<AK_BLOCKED_IMPORT>",
+    "<AK_ACTION_REPAIR>",
+    "<AK_ACTION_RETRIEVE_MORE>",
+    "<AK_ACTION_ABSTAIN>"
+  ],
+  "name": "stage8847_software_maintainer_custom_token_gap_audit",
+  "near_term_policy": {
+    "decoder_role": "bounded argument rendering only after structured gates choose legal action/target",
+    "do_not_expand_1506_vocab_without_migration": true,
+    "represent_repo_state_as": [
+      "structured_feature_ids",
+      "manifest JSON fields",
+      "graph node/edge typed IDs",
+      "action labels",
+      "loss masks"
+    ]
+  },
+  "next_best_step": "Design unified special-token guard and tokenizer-ID suppression masks without expanding the tokenizer. Do not run a model yet.",
+  "passed": true,
+  "recovered_tokenizer": {
+    "agentkernel_special_tokens": 146,
+    "copy_user_source_slots": 24,
+    "kind": "agentkernel_bytelevel_bpe_v1",
+    "pad_bos_eos_unk_ids": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "vocab_size": 1506
+  },
+  "stage": 8847
+}

@@ -1711,3 +1711,99 @@ The model-output capture preflight has now passed a closed-authority audit.
 - Stage8836 reconciles registry/spine.
 
 Next boundary: static runner-interface design only. This should specify CLI flags/artifact paths/assertions for a future capture runner, but still must not run the model or open decoder CE/runtime/Gemma/scoring.
+
+## Stage8831-8834 Authority-Closed Model Output Capture Preflight
+
+The future model-output capture path now has a preflight design and a static closed gate, but still no model execution.
+
+- Stage8831 built 240 capture-preflight design rows from synthetic placeholder packets.
+- Stage8832 attached `design:authority_closed_model_output_capture_preflight_v1` to the graph and introduced `objective:static_capture_preflight_gate_audit`.
+- Stage8833 validated all 240 rows through the static gate with zero model-output, probe-ready, model-execution, decoder-CE, authority, or loss openings.
+- Stage8834 reconciles registry/spine.
+
+Next boundary: recover an authority-ticket schema for future model-output capture. It must describe the exact authorization fields needed before checkpoint loading or model forward/decode can ever be considered.
+
+## Stage8837-8839 Future Runner Static Design
+
+The future model-output capture runner now has a static interface design, but still no runnable model path.
+
+- Stage8837 defined required CLI flags, artifact paths, and assertions for a future runner. All 240 rows keep checkpoint loading, model forward, decode, CE, runtime, Gemma, scoring, and artifact writes closed.
+- Stage8838 attached `design:future_model_output_capture_runner_static_v1` to the graph and introduced `objective:future_model_output_capture_authority_ticket_schema`.
+- Stage8839 reconciles registry/spine and restores latest-stage metrics after the concurrent Stage8834-8836 path.
+
+Next boundary: recover the authority-ticket schema. This ticket must define the exact explicit authorization fields required before any future checkpoint load, forward pass, decode, output artifact write, CE, runtime, Gemma, or scoring path can open.
+
+## Stage8840-8843 Authority Ticket Schema
+
+The future model-output capture path now has a closed-by-default authority-ticket schema.
+
+- Stage8840 created 240 ticket-schema rows with all gated operations denied by default: checkpoint load, forward, decode, model-output artifact write, decoder CE, denoise CE, runtime, Gemma, scoring, source/body emission, and promotion.
+- Stage8841 attached `schema:model_output_capture_authority_ticket_v1` to the graph.
+- Stage8842 audited all 240 rows: zero allowed-operation rows, zero opening rows, zero authority openings, and zero missing denials.
+- Stage8843 reconciles registry/spine.
+
+Next boundary: recover a closed ticket-instance dry run. That dry run should instantiate denied tickets and prove the runner would reject them before any future execution path is considered.
+
+## Stage8844 Special Token Recovery Contract
+
+The special-token contract has been recovered from preserved `/arxiv` tokenizer artifacts and folded back into the training spine.
+
+- Stage8844 records the recovered 100M tokenizer as `agentkernel_bytelevel_bpe_v1` with vocab size `1506`.
+- PAD/BOS/EOS/UNK are fixed as `<pad>/<s></s>/<unk>` with IDs `0/1/2/3`.
+- The tokenizer contains 150 added special tokens, including 146 AgentKernel structural `<AK_...>` tokens and 24 copy-source slot tokens.
+- The full inventory and semantic grouping are now in `configs/tokenizer/agentkernel_special_token_contract_stage8844.json`.
+- The durable note is `docs/SPECIAL_TOKEN_RECOVERY_CONTRACT_STAGE8844.md`.
+
+Recovered control rule:
+
+`<AK_...>` tokens are structural/control vocabulary, not ordinary user-facing prose. They may appear only in authorized structured/control surfaces. Legacy internal-control families such as `<MTC...>`, `<COPY...>`, `<SEM...>`, `<CTRL...>`, `<PLAN...>`, `<MNSB...>`, `<PYPLAN...>`, `POLICY_*`, `CONTROL_*`, `INTERNAL_*`, and `decoder_control` must route to denoise/negative/quarantine unless a specialized objective explicitly authorizes them.
+
+Training boundary:
+
+- Full 100M training must use the recovered 1506-vocab tokenizer, not the byte fallback.
+- Bounded decoder CE must hard-check tokenizer hashes, vocab size, token IDs, target length, token leaks, loss masks, and route authorization.
+- Zero internal-token leakage is insufficient by itself; decoder probes must also prove contentful output, non-junk length, non-repetition, and sane EOS behavior.
+
+Next boundary: unify token guards across dataset judge, loss-mask compiler, trainer preflight, packet telemetry, and denoise routing. Then build tokenizer-ID suppression masks from the recovered tokenizer instead of relying only on string regex checks.
+
+## Stage8844-8846 Learning Signal Improvement Contract
+
+The learning-signal recovery is now represented as a contract rather than loose advice.
+
+- Stage8844 created contract rows for structured/policy targets: needs_verification, retrieval_coverage, ood_query, build_mode, patch_operator, edit_localization, symbol_binding, and verifier_repair.
+- The contract requires counterfactual siblings, row-field logits/losses, confusion matrices, margin/confidence/entropy, high-confidence wrong rows, token loss maps, per-row/per-module gradient norms, typed serialization, and explicit loss weighting.
+- Stage8845 attached the contract to the graph and linked it to `training_data.py`, `training_loop.py`, `training_telemetry_metrics.py`, and `modeling_transformer.py`.
+- Stage8846 reconciles registry/spine.
+
+Next boundary: recover the dataset/trainer implementation plan. It should list exact code changes and gates, but still must not authorize training or decoder CE.
+
+## Stage8847 Software Maintainer Custom Token Gap Audit
+
+The recovered 1506-vocab tokenizer is checkpoint-compatible and strong for AgentKernel control/evidence/retrieval, but it is not yet a complete software-maintenance token vocabulary.
+
+Recovered strength:
+
+- 146 AgentKernel structural `<AK_...>` tokens
+- 24 copy-source slot tokens
+- high-level software-maintenance seed tokens: `<AK_RET_CODE>`, `<AK_ARTIFACT_REPAIR>`, `<AK_SOURCE_INSPECT>`, `<AK_PATCH_BUILD>`, `<AK_SAFE_STOP>`, `<AK_SOURCE_SLOTS>`
+
+Gap:
+
+The tokenizer lacks dedicated repo-state and edit-state markers such as repo, file, symbol, import, callsite, test, config, dependency, AST, graph edge, failure log, stack trace, verifier result, diff, patch, edit operator, build mode, allowed import, and blocked import.
+
+Decision:
+
+Do not expand the tokenizer casually. The recovered 1506-vocab tokenizer remains canonical for checkpoint-compatible 100M recovery. Repo-state learning should continue through structured tensors, manifest fields, graph node/edge typed IDs, action labels, and loss masks. Token expansion requires a separate v2 tokenizer migration with embedding/head resize, hash gate updates, token-ID suppression mask rebuild, and compatibility probes.
+
+Next boundary: design unified special-token guards and tokenizer-ID suppression masks without expanding the tokenizer. Keep model execution and decoder CE closed.
+
+## Stage8847-8850 Learning Signal Dataset/Trainer Implementation Plan
+
+The learning-signal contract now has a file-specific dataset/trainer implementation plan.
+
+- Stage8847 created six implementation-plan rows: typed input serialization, counterfactual sibling manifest gate, structured-head telemetry, gradient/loss-weight telemetry, telemetry helper expansion, and structured-head target mapping.
+- Stage8848 attached the plan to the graph and linked it to `training_data.py`, `training_loop.py`, `training_telemetry_metrics.py`, and `modeling_transformer.py`.
+- Stage8849 audited the plan: all required plan IDs and files are present, all rows have planned changes and acceptance checks, and training/decoder CE remain closed.
+- Stage8850 reconciles registry/spine.
+
+Next boundary: recover a code-patch readiness checklist. It should define the exact preconditions before modifying training/data code, but still must not authorize training or decoder CE.

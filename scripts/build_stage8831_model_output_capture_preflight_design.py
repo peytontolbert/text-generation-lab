@@ -5,7 +5,7 @@ import json
 import time
 from pathlib import Path
 
-from model_output_capture_preflight_builder import build_card, build_preflight_rows
+from model_output_capture_preflight_design_builder import build_card, build_preflight_rows
 from model_output_packet_telemetry_contract_builder import AUTHORITY_CLOSED
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,30 +21,30 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     packets = [json.loads(line) for line in SOURCE.read_text(encoding="utf-8").splitlines() if line.strip()]
     rows = build_preflight_rows(packets)
-    manifest = OUT_DIR / "model_output_capture_preflight_design.jsonl"
+    manifest = OUT_DIR / "model_output_capture_preflight_design_manifest.jsonl"
     manifest.write_text("".join(json.dumps(row, sort_keys=True) + "\n" for row in rows), encoding="utf-8")
-    failures = [] if SOURCE.exists() else [f"missing:{SOURCE}"]
-    base_metrics = build_card(rows)
-    metrics = {
-        **AUTHORITY_CLOSED,
-        **{k: v for k, v in base_metrics.items() if k != "passed"},
-        "authority_rows": base_metrics["authority_open_rows"],
-        "source_rows": len(packets),
-        "source_failures": failures,
-    }
-    passed = base_metrics["passed"] and not failures
+    metrics = {**AUTHORITY_CLOSED, **build_card(rows), "source_rows": len(packets), "source_failures": [] if SOURCE.exists() else [f"missing:{SOURCE}"]}
+    passed = (
+        bool(rows)
+        and metrics["source_failures"] == []
+        and metrics["authority_rows"] == 0
+        and metrics["loss_rows"] == 0
+        and metrics["probe_ready_rows"] == 0
+        and metrics["ready_for_model_execution_rows"] == 0
+        and metrics["ready_for_decoder_ce_rows"] == 0
+        and metrics["model_output_rows"] == 0
+        and metrics["missing_preflight_field_rows"] == 0
+        and metrics["missing_blocked_operation_rows"] == 0
+    )
     card = {
         "stage": STAGE,
         "stage_name": NAME,
         "passed": passed,
         "authority": AUTHORITY_CLOSED,
         "metrics": metrics,
-        "artifacts": {
-            "manifest": str(manifest.relative_to(ROOT)),
-            "source": str(SOURCE.relative_to(ROOT)),
-        },
-        "decision": "Designed authority-closed model-output capture preflight with no model output artifacts and no CE/runtime/scoring authority." if passed else "Model-output capture preflight design failed.",
-        "next_best_step": "Audit capture preflight design and attach it to the graph. Do not run a model yet.",
+        "artifacts": {"manifest": str(manifest.relative_to(ROOT)), "source": str(SOURCE.relative_to(ROOT))},
+        "decision": "Defined authority-closed model-output capture preflight design without model execution." if passed else "Model-output capture preflight design failed.",
+        "next_best_step": "Attach capture preflight design to graph, then build a static preflight gate audit. Keep model execution/training/CE closed.",
         "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     (OUT_DIR / "model_output_capture_preflight_design_card.json").write_text(json.dumps(card, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -55,12 +55,13 @@ def main() -> None:
         f"Passed: `{passed}`",
         "",
         f"Rows: `{metrics['rows']}`",
-        f"Preflight-design-ready rows: `{metrics['preflight_design_ready_rows']}`",
-        f"Model output rows: `{metrics['model_output_rows']}`",
-        f"Artifact write rows: `{metrics['artifact_write_rows']}`",
+        f"Source rows: `{metrics['source_rows']}`",
         f"Authority rows: `{metrics['authority_rows']}`",
+        f"Loss rows: `{metrics['loss_rows']}`",
+        f"Ready for model execution rows: `{metrics['ready_for_model_execution_rows']}`",
+        f"Model output rows: `{metrics['model_output_rows']}`",
         "",
-        "This is a design-only preflight for future model-output capture. It does not run a model, write model outputs, open decoder CE, open runtime, score, call Gemma, or authorize promotion.",
+        "This is a design manifest only. It defines future capture inputs/outputs and blocked operations, while keeping model execution, CE, runtime, Gemma, scoring, source/body emission, and promotion closed.",
         "",
     ]), encoding="utf-8")
     print(json.dumps(card, indent=2, sort_keys=True))
