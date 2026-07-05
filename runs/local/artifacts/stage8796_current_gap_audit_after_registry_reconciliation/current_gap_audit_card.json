@@ -1,0 +1,198 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T02:49:25Z",
+  "decision": "Current gap audit recorded. Recovery has advanced through source-backed verifier repair, but bounded decoder arguments, output repair denoise, current bounded decoder CE packaging, full gate materialization, mining, and training remain blocked.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "candidate_ready_no_training_objectives": 4,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "neutral_ready_missing_source_backed_controls": 2,
+    "objectives_reviewed": 8,
+    "promotion_ready": false,
+    "remaining_blocker_count": 7,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "next_best_step": "Recover source-backed bounded decoder argument candidate controls under gate_status_contract.",
+  "objective_status": {
+    "bounded_decoder_arguments": {
+      "evidence": [
+        "runs/summaries/stage8645_bounded_decoder_arguments_neutral_manifest.json",
+        "runs/summaries/stage8646_bounded_decoder_arguments_shortcut_baseline.json"
+      ],
+      "evidence_passed": {
+        "runs/summaries/stage8645_bounded_decoder_arguments_neutral_manifest.json": true,
+        "runs/summaries/stage8646_bounded_decoder_arguments_shortcut_baseline.json": true
+      },
+      "evidence_present": {
+        "runs/summaries/stage8645_bounded_decoder_arguments_neutral_manifest.json": true,
+        "runs/summaries/stage8646_bounded_decoder_arguments_shortcut_baseline.json": true
+      },
+      "gap": "Next objective to recover: candidate manifest under gate_status_contract with decoder_ce still closed.",
+      "status": "neutral_ready_missing_source_backed_gate_status_controls"
+    },
+    "bounded_decoder_ce": {
+      "evidence": [
+        "runs/summaries/stage8592_reconstructed_bounded_decoder_ce_candidate_and_loss_mask_package.json",
+        "runs/summaries/stage8594_reconstructed_bounded_decoder_ce_final_pre_execution_audit.json"
+      ],
+      "evidence_passed": {
+        "runs/summaries/stage8592_reconstructed_bounded_decoder_ce_candidate_and_loss_mask_package.json": true,
+        "runs/summaries/stage8594_reconstructed_bounded_decoder_ce_final_pre_execution_audit.json": true
+      },
+      "evidence_present": {
+        "runs/summaries/stage8592_reconstructed_bounded_decoder_ce_candidate_and_loss_mask_package.json": true,
+        "runs/summaries/stage8594_reconstructed_bounded_decoder_ce_final_pre_execution_audit.json": true
+      },
+      "gap": "Must be rebuilt from recovered bounded-decoder-argument controls and loss masks; no decoder CE execution authorized.",
+      "status": "old_scaffold_exists_current_rebuild_blocked"
+    },
+    "intent_to_build_strategy": {
+      "evidence": [
+        "runs/summaries/stage8630_intent_to_build_neutral_manifest.json",
+        "runs/summaries/stage8631_intent_to_build_shortcut_baseline.json",
+        "runs/summaries/stage8668_intent_to_build_copy_routed_manifest.json"
+      ],
+      "evidence_passed": {
+        "runs/summaries/stage8630_intent_to_build_neutral_manifest.json": true,
+        "runs/summaries/stage8631_intent_to_build_shortcut_baseline.json": true,
+        "runs/summaries/stage8668_intent_to_build_copy_routed_manifest.json": true
+      },
+      "evidence_present": {
+        "runs/summaries/stage8630_intent_to_build_neutral_manifest.json": true,
+        "runs/summaries/stage8631_intent_to_build_shortcut_baseline.json": true,
+        "runs/summaries/stage8668_intent_to_build_copy_routed_manifest.json": true
+      },
+      "gap": "No current source-backed/gate-status candidate manifest equivalent to symbol/edit/patch/verifier.",
+      "status": "neutral_ready_not_source_backed"
+    },
+    "output_repair_denoise": {
+      "evidence": [
+        "runs/summaries/stage8647_output_repair_denoise_neutral_manifest.json",
+        "runs/summaries/stage8648_output_repair_denoise_shortcut_baseline.json"
+      ],
+      "evidence_passed": {
+        "runs/summaries/stage8647_output_repair_denoise_neutral_manifest.json": true,
+        "runs/summaries/stage8648_output_repair_denoise_shortcut_baseline.json": true
+      },
+      "evidence_present": {
+        "runs/summaries/stage8647_output_repair_denoise_neutral_manifest.json": true,
+        "runs/summaries/stage8648_output_repair_denoise_shortcut_baseline.json": true
+      },
+      "gap": "Needs source-backed/verified repair controls after bounded decoder argument controls; denoise CE remains closed.",
+      "status": "neutral_ready_missing_source_backed_gate_status_controls"
+    },
+    "source_backed_edit_localization": {
+      "evidence": [
+        "runs/summaries/stage8765_source_backed_edit_localization_candidate_manifest.json",
+        "runs/summaries/stage8766_source_backed_edit_localization_candidate_audit.json",
+        "runs/summaries/stage8767_source_backed_edit_localization_graph_attachment.json"
+      ],
+      "evidence_passed": {
+        "runs/summaries/stage8765_source_backed_edit_localization_candidate_manifest.json": true,
+        "runs/summaries/stage8766_source_backed_edit_localization_candidate_audit.json": true,
+        "runs/summaries/stage8767_source_backed_edit_localization_graph_attachment.json": true
+      },
+      "evidence_present": {
+        "runs/summaries/stage8765_source_backed_edit_localization_candidate_manifest.json": true,
+        "runs/summaries/stage8766_source_backed_edit_localization_candidate_audit.json": true,
+        "runs/summaries/stage8767_source_backed_edit_localization_graph_attachment.json": true
+      },
+      "gap": "Rows are candidate-only; remaining recovered gates must be explicitly materialized before compiler-ready training rows.",
+      "status": "candidate_ready_no_training"
+    },
+    "source_backed_patch_operator": {
+      "evidence": [
+        "runs/summaries/stage8774_source_backed_patch_operator_candidate_manifest.json",
+        "runs/summaries/stage8775_source_backed_patch_operator_candidate_audit.json",
+        "runs/summaries/stage8776_source_backed_patch_operator_graph_attachment.json"
+      ],
+      "evidence_passed": {
+        "runs/summaries/stage8774_source_backed_patch_operator_candidate_manifest.json": true,
+        "runs/summaries/stage8775_source_backed_patch_operator_candidate_audit.json": true,
+        "runs/summaries/stage8776_source_backed_patch_operator_graph_attachment.json": true
+      },
+      "evidence_present": {
+        "runs/summaries/stage8774_source_backed_patch_operator_candidate_manifest.json": true,
+        "runs/summaries/stage8775_source_backed_patch_operator_candidate_audit.json": true,
+        "runs/summaries/stage8776_source_backed_patch_operator_graph_attachment.json": true
+      },
+      "gap": "Rows are candidate-only; remaining recovered gates must be explicitly materialized before compiler-ready training rows.",
+      "status": "candidate_ready_no_training"
+    },
+    "source_backed_symbol_binding": {
+      "evidence": [
+        "runs/summaries/stage8674_source_backed_symbol_binding_candidate_manifest.json",
+        "runs/summaries/stage8675_source_backed_symbol_binding_candidate_manifest_audit.json"
+      ],
+      "evidence_passed": {
+        "runs/summaries/stage8674_source_backed_symbol_binding_candidate_manifest.json": true,
+        "runs/summaries/stage8675_source_backed_symbol_binding_candidate_manifest_audit.json": false
+      },
+      "evidence_present": {
+        "runs/summaries/stage8674_source_backed_symbol_binding_candidate_manifest.json": true,
+        "runs/summaries/stage8675_source_backed_symbol_binding_candidate_manifest_audit.json": true
+      },
+      "gap": "Validated seed exists; test-query counterexamples and full gate materialization remain thin before mining/training.",
+      "status": "candidate_ready_needs_expansion_and_compiler_gates"
+    },
+    "source_backed_verifier_repair": {
+      "evidence": [
+        "runs/summaries/stage8788_source_backed_verifier_repair_candidate_manifest.json",
+        "runs/summaries/stage8789_source_backed_verifier_repair_candidate_audit.json",
+        "runs/summaries/stage8790_source_backed_verifier_repair_graph_attachment.json"
+      ],
+      "evidence_passed": {
+        "runs/summaries/stage8788_source_backed_verifier_repair_candidate_manifest.json": true,
+        "runs/summaries/stage8789_source_backed_verifier_repair_candidate_audit.json": true,
+        "runs/summaries/stage8790_source_backed_verifier_repair_graph_attachment.json": true
+      },
+      "evidence_present": {
+        "runs/summaries/stage8788_source_backed_verifier_repair_candidate_manifest.json": true,
+        "runs/summaries/stage8789_source_backed_verifier_repair_candidate_audit.json": true,
+        "runs/summaries/stage8790_source_backed_verifier_repair_graph_attachment.json": true
+      },
+      "gap": "Rows are candidate-only; remaining recovered gates must be explicitly materialized before compiler-ready training rows.",
+      "status": "candidate_ready_no_training"
+    }
+  },
+  "passed": true,
+  "remaining_blockers": [
+    "Recover source-backed bounded_decoder_arguments candidate controls under gate_status_contract.",
+    "Recover output_repair_denoise candidate controls after bounded decoder arguments.",
+    "Rebuild bounded_decoder_ce candidate/loss-mask package from current recovered argument controls, not stale pre-gate artifacts.",
+    "Materialize full recovered gate_status passes for candidate rows: contamination, locked/golden eval, drift canary, cluster/slice, junk/OOD, schema, source lineage/provenance.",
+    "Rerun no-training scale-readiness preflight after current candidate controls are rebuilt.",
+    "Do not resume mining until objective builders emit counterfactual obligations, duplicate/split checks, route cards, authority cards, and loss-mask cards.",
+    "Do not resume training/model execution until structured telemetry, loss masks, and final pre-execution audits pass for the current manifests."
+  ],
+  "stage": 8796,
+  "stage_name": "stage8796_current_gap_audit_after_registry_reconciliation",
+  "support_status": {
+    "curriculum_compiler": "requires recovered gates and routes rows to human review when gates fail; still needs deeper mandatory integration with ranker/cluster/lineage for mining scale",
+    "query_expansion_rewriter": "ready_no_authority_per_stage8791_graph_attached_stage8793",
+    "runtime_verifier_loop": "contract recovered but runtime execution remains closed",
+    "stage8753_missing_real_modules": "locally_ready_per_stage8792",
+    "training_telemetry": "modules exist but no authorized native training run has produced current row/logit/gradient telemetry for recovered objectives",
+    "transformer_100m": "target architecture features recovered; model execution remains closed"
+  }
+}

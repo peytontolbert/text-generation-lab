@@ -1450,3 +1450,137 @@ Stage8790 attached source-backed verifier-repair to the central graph:
 Authority remains closed: no training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
 
 Current next best step: recover bounded decoder argument candidate controls under `gate_status_contract`, then use those to rebuild the bounded decoder CE candidate path without bypassing loss masks or safety gates.
+
+## Stage8791-8794 Query Expansion and Recovery Integration
+
+Recovered `scripts/query_expansion_rewriter.py` as the last Stage8753 missing-real support module.
+
+Its job is narrow and evidence-facing:
+
+- generate retrieval query variants from visible intent, symbol, error, API, path, language, and test-name hints
+- emit `query_variants`, `query_source_bits`, and `expansion_reason`
+- block rows exposing target-coded fields such as `target_label`, `clean_state`, `target`, `answer`, or `patch_operator`
+- keep retrieval execution, training, scoring, runtime, and promotion closed
+
+Stage8791 readiness passed:
+
+- sample rows: `3`
+- query variants: `6`
+- pass rows: `1`
+- hold rows: `1`
+- blocked rows: `1`
+- leak or target rows: `1`
+- authority rows: `0`
+
+Stage8792 re-audited the Stage8753 parallel recovery list:
+
+- audited missing-real modules: `16`
+- ready local modules: `16`
+- modules with missing files: `0`
+- modules missing readiness summaries: `0`
+- authority rows: `0`
+
+Stage8793 attached Stage8791 query expansion readiness and Stage8792 parallel recovery completion to the central graph:
+
+- graph nodes: `1720`
+- graph edges: `2524`
+- added nodes: `1`
+- authority rows: `0`
+
+Stage8794 ran a no-registry support-stack integration audit against the Stage8793 graph:
+
+- modules reviewed: `16`
+- ready local modules: `16`
+- missing file modules: `0`
+- missing readiness modules: `0`
+- missing graph modules: `0`
+- focused tests: `16`
+- focused test return code: `0`
+- blockers: `[]`
+
+Current frontier:
+
+```text
+source lineage/provenance
+-> contamination/leakage
+-> locked eval / drift canary
+-> schema / patch / coverage / flaky gates
+-> eval trace / skill registry / ngram / memory
+-> source-backed edit localization
+-> source-backed patch operator
+-> cost / security / weak supervision / graph memory
+-> latency / repository universe / traced eval
+-> source-backed verifier repair
+-> query expansion and recovered-module integration audit
+```
+
+The next step is bounded decoder argument candidate controls under `gate_status_contract`.
+
+Do not resume mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma comparison, controller merge, or promotion until the reconstructed registry and central spine both point at this frontier cleanly.
+
+## Stage8796-8800 Bounded Decoder Argument Controls
+
+Bounded decoder argument recovery has been reintroduced as a closed control objective, not as decoder CE training.
+
+- Stage8796 built a gate-complete no-authority bounded decoder argument controls manifest from the earlier neutral Stage8645 rows.
+- Stage8798 audited the controls: 504 rows, balanced labels, max proxy single 0.2857, max proxy combo 0.4286, zero training-loss rows, zero incomplete gate rows.
+- Stage8799 attached the objective to the central graph as `objective:bounded_decoder_arguments` with decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, and promotion closed.
+- Stage8800 reconciles the registry/spine so the current frontier is visible and does not get lost behind older recovery stages.
+
+Current frontier:
+
+```text
+source lineage/provenance
+-> contamination/leakage
+-> locked eval / drift canary
+-> schema / patch / coverage / flaky gates
+-> eval trace / skill registry / ngram / memory
+-> source-backed edit localization / patch operator / verifier repair
+-> query expansion and recovered-module integration audit
+-> bounded decoder argument controls
+-> closed bounded decoder CE package gate
+```
+
+Do not resume mining, decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, or promotion until the next bounded decoder CE package gate passes with the same recovered gate-status contract.
+
+## Stage8801 Parallel Audit Reconciliation
+
+The bounded decoder argument controls have two equivalent shortcut/gate audits. Both agree on 504 rows, balanced labels, max proxy single 0.2857, max proxy combo 0.4286, zero training-loss rows, and closed authority.
+
+This means the current recovery issue is no longer argument-control schema safety. The next unresolved boundary is a closed bounded decoder CE package gate that consumes these controls without reopening CE, runtime, body emission, or scoring.
+
+## Stage8797-8800 Bounded Decoder Argument Controls
+
+Bounded decoder argument recovery has been reintroduced as a closed control objective, not as decoder CE training.
+
+- Stage8797 built a gate-complete no-authority bounded decoder argument controls manifest from the earlier neutral Stage8645 rows.
+- Stage8798 audited the controls: 504 rows, balanced labels, max proxy single 0.2857, max proxy combo 0.4286, zero training-loss rows, zero incomplete gate rows.
+- Stage8799 attached the objective to the central graph as `objective:bounded_decoder_arguments` with decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, and promotion closed.
+- Stage8800 reconciles the registry/spine so the current frontier is visible and does not get lost behind older recovery stages.
+
+Current frontier:
+
+```text
+source lineage/provenance
+-> contamination/leakage
+-> locked eval / drift canary
+-> schema / patch / coverage / flaky gates
+-> eval trace / skill registry / ngram / memory
+-> source-backed edit localization / patch operator / verifier repair
+-> query expansion and recovered-module integration audit
+-> bounded decoder argument controls
+-> closed bounded decoder CE package gate
+```
+
+Do not resume mining, decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, or promotion until the next bounded decoder CE package gate passes with the same recovered gate-status contract.
+
+## Stage8802-8805 Closed Bounded Decoder CE Gate
+
+The recovered bounded decoder CE path is now represented as a closed gate, not as training authority.
+
+- Stage8802 built 504 closed CE package-gate rows from the audited argument controls.
+- Stage8803 audited that zero rows have decoder CE loss enabled, zero rows are CE-eligible now, all gate-status fields are complete, and all authority remains closed.
+- Stage8804 attached the gate to the central graph and introduced `objective:source_backed_decoder_target_materialization` as the next missing recovery target.
+- Stage8805 updates the registry/spine frontier accordingly.
+
+Current hard boundary: 360 rows are future CE candidates only after source-backed target text materialization. 72 are blocked for long-output/budget and 72 are blocked for retrieve-more. No decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, or promotion is authorized.

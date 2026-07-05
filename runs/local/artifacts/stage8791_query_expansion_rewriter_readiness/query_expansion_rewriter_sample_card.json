@@ -1,0 +1,96 @@
+{
+  "metrics": {
+    "authority_rows": 0,
+    "blocked_rows": 1,
+    "expansion_source_bits": {
+      "api": 1,
+      "error": 1,
+      "intent": 2,
+      "language": 1,
+      "symbol": 1
+    },
+    "hold_rows": 1,
+    "leak_or_target_rows": 1,
+    "pass_rows": 1,
+    "query_variant_count": 6,
+    "route_counts": {
+      "BLOCK_QUERY_EXPANSION_LEAK": 1,
+      "HOLD_QUERY_EXPANSION_NO_HINTS": 1,
+      "PASS_QUERY_EXPANSION": 1
+    },
+    "rows": 3
+  },
+  "records": [
+    {
+      "authority": {
+        "promotion_ready": false,
+        "retrieval_execution_authorized": false,
+        "training_authorized": false
+      },
+      "expansion_reason": "visible_hints:intent,symbol,error,api,language",
+      "leak_or_target_rows": 0,
+      "query_expansion_route": "PASS_QUERY_EXPANSION",
+      "query_source_bits": {
+        "api": true,
+        "error": true,
+        "intent": true,
+        "language": true,
+        "path": false,
+        "symbol": true,
+        "test_name": false
+      },
+      "query_variants": [
+        "fix auth failure",
+        "validate_user definition references",
+        "validate_user tests call sites",
+        "AssertionError expected 403 got 200 root cause",
+        "FastAPI Depends usage examples",
+        "python validate_user fix"
+      ],
+      "row_id": "expand"
+    },
+    {
+      "authority": {
+        "promotion_ready": false,
+        "retrieval_execution_authorized": false,
+        "training_authorized": false
+      },
+      "expansion_reason": "no_visible_hints",
+      "leak_or_target_rows": 0,
+      "query_expansion_route": "HOLD_QUERY_EXPANSION_NO_HINTS",
+      "query_source_bits": {
+        "api": false,
+        "error": false,
+        "intent": false,
+        "language": false,
+        "path": false,
+        "symbol": false,
+        "test_name": false
+      },
+      "query_variants": [],
+      "row_id": "hold"
+    },
+    {
+      "authority": {
+        "promotion_ready": false,
+        "retrieval_execution_authorized": false,
+        "training_authorized": false
+      },
+      "expansion_reason": "blocked_target_field_visible",
+      "leak_or_target_rows": 1,
+      "query_expansion_route": "BLOCK_QUERY_EXPANSION_LEAK",
+      "query_source_bits": {
+        "api": false,
+        "error": false,
+        "intent": true,
+        "language": false,
+        "path": false,
+        "symbol": false,
+        "test_name": false
+      },
+      "query_variants": [],
+      "row_id": "block"
+    }
+  ],
+  "rows": 3
+}

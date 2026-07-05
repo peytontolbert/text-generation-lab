@@ -1,0 +1,70 @@
+{
+  "artifacts": {
+    "builder": "scripts/bounded_decoder_ce_package_gate_builder.py",
+    "card": "runs/local/artifacts/stage8802_closed_bounded_decoder_ce_package_gate/closed_bounded_decoder_ce_package_gate_card.json",
+    "manifest": "runs/local/artifacts/stage8802_closed_bounded_decoder_ce_package_gate/closed_bounded_decoder_ce_package_gate_manifest.jsonl",
+    "source_manifest": "runs/local/artifacts/stage8797_bounded_decoder_argument_controls_manifest/bounded_decoder_argument_controls_manifest.jsonl",
+    "tests": "tests/test_bounded_decoder_ce_package_gate_builder.py"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T03:02:12Z",
+  "decision": "Built closed bounded decoder CE package gate. It identifies future CE candidates but authorizes no CE/training/runtime.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "bounded_argument_type_counts": {
+      "ARG_CALL": 72,
+      "ARG_IMPORT": 72,
+      "ARG_LITERAL": 72,
+      "ARG_NAME": 72,
+      "ARG_PATH": 72,
+      "HOLD_LONG_OUTPUT": 72,
+      "RETRIEVE_MORE": 72
+    },
+    "complete_gate_status_rows": 504,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_eligible_now_rows": 0,
+    "decoder_ce_rows": 0,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gate_decision_counts": {
+      "CE_BLOCK_LONG_OUTPUT_UNDER_CURRENT_DECODER_BUDGET": 72,
+      "CE_BLOCK_RETRIEVE_MORE_BEFORE_DECODING": 72,
+      "CE_CANDIDATE_NEEDS_SOURCE_BACKED_TARGET_TEXT": 360
+    },
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_mask_rows": 0,
+    "missing_gate_status_rows": 0,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "raw_or_target_visible_rows": 0,
+    "rows": 504,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_rows": 504,
+    "split_counts": {
+      "eval": 168,
+      "strict": 168,
+      "train": 168
+    }
+  },
+  "next_best_step": "Audit the closed CE gate, then attach it to the central graph before any target materialization or tiny probe discussion.",
+  "passed": true,
+  "stage": 8802,
+  "stage_name": "stage8802_closed_bounded_decoder_ce_package_gate"
+}
