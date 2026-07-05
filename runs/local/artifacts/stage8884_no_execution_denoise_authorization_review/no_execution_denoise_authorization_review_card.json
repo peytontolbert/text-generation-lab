@@ -1,0 +1,105 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "authorization_design": {
+    "allowed_future_loss": "denoise_ce_only_after_separate_ticket",
+    "execution_authorized_now": false,
+    "forbidden_now": [
+      "model_execution",
+      "denoise_ce_training",
+      "decoder_ce_training",
+      "runtime_verifier_execution",
+      "source_body_emission",
+      "gemma_harness_scoring",
+      "checkpoint_export",
+      "promotion"
+    ],
+    "future_review_only": true,
+    "mode": "denoise_repair_probe",
+    "required_before_any_denoise_ce": [
+      "explicit_user_authorization",
+      "one_run_ticket",
+      "loss_mask_runtime_assertions",
+      "target_store_resolver_readonly",
+      "artifact_gate_required",
+      "no_runtime_verifier_execution",
+      "cleanup_checkpoint_policy"
+    ]
+  },
+  "created_at_utc": "2026-07-05T08:03:43Z",
+  "decision": "No-execution denoise authorization review passed. It defines prerequisites for a future ticket but opens no denoise CE/runtime authority.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_eligible_now_rows": 0,
+    "denoise_ce_training_authorized_next": false,
+    "future_no_execution_design_ready": true,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "review_failures": 0,
+    "review_items": 8,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "runtime_verifier_execution_eligible_now_rows": 0,
+    "same_stage_denoise_ce_authorized": false,
+    "same_stage_execution_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_authorized": false
+  },
+  "next_best_step": "If denoise is pursued later, build a separate one-run ticket and keep runtime verifier execution closed. Do not run from this stage.",
+  "passed": true,
+  "review_items": [
+    {
+      "item": "denoise_controls_passed",
+      "passed": true
+    },
+    {
+      "item": "verifier_targets_passed",
+      "passed": true
+    },
+    {
+      "item": "denoise_contract_passed",
+      "passed": true
+    },
+    {
+      "item": "telemetry_contract_passed",
+      "passed": true
+    },
+    {
+      "item": "denoise_ce_still_closed",
+      "passed": true
+    },
+    {
+      "item": "runtime_still_closed",
+      "passed": true
+    },
+    {
+      "item": "target_text_not_in_manifest",
+      "passed": true
+    },
+    {
+      "item": "shortcut_gate_clean",
+      "passed": true
+    }
+  ],
+  "stage": 8884,
+  "stage_name": "stage8884_no_execution_denoise_authorization_review"
+}

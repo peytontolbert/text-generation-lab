@@ -1,0 +1,160 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "candidate_probe_plan": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "batch_size": 2,
+    "cleanup_forbidden_paths": [
+      "/",
+      "/data",
+      "/arxiv",
+      "/data/agentkernel-seq2seq-text-lab"
+    ],
+    "cleanup_policy": "safe_cleanup_checkpoints_only",
+    "execution_authorized_now": false,
+    "implementation": "transformer",
+    "loss_weights": {
+      "decoder_ce_weight": 0.0,
+      "denoise_weight": 0.0,
+      "structured_aux_weight": 1.0
+    },
+    "max_decoder_tokens": 64,
+    "max_encoder_tokens": 256,
+    "max_eval_rows": 16,
+    "max_steps": 8,
+    "max_strict_rows": 16,
+    "max_train_rows": 32,
+    "mode": "structured_policy_probe",
+    "objective_family": "intent_to_build_strategy",
+    "output_dir": "runs/local/probes/stage8890_tiny_structured_policy_probe_candidate",
+    "post_run_artifact_gate": {
+      "fail_if_missing_or_empty": true,
+      "mode": "structured_aux_probe",
+      "required": true,
+      "script": "scripts/native_probe_interpretability_artifact_contract.py"
+    },
+    "probe_id": "stage8890_tiny_structured_policy_probe_candidate",
+    "purpose": "First real tiny native structured probe candidate after Stage8862 telemetry gate recovery.",
+    "required_interpretability_artifacts": [
+      "row_field_logits.jsonl",
+      "row_field_losses.jsonl",
+      "row_gradient_norms.jsonl",
+      "activation_summary.jsonl",
+      "feature_ablation_attribution.jsonl",
+      "activation_patch_recovery.jsonl",
+      "row_dynamics_history.jsonl",
+      "module_delta_norms.json",
+      "field_exact_by_cell.json"
+    ],
+    "required_trainable_fields": [
+      "build_mode",
+      "allowed_import_policy",
+      "blocked_import_policy",
+      "repo_dependency_policy",
+      "action_sequence",
+      "file_plan"
+    ],
+    "source_manifest": "runs/local/artifacts/stage8630_intent_to_build_neutral_manifest/intent_to_build_neutral_manifest.jsonl"
+  },
+  "created_at_utc": "2026-07-05T08:03:43Z",
+  "decision": "Review card passed for a future tiny structured-policy probe request, but this stage does not execute or authorize execution by itself.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "max_eval_rows": 16,
+    "max_steps": 8,
+    "max_strict_rows": 16,
+    "max_train_rows": 32,
+    "model_execution_authorized_next": false,
+    "next_stage_tiny_execution_may_be_requested": true,
+    "promotion_ready": false,
+    "review_failures": 0,
+    "review_items": 11,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "same_stage_execution_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_authorized": false
+  },
+  "next_best_step": "If the user explicitly authorizes execution in a later stage, build a one-run Stage8890 execution ticket that still requires artifact-gate validation. Do not run from this stage.",
+  "passed": true,
+  "review_items": [
+    {
+      "item": "preflight_gate_passed",
+      "passed": true
+    },
+    {
+      "item": "telemetry_contract_passed",
+      "passed": true
+    },
+    {
+      "item": "probe_id_is_stage8890",
+      "passed": true
+    },
+    {
+      "item": "execution_not_authorized_now",
+      "passed": true
+    },
+    {
+      "item": "structured_aux_only",
+      "passed": true
+    },
+    {
+      "item": "decoder_ce_closed",
+      "passed": true
+    },
+    {
+      "item": "denoise_ce_closed",
+      "passed": true
+    },
+    {
+      "item": "tiny_caps",
+      "passed": true
+    },
+    {
+      "item": "artifact_gate_required",
+      "passed": true
+    },
+    {
+      "item": "safe_cleanup_policy",
+      "passed": true
+    },
+    {
+      "item": "authority_closed_on_plan",
+      "passed": true
+    }
+  ],
+  "stage": 8882,
+  "stage_name": "stage8882_tiny_structured_probe_execution_authorization_review"
+}

@@ -1889,3 +1889,14 @@ Bounded decoder CE and denoise repair are now reconciled as recovered closed gat
 - The only missing node left by the recovered graph is optional metadata-only commit inventory preflight, which must not run repository walking unless explicitly requested.
 
 This remains no-authority recovery: no model execution, training, decoder CE, denoise CE, runtime, source/body emission, Gemma, harness, scoring, mining, controller merge, memory writes, or promotion is authorized.
+
+## Stage8882-8885 Authorization Review Cards
+
+Three requested next-step review/design artifacts are recovered and indexed.
+
+- Stage8882 reviews the future Stage8890 tiny structured-policy probe plan. It passes but does not run or authorize execution by itself.
+- Stage8883 designs optional metadata-only commit inventory preflight with zero repository walks, zero commit reads, zero diff body reads, and zero training rows.
+- Stage8884 reviews denoise authorization prerequisites as no-execution/no-CE only. Denoise CE and runtime verifier execution remain closed.
+- Stage8885 reconciles these into registry/spine.
+
+No model execution, training, decoder CE, denoise CE, runtime, source/body emission, Gemma, harness, scoring, controller merge, mining, memory writes, or promotion is authorized.
