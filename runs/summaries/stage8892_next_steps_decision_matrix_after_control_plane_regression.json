@@ -1,0 +1,105 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T19:17:44Z",
+  "decision": "Next-step decision matrix recorded. Only no-execution hardening is available without explicit live authorization.",
+  "decision_matrix": [
+    {
+      "allowed_now": false,
+      "branch_id": "A_stage8890_one_run_structured_probe",
+      "hard_limits": {
+        "decoder_ce_weight": 0.0,
+        "denoise_weight": 0.0,
+        "max_eval_rows": 16,
+        "max_steps": 8,
+        "max_strict_rows": 16,
+        "max_train_rows": 32,
+        "mode": "structured_policy_probe",
+        "runtime": false
+      },
+      "must_pass_after_run": [
+        "native_probe_interpretability_artifact_contract",
+        "row_field_logits_nonempty_with_confidence_entropy_topk",
+        "row_gradient_norms_nonempty",
+        "activation_summary_nonempty",
+        "module_delta_norms_decoder_delta_guard",
+        "field_exact_by_cell_present"
+      ],
+      "purpose": "Run the tiny structured-policy probe candidate only after a fresh live authorization ticket.",
+      "required_next_stage_before_run": "live_one_run_authorization_ticket_and_pre_execution_check",
+      "status": "blocked_on_explicit_user_authorization"
+    },
+    {
+      "allowed_now": true,
+      "branch_id": "B_no_execution_hardening",
+      "purpose": "Add more regression tests, docs, and static audits without model execution or data mining.",
+      "recommended_when": "No explicit live probe authorization has been given.",
+      "status": "available_now"
+    },
+    {
+      "allowed_now": false,
+      "branch_id": "C_metadata_inventory",
+      "current_counts": {
+        "commit_reads_now": 0,
+        "diff_patch_source_body_reads_now": 0,
+        "repository_walks_now": 0,
+        "training_rows_now": 0
+      },
+      "purpose": "Future metadata-only commit inventory, not repository walking or data mining.",
+      "required_next_stage_before_any_read": "new explicit metadata inventory ticket with caps",
+      "status": "closed_inactive_ticket_only"
+    },
+    {
+      "allowed_now": false,
+      "branch_id": "D_denoise_repair",
+      "purpose": "Output-repair denoise is conceptually recovered but CE/runtime remain closed.",
+      "required_next_stage_before_loss": "separate one-run denoise ticket after structured probe evidence",
+      "status": "reviewed_no_execution_only"
+    },
+    {
+      "allowed_now": false,
+      "branch_id": "E_dataset_mining_scaleup",
+      "purpose": "Mining / large data recovery / /arxiv walks stay closed until execution and telemetry decisions are made.",
+      "status": "closed"
+    }
+  ],
+  "metrics": {
+    "arxiv_walk_authorized": false,
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "branches": 5,
+    "branches_allowed_now": 1,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "live_probe_authorized_now": false,
+    "metadata_inventory_read_authorized": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_authorized": false
+  },
+  "next_best_step": "If the user explicitly says to authorize the tiny Stage8890 structured probe, build a live one-run ticket next. Otherwise continue no-execution hardening or documentation; do not run training/mining.",
+  "passed": true,
+  "stage": 8892,
+  "stage_name": "stage8892_next_steps_decision_matrix_after_control_plane_regression"
+}
