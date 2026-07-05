@@ -1930,3 +1930,7 @@ This is hardening only. It opens no execution, training, decoder CE, denoise CE,
 Stage8893 verifies concrete regression markers across the no-execution telemetry/gate matrix: curriculum compiler loss masks, native probe preflight, packet telemetry, capture preflight, bounded decoder CE, source-backed target materialization, output-repair denoise controls, verifier-guided repair targets, and inactive authority tickets.
 
 This is hardening only. It opens no execution, training, decoder CE, denoise CE, runtime, mining, source/body emission, Gemma, harness, scoring, checkpoint export, controller merge, or promotion.
+
+## Stage8894 Registry Frontier Collision Guard
+
+Stage8894 adds a collision guard for the protected frontier band. It prevents duplicate stage numbers/names, keeps reserved Stage8890 unmaterialized, and preserves zero authority counts before adding future no-execution stages.
