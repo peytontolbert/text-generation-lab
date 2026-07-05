@@ -1691,3 +1691,13 @@ The output-packet schema has now been validated with synthetic placeholder packe
 - Stage8830 reconciles registry/spine.
 
 Next boundary: design an authority-closed model-output capture preflight. It should specify how future model outputs would be captured into validated packets, but still must not run the model or open decoder CE/runtime/Gemma/scoring.
+
+## Stage8831-8833 Authority-Closed Model Output Capture Preflight
+
+The next decoder-eval boundary is now a design-only capture preflight, not a model run.
+
+- Stage8831 built 240 authority-closed capture-preflight rows from synthetic placeholder packets: zero model outputs, zero artifact writes, zero loss openings, and zero execution authority.
+- Stage8832 attached the capture preflight to the graph and introduced `objective:model_output_capture_preflight_audit`.
+- Stage8833 reconciles registry/spine.
+
+Next boundary: audit the capture preflight design. Only after that should a future runner design be considered, and even then it must remain behind explicit model-execution and CE authority gates.
