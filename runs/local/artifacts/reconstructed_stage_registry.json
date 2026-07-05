@@ -4,6 +4,7 @@
       "body_emission_authorized": 0,
       "controller_complete_merge_authorized_next": 0,
       "decoder_ce_training_authorized_next": 0,
+      "denoise_ce_training_authorized_next": 0,
       "gemma_execution_authorized_next": 0,
       "harness_execution_authorized_next": 0,
       "model_execution_authorized_next": 0,
@@ -12,12 +13,13 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 8805,
-    "latest_stage_name": "stage8805_registry_spine_reconciliation_after_closed_ce_gate",
-    "latest_stage_next_best_step": "Recover source-backed decoder target materialization controls. Keep decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, and promotion closed.",
-    "max_stage": 8805,
+    "historical_failed_rows": 60,
+    "latest_stage": 8827,
+    "latest_stage_name": "stage8827_registry_spine_reconciliation_after_packet_readiness_audit",
+    "latest_stage_next_best_step": "Build a no-execution packet validator dry-run using synthetic placeholder packets, not model outputs. Keep model execution/training/CE closed.",
+    "max_stage": 8827,
     "min_stage": 8530,
-    "registry_rows": 301
+    "registry_rows": 327
   },
   "passed": true,
   "rows": [
@@ -5739,6 +5741,506 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8805_registry_spine_reconciliation_after_closed_ce_gate.json",
       "stage": 8805,
       "stage_name": "stage8805_registry_spine_reconciliation_after_closed_ce_gate"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Audit the target materialization controls before any decoder CE loss-mask package is rebuilt.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8806_source_backed_decoder_target_materialization_controls.json",
+      "stage": 8806,
+      "stage_name": "stage8806_source_backed_decoder_target_materialization_controls"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Attach source-backed decoder target materialization controls to the central graph, then design split-deduped closed CE candidate selection without enabling CE.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8807_source_backed_decoder_target_materialization_audit.json",
+      "stage": 8807,
+      "stage_name": "stage8807_source_backed_decoder_target_materialization_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build split-deduped closed CE candidate selection from the target store. Do not enable decoder CE/runtime.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8808_source_backed_decoder_target_materialization_graph_attachment.json",
+      "stage": 8808,
+      "stage_name": "stage8808_source_backed_decoder_target_materialization_graph_attachment"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build split-deduped closed CE candidate selection from target store; keep decoder CE/runtime/source-body/Gemma/scoring closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8809_registry_spine_reconciliation_after_target_materialization.json",
+      "stage": 8809,
+      "stage_name": "stage8809_registry_spine_reconciliation_after_target_materialization"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Run shortcut/gate audit, then attach output repair/denoise controls to the central graph. Do not enable denoise CE.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8810_output_repair_denoise_controls_manifest.json",
+      "stage": 8810,
+      "stage_name": "stage8810_output_repair_denoise_controls_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Audit split-deduped closed CE candidate selection, then decide whether to rematerialize eval/strict targets or keep this as train-only candidate support.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8810_split_deduped_closed_ce_candidate_selection.json",
+      "stage": 8810,
+      "stage_name": "stage8810_split_deduped_closed_ce_candidate_selection"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Attach output repair/denoise controls to the central graph. Do not enable denoise CE.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8811_output_repair_denoise_controls_shortcut_gate.json",
+      "stage": 8811,
+      "stage_name": "stage8811_output_repair_denoise_controls_shortcut_gate"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Attach split-deduped closed CE selection to graph, then recover eval/strict unique target materialization or a heldout evaluation design.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8811_split_deduped_closed_ce_candidate_selection_audit.json",
+      "stage": 8811,
+      "stage_name": "stage8811_split_deduped_closed_ce_candidate_selection_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "After source-backed decoder target materialization, recover verifier-guided repair target materialization controls. Do not enable denoise CE.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8812_output_repair_denoise_controls_graph_attachment.json",
+      "stage": 8812,
+      "stage_name": "stage8812_output_repair_denoise_controls_graph_attachment"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Recover eval/strict unique target materialization or heldout evaluation design before any CE loss-mask package.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8812_split_deduped_closed_ce_candidate_graph_attachment.json",
+      "stage": 8812,
+      "stage_name": "stage8812_split_deduped_closed_ce_candidate_graph_attachment"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Continue source-backed decoder target materialization in the parallel track; after that, recover verifier-guided repair target materialization controls. Keep training/runtime/CE closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8813_registry_spine_reconciliation_after_denoise_controls.json",
+      "stage": 8813,
+      "stage_name": "stage8813_registry_spine_reconciliation_after_denoise_controls"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Recover eval/strict unique target materialization or heldout evaluation design before any decoder CE loss-mask package. Keep all execution and CE authority closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8813_registry_spine_reconciliation_after_split_dedup_ce_selection.json",
+      "stage": 8813,
+      "stage_name": "stage8813_registry_spine_reconciliation_after_split_dedup_ce_selection"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Use this study path to debug future CE/denoise probes by tensor shapes, attention projections, logits/loss, gradients, and structured heads; keep execution/training closed until gates authorize it.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8814_transformer_path_study_graph_attachment.json",
+      "stage": 8814,
+      "stage_name": "stage8814_transformer_path_study_graph_attachment"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build split-deduped closed CE candidate selection from target store while using transformer-path shape/loss telemetry as the future debug checklist; keep execution/training closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8815_registry_spine_reconciliation_after_transformer_path_index.json",
+      "stage": 8815,
+      "stage_name": "stage8815_registry_spine_reconciliation_after_transformer_path_index"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Recover eval/strict unique target materialization or a heldout evaluation design before any CE loss-mask package. Keep CE/runtime closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8816_registry_spine_reconciliation_after_split_dedup_ce_selection.json",
+      "stage": 8816,
+      "stage_name": "stage8816_registry_spine_reconciliation_after_split_dedup_ce_selection"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Attach eval/strict unique-target gap to graph, then design split-unique eval/strict target materialization or heldout evaluation.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8817_eval_strict_unique_target_gap_manifest.json",
+      "stage": 8817,
+      "stage_name": "stage8817_eval_strict_unique_target_gap_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Design split-unique eval/strict target materialization or heldout non-CE evaluation package.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8818_eval_strict_unique_target_gap_graph_attachment.json",
+      "stage": 8818,
+      "stage_name": "stage8818_eval_strict_unique_target_gap_graph_attachment"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build heldout non-CE decoder evaluation design first, unless a real unique eval/strict target source is available. Keep CE/runtime closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8819_registry_spine_reconciliation_after_eval_strict_target_gap.json",
+      "stage": 8819,
+      "stage_name": "stage8819_registry_spine_reconciliation_after_eval_strict_target_gap"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Attach heldout non-CE eval design to graph, then define future model-output packet schema/telemetry before any probe.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8820_heldout_non_ce_decoder_eval_design_manifest.json",
+      "stage": 8820,
+      "stage_name": "stage8820_heldout_non_ce_decoder_eval_design_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build future model-output packet schema/telemetry contract before any tiny probe. Keep execution/training/CE closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8821_heldout_non_ce_decoder_eval_design_graph_attachment.json",
+      "stage": 8821,
+      "stage_name": "stage8821_heldout_non_ce_decoder_eval_design_graph_attachment"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build future model-output packet schema/telemetry contract before any tiny probe. Keep execution/training/CE closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8822_registry_spine_reconciliation_after_heldout_non_ce_eval_design.json",
+      "stage": 8822,
+      "stage_name": "stage8822_registry_spine_reconciliation_after_heldout_non_ce_eval_design"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Attach packet telemetry contract to graph, then build a no-execution future probe packet readiness audit.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8823_model_output_packet_telemetry_contract_manifest.json",
+      "stage": 8823,
+      "stage_name": "stage8823_model_output_packet_telemetry_contract_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build no-execution future probe packet readiness audit. Keep execution/training/CE closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8824_model_output_packet_telemetry_graph_attachment.json",
+      "stage": 8824,
+      "stage_name": "stage8824_model_output_packet_telemetry_graph_attachment"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build no-execution future probe packet readiness audit. Keep execution/training/CE closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8825_registry_spine_reconciliation_after_packet_telemetry_contract.json",
+      "stage": 8825,
+      "stage_name": "stage8825_registry_spine_reconciliation_after_packet_telemetry_contract"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build a no-execution packet validator dry-run using synthetic placeholder packets, not model outputs. Keep model execution/training/CE closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8826_model_output_packet_readiness_contract_audit.json",
+      "stage": 8826,
+      "stage_name": "stage8826_model_output_packet_readiness_contract_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build a no-execution packet validator dry-run using synthetic placeholder packets, not model outputs. Keep model execution/training/CE closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8827_registry_spine_reconciliation_after_packet_readiness_audit.json",
+      "stage": 8827,
+      "stage_name": "stage8827_registry_spine_reconciliation_after_packet_readiness_audit"
     }
   ]
 }

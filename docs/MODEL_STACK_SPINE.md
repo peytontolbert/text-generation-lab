@@ -1584,3 +1584,100 @@ The recovered bounded decoder CE path is now represented as a closed gate, not a
 - Stage8805 updates the registry/spine frontier accordingly.
 
 Current hard boundary: 360 rows are future CE candidates only after source-backed target text materialization. 72 are blocked for long-output/budget and 72 are blocked for retrieve-more. No decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, or promotion is authorized.
+
+## Stage8810-8813 Output Repair Denoise Controls
+
+Output repair/denoise is recovered as a closed control surface, not as denoise CE training.
+
+- Stage8810 rebuilt 360 output-repair/denoise control rows from the older neutral manifest with recovered gate-status fields and all losses closed.
+- Stage8811 audited shortcuts: repair signal is allowed semantic evidence, max proxy single/combo are 0.2083, and denoise CE eligible-now rows remain zero.
+- Stage8812 attached the objective to the central graph and recorded `objective:verifier_guided_repair_target_materialization` as the next missing recovery target after source-backed decoder target materialization.
+- Stage8813 updates the registry/spine frontier accordingly.
+
+Current boundary: denoise can classify bad-output repair routes and future masked-repair candidates, but denoise CE, decoder CE, runtime, source/body emission, Gemma, scoring, controller merge, and promotion remain closed.
+
+## Stage8806-8809 Source-Backed Decoder Target Materialization
+
+Recovered source-backed decoder target materialization as a closed control layer. Stage8806 materialized 360 bounded target texts into a separate target-store artifact and kept 144 rows blocked. Stage8807 audited that target text is not copied into the manifest/model input, target refs and hashes match, authority and loss rows are zero, and CE eligibility remains zero. Stage8808 attached this to the central graph.
+
+Important blocker discovered: 120 target hashes repeat across train/eval/strict, covering all 360 target-store rows. This is not a materialization failure while CE is closed, but it blocks future CE selection until split dedup or split-specific target materialization is designed.
+
+Current next step: build split-deduped closed CE candidate selection from the target store. Decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, and promotion remain closed.
+
+## Stage8814 Transformer Path Study Index
+
+The lab's primary tiny-model intelligence path is the recovered transformer, not the GRU scaffold. The graph now indexes `legacy_src/agentkernel_lite/modeling_transformer.py`, `legacy_src/agentkernel_lite/training_loop.py`, `tests/test_transformer_recovery.py`, and the Stage8703 low-level concept checklist as the required study/debug path.
+
+Study/debug order:
+
+1. Tensor shapes through config, embedding, head split/merge, encoder/decoder, and logits.
+2. `nn.Linear` as matmul/projection for Q/K/V/O, MLP, LM head, retrieval heads, and structured heads.
+3. Multi-head attention mechanics: QKV, RoPE, causal/padding masks, scaled-dot-product attention, merge/project out.
+4. State as evolving hidden tensor plus encoder memory read by decoder cross-attention.
+5. Loss/learning through decoder CE, autograd, gradient clipping, and optimizer step.
+
+This node should be used when debugging future bounded decoder CE, denoise repair, fusion/logit contracts, activation telemetry, and structured heads. It opens no training/runtime authority.
+
+## Stage8810-8813 Split-Deduped Closed CE Candidate Selection
+
+Recovered split-deduped closed CE candidate selection from the source-backed target store. Stage8810 selected 120 unique target-hash candidates and blocked 384 rows. Stage8811 audited that all selected candidates are train-only, with zero eval/strict selected rows, zero loss rows, zero CE eligibility, and zero authority rows. Stage8812 attached this to the central graph.
+
+This is useful train-side candidate support but not a probe-ready CE package. The next missing module is eval/strict unique target materialization or a heldout evaluation design that avoids cross-split target duplication.
+
+Decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, and promotion remain closed.
+
+## Stage8816 Split-Deduped Closed CE Candidate Selection
+
+The source-backed target store was split-deduped into a closed CE candidate support set. This is not a probe-ready CE package.
+
+- Stage8810 selected 120 unique train candidates and blocked 384 rows.
+- Stage8811 audited the result: selected eval rows 0, selected strict rows 0, probe_ready false, decoder CE eligible-now rows 0, training loss rows 0.
+- Stage8812 attached this to the graph as train-only candidate support and recorded the remaining gap: eval/strict unique target materialization or a heldout evaluation design.
+- Stage8816 reconciles this branch into the registry/spine after the transformer-path index.
+
+Next boundary: build eval/strict unique target materialization or a heldout evaluation design before any decoder CE loss-mask package. Do not open decoder CE/runtime.
+
+## Stage8817-8819 Eval/Strict Target Gap
+
+Split-dedup selected 120 train-only CE candidates. The remaining blocker is now explicit: 240 eval/strict rows have duplicate target hashes and cannot support a clean CE probe package.
+
+- Stage8817 built a closed gap manifest for 120 eval and 120 strict duplicate-target rows.
+- Stage8818 attached the gap to the graph with two valid resolution paths: semantically unique eval/strict target materialization, or heldout non-CE decoder evaluation design.
+- Stage8819 reconciles the registry/spine and recommends heldout non-CE decoder evaluation design first unless a real unique eval/strict source is available.
+
+Do not solve this by suffixing target text or adding split markers. That would create an artificial eval distinction and weaken the probe. CE/runtime remain closed.
+
+## Stage8817-8819 Eval/Strict Unique Target Gap
+
+The split-deduped CE candidate path revealed that train candidates can be selected safely, but eval/strict target hashes duplicate train target hashes. Stage8817 materialized this as 240 explicit gap rows: 120 eval and 120 strict. Stage8818 attached the gap to the graph, and Stage8819 reconciles it into the registry/spine.
+
+Current next step: design split-unique eval/strict target materialization or a heldout non-CE evaluation package. Decoder CE, denoise CE, runtime, source/body emission, Gemma, scoring, controller merge, and promotion remain closed.
+
+## Stage8820-8822 Heldout Non-CE Decoder Eval Design
+
+Heldout eval/strict decoder evaluation is now represented as a non-CE design. This avoids using duplicate eval/strict target hashes for CE scoring.
+
+- Stage8820 built 240 eval/strict design rows with no target text, no CE loss, no runtime/Gemma/scoring, and probe_ready false.
+- Stage8821 attached the design to the graph and introduced `objective:future_model_output_packet_schema` as the next missing contract.
+- Stage8822 reconciles the registry/spine.
+
+Next boundary: future model-output packet schema/telemetry must exist before any tiny probe. It should specify generated text packet fields, parse/leak/surface checks, tensor-shape/logit/loss telemetry hooks, and authority-closed evaluation metadata. CE/runtime remain closed.
+
+## Stage8823-8825 Model Output Packet Telemetry Contract
+
+The heldout non-CE decoder path now has an explicit future output-packet contract instead of ad hoc probe logs.
+
+- Stage8823 built 240 eval/strict packet-contract rows requiring schema checks, leak checks, surface checks, budget checks, grounded-argument checks, locked-eval checks, cluster duplicate checks, and tensor/logit decode telemetry.
+- Stage8824 attached `contract:model_output_packet_telemetry_v1` to the central graph and introduced `objective:future_probe_packet_readiness_audit`.
+- Stage8825 reconciles registry/spine.
+
+Next boundary: build a no-execution future probe packet readiness audit. It should validate packet fields/checks/telemetry and authority bits before any model probe is considered. Decoder CE, denoise CE, runtime, Gemma, scoring, source/body emission, and promotion remain closed.
+
+## Stage8826-8827 Packet Readiness Audit
+
+The packet telemetry contract is now audited as schema-ready, but not model-probe-ready.
+
+- Stage8826 checked 240 packet-contract rows and found zero missing fields, zero missing checks, zero missing telemetry, zero authority openings, and zero loss openings.
+- Stage8827 reconciles the audit into registry/spine.
+
+Next boundary: build a synthetic no-execution packet validator dry run. It should validate placeholder packets against the contract before any real model output is allowed into the evaluation path.

@@ -1,0 +1,71 @@
+{
+  "artifacts": {
+    "builder": "scripts/output_repair_denoise_controls_builder.py",
+    "card": "runs/local/artifacts/stage8810_output_repair_denoise_controls_manifest/output_repair_denoise_controls_card.json",
+    "manifest": "runs/local/artifacts/stage8810_output_repair_denoise_controls_manifest/output_repair_denoise_controls_manifest.jsonl",
+    "source_manifest": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+    "tests": "tests/test_output_repair_denoise_controls_builder.py"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T03:12:07Z",
+  "decision": "Built output repair/denoise controls with recovered gates and all CE/runtime authorities closed.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "complete_gate_status_rows": 360,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_rows": 0,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_eligible_now_rows": 0,
+    "denoise_ce_rows": 0,
+    "denoise_ce_training_authorized_next": false,
+    "denoise_gate_decision_counts": {
+      "DENOISE_BLOCK_ABSTAIN_UNRECOVERABLE": 72,
+      "DENOISE_CANDIDATE_EXPAND_MISSING_SPANS": 72,
+      "DENOISE_CANDIDATE_MASK_INTERNAL_TOKENS": 72,
+      "DENOISE_CANDIDATE_MASK_REPEATED_SPANS": 72,
+      "DENOISE_CANDIDATE_RESELECT_SURFACE": 72
+    },
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_rows": 0,
+    "missing_gate_status_rows": 0,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "raw_or_target_visible_rows": 0,
+    "repair_action_counts": {
+      "ABSTAIN_UNRECOVERABLE": 72,
+      "REPAIR_INTERNAL_LEAK": 72,
+      "REPAIR_REPETITION": 72,
+      "REPAIR_SHORT_OUTPUT": 72,
+      "REPAIR_WRONG_SURFACE": 72
+    },
+    "rows": 360,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_rows": 360,
+    "split_counts": {
+      "eval": 120,
+      "strict": 120,
+      "train": 120
+    }
+  },
+  "next_best_step": "Run shortcut/gate audit, then attach output repair/denoise controls to the central graph. Do not enable denoise CE.",
+  "passed": true,
+  "stage": 8810,
+  "stage_name": "stage8810_output_repair_denoise_controls_manifest"
+}

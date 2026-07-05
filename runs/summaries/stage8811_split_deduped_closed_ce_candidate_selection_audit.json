@@ -1,0 +1,73 @@
+{
+  "artifacts": {
+    "audit_card": "runs/local/artifacts/stage8811_split_deduped_closed_ce_candidate_selection_audit/split_deduped_closed_ce_candidate_selection_audit_card.json",
+    "audit_script": "scripts/audit_stage8811_split_deduped_closed_ce_candidate_selection.py",
+    "manifest": "runs/local/artifacts/stage8810_split_deduped_closed_ce_candidate_selection/split_deduped_closed_ce_candidate_selection.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T03:24:09Z",
+  "decision": "Split-deduped closed CE selection passed as train-only candidate support; it is not probe-ready because eval/strict targets are blocked.",
+  "metrics": {
+    "authority_rows": 0,
+    "blocked_rows": 384,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_eligible_now_rows": 0,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "probe_blockers": [
+      "selected_candidates_are_train_only",
+      "eval_and_strict_need_unique_target_materialization_or_holdout_design",
+      "decoder_ce_loss_not_authorized",
+      "explicit_execution_authorization_required"
+    ],
+    "probe_ready": false,
+    "promotion_ready": false,
+    "route_counts": {
+      "CE_BLOCK_NOT_MATERIALIZED_OR_NONDECODE_ROUTE": 144,
+      "CE_BLOCK_SPLIT_DUPLICATE_TARGET_HASH": 240,
+      "CLOSED_CE_CANDIDATE_SPLIT_DEDUP_SELECTED": 120
+    },
+    "rows": 504,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "selected_argument_counts": {
+      "ARG_CALL": 24,
+      "ARG_IMPORT": 24,
+      "ARG_LITERAL": 24,
+      "ARG_NAME": 24,
+      "ARG_PATH": 24
+    },
+    "selected_candidate_rows": 120,
+    "selected_eval_rows": 0,
+    "selected_hash_unique_rows": 120,
+    "selected_ref_unique_rows": 120,
+    "selected_split_counts": {
+      "train": 120
+    },
+    "selected_strict_rows": 0,
+    "source_emission_authorized": false,
+    "target_text_in_manifest_flags": 0,
+    "training_loss_rows": 0
+  },
+  "next_best_step": "Attach split-deduped closed CE selection to graph, then recover eval/strict unique target materialization or a heldout evaluation design.",
+  "passed": true,
+  "stage": 8811,
+  "stage_name": "stage8811_split_deduped_closed_ce_candidate_selection_audit"
+}

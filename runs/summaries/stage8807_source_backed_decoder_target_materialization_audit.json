@@ -1,0 +1,73 @@
+{
+  "artifacts": {
+    "audit_card": "runs/local/artifacts/stage8807_source_backed_decoder_target_materialization_audit/target_materialization_audit_card.json",
+    "audit_script": "scripts/audit_stage8807_source_backed_decoder_target_materialization_controls.py",
+    "manifest": "runs/local/artifacts/stage8806_source_backed_decoder_target_materialization_controls/source_backed_decoder_target_materialization_controls.jsonl",
+    "target_store": "runs/local/artifacts/stage8806_source_backed_decoder_target_materialization_controls/source_backed_decoder_target_store.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T03:16:32Z",
+  "decision": "Target materialization controls passed leakage/authority audit; future CE remains blocked by split-dedup and explicit authorization.",
+  "metrics": {
+    "authority_rows": 0,
+    "blocked_rows": 144,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "cross_split_duplicate_target_hashes": 120,
+    "cross_split_duplicate_target_ref_rows": 360,
+    "decoder_ce_eligible_now_rows": 0,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "future_ce_blockers": [
+      "cross_split_duplicate_target_hashes_require_dedup_or_split_specific_materialization",
+      "decoder_ce_loss_not_authorized",
+      "tiny_pre_execution_audit_required",
+      "explicit_execution_authorization_required"
+    ],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "hash_mismatch_examples": [],
+    "hash_mismatch_rows": 0,
+    "manifest_route_counts": {
+      "TARGET_MATERIALIZATION_BLOCKED": 144,
+      "TARGET_MATERIALIZED_CE_STILL_CLOSED": 360
+    },
+    "materialized_rows": 360,
+    "missing_target_ref_examples": [],
+    "missing_target_ref_rows": 0,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "rows": 504,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "target_hash_unique_rows": 120,
+    "target_ref_unique_rows": 360,
+    "target_store_authority_rows": 0,
+    "target_store_rows": 360,
+    "target_store_split_counts": {
+      "eval": 120,
+      "strict": 120,
+      "train": 120
+    },
+    "target_text_copied_to_manifest_rows": 0,
+    "training_loss_rows": 0
+  },
+  "next_best_step": "Attach source-backed decoder target materialization controls to the central graph, then design split-deduped closed CE candidate selection without enabling CE.",
+  "passed": true,
+  "stage": 8807,
+  "stage_name": "stage8807_source_backed_decoder_target_materialization_audit"
+}
