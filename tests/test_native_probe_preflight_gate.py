@@ -1,6 +1,10 @@
 from __future__ import annotations
 
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
 from scripts.native_probe_preflight_gate import audit_preflight_rows
 
@@ -22,6 +26,7 @@ def base_row() -> dict[str, object]:
         "authority": {
             "model_execution_authorized_next": False,
             "decoder_ce_training_authorized_next": False,
+            "denoise_ce_training_authorized_next": False,
             "runtime_authorized": False,
             "source_emission_authorized": False,
             "body_emission_authorized": False,
