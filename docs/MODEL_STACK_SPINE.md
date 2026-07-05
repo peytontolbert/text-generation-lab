@@ -1938,3 +1938,14 @@ Stage8894 adds a collision guard for the protected frontier band. It prevents du
 ## Stage8895 Stage8890 Live Authorization Checklist
 
 Stage8895 records the exact checklist required before any future Stage8890 live one-run structured-policy probe ticket. It remains no-execution/no-training and opens no authority.
+
+## Stage8896 Next Stage Allocation Preflight
+
+Stage8896 adds a no-execution allocator for future stage numbers. It records the next free stage, keeps Stage8890 reserved, and requires rerunning allocation before writing if concurrent work advances the registry.
+
+
+## Stage8897 Transition Compression Thesis
+
+The 100M software maintainer is governed as a transition kernel, not a parametric encyclopedia. Raw papers/frameworks/repos are too large as direct memory; the curriculum compiler must convert them into canonical software-state transition records, research-operator cards, verifier-grounded repair traces, and retrieval-conditioned action examples.
+
+Weights should store reusable transition operators. Retrieval/tools/verifiers should store and ground long-tail facts. Future mining/training must preserve this division of labor.
