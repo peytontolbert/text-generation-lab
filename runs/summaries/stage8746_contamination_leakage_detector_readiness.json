@@ -1,0 +1,60 @@
+{
+  "artifacts": {
+    "decisions": "runs/local/artifacts/stage8746_contamination_leakage_detector_readiness/contamination_leakage_detector_decisions.jsonl",
+    "sample_card": "runs/local/artifacts/stage8746_contamination_leakage_detector_readiness/contamination_leakage_detector_sample_card.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_authorized_next": false
+  },
+  "created_at_utc": "2026-07-05T00:35:56Z",
+  "decision": "Recovered unified contamination/leakage detector. It blocks visible target leaks, label-coded identifiers, heldout overlap, and body/source leakage while routing suspicious proxies and split overlap to review.",
+  "metrics": {
+    "authority_rows": 0,
+    "blocked_rows": 4,
+    "body_emission_authorized": false,
+    "body_leak_rows": 1,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "heldout_overlap_rows": 1,
+    "label_coded_id_rows": 1,
+    "model_execution_authorized_next": false,
+    "pass_rows": 2,
+    "promotion_ready": false,
+    "review_rows": 2,
+    "routes": {
+      "BLOCK_BODY_OR_SOURCE_LEAK": 1,
+      "BLOCK_HELDOUT_OVERLAP": 1,
+      "BLOCK_LABEL_CODED_ID": 1,
+      "BLOCK_TARGET_LEAK": 1,
+      "PASS_NO_CONTAMINATION": 2,
+      "REVIEW_SPLIT_OVERLAP": 1,
+      "REVIEW_SUSPICIOUS_PROXY": 1
+    },
+    "rows": 7,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_overlap_rows": 1,
+    "target_leak_rows": 1,
+    "training_authorized_next": false
+  },
+  "name": "stage8746_contamination_leakage_detector_readiness",
+  "next_best_step": "Attach contamination_leakage_detector to central graph, then recover hybrid_retrieval_fusion.",
+  "passed": true,
+  "stage": 8746,
+  "stage_name": "stage8746_contamination_leakage_detector_readiness"
+}
