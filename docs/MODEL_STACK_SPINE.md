@@ -701,3 +701,49 @@ Artifacts:
 - `runs/summaries/stage8738_structured_data_operation_curriculum_graph_attachment.json`
 
 Next queue item: `semantic_equivalence_metamorphic_verifier`.
+
+## Stage8740 Semantic Equivalence / Metamorphic Verifier
+
+Recovered as `ready_partial_no_execution_contract`. This closes the Stage8720 semantic verification gap at the contract level. Verification remains static contract checking only: it does not execute runtime tests, authorize scoring, or promote rows.
+
+Verifier types:
+
+- `semantic_equivalence`
+- `property_contract`
+- `metamorphic_relation`
+- `api_compatibility`
+- `determinism_contract`
+
+Artifacts:
+
+- `scripts/semantic_equivalence_metamorphic_verifier.py`
+- `tests/test_semantic_equivalence_metamorphic_verifier.py`
+- `runs/summaries/stage8739_semantic_equivalence_metamorphic_verifier_readiness.json`
+- `runs/summaries/stage8740_semantic_equivalence_metamorphic_verifier_graph_attachment.json`
+
+Next step: refresh the forgotten-module queue and run a support-module recovery completion audit.
+
+## Stage8742 Source Inventory Lineage Tracker
+
+Recovered as `ready_partial_reusable_lineage_contract`. This implements the reusable form of the Stage8663 source lineage lesson: future mined rows must carry source identity and transformation lineage before they can enter objective builders.
+
+Required lineage fields:
+
+- `source_id`
+- `content_hash`
+- `transform_chain`
+- `split_eligibility`
+- `lineage_hash`
+- `license_status`
+- `security_policy_present`
+
+Hard rule: locked-eval sources are never train-eligible. Unknown-license train rows require review. External train rows without security-policy evidence are blocked. Missing content hash or source/body leak blocks admission.
+
+Artifacts:
+
+- `scripts/source_inventory_lineage_tracker.py`
+- `tests/test_source_inventory_lineage_tracker.py`
+- `runs/summaries/stage8741_source_inventory_lineage_tracker_readiness.json`
+- `runs/summaries/stage8742_source_inventory_lineage_tracker_graph_attachment.json`
+
+Next queue item: `source_provenance_license_security_filter`.
