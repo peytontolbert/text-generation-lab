@@ -1,0 +1,53 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "coverage_recovered": [
+    "row/field logits helper metrics",
+    "token loss map helper",
+    "module delta norms",
+    "row gradient norm helpers",
+    "activation summaries",
+    "feature ablation attribution",
+    "activation patch recovery cards",
+    "dataset cartography",
+    "training-data attribution",
+    "confidence/OOD/drift/schema monitors"
+  ],
+  "critical_gaps": [
+    "structured row_field_logits lacks confidence/entropy/top-k in actual trainer output",
+    "bounded decoder row_token_loss is target metadata, not per-position CE map",
+    "row_gradient_norms not emitted by native trainer",
+    "activation caches/summaries not wired into native probes",
+    "feature ablations not automated over software-maintenance evidence groups",
+    "activation patching lacks current-objective clean/corrupt runner",
+    "module deltas need semantic module buckets and decoder-delta guard",
+    "row dynamics history not emitted across checkpoints",
+    "influence attribution remains heuristic until real gradient/embedding signals exist",
+    "probe gates must fail on missing telemetry artifacts"
+  ],
+  "decision": "Telemetry substrate is recovered, but native probes need richer enforced artifacts before training or decoder CE can be trusted.",
+  "next_best_step": "Build native probe interpretability artifact contract and gate checks before any next model execution. Do not run a model yet.",
+  "passed": true,
+  "required_next_artifacts": [
+    "row_gradient_norms.jsonl",
+    "feature_ablation_attribution.jsonl",
+    "activation_summary.jsonl",
+    "activation_patch_recovery.jsonl",
+    "row_dynamics_history.jsonl",
+    "internal_token_logit_summary.json",
+    "field_exact_by_cell.json"
+  ],
+  "stage": 8858,
+  "stage_name": "stage8858_model_interpretability_telemetry_gap_audit"
+}
