@@ -1,0 +1,85 @@
+{
+  "adapter_mode": "no_mining_schema_only",
+  "allowed_splits": [
+    "eval",
+    "holdout",
+    "schema_only",
+    "strict_eval",
+    "train"
+  ],
+  "allowed_task_families": [
+    "bounded_decoder_argument",
+    "denoise_repair",
+    "edit_localization",
+    "intent_to_build_strategy",
+    "patch_operator",
+    "repo_state_graph",
+    "research_transfer",
+    "symbol_binding",
+    "verifier_repair"
+  ],
+  "authority_default": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "forbidden_raw_keys": [
+    "decoder_text",
+    "gemma_score_body",
+    "hidden_eval_answer",
+    "patch_body",
+    "raw_decoder_target_text",
+    "raw_patch_body",
+    "raw_source_body",
+    "runtime_output_body",
+    "source_body",
+    "unhashed_commit_message_body"
+  ],
+  "hard_runtime_assertions": [
+    "input_contains_no_forbidden_raw_keys",
+    "compiled_record_has_all_required_fields",
+    "authority_closed",
+    "loss_mask_closed",
+    "runtime_not_executed",
+    "telemetry_contract_present",
+    "refs_only_no_materialized_hidden_body"
+  ],
+  "input": "candidate transition object with refs only; no dataset walk and no raw source/body fields",
+  "loss_mask_default": {
+    "train_action_policy": false,
+    "train_decoder_ce": false,
+    "train_denoise_ce": false,
+    "train_retrieval_policy": false,
+    "train_runtime_reward": false,
+    "train_state_transition": false,
+    "train_structured_aux": false,
+    "train_value_head": false
+  },
+  "output_schema": "verified_transition_record_v1",
+  "required_input_refs": [
+    "state_before_ref",
+    "retrieval_refs",
+    "observation_ref",
+    "tool_result_ref",
+    "state_after_ref",
+    "provenance_refs"
+  ],
+  "stage": 8901,
+  "stage_name": "stage8901_verified_transition_record_no_mining_compiler_adapter",
+  "telemetry_required": [
+    "row_field_logits.jsonl",
+    "row_field_losses.jsonl",
+    "row_gradient_norms.jsonl",
+    "feature_ablation_attribution.jsonl",
+    "module_delta_norms.json",
+    "failure_bucket_card.json"
+  ]
+}

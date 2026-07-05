@@ -1970,3 +1970,9 @@ This does not emit training rows or open execution/losses. It gives future no-mi
 Stage8900 validates the verified transition record as the canonical schema-only target for future curriculum compiler work: state-before refs, retrieval refs, action, tool observation, verifier result, state-after ref, transition label, reward/value, confidence/OOD, gate status, anti-cheat, authority, and loss masks.
 
 This does not emit training rows or open execution/losses. It gives future no-mining compiler adapters a concrete object to target before any scale-up.
+
+## Stage8901 Verified Transition Record No-Mining Compiler Adapter
+
+Stage8901 defines the no-mining adapter that turns refs-only candidate transition objects into `verified_transition_record_v1`. It rejects raw source/patch/decoder/runtime/Gemma bodies, keeps authority closed, and keeps all losses disabled by default.
+
+This is the first compiler bridge after the schema contract, but it does not mine data or create trainable rows.
