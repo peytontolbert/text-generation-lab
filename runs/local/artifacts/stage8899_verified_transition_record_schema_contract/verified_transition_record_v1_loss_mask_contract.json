@@ -1,0 +1,55 @@
+{
+  "default_loss_mask": {
+    "train_action_policy": false,
+    "train_decoder_ce": false,
+    "train_denoise_ce": false,
+    "train_retrieval_policy": false,
+    "train_runtime_reward": false,
+    "train_state_transition": false,
+    "train_structured_aux": false,
+    "train_value_head": false
+  },
+  "forbidden_without_explicit_future_authority": [
+    "train_decoder_ce",
+    "train_denoise_ce",
+    "train_runtime_reward"
+  ],
+  "route_allowed_losses": {
+    "HOLD_LONG_OUTPUT": [
+      "train_action_policy",
+      "train_value_head"
+    ],
+    "KEEP_BOUNDED_DECODER": [
+      "train_decoder_ce"
+    ],
+    "KEEP_STRUCTURED": [
+      "train_action_policy",
+      "train_retrieval_policy",
+      "train_state_transition",
+      "train_value_head",
+      "train_structured_aux"
+    ],
+    "NEEDS_RETRIEVAL": [
+      "train_retrieval_policy",
+      "train_action_policy"
+    ],
+    "QUARANTINE_LABEL_CONFLICT": [],
+    "USE_AS_NEGATIVE": [
+      "train_action_policy",
+      "train_value_head",
+      "train_structured_aux"
+    ],
+    "USE_FOR_DENOISE_REPAIR": [
+      "train_denoise_ce"
+    ]
+  },
+  "runtime_assertions": [
+    "row_ids_match_manifest",
+    "loss_mask_present_for_every_row",
+    "forbidden_losses_zero_unless_stage_authority_says_otherwise",
+    "decoder_ce_only_on_budget_safe_rows",
+    "denoise_ce_only_on_repair_rows",
+    "runtime_reward_never_active_in_no_execution_probe"
+  ],
+  "schema_version": "verified_transition_record_v1_loss_mask_contract"
+}

@@ -1955,3 +1955,18 @@ Weights should store reusable transition operators. Retrieval/tools/verifiers sh
 Stage8898 records that the 100M checkpoint is static at inference but evolves through the surrounding verified training loop. The model should learn transition operators, while retrieval/tools/verifiers retain observable long-tail facts.
 
 It also adds the knowledge-transfer policy: unfamiliar papers/APIs/framework details must be compiled into research-operator cards, tests, implementation plans, patch steps, verifier observations, and verified transition records before they create gradients.
+
+## Stage8899 Verified Transition Record Schema Contract
+
+Stage8899 materializes `verified_transition_record_v1` as the central object for future compiler output. It captures state, retrieval refs, observations, typed actions, verifier results, next state, reward/value signals, loss masks, provenance, anti-cheat constraints, and telemetry requirements.
+
+All loss masks default closed. Future data builders must prove schema validity and loss-mask authority before any row can create gradients.
+
+
+This does not emit training rows or open execution/losses. It gives future no-mining compiler adapters a concrete object to target before any scale-up.
+
+## Stage8900 Verified Transition Record Validation Contract
+
+Stage8900 validates the verified transition record as the canonical schema-only target for future curriculum compiler work: state-before refs, retrieval refs, action, tool observation, verifier result, state-after ref, transition label, reward/value, confidence/OOD, gate status, anti-cheat, authority, and loss masks.
+
+This does not emit training rows or open execution/losses. It gives future no-mining compiler adapters a concrete object to target before any scale-up.
