@@ -885,3 +885,35 @@ Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, 
 
 Next step: run a scale-readiness preflight over a small no-training manifest requiring recovered gates before any mining or training resumes.
 
+## Stage8755 Schema Drift Detector
+
+Recovered as `ready_partial_schema_alias_gate`. This restores the Stage8058/8059 lesson that feature/schema drift can silently poison training even when labels are otherwise clean.
+
+Routes:
+
+- `PASS_SCHEMA_STABLE`
+- `HOLD_SCHEMA_REVIEW`
+- `BLOCK_SCHEMA_DRIFT`
+
+The detector audits:
+
+- required field presence
+- forbidden field presence
+- unknown fields when the schema is closed
+- field type mismatches
+- alias collisions
+- split vocabulary validity
+
+The curriculum compiler now includes `schema_drift_detector` in `REQUIRED_RECOVERED_GATE_REFERENCES`. Rows missing this gate pass bit are routed to `NEEDS_HUMAN_REVIEW` when `--require-recovered-gates` is enabled.
+
+Artifacts:
+
+- `scripts/schema_drift_detector.py`
+- `tests/test_schema_drift_detector.py`
+- `runs/summaries/stage8754_schema_drift_detector_readiness.json`
+- `runs/summaries/stage8755_schema_drift_detector_graph_attachment.json`
+
+Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next queue item: `patch_minimality_complexity_meter` or `coverage_test_selection`.
+

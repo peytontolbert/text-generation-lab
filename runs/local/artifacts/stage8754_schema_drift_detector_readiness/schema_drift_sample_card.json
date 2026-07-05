@@ -1,0 +1,97 @@
+{
+  "metrics": {
+    "blocked_rows": 2,
+    "failure_counts": {
+      "alias_collisions": 1,
+      "forbidden_fields_present": 1,
+      "missing_required_fields": 1
+    },
+    "pass_rows": 1,
+    "review_rows": 1,
+    "route_counts": {
+      "BLOCK_SCHEMA_DRIFT": 2,
+      "HOLD_SCHEMA_REVIEW": 1,
+      "PASS_SCHEMA_STABLE": 1
+    },
+    "rows": 4
+  },
+  "records": [
+    {
+      "alias_collisions": [],
+      "aliases_used": {},
+      "blocked": false,
+      "failures": [],
+      "forbidden_fields_present": [],
+      "missing_required_fields": [],
+      "needs_review": false,
+      "row_id": "ok",
+      "schema_drift_route": "PASS_SCHEMA_STABLE",
+      "split_invalid": false,
+      "type_mismatches": [],
+      "unknown_fields_present": []
+    },
+    {
+      "alias_collisions": [],
+      "aliases_used": {},
+      "blocked": false,
+      "failures": [
+        "missing_required_fields"
+      ],
+      "forbidden_fields_present": [],
+      "missing_required_fields": [
+        "gate_status"
+      ],
+      "needs_review": true,
+      "row_id": "review_missing_gate",
+      "schema_drift_route": "HOLD_SCHEMA_REVIEW",
+      "split_invalid": false,
+      "type_mismatches": [],
+      "unknown_fields_present": []
+    },
+    {
+      "alias_collisions": [],
+      "aliases_used": {},
+      "blocked": true,
+      "failures": [
+        "forbidden_fields_present"
+      ],
+      "forbidden_fields_present": [
+        "target_label"
+      ],
+      "missing_required_fields": [],
+      "needs_review": false,
+      "row_id": "block_target",
+      "schema_drift_route": "BLOCK_SCHEMA_DRIFT",
+      "split_invalid": false,
+      "type_mismatches": [],
+      "unknown_fields_present": []
+    },
+    {
+      "alias_collisions": [
+        {
+          "canonical": "split",
+          "keys": [
+            "package_split",
+            "split"
+          ]
+        }
+      ],
+      "aliases_used": {
+        "package_split": "split"
+      },
+      "blocked": true,
+      "failures": [
+        "alias_collisions"
+      ],
+      "forbidden_fields_present": [],
+      "missing_required_fields": [],
+      "needs_review": false,
+      "row_id": "block_alias_collision",
+      "schema_drift_route": "BLOCK_SCHEMA_DRIFT",
+      "split_invalid": false,
+      "type_mismatches": [],
+      "unknown_fields_present": []
+    }
+  ],
+  "rows": 4
+}

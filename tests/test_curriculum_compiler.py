@@ -63,6 +63,7 @@ def test_compiler_requires_recovered_gate_status_when_enabled(tmp_path: Path) ->
                 "drift_canary_regression_monitor": True,
                 "cluster_slice_near_duplicate_detector": True,
                 "dataset_junk_ood_ranker_v1": True,
+                "schema_drift_detector": True,
             },
         },
     ]

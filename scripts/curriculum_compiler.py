@@ -82,6 +82,7 @@ REQUIRED_RECOVERED_GATE_REFERENCES = [
     "drift_canary_regression_monitor",
     "cluster_slice_near_duplicate_detector",
     "dataset_junk_ood_ranker_v1",
+    "schema_drift_detector",
 ]
 
 
