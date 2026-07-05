@@ -998,3 +998,45 @@ Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, 
 
 Next step: update source-backed builders to emit full `gate_status` cards and run a no-training scale-readiness preflight before mining resumes.
 
+## Stage8762-8764 Gate Status Contract And No-Training Preflight
+
+Recovered as `ready_complete_recovered_gate_card_contract` plus a no-training compiler preflight. This closes the gap between recovered support modules and actual curriculum rows: future source-backed builders now have one shared `gate_status` card contract aligned to the compiler required-gate list.
+
+Required recovered gates currently enforced by the compiler:
+
+- `source_inventory_lineage`
+- `source_provenance`
+- `contamination_leakage_detector`
+- `golden_locked_eval_suite`
+- `drift_canary_regression_monitor`
+- `cluster_slice_near_duplicate_detector`
+- `dataset_junk_ood_ranker_v1`
+- `schema_drift_detector`
+
+New rule: builders must emit a complete `gate_status` dict, even for rows pending audit. Missing or failed gates route rows to `NEEDS_HUMAN_REVIEW` / `human_review` and cannot create model gradients.
+
+Stage8763 no-training preflight proved this path:
+
+- input rows: `5`
+- gate rejected rows: `3`
+- `human_review` rows: `3`
+- decoder CE loss count: `0`
+- denoise CE loss count: `0`
+- runtime reward loss count: `0`
+- authority rows: `0`
+- compiler output audit: passed
+
+Patched source-backed symbol-binding builders now import `gate_status_contract` for future reruns instead of free-handing gate cards. Existing Stage8674/8676 historical artifacts were not rewritten.
+
+Artifacts:
+
+- `scripts/gate_status_contract.py`
+- `tests/test_gate_status_contract.py`
+- `runs/summaries/stage8762_gate_status_contract_readiness.json`
+- `runs/summaries/stage8763_no_training_scale_readiness_preflight.json`
+- `runs/summaries/stage8764_gate_status_preflight_graph_attachment.json`
+
+Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next step: patch remaining source-backed builders to use `gate_status_contract`, then recover source-backed edit localization builder.
+

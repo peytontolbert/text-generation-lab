@@ -1,0 +1,108 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "compiler_options": {
+    "allow_decoder": false,
+    "allow_denoise": false,
+    "allow_runtime": false,
+    "require_recovered_gates": true
+  },
+  "gate_rejected_examples": [
+    {
+      "missing_or_failed_recovered_gates": [
+        "source_inventory_lineage",
+        "source_provenance",
+        "contamination_leakage_detector",
+        "golden_locked_eval_suite",
+        "drift_canary_regression_monitor",
+        "cluster_slice_near_duplicate_detector",
+        "dataset_junk_ood_ranker_v1",
+        "schema_drift_detector"
+      ],
+      "row_id": "missing_gate_card"
+    },
+    {
+      "missing_or_failed_recovered_gates": [
+        "schema_drift_detector"
+      ],
+      "row_id": "schema_failed"
+    },
+    {
+      "missing_or_failed_recovered_gates": [
+        "contamination_leakage_detector"
+      ],
+      "row_id": "contamination_failed_decoder"
+    }
+  ],
+  "gate_rejected_rows": 3,
+  "loss_counts": {
+    "action_sequence_ce": 1,
+    "allowed_import_policy_ce": 1,
+    "blocked_import_policy_ce": 1,
+    "build_mode_ce": 1,
+    "decoder_ce": 0,
+    "denoise_ce": 0,
+    "edit_localization_ce": 1,
+    "file_plan_ce": 1,
+    "patch_operator_ce": 1,
+    "repair_surface_ce": 1,
+    "repo_dependency_policy_ce": 1,
+    "runtime_reward": 0,
+    "surface_role_ce": 1,
+    "symbol_binding_ce": 1,
+    "verifier_repair_ce": 1
+  },
+  "objective_counts": {
+    "bounded_decoder_ce": 1,
+    "human_review": 3,
+    "structured_state": 1
+  },
+  "rejected_or_holdout_examples": [
+    {
+      "objective_family": "human_review",
+      "route": "NEEDS_HUMAN_REVIEW",
+      "row_id": "missing_gate_card"
+    },
+    {
+      "objective_family": "human_review",
+      "route": "NEEDS_HUMAN_REVIEW",
+      "row_id": "schema_failed"
+    },
+    {
+      "objective_family": "human_review",
+      "route": "NEEDS_HUMAN_REVIEW",
+      "row_id": "contamination_failed_decoder"
+    }
+  ],
+  "required_recovered_gate_references": [
+    "source_inventory_lineage",
+    "source_provenance",
+    "contamination_leakage_detector",
+    "golden_locked_eval_suite",
+    "drift_canary_regression_monitor",
+    "cluster_slice_near_duplicate_detector",
+    "dataset_junk_ood_ranker_v1",
+    "schema_drift_detector"
+  ],
+  "route_counts": {
+    "KEEP_BOUNDED_DECODER": 1,
+    "KEEP_STRUCTURED": 1,
+    "NEEDS_HUMAN_REVIEW": 3
+  },
+  "rows": 5,
+  "split_counts": {
+    "eval": 2,
+    "strict_eval": 1,
+    "train": 2
+  }
+}

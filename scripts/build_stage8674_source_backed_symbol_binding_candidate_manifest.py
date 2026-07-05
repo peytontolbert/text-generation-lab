@@ -2,6 +2,7 @@
 from __future__ import annotations
 import collections, hashlib, json, time
 from pathlib import Path
+from gate_status_contract import default_gate_status
 ROOT=Path(__file__).resolve().parents[1]
 SRC=ROOT/'runs/local/artifacts/stage8618_symbol_binding_counterfactual_with_test_patch/combined_symbol_binding_candidates.jsonl'
 LINEAGE=ROOT/'configs/software_maintainer/source_inventory_lineage_registry_stage8663.json'
@@ -50,6 +51,10 @@ def main():
     'semantic_key':f"{r.get('split')}:{action}:{graph.get('query_kind')}:{query.get('query_node_id')}",
     'authority':AUTHORITY_CLOSED,
     'loss_mask':LOSS_MASK,
+    'gate_status': default_gate_status(
+      source_inventory_lineage=True,
+      source_provenance=True,
+      golden_locked_eval_suite=True),
     'source_lineage':{
       'graph_nodes_source_id':nodes_lin['source_id'], 'graph_nodes_lineage_hash':nodes_lin['lineage_hash'],
       'graph_spans_source_id':spans_lin['source_id'], 'graph_spans_lineage_hash':spans_lin['lineage_hash'],

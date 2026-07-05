@@ -1,0 +1,65 @@
+{
+  "artifacts": {
+    "compile_card": "runs/local/artifacts/stage8763_no_training_scale_readiness_preflight/compiled/compile_card.json",
+    "compiled_dir": "runs/local/artifacts/stage8763_no_training_scale_readiness_preflight/compiled",
+    "compiler_output_audit": "runs/local/artifacts/stage8763_no_training_scale_readiness_preflight/compiler_output_audit.json",
+    "input_rows": "runs/local/artifacts/stage8763_no_training_scale_readiness_preflight/preflight_input_rows.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T01:32:45Z",
+  "decision": "No-training compiler preflight passed: full recovered gates allow only audited rows, failed/missing gates route to human_review, and decoder/denoise/runtime gradients remain closed.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "compiler_audit_passed": true,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "failures": [],
+    "gate_rejected_rows": 3,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "input_rows": 5,
+    "loss_counts": {
+      "action_sequence_ce": 1,
+      "allowed_import_policy_ce": 1,
+      "blocked_import_policy_ce": 1,
+      "build_mode_ce": 1,
+      "decoder_ce": 0,
+      "denoise_ce": 0,
+      "edit_localization_ce": 1,
+      "file_plan_ce": 1,
+      "patch_operator_ce": 1,
+      "repair_surface_ce": 1,
+      "repo_dependency_policy_ce": 1,
+      "runtime_reward": 0,
+      "surface_role_ce": 1,
+      "symbol_binding_ce": 1,
+      "verifier_repair_ce": 1
+    },
+    "model_execution_authorized_next": false,
+    "objective_counts": {
+      "bounded_decoder_ce": 1,
+      "human_review": 3,
+      "structured_state": 1
+    },
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "next_best_step": "Attach gate_status contract and no-training preflight to the central graph, then use full gate_status cards in all future source-backed builders before mining.",
+  "passed": true,
+  "stage": 8763,
+  "stage_name": "stage8763_no_training_scale_readiness_preflight"
+}
