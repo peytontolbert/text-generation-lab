@@ -1,0 +1,67 @@
+{
+  "metrics": {
+    "action_counts": {
+      "act": 2,
+      "observe": 2
+    },
+    "blocked_tools": 1,
+    "passed_tools": 3,
+    "permission_counts": {
+      "destructive": 1,
+      "network": 1,
+      "read_only": 1,
+      "workspace_write": 1
+    },
+    "route_counts": {
+      "BLOCK_TOOL_REGISTRY_ENTRY": 1,
+      "PASS_TOOL_REGISTRY_ENTRY": 3
+    },
+    "safe_for_training_surface": 2,
+    "tools": 4
+  },
+  "records": [
+    {
+      "action_type": "observe",
+      "failures": [],
+      "missing_required_fields": [],
+      "permission": "read_only",
+      "requires_explicit_authority": false,
+      "route": "PASS_TOOL_REGISTRY_ENTRY",
+      "safe_for_training_surface": true,
+      "tool_id": "read_file"
+    },
+    {
+      "action_type": "act",
+      "failures": [],
+      "missing_required_fields": [],
+      "permission": "workspace_write",
+      "requires_explicit_authority": false,
+      "route": "PASS_TOOL_REGISTRY_ENTRY",
+      "safe_for_training_surface": true,
+      "tool_id": "edit_file"
+    },
+    {
+      "action_type": "observe",
+      "failures": [],
+      "missing_required_fields": [],
+      "permission": "network",
+      "requires_explicit_authority": true,
+      "route": "PASS_TOOL_REGISTRY_ENTRY",
+      "safe_for_training_surface": false,
+      "tool_id": "network_fetch"
+    },
+    {
+      "action_type": "act",
+      "failures": [
+        "dangerous_permission_without_authority"
+      ],
+      "missing_required_fields": [],
+      "permission": "destructive",
+      "requires_explicit_authority": false,
+      "route": "BLOCK_TOOL_REGISTRY_ENTRY",
+      "safe_for_training_surface": false,
+      "tool_id": "bad_tool"
+    }
+  ],
+  "tools": 4
+}

@@ -1,0 +1,111 @@
+{
+  "dataset_patches": [
+    {
+      "affected_slices": [
+        "retrieval"
+      ],
+      "blocked": false,
+      "blocked_reasons": [],
+      "dataset_op": "add_counterfactual",
+      "evidence": {
+        "dataset_version": null,
+        "eval_run_id": null,
+        "judge_result": null,
+        "model_id": null,
+        "verifier_result": null
+      },
+      "expected_controls": [
+        "source_inventory_lineage",
+        "source_provenance",
+        "contamination_leakage_detector",
+        "schema_drift_detector",
+        "dataset_junk_ood_ranker_v1",
+        "cluster_slice_near_duplicate_detector"
+      ],
+      "failure_type": "missing_evidence",
+      "patch_id": "dataset_patch_3442edfcfe6e",
+      "recommended_action": "add_retrieval_counterfactuals",
+      "route": "PROPOSE_DATASET_PATCH",
+      "source_examples": [],
+      "trace_id": "retrieval_gap"
+    },
+    {
+      "affected_slices": [
+        "patch"
+      ],
+      "blocked": false,
+      "blocked_reasons": [],
+      "dataset_op": "add_preference_pair",
+      "evidence": {
+        "dataset_version": null,
+        "eval_run_id": null,
+        "judge_result": null,
+        "model_id": null,
+        "verifier_result": null
+      },
+      "expected_controls": [
+        "source_inventory_lineage",
+        "source_provenance",
+        "contamination_leakage_detector",
+        "schema_drift_detector",
+        "dataset_junk_ood_ranker_v1",
+        "cluster_slice_near_duplicate_detector"
+      ],
+      "failure_type": "overbroad_patch",
+      "patch_id": "dataset_patch_43b20ed35b4d",
+      "recommended_action": "add_minimality_preference_pairs",
+      "route": "PROPOSE_DATASET_PATCH",
+      "source_examples": [],
+      "trace_id": "minimality"
+    },
+    {
+      "affected_slices": [],
+      "blocked": true,
+      "blocked_reasons": [
+        "locked_or_hidden_eval_trace_forbidden_for_training_patch"
+      ],
+      "dataset_op": "relabel",
+      "evidence": {
+        "dataset_version": null,
+        "eval_run_id": null,
+        "judge_result": null,
+        "model_id": null,
+        "verifier_result": null
+      },
+      "expected_controls": [
+        "source_inventory_lineage",
+        "source_provenance",
+        "contamination_leakage_detector",
+        "schema_drift_detector",
+        "dataset_junk_ood_ranker_v1",
+        "cluster_slice_near_duplicate_detector"
+      ],
+      "failure_type": "bad_label",
+      "patch_id": "dataset_patch_14cb346db9c9",
+      "recommended_action": "relabel_or_quarantine",
+      "route": "BLOCK_DATASET_PATCH",
+      "source_examples": [],
+      "trace_id": "locked"
+    }
+  ],
+  "metrics": {
+    "blocked_patches": 1,
+    "failure_counts": {
+      "bad_label": 1,
+      "missing_evidence": 1,
+      "overbroad_patch": 1
+    },
+    "op_counts": {
+      "add_counterfactual": 1,
+      "add_preference_pair": 1,
+      "relabel": 1
+    },
+    "proposed_patches": 2,
+    "route_counts": {
+      "BLOCK_DATASET_PATCH": 1,
+      "PROPOSE_DATASET_PATCH": 2
+    },
+    "traces": 3
+  },
+  "traces": 3
+}

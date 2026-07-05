@@ -1040,3 +1040,111 @@ Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, 
 
 Next step: patch remaining source-backed builders to use `gate_status_contract`, then recover source-backed edit localization builder.
 
+## Stage8765-8767 Source-Backed Edit Localization Candidate Recovery
+
+Recovered source-backed edit localization as candidate-ready, no-training rows under the new `gate_status_contract`. This fills the next missing maintenance-cognition builder after source-backed symbol binding.
+
+Source path:
+
+- Neutral objective source: `runs/local/artifacts/stage8636_edit_localization_neutral_manifest/edit_localization_neutral_manifest.jsonl`
+- Lineage registry: `configs/software_maintainer/source_inventory_lineage_registry_stage8663.json`
+- Recovered builder: `scripts/source_backed_edit_localization_builder.py`
+
+Stage8765 built:
+
+- rows: `504`
+- targets: `72` each for `TARGET_FILE`, `TARGET_SYMBOL`, `TARGET_CONFIG`, `TARGET_TEST`, `TARGET_ENTRYPOINT`, `RETRIEVE_MORE`, `ABSTAIN_UNBOUND`
+- languages: `126` each for `python`, `typescript`, `rust`, `cpp`
+- splits: `168` each for `train`, `eval`, `strict`
+- complete gate_status rows: `504`
+- training loss rows: `0`
+
+Stage8766 audit passed:
+
+- contamination blocked rows: `0`
+- contamination review rows: `0`
+- schema blocked rows: `0`
+- schema review rows: `0`
+- junk route: `KEEP_STRUCTURED` for `504` rows
+- max single proxy baseline: `0.14285714285714285`
+- max combo proxy baseline: `0.14285714285714285`
+- semantic evidence baseline: `1.0` for allowed locality evidence
+
+Rows remain `CANDIDATE_NEEDS_AUDIT` with no trainable losses. This is not yet compiler-ready training data because the remaining recovered gate statuses must be explicitly materialized, not inferred from narrative.
+
+Artifacts:
+
+- `scripts/source_backed_edit_localization_builder.py`
+- `tests/test_source_backed_edit_localization_builder.py`
+- `runs/summaries/stage8765_source_backed_edit_localization_candidate_manifest.json`
+- `runs/summaries/stage8766_source_backed_edit_localization_candidate_audit.json`
+- `runs/summaries/stage8767_source_backed_edit_localization_graph_attachment.json`
+
+Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next step: recover `source_backed_patch_operator_builder` under the same gate-status contract, then later materialize compiler-ready rows only after every recovered gate has an explicit pass card.
+
+## Stage8768-8773 Additional No-Authority Support Modules
+
+Recovered and reconciled several concurrent support modules after stage-number conflicts. They were renumbered forward so they do not collide with already committed Stage8758/8759 or Stage8760/8761 history.
+
+### Eval Trace Dataset Patch Loop V2
+
+Stage8768 adds a second, more generic no-generation compiler from eval/failure traces into auditable dataset operations. It complements the earlier typed patch-action loop by emitting operations such as `add`, `add_counterfactual`, `add_preference_pair`, `holdout`, `quarantine`, `rewrite`, `relabel`, and `route_change`. Locked/hidden eval traces and traces containing target answers are blocked.
+
+The older Stage8760 typed API remains backward-compatible through `classify_trace` and `build_patch_card`, so committed readiness scripts still run.
+
+### Skill Tool Registry
+
+Stage8769 recovers a typed tool/action registry for future observe-orient-act rows. It validates:
+
+- tool id
+- action type
+- permission class
+- input schema
+- failure modes
+- explicit authority requirement for dangerous permissions
+
+Only `read_only` and `workspace_write` passing tools are marked safe for training surfaces. Runtime, network, external write, and destructive actions remain authority-gated.
+
+### N-Gram Repetition And Style Detectors
+
+Stage8771 recovers static text/code ranker features:
+
+- unigram/bigram/trigram repetition ratios
+- long-line count
+- trailing whitespace
+- tab/odd indentation anomalies
+- too-few-token checks
+
+These are non-authority features for decoder/denoise rows and dataset junk/OOD routing.
+
+### Memory Retrieval Evaluator
+
+Stage8772 recovers a no-execution evaluator for retrieved memories:
+
+- relevance
+- staleness
+- duplicate memory
+- lineage presence
+- locked/hidden contamination
+- skill reuse score
+
+Stage8773 attaches n-gram/style and memory retrieval support to the central graph.
+
+Artifacts:
+
+- `scripts/eval_trace_to_dataset_patch_loop.py`
+- `scripts/skill_tool_registry.py`
+- `scripts/ngram_repetition_style_detectors.py`
+- `scripts/memory_retrieval_evaluator.py`
+- `runs/summaries/stage8768_eval_trace_to_dataset_patch_loop_v2_readiness.json`
+- `runs/summaries/stage8769_skill_tool_registry_readiness.json`
+- `runs/summaries/stage8771_ngram_repetition_style_detectors_readiness.json`
+- `runs/summaries/stage8772_memory_retrieval_evaluator_readiness.json`
+- `runs/summaries/stage8773_ngram_memory_graph_attachment.json`
+
+Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, memory writes, tool execution, or promotion is authorized.
+
+Next step: recover source-backed patch operator builder under `gate_status_contract`, then cost/budget scheduler if still missing.
+
