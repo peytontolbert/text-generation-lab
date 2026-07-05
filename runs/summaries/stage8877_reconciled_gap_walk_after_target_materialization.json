@@ -1,0 +1,113 @@
+{
+  "artifacts": {
+    "gap_walk": "runs/local/artifacts/stage8877_reconciled_gap_walk_after_target_materialization/reconciled_gap_walk_after_target_materialization.json",
+    "graph": "runs/local/artifacts/stage8876_post_target_materialization_gap_reconciliation/central_research_graph_post_target_materialization_reconciled.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "closed_gate_blockers": [
+    {
+      "id": "objective:bounded_decoder_ce",
+      "kind": "support_or_objective",
+      "name": "bounded_decoder_ce",
+      "status": "blocked_by_closed_gate_pending_source_backed_target_materialization"
+    },
+    {
+      "id": "objective:denoise_repair",
+      "kind": "support_or_objective",
+      "name": "denoise_repair",
+      "status": "blocked_by_closed_controls_pending_verifier_guided_materialization"
+    }
+  ],
+  "created_at_utc": "2026-07-05T07:38:48Z",
+  "decision": "Fresh gap walk after verifier/target/packet reconciliation complete. Remaining blockers are closed authority gates or explicitly optional commit inventory preflight.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "closed_gate_blockers": 2,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "graph_edges": 2684,
+    "graph_nodes": 1797,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "prioritized_gap_count": 3,
+    "promotion_ready": false,
+    "registry_latest_stage": 8875,
+    "resolved_nodes": 14,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_authorized": false,
+    "unresolved_missing_or_blocked_nodes": 4
+  },
+  "next_best_step": "Do not train yet. Either design metadata-only commit inventory preflight if explicitly requested, or prepare an execution-authorization review for the tiny Stage8890 structured probe.",
+  "passed": true,
+  "prioritized_gaps": [
+    {
+      "authority_closed": true,
+      "gap_id": "future_commit_inventory_preflight",
+      "next_step": "Design metadata-only commit inventory preflight only if repository walking is explicitly requested; no commit walking/mining by default.",
+      "node_id": "objective:future_commit_inventory_preflight",
+      "priority": 1
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "bounded_decoder_ce_closed_gate",
+      "next_step": "Keep bounded decoder CE closed until explicit tiny execution authorization; current target controls and telemetry gates are recovered.",
+      "node_id": "objective:bounded_decoder_ce",
+      "priority": 2
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "denoise_repair_closed_gate",
+      "next_step": "Verifier-guided repair targets exist, but denoise CE/runtime remain closed pending dedicated no-execution denoise gate.",
+      "node_id": "objective:denoise_repair",
+      "priority": 3
+    }
+  ],
+  "stage": 8877,
+  "stage_name": "stage8877_reconciled_gap_walk_after_target_materialization",
+  "unresolved_missing_or_blocked_nodes": [
+    {
+      "id": "objective:bounded_decoder_ce",
+      "kind": "support_or_objective",
+      "name": "bounded_decoder_ce",
+      "status": "blocked_by_closed_gate_pending_source_backed_target_materialization"
+    },
+    {
+      "id": "objective:denoise_repair",
+      "kind": "support_or_objective",
+      "name": "denoise_repair",
+      "status": "blocked_by_closed_controls_pending_verifier_guided_materialization"
+    },
+    {
+      "id": "audit:parallel_recovery_readiness",
+      "kind": "audit",
+      "name": "parallel_recovery_readiness_audit",
+      "status": "passed_all_stage8753_missing_real_modules_recovered"
+    },
+    {
+      "id": "objective:future_commit_inventory_preflight",
+      "kind": "objective",
+      "name": "future_commit_inventory_preflight",
+      "status": "missing_next_recovery_target"
+    }
+  ]
+}

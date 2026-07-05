@@ -1,0 +1,82 @@
+{
+  "artifacts": {
+    "edges_jsonl": "runs/local/artifacts/stage8876_post_target_materialization_gap_reconciliation/central_research_graph_post_target_materialization_reconciled_edges.jsonl",
+    "graph": "runs/local/artifacts/stage8876_post_target_materialization_gap_reconciliation/central_research_graph_post_target_materialization_reconciled.json",
+    "nodes_jsonl": "runs/local/artifacts/stage8876_post_target_materialization_gap_reconciliation/central_research_graph_post_target_materialization_reconciled_nodes.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T07:37:12Z",
+  "decision": "Reconciled heldout eval, packet telemetry, packet readiness, and runner static design statuses after verifier-guided target recovery.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "candidate_nodes": 5,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "graph_edges": 2684,
+    "graph_nodes": 1797,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "patched_nodes": 5,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "skipped_nodes": 0,
+    "source_emission_authorized": false,
+    "training_authorized": false
+  },
+  "next_best_step": "Run a fresh central graph gap walk; expected remaining blockers should be true closed gates such as commit inventory preflight and CE/runtime execution authority.",
+  "passed": true,
+  "patched_nodes": [
+    {
+      "id": "gap:bounded_decoder_eval_strict_unique_target_materialization",
+      "new_status": "resolved_by_heldout_non_ce_eval_design",
+      "old_status": "missing_before_probe_ready_ce_package",
+      "resolved_by_stage": "stage8820_heldout_non_ce_decoder_eval_design_manifest"
+    },
+    {
+      "id": "objective:eval_strict_unique_target_materialization",
+      "new_status": "resolved_by_heldout_non_ce_eval_design",
+      "old_status": "missing_recovery_option",
+      "resolved_by_stage": "stage8822_registry_spine_reconciliation_after_heldout_non_ce_eval_design"
+    },
+    {
+      "id": "objective:future_model_output_packet_schema",
+      "new_status": "resolved_by_packet_telemetry_contract",
+      "old_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8823_model_output_packet_telemetry_contract_manifest"
+    },
+    {
+      "id": "objective:future_probe_packet_readiness_audit",
+      "new_status": "resolved_by_packet_readiness_audit",
+      "old_status": "missing_next_recovery_target",
+      "resolved_by_stage": "stage8826_model_output_packet_readiness_contract_audit"
+    },
+    {
+      "id": "objective:future_model_output_capture_runner_design",
+      "new_status": "resolved_by_runner_static_design",
+      "old_status": "blocked_by_preflight_audit",
+      "resolved_by_stage": "stage8837_model_output_capture_runner_static_design"
+    }
+  ],
+  "skipped_nodes": [],
+  "stage": 8876,
+  "stage_name": "stage8876_post_target_materialization_gap_reconciliation"
+}
