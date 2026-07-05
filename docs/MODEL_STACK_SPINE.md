@@ -1405,3 +1405,48 @@ Stage8787 attached traced-eval observability to the central graph as a support m
 This preserves the closed loop:
 
 probe/eval -> traced failure packet -> attribution -> dataset patch queue -> judge/ranker -> curriculum compiler -> next closed-boundary probe.
+
+
+## Stage8788-8790 Source-Backed Verifier Repair Recovery
+
+Recovered `source_backed_verifier_repair_builder` under the same `gate_status_contract` used for source-backed symbol binding, edit localization, and patch operator.
+
+Input source:
+
+- Neutral verifier-repair manifest: `runs/local/artifacts/stage8643_verifier_repair_neutral_manifest/verifier_repair_neutral_manifest.jsonl`
+- Source inventory lineage: `configs/software_maintainer/source_inventory_lineage_registry_stage8663.json`
+
+Stage8788 built candidate rows:
+
+- rows: `648`
+- actions: `72` each for `DIAGNOSE_FAILURE`, `LOCALIZE_FAILURE`, `REPAIR_API_CALL`, `REPAIR_ASSERTION`, `REPAIR_IMPORT`, `REPAIR_SYNTAX`, `RERUN_VERIFIER`, `RETRIEVE_MORE`, `ROLLBACK_OR_ABSTAIN`
+- languages: `162` each for `python`, `typescript`, `rust`, `cpp`
+- splits: `216` each for `train`, `eval`, `strict`
+- complete gate_status rows: `648`
+- training loss rows: `0`
+
+Rows are source-backed but candidate-only. They include opaque failure, patch-candidate, and verifier node IDs. They do not include raw source, raw log bodies, raw patch bodies, runtime output, target answers, decoder text, or source row IDs in model input.
+
+Stage8789 audit passed:
+
+- contamination blocked rows: `0`
+- contamination review rows: `0`
+- schema blocked rows: `0`
+- schema review rows: `0`
+- junk route: `KEEP_STRUCTURED` for all `648`
+- gate_status complete rows: `648`
+- max single proxy baseline: `0.12808641975308643`
+- max combo proxy baseline: `0.1867283950617284`
+- semantic evidence baseline: `1.0`
+
+`verifier_signal` remains allowed semantic evidence. Non-evidence graph/budget/visibility proxies are below the shortcut ceiling.
+
+Stage8790 attached source-backed verifier-repair to the central graph:
+
+- graph nodes: `1719`
+- graph edges: `2512`
+- authority rows: `0`
+
+Authority remains closed: no training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Current next best step: recover bounded decoder argument candidate controls under `gate_status_contract`, then use those to rebuild the bounded decoder CE candidate path without bypassing loss masks or safety gates.
