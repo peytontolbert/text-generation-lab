@@ -1,0 +1,102 @@
+{
+  "metrics": {
+    "avg_minimality_score": 0.9394,
+    "blocked_rows": 1,
+    "pass_rows": 1,
+    "review_rows": 2,
+    "route_counts": {
+      "BLOCK_OVERBROAD_PATCH": 1,
+      "HOLD_PATCH_REVIEW": 1,
+      "HOLD_PUBLIC_API_REVIEW": 1,
+      "PASS_PATCH_MINIMALITY": 1
+    },
+    "rows": 4
+  },
+  "records": [
+    {
+      "added_lines": 1,
+      "blocked": false,
+      "changed_files": [
+        "a.py"
+      ],
+      "changed_lines": 2,
+      "complexity_delta": 0,
+      "files_changed": 1,
+      "hunks": 1,
+      "minimality_score": 0.975,
+      "needs_review": false,
+      "new_dependency_lines": [],
+      "patch_minimality_route": "PASS_PATCH_MINIMALITY",
+      "public_api_touches": [],
+      "reasons": [],
+      "removed_lines": 1,
+      "row_id": "ok"
+    },
+    {
+      "added_lines": 0,
+      "blocked": false,
+      "changed_files": [],
+      "changed_lines": 0,
+      "complexity_delta": 0,
+      "files_changed": 0,
+      "hunks": 0,
+      "minimality_score": 1.0,
+      "needs_review": true,
+      "new_dependency_lines": [],
+      "patch_minimality_route": "HOLD_PATCH_REVIEW",
+      "public_api_touches": [],
+      "reasons": [
+        "missing_patch_text"
+      ],
+      "removed_lines": 0,
+      "row_id": "missing"
+    },
+    {
+      "added_lines": 1,
+      "blocked": true,
+      "changed_files": [
+        "a.py"
+      ],
+      "changed_lines": 1,
+      "complexity_delta": 0,
+      "files_changed": 1,
+      "hunks": 0,
+      "minimality_score": 0.8875,
+      "needs_review": false,
+      "new_dependency_lines": [
+        "+import requests"
+      ],
+      "patch_minimality_route": "BLOCK_OVERBROAD_PATCH",
+      "public_api_touches": [],
+      "reasons": [
+        "new_dependency_or_import"
+      ],
+      "removed_lines": 0,
+      "row_id": "dep"
+    },
+    {
+      "added_lines": 2,
+      "blocked": false,
+      "changed_files": [
+        "api.py"
+      ],
+      "changed_lines": 2,
+      "complexity_delta": 0,
+      "files_changed": 1,
+      "hunks": 0,
+      "minimality_score": 0.895,
+      "needs_review": true,
+      "new_dependency_lines": [],
+      "patch_minimality_route": "HOLD_PUBLIC_API_REVIEW",
+      "public_api_touches": [
+        "def:public_api"
+      ],
+      "reasons": [
+        "public_api_touch"
+      ],
+      "removed_lines": 0,
+      "row_id": "api"
+    }
+  ],
+  "rows": 4
+}

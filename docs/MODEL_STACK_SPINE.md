@@ -917,3 +917,55 @@ Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, 
 
 Next queue item: `patch_minimality_complexity_meter` or `coverage_test_selection`.
 
+## Stage8759 Patch Coverage Flaky Governance
+
+Recovered three no-execution support gates for future patch/body/verifier objectives.
+
+### Patch Minimality Complexity Meter
+
+Routes:
+
+- `PASS_PATCH_MINIMALITY`
+- `HOLD_PATCH_REVIEW`
+- `HOLD_PUBLIC_API_REVIEW`
+- `BLOCK_OVERBROAD_PATCH`
+
+Checks changed-line budget, files-changed budget, complexity delta, public API touches, and new dependency/import risk.
+
+### Coverage Test Selection
+
+Routes:
+
+- `PASS_TARGETED_TEST_SELECTION`
+- `NEEDS_BROAD_TEST_DISCOVERY`
+- `HOLD_NO_CHANGESET`
+
+Maps changed files/symbols to candidate tests using coverage maps, path-stem matches, and symbol-test metadata. It does not run tests.
+
+### Flaky Test Detector
+
+Routes:
+
+- `PASS_STABLE_FAILURE`
+- `PASS_STABLE_PASS`
+- `HOLD_FLAKY_FAILURE`
+- `HOLD_UNSTABLE_FAILURE_SIGNATURE`
+- `HOLD_NO_RERUN_EVIDENCE`
+- `HOLD_INSUFFICIENT_RERUNS`
+
+Separates stable failures from flaky pass/fail mixes and unstable failure signatures using provided rerun observations only. Runtime remains closed.
+
+Artifacts:
+
+- `scripts/patch_minimality_complexity_meter.py`
+- `scripts/coverage_test_selection.py`
+- `scripts/flaky_test_detector.py`
+- `runs/summaries/stage8756_patch_minimality_complexity_meter_readiness.json`
+- `runs/summaries/stage8757_coverage_test_selection_readiness.json`
+- `runs/summaries/stage8758_flaky_test_detector_readiness.json`
+- `runs/summaries/stage8759_patch_coverage_flaky_graph_attachment.json`
+
+Authority remains closed: no mining, training, decoder CE, denoise CE, runtime, source/body emission, scoring, Gemma, controller merge, or promotion is authorized.
+
+Next queue item: `eval_trace_to_dataset_patch_loop`, then source-backed builders must emit complete `gate_status` cards.
+

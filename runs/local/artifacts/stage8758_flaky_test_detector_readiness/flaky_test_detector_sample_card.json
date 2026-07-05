@@ -1,0 +1,56 @@
+{
+  "metrics": {
+    "holdout_rows": 1,
+    "rerun_needed_rows": 1,
+    "route_counts": {
+      "HOLD_FLAKY_FAILURE": 1,
+      "HOLD_NO_RERUN_EVIDENCE": 1,
+      "PASS_STABLE_FAILURE": 1
+    },
+    "rows": 3,
+    "stable_rows": 1
+  },
+  "records": [
+    {
+      "fail_count": 2,
+      "failure_signatures": {
+        "ImportError": 2
+      },
+      "failure_stability": true,
+      "flaky_test_route": "PASS_STABLE_FAILURE",
+      "pass_count": 0,
+      "rerun_count": 2,
+      "rerun_needed": false,
+      "route_to_holdout": false,
+      "row_id": "stable",
+      "unknown_count": 0
+    },
+    {
+      "fail_count": 1,
+      "failure_signatures": {
+        "Timeout": 1
+      },
+      "failure_stability": false,
+      "flaky_test_route": "HOLD_FLAKY_FAILURE",
+      "pass_count": 1,
+      "rerun_count": 2,
+      "rerun_needed": false,
+      "route_to_holdout": true,
+      "row_id": "flaky",
+      "unknown_count": 0
+    },
+    {
+      "fail_count": 0,
+      "failure_signatures": {},
+      "failure_stability": false,
+      "flaky_test_route": "HOLD_NO_RERUN_EVIDENCE",
+      "pass_count": 0,
+      "rerun_count": 0,
+      "rerun_needed": true,
+      "route_to_holdout": false,
+      "row_id": "none",
+      "unknown_count": 0
+    }
+  ],
+  "rows": 3
+}
