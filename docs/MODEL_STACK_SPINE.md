@@ -2498,3 +2498,7 @@ No source metadata read, row/source body read, route-card materialization, candi
 ## Stage9080 No-Data Route-Card Materialization Audit Instance Design
 
 Stage9080 designs an inactive route-card materialization audit instance. It records future required inputs, outputs, and audits while keeping source/output tickets, metadata reads, body reads, route-card materialization, compiler handoff, trainer dry run, and training closed.
+
+## Stage9082 Route-Card Audit Instance Graph Attachment
+
+Stage9082 attaches the inactive route-card materialization audit instance and negative-case audit to the central graph. Compiler handoff and trainer dry-run remain blocked behind source/output and route-card gates.
