@@ -1,0 +1,94 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "compatibility_criteria_recorded": true,
+    "forbidden_actions_recorded": true,
+    "recommended_routes_recorded": true,
+    "required_input_artifacts_recorded": true,
+    "schema_judge_output_fields_recorded": true,
+    "source_summaries_passed": true,
+    "source_summaries_present": true,
+    "stage8985_ticket_audit_passed": true,
+    "stage8990_return_path_records_schema_judge": true
+  },
+  "compatibility_criteria": [
+    "has_text_or_trace_like_fields",
+    "has_task_or_prompt_like_fields",
+    "has_output_or_action_like_fields",
+    "has_metadata_ids_for_lineage",
+    "no_row_body_needed_for_initial_schema_decision",
+    "no_locked_eval_or_hidden_split_markers_in_train_route",
+    "can_emit_loss_mask_candidates_only_after_row_judge"
+  ],
+  "decision": "Post-footer schema compatibility judging is specified as a future contract only. It consumes footer metadata artifacts after they exist, but this stage does not execute footer access, judge schemas, load rows, mine data, or train.",
+  "forbidden_judge_actions": [
+    "read_dataset_rows",
+    "read_jsonl_first_line",
+    "read_repository_source_body",
+    "write_to_arxiv",
+    "start_mining",
+    "start_training",
+    "claim_dataset_quality_from_schema_only",
+    "emit_training_manifest"
+  ],
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "compatibility_criteria": 7,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "footer_access_authorized_now": false,
+    "forbidden_judge_actions": 8,
+    "model_execution_attempted": false,
+    "recommended_routes": 3,
+    "repository_source_bodies_loaded": false,
+    "required_input_artifacts": 3,
+    "runtime_authorized_flag": false,
+    "schema_judge_executed_now": false,
+    "schema_judge_output_fields": 10,
+    "training_authorized": false
+  },
+  "recommended_routes": [
+    "SCHEMA_COMPATIBLE_CANDIDATE_PENDING_ROW_SAMPLE_TICKET",
+    "SCHEMA_INSUFFICIENT_NEEDS_DIFFERENT_DATASET",
+    "SCHEMA_AMBIGUOUS_NEEDS_HUMAN_REVIEW"
+  ],
+  "required_input_artifacts": [
+    "parquet_footer_schema_metadata_only.jsonl",
+    "footer_access_audit_card.json",
+    "selected_candidate_ids.jsonl"
+  ],
+  "schema_judge_output_fields": [
+    "candidate_id",
+    "relative_path",
+    "schema_columns",
+    "schema_types",
+    "maintainer_relevance_score",
+    "required_field_coverage",
+    "row_body_required_for_decision",
+    "compatible_with_curriculum_compiler",
+    "recommended_route",
+    "rejection_reasons"
+  ],
+  "source_stage_status": {
+    "8985": true,
+    "8990": true
+  },
+  "stage": 8993,
+  "stage_name": "stage8993_post_footer_schema_compatibility_judge_contract",
+  "status": "POST_FOOTER_SCHEMA_COMPATIBILITY_JUDGE_CONTRACT_NO_EXECUTION"
+}

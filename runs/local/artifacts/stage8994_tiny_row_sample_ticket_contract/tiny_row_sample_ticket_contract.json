@@ -1,0 +1,113 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "required_assertions_recorded": true,
+    "required_outputs_recorded": true,
+    "return_path_contains_tiny_row_sample_ticket": true,
+    "source_stage8990_passed": true,
+    "source_stage8990_present": true,
+    "ticket_fields_recorded": true
+  },
+  "decision": "Tiny row sampling is specified as a future ticket only. It requires footer metadata, schema compatibility, strict locked-eval exclusion, lineage fields, and a post-sample dataset judge before any manifest compile or training path.",
+  "forbidden_operations": [
+    "ROW_SAMPLE_EXECUTION_NOW",
+    "LOCKED_EVAL_ROW_READ",
+    "HIDDEN_EVAL_ROW_READ",
+    "REPOSITORY_SOURCE_BODY_READ",
+    "ARXIV_WRITE",
+    "TRAINING",
+    "MINING",
+    "MODEL_EXECUTION",
+    "RUNTIME_EXECUTION",
+    "DECODER_CE",
+    "DENOISE_CE"
+  ],
+  "limits": {
+    "allowed_splits": [
+      "train",
+      "eval",
+      "strict_eval"
+    ],
+    "hidden_eval_exclusion_required": true,
+    "locked_eval_exclusion_required": true,
+    "max_candidates": 3,
+    "max_rows_per_candidate": 3,
+    "max_total_rows": 9
+  },
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_operations": 11,
+    "hidden_eval_rows_loaded": false,
+    "locked_eval_rows_loaded": false,
+    "max_candidates": 3,
+    "max_rows_per_candidate": 3,
+    "max_total_rows": 9,
+    "model_execution_attempted": false,
+    "repository_source_bodies_loaded": false,
+    "required_assertions": 10,
+    "required_outputs": 6,
+    "row_sample_authorized_now": false,
+    "row_sample_executed_now": false,
+    "runtime_authorized_flag": false,
+    "ticket_fields": 15,
+    "training_authorized": false
+  },
+  "required_assertions": [
+    "schema_judge_pass_required_before_ticket_activation",
+    "footer_metadata_artifact_required_before_ticket_activation",
+    "candidate_count_lte_3",
+    "rows_per_candidate_lte_3",
+    "total_rows_lte_9",
+    "locked_eval_split_excluded",
+    "hidden_eval_split_excluded",
+    "lineage_fields_present_before_row_sample",
+    "row_sample_outputs_under_runs_local_artifacts",
+    "post_sample_dataset_judge_required_before_manifest_compile"
+  ],
+  "required_outputs": [
+    "row_sample_ticket_authorization_card.json",
+    "selected_candidate_ids.jsonl",
+    "row_sample_manifest_metadata.jsonl",
+    "row_sample_access_audit_card.json",
+    "no_locked_eval_sample_proof.json",
+    "next_row_sample_dataset_judge_input.jsonl"
+  ],
+  "stage": 8994,
+  "stage_name": "stage8994_tiny_row_sample_ticket_contract",
+  "status": "TINY_ROW_SAMPLE_TICKET_CONTRACT_NO_EXECUTION",
+  "ticket_fields": [
+    "ticket_id",
+    "source_schema_judge_artifact",
+    "source_footer_metadata_artifact",
+    "compatible_candidate_ids",
+    "selected_candidate_ids",
+    "max_candidates",
+    "max_rows_per_candidate",
+    "max_total_rows",
+    "allowed_splits",
+    "locked_eval_exclusion_required",
+    "lineage_fields_required",
+    "post_sample_judge_required",
+    "output_dir",
+    "required_outputs",
+    "forbidden_operations"
+  ]
+}

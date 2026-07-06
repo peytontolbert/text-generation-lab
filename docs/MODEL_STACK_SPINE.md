@@ -2372,3 +2372,7 @@ Stage8991 specifies the post-footer schema compatibility judge contract. It wait
 ## Stage8992 Parquet Footer Metadata Execution Gate Audit
 
 Stage8992 audits the future parquet-footer metadata execution-gate design but still grants no footer access. A later one-command grant stage is required before any metadata access can run.
+
+## Stage8993 Post-Footer Schema Compatibility Judge Contract
+
+Stage8993 specifies the post-footer schema compatibility judge contract. It waits for footer metadata artifacts and keeps row reads, source-body reads, mining, training, model execution, and runtime closed.
