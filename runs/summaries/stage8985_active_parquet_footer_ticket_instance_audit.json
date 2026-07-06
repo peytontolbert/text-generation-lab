@@ -1,6 +1,6 @@
 {
   "artifacts": {
-    "contract": "runs/local/artifacts/stage8990_training_return_path_after_footer_gate_contract/training_return_path_after_footer_gate_contract.json"
+    "audit": "runs/local/artifacts/stage8985_active_parquet_footer_ticket_instance_audit/active_parquet_footer_ticket_instance_audit.json"
   },
   "authority": {
     "body_emission_authorized": false,
@@ -15,12 +15,13 @@
     "scoring_authorized_next": false,
     "source_emission_authorized": false
   },
-  "created_at_utc": "2026-07-06T14:01:48Z",
-  "decision": "The path back to training is explicit: footer metadata, schema judging, tiny row sampling, dataset judging, locked manifest compile, trainer contract-only dry run, then a one-run bounded training ticket. This stage authorizes none of those executions.",
+  "created_at_utc": "2026-07-06T14:00:31Z",
+  "decision": "Pending active parquet-footer ticket instance audit passed. The ticket is structurally valid but still not executable; footer access requires a separate execution gate.",
   "metrics": {
     "arxiv_write_authorized": false,
     "authority_rows": 0,
     "body_emission_authorized": false,
+    "candidate_file_opened": false,
     "controller_complete_merge_authorized_next": false,
     "data_mining_authorized": false,
     "dataset_rows_loaded": false,
@@ -28,25 +29,31 @@
     "decoder_ce_training_authorized_next": false,
     "denoise_ce_authorized": false,
     "denoise_ce_training_authorized_next": false,
+    "dry_run_rows": 40,
+    "execution_authorized": false,
     "failures": [],
     "footer_access_authorized_now": false,
     "gemma_execution_authorized_next": false,
     "harness_execution_authorized_next": false,
     "model_execution_attempted": false,
     "model_execution_authorized_next": false,
-    "non_negotiable_controls": 9,
+    "network_upload_performed": false,
+    "parquet_footer_access_performed": false,
     "promotion_ready": false,
     "repository_source_bodies_loaded": false,
-    "return_path_gates": 8,
     "runtime_authorized": false,
     "runtime_authorized_flag": false,
+    "schema_or_header_read_performed": false,
     "scoring_authorized_next": false,
+    "selected_candidate_count": 5,
     "source_emission_authorized": false,
-    "training_authorized": false,
-    "training_authorizing_gates": 1
+    "ticket_audit_passed": true,
+    "ticket_failures": 0,
+    "ticket_pending_audit": true,
+    "training_authorized": false
   },
-  "next_best_step": "Let Stage8984 continue. In parallel, keep this return-path contract as the checklist for when to request a tiny bounded training ticket.",
+  "next_best_step": "Design a separate execution gate for parquet-footer metadata-only access. Do not execute footer access until that gate passes.",
   "passed": true,
-  "stage": 8990,
-  "stage_name": "stage8990_training_return_path_after_footer_gate_contract"
+  "stage": 8985,
+  "stage_name": "stage8985_active_parquet_footer_ticket_instance_audit"
 }

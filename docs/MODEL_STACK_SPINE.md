@@ -2356,3 +2356,7 @@ Stage8990 records the gated path from footer metadata preflight to tiny bounded 
 ## Stage8984 Active Parquet Footer Ticket Instance Design
 
 Stage8984 designs a pending-audit active parquet-footer ticket instance over a small candidate subset. It does not authorize or execute footer access.
+
+## Stage8985 Active Parquet Footer Ticket Instance Audit
+
+Stage8985 audits the pending active parquet-footer ticket instance and keeps footer access, file opens, row/source-body reads, mining, training, model execution, and runtime closed.
