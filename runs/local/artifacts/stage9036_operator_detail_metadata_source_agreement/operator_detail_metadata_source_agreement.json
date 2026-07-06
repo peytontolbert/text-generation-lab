@@ -1,0 +1,130 @@
+{
+  "approved_metadata_source_classes": [
+    {
+      "allowed_examples": [
+        "runs/summaries/stage8703_low_level_training_concept_session_grep.json",
+        "runs/summaries/stage9033_operator_detail_seed_catalog.json",
+        "runs/summaries/stage9034_operator_detail_seed_gap_matrix.json"
+      ],
+      "allowed_use": "stage names, metrics, operator IDs, operator names, layer labels, reason-code names, and already summarized metadata.",
+      "forbidden_use": "copying raw embedded session text, source code bodies, row bodies, generated patches, or hidden payloads.",
+      "source_class": "recovered_stage_summaries"
+    },
+    {
+      "allowed_examples": [
+        "runs/local/artifacts/stage8718_operator_codelength_interface_readiness/operator_inventory.json",
+        "runs/local/artifacts/stage9033_operator_detail_seed_catalog/operator_detail_seed_catalog.json"
+      ],
+      "allowed_use": "operator/category inventories, codelength field names, opaque detail refs, coverage counts, and hashes.",
+      "forbidden_use": "training row materialization or raw payload expansion.",
+      "source_class": "recovered_artifact_summaries"
+    },
+    {
+      "allowed_examples": [
+        "future reviewed operator_detail_metadata_patch.jsonl"
+      ],
+      "allowed_use": "manual symbolic metadata for inputs, outputs, confidence semantics, failure modes, label source refs, and metric names.",
+      "forbidden_use": "unreviewed model-generated detail fields or raw source/session excerpts.",
+      "source_class": "human_authored_metadata_patch"
+    },
+    {
+      "allowed_examples": [
+        "docs/*.md with explicit recovery-stage references"
+      ],
+      "allowed_use": "short metadata facts already summarized in docs with provenance.",
+      "forbidden_use": "bulk importing documentation prose as operator detail payload.",
+      "source_class": "existing_docs_metadata_only"
+    }
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "approved_source_classes_recorded": true,
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "forbidden_source_classes_recorded": true,
+    "future_required_proofs_recorded": true,
+    "raw_payload_sources_forbidden": true,
+    "source_classes_are_metadata_only": true,
+    "source_stage9035_passed": true,
+    "source_stage9035_present": true,
+    "ticket_allowed_sources_not_empty": true
+  },
+  "decision": "Metadata-only source classes are agreed for future operator-detail recovery; no ticket is instantiated and no raw payloads are read.",
+  "forbidden_operations": [
+    "INSTANTIATE_OPERATOR_DETAIL_TICKET_NOW",
+    "RECOVER_OPERATOR_DETAILS_NOW",
+    "READ_RAW_SESSION_TEXT",
+    "READ_REPOSITORY_SOURCE_BODY",
+    "READ_ROW_BODY_TEXT",
+    "MATERIALIZE_OPERATOR_DETAIL_PATCH_NOW",
+    "MATERIALIZE_TRAINING_ROWS_NOW",
+    "RUN_ROW_SAMPLE_JUDGE_NOW",
+    "MATERIALIZE_MANIFEST_NOW",
+    "RUN_TRAINER_DRY_RUN_NOW",
+    "START_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "RUN_GEMMA",
+    "WRITE_TO_ARXIV",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "forbidden_source_classes": [
+    "raw_codex_session_text",
+    "raw_repository_source_body",
+    "raw_row_body_text",
+    "hidden_or_locked_eval_payload",
+    "model_generated_operator_detail_without_audit",
+    "runtime_output_payload",
+    "gemma_or_teacher_output_without_verifier"
+  ],
+  "future_required_proofs": [
+    "source_class_recorded_per_detail_field",
+    "source_path_or_stage_ref_recorded_per_detail_field",
+    "raw_payload_absence_scan_passed",
+    "detail_hash_present_for_recovered_rows",
+    "operator_id_category_match_stage9033_seed",
+    "training_ready_status_stays_false_until_full_audit"
+  ],
+  "metrics": {
+    "approved_metadata_source_classes": 4,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_source_classes": 7,
+    "future_required_proofs": 6,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "judge_executed_now": false,
+    "manifest_compile_authorized_now": false,
+    "manifest_materialized_now": false,
+    "metadata_source_agreement_only": true,
+    "model_execution_attempted": false,
+    "operator_detail_patch_materialized_now": false,
+    "operator_detail_ticket_instantiated_now": false,
+    "operator_details_recovered_now": false,
+    "raw_session_text_read_now": false,
+    "repository_source_bodies_read_now": false,
+    "row_bodies_read_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false,
+    "training_rows_materialized_now": false
+  },
+  "stage": 9036,
+  "stage_name": "stage9036_operator_detail_metadata_source_agreement",
+  "status": "OPERATOR_DETAIL_METADATA_SOURCE_AGREEMENT_NO_EXECUTION"
+}
