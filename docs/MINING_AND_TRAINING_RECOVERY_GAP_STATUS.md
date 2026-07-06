@@ -1,141 +1,72 @@
 # Mining And Training Recovery Gap Status
 
-Current frontier: `Stage8619`.
+Current frontier: `Stage9045`.
 
 ## Direct Answer
 
-No, broad mining is not fully recovered yet.
+Broad mining and training are still closed. The control plane, compiler scaffolds, semantic/user-intent contract, domain/twin/operator bridge, and long-context pipeline guards are recovered enough to design future real-manifest tickets, but not enough to scan `/arxiv` or train.
 
-Recovered enough for limited work:
+## Recovered Control Components
 
-- `/arxiv` corpus inventory
-- repo capability catalog seeds
-- repo-state graph seed rows
-- symbol/import/test binding candidate extraction
-- symbol-binding counterfactual patching
-- true `BIND_TEST_TO_SYMBOL` seed recovery
-- symbol-binding counterfactual rebuild with test-bind coverage
-- dataset judge/ranker scaffold
-- curriculum compiler scaffold
-- loss-mask card
-- counterfactual obligation audit
-- structured telemetry contract
-- semantic/user-intent/mining concepts from recent Codex sessions
+- `stage_registry`
+- `authority_flags`
+- `safe_cleanup`
+- `loss_mask_card`
+- `dataset_judge_ranker`
+- `curriculum_compiler`
+- `shortcut_counterfactual_audit`
+- `gate_status_contract`
+- `telemetry_contract`
+- `semantic_intent_surface_contract`
+- `domain_twin_operator_bridge`
+- `long_context_transition_pipeline`
 
-Not recovered enough for broad mining:
+## Recovered Objective Families Or Contracts
 
-- `intent_to_build_strategy` miner
-- `edit_localization` miner
-- `patch_operator` miner
-- `verifier_repair` miner
-- `bounded_decoder_arguments` miner
-- `output_repair_denoise` miner
+- `intent_to_build_strategy_contract`
+- `repo_state_graph_v1_contract`
+- `symbol_binding_candidates`
+- `edit_localization_candidates`
+- `patch_operator_candidates`
+- `verifier_repair_candidates`
+- `bounded_decoder_arguments_contract`
+- `bounded_decoder_ce_candidate_contract`
+- `output_repair_denoise_controls`
+- `verified_transition_record_v1`
 
-Do not start broad `/arxiv` mining until those are restored.
+## Still Required Before Broad Mining
 
-## Recovered From Sessions
+- `active_source_ticket_for_arxiv_or_repository_library_reads`
+- `metadata_only_domain_graph_manifest_design`
+- `repo_twin_memory_manifest_design`
+- `paper_twin_memory_manifest_design`
+- `semantic_presentation_user_intent_shortcut_audit_for_real_rows`
+- `operator_detail_metadata_patch_validation_stage9040`
+- `source_body_ticket_for_any_source_backed_row_materialization`
+- `row_body_ticket_for_any_dataset_record_read`
+- `compiler_route_card_for_each_real_manifest`
+- `full_gate_status_materialization_for_real_rows`
+- `training_authorization_review_after_manifest_audits`
 
-The session recovery pass found these concept groups:
+## Blocked Now
 
-- semantic presentation
-- user intent
-- mining
-- curriculum compiler
-- dataset judge
-- training telemetry
-- software maintenance
+- `broad_arxiv_mining`
+- `repository_library_scan`
+- `dataset_row_body_read`
+- `repository_source_body_read`
+- `train_100m_model`
+- `run_native_probe`
+- `decoder_ce_training`
+- `denoise_ce_training`
+- `runtime_execution`
+- `gemma_or_harness_scoring`
+- `hf_upload`
+- `write_arxiv`
 
-Important recovered details:
+## Current Safe Work
 
-- The model needs semantic presentation surfaces, not raw text only.
-- User intent must include repo QA, repo repair, code generation, test generation, config update, dependency decision, debugging, and maintainer explanation.
-- Mining must produce action-value counterfactuals: action A failed, action B passed, action C was risky, action D needed tests first.
-- Long-horizon repo state matters: invariants, dependencies, tests, architecture, user intent, and prior failed attempts.
-- Verifier discovery and baseline-passing verifier gates are required before runtime or guarded accepts.
-- Non-Python repair-control surfaces previously used `ACTION_HOLD` vs `ACTION_REJECT` and `EVIDENCE_FAILURE` vs `EVIDENCE_HOLD`.
-- Hard negatives and HOLD evidence are first-class mining targets.
+Safe work remains contract-only, synthetic-fixture, or repo-local audit-only. Future real-row work must start with explicit active source tickets, then route-card/schema/header audits, then judge/ranker/shortcut/counterfactual/loss-mask audits before any model gradients.
 
-## Semantic Presentation Surfaces
+## Rule
 
-Recovered target surfaces:
-
-- `maintainer_answer`
-- `repair_plan`
-- `bounded_patch_hunk`
-- `test_plan`
-- `repo_qa_answer`
-- `retrieve_more_answer`
-- `abstain_unsafe_answer`
-- `verifier_failure_summary`
-- `symbol_binding_decision`
-- `edit_localization_decision`
-- `patch_operator_decision`
-
-These must remain separated from local objective labels. The model should learn semantic state/action first, then render the appropriate surface.
-
-## User Intent Fields
-
-Recovered fields:
-
-- `intent_type`
-- `requested_output_type`
-- `target_language`
-- `repo_scope`
-- `allowed_imports`
-- `blocked_imports`
-- `available_repositories`
-- `file_creation_allowed`
-- `modify_existing_allowed`
-- `test_required`
-- `verification_mode`
-- `risk_tolerance`
-- `budget_constraints`
-
-Build strategy remains:
-
-- `USE_WHITELIST_IMPORT`
-- `BUILD_ON_TOP`
-- `BUILD_FROM_SCRATCH`
-
-## Mining Must Produce
-
-Every mined row family needs:
-
-- source inventory card
-- route card
-- authority card
-- loss-mask card
-- counterfactual obligation card
-- shortcut baseline card
-- duplicate semantic key card
-- split-overlap card
-- budget/evidence card
-- telemetry contract card
-
-## Current Safe Mining Scope
-
-Allowed next limited mining:
-
-- symbol-binding action rebalance rows, especially non-`RETRIEVE_MORE` rows
-- same-query test contrastives where test evidence should bind versus retrieve
-- additional import-module and abstain-unbound near-miss rows
-
-Reason:
-
-- symbol-binding extractor exists
-- true `BIND_TEST_TO_SYMBOL` seed rows now exist
-- counterfactual audit exists
-- telemetry contract exists
-- current blocker is majority-action baseline dominance, not missing test-bind coverage
-
-Blocked broad mining:
-
-- intent-to-build
-- edit localization
-- patch operator
-- verifier repair
-- bounded decoder arguments
-- output repair denoise
-
-Those need dedicated miners and audits restored first.
-
+No `/arxiv` row or repository body reaches a compiler or model until it has an explicit route card, authority card, source/row-body ticket, gate status, loss mask, shortcut audit, duplicate check, budget/evidence status, and telemetry contract.
