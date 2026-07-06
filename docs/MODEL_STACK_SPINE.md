@@ -2384,3 +2384,7 @@ Stage8995 records that row-sample ticket instance design is blocked until footer
 ## Stage8997 Locked Tiny Manifest Compile Contract
 
 Stage8997 defines the future locked tiny manifest compile contract. Loss masks default false, unjudged rows are forbidden, and manifest compile/training remain closed.
+
+## Stage8998 Trainer Contract-Only Dry Run Contract
+
+Stage8998 defines the future trainer contract-only dry-run contract: CLI flags, loss-mask enforcement, telemetry path checks, and a hard stop before model forward. Trainer execution remains closed.
