@@ -2288,3 +2288,7 @@ Stage8971 statically reconciles the recovered trainer CLI and telemetry contract
 ## Stage8972 Real Data Preflight Plan No Arxiv Access
 
 Stage8972 designs the future real-data preflight around /arxiv/datasets and /arxiv/repositories. It performs no /arxiv access and keeps all data, mining, and training authority closed.
+
+## Stage8973 Arxiv Metadata-Only Preflight
+
+Stage8973 performs the first protected metadata-only /arxiv preflight. It inventories file and top-level repository metadata only and keeps data-row reading, source-body reading, mining, and training closed.

@@ -1,0 +1,82 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "arxiv_write_closed": true,
+    "authority_counts_zero": true,
+    "dataset_rows_not_loaded": true,
+    "forbidden_operations_recorded": true,
+    "metadata_only_policy_true": true,
+    "outputs_under_runs_local_artifacts": true,
+    "registry_frontier_stage8972_or_8973": true,
+    "repository_source_bodies_not_loaded": true,
+    "source_stage8972_passed": true
+  },
+  "decision": "Metadata-only /arxiv preflight completed. The stage recorded file/directory metadata only, wrote outputs under runs/local/artifacts, and did not read dataset row bodies or repository source bodies.",
+  "decision_card": {
+    "compiler_or_training_authorized": false,
+    "dataset_inventory_ready_for_route_card_design": true,
+    "next_best_step": "Design an audit-only route-card selector over metadata inventories before reading any dataset rows or repository source bodies.",
+    "real_data_preflight_completed": true,
+    "repository_inventory_ready_for_route_card_design": true
+  },
+  "metrics": {
+    "arxiv_metadata_access_performed": true,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_inventory_rows": 5000,
+    "dataset_inventory_truncated": true,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_attempted": false,
+    "network_upload_performed": false,
+    "repository_inventory_rows": 607,
+    "repository_inventory_truncated": false,
+    "repository_source_bodies_loaded": false,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "policy": {
+    "arxiv_write_authorized": false,
+    "dataset_rows_loaded": false,
+    "forbidden_operations": [
+      "open_dataset_file_body",
+      "read_json_or_parquet_rows",
+      "read_repository_source_body",
+      "write_to_arxiv",
+      "delete_or_cleanup_arxiv",
+      "start_mining",
+      "start_training",
+      "load_checkpoint",
+      "upload_network_artifacts"
+    ],
+    "metadata_only": true,
+    "outputs_under": "runs/local/artifacts/stage8973_arxiv_metadata_only_preflight",
+    "repository_source_bodies_loaded": false
+  },
+  "root_card": {
+    "arxiv_root": "/arxiv",
+    "arxiv_root_exists": true,
+    "dataset_file_cap": 5000,
+    "datasets_root": "/arxiv/datasets",
+    "datasets_root_exists": true,
+    "repositories_root": "/arxiv/repositories",
+    "repositories_root_exists": true,
+    "repository_dir_cap": 2000
+  },
+  "stage": 8973,
+  "stage_name": "stage8973_arxiv_metadata_only_preflight",
+  "status": "ARXIV_METADATA_ONLY_PREFLIGHT"
+}
