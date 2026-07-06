@@ -1,0 +1,167 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blocking_assertions": [
+    "all_required_inputs_present_before_translation",
+    "no_route_card_materialization_without_ticket",
+    "no_source_body_read_without_ticket",
+    "route_card_audit_output_passed_before_translation",
+    "trainer_input_completeness_audit_passed_before_translation",
+    "decoder_ce_remains_closed",
+    "denoise_ce_remains_closed",
+    "runtime_reward_remains_closed",
+    "model_forward_remains_closed"
+  ],
+  "checks": {
+    "authority_counts_zero": true,
+    "blocking_assertions_recorded": true,
+    "closed_card_passes": true,
+    "negative_cases_rejected": true,
+    "prior_preflight_still_blocks_loss_before_compiler_ready": true,
+    "required_inputs_recorded": true,
+    "source_stage9062_passed": true,
+    "source_stage9086_passed": true,
+    "source_stage9087_passed": true,
+    "stage9087_frontier": true,
+    "structured_after_all_controls_passes_design_only": true,
+    "trainer_loss_keys_known": true,
+    "translation_keys_cover_route_losses": true,
+    "translation_outputs_recorded": true
+  },
+  "closed_card_failures": [],
+  "decision": "Designed the no-data route-to-trainer-loss translation layer. It documents how future audited route-card losses translate to trainer loss masks while keeping translation, compiler handoff, trainer dry run, model input rows, decoder CE, denoise CE, runtime, /arxiv IO, and training closed.",
+  "forbidden_trainer_losses_now": [
+    "decoder_ce",
+    "denoise_ce",
+    "runtime_reward"
+  ],
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "blocking_assertions": 9,
+    "candidate_rows_materialized": 0,
+    "compiler_handoff_ready_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "negative_cases": 8,
+    "negative_cases_rejected": 8,
+    "required_inputs": 9,
+    "route_cards_materialized_now": false,
+    "route_loss_keys": 5,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_executed_now": false,
+    "trainer_dry_run_ready_now": false,
+    "trainer_loss_keys": 15,
+    "training_authorized": false,
+    "translation_outputs": 5,
+    "translation_ready_now": false
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_open": {
+      "failures": [
+        "forbidden_trainer_loss_open:decoder_ce"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_open": {
+      "failures": [
+        "forbidden_trainer_loss_open:denoise_ce"
+      ],
+      "rejected": true
+    },
+    "model_input_ready": {
+      "failures": [
+        "model_input_ready_not_allowed_by_design"
+      ],
+      "rejected": true
+    },
+    "runtime_reward_open": {
+      "failures": [
+        "forbidden_trainer_loss_open:runtime_reward"
+      ],
+      "rejected": true
+    },
+    "structured_loss_before_translation_ready": {
+      "failures": [
+        "loss_open_before_translation_ready"
+      ],
+      "rejected": true
+    },
+    "trainer_dry_run_ready": {
+      "failures": [
+        "trainer_dry_run_ready_not_allowed_by_design"
+      ],
+      "rejected": true
+    },
+    "translation_ready_missing_route_card_audit_output": {
+      "failures": [
+        "translation_ready_missing_required_inputs"
+      ],
+      "rejected": true
+    }
+  },
+  "prior_preflight_structured_failures": [
+    "loss_open_before_compiler_ready"
+  ],
+  "required_inputs": [
+    "source_output_ticket_authorization_card.json",
+    "source_output_ticket_design_audit.json",
+    "source_output_ticket_graph_attachment_card.json",
+    "route_card_materialization_audit_instance_design.json",
+    "route_card_materialization_audit_instance_audit.json",
+    "route_card_audit_instance_graph_attachment_card.json",
+    "route_card_materialization_audit_output.json",
+    "trainer_dry_run_input_completeness_audit.json",
+    "trainer_dry_run_input_controls_graph_attachment_card.json"
+  ],
+  "route_to_trainer_loss_translation": {
+    "decoder_ce": [
+      "decoder_ce"
+    ],
+    "denoise_ce": [
+      "denoise_ce"
+    ],
+    "retrieval_loss": [],
+    "runtime_reward": [
+      "runtime_reward"
+    ],
+    "structured_aux_ce": [
+      "surface_role_ce",
+      "repair_surface_ce",
+      "symbol_binding_ce",
+      "edit_localization_ce",
+      "patch_operator_ce",
+      "verifier_repair_ce"
+    ]
+  },
+  "stage": 9088,
+  "stage_name": "stage9088_route_to_trainer_loss_translation_no_data_design",
+  "status": "ROUTE_TO_TRAINER_LOSS_TRANSLATION_DESIGN_NO_DATA",
+  "structured_after_all_controls_failures": [],
+  "translation_outputs": [
+    "route_to_trainer_loss_translation_status.json",
+    "route_loss_to_trainer_loss_map.json",
+    "closed_loss_mask_card_template.json",
+    "structured_aux_only_loss_mask_template.json",
+    "translation_negative_case_audit.json"
+  ]
+}

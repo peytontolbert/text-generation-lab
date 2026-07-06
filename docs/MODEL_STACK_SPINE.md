@@ -2524,3 +2524,7 @@ Stage9086 attaches Stage9084/9085 trainer dry-run input completeness controls to
 Stage9087 reconciles the current frontier after Stage9086. Source/output ticket, route-card audit, and trainer input completeness controls are graph-visible.
 
 No data access, route-card materialization, route-to-loss translation, compiler handoff, trainer dry run, model forward, decoder CE, denoise CE, runtime, /arxiv IO, cleanup, or training is authorized.
+
+## Stage9088 Route-To-Trainer-Loss Translation No-Data Design
+
+Stage9088 designs the no-data route-to-trainer-loss translation layer after source/output ticket, route-card audit, and trainer input graph controls. It maps future audited route-card loss intents to trainer loss-mask keys while keeping translation, compiler handoff, trainer execution, model forward, row loading, /arxiv IO, decoder CE, denoise CE, runtime, and training closed.
