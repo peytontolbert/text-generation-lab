@@ -2397,3 +2397,8 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 - Designs the future trainer contract-only dry-run instance that Stage9002 requires before one-run training tickets can be instantiated.
 - Keeps dry-run execution, model forward/backward, row-body loading, checkpoint writes, decoder CE, denoise CE, runtime, Gemma, harness scoring, and /arxiv writes closed.
 - Blocks execution until locked manifest, loss-mask, schema, and contamination/leakage proof artifacts exist and a separate authorization stage passes.
+
+## Stage9006 Active Frontier Routing Audit
+- Clarifies that Stage9005 is a future post-training diagnostics blocker, not the immediate pre-training execution path.
+- Routes the active next step back to Stage9003 input materialization: locked tiny manifest, loss mask, schema lock, trainer dry-run input, and contamination/leakage proof.
+- Keeps dry-run execution, training, model execution, mining, runtime, Gemma, harness scoring, promotion, and /arxiv writes closed.
