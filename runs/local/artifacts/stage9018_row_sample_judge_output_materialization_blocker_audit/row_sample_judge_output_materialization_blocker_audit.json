@@ -1,0 +1,92 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blocking_reasons": {
+    "no_locked_eval_sample_proof_passed": "no-locked-eval sample proof has not passed",
+    "no_locked_eval_sample_proof_present": "no-locked-eval sample proof is absent",
+    "row_sample_access_audit_passed": "row-sample access audit has not passed",
+    "row_sample_access_audit_present": "row-sample access audit card is absent",
+    "row_sample_manifest_metadata_present": "row-sample manifest metadata is absent",
+    "row_sample_ticket_authorization_present": "row-sample ticket authorization card is absent",
+    "separate_materialization_execution_ticket_present": "separate materialization execution ticket is absent"
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authorization_conditions_recorded": true,
+    "forbidden_operations_recorded": true,
+    "materialization_blocked": true,
+    "stage9017_contract_outputs_ok_if_present": true,
+    "stage9017_safety_ok_if_present": true,
+    "stage9017_status_recorded": true
+  },
+  "decision": "Row-sample judge-output materialization remains blocked until Stage9017 is materialized, upstream row-sample artifacts exist and pass, and a separate execution ticket exists.",
+  "forbidden_operations": [
+    "MATERIALIZE_JUDGE_OUTPUTS_NOW",
+    "RUN_ROW_SAMPLE_JUDGE_NOW",
+    "READ_ROW_BODIES_NOW",
+    "OPEN_ADDITIONAL_DATASET_FILES",
+    "MATERIALIZE_MANIFEST_NOW",
+    "RUN_TRAINER_DRY_RUN_NOW",
+    "START_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "RUN_GEMMA",
+    "WRITE_TO_ARXIV",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "metrics": {
+    "additional_dataset_files_opened": false,
+    "arxiv_write_authorized": false,
+    "authorization_conditions": 9,
+    "blocking_reasons": 7,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "judge_outputs_materialized_now": false,
+    "manifest_materialized_now": false,
+    "materialization_authorized_now": false,
+    "materialization_ready": false,
+    "missing_upstream_artifacts": 4,
+    "model_execution_attempted": false,
+    "required_upstream_artifacts": 4,
+    "row_bodies_read_now": false,
+    "row_sample_judge_executed_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false
+  },
+  "readiness": {
+    "no_locked_eval_sample_proof_passed": false,
+    "no_locked_eval_sample_proof_present": false,
+    "row_sample_access_audit_passed": false,
+    "row_sample_access_audit_present": false,
+    "row_sample_manifest_metadata_present": false,
+    "row_sample_ticket_authorization_present": false,
+    "separate_materialization_execution_ticket_present": false,
+    "stage9017_contract_passed": true,
+    "stage9017_contract_present": true
+  },
+  "required_upstream_artifacts": {
+    "no_locked_eval_sample_proof.json": "runs/local/artifacts/future_stage9xxx_row_sample_ticket/no_locked_eval_sample_proof.json",
+    "row_sample_access_audit_card.json": "runs/local/artifacts/future_stage9xxx_row_sample_ticket/row_sample_access_audit_card.json",
+    "row_sample_manifest_metadata.jsonl": "runs/local/artifacts/future_stage9xxx_row_sample_ticket/row_sample_manifest_metadata.jsonl",
+    "row_sample_ticket_authorization_card.json": "runs/local/artifacts/future_stage9xxx_row_sample_ticket/row_sample_ticket_authorization_card.json"
+  },
+  "stage": 9018,
+  "stage_name": "stage9018_row_sample_judge_output_materialization_blocker_audit",
+  "status": "ROW_SAMPLE_JUDGE_OUTPUT_MATERIALIZATION_BLOCKER_AUDIT_NO_EXECUTION"
+}
