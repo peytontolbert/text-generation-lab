@@ -1,0 +1,140 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authority_rows_zero": true,
+    "base_graph_present": true,
+    "negative_cases_rejected": true,
+    "new_edges_present": true,
+    "new_nodes_present": true,
+    "registry_frontier_stage9085": true,
+    "route_card_contract_node_present": true,
+    "source_output_ticket_node_present": true,
+    "source_stage9084_passed": true,
+    "source_stage9085_passed": true
+  },
+  "decision": "Attached trainer dry-run input completeness controls to the central graph. Route-to-loss translation, compiler handoff, trainer execution, model forward, row loading, /arxiv IO, and training remain closed.",
+  "metrics": {
+    "added_edges": 16,
+    "added_nodes": 6,
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "authority_rows": 0,
+    "candidate_rows_materialized": 0,
+    "compiler_handoff_ready_now": false,
+    "graph_edges": 2817,
+    "graph_nodes": 1882,
+    "model_forward_attempted": false,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "source_output_ticket_instantiated_now": false,
+    "trainer_dry_run_executed_now": false,
+    "trainer_dry_run_ready_now": false,
+    "training_authorized": false
+  },
+  "new_edges": [
+    [
+      "contract:trainer_dry_run_input_completeness_v1",
+      "audited_by",
+      "audit:trainer_dry_run_input_completeness_negative_cases_v1"
+    ],
+    [
+      "contract:trainer_dry_run_input_completeness_v1",
+      "requires",
+      "contract:source_output_ticket_inactive_v1"
+    ],
+    [
+      "contract:trainer_dry_run_input_completeness_v1",
+      "requires",
+      "contract:route_card_materialization_audit_instance_inactive_v1"
+    ],
+    [
+      "contract:trainer_dry_run_input_completeness_v1",
+      "requires",
+      "gate:trainer_dry_run_requires_source_output_ticket"
+    ],
+    [
+      "contract:trainer_dry_run_input_completeness_v1",
+      "requires",
+      "gate:trainer_dry_run_requires_route_card_audit_output"
+    ],
+    [
+      "contract:trainer_dry_run_input_completeness_v1",
+      "blocks",
+      "operation:route_to_trainer_loss_translation"
+    ],
+    [
+      "contract:trainer_dry_run_input_completeness_v1",
+      "blocks",
+      "operation:compiler_handoff"
+    ],
+    [
+      "contract:trainer_dry_run_input_completeness_v1",
+      "blocks",
+      "operation:trainer_execution"
+    ],
+    [
+      "contract:trainer_dry_run_input_completeness_v1",
+      "blocks",
+      "operation:model_forward"
+    ],
+    [
+      "gate:trainer_dry_run_blocks_route_to_loss_translation",
+      "blocks",
+      "operation:route_to_trainer_loss_translation"
+    ],
+    [
+      "gate:trainer_dry_run_blocks_model_forward",
+      "blocks",
+      "operation:model_forward"
+    ],
+    [
+      "audit:trainer_dry_run_input_completeness_negative_cases_v1",
+      "rejects",
+      "failure:missing_source_output_ticket_authorization"
+    ],
+    [
+      "audit:trainer_dry_run_input_completeness_negative_cases_v1",
+      "rejects",
+      "failure:missing_route_card_materialization_audit_output"
+    ],
+    [
+      "audit:trainer_dry_run_input_completeness_negative_cases_v1",
+      "rejects",
+      "failure:trainer_dry_run_ready_now"
+    ],
+    [
+      "audit:trainer_dry_run_input_completeness_negative_cases_v1",
+      "rejects",
+      "failure:candidate_rows_materialized"
+    ],
+    [
+      "audit:trainer_dry_run_input_completeness_negative_cases_v1",
+      "rejects",
+      "failure:arxiv_read_authorized_for_compiler"
+    ]
+  ],
+  "new_node_ids": [
+    "contract:trainer_dry_run_input_completeness_v1",
+    "audit:trainer_dry_run_input_completeness_negative_cases_v1",
+    "gate:trainer_dry_run_requires_source_output_ticket",
+    "gate:trainer_dry_run_requires_route_card_audit_output",
+    "gate:trainer_dry_run_blocks_route_to_loss_translation",
+    "gate:trainer_dry_run_blocks_model_forward"
+  ],
+  "stage": 9086,
+  "stage_name": "stage9086_trainer_dry_run_input_controls_graph_attachment",
+  "status": "TRAINER_DRY_RUN_INPUT_CONTROLS_GRAPH_ATTACHMENT_NO_DATA"
+}

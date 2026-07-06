@@ -2514,3 +2514,7 @@ No ticket, data access, route-card materialization, compiler handoff, trainer dr
 Stage9084 refreshes the future trainer dry-run input completeness checklist to include source/output ticket controls and route-card materialization audit instance controls.
 
 Trainer dry-run readiness remains false; no rows, source bodies, route cards, compiler handoff, trainer execution, model forward, decoder CE, denoise CE, runtime, /arxiv IO, or training are authorized.
+
+## Stage9086 Trainer Dry-Run Input Controls Graph Attachment
+
+Stage9086 attaches Stage9084/9085 trainer dry-run input completeness controls to the central graph. Route-to-loss translation, compiler handoff, trainer execution, model forward, row loading, /arxiv IO, and training remain closed.
