@@ -2470,3 +2470,9 @@ Trainer execution, row loading, repository source/body loading, candidate mining
 Stage9074 attaches the Stage9072 recovered trainer dry-run documentation contract to the central graph as metadata-only nodes and edges.
 
 Trainer execution, row loading, repository source/body loading, candidate mining, model forward, decoder CE, denoise CE, runtime, /arxiv compiler IO, and training remain closed.
+
+## Stage9075 Current Frontier After Trainer Docs Graph
+
+Stage9075 reconciles the current frontier after Stage9074. Trainer dry-run documentation controls are now attached to the graph; the next safe branches remain future source/output ticket design or route-card audit design.
+
+Trainer execution, row loading, candidate mining, model forward, decoder CE, denoise CE, runtime, /arxiv compiler IO, and training remain closed.
