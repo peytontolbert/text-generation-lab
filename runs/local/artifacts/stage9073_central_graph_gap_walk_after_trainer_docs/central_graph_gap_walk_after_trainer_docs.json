@@ -1,0 +1,149 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authority_rows_zero": true,
+    "base_graph_present": true,
+    "existing_trainer_controls_attached": true,
+    "registry_frontier_stage9072": true,
+    "source_stage9072_passed": true,
+    "source_stage9072_present": true,
+    "stage9072_attachment_gap_identified": true,
+    "stage9072_no_candidate_rows": true,
+    "stage9072_trainer_not_invoked": true,
+    "stage9072_training_closed": true,
+    "unresolved_gaps_recorded": true
+  },
+  "decision": "Central graph gap walk confirms Stage9067 trainer controls are attached and Stage9072 recovered trainer documentation still needs a metadata-only graph attachment. Execution, mining, row loading, and training remain closed.",
+  "graph_source": "runs/local/artifacts/stage9067_trainer_dry_run_controls_graph_attachment/central_research_graph_with_trainer_dry_run_controls.json",
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "authority_rows": 0,
+    "candidate_rows_materialized": 0,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "existing_control_nodes": 7,
+    "graph_edges": 2766,
+    "graph_nodes": 1846,
+    "missing_existing_control_nodes": 0,
+    "model_forward_attempted": false,
+    "present_existing_control_nodes": 7,
+    "repository_source_bodies_loaded": false,
+    "runtime_authorized_flag": false,
+    "stage9072_expected_edges": 8,
+    "stage9072_expected_nodes": 7,
+    "stage9072_missing_edges": 8,
+    "stage9072_missing_nodes": 7,
+    "trainer_dry_run_executed_now": false,
+    "trainer_invoked": false,
+    "training_authorized": false,
+    "training_ready": false,
+    "unresolved_gap_count": 4
+  },
+  "missing_existing_control_nodes": [],
+  "present_existing_control_nodes": [
+    "audit:trainer_dry_run_input_negative_cases_v1",
+    "contract:trainer_dry_run_input_long_context_v1",
+    "gate:long_context_compiler_handoff_blocker_v1",
+    "gate:long_context_route_card_materialization_audit_v1",
+    "gate:no_trainer_row_or_weight_load",
+    "gate:trainer_stops_before_model_forward",
+    "preflight:long_context_loss_mask_compiler_v1"
+  ],
+  "stage": 9073,
+  "stage9072_missing_edges": [
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "blocks",
+      "operation:dataset_row_load"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "blocks",
+      "operation:model_forward"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "blocks",
+      "operation:trainer_execution"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "documents",
+      "contract:trainer_dry_run_input_long_context_v1"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "requires",
+      "gate:trainer_long_context_inputs_required"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "requires",
+      "gate:trainer_no_execution_documented"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "requires",
+      "gate:trainer_required_inputs_complete"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "requires",
+      "telemetry:trainer_dry_run_required_stubs"
+    ]
+  ],
+  "stage9072_missing_nodes": [
+    "contract:trainer_dry_run_recovered_contract_v1",
+    "doc:trainer_dry_run_recovered_contract_stage9072",
+    "forbidden_ops:trainer_dry_run_forbidden_operations",
+    "gate:trainer_long_context_inputs_required",
+    "gate:trainer_no_execution_documented",
+    "gate:trainer_required_inputs_complete",
+    "telemetry:trainer_dry_run_required_stubs"
+  ],
+  "stage9072_present_edges": [],
+  "stage9072_present_nodes": [],
+  "stage_name": "stage9073_central_graph_gap_walk_after_trainer_docs",
+  "status": "CENTRAL_GRAPH_GAP_WALK_AFTER_TRAINER_DOCS_NO_EXECUTION",
+  "unresolved_gaps": [
+    {
+      "authority_closed": true,
+      "gap_id": "stage9072_graph_attachment_missing",
+      "next_step": "Attach Stage9072 recovered trainer dry-run documentation contract to the central graph as metadata-only nodes and edges.",
+      "priority": 1
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "source_output_ticket_missing_for_real_long_context_rows",
+      "next_step": "Design a future source/output ticket before any real route-card materialization, index build, or candidate mining.",
+      "priority": 2
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "trainer_contract_only_dry_run_inputs_unmaterialized",
+      "next_step": "Keep trainer dry-run execution closed until locked manifest, loss-mask, schema lock, leakage proof, and long-context gate inputs exist.",
+      "priority": 3
+    },
+    {
+      "authority_closed": true,
+      "gap_id": "one_run_training_ticket_blocked",
+      "next_step": "Do not instantiate a one-run training ticket until a real trainer contract-only dry run passes and emits required telemetry stubs.",
+      "priority": 4
+    }
+  ]
+}

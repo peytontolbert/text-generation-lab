@@ -2458,3 +2458,9 @@ Real source/index/candidate work, /arxiv compiler IO, trainer execution, model f
 Stage9072 records the recovered trainer dry-run contract after Stage9071: required locked-manifest inputs, long-context blocker inputs, loss-mask assertions, telemetry stubs, forbidden operations, and hard stops are documented as the current control surface.
 
 No trainer invocation, model forward, row loading, source/body loading, candidate mining, decoder CE, denoise CE, runtime, /arxiv compiler IO, or training is authorized.
+
+## Stage9073 Central Graph Gap Walk After Trainer Docs
+
+Stage9073 confirms Stage9067 trainer dry-run controls are present in the central graph and records the next no-data gap: Stage9072 recovered trainer documentation needs a metadata-only graph attachment.
+
+Trainer execution, row loading, repository source/body loading, candidate mining, decoder CE, denoise CE, runtime, /arxiv compiler IO, and training remain closed.
