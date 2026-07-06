@@ -156,6 +156,17 @@ def _mention_rows(chunk: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
+def _repo_path_excluded(path: Path, *, source_root: Path) -> bool:
+    rel = str(path.relative_to(source_root)).lower()
+    if any(part in rel for part in ['/dist/', '/build/', '/coverage/', '/vendor/', '/node_modules/']):
+        return True
+    if any(name in rel for name in ['package-lock.json', 'pnpm-lock.yaml', 'yarn.lock', 'poetry.lock', 'cargo.lock']):
+        return True
+    if any(part in rel for part in ['/assets/translations/', '/i18n/', '/locale/', '/locales/']):
+        return True
+    return False
+
+
 def _repo_file_priority(path: Path, *, source_root: Path) -> tuple[int, str]:
     rel = str(path.relative_to(source_root)).lower()
     suffix = path.suffix.lower()
@@ -188,13 +199,13 @@ def _iter_repo_candidate_files(repo_root: Path) -> Iterator[Path]:
             continue
         preferred = sorted(iter_text_files(subdir), key=lambda item: _repo_file_priority(item, source_root=repo_root))
         for path in preferred:
-            if path in yielded:
+            if path in yielded or _repo_path_excluded(path, source_root=repo_root):
                 continue
             yielded.add(path)
             yield path
     fallback = sorted(iter_text_files(repo_root), key=lambda item: _repo_file_priority(item, source_root=repo_root))
     for path in fallback:
-        if path in yielded:
+        if path in yielded or _repo_path_excluded(path, source_root=repo_root):
             continue
         yielded.add(path)
         yield path
@@ -261,6 +272,8 @@ def build_chunk_and_mention_shards(
             continue
         scanned = 0
         for path in _iter_root_files(root, declared_type, max_files_per_root):
+            if declared_type == 'repo' and _repo_path_excluded(path, source_root=root):
+                continue
             scanned += 1
             file_count += 1
             raw = safe_read_text(path, max_chars=max_chars_per_file)
