@@ -277,3 +277,36 @@ Model metrics:
 - contradiction-resolution accuracy
 - retention accuracy vs transition distance
 - failure rate by template family
+
+
+## Production Storage Design
+
+Long-term corpus indexing should use sharded Parquet outputs, but this repo does not currently authorize production scans or `/arxiv` writes. The builder is intentionally guarded so the default command surface refuses corpus indexing unless a later stage grants explicit scan and output flags.
+
+Future gated builder shape:
+
+```bash
+python scripts/build_stage8801_long_context_corpus_index.py \
+  --papers-root /data/repository_library/exports/corpus/papers \
+  --repos-root /arxiv/repositories \
+  --datasets-root /arxiv/datasets \
+  --output-dir /arxiv/long_context_transition_index \
+  --allow-corpus-scan \
+  --allow-arxiv-output
+```
+
+Those flags are not granted by the current recovery frontier. Until a separate corpus-root ticket passes, tests and smoke checks must use synthetic or repo-local fixture roots only.
+
+Expected directories after a future authorized run:
+
+- `chunks/`
+- `chunk_mentions/`
+- `entities/`
+- `links/`
+
+Expected summaries after a future authorized run:
+
+- `source_inventory.json`
+- `entity_aliases.json`
+- `links_summary.json`
+- `index_summary.json`

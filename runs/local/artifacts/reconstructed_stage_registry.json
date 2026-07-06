@@ -13,12 +13,12 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9041,
-    "latest_stage_name": "stage9041_operator_detail_training_readiness_gate",
-    "latest_stage_next_best_step": "Do not train. First materialize and validate an operator-detail metadata patch under the Stage9040 contract, then require a separate training ticket.",
-    "max_stage": 9041,
+    "latest_stage": 9042,
+    "latest_stage_name": "stage9042_long_context_corpus_index_guard_audit",
+    "latest_stage_next_best_step": "Keep corpus indexing closed. If needed, design a separate active corpus-root ticket before scanning /arxiv, repository_library, writing Parquet under /arxiv, or uploading to Hugging Face.",
+    "max_stage": 9042,
     "min_stage": 8530,
-    "registry_rows": 540
+    "registry_rows": 536
   },
   "passed": true,
   "rows": [
@@ -9576,26 +9576,6 @@
         "scoring_authorized_next": false,
         "source_emission_authorized": false
       },
-      "next_best_step": "Audit the zero-row preflight design, then implement a dry-run preflight runner that still does not open /arxiv files unless a future explicit ticket allows metadata-only file access.",
-      "passed": true,
-      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8976_zero_row_schema_header_preflight_design.json",
-      "stage": 8976,
-      "stage_name": "stage8976_zero_row_schema_header_preflight_design"
-    },
-    {
-      "authority": {
-        "body_emission_authorized": false,
-        "controller_complete_merge_authorized_next": false,
-        "decoder_ce_training_authorized_next": false,
-        "denoise_ce_training_authorized_next": false,
-        "gemma_execution_authorized_next": false,
-        "harness_execution_authorized_next": false,
-        "model_execution_authorized_next": false,
-        "promotion_ready": false,
-        "runtime_authorized": false,
-        "scoring_authorized_next": false,
-        "source_emission_authorized": false
-      },
       "next_best_step": "Implement a zero-row candidate selector that emits selected path metadata only. Do not read schemas, headers, rows, or repository source bodies until a separate preflight execution ticket exists.",
       "passed": true,
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8976_zero_row_schema_preflight_design.json",
@@ -9621,26 +9601,6 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8977_zero_row_candidate_selector.json",
       "stage": 8977,
       "stage_name": "stage8977_zero_row_candidate_selector"
-    },
-    {
-      "authority": {
-        "body_emission_authorized": false,
-        "controller_complete_merge_authorized_next": false,
-        "decoder_ce_training_authorized_next": false,
-        "denoise_ce_training_authorized_next": false,
-        "gemma_execution_authorized_next": false,
-        "harness_execution_authorized_next": false,
-        "model_execution_authorized_next": false,
-        "promotion_ready": false,
-        "runtime_authorized": false,
-        "scoring_authorized_next": false,
-        "source_emission_authorized": false
-      },
-      "next_best_step": "Implement a dry-run preflight runner contract that reads only Stage8976 selected-candidate metadata and still opens no /arxiv files.",
-      "passed": true,
-      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8977_zero_row_schema_header_preflight_design_audit.json",
-      "stage": 8977,
-      "stage_name": "stage8977_zero_row_schema_header_preflight_design_audit"
     },
     {
       "authority": {
@@ -9701,26 +9661,6 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8980_zero_row_runner_contract_audit.json",
       "stage": 8980,
       "stage_name": "stage8980_zero_row_runner_contract_audit"
-    },
-    {
-      "authority": {
-        "body_emission_authorized": false,
-        "controller_complete_merge_authorized_next": false,
-        "decoder_ce_training_authorized_next": false,
-        "denoise_ce_training_authorized_next": false,
-        "gemma_execution_authorized_next": false,
-        "harness_execution_authorized_next": false,
-        "model_execution_authorized_next": false,
-        "promotion_ready": false,
-        "runtime_authorized": false,
-        "scoring_authorized_next": false,
-        "source_emission_authorized": false
-      },
-      "next_best_step": "Audit the parquet-footer metadata-only ticket design. Do not execute footer access until a separate explicit ticket is granted.",
-      "passed": true,
-      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8981_parquet_footer_metadata_access_ticket_design.json",
-      "stage": 8981,
-      "stage_name": "stage8981_parquet_footer_metadata_access_ticket_design"
     },
     {
       "authority": {
@@ -9861,26 +9801,6 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8991_parquet_footer_metadata_execution_gate_design.json",
       "stage": 8991,
       "stage_name": "stage8991_parquet_footer_metadata_execution_gate_design"
-    },
-    {
-      "authority": {
-        "body_emission_authorized": false,
-        "controller_complete_merge_authorized_next": false,
-        "decoder_ce_training_authorized_next": false,
-        "denoise_ce_training_authorized_next": false,
-        "gemma_execution_authorized_next": false,
-        "harness_execution_authorized_next": false,
-        "model_execution_authorized_next": false,
-        "promotion_ready": false,
-        "runtime_authorized": false,
-        "scoring_authorized_next": false,
-        "source_emission_authorized": false
-      },
-      "next_best_step": "After footer metadata execution exists, build the schema compatibility judge runner against metadata artifacts only. Do not sample rows yet.",
-      "passed": true,
-      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage8991_post_footer_schema_compatibility_judge_contract.json",
-      "stage": 8991,
-      "stage_name": "stage8991_post_footer_schema_compatibility_judge_contract"
     },
     {
       "authority": {
@@ -10778,26 +10698,6 @@
       },
       "next_best_step": "Only after a metadata-only operator-detail patch exists, run this validator; keep raw payload reads, mining, and training closed.",
       "passed": true,
-      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9039_operator_detail_metadata_patch_validator_contract.json",
-      "stage": 9039,
-      "stage_name": "stage9039_operator_detail_metadata_patch_validator_contract"
-    },
-    {
-      "authority": {
-        "body_emission_authorized": false,
-        "controller_complete_merge_authorized_next": false,
-        "decoder_ce_training_authorized_next": false,
-        "denoise_ce_training_authorized_next": false,
-        "gemma_execution_authorized_next": false,
-        "harness_execution_authorized_next": false,
-        "model_execution_authorized_next": false,
-        "promotion_ready": false,
-        "runtime_authorized": false,
-        "scoring_authorized_next": false,
-        "source_emission_authorized": false
-      },
-      "next_best_step": "Only after a metadata-only operator-detail patch exists, run this validator; keep raw payload reads, mining, and training closed.",
-      "passed": true,
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9040_operator_detail_metadata_patch_validator_contract.json",
       "stage": 9040,
       "stage_name": "stage9040_operator_detail_metadata_patch_validator_contract"
@@ -10821,6 +10721,26 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9041_operator_detail_training_readiness_gate.json",
       "stage": 9041,
       "stage_name": "stage9041_operator_detail_training_readiness_gate"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Keep corpus indexing closed. If needed, design a separate active corpus-root ticket before scanning /arxiv, repository_library, writing Parquet under /arxiv, or uploading to Hugging Face.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9042_long_context_corpus_index_guard_audit.json",
+      "stage": 9042,
+      "stage_name": "stage9042_long_context_corpus_index_guard_audit"
     }
   ]
 }
