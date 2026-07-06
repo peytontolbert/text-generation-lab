@@ -2407,3 +2407,8 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 - Designs the future metadata-only ticket for locked tiny manifest, loss-mask card, schema lock, leakage proof, and trainer dry-run input artifacts.
 - Does not emit the manifest or read row bodies; all loss masks remain false by default.
 - Keeps trainer dry run, model execution, decoder CE, denoise CE, runtime, Gemma, harness scoring, training, mining, and /arxiv writes closed.
+
+## Stage9009 Registry Duplicate Stage Inventory
+- Inventories duplicate recovered stage IDs without mutation or deletion.
+- Classifies duplicates into allowed IDs, recovery bands, and outside-band risks.
+- Keeps all execution and training authority closed while a later resolution policy is designed.
