@@ -2380,3 +2380,7 @@ Stage8993 specifies the post-footer schema compatibility judge contract. It wait
 ## Stage8995 Tiny Row Sample Ticket Instance Blocker Audit
 
 Stage8995 records that row-sample ticket instance design is blocked until footer metadata and schema compatibility artifacts exist. It keeps row reads, source-body reads, `/arxiv` writes, mining, training, model execution, and runtime closed.
+
+## Stage8997 Locked Tiny Manifest Compile Contract
+
+Stage8997 defines the future locked tiny manifest compile contract. Loss masks default false, unjudged rows are forbidden, and manifest compile/training remain closed.

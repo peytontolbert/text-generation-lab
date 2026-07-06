@@ -1,0 +1,120 @@
+{
+  "allowed_after_future_judge_pass": {
+    "train_decoder_ce": false,
+    "train_denoise_ce": false,
+    "train_gemma_distill": false,
+    "train_retrieval": false,
+    "train_runtime_reward": false,
+    "train_source_body": false,
+    "train_structured_aux": true
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "loss_mask_fields_recorded": true,
+    "manifest_fields_recorded": true,
+    "required_inputs_recorded": true,
+    "required_outputs_recorded": true,
+    "source_stage8996_keeps_judge_closed": true,
+    "source_stage8996_passed": true,
+    "source_stage8996_present": true,
+    "source_stage8996_requires_gate_status": true
+  },
+  "decision": "Locked tiny manifest compilation is specified as a future contract only. It requires a passed row-sample dataset judge and explicit loss masks before any trainer dry run or training ticket.",
+  "forbidden_operations": [
+    "MANIFEST_COMPILE_EXECUTION_NOW",
+    "ADD_UNJUDGED_ROWS",
+    "USE_LOCKED_EVAL_FOR_TRAINING",
+    "ENABLE_DECODER_CE_BY_DEFAULT",
+    "ENABLE_DENOISE_CE_BY_DEFAULT",
+    "READ_REPOSITORY_SOURCE_BODY",
+    "WRITE_TO_ARXIV",
+    "START_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME"
+  ],
+  "loss_mask_defaults": {
+    "train_decoder_ce": false,
+    "train_denoise_ce": false,
+    "train_gemma_distill": false,
+    "train_retrieval": false,
+    "train_runtime_reward": false,
+    "train_source_body": false,
+    "train_structured_aux": false
+  },
+  "loss_mask_fields": [
+    "train_structured_aux",
+    "train_decoder_ce",
+    "train_denoise_ce",
+    "train_retrieval",
+    "train_runtime_reward",
+    "train_gemma_distill",
+    "train_source_body"
+  ],
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_default_enabled": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_default_enabled": false,
+    "forbidden_operations": 10,
+    "loss_mask_fields": 7,
+    "manifest_compile_authorized_now": false,
+    "manifest_emitted_now": false,
+    "model_execution_attempted": false,
+    "repository_source_bodies_loaded": false,
+    "required_inputs": 4,
+    "required_manifest_fields": 12,
+    "required_outputs": 6,
+    "runtime_authorized_flag": false,
+    "training_authorized": false,
+    "unjudged_rows_allowed": false,
+    "unjugded_rows_allowed": false
+  },
+  "required_inputs": [
+    "row_sample_dataset_judge_report.json",
+    "accepted_row_ids_pending_manifest_compile.jsonl",
+    "candidate_row_quality_scores.jsonl",
+    "judge_to_compiler_gate_status.json"
+  ],
+  "required_manifest_fields": [
+    "row_id",
+    "source_candidate_id",
+    "split",
+    "route",
+    "task_family",
+    "language_family",
+    "input_packet_ref",
+    "target_ref",
+    "losses_enabled",
+    "authority",
+    "lineage",
+    "judge_score_ref"
+  ],
+  "required_outputs": [
+    "locked_tiny_training_manifest.jsonl",
+    "loss_mask_card.json",
+    "manifest_schema_lock.json",
+    "split_cell_card.json",
+    "contamination_and_leakage_proof.json",
+    "trainer_contract_dry_run_input.json"
+  ],
+  "stage": 8997,
+  "stage_name": "stage8997_locked_tiny_manifest_compile_contract",
+  "status": "LOCKED_TINY_MANIFEST_COMPILE_CONTRACT_NO_EXECUTION"
+}
