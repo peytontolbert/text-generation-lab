@@ -1,0 +1,113 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_failures": [],
+  "checks": {
+    "authority_closed": true,
+    "base_static_card_passes": true,
+    "negative_cases_rejected": true,
+    "required_flags_present": true,
+    "required_guard_terms_present": true,
+    "required_modes_present": true,
+    "source_stage9092_passed": true,
+    "source_stage9092_present": true,
+    "trainer_not_executed": true,
+    "trainer_static_only": true
+  },
+  "decision": "Trainer command surface static refresh rejects missing required flags, modes, guard terms, premature trainer invocation, route-to-loss translation, model input rows, decoder CE, authority, and training.",
+  "failures": [],
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "candidate_rows_materialized": 0,
+    "contract_only_invoked_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "negative_cases": 10,
+    "negative_cases_rejected": 10,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_ready_now": false,
+    "trainer_executed_now": false,
+    "trainer_static_inspection_only": true,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "contract_only_invoked_now": {
+      "failures": [
+        "contract_only_invoked_now"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "missing_bounded_decoder_mode": {
+      "failures": [
+        "missing_required_mode:bounded_decoder_ce_probe"
+      ],
+      "rejected": true
+    },
+    "missing_manifest_flag": {
+      "failures": [
+        "missing_required_flag:--manifest"
+      ],
+      "rejected": true
+    },
+    "missing_safe_cleanup_guard": {
+      "failures": [
+        "missing_required_guard_term:safe_cleanup_checkpoints"
+      ],
+      "rejected": true
+    },
+    "model_input_rows_now": {
+      "failures": [
+        "model_input_rows_now"
+      ],
+      "rejected": true
+    },
+    "route_to_loss_translation_ready_now": {
+      "failures": [
+        "route_to_loss_translation_ready_now"
+      ],
+      "rejected": true
+    },
+    "trainer_executed_now": {
+      "failures": [
+        "trainer_executed_now"
+      ],
+      "rejected": true
+    },
+    "unexpected_registry_frontier": {
+      "failures": [
+        "unexpected_registry_frontier:9999"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "stage": 9093,
+  "stage_name": "stage9093_trainer_command_surface_static_audit"
+}
