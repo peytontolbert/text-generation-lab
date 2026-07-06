@@ -2528,3 +2528,7 @@ No data access, route-card materialization, route-to-loss translation, compiler 
 ## Stage9088 Route-To-Trainer-Loss Translation No-Data Design
 
 Stage9088 designs the no-data route-to-trainer-loss translation layer after source/output ticket, route-card audit, and trainer input graph controls. It maps future audited route-card loss intents to trainer loss-mask keys while keeping translation, compiler handoff, trainer execution, model forward, row loading, /arxiv IO, decoder CE, denoise CE, runtime, and training closed.
+
+## Stage9090 Route-To-Trainer-Loss Translation Graph Attachment
+
+Stage9090 attaches Stage9088/9089 route-to-trainer-loss translation controls to the central graph. Translation, model input rows, route cards, trainer execution, model forward, decoder CE, denoise CE, runtime, and training remain closed.

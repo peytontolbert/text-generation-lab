@@ -1,0 +1,140 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authority_rows_zero": true,
+    "base_graph_present": true,
+    "negative_cases_rejected": true,
+    "new_edges_present": true,
+    "new_nodes_present": true,
+    "registry_frontier_stage9089": true,
+    "source_stage9088_passed": true,
+    "source_stage9089_passed": true,
+    "trainer_input_contract_present": true
+  },
+  "decision": "Attached route-to-trainer-loss translation controls to the central graph. Translation, model input rows, route cards, trainer execution, model forward, decoder CE, denoise CE, runtime, and training remain closed.",
+  "metrics": {
+    "added_edges": 16,
+    "added_nodes": 6,
+    "authority_rows": 0,
+    "candidate_rows_materialized": 0,
+    "compiler_handoff_ready_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "graph_edges": 2833,
+    "graph_nodes": 1893,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "route_cards_materialized_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_executed_now": false,
+    "trainer_dry_run_ready_now": false,
+    "training_authorized": false,
+    "translation_ready_now": false
+  },
+  "new_edges": [
+    [
+      "contract:route_to_trainer_loss_translation_no_data_v1",
+      "audited_by",
+      "audit:route_to_trainer_loss_translation_no_data_negative_cases_v1"
+    ],
+    [
+      "contract:route_to_trainer_loss_translation_no_data_v1",
+      "requires",
+      "contract:source_output_ticket_inactive_v1"
+    ],
+    [
+      "contract:route_to_trainer_loss_translation_no_data_v1",
+      "requires",
+      "contract:route_card_materialization_audit_instance_inactive_v1"
+    ],
+    [
+      "contract:route_to_trainer_loss_translation_no_data_v1",
+      "requires",
+      "contract:trainer_dry_run_input_completeness_v1"
+    ],
+    [
+      "contract:route_to_trainer_loss_translation_no_data_v1",
+      "requires",
+      "gate:route_to_loss_requires_source_output_ticket"
+    ],
+    [
+      "contract:route_to_trainer_loss_translation_no_data_v1",
+      "requires",
+      "gate:route_to_loss_requires_route_card_audit_output"
+    ],
+    [
+      "contract:route_to_trainer_loss_translation_no_data_v1",
+      "blocks",
+      "operation:route_to_trainer_loss_translation"
+    ],
+    [
+      "contract:route_to_trainer_loss_translation_no_data_v1",
+      "blocks",
+      "operation:model_input_materialization"
+    ],
+    [
+      "contract:route_to_trainer_loss_translation_no_data_v1",
+      "blocks",
+      "operation:trainer_execution"
+    ],
+    [
+      "gate:route_to_loss_blocks_model_input_rows",
+      "blocks",
+      "operation:model_input_materialization"
+    ],
+    [
+      "gate:route_to_loss_blocks_decoder_denoise_runtime",
+      "blocks",
+      "objective:bounded_decoder_ce"
+    ],
+    [
+      "gate:route_to_loss_blocks_decoder_denoise_runtime",
+      "blocks",
+      "objective:denoise_ce"
+    ],
+    [
+      "gate:route_to_loss_blocks_decoder_denoise_runtime",
+      "blocks",
+      "objective:runtime_reward"
+    ],
+    [
+      "audit:route_to_trainer_loss_translation_no_data_negative_cases_v1",
+      "rejects",
+      "failure:translation_ready_now"
+    ],
+    [
+      "audit:route_to_trainer_loss_translation_no_data_negative_cases_v1",
+      "rejects",
+      "failure:model_input_rows_now"
+    ],
+    [
+      "audit:route_to_trainer_loss_translation_no_data_negative_cases_v1",
+      "rejects",
+      "failure:decoder_ce_authorized"
+    ]
+  ],
+  "new_node_ids": [
+    "contract:route_to_trainer_loss_translation_no_data_v1",
+    "audit:route_to_trainer_loss_translation_no_data_negative_cases_v1",
+    "gate:route_to_loss_requires_source_output_ticket",
+    "gate:route_to_loss_requires_route_card_audit_output",
+    "gate:route_to_loss_blocks_model_input_rows",
+    "gate:route_to_loss_blocks_decoder_denoise_runtime"
+  ],
+  "stage": 9090,
+  "stage_name": "stage9090_route_to_trainer_loss_translation_graph_attachment",
+  "status": "ROUTE_TO_TRAINER_LOSS_TRANSLATION_GRAPH_ATTACHMENT_NO_DATA"
+}
