@@ -2464,3 +2464,9 @@ No trainer invocation, model forward, row loading, source/body loading, candidat
 Stage9073 confirms Stage9067 trainer dry-run controls are present in the central graph and records the next no-data gap: Stage9072 recovered trainer documentation needs a metadata-only graph attachment.
 
 Trainer execution, row loading, repository source/body loading, candidate mining, decoder CE, denoise CE, runtime, /arxiv compiler IO, and training remain closed.
+
+## Stage9074 Trainer Docs Graph Attachment
+
+Stage9074 attaches the Stage9072 recovered trainer dry-run documentation contract to the central graph as metadata-only nodes and edges.
+
+Trainer execution, row loading, repository source/body loading, candidate mining, model forward, decoder CE, denoise CE, runtime, /arxiv compiler IO, and training remain closed.

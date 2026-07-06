@@ -1,0 +1,129 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authority_rows_zero": true,
+    "base_graph_present": true,
+    "new_edges_present": true,
+    "new_nodes_present": true,
+    "registry_frontier_stage9073": true,
+    "source_stage9072_passed": true,
+    "source_stage9072_present": true,
+    "source_stage9073_passed": true,
+    "source_stage9073_present": true,
+    "stage9072_trainer_not_invoked": true,
+    "stage9073_identified_gap": true
+  },
+  "decision": "Attached Stage9072 recovered trainer dry-run documentation contract to the central graph as metadata-only controls. Trainer execution, row loading, mining, model forward, decoder CE, denoise CE, runtime, and training remain closed.",
+  "metrics": {
+    "added_edges": 13,
+    "added_nodes": 7,
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "authority_rows": 0,
+    "candidate_rows_materialized": 0,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "graph_edges": 2779,
+    "graph_nodes": 1854,
+    "model_forward_attempted": false,
+    "repository_source_bodies_loaded": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_executed_now": false,
+    "trainer_invoked": false,
+    "training_authorized": false,
+    "training_ready": false
+  },
+  "new_edges": [
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "documents",
+      "contract:trainer_dry_run_input_long_context_v1"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "documented_by",
+      "doc:trainer_dry_run_recovered_contract_stage9072"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "requires",
+      "gate:trainer_required_inputs_complete"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "requires",
+      "gate:trainer_long_context_inputs_required"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "requires",
+      "gate:trainer_no_execution_documented"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "requires",
+      "telemetry:trainer_dry_run_required_stubs"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "requires",
+      "forbidden_ops:trainer_dry_run_forbidden_operations"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "blocks",
+      "operation:model_forward"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "blocks",
+      "operation:dataset_row_load"
+    ],
+    [
+      "contract:trainer_dry_run_recovered_contract_v1",
+      "blocks",
+      "operation:trainer_execution"
+    ],
+    [
+      "gate:trainer_long_context_inputs_required",
+      "requires",
+      "gate:long_context_compiler_handoff_blocker_v1"
+    ],
+    [
+      "gate:trainer_long_context_inputs_required",
+      "requires",
+      "preflight:long_context_loss_mask_compiler_v1"
+    ],
+    [
+      "gate:trainer_long_context_inputs_required",
+      "requires",
+      "gate:long_context_route_card_materialization_audit_v1"
+    ]
+  ],
+  "new_node_ids": [
+    "contract:trainer_dry_run_recovered_contract_v1",
+    "doc:trainer_dry_run_recovered_contract_stage9072",
+    "gate:trainer_required_inputs_complete",
+    "gate:trainer_long_context_inputs_required",
+    "gate:trainer_no_execution_documented",
+    "telemetry:trainer_dry_run_required_stubs",
+    "forbidden_ops:trainer_dry_run_forbidden_operations"
+  ],
+  "stage": 9074,
+  "stage_name": "stage9074_trainer_docs_graph_attachment",
+  "status": "TRAINER_DOCS_GRAPH_ATTACHMENT_NO_EXECUTION"
+}
