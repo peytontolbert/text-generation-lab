@@ -2488,3 +2488,9 @@ No source metadata read, row/source body read, route-card materialization, index
 Stage9078 attaches the inactive source/output ticket contract and audit to the central graph. The graph now records `/arxiv` never-delete, no body reads without ticket, and no route-card materialization without ticket.
 
 No source metadata read, row/source body read, route-card materialization, candidate mining, /arxiv IO, cleanup, trainer dry run, model forward, decoder CE, denoise CE, runtime, or training is authorized.
+
+## Stage9079 Current Frontier After Source/Output Graph
+
+Stage9079 reconciles the current frontier after Stage9078. The source/output ticket controls are graph-attached; next safe work is a no-data route-card materialization audit instance design.
+
+No source metadata read, row/source body read, route-card materialization, candidate mining, /arxiv IO, cleanup, trainer dry run, model forward, decoder CE, denoise CE, runtime, or training is authorized.
