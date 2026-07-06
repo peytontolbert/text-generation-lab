@@ -1,0 +1,161 @@
+{
+  "assertion_families": {
+    "authority_closure": [
+      "AUTHORITY_FLAGS",
+      "_row_authority",
+      "authority rows present",
+      "model_execution_authorized_next",
+      "decoder_ce_training_authorized_next",
+      "runtime_authorized"
+    ],
+    "checkpoint_export_guards": [
+      "--no-final-checkpoint-export is required",
+      "--skip-final-model-save 1 is required",
+      "checkpoint export must remain disabled",
+      "final_checkpoint_export_disabled",
+      "final_model_save_skipped"
+    ],
+    "cleanup_guards": [
+      "safe_cleanup_checkpoints",
+      "UnsafePathError",
+      "safe cleanup dry-run refused",
+      ".agentkernel_probe_output",
+      "cleanup_dry_run.json",
+      "cleanup_proof.json"
+    ],
+    "decoder_budget_and_targets": [
+      "_target_token_len",
+      "target token over-cap rows present",
+      "empty decoder target rows present",
+      "max_decoder_tokens",
+      "_decoder_target_text"
+    ],
+    "execution_gates": [
+      "contract_only",
+      "execution_authorized_for_recovery_probe",
+      "model execution is disabled unless --execution-authorized-for-recovery-probe is present",
+      "cannot execute recovery probe because contract did not pass",
+      "execution is not restored for mode"
+    ],
+    "implementation_and_tokenizer_guards": [
+      "evaluate_implementation_selection",
+      "implementation_contract",
+      "transformer_execution_requires_explicit_authorization",
+      "tokenizer_contract",
+      "target_100m_vocab_size",
+      "byte_fallback_used_when_unset"
+    ],
+    "loss_mask_enforcement": [
+      "normalize_loss_mask",
+      "validate_loss_mask_row",
+      "--require-loss-mask-enforcement-audit is required",
+      "unsafe loss-mask rows present",
+      "enabled_losses",
+      "forbidden_losses"
+    ],
+    "manifest_and_repo_path": [
+      "manifest does not exist",
+      "output_dir must be under repo_root",
+      "_manifest_hash",
+      "read_jsonl"
+    ],
+    "row_caps_and_splits": [
+      "train rows",
+      "eval rows",
+      "strict rows",
+      "unexpected split rows",
+      "max_train_rows",
+      "max_eval_rows",
+      "max_strict_rows"
+    ],
+    "weight_mode_guards": [
+      "bounded decoder CE probe requires --decoder-ce-weight > 0",
+      "bounded decoder CE probe requires --structured-aux-weight 0",
+      "bounded decoder CE probe requires --denoise-weight 0",
+      "structured probes require --decoder-ce-weight 0",
+      "denoise repair probe requires --denoise-weight > 0"
+    ]
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "assertion_families_complete": true,
+    "authority_counts_zero": true,
+    "contract_only_frontier_closed": true,
+    "registry_frontier_stage9095": true,
+    "source_stage9095_passed": true,
+    "telemetry_artifacts_declared": true,
+    "trainer_command_graph_frontier_closed": true,
+    "trainer_exists": true
+  },
+  "decision": "Trainer runtime assertion inventory is complete by static inspection. This stage does not invoke the trainer, contract-only mode, runtime assertions, route-to-loss translation, model forward, row loading, /arxiv IO, or training.",
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "assertion_families": 10,
+    "assertion_terms": 55,
+    "candidate_rows_materialized": 0,
+    "contract_only_invoked_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "families_with_missing_terms": 0,
+    "missing_assertion_terms": 0,
+    "missing_telemetry_artifacts": 0,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "required_telemetry_artifacts": 17,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_assertions_executed_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_executed_now": false,
+    "trainer_static_inspection_only": true,
+    "training_authorized": false
+  },
+  "missing_by_family": {
+    "authority_closure": [],
+    "checkpoint_export_guards": [],
+    "cleanup_guards": [],
+    "decoder_budget_and_targets": [],
+    "execution_gates": [],
+    "implementation_and_tokenizer_guards": [],
+    "loss_mask_enforcement": [],
+    "manifest_and_repo_path": [],
+    "row_caps_and_splits": [],
+    "weight_mode_guards": []
+  },
+  "missing_telemetry_artifacts": [],
+  "required_telemetry_artifacts": [
+    "loss_by_step.jsonl",
+    "eval_loss_by_checkpoint.jsonl",
+    "row_token_loss.jsonl",
+    "row_gradient_norms.jsonl",
+    "activation_summary.jsonl",
+    "feature_ablation_attribution.jsonl",
+    "activation_patch_recovery.jsonl",
+    "internal_token_logit_summary.json",
+    "row_dynamics_history.jsonl",
+    "eos_length_audit.json",
+    "short_output_probe.json",
+    "repetition_probe.json",
+    "internal_leak_probe.json",
+    "sample_generation_audit.json",
+    "module_delta_norms.json",
+    "failure_bucket_card.json",
+    "cleanup_proof.json"
+  ],
+  "stage": 9096,
+  "stage_name": "stage9096_trainer_runtime_assertion_inventory",
+  "status": "TRAINER_RUNTIME_ASSERTION_INVENTORY_NO_INVOCATION",
+  "trainer": "legacy_src/scripts/train_agentkernel_lite_encdec.py"
+}
