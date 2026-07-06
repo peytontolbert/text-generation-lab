@@ -86,7 +86,7 @@ def _canonical_name_ok(name: str) -> bool:
         'github', 'training', 'network', 'networks', 'maps', 'matrix', 'language', 'power', 'environment', 'module',
         'self', 'append', 'assert', 'label', 'dataset', 'blue', 'stars', 'args', 'style', 'torch', 'task', 'boolean',
         'case', 'class', 'context', 'configuration', 'length', 'number', 'generation', 'research', 'reward', 'social',
-        'via', 'none', 'multi', 'buffer', 'auto', 'average', 'block', 'boundary',
+        'via', 'none', 'multi', 'buffer', 'auto', 'average', 'block', 'boundary', 'error', 'parameter', 'parameters',
     }
     return lower not in banned
 
@@ -176,6 +176,31 @@ def _entity_specificity_score(canonical_name: str, mention_rows: list[dict[str, 
     return score
 
 
+def _entity_dispersion_score(mention_rows: list[dict[str, Any]]) -> int:
+    distinct_docs = {(str(row.get('source_type') or ''), str(row.get('source_id') or ''), str(row.get('doc_id') or '')) for row in mention_rows}
+    distinct_sources = {(str(row.get('source_type') or ''), str(row.get('source_id') or '')) for row in mention_rows}
+    repo_docs = {str(row.get('doc_id') or '') for row in mention_rows if str(row.get('source_type') or '') == 'repo'}
+    paper_docs = {str(row.get('doc_id') or '') for row in mention_rows if str(row.get('source_type') or '') == 'paper'}
+    score = 0
+    if len(distinct_docs) >= 4:
+        score += 2
+    elif len(distinct_docs) >= 3:
+        score += 1
+    if len(distinct_sources) >= 4:
+        score += 2
+    elif len(distinct_sources) >= 3:
+        score += 1
+    if len(repo_docs) >= 2:
+        score += 2
+    elif len(repo_docs) == 1:
+        score -= 1
+    if len(paper_docs) >= 2:
+        score += 1
+    elif len(paper_docs) == 1:
+        score -= 1
+    return score
+
+
 def _paper_path_quality(path: str) -> int:
     lower = str(path or '').lower()
     score = 0
@@ -192,9 +217,11 @@ def mine_candidates(
     max_candidates: int = 5000,
     min_sources: int = 2,
     required_source_types: tuple[str, ...] = ('paper', 'repo'),
+    max_entity_chunk_ratio: float = 0.01,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     chunks = _read_rows(index_dir / 'chunks')
     entities = _read_rows(index_dir / 'entities')
+    total_chunk_count = max(1, len(chunks))
     chunk_by_id = {str(row['chunk_id']): row for row in chunks}
     candidates: list[dict[str, Any]] = []
 
@@ -204,6 +231,9 @@ def mine_candidates(
             continue
         mentions = json.loads(str(entity.get('mentions_json') or '[]'))
         mention_rows = [chunk_by_id[m] for m in mentions if m in chunk_by_id]
+        distinct_chunk_ratio = len({str(row.get('chunk_id') or '') for row in mention_rows}) / total_chunk_count
+        if distinct_chunk_ratio > max_entity_chunk_ratio:
+            continue
         if len(mention_rows) < 2:
             continue
         source_types = {str(row.get('source_type') or '') for row in mention_rows}
@@ -214,6 +244,8 @@ def mine_candidates(
         if not _entity_support_ok(mention_rows, required_source_types):
             continue
         if _entity_specificity_score(canonical_name, mention_rows) < 1:
+            continue
+        if _entity_dispersion_score(mention_rows) < 3:
             continue
 
         scored_rows = []
@@ -301,6 +333,7 @@ def mine_candidates(
         'max_candidates': max_candidates,
         'min_sources': min_sources,
         'required_source_types': list(required_source_types),
+        'max_entity_chunk_ratio': max_entity_chunk_ratio,
     }
     return candidates, summary
 
@@ -313,6 +346,7 @@ def main() -> None:
     parser.add_argument('--max-candidates', type=int, default=5000)
     parser.add_argument('--min-sources', type=int, default=2)
     parser.add_argument('--required-source-types', type=str, default='paper,repo')
+    parser.add_argument('--max-entity-chunk-ratio', type=float, default=0.01)
     parser.add_argument('--allow-candidate-mining', action='store_true', help='Required before reading a real corpus index.')
     parser.add_argument('--allow-arxiv-output', action='store_true', help='Required before writing candidates under /arxiv.')
     args = parser.parse_args()
@@ -327,6 +361,7 @@ def main() -> None:
         max_candidates=args.max_candidates,
         min_sources=args.min_sources,
         required_source_types=tuple(item.strip() for item in args.required_source_types.split(',') if item.strip()),
+        max_entity_chunk_ratio=args.max_entity_chunk_ratio,
     )
     write_jsonl(args.output, candidates)
     write_json(args.summary_output or args.output.with_name('candidates_summary.json'), summary)
