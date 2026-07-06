@@ -2538,3 +2538,7 @@ Stage9090 attaches Stage9088/9089 route-to-trainer-loss translation controls to 
 Stage9091 reconciles the current frontier after Stage9090. Route-to-trainer-loss controls are graph-visible and block translation, model input rows, trainer execution, model forward, decoder CE, denoise CE, runtime, and training.
 
 No source/output ticket, data access, route-card materialization, route-to-loss translation, compiler handoff, trainer dry run, model forward, decoder CE, denoise CE, runtime, /arxiv IO, cleanup, or training is authorized.
+
+## Stage9092 Trainer Command Surface Static Refresh
+
+Stage9092 statically refreshes the recovered trainer command surface after route-to-loss controls. The trainer is not invoked; contract-only mode, route-to-loss translation, model forward, row loading, /arxiv IO, decoder CE, denoise CE, runtime, and training remain closed.
