@@ -1,0 +1,72 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "pipeline_steps_recorded": true,
+    "required_files_present": true
+  },
+  "decision": "Recovered a local long-context transition dataset utility pipeline, but this stage is readiness-only and authorizes no corpus scan, mining, training, or /arxiv write.",
+  "forbidden_operations": [
+    "SCAN_ARXIV_NOW",
+    "SCAN_REPOSITORY_LIBRARY_NOW",
+    "MATERIALIZE_LONG_CONTEXT_DATASET_NOW",
+    "WRITE_TO_ARXIV",
+    "RUN_MODEL",
+    "RUN_TRAINING",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "metrics": {
+    "arxiv_scan_attempted": false,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "long_context_dataset_materialized_now": false,
+    "missing_files": 0,
+    "model_execution_attempted": false,
+    "pipeline_steps": 5,
+    "readiness_audit_only": true,
+    "repository_library_scan_attempted": false,
+    "required_files": 9,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "missing_files": [],
+  "required_files": [
+    "docs/LONG_CONTEXT_TRANSITION_DATASET_SPEC.md",
+    "scripts/long_context_common.py",
+    "scripts/long_context_chunk_catalog.py",
+    "scripts/long_context_entity_linker.py",
+    "scripts/long_context_program_builder.py",
+    "scripts/long_context_example_renderer.py",
+    "scripts/long_context_shortcut_audit.py",
+    "scripts/build_stage8800_long_context_transition_dataset.py",
+    "tests/test_long_context_transition_pipeline.py"
+  ],
+  "required_pipeline_steps": [
+    "chunk_catalog",
+    "entity_linking",
+    "latent_transition_program_builder",
+    "long_context_example_renderer",
+    "shortcut_quality_audit"
+  ],
+  "stage": 9037,
+  "stage_name": "stage9037_long_context_transition_pipeline_readiness",
+  "status": "LONG_CONTEXT_TRANSITION_PIPELINE_READINESS_NO_DATA_SCAN"
+}
