@@ -296,6 +296,44 @@ def test_candidate_miner_prefers_implementation_repo_rows_over_tests(tmp_path: P
     assert repo_paths[0].endswith("repo_a/src/engine.py")
 
 
+def test_candidate_miner_compound_only_mode_filters_unigrams(tmp_path: Path) -> None:
+    if importlib.util.find_spec("pyarrow") is None:
+        return
+    papers = tmp_path / "papers"
+    repos = tmp_path / "repositories"
+    (papers / "paper_a").mkdir(parents=True)
+    (repos / "repo_a" / "src").mkdir(parents=True)
+    (papers / "paper_a" / "method.txt").write_text(
+        "Pre trained encoder improves transfer. Local update remains stable.\n",
+        encoding="utf-8",
+    )
+    (papers / "paper_a" / "results.txt").write_text(
+        "Pre trained setup improves robustness. Local behavior also changes.\n",
+        encoding="utf-8",
+    )
+    (repos / "repo_a" / "src" / "engine.py").write_text(
+        "def pre_trained_encoder():\n    return 'pre trained'\n\ndef local_update():\n    return 'local'\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "compound_only_out"
+    build_chunk_and_mention_shards(
+        paper_roots=[papers],
+        repo_roots=[repos],
+        dataset_roots=[],
+        output_dir=out,
+        paper_chunk_tokens=64,
+        repo_chunk_tokens=64,
+        trace_chunk_tokens=64,
+        rows_per_shard=8,
+    )
+    build_entities_with_pyarrow(output_dir=out, min_mention_count=2, max_chunk_frequency_ratio=1.0)
+    build_links_with_pyarrow(output_dir=out, max_pairwise_mentions_per_entity=8)
+    candidates, summary = mine_candidates(index_dir=out, max_candidates=20, required_source_types=("paper", "repo"), max_entity_chunk_ratio=1.0, max_compound_entity_chunk_ratio=1.0, compound_only=True)
+    assert candidates
+    assert all('_' in candidate["canonical_name"] for candidate in candidates)
+    assert summary["compound_only"] is True
+
+
 def test_candidate_miner_prefers_compound_candidates_in_order(tmp_path: Path) -> None:
     if importlib.util.find_spec("pyarrow") is None:
         return
@@ -427,6 +465,7 @@ def test_candidate_miner_from_parquet_index(tmp_path: Path) -> None:
     assert summary["max_entity_chunk_ratio"] == 0.01
     assert summary["max_compound_entity_chunk_ratio"] == 0.04
     assert "template_family_counts" in summary
+    assert summary["compound_only"] is False
     repo_chunk_ids = {
         chunk_id
         for candidate in candidates

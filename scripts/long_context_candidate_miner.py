@@ -242,6 +242,7 @@ def mine_candidates(
     required_source_types: tuple[str, ...] = ('paper', 'repo'),
     max_entity_chunk_ratio: float = 0.01,
     max_compound_entity_chunk_ratio: float = 0.04,
+    compound_only: bool = False,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     chunks = _read_rows(index_dir / 'chunks')
     entities = _read_rows(index_dir / 'entities')
@@ -253,6 +254,8 @@ def mine_candidates(
     for entity in entities:
         canonical_name = str(entity.get('canonical_name') or '')
         if not _canonical_name_ok(canonical_name):
+            continue
+        if compound_only and '_' not in canonical_name:
             continue
         mentions = json.loads(str(entity.get('mentions_json') or '[]'))
         mention_rows = [chunk_by_id[m] for m in mentions if m in chunk_by_id]
@@ -375,6 +378,7 @@ def mine_candidates(
         'max_entity_chunk_ratio': max_entity_chunk_ratio,
         'max_compound_entity_chunk_ratio': max_compound_entity_chunk_ratio,
         'template_family_counts': dict(sorted(family_counts.items())),
+        'compound_only': compound_only,
     }
     return candidates, summary
 
@@ -389,6 +393,7 @@ def main() -> None:
     parser.add_argument('--required-source-types', type=str, default='paper,repo')
     parser.add_argument('--max-entity-chunk-ratio', type=float, default=0.01)
     parser.add_argument('--max-compound-entity-chunk-ratio', type=float, default=0.04)
+    parser.add_argument('--compound-only', action='store_true')
     parser.add_argument('--allow-candidate-mining', action='store_true', help='Required before reading a real corpus index.')
     parser.add_argument('--allow-arxiv-output', action='store_true', help='Required before writing candidates under /arxiv.')
     args = parser.parse_args()
@@ -405,6 +410,7 @@ def main() -> None:
         required_source_types=tuple(item.strip() for item in args.required_source_types.split(',') if item.strip()),
         max_entity_chunk_ratio=args.max_entity_chunk_ratio,
         max_compound_entity_chunk_ratio=args.max_compound_entity_chunk_ratio,
+        compound_only=args.compound_only,
     )
     write_jsonl(args.output, candidates)
     write_json(args.summary_output or args.output.with_name('candidates_summary.json'), summary)
