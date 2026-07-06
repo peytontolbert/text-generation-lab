@@ -1,0 +1,141 @@
+{
+  "adapter_required_outputs": [
+    "domain_twin_judged_rows.jsonl",
+    "domain_twin_gate_status_card.json",
+    "domain_twin_loss_mask_card.json",
+    "domain_twin_shortcut_audit.json",
+    "domain_twin_compiler_audit_card.json"
+  ],
+  "adapter_required_rules": [
+    "source_metadata_records_must_not_be_compiler_rows_directly",
+    "adapter_must_assign_objective_aware_route",
+    "adapter_must_emit_complete_gate_status",
+    "adapter_must_emit_all_losses_disabled_by_default",
+    "adapter_must_emit_semantic_key_without_body_text",
+    "adapter_must_preserve_authority_closed",
+    "adapter_must_run_shortcut_baselines_before_training"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "adapter_required_outputs_recorded": true,
+    "adapter_required_rules_recorded": true,
+    "all_schema_families_have_metadata_guards": true,
+    "authority_counts_zero": true,
+    "compiler_required_fields_recorded": true,
+    "gate_references_available": true,
+    "loss_keys_available": true,
+    "schema_artifact_present": true,
+    "schema_families_present": true,
+    "source_stage9046_passed": true,
+    "source_stage9046_present": true
+  },
+  "compiler_row_required_fields": [
+    "row_id",
+    "split",
+    "route",
+    "semantic_key",
+    "gate_status",
+    "authority",
+    "loss_mask",
+    "anti_cheat",
+    "provenance"
+  ],
+  "decision": "Domain/Twin metadata records are not compiler rows. A future adapter must judge, route, gate, loss-mask, and shortcut-audit them before any objective manifest can exist.",
+  "family_checks": {
+    "domain_concept_manifest": {
+      "forbids_raw_payloads": true,
+      "has_anti_cheat": true,
+      "has_authority": true,
+      "has_provenance": true
+    },
+    "domain_twin_alignment_manifest": {
+      "forbids_raw_payloads": true,
+      "has_anti_cheat": true,
+      "has_authority": true,
+      "has_provenance": true
+    },
+    "paper_twin_manifest": {
+      "forbids_raw_payloads": true,
+      "has_anti_cheat": true,
+      "has_authority": true,
+      "has_provenance": true
+    },
+    "repo_twin_manifest": {
+      "forbids_raw_payloads": true,
+      "has_anti_cheat": true,
+      "has_authority": true,
+      "has_provenance": true
+    }
+  },
+  "forbidden_now": [
+    "compile_domain_twin_records_now",
+    "materialize_adapter_outputs_now",
+    "enable_any_domain_twin_loss_now",
+    "scan_arxiv_now",
+    "scan_repository_library_now",
+    "read_bodies_now",
+    "run_model_now",
+    "train_now"
+  ],
+  "loss_keys": [
+    "surface_role_ce",
+    "repair_surface_ce",
+    "build_mode_ce",
+    "allowed_import_policy_ce",
+    "blocked_import_policy_ce",
+    "repo_dependency_policy_ce",
+    "action_sequence_ce",
+    "file_plan_ce",
+    "symbol_binding_ce",
+    "edit_localization_ce",
+    "patch_operator_ce",
+    "verifier_repair_ce",
+    "decoder_ce",
+    "denoise_ce",
+    "runtime_reward"
+  ],
+  "metrics": {
+    "adapter_outputs_materialized_now": false,
+    "adapter_required_outputs": 5,
+    "adapter_required_rules": 7,
+    "arxiv_scan_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "body_read_authorized_now": false,
+    "compiler_row_required_fields": 9,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "domain_twin_losses_enabled_now": false,
+    "domain_twin_records_compiled_now": false,
+    "model_execution_attempted": false,
+    "repository_library_scan_authorized_now": false,
+    "runtime_authorized_flag": false,
+    "schema_audit_only": true,
+    "schema_families": 4,
+    "training_authorized": false
+  },
+  "required_recovered_gate_references": [
+    "source_inventory_lineage",
+    "source_provenance",
+    "contamination_leakage_detector",
+    "golden_locked_eval_suite",
+    "drift_canary_regression_monitor",
+    "cluster_slice_near_duplicate_detector",
+    "dataset_junk_ood_ranker_v1",
+    "schema_drift_detector"
+  ],
+  "stage": 9047,
+  "stage_name": "stage9047_domain_twin_schema_compiler_audit",
+  "status": "DOMAIN_TWIN_SCHEMA_COMPILER_AUDIT_NO_ADAPTER_EXECUTION"
+}
