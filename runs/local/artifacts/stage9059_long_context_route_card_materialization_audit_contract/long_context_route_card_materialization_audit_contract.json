@@ -1,0 +1,148 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_closed": true,
+    "closed_sample_passes": true,
+    "contract_status_no_materialization": true,
+    "negative_cases_rejected": true,
+    "required_fields_recorded": true,
+    "required_gate_fields_recorded": true,
+    "route_rows_not_materialized": true,
+    "source_stage9058_passed": true,
+    "source_stage9058_present": true
+  },
+  "closed_sample_failures": [],
+  "contract": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "compiler_ready_rows_now": 0,
+    "contract_name": "long_context_route_card_materialization_audit_v1",
+    "loss_keys": [
+      "structured_aux_ce",
+      "decoder_ce",
+      "denoise_ce",
+      "retrieval_loss",
+      "runtime_reward"
+    ],
+    "negative_cases": {
+      "compiler_ready_without_gates": "compiler_ready",
+      "missing_required_field": "route_card_id",
+      "missing_source_ticket": "source_output_ticket_granted",
+      "open_decoder_ce": "decoder_ce",
+      "open_training_authority": "decoder_ce_training_authorized_next"
+    },
+    "required_fields": [
+      "route_card_id",
+      "candidate_id",
+      "source_ticket_id",
+      "source_lineage",
+      "route",
+      "route_reasons",
+      "required_gates_before_compiler",
+      "quality_signals",
+      "risk_signals",
+      "losses_enabled",
+      "compiler_ready",
+      "training_ready",
+      "model_input_ready",
+      "authority"
+    ],
+    "required_gate_fields": [
+      "source_output_ticket_granted",
+      "source_lineage_card",
+      "dataset_junk_ood_ranker_card",
+      "shortcut_baseline_audit",
+      "counterfactual_obligation_card",
+      "split_overlap_audit",
+      "loss_mask_card",
+      "telemetry_contract"
+    ],
+    "required_materialization_audits": [
+      "source_output_ticket_granted_and_scoped",
+      "route_card_schema_v1_fields_present",
+      "source_lineage_card_present",
+      "dataset_junk_ood_ranker_card_present",
+      "shortcut_baseline_card_present",
+      "counterfactual_obligation_card_present",
+      "split_overlap_card_present",
+      "loss_mask_card_present_and_closed_by_default",
+      "telemetry_contract_present",
+      "compiler_ready_false_until_all_gates_pass"
+    ],
+    "route_rows_materialized_now": false,
+    "schema_contract": "long_context_route_card_v1",
+    "status": "audit_contract_only_no_materialization",
+    "training_ready_rows_now": 0
+  },
+  "decision": "Future long-context route-card materialization audit contract is defined; no route cards are materialized and compiler/training remain closed.",
+  "failures": [],
+  "metrics": {
+    "arxiv_read_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "compiler_ready_rows_now": 0,
+    "model_execution_attempted": false,
+    "negative_cases": 5,
+    "required_materialization_audits": 10,
+    "route_rows_materialized_now": false,
+    "training_authorized": false,
+    "training_ready_rows_now": 0
+  },
+  "negative_cases": {
+    "compiler_ready_without_gates": {
+      "failures": [
+        "compiler_ready_without_all_gates"
+      ],
+      "rejected": true
+    },
+    "missing_required_field": {
+      "failures": [
+        "missing_field:route_card_id"
+      ],
+      "rejected": true
+    },
+    "missing_source_ticket": {
+      "failures": [
+        "missing_gate:source_output_ticket_granted"
+      ],
+      "rejected": true
+    },
+    "open_decoder_ce": {
+      "failures": [
+        "loss_open"
+      ],
+      "rejected": true
+    },
+    "open_training_authority": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "stage": 9059,
+  "stage_name": "stage9059_long_context_route_card_materialization_audit_contract"
+}
