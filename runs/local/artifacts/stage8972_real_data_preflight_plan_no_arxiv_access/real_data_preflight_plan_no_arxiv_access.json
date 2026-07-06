@@ -1,0 +1,81 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_declared": true,
+    "future_outputs_declared": true,
+    "future_steps_declared": true,
+    "no_arxiv_access_performed": true,
+    "no_training_or_mining_authorized": true,
+    "protected_roots_declared": true,
+    "registry_frontier_stage8971_or_8972": true,
+    "source_stage8971_passed": true
+  },
+  "decision": "The real-data preflight is designed but not executed. /arxiv remains protected as backup storage; future preflight may inspect only metadata and must write outputs under runs/local/artifacts, never /arxiv.",
+  "forbidden_in_preflight": [
+    "read_dataset_rows",
+    "read_repository_source_body",
+    "write_to_arxiv",
+    "delete_or_cleanup_arxiv",
+    "load_model_checkpoint",
+    "execute_training",
+    "execute_runtime",
+    "start_mining",
+    "upload_to_huggingface"
+  ],
+  "future_preflight_steps": [
+    "verify_arxiv_roots_exist_metadata_only",
+    "inventory_dataset_files_by_name_size_extension_only",
+    "inventory_repository_roots_by_name_only",
+    "reject_hidden_checkpoint_or_runtime_probe_paths",
+    "sample_zero_rows_until_explicit_compiler_ticket",
+    "write_all_preflight_outputs_under_runs_local_artifacts_only",
+    "require_dataset_judge_route_card_before_mining",
+    "require_loss_mask_card_before_training",
+    "require_trainer_contract_only_ticket_before_any_output_dir_generation"
+  ],
+  "metrics": {
+    "arxiv_access_performed": false,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_operations": 9,
+    "future_preflight_steps": 9,
+    "model_execution_attempted": false,
+    "network_upload_performed": false,
+    "protected_roots": 3,
+    "repository_source_bodies_loaded": false,
+    "required_future_outputs": 5,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "protected_roots": [
+    "/arxiv",
+    "/arxiv/datasets",
+    "/arxiv/repositories"
+  ],
+  "required_outputs_for_future_preflight": [
+    "arxiv_root_metadata_card.json",
+    "dataset_file_inventory_metadata_only.jsonl",
+    "repository_root_inventory_metadata_only.jsonl",
+    "protected_path_policy_card.json",
+    "real_data_preflight_decision_card.json"
+  ],
+  "stage": 8972,
+  "stage_name": "stage8972_real_data_preflight_plan_no_arxiv_access",
+  "status": "REAL_DATA_PREFLIGHT_PLAN_NO_ARXIV_ACCESS"
+}

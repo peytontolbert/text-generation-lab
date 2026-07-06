@@ -2284,3 +2284,7 @@ Stage8970 inventories recovered support modules for the 100M training pipeline. 
 ## Stage8971 Trainer Contract Reconciliation No-Execution
 
 Stage8971 statically reconciles the recovered trainer CLI and telemetry contract. The interface is present, but contract-only generation and training remain closed pending explicit tickets.
+
+## Stage8972 Real Data Preflight Plan No Arxiv Access
+
+Stage8972 designs the future real-data preflight around /arxiv/datasets and /arxiv/repositories. It performs no /arxiv access and keeps all data, mining, and training authority closed.
