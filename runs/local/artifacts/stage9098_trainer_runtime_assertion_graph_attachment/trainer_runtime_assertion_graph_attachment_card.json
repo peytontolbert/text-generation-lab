@@ -1,0 +1,163 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authority_rows_zero": true,
+    "base_graph_present": true,
+    "new_edges_present": true,
+    "new_nodes_present": true,
+    "registry_frontier_stage9097": true,
+    "runtime_inventory_negative_cases_rejected": true,
+    "source_stage9096_passed": true,
+    "source_stage9097_passed": true,
+    "stage9096_runtime_assertions_not_executed": true,
+    "stage9097_trainer_not_executed": true,
+    "trainer_command_surface_contract_present": true
+  },
+  "decision": "Attached trainer runtime assertion inventory controls to the central graph. Trainer invocation, contract-only mode, runtime assertions, model rows, model forward, decoder CE, denoise CE, runtime, and training remain closed.",
+  "metrics": {
+    "added_edges": 20,
+    "added_nodes": 7,
+    "authority_rows": 0,
+    "candidate_rows_materialized": 0,
+    "contract_only_invoked_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "graph_edges": 2869,
+    "graph_nodes": 1918,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_assertions_executed_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_ready_now": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "new_edges": [
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "audited_by",
+      "audit:trainer_runtime_assertion_inventory_negative_cases_v1"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "requires",
+      "contract:trainer_command_surface_static_v1"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "requires",
+      "gate:trainer_command_requires_manifest_flag"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "requires",
+      "gate:trainer_command_requires_mode_flag"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "requires",
+      "gate:runtime_assertions_require_manifest_and_caps"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "requires",
+      "gate:runtime_assertions_require_loss_mask_enforcement"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "requires",
+      "gate:runtime_assertions_require_authority_closure"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "requires",
+      "gate:runtime_assertions_require_checkpoint_cleanup_proof"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "requires",
+      "telemetry:trainer_probe_required_interpretability_artifacts_v1"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "blocks",
+      "operation:trainer_contract_only_invocation"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "blocks",
+      "operation:trainer_execution"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "blocks",
+      "operation:model_forward"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "blocks",
+      "operation:decoder_ce_training"
+    ],
+    [
+      "contract:trainer_runtime_assertion_inventory_v1",
+      "blocks",
+      "operation:denoise_ce_training"
+    ],
+    [
+      "audit:trainer_runtime_assertion_inventory_negative_cases_v1",
+      "rejects",
+      "failure:missing_runtime_assertion_family"
+    ],
+    [
+      "audit:trainer_runtime_assertion_inventory_negative_cases_v1",
+      "rejects",
+      "failure:missing_runtime_assertion_term"
+    ],
+    [
+      "audit:trainer_runtime_assertion_inventory_negative_cases_v1",
+      "rejects",
+      "failure:missing_required_telemetry_artifact"
+    ],
+    [
+      "audit:trainer_runtime_assertion_inventory_negative_cases_v1",
+      "rejects",
+      "failure:runtime_assertions_executed_now"
+    ],
+    [
+      "audit:trainer_runtime_assertion_inventory_negative_cases_v1",
+      "rejects",
+      "failure:trainer_executed_now"
+    ],
+    [
+      "audit:trainer_runtime_assertion_inventory_negative_cases_v1",
+      "rejects",
+      "failure:model_input_rows_now"
+    ]
+  ],
+  "new_node_ids": [
+    "contract:trainer_runtime_assertion_inventory_v1",
+    "audit:trainer_runtime_assertion_inventory_negative_cases_v1",
+    "gate:runtime_assertions_require_manifest_and_caps",
+    "gate:runtime_assertions_require_loss_mask_enforcement",
+    "gate:runtime_assertions_require_authority_closure",
+    "gate:runtime_assertions_require_checkpoint_cleanup_proof",
+    "telemetry:trainer_probe_required_interpretability_artifacts_v1"
+  ],
+  "stage": 9098,
+  "stage_name": "stage9098_trainer_runtime_assertion_graph_attachment",
+  "status": "TRAINER_RUNTIME_ASSERTION_GRAPH_ATTACHMENT_NO_EXECUTION"
+}

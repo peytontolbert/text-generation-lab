@@ -2556,3 +2556,7 @@ No source/output ticket, data access, route-card materialization, route-to-loss 
 ## Stage9096 Trainer Runtime Assertion Inventory
 
 Stage9096 statically inventories trainer runtime assertion families and telemetry artifact requirements. The trainer is not invoked; contract-only mode, route-to-loss translation, model forward, row loading, /arxiv IO, decoder CE, denoise CE, runtime, and training remain closed.
+
+## Stage9098 Trainer Runtime Assertion Graph Attachment
+
+Stage9098 attaches Stage9096/9097 trainer runtime assertion inventory controls to the central graph. Trainer invocation, contract-only mode, runtime assertions, model rows, model forward, decoder CE, denoise CE, runtime, and training remain closed.
