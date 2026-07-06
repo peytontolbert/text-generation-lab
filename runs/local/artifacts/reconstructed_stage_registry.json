@@ -13,12 +13,12 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9020,
-    "latest_stage_name": "stage9020_judge_to_compiler_gate_status_contract",
-    "latest_stage_next_best_step": "After a future judge materializes row IDs and scores, materialize judge_to_compiler_gate_status.json from this schema and audit it before locked manifest compilation.",
-    "max_stage": 9020,
+    "latest_stage": 9021,
+    "latest_stage_name": "stage9021_locked_manifest_compile_blocker_audit",
+    "latest_stage_next_best_step": "Do not compile a manifest. Materialize real row-sample judge outputs and a passing judge_to_compiler_gate_status.json under a separate execution ticket first.",
+    "max_stage": 9021,
     "min_stage": 8530,
-    "registry_rows": 519
+    "registry_rows": 520
   },
   "passed": true,
   "rows": [
@@ -10401,6 +10401,26 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9020_judge_to_compiler_gate_status_contract.json",
       "stage": 9020,
       "stage_name": "stage9020_judge_to_compiler_gate_status_contract"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Do not compile a manifest. Materialize real row-sample judge outputs and a passing judge_to_compiler_gate_status.json under a separate execution ticket first.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9021_locked_manifest_compile_blocker_audit.json",
+      "stage": 9021,
+      "stage_name": "stage9021_locked_manifest_compile_blocker_audit"
     }
   ]
 }
