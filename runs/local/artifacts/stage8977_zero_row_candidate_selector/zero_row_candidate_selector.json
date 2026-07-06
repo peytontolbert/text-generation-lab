@@ -1,0 +1,73 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "arxiv_write_closed": true,
+    "authority_counts_zero": true,
+    "candidate_files_not_opened": true,
+    "dataset_rows_not_loaded": true,
+    "design_present": true,
+    "inventory_present": true,
+    "inventory_rows_present": true,
+    "metadata_only_policy_true": true,
+    "registry_frontier_stage8976_or_8977": true,
+    "repository_source_bodies_not_loaded": true,
+    "schema_or_header_not_read": true,
+    "selected_candidates_present": true,
+    "selected_jsonl_absent": true,
+    "source_stage8976_passed": true
+  },
+  "decision": "Zero-row candidate selector emitted selected path metadata only from existing inventory artifacts. It did not open candidate files, read schemas/headers/rows, read repository bodies, or authorize mining/training.",
+  "decision_card": {
+    "next_best_step": "Audit selected path metadata, then require a separate explicit ticket before any parquet footer schema access.",
+    "route_counts": {
+      "NAMED_SOFTWARE_MAINTAINER_DATASET_CANDIDATE": 20,
+      "PARQUET_TABLE_CANDIDATE": 20
+    },
+    "selected_candidates": 40,
+    "selector_completed": true
+  },
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "candidate_file_opened": false,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "inventory_rows_seen": 5000,
+    "model_execution_attempted": false,
+    "network_upload_performed": false,
+    "repository_source_bodies_loaded": false,
+    "runtime_authorized_flag": false,
+    "schema_or_header_read_performed": false,
+    "selected_candidates": 40,
+    "selected_jsonl_candidates": 0,
+    "selected_named_candidates": 20,
+    "selected_parquet_candidates": 20,
+    "training_authorized": false
+  },
+  "policy": {
+    "candidate_file_opened": false,
+    "dataset_rows_loaded": false,
+    "jsonl_selected": false,
+    "metadata_only": true,
+    "repository_source_bodies_loaded": false,
+    "schema_or_header_read_performed": false,
+    "selected_from_stage8973_inventory": true,
+    "write_to_arxiv": false
+  },
+  "stage": 8977,
+  "stage_name": "stage8977_zero_row_candidate_selector",
+  "status": "ZERO_ROW_CANDIDATE_SELECTOR"
+}

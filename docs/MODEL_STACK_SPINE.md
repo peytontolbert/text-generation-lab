@@ -2304,3 +2304,15 @@ Stage8975 audits metadata route selector outputs and records requirements for a 
 ## Stage8976 Zero-Row Schema Preflight Design
 
 Stage8976 designs a future zero-row schema/header preflight. It performs no schema/header reads itself and keeps row/source-body reads, mining, and training closed.
+
+## Stage8976 Zero-Row Schema/Header Preflight Design
+
+Stage8976 designs a zero-row schema/header preflight from metadata route cards only. It keeps /arxiv file access, dataset rows, repository source bodies, schema/header probes, mining, training, and runtime closed.
+
+## Stage8977 Zero-Row Candidate Selector
+
+Stage8977 selects metadata-only candidate paths for a future schema preflight. It opens no selected files and keeps row/source-body reads, mining, and training closed.
+
+## Stage8977 Zero-Row Schema/Header Preflight Design Audit
+
+Stage8977 audits Stage8976 zero-row preflight design artifacts by exact stage name and keeps /arxiv file access, row loads, source-body reads, schema/header probes, mining, training, and runtime closed.
