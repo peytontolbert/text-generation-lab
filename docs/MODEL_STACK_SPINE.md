@@ -2494,3 +2494,7 @@ No source metadata read, row/source body read, route-card materialization, candi
 Stage9079 reconciles the current frontier after Stage9078. The source/output ticket controls are graph-attached; next safe work is a no-data route-card materialization audit instance design.
 
 No source metadata read, row/source body read, route-card materialization, candidate mining, /arxiv IO, cleanup, trainer dry run, model forward, decoder CE, denoise CE, runtime, or training is authorized.
+
+## Stage9080 No-Data Route-Card Materialization Audit Instance Design
+
+Stage9080 designs an inactive route-card materialization audit instance. It records future required inputs, outputs, and audits while keeping source/output tickets, metadata reads, body reads, route-card materialization, compiler handoff, trainer dry run, and training closed.
