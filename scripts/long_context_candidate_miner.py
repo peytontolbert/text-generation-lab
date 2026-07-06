@@ -226,6 +226,14 @@ def _paper_path_quality(path: str) -> int:
     return score
 
 
+def _candidate_priority(canonical_name: str, mention_rows: list[dict[str, Any]]) -> tuple[int, int, int, int, str]:
+    compound_bonus = 1 if '_' in canonical_name else 0
+    specificity = _entity_specificity_score(canonical_name, mention_rows)
+    dispersion = _entity_dispersion_score(mention_rows)
+    distinct_sources = len({(str(row.get('source_type') or ''), str(row.get('source_id') or '')) for row in mention_rows})
+    return (-compound_bonus, -specificity, -dispersion, -distinct_sources, canonical_name)
+
+
 def mine_candidates(
     *,
     index_dir: Path,
@@ -241,12 +249,19 @@ def mine_candidates(
     chunk_by_id = {str(row['chunk_id']): row for row in chunks}
     candidates: list[dict[str, Any]] = []
 
+    ranked_entities: list[tuple[tuple[int, int, int, int, str], dict[str, Any], list[dict[str, Any]]]] = []
     for entity in entities:
         canonical_name = str(entity.get('canonical_name') or '')
         if not _canonical_name_ok(canonical_name):
             continue
         mentions = json.loads(str(entity.get('mentions_json') or '[]'))
         mention_rows = [chunk_by_id[m] for m in mentions if m in chunk_by_id]
+        if len(mention_rows) < 2:
+            continue
+        ranked_entities.append((_candidate_priority(canonical_name, mention_rows), entity, mention_rows))
+
+    for _, entity, mention_rows in sorted(ranked_entities, key=lambda item: item[0]):
+        canonical_name = str(entity.get('canonical_name') or '')
         distinct_chunk_ratio = len({str(row.get('chunk_id') or '') for row in mention_rows}) / total_chunk_count
         ratio_limit = max_compound_entity_chunk_ratio if '_' in canonical_name else max_entity_chunk_ratio
         if distinct_chunk_ratio > ratio_limit:
@@ -337,7 +352,7 @@ def mine_candidates(
             'candidate_id': stable_id('cand', entity['entity_id'], str(len(candidates) + 1)),
             'canonical_name': canonical_name,
             'entity_id': entity['entity_id'],
-            'template_family': 'natural_multi_source_transition',
+            'template_family': 'compound_concept_transition' if '_' in canonical_name else 'natural_multi_source_transition',
             'state_variable': state_name,
             'required_source_types': sorted({str(row.get('source_type') or '') for row in chosen}),
             'supporting_chunk_ids': [transition['trigger_chunk_id'] for transition in transitions],
@@ -348,6 +363,10 @@ def mine_candidates(
         if len(candidates) >= max_candidates:
             break
 
+    family_counts: dict[str, int] = {}
+    for candidate in candidates:
+        family = str(candidate.get('template_family') or 'unknown')
+        family_counts[family] = family_counts.get(family, 0) + 1
     summary = {
         'candidate_count': len(candidates),
         'max_candidates': max_candidates,
@@ -355,6 +374,7 @@ def mine_candidates(
         'required_source_types': list(required_source_types),
         'max_entity_chunk_ratio': max_entity_chunk_ratio,
         'max_compound_entity_chunk_ratio': max_compound_entity_chunk_ratio,
+        'template_family_counts': dict(sorted(family_counts.items())),
     }
     return candidates, summary
 

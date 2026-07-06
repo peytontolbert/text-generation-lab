@@ -2446,3 +2446,9 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 ## Stage9064 Training Readiness Refresh After Long-Context Controls
 
 Stage9064 refreshes the training-readiness blocker matrix after long-context compiler handoff and route-to-trainer loss-mask controls. The controls are recovered, but source tickets, route-card materialization, compiler handoff, loss masks, model execution, mining, decoder CE, denoise CE, runtime, and training remain closed.
+
+## Stage9071 Current Frontier Reconciliation After Long-Context Guards
+
+Stage9071 reconciles Stage9064-9070 into the current no-data recovery frontier. Training readiness, trainer dry-run input controls, negative-case audits, graph attachment, candidate dispersion, compound term indexing, and compound candidate ratio guards are recovered.
+
+Real source/index/candidate work, /arxiv compiler IO, trainer execution, model forward, decoder CE, denoise CE, runtime, Gemma, harness/scoring, controller merge, promotion, and training remain closed until separate explicit tickets and audits pass.

@@ -296,6 +296,49 @@ def test_candidate_miner_prefers_implementation_repo_rows_over_tests(tmp_path: P
     assert repo_paths[0].endswith("repo_a/src/engine.py")
 
 
+def test_candidate_miner_prefers_compound_candidates_in_order(tmp_path: Path) -> None:
+    if importlib.util.find_spec("pyarrow") is None:
+        return
+    papers = tmp_path / "papers"
+    repos = tmp_path / "repositories"
+    (papers / "paper_a").mkdir(parents=True)
+    (repos / "repo_a" / "src").mkdir(parents=True)
+    (repos / "repo_b" / "src").mkdir(parents=True)
+    (papers / "paper_a" / "method.txt").write_text(
+        "Pre trained encoder improves transfer. Pre trained encoder remains stable. Local update remains stable.\n",
+        encoding="utf-8",
+    )
+    (papers / "paper_a" / "results.txt").write_text(
+        "Pre trained setup improves robustness. Local behavior also changes.\n",
+        encoding="utf-8",
+    )
+    (repos / "repo_a" / "src" / "engine.py").write_text(
+        "def pre_trained_encoder():\n    return 'pre trained'\n",
+        encoding="utf-8",
+    )
+    (repos / "repo_b" / "src" / "helper.py").write_text(
+        "def local_update():\n    return 'local'\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "compound_order_out"
+    build_chunk_and_mention_shards(
+        paper_roots=[papers],
+        repo_roots=[repos],
+        dataset_roots=[],
+        output_dir=out,
+        paper_chunk_tokens=64,
+        repo_chunk_tokens=64,
+        trace_chunk_tokens=64,
+        rows_per_shard=8,
+    )
+    build_entities_with_pyarrow(output_dir=out, min_mention_count=2, max_chunk_frequency_ratio=1.0)
+    build_links_with_pyarrow(output_dir=out, max_pairwise_mentions_per_entity=8)
+    candidates, summary = mine_candidates(index_dir=out, max_candidates=10, required_source_types=("paper", "repo"), max_entity_chunk_ratio=1.0, max_compound_entity_chunk_ratio=1.0)
+    assert candidates
+    assert candidates[0]["template_family"] == "compound_concept_transition"
+    assert "compound_concept_transition" in summary["template_family_counts"]
+
+
 def test_candidate_miner_rejects_single_doc_single_repo_overlap(tmp_path: Path) -> None:
     if importlib.util.find_spec("pyarrow") is None:
         return
@@ -383,6 +426,7 @@ def test_candidate_miner_from_parquet_index(tmp_path: Path) -> None:
     assert summary["candidate_count"] == len(candidates)
     assert summary["max_entity_chunk_ratio"] == 0.01
     assert summary["max_compound_entity_chunk_ratio"] == 0.04
+    assert "template_family_counts" in summary
     repo_chunk_ids = {
         chunk_id
         for candidate in candidates
