@@ -1,0 +1,158 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_families_have_authority_provenance_anti_cheat": true,
+    "all_families_have_forbidden_fields": true,
+    "authority_counts_zero": true,
+    "required_anti_cheat_fields_recorded": true,
+    "required_authority_fields_recorded": true,
+    "schema_has_four_manifest_families": true,
+    "source_stage9043_passed": true,
+    "source_stage9043_present": true
+  },
+  "decision": "Define metadata-only DomainGraph/RepoTwin/PaperTwin manifest schemas as future compiler inputs without materializing real manifests or opening IO/training.",
+  "forbidden_now": [
+    "materialize_real_domain_manifest",
+    "scan_arxiv",
+    "scan_repository_library",
+    "read_paper_body",
+    "read_repo_source_body",
+    "write_arxiv",
+    "upload_hf",
+    "train_model"
+  ],
+  "metrics": {
+    "arxiv_scan_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "hf_upload_authorized_now": false,
+    "manifest_families": 4,
+    "model_execution_attempted": false,
+    "paper_body_read_authorized_now": false,
+    "real_manifest_materialized_now": false,
+    "repo_source_body_read_authorized_now": false,
+    "repository_library_scan_authorized_now": false,
+    "required_anti_cheat_fields": 6,
+    "required_authority_fields": 6,
+    "schema_design_only": true,
+    "training_authorized": false
+  },
+  "required_anti_cheat_fields": [
+    "id_is_opaque",
+    "label_coded_id_absent",
+    "target_label_absent_from_input",
+    "raw_body_absent",
+    "shortcut_baseline_required_before_training",
+    "split_overlap_check_required"
+  ],
+  "required_authority_fields": [
+    "training_authorized",
+    "decoder_ce_authorized",
+    "denoise_ce_authorized",
+    "runtime_authorized",
+    "source_body_read_authorized",
+    "arxiv_write_authorized"
+  ],
+  "schema_contract": {
+    "domain_concept_manifest": {
+      "forbidden_fields": [
+        "raw_paper_text",
+        "raw_repo_source",
+        "target_label",
+        "answer_text",
+        "model_logits"
+      ],
+      "required_fields": [
+        "concept_id",
+        "canonical_name",
+        "alias_terms",
+        "embedding_ref",
+        "source_ref_ids",
+        "edge_refs",
+        "domain_tags",
+        "authority",
+        "provenance",
+        "anti_cheat"
+      ]
+    },
+    "domain_twin_alignment_manifest": {
+      "forbidden_fields": [
+        "raw_repo_source",
+        "raw_paper_text",
+        "decoder_target",
+        "target_label",
+        "eval_answer"
+      ],
+      "required_fields": [
+        "alignment_id",
+        "concept_id",
+        "repo_twin_id",
+        "paper_twin_id",
+        "alignment_type",
+        "evidence_ref_ids",
+        "score_metadata",
+        "authority",
+        "provenance",
+        "anti_cheat"
+      ]
+    },
+    "paper_twin_manifest": {
+      "forbidden_fields": [
+        "raw_pdf_text",
+        "raw_equation_body",
+        "target_code",
+        "hidden_eval_answer",
+        "teacher_unverified_truth"
+      ],
+      "required_fields": [
+        "paper_twin_id",
+        "paper_ref",
+        "concept_refs",
+        "method_operator_refs",
+        "assumption_refs",
+        "implementation_hint_refs",
+        "semantic_summary_refs",
+        "citation_graph_refs",
+        "authority",
+        "provenance",
+        "anti_cheat"
+      ]
+    },
+    "repo_twin_manifest": {
+      "forbidden_fields": [
+        "raw_source_body",
+        "patch_body",
+        "secret",
+        "hidden_eval_answer",
+        "model_output_body"
+      ],
+      "required_fields": [
+        "repo_twin_id",
+        "repo_ref",
+        "capability_refs",
+        "symbol_index_ref",
+        "test_index_ref",
+        "semantic_summary_refs",
+        "episodic_memory_refs",
+        "style_profile_ref",
+        "authority",
+        "provenance",
+        "anti_cheat"
+      ]
+    }
+  },
+  "stage": 9046,
+  "stage_name": "stage9046_domain_twin_manifest_schema_design",
+  "status": "DOMAIN_TWIN_MANIFEST_SCHEMA_DESIGN_NO_DATA"
+}
