@@ -2280,3 +2280,7 @@ Stage8969 records that the recovery branch was pushed to GitHub and that draft P
 ## Stage8970 Training Pipeline Module Gap Matrix
 
 Stage8970 inventories recovered support modules for the 100M training pipeline. The module surface is mostly present, but training remains closed pending no-execution trainer contract reconciliation and real-data preflight.
+
+## Stage8971 Trainer Contract Reconciliation No-Execution
+
+Stage8971 statically reconciles the recovered trainer CLI and telemetry contract. The interface is present, but contract-only generation and training remain closed pending explicit tickets.
