@@ -1,0 +1,84 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_audit": {
+    "denied_operations": 13,
+    "failures": [],
+    "passed": true,
+    "required_postrun_artifacts": 6,
+    "required_preflight_artifacts": 6,
+    "ticket_contract_failures": []
+  },
+  "checks": {
+    "all_negative_mutations_rejected": true,
+    "authority_counts_zero": true,
+    "base_ticket_audit_passed": true,
+    "command_not_materialized": true,
+    "denies_all_real_data_ops": true,
+    "required_caps_zero_or_false": true,
+    "source_stage9052_passed": true,
+    "source_stage9052_present": true,
+    "ticket_artifact_present": true,
+    "ticket_not_granted_now": true
+  },
+  "decision": "Stage9052 inactive source/output ticket passes independent audit and rejects unsafe mutations; no source read or candidate mining is opened.",
+  "failures": [],
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "candidate_mining_authorized_now": false,
+    "corpus_scan_authorized_now": false,
+    "denied_operations": 13,
+    "hf_upload_authorized_now": false,
+    "model_execution_attempted": false,
+    "negative_mutation_checks": 6,
+    "required_caps": 9,
+    "ticket_audit_only": true,
+    "training_authorized": false
+  },
+  "negative_checks": {
+    "enabled_hf_upload": {
+      "expected_failure": "cap_mismatch:hf_upload",
+      "observed": true,
+      "passed": false
+    },
+    "granted_ticket": {
+      "expected_failure": "ticket_granted_now_not_false",
+      "observed": true,
+      "passed": false
+    },
+    "materialized_command": {
+      "expected_failure": "command_materialized_not_false",
+      "observed": true,
+      "passed": false
+    },
+    "missing_arxiv_denial": {
+      "expected_failure": "missing_denial:scan_arxiv",
+      "observed": true,
+      "passed": false
+    },
+    "nonzero_candidate_cap": {
+      "expected_failure": "cap_mismatch:max_candidates",
+      "observed": true,
+      "passed": false
+    },
+    "opened_allowed_operation": {
+      "expected_failure": "allowed_operations_now_not_empty",
+      "observed": true,
+      "passed": false
+    }
+  },
+  "passed": true,
+  "stage": 9053,
+  "stage_name": "stage9053_long_context_source_output_ticket_audit"
+}

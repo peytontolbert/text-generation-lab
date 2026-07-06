@@ -1,7 +1,6 @@
 {
   "artifacts": {
-    "audit": "runs/local/artifacts/stage9052_long_context_source_output_ticket_design/long_context_source_output_ticket_audit.json",
-    "ticket": "runs/local/artifacts/stage9052_long_context_source_output_ticket_design/long_context_source_output_ticket_template_inactive.json"
+    "audit": "runs/local/artifacts/stage9053_long_context_source_output_ticket_audit/long_context_source_output_ticket_audit.json"
   },
   "authority": {
     "body_emission_authorized": false,
@@ -16,14 +15,13 @@
     "scoring_authorized_next": false,
     "source_emission_authorized": false
   },
-  "created_at_utc": "2026-07-06T18:47:26Z",
-  "decision": "Inactive long-context source/output ticket schema is defined but not granted. Real corpus indexing/candidate mining remains closed.",
+  "created_at_utc": "2026-07-06T18:47:47Z",
+  "decision": "Stage9052 inactive source/output ticket passes independent audit and rejects unsafe mutations; no source read or candidate mining is opened.",
   "metrics": {
     "arxiv_write_authorized": false,
     "authority_rows": 0,
     "body_emission_authorized": false,
     "candidate_mining_authorized_now": false,
-    "command_materialized": false,
     "controller_complete_merge_authorized_next": false,
     "corpus_scan_authorized_now": false,
     "decoder_ce_training_authorized_next": false,
@@ -35,18 +33,17 @@
     "hf_upload_authorized_now": false,
     "model_execution_attempted": false,
     "model_execution_authorized_next": false,
+    "negative_mutation_checks": 6,
     "promotion_ready": false,
-    "required_postrun_artifacts": 6,
-    "required_preflight_artifacts": 6,
+    "required_caps": 9,
     "runtime_authorized": false,
     "scoring_authorized_next": false,
     "source_emission_authorized": false,
-    "ticket_contract_failures": 0,
-    "ticket_granted_now": false,
+    "ticket_audit_only": true,
     "training_authorized": false
   },
-  "next_best_step": "Audit this inactive ticket schema, then continue no-data pipeline recovery unless the user explicitly authorizes a tiny source/output ticket instance later.",
+  "next_best_step": "Continue no-data pipeline recovery: attach long-context candidate ticket controls to the central compiler graph, or audit candidate quality/routing on synthetic fixtures only.",
   "passed": true,
-  "stage": 9052,
-  "stage_name": "stage9052_long_context_source_output_ticket_design"
+  "stage": 9053,
+  "stage_name": "stage9053_long_context_source_output_ticket_audit"
 }
