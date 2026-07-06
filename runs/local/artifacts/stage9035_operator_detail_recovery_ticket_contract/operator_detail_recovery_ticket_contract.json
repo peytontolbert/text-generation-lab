@@ -1,0 +1,175 @@
+{
+  "allowed_metadata_sources": [
+    "stage8703_low_level_training_concept_session_grep_artifacts",
+    "stage9033_operator_detail_seed_catalog",
+    "stage8718_operator_inventory",
+    "existing_docs_no_raw_session_payload",
+    "human_authored_metadata_patch"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_recovery_fields_match_gap_matrix": true,
+    "all_recovery_fields_missing_for_108_rows": true,
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "forbidden_sources_recorded": true,
+    "future_outputs_recorded": true,
+    "source_stage9034_confirms_108_blocked_rows": true,
+    "source_stage9034_passed": true,
+    "source_stage9034_present": true,
+    "ticket_required_fields_recorded": true,
+    "validation_requirements_recorded": true
+  },
+  "decision": "This stage defines the future operator-detail recovery ticket only. It does not recover details, read raw payloads, materialize patches, mine, or train.",
+  "forbidden_operations": [
+    "RECOVER_OPERATOR_DETAILS_NOW",
+    "READ_RAW_SESSION_TEXT",
+    "READ_REPOSITORY_SOURCE_BODY",
+    "READ_ROW_BODY_TEXT",
+    "MATERIALIZE_OPERATOR_DETAIL_PATCH_NOW",
+    "MATERIALIZE_TRAINING_ROWS_NOW",
+    "RUN_ROW_SAMPLE_JUDGE_NOW",
+    "MATERIALIZE_MANIFEST_NOW",
+    "RUN_TRAINER_DRY_RUN_NOW",
+    "START_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "RUN_GEMMA",
+    "WRITE_TO_ARXIV",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "forbidden_sources": [
+    "raw_codex_session_text",
+    "raw_repository_source_body",
+    "raw_row_body_text",
+    "hidden_or_locked_eval_payload",
+    "model_generated_operator_detail_without_audit"
+  ],
+  "future_output_artifacts": [
+    "operator_detail_metadata_patch.jsonl",
+    "operator_detail_field_coverage_card.json",
+    "operator_detail_hash_audit.json",
+    "operator_detail_no_raw_payload_proof.json"
+  ],
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_operations": 16,
+    "forbidden_sources": 5,
+    "future_output_artifacts": 4,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "judge_executed_now": false,
+    "manifest_compile_authorized_now": false,
+    "manifest_materialized_now": false,
+    "model_execution_attempted": false,
+    "operator_detail_patch_materialized_now": false,
+    "operator_details_recovered_now": false,
+    "operator_rows_to_recover": 108,
+    "raw_session_text_read_now": false,
+    "recovery_fields": 6,
+    "repository_source_bodies_read_now": false,
+    "row_bodies_read_now": false,
+    "runtime_authorized_flag": false,
+    "ticket_contract_only": true,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false,
+    "training_rows_materialized_now": false,
+    "validation_requirements": 9
+  },
+  "recovery_fields": [
+    "inputs",
+    "outputs",
+    "confidence_score",
+    "failure_modes",
+    "training_label_source",
+    "metric"
+  ],
+  "stage": 9035,
+  "stage_name": "stage9035_operator_detail_recovery_ticket_contract",
+  "status": "OPERATOR_DETAIL_RECOVERY_TICKET_CONTRACT_NO_EXECUTION",
+  "ticket_template": {
+    "allowed_metadata_sources": [
+      "stage8703_low_level_training_concept_session_grep_artifacts",
+      "stage9033_operator_detail_seed_catalog",
+      "stage8718_operator_inventory",
+      "existing_docs_no_raw_session_payload",
+      "human_authored_metadata_patch"
+    ],
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "forbidden_sources": [
+      "raw_codex_session_text",
+      "raw_repository_source_body",
+      "raw_row_body_text",
+      "hidden_or_locked_eval_payload",
+      "model_generated_operator_detail_without_audit"
+    ],
+    "operator_ids": "OP001-OP108",
+    "output_artifacts": [
+      "operator_detail_metadata_patch.jsonl",
+      "operator_detail_field_coverage_card.json",
+      "operator_detail_hash_audit.json",
+      "operator_detail_no_raw_payload_proof.json"
+    ],
+    "recovery_fields": [
+      "inputs",
+      "outputs",
+      "confidence_score",
+      "failure_modes",
+      "training_label_source",
+      "metric"
+    ],
+    "source_gap_stage": "stage9034_operator_detail_seed_gap_matrix",
+    "source_seed_stage": "stage9033_operator_detail_seed_catalog",
+    "ticket_id": "future_operator_detail_recovery_ticket",
+    "validation_requirements": [
+      "all_108_operator_ids_preserved",
+      "all_recovery_fields_present_or_explicitly_blocked",
+      "inputs_outputs_are_symbolic_metadata_not_source_body",
+      "confidence_score_semantics_documented",
+      "failure_modes_are_reason_codes_not_raw_trace",
+      "training_label_source_is_stage_or_human_patch_ref",
+      "metric_is_named_and_bounded",
+      "detail_hash_present_for_recovered_rows",
+      "no_raw_session_or_source_payload_fields"
+    ]
+  },
+  "validation_requirements": [
+    "all_108_operator_ids_preserved",
+    "all_recovery_fields_present_or_explicitly_blocked",
+    "inputs_outputs_are_symbolic_metadata_not_source_body",
+    "confidence_score_semantics_documented",
+    "failure_modes_are_reason_codes_not_raw_trace",
+    "training_label_source_is_stage_or_human_patch_ref",
+    "metric_is_named_and_bounded",
+    "detail_hash_present_for_recovered_rows",
+    "no_raw_session_or_source_payload_fields"
+  ]
+}
