@@ -2508,3 +2508,9 @@ Stage9082 attaches the inactive route-card materialization audit instance and ne
 Stage9083 reconciles the current frontier after Stage9082. Route-card audit instance controls are graph-visible; next safe work is a trainer dry-run input completeness checklist refresh.
 
 No ticket, data access, route-card materialization, compiler handoff, trainer dry run, model forward, decoder CE, denoise CE, runtime, /arxiv IO, cleanup, or training is authorized.
+
+## Stage9084 Trainer Dry-Run Input Completeness After Route-Card Graph
+
+Stage9084 refreshes the future trainer dry-run input completeness checklist to include source/output ticket controls and route-card materialization audit instance controls.
+
+Trainer dry-run readiness remains false; no rows, source bodies, route cards, compiler handoff, trainer execution, model forward, decoder CE, denoise CE, runtime, /arxiv IO, or training are authorized.
