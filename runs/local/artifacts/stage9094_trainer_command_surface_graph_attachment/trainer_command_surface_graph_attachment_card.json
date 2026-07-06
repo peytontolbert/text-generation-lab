@@ -1,0 +1,139 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authority_rows_zero": true,
+    "base_graph_present": true,
+    "negative_cases_rejected": true,
+    "new_edges_present": true,
+    "new_nodes_present": true,
+    "registry_frontier_stage9093": true,
+    "route_to_loss_contract_present": true,
+    "source_stage9092_passed": true,
+    "source_stage9093_passed": true
+  },
+  "decision": "Attached trainer command surface static controls to the central graph. Trainer invocation, contract-only mode, model rows, model forward, decoder CE, denoise CE, runtime, and training remain closed.",
+  "metrics": {
+    "added_edges": 16,
+    "added_nodes": 6,
+    "authority_rows": 0,
+    "candidate_rows_materialized": 0,
+    "contract_only_invoked_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "graph_edges": 2849,
+    "graph_nodes": 1905,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_ready_now": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "new_edges": [
+    [
+      "contract:trainer_command_surface_static_v1",
+      "audited_by",
+      "audit:trainer_command_surface_static_negative_cases_v1"
+    ],
+    [
+      "contract:trainer_command_surface_static_v1",
+      "requires",
+      "contract:route_to_trainer_loss_translation_no_data_v1"
+    ],
+    [
+      "contract:trainer_command_surface_static_v1",
+      "requires",
+      "contract:trainer_dry_run_input_completeness_v1"
+    ],
+    [
+      "contract:trainer_command_surface_static_v1",
+      "requires",
+      "gate:trainer_command_requires_manifest_flag"
+    ],
+    [
+      "contract:trainer_command_surface_static_v1",
+      "requires",
+      "gate:trainer_command_requires_mode_flag"
+    ],
+    [
+      "contract:trainer_command_surface_static_v1",
+      "requires",
+      "gate:trainer_command_requires_loss_mask_audit_flag"
+    ],
+    [
+      "contract:trainer_command_surface_static_v1",
+      "blocks",
+      "operation:trainer_contract_only_invocation"
+    ],
+    [
+      "contract:trainer_command_surface_static_v1",
+      "blocks",
+      "operation:trainer_execution"
+    ],
+    [
+      "contract:trainer_command_surface_static_v1",
+      "blocks",
+      "operation:model_forward"
+    ],
+    [
+      "gate:trainer_command_blocks_contract_invocation",
+      "blocks",
+      "operation:trainer_contract_only_invocation"
+    ],
+    [
+      "audit:trainer_command_surface_static_negative_cases_v1",
+      "rejects",
+      "failure:missing_manifest_flag"
+    ],
+    [
+      "audit:trainer_command_surface_static_negative_cases_v1",
+      "rejects",
+      "failure:missing_bounded_decoder_mode"
+    ],
+    [
+      "audit:trainer_command_surface_static_negative_cases_v1",
+      "rejects",
+      "failure:missing_safe_cleanup_guard"
+    ],
+    [
+      "audit:trainer_command_surface_static_negative_cases_v1",
+      "rejects",
+      "failure:trainer_executed_now"
+    ],
+    [
+      "audit:trainer_command_surface_static_negative_cases_v1",
+      "rejects",
+      "failure:contract_only_invoked_now"
+    ],
+    [
+      "audit:trainer_command_surface_static_negative_cases_v1",
+      "rejects",
+      "failure:model_input_rows_now"
+    ]
+  ],
+  "new_node_ids": [
+    "contract:trainer_command_surface_static_v1",
+    "audit:trainer_command_surface_static_negative_cases_v1",
+    "gate:trainer_command_requires_manifest_flag",
+    "gate:trainer_command_requires_mode_flag",
+    "gate:trainer_command_requires_loss_mask_audit_flag",
+    "gate:trainer_command_blocks_contract_invocation"
+  ],
+  "stage": 9094,
+  "stage_name": "stage9094_trainer_command_surface_graph_attachment",
+  "status": "TRAINER_COMMAND_SURFACE_GRAPH_ATTACHMENT_NO_EXECUTION"
+}

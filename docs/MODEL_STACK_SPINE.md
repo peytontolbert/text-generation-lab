@@ -2542,3 +2542,7 @@ No source/output ticket, data access, route-card materialization, route-to-loss 
 ## Stage9092 Trainer Command Surface Static Refresh
 
 Stage9092 statically refreshes the recovered trainer command surface after route-to-loss controls. The trainer is not invoked; contract-only mode, route-to-loss translation, model forward, row loading, /arxiv IO, decoder CE, denoise CE, runtime, and training remain closed.
+
+## Stage9094 Trainer Command Surface Graph Attachment
+
+Stage9094 attaches Stage9092/9093 trainer command surface controls to the central graph. Trainer invocation, contract-only mode, model rows, model forward, decoder CE, denoise CE, runtime, and training remain closed.
