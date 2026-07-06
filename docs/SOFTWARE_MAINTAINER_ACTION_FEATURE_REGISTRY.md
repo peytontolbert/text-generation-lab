@@ -71,6 +71,51 @@ Anti-cheat rules:
 - Query node ID alone must not solve the target.
 - Degree profile alone must not solve action or target.
 
+
+## Semantic Presentation And User Intent
+
+Semantic presentation is a first-class row field, not a synonym for free-form decoder text. Future transition records must keep user intent, semantic surface, and objective labels separate so the model cannot solve a task by copying visible target markers.
+
+Recovered semantic presentation surfaces:
+
+- `maintainer_answer`
+- `repair_plan`
+- `bounded_patch_hunk`
+- `test_plan`
+- `repo_qa_answer`
+- `retrieve_more_answer`
+- `abstain_unsafe_answer`
+- `verifier_failure_summary`
+- `symbol_binding_decision`
+- `edit_localization_decision`
+- `patch_operator_decision`
+
+Recovered user-intent fields:
+
+- `intent_type`
+- `requested_output_type`
+- `target_language`
+- `repo_scope`
+- `allowed_imports`
+- `blocked_imports`
+- `available_repositories`
+- `file_creation_allowed`
+- `modify_existing_allowed`
+- `test_required`
+- `verification_mode`
+- `risk_tolerance`
+- `budget_constraints`
+
+Required anti-cheat rule:
+
+```text
+semantic_presentation != objective_label
+requested_output_type != target_action
+intent_type alone must not solve build_mode/action/surface
+```
+
+Rows that expose direct target labels in user-intent or presentation fields must route to `NEEDS_HUMAN_REVIEW` or a neutralization patch queue before they can create gradients.
+
 ## Objective Families
 
 The compiler should produce separate manifests:
