@@ -13,12 +13,12 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9040,
-    "latest_stage_name": "stage9040_operator_detail_metadata_patch_validator_contract",
-    "latest_stage_next_best_step": "Only after a metadata-only operator-detail patch exists, run this validator; keep raw payload reads, mining, and training closed.",
-    "max_stage": 9040,
+    "latest_stage": 9041,
+    "latest_stage_name": "stage9041_operator_detail_training_readiness_gate",
+    "latest_stage_next_best_step": "Do not train. First materialize and validate an operator-detail metadata patch under the Stage9040 contract, then require a separate training ticket.",
+    "max_stage": 9041,
     "min_stage": 8530,
-    "registry_rows": 539
+    "registry_rows": 540
   },
   "passed": true,
   "rows": [
@@ -10801,6 +10801,26 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9040_operator_detail_metadata_patch_validator_contract.json",
       "stage": 9040,
       "stage_name": "stage9040_operator_detail_metadata_patch_validator_contract"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Do not train. First materialize and validate an operator-detail metadata patch under the Stage9040 contract, then require a separate training ticket.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9041_operator_detail_training_readiness_gate.json",
+      "stage": 9041,
+      "stage_name": "stage9041_operator_detail_training_readiness_gate"
     }
   ]
 }
