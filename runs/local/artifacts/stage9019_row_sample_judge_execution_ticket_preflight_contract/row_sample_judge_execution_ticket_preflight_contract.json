@@ -1,0 +1,162 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "future_allowed_operations_are_metadata_only": true,
+    "required_inputs_recorded": true,
+    "required_outputs_recorded": true,
+    "required_ticket_fields_recorded": true,
+    "source_stage9017_passed": true,
+    "source_stage9017_present": true,
+    "source_stage9018_blocks_materialization": true,
+    "source_stage9018_passed": true,
+    "source_stage9018_present": true,
+    "template_authority_closed": true,
+    "template_blocks_decoder_and_denoise": true,
+    "template_blocks_row_body_access": true,
+    "template_blocks_source_body_access": true,
+    "template_blocks_trainer": true
+  },
+  "decision": "This stage defines the future execution-ticket preflight schema only. It does not instantiate a ticket, materialize judge outputs, read row/source bodies, materialize a manifest, run trainer dry-run, train, or mine.",
+  "metrics": {
+    "additional_dataset_files_opened": false,
+    "allowed_operations_future_only": 5,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "execution_ticket_instantiated_now": false,
+    "forbidden_operations": 14,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "judge_outputs_materialized_now": false,
+    "manifest_materialized_now": false,
+    "model_execution_attempted": false,
+    "repository_source_bodies_read_now": false,
+    "required_input_artifacts": 4,
+    "required_output_artifacts": 5,
+    "required_ticket_fields": 17,
+    "row_bodies_read_now": false,
+    "row_sample_judge_executed_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false
+  },
+  "required_ticket_fields": [
+    "ticket_id",
+    "ticket_stage",
+    "source_contract_stage",
+    "source_blocker_stage",
+    "scope",
+    "input_artifacts",
+    "output_artifacts",
+    "allowed_operations",
+    "forbidden_operations",
+    "locked_eval_exclusion_proof",
+    "row_body_access_policy",
+    "source_body_access_policy",
+    "decoder_loss_policy",
+    "denoise_loss_policy",
+    "trainer_policy",
+    "authority",
+    "diagnostic_closure_required"
+  ],
+  "stage": 9019,
+  "stage_name": "stage9019_row_sample_judge_execution_ticket_preflight_contract",
+  "status": "ROW_SAMPLE_JUDGE_EXECUTION_TICKET_PREFLIGHT_CONTRACT_NO_EXECUTION",
+  "ticket_template": {
+    "allowed_operations": [
+      "READ_AUTHORIZED_METADATA_ROWS_ONLY",
+      "SCORE_ROW_METADATA_WITH_STATIC_JUDGE_ONLY",
+      "WRITE_ROW_IDS_AND_QUALITY_SCORES_ONLY",
+      "WRITE_ACCEPT_REJECT_ID_LISTS_ONLY",
+      "WRITE_COMPILER_GATE_STATUS_ONLY"
+    ],
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "decoder_loss_policy": {
+      "decoder_ce_authorized": false,
+      "raw_decoder_targets_authorized": false
+    },
+    "denoise_loss_policy": {
+      "denoise_ce_authorized": false,
+      "masked_text_targets_authorized": false
+    },
+    "diagnostic_closure_required": true,
+    "forbidden_operations": [
+      "READ_ROW_BODY_TEXT",
+      "READ_REPOSITORY_SOURCE_BODY",
+      "OPEN_UNLISTED_DATASET_FILES",
+      "USE_LOCKED_OR_HIDDEN_EVAL_ROWS",
+      "MATERIALIZE_TRAINING_MANIFEST",
+      "RUN_TRAINER_DRY_RUN",
+      "START_TRAINING",
+      "RUN_MODEL",
+      "RUN_RUNTIME",
+      "RUN_GEMMA",
+      "RUN_HARNESS_SCORING",
+      "WRITE_TO_ARXIV",
+      "AUTHORIZE_DECODER_CE",
+      "AUTHORIZE_DENOISE_CE"
+    ],
+    "input_artifacts": [
+      "row_sample_ticket_authorization_card.json",
+      "row_sample_manifest_metadata.jsonl",
+      "row_sample_access_audit_card.json",
+      "no_locked_eval_sample_proof.json"
+    ],
+    "locked_eval_exclusion_proof": {
+      "artifact": "no_locked_eval_sample_proof.json",
+      "required": true
+    },
+    "output_artifacts": [
+      "row_sample_dataset_judge_report.json",
+      "candidate_row_quality_scores.jsonl",
+      "rejected_row_ids.jsonl",
+      "accepted_row_ids_pending_manifest_compile.jsonl",
+      "judge_to_compiler_gate_status.json"
+    ],
+    "row_body_access_policy": {
+      "read_raw_decoder_text": false,
+      "read_raw_encoder_text": false,
+      "read_row_bodies": false
+    },
+    "scope": "row_sample_judge_output_materialization_metadata_only",
+    "source_blocker_stage": "stage9018_row_sample_judge_output_materialization_blocker_audit",
+    "source_body_access_policy": {
+      "read_repository_source_bodies": false,
+      "read_source_body_spans": false
+    },
+    "source_contract_stage": "stage9017_row_sample_judge_output_materialization_contract",
+    "ticket_id": "future_stage9xxx_row_sample_judge_execution_ticket",
+    "ticket_stage": "future_stage9xxx",
+    "trainer_policy": {
+      "trainer_dry_run_authorized": false,
+      "training_authorized": false
+    }
+  }
+}
