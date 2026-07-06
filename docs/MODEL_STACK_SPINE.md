@@ -2482,3 +2482,9 @@ Trainer execution, row loading, candidate mining, model forward, decoder CE, den
 Stage9076 defines an inactive future source/output ticket schema for route-card materialization and long-context candidate work. It records allowed future policy fields, forbidden operations, path/output controls, and the permanent rule that `/arxiv` is a backup root and must never be deleted.
 
 No source metadata read, row/source body read, route-card materialization, index build, candidate mining, /arxiv IO, cleanup, trainer dry run, model forward, decoder CE, denoise CE, runtime, or training is authorized.
+
+## Stage9078 Source/Output Ticket Graph Attachment
+
+Stage9078 attaches the inactive source/output ticket contract and audit to the central graph. The graph now records `/arxiv` never-delete, no body reads without ticket, and no route-card materialization without ticket.
+
+No source metadata read, row/source body read, route-card materialization, candidate mining, /arxiv IO, cleanup, trainer dry run, model forward, decoder CE, denoise CE, runtime, or training is authorized.
