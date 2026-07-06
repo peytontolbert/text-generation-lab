@@ -2402,3 +2402,8 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 - Clarifies that Stage9005 is a future post-training diagnostics blocker, not the immediate pre-training execution path.
 - Routes the active next step back to Stage9003 input materialization: locked tiny manifest, loss mask, schema lock, trainer dry-run input, and contamination/leakage proof.
 - Keeps dry-run execution, training, model execution, mining, runtime, Gemma, harness scoring, promotion, and /arxiv writes closed.
+
+## Stage9007 Locked Manifest Materialization Ticket Design
+- Designs the future metadata-only ticket for locked tiny manifest, loss-mask card, schema lock, leakage proof, and trainer dry-run input artifacts.
+- Does not emit the manifest or read row bodies; all loss masks remain false by default.
+- Keeps trainer dry run, model execution, decoder CE, denoise CE, runtime, Gemma, harness scoring, training, mining, and /arxiv writes closed.
