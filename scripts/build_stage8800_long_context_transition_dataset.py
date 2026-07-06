@@ -5,6 +5,7 @@ from pathlib import Path
 
 from long_context_chunk_catalog import build_chunk_catalog
 from long_context_entity_linker import build_entities
+from long_context_relation_graph_builder import build_relation_graph
 from long_context_example_renderer import render_examples
 from long_context_program_builder import DEFAULT_TEMPLATE_FAMILIES, build_programs
 from long_context_shortcut_audit import audit_examples
@@ -51,6 +52,10 @@ def main() -> None:
     write_jsonl(out / "entities.jsonl", entities)
     write_json(out / "entity_aliases.json", alias_card)
 
+    links, links_summary = build_relation_graph(chunks, entities)
+    write_jsonl(out / "links.jsonl", links)
+    write_json(out / "links_summary.json", links_summary)
+
     programs = build_programs(
         chunks=chunks,
         entities=entities,
@@ -76,6 +81,7 @@ def main() -> None:
     summary = {
         "chunk_count": len(chunks),
         "entity_count": len(entities),
+        "link_count": len(links),
         "program_count": len(programs),
         "example_count": len(examples),
         "accepted_example_count": sum(1 for audit in audits if audit["accepted"]),

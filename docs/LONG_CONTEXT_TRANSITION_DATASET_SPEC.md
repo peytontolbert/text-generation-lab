@@ -52,6 +52,8 @@ Primary outputs:
 - `source_inventory.json`
 - `entities.jsonl`
 - `entity_aliases.json`
+- `links.jsonl`
+- `links_summary.json`
 - `programs.jsonl`
 - `examples_*.jsonl`
 - `quality_audits.jsonl`
@@ -77,6 +79,8 @@ This emits:
 - `source_inventory.json`
 - `entities.jsonl`
 - `entity_aliases.json`
+- `links.jsonl`
+- `links_summary.json`
 - `programs.jsonl`
 - `examples.jsonl`
 - `quality_audits.jsonl`
@@ -119,6 +123,21 @@ Required fields:
 - `token_count`
 - `text`
 - `metadata`
+
+
+## Natural Mining
+
+The miner should discover examples from the full indexed corpus and then measure
+their natural closure size. Context length is treated as an observed property of
+a mined example, not a top-down requirement.
+
+The initial graph artifacts are:
+
+- `chunks.jsonl`
+- `entities.jsonl`
+- `links.jsonl`
+
+Candidate mining and evidence-closure expansion should operate over that graph.
 
 ## Entity Schema
 

@@ -1,0 +1,70 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "edge_types_recorded": true,
+    "forbidden_operations_recorded": true,
+    "required_files_present": true,
+    "source_stage9038_passed": true,
+    "source_stage9038_present": true
+  },
+  "decision": "Recovered long-context relation graph construction as a local utility extension. No corpus scan, dataset materialization, or training is authorized.",
+  "forbidden_operations": [
+    "RUN_RELATION_GRAPH_BUILDER_ON_ARXIV_NOW",
+    "RUN_RELATION_GRAPH_BUILDER_ON_REPOSITORY_LIBRARY_NOW",
+    "MATERIALIZE_LONG_CONTEXT_DATASET_NOW",
+    "MATERIALIZE_TRAINING_ROWS_NOW",
+    "START_TRAINING",
+    "RUN_MODEL",
+    "WRITE_TO_ARXIV"
+  ],
+  "metrics": {
+    "arxiv_scan_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "edge_types": 5,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "long_context_dataset_materialized_now": false,
+    "missing_files": 0,
+    "model_execution_attempted": false,
+    "relation_graph_builder_executed_on_corpus_now": false,
+    "relation_graph_readiness_only": true,
+    "repository_library_scan_authorized_now": false,
+    "required_files": 4,
+    "runtime_authorized_flag": false,
+    "training_authorized": false,
+    "training_rows_materialized_now": false
+  },
+  "missing_files": [],
+  "required_edge_types": [
+    "chunk_mentions_entity",
+    "entity_mentioned_by_chunk",
+    "entity_co_mention",
+    "adjacent_chunk",
+    "same_source_chunk"
+  ],
+  "required_files": [
+    "scripts/long_context_relation_graph_builder.py",
+    "scripts/build_stage8800_long_context_transition_dataset.py",
+    "tests/test_long_context_transition_pipeline.py",
+    "docs/LONG_CONTEXT_TRANSITION_DATASET_SPEC.md"
+  ],
+  "stage": 9039,
+  "stage_name": "stage9039_long_context_relation_graph_readiness",
+  "status": "LONG_CONTEXT_RELATION_GRAPH_READINESS_NO_SCAN"
+}

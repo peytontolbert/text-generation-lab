@@ -10,6 +10,7 @@ from build_stage8800_long_context_transition_dataset import main as build_stage_
 from long_context_chunk_catalog import build_chunk_catalog
 from long_context_entity_linker import build_entities
 from long_context_program_builder import build_programs
+from long_context_relation_graph_builder import build_relation_graph
 from long_context_example_renderer import render_examples
 from long_context_shortcut_audit import audit_examples
 
@@ -54,6 +55,10 @@ def test_long_context_pipeline_end_to_end(tmp_path: Path) -> None:
     assert entities
     assert alias_card["entity_count"] == len(entities)
 
+    links, links_summary = build_relation_graph(chunks, entities)
+    assert links
+    assert links_summary["link_count"] == len(links)
+
     programs = build_programs(chunks=chunks, entities=entities, num_programs=10)
     assert programs
     assert all(len(program["transitions"]) >= 2 for program in programs)
@@ -96,6 +101,7 @@ def test_stage_builder_cli_writes_outputs(tmp_path: Path, monkeypatch) -> None:
     build_stage_main()
     assert (out / "chunks.jsonl").is_file()
     assert (out / "entities.jsonl").is_file()
+    assert (out / "links.jsonl").is_file()
     assert (out / "programs.jsonl").is_file()
     assert (out / "examples.jsonl").is_file()
     assert (out / "quality_audits.jsonl").is_file()
