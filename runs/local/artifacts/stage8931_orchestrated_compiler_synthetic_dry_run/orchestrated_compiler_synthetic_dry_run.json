@@ -1,0 +1,503 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "compile_card_emitted": true,
+    "counterfactual_card_emitted": true,
+    "decoder_loss_closed": true,
+    "denoise_loss_closed": true,
+    "judge_rows_emitted": true,
+    "no_data_mining": true,
+    "objective_rows_match": true,
+    "ranker_rows_emitted": true,
+    "runtime_loss_closed": true,
+    "runtime_remains_blocked": true,
+    "shortcut_card_emitted": true,
+    "source_stage8930_passed": true,
+    "synthetic_rows_only": true,
+    "training_remains_blocked": true
+  },
+  "compile_card": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "compiler_options": {
+      "allow_decoder": false,
+      "allow_denoise": false,
+      "allow_runtime": false,
+      "require_recovered_gates": false
+    },
+    "gate_rejected_examples": [],
+    "gate_rejected_rows": 0,
+    "loss_counts": {
+      "action_sequence_ce": 2,
+      "allowed_import_policy_ce": 1,
+      "blocked_import_policy_ce": 1,
+      "build_mode_ce": 1,
+      "decoder_ce": 0,
+      "denoise_ce": 0,
+      "edit_localization_ce": 1,
+      "file_plan_ce": 1,
+      "patch_operator_ce": 1,
+      "repair_surface_ce": 1,
+      "repo_dependency_policy_ce": 1,
+      "runtime_reward": 0,
+      "surface_role_ce": 1,
+      "symbol_binding_ce": 1,
+      "verifier_repair_ce": 1
+    },
+    "objective_counts": {
+      "denoise_repair": 1,
+      "long_output_holdout": 1,
+      "retrieval_control": 1,
+      "structured_state": 1
+    },
+    "rejected_or_holdout_examples": [],
+    "required_recovered_gate_references": [
+      "source_inventory_lineage",
+      "source_provenance",
+      "contamination_leakage_detector",
+      "golden_locked_eval_suite",
+      "drift_canary_regression_monitor",
+      "cluster_slice_near_duplicate_detector",
+      "dataset_junk_ood_ranker_v1",
+      "schema_drift_detector"
+    ],
+    "route_counts": {
+      "HOLD_LONG_OUTPUT": 1,
+      "KEEP_STRUCTURED": 1,
+      "NEEDS_RETRIEVAL": 1,
+      "USE_FOR_DENOISE_REPAIR": 1
+    },
+    "rows": 4,
+    "split_counts": {
+      "train": 4
+    }
+  },
+  "counterfactual_card": {
+    "counterfactual_obligations_complete": false,
+    "groups": 2,
+    "missing_group_row_examples": [],
+    "missing_group_rows": 0,
+    "missing_obligation_group_examples": [
+      {
+        "group_id": "syn_group_2",
+        "missing": [
+          "CONTRASTIVE_BOUNDARY_SIBLING",
+          "EVIDENCE_REMOVED_OR_RETRIEVE"
+        ],
+        "objective_family": "synthetic_compiler_contract",
+        "present": [
+          "POSITIVE_ORIGINAL"
+        ],
+        "rows": [
+          "syn_internal_leak_repair"
+        ]
+      }
+    ],
+    "missing_obligation_groups": 1,
+    "objective_counts": {
+      "synthetic_compiler_contract": 4
+    },
+    "obligation_counts": {
+      "CONTRASTIVE_BOUNDARY_SIBLING": 1,
+      "EVIDENCE_REMOVED_OR_RETRIEVE": 1,
+      "POSITIVE_ORIGINAL": 2
+    },
+    "rows": 4
+  },
+  "metrics": {
+    "compiled_rows": 4,
+    "data_mining_authorized": false,
+    "decoder_ce_loss_rows": 0,
+    "denoise_ce_loss_rows": 0,
+    "judged_rows": 4,
+    "model_execution_authorized_now": false,
+    "objective_families": 4,
+    "ranked_rows": 4,
+    "runtime_authorized_flag": false,
+    "runtime_reward_rows": 0,
+    "synthetic_rows": 4,
+    "training_authorized": false
+  },
+  "ranked_card": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "loss_counts": {
+      "action_sequence_ce": 2,
+      "allowed_import_policy_ce": 1,
+      "blocked_import_policy_ce": 1,
+      "build_mode_ce": 1,
+      "decoder_ce": 0,
+      "denoise_ce": 1,
+      "edit_localization_ce": 1,
+      "file_plan_ce": 1,
+      "patch_operator_ce": 1,
+      "repair_surface_ce": 1,
+      "repo_dependency_policy_ce": 1,
+      "runtime_reward": 0,
+      "surface_role_ce": 1,
+      "symbol_binding_ce": 1,
+      "verifier_repair_ce": 1
+    },
+    "ranked_rows": [
+      {
+        "authority": {
+          "body_emission_authorized": false,
+          "controller_complete_merge_authorized_next": false,
+          "decoder_ce_training_authorized_next": false,
+          "gemma_execution_authorized_next": false,
+          "harness_execution_authorized_next": false,
+          "model_execution_authorized_next": false,
+          "promotion_ready": false,
+          "runtime_authorized": false,
+          "scoring_authorized_next": false,
+          "source_emission_authorized": false
+        },
+        "eligibility": {
+          "eval_eligible": true,
+          "holdout_only": false,
+          "locked_eval_source": false,
+          "train_eligible": true
+        },
+        "features": {
+          "decode_allowed": false,
+          "decoder_budget_ok": true,
+          "encoder_chars": 50,
+          "split": "train",
+          "target_chars": 18,
+          "target_tokens": 2
+        },
+        "junk_score": 0.0,
+        "loss_mask": {
+          "action_sequence_ce": true,
+          "allowed_import_policy_ce": true,
+          "blocked_import_policy_ce": true,
+          "build_mode_ce": true,
+          "decoder_ce": false,
+          "denoise_ce": false,
+          "edit_localization_ce": true,
+          "file_plan_ce": true,
+          "patch_operator_ce": true,
+          "repair_surface_ce": true,
+          "repo_dependency_policy_ce": true,
+          "runtime_reward": false,
+          "surface_role_ce": true,
+          "symbol_binding_ce": true,
+          "verifier_repair_ce": true
+        },
+        "objective_family": "synthetic_compiler_contract",
+        "ood_score": 0.0,
+        "reason_bits": {
+          "authority_true": false,
+          "budget_bad_but_decode_allowed": false,
+          "degenerate_repetition_target": false,
+          "duplicate_semantic_key": false,
+          "explicit_training_loss_true": false,
+          "html_doc_fragment": false,
+          "internal_token_in_model_input": false,
+          "label_conflict": false,
+          "locked_eval_source": false,
+          "long_blob": false,
+          "missing_evidence": false,
+          "missing_evidence_but_decode_allowed": false,
+          "raw_internal_token_in_decoder": false,
+          "short_or_junk_target": false,
+          "target_over_decoder_budget": false,
+          "target_text_copied_in_encoder": false,
+          "unknown_source_lineage": false
+        },
+        "reasons": [],
+        "risk_bucket": "KEEP_STRUCTURED",
+        "route": "KEEP_STRUCTURED",
+        "row_id": "syn_positive_original"
+      },
+      {
+        "authority": {
+          "body_emission_authorized": false,
+          "controller_complete_merge_authorized_next": false,
+          "decoder_ce_training_authorized_next": false,
+          "gemma_execution_authorized_next": false,
+          "harness_execution_authorized_next": false,
+          "model_execution_authorized_next": false,
+          "promotion_ready": false,
+          "runtime_authorized": false,
+          "scoring_authorized_next": false,
+          "source_emission_authorized": false
+        },
+        "eligibility": {
+          "eval_eligible": true,
+          "holdout_only": false,
+          "locked_eval_source": false,
+          "train_eligible": true
+        },
+        "features": {
+          "decode_allowed": false,
+          "decoder_budget_ok": true,
+          "encoder_chars": 29,
+          "split": "train",
+          "target_chars": 13,
+          "target_tokens": 2
+        },
+        "junk_score": 0.0,
+        "loss_mask": {
+          "action_sequence_ce": true,
+          "allowed_import_policy_ce": false,
+          "blocked_import_policy_ce": false,
+          "build_mode_ce": false,
+          "decoder_ce": false,
+          "denoise_ce": false,
+          "edit_localization_ce": false,
+          "file_plan_ce": false,
+          "patch_operator_ce": false,
+          "repair_surface_ce": false,
+          "repo_dependency_policy_ce": false,
+          "runtime_reward": false,
+          "surface_role_ce": false,
+          "symbol_binding_ce": false,
+          "verifier_repair_ce": false
+        },
+        "objective_family": "synthetic_compiler_contract",
+        "ood_score": 0.2,
+        "reason_bits": {
+          "authority_true": false,
+          "budget_bad_but_decode_allowed": false,
+          "degenerate_repetition_target": false,
+          "duplicate_semantic_key": false,
+          "explicit_training_loss_true": false,
+          "html_doc_fragment": false,
+          "internal_token_in_model_input": false,
+          "label_conflict": false,
+          "locked_eval_source": false,
+          "long_blob": false,
+          "missing_evidence": true,
+          "missing_evidence_but_decode_allowed": false,
+          "raw_internal_token_in_decoder": false,
+          "short_or_junk_target": false,
+          "target_over_decoder_budget": false,
+          "target_text_copied_in_encoder": false,
+          "unknown_source_lineage": false
+        },
+        "reasons": [
+          "missing_evidence"
+        ],
+        "risk_bucket": "NEEDS_RETRIEVAL",
+        "route": "NEEDS_RETRIEVAL",
+        "row_id": "syn_evidence_removed"
+      },
+      {
+        "authority": {
+          "body_emission_authorized": false,
+          "controller_complete_merge_authorized_next": false,
+          "decoder_ce_training_authorized_next": false,
+          "gemma_execution_authorized_next": false,
+          "harness_execution_authorized_next": false,
+          "model_execution_authorized_next": false,
+          "promotion_ready": false,
+          "runtime_authorized": false,
+          "scoring_authorized_next": false,
+          "source_emission_authorized": false
+        },
+        "eligibility": {
+          "eval_eligible": true,
+          "holdout_only": true,
+          "locked_eval_source": false,
+          "train_eligible": false
+        },
+        "features": {
+          "decode_allowed": true,
+          "decoder_budget_ok": false,
+          "encoder_chars": 51,
+          "split": "train",
+          "target_chars": 1800,
+          "target_tokens": 900
+        },
+        "junk_score": 0.12,
+        "loss_mask": {
+          "action_sequence_ce": false,
+          "allowed_import_policy_ce": false,
+          "blocked_import_policy_ce": false,
+          "build_mode_ce": false,
+          "decoder_ce": false,
+          "denoise_ce": false,
+          "edit_localization_ce": false,
+          "file_plan_ce": false,
+          "patch_operator_ce": false,
+          "repair_surface_ce": false,
+          "repo_dependency_policy_ce": false,
+          "runtime_reward": false,
+          "surface_role_ce": false,
+          "symbol_binding_ce": false,
+          "verifier_repair_ce": false
+        },
+        "objective_family": "synthetic_compiler_contract",
+        "ood_score": 0.0,
+        "reason_bits": {
+          "authority_true": false,
+          "budget_bad_but_decode_allowed": true,
+          "degenerate_repetition_target": false,
+          "duplicate_semantic_key": false,
+          "explicit_training_loss_true": false,
+          "html_doc_fragment": false,
+          "internal_token_in_model_input": false,
+          "label_conflict": false,
+          "locked_eval_source": false,
+          "long_blob": false,
+          "missing_evidence": false,
+          "missing_evidence_but_decode_allowed": false,
+          "raw_internal_token_in_decoder": false,
+          "short_or_junk_target": false,
+          "target_over_decoder_budget": true,
+          "target_text_copied_in_encoder": false,
+          "unknown_source_lineage": false
+        },
+        "reasons": [
+          "budget_bad_but_decode_allowed",
+          "target_over_decoder_budget"
+        ],
+        "risk_bucket": "HOLD_LONG_OUTPUT",
+        "route": "HOLD_LONG_OUTPUT",
+        "row_id": "syn_boundary_sibling"
+      },
+      {
+        "authority": {
+          "body_emission_authorized": false,
+          "controller_complete_merge_authorized_next": false,
+          "decoder_ce_training_authorized_next": false,
+          "gemma_execution_authorized_next": false,
+          "harness_execution_authorized_next": false,
+          "model_execution_authorized_next": false,
+          "promotion_ready": false,
+          "runtime_authorized": false,
+          "scoring_authorized_next": false,
+          "source_emission_authorized": false
+        },
+        "eligibility": {
+          "eval_eligible": true,
+          "holdout_only": false,
+          "locked_eval_source": false,
+          "train_eligible": true
+        },
+        "features": {
+          "decode_allowed": true,
+          "decoder_budget_ok": true,
+          "encoder_chars": 28,
+          "split": "train",
+          "target_chars": 33,
+          "target_tokens": 5
+        },
+        "junk_score": 0.12,
+        "loss_mask": {
+          "action_sequence_ce": false,
+          "allowed_import_policy_ce": false,
+          "blocked_import_policy_ce": false,
+          "build_mode_ce": false,
+          "decoder_ce": false,
+          "denoise_ce": true,
+          "edit_localization_ce": false,
+          "file_plan_ce": false,
+          "patch_operator_ce": false,
+          "repair_surface_ce": false,
+          "repo_dependency_policy_ce": false,
+          "runtime_reward": false,
+          "surface_role_ce": false,
+          "symbol_binding_ce": false,
+          "verifier_repair_ce": false
+        },
+        "objective_family": "synthetic_compiler_contract",
+        "ood_score": 0.0,
+        "reason_bits": {
+          "authority_true": false,
+          "budget_bad_but_decode_allowed": false,
+          "degenerate_repetition_target": false,
+          "duplicate_semantic_key": false,
+          "explicit_training_loss_true": false,
+          "html_doc_fragment": false,
+          "internal_token_in_model_input": false,
+          "label_conflict": false,
+          "locked_eval_source": false,
+          "long_blob": false,
+          "missing_evidence": false,
+          "missing_evidence_but_decode_allowed": false,
+          "raw_internal_token_in_decoder": true,
+          "short_or_junk_target": false,
+          "target_over_decoder_budget": false,
+          "target_text_copied_in_encoder": false,
+          "unknown_source_lineage": false
+        },
+        "reasons": [
+          "raw_internal_token_in_decoder"
+        ],
+        "risk_bucket": "USE_FOR_DENOISE_REPAIR",
+        "route": "USE_FOR_DENOISE_REPAIR",
+        "row_id": "syn_internal_leak_repair"
+      }
+    ],
+    "reason_counts": {
+      "budget_bad_but_decode_allowed": 1,
+      "missing_evidence": 1,
+      "raw_internal_token_in_decoder": 1,
+      "target_over_decoder_budget": 1
+    },
+    "route_counts": {
+      "HOLD_LONG_OUTPUT": 1,
+      "KEEP_STRUCTURED": 1,
+      "NEEDS_RETRIEVAL": 1,
+      "USE_FOR_DENOISE_REPAIR": 1
+    },
+    "rows": 4
+  },
+  "shortcut_card": {
+    "ceiling": 0.8,
+    "combo_feature_exact": {
+      "decode_allowed+decoder_budget_ok": 0.75,
+      "decode_allowed+evidence_state": 0.75,
+      "decoder_budget_ok+evidence_state": 1.0
+    },
+    "majority_exact": 0.5,
+    "rows": 4,
+    "single_feature_exact": {
+      "decode_allowed": 0.5,
+      "decoder_budget_ok": 0.75,
+      "evidence_state": 0.75
+    },
+    "strongest_baseline_exact": 1.0,
+    "strongest_combo_feature_exact": 1.0,
+    "strongest_single_feature_exact": 0.75,
+    "target_field": "obligation_type",
+    "training_blocked_by_shortcut_dominance": true
+  },
+  "stage": 8931,
+  "stage_name": "stage8931_orchestrated_compiler_synthetic_dry_run"
+}

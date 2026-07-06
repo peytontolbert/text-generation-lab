@@ -1,0 +1,188 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers": [
+    "export_vocab_8207_does_not_match_recovered_target_1506"
+  ],
+  "checks": {
+    "ak_special_ids_contiguous": true,
+    "ak_special_tokens_present": true,
+    "core_special_ids_match": true,
+    "export_vocab_size": 8207,
+    "recovered_target_vocab_size": 1506,
+    "requires_vocab_resize_or_target_config_update": true,
+    "safe_to_swap_tokenizer_without_resize": false,
+    "tokenizer_files_present": true,
+    "tokenizer_kind_supported_by_wrapper": true,
+    "v2_special_tokens_missing": [
+      "<AK_OBSERVE>",
+      "<AK_ORIENT>",
+      "<AK_ACT>",
+      "<AK_VERIFY>",
+      "<AK_REPAIR>",
+      "<AK_RETRIEVE>",
+      "<AK_PATCH>",
+      "<AK_TEST>",
+      "<AK_ABORT>",
+      "<AK_HOLD_LONG_OUTPUT>",
+      "<AK_BOUND_DECODER>",
+      "<AK_VTR>"
+    ],
+    "vocab_matches_recovered_target": false
+  },
+  "core_specials": {
+    "bos_token_id": 1,
+    "eos_token_id": 2,
+    "pad_token_id": 0,
+    "unk_token_id": 3
+  },
+  "decision": {
+    "core_token_compatibility": "pass",
+    "full_tokenizer_swap_status": "blocked_pending_vocab_migration",
+    "recommended_v2_policy": "Do not add missing V2 maintenance tokens ad hoc. Reserve them in a tokenizer migration manifest, then resize embeddings/lm_head under a state-dict shape audit."
+  },
+  "expected_ak_specials": [
+    "<AK_USER>",
+    "<AK_CHAT>",
+    "<AK_THINK>",
+    "<AK_DEEP_RESEARCH>",
+    "<AK_CONTEXT>",
+    "<AK_EVIDENCE>",
+    "<AK_CANDIDATE>",
+    "<AK_QUERY_REWRITE>",
+    "<AK_RERANK>",
+    "<AK_GATHER_CONTEXT>",
+    "<AK_RESPOND>",
+    "<AK_SUFFICIENT>",
+    "<AK_INSUFFICIENT>",
+    "<AK_ANSWER>",
+    "<AK_JSON>"
+  ],
+  "missing_ak_specials": [],
+  "special_tokens": [
+    {
+      "content": "<pad>",
+      "id": 0,
+      "special": true
+    },
+    {
+      "content": "<s>",
+      "id": 1,
+      "special": true
+    },
+    {
+      "content": "</s>",
+      "id": 2,
+      "special": true
+    },
+    {
+      "content": "<unk>",
+      "id": 3,
+      "special": true
+    },
+    {
+      "content": "<AK_USER>",
+      "id": 8192,
+      "special": true
+    },
+    {
+      "content": "<AK_CHAT>",
+      "id": 8193,
+      "special": true
+    },
+    {
+      "content": "<AK_THINK>",
+      "id": 8194,
+      "special": true
+    },
+    {
+      "content": "<AK_DEEP_RESEARCH>",
+      "id": 8195,
+      "special": true
+    },
+    {
+      "content": "<AK_CONTEXT>",
+      "id": 8196,
+      "special": true
+    },
+    {
+      "content": "<AK_EVIDENCE>",
+      "id": 8197,
+      "special": true
+    },
+    {
+      "content": "<AK_CANDIDATE>",
+      "id": 8198,
+      "special": true
+    },
+    {
+      "content": "<AK_QUERY_REWRITE>",
+      "id": 8199,
+      "special": true
+    },
+    {
+      "content": "<AK_RERANK>",
+      "id": 8200,
+      "special": true
+    },
+    {
+      "content": "<AK_GATHER_CONTEXT>",
+      "id": 8201,
+      "special": true
+    },
+    {
+      "content": "<AK_RESPOND>",
+      "id": 8202,
+      "special": true
+    },
+    {
+      "content": "<AK_SUFFICIENT>",
+      "id": 8203,
+      "special": true
+    },
+    {
+      "content": "<AK_INSUFFICIENT>",
+      "id": 8204,
+      "special": true
+    },
+    {
+      "content": "<AK_ANSWER>",
+      "id": 8205,
+      "special": true
+    },
+    {
+      "content": "<AK_JSON>",
+      "id": 8206,
+      "special": true
+    }
+  ],
+  "stage": 8908,
+  "stage_name": "stage8908_tokenizer_special_token_compatibility_audit",
+  "tokenizer_config": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11/tokenizer/tokenizer_config.json",
+  "tokenizer_json": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11/tokenizer/tokenizer.json",
+  "v2_special_token_gaps": [
+    "<AK_OBSERVE>",
+    "<AK_ORIENT>",
+    "<AK_ACT>",
+    "<AK_VERIFY>",
+    "<AK_REPAIR>",
+    "<AK_RETRIEVE>",
+    "<AK_PATCH>",
+    "<AK_TEST>",
+    "<AK_ABORT>",
+    "<AK_HOLD_LONG_OUTPUT>",
+    "<AK_BOUND_DECODER>",
+    "<AK_VTR>"
+  ]
+}

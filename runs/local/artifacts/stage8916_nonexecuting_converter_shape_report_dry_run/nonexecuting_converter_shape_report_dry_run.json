@@ -1,0 +1,45 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "binary_tensor_values_read": false,
+    "blocked_rows": 110,
+    "compatible_rows": 40,
+    "converter_emits_full_metadata_rows": true,
+    "dense_rows": 43,
+    "direct_load_allowed": false,
+    "needs_migration_rows": 2,
+    "new_init_rows": 7,
+    "packed_manifest_rows": 109,
+    "rows_present": true
+  },
+  "decision": {
+    "direct_load_status": "blocked",
+    "dry_run_status": "metadata_only_complete_enough_for_next_audit",
+    "next_required_artifact": "converter_row_completeness_and_collision_audit"
+  },
+  "forbidden_operations": [
+    "torch_load",
+    "state_dict_load",
+    "read_binary_tensor_values",
+    "decode_packed_bitnet",
+    "embedding_resize",
+    "checkpoint_write",
+    "model_forward",
+    "training_step"
+  ],
+  "row_validation_failures": [],
+  "stage": 8916,
+  "stage_name": "stage8916_nonexecuting_converter_shape_report_dry_run"
+}

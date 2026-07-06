@@ -1,0 +1,299 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_required_scripts_present": true,
+    "authority_counts_zero": true,
+    "data_mining_remains_blocked": true,
+    "known_gaps_recorded": true,
+    "module_inventory_present": true,
+    "most_direct_tests_present": true,
+    "runtime_remains_blocked": true,
+    "source_stage8927_passed": true,
+    "training_remains_blocked": true
+  },
+  "decision": {
+    "compiler_recovery_status": "substantial_modules_present_but_orchestration_gaps_remain",
+    "next_required_artifact": "single compiler API contract or targeted tests for source extractors/structured ranker/counterfactual obligations",
+    "training_status": "blocked"
+  },
+  "known_gaps": [
+    {
+      "gap": "single_orchestrated_compiler_api",
+      "reason": "modules exist, but a single durable API that runs judge -> rank -> compile -> audit -> patch queue is not yet proven as one interface",
+      "status": "missing_or_undercentralized"
+    },
+    {
+      "gap": "source_extractors_need_tests",
+      "reason": "symbol/call graph extractor scripts exist, but direct tests were not found in this inventory",
+      "status": "partial"
+    },
+    {
+      "gap": "structured_junk_ranker_test_gap",
+      "reason": "structured_dataset_junk_ranker.py exists without a direct matching test filename",
+      "status": "partial"
+    },
+    {
+      "gap": "counterfactual_obligation_test_gap",
+      "reason": "counterfactual_obligation_audit.py exists without a direct matching test filename",
+      "status": "partial"
+    },
+    {
+      "gap": "runtime_loop_authority_closed",
+      "reason": "runtime verifier contract exists, but runtime remains unauthorized by design",
+      "status": "expected_blocked"
+    }
+  ],
+  "metrics": {
+    "data_mining_authorized": false,
+    "direct_tests_expected": 21,
+    "direct_tests_present": 21,
+    "known_gap_count": 5,
+    "model_execution_authorized_now": false,
+    "module_count": 25,
+    "runtime_authorized_flag": false,
+    "scripts_missing": 0,
+    "scripts_present": 25,
+    "training_authorized": false
+  },
+  "modules": [
+    {
+      "area": "row_judge",
+      "has_direct_test": true,
+      "role": "row-level objective validation and shortcut checks",
+      "script": "scripts/objective_row_judge.py",
+      "script_exists": true,
+      "test": "tests/test_judge_and_shortcuts.py",
+      "test_exists": true
+    },
+    {
+      "area": "curriculum_compiler",
+      "has_direct_test": true,
+      "role": "route judged rows into objective-specific manifests",
+      "script": "scripts/curriculum_compiler.py",
+      "script_exists": true,
+      "test": "tests/test_curriculum_compiler.py",
+      "test_exists": true
+    },
+    {
+      "area": "unified_junk_ood_ranker",
+      "has_direct_test": true,
+      "role": "objective-aware row risk/routing score",
+      "script": "scripts/dataset_junk_ood_ranker_v1.py",
+      "script_exists": true,
+      "test": "tests/test_dataset_junk_ood_ranker_v1.py",
+      "test_exists": true
+    },
+    {
+      "area": "structured_junk_ranker",
+      "has_direct_test": false,
+      "role": "structured row route/risk features for decoder-state curriculum",
+      "script": "scripts/structured_dataset_junk_ranker.py",
+      "script_exists": true,
+      "test": null,
+      "test_exists": null
+    },
+    {
+      "area": "shortcut_baselines",
+      "has_direct_test": true,
+      "role": "single/combo feature shortcut detection before training",
+      "script": "scripts/shortcut_baseline_audit.py",
+      "script_exists": true,
+      "test": "tests/test_judge_and_shortcuts.py",
+      "test_exists": true
+    },
+    {
+      "area": "counterfactual_obligations",
+      "has_direct_test": false,
+      "role": "counterfactual row sufficiency and obligation checks",
+      "script": "scripts/counterfactual_obligation_audit.py",
+      "script_exists": true,
+      "test": null,
+      "test_exists": null
+    },
+    {
+      "area": "cluster_slice_duplicates",
+      "has_direct_test": true,
+      "role": "cluster/slice duplicate and near-duplicate risk detection",
+      "script": "scripts/cluster_slice_near_duplicate_detector.py",
+      "script_exists": true,
+      "test": "tests/test_cluster_slice_near_duplicate_detector.py",
+      "test_exists": true
+    },
+    {
+      "area": "dataset_cartography",
+      "has_direct_test": true,
+      "role": "confidence/loss/forgetting based row routing",
+      "script": "scripts/dataset_cartography_active_learning.py",
+      "script_exists": true,
+      "test": "tests/test_dataset_cartography_active_learning.py",
+      "test_exists": true
+    },
+    {
+      "area": "training_influence",
+      "has_direct_test": true,
+      "role": "link eval failures to helpful/harmful/missing-neighborhood train rows",
+      "script": "scripts/training_data_attribution_influence.py",
+      "script_exists": true,
+      "test": "tests/test_training_data_attribution_influence.py",
+      "test_exists": true
+    },
+    {
+      "area": "cross_encoder_reranker",
+      "has_direct_test": true,
+      "role": "task/evidence pair calibration and high-confidence-wrong review",
+      "script": "scripts/cross_encoder_reranker_calibration.py",
+      "script_exists": true,
+      "test": "tests/test_cross_encoder_reranker_calibration.py",
+      "test_exists": true
+    },
+    {
+      "area": "semantic_equivalence",
+      "has_direct_test": true,
+      "role": "metamorphic equivalence verifier for candidate outputs/patches",
+      "script": "scripts/semantic_equivalence_metamorphic_verifier.py",
+      "script_exists": true,
+      "test": "tests/test_semantic_equivalence_metamorphic_verifier.py",
+      "test_exists": true
+    },
+    {
+      "area": "repo_graph_encoder",
+      "has_direct_test": true,
+      "role": "repo graph feature encoding for software-state inputs",
+      "script": "scripts/repo_graph_encoder.py",
+      "script_exists": true,
+      "test": "tests/test_repo_graph_encoder.py",
+      "test_exists": true
+    },
+    {
+      "area": "program_state_extractors",
+      "has_direct_test": false,
+      "role": "symbol-table extraction support",
+      "script": "scripts/program_state_symbol_table_extractor.py",
+      "script_exists": true,
+      "test": null,
+      "test_exists": null
+    },
+    {
+      "area": "program_state_call_graph",
+      "has_direct_test": false,
+      "role": "call-graph extraction support",
+      "script": "scripts/program_state_call_graph_extractor.py",
+      "script_exists": true,
+      "test": null,
+      "test_exists": null
+    },
+    {
+      "area": "source_backed_edit_localization",
+      "has_direct_test": true,
+      "role": "source-backed edit localization candidate builder",
+      "script": "scripts/source_backed_edit_localization_builder.py",
+      "script_exists": true,
+      "test": "tests/test_source_backed_edit_localization_builder.py",
+      "test_exists": true
+    },
+    {
+      "area": "source_backed_patch_operator",
+      "has_direct_test": true,
+      "role": "source-backed patch operator candidate builder",
+      "script": "scripts/source_backed_patch_operator_builder.py",
+      "script_exists": true,
+      "test": "tests/test_source_backed_patch_operator_builder.py",
+      "test_exists": true
+    },
+    {
+      "area": "source_backed_verifier_repair",
+      "has_direct_test": true,
+      "role": "source-backed verifier/failure-to-repair candidate builder",
+      "script": "scripts/source_backed_verifier_repair_builder.py",
+      "script_exists": true,
+      "test": "tests/test_source_backed_verifier_repair_builder.py",
+      "test_exists": true
+    },
+    {
+      "area": "denoise_repair_contract",
+      "has_direct_test": true,
+      "role": "denoise/diffusion repair objective contract",
+      "script": "scripts/denoise_diffusion_repair_contract.py",
+      "script_exists": true,
+      "test": "tests/test_denoise_diffusion_repair_contract.py",
+      "test_exists": true
+    },
+    {
+      "area": "output_repair_controls",
+      "has_direct_test": true,
+      "role": "output repair denoise controls and shortcut gates",
+      "script": "scripts/output_repair_denoise_controls_builder.py",
+      "script_exists": true,
+      "test": "tests/test_output_repair_denoise_controls_builder.py",
+      "test_exists": true
+    },
+    {
+      "area": "structured_data_ops",
+      "has_direct_test": true,
+      "role": "structured/table operation curriculum support",
+      "script": "scripts/structured_data_operation_curriculum.py",
+      "script_exists": true,
+      "test": "tests/test_structured_data_operation_curriculum.py",
+      "test_exists": true
+    },
+    {
+      "area": "telemetry_metrics",
+      "has_direct_test": true,
+      "role": "row/logit/loss/gradient telemetry metrics",
+      "script": "scripts/training_telemetry_metrics.py",
+      "script_exists": true,
+      "test": "tests/test_training_telemetry_metrics.py",
+      "test_exists": true
+    },
+    {
+      "area": "packet_telemetry",
+      "has_direct_test": true,
+      "role": "model output packet telemetry contract",
+      "script": "scripts/model_output_packet_telemetry_contract_builder.py",
+      "script_exists": true,
+      "test": "tests/test_model_output_packet_telemetry_contract_builder.py",
+      "test_exists": true
+    },
+    {
+      "area": "confidence_ood",
+      "has_direct_test": true,
+      "role": "confidence/OOD head contract",
+      "script": "scripts/confidence_ood_head_contract.py",
+      "script_exists": true,
+      "test": "tests/test_confidence_ood_head_contract.py",
+      "test_exists": true
+    },
+    {
+      "area": "runtime_verifier_loop",
+      "has_direct_test": true,
+      "role": "runtime verifier loop contract; still no runtime authority",
+      "script": "scripts/runtime_verifier_loop_contract.py",
+      "script_exists": true,
+      "test": "tests/test_runtime_verifier_loop_contract.py",
+      "test_exists": true
+    },
+    {
+      "area": "verified_transition_record_adapter",
+      "has_direct_test": true,
+      "role": "no-mining verified transition record adapter",
+      "script": "scripts/build_stage8901_verified_transition_record_no_mining_compiler_adapter.py",
+      "script_exists": true,
+      "test": "tests/test_verified_transition_record_no_mining_compiler_adapter.py",
+      "test_exists": true
+    }
+  ],
+  "stage": 8928,
+  "stage_name": "stage8928_dataset_compiler_module_inventory_gap_matrix"
+}

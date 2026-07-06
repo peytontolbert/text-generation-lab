@@ -1,0 +1,63 @@
+{
+  "allowed_write_kinds": 5,
+  "failures": [],
+  "forbidden_write_kinds": 10,
+  "negative_mutation_checks": {
+    "allow_checkpoint": {
+      "failures": [
+        "write_kind_allowed_and_forbidden_overlap"
+      ],
+      "rejected": true
+    },
+    "arxiv_root": {
+      "failures": [
+        "allowed_output_root_mismatch",
+        "allowed_output_root_not_under_probe_root"
+      ],
+      "rejected": true
+    },
+    "existing_root": {
+      "failures": [
+        "allowed_output_root_already_exists"
+      ],
+      "rejected": true
+    },
+    "missing_forbidden_hidden": {
+      "failures": [
+        "missing_forbidden_write_kinds"
+      ],
+      "rejected": true
+    },
+    "open_authority": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "path_traversal_root": {
+      "failures": [
+        "allowed_output_root_mismatch"
+      ],
+      "rejected": true
+    },
+    "repo_root": {
+      "failures": [
+        "allowed_output_root_mismatch",
+        "allowed_output_root_not_under_probe_root"
+      ],
+      "rejected": true
+    },
+    "unsafe_artifact_name": {
+      "failures": [
+        "unsafe_required_artifact_name:../escape.json",
+        "required_artifact_names_mismatch"
+      ],
+      "rejected": true
+    }
+  },
+  "negative_mutations_rejected": 8,
+  "passed": true,
+  "policy_failures": [],
+  "registry_latest_stage_observed": 8920,
+  "required_artifact_names": 15
+}

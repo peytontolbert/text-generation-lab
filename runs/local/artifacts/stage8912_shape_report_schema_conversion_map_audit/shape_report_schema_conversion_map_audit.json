@@ -1,0 +1,265 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers": [
+    "shape_report_schema_only_no_weight_loading",
+    "embedding_rows_require_tokenizer_migration",
+    "packed_bitnet_layers_require_converter_spec",
+    "learned_encoder_positional_embedding_has_no_current_target_key",
+    "retrieval_policy_structured_heads_require_new_init_or_external_checkpoint"
+  ],
+  "checks": {
+    "binary_tensor_values_read": false,
+    "blocked_rows": 2,
+    "compatible_rows": 2,
+    "conversion_rows_present": true,
+    "direct_load_allowed": false,
+    "embedding_file_sizes_match_export_vocab": true,
+    "needs_migration_rows": 2,
+    "new_init_rows": 2,
+    "positional_embedding_file_matches_export_shape": true,
+    "schema_has_required_fields": true
+  },
+  "conversion_rows": [
+    {
+      "action": "resize_embedding_rows",
+      "dtype": "float32",
+      "notes": "Export vocab 8207 differs from recovered target vocab 1506; do not copy without tokenizer decision.",
+      "provenance": "local_agentkernel_lite_browser_bitnet_export",
+      "source_artifact": "dense/enc_embed_weight.f32.bin",
+      "source_key": "enc_embed_weight",
+      "source_shape": [
+        8207,
+        640
+      ],
+      "status": "needs_migration",
+      "target_key": "enc_embed.weight",
+      "target_shape": [
+        1506,
+        640
+      ]
+    },
+    {
+      "action": "resize_embedding_rows",
+      "dtype": "float32",
+      "notes": "Decoder embedding rows require the same tokenizer/vocab decision as encoder embedding.",
+      "provenance": "local_agentkernel_lite_browser_bitnet_export",
+      "source_artifact": "dense/dec_embed_weight.f32.bin",
+      "source_key": "dec_embed_weight",
+      "source_shape": [
+        8207,
+        640
+      ],
+      "status": "needs_migration",
+      "target_key": "dec_embed.weight",
+      "target_shape": [
+        1506,
+        640
+      ]
+    },
+    {
+      "action": "rename_copy",
+      "dtype": "float32",
+      "notes": "Shape-compatible metadata only; binary values are not read in this stage.",
+      "provenance": "local_agentkernel_lite_browser_bitnet_export",
+      "source_artifact": "dense/enc_norm_weight.f32.bin",
+      "source_key": "enc_norm_weight",
+      "source_shape": [
+        640
+      ],
+      "status": "compatible",
+      "target_key": "enc_norm.weight",
+      "target_shape": [
+        640
+      ]
+    },
+    {
+      "action": "rename_copy",
+      "dtype": "float32",
+      "notes": "Shape-compatible metadata only; binary values are not read in this stage.",
+      "provenance": "local_agentkernel_lite_browser_bitnet_export",
+      "source_artifact": "dense/dec_norm_weight.f32.bin",
+      "source_key": "dec_norm_weight",
+      "source_shape": [
+        640
+      ],
+      "status": "compatible",
+      "target_key": "dec_norm.weight",
+      "target_shape": [
+        640
+      ]
+    },
+    {
+      "action": "merge_or_ignore_positional_embedding",
+      "dtype": "float32",
+      "notes": "Recovered PyTorch module currently uses decoder RoPE and encoder has no learned positional embedding parameter.",
+      "provenance": "local_agentkernel_lite_browser_bitnet_export",
+      "source_artifact": "dense/enc_pos_embed_weight.f32.bin",
+      "source_key": "enc_pos_embed_weight",
+      "source_shape": [
+        4096,
+        640
+      ],
+      "status": "blocked",
+      "target_key": null,
+      "target_shape": null
+    },
+    {
+      "action": "rename_copy",
+      "dtype": "bitnet_packed_u8_to_float_or_quantized_tensor",
+      "notes": "Packed runtime layout requires a converter spec; no binary tensor decoding is authorized here.",
+      "provenance": "local_agentkernel_lite_browser_bitnet_export",
+      "source_artifact": "layers/encoder_0_attn_w_q.packed_weight.u8.bin",
+      "source_key": "encoder.0.attn.w_q",
+      "source_shape": "packed_bitnet_layout_header_required",
+      "status": "blocked",
+      "target_key": "encoder.0.self_attn.q_proj.weight",
+      "target_shape": [
+        640,
+        640
+      ]
+    },
+    {
+      "action": "new_init",
+      "dtype": "float32_or_training_dtype",
+      "notes": "Missing from export metadata; must be newly initialized or recovered from a different checkpoint.",
+      "provenance": "recovered_target_control_head",
+      "source_artifact": null,
+      "source_key": null,
+      "source_shape": null,
+      "status": "new_init_required",
+      "target_key": "retrieval_query_head.weight",
+      "target_shape": [
+        128,
+        640
+      ]
+    },
+    {
+      "action": "new_init",
+      "dtype": "float32_or_training_dtype",
+      "notes": "Structured software-maintainer heads are current-project control heads and cannot be assumed from export.",
+      "provenance": "recovered_software_maintainer_control_surface",
+      "source_artifact": null,
+      "source_key": null,
+      "source_shape": null,
+      "status": "new_init_required",
+      "target_key": "structured_heads.*.weight/bias",
+      "target_shape": "per_structured_field_vocab"
+    }
+  ],
+  "decision": {
+    "conversion_map_status": "draft_schema_only",
+    "direct_load_status": "blocked",
+    "next_required_artifact": "non_executing_converter_shape_report_generator"
+  },
+  "inferred_file_shapes": {
+    "dec_embed": {
+      "artifact": "dense/dec_embed_weight.f32.bin",
+      "exists": true,
+      "expected_bytes": 21009920,
+      "expected_shape": [
+        8207,
+        640
+      ],
+      "file_size_bytes": 21009920,
+      "matches_expected_bytes": true
+    },
+    "dec_norm": {
+      "artifact": "dense/dec_norm_weight.f32.bin",
+      "exists": true,
+      "expected_bytes": 2560,
+      "expected_shape": [
+        640
+      ],
+      "file_size_bytes": 2560,
+      "matches_expected_bytes": true
+    },
+    "enc_embed": {
+      "artifact": "dense/enc_embed_weight.f32.bin",
+      "exists": true,
+      "expected_bytes": 21009920,
+      "expected_shape": [
+        8207,
+        640
+      ],
+      "file_size_bytes": 21009920,
+      "matches_expected_bytes": true
+    },
+    "enc_norm": {
+      "artifact": "dense/enc_norm_weight.f32.bin",
+      "exists": true,
+      "expected_bytes": 2560,
+      "expected_shape": [
+        640
+      ],
+      "file_size_bytes": 2560,
+      "matches_expected_bytes": true
+    },
+    "enc_pos_embed": {
+      "artifact": "dense/enc_pos_embed_weight.f32.bin",
+      "exists": true,
+      "expected_bytes": 10485760,
+      "expected_shape": [
+        4096,
+        640
+      ],
+      "file_size_bytes": 10485760,
+      "matches_expected_bytes": true
+    }
+  },
+  "row_validation_failures": [],
+  "schema": {
+    "allowed_actions": [
+      "copy_exact",
+      "rename_copy",
+      "transpose_copy",
+      "split_gated_mlp",
+      "merge_or_ignore_positional_embedding",
+      "resize_embedding_rows",
+      "new_init",
+      "skip",
+      "blocked"
+    ],
+    "forbidden_in_this_stage": [
+      "torch_load",
+      "state_dict_load",
+      "read_binary_tensor_values",
+      "embedding_resize",
+      "checkpoint_write",
+      "model_forward",
+      "training_step"
+    ],
+    "required_fields": [
+      "source_key",
+      "target_key",
+      "source_artifact",
+      "source_shape",
+      "target_shape",
+      "dtype",
+      "action",
+      "status",
+      "provenance",
+      "notes"
+    ],
+    "required_statuses": [
+      "compatible",
+      "needs_migration",
+      "new_init_required",
+      "blocked"
+    ],
+    "schema_name": "agentkernel_lite_state_dict_shape_report_v1"
+  },
+  "stage": 8912,
+  "stage_name": "stage8912_shape_report_schema_conversion_map_audit"
+}

@@ -1,0 +1,103 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "branch": "recovery/100m-maintainer-rebuild-20260704",
+  "checks": {
+    "authority_counts_zero": true,
+    "branch_is_recovery_branch": true,
+    "changed_paths_present": true,
+    "commit_plan_steps_recorded": true,
+    "exclude_paths_absent": true,
+    "forbidden_by_plan_recorded": true,
+    "include_paths_present": true,
+    "no_git_write_performed": true,
+    "registry_frontier_stage8966_or_8967": true,
+    "remote_present": true,
+    "review_paths_absent": true,
+    "source_stage8966_passed": true
+  },
+  "commit_plan_steps": [
+    "review_scope",
+    "stage_recovery_files_only",
+    "commit_recovery_snapshot",
+    "push_current_recovery_branch",
+    "verify_remote_branch"
+  ],
+  "decision": "Backup commit scope is planned but not executed. All changed paths fall under recovery include prefixes, with no excluded or review paths detected. A future backup step may intentionally stage/commit/push this recovery branch if explicitly requested.",
+  "exclude_paths": [],
+  "exclude_prefixes": [
+    "/arxiv",
+    "arxiv/",
+    "checkpoints/",
+    "runs/local/probes/",
+    "runs/local/checkpoints/",
+    "wandb/",
+    ".venv/",
+    "__pycache__/"
+  ],
+  "forbidden_by_plan": [
+    "git_add_now",
+    "git_commit_now",
+    "git_push_now",
+    "network_upload",
+    "force_push",
+    "delete_or_cleanup",
+    "include_arxiv",
+    "include_checkpoints",
+    "include_probe_outputs_from_execution",
+    "train_or_mine"
+  ],
+  "include_prefixes": [
+    "docs/",
+    "runs/summaries/",
+    "runs/local/artifacts/",
+    "runs/local/manifests/",
+    "scripts/",
+    "tests/"
+  ],
+  "metrics": {
+    "actual_execution_authorized_next": false,
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "changed_paths": 319,
+    "commit_plan_steps": 5,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "exclude_paths": 0,
+    "forbidden_operations": 10,
+    "git_add_performed": false,
+    "git_commit_performed": false,
+    "git_push_performed": false,
+    "include_paths": 319,
+    "model_execution_attempted": false,
+    "network_upload_performed": false,
+    "review_paths": 0,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "path_classification_counts": {
+    "docs": 63,
+    "runs/local/artifacts": 63,
+    "runs/local/manifests": 1,
+    "runs/summaries": 62,
+    "scripts": 65,
+    "tests": 65
+  },
+  "remote_text": "origin\thttps://github.com/peytontolbert/text-generation-lab.git (fetch)\norigin\thttps://github.com/peytontolbert/text-generation-lab.git (push)",
+  "review_paths": [],
+  "stage": 8967,
+  "stage_name": "stage8967_backup_commit_scope_plan_no_write",
+  "status": "BACKUP_COMMIT_SCOPE_PLAN_NO_WRITE"
+}

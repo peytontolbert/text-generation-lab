@@ -1,0 +1,65 @@
+{
+  "decision_boundary": {
+    "canonical_future_contract": "scripts/diagnostic_ticket_contract.py",
+    "future_live_ticket_builder_status": "not_yet_built",
+    "legacy_ticket_builders": "historical_reference_only_do_not_reuse_for_live_ticket_without_stage8907_contract_patch",
+    "training_or_execution_authorized": false
+  },
+  "failures": [],
+  "future_builder_requirements": [
+    "import_or_call_apply_diagnostic_gate_fields",
+    "call_audit_diagnostic_ticket_fields_before_write",
+    "fail_closed_on_contract_failures",
+    "write_no_live_command_until_explicit_ticket",
+    "preserve_closed_authority_until_run_ticket",
+    "block_metrics_interpretation_until_stage8902_passes"
+  ],
+  "passed": true,
+  "registry_latest_stage_observed": 8910,
+  "surface_statuses": [
+    {
+      "allowed_future_use": "historical_reference_only",
+      "calls_apply_diagnostic_gate_fields": false,
+      "calls_audit_diagnostic_ticket_fields": false,
+      "contract_compliant_for_future_use": false,
+      "exists": true,
+      "historical_only": true,
+      "imports_contract": false,
+      "path": "scripts/build_stage8886_stage8890_inactive_execution_ticket_design.py",
+      "role": "historical_inactive_ticket_builder"
+    },
+    {
+      "allowed_future_use": "historical_reference_only",
+      "calls_apply_diagnostic_gate_fields": false,
+      "calls_audit_diagnostic_ticket_fields": false,
+      "contract_compliant_for_future_use": false,
+      "exists": true,
+      "historical_only": true,
+      "imports_contract": false,
+      "path": "scripts/build_stage8895_stage8890_live_authorization_checklist.py",
+      "role": "historical_live_checklist_builder"
+    },
+    {
+      "allowed_future_use": "historical_reference_only",
+      "calls_apply_diagnostic_gate_fields": false,
+      "calls_audit_diagnostic_ticket_fields": false,
+      "contract_compliant_for_future_use": false,
+      "exists": true,
+      "historical_only": true,
+      "imports_contract": false,
+      "path": "scripts/build_stage8864_native_probe_preflight_gate.py",
+      "role": "historical_probe_preflight_builder"
+    },
+    {
+      "allowed_future_use": "canonical",
+      "calls_apply_diagnostic_gate_fields": true,
+      "calls_audit_diagnostic_ticket_fields": true,
+      "contract_compliant_for_future_use": true,
+      "exists": true,
+      "historical_only": false,
+      "imports_contract": false,
+      "path": "scripts/diagnostic_ticket_contract.py",
+      "role": "canonical_future_ticket_contract"
+    }
+  ]
+}

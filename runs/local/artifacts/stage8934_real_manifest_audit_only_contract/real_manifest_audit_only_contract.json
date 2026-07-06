@@ -1,0 +1,90 @@
+{
+  "allowed_input_roots": [
+    "runs/local/artifacts",
+    "runs/local/recovered",
+    "runs/local/manifests",
+    "datasets/recovered"
+  ],
+  "audit_only_allowed_outputs": [
+    "judged_rows.jsonl",
+    "ranked_rows.jsonl",
+    "shortcut_baseline_card.json",
+    "counterfactual_obligation_card.json",
+    "compile_card.json",
+    "compiler_audit_card.json",
+    "dataset_patch_queue.jsonl"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "allowed_input_roots_recorded": true,
+    "audit_only_outputs_recorded": true,
+    "authority_counts_zero": true,
+    "data_mining_remains_blocked": true,
+    "forbidden_input_roots_recorded": true,
+    "forbidden_operations_recorded": true,
+    "required_manifest_properties_recorded": true,
+    "runtime_remains_blocked": true,
+    "source_stage8933_passed": true,
+    "training_remains_blocked": true
+  },
+  "contract_status": "NO_MINING_REAL_MANIFEST_AUDIT_ONLY",
+  "decision": {
+    "mining_status": "blocked",
+    "next_required_artifact": "if needed, implement path validator for audit-only manifest input; otherwise return to checkpoint blockers",
+    "real_manifest_status": "audit_only_if_explicit_path_provided",
+    "training_status": "blocked"
+  },
+  "forbidden_input_roots": [
+    "/arxiv",
+    "/data",
+    "/"
+  ],
+  "forbidden_operations": [
+    "glob_discovery_mining",
+    "remote_download",
+    "recursive_dataset_scan",
+    "model_execution",
+    "training_step",
+    "runtime_execution",
+    "decoder_ce_enable",
+    "denoise_ce_enable",
+    "checkpoint_write",
+    "mutate_input_manifest",
+    "write_into_arxiv"
+  ],
+  "metrics": {
+    "allowed_input_roots": 4,
+    "audit_only_allowed_outputs": 7,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_input_roots": 3,
+    "forbidden_operations": 11,
+    "model_execution_authorized_now": false,
+    "required_manifest_properties": 6,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "required_manifest_properties": [
+    "jsonl_objects_only",
+    "row_id_present_or_compiler_assigns",
+    "authority_absent_or_all_false",
+    "no_locked_eval_training_rows",
+    "source_lineage_present_for_source_backed_rows",
+    "loss_masks_absent_or_default_false_before_compile"
+  ],
+  "stage": 8934,
+  "stage_name": "stage8934_real_manifest_audit_only_contract"
+}

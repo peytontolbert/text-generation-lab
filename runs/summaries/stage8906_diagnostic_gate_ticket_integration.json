@@ -1,0 +1,53 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage8906_diagnostic_gate_ticket_integration/diagnostic_gate_ticket_integration_audit.json",
+    "ticket_template": "runs/local/artifacts/stage8906_diagnostic_gate_ticket_integration/future_live_probe_ticket_diagnostic_gate_template.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-05T22:02:38Z",
+  "decision": "Future live probe tickets must embed the diagnostic promotion gate before any metrics interpretation or promotion. This stage is template-only and opens no execution.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "forbidden_without_diagnostics_count": 9,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "metrics_interpretation_blocked_until_diagnostics_pass": true,
+    "model_execution_authorized_next": false,
+    "model_execution_authorized_now": false,
+    "post_run_diagnostic_gate_required": true,
+    "promotion_blocked_until_diagnostics_pass": true,
+    "promotion_ready": false,
+    "required_ticket_fields": 11,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_summaries_checked": 4,
+    "source_summaries_passing": 4,
+    "training_authorized": false
+  },
+  "next_best_step": "Patch future probe/ticket builders to emit these diagnostic-gate fields by construction; keep execution/training/decoder CE closed until a separate explicit one-run ticket exists.",
+  "passed": true,
+  "stage": 8906,
+  "stage_name": "stage8906_diagnostic_gate_ticket_integration"
+}

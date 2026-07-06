@@ -1,0 +1,89 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "artifact_names_are_safe": true,
+    "authority_counts_zero": true,
+    "authority_ticket_required": true,
+    "checkpoint_write_proof_is_future_artifact_only": true,
+    "no_current_checkpoint_load": true,
+    "no_current_checkpoint_write": true,
+    "no_current_model_forward": true,
+    "no_current_tensor_read": true,
+    "no_current_training": true,
+    "required_delta_buckets_recorded": true,
+    "required_future_artifacts_recorded": true,
+    "source_stage8941_passed": true
+  },
+  "decision": "Materialization delta/shape telemetry contract is recovered. Any future converter must emit complete key-route, shape, dtype, initializer, ignored, blocked, and authority-ticket artifacts before checkpoint write can be considered; no current load/write/decode/init/forward/train authority is opened.",
+  "forbidden_operations": [
+    "read_tensor_values",
+    "write_checkpoint",
+    "load_checkpoint",
+    "decode_packed_bitnet",
+    "initialize_parameters",
+    "model.forward",
+    "train_step"
+  ],
+  "metrics": {
+    "checkpoint_load_authorized": false,
+    "checkpoint_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_authorized_now": false,
+    "required_delta_buckets": 6,
+    "required_future_artifacts": 12,
+    "runtime_authorized_flag": false,
+    "tensor_read_authorized": false,
+    "training_authorized": false
+  },
+  "required_delta_buckets": [
+    "renamed_dense_copy_candidate",
+    "packed_bitnet_decode_candidate",
+    "target_only_initialized_candidate",
+    "ignored_source_only_artifact",
+    "blocked_tokenizer_embedding_or_lm_head",
+    "blocked_unknown_or_shape_mismatch"
+  ],
+  "required_future_artifacts": [
+    "materialization_plan.json",
+    "source_target_key_map.jsonl",
+    "tensor_shape_assertions.jsonl",
+    "packed_decode_manifest.jsonl",
+    "embedding_lm_head_policy_report.json",
+    "initialized_module_manifest.jsonl",
+    "ignored_source_artifacts.jsonl",
+    "missing_target_keys.jsonl",
+    "unexpected_source_keys.jsonl",
+    "module_delta_shape_report.json",
+    "materialization_authority_ticket.json",
+    "checkpoint_write_proof.json"
+  ],
+  "stage": 8942,
+  "stage_name": "stage8942_materialization_delta_shape_telemetry_contract",
+  "status": "MATERIALIZATION_DELTA_SHAPE_TELEMETRY_CONTRACT_ONLY",
+  "telemetry_contract": {
+    "must_fail_if_checkpoint_write_without_ticket": true,
+    "must_fail_if_unexplained_key_delta": true,
+    "must_report_blocked_artifacts": true,
+    "must_report_dtype_before_after": true,
+    "must_report_every_source_row_route": true,
+    "must_report_every_target_key_status": true,
+    "must_report_ignored_artifacts": true,
+    "must_report_initializer_seeds_without_sampling_now": true,
+    "must_report_shape_before_after": true,
+    "must_report_tokenizer_hashes": true
+  }
+}

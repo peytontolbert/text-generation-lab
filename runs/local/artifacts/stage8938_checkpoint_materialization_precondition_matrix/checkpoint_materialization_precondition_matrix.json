@@ -1,0 +1,142 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "bitnet_decoder_still_blocked": true,
+    "blocked_preconditions_remain": true,
+    "control_head_init_still_blocked": true,
+    "no_load_or_write_authority": true,
+    "preconditions_recorded": true,
+    "source_stage8918_passed": true,
+    "source_stage8919_passed": true,
+    "source_stage8920_passed": true,
+    "source_stage8921_passed": true,
+    "source_stage8922_passed": true,
+    "source_stage8927_passed": true,
+    "source_stage8937_passed": true,
+    "tokenizer_hash_lock_resolved": true
+  },
+  "decision": "Checkpoint materialization remains blocked. Tokenizer/hash/path cleanup guards are recovered, but BitNet layout decoding, packed shape assertions, control-head initializer seed policy, positional embedding policy, and materialization-specific telemetry are still missing.",
+  "forbidden_operations": [
+    "torch.load",
+    "state_dict.load_state_dict",
+    "read_tensor_values",
+    "decode_packed_bitnet",
+    "resize_token_embeddings",
+    "initialize_module_parameters",
+    "save_checkpoint",
+    "model.forward",
+    "train_step"
+  ],
+  "metrics": {
+    "blocked_preconditions": 5,
+    "checkpoint_load_authorized": false,
+    "checkpoint_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_authorized_now": false,
+    "preconditions": 12,
+    "resolved_preconditions": 7,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "preconditions": [
+    {
+      "precondition": "tokenizer_hash_lock",
+      "reason": "Source tokenizer hashes and keep-target bridge decision are recorded; tokenizer swap and embedding copy remain blocked.",
+      "source_stage": 8927,
+      "status": "resolved_no_execution"
+    },
+    {
+      "precondition": "bridge_token_mapping_table_or_keep_target_tokenizer_decision",
+      "reason": "Current decision keeps recovered target tokenizer 1506; bridge rows are metadata-only.",
+      "source_stage": 8927,
+      "status": "resolved_keep_target_no_execution"
+    },
+    {
+      "precondition": "embedding_resize_or_no_copy_policy",
+      "reason": "Embedding copy/resize is explicitly blocked under keep-target policy.",
+      "source_stage": 8919,
+      "status": "resolved_block_copy_resize"
+    },
+    {
+      "precondition": "lm_head_resize_or_no_copy_policy",
+      "reason": "LM-head copy/resize is explicitly blocked under keep-target policy.",
+      "source_stage": 8919,
+      "status": "resolved_block_copy_resize"
+    },
+    {
+      "precondition": "bitnet_layout_decoder_contract",
+      "reason": "Packed browser BitNet rows still require layout/dequantization spec before tensor materialization.",
+      "source_stage": null,
+      "status": "blocked_missing_contract"
+    },
+    {
+      "precondition": "packed_weight_shape_assertions",
+      "reason": "Packed-weight file-size/dtype/shape assertions are not yet implemented for materialization.",
+      "source_stage": null,
+      "status": "blocked_missing_contract"
+    },
+    {
+      "precondition": "control_head_initializer_seed_contract",
+      "reason": "Recovered target-only heads need deterministic initializer and seed policy before any initialization.",
+      "source_stage": null,
+      "status": "blocked_missing_contract"
+    },
+    {
+      "precondition": "positional_embedding_merge_or_ignore_policy",
+      "reason": "Source-only encoder positional embedding artifact requires explicit ignore/merge policy.",
+      "source_stage": null,
+      "status": "blocked_missing_contract"
+    },
+    {
+      "precondition": "output_checkpoint_safe_path_contract",
+      "reason": "Future outputs are scoped to fresh probe directories with forbidden write classes denied.",
+      "source_stage": 8921,
+      "status": "resolved_no_execution"
+    },
+    {
+      "precondition": "cleanup_proof_no_overwrite_contract",
+      "reason": "Cleanup is scoped to checkpoint children only under a marked fresh probe output.",
+      "source_stage": 8922,
+      "status": "resolved_no_execution"
+    },
+    {
+      "precondition": "module_delta_and_shape_telemetry_contract",
+      "reason": "Training telemetry exists elsewhere, but checkpoint materialization needs its own before/after module-shape and delta guard.",
+      "source_stage": null,
+      "status": "blocked_missing_materialization_specific_contract"
+    },
+    {
+      "precondition": "manifest_path_guard_for_audit_inputs",
+      "reason": "Explicit repo-local manifests are path-guarded and compiler-auditable without mining.",
+      "source_stage": 8937,
+      "status": "resolved_no_execution"
+    }
+  ],
+  "source_stage_status": {
+    "8918": true,
+    "8919": true,
+    "8920": true,
+    "8921": true,
+    "8922": true,
+    "8927": true,
+    "8937": true
+  },
+  "stage": 8938,
+  "stage_name": "stage8938_checkpoint_materialization_precondition_matrix",
+  "status": "CHECKPOINT_MATERIALIZATION_PRECONDITION_MATRIX"
+}

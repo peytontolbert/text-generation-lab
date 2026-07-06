@@ -1,0 +1,79 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "combo_feature_hits_exact": true,
+    "patch_queue_present": true,
+    "patch_queue_reason_shortcut": true,
+    "registry_frontier_stage8962": true,
+    "repair_requirements_recorded": true,
+    "single_feature_below_ceiling": true,
+    "source_stage8962_passed": true,
+    "training_blocked_by_shortcut_dominance": true
+  },
+  "decision": "The focused manifest is useful for audit plumbing but not trainable: two-feature shortcut baselines recover the target exactly. It needs counterbalanced neutral evidence rows before it can support model gradients.",
+  "metrics": {
+    "actual_execution_authorized_next": false,
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "combo_exact_1_0_rows": 2,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "manifest_trainable_now": false,
+    "model_execution_attempted": false,
+    "patch_queue_rows": 1,
+    "repair_requirements": 6,
+    "runtime_authorized_flag": false,
+    "strongest_combo_feature_exact": 1.0,
+    "strongest_single_feature_exact": 0.6666666666666666,
+    "training_authorized": false
+  },
+  "patch_queue": [
+    {
+      "card": "shortcut_baseline_card.json",
+      "reason": "shortcut_dominance"
+    }
+  ],
+  "repair_requirements": [
+    "add_rows_where_decode_allowed_and_evidence_state_combo_no_longer_solves_obligation_type",
+    "add_rows_where_decoder_budget_ok_and_evidence_state_combo_no_longer_solves_obligation_type",
+    "counterbalance_missing_evidence_with_multiple_obligation_types",
+    "counterbalance_budget_bad_with_multiple_obligation_types",
+    "add_neutral_non_label_evidence_features",
+    "rerun_shortcut_baselines_before_trainability"
+  ],
+  "shortcut_summary": {
+    "ceiling": 0.8,
+    "combo_feature_exact": {
+      "decode_allowed+decoder_budget_ok": 0.6666666666666666,
+      "decode_allowed+evidence_state": 1.0,
+      "decoder_budget_ok+evidence_state": 1.0
+    },
+    "majority_exact": 0.3333333333333333,
+    "strongest_combo_feature_exact": 1.0,
+    "strongest_single_feature_exact": 0.6666666666666666
+  },
+  "source_stage": 8962,
+  "stage": 8963,
+  "stage_name": "stage8963_focused_manifest_patch_queue_interpretation",
+  "status": "FOCUSED_MANIFEST_PATCH_QUEUE_INTERPRETATION",
+  "trainability_decision": {
+    "combo_feature_baseline_ok": false,
+    "manifest_trainable_now": false,
+    "reason": "combo_feature_shortcut_exact_1_0",
+    "single_feature_baseline_ok": true
+  }
+}

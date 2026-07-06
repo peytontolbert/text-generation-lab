@@ -1,0 +1,112 @@
+{
+  "acceptance_spec_rows": [
+    {
+      "expect": "reject_embedding_or_lm_head_copy_resize",
+      "fixture_type": "json_metadata_only",
+      "forbidden": [
+        "load_checkpoint",
+        "resize_embeddings",
+        "copy_lm_head"
+      ],
+      "given": "target tokenizer hash and source tokenizer hash differ",
+      "spec_id": "tokenizer_hashlock_rejects_source_swap"
+    },
+    {
+      "expect": "require_synthetic_golden_vector_pass_before_real_decode",
+      "fixture_type": "synthetic_vector_only",
+      "forbidden": [
+        "read_real_packed_weight_values",
+        "decode_real_packed_bitnet"
+      ],
+      "given": "packed BitNet candidate semantics without real weight bytes",
+      "spec_id": "bitnet_synthetic_golden_vectors_required_before_real_decode"
+    },
+    {
+      "expect": "emit_delta_shape_telemetry_schema",
+      "fixture_type": "shape_schema_only",
+      "forbidden": [
+        "save_checkpoint",
+        "load_state_dict"
+      ],
+      "given": "module mapping and expected target shapes",
+      "spec_id": "shape_delta_telemetry_required_before_checkpoint_write"
+    },
+    {
+      "expect": "ignore_source_positional_embedding",
+      "fixture_type": "policy_metadata_only",
+      "forbidden": [
+        "copy_source_positional_embedding"
+      ],
+      "given": "source positional embedding incompatible with target policy",
+      "spec_id": "positional_embedding_ignore_policy_rechecked"
+    },
+    {
+      "expect": "record_deterministic_initializer_seed_schema",
+      "fixture_type": "seed_policy_only",
+      "forbidden": [
+        "initialize_live_module_parameters"
+      ],
+      "given": "missing source weights for recovered control heads",
+      "spec_id": "control_head_seed_policy_rechecked"
+    }
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "acceptance_spec_rows_recorded": true,
+    "all_rows_fixture_only": true,
+    "all_rows_have_forbidden_ops": true,
+    "authority_counts_zero": true,
+    "global_forbidden_ops_recorded": true,
+    "no_checkpoint_open_authorized": true,
+    "no_checkpoint_write_authorized": true,
+    "no_converter_execution_authorized": true,
+    "no_model_execution_authorized": true,
+    "no_real_checkpoint_or_tensor_fixture": true,
+    "no_training_authorized": true,
+    "source_stage8947_passed": true
+  },
+  "decision": "Converter acceptance criteria are now specified as fixture-only tests. They define what a future converter must prove without opening checkpoints, reading tensor bytes, decoding packed weights, writing checkpoints, running models, mining data, or training.",
+  "global_forbidden_operations": [
+    "open_source_checkpoint",
+    "read_weight_bytes",
+    "decode_real_packed_bitnet",
+    "instantiate_model",
+    "load_state_dict",
+    "save_checkpoint",
+    "run_forward",
+    "train_step",
+    "mine_data"
+  ],
+  "metrics": {
+    "acceptance_spec_rows": 5,
+    "checkpoint_open_authorized": false,
+    "checkpoint_write_authorized": false,
+    "converter_code_written": false,
+    "converter_execution_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "global_forbidden_operations": 9,
+    "model_execution_authorized_now": false,
+    "real_checkpoint_fixture_rows": 0,
+    "real_tensor_fixture_rows": 0,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "source_stage": 8947,
+  "stage": 8948,
+  "stage_name": "stage8948_converter_fixture_only_acceptance_spec",
+  "status": "CONVERTER_ACCEPTANCE_SPEC_FIXTURE_ONLY"
+}

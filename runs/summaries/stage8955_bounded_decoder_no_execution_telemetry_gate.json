@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "gate": "runs/local/artifacts/stage8955_bounded_decoder_no_execution_telemetry_gate/bounded_decoder_no_execution_telemetry_gate.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-06T03:12:50Z",
+  "decision": "Bounded decoder CE cannot receive an execution ticket unless telemetry artifact gates are present and future probe outputs are non-empty/schema-complete. This stage records the no-execution telemetry gate only; it does not run a probe, model, converter, runtime, mining, decoder CE, denoise CE, or training.",
+  "metrics": {
+    "actual_execution_authorized_next": false,
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gated_before_execution_artifacts": 13,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "mandatory_failure_modes": 7,
+    "model_execution_attempted": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "required_bounded_json_artifacts": 9,
+    "required_bounded_jsonl_artifacts": 6,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "training_authorized": false
+  },
+  "next_best_step": "Recover the explicit one-run authorization review schema for a future tiny bounded decoder CE probe; keep execution and training closed.",
+  "passed": true,
+  "stage": 8955,
+  "stage_name": "stage8955_bounded_decoder_no_execution_telemetry_gate"
+}

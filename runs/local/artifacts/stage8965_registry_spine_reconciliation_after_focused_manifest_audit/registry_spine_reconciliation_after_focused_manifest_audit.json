@@ -1,0 +1,254 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_focused_manifest_status_non_trainable": true,
+    "authority_counts_zero": true,
+    "counterbalance_templates_non_trainable": true,
+    "focused_manifest_not_trainable": true,
+    "next_branch_options_recorded": true,
+    "only_no_execution_branches_allowed": true,
+    "registry_frontier_stage8964": true,
+    "source_summaries_passed": true,
+    "source_summaries_present": true,
+    "spine_status_recorded": true
+  },
+  "decision": "Focused manifest audit branch is reconciled: audit plumbing works, but combo shortcuts block trainability and counterbalance rows are design-only. Continue only no-execution work unless an explicit future authorization is requested.",
+  "metrics": {
+    "actual_execution_authorized_next": false,
+    "allowed_now_branches": 2,
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "counterbalance_templates_trainable_now": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "focused_manifest_trainable_now": false,
+    "model_execution_attempted": false,
+    "next_branch_options": 5,
+    "runtime_authorized_flag": false,
+    "source_summaries": 4,
+    "source_summaries_passed": 4,
+    "spine_status_nodes": 3,
+    "training_authorized": false
+  },
+  "next_branch_options": [
+    {
+      "allowed_now": true,
+      "branch": "continue_no_execution_recovery",
+      "description": "Continue contracts, audits, and docs without mining/training."
+    },
+    {
+      "allowed_now": true,
+      "branch": "repo_local_manifest_audit_only",
+      "description": "Audit explicit repo-local manifests only; do not recurse or mine."
+    },
+    {
+      "allowed_now": false,
+      "branch": "future_one_run_bounded_probe_ticket",
+      "description": "Requires explicit user one-run authorization and fresh pre-execution audit."
+    },
+    {
+      "allowed_now": false,
+      "branch": "counterbalance_row_materialization",
+      "description": "Requires separate row-source/audit gate; current templates are not trainable."
+    },
+    {
+      "allowed_now": false,
+      "branch": "data_mining_or_arxiv_walk",
+      "description": "Still closed."
+    }
+  ],
+  "source_status": {
+    "8961": {
+      "exists": true,
+      "metrics": {
+        "actual_execution_authorized_next": false,
+        "arxiv_paths_scanned": 0,
+        "arxiv_read_authorized_for_compiler": false,
+        "arxiv_write_authorized": false,
+        "authority_rows": 0,
+        "body_emission_authorized": false,
+        "category_counts": {
+          "bounded_decoder": 19,
+          "central_graph": 178,
+          "denoise_repair": 4,
+          "edit_localization": 2,
+          "intent_to_build": 2,
+          "manifest": 17,
+          "other_jsonl": 68,
+          "patch_operator": 2,
+          "recovery": 16,
+          "symbol_binding": 9,
+          "telemetry": 14,
+          "verifier_repair": 2
+        },
+        "content_files_opened_for_row_count": 0,
+        "controller_complete_merge_authorized_next": false,
+        "data_mining_authorized": false,
+        "decoder_ce_authorized": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_authorized": false,
+        "denoise_ce_training_authorized_next": false,
+        "failures": [],
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "inventory_rows": 333,
+        "model_execution_attempted": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "root_counts": {
+          "runs/local/artifacts": 332,
+          "runs/local/manifests": 1
+        },
+        "runtime_authorized": false,
+        "runtime_authorized_flag": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "training_authorized": false
+      },
+      "passed": true,
+      "stage_name": "stage8961_repo_local_manifest_inventory_no_mining"
+    },
+    "8962": {
+      "exists": true,
+      "metrics": {
+        "actual_execution_authorized_next": false,
+        "arxiv_read_authorized_for_compiler": false,
+        "arxiv_write_authorized": false,
+        "authority_rows": 0,
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "data_mining_authorized": false,
+        "decoder_ce_authorized": false,
+        "decoder_ce_loss_rows": 0,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_authorized": false,
+        "denoise_ce_loss_rows": 0,
+        "denoise_ce_training_authorized_next": false,
+        "failures": [],
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "manifest_rows": 3,
+        "model_execution_attempted": false,
+        "model_execution_authorized_next": false,
+        "objective_files": 1,
+        "output_files_expected": 8,
+        "output_files_written": 8,
+        "patch_queue_rows": 1,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "runtime_authorized_flag": false,
+        "runtime_reward_rows": 0,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "training_authorized": false
+      },
+      "passed": true,
+      "stage_name": "stage8962_focused_manifest_audit_only_compiler_refresh"
+    },
+    "8963": {
+      "exists": true,
+      "metrics": {
+        "actual_execution_authorized_next": false,
+        "arxiv_read_authorized_for_compiler": false,
+        "arxiv_write_authorized": false,
+        "authority_rows": 0,
+        "body_emission_authorized": false,
+        "combo_exact_1_0_rows": 2,
+        "controller_complete_merge_authorized_next": false,
+        "data_mining_authorized": false,
+        "decoder_ce_authorized": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_authorized": false,
+        "denoise_ce_training_authorized_next": false,
+        "failures": [],
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "manifest_trainable_now": false,
+        "model_execution_attempted": false,
+        "model_execution_authorized_next": false,
+        "patch_queue_rows": 1,
+        "promotion_ready": false,
+        "repair_requirements": 6,
+        "runtime_authorized": false,
+        "runtime_authorized_flag": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "strongest_combo_feature_exact": 1.0,
+        "strongest_single_feature_exact": 0.6666666666666666,
+        "training_authorized": false
+      },
+      "passed": true,
+      "stage_name": "stage8963_focused_manifest_patch_queue_interpretation"
+    },
+    "8964": {
+      "exists": true,
+      "metrics": {
+        "actual_execution_authorized_next": false,
+        "arxiv_read_authorized_for_compiler": false,
+        "arxiv_write_authorized": false,
+        "authority_rows": 0,
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "counterbalance_cells": 4,
+        "data_mining_authorized": false,
+        "decoder_ce_authorized": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_authorized": false,
+        "denoise_ce_training_authorized_next": false,
+        "failures": [],
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_attempted": false,
+        "model_execution_authorized_next": false,
+        "neutral_evidence_features": 6,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "runtime_authorized_flag": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "template_rows": 4,
+        "trainability_gates": 8,
+        "trainable_rows": 0,
+        "training_authorized": false
+      },
+      "passed": true,
+      "stage_name": "stage8964_focused_manifest_counterbalance_design_no_mining"
+    }
+  },
+  "spine_status": [
+    {
+      "evidence_stage": 8962,
+      "node_id": "manifest:stage8937_tiny_explicit_manifest",
+      "status": "audit_only_compiler_path_passed",
+      "trainable_now": false
+    },
+    {
+      "evidence_stage": 8963,
+      "node_id": "issue:focused_manifest_combo_shortcut",
+      "status": "blocked_trainability",
+      "trainable_now": false
+    },
+    {
+      "evidence_stage": 8964,
+      "node_id": "design:focused_manifest_counterbalance_templates",
+      "status": "design_only_non_trainable",
+      "trainable_now": false
+    }
+  ],
+  "stage": 8965,
+  "stage_name": "stage8965_registry_spine_reconciliation_after_focused_manifest_audit",
+  "status": "RECONCILED_FOCUSED_MANIFEST_AUDIT_BRANCH"
+}

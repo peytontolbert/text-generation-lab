@@ -1,0 +1,74 @@
+{
+  "allowed_manifest_roots": [
+    "runs/local/artifacts",
+    "runs/local/recovered",
+    "runs/local/manifests",
+    "datasets/recovered"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "allowed_roots_only": true,
+    "arxiv_not_scanned": true,
+    "authority_counts_zero": true,
+    "content_not_loaded": true,
+    "content_rows_not_counted": true,
+    "focused_manifest_root_counted": true,
+    "inventory_rows_present": true,
+    "registry_frontier_stage8960": true,
+    "source_stage8960_passed": true
+  },
+  "decision": "Repo-local JSONL manifest inventory is metadata-only: it lists files under allowed manifest roots without loading row content, counting data rows, scanning /arxiv, mining, model execution, decoder CE, denoise CE, runtime, or training.",
+  "max_depth_by_root": {
+    "datasets/recovered": 2,
+    "runs/local/artifacts": 2,
+    "runs/local/manifests": 2,
+    "runs/local/recovered": 2
+  },
+  "metrics": {
+    "actual_execution_authorized_next": false,
+    "arxiv_paths_scanned": 0,
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "category_counts": {
+      "bounded_decoder": 19,
+      "central_graph": 178,
+      "denoise_repair": 4,
+      "edit_localization": 2,
+      "intent_to_build": 2,
+      "manifest": 17,
+      "other_jsonl": 68,
+      "patch_operator": 2,
+      "recovery": 16,
+      "symbol_binding": 9,
+      "telemetry": 14,
+      "verifier_repair": 2
+    },
+    "content_files_opened_for_row_count": 0,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "inventory_rows": 333,
+    "model_execution_attempted": false,
+    "root_counts": {
+      "runs/local/artifacts": 332,
+      "runs/local/manifests": 1
+    },
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "stage": 8961,
+  "stage_name": "stage8961_repo_local_manifest_inventory_no_mining",
+  "status": "REPO_LOCAL_MANIFEST_INVENTORY_NO_MINING"
+}

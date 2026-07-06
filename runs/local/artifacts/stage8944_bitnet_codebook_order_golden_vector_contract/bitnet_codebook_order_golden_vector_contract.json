@@ -1,0 +1,114 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "axis_order_candidates": [
+    "row_major_flattened_target_shape",
+    "column_major_flattened_target_shape",
+    "blocked_tile_order_requires_header"
+  ],
+  "checks": {
+    "authority_counts_zero": true,
+    "axis_order_candidates_recorded": true,
+    "codebook_candidates_recorded": true,
+    "future_gates_recorded": true,
+    "golden_rows_are_synthetic_only": true,
+    "no_checkpoint_load_authorized": true,
+    "no_checkpoint_write_authorized": true,
+    "no_model_execution_authorized": true,
+    "no_real_decode_authorized": true,
+    "no_real_weight_read_authorized": true,
+    "no_training_authorized": true,
+    "packing_order_candidates_recorded": true,
+    "source_stage8943_passed": true,
+    "synthetic_golden_rows_recorded": true
+  },
+  "codebook_candidates": [
+    {
+      "codebook_id": "ternary_symmetric_zero_centered",
+      "codes": {
+        "0b00": -1.0,
+        "0b01": 0.0,
+        "0b10": 1.0,
+        "0b11": "reserved_or_zero"
+      },
+      "status": "candidate_requires_export_evidence"
+    },
+    {
+      "codebook_id": "quaternary_symmetric",
+      "codes": {
+        "0b00": -1.0,
+        "0b01": -0.3333333333,
+        "0b10": 0.3333333333,
+        "0b11": 1.0
+      },
+      "status": "candidate_requires_export_evidence"
+    },
+    {
+      "codebook_id": "unsigned_affine_quantized",
+      "codes": {
+        "0b00": 0,
+        "0b01": 1,
+        "0b10": 2,
+        "0b11": 3
+      },
+      "status": "candidate_requires_scale_zero_point_metadata"
+    }
+  ],
+  "decision": "BitNet codebook/order/golden-vector semantics are recovered as a future proof contract only. The contract records candidate codebooks, byte order, axis order, synthetic golden vectors, and required future gates, but still forbids reading or decoding real packed weights and forbids checkpoint load/write, model execution, and training.",
+  "forbidden_operations": [
+    "read_real_packed_weight_values",
+    "decode_real_packed_bitnet",
+    "dequantize_real_weight_values",
+    "load_checkpoint",
+    "write_checkpoint",
+    "model.forward",
+    "train_step"
+  ],
+  "metrics": {
+    "axis_order_candidates": 3,
+    "checkpoint_load_authorized": false,
+    "checkpoint_write_authorized": false,
+    "codebook_candidates": 3,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_authorized_now": false,
+    "packing_order_candidates": 2,
+    "real_packed_decode_authorized": false,
+    "real_weight_read_authorized": false,
+    "required_future_gates": 10,
+    "runtime_authorized_flag": false,
+    "synthetic_golden_rows": 3,
+    "training_authorized": false
+  },
+  "packing_order_candidates": [
+    "least_significant_bits_first",
+    "most_significant_bits_first"
+  ],
+  "required_future_gates": [
+    "select_exact_codebook_from_export_docs_or_known_converter",
+    "select_exact_byte_bit_order",
+    "select_exact_axis_order",
+    "define_scale_threshold_or_zero_point_policy",
+    "pass_synthetic_golden_vectors",
+    "pass_real_metadata_file_size_shape_assertions",
+    "emit_decode_telemetry_without_checkpoint_write",
+    "fail_closed_on_reserved_or_unknown_codes",
+    "lm_head_vocab_projection_policy_applied",
+    "materialization_delta_shape_telemetry_attached"
+  ],
+  "stage": 8944,
+  "stage_name": "stage8944_bitnet_codebook_order_golden_vector_contract",
+  "status": "BITNET_CODEBOOK_ORDER_GOLDEN_VECTOR_CONTRACT_ONLY"
+}

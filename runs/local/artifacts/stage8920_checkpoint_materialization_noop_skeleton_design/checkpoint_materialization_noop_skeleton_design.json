@@ -1,0 +1,109 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "dangerous_steps_blocked": true,
+    "metadata_only_boundary_present": true,
+    "no_checkpoint_write_authorized": true,
+    "no_control_head_init_authorized": true,
+    "no_embedding_resize_authorized": true,
+    "no_model_forward_authorized": true,
+    "no_packed_decode_authorized": true,
+    "no_state_dict_load_authorized": true,
+    "no_tensor_value_read_authorized": true,
+    "no_training_authorized": true,
+    "noop_steps_recorded": true,
+    "preconditions_recorded": true,
+    "stage8919_policy_passed": true
+  },
+  "decision": {
+    "materialization_status": "blocked_until_all_preconditions_have_separate_passing_audits",
+    "next_required_artifact": "tokenizer_hash_lock_and_bridge_mapping_table_or_explicit_keep-target decision card",
+    "skeleton_status": "no_op_design_only"
+  },
+  "forbidden_operations": [
+    "torch.load",
+    "state_dict.load_state_dict",
+    "read_tensor_values",
+    "decode_packed_bitnet",
+    "resize_token_embeddings",
+    "initialize_module_parameters",
+    "save_checkpoint",
+    "model.forward",
+    "train_step"
+  ],
+  "materialization_preconditions": [
+    "tokenizer_hash_lock",
+    "bridge_token_mapping_table_or_keep_target_tokenizer_decision",
+    "embedding_resize_or_no_copy_policy",
+    "lm_head_resize_or_no_copy_policy",
+    "bitnet_layout_decoder_contract",
+    "packed_weight_shape_assertions",
+    "control_head_initializer_seed_contract",
+    "positional_embedding_merge_or_ignore_policy",
+    "output_checkpoint_safe_path_contract",
+    "module_delta_and_shape_telemetry_contract"
+  ],
+  "metrics": {
+    "blocked_noop_steps": 6,
+    "checkpoint_write_authorized": false,
+    "control_head_init_authorized": false,
+    "embedding_resize_authorized": false,
+    "metadata_only_allowed_steps": 1,
+    "model_forward_authorized": false,
+    "noop_step_count": 8,
+    "packed_decode_authorized": false,
+    "precondition_count": 10,
+    "state_dict_load_authorized": false,
+    "tensor_value_read_authorized": false,
+    "training_authorized": false
+  },
+  "noop_steps": [
+    {
+      "status": "allowed_metadata_only",
+      "step": "read_contract_metadata"
+    },
+    {
+      "status": "design_only",
+      "step": "validate_preconditions"
+    },
+    {
+      "status": "blocked",
+      "step": "load_source_weights"
+    },
+    {
+      "status": "blocked",
+      "step": "decode_packed_bitnet"
+    },
+    {
+      "status": "blocked",
+      "step": "resize_embeddings"
+    },
+    {
+      "status": "blocked",
+      "step": "initialize_control_heads"
+    },
+    {
+      "status": "blocked",
+      "step": "write_checkpoint"
+    },
+    {
+      "status": "blocked",
+      "step": "run_forward_smoke"
+    }
+  ],
+  "source_stage": 8919,
+  "stage": 8920,
+  "stage_name": "stage8920_checkpoint_materialization_noop_skeleton_design"
+}

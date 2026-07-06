@@ -1,0 +1,85 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "compatible_rows_have_targets": true,
+    "expected_blocked_policy_rows": true,
+    "expected_compatible_mapping_rows": true,
+    "expected_embedding_migration_policy_rows": true,
+    "expected_new_init_policy_rows": true,
+    "no_binary_tensor_values_read": true,
+    "no_execution_authorized_rows": true,
+    "no_load_authorized_rows": true,
+    "no_target_key_collisions": true,
+    "no_training_authorized_rows": true,
+    "no_unknown_policy_rows": true,
+    "source_shape_report_exists": true,
+    "stage8917_summary_passed": true
+  },
+  "forbidden_operations": [
+    "read_binary_tensor_values",
+    "decode_packed_bitnet",
+    "torch_load",
+    "state_dict_load",
+    "embedding_resize",
+    "initialize_weights",
+    "checkpoint_write",
+    "model_forward",
+    "training_step"
+  ],
+  "metrics": {
+    "binary_tensor_value_rows": 0,
+    "blocked_policy_rows": 119,
+    "compatible_mapping_rows": 40,
+    "compatible_rows_missing_target": 0,
+    "contract_rows": 159,
+    "embedding_migration_policy_rows": 2,
+    "embedding_targets": [
+      "dec_embed.weight",
+      "enc_embed.weight"
+    ],
+    "execution_authorized_rows": 0,
+    "load_authorized_rows": 0,
+    "new_init_policy_rows": 7,
+    "new_init_targets": [
+      "agent_controller.weight/bias",
+      "agent_intent_head.weight/bias",
+      "agent_policy_heads.*.weight/bias",
+      "retrieval_doc_head.weight",
+      "retrieval_query_head.weight",
+      "scalar_invariant.weight",
+      "structured_heads.*.weight/bias"
+    ],
+    "policy_counts": {
+      "compatible_dense_metadata_only": 40,
+      "embedding_row_resize_policy_required": 2,
+      "packed_bitnet_converter_required": 109,
+      "source_only_positional_embedding_policy_required": 1,
+      "target_only_head_initialization_required": 7
+    },
+    "target_key_collision_count": 0,
+    "training_authorized_rows": 0,
+    "unknown_policy_rows": 0
+  },
+  "policy_notes": {
+    "compatible_dense_metadata_only": "These rows may become rename/copy candidates only after a future binary converter validates dtype, file size, target shape, and target key.",
+    "embedding_row_resize_policy_required": "Encoder/decoder embeddings require a tokenizer migration contract; no resize or copy is authorized here.",
+    "packed_bitnet_converter_required": "Packed BitNet rows remain blocked until layout decoding, dequantization, and shape assertions are implemented and audited.",
+    "source_only_positional_embedding_policy_required": "The browser export has learned encoder positional embeddings but the recovered target does not; merge/ignore policy is required.",
+    "target_only_head_initialization_required": "Recovered control heads require an initializer/seed policy; no initialization is performed here."
+  },
+  "source_stage": 8917,
+  "stage": 8918,
+  "stage_name": "stage8918_converter_key_mapping_init_policy_contract"
+}

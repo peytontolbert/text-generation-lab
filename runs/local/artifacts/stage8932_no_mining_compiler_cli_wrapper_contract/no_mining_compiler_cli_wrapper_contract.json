@@ -1,0 +1,106 @@
+{
+  "allowed_flags": [
+    "--input",
+    "--output-dir",
+    "--mode",
+    "--decoder-token-cap",
+    "--shortcut-ceiling",
+    "--require-recovered-gates",
+    "--synthetic-only",
+    "--no-decoder-ce",
+    "--no-denoise-ce",
+    "--no-runtime",
+    "--no-mining",
+    "--no-model-execution"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "allowed_flags_present": true,
+    "authority_counts_zero": true,
+    "decoder_ce_forbidden_by_default": true,
+    "denoise_ce_forbidden_by_default": true,
+    "forbidden_flags_present": true,
+    "forbidden_operations_present": true,
+    "mining_forbidden_by_default": true,
+    "model_execution_forbidden_by_default": true,
+    "required_modes_present": true,
+    "required_outputs_present": true,
+    "runtime_forbidden_by_default": true,
+    "source_stage8931_passed": true
+  },
+  "cli_name": "compile_software_maintenance_curriculum_v1",
+  "contract_status": "NO_EXECUTION_CLI_CONTRACT_ONLY",
+  "decision": {
+    "cli_status": "contracted_not_implemented_or_executed",
+    "default_mode": "synthetic_dry_run",
+    "next_required_artifact": "wrapper skeleton or return to checkpoint/dataset recovery; no execution without a separate authorization card",
+    "training_status": "blocked"
+  },
+  "forbidden_flags": [
+    "--mine",
+    "--train",
+    "--allow-runtime",
+    "--allow-decoder-ce",
+    "--allow-denoise-ce",
+    "--load-model",
+    "--write-checkpoint",
+    "--emit-source-body",
+    "--gemma",
+    "--harness",
+    "--score"
+  ],
+  "forbidden_operations": [
+    "data_mining",
+    "model_execution",
+    "training_step",
+    "runtime_execution",
+    "decoder_ce_enable",
+    "denoise_ce_enable",
+    "checkpoint_write",
+    "source_body_emission",
+    "gemma_execution",
+    "harness_execution",
+    "scoring"
+  ],
+  "metrics": {
+    "allowed_flags": 12,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_flags": 11,
+    "forbidden_operations": 11,
+    "model_execution_authorized_now": false,
+    "required_mode_values": 2,
+    "required_outputs": 8,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "required_mode_values": [
+    "synthetic_dry_run",
+    "manifest_no_mining_audit_only"
+  ],
+  "required_outputs": [
+    "normalized_input_rows.jsonl",
+    "judged_rows.jsonl",
+    "ranked_rows.jsonl",
+    "shortcut_baseline_card.json",
+    "counterfactual_obligation_card.json",
+    "compile_card.json",
+    "compiler_audit_card.json",
+    "dataset_patch_queue.jsonl"
+  ],
+  "stage": 8932,
+  "stage_name": "stage8932_no_mining_compiler_cli_wrapper_contract"
+}

@@ -1,0 +1,182 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_readiness_rows_training_blocked": true,
+    "authority_counts_zero": true,
+    "forbidden_next_operations_recorded": true,
+    "readiness_rows_present": true,
+    "registry_frontier_stage8952": true,
+    "required_source_summaries_passed": true,
+    "required_source_summaries_present": true,
+    "stage8949_preserved_as_superseded_failure": true
+  },
+  "decision": "Converter recovery is contract-complete through metadata promotion gates, but the training plane remains closed. The next rebuild work should refresh dataset judge, loss-mask, telemetry, trainer-mode, and bounded-probe readiness contracts before any mining, converter execution, model execution, or training.",
+  "forbidden_next_operations": [
+    "run_converter",
+    "open_checkpoint",
+    "read_tensor_bytes",
+    "decode_packed_weights",
+    "instantiate_model",
+    "run_model_forward",
+    "run_training_step",
+    "run_bounded_decoder_ce_probe",
+    "run_denoise_probe",
+    "mine_new_data",
+    "runtime_harness",
+    "gemma_comparison",
+    "checkpoint_export",
+    "promotion"
+  ],
+  "historical_superseded_failures": {
+    "8949": {
+      "exists": true,
+      "passed": false,
+      "preserved": true,
+      "reason": "stale-frontier failure preserved for audit history",
+      "stage_name": "stage8949_converter_acceptance_test_generator_contract",
+      "superseded_by": 8951
+    }
+  },
+  "metrics": {
+    "checkpoint_materialization_authorized": false,
+    "converter_contract_chain_complete": true,
+    "converter_implementation_complete": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "historical_superseded_failures": 1,
+    "model_execution_authorized_now": false,
+    "required_passed_source_stages": 7,
+    "required_passed_source_stages_passed": 7,
+    "required_passed_source_stages_present": 7,
+    "runnable_converter_tests_authorized": false,
+    "runtime_authorized_flag": false,
+    "training_authorized": false,
+    "training_blocked_components": 9,
+    "training_ready_components": 0
+  },
+  "readiness_rows": [
+    {
+      "blocker": "training remains closed until full readiness matrix and explicit authority ticket pass",
+      "component": "workspace_safety",
+      "evidence_stage": 8587,
+      "ready_for_training": false,
+      "status": "contract_recovered"
+    },
+    {
+      "blocker": "checkpoint materialization is still not authorized",
+      "component": "checkpoint_preconditions",
+      "evidence_stage": 8945,
+      "ready_for_training": false,
+      "status": "contract_recovered"
+    },
+    {
+      "blocker": "real converter implementation and runnable acceptance tests require future explicit authority",
+      "component": "bitnet_converter_implementation",
+      "evidence_stage": 8946,
+      "ready_for_training": false,
+      "status": "audit_skeleton_recovered"
+    },
+    {
+      "blocker": "no human approval ticket grants checkpoint, tensor, converter, model, or training operations",
+      "component": "converter_authority_ticket",
+      "evidence_stage": 8947,
+      "ready_for_training": false,
+      "status": "dry_run_contract_recovered"
+    },
+    {
+      "blocker": "fixture metadata is non-runnable and contains no real tensors",
+      "component": "converter_fixture_acceptance",
+      "evidence_stage": 8948,
+      "ready_for_training": false,
+      "status": "fixture_only_spec_recovered"
+    },
+    {
+      "blocker": "test-spec rows are not runnable without a future promotion ticket",
+      "component": "converter_test_spec_generator",
+      "evidence_stage": 8951,
+      "ready_for_training": false,
+      "status": "metadata_only_retry_recovered"
+    },
+    {
+      "blocker": "promotion gate intentionally authorizes zero runnable tests and zero converter/model execution",
+      "component": "converter_test_spec_promotion",
+      "evidence_stage": 8952,
+      "ready_for_training": false,
+      "status": "promotion_gate_recovered"
+    },
+    {
+      "blocker": "trainer command surface and runtime assertions must be recovered before any tiny probe",
+      "component": "bounded_decoder_ce_probe",
+      "evidence_stage": 8580,
+      "ready_for_training": false,
+      "status": "still_blocked"
+    },
+    {
+      "blocker": "must refresh loss-mask, judge, telemetry, and trainer readiness before data mining or training",
+      "component": "dataset_and_curriculum_compiler",
+      "evidence_stage": 8953,
+      "ready_for_training": false,
+      "status": "recovery_continues"
+    }
+  ],
+  "source_status": {
+    "8945": {
+      "exists": true,
+      "failures": [],
+      "passed": true,
+      "stage_name": "stage8945_checkpoint_precondition_matrix_all_contracts_recovered"
+    },
+    "8946": {
+      "exists": true,
+      "failures": [],
+      "passed": true,
+      "stage_name": "stage8946_converter_implementation_audit_skeleton"
+    },
+    "8947": {
+      "exists": true,
+      "failures": [],
+      "passed": true,
+      "stage_name": "stage8947_converter_authority_ticket_dry_run_harness_contract"
+    },
+    "8948": {
+      "exists": true,
+      "failures": [],
+      "passed": true,
+      "stage_name": "stage8948_converter_fixture_only_acceptance_spec"
+    },
+    "8950": {
+      "exists": true,
+      "failures": [],
+      "passed": true,
+      "stage_name": "stage8950_registry_frontier_normalization_gate"
+    },
+    "8951": {
+      "exists": true,
+      "failures": [],
+      "passed": true,
+      "stage_name": "stage8951_converter_acceptance_test_generator_contract_retry"
+    },
+    "8952": {
+      "exists": true,
+      "failures": [],
+      "passed": true,
+      "stage_name": "stage8952_converter_test_spec_promotion_gate"
+    }
+  },
+  "stage": 8953,
+  "stage_name": "stage8953_training_readiness_matrix_refresh_after_converter_contracts",
+  "status": "TRAINING_READINESS_REFRESH_CONTRACT_ONLY"
+}

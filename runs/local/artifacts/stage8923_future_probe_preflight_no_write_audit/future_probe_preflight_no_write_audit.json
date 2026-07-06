@@ -1,0 +1,141 @@
+{
+  "failures": [],
+  "negative_mutation_checks": {
+    "artifact_delete": {
+      "failures": [
+        "no_artifact_delete"
+      ],
+      "rejected": true
+    },
+    "artifact_write": {
+      "failures": [
+        "no_artifact_write"
+      ],
+      "rejected": true
+    },
+    "directory_creation": {
+      "failures": [
+        "no_directory_creation"
+      ],
+      "rejected": true
+    },
+    "duplicate_artifact_name": {
+      "failures": [
+        "required_artifact_names_unique"
+      ],
+      "rejected": true
+    },
+    "existing_output_root": {
+      "failures": [
+        "output_root_fresh"
+      ],
+      "rejected": true
+    },
+    "open_authority": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "open_execution": {
+      "failures": [
+        "no_model_execution"
+      ],
+      "rejected": true
+    },
+    "unsafe_artifact_name": {
+      "failures": [
+        "required_artifact_names_safe"
+      ],
+      "rejected": true
+    }
+  },
+  "negative_mutations": 8,
+  "negative_mutations_rejected": 8,
+  "passed": true,
+  "preflight": {
+    "artifact_targets": [
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/loss_by_step.jsonl",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/eval_loss_by_checkpoint.jsonl",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/row_field_logits.jsonl",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/row_field_losses.jsonl",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/row_gradient_norms.jsonl",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/activation_summary.jsonl",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/feature_ablation_attribution.jsonl",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/activation_patch_recovery.jsonl",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/row_dynamics_history.jsonl",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/module_delta_norms.json",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/field_exact_by_cell.json",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/field_label_vocabs.json",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/structured_confusion_matrix.json",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/failure_bucket_card.json",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate/cleanup_proof.json"
+    ],
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "checks": {
+      "cleanup_proof_field_schema_present": true,
+      "cleanup_scope_checkpoint_children_only": true,
+      "no_artifact_delete": true,
+      "no_artifact_write": true,
+      "no_directory_creation": true,
+      "no_model_execution": true,
+      "no_training": true,
+      "output_root_fresh": true,
+      "output_root_under_probe_root": true,
+      "required_artifact_names_present": true,
+      "required_artifact_names_safe": true,
+      "required_artifact_names_unique": true,
+      "source_cleanup_contract_present": true,
+      "source_policy_present": true
+    },
+    "decision": {
+      "future_probe_write_status": "blocked_until_explicit_execution_authorization",
+      "next_required_artifact": "explicit one-run execution authorization review card if and only if the user asks to execute",
+      "preflight_status": "no_write_read_only"
+    },
+    "forbidden_operations": [
+      "mkdir_probe_output_root",
+      "touch_artifact_file",
+      "write_probe_artifact",
+      "overwrite_existing_artifact",
+      "delete_existing_output_root",
+      "cleanup_checkpoint_children",
+      "model_forward",
+      "training_step"
+    ],
+    "metrics": {
+      "artifact_targets_reserved": 15,
+      "cleanup_proof_fields": 13,
+      "cleanup_scope": "checkpoint_children_only",
+      "model_execution_authorized_now": false,
+      "output_root": "/data/agentkernel-seq2seq-text-lab/runs/local/probes/stage8890_tiny_structured_policy_probe_candidate",
+      "output_root_exists": false,
+      "output_root_under_probe_root": true,
+      "required_artifact_names": 15,
+      "required_artifact_names_unique": true,
+      "training_authorized": false,
+      "unsafe_required_artifact_names": [],
+      "would_create_directories": false,
+      "would_delete_artifacts": false,
+      "would_write_artifacts": false
+    },
+    "source_stages": [
+      8921,
+      8922
+    ],
+    "stage": 8923,
+    "stage_name": "stage8923_future_probe_preflight_no_write_audit"
+  }
+}

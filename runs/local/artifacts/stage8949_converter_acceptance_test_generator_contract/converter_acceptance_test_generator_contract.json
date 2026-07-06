@@ -1,0 +1,71 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_generated_specs_non_runnable": true,
+    "all_generated_specs_require_future_ticket": true,
+    "authority_counts_zero": true,
+    "forbidden_generator_outputs_recorded": true,
+    "generator_output_fields_recorded": true,
+    "no_checkpoint_open": true,
+    "no_generated_test_files": true,
+    "no_model_run": true,
+    "no_packed_decode": true,
+    "no_real_tensor_read": true,
+    "no_training": true,
+    "source_fixture_rows_present": true,
+    "source_stage8948_passed": true,
+    "test_spec_rows_match_source": true
+  },
+  "decision": "Converter acceptance-test generation is recovered only as metadata test-spec rows. No runnable test files, converter code, checkpoint access, tensor reads, packed decode, model execution, runtime, data mining, or training are authorized.",
+  "forbidden_generator_outputs": [
+    "python_test_file_written",
+    "converter_code_written",
+    "checkpoint_path_opened",
+    "real_tensor_fixture_embedded",
+    "packed_weight_decode_attempted",
+    "model_forward_attempted",
+    "training_attempted"
+  ],
+  "generator_output_fields": [
+    "test_spec_id",
+    "source_fixture_spec_id",
+    "test_name",
+    "fixture_type",
+    "assertion_contract",
+    "forbidden_operations",
+    "requires_future_authority_ticket",
+    "runnable_now"
+  ],
+  "metrics": {
+    "checkpoint_open_authorized": false,
+    "converter_code_written": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "generated_specs_runnable_now": 0,
+    "model_execution_authorized_now": false,
+    "packed_decode_authorized": false,
+    "python_test_files_written": 0,
+    "real_tensor_read_authorized": false,
+    "runtime_authorized_flag": false,
+    "source_fixture_rows": 5,
+    "test_spec_rows": 5,
+    "training_authorized": false
+  },
+  "source_stage": 8948,
+  "stage": 8949,
+  "stage_name": "stage8949_converter_acceptance_test_generator_contract",
+  "status": "CONVERTER_ACCEPTANCE_TEST_GENERATOR_CONTRACT_ONLY"
+}

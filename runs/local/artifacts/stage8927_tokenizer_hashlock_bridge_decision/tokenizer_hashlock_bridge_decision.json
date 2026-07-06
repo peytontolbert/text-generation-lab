@@ -1,0 +1,83 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "bridge_policy": {
+    "bridge_rows_are_metadata_only": true,
+    "current_decision": "keep_recovered_target_tokenizer_1506",
+    "direct_source_tokenizer_swap": "blocked",
+    "embedding_resize": "blocked",
+    "source_embedding_copy": "blocked",
+    "source_lm_head_copy": "blocked",
+    "v2_special_token_addition": "future_manifest_only"
+  },
+  "checks": {
+    "ak_specials_source_only": true,
+    "core_rows_identity_locked": true,
+    "no_embedding_copy_authorized": true,
+    "no_tokenizer_swap_authorized": true,
+    "source_vocab_locked": true,
+    "stage8908_passed": true,
+    "stage8919_default_keep_target": true,
+    "target_vocab_locked": true,
+    "tokenizer_config_hash_present": true,
+    "tokenizer_json_hash_present": true,
+    "v2_reserved_not_current_edits": true
+  },
+  "core_id_contract": {
+    "bos": {
+      "source_id": 1,
+      "target_id": 1
+    },
+    "eos": {
+      "source_id": 2,
+      "target_id": 2
+    },
+    "pad": {
+      "source_id": 0,
+      "target_id": 0
+    },
+    "unk": {
+      "source_id": 3,
+      "target_id": 3
+    }
+  },
+  "forbidden_operations": [
+    "tokenizer_swap",
+    "embedding_resize",
+    "lm_head_resize",
+    "copy_embedding_values",
+    "copy_lm_head_values",
+    "initialize_new_token_rows",
+    "state_dict_load",
+    "checkpoint_write",
+    "model_forward",
+    "training_step"
+  ],
+  "source_files": {
+    "tokenizer_config": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11/tokenizer/tokenizer_config.json",
+    "tokenizer_config_sha256": "844b92a5153b60309ffa59bf9880f16cf3ed7d3fb63cea17ffde9d2f659ccab3",
+    "tokenizer_json": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11/tokenizer/tokenizer.json",
+    "tokenizer_json_sha256": "91db8bc4ebe1a537a49d9635ba8b208209f12a52695d81cf8a52a54c459803ed"
+  },
+  "source_stages": [
+    8908,
+    8919,
+    8924
+  ],
+  "source_vocab_size": 8207,
+  "stage": 8927,
+  "stage_name": "stage8927_tokenizer_hashlock_bridge_decision",
+  "target_vocab_size": 1506,
+  "vocab_delta": 6701
+}

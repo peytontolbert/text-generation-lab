@@ -1,0 +1,127 @@
+{
+  "ak_special_id_range": [
+    8192,
+    8206
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "ak_special_tokens_present": true,
+    "core_special_ids_match": true,
+    "default_policy_keeps_target_tokenizer": true,
+    "no_embedding_copy_authorized": true,
+    "no_embedding_resize_authorized": true,
+    "no_lm_head_copy_authorized": true,
+    "no_state_dict_load_authorized": true,
+    "no_tokenizer_swap_authorized": true,
+    "source_vocab_is_8207": true,
+    "stage8908_tokenizer_audit_passed": true,
+    "stage8918_contract_passed": true,
+    "target_vocab_is_1506": true,
+    "v2_tokens_are_future_gaps_not_current_edits": true,
+    "vocab_delta_recorded": true
+  },
+  "core_id_contract": {
+    "bos_token_id": 1,
+    "eos_token_id": 2,
+    "pad_token_id": 0,
+    "unk_token_id": 3
+  },
+  "decision": {
+    "blocked_policy": "do not copy 8207-row embeddings/lm_head or resize until a future checkpoint materialization contract passes",
+    "current_policy": "keep recovered target tokenizer at vocab 1506 for now",
+    "next_required_artifact": "tokenizer hash lock and bridge-token mapping table design, if future conversion remains desired"
+  },
+  "forbidden_operations": [
+    "resize_embeddings",
+    "copy_embedding_values",
+    "copy_lm_head_values",
+    "initialize_new_token_rows",
+    "load_tokenizer_into_training",
+    "state_dict_load",
+    "checkpoint_write",
+    "model_forward",
+    "training_step"
+  ],
+  "metrics": {
+    "ak_special_id_end": 8206,
+    "ak_special_id_start": 8192,
+    "ak_special_tokens_present": true,
+    "core_special_ids_match": true,
+    "default_policy": "keep_recovered_target_tokenizer_1506_and_do_not_load_export_embeddings",
+    "embedding_copy_authorized_rows": 0,
+    "embedding_resize_authorized": false,
+    "lm_head_copy_authorized_rows": 0,
+    "migration_options": 3,
+    "recovered_target_vocab_size": 1506,
+    "source_vocab_size": 8207,
+    "state_dict_load_authorized": false,
+    "tokenizer_swap_authorized": false,
+    "v2_special_token_gap_count": 12,
+    "vocab_delta": 6701
+  },
+  "migration_options": [
+    {
+      "option": "adopt_source_tokenizer_and_resize_recovered_target",
+      "requires": [
+        "explicit_embedding_resize_policy",
+        "lm_head_resize_policy",
+        "tokenizer_hash_lock",
+        "special_token_id_lock",
+        "weight_copy_or_init_policy_for_rows_1506_8206",
+        "round_trip_tokenization_regression"
+      ],
+      "status": "blocked_pending_checkpoint_materialization_contract"
+    },
+    {
+      "option": "keep_recovered_target_tokenizer_1506_and_do_not_load_export_embeddings",
+      "requires": [
+        "do_not_copy_source_embeddings",
+        "do_not_copy_lm_head",
+        "train_or_initialize_recovered_embeddings_under_future_probe"
+      ],
+      "status": "safe_metadata_only_default"
+    },
+    {
+      "option": "build_explicit_bridge_tokenizer",
+      "requires": [
+        "token_mapping_table",
+        "unknown_token_fallback_policy",
+        "special_token_migration_manifest",
+        "embedding_projection_or_reinitialization_audit"
+      ],
+      "status": "future_v2_design_only"
+    }
+  ],
+  "source_stages": [
+    8908,
+    8918
+  ],
+  "stage": 8919,
+  "stage_name": "stage8919_tokenizer_embedding_migration_policy_design",
+  "v2_special_token_gaps": [
+    "<AK_OBSERVE>",
+    "<AK_ORIENT>",
+    "<AK_ACT>",
+    "<AK_VERIFY>",
+    "<AK_REPAIR>",
+    "<AK_RETRIEVE>",
+    "<AK_PATCH>",
+    "<AK_TEST>",
+    "<AK_ABORT>",
+    "<AK_HOLD_LONG_OUTPUT>",
+    "<AK_BOUND_DECODER>",
+    "<AK_VTR>"
+  ]
+}

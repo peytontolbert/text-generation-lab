@@ -1,0 +1,164 @@
+{
+  "api_name": "compile_software_maintenance_curriculum_v1",
+  "api_signature": {
+    "config": {
+      "allow_decoder_ce": false,
+      "allow_denoise_ce": false,
+      "allow_runtime": false,
+      "require_recovered_gates": true,
+      "shortcut_ceiling": 0.8
+    },
+    "input_manifest": "Path",
+    "output_dir": "Path"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_step_modules_present": true,
+    "authority_counts_zero": true,
+    "data_mining_remains_blocked": true,
+    "forbidden_operations_present": true,
+    "hard_gates_present": true,
+    "pipeline_steps_present": true,
+    "required_outputs_present": true,
+    "runtime_remains_blocked": true,
+    "source_stage8928_passed": true,
+    "training_remains_blocked": true
+  },
+  "contract_status": "NO_EXECUTION_API_CONTRACT_ONLY",
+  "decision": {
+    "api_status": "contracted_not_executed",
+    "next_required_artifact": "targeted readiness tests for source extractors, structured junk ranker, and counterfactual obligation audit",
+    "training_status": "blocked"
+  },
+  "forbidden_operations": [
+    "data_mining",
+    "model_execution",
+    "training_step",
+    "runtime_execution",
+    "hidden_scoring",
+    "gemma_execution",
+    "checkpoint_write",
+    "source_body_emission"
+  ],
+  "hard_gates": [
+    "authority_rows == 0",
+    "runtime_authorized == false",
+    "decoder_ce only when route == KEEP_BOUNDED_DECODER and explicit authorization exists",
+    "denoise_ce only when route == USE_FOR_DENOISE_REPAIR and explicit authorization exists",
+    "locked_eval_source rows never train",
+    "shortcut strongest baseline below configured ceiling",
+    "counterfactual obligations satisfied or route to patch queue",
+    "target_over_budget rows route to HOLD_LONG_OUTPUT",
+    "internal token rows route to repair/quarantine, not raw decoder CE",
+    "all loss masks are explicit and default false"
+  ],
+  "metrics": {
+    "data_mining_authorized": false,
+    "hard_gates": 10,
+    "model_execution_authorized_now": false,
+    "pipeline_steps": 9,
+    "required_outputs": 9,
+    "runtime_authorized_flag": false,
+    "step_modules_present": 9,
+    "training_authorized": false
+  },
+  "pipeline_steps": [
+    {
+      "input": "raw_or_recovered_rows.jsonl",
+      "module": "scripts/curriculum_compiler.py",
+      "module_exists": true,
+      "output": "normalized_input_rows.jsonl",
+      "status": "contract_only",
+      "step": "ingest_manifest"
+    },
+    {
+      "input": "normalized_input_rows.jsonl",
+      "module": "scripts/objective_row_judge.py",
+      "module_exists": true,
+      "output": "judged_rows.jsonl",
+      "status": "contract_only",
+      "step": "objective_row_judge"
+    },
+    {
+      "input": "judged_rows.jsonl",
+      "module": "scripts/dataset_junk_ood_ranker_v1.py",
+      "module_exists": true,
+      "output": "ranked_rows.jsonl",
+      "status": "contract_only",
+      "step": "junk_ood_rank"
+    },
+    {
+      "input": "ranked_rows.jsonl",
+      "module": "scripts/shortcut_baseline_audit.py",
+      "module_exists": true,
+      "output": "shortcut_baseline_card.json",
+      "status": "contract_only",
+      "step": "shortcut_baseline_audit"
+    },
+    {
+      "input": "ranked_rows.jsonl",
+      "module": "scripts/counterfactual_obligation_audit.py",
+      "module_exists": true,
+      "output": "counterfactual_obligation_card.json",
+      "status": "contract_only",
+      "step": "counterfactual_obligation_audit"
+    },
+    {
+      "input": "ranked_rows.jsonl",
+      "module": "scripts/curriculum_compiler.py",
+      "module_exists": true,
+      "output": "objective_manifests/",
+      "status": "contract_only",
+      "step": "compile_objective_manifests"
+    },
+    {
+      "input": "objective_manifests/",
+      "module": "scripts/curriculum_compiler.py",
+      "module_exists": true,
+      "output": "loss_mask_card.json",
+      "status": "contract_only",
+      "step": "emit_loss_mask_card"
+    },
+    {
+      "input": "audit_failures.jsonl",
+      "module": "scripts/training_data_attribution_influence.py",
+      "module_exists": true,
+      "output": "dataset_patch_queue.jsonl",
+      "status": "contract_only",
+      "step": "emit_patch_queue"
+    },
+    {
+      "input": "all_cards",
+      "module": "scripts/training_telemetry_metrics.py",
+      "module_exists": true,
+      "output": "compiler_audit_card.json",
+      "status": "contract_only",
+      "step": "emit_compiler_audit_card"
+    }
+  ],
+  "required_outputs": [
+    "normalized_input_rows.jsonl",
+    "judged_rows.jsonl",
+    "ranked_rows.jsonl",
+    "shortcut_baseline_card.json",
+    "counterfactual_obligation_card.json",
+    "objective_manifests/",
+    "loss_mask_card.json",
+    "dataset_patch_queue.jsonl",
+    "compiler_audit_card.json"
+  ],
+  "stage": 8929,
+  "stage_name": "stage8929_single_compiler_api_contract"
+}

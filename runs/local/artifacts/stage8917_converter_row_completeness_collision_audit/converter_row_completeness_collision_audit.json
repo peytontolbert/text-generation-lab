@@ -1,0 +1,83 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_packed_rows_blocked_pending_converter": true,
+    "all_packed_rows_have_file_size_metadata": true,
+    "direct_load_allowed": false,
+    "embedding_rows_require_migration": true,
+    "expected_dense_row_count": true,
+    "expected_new_init_row_count": true,
+    "expected_packed_row_count": true,
+    "expected_shape_row_count": true,
+    "no_binary_tensor_values_read": true,
+    "no_source_artifact_collisions": true,
+    "no_source_key_collisions": true,
+    "no_target_key_collisions": true,
+    "no_unknown_dense_rows": true,
+    "only_positional_embedding_dense_blocked": true,
+    "shape_report_exists": true,
+    "stage8916_summary_passed": true
+  },
+  "decision": {
+    "direct_load_status": "blocked",
+    "next_required_artifact": "metadata_only_converter_collision_followup_or_converter_key_mapping_contract",
+    "row_completeness_status": "failed"
+  },
+  "forbidden_operations": [
+    "read_binary_tensor_values",
+    "decode_packed_bitnet",
+    "torch_load",
+    "state_dict_load",
+    "embedding_resize",
+    "model_forward",
+    "training_step",
+    "checkpoint_write"
+  ],
+  "metrics": {
+    "binary_tensor_value_rows": 0,
+    "blocked_dense_artifacts": [
+      "dense/enc_pos_embed_weight.f32.bin"
+    ],
+    "blocked_dense_rows": 1,
+    "compatible_dense_rows": 40,
+    "dense_rows": 43,
+    "embedding_migration_rows": 2,
+    "new_init_rows": 7,
+    "new_init_targets": [
+      "agent_controller.weight/bias",
+      "agent_intent_head.weight/bias",
+      "agent_policy_heads.*.weight/bias",
+      "retrieval_doc_head.weight",
+      "retrieval_query_head.weight",
+      "scalar_invariant.weight",
+      "structured_heads.*.weight/bias"
+    ],
+    "packed_rows": 109,
+    "packed_rows_missing_file_size": 0,
+    "packed_status_blocked_rows": 109,
+    "shape_rows": 159,
+    "source_artifact_duplicate_count": 0,
+    "source_artifact_duplicates": [],
+    "source_key_duplicate_count": 0,
+    "source_key_duplicates": [],
+    "target_key_duplicate_count": 0,
+    "target_key_duplicates": [],
+    "unknown_dense_artifacts": [],
+    "unknown_dense_rows": 0
+  },
+  "source_stage": 8916,
+  "stage": 8917,
+  "stage_name": "stage8917_converter_row_completeness_collision_audit"
+}

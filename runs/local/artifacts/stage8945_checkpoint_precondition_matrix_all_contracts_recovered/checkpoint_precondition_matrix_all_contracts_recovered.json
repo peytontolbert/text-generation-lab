@@ -1,0 +1,115 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_precondition_contracts_recovered": true,
+    "all_source_summaries_passed": true,
+    "authority_counts_zero": true,
+    "implementation_blockers_recorded": true,
+    "no_checkpoint_load_authorized": true,
+    "no_checkpoint_write_authorized": true,
+    "no_model_execution_authorized": true,
+    "no_real_packed_decode_authorized": true,
+    "no_training_authorized": true,
+    "preconditions_recorded": true
+  },
+  "decision": "All checkpoint materialization preconditions are recovered as no-execution contracts. This does not authorize implementation, real packed decode, checkpoint load/write, model execution, or training; the next step is a converter implementation audit skeleton.",
+  "implementation_blockers": [
+    "converter_implementation_not_written",
+    "real_packed_decode_not_authorized",
+    "checkpoint_load_not_authorized",
+    "checkpoint_write_not_authorized",
+    "model_forward_not_authorized",
+    "training_not_authorized"
+  ],
+  "metrics": {
+    "blocked_precondition_contracts": 0,
+    "checkpoint_load_authorized": false,
+    "checkpoint_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "implementation_blockers": 6,
+    "model_execution_authorized_now": false,
+    "preconditions": 10,
+    "real_packed_decode_authorized": false,
+    "recovered_precondition_contracts": 10,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "preconditions": [
+    {
+      "precondition": "tokenizer_hash_lock",
+      "source_stage": 8927,
+      "status": "contract_recovered_no_execution"
+    },
+    {
+      "precondition": "bridge_token_mapping_table_or_keep_target_tokenizer_decision",
+      "source_stage": 8927,
+      "status": "contract_recovered_no_execution"
+    },
+    {
+      "precondition": "embedding_resize_or_no_copy_policy",
+      "source_stage": 8927,
+      "status": "contract_recovered_block_copy_resize"
+    },
+    {
+      "precondition": "lm_head_resize_or_no_copy_policy",
+      "source_stage": 8927,
+      "status": "contract_recovered_block_copy_resize"
+    },
+    {
+      "precondition": "manifest_path_guard_for_audit_inputs",
+      "source_stage": 8937,
+      "status": "contract_recovered_no_execution"
+    },
+    {
+      "precondition": "packed_weight_metadata_shape_assertions",
+      "source_stage": 8939,
+      "status": "contract_recovered_metadata_only"
+    },
+    {
+      "precondition": "bitnet_codebook_order_golden_vector_semantics",
+      "source_stage": 8944,
+      "status": "contract_recovered_future_proof_only"
+    },
+    {
+      "precondition": "control_head_initializer_seed_contract",
+      "source_stage": 8940,
+      "status": "contract_recovered_metadata_only"
+    },
+    {
+      "precondition": "positional_embedding_merge_or_ignore_policy",
+      "source_stage": 8941,
+      "status": "contract_recovered_ignore_source_only"
+    },
+    {
+      "precondition": "materialization_module_delta_shape_telemetry_contract",
+      "source_stage": 8942,
+      "status": "contract_recovered_future_required"
+    }
+  ],
+  "source_stage_status": {
+    "8927": true,
+    "8937": true,
+    "8939": true,
+    "8940": true,
+    "8941": true,
+    "8942": true,
+    "8944": true
+  },
+  "stage": 8945,
+  "stage_name": "stage8945_checkpoint_precondition_matrix_all_contracts_recovered",
+  "status": "CHECKPOINT_PRECONDITION_CONTRACTS_RECOVERED_IMPLEMENTATION_BLOCKED"
+}

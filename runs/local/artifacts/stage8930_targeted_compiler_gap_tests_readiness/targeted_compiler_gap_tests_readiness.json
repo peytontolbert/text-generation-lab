@@ -1,0 +1,66 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_targeted_modules_present": true,
+    "authority_counts_zero": true,
+    "capabilities_recorded": true,
+    "data_mining_remains_blocked": true,
+    "runtime_remains_blocked": true,
+    "source_stage8929_passed": true,
+    "targeted_test_file_present": true,
+    "training_remains_blocked": true
+  },
+  "decision": {
+    "next_required_artifact": "orchestrated compiler dry-run on synthetic in-memory rows, still no mining/training",
+    "readiness_status": "targeted_tests_added",
+    "training_status": "blocked"
+  },
+  "metrics": {
+    "data_mining_authorized": false,
+    "model_execution_authorized_now": false,
+    "runtime_authorized_flag": false,
+    "targeted_capabilities": 4,
+    "targeted_modules": 4,
+    "targeted_modules_present": 4,
+    "targeted_test_files": 1,
+    "training_authorized": false
+  },
+  "stage": 8930,
+  "stage_name": "stage8930_targeted_compiler_gap_tests_readiness",
+  "targeted_capabilities": [
+    "symbol_extractor_recovers_import_class_function_method_callsite_local",
+    "call_graph_extractor_recovers_call_edges_and_syntax_failure",
+    "structured_junk_ranker_routes_budget_internal_safe_rows",
+    "counterfactual_obligation_audit_accepts_complete_and_flags_missing"
+  ],
+  "targeted_modules": [
+    {
+      "exists": true,
+      "path": "scripts/program_state_symbol_table_extractor.py"
+    },
+    {
+      "exists": true,
+      "path": "scripts/program_state_call_graph_extractor.py"
+    },
+    {
+      "exists": true,
+      "path": "scripts/structured_dataset_junk_ranker.py"
+    },
+    {
+      "exists": true,
+      "path": "scripts/counterfactual_obligation_audit.py"
+    }
+  ]
+}

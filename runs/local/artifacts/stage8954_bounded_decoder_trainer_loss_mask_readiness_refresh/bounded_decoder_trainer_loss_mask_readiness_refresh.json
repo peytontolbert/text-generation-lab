@@ -1,0 +1,224 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "contract_probe_no_model_execution": true,
+    "final_pre_execution_audit_passed": true,
+    "final_pre_execution_still_not_authorized": true,
+    "loss_mask_package_caps_recovered": true,
+    "loss_mask_package_rows_recovered": true,
+    "loss_mask_package_unsafe_rows_zero": true,
+    "registry_frontier_stage8953": true,
+    "source_summaries_passed": true,
+    "source_summaries_present": true,
+    "trainer_exists": true,
+    "trainer_required_flags_present": true,
+    "trainer_runtime_guard_strings_present": true
+  },
+  "decision": "The bounded decoder trainer command/loss-mask contract is recovered enough for no-execution contract checks: required flags and runtime guard strings are present, recovered loss-mask rows are capped and safe, and the final pre-execution audit remains non-authorizing. This does not permit model execution, converter execution, mining, decoder CE, denoise CE, runtime, checkpoint export, or training.",
+  "expected_recovered_caps": {
+    "eval": 16,
+    "loss_mask_rows": 64,
+    "max_steps": 16,
+    "strict_eval": 16,
+    "train": 32
+  },
+  "metrics": {
+    "actual_execution_authorized_next": false,
+    "contract_only_probe_available": true,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "loss_mask_rows": 64,
+    "model_execution_attempted": false,
+    "over_cap_rows": 0,
+    "runtime_authorized_flag": false,
+    "source_summaries": 4,
+    "source_summaries_passed": 4,
+    "trainer_help_missing_flags": 0,
+    "trainer_missing_required_flags": 0,
+    "trainer_missing_runtime_guard_strings": 0,
+    "training_authorized": false,
+    "unsafe_loss_rows": 0
+  },
+  "required_focused_tests": [
+    "tests/test_recovered_trainer_contract.py",
+    "tests/test_training_readiness_matrix_refresh_after_converter_contracts_stage8953.py"
+  ],
+  "source_status": {
+    "8592": {
+      "exists": true,
+      "metrics": {
+        "candidate_authority_rows": 0,
+        "candidate_copied_target_text_rows": 0,
+        "candidate_language_counts": {
+          "c_family": 24,
+          "python": 24,
+          "rust": 24,
+          "web_js_ts_html": 24
+        },
+        "candidate_over_cap_rows": 0,
+        "candidate_rows": 96,
+        "candidate_split_counts": {
+          "eval": 32,
+          "strict_eval": 32,
+          "train": 32
+        },
+        "candidate_surface_counts": {
+          "MAINTAINER_EXPLANATION_ARGS": 24,
+          "PATCH_HUNK_ARGS": 24,
+          "REPAIR_PLAN_ARGS": 24,
+          "TEST_PLAN_ARGS": 24
+        },
+        "loss_mask_authority_rows": 0,
+        "loss_mask_over_cap_rows": 0,
+        "loss_mask_rows": 64,
+        "loss_mask_split_counts": {
+          "eval": 16,
+          "other": 0,
+          "strict_eval": 16,
+          "train": 32
+        },
+        "model_execution_attempted": false,
+        "row_bodies_are_reconstructed_not_original": true,
+        "unsafe_loss_rows": 0
+      },
+      "passed": true,
+      "stage_name": "stage8592_reconstructed_bounded_decoder_ce_candidate_and_loss_mask_package"
+    },
+    "8593": {
+      "exists": true,
+      "metrics": {
+        "authority_rows": 0,
+        "contract_rows": 64,
+        "decoder_ce_loss_rows": 64,
+        "final_checkpoint_export_disabled": true,
+        "final_model_save_skipped": true,
+        "model_execution_attempted": false,
+        "over_cap_rows": 0,
+        "split_counts": {
+          "eval": 16,
+          "other": 0,
+          "strict_eval": 16,
+          "train": 32
+        },
+        "unsafe_loss_rows": 0
+      },
+      "passed": true,
+      "stage_name": "stage8593_reconstructed_bounded_decoder_ce_contract_probe_audit"
+    },
+    "8594": {
+      "exists": true,
+      "metrics": {
+        "actual_execution_authorized_next": false,
+        "authority_rows": 0,
+        "final_pre_execution_audit_passed": true,
+        "manifest_rows": 64,
+        "manifest_split_counts": {
+          "eval": 16,
+          "other": 0,
+          "strict_eval": 16,
+          "train": 32
+        },
+        "model_execution_attempted": false,
+        "over_cap_rows": 0,
+        "trainer_help_missing_flags": 0,
+        "unsafe_loss_rows": 0
+      },
+      "passed": true,
+      "stage_name": "stage8594_reconstructed_bounded_decoder_ce_final_pre_execution_audit"
+    },
+    "8953": {
+      "exists": true,
+      "metrics": {
+        "authority_rows": 0,
+        "body_emission_authorized": false,
+        "checkpoint_materialization_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "converter_contract_chain_complete": true,
+        "converter_implementation_complete": false,
+        "data_mining_authorized": false,
+        "decoder_ce_authorized": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_authorized": false,
+        "denoise_ce_training_authorized_next": false,
+        "failures": [],
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "historical_superseded_failures": 1,
+        "model_execution_authorized_next": false,
+        "model_execution_authorized_now": false,
+        "promotion_ready": false,
+        "required_passed_source_stages": 7,
+        "required_passed_source_stages_passed": 7,
+        "required_passed_source_stages_present": 7,
+        "runnable_converter_tests_authorized": false,
+        "runtime_authorized": false,
+        "runtime_authorized_flag": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false,
+        "training_authorized": false,
+        "training_blocked_components": 9,
+        "training_ready_components": 0
+      },
+      "passed": true,
+      "stage_name": "stage8953_training_readiness_matrix_refresh_after_converter_contracts"
+    }
+  },
+  "stage": 8954,
+  "stage_name": "stage8954_bounded_decoder_trainer_loss_mask_readiness_refresh",
+  "status": "BOUNDED_DECODER_TRAINER_LOSS_MASK_READINESS_CONTRACT_ONLY",
+  "trainer_static_contract": {
+    "missing_required_flags": [],
+    "missing_runtime_guard_strings": [],
+    "required_flags": [
+      "--repo-root",
+      "--manifest",
+      "--mode",
+      "--max-train-rows",
+      "--max-eval-rows",
+      "--max-strict-rows",
+      "--max-steps",
+      "--decoder-ce-weight",
+      "--structured-aux-weight",
+      "--denoise-weight",
+      "--require-loss-mask-enforcement-audit",
+      "--require-counterfactual-obligation-audit",
+      "--no-final-checkpoint-export",
+      "--cleanup-checkpoints-after-probe",
+      "--skip-final-model-save",
+      "--execution-authorized-for-recovery-probe",
+      "--output-dir",
+      "--run-id",
+      "--implementation",
+      "--tokenizer-json",
+      "--tokenizer-config"
+    ],
+    "required_runtime_guard_strings": [
+      "model execution is disabled unless --execution-authorized-for-recovery-probe is present",
+      "bounded_decoder_ce_probe",
+      "contract-only",
+      "unsafe_loss_rows",
+      "over_cap_rows",
+      "final_checkpoint_export_disabled",
+      "final_model_save_skipped",
+      "cleanup_dry_run.json",
+      "target_implementation_guard",
+      "contract requires transformer"
+    ],
+    "trainer_exists": true,
+    "trainer_path": "legacy_src/scripts/train_agentkernel_lite_encdec.py"
+  }
+}

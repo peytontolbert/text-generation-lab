@@ -1,0 +1,76 @@
+{
+  "allowed_future_command_sequence": [
+    "git status --short",
+    "git add docs runs/summaries runs/local/artifacts runs/local/manifests scripts tests",
+    "git commit -m 'rebuild 100m maintainer recovery artifacts'",
+    "git push origin recovery/100m-maintainer-rebuild-20260704",
+    "git status --short"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "branch": "recovery/100m-maintainer-rebuild-20260704",
+  "changed_paths": 321,
+  "checks": {
+    "authority_counts_zero": true,
+    "branch_is_recovery_branch": true,
+    "changed_paths_present": true,
+    "explicit_authorization_phrases_recorded": true,
+    "forbidden_without_new_authorization_recorded": true,
+    "future_sequence_has_no_forbidden_terms": true,
+    "future_sequence_recorded": true,
+    "no_git_add_performed": true,
+    "no_git_commit_performed": true,
+    "no_git_push_performed": true,
+    "no_network_upload_performed": true,
+    "registry_frontier_stage8967_or_8968": true,
+    "remote_origin_present": true,
+    "source_stage8967_passed": true
+  },
+  "decision": "Backup push remains unauthorized. This review card records the exact future scope and requires an explicit user instruction before any git add, commit, push, or network operation.",
+  "forbidden_without_new_explicit_authorization": [
+    "git push --force",
+    "git reset",
+    "git clean",
+    "delete_any_path",
+    "include_arxiv",
+    "include_checkpoints",
+    "include_runtime_probe_outputs",
+    "upload_to_huggingface",
+    "train_or_mine"
+  ],
+  "metrics": {
+    "allowed_future_commands": 5,
+    "arxiv_write_authorized": false,
+    "changed_paths": 321,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "delete_or_cleanup_performed": false,
+    "denoise_ce_authorized": false,
+    "explicit_authorization_phrases": 2,
+    "forbidden_without_new_authorization": 9,
+    "git_add_performed": false,
+    "git_commit_performed": false,
+    "git_push_performed": false,
+    "network_upload_performed": false,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "required_explicit_user_authorization": [
+    "push this recovery branch to GitHub now",
+    "backup this recovery branch to GitHub now"
+  ],
+  "stage": 8968,
+  "stage_name": "stage8968_backup_push_authorization_review_no_network",
+  "status": "BACKUP_PUSH_AUTHORIZATION_REVIEW_NO_NETWORK"
+}

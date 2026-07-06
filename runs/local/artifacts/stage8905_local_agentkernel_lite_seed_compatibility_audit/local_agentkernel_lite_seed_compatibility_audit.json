@@ -1,0 +1,131 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers": [
+    "tokenizer_vocab_mismatch_requires_explicit_vocab_resize_or_matching_tokenizer",
+    "retrieval_head_missing_for_current_100m_control_surface",
+    "agent_policy_heads_missing_for_current_control_surface",
+    "browser_bitnet_runtime_export_not_direct_pytorch_training_checkpoint",
+    "no_verified_pytorch_state_dict_for_trainer_loading"
+  ],
+  "checks": {
+    "export_has_agent_policy_heads": false,
+    "export_has_retrieval_head": false,
+    "has_pytorch_state_dict": false,
+    "is_browser_bitnet_export": true,
+    "local_export_present": true,
+    "safe_to_directly_initialize_training": false,
+    "same_attention_heads": true,
+    "same_d_ff": true,
+    "same_d_model": true,
+    "same_layer_count": true,
+    "same_pad_token": true,
+    "same_position_limit": true,
+    "same_rope_theta": true,
+    "vocab_matches_recovered_target": false
+  },
+  "decision": {
+    "allowed_use_now": [
+      "architecture_lineage_reference",
+      "tokenizer_special_token_lineage_reference",
+      "browser_runtime_export_reference",
+      "teacher/tool candidate only after separate no-execution registration"
+    ],
+    "direct_training_seed_status": "blocked_pending_conversion_plan",
+    "required_before_seed_loading": [
+      "match tokenizer/vocab or define audited resize mapping",
+      "recover or convert a PyTorch-compatible state dict",
+      "decide whether retrieval and policy heads are newly initialized or recovered",
+      "run state-dict key/shape audit without training",
+      "run tokenizer special-token compatibility audit",
+      "keep decoder CE/training/runtime closed until explicit one-run authorization"
+    ]
+  },
+  "local_export": {
+    "artifact_kind": "agentkernel_lite_browser_bitnet_export",
+    "exists": true,
+    "format": "model-stack-browser-bitnet",
+    "layer_count": 109,
+    "manifest_exists": true,
+    "manifest_path": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11/agentkernel_lite_browser_bitnet_export.json",
+    "model": {
+      "agent_policy_heads": false,
+      "d_ff": 2048,
+      "d_model": 640,
+      "max_position_embeddings": 4096,
+      "n_heads": 10,
+      "n_layers": 6,
+      "pad_token_id": 0,
+      "positional": "apply_rotary",
+      "retrieval_head_dim": null,
+      "rope_theta": 1000000.0,
+      "vocab_size": 8207
+    },
+    "path": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11",
+    "quantization": {
+      "activation_quant": "none",
+      "num": 109,
+      "scheme": "bitnet"
+    },
+    "size_bytes": 80257831,
+    "source_bundle_manifest_path": "/data/agentkernel/artifacts/agentkernel_lite_encdec/recommendation_answer_v11_exact_twopass_from_v9_train_00200_lr2e6/agentkernel_lite_encdec_manifest.json",
+    "source_model_dir": "/data/agentkernel/artifacts/agentkernel_lite_encdec/recommendation_answer_v11_exact_twopass_from_v9_train_00200_lr2e6/model",
+    "source_tokenizer_dir": "/data/agentkernel/artifacts/agentkernel_lite_encdec/recommendation_answer_v11_exact_twopass_from_v9_train_00200_lr2e6/tokenizer",
+    "tokenizer": {
+      "bos_token_id": 1,
+      "eos_token_id": 2,
+      "kind": "agentkernel-bpe",
+      "pad_token_id": 0,
+      "source_kind": "agentkernel_bytelevel_bpe_v1",
+      "unk_token_id": 3,
+      "vocab_size": 8207
+    },
+    "webapp_model_dir": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11"
+  },
+  "recovered_target": {
+    "agent_policy_heads": true,
+    "d_ff": 2048,
+    "d_model": 640,
+    "max_position_embeddings": 4096,
+    "model_family": "recovered_agentkernel_lite_transformer",
+    "n_heads": 10,
+    "n_layers": 6,
+    "pad_token_id": 0,
+    "retrieval_head_dim": 128,
+    "rope_theta": 1000000.0,
+    "structured_heads_required": [
+      "surface_role",
+      "repair_surface",
+      "action_label",
+      "evidence_state",
+      "decoder_budget_ok",
+      "decode_allowed",
+      "build_mode",
+      "allowed_import_policy",
+      "blocked_import_policy",
+      "repo_dependency_policy",
+      "action_sequence",
+      "file_plan",
+      "symbol_binding",
+      "edit_localization",
+      "patch_operator",
+      "verifier_repair"
+    ],
+    "trainable_surface": "legacy_src/agentkernel_lite/modeling_transformer.py",
+    "trainer_surface": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "vocab_size": 1506
+  },
+  "stage": 8905,
+  "stage_name": "stage8905_local_agentkernel_lite_seed_compatibility_audit"
+}

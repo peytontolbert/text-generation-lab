@@ -1,0 +1,287 @@
+{
+  "accepted_example": {
+    "allowed": true,
+    "allowed_input_roots": [
+      "runs/local/artifacts",
+      "runs/local/recovered",
+      "runs/local/manifests",
+      "datasets/recovered"
+    ],
+    "data_mining_authorized": false,
+    "exists": false,
+    "failures": [],
+    "forbidden_absolute_roots": [
+      "/",
+      "/arxiv",
+      "/data"
+    ],
+    "input_path": "runs/local/manifests/explicit_manifest.jsonl",
+    "must_exist": false,
+    "recursive_scan_authorized": false,
+    "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/manifests/explicit_manifest.jsonl",
+    "root_label": "runs/local/manifests",
+    "runtime_authorized": false,
+    "training_authorized": false
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "accepted_explicit_repo_local_jsonl": true,
+    "allowed_roots_match_stage8934_contract": true,
+    "authority_counts_zero": true,
+    "data_mining_remains_blocked": true,
+    "rejects_arxiv": true,
+    "rejects_data_outside_repo": true,
+    "rejects_directory": true,
+    "rejects_glob": true,
+    "rejects_remote_uri": true,
+    "rejects_repo_root": true,
+    "rejects_traversal": true,
+    "rejects_wrong_suffix": true,
+    "runtime_remains_blocked": true,
+    "source_stage8934_passed": true,
+    "training_remains_blocked": true
+  },
+  "decision": "Audit-only manifest path validation is implemented for explicit repo-local JSONL manifests; discovery, mining, training, runtime, model execution, and /arxiv writes remain blocked.",
+  "metrics": {
+    "allowed_input_roots": 4,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_authorized_now": false,
+    "rejected_examples": 8,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "rejected_examples": {
+    "arxiv": {
+      "allowed": false,
+      "allowed_input_roots": [
+        "runs/local/artifacts",
+        "runs/local/recovered",
+        "runs/local/manifests",
+        "datasets/recovered"
+      ],
+      "data_mining_authorized": false,
+      "exists": false,
+      "failures": [
+        "manifest_path_under_arxiv_forbidden",
+        "manifest_path_not_under_allowed_input_root"
+      ],
+      "forbidden_absolute_roots": [
+        "/",
+        "/arxiv",
+        "/data"
+      ],
+      "input_path": "/arxiv/datasets/rows.jsonl",
+      "must_exist": false,
+      "recursive_scan_authorized": false,
+      "resolved_path": "/arxiv/datasets/rows.jsonl",
+      "root_label": null,
+      "runtime_authorized": false,
+      "training_authorized": false
+    },
+    "data_outside_repo": {
+      "allowed": false,
+      "allowed_input_roots": [
+        "runs/local/artifacts",
+        "runs/local/recovered",
+        "runs/local/manifests",
+        "datasets/recovered"
+      ],
+      "data_mining_authorized": false,
+      "exists": false,
+      "failures": [
+        "manifest_path_under_data_outside_repo_forbidden",
+        "manifest_path_not_under_allowed_input_root"
+      ],
+      "forbidden_absolute_roots": [
+        "/",
+        "/arxiv",
+        "/data"
+      ],
+      "input_path": "/data/rows.jsonl",
+      "must_exist": false,
+      "recursive_scan_authorized": false,
+      "resolved_path": "/data/rows.jsonl",
+      "root_label": null,
+      "runtime_authorized": false,
+      "training_authorized": false
+    },
+    "directory": {
+      "allowed": false,
+      "allowed_input_roots": [
+        "runs/local/artifacts",
+        "runs/local/recovered",
+        "runs/local/manifests",
+        "datasets/recovered"
+      ],
+      "data_mining_authorized": false,
+      "exists": false,
+      "failures": [
+        "manifest_must_be_jsonl",
+        "manifest_path_not_under_allowed_input_root"
+      ],
+      "forbidden_absolute_roots": [
+        "/",
+        "/arxiv",
+        "/data"
+      ],
+      "input_path": "runs/local/manifests",
+      "must_exist": false,
+      "recursive_scan_authorized": false,
+      "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/manifests",
+      "root_label": null,
+      "runtime_authorized": false,
+      "training_authorized": false
+    },
+    "glob": {
+      "allowed": false,
+      "allowed_input_roots": [
+        "runs/local/artifacts",
+        "runs/local/recovered",
+        "runs/local/manifests",
+        "datasets/recovered"
+      ],
+      "data_mining_authorized": false,
+      "exists": false,
+      "failures": [
+        "glob_manifest_path_forbidden"
+      ],
+      "forbidden_absolute_roots": [
+        "/",
+        "/arxiv",
+        "/data"
+      ],
+      "input_path": "runs/local/manifests/*.jsonl",
+      "must_exist": false,
+      "recursive_scan_authorized": false,
+      "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/manifests/*.jsonl",
+      "root_label": "runs/local/manifests",
+      "runtime_authorized": false,
+      "training_authorized": false
+    },
+    "remote_uri": {
+      "allowed": false,
+      "allowed_input_roots": [
+        "runs/local/artifacts",
+        "runs/local/recovered",
+        "runs/local/manifests",
+        "datasets/recovered"
+      ],
+      "data_mining_authorized": false,
+      "exists": false,
+      "failures": [
+        "remote_manifest_uri_forbidden",
+        "manifest_path_not_under_allowed_input_root"
+      ],
+      "forbidden_absolute_roots": [
+        "/",
+        "/arxiv",
+        "/data"
+      ],
+      "input_path": "https://example.com/rows.jsonl",
+      "must_exist": false,
+      "recursive_scan_authorized": false,
+      "resolved_path": "/data/agentkernel-seq2seq-text-lab/https:/example.com/rows.jsonl",
+      "root_label": null,
+      "runtime_authorized": false,
+      "training_authorized": false
+    },
+    "repo_root": {
+      "allowed": false,
+      "allowed_input_roots": [
+        "runs/local/artifacts",
+        "runs/local/recovered",
+        "runs/local/manifests",
+        "datasets/recovered"
+      ],
+      "data_mining_authorized": false,
+      "exists": true,
+      "failures": [
+        "manifest_must_be_jsonl",
+        "manifest_path_not_under_allowed_input_root",
+        "manifest_path_is_directory"
+      ],
+      "forbidden_absolute_roots": [
+        "/",
+        "/arxiv",
+        "/data"
+      ],
+      "input_path": "/data/agentkernel-seq2seq-text-lab",
+      "must_exist": false,
+      "recursive_scan_authorized": false,
+      "resolved_path": "/data/agentkernel-seq2seq-text-lab",
+      "root_label": null,
+      "runtime_authorized": false,
+      "training_authorized": false
+    },
+    "traversal": {
+      "allowed": false,
+      "allowed_input_roots": [
+        "runs/local/artifacts",
+        "runs/local/recovered",
+        "runs/local/manifests",
+        "datasets/recovered"
+      ],
+      "data_mining_authorized": false,
+      "exists": false,
+      "failures": [
+        "path_traversal_forbidden",
+        "manifest_path_not_under_allowed_input_root"
+      ],
+      "forbidden_absolute_roots": [
+        "/",
+        "/arxiv",
+        "/data"
+      ],
+      "input_path": "runs/local/manifests/../escape.jsonl",
+      "must_exist": false,
+      "recursive_scan_authorized": false,
+      "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/escape.jsonl",
+      "root_label": null,
+      "runtime_authorized": false,
+      "training_authorized": false
+    },
+    "wrong_suffix": {
+      "allowed": false,
+      "allowed_input_roots": [
+        "runs/local/artifacts",
+        "runs/local/recovered",
+        "runs/local/manifests",
+        "datasets/recovered"
+      ],
+      "data_mining_authorized": false,
+      "exists": false,
+      "failures": [
+        "manifest_must_be_jsonl"
+      ],
+      "forbidden_absolute_roots": [
+        "/",
+        "/arxiv",
+        "/data"
+      ],
+      "input_path": "runs/local/manifests/rows.txt",
+      "must_exist": false,
+      "recursive_scan_authorized": false,
+      "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/manifests/rows.txt",
+      "root_label": "runs/local/manifests",
+      "runtime_authorized": false,
+      "training_authorized": false
+    }
+  },
+  "stage": 8935,
+  "stage_name": "stage8935_audit_only_manifest_path_validator",
+  "status": "AUDIT_ONLY_MANIFEST_PATH_VALIDATOR"
+}

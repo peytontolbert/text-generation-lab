@@ -1,0 +1,83 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "default_policy_is_ignore": true,
+    "exactly_one_positional_source_only_row": true,
+    "future_reopen_gates_recorded": true,
+    "no_architecture_mutation_authorized": true,
+    "no_checkpoint_write_authorized": true,
+    "no_copy_authorized": true,
+    "no_training_authorized": true,
+    "positional_row_has_no_target_key": true,
+    "source_rows_exist": true,
+    "source_stage8940_passed": true
+  },
+  "decision": "Source-only encoder positional embedding is ignored by default because no recovered target key exists. Copy, architecture mutation, checkpoint load/write, forward, and training remain blocked unless future architecture gates pass.",
+  "forbidden_operations": [
+    "copy_source_positional_embedding",
+    "read_binary_tensor_values",
+    "add_target_positional_module",
+    "mutate_model_architecture",
+    "load_checkpoint",
+    "save_checkpoint",
+    "model.forward",
+    "train_step"
+  ],
+  "metrics": {
+    "architecture_mutation_authorized": false,
+    "checkpoint_load_authorized": false,
+    "checkpoint_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_authorized_now": false,
+    "positional_copy_authorized": false,
+    "positional_policy_rows": 1,
+    "runtime_authorized_flag": false,
+    "source_rows": 159,
+    "training_authorized": false
+  },
+  "policy_rows": [
+    {
+      "architecture_mutation_authorized": false,
+      "checkpoint_write_authorized": false,
+      "copy_authorized": false,
+      "model_forward_authorized": false,
+      "policy": "ignore_source_only_positional_embedding_by_default",
+      "reason": "No recovered target key/schema row exists for this learned encoder positional embedding artifact.",
+      "source_artifact": "dense/enc_pos_embed_weight.f32.bin",
+      "source_key": "enc_pos_embed_weight",
+      "source_shape": [
+        4096,
+        640
+      ],
+      "target_key": null,
+      "target_shape": null,
+      "training_authorized": false
+    }
+  ],
+  "required_future_reopen_gates": [
+    "target_architecture_declares_learned_encoder_positional_embedding",
+    "target_key_exists_in_state_dict_schema",
+    "position_length_policy_matches_encoder_max_length",
+    "rotary_or_relative_position_conflict_audit",
+    "copy_or_interpolate_policy",
+    "module_delta_telemetry_guard"
+  ],
+  "stage": 8941,
+  "stage_name": "stage8941_positional_embedding_ignore_policy",
+  "status": "POSITIONAL_EMBEDDING_IGNORE_POLICY_METADATA_ONLY"
+}

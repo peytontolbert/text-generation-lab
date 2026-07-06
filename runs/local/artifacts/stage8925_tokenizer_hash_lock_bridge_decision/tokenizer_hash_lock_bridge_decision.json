@@ -1,0 +1,118 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "bridge_decision": {
+    "active_tokenizer": "recovered_target_tokenizer_1506",
+    "bridge_mapping_status": "not_built",
+    "reason": "source vocab 8207 and recovered target vocab 1506 are incompatible without an explicit row mapping and embedding/lm-head policy",
+    "source_export_tokenizer_status": "hash_locked_reference_only"
+  },
+  "checks": {
+    "active_tokenizer_is_target": true,
+    "bridge_mapping_not_built": true,
+    "core_ids_match": true,
+    "no_embedding_copy_authorized": true,
+    "no_embedding_resize_authorized": true,
+    "no_lm_head_copy_authorized": true,
+    "no_model_execution_authorized": true,
+    "no_tokenizer_swap_authorized": true,
+    "no_training_authorized": true,
+    "source_tokenizer_config_hash_locked": true,
+    "source_tokenizer_json_hash_locked": true,
+    "source_tokenizer_reference_only": true,
+    "source_vocab_is_8207": true,
+    "stage8919_policy_passed": true,
+    "stage8924_blocker_matrix_passed": true,
+    "target_config_hash_locked": true,
+    "target_vocab_is_1506": true,
+    "vocab_delta_recorded": true
+  },
+  "core_id_contract": {
+    "bos_token_id": 1,
+    "eos_token_id": 2,
+    "pad_token_id": 0,
+    "unk_token_id": 3
+  },
+  "decision": {
+    "current_status": "keep_target_tokenizer",
+    "materialization_status": "blocked",
+    "next_required_artifact": "dataset/compiler recovery audit or, if conversion continues, explicit bridge mapping table design with no embedding copy",
+    "source_tokenizer_status": "reference_hash_locked_only"
+  },
+  "file_locks": {
+    "source_tokenizer_config": {
+      "exists": true,
+      "path": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11/tokenizer/tokenizer_config.json",
+      "sha256": "844b92a5153b60309ffa59bf9880f16cf3ed7d3fb63cea17ffde9d2f659ccab3",
+      "size_bytes": 608
+    },
+    "source_tokenizer_json": {
+      "exists": true,
+      "path": "/data/repository_library/exports/agent_kernel/models/agentkernel_lite_100m_bitnet_v11/tokenizer/tokenizer.json",
+      "sha256": "91db8bc4ebe1a537a49d9635ba8b208209f12a52695d81cf8a52a54c459803ed",
+      "size_bytes": 566690
+    },
+    "target_config": {
+      "exists": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "sha256": "dda55307003800072d98070a4f744ebd0f8262c5680fa1b0f74c5724b32f5a77",
+      "size_bytes": 3473
+    }
+  },
+  "forbidden_operations": [
+    "tokenizer_swap",
+    "resize_embeddings",
+    "copy_source_embedding_rows",
+    "copy_source_lm_head_rows",
+    "initialize_new_token_rows",
+    "tokenize_training_data_with_source_tokenizer",
+    "state_dict_load",
+    "checkpoint_write",
+    "model_forward",
+    "training_step"
+  ],
+  "known_source_ak_special_range": {
+    "count": 15,
+    "end_id": 8206,
+    "start_id": 8192
+  },
+  "metrics": {
+    "active_tokenizer_is_target": true,
+    "bridge_mapping_rows": 0,
+    "core_ids_match": true,
+    "embedding_copy_authorized_rows": 0,
+    "embedding_resize_authorized": false,
+    "lm_head_copy_authorized_rows": 0,
+    "model_execution_authorized_now": false,
+    "source_files_hash_locked": 2,
+    "source_tokenizer_files": 2,
+    "source_vocab_size": 8207,
+    "target_config_hash_locked": 1,
+    "target_vocab_size": 1506,
+    "tokenizer_swap_authorized": false,
+    "training_authorized": false,
+    "vocab_delta": 6701
+  },
+  "source_stages": [
+    8919,
+    8924
+  ],
+  "stage": 8925,
+  "stage_name": "stage8925_tokenizer_hash_lock_bridge_decision",
+  "target_config_tokenizer": {
+    "kind": "agentkernel-bpe",
+    "name": "agentkernel-bpe",
+    "vocab_size": 1506
+  }
+}

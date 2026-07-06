@@ -1,0 +1,81 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_binary_values_unread": true,
+    "all_checkpoint_write_blocked": true,
+    "all_decode_blocked": true,
+    "all_training_blocked": true,
+    "authority_counts_zero": true,
+    "future_gates_recorded": true,
+    "lm_head_vocab_projection_isolated": true,
+    "non_vocab_file_sizes_match_2bit_shape": true,
+    "packed_rows_present": true,
+    "source_shape_rows_exist": true,
+    "source_stage8938_passed": true
+  },
+  "decision": "Packed BitNet metadata shape assertions pass for non-vocab packed rows under an inferred 2-bit/four-values-per-byte layout. The lm_head packed row is isolated as a source-vocab projection mismatch covered by tokenizer/LM-head policy. Actual layout decoding/dequantization remains blocked until codebook/order/golden-vector gates exist.",
+  "forbidden_operations": [
+    "read_binary_tensor_values",
+    "decode_packed_bitnet",
+    "dequantize_weight_values",
+    "torch.load",
+    "state_dict.load_state_dict",
+    "initialize_module_parameters",
+    "save_checkpoint",
+    "model.forward",
+    "train_step"
+  ],
+  "future_implementation_gates": [
+    "explicit_2bit_codebook_semantics",
+    "packing_order_and_axis_spec",
+    "signed_or_ternary_value_mapping_spec",
+    "scale_or_threshold_metadata_policy",
+    "golden_tiny_decode_vectors",
+    "file_size_to_target_shape_assertions",
+    "dtype_output_policy",
+    "module_key_mapping_lock",
+    "no_inplace_source_mutation",
+    "materialization_telemetry_delta_guard"
+  ],
+  "layout_contract": {
+    "container": "u8_packed_weight_bin",
+    "decode_status": "blocked_pending_codebook_and_order_spec",
+    "dequantization_authorized": false,
+    "inferred_bits_per_value_from_file_size": 2,
+    "inferred_values_per_byte_from_file_size": 4,
+    "metadata_shape_assertion_status": "passed_if_checks_pass",
+    "tensor_value_read_authorized": false
+  },
+  "metrics": {
+    "checkpoint_load_authorized": false,
+    "checkpoint_write_authorized": false,
+    "data_mining_authorized": false,
+    "decode_packed_bitnet_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "lm_head_vocab_projection_mismatch_rows": 1,
+    "model_execution_authorized_now": false,
+    "non_vocab_shape_assertion_failures": 0,
+    "packed_rows": 109,
+    "runtime_authorized_flag": false,
+    "shape_assertion_failures": 1,
+    "source_rows": 159,
+    "target_shape_classes": 4,
+    "training_authorized": false
+  },
+  "stage": 8939,
+  "stage_name": "stage8939_bitnet_layout_decoder_contract",
+  "status": "BITNET_LAYOUT_CONTRACT_METADATA_ONLY"
+}

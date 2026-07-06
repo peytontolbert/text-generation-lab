@@ -1,0 +1,41 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "cli_imports_validator": true,
+    "cli_rejects_failed_path_card": true,
+    "cli_validates_manifest_mode_input": true,
+    "data_mining_remains_blocked": true,
+    "runtime_remains_blocked": true,
+    "source_stage8935_passed": true,
+    "test_accepts_focused_manifest_path": true,
+    "test_rejects_unfocused_input_path": true,
+    "training_remains_blocked": true
+  },
+  "decision": "The no-mining curriculum CLI now validates manifest_no_mining_audit_only input paths before reading rows. Arbitrary temp paths, /arxiv, remote URIs, traversal, and globs are rejected by the shared validator.",
+  "metrics": {
+    "cli_validator_imports": 1,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "manifest_rejection_tests": 1,
+    "model_execution_authorized_now": false,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "stage": 8936,
+  "stage_name": "stage8936_cli_manifest_path_validator_wiring",
+  "status": "CLI_MANIFEST_PATH_VALIDATOR_WIRED"
+}

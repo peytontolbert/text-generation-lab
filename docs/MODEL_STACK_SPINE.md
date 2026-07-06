@@ -1990,3 +1990,285 @@ This is not a model-quality claim. Any future probe must still emit real diagnos
 ## Stage8904 Research Library Seed Model Catalog
 
 Stage8902 catalogs research-library/local model candidates. The only direct 100M core-seed candidate is the local AgentKernel Lite encoder-decoder export, pending compatibility audit. Collection models should first be used as frozen teachers, rerankers, retrieval tools, verifier priors, proposal sources, or representation sidecars behind verified-transition-record gates.
+
+## Stage8905 Local AgentKernel Lite Seed Compatibility
+
+Stage8905 audits the local AgentKernel Lite browser BitNet export as a possible 100M seed. It is dimensionally relevant, but blocked as a direct training seed because tokenizer/vocab, state-dict, and missing control-head compatibility are not solved. Treat it as lineage/reference until tokenizer and state-dict shape audits pass.
+
+## Stage8906 Diagnostic Gate Ticket Integration
+
+Stage8906 connects the diagnostics closure path to future live authorization tickets: every future probe ticket must require Stage8902 post-run diagnostic promotion checks before metrics interpretation, checkpoint export, controller merge, or promotion.
+
+## Stage8907 Diagnostic Ticket Contract Module
+
+Stage8907 turns the diagnostic gate into a reusable builder contract: future probe tickets should import `scripts.diagnostic_ticket_contract`, apply the gate fields, and reject tickets that fail `audit_diagnostic_ticket_fields`.
+
+## Stage8906 Tokenizer Special Token Compatibility
+
+Stage8906 recovers the local AgentKernel Lite tokenizer boundary. Core IDs match the recovered wrapper, and AgentKernel special tokens occupy 8192-8206. Direct tokenizer swap is blocked because the recovered target config uses vocab 1506 while the local export uses vocab 8207. V2 software-maintainer special tokens must be added only through an audited tokenizer migration plus embedding/lm-head shape plan.
+
+## Stage8908 Tokenizer Special Token Compatibility
+
+Stage8908 recovers the local AgentKernel Lite tokenizer boundary. Core IDs match the recovered wrapper, and AgentKernel special tokens occupy 8192-8206. Direct tokenizer swap is blocked because the recovered target config uses vocab 1506 while the local export uses vocab 8207. V2 software-maintainer special tokens must be added only through an audited tokenizer migration plus embedding/lm-head shape plan.
+
+## Stage8909 State-Dict Shape Migration
+
+Stage8909 blocks direct state-dict loading from the local AgentKernel Lite browser BitNet export. The export is dimensionally useful but needs tokenizer migration, export-to-PyTorch key mapping, per-key shape reporting, and explicit new-head initialization policy before any seed loading.
+
+## Stage8909 Ticket Builder Contract Enforcement Audit
+
+Stage8909 marks legacy ticket/preflight builders as historical-only and records the future-builder rule: import `scripts.diagnostic_ticket_contract`, apply diagnostic fields, and fail closed before any live probe ticket can be emitted.
+
+## Stage8911 Ticket Builder Contract Enforcement Audit
+
+Stage8911 marks legacy ticket/preflight builders as historical-only and records the future-builder rule: import `scripts.diagnostic_ticket_contract`, apply diagnostic fields, and fail closed before any live probe ticket can be emitted.
+
+## Stage8910 Shape Report Schema And Conversion Map
+
+Stage8910 adds a metadata-only shape report schema and draft conversion map for the local AgentKernel Lite export. It preserves the direct-load block: embedding rows require tokenizer migration, packed BitNet layers require a converter spec, and recovered control heads require new initialization or another checkpoint.
+
+## Stage8912 Shape Report Schema And Conversion Map
+
+Stage8912 adds a metadata-only shape report schema and draft conversion map for the local AgentKernel Lite export. It preserves the direct-load block: embedding rows require tokenizer migration, packed BitNet layers require a converter spec, and recovered control heads require new initialization or another checkpoint.
+
+## Stage8913 Future Live Ticket Builder Skeleton
+
+Stage8913 adds a reusable inactive/template future live-ticket builder skeleton that imports Stage8907 diagnostics, denies execution operations, and keeps all authority closed.
+
+## Stage8914 Future Ticket Pre-Execution Audit
+
+Stage8914 adds the final pre-execution audit for the inactive future ticket template, including negative mutation checks for opened execution, command materialization, diagnostic-gate removal, decoder/runtime loss opening, and authority opening.
+
+## Stage8915 Future Ticket Pre-Execution Audit
+
+Stage8915 adds the final pre-execution audit for the inactive future ticket template, including negative mutation checks for opened execution, command materialization, diagnostic-gate removal, decoder/runtime loss opening, and authority opening.
+
+## Stage8914 Non-Executing Converter Shape Report Dry Run
+
+Stage8914 emits metadata-only shape rows for the AgentKernel Lite export. It does not decode packed BitNet weights, load a state dict, resize embeddings, execute, or train. Direct loading stays blocked pending row completeness and target-key collision audits.
+
+## Stage8916 Non-Executing Converter Shape Report Dry Run
+
+Stage8916 emits metadata-only shape rows for the AgentKernel Lite export. It does not decode packed BitNet weights, load a state dict, resize embeddings, execute, or train. Direct loading stays blocked pending row completeness and target-key collision audits.
+
+## Stage8917 Converter Row Completeness Collision Audit
+
+Stage8917 audits Stage8916 converter metadata rows for completeness and collisions. It confirms the row set is clean enough for a converter key-mapping contract while direct loading, packed-weight decoding, execution, and training remain blocked.
+
+## Stage8918 Converter Key Mapping Init Policy Contract
+
+Stage8918 classifies converter metadata rows into compatible mapping, embedding migration, target-only initialization, and blocked policies. It preserves the no-load/no-execution/no-training boundary and makes tokenizer/embedding migration the next blocker.
+
+## Stage8919 Tokenizer Embedding Migration Policy Design
+
+Stage8919 records the tokenizer/embedding migration policy for the 8207-to-1506 mismatch. The safe default is to keep the recovered target tokenizer and block export embedding/lm-head copy, resize, tokenizer swap, state-dict load, execution, and training until a future materialization contract exists.
+
+## Stage8920 Future Probe Artifact Path Policy
+
+Stage8920 constrains any future authorized probe outputs to a fresh scoped `runs/local/probes/stage8890...` directory and rejects overwrite, path traversal, `/arxiv`, repo-root, checkpoint, promotion, runtime, hidden-ref, and source/body artifact writes.
+
+## Stage8920 Checkpoint Materialization No-Op Skeleton Design
+
+Stage8920 defines checkpoint materialization as a no-op skeleton with explicit preconditions. It blocks loading, packed decoding, embedding resize, control-head initialization, checkpoint writes, forward execution, and training until separate audits pass.
+
+## Stage8921 Future Probe Artifact Path Policy
+
+Stage8921 constrains any future authorized probe outputs to a fresh scoped `runs/local/probes/stage8890...` directory and rejects overwrite, path traversal, `/arxiv`, repo-root, checkpoint, promotion, runtime, hidden-ref, and source/body artifact writes.
+
+## Stage8922 Cleanup Proof No-Overwrite Finalization
+
+Stage8922 finalizes the cleanup-proof/no-overwrite contract for future explicitly authorized probes. It requires a fresh marked probe output directory, preserves telemetry artifacts, forbids `/arxiv`, `/data`, repo-root, parent, output-dir, and symlink escape deletion, and permits cleanup only for checkpoint children. No cleanup is executed.
+
+## Stage8923 Future Probe Preflight No-Write Audit
+
+Stage8923 adds a no-write preflight for the future probe path. It checks the output root is fresh, telemetry names are reserved and safe, cleanup proof schema is present, and no directory creation, artifact writes, deletion, execution, or training occurs.
+
+## Stage8924 Training Readiness Blocker Matrix
+
+Stage8924 consolidates seed/tokenizer/converter/checkpoint/probe-safety recovery into a training-readiness blocker matrix. It records what is ready, what remains blocked, and keeps model execution, decoder CE, runtime, mining, and training closed.
+
+## Stage8925 Tokenizer Hash Lock Bridge Decision
+
+Stage8925 hash-locks the source export tokenizer files and recovered target config, then records the active tokenizer decision: keep the 1506-vocab recovered target tokenizer active, treat the 8207-vocab source export tokenizer as reference-only, and do not build bridge mappings or copy/resize embeddings without later audits.
+
+## Stage8925 Tokenizer Hash-Lock Bridge Decision
+
+Stage8925 locks tokenizer file hashes and records bridge rows for core IDs, source-only AgentKernel specials, and future V2 reserved tokens. It keeps the recovered target tokenizer at vocab 1506 and blocks tokenizer swap, embedding/lm-head resize/copy, state-dict load, execution, and training.
+
+## Stage8927 Tokenizer Hash-Lock Bridge Decision
+
+Stage8927 locks tokenizer file hashes and records bridge rows for core IDs, source-only AgentKernel specials, and future V2 reserved tokens. It keeps the recovered target tokenizer at vocab 1506 and blocks tokenizer swap, embedding/lm-head resize/copy, state-dict load, execution, and training.
+
+## Stage8926 Dataset Compiler Module Inventory Gap Matrix
+
+Stage8926 inventories recovered dataset/compiler modules: judges, junk/OOD rankers, curriculum compiler, shortcut/counterfactual audits, cartography, influence, reranking, repo graph, source-backed builders, denoise controls, semantic verifier, and telemetry. It records remaining orchestration and direct-test gaps while keeping mining/training closed.
+
+## Stage8928 Dataset Compiler Module Inventory Gap Matrix
+
+Stage8928 inventories recovered dataset/compiler modules: judges, junk/OOD rankers, curriculum compiler, shortcut/counterfactual audits, cartography, influence, reranking, repo graph, source-backed builders, denoise controls, semantic verifier, and telemetry. It records remaining orchestration and direct-test gaps while keeping mining/training closed.
+
+## Stage8929 Single Compiler API Contract
+
+Stage8929 defines the single no-execution compiler API contract: ingest -> judge -> junk/OOD rank -> shortcut/counterfactual audit -> compile objective manifests -> loss mask card -> patch queue -> compiler audit. It centralizes recovered modules without authorizing mining, training, decoder CE, denoise CE, runtime, or execution.
+
+## Stage8930 Targeted Compiler Gap Tests Readiness
+
+Stage8930 adds direct readiness coverage for source extractors, structured junk ranker, and counterfactual obligation audit. This closes the targeted test gap identified by the compiler inventory while keeping mining and training closed.
+
+## Stage8931 Orchestrated Compiler Synthetic Dry Run
+
+Stage8931 executes the compiler contract on synthetic rows only: objective judge, junk/OOD ranker, shortcut audit, counterfactual audit, and curriculum compiler. It verifies loss masks keep decoder CE, denoise CE, runtime, mining, execution, and training closed.
+
+## Stage8932 No-Mining Compiler CLI Wrapper Contract
+
+Stage8932 defines the no-mining compiler CLI wrapper contract for the recovered orchestration. It records allowed flags, forbidden flags, required outputs, and closed defaults for decoder CE, denoise CE, runtime, mining, model execution, checkpoint writes, and training.
+
+## Stage8933 No-Mining Compiler CLI Wrapper Skeleton
+
+Stage8933 implements the guarded no-mining compiler CLI wrapper skeleton. It supports synthetic dry runs and manifest audit-only mode while requiring closed safety flags and rejecting mining, training, runtime, model loading, decoder CE, denoise CE, and checkpoint writes.
+
+## Stage8934 Real Manifest Audit-Only Contract
+
+Stage8934 defines real-manifest audit-only boundaries for the compiler wrapper: explicit local input paths only, no discovery/mining/downloads, no mutation of input manifests, no `/arxiv` writes, and no training/runtime/model execution.
+
+## Stage8935 Audit-Only Manifest Path Validator
+
+Stage8935 turns the Stage8934 real-manifest audit-only contract into reusable path validation code. Explicit repo-local JSONL manifests may be checked; discovery/mining, recursive scans, remote inputs, `/arxiv` writes, training, runtime, and model execution remain blocked.
+
+## Stage8936 CLI Manifest Path Validator Wiring
+
+Stage8936 wires the Stage8935 manifest path validator into `scripts/software_maintenance_curriculum_cli.py` for `manifest_no_mining_audit_only`, so explicit local manifests can be audited without allowing arbitrary path reads, discovery, mining, training, runtime, or model execution.
+
+## Stage8937 Tiny Explicit Manifest CLI Audit
+
+Stage8937 validates the guarded `manifest_no_mining_audit_only` path end to end on a tiny explicit repo-local manifest. It writes audit artifacts only and opens no mining, training, runtime, model execution, decoder, denoise, checkpoint, or promotion authority.
+
+## Stage8938 Checkpoint Materialization Precondition Matrix
+
+Stage8938 records checkpoint materialization preconditions after path-guard recovery. Tokenizer/hash/path cleanup guards are recovered, but packed BitNet layout, shape assertions, control-head initializer seed policy, positional embedding policy, and materialization telemetry remain blockers. No checkpoint load/write or model execution is authorized.
+
+## Stage8939 BitNet Layout Decoder Contract
+
+Stage8939 records metadata-only packed BitNet layout assertions. File sizes match an inferred 2-bit/four-values-per-byte shape contract, but actual codebook/order semantics, decode, dequantization, checkpoint load/write, model execution, and training remain blocked.
+
+## Stage8940 Control Head Initializer Seed Policy
+
+Stage8940 records deterministic future initializer policy for recovered target-only control heads. It assigns scoped per-key seeds and initializer rules but opens no initialization, checkpoint load/write, forward execution, or training authority.
+
+## Stage8941 Positional Embedding Ignore Policy
+
+Stage8941 records the default ignore policy for the source-only learned encoder positional embedding artifact. It opens no tensor copy, architecture mutation, checkpoint load/write, model execution, or training authority.
+
+## Stage8942 Materialization Delta Shape Telemetry Contract
+
+Stage8942 records future materialization telemetry requirements: every source/target key route, shape/dtype delta, initialized module, ignored artifact, blocked artifact, and authority ticket must be reported before checkpoint write can be considered. No load/write/decode/init/forward/train authority is opened.
+
+## Stage8943 Checkpoint Precondition Matrix Refresh
+
+Stage8943 refreshes checkpoint materialization preconditions: 9 recovered as no-execution contracts, 1 remaining blocker for packed BitNet codebook/order/golden-vector semantics. Checkpoint load/write, packed decode, model execution, and training remain closed.
+
+## Stage8944 BitNet Codebook Order Golden Vector Contract
+
+Stage8944 records packed BitNet semantic proof obligations: candidate codebooks, byte bit order, axis order, synthetic golden vectors, and required future gates. It still forbids reading or decoding real packed weights, checkpoint load/write, model execution, and training.
+
+## Stage8945 Checkpoint Precondition Matrix All Contracts Recovered
+
+Stage8945 records all checkpoint materialization preconditions as recovered contracts, while implementation remains blocked. No real packed decode, checkpoint load/write, model execution, runtime, training, or promotion authority is opened.
+
+## Stage8946 Converter Implementation Audit Skeleton
+
+Stage8946 defines a no-op converter implementation audit skeleton. It records required audit phases and authority-ticket fields while explicitly blocking converter code, packed decode, checkpoint load/write, model execution, runtime, and training.
+
+## Stage8947 Converter Authority Ticket Dry-Run Harness Contract
+
+Stage8947 defines the future authority-ticket schema and no-op dry-run harness contract for converter work. It grants no ticket and keeps checkpoint open/read/write, converter execution, model execution, runtime, and training closed.
+
+## Stage8948 Converter Fixture-Only Acceptance Spec
+
+Stage8948 records fixture-only converter acceptance specifications. It keeps converter implementation, checkpoint open/read/write, packed decode, model execution, runtime, mining, and training closed.
+
+## Stage8949 Converter Acceptance-Test Generator Contract
+
+Stage8949 converts fixture-only acceptance specs into metadata-only test-spec rows. It writes no runnable tests and keeps converter implementation, checkpoint access, tensor reads, packed decode, model execution, runtime, mining, and training closed.
+
+## Stage8950 Registry Frontier Normalization Gate
+
+Stage8950 records stale-frontier builder reruns as registry hygiene issues and normalizes the current frontier. It preserves historical failed summaries while keeping runtime, checkpoint access, converter execution, mining, and training closed.
+
+## Stage8951 Converter Acceptance-Test Generator Contract Retry
+
+Stage8951 retries converter acceptance-test generation after stale-frontier normalization. It emits metadata-only test-spec rows and keeps runnable tests, converter implementation, checkpoint access, tensor reads, packed decode, model execution, runtime, mining, and training closed.
+
+## Stage8952 Registry-Independent Acceptance Generator Recovery
+
+Stage8952 recovers metadata-only converter acceptance-test generation from stable fixture specs without trusting the mutable registry latest pointer. Runtime, checkpoint access, converter execution, model execution, mining, and training remain closed.
+
+## Stage8952 Converter Test-Spec Promotion Gate
+
+Stage8952 gates converter metadata test-spec promotion. Without a future explicit authority ticket, no runnable tests, checkpoint access, tensor reads, packed decode, converter execution, model execution, runtime, mining, or training are authorized.
+
+## Stage8953 Training Readiness Matrix Refresh
+
+Stage8953 folds converter recovery back into the training readiness spine. Converter contracts are recovered, but actual converter implementation, checkpoint materialization, runnable tests, model execution, data mining, decoder CE, denoise CE, and training remain closed.
+
+## Stage8954 Bounded Decoder Trainer/Loss-Mask Readiness
+
+Stage8954 refreshes the recovered trainer command/loss-mask contract for bounded decoder CE. The no-execution contract is recovered, but model execution, mining, decoder CE, denoise CE, runtime, checkpoint export, and training remain closed.
+
+## Stage8955 Bounded Decoder No-Execution Telemetry Gate
+
+Stage8955 records mandatory bounded decoder CE telemetry gates. Future probe outputs must include non-empty/schema-complete token loss, gradient, activation, dynamics, EOS/length, leak, repetition, sample, module-delta, cleanup, and failure-bucket artifacts before any execution result can be trusted.
+
+## Stage8956 Bounded Decoder Future One-Run Authorization Schema
+
+Stage8956 adds an inactive/template one-run authorization schema for a future tiny bounded decoder CE probe. It grants no operation now and requires explicit user authorization, fresh pre-execution audit, Stage8955 telemetry, and Stage8902 diagnostics before any future metrics can be interpreted.
+
+## Stage8957 No-Mining Compiler Readiness Refresh
+
+Stage8957 refreshes the no-mining compiler path after bounded decoder gates. Judge, ranker, shortcut, counterfactual, compiler, loss-mask, and CLI wrapper wiring are recovered for synthetic/audit-only paths, but mining and training remain closed.
+
+## Stage8958 Real-Manifest Audit-Only Route-Card Readiness
+
+Stage8958 records explicit local manifest route-card requirements. The no-mining compiler path may inspect focused repo-local JSONL manifests only; /arxiv, arbitrary /data paths, discovery, mining, execution, and training remain closed.
+
+## Stage8959 Training Readiness Blocker Matrix Refresh
+
+Stage8959 refreshes the full training-readiness blocker matrix after converter, bounded decoder, compiler, and real-manifest audit recovery. The no-execution spine is current, but training remains hard-blocked.
+
+## Stage8960 Registry/Spine Reconciliation After Training Readiness Refresh
+
+Stage8960 reconciles Stage8953-8959 into the central research spine: converter contracts, bounded decoder trainer/loss-mask readiness, telemetry gates, inactive one-run schema, no-mining compiler readiness, real-manifest audit-only route cards, and training blocker matrix are current.
+
+Training remains hard-blocked. No model execution, mining, decoder CE, denoise CE, runtime, source/body emission, Gemma, harness, scoring, checkpoint export, controller merge, or promotion is authorized.
+
+## Stage8961 Repo-Local Manifest Inventory No-Mining
+
+Stage8961 inventories repo-local JSONL manifests under allowed roots only. It does not load row content, count data rows, scan /arxiv, mine, execute models, or train.
+
+## Stage8962 Focused Manifest Audit-Only Compiler Refresh
+
+Stage8962 audits the focused repo-local Stage8937 manifest through the recovered compiler path. It emits audit outputs and keeps mining, model execution, decoder CE, denoise CE, runtime, and training closed.
+
+## Stage8963 Focused Manifest Patch Queue Interpretation
+
+Stage8963 interprets the focused manifest audit patch queue: combo-feature shortcut baselines solve the tiny target exactly, so the manifest is not trainable until counterbalanced neutral evidence rows are designed and audited.
+
+## Stage8964 Focused Manifest Counterbalance Design No-Mining
+
+Stage8964 records non-trainable counterbalance templates for the focused manifest combo-shortcut issue. It does not mine rows or make the manifest trainable.
+
+## Stage8965 Registry/Spine Reconciliation After Focused Manifest Audit
+
+Stage8965 reconciles the focused manifest audit branch. The compiler audit path is working, but the focused manifest remains non-trainable because combo-feature shortcuts solve the target exactly. Counterbalance rows are templates only.
+
+## Stage8966 Backup Branch Preflight No-Push
+
+Stage8966 records backup readiness for the recovery branch. It does not stage, commit, push, upload, mine, execute models, or train.
+
+## Stage8967 Backup Commit Scope Plan No-Write
+
+Stage8967 plans backup commit scope for the recovery branch. It performs no git add, commit, push, upload, cleanup, mining, execution, or training.
+
+## Stage8968 Backup Push Authorization Review No-Network
+
+Stage8968 records a no-network backup authorization review card. Git add/commit/push remain closed unless the user explicitly asks for that backup operation.

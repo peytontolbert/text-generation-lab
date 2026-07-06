@@ -1,0 +1,92 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_seed": 20260706,
+  "checks": {
+    "all_initializer_rules_present": true,
+    "authority_counts_zero": true,
+    "expected_target_only_rows": true,
+    "no_checkpoint_write_authorized": true,
+    "no_initialization_authorized": true,
+    "no_model_forward_authorized": true,
+    "no_training_authorized": true,
+    "scoped_seeds_unique": true,
+    "source_policy_rows_exist": true,
+    "source_stage8939_passed": true
+  },
+  "decision": "Control-head initializer seed policy is recovered as metadata only. Future initialization must use scoped deterministic seeds and recorded initializer rules, but no initialization, checkpoint load/write, forward, or training is authorized here.",
+  "forbidden_operations": [
+    "initialize_module_parameters",
+    "sample_random_values",
+    "write_initialized_state_dict",
+    "load_checkpoint",
+    "save_checkpoint",
+    "model.forward",
+    "train_step"
+  ],
+  "initializer_rules": {
+    "agent_controller.weight/bias": {
+      "bias_init": "zeros_future",
+      "fan_policy": "target_shape",
+      "weight_init": "xavier_uniform_future"
+    },
+    "agent_intent_head.weight/bias": {
+      "bias_init": "zeros_future",
+      "fan_policy": "target_shape",
+      "weight_init": "xavier_uniform_future"
+    },
+    "agent_policy_heads.*.weight/bias": {
+      "bias_init": "zeros_future",
+      "fan_policy": "per_policy_head_vocab",
+      "weight_init": "xavier_uniform_future"
+    },
+    "retrieval_doc_head.weight": {
+      "bias_init": "none",
+      "fan_policy": "target_shape",
+      "weight_init": "xavier_uniform_future"
+    },
+    "retrieval_query_head.weight": {
+      "bias_init": "none",
+      "fan_policy": "target_shape",
+      "weight_init": "xavier_uniform_future"
+    },
+    "scalar_invariant.weight": {
+      "bias_init": "none",
+      "fan_policy": "target_shape",
+      "weight_init": "xavier_uniform_future"
+    },
+    "structured_heads.*.weight/bias": {
+      "bias_init": "zeros_future",
+      "fan_policy": "per_structured_field_vocab",
+      "weight_init": "xavier_uniform_future"
+    }
+  },
+  "metrics": {
+    "checkpoint_load_authorized": false,
+    "checkpoint_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "initialization_authorized": false,
+    "model_execution_authorized_now": false,
+    "policy_rows": 7,
+    "runtime_authorized_flag": false,
+    "source_rows": 159,
+    "training_authorized": false,
+    "unique_scoped_seeds": 7
+  },
+  "stage": 8940,
+  "stage_name": "stage8940_control_head_initializer_seed_policy",
+  "status": "CONTROL_HEAD_INITIALIZER_SEED_POLICY_METADATA_ONLY"
+}

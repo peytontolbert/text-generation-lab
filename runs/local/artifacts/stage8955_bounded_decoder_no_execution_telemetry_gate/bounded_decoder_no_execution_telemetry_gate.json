@@ -1,0 +1,141 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "bounded_json_artifacts_recorded": true,
+    "bounded_jsonl_artifacts_recorded": true,
+    "gated_before_execution_artifacts_covered": true,
+    "jsonl_empty_failure_present": true,
+    "mandatory_failure_modes_recorded": true,
+    "missing_artifact_failure_present": true,
+    "native_test_covers_bounded_token_positions": true,
+    "registry_frontier_stage8954": true,
+    "row_token_loss_requires_positions": true,
+    "source_stage8954_passed": true,
+    "telemetry_module_exists": true,
+    "telemetry_test_exists": true
+  },
+  "decision": "Bounded decoder CE cannot receive an execution ticket unless telemetry artifact gates are present and future probe outputs are non-empty/schema-complete. This stage records the no-execution telemetry gate only; it does not run a probe, model, converter, runtime, mining, decoder CE, denoise CE, or training.",
+  "gated_before_execution": [
+    "row_token_loss.jsonl",
+    "row_gradient_norms.jsonl",
+    "activation_summary.jsonl",
+    "row_dynamics_history.jsonl",
+    "module_delta_norms.json",
+    "internal_token_logit_summary.json",
+    "eos_length_audit.json",
+    "short_output_probe.json",
+    "repetition_probe.json",
+    "internal_leak_probe.json",
+    "sample_generation_audit.json",
+    "failure_bucket_card.json",
+    "cleanup_proof.json"
+  ],
+  "mandatory_failure_modes": [
+    "missing_artifact",
+    "empty_jsonl_artifact",
+    "missing_required_keys",
+    "row_token_loss_without_per_position_loss",
+    "json_artifact_not_object",
+    "invalid_json",
+    "invalid_jsonl"
+  ],
+  "metrics": {
+    "actual_execution_authorized_next": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "gated_before_execution_artifacts": 13,
+    "mandatory_failure_modes": 7,
+    "model_execution_attempted": false,
+    "required_bounded_json_artifacts": 9,
+    "required_bounded_jsonl_artifacts": 6,
+    "runtime_authorized_flag": false,
+    "training_authorized": false
+  },
+  "required_bounded_json_artifacts": {
+    "cleanup_proof.json": [
+      "cleanup_executed",
+      "run_id"
+    ],
+    "eos_length_audit.json": [
+      "max_decoder_tokens",
+      "rows_checked"
+    ],
+    "failure_bucket_card.json": [
+      "failure_rows"
+    ],
+    "internal_leak_probe.json": [
+      "target_internal_token_rows"
+    ],
+    "internal_token_logit_summary.json": [
+      "rows",
+      "total_internal_token_probability_mass"
+    ],
+    "module_delta_norms.json": [
+      "decoder_delta_norm",
+      "delta_norm_by_bucket",
+      "total_delta_norm"
+    ],
+    "repetition_probe.json": [
+      "generated_rows"
+    ],
+    "sample_generation_audit.json": [
+      "generated_rows"
+    ],
+    "short_output_probe.json": [
+      "generated_rows"
+    ]
+  },
+  "required_bounded_jsonl_artifacts": {
+    "activation_summary.jsonl": [
+      "activation_cache_present",
+      "layers",
+      "row_id"
+    ],
+    "eval_loss_by_checkpoint.jsonl": [
+      "loss",
+      "rows",
+      "split"
+    ],
+    "loss_by_step.jsonl": [
+      "grad_norm",
+      "loss",
+      "step"
+    ],
+    "row_dynamics_history.jsonl": [
+      "forgetting_events",
+      "loss_history",
+      "prediction_flip_count",
+      "row_id"
+    ],
+    "row_gradient_norms.jsonl": [
+      "grad_norm_by_bucket",
+      "gradient_scope",
+      "row_id",
+      "total_grad_norm"
+    ],
+    "row_token_loss.jsonl": [
+      "mean_loss",
+      "positions",
+      "row_id",
+      "token_count"
+    ]
+  },
+  "source_stage": 8954,
+  "stage": 8955,
+  "stage_name": "stage8955_bounded_decoder_no_execution_telemetry_gate",
+  "status": "BOUNDED_DECODER_TELEMETRY_GATE_NO_EXECUTION"
+}

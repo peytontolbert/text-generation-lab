@@ -1,0 +1,164 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers": [
+    {
+      "blocker": "direct_seed_load_blocked",
+      "reason": "local AgentKernel Lite export is browser BitNet runtime format and is not a verified PyTorch checkpoint",
+      "required_next": "state-dict materialization contract plus converter implementation audits",
+      "source_stage": 8905
+    },
+    {
+      "blocker": "tokenizer_vocab_mismatch",
+      "reason": "source export vocab 8207 does not match recovered target vocab 1506",
+      "required_next": "tokenizer hash lock and bridge mapping or explicit keep-target decision",
+      "source_stage": 8908
+    },
+    {
+      "blocker": "packed_bitnet_decode_blocked",
+      "reason": "109 packed BitNet rows require layout decoder and dequantization shape assertions",
+      "required_next": "metadata-first BitNet layout decoder contract; no tensor values until authorized",
+      "source_stage": 8916
+    },
+    {
+      "blocker": "embedding_lm_head_migration_blocked",
+      "reason": "embedding/lm-head copy, resize, and tokenizer swap remain explicitly unauthorized",
+      "required_next": "embedding/lm-head migration policy with hashes, row mapping, and tests",
+      "source_stage": 8919
+    },
+    {
+      "blocker": "control_head_initialization_blocked",
+      "reason": "retrieval, policy, intent, controller, scalar, and structured heads are target-only/new-init groups",
+      "required_next": "initializer seed policy and module-shape telemetry contract",
+      "source_stage": 8918
+    },
+    {
+      "blocker": "checkpoint_materialization_noop_only",
+      "reason": "materialization skeleton records preconditions but blocks load/decode/resize/init/write/forward/train",
+      "required_next": "separate passing audits for every materialization precondition",
+      "source_stage": 8920
+    },
+    {
+      "blocker": "future_probe_artifact_path_only",
+      "reason": "probe path policy is ready, but only as a no-execution template",
+      "required_next": "explicit one-run authorization review card before any probe writes",
+      "source_stage": 8921
+    },
+    {
+      "blocker": "cleanup_preflight_no_write_only",
+      "reason": "future probe output root is fresh and reserved, but no directories/artifacts were created",
+      "required_next": "explicit execution authorization if a tiny run is requested",
+      "source_stage": 8923
+    }
+  ],
+  "checks": {
+    "all_source_summaries_passed": true,
+    "all_source_summaries_present": true,
+    "authority_counts_zero": true,
+    "blockers_present": true,
+    "decoder_ce_remains_blocked": true,
+    "model_execution_remains_blocked": true,
+    "ready_components_present": true,
+    "runtime_remains_blocked": true,
+    "training_remains_blocked": true
+  },
+  "decision": {
+    "execution_status": "blocked",
+    "next_required_artifact": "tokenizer hash-lock and bridge-token mapping/keep-target decision card, unless work returns to dataset/compiler recovery",
+    "training_readiness": "not_ready"
+  },
+  "metrics": {
+    "blocker_count": 8,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_authorized_now": false,
+    "ready_component_count": 9,
+    "runtime_authorized_flag": false,
+    "source_stages": 11,
+    "source_summaries_passed": 11,
+    "source_summaries_present": 11,
+    "training_authorized": false
+  },
+  "ready_components": [
+    "local seed export located and cataloged",
+    "core tokenizer IDs and AgentKernel special token range recovered",
+    "metadata-only converter shape rows complete and collision-free",
+    "converter key-mapping/init policy classified",
+    "tokenizer/embedding safe default recorded",
+    "checkpoint materialization skeleton defined as no-op",
+    "future probe artifact path policy recorded",
+    "cleanup/no-overwrite proof contract recorded",
+    "future probe no-write preflight passed"
+  ],
+  "source_status": {
+    "8905": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8905_local_agentkernel_lite_seed_compatibility_audit.json"
+    },
+    "8908": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8908_tokenizer_special_token_compatibility_audit.json"
+    },
+    "8909": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8909_state_dict_shape_migration_design.json"
+    },
+    "8916": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8916_nonexecuting_converter_shape_report_dry_run.json"
+    },
+    "8917": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8917_converter_row_completeness_collision_audit.json"
+    },
+    "8918": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8918_converter_key_mapping_init_policy_contract.json"
+    },
+    "8919": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8919_tokenizer_embedding_migration_policy_design.json"
+    },
+    "8920": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8920_checkpoint_materialization_noop_skeleton_design.json"
+    },
+    "8921": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8921_future_probe_artifact_path_policy.json"
+    },
+    "8922": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8922_cleanup_proof_no_overwrite_finalization.json"
+    },
+    "8923": {
+      "exists": true,
+      "passed": true,
+      "path": "runs/summaries/stage8923_future_probe_preflight_no_write_audit.json"
+    }
+  },
+  "stage": 8924,
+  "stage_name": "stage8924_training_readiness_blocker_matrix"
+}

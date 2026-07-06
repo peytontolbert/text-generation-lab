@@ -1,0 +1,41 @@
+{
+  "allowed_actions": [
+    "copy_exact",
+    "rename_copy",
+    "transpose_copy",
+    "split_gated_mlp",
+    "merge_or_ignore_positional_embedding",
+    "resize_embedding_rows",
+    "new_init",
+    "skip",
+    "blocked"
+  ],
+  "forbidden_in_this_stage": [
+    "torch_load",
+    "state_dict_load",
+    "read_binary_tensor_values",
+    "embedding_resize",
+    "checkpoint_write",
+    "model_forward",
+    "training_step"
+  ],
+  "required_fields": [
+    "source_key",
+    "target_key",
+    "source_artifact",
+    "source_shape",
+    "target_shape",
+    "dtype",
+    "action",
+    "status",
+    "provenance",
+    "notes"
+  ],
+  "required_statuses": [
+    "compatible",
+    "needs_migration",
+    "new_init_required",
+    "blocked"
+  ],
+  "schema_name": "agentkernel_lite_state_dict_shape_report_v1"
+}

@@ -1,0 +1,92 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "counterbalance_cells_recorded": true,
+    "each_shortcut_combo_has_counterbalance": true,
+    "neutral_features_recorded": true,
+    "registry_frontier_stage8963": true,
+    "source_manifest_not_trainable": true,
+    "source_stage8963_passed": true,
+    "template_rows_authority_closed": true,
+    "template_rows_non_trainable": true,
+    "trainability_gates_recorded": true
+  },
+  "counterbalance_cells": [
+    {
+      "breaks_combo": "decode_allowed+evidence_state",
+      "cell_id": "decode_allowed_true_evidence_missing_not_retrieve",
+      "required_target_variation": "non_retrieve_obligation_with_missing_evidence_marker_controlled",
+      "template_only": true
+    },
+    {
+      "breaks_combo": "decode_allowed+evidence_state",
+      "cell_id": "decode_allowed_false_evidence_direct_retrieve",
+      "required_target_variation": "retrieve_obligation_without_decode_permission_shortcut",
+      "template_only": true
+    },
+    {
+      "breaks_combo": "decoder_budget_ok+evidence_state",
+      "cell_id": "budget_bad_evidence_missing_not_boundary",
+      "required_target_variation": "missing_evidence_obligation_with_budget_bad_controlled",
+      "template_only": true
+    },
+    {
+      "breaks_combo": "decoder_budget_ok+evidence_state",
+      "cell_id": "budget_ok_evidence_direct_boundary_like",
+      "required_target_variation": "boundary_obligation_without_budget_bad_shortcut",
+      "template_only": true
+    }
+  ],
+  "decision": "Focused manifest counterbalance design is recorded as non-trainable templates only. Actual rows must be sourced or constructed later under a separate no-mining/audit gate before any trainability claim.",
+  "metrics": {
+    "actual_execution_authorized_next": false,
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "counterbalance_cells": 4,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_attempted": false,
+    "neutral_evidence_features": 6,
+    "runtime_authorized_flag": false,
+    "template_rows": 4,
+    "trainability_gates": 8,
+    "trainable_rows": 0,
+    "training_authorized": false
+  },
+  "neutral_evidence_features": [
+    "has_visible_goal_constraint",
+    "has_evidence_sufficiency_reason",
+    "has_budget_reason_not_label",
+    "has_surface_independent_task_description",
+    "has_non_label_failure_signal",
+    "has_expected_action_rationale"
+  ],
+  "source_stage": 8963,
+  "stage": 8964,
+  "stage_name": "stage8964_focused_manifest_counterbalance_design_no_mining",
+  "status": "COUNTERBALANCE_DESIGN_NO_MINING",
+  "trainability_gates": [
+    "strongest_single_feature_exact_below_0_8",
+    "strongest_combo_feature_exact_below_0_8",
+    "majority_baseline_recorded",
+    "counterbalance_cells_present",
+    "neutral_evidence_features_present",
+    "counterfactual_obligations_complete",
+    "authority_rows_zero",
+    "decoder_denoise_runtime_losses_closed_until_authorized"
+  ]
+}
