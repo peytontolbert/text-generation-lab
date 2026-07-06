@@ -2292,3 +2292,7 @@ Stage8972 designs the future real-data preflight around /arxiv/datasets and /arx
 ## Stage8973 Arxiv Metadata-Only Preflight
 
 Stage8973 performs the first protected metadata-only /arxiv preflight. It inventories file and top-level repository metadata only and keeps data-row reading, source-body reading, mining, and training closed.
+
+## Stage8974 Metadata Inventory Route Selector
+
+Stage8974 routes Stage8973 metadata inventory entries into candidate dataset/repository buckets without touching /arxiv or reading bodies. It keeps mining and training closed.
