@@ -19,6 +19,7 @@ from long_context_chunk_catalog import build_chunk_catalog
 from long_context_entity_linker import build_entities
 from long_context_program_builder import build_programs
 from long_context_relation_graph_builder import build_relation_graph
+from long_context_candidate_miner import CandidateMiningSafetyError, mine_candidates, validate_candidate_mining_request
 from long_context_example_renderer import render_examples
 from long_context_shortcut_audit import audit_examples
 
@@ -171,3 +172,53 @@ def test_production_parquet_index_requires_explicit_corpus_scan_flag(tmp_path: P
     )
     assert card['checks']['allow_corpus_scan_flag'] is True
     assert card['output_under_arxiv'] is False
+
+
+
+
+def test_candidate_miner_requires_explicit_real_index_flags(tmp_path: Path) -> None:
+    try:
+        validate_candidate_mining_request(
+            index_dir=Path('/arxiv/long_context_transition_index/slice_0006_paper_repo'),
+            output=Path('/arxiv/long_context_transition_index/slice_0006_paper_repo/candidates.jsonl'),
+            allow_candidate_mining=False,
+            allow_arxiv_output=False,
+        )
+    except CandidateMiningSafetyError as exc:
+        message = str(exc)
+    else:  # pragma: no cover
+        raise AssertionError('unguarded candidate mining request was accepted')
+    assert 'allow_candidate_mining_flag' in message
+    assert 'arxiv_output_requires_explicit_output_flag' in message
+
+    card = validate_candidate_mining_request(
+        index_dir=tmp_path / 'fixture_index',
+        output=tmp_path / 'candidates.jsonl',
+        allow_candidate_mining=True,
+        allow_arxiv_output=False,
+    )
+    assert card['checks']['allow_candidate_mining_flag'] is True
+    assert card['output_under_arxiv'] is False
+
+
+def test_candidate_miner_from_parquet_index(tmp_path: Path) -> None:
+    if importlib.util.find_spec("pyarrow") is None:
+        return
+    papers, repos, datasets = _make_tree(tmp_path / "cand_inputs")
+    out = tmp_path / "cand_out"
+    source_summary = build_chunk_and_mention_shards(
+        paper_roots=[papers],
+        repo_roots=[repos],
+        dataset_roots=[],
+        output_dir=out,
+        paper_chunk_tokens=64,
+        repo_chunk_tokens=64,
+        trace_chunk_tokens=64,
+        rows_per_shard=2,
+    )
+    assert source_summary["chunk_count"] >= 2
+    build_entities_with_pyarrow(output_dir=out, min_mention_count=2, max_chunk_frequency_ratio=1.0)
+    build_links_with_pyarrow(output_dir=out, max_pairwise_mentions_per_entity=8)
+    candidates, summary = mine_candidates(index_dir=out, max_candidates=10, required_source_types=("paper", "repo"))
+    assert candidates
+    assert summary["candidate_count"] == len(candidates)

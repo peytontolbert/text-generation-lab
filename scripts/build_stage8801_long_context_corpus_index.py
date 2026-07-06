@@ -347,8 +347,16 @@ def build_links_with_pyarrow(*, output_dir: Path, max_pairwise_mentions_per_enti
     return summary
 
 
+CORPUS_PROFILES = {
+    'mixed_all': {'include_papers': True, 'include_repos': True, 'include_datasets': True},
+    'paper_repo_core': {'include_papers': True, 'include_repos': True, 'include_datasets': False},
+    'dataset_traces': {'include_papers': False, 'include_repos': False, 'include_datasets': True},
+}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description='Build a production-grade long-context corpus index with sharded Parquet outputs.')
+    parser.add_argument('--profile', choices=sorted(CORPUS_PROFILES), default='mixed_all')
     parser.add_argument('--papers-root', action='append', type=Path, default=[])
     parser.add_argument('--repos-root', action='append', type=Path, default=[])
     parser.add_argument('--datasets-root', action='append', type=Path, default=[])
@@ -366,11 +374,16 @@ def main() -> None:
     parser.add_argument('--allow-arxiv-output', action='store_true', help='Required before writing the index under /arxiv.')
     args = parser.parse_args()
 
+    profile = CORPUS_PROFILES[args.profile]
+    paper_roots = args.papers_root if profile['include_papers'] else []
+    repo_roots = args.repos_root if profile['include_repos'] else []
+    dataset_roots = args.datasets_root if profile['include_datasets'] else []
+
     out = args.output_dir
     validate_corpus_index_request(
-        paper_roots=args.papers_root,
-        repo_roots=args.repos_root,
-        dataset_roots=args.datasets_root,
+        paper_roots=paper_roots,
+        repo_roots=repo_roots,
+        dataset_roots=dataset_roots,
         output_dir=out,
         allow_corpus_scan=args.allow_corpus_scan,
         allow_arxiv_output=args.allow_arxiv_output,
@@ -378,9 +391,9 @@ def main() -> None:
     out.mkdir(parents=True, exist_ok=True)
 
     source_summary = build_chunk_and_mention_shards(
-        paper_roots=args.papers_root,
-        repo_roots=args.repos_root,
-        dataset_roots=args.datasets_root,
+        paper_roots=paper_roots,
+        repo_roots=repo_roots,
+        dataset_roots=dataset_roots,
         output_dir=out,
         paper_chunk_tokens=args.paper_chunk_tokens,
         repo_chunk_tokens=args.repo_chunk_tokens,
@@ -393,6 +406,7 @@ def main() -> None:
     link_summary = build_links_with_pyarrow(output_dir=out, max_pairwise_mentions_per_entity=args.max_pairwise_mentions_per_entity)
 
     write_json(out / 'index_summary.json', {
+        'profile': args.profile,
         'source_summary': source_summary,
         'entity_summary': entity_summary,
         'link_summary': link_summary,

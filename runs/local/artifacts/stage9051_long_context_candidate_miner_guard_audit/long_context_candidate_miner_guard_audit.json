@@ -1,0 +1,46 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "candidate_miner_has_guard_terms": true,
+    "candidate_miner_present": true,
+    "candidate_miner_validates_before_mining": true,
+    "candidate_mining_docs_mark_future_gate": true,
+    "candidate_mining_docs_show_required_flags": true,
+    "source_stage9050_passed": true,
+    "source_stage9050_present": true
+  },
+  "decision": "Preserve the candidate miner, but require explicit future source/output authorization before reading real long-context indexes or writing candidates under /arxiv.",
+  "forbidden_now": [
+    "run_candidate_mining",
+    "read_arxiv_index",
+    "write_candidates_under_arxiv",
+    "upload_hf",
+    "train_model"
+  ],
+  "metrics": {
+    "arxiv_candidate_write_authorized_now": false,
+    "arxiv_index_read_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "candidate_miner_guard_audit_only": true,
+    "candidate_mining_executed_now": false,
+    "hf_upload_authorized_now": false,
+    "model_execution_attempted": false,
+    "training_authorized": false
+  },
+  "stage": 9051,
+  "stage_name": "stage9051_long_context_candidate_miner_guard_audit",
+  "status": "LONG_CONTEXT_CANDIDATE_MINER_GUARD_AUDIT_NO_MINING"
+}

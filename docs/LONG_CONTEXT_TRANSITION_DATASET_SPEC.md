@@ -310,3 +310,22 @@ Expected summaries after a future authorized run:
 - `entity_aliases.json`
 - `links_summary.json`
 - `index_summary.json`
+
+
+Corpus profiles:
+
+- `mixed_all`: papers + repos + datasets
+- `paper_repo_core`: papers + repos only
+- `dataset_traces`: datasets only
+
+Candidate mining entrypoint:
+
+```bash
+python scripts/long_context_candidate_miner.py \
+  --index-dir /arxiv/long_context_transition_index/slice_0006_paper_repo \
+  --output /arxiv/long_context_transition_index/slice_0006_paper_repo/candidates.jsonl \
+  --allow-candidate-mining \
+  --allow-arxiv-output
+```
+
+Candidate mining from `/arxiv` remains future-gated. The flags above are only valid after a separate active source/output ticket authorizes the specific index and output path.
