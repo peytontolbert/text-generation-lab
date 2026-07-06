@@ -1,0 +1,83 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "baselines": {
+    "adapter_status->all_gate_status_passed": 1.0,
+    "adapter_status->any_loss_enabled": 1.0,
+    "adapter_status->route": 1.0,
+    "semantic_key->all_gate_status_passed": 1.0,
+    "semantic_key->any_loss_enabled": 1.0,
+    "semantic_key->route": 1.0,
+    "source_manifest_family->all_gate_status_passed": 1.0,
+    "source_manifest_family->any_loss_enabled": 1.0,
+    "source_manifest_family->route": 1.0,
+    "source_ref_id->all_gate_status_passed": 1.0,
+    "source_ref_id->any_loss_enabled": 1.0,
+    "source_ref_id->route": 1.0,
+    "split->all_gate_status_passed": 1.0,
+    "split->any_loss_enabled": 1.0,
+    "split->route": 1.0
+  },
+  "checks": {
+    "all_gate_status_not_passed": true,
+    "all_loss_masks_closed": true,
+    "all_rows_route_needs_human_review": true,
+    "audit_interpreted_as_nontraining_only": true,
+    "authority_counts_zero": true,
+    "shortcut_baselines_recorded": true,
+    "source_stage9048_passed": true,
+    "source_stage9048_present": true,
+    "synthetic_rows_present": true
+  },
+  "decision": "Synthetic adapter rows are intentionally shortcut-solvable because every row is blocked; this audit proves they are nontraining fixtures only, not model-quality evidence.",
+  "features_audited": [
+    "source_manifest_family",
+    "source_ref_id",
+    "semantic_key",
+    "split",
+    "adapter_status"
+  ],
+  "forbidden_now": [
+    "treat_synthetic_shortcut_result_as_training_quality",
+    "train_on_synthetic_adapter_rows",
+    "materialize_real_rows",
+    "scan_arxiv",
+    "scan_repository_library",
+    "run_model"
+  ],
+  "metrics": {
+    "arxiv_scan_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "baseline_count": 15,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "max_baseline_exact": 1.0,
+    "model_execution_attempted": false,
+    "real_rows_materialized_now": false,
+    "repository_library_scan_authorized_now": false,
+    "shortcut_audit_only": true,
+    "synthetic_rows": 4,
+    "synthetic_rows_trainable": false,
+    "training_authorized": false,
+    "training_quality_claim_allowed": false
+  },
+  "stage": 9049,
+  "stage_name": "stage9049_domain_twin_synthetic_shortcut_audit",
+  "status": "DOMAIN_TWIN_SYNTHETIC_SHORTCUT_AUDIT_NO_TRAINING",
+  "targets_audited": [
+    "route",
+    "any_loss_enabled",
+    "all_gate_status_passed"
+  ]
+}

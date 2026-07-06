@@ -135,7 +135,7 @@ def test_production_parquet_index_writes_outputs(tmp_path: Path) -> None:
     assert list((out / "chunks").glob("*.parquet"))
     assert list((out / "chunk_mentions").glob("*.parquet"))
 
-    entity_summary = build_entities_with_pyarrow(output_dir=out, min_mention_count=2)
+    entity_summary = build_entities_with_pyarrow(output_dir=out, min_mention_count=2, max_chunk_frequency_ratio=1.0)
     assert entity_summary["entity_count"] >= 1
     assert list((out / "entities").glob("*.parquet"))
 

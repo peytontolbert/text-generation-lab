@@ -1,0 +1,68 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "chunk_catalog_passes_context": true,
+    "common_extract_terms_accepts_context": true,
+    "common_has_noise_filter_terms": true,
+    "corpus_index_guard_still_present": true,
+    "corpus_index_has_high_frequency_entity_cap": true,
+    "corpus_index_passes_context": true,
+    "entity_linker_passes_context": true,
+    "source_stage9042_passed": true,
+    "source_stage9042_present": true
+  },
+  "decision": "Preserve source/modality-aware term-noise filtering for long-context indexing while keeping corpus scans, Parquet writes, HF upload, and training closed.",
+  "forbidden_now": [
+    "run_corpus_index",
+    "scan_arxiv",
+    "scan_repository_library",
+    "write_parquet_under_arxiv",
+    "upload_hf",
+    "train_model"
+  ],
+  "keep_examples": [
+    "retrieval",
+    "verifier",
+    "symbolic",
+    "counterfactual",
+    "regression"
+  ],
+  "metrics": {
+    "arxiv_scan_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "corpus_index_executed_now": false,
+    "hf_upload_authorized_now": false,
+    "high_frequency_entity_cap_recorded": true,
+    "keep_examples": 5,
+    "model_execution_attempted": false,
+    "noise_examples": 6,
+    "parquet_written_now": false,
+    "repository_library_scan_authorized_now": false,
+    "term_filter_audit_only": true,
+    "training_authorized": false
+  },
+  "noise_examples": [
+    "timestamp",
+    "payload",
+    "response_item",
+    "model_provider",
+    "token_count",
+    "source_id"
+  ],
+  "stage": 9050,
+  "stage_name": "stage9050_long_context_term_noise_filter_audit",
+  "status": "LONG_CONTEXT_TERM_NOISE_FILTER_AUDIT_NO_DATA_SCAN"
+}

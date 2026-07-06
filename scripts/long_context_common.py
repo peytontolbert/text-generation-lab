@@ -13,39 +13,26 @@ from typing import Any, Iterable, Iterator, Mapping
 TOKEN_RE = re.compile(r"[A-Za-z0-9_./:-]+")
 WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9_\-]{2,}")
 STOPWORDS = {
-    "the",
-    "and",
-    "for",
-    "with",
-    "from",
-    "that",
-    "this",
-    "into",
-    "your",
-    "have",
-    "will",
-    "would",
-    "about",
-    "their",
-    "there",
-    "which",
-    "when",
-    "where",
-    "while",
-    "using",
-    "used",
-    "into",
-    "than",
-    "then",
-    "what",
-    "only",
-    "because",
-    "been",
-    "being",
-    "were",
-    "they",
-    "them",
-    "across",
+    "the", "and", "for", "with", "from", "that", "this", "into", "your", "have", "will", "would",
+    "about", "their", "there", "which", "when", "where", "while", "using", "used", "than", "then",
+    "what", "only", "because", "been", "being", "were", "they", "them", "across", "are", "can",
+    "our", "not", "such", "all", "set", "has", "these", "between", "let", "each", "two", "three",
+    "four", "five", "more", "most", "other", "some", "many", "into", "also", "than", "over", "under",
+}
+GENERIC_CORPUS_TERMS = {
+    "paper", "papers", "section", "source", "text", "system", "systems", "data", "value", "based",
+    "method", "methods", "analysis", "standard", "time", "path", "file", "model", "models", "result",
+    "results", "approach", "approaches", "framework", "storage", "market", "technology", "frequency",
+}
+STRUCTURED_NOISE_TERMS = {
+    "timestamp", "payload", "response_item", "turn_id", "session_meta", "event_msg", "call_id", "tool_call",
+    "message", "messages", "content", "input_text", "output_text", "jsonl", "null", "true", "false",
+    "type", "types", "role", "roles", "phase", "model_provider", "cli_version", "source_id", "doc_id",
+    "paper_chunk", "pdf_path", "pdfs", "meta", "arxiv", "domains", "workspace", "user", "assistant",
+    "developer", "commentary", "final", "reasoning", "token_count", "cached_input_tokens", "output_tokens",
+    "used_percent", "window_minutes", "resets_at", "skills", "skill", "codex", "app", "apps", "html",
+    "const", "var", "function", "functions", "files", "metadata", "name", "title", "work", "code",
+    "cli", "tool", "tools", "repo", "repos", "prompt", "prompts", "agent", "agents",
 }
 
 
@@ -122,20 +109,9 @@ def modality_from_suffix(path: Path) -> str:
 
 def language_from_suffix(path: Path) -> str | None:
     mapping = {
-        ".py": "python",
-        ".js": "javascript",
-        ".jsx": "javascript",
-        ".ts": "typescript",
-        ".tsx": "typescript",
-        ".java": "java",
-        ".go": "go",
-        ".rs": "rust",
-        ".c": "c",
-        ".cc": "cpp",
-        ".cpp": "cpp",
-        ".h": "c",
-        ".hpp": "cpp",
-        ".sh": "shell",
+        ".py": "python", ".js": "javascript", ".jsx": "javascript", ".ts": "typescript", ".tsx": "typescript",
+        ".java": "java", ".go": "go", ".rs": "rust", ".c": "c", ".cc": "cpp", ".cpp": "cpp",
+        ".h": "c", ".hpp": "cpp", ".sh": "shell",
     }
     return mapping.get(path.suffix.lower())
 
@@ -174,11 +150,31 @@ def chunk_text(text: str, *, max_tokens: int) -> list[str]:
     return [chunk for chunk in out if chunk]
 
 
-def extract_terms(text: str, *, max_terms: int = 32) -> list[str]:
+def should_keep_term(term: str, *, source_type: str | None = None, modality: str | None = None) -> bool:
+    lower = term.lower().strip()
+    if len(lower) < 3:
+        return False
+    if lower in STOPWORDS or lower in GENERIC_CORPUS_TERMS:
+        return False
+    if lower in STRUCTURED_NOISE_TERMS:
+        return False
+    if lower.isdigit():
+        return False
+    if lower.startswith(("call_", "turn_", "msg_", "tok_", "chunk_")):
+        return False
+    if lower.endswith(("_id", "_ids", "_json", "_jsonl", "_count", "_tokens")):
+        return False
+    if source_type == "dataset" or modality == "structured_text":
+        if lower in {"input", "output", "command", "commands", "args", "argument", "arguments", "session", "sessions", "tool", "tools", "status", "system", "chat", "instruction", "instructions"}:
+            return False
+    return True
+
+
+def extract_terms(text: str, *, max_terms: int = 32, source_type: str | None = None, modality: str | None = None) -> list[str]:
     counts: Counter[str] = Counter()
     for token in WORD_RE.findall(text or ""):
         lower = token.lower()
-        if lower in STOPWORDS:
+        if not should_keep_term(lower, source_type=source_type, modality=modality):
             continue
         counts[lower] += 1
     return [term for term, _ in counts.most_common(max_terms)]
@@ -214,8 +210,10 @@ def choose_distractors(
 def infer_entity_type(name: str, source_types: Iterable[str]) -> str:
     joined = " ".join(source_types)
     lower = name.lower()
-    if any(tag in lower for tag in {"error", "failure", "exception"}):
+    if any(tag in lower for tag in {"error", "failure", "exception", "regression"}):
         return "failure_type"
+    if lower in {"benchmark", "benchmarks", "mmlu", "swebench", "swe"}:
+        return "benchmark_term"
     if "repo" in joined:
         return "symbol_or_repo_term"
     if "paper" in joined:

@@ -39,9 +39,9 @@ def chunk_row(
         "title": path.stem if source_type == "paper" else None,
         "symbol_names": [],
         "imports": [],
-        "method_terms": extract_terms(text, max_terms=8),
+        "method_terms": extract_terms(text, max_terms=8, source_type=source_type, modality=modality_from_suffix(path)),
         "benchmark_terms": [],
-        "error_terms": [term for term in extract_terms(text, max_terms=12) if "error" in term or "fail" in term],
+        "error_terms": [term for term in extract_terms(text, max_terms=12, source_type=source_type, modality=modality_from_suffix(path)) if "error" in term or "fail" in term],
     }
     return {
         "chunk_id": stable_id(source_type, source_id, rel, str(chunk_index)),

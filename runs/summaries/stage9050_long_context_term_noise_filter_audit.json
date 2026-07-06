@@ -1,0 +1,51 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9050_long_context_term_noise_filter_audit/long_context_term_noise_filter_audit.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-06T18:17:44Z",
+  "decision": "Preserve source/modality-aware term-noise filtering for long-context indexing while keeping corpus scans, Parquet writes, HF upload, and training closed.",
+  "metrics": {
+    "arxiv_scan_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "corpus_index_executed_now": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "hf_upload_authorized_now": false,
+    "high_frequency_entity_cap_recorded": true,
+    "keep_examples": 5,
+    "model_execution_attempted": false,
+    "model_execution_authorized_next": false,
+    "noise_examples": 6,
+    "parquet_written_now": false,
+    "promotion_ready": false,
+    "repository_library_scan_authorized_now": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "term_filter_audit_only": true,
+    "training_authorized": false
+  },
+  "next_best_step": "Keep long-context indexing in guarded fixture mode. Real corpus indexing still requires a separate active source/output ticket.",
+  "passed": true,
+  "stage": 9050,
+  "stage_name": "stage9050_long_context_term_noise_filter_audit"
+}

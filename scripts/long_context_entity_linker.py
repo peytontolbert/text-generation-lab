@@ -11,7 +11,7 @@ from long_context_common import extract_terms, infer_entity_type, read_jsonl, st
 def build_entities(chunks: list[dict[str, Any]], *, min_mention_count: int = 2, max_terms_per_chunk: int = 16) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     mentions: dict[str, list[dict[str, str]]] = defaultdict(list)
     for chunk in chunks:
-        candidates = set(extract_terms(chunk.get("text", ""), max_terms=max_terms_per_chunk))
+        candidates = set(extract_terms(chunk.get("text", ""), max_terms=max_terms_per_chunk, source_type=str(chunk.get("source_type") or ""), modality=str(chunk.get("modality") or "")))
         meta = chunk.get("metadata", {})
         for field in ("method_terms", "benchmark_terms", "error_terms", "symbol_names"):
             value = meta.get(field)

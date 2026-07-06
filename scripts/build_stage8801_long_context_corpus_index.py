@@ -118,9 +118,9 @@ def _chunk_row(*, source_root: Path, path: Path, chunk_index: int, text: str) ->
         'title': path.stem if source_type == 'paper' else None,
         'symbol_names': [],
         'imports': [],
-        'method_terms': extract_terms(text, max_terms=8),
+        'method_terms': extract_terms(text, max_terms=8, source_type=source_type, modality=modality_from_suffix(path)),
         'benchmark_terms': [],
-        'error_terms': [term for term in extract_terms(text, max_terms=12) if 'error' in term or 'fail' in term],
+        'error_terms': [term for term in extract_terms(text, max_terms=12, source_type=source_type, modality=modality_from_suffix(path)) if 'error' in term or 'fail' in term],
     }
     return {
         'chunk_id': stable_id(source_type, source_id, rel, str(chunk_index)),
@@ -137,7 +137,7 @@ def _chunk_row(*, source_root: Path, path: Path, chunk_index: int, text: str) ->
 
 def _mention_rows(chunk: dict[str, Any]) -> list[dict[str, Any]]:
     metadata = json.loads(chunk['metadata_json'])
-    candidates = set(extract_terms(chunk.get('text', ''), max_terms=16))
+    candidates = set(extract_terms(chunk.get('text', ''), max_terms=16, source_type=str(chunk.get('source_type') or ''), modality=str(chunk.get('modality') or '')))
     for field in ('method_terms', 'benchmark_terms', 'error_terms', 'symbol_names'):
         value = metadata.get(field)
         if isinstance(value, list):
@@ -231,8 +231,10 @@ def build_chunk_and_mention_shards(
     return summary
 
 
-def build_entities_with_pyarrow(*, output_dir: Path, min_mention_count: int = 2) -> dict[str, Any]:
+def build_entities_with_pyarrow(*, output_dir: Path, min_mention_count: int = 2, max_chunk_frequency_ratio: float = 0.05) -> dict[str, Any]:
     mentions = _read_parquet_rows(output_dir / 'chunk_mentions')
+    chunks = _read_parquet_rows(output_dir / 'chunks')
+    total_chunk_count = max(1, len(chunks))
     by_term: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in mentions:
         by_term[str(row['term'])].append(row)
@@ -241,6 +243,8 @@ def build_entities_with_pyarrow(*, output_dir: Path, min_mention_count: int = 2)
     for term, rows in sorted(by_term.items()):
         chunk_ids = sorted({str(row['chunk_id']) for row in rows})
         if len(chunk_ids) < min_mention_count:
+            continue
+        if len(chunk_ids) / total_chunk_count > max_chunk_frequency_ratio:
             continue
         counts = Counter(str(row['source_type']) for row in rows)
         entity_rows.append({
@@ -259,6 +263,7 @@ def build_entities_with_pyarrow(*, output_dir: Path, min_mention_count: int = 2)
     summary = {
         'entity_count': len(entity_rows),
         'min_mention_count': min_mention_count,
+        'max_chunk_frequency_ratio': max_chunk_frequency_ratio,
         'top_entities': [
             {'canonical_name': row['canonical_name'], 'mention_count': row['mention_count']}
             for row in sorted(entity_rows, key=lambda item: (-int(item['mention_count']), item['canonical_name']))[:20]
@@ -355,6 +360,7 @@ def main() -> None:
     parser.add_argument('--max-chars-per-file', type=int, default=120000)
     parser.add_argument('--rows-per-shard', type=int, default=5000)
     parser.add_argument('--min-mention-count', type=int, default=2)
+    parser.add_argument('--max-chunk-frequency-ratio', type=float, default=0.05)
     parser.add_argument('--max-pairwise-mentions-per-entity', type=int, default=64)
     parser.add_argument('--allow-corpus-scan', action='store_true', help='Required for any real corpus scan, including /arxiv or repository_library roots.')
     parser.add_argument('--allow-arxiv-output', action='store_true', help='Required before writing the index under /arxiv.')
@@ -383,7 +389,7 @@ def main() -> None:
         max_chars_per_file=args.max_chars_per_file,
         rows_per_shard=args.rows_per_shard,
     )
-    entity_summary = build_entities_with_pyarrow(output_dir=out, min_mention_count=args.min_mention_count)
+    entity_summary = build_entities_with_pyarrow(output_dir=out, min_mention_count=args.min_mention_count, max_chunk_frequency_ratio=args.max_chunk_frequency_ratio)
     link_summary = build_links_with_pyarrow(output_dir=out, max_pairwise_mentions_per_entity=args.max_pairwise_mentions_per_entity)
 
     write_json(out / 'index_summary.json', {
