@@ -80,13 +80,13 @@ def build_design(registry: dict[str, Any]) -> dict[str, Any]:
         "long_context_outputs_added": {"long_context_gate_input_audit.json", "route_to_trainer_loss_translation_audit.json"}.issubset(set(outputs)),
         "stage9064_training_still_blocked": (source_9064.get("metrics") or {}).get("training_ready") is False,
         "authority_counts_zero": not any(((registry.get("metrics") or {}).get("authority_counts") or {}).get(key, 0) for key in AUTHORITY_CLOSED),
-        "registry_frontier_stage9064": int((registry.get("metrics") or {}).get("latest_stage", -1)) == 9064,
+        "registry_frontier_stage9064_or_followup": int((registry.get("metrics") or {}).get("latest_stage", -1)) in {9064, STAGE, 9066},
     }
     return {
         "stage": STAGE,
         "stage_name": NAME,
         "status": "TRAINER_DRY_RUN_INPUT_REFRESH_NO_EXECUTION",
-        "future_required_inputs": FUTURE_DRY_RUN_INPUTS,
+        "future_required_inputs": list(FUTURE_DRY_RUN_INPUTS),
         "dry_run_flags": list(DRY_RUN_FLAGS),
         "required_assertions": assertions,
         "required_outputs": outputs,
@@ -118,7 +118,7 @@ def validate_design(card: dict[str, Any], registry: dict[str, Any]) -> list[str]
     if any((card.get("authority") or {}).values()):
         failures.append("authority_open")
     latest = int((registry.get("metrics") or {}).get("latest_stage", -1))
-    if latest not in {9064, STAGE}:
+    if latest not in {9064, STAGE, 9066}:
         failures.append(f"unexpected_registry_frontier:{latest}")
     for required in REQUIRED_LONG_CONTEXT_INPUTS:
         if required not in card.get("future_required_inputs", []):

@@ -1,0 +1,97 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_failures": [],
+  "checks": {
+    "all_long_context_assertions_covered": true,
+    "all_long_context_inputs_covered": true,
+    "authority_closed": true,
+    "base_design_passes": true,
+    "negative_cases_rejected": true,
+    "no_model_forward": true,
+    "no_trainer_execution": true,
+    "source_stage9065_passed": true,
+    "source_stage9065_present": true
+  },
+  "decision": "Trainer dry-run input negative cases are rejected; missing long-context inputs, missing loss-translation assertions, execution flags, and authority reopen attempts remain blocked.",
+  "failures": [],
+  "metrics": {
+    "model_execution_attempted": false,
+    "model_forward_attempted": false,
+    "model_weights_loaded": false,
+    "negative_cases": 9,
+    "negative_cases_rejected": 9,
+    "trainer_dry_run_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authority_open_model_execution": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "missing_long_context_handoff_input": {
+      "failures": [
+        "missing_long_context_input:long_context_compiler_handoff_blocker_audit.json"
+      ],
+      "rejected": true
+    },
+    "missing_long_context_loss_mask_input": {
+      "failures": [
+        "missing_long_context_input:long_context_loss_mask_compiler_preflight.json"
+      ],
+      "rejected": true
+    },
+    "missing_route_to_trainer_loss_assertion": {
+      "failures": [
+        "missing_long_context_assertion:route_to_trainer_loss_translation_blocks_decoder_denoise_runtime"
+      ],
+      "rejected": true
+    },
+    "model_forward_attempted": {
+      "failures": [
+        "model_forward_attempted"
+      ],
+      "rejected": true
+    },
+    "model_weights_loaded": {
+      "failures": [
+        "model_weights_loaded"
+      ],
+      "rejected": true
+    },
+    "trainer_dry_run_executed_now": {
+      "failures": [
+        "trainer_dry_run_executed_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    },
+    "unexpected_registry_frontier": {
+      "failures": [
+        "unexpected_registry_frontier:9999"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "stage": 9066,
+  "stage_name": "stage9066_trainer_dry_run_input_negative_case_audit"
+}
