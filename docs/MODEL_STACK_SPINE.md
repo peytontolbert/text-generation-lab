@@ -2422,3 +2422,8 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 - Writes only a proposed duplicate-resolution alias diff artifact; does not apply it to the registry.
 - Preserves original rows, summaries, artifacts, authority flags, and passed status.
 - Keeps training, mining, model execution, runtime, Gemma, harness scoring, decoder CE, denoise CE, and /arxiv writes closed.
+
+## Stage9014 Duplicate Resolution Preview Review Gate
+- Reviews the proposed duplicate-resolution alias diff and verifies all operations are metadata-only.
+- Does not apply the diff, write the registry, delete rows, delete artifacts, or open execution authority.
+- Leaves the active training path closed until a separate decision returns to manifest-input materialization.
