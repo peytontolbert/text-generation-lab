@@ -1,0 +1,109 @@
+{
+  "allowed_zero_row_operations": [
+    "read_stage8974_metadata_route_card",
+    "select_candidate_paths_from_metadata_only",
+    "for_parquet_read_footer_schema_only_if_future_ticket_explicitly_authorizes",
+    "for_jsonl_read_zero_bytes_or_compression_container_metadata_only",
+    "for_json_metadata_read_top_level_keys_only_if_file_is_declared_metadata_not_dataset_rows",
+    "write_schema_preflight_outputs_under_runs_local_artifacts_only"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "available_route_counts": {
+    "json_metadata_candidates": 21,
+    "jsonl_candidates": 85,
+    "named_software_maintainer_dataset_candidates": 284,
+    "parquet_candidates": 2291
+  },
+  "candidate_limits": {
+    "json_metadata_candidates": 0,
+    "jsonl_candidates": 0,
+    "named_software_maintainer_dataset_candidates": 20,
+    "parquet_candidates": 20
+  },
+  "checks": {
+    "allowed_operations_declared": true,
+    "authority_counts_zero": true,
+    "candidate_limits_declared": true,
+    "dataset_route_card_present": true,
+    "forbidden_operations_declared": true,
+    "future_outputs_declared": true,
+    "future_pass_gates_declared": true,
+    "jsonl_candidates_planned_zero": true,
+    "no_dataset_rows_loaded": true,
+    "no_repository_source_bodies_loaded": true,
+    "no_schema_or_header_read_performed": true,
+    "registry_frontier_stage8975_or_8976": true,
+    "route_counts_available": true,
+    "source_stage8975_passed": true,
+    "training_and_mining_closed": true
+  },
+  "decision": "Zero-row schema/header preflight is designed but not executed. Future schema work must select candidates from metadata only and must not read dataset records or repository source bodies.",
+  "forbidden_zero_row_operations": [
+    "read_any_dataset_record",
+    "read_jsonl_first_line",
+    "read_csv_header_without_explicit_ticket",
+    "read_repository_source_body",
+    "write_to_arxiv",
+    "delete_or_cleanup_arxiv",
+    "start_mining",
+    "start_training",
+    "load_checkpoint",
+    "runtime_execution",
+    "network_upload"
+  ],
+  "future_pass_gates": [
+    "selected_paths_from_stage8974_metadata_only",
+    "dataset_records_read_equals_0",
+    "repository_source_bodies_read_equals_0",
+    "arxiv_writes_equals_0",
+    "schema_outputs_under_runs_local_artifacts",
+    "training_and_mining_authority_closed",
+    "explicit_ticket_required_for_any_parquet_footer_access"
+  ],
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "available_jsonl_candidates": 85,
+    "available_named_candidates": 284,
+    "available_parquet_candidates": 2291,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_attempted": false,
+    "network_upload_performed": false,
+    "planned_jsonl_candidates": 0,
+    "planned_named_candidates": 20,
+    "planned_parquet_candidates": 20,
+    "repository_source_bodies_loaded": false,
+    "runtime_authorized_flag": false,
+    "schema_or_header_read_performed": false,
+    "training_authorized": false
+  },
+  "planned_selection_counts": {
+    "json_metadata_candidates": 0,
+    "jsonl_candidates": 0,
+    "named_software_maintainer_dataset_candidates": 20,
+    "parquet_candidates": 20
+  },
+  "required_future_outputs": [
+    "selected_schema_candidate_paths.jsonl",
+    "zero_row_schema_policy_card.json",
+    "schema_extraction_result_metadata_only.jsonl",
+    "schema_preflight_decision_card.json"
+  ],
+  "stage": 8976,
+  "stage_name": "stage8976_zero_row_schema_preflight_design",
+  "status": "ZERO_ROW_SCHEMA_PREFLIGHT_DESIGN"
+}

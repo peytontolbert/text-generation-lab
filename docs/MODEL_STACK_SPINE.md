@@ -2300,3 +2300,7 @@ Stage8974 routes Stage8973 metadata inventory entries into candidate dataset/rep
 ## Stage8975 Metadata Route Selector Audit
 
 Stage8975 audits metadata route selector outputs and records requirements for a future zero-row schema/header preflight. It keeps row/body reads, mining, and training closed.
+
+## Stage8976 Zero-Row Schema Preflight Design
+
+Stage8976 designs a future zero-row schema/header preflight. It performs no schema/header reads itself and keeps row/source-body reads, mining, and training closed.
