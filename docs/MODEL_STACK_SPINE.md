@@ -2276,3 +2276,7 @@ Stage8968 records a no-network backup authorization review card. Git add/commit/
 ## Stage8969 GitHub Backup Push Result
 
 Stage8969 records that the recovery branch was pushed to GitHub and that draft PR creation is blocked by unrelated branch history. The branch is a backup branch, not a merge proposal.
+
+## Stage8970 Training Pipeline Module Gap Matrix
+
+Stage8970 inventories recovered support modules for the 100M training pipeline. The module surface is mostly present, but training remains closed pending no-execution trainer contract reconciliation and real-data preflight.
