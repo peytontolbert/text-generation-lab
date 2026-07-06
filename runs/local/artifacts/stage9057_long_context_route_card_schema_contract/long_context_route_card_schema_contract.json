@@ -1,0 +1,70 @@
+{
+  "allowed_routes": [
+    "CANDIDATE_REVIEW_ONLY",
+    "NEEDS_HUMAN_REVIEW",
+    "NEEDS_SOURCE_TICKET",
+    "NEEDS_JUDGE",
+    "NEEDS_SHORTCUT_AUDIT",
+    "KEEP_STRUCTURED_AFTER_GATES",
+    "HOLD_LONG_OUTPUT",
+    "DROP_NOISY_SOURCE"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "closed_default_loss_mask": {
+    "decoder_ce": false,
+    "denoise_ce": false,
+    "retrieval_loss": false,
+    "runtime_reward": false,
+    "structured_aux_ce": false
+  },
+  "compiler_ready_rule": "compiler_ready may become true only after all required gates pass, authority remains closed for training, and losses_enabled is explicitly audited",
+  "decoder_ce_rule": "decoder_ce remains false unless a future bounded-decoder ticket, target-budget audit, judge card, and loss-mask audit pass",
+  "denoise_ce_rule": "denoise_ce remains false unless a separate repair-denoise ticket and verifier-feedback manifest pass",
+  "loss_keys": [
+    "structured_aux_ce",
+    "decoder_ce",
+    "denoise_ce",
+    "retrieval_loss",
+    "runtime_reward"
+  ],
+  "required_fields": [
+    "route_card_id",
+    "candidate_id",
+    "source_ticket_id",
+    "source_lineage",
+    "route",
+    "route_reasons",
+    "required_gates_before_compiler",
+    "quality_signals",
+    "risk_signals",
+    "losses_enabled",
+    "compiler_ready",
+    "training_ready",
+    "model_input_ready",
+    "authority"
+  ],
+  "required_gate_fields": [
+    "source_output_ticket_granted",
+    "source_lineage_card",
+    "dataset_junk_ood_ranker_card",
+    "shortcut_baseline_audit",
+    "counterfactual_obligation_card",
+    "split_overlap_audit",
+    "loss_mask_card",
+    "telemetry_contract"
+  ],
+  "schema_name": "long_context_route_card_v1",
+  "status": "metadata_schema_only_no_rows"
+}
