@@ -1,0 +1,92 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blocking_reasons": {
+    "accepted_row_ids_nonempty": "accepted row-id list cannot be checked before it exists",
+    "accepted_row_ids_pending_manifest_compile_present": "accepted row-id list has not been emitted",
+    "candidate_quality_scores_nonempty": "candidate quality score rows cannot be checked before they exist",
+    "candidate_row_quality_scores_present": "candidate row quality scores have not been emitted",
+    "judge_to_compiler_gate_status_passed": "no passing judge-to-compiler gate status is available",
+    "judge_to_compiler_gate_status_present": "judge-to-compiler gate status has not been emitted",
+    "row_sample_dataset_judge_report_passed": "no passing row-sample judge report is available",
+    "row_sample_dataset_judge_report_present": "row-sample dataset judge report has not been emitted"
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "readiness_blocked_until_inputs_exist": true,
+    "readiness_conditions_recorded": true,
+    "required_input_artifacts_recorded": true,
+    "source_stage9015_keeps_manifest_closed": true,
+    "source_stage9015_passed": true,
+    "source_stage9015_present": true
+  },
+  "decision": "Row-sample judge outputs are not ready. Manifest materialization remains blocked until the four judge-output artifacts exist and pass metadata checks.",
+  "forbidden_operations": [
+    "RUN_ROW_SAMPLE_JUDGE_NOW",
+    "READ_ROW_BODIES_NOW",
+    "MATERIALIZE_MANIFEST_NOW",
+    "RUN_TRAINER_DRY_RUN_NOW",
+    "RUN_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "RUN_GEMMA",
+    "WRITE_TO_ARXIV",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "blocking_reasons": 8,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "manifest_materialization_authorized_now": false,
+    "manifest_materialized_now": false,
+    "missing_input_artifacts": 4,
+    "model_execution_attempted": false,
+    "present_input_artifacts": 0,
+    "readiness_conditions": 10,
+    "required_input_artifacts": 4,
+    "row_body_read_authorized_now": false,
+    "row_sample_judge_execution_authorized_now": false,
+    "row_sample_judge_outputs_ready": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false
+  },
+  "readiness": {
+    "accepted_row_ids_nonempty": false,
+    "accepted_row_ids_pending_manifest_compile_present": false,
+    "candidate_quality_scores_nonempty": false,
+    "candidate_row_quality_scores_present": false,
+    "judge_to_compiler_gate_status_passed": false,
+    "judge_to_compiler_gate_status_present": false,
+    "no_row_body_inputs_required": true,
+    "row_sample_dataset_judge_report_passed": false,
+    "row_sample_dataset_judge_report_present": false,
+    "stage9015_return_gate_passed": true
+  },
+  "required_input_artifacts": {
+    "accepted_row_ids_pending_manifest_compile.jsonl": "runs/local/artifacts/future_stage9xxx_row_sample_judge_execution/accepted_row_ids_pending_manifest_compile.jsonl",
+    "candidate_row_quality_scores.jsonl": "runs/local/artifacts/future_stage9xxx_row_sample_judge_execution/candidate_row_quality_scores.jsonl",
+    "judge_to_compiler_gate_status.json": "runs/local/artifacts/future_stage9xxx_row_sample_judge_execution/judge_to_compiler_gate_status.json",
+    "row_sample_dataset_judge_report.json": "runs/local/artifacts/future_stage9xxx_row_sample_judge_execution/row_sample_dataset_judge_report.json"
+  },
+  "stage": 9016,
+  "stage_name": "stage9016_row_sample_judge_output_readiness_audit",
+  "status": "ROW_SAMPLE_JUDGE_OUTPUT_READINESS_AUDIT_NO_EXECUTION"
+}
