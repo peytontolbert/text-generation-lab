@@ -1,0 +1,103 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_closed": true,
+    "closed_candidate_passes": true,
+    "compiler_ready_rows_now_zero": true,
+    "model_input_rows_now_zero": true,
+    "negative_cases_rejected": true,
+    "route_card_required_gates_preserved": true,
+    "source_stage9059_passed": true,
+    "source_stage9059_present": true,
+    "source_stage9060_passed": true,
+    "source_stage9060_present": true,
+    "training_ready_rows_now_zero": true
+  },
+  "closed_candidate_failures": [],
+  "decision": "Long-context candidates remain blocked from compiler handoff until route-card materialization and every judge/shortcut/counterfactual/split/loss/telemetry gate passes.",
+  "failures": [],
+  "forbidden_handoff_flags": [
+    "compiler_ready",
+    "training_ready",
+    "model_input_ready",
+    "decoder_ce_training_authorized_next",
+    "denoise_ce_training_authorized_next",
+    "model_execution_authorized_next",
+    "runtime_authorized"
+  ],
+  "metrics": {
+    "arxiv_read_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "compiler_ready_rows_now": 0,
+    "model_execution_attempted": false,
+    "model_input_rows_now": 0,
+    "negative_cases": 6,
+    "required_handoff_artifacts": 9,
+    "training_authorized": false,
+    "training_ready_rows_now": 0
+  },
+  "negative_cases": {
+    "compiler_ready_without_artifacts": {
+      "failures": [
+        "compiler_ready_without_all_handoff_artifacts"
+      ],
+      "rejected": true
+    },
+    "missing_materialization_audit": {
+      "failures": [
+        "missing_required_artifact:route_card_materialization_audit_passed"
+      ],
+      "rejected": true
+    },
+    "model_input_ready_before_handoff": {
+      "failures": [
+        "model_input_ready_not_allowed_by_handoff_blocker"
+      ],
+      "rejected": true
+    },
+    "open_decoder_ce_loss": {
+      "failures": [
+        "loss_open_before_compiler_handoff"
+      ],
+      "rejected": true
+    },
+    "open_model_execution_authority": {
+      "failures": [
+        "authority_open:model_execution_authorized_next"
+      ],
+      "rejected": true
+    },
+    "training_ready_before_handoff": {
+      "failures": [
+        "training_ready_not_allowed_by_handoff_blocker"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "required_handoff_artifacts": [
+    "source_output_ticket_granted_and_scoped",
+    "route_card_materialization_audit_passed",
+    "source_lineage_card",
+    "dataset_junk_ood_ranker_card",
+    "shortcut_baseline_audit",
+    "counterfactual_obligation_card",
+    "split_overlap_audit",
+    "loss_mask_card",
+    "telemetry_contract"
+  ],
+  "stage": 9061,
+  "stage_name": "stage9061_long_context_compiler_handoff_blocker_audit"
+}

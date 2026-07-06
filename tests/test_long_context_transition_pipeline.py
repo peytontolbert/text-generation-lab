@@ -240,6 +240,85 @@ def test_candidate_miner_requires_explicit_real_index_flags(tmp_path: Path) -> N
     assert card['output_under_arxiv'] is False
 
 
+def test_candidate_miner_prefers_implementation_repo_rows_over_tests(tmp_path: Path) -> None:
+    if importlib.util.find_spec("pyarrow") is None:
+        return
+    papers = tmp_path / "papers"
+    repos = tmp_path / "repositories"
+    datasets = tmp_path / "datasets"
+    (papers / "paper_a").mkdir(parents=True)
+    (repos / "repo_a" / "src").mkdir(parents=True)
+    (repos / "repo_a" / "tests").mkdir(parents=True)
+    (datasets / "trace_a").mkdir(parents=True)
+    (papers / "paper_a" / "method.txt").write_text(
+        "Adaptive controller uses spectralkernel for stable update. Spectralkernel remains active.\n",
+        encoding="utf-8",
+    )
+    impl_text = "def spectralkernel_update():\n    return spectralkernel\n"
+    test_text = "def test_spectralkernel_update():\n    assert spectralkernel_update() == spectralkernel\n"
+    (repos / "repo_a" / "src" / "engine.py").write_text(impl_text, encoding="utf-8")
+    (repos / "repo_a" / "tests" / "test_engine.py").write_text(test_text, encoding="utf-8")
+    out = tmp_path / "impl_pref_out"
+    build_chunk_and_mention_shards(
+        paper_roots=[papers],
+        repo_roots=[repos],
+        dataset_roots=[datasets],
+        output_dir=out,
+        paper_chunk_tokens=64,
+        repo_chunk_tokens=64,
+        trace_chunk_tokens=64,
+        rows_per_shard=8,
+    )
+    build_entities_with_pyarrow(output_dir=out, min_mention_count=2, max_chunk_frequency_ratio=1.0)
+    build_links_with_pyarrow(output_dir=out, max_pairwise_mentions_per_entity=8)
+    candidates, _ = mine_candidates(index_dir=out, max_candidates=20, required_source_types=("paper", "repo"))
+    target = next(candidate for candidate in candidates if candidate["canonical_name"] == "spectralkernel")
+    import pyarrow.parquet as pq
+    chunk_rows = {}
+    for shard in sorted((out / "chunks").glob("*.parquet")):
+        for row in pq.read_table(shard).to_pylist():
+            chunk_rows[row["chunk_id"]] = row
+    repo_paths = [
+        json.loads(chunk_rows[transition["trigger_chunk_id"]]["metadata_json"])["path"]
+        for transition in target["transition_chain"]
+        if transition["source_type"] == "repo"
+    ]
+    assert repo_paths
+    assert repo_paths[0].endswith("repo_a/src/engine.py")
+
+
+def test_candidate_miner_rejects_test_only_repo_evidence_when_no_impl_support(tmp_path: Path) -> None:
+    if importlib.util.find_spec("pyarrow") is None:
+        return
+    papers = tmp_path / "papers"
+    repos = tmp_path / "repositories"
+    (papers / "paper_a").mkdir(parents=True)
+    (repos / "repo_a" / "tests").mkdir(parents=True)
+    (papers / "paper_a" / "method.txt").write_text(
+        "Adaptive controller uses spectralkernel for stable update. Spectralkernel remains active.\n",
+        encoding="utf-8",
+    )
+    (repos / "repo_a" / "tests" / "test_engine.py").write_text(
+        "def test_spectralkernel_update():\n    assert spectralkernel_update() == spectralkernel\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "test_only_out"
+    build_chunk_and_mention_shards(
+        paper_roots=[papers],
+        repo_roots=[repos],
+        dataset_roots=[],
+        output_dir=out,
+        paper_chunk_tokens=64,
+        repo_chunk_tokens=64,
+        trace_chunk_tokens=64,
+        rows_per_shard=8,
+    )
+    build_entities_with_pyarrow(output_dir=out, min_mention_count=2, max_chunk_frequency_ratio=1.0)
+    build_links_with_pyarrow(output_dir=out, max_pairwise_mentions_per_entity=8)
+    candidates, _ = mine_candidates(index_dir=out, max_candidates=20, required_source_types=("paper", "repo"))
+    assert all(candidate["canonical_name"] != "spectralkernel" for candidate in candidates)
+
+
 def test_candidate_miner_from_parquet_index(tmp_path: Path) -> None:
     if importlib.util.find_spec("pyarrow") is None:
         return

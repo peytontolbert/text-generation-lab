@@ -80,10 +80,13 @@ def _canonical_name_ok(name: str) -> bool:
     if lower in STOPWORDS or lower in GENERIC_CORPUS_TERMS or lower in STRUCTURED_NOISE_TERMS:
         return False
     banned = {
-        'actions', 'base', 'behavior', 'both', 'given', 'next', 'task', 'days', 'plugin', 'resource', 'display',
+        'actions', 'action', 'base', 'behavior', 'both', 'given', 'next', 'task', 'days', 'plugin', 'resource', 'display',
         'return', 'state', 'updates', 'active', 'first', 'name', 'title', 'protocol', 'rewrite', 'any', 'files',
         'code', 'work', 'html', 'const', 'var', 'use', 'you', 'button', 'pdf', 'index', 'fig', 'com', 'https',
         'github', 'training', 'network', 'networks', 'maps', 'matrix', 'language', 'power', 'environment', 'module',
+        'self', 'append', 'assert', 'label', 'dataset', 'blue', 'stars', 'args', 'style', 'torch', 'task', 'boolean',
+        'case', 'class', 'context', 'configuration', 'length', 'number', 'generation', 'research', 'reward', 'social',
+        'via', 'none', 'multi', 'buffer', 'auto', 'average', 'block', 'boundary',
     }
     return lower not in banned
 
@@ -97,12 +100,12 @@ def _repo_path_quality(path: str) -> int:
         score -= 4
     if any(name in lower for name in ['package-lock.json', 'pnpm-lock.yaml', 'yarn.lock', 'poetry.lock', 'cargo.lock']):
         score -= 5
-    if any(part in lower for part in ['/src/', '/lib/', '/app/', '/core/']):
+    if any(part in lower for part in ['/src/', '/lib/', '/app/', '/core/', '/cmd/', '/pkg/']):
+        score += 5
+    if lower.endswith(('.py', '.ts', '.tsx', '.js', '.jsx', '.java', '.go', '.rs', '.c', '.cc', '.cpp', '.h', '.hpp')):
         score += 3
-    if lower.endswith(('.py', '.ts', '.tsx', '.js', '.jsx', '.java', '.go', '.rs', '.c', '.cc', '.cpp')):
-        score += 2
-    if any(part in lower for part in ['/test', '/tests']):
-        score += 1
+    if any(part in lower for part in ['/test', '/tests', '/benchmark/']):
+        score -= 2
     if 'readme' in lower or lower.endswith('.md'):
         score -= 2
     if lower.endswith(('.json', '.yaml', '.yml', '.toml', '.cfg', '.ini')):
@@ -118,6 +121,59 @@ def _repo_row_usable(row: dict[str, Any], *, quality: int) -> bool:
         return False
     text = str(row.get('text') or '')
     return bool(CODE_SIGNAL_RE.search(text))
+
+
+def _repo_path_is_implementation(path: str) -> bool:
+    lower = str(path or '').lower()
+    return any(part in lower for part in ['/src/', '/lib/', '/app/', '/core/', '/cmd/', '/pkg/']) and not any(
+        part in lower for part in ['/test', '/tests', '/benchmark/']
+    )
+
+
+def _repo_path_is_test(path: str) -> bool:
+    lower = str(path or '').lower()
+    return any(part in lower for part in ['/test', '/tests', '/benchmark/'])
+
+
+def _repo_row_sort_key(row: dict[str, Any], *, quality: int) -> tuple[int, int, int, str]:
+    metadata = json.loads(str(row.get('metadata_json') or '{}'))
+    path = str(metadata.get('path') or '').lower()
+    implementation_bias = 1 if _repo_path_is_implementation(path) else 0
+    test_penalty = 1 if _repo_path_is_test(path) else 0
+    return (-implementation_bias, test_penalty, -quality, path)
+
+
+def _entity_support_ok(mention_rows: list[dict[str, Any]], required_source_types: tuple[str, ...]) -> bool:
+    by_type: dict[str, list[dict[str, Any]]] = {}
+    for row in mention_rows:
+        by_type.setdefault(str(row.get('source_type') or ''), []).append(row)
+    for source_type in required_source_types:
+        rows = by_type.get(source_type, [])
+        distinct_docs = {str(row.get('doc_id') or '') for row in rows}
+        if len(rows) < 2 and len(distinct_docs) < 2:
+            return False
+    return True
+
+
+def _entity_specificity_score(canonical_name: str, mention_rows: list[dict[str, Any]]) -> int:
+    lower = canonical_name.lower()
+    score = 0
+    if '-' in lower or '_' in lower:
+        score += 2
+    if len(lower) >= 8:
+        score += 1
+    source_ids = {str(row.get('source_id') or '') for row in mention_rows}
+    if len(source_ids) >= 3:
+        score += 1
+    repo_rows = [row for row in mention_rows if str(row.get('source_type') or '') == 'repo']
+    paper_rows = [row for row in mention_rows if str(row.get('source_type') or '') == 'paper']
+    if len(repo_rows) >= 2 and len(paper_rows) >= 2:
+        score += 2
+    if len(repo_rows) == 1 or len(paper_rows) == 1:
+        score -= 2
+    if lower.endswith(('ing', 'tion', 'ment', 'ness', 'able', 'ible')):
+        score -= 1
+    return score
 
 
 def _paper_path_quality(path: str) -> int:
@@ -155,6 +211,10 @@ def mine_candidates(
             continue
         if required_source_types and not set(required_source_types).issubset(source_types):
             continue
+        if not _entity_support_ok(mention_rows, required_source_types):
+            continue
+        if _entity_specificity_score(canonical_name, mention_rows) < 1:
+            continue
 
         scored_rows = []
         for row in mention_rows:
@@ -170,11 +230,25 @@ def mine_candidates(
             scored_rows.append((quality, row))
 
         paper_rows = [row for quality, row in scored_rows if str(row.get('source_type') or '') == 'paper' and quality >= 0]
-        repo_rows = [
-            row
-            for quality, row in scored_rows
+        repo_pairs = [
+            (quality, row)
+            for quality, row in sorted(
+                scored_rows,
+                key=lambda item: _repo_row_sort_key(item[1], quality=item[0]) if str(item[1].get('source_type') or '') == 'repo' else (0, 0, 0, ''),
+            )
             if str(row.get('source_type') or '') == 'repo' and _repo_row_usable(row, quality=quality)
         ]
+        implementation_repo_pairs = []
+        for quality, row in repo_pairs:
+            metadata = json.loads(str(row.get('metadata_json') or '{}'))
+            repo_path = str(metadata.get('path') or '')
+            if _repo_path_is_implementation(repo_path):
+                implementation_repo_pairs.append((quality, row))
+        if implementation_repo_pairs:
+            repo_pairs = implementation_repo_pairs
+        elif 'repo' in required_source_types:
+            continue
+        repo_rows = [row for _, row in repo_pairs]
         if required_source_types == ('paper', 'repo') and (not paper_rows or not repo_rows):
             continue
 
