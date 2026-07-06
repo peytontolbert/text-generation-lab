@@ -1,0 +1,84 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "dataset_route_card_present": true,
+    "forbidden_prefight_actions_recorded": true,
+    "no_arxiv_files_opened_now": true,
+    "no_dataset_rows_loaded": true,
+    "no_repository_source_bodies_loaded": true,
+    "no_training_or_mining_authorized": true,
+    "registry_frontier_stage8975_or_8976": true,
+    "selected_candidates_present": true,
+    "selected_routes_present": true,
+    "source_stage8975_passed": true,
+    "zero_row_allowed_probes_recorded": true
+  },
+  "decision": "Zero-row schema/header preflight is designed but not executed. Selected candidates are copied from existing metadata route cards only; no /arxiv files, dataset rows, repository source bodies, schema probes, mining, training, or runtime execution are opened.",
+  "forbidden_prefight_actions": [
+    "read_jsonl_first_line",
+    "read_json_body",
+    "read_csv_header_if_data_file",
+    "materialize_parquet_batch",
+    "load_dataset_rows",
+    "read_repository_source_body",
+    "write_to_arxiv",
+    "start_mining",
+    "start_training",
+    "load_checkpoint",
+    "model_execution"
+  ],
+  "metrics": {
+    "arxiv_files_opened_now": 0,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "header_probe_executed_now": false,
+    "model_execution_attempted": false,
+    "network_upload_performed": false,
+    "repository_source_bodies_loaded": false,
+    "runtime_authorized_flag": false,
+    "schema_probe_executed_now": false,
+    "selected_candidates": 9,
+    "selected_routes": 3,
+    "training_authorized": false
+  },
+  "selected_routes": [
+    "NAMED_SOFTWARE_MAINTAINER_DATASET_CANDIDATE",
+    "PARQUET_TABLE_CANDIDATE",
+    "JSONL_MANIFEST_CANDIDATE"
+  ],
+  "source_stage": 8975,
+  "stage": 8976,
+  "stage_name": "stage8976_zero_row_schema_header_preflight_design",
+  "status": "ZERO_ROW_SCHEMA_HEADER_PREFLIGHT_DESIGN_ONLY",
+  "zero_row_allowed_probes": {
+    ".json": [
+      "read_filename_size_and_extension_only",
+      "defer_body_schema_until_explicit_json_metadata_ticket"
+    ],
+    ".jsonl": [
+      "read_filename_size_and_extension_only",
+      "defer_header_detection_until_explicit_row_ticket"
+    ],
+    ".parquet": [
+      "read_file_footer_metadata_only",
+      "extract_schema_without_materializing_batches",
+      "extract_row_group_count_without_rows"
+    ]
+  }
+}

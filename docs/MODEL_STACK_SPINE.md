@@ -2316,3 +2316,11 @@ Stage8977 selects metadata-only candidate paths for a future schema preflight. I
 ## Stage8977 Zero-Row Schema/Header Preflight Design Audit
 
 Stage8977 audits Stage8976 zero-row preflight design artifacts by exact stage name and keeps /arxiv file access, row loads, source-body reads, schema/header probes, mining, training, and runtime closed.
+
+## Stage8978 Zero-Row Preflight Runner Contract
+
+Stage8978 defines a dry-run runner contract over local selected-candidate metadata only. It emits planned probe rows while keeping /arxiv file opens, row loads, source-body reads, schema/header probes, mining, training, and runtime closed.
+
+## Stage8978 Duplicate Stage Artifact Preservation
+
+Stage8978 preserves duplicate Stage8976/8977 schema-header design artifacts under superseded paths and keeps the active zero-row candidate selector lineage unambiguous.
