@@ -2532,3 +2532,9 @@ Stage9088 designs the no-data route-to-trainer-loss translation layer after sour
 ## Stage9090 Route-To-Trainer-Loss Translation Graph Attachment
 
 Stage9090 attaches Stage9088/9089 route-to-trainer-loss translation controls to the central graph. Translation, model input rows, route cards, trainer execution, model forward, decoder CE, denoise CE, runtime, and training remain closed.
+
+## Stage9091 Current Frontier After Route-To-Loss Graph
+
+Stage9091 reconciles the current frontier after Stage9090. Route-to-trainer-loss controls are graph-visible and block translation, model input rows, trainer execution, model forward, decoder CE, denoise CE, runtime, and training.
+
+No source/output ticket, data access, route-card materialization, route-to-loss translation, compiler handoff, trainer dry run, model forward, decoder CE, denoise CE, runtime, /arxiv IO, cleanup, or training is authorized.
