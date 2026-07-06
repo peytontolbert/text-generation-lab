@@ -1,0 +1,84 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers": [
+    "trainer contract-only dry run has not executed",
+    "loss-mask enforcement dry-run audit artifact is absent",
+    "telemetry artifact plan from dry run is absent",
+    "no-model-forward proof is absent",
+    "no-training proof is absent",
+    "one-run ticket input artifact is absent",
+    "trainer dry-run pass card is absent"
+  ],
+  "checks": {
+    "authority_counts_zero": true,
+    "missing_prerequisites_recorded": true,
+    "source_stage9000_passed": true,
+    "source_stage9000_present": true,
+    "source_stage9000_requires_dry_run_inputs": true,
+    "source_stage9000_training_closed": true,
+    "ticket_instance_correctly_blocked": true
+  },
+  "decision": "One-run bounded training ticket instance is correctly blocked because trainer dry-run artifacts do not exist. No training ticket is designed or authorized.",
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "blockers": 7,
+    "checkpoint_written": false,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "final_checkpoint_exported": false,
+    "missing_prerequisites": 7,
+    "model_execution_attempted": false,
+    "repository_source_bodies_loaded": false,
+    "required_prerequisites": 8,
+    "runtime_authorized_flag": false,
+    "ticket_instance_designed": false,
+    "ticket_instance_ready": false,
+    "training_authorized": false,
+    "training_executed_now": false,
+    "training_ticket_authorized_now": false
+  },
+  "missing_prerequisites": [
+    "trainer_contract_dry_run_report_present",
+    "loss_mask_enforcement_audit_present",
+    "telemetry_artifact_plan_present",
+    "no_model_forward_proof_present",
+    "no_training_execution_proof_present",
+    "next_one_run_training_ticket_input_present",
+    "dry_run_audit_passed"
+  ],
+  "prerequisite_status": {
+    "dry_run_audit_passed": false,
+    "loss_mask_enforcement_audit_present": false,
+    "next_one_run_training_ticket_input_present": false,
+    "no_model_forward_proof_present": false,
+    "no_training_execution_proof_present": false,
+    "stage9000_contract_passed": true,
+    "telemetry_artifact_plan_present": false,
+    "trainer_contract_dry_run_report_present": false
+  },
+  "required_dry_run_artifacts": [
+    "trainer_contract_dry_run_report.json",
+    "loss_mask_enforcement_audit.json",
+    "telemetry_artifact_plan.json",
+    "no_model_forward_proof.json",
+    "no_training_execution_proof.json",
+    "next_one_run_training_ticket_input.json"
+  ],
+  "stage": 9001,
+  "stage_name": "stage9001_one_run_training_ticket_instance_blocker_audit",
+  "status": "ONE_RUN_TRAINING_TICKET_INSTANCE_BLOCKED_NO_EXECUTION"
+}

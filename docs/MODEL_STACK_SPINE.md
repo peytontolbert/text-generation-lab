@@ -2388,3 +2388,7 @@ Stage8997 defines the future locked tiny manifest compile contract. Loss masks d
 ## Stage8998 Trainer Contract-Only Dry Run Contract
 
 Stage8998 defines the future trainer contract-only dry-run contract: CLI flags, loss-mask enforcement, telemetry path checks, and a hard stop before model forward. Trainer execution remains closed.
+
+## Stage9001 One-Run Training Ticket Instance Blocker Audit
+
+Stage9001 records that actual one-run bounded training ticket instantiation is blocked until trainer dry-run artifacts exist and pass. Training and model execution remain closed.
