@@ -1,0 +1,78 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "preview_rules_recorded": true,
+    "proposed_diff_covers_alias_rows": true,
+    "source_stage9010_passed": true,
+    "source_stage9010_policy_only": true,
+    "source_stage9010_present": true
+  },
+  "decision": "Duplicate-resolution apply preview is written as a side artifact only. The reconstructed registry is not mutated, no rows/files are deleted, and no execution is authorized.",
+  "forbidden_operations": [
+    "WRITE_RECONSTRUCTED_REGISTRY_NOW",
+    "APPLY_RENUMBERING_NOW",
+    "DELETE_DUPLICATE_ROWS",
+    "DELETE_SUMMARIES",
+    "DELETE_ARTIFACTS",
+    "REWRITE_GIT_HISTORY",
+    "RUN_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "RUN_GEMMA",
+    "WRITE_TO_ARXIV"
+  ],
+  "metrics": {
+    "artifacts_deleted_now": false,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_attempted": false,
+    "preview_only_no_mutation": true,
+    "proposed_diff_operations": 76,
+    "registry_rows_deleted_now": false,
+    "registry_rows_mutated_now": false,
+    "registry_written_now": false,
+    "renumbering_applied_now": false,
+    "runtime_authorized_flag": false,
+    "summaries_deleted_now": false,
+    "training_authorized": false
+  },
+  "preview_rules": [
+    "write_preview_artifacts_only",
+    "do_not_write_reconstructed_stage_registry",
+    "do_not_delete_registry_rows",
+    "do_not_delete_summary_files",
+    "do_not_delete_artifact_files",
+    "preserve_original_stage_id_as_recovered_stage_id",
+    "propose_unique_registry_key_for_each_duplicate_alias",
+    "preserve_authority_flags",
+    "preserve_passed_status",
+    "require_future_human_or_contract_apply_authorization"
+  ],
+  "proposed_diff_path": "runs/local/artifacts/stage9011_registry_duplicate_resolution_apply_preview/proposed_registry_duplicate_resolution_diff.json",
+  "proposed_diff_summary": {
+    "applies_now": false,
+    "deletes_anything": false,
+    "operation_type": "add_registry_alias_metadata_only",
+    "operations": 76,
+    "writes_registry": false
+  },
+  "stage": 9011,
+  "stage_name": "stage9011_registry_duplicate_resolution_apply_preview",
+  "status": "REGISTRY_DUPLICATE_RESOLUTION_APPLY_PREVIEW_NO_MUTATION"
+}

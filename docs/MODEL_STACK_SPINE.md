@@ -2417,3 +2417,8 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 - Defines preservation aliases for duplicate recovered stage rows without mutating the registry.
 - Requires future preview/apply stages before any renumbering and forbids deletion of summaries or artifacts.
 - Keeps all execution and training authority closed.
+
+## Stage9011 Registry Duplicate Resolution Apply Preview
+- Writes only a proposed duplicate-resolution alias diff artifact; does not apply it to the registry.
+- Preserves original rows, summaries, artifacts, authority flags, and passed status.
+- Keeps training, mining, model execution, runtime, Gemma, harness scoring, decoder CE, denoise CE, and /arxiv writes closed.

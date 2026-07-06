@@ -1,0 +1,106 @@
+{
+  "allowed_metadata_fields": [
+    "source_root_label",
+    "source_root_exists",
+    "relative_path_hash",
+    "extension",
+    "file_size_bytes",
+    "mtime_utc",
+    "depth"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "allowed_metadata_fields_recorded": true,
+    "authority_counts_zero": true,
+    "forbidden_content_fields_recorded": true,
+    "forbidden_operations_recorded": true,
+    "inventory_scope_recorded": true,
+    "required_outputs_recorded": true,
+    "source_stage9012_has_roots": true,
+    "source_stage9012_keeps_mining_closed": true,
+    "source_stage9012_passed": true,
+    "source_stage9012_present": true
+  },
+  "decision": "Codex session inventory is specified as a future no-content preflight. This stage records metadata-only scope and forbidden content fields, but does not traverse, parse, copy, mine, or train.",
+  "forbidden_content_fields": [
+    "message_text",
+    "assistant_text",
+    "tool_output_text",
+    "command_text",
+    "patch_text",
+    "file_body",
+    "session_json_payload",
+    "raw_path"
+  ],
+  "forbidden_operations": [
+    "READ_SESSION_FILE_CONTENT_NOW",
+    "PARSE_SESSION_JSON_NOW",
+    "COPY_SESSION_FILES_NOW",
+    "HASH_MESSAGE_BODIES_NOW",
+    "WRITE_TO_ARXIV",
+    "EMIT_TRAINING_ROWS",
+    "TRAIN_MODEL",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "inventory_scope": [
+    "expand_source_roots_without_following_symlinks",
+    "record_root_exists_boolean",
+    "record_file_count_by_extension",
+    "record_total_bytes_by_extension",
+    "record_mtime_range_by_root",
+    "record_relative_path_hashes_only",
+    "record_no_message_body_hashes",
+    "record_no_tool_output_content"
+  ],
+  "metrics": {
+    "allowed_metadata_fields": 7,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_content_fields": 8,
+    "inventory_scope_rules": 8,
+    "message_body_hashing_authorized_now": false,
+    "model_execution_attempted": false,
+    "required_outputs": 6,
+    "runtime_authorized_flag": false,
+    "session_file_content_read_now": false,
+    "session_files_copied_now": false,
+    "session_inventory_authorized_now": false,
+    "session_json_parsed_now": false,
+    "source_roots": 3,
+    "training_authorized": false,
+    "training_rows_emitted_now": false
+  },
+  "required_outputs": [
+    "session_inventory_root_card.json",
+    "session_inventory_counts_by_root.json",
+    "session_inventory_extension_counts.json",
+    "session_inventory_relative_path_hashes.jsonl",
+    "no_content_read_proof.json",
+    "next_session_parser_ticket_input.json"
+  ],
+  "session_source_roots": [
+    "~/codex/sessions",
+    "~/.codex/sessions",
+    "/arxiv/code/sessions"
+  ],
+  "stage": 9013,
+  "stage_name": "stage9013_codex_sessions_no_content_inventory_contract",
+  "status": "CODEX_SESSIONS_NO_CONTENT_INVENTORY_CONTRACT_NO_READ"
+}

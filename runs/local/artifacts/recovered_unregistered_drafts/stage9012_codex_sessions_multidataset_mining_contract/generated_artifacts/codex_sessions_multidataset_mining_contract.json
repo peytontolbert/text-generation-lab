@@ -1,0 +1,194 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "dataset_families_recorded": true,
+    "forbidden_operations_recorded": true,
+    "global_acceptance_filters_recorded": true,
+    "global_rejection_filters_recorded": true,
+    "normalized_event_types_recorded": true,
+    "session_source_roots_recorded": true,
+    "split_policy_recorded": true
+  },
+  "dataset_families": [
+    {
+      "family": "next_action_policy",
+      "primary_filters": [
+        "software_task_present",
+        "state_has_recent_context",
+        "next_tool_or_final_action_observed"
+      ],
+      "target": "SEARCH | READ_FILE | EDIT_FILE | RUN_TEST | VERIFY | REPAIR | ROLLBACK | ABSTAIN | ASK | SUMMARIZE"
+    },
+    {
+      "family": "edit_localization",
+      "primary_filters": [
+        "file_reads_observed",
+        "later_edit_or_verified_focus_exists",
+        "exclude_browsing_only_spans"
+      ],
+      "target": "file_path | symbol | region | retrieve_more"
+    },
+    {
+      "family": "patch_operator",
+      "primary_filters": [
+        "apply_patch_observed",
+        "localized_context_available",
+        "operator_inferable_from_diff"
+      ],
+      "target": "ADD_IMPORT | MODIFY_FUNCTION | INSERT_GUARD | UPDATE_CONFIG | ADD_TEST | ROLLBACK | DOC_UPDATE"
+    },
+    {
+      "family": "verifier_selection",
+      "primary_filters": [
+        "tool_command_observed",
+        "change_state_known",
+        "verification_command_classifiable"
+      ],
+      "target": "targeted_test | full_test | build | typecheck | lint | smoke | no_verifier_yet"
+    },
+    {
+      "family": "verifier_repair",
+      "primary_filters": [
+        "verification_failed_or_user_regression",
+        "subsequent_repair_observed",
+        "repair_outcome_labelable"
+      ],
+      "target": "repair_localization | repair_operator | rollback | retrieve_more | abstain"
+    },
+    {
+      "family": "outcome_reward",
+      "primary_filters": [
+        "action_outcome_available",
+        "verification_or_user_feedback_available",
+        "exclude_unresolved_ambiguous"
+      ],
+      "target": "helpful | harmful | neutral | regression | dead_end | verified_success"
+    },
+    {
+      "family": "abstain_retrieve_more",
+      "primary_filters": [
+        "insufficient_context_or_high_risk_state",
+        "no_safe_edit_evidence",
+        "decision_boundary_clear"
+      ],
+      "target": "RETRIEVE_MORE | ASK_FOR_INFO | DO_NOT_EDIT | RUN_VERIFIER_FIRST"
+    },
+    {
+      "family": "small_validated_patch_generation",
+      "primary_filters": [
+        "short_coherent_patch",
+        "verification_passed",
+        "no_later_regression_in_slice",
+        "source_context_compact"
+      ],
+      "target": "bounded_patch_hunk"
+    },
+    {
+      "family": "trace_summarization",
+      "primary_filters": [
+        "tool_heavy_trace",
+        "state_transition_preserved",
+        "summary_is_grounded_in_events"
+      ],
+      "target": "compact_state_summary"
+    }
+  ],
+  "decision": "Wider Codex sessions are recorded as a future multi-dataset mine. This stage defines event normalization, dataset families, filters, and split policy, but reads no sessions and emits no rows.",
+  "forbidden_operations": [
+    "READ_SESSIONS_NOW",
+    "MINE_SESSIONS_NOW",
+    "COPY_SESSION_CONTENT_NOW",
+    "WRITE_TO_ARXIV",
+    "EMIT_TRAINING_ROWS",
+    "TRAIN_MODEL",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "global_acceptance_filters": [
+    "concrete_software_task_present",
+    "repo_or_file_context_present",
+    "tool_action_sequence_parseable",
+    "edits_linked_to_file_paths_when_used",
+    "verification_or_feedback_available_for_outcome_labels",
+    "session_boundary_preserved",
+    "no_secret_or_credential_content",
+    "no_locked_eval_contamination"
+  ],
+  "global_rejection_filters": [
+    "planning_only_without_tools",
+    "browsing_only_without_outcome",
+    "three_or_more_failed_edits_without_resolution",
+    "user_reports_made_worse_without_later_repair",
+    "unattributed_assistant_claim_of_success",
+    "missing_tool_output_for_claimed_verification",
+    "large_unbounded_patch_target",
+    "private_secret_or_credential_exposure"
+  ],
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_families": 9,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "global_acceptance_filters": 8,
+    "global_rejection_filters": 8,
+    "model_execution_attempted": false,
+    "normalized_event_types": 16,
+    "runtime_authorized_flag": false,
+    "session_content_copied_now": false,
+    "session_mining_authorized_now": false,
+    "session_read_authorized_now": false,
+    "session_source_roots": 3,
+    "split_policy_rules": 5,
+    "training_authorized": false,
+    "training_rows_emitted_now": false
+  },
+  "normalized_event_types": [
+    "session_meta",
+    "user_message",
+    "assistant_message",
+    "assistant_final",
+    "commentary_update",
+    "tool_call_exec_command",
+    "tool_call_apply_patch",
+    "tool_call_other",
+    "tool_output",
+    "file_read_observed",
+    "patch_applied",
+    "verification_command",
+    "verification_result",
+    "user_regression_report",
+    "repair_attempt",
+    "final_verified_summary"
+  ],
+  "session_source_roots": [
+    "~/codex/sessions",
+    "~/.codex/sessions",
+    "/arxiv/code/sessions"
+  ],
+  "split_policy": [
+    "split_by_session_id_not_row",
+    "split_by_repository_when_repository_id_available",
+    "hold_out_user_regression_sessions_for_strict_eval",
+    "keep_near_duplicate_session_slices_in_same_split",
+    "never_train_on_hidden_or_locked_eval_slices"
+  ],
+  "stage": 9012,
+  "stage_name": "stage9012_codex_sessions_multidataset_mining_contract",
+  "status": "CODEX_SESSIONS_MULTIDATASET_MINING_CONTRACT_NO_MINING"
+}
