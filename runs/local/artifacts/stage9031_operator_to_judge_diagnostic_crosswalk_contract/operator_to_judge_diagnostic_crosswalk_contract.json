@@ -1,0 +1,155 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "category_to_diagnostic_fields": {
+    "candidate_search": [
+      "quality_score",
+      "confidence",
+      "risk_reasons"
+    ],
+    "debug_repair": [
+      "criteria_scores",
+      "risk_reasons",
+      "loss_mask_candidates"
+    ],
+    "environment_tooling": [
+      "risk_reasons",
+      "gate_status"
+    ],
+    "governance": [
+      "reject_reason",
+      "risk_reasons",
+      "gate_status"
+    ],
+    "instruction_intent": [
+      "criteria_scores",
+      "feature_presence"
+    ],
+    "memory_learning": [
+      "feature_presence",
+      "gate_status"
+    ],
+    "planning": [
+      "criteria_scores",
+      "quality_score"
+    ],
+    "probabilistic_compression": [
+      "quality_score",
+      "confidence"
+    ],
+    "relationship_graph": [
+      "feature_presence",
+      "gate_status"
+    ],
+    "retrieval_context": [
+      "confidence",
+      "risk_reasons",
+      "loss_mask_candidates"
+    ],
+    "semantic_verification": [
+      "criteria_scores",
+      "reject_reason"
+    ],
+    "software_grounding": [
+      "criteria_scores",
+      "source_metadata_ref",
+      "gate_status"
+    ],
+    "synthesis_transform": [
+      "criteria_scores",
+      "loss_mask_candidates"
+    ],
+    "validation": [
+      "criteria_scores",
+      "reject_reason",
+      "risk_reasons"
+    ],
+    "version_control_collaboration": [
+      "feature_presence",
+      "criteria_scores"
+    ]
+  },
+  "checks": {
+    "all_inventory_categories_crosswalked": true,
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "no_unknown_crosswalk_categories": true,
+    "referenced_diagnostics_known": true,
+    "required_row_fields_recorded": true,
+    "source_stage9023_passed": true,
+    "source_stage9023_present": true,
+    "source_stage9028_passed": true,
+    "source_stage9028_present": true
+  },
+  "decision": "Future judged rows must carry operator_id/operator_category diagnostics so compiler decisions are tied to the recovered maintenance operator inventory. This stage defines the crosswalk only.",
+  "forbidden_operations": [
+    "MATERIALIZE_CROSSWALKED_ROWS_NOW",
+    "RUN_ROW_SAMPLE_JUDGE_NOW",
+    "READ_ROW_BODY_TEXT",
+    "READ_REPOSITORY_SOURCE_BODY",
+    "MATERIALIZE_MANIFEST_NOW",
+    "RUN_TRAINER_DRY_RUN_NOW",
+    "START_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "RUN_GEMMA",
+    "WRITE_TO_ARXIV",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "crosswalk_categories": 15,
+    "crosswalk_contract_only": true,
+    "crosswalked_rows_materialized_now": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_operations": 13,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "inventory_categories": 15,
+    "judge_executed_now": false,
+    "judge_outputs_materialized_now": false,
+    "manifest_compile_authorized_now": false,
+    "manifest_materialized_now": false,
+    "model_execution_attempted": false,
+    "referenced_diagnostic_fields": 9,
+    "repository_source_bodies_read_now": false,
+    "required_row_fields": 10,
+    "row_bodies_read_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false,
+    "unknown_diagnostic_fields": 0
+  },
+  "missing_inventory_categories": [],
+  "required_row_fields": [
+    "row_id",
+    "operator_id",
+    "operator_category",
+    "diagnostic_fields_required",
+    "quality_score",
+    "confidence",
+    "criteria_scores",
+    "feature_presence",
+    "gate_status",
+    "loss_mask_candidates"
+  ],
+  "stage": 9031,
+  "stage_name": "stage9031_operator_to_judge_diagnostic_crosswalk_contract",
+  "status": "OPERATOR_TO_JUDGE_DIAGNOSTIC_CROSSWALK_CONTRACT_NO_EXECUTION",
+  "unknown_crosswalk_categories": [],
+  "unknown_diagnostic_fields": []
+}
