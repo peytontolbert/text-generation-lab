@@ -2452,3 +2452,9 @@ Stage9064 refreshes the training-readiness blocker matrix after long-context com
 Stage9071 reconciles Stage9064-9070 into the current no-data recovery frontier. Training readiness, trainer dry-run input controls, negative-case audits, graph attachment, candidate dispersion, compound term indexing, and compound candidate ratio guards are recovered.
 
 Real source/index/candidate work, /arxiv compiler IO, trainer execution, model forward, decoder CE, denoise CE, runtime, Gemma, harness/scoring, controller merge, promotion, and training remain closed until separate explicit tickets and audits pass.
+
+## Stage9072 Trainer Dry-Run Recovered Contract
+
+Stage9072 records the recovered trainer dry-run contract after Stage9071: required locked-manifest inputs, long-context blocker inputs, loss-mask assertions, telemetry stubs, forbidden operations, and hard stops are documented as the current control surface.
+
+No trainer invocation, model forward, row loading, source/body loading, candidate mining, decoder CE, denoise CE, runtime, /arxiv compiler IO, or training is authorized.
