@@ -1,0 +1,62 @@
+{
+  "allowed_probe_type": "PARQUET_FOOTER_SCHEMA_METADATA_ONLY",
+  "defaults": {
+    "arxiv_write_allowed": false,
+    "batch_materialization_allowed": false,
+    "output_dir_root": "runs/local/artifacts",
+    "repository_source_body_reads_allowed": false,
+    "row_body_reads_allowed": false
+  },
+  "forbidden_operations": [
+    "DATASET_ROW_SCAN",
+    "DATASET_ROW_MATERIALIZATION",
+    "PARQUET_BATCH_MATERIALIZATION",
+    "JSONL_FIRST_LINE_READ",
+    "CSV_HEADER_READ",
+    "REPOSITORY_SOURCE_BODY_READ",
+    "ARXIV_WRITE",
+    "CHECKPOINT_LOAD",
+    "TRAINING",
+    "MINING",
+    "MODEL_EXECUTION",
+    "RUNTIME_EXECUTION",
+    "NETWORK_UPLOAD"
+  ],
+  "max_candidates": 20,
+  "pass_gates": [
+    "source_stage8980_passed",
+    "selected_candidate_ids_subset_of_stage8979_dry_run_rows",
+    "selected_candidates_count_lte_20",
+    "allowed_probe_type_exact_parquet_footer_schema_metadata_only",
+    "row_body_reads_allowed_false",
+    "repository_source_body_reads_allowed_false",
+    "arxiv_write_allowed_false",
+    "batch_materialization_allowed_false",
+    "output_dir_under_runs_local_artifacts",
+    "required_artifacts_declared"
+  ],
+  "required_artifacts": [
+    "ticket_authorization_card.json",
+    "selected_candidate_ids.jsonl",
+    "parquet_footer_schema_metadata_only.jsonl",
+    "parquet_footer_access_audit_card.json",
+    "decision_card.json"
+  ],
+  "required_fields": [
+    "ticket_id",
+    "source_stage",
+    "source_audit_artifact",
+    "selected_candidate_ids",
+    "allowed_probe_type",
+    "max_candidates",
+    "row_body_reads_allowed",
+    "repository_source_body_reads_allowed",
+    "arxiv_write_allowed",
+    "batch_materialization_allowed",
+    "output_dir",
+    "required_artifacts",
+    "expiration_stage"
+  ],
+  "schema_name": "parquet_footer_metadata_only_access_ticket_v1",
+  "stage": 8981
+}

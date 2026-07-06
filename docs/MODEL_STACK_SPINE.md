@@ -2332,3 +2332,11 @@ Stage8979 defines a dry-run runner contract over local Stage8977 selected-candid
 ## Stage8980 Zero-Row Runner Contract Audit
 
 Stage8980 audits Stage8979 dry-run rows and introduces a future ticket schema for parquet-footer metadata-only access while keeping all file opens, row/source-body reads, mining, training, and runtime closed.
+
+## Stage8981 Parquet Footer Metadata Access Ticket Design
+
+Stage8981 designs a future parquet-footer metadata-only access ticket. The ticket is not granted; footer reads, row/body reads, /arxiv writes, mining, training, model execution, and runtime remain closed.
+
+## Stage8981 Parquet Footer Metadata Ticket Design
+
+Stage8981 designs an inactive future ticket for parquet-footer metadata-only schema access. It does not perform footer access and keeps row reads, source-body reads, mining, training, and runtime closed.
