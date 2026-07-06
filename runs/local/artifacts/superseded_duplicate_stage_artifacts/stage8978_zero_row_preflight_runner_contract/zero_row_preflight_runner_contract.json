@@ -1,0 +1,70 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_probes_not_executed_now": true,
+    "authority_counts_zero": true,
+    "dry_rows_match_candidates": true,
+    "no_arxiv_file_opened_now": true,
+    "no_dataset_rows_loaded": true,
+    "no_repository_source_bodies_loaded": true,
+    "registry_frontier_stage8977_or_8978": true,
+    "runner_inputs_recorded": true,
+    "runner_outputs_recorded": true,
+    "selected_candidate_metadata_present": true,
+    "selected_candidates_present": true,
+    "source_stage8977_passed": true
+  },
+  "decision": "The zero-row preflight runner is recovered as a dry-run contract only. It consumes local Stage8977 selected-candidate metadata and emits planned probe rows without opening /arxiv files, executing probes, loading rows, reading source bodies, mining, training, or running models.",
+  "metrics": {
+    "arxiv_files_opened_now": 0,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "dry_run_rows": 40,
+    "header_probe_executed_now": false,
+    "model_execution_attempted": false,
+    "probe_executed_now_rows": 0,
+    "repository_source_bodies_loaded": false,
+    "runtime_authorized_flag": false,
+    "schema_probe_executed_now": false,
+    "selected_candidates": 40,
+    "training_authorized": false
+  },
+  "runner_inputs": [
+    "stage8976_selected_candidate_metadata_json",
+    "candidate_route",
+    "relative_path",
+    "extension",
+    "allowed_zero_row_probe"
+  ],
+  "runner_output_fields": [
+    "candidate_id",
+    "route",
+    "relative_path",
+    "extension",
+    "planned_probe",
+    "probe_executed_now",
+    "arxiv_file_opened_now",
+    "dataset_rows_loaded",
+    "repository_source_bodies_loaded",
+    "status"
+  ],
+  "source_stage": 8977,
+  "stage": 8978,
+  "stage_name": "stage8978_zero_row_preflight_runner_contract",
+  "status": "ZERO_ROW_PREFLIGHT_RUNNER_CONTRACT_DRY_RUN_ONLY"
+}

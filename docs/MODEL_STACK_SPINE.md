@@ -2324,3 +2324,7 @@ Stage8978 defines a dry-run runner contract over local selected-candidate metada
 ## Stage8978 Duplicate Stage Artifact Preservation
 
 Stage8978 preserves duplicate Stage8976/8977 schema-header design artifacts under superseded paths and keeps the active zero-row candidate selector lineage unambiguous.
+
+## Stage8979 Zero-Row Preflight Runner Contract
+
+Stage8979 defines a dry-run runner contract over local Stage8977 selected-candidate metadata only. It emits planned probe rows while keeping /arxiv file opens, row loads, source-body reads, schema/header probes, mining, training, and runtime closed.
