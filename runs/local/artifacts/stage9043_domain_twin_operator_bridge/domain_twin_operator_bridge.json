@@ -1,0 +1,155 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "canonical_row_fields": [
+    "task",
+    "repo_state",
+    "phase",
+    "operator_history",
+    "retrieved_context_refs",
+    "candidate_list_refs",
+    "evidence.tests_ref",
+    "evidence.execution_ref",
+    "evidence.static_analysis_ref",
+    "evidence.data_flow_ref",
+    "evidence.focal_context_ref",
+    "target.next_operator",
+    "target.decision",
+    "target.selected_candidate",
+    "target.reason_code"
+  ],
+  "checks": {
+    "action_registry_has_core_maintainer_actions": true,
+    "action_registry_present": true,
+    "authority_counts_zero": true,
+    "canonical_row_fields_recorded": true,
+    "domain_graph_variables_recorded": true,
+    "model_stack_spine_present": true,
+    "operator_bridge_covers_five_critical_ops": true,
+    "recovered_stage_sequence_recorded": true,
+    "source_stage8703_passed": true,
+    "source_stage8703_present": true,
+    "spine_has_retrieval_and_repo_graph_layers": true,
+    "twin_memory_variables_recorded": true
+  },
+  "decision": "Attach recovered DomainGraph/RepoTwin/PaperTwin orchestration and the OP030/OP053/OP048/OP059/OP086 phase bridge to the central maintainer spine without materializing data or opening training.",
+  "domain_graph_variables": [
+    "concept_id",
+    "concept_name",
+    "concept_embedding",
+    "edge_types",
+    "appears_in_same_repo_as",
+    "co_occurs_with",
+    "is_subconcept_of_future",
+    "cross_domain_connector_future",
+    "repo_to_concept_map",
+    "paper_to_concept_map",
+    "repo_frequency_score",
+    "concept_local_degree_score",
+    "expert_repo_score",
+    "expert_paper_score"
+  ],
+  "forbidden_now": [
+    "scan_data_repository_library",
+    "scan_arxiv",
+    "materialize_domain_graph_from_corpus",
+    "materialize_repo_twin_memory",
+    "materialize_paper_twin_memory",
+    "train_operator_bridge",
+    "run_retrieval_eval",
+    "run_model",
+    "run_runtime",
+    "write_arxiv",
+    "upload_hf"
+  ],
+  "metrics": {
+    "arxiv_scan_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "canonical_row_fields": 15,
+    "contract_only": true,
+    "domain_graph_materialized_now": false,
+    "domain_graph_variables": 14,
+    "hf_upload_authorized_now": false,
+    "model_execution_attempted": false,
+    "operator_bridge_rows": 5,
+    "operator_bridge_training_authorized_now": false,
+    "paper_twin_memory_materialized_now": false,
+    "recovered_stage_sequence_rows": 6,
+    "repo_twin_memory_materialized_now": false,
+    "repository_library_scan_authorized_now": false,
+    "retrieval_eval_execution_authorized_now": false,
+    "runtime_authorized_flag": false,
+    "training_authorized": false,
+    "twin_memory_variables": 14
+  },
+  "operator_bridge": [
+    {
+      "failure_question": "was_the_right_artifact_retrieved",
+      "operator": "OP030",
+      "required_metric": "retrieval_recall_at_k",
+      "role": "repository_retrieval"
+    },
+    {
+      "failure_question": "did_reranker_pick_the_right_candidate",
+      "operator": "OP053",
+      "required_metric": "rerank_mrr_or_pairwise_accuracy",
+      "role": "list_aware_candidate_quality"
+    },
+    {
+      "failure_question": "was_test_execution_static_or_dataflow_evidence_available",
+      "operator": "OP048",
+      "required_metric": "verifier_backed_equivalence_accuracy",
+      "role": "verifier_backed_equivalence"
+    },
+    {
+      "failure_question": "were_bidirectional_context_and_slot_constraints_present",
+      "operator": "OP059",
+      "required_metric": "template_slot_accuracy",
+      "role": "template_infill_slot_completion"
+    },
+    {
+      "failure_question": "did_policy_choose_retrieve_rerank_instantiate_verify_repair_route_or_abstain",
+      "operator": "OP086",
+      "required_metric": "phase_routing_accuracy",
+      "role": "phase_controller_policy"
+    }
+  ],
+  "recovered_stage_sequence": [
+    "stage1272_failure_decomposition_eval",
+    "stage1273_repository_retrieval_candidates_v2",
+    "stage1274_list_aware_candidate_quality",
+    "stage1275_op048_verifier_rows",
+    "stage1276_op059_template_infill_rows",
+    "stage1277_phase_controller_policy"
+  ],
+  "stage": 9043,
+  "stage_name": "stage9043_domain_twin_operator_bridge",
+  "status": "DOMAIN_TWIN_OPERATOR_BRIDGE_CONTRACT_ONLY",
+  "twin_memory_variables": [
+    "repo_twin_id",
+    "paper_twin_id",
+    "semantic_summary_scope",
+    "episodic_time_window",
+    "recency_boost",
+    "test_type_weight",
+    "doc_type_weight",
+    "commit_issue_type_weight",
+    "context_dedup_key",
+    "semantic_context_limit",
+    "episodic_context_limit",
+    "consistency_report",
+    "uncertainty_flags",
+    "evidence_map"
+  ]
+}
