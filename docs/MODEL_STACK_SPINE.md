@@ -2518,3 +2518,9 @@ Trainer dry-run readiness remains false; no rows, source bodies, route cards, co
 ## Stage9086 Trainer Dry-Run Input Controls Graph Attachment
 
 Stage9086 attaches Stage9084/9085 trainer dry-run input completeness controls to the central graph. Route-to-loss translation, compiler handoff, trainer execution, model forward, row loading, /arxiv IO, and training remain closed.
+
+## Stage9087 Current Frontier After Trainer Input Graph
+
+Stage9087 reconciles the current frontier after Stage9086. Source/output ticket, route-card audit, and trainer input completeness controls are graph-visible.
+
+No data access, route-card materialization, route-to-loss translation, compiler handoff, trainer dry run, model forward, decoder CE, denoise CE, runtime, /arxiv IO, cleanup, or training is authorized.
