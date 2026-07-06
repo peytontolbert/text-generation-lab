@@ -2442,3 +2442,7 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 - Defines future row-sample judge outputs required before locked manifest materialization.
 - Requires metadata-only row-sample inputs and forbids row body/source body reads.
 - Keeps manifest materialization, trainer dry-run, training, mining, and /arxiv writes closed.
+
+## Stage9064 Training Readiness Refresh After Long-Context Controls
+
+Stage9064 refreshes the training-readiness blocker matrix after long-context compiler handoff and route-to-trainer loss-mask controls. The controls are recovered, but source tickets, route-card materialization, compiler handoff, loss masks, model execution, mining, decoder CE, denoise CE, runtime, and training remain closed.
