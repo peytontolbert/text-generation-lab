@@ -1,0 +1,44 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_closed": true,
+    "compound_entity_ratio_blocks_above_relaxed_cap": true,
+    "compound_entity_relaxed_ratio_allows_0_02": true,
+    "compound_repo_concept_code_usable": true,
+    "compound_repo_concept_doc_usable": true,
+    "compound_repo_readme_rejected": true,
+    "compound_repo_test_concept_rejected": true,
+    "no_candidate_mining": true,
+    "no_real_index_read": true,
+    "plain_entity_strict_ratio_blocks_0_02": true,
+    "source_stage9069_passed": true,
+    "source_stage9069_present": true
+  },
+  "decision": "Compound long-context candidate names may use a relaxed chunk-frequency cap and concept-row fallback, while tests/README and over-broad entities remain blocked.",
+  "default_max_compound_entity_chunk_ratio": 0.04,
+  "default_max_entity_chunk_ratio": 0.01,
+  "failures": [],
+  "metrics": {
+    "arxiv_read_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "candidate_rows_materialized": 0,
+    "model_execution_attempted": false,
+    "real_index_rows_read": 0,
+    "training_authorized": false
+  },
+  "passed": true,
+  "stage": 9070,
+  "stage_name": "stage9070_long_context_compound_candidate_ratio_guard_audit"
+}

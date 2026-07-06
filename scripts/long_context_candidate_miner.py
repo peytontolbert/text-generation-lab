@@ -123,6 +123,21 @@ def _repo_row_usable(row: dict[str, Any], *, quality: int) -> bool:
     return bool(CODE_SIGNAL_RE.search(text))
 
 
+def _repo_concept_row_usable(row: dict[str, Any], *, quality: int) -> bool:
+    if quality <= 0:
+        return False
+    modality = str(row.get('modality') or '')
+    if modality not in {'code', 'text'}:
+        return False
+    metadata = json.loads(str(row.get('metadata_json') or '{}'))
+    path = str(metadata.get('path') or '')
+    if _repo_path_is_test(path):
+        return False
+    if 'readme' in path.lower():
+        return False
+    return True
+
+
 def _repo_path_is_implementation(path: str) -> bool:
     lower = str(path or '').lower()
     return any(part in lower for part in ['/src/', '/lib/', '/app/', '/core/', '/cmd/', '/pkg/']) and not any(
@@ -218,6 +233,7 @@ def mine_candidates(
     min_sources: int = 2,
     required_source_types: tuple[str, ...] = ('paper', 'repo'),
     max_entity_chunk_ratio: float = 0.01,
+    max_compound_entity_chunk_ratio: float = 0.04,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     chunks = _read_rows(index_dir / 'chunks')
     entities = _read_rows(index_dir / 'entities')
@@ -232,7 +248,8 @@ def mine_candidates(
         mentions = json.loads(str(entity.get('mentions_json') or '[]'))
         mention_rows = [chunk_by_id[m] for m in mentions if m in chunk_by_id]
         distinct_chunk_ratio = len({str(row.get('chunk_id') or '') for row in mention_rows}) / total_chunk_count
-        if distinct_chunk_ratio > max_entity_chunk_ratio:
+        ratio_limit = max_compound_entity_chunk_ratio if '_' in canonical_name else max_entity_chunk_ratio
+        if distinct_chunk_ratio > ratio_limit:
             continue
         if len(mention_rows) < 2:
             continue
@@ -262,14 +279,15 @@ def mine_candidates(
             scored_rows.append((quality, row))
 
         paper_rows = [row for quality, row in scored_rows if str(row.get('source_type') or '') == 'paper' and quality >= 0]
-        repo_pairs = [
+        sorted_repo_scored = [
             (quality, row)
             for quality, row in sorted(
                 scored_rows,
                 key=lambda item: _repo_row_sort_key(item[1], quality=item[0]) if str(item[1].get('source_type') or '') == 'repo' else (0, 0, 0, ''),
             )
-            if str(row.get('source_type') or '') == 'repo' and _repo_row_usable(row, quality=quality)
+            if str(row.get('source_type') or '') == 'repo'
         ]
+        repo_pairs = [(quality, row) for quality, row in sorted_repo_scored if _repo_row_usable(row, quality=quality)]
         implementation_repo_pairs = []
         for quality, row in repo_pairs:
             metadata = json.loads(str(row.get('metadata_json') or '{}'))
@@ -278,6 +296,8 @@ def mine_candidates(
                 implementation_repo_pairs.append((quality, row))
         if implementation_repo_pairs:
             repo_pairs = implementation_repo_pairs
+        elif '_' in canonical_name:
+            repo_pairs = [(quality, row) for quality, row in sorted_repo_scored if _repo_concept_row_usable(row, quality=quality)]
         elif 'repo' in required_source_types:
             continue
         repo_rows = [row for _, row in repo_pairs]
@@ -334,6 +354,7 @@ def mine_candidates(
         'min_sources': min_sources,
         'required_source_types': list(required_source_types),
         'max_entity_chunk_ratio': max_entity_chunk_ratio,
+        'max_compound_entity_chunk_ratio': max_compound_entity_chunk_ratio,
     }
     return candidates, summary
 
@@ -347,6 +368,7 @@ def main() -> None:
     parser.add_argument('--min-sources', type=int, default=2)
     parser.add_argument('--required-source-types', type=str, default='paper,repo')
     parser.add_argument('--max-entity-chunk-ratio', type=float, default=0.01)
+    parser.add_argument('--max-compound-entity-chunk-ratio', type=float, default=0.04)
     parser.add_argument('--allow-candidate-mining', action='store_true', help='Required before reading a real corpus index.')
     parser.add_argument('--allow-arxiv-output', action='store_true', help='Required before writing candidates under /arxiv.')
     args = parser.parse_args()
@@ -362,6 +384,7 @@ def main() -> None:
         min_sources=args.min_sources,
         required_source_types=tuple(item.strip() for item in args.required_source_types.split(',') if item.strip()),
         max_entity_chunk_ratio=args.max_entity_chunk_ratio,
+        max_compound_entity_chunk_ratio=args.max_compound_entity_chunk_ratio,
     )
     write_jsonl(args.output, candidates)
     write_json(args.summary_output or args.output.with_name('candidates_summary.json'), summary)

@@ -12,6 +12,7 @@ from typing import Any, Iterable, Iterator, Mapping
 
 TOKEN_RE = re.compile(r"[A-Za-z0-9_./:-]+")
 WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9_\-]{2,}")
+COMPOUND_RE = re.compile(r"[A-Za-z][A-Za-z0-9]*(?:[_-][A-Za-z0-9]+)+|[A-Z]?[a-z0-9]+(?:[A-Z][a-z0-9]+)+")
 STOPWORDS = {
     "the", "and", "for", "with", "from", "that", "this", "into", "your", "have", "will", "would",
     "about", "their", "there", "which", "when", "where", "while", "using", "used", "than", "then",
@@ -177,6 +178,46 @@ def extract_terms(text: str, *, max_terms: int = 32, source_type: str | None = N
         if not should_keep_term(lower, source_type=source_type, modality=modality):
             continue
         counts[lower] += 1
+    return [term for term, _ in counts.most_common(max_terms)]
+
+
+def _split_camel(token: str) -> list[str]:
+    return [part for part in re.findall(r'[A-Z]?[a-z0-9]+|[A-Z]+(?=[A-Z][a-z]|$)', token) if part]
+
+
+def normalize_compound_term(token: str) -> str | None:
+    raw = str(token or '').strip()
+    if not raw:
+        return None
+    if '_' in raw or '-' in raw:
+        pieces = re.split(r'[_-]+', raw)
+    else:
+        pieces = _split_camel(raw)
+    normalized_parts = []
+    for piece in pieces:
+        lower = piece.lower().strip()
+        if len(lower) < 3:
+            continue
+        if not should_keep_term(lower):
+            continue
+        normalized_parts.append(lower)
+    if len(normalized_parts) < 2:
+        return None
+    compound = '_'.join(normalized_parts)
+    if not should_keep_term(compound, source_type=None, modality=None):
+        return None
+    return compound
+
+
+def extract_compound_terms(text: str, *, max_terms: int = 16, source_type: str | None = None, modality: str | None = None) -> list[str]:
+    counts: Counter[str] = Counter()
+    for token in COMPOUND_RE.findall(text or ''):
+        normalized = normalize_compound_term(token)
+        if not normalized:
+            continue
+        if not should_keep_term(normalized, source_type=source_type, modality=modality):
+            continue
+        counts[normalized] += 1
     return [term for term, _ in counts.most_common(max_terms)]
 
 

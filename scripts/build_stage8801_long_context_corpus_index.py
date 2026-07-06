@@ -10,6 +10,7 @@ from typing import Any, Iterator
 from long_context_common import (
     approx_token_count,
     chunk_text,
+    extract_compound_terms,
     extract_terms,
     iter_text_files,
     language_from_suffix,
@@ -111,6 +112,9 @@ def _chunk_row(*, source_root: Path, path: Path, chunk_index: int, text: str) ->
     source_type = source_type_from_path(path, source_root=source_root)
     source_id = source_id_from_path(path, source_root=source_root)
     rel = str(path.relative_to(source_root))
+    modality = modality_from_suffix(path)
+    base_terms = extract_terms(text, max_terms=12, source_type=source_type, modality=modality)
+    compound_terms = extract_compound_terms(text, max_terms=8, source_type=source_type, modality=modality)
     metadata = {
         'path': rel,
         'language': language_from_suffix(path),
@@ -118,9 +122,10 @@ def _chunk_row(*, source_root: Path, path: Path, chunk_index: int, text: str) ->
         'title': path.stem if source_type == 'paper' else None,
         'symbol_names': [],
         'imports': [],
-        'method_terms': extract_terms(text, max_terms=8, source_type=source_type, modality=modality_from_suffix(path)),
+        'method_terms': base_terms[:8],
+        'compound_terms': compound_terms,
         'benchmark_terms': [],
-        'error_terms': [term for term in extract_terms(text, max_terms=12, source_type=source_type, modality=modality_from_suffix(path)) if 'error' in term or 'fail' in term],
+        'error_terms': [term for term in base_terms if 'error' in term or 'fail' in term],
     }
     return {
         'chunk_id': stable_id(source_type, source_id, rel, str(chunk_index)),
@@ -128,7 +133,7 @@ def _chunk_row(*, source_root: Path, path: Path, chunk_index: int, text: str) ->
         'source_id': source_id,
         'doc_id': rel,
         'chunk_index': chunk_index,
-        'modality': modality_from_suffix(path),
+        'modality': modality,
         'token_count': approx_token_count(text),
         'text': text,
         'metadata_json': json.dumps(metadata, sort_keys=True),
@@ -138,7 +143,8 @@ def _chunk_row(*, source_root: Path, path: Path, chunk_index: int, text: str) ->
 def _mention_rows(chunk: dict[str, Any]) -> list[dict[str, Any]]:
     metadata = json.loads(chunk['metadata_json'])
     candidates = set(extract_terms(chunk.get('text', ''), max_terms=16, source_type=str(chunk.get('source_type') or ''), modality=str(chunk.get('modality') or '')))
-    for field in ('method_terms', 'benchmark_terms', 'error_terms', 'symbol_names'):
+    candidates.update(extract_compound_terms(chunk.get('text', ''), max_terms=12, source_type=str(chunk.get('source_type') or ''), modality=str(chunk.get('modality') or '')))
+    for field in ('method_terms', 'compound_terms', 'benchmark_terms', 'error_terms', 'symbol_names'):
         value = metadata.get(field)
         if isinstance(value, list):
             candidates.update(str(item).lower() for item in value if str(item).strip())

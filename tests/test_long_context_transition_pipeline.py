@@ -21,6 +21,7 @@ from long_context_entity_linker import build_entities
 from long_context_program_builder import build_programs
 from long_context_relation_graph_builder import build_relation_graph
 from long_context_candidate_miner import CandidateMiningSafetyError, mine_candidates, validate_candidate_mining_request
+from long_context_common import extract_compound_terms
 from long_context_example_renderer import render_examples
 from long_context_shortcut_audit import audit_examples
 
@@ -50,6 +51,14 @@ def _make_tree(root: Path) -> tuple[Path, Path, Path]:
         encoding="utf-8",
     )
     return papers, repos, datasets
+
+
+def test_extract_compound_terms_normalizes_identifiers() -> None:
+    text = "multi-agent system uses stateSpaceModel and spectral_kernel_update during rollout"
+    terms = extract_compound_terms(text, max_terms=16, source_type="repo", modality="code")
+    assert "state_space" in terms
+    assert "spectral_kernel_update" in terms
+    assert "multi_agent" not in terms
 
 
 def test_long_context_pipeline_end_to_end(tmp_path: Path) -> None:
@@ -373,6 +382,7 @@ def test_candidate_miner_from_parquet_index(tmp_path: Path) -> None:
     assert candidates
     assert summary["candidate_count"] == len(candidates)
     assert summary["max_entity_chunk_ratio"] == 0.01
+    assert summary["max_compound_entity_chunk_ratio"] == 0.04
     repo_chunk_ids = {
         chunk_id
         for candidate in candidates
