@@ -1,0 +1,107 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_arxiv_files_not_opened": true,
+    "all_dataset_rows_not_loaded": true,
+    "all_probes_not_executed": true,
+    "all_repository_source_bodies_not_loaded": true,
+    "authority_counts_zero": true,
+    "contract_present": true,
+    "dry_rows_match_contract_count": true,
+    "dry_rows_present": true,
+    "future_ticket_forbids_rows_source_training": true,
+    "future_ticket_schema_declared": true,
+    "parquet_future_rows_present": true,
+    "registry_frontier_stage8979_or_8980": true,
+    "required_fields_present": true,
+    "source_stage8979_passed": true
+  },
+  "decision": "Zero-row runner contract audit passed. The future ticket schema may allow parquet footer schema metadata access only, but row/body reads, /arxiv writes, mining, training, model execution, and runtime remain closed.",
+  "field_failures": {},
+  "future_ticket_schema": {
+    "allowed_probe_types": [
+      "PARQUET_FOOTER_SCHEMA_METADATA_ONLY"
+    ],
+    "defaults": {
+      "arxiv_write_allowed": false,
+      "max_candidates": 20,
+      "output_dir_root": "runs/local/artifacts",
+      "repository_source_body_reads_allowed": false,
+      "row_body_reads_allowed": false
+    },
+    "fields": [
+      "ticket_id",
+      "source_stage",
+      "selected_candidate_ids",
+      "allowed_probe_type",
+      "max_candidates",
+      "row_body_reads_allowed",
+      "repository_source_body_reads_allowed",
+      "arxiv_write_allowed",
+      "output_dir",
+      "required_artifacts"
+    ],
+    "forbidden_operations": [
+      "JSONL_FIRST_LINE_READ",
+      "CSV_HEADER_READ",
+      "PARQUET_BATCH_MATERIALIZATION",
+      "DATASET_ROW_SCAN",
+      "REPOSITORY_SOURCE_BODY_READ",
+      "ARXIV_WRITE",
+      "TRAINING",
+      "MINING",
+      "MODEL_EXECUTION"
+    ],
+    "required_artifacts": [
+      "ticket_authorization_card.json",
+      "selected_candidate_ids.jsonl",
+      "parquet_footer_schema_metadata_only.jsonl",
+      "footer_access_audit_card.json",
+      "decision_card.json"
+    ],
+    "ticket_name": "future_metadata_only_parquet_footer_schema_access_ticket_v1"
+  },
+  "metrics": {
+    "arxiv_file_opened_rows": 0,
+    "arxiv_write_authorized": false,
+    "candidate_file_opened": false,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "dataset_rows_loaded_rows": 0,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "dry_run_rows": 40,
+    "field_failure_rows": 0,
+    "future_ticket_fields": 10,
+    "future_ticket_forbidden_operations": 9,
+    "model_execution_attempted": false,
+    "network_upload_performed": false,
+    "parquet_future_ticket_rows": 36,
+    "probe_executed_rows": 0,
+    "repository_source_bodies_loaded": false,
+    "repository_source_body_read_rows": 0,
+    "route_count": 2,
+    "runtime_authorized_flag": false,
+    "schema_or_header_read_performed": false,
+    "training_authorized": false
+  },
+  "route_counts": {
+    "NAMED_SOFTWARE_MAINTAINER_DATASET_CANDIDATE": 20,
+    "PARQUET_TABLE_CANDIDATE": 20
+  },
+  "stage": 8980,
+  "stage_name": "stage8980_zero_row_runner_contract_audit",
+  "status": "ZERO_ROW_RUNNER_CONTRACT_AUDIT"
+}

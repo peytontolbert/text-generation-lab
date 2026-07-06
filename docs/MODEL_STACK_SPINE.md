@@ -2328,3 +2328,7 @@ Stage8978 preserves duplicate Stage8976/8977 schema-header design artifacts unde
 ## Stage8979 Zero-Row Preflight Runner Contract
 
 Stage8979 defines a dry-run runner contract over local Stage8977 selected-candidate metadata only. It emits planned probe rows while keeping /arxiv file opens, row loads, source-body reads, schema/header probes, mining, training, and runtime closed.
+
+## Stage8980 Zero-Row Runner Contract Audit
+
+Stage8980 audits Stage8979 dry-run rows and introduces a future ticket schema for parquet-footer metadata-only access while keeping all file opens, row/source-body reads, mining, training, and runtime closed.
