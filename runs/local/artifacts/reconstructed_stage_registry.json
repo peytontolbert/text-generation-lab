@@ -13,12 +13,12 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9002,
-    "latest_stage_name": "stage9002_one_run_training_ticket_blocker_audit",
-    "latest_stage_next_best_step": "Execute a trainer contract-only dry run only after the earlier manifest/row-sample gates have actually produced inputs. Until then, keep one-run training ticket instantiation blocked.",
-    "max_stage": 9002,
+    "latest_stage": 9005,
+    "latest_stage_name": "stage9005_post_training_diagnostics_instance_blocker_audit",
+    "latest_stage_next_best_step": "Keep diagnostics execution blocked until a real bounded training run emits the required telemetry artifacts. Do not promote, merge, score, or expand decoder paths.",
+    "max_stage": 9005,
     "min_stage": 8530,
-    "registry_rows": 504
+    "registry_rows": 506
   },
   "passed": true,
   "rows": [
@@ -10101,6 +10101,46 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9002_one_run_training_ticket_blocker_audit.json",
       "stage": 9002,
       "stage_name": "stage9002_one_run_training_ticket_blocker_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Materialize the locked tiny manifest/loss-mask/schema/leakage artifacts before any trainer dry-run execution. Keep training and model execution closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9003_trainer_contract_dry_run_instance_design.json",
+      "stage": 9003,
+      "stage_name": "stage9003_trainer_contract_dry_run_instance_design"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Keep diagnostics execution blocked until a real bounded training run emits the required telemetry artifacts. Do not promote, merge, score, or expand decoder paths.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9005_post_training_diagnostics_instance_blocker_audit.json",
+      "stage": 9005,
+      "stage_name": "stage9005_post_training_diagnostics_instance_blocker_audit"
     }
   ]
 }

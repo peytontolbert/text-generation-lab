@@ -2392,3 +2392,8 @@ Stage8998 defines the future trainer contract-only dry-run contract: CLI flags, 
 ## Stage9001 One-Run Training Ticket Instance Blocker Audit
 
 Stage9001 records that actual one-run bounded training ticket instantiation is blocked until trainer dry-run artifacts exist and pass. Training and model execution remain closed.
+
+## Stage9003 Trainer Contract Dry-Run Instance Design
+- Designs the future trainer contract-only dry-run instance that Stage9002 requires before one-run training tickets can be instantiated.
+- Keeps dry-run execution, model forward/backward, row-body loading, checkpoint writes, decoder CE, denoise CE, runtime, Gemma, harness scoring, and /arxiv writes closed.
+- Blocks execution until locked manifest, loss-mask, schema, and contamination/leakage proof artifacts exist and a separate authorization stage passes.
