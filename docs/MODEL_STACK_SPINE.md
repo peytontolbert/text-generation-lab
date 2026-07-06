@@ -2376,3 +2376,7 @@ Stage8992 audits the future parquet-footer metadata execution-gate design but st
 ## Stage8993 Post-Footer Schema Compatibility Judge Contract
 
 Stage8993 specifies the post-footer schema compatibility judge contract. It waits for footer metadata artifacts and keeps row reads, source-body reads, mining, training, model execution, and runtime closed.
+
+## Stage8995 Tiny Row Sample Ticket Instance Blocker Audit
+
+Stage8995 records that row-sample ticket instance design is blocked until footer metadata and schema compatibility artifacts exist. It keeps row reads, source-body reads, `/arxiv` writes, mining, training, model execution, and runtime closed.

@@ -1,0 +1,76 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers": [
+    "footer metadata execution has not run and is not authorized",
+    "footer access audit artifact does not exist yet",
+    "schema compatibility judge has not run",
+    "schema compatibility audit artifact does not exist yet",
+    "no schema-compatible candidate IDs are available"
+  ],
+  "checks": {
+    "authority_counts_zero": true,
+    "contract_limits_preserved": true,
+    "footer_metadata_artifact_absent_as_expected": true,
+    "hidden_eval_exclusion_policy_present": true,
+    "locked_eval_exclusion_policy_present": true,
+    "row_sample_instance_correctly_blocked": true,
+    "schema_judge_artifact_absent_as_expected": true,
+    "source_stage8994_passed": true,
+    "source_stage8994_present": true
+  },
+  "decision": "Tiny row-sample ticket instance is correctly blocked because footer metadata and schema compatibility artifacts do not exist. No row sampling, mining, training, or execution is authorized.",
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "blockers": 5,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "footer_metadata_artifact_present": false,
+    "hidden_eval_rows_loaded": false,
+    "locked_eval_rows_loaded": false,
+    "missing_prerequisites": 5,
+    "model_execution_attempted": false,
+    "repository_source_bodies_loaded": false,
+    "required_prerequisites": 8,
+    "row_sample_authorized_now": false,
+    "row_sample_executed_now": false,
+    "row_sample_ticket_instance_designed": false,
+    "row_sample_ticket_instance_ready": false,
+    "runtime_authorized_flag": false,
+    "schema_judge_artifact_present": false,
+    "training_authorized": false
+  },
+  "missing_prerequisites": [
+    "footer_metadata_artifact_present",
+    "footer_access_audit_passed",
+    "schema_compatibility_results_present",
+    "schema_compatibility_audit_passed",
+    "compatible_candidate_ids_nonempty"
+  ],
+  "prerequisite_status": {
+    "compatible_candidate_ids_nonempty": false,
+    "footer_access_audit_passed": false,
+    "footer_metadata_artifact_present": false,
+    "lineage_fields_policy_present": true,
+    "locked_eval_exclusion_policy_present": true,
+    "schema_compatibility_audit_passed": false,
+    "schema_compatibility_results_present": false,
+    "stage8994_contract_passed": true
+  },
+  "stage": 8995,
+  "stage_name": "stage8995_tiny_row_sample_ticket_instance_blocker_audit",
+  "status": "TINY_ROW_SAMPLE_TICKET_INSTANCE_BLOCKED_NO_EXECUTION"
+}

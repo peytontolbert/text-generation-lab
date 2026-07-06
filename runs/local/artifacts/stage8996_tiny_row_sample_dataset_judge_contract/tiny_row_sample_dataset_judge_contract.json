@@ -1,0 +1,99 @@
+{
+  "accept_routes": [
+    "ACCEPT_PENDING_LOCKED_MANIFEST_COMPILE",
+    "REJECT_JUNK_OR_OOD",
+    "REJECT_CONTAMINATION_OR_LOCKED_EVAL_RISK",
+    "REJECT_SCHEMA_MISMATCH",
+    "REQUEST_MORE_ROW_EVIDENCE",
+    "REQUEST_COUNTERFACTUAL_SIBLINGS"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "accept_routes_recorded": true,
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "judge_criteria_recorded": true,
+    "judge_inputs_recorded": true,
+    "judge_outputs_recorded": true,
+    "source_stage8994_keeps_row_sample_closed": true,
+    "source_stage8994_passed": true,
+    "source_stage8994_present": true,
+    "source_stage8994_requires_post_sample_judge": true
+  },
+  "decision": "Tiny row-sample judging is specified as a future contract only. It must reject junk/OOD, contamination, locked-eval risk, schema mismatch, target leakage, and missing lineage before any locked manifest compile.",
+  "forbidden_operations": [
+    "DATASET_ROW_JUDGE_EXECUTION_NOW",
+    "OPEN_ADDITIONAL_DATASET_FILES",
+    "READ_REPOSITORY_SOURCE_BODY",
+    "WRITE_TO_ARXIV",
+    "START_MINING",
+    "START_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "EMIT_TRAINING_MANIFEST",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "judge_criteria": [
+    "source_inventory_lineage_present",
+    "source_provenance_present",
+    "contamination_leakage_detector_pass",
+    "golden_locked_eval_suite_excluded",
+    "drift_canary_regression_monitor_ready",
+    "cluster_slice_near_duplicate_detector_pass",
+    "dataset_junk_ood_ranker_pass",
+    "schema_fields_match_training_surface",
+    "loss_mask_candidates_explicit",
+    "no_target_leakage_in_model_visible_fields",
+    "no_source_body_required_for_initial_acceptance",
+    "task_slice_tags_present",
+    "counterfactual_sibling_status_present_or_requested"
+  ],
+  "judge_inputs": [
+    "row_sample_ticket_authorization_card.json",
+    "row_sample_manifest_metadata.jsonl",
+    "row_sample_access_audit_card.json",
+    "no_locked_eval_sample_proof.json"
+  ],
+  "judge_outputs": [
+    "row_sample_dataset_judge_report.json",
+    "candidate_row_quality_scores.jsonl",
+    "rejected_row_ids.jsonl",
+    "accepted_row_ids_pending_manifest_compile.jsonl",
+    "judge_to_compiler_gate_status.json"
+  ],
+  "metrics": {
+    "accept_routes": 6,
+    "additional_dataset_files_opened": false,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_judge_executed_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_operations": 11,
+    "judge_criteria": 13,
+    "judge_inputs": 4,
+    "judge_outputs": 5,
+    "model_execution_attempted": false,
+    "repository_source_bodies_loaded": false,
+    "runtime_authorized_flag": false,
+    "training_authorized": false,
+    "training_manifest_emitted": false
+  },
+  "stage": 8996,
+  "stage_name": "stage8996_tiny_row_sample_dataset_judge_contract",
+  "status": "TINY_ROW_SAMPLE_DATASET_JUDGE_CONTRACT_NO_EXECUTION"
+}
