@@ -1,0 +1,59 @@
+{
+  "allowed_probe_type": "PARQUET_FOOTER_SCHEMA_METADATA_ONLY",
+  "arxiv_write_allowed": false,
+  "batch_materialization_allowed": false,
+  "candidate_source_artifact": "runs/local/artifacts/stage8979_zero_row_preflight_runner_contract/zero_row_preflight_dry_run_rows.jsonl",
+  "execution_authorized": false,
+  "expiration_stage": 8990,
+  "footer_access_authorized_now": false,
+  "forbidden_operations": [
+    "DATASET_ROW_SCAN",
+    "DATASET_ROW_MATERIALIZATION",
+    "PARQUET_BATCH_MATERIALIZATION",
+    "JSONL_FIRST_LINE_READ",
+    "CSV_HEADER_READ",
+    "REPOSITORY_SOURCE_BODY_READ",
+    "ARXIV_WRITE",
+    "CHECKPOINT_LOAD",
+    "TRAINING",
+    "MINING",
+    "MODEL_EXECUTION",
+    "RUNTIME_EXECUTION",
+    "NETWORK_UPLOAD"
+  ],
+  "max_candidates": 5,
+  "output_dir": "runs/local/artifacts/future_stage898x_parquet_footer_metadata_only_access",
+  "pass_gates": [
+    "source_stage8980_passed",
+    "selected_candidate_ids_subset_of_stage8979_dry_run_rows",
+    "selected_candidates_count_lte_20",
+    "allowed_probe_type_exact_parquet_footer_schema_metadata_only",
+    "row_body_reads_allowed_false",
+    "repository_source_body_reads_allowed_false",
+    "arxiv_write_allowed_false",
+    "batch_materialization_allowed_false",
+    "output_dir_under_runs_local_artifacts",
+    "required_artifacts_declared"
+  ],
+  "repository_source_body_reads_allowed": false,
+  "required_artifacts": [
+    "ticket_authorization_card.json",
+    "selected_candidate_ids.jsonl",
+    "parquet_footer_schema_metadata_only.jsonl",
+    "parquet_footer_access_audit_card.json",
+    "decision_card.json"
+  ],
+  "row_body_reads_allowed": false,
+  "selected_candidate_count": 5,
+  "selected_candidate_ids": [
+    "candidate_0004",
+    "candidate_0005",
+    "candidate_0006",
+    "candidate_0007",
+    "candidate_0008"
+  ],
+  "source_schema_artifact": "runs/local/artifacts/stage8981_parquet_footer_metadata_ticket_design/parquet_footer_metadata_ticket_schema.json",
+  "source_stage": 8983,
+  "ticket_id": "stage8984_pending_audit_parquet_footer_metadata_subset",
+  "ticket_state": "PENDING_AUDIT_NOT_EXECUTABLE"
+}

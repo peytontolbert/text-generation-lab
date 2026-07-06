@@ -1,0 +1,111 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "current_footer_ticket_inactive": true,
+    "current_training_closed": true,
+    "module_stack_complete": true,
+    "non_negotiable_controls_recorded": true,
+    "only_final_gate_authorizes_training": true,
+    "return_path_gates_recorded": true,
+    "source_summaries_passed": true,
+    "source_summaries_present": true
+  },
+  "decision": "The path back to training is explicit: footer metadata, schema judging, tiny row sampling, dataset judging, locked manifest compile, trainer contract-only dry run, then a one-run bounded training ticket. This stage authorizes none of those executions.",
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "footer_access_authorized_now": false,
+    "model_execution_attempted": false,
+    "non_negotiable_controls": 9,
+    "repository_source_bodies_loaded": false,
+    "return_path_gates": 8,
+    "runtime_authorized_flag": false,
+    "training_authorized": false,
+    "training_authorizing_gates": 1
+  },
+  "non_negotiable_controls": [
+    "locked_eval_never_train",
+    "contamination_leakage_detector_pass",
+    "dataset_junk_ood_ranker_pass",
+    "loss_masks_explicit_default_false",
+    "post_run_diagnostics_required",
+    "high_confidence_wrong_rows_reported",
+    "per_field_metrics_required",
+    "authority_ticket_scope_single_run",
+    "runtime_outputs_under_runs_local_artifacts"
+  ],
+  "return_path_gates": [
+    {
+      "authorizes_training": false,
+      "gate_id": "active_parquet_footer_ticket_instance",
+      "purpose": "select a small parquet candidate subset and grant only metadata footer access",
+      "requires_previous": "stage8983_active_parquet_footer_ticket_schema_audit"
+    },
+    {
+      "authorizes_training": false,
+      "gate_id": "parquet_footer_metadata_access_execution",
+      "purpose": "read footer/schema metadata only for selected parquet candidates",
+      "requires_previous": "active ticket instance audit pass"
+    },
+    {
+      "authorizes_training": false,
+      "gate_id": "schema_compatibility_judge",
+      "purpose": "classify candidate datasets against maintainer/curriculum schemas without row bodies",
+      "requires_previous": "footer metadata artifacts"
+    },
+    {
+      "authorizes_training": false,
+      "gate_id": "tiny_row_sample_ticket",
+      "purpose": "allow bounded row samples from selected compatible datasets",
+      "requires_previous": "schema compatibility pass"
+    },
+    {
+      "authorizes_training": false,
+      "gate_id": "row_sample_dataset_judge",
+      "purpose": "run junk/OOD/leakage/contamination/schema/task-label checks on tiny row samples",
+      "requires_previous": "tiny row sample artifacts"
+    },
+    {
+      "authorizes_training": false,
+      "gate_id": "locked_tiny_training_manifest_compile",
+      "purpose": "compile judged rows into explicit loss-mask training manifest",
+      "requires_previous": "dataset judge pass and contamination pass"
+    },
+    {
+      "authorizes_training": false,
+      "gate_id": "trainer_contract_only_dry_run",
+      "purpose": "validate trainer flags, loss masks, telemetry outputs, and no-write paths without training",
+      "requires_previous": "locked tiny training manifest"
+    },
+    {
+      "authorizes_training": true,
+      "gate_id": "one_run_bounded_training_ticket",
+      "purpose": "authorize exactly one bounded training/probe command with post-run diagnostics",
+      "requires_previous": "trainer contract-only dry run pass"
+    }
+  ],
+  "source_stage_status": {
+    "8970": true,
+    "8971": true,
+    "8983": true
+  },
+  "stage": 8990,
+  "stage_name": "stage8990_training_return_path_after_footer_gate_contract",
+  "status": "TRAINING_RETURN_PATH_CONTRACT_NO_EXECUTION"
+}

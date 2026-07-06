@@ -2348,3 +2348,11 @@ Stage8982 preserves duplicate Stage8981 parquet-footer ticket design artifacts u
 ## Stage8983 Active Parquet Footer Ticket Schema Audit
 
 Stage8983 audits the inactive Stage8981 parquet-footer metadata ticket schema and keeps footer access, file opens, row reads, mining, training, and runtime closed.
+
+## Stage8990 Training Return Path After Footer Gate Contract
+
+Stage8990 records the gated path from footer metadata preflight to tiny bounded training: footer ticket, schema judge, tiny row sample ticket, dataset judge, locked manifest, trainer contract dry run, and one-run bounded training ticket. Execution remains closed.
+
+## Stage8984 Active Parquet Footer Ticket Instance Design
+
+Stage8984 designs a pending-audit active parquet-footer ticket instance over a small candidate subset. It does not authorize or execute footer access.
