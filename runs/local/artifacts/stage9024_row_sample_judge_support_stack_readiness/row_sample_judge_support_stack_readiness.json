@@ -1,0 +1,249 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "body_free_support_index": true,
+    "diagnostic_coverage_complete": true,
+    "source_stage9023_passed": true,
+    "source_stage9023_present": true,
+    "support_modules_recorded": true,
+    "support_scripts_present": true,
+    "support_tests_present": true
+  },
+  "decision": "The row-sample judge diagnostics support stack is indexed and file-present. This stage does not execute module tests, run a judge, materialize outputs, compile a manifest, train, mine, or read row bodies.",
+  "diagnostic_coverage": {
+    "confidence": [
+      "cross_encoder_reranker_calibration",
+      "dataset_cartography_active_learning",
+      "confidence_ood_head_contract"
+    ],
+    "criteria_scores": [
+      "objective_row_judge",
+      "cross_encoder_reranker_calibration",
+      "semantic_equivalence_metamorphic_verifier",
+      "gradient_activation_interpretability",
+      "rubric_judge_calibrator"
+    ],
+    "feature_presence": [
+      "gradient_activation_interpretability",
+      "program_state_semantic_flow_extractors"
+    ],
+    "gate_status": [
+      "program_state_semantic_flow_extractors"
+    ],
+    "loss_mask_candidates": [
+      "objective_row_judge"
+    ],
+    "near_duplicate_risk_below_threshold": [
+      "adversarial_hard_negative_generator"
+    ],
+    "quality_score": [
+      "dataset_junk_ood_ranker_v1",
+      "confidence_ood_head_contract",
+      "rubric_judge_calibrator"
+    ],
+    "reject_reason": [
+      "objective_row_judge",
+      "semantic_equivalence_metamorphic_verifier"
+    ],
+    "risk_reasons": [
+      "dataset_junk_ood_ranker_v1",
+      "dataset_cartography_active_learning",
+      "training_data_attribution_influence"
+    ],
+    "shortcut_proxy_absent": [
+      "adversarial_hard_negative_generator"
+    ]
+  },
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_files_opened": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "judge_executed_now": false,
+    "judge_outputs_materialized_now": false,
+    "manifest_compile_authorized_now": false,
+    "manifest_materialized_now": false,
+    "missing_diagnostic_coverage": 0,
+    "model_execution_attempted": false,
+    "module_tests_executed_now": false,
+    "repository_source_bodies_read_now": false,
+    "required_diagnostic_coverage": 10,
+    "row_bodies_read_now": false,
+    "runtime_authorized_flag": false,
+    "support_modules": 13,
+    "support_scripts_present": 13,
+    "support_tests_present": 13,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false
+  },
+  "missing_diagnostic_coverage": [],
+  "missing_scripts": [],
+  "missing_tests": [],
+  "stage": 9024,
+  "stage_name": "stage9024_row_sample_judge_support_stack_readiness",
+  "status": "ROW_SAMPLE_JUDGE_SUPPORT_STACK_READINESS_NO_EXECUTION",
+  "support_modules": [
+    {
+      "diagnostics": [
+        "criteria_scores",
+        "reject_reason",
+        "loss_mask_candidates"
+      ],
+      "module": "objective_row_judge",
+      "script": "scripts/objective_row_judge.py",
+      "script_exists": true,
+      "test": "tests/test_judge_and_shortcuts.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "quality_score",
+        "risk_reasons",
+        "route"
+      ],
+      "module": "dataset_junk_ood_ranker_v1",
+      "script": "scripts/dataset_junk_ood_ranker_v1.py",
+      "script_exists": true,
+      "test": "tests/test_dataset_junk_ood_ranker_v1.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "risk_reason_counts",
+        "reject_reason_counts"
+      ],
+      "module": "structured_dataset_junk_ranker",
+      "script": "scripts/structured_dataset_junk_ranker.py",
+      "script_exists": true,
+      "test": "tests/test_judge_and_shortcuts.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "confidence",
+        "criteria_scores"
+      ],
+      "module": "cross_encoder_reranker_calibration",
+      "script": "scripts/cross_encoder_reranker_calibration.py",
+      "script_exists": true,
+      "test": "tests/test_cross_encoder_reranker_calibration.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "confidence",
+        "risk_reasons"
+      ],
+      "module": "dataset_cartography_active_learning",
+      "script": "scripts/dataset_cartography_active_learning.py",
+      "script_exists": true,
+      "test": "tests/test_dataset_cartography_active_learning.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "risk_reasons",
+        "blocking_reasons"
+      ],
+      "module": "training_data_attribution_influence",
+      "script": "scripts/training_data_attribution_influence.py",
+      "script_exists": true,
+      "test": "tests/test_training_data_attribution_influence.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "shortcut_proxy_absent",
+        "near_duplicate_risk_below_threshold"
+      ],
+      "module": "adversarial_hard_negative_generator",
+      "script": "scripts/adversarial_hard_negative_generator.py",
+      "script_exists": true,
+      "test": "tests/test_adversarial_hard_negative_generator.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "criteria_scores",
+        "reject_reason"
+      ],
+      "module": "semantic_equivalence_metamorphic_verifier",
+      "script": "scripts/semantic_equivalence_metamorphic_verifier.py",
+      "script_exists": true,
+      "test": "tests/test_semantic_equivalence_metamorphic_verifier.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "confidence",
+        "quality_score"
+      ],
+      "module": "confidence_ood_head_contract",
+      "script": "scripts/confidence_ood_head_contract.py",
+      "script_exists": true,
+      "test": "tests/test_confidence_ood_head_contract.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "criteria_scores",
+        "feature_presence"
+      ],
+      "module": "gradient_activation_interpretability",
+      "script": "scripts/gradient_activation_interpretability.py",
+      "script_exists": true,
+      "test": "tests/test_gradient_activation_interpretability.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "score_distribution",
+        "blocking_reasons"
+      ],
+      "module": "training_telemetry_metrics",
+      "script": "scripts/training_telemetry_metrics.py",
+      "script_exists": true,
+      "test": "tests/test_training_telemetry_metrics.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "quality_score",
+        "criteria_scores"
+      ],
+      "module": "rubric_judge_calibrator",
+      "script": "scripts/rubric_judge_calibrator.py",
+      "script_exists": true,
+      "test": "tests/test_rubric_judge_calibrator.py",
+      "test_exists": true
+    },
+    {
+      "diagnostics": [
+        "feature_presence",
+        "gate_status"
+      ],
+      "module": "program_state_semantic_flow_extractors",
+      "script": "scripts/program_state_data_control_flow_extractor.py",
+      "script_exists": true,
+      "test": "tests/test_program_state_semantic_flow_extractors.py",
+      "test_exists": true
+    }
+  ]
+}
