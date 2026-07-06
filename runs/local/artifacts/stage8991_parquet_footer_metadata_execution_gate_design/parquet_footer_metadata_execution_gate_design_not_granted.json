@@ -1,0 +1,61 @@
+{
+  "allowed_probe_type": "PARQUET_FOOTER_SCHEMA_METADATA_ONLY",
+  "arxiv_write_allowed": false,
+  "batch_materialization_allowed": false,
+  "execution_authorized": false,
+  "footer_access_authorized_now": false,
+  "forbidden_operations": [
+    "DATASET_ROW_SCAN",
+    "DATASET_ROW_MATERIALIZATION",
+    "PARQUET_BATCH_MATERIALIZATION",
+    "PARQUET_DATA_PAGE_READ",
+    "REPOSITORY_SOURCE_BODY_READ",
+    "ARXIV_WRITE",
+    "TRAINING",
+    "MINING",
+    "MODEL_EXECUTION",
+    "RUNTIME_EXECUTION",
+    "NETWORK_UPLOAD"
+  ],
+  "gate_id": "stage8991_future_parquet_footer_metadata_execution_gate",
+  "gate_state": "DESIGNED_NOT_GRANTED",
+  "grant_requires_clean_worktree_or_explicit_dirty_card": true,
+  "grant_requires_manual_execution_authorization": true,
+  "grant_requires_no_arxiv_write": true,
+  "grant_requires_stage8985_passed": true,
+  "max_candidates": 5,
+  "model_execution_authorized": false,
+  "output_dir": "runs/local/artifacts/future_stage899x_parquet_footer_metadata_only_access",
+  "repository_source_body_reads_allowed": false,
+  "required_outputs": [
+    "footer_schema_metadata.jsonl",
+    "footer_access_audit_card.json",
+    "candidate_footer_metadata_card.json",
+    "no_row_read_proof.json",
+    "next_schema_judge_input.jsonl"
+  ],
+  "required_runtime_assertions": [
+    "candidate_ids_match_stage8984_ticket",
+    "candidate_count_lte_5",
+    "probe_type_exact_parquet_footer_schema_metadata_only",
+    "read_footer_metadata_only",
+    "no_row_groups_materialized",
+    "no_dataset_rows_loaded",
+    "no_repository_source_bodies_loaded",
+    "output_dir_under_runs_local_artifacts",
+    "write_marker_under_output_dir_only",
+    "abort_on_any_forbidden_operation"
+  ],
+  "row_body_reads_allowed": false,
+  "runtime_authorized": false,
+  "selected_candidate_count": 5,
+  "selected_candidate_ids": [
+    "candidate_0004",
+    "candidate_0005",
+    "candidate_0006",
+    "candidate_0007",
+    "candidate_0008"
+  ],
+  "source_ticket_id": "stage8984_pending_audit_parquet_footer_metadata_subset",
+  "training_authorized": false
+}
