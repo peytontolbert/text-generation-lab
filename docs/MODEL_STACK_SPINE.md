@@ -2427,3 +2427,8 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 - Reviews the proposed duplicate-resolution alias diff and verifies all operations are metadata-only.
 - Does not apply the diff, write the registry, delete rows, delete artifacts, or open execution authority.
 - Leaves the active training path closed until a separate decision returns to manifest-input materialization.
+
+## Stage9015 Return To Manifest Input Gate
+- Returns active work to Stage9007 manifest-input prerequisites after duplicate preview review.
+- Keeps duplicate cleanup unapplied and all manifest/training/model execution authority closed.
+- Next work is a readiness audit for row-sample judge outputs.

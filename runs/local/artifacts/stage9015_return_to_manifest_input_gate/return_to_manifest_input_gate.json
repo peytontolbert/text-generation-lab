@@ -1,0 +1,77 @@
+{
+  "active_next_surface": "stage9007_manifest_input_prerequisites",
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "required_manifest_inputs_recorded": true,
+    "return_decision_rules_recorded": true,
+    "source_stage9007_manifest_closed": true,
+    "source_stage9007_passed": true,
+    "source_stage9007_present": true,
+    "source_stage9014_apply_closed": true,
+    "source_stage9014_passed": true,
+    "source_stage9014_present": true
+  },
+  "decision": "Active work returns to Stage9007 manifest-input prerequisites. Duplicate cleanup remains unapplied and all execution/training authority remains closed.",
+  "forbidden_operations": [
+    "APPLY_DUPLICATE_RESOLUTION_NOW",
+    "MATERIALIZE_MANIFEST_NOW",
+    "READ_ROW_BODIES_NOW",
+    "RUN_TRAINER_DRY_RUN_NOW",
+    "RUN_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "RUN_GEMMA",
+    "WRITE_TO_ARXIV",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "metrics": {
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "duplicate_resolution_applied_now": false,
+    "duplicate_resolution_apply_authorized_now": false,
+    "manifest_materialization_authorized_now": false,
+    "manifest_materialized_now": false,
+    "model_execution_attempted": false,
+    "required_manifest_inputs": 4,
+    "return_to_manifest_input_path": true,
+    "row_body_read_authorized_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false
+  },
+  "required_manifest_inputs": [
+    "row_sample_dataset_judge_report.json",
+    "accepted_row_ids_pending_manifest_compile.jsonl",
+    "candidate_row_quality_scores.jsonl",
+    "judge_to_compiler_gate_status.json"
+  ],
+  "return_decision_rules": [
+    "duplicate_resolution_preview_reviewed",
+    "duplicate_resolution_apply_not_authorized",
+    "registry_cleanup_not_required_before_manifest_input_design",
+    "return_to_stage9007_manifest_input_prerequisites",
+    "do_not_materialize_manifest_until_judge_outputs_exist",
+    "do_not_run_trainer_dry_run",
+    "do_not_train"
+  ],
+  "stage": 9015,
+  "stage_name": "stage9015_return_to_manifest_input_gate",
+  "status": "RETURN_TO_MANIFEST_INPUT_GATE_NO_EXECUTION"
+}
