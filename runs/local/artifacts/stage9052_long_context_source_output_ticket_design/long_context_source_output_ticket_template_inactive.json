@@ -1,0 +1,91 @@
+{
+  "allowed_operations_now": [],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "command_materialized": false,
+  "denied_operations": [
+    "scan_arxiv",
+    "scan_repository_library",
+    "read_repository_bodies",
+    "read_dataset_rows",
+    "build_corpus_index",
+    "read_long_context_index",
+    "run_candidate_mining",
+    "write_candidates_under_arxiv",
+    "write_parquet_under_arxiv",
+    "upload_hf",
+    "compile_training_manifest",
+    "run_model",
+    "train_model"
+  ],
+  "diagnostic_closure_stage": "stage8903_diagnostics_closure_audit",
+  "forbidden_without_passing_diagnostics": [
+    "interpret_model_metrics",
+    "claim_training_quality",
+    "claim_decoder_quality",
+    "promote_probe",
+    "export_checkpoint",
+    "merge_controller",
+    "open_runtime",
+    "open_source_or_body_emission",
+    "use_hidden_or_locked_eval_for_tuning"
+  ],
+  "metrics_interpretation_blocked_until_diagnostics_pass": true,
+  "post_run_artifact_contract_stage": "stage8862_native_probe_interpretability_artifact_contract",
+  "post_run_diagnostic_gate_required": true,
+  "post_run_diagnostic_gate_stage": "stage8902_diagnostic_promotion_gate",
+  "promotion_blocked_until_diagnostics_pass": true,
+  "required_caps": {
+    "allow_arxiv_output": false,
+    "allow_candidate_mining": false,
+    "allow_corpus_scan": false,
+    "hf_upload": false,
+    "max_candidates": 0,
+    "max_chars_per_file": 0,
+    "max_files_per_root": 0,
+    "profile": "paper_repo_core",
+    "rows_per_shard": 0
+  },
+  "required_output_paths": {
+    "candidate_output": "explicit_path_required_later",
+    "index_dir": "explicit_path_required_later",
+    "summary_output": "explicit_path_required_later"
+  },
+  "required_postrun_artifacts": [
+    "index_summary.json",
+    "candidate_summary.json",
+    "source_lineage_card.json",
+    "route_card.json",
+    "shortcut_baseline_audit.json",
+    "junk_ranker_card.json"
+  ],
+  "required_preflight_artifacts": [
+    "source_root_allowlist.json",
+    "output_path_allowlist.json",
+    "source_license_security_card.json",
+    "expected_profile_card.json",
+    "no_locked_eval_overlap_card.json",
+    "no_destructive_cleanup_card.json"
+  ],
+  "required_source_roots": {
+    "datasets_root": "optional_explicit_path_required_later",
+    "papers_root": "explicit_path_required_later",
+    "repos_root": "explicit_path_required_later"
+  },
+  "requires_explicit_user_authorization": true,
+  "requires_fresh_pre_execution_audit": true,
+  "ticket_granted_now": false,
+  "ticket_id": "future_long_context_source_output_ticket__inactive_stage9052",
+  "ticket_status": "TEMPLATE_ONLY_INACTIVE"
+}

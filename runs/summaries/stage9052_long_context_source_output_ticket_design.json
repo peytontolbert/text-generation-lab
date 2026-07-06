@@ -1,6 +1,7 @@
 {
   "artifacts": {
-    "audit": "runs/local/artifacts/stage9051_long_context_candidate_miner_guard_audit/long_context_candidate_miner_guard_audit.json"
+    "audit": "runs/local/artifacts/stage9052_long_context_source_output_ticket_design/long_context_source_output_ticket_audit.json",
+    "ticket": "runs/local/artifacts/stage9052_long_context_source_output_ticket_design/long_context_source_output_ticket_template_inactive.json"
   },
   "authority": {
     "body_emission_authorized": false,
@@ -15,18 +16,18 @@
     "scoring_authorized_next": false,
     "source_emission_authorized": false
   },
-  "created_at_utc": "2026-07-06T18:43:40Z",
-  "decision": "Preserve the candidate miner, but require explicit future source/output authorization before reading real long-context indexes or writing candidates under /arxiv.",
+  "created_at_utc": "2026-07-06T18:44:02Z",
+  "decision": "Inactive long-context source/output ticket schema is defined but not granted. Real corpus indexing/candidate mining remains closed.",
   "metrics": {
-    "arxiv_candidate_write_authorized_now": false,
-    "arxiv_index_read_authorized_now": false,
     "arxiv_write_authorized": false,
     "authority_rows": 0,
     "body_emission_authorized": false,
-    "candidate_miner_guard_audit_only": true,
-    "candidate_mining_executed_now": false,
+    "candidate_mining_authorized_now": false,
+    "command_materialized": false,
     "controller_complete_merge_authorized_next": false,
+    "corpus_scan_authorized_now": false,
     "decoder_ce_training_authorized_next": false,
+    "denied_operations": 13,
     "denoise_ce_training_authorized_next": false,
     "failures": [],
     "gemma_execution_authorized_next": false,
@@ -35,13 +36,17 @@
     "model_execution_attempted": false,
     "model_execution_authorized_next": false,
     "promotion_ready": false,
+    "required_postrun_artifacts": 6,
+    "required_preflight_artifacts": 6,
     "runtime_authorized": false,
     "scoring_authorized_next": false,
     "source_emission_authorized": false,
+    "ticket_contract_failures": 0,
+    "ticket_granted_now": false,
     "training_authorized": false
   },
-  "next_best_step": "Design an active source/output ticket for a tiny explicit long-context index only if real candidate mining is needed. Otherwise continue pipeline recovery without data scans.",
+  "next_best_step": "Audit this inactive ticket schema, then continue no-data pipeline recovery unless the user explicitly authorizes a tiny source/output ticket instance later.",
   "passed": true,
-  "stage": 9051,
-  "stage_name": "stage9051_long_context_candidate_miner_guard_audit"
+  "stage": 9052,
+  "stage_name": "stage9052_long_context_source_output_ticket_design"
 }
