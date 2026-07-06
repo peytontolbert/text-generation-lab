@@ -2412,3 +2412,8 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 - Inventories duplicate recovered stage IDs without mutation or deletion.
 - Classifies duplicates into allowed IDs, recovery bands, and outside-band risks.
 - Keeps all execution and training authority closed while a later resolution policy is designed.
+
+## Stage9010 Registry Duplicate Resolution Policy
+- Defines preservation aliases for duplicate recovered stage rows without mutating the registry.
+- Requires future preview/apply stages before any renumbering and forbids deletion of summaries or artifacts.
+- Keeps all execution and training authority closed.
