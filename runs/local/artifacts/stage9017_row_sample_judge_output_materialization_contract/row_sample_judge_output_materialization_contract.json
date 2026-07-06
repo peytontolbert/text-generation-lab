@@ -1,0 +1,143 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blocked_until": [
+    "row_sample_ticket_authorization_card.json exists and authorizes metadata-only judging",
+    "row_sample_manifest_metadata.jsonl exists",
+    "row_sample_access_audit_card.json exists and passes",
+    "no_locked_eval_sample_proof.json exists and passes",
+    "separate materialization execution authorization passes"
+  ],
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "future_outputs_recorded": true,
+    "materialization_rules_recorded": true,
+    "output_schema_recorded": true,
+    "required_upstream_inputs_recorded": true,
+    "source_stage8996_outputs_match": true,
+    "source_stage8996_passed": true,
+    "source_stage8996_present": true,
+    "source_stage9016_confirms_missing_outputs": true,
+    "source_stage9016_passed": true,
+    "source_stage9016_present": true
+  },
+  "decision": "Row-sample judge-output materialization is specified as a future contract only. It cannot run until upstream row-sample authorization/access artifacts exist and a separate execution authorization passes.",
+  "forbidden_operations": [
+    "MATERIALIZE_JUDGE_OUTPUTS_NOW",
+    "RUN_ROW_SAMPLE_JUDGE_NOW",
+    "OPEN_ADDITIONAL_DATASET_FILES",
+    "READ_ROW_BODIES_NOW",
+    "READ_REPOSITORY_SOURCE_BODY",
+    "MATERIALIZE_MANIFEST_NOW",
+    "RUN_TRAINER_DRY_RUN_NOW",
+    "START_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "RUN_GEMMA",
+    "WRITE_TO_ARXIV",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "future_outputs": [
+    "row_sample_dataset_judge_report.json",
+    "candidate_row_quality_scores.jsonl",
+    "rejected_row_ids.jsonl",
+    "accepted_row_ids_pending_manifest_compile.jsonl",
+    "judge_to_compiler_gate_status.json"
+  ],
+  "materialization_rules": [
+    "consume_only_authorized_row_sample_metadata",
+    "do_not_open_additional_dataset_files",
+    "do_not_read_repository_source_bodies",
+    "do_not_read_row_bodies",
+    "emit_row_ids_and_scores_only",
+    "emit_rejections_with_reason_codes",
+    "emit_accepts_pending_manifest_compile_only",
+    "emit_gate_status_without_manifest_materialization",
+    "require_no_locked_eval_sample_proof",
+    "require_no_target_leakage_in_visible_fields",
+    "require_loss_mask_candidates_explicit",
+    "default_decoder_ce_false",
+    "default_denoise_ce_false"
+  ],
+  "metrics": {
+    "additional_dataset_files_opened": false,
+    "arxiv_write_authorized": false,
+    "contract_designed": true,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "future_outputs": 5,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "judge_outputs_materialized_now": false,
+    "manifest_materialized_now": false,
+    "materialization_authorized_now": false,
+    "materialization_rules": 13,
+    "model_execution_attempted": false,
+    "output_schema_files": 5,
+    "repository_source_bodies_read_now": false,
+    "required_upstream_inputs": 4,
+    "row_bodies_read_now": false,
+    "row_sample_judge_executed_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false
+  },
+  "output_schema": {
+    "accepted_row_ids_pending_manifest_compile.jsonl": [
+      "row_id",
+      "route",
+      "split",
+      "language_family",
+      "task_family"
+    ],
+    "candidate_row_quality_scores.jsonl": [
+      "row_id",
+      "route",
+      "quality_score",
+      "risk_reasons",
+      "loss_mask_candidates"
+    ],
+    "judge_to_compiler_gate_status.json": [
+      "passed",
+      "accepted_rows",
+      "rejected_rows",
+      "allowed_losses",
+      "blocked_losses"
+    ],
+    "rejected_row_ids.jsonl": [
+      "row_id",
+      "reject_reason",
+      "risk_reasons"
+    ],
+    "row_sample_dataset_judge_report.json": [
+      "passed",
+      "criteria",
+      "counts",
+      "blocking_reasons",
+      "authority"
+    ]
+  },
+  "required_upstream_inputs": [
+    "row_sample_ticket_authorization_card.json",
+    "row_sample_manifest_metadata.jsonl",
+    "row_sample_access_audit_card.json",
+    "no_locked_eval_sample_proof.json"
+  ],
+  "stage": 9017,
+  "stage_name": "stage9017_row_sample_judge_output_materialization_contract",
+  "status": "ROW_SAMPLE_JUDGE_OUTPUT_MATERIALIZATION_CONTRACT_NO_EXECUTION"
+}

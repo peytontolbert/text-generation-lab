@@ -2437,3 +2437,8 @@ Stage9001 records that actual one-run bounded training ticket instantiation is b
 - Audits readiness of the four row-sample judge outputs needed for locked manifest materialization.
 - Records missing inputs as blockers; does not run a judge, read row bodies, materialize a manifest, or train.
 - Keeps all execution and /arxiv write authority closed.
+
+## Stage9017 Row-Sample Judge Output Materialization Contract
+- Defines future row-sample judge outputs required before locked manifest materialization.
+- Requires metadata-only row-sample inputs and forbids row body/source body reads.
+- Keeps manifest materialization, trainer dry-run, training, mining, and /arxiv writes closed.
