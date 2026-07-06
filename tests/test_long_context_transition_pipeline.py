@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 from pathlib import Path
 
@@ -37,6 +38,11 @@ def _make_tree(root: Path) -> tuple[Path, Path, Path]:
     )
     (repos / "repo_a" / "engine.py").write_text(
         "def online_update():\n    return 'streaming update active'\n",
+        encoding="utf-8",
+    )
+    (repos / "repo_a" / "src" / "assets" / "translations").mkdir(parents=True)
+    (repos / "repo_a" / "src" / "assets" / "translations" / "lesson.json").write_text(
+        '{"title": "Streaming update lesson", "body": "adaptive controller adversarial training dataset"}\n',
         encoding="utf-8",
     )
     (datasets / "trace_a" / "failure.txt").write_text(
@@ -145,6 +151,39 @@ def test_production_parquet_index_writes_outputs(tmp_path: Path) -> None:
     assert list((out / "links").glob("*.parquet"))
 
 
+def test_production_parquet_index_balances_capped_repo_scan_across_repositories(tmp_path: Path) -> None:
+    if importlib.util.find_spec("pyarrow") is None:
+        return
+    repo_root = tmp_path / "balanced_repos"
+    (repo_root / "repo_a" / "src" / "assets" / "translations").mkdir(parents=True)
+    (repo_root / "repo_a" / "src" / "assets" / "translations" / "lesson.json").write_text(
+        '{"title": "attention lesson"}\n',
+        encoding="utf-8",
+    )
+    (repo_root / "repo_b" / "src").mkdir(parents=True)
+    (repo_root / "repo_b" / "src" / "engine.py").write_text(
+        "def attention_kernel():\n    return True\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "balanced_out"
+    build_chunk_and_mention_shards(
+        paper_roots=[],
+        repo_roots=[repo_root],
+        dataset_roots=[],
+        output_dir=out,
+        repo_chunk_tokens=64,
+        max_files_per_root=2,
+        rows_per_shard=8,
+    )
+    import pyarrow.parquet as pq
+    paths = set()
+    for shard in sorted((out / "chunks").glob("*.parquet")):
+        for row in pq.read_table(shard).to_pylist():
+            paths.add(json.loads(row["metadata_json"])["path"])
+    assert any(path.endswith("repo_a/src/assets/translations/lesson.json") for path in paths)
+    assert any(path.endswith("repo_b/src/engine.py") for path in paths)
+
+
 def test_production_parquet_index_requires_explicit_corpus_scan_flag(tmp_path: Path) -> None:
     try:
         validate_corpus_index_request(
@@ -222,3 +261,18 @@ def test_candidate_miner_from_parquet_index(tmp_path: Path) -> None:
     candidates, summary = mine_candidates(index_dir=out, max_candidates=10, required_source_types=("paper", "repo"))
     assert candidates
     assert summary["candidate_count"] == len(candidates)
+    repo_chunk_ids = {
+        chunk_id
+        for candidate in candidates
+        for chunk_id, transition in zip(candidate["supporting_chunk_ids"], candidate["transition_chain"])
+        if transition["source_type"] == "repo"
+    }
+    assert repo_chunk_ids
+    import pyarrow.parquet as pq
+    chunk_rows = {}
+    for shard in sorted((out / "chunks").glob("*.parquet")):
+        for row in pq.read_table(shard).to_pylist():
+            chunk_rows[row["chunk_id"]] = row
+    repo_paths = {json.loads(chunk_rows[chunk_id]["metadata_json"])["path"] for chunk_id in repo_chunk_ids}
+    assert all("/assets/translations/" not in path for path in repo_paths)
+    assert any(path.endswith("engine.py") for path in repo_paths)

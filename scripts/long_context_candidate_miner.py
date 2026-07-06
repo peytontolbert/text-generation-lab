@@ -2,10 +2,17 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any
 
 from long_context_common import GENERIC_CORPUS_TERMS, STOPWORDS, STRUCTURED_NOISE_TERMS, stable_id, write_json, write_jsonl
+
+
+CODE_SIGNAL_RE = re.compile(
+    r"\b(def|class|import|from|return|yield|async|await|function|const|let|var|export|public|private|protected|interface|struct|enum|impl|fn|package)\b|=>|::",
+    re.IGNORECASE,
+)
 
 
 class CandidateMiningSafetyError(ValueError):
@@ -84,17 +91,33 @@ def _canonical_name_ok(name: str) -> bool:
 def _repo_path_quality(path: str) -> int:
     lower = str(path or '').lower()
     score = 0
+    if any(part in lower for part in ['/node_modules/', '/dist/', '/build/', '/binder/', '/coverage/', '/vendor/']):
+        score -= 5
+    if any(part in lower for part in ['/assets/', '/translations/', '/i18n/', '/locale/', '/locales/', '/fixtures/', '/examples/']):
+        score -= 4
+    if any(name in lower for name in ['package-lock.json', 'pnpm-lock.yaml', 'yarn.lock', 'poetry.lock', 'cargo.lock']):
+        score -= 5
     if any(part in lower for part in ['/src/', '/lib/', '/app/', '/core/']):
         score += 3
     if lower.endswith(('.py', '.ts', '.tsx', '.js', '.jsx', '.java', '.go', '.rs', '.c', '.cc', '.cpp')):
         score += 2
     if any(part in lower for part in ['/test', '/tests']):
         score += 1
-    if any(part in lower for part in ['/dist/', '/build/', '/binder/']):
-        score -= 3
     if 'readme' in lower or lower.endswith('.md'):
         score -= 2
+    if lower.endswith(('.json', '.yaml', '.yml', '.toml', '.cfg', '.ini')):
+        score -= 2
     return score
+
+
+def _repo_row_usable(row: dict[str, Any], *, quality: int) -> bool:
+    if quality <= 1:
+        return False
+    modality = str(row.get('modality') or '')
+    if modality != 'code':
+        return False
+    text = str(row.get('text') or '')
+    return bool(CODE_SIGNAL_RE.search(text))
 
 
 def _paper_path_quality(path: str) -> int:
@@ -147,7 +170,11 @@ def mine_candidates(
             scored_rows.append((quality, row))
 
         paper_rows = [row for quality, row in scored_rows if str(row.get('source_type') or '') == 'paper' and quality >= 0]
-        repo_rows = [row for quality, row in scored_rows if str(row.get('source_type') or '') == 'repo' and quality > 0]
+        repo_rows = [
+            row
+            for quality, row in scored_rows
+            if str(row.get('source_type') or '') == 'repo' and _repo_row_usable(row, quality=quality)
+        ]
         if required_source_types == ('paper', 'repo') and (not paper_rows or not repo_rows):
             continue
 
