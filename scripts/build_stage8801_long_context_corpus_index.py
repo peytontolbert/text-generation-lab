@@ -162,7 +162,7 @@ def _repo_file_priority(path: Path, *, source_root: Path) -> tuple[int, str]:
     score = 0
     if suffix in {'.py', '.ts', '.tsx', '.js', '.jsx', '.java', '.go', '.rs', '.c', '.cc', '.cpp', '.h', '.hpp', '.sh'}:
         score += 10
-    if any(part in rel for part in ['/src/', '/lib/', '/app/', '/core/']):
+    if any(part in rel for part in ['/src/', '/lib/', '/app/', '/core/', '/cmd/', '/pkg/']):
         score += 6
     if any(part in rel for part in ['/test', '/tests']):
         score += 2
@@ -179,6 +179,27 @@ def _repo_file_priority(path: Path, *, source_root: Path) -> tuple[int, str]:
     return (-score, rel)
 
 
+def _iter_repo_candidate_files(repo_root: Path) -> Iterator[Path]:
+    yielded: set[Path] = set()
+    preferred_dirs = ['src', 'lib', 'app', 'core', 'cmd', 'pkg']
+    for dirname in preferred_dirs:
+        subdir = repo_root / dirname
+        if not subdir.is_dir():
+            continue
+        preferred = sorted(iter_text_files(subdir), key=lambda item: _repo_file_priority(item, source_root=repo_root))
+        for path in preferred:
+            if path in yielded:
+                continue
+            yielded.add(path)
+            yield path
+    fallback = sorted(iter_text_files(repo_root), key=lambda item: _repo_file_priority(item, source_root=repo_root))
+    for path in fallback:
+        if path in yielded:
+            continue
+        yielded.add(path)
+        yield path
+
+
 def _iter_root_files(root: Path, declared_type: str, max_files_per_root: int | None) -> Iterator[Path]:
     if declared_type != 'repo' or max_files_per_root is None:
         for index, path in enumerate(iter_text_files(root)):
@@ -187,29 +208,24 @@ def _iter_root_files(root: Path, declared_type: str, max_files_per_root: int | N
             yield path
         return
 
-    grouped: dict[str, list[Path]] = defaultdict(list)
-    for path in iter_text_files(root):
-        grouped[source_id_from_path(path, source_root=root)].append(path)
-    for paths in grouped.values():
-        paths.sort(key=lambda item: _repo_file_priority(item, source_root=root))
-
-    source_ids = sorted(grouped)
+    repo_roots = [path for path in sorted(root.iterdir()) if path.is_dir()]
+    if not repo_roots:
+        repo_roots = [root]
+    iterators = [iter(_iter_repo_candidate_files(repo_root)) for repo_root in repo_roots]
     emitted = 0
-    depth = 0
-    while emitted < max_files_per_root:
-        made_progress = False
-        for source_id in source_ids:
-            paths = grouped[source_id]
-            if depth >= len(paths):
+    while emitted < max_files_per_root and iterators:
+        next_iterators: list[Iterator[Path]] = []
+        for iterator in iterators:
+            try:
+                path = next(iterator)
+            except StopIteration:
                 continue
-            yield paths[depth]
+            yield path
             emitted += 1
-            made_progress = True
             if emitted >= max_files_per_root:
                 return
-        if not made_progress:
-            return
-        depth += 1
+            next_iterators.append(iterator)
+        iterators = next_iterators
 
 
 def build_chunk_and_mention_shards(
