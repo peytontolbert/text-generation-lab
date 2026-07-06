@@ -1,0 +1,116 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "allowed_root_policy_recorded": true,
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "forbidden_roots_recorded": true,
+    "quality_gates_recorded": true,
+    "required_outputs_recorded": true,
+    "source_stage9037_passed": true,
+    "source_stage9037_present": true,
+    "ticket_required_fields_recorded": true
+  },
+  "decision": "Defined a future long-context execution ticket that defaults to synthetic/repo-local fixtures only. No corpus scan or dataset materialization is authorized now.",
+  "forbidden_operations": [
+    "RUN_LONG_CONTEXT_PIPELINE_ON_ARXIV_NOW",
+    "RUN_LONG_CONTEXT_PIPELINE_ON_REPOSITORY_LIBRARY_NOW",
+    "MATERIALIZE_TRAINING_ROWS_NOW",
+    "RUN_TRAINER_DRY_RUN_NOW",
+    "START_TRAINING",
+    "RUN_MODEL",
+    "RUN_RUNTIME",
+    "RUN_GEMMA",
+    "WRITE_TO_ARXIV",
+    "AUTHORIZE_DECODER_CE",
+    "AUTHORIZE_DENOISE_CE"
+  ],
+  "metrics": {
+    "arxiv_scan_authorized_now": false,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "long_context_pipeline_executed_now": false,
+    "model_execution_attempted": false,
+    "quality_gates": 7,
+    "repository_library_scan_authorized_now": false,
+    "required_outputs": 9,
+    "runtime_authorized_flag": false,
+    "ticket_contract_only": true,
+    "ticket_required_fields": 11,
+    "training_authorized": false,
+    "training_rows_materialized_now": false
+  },
+  "stage": 9038,
+  "stage_name": "stage9038_long_context_no_data_scan_ticket",
+  "status": "LONG_CONTEXT_NO_DATA_SCAN_TICKET_NO_EXECUTION",
+  "ticket_template": {
+    "allowed_roots": [
+      "synthetic_tmp_fixture_only_by_default",
+      "repo_local_fixture_only_without_separate_user_approval",
+      "explicit_future_ticket_required_for_arxiv_roots",
+      "explicit_future_ticket_required_for_repository_library_roots"
+    ],
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "forbidden_roots": [
+      "/arxiv",
+      "/arxiv/datasets",
+      "/arxiv/repositories",
+      "/data/repository_library",
+      "/data/repository_library/exports/corpus/papers"
+    ],
+    "max_chars_per_file": 120000,
+    "max_files_per_root": 20,
+    "mode": "synthetic_fixture_only_by_default",
+    "output_dir": "runs/local/artifacts/long_context_transition_future_ticket",
+    "quality_gates": [
+      "source_inventory_exists",
+      "accepted_examples_recorded",
+      "single_chunk_shortcut_audited",
+      "last_chunk_shortcut_audited",
+      "lexical_topk_shortcut_audited",
+      "no_training_rows_exported",
+      "no_arxiv_write"
+    ],
+    "required_outputs": [
+      "chunks.jsonl",
+      "source_inventory.json",
+      "entities.jsonl",
+      "entity_aliases.json",
+      "programs.jsonl",
+      "examples.jsonl",
+      "quality_audits.jsonl",
+      "examples_accepted.jsonl",
+      "summary.json"
+    ],
+    "source_stage": "stage9037_long_context_transition_pipeline_readiness",
+    "ticket_id": "future_long_context_synthetic_fixture_or_explicit_root_ticket"
+  }
+}
