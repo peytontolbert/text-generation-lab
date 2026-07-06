@@ -1,0 +1,151 @@
+{
+  "allowed_current_frontier_flags": [
+    "--input",
+    "--output-dir",
+    "--require-recovered-gates"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "allowed_flags_recorded": true,
+    "authority_counts_zero": true,
+    "forbidden_flags_recorded": true,
+    "safe_command_flags_accepted": true,
+    "source_stage9021_blocks_manifest_compile": true,
+    "source_stage9021_passed": true,
+    "source_stage9021_present": true,
+    "synthetic_decoder_loss_blocked": true,
+    "synthetic_denoise_loss_blocked": true,
+    "synthetic_runtime_loss_blocked": true,
+    "unsafe_command_flags_rejected": true
+  },
+  "decision": "Under the current frontier, curriculum compiler invocation may only run no-data/synthetic or future judged metadata paths without decoder, denoise, or runtime flags.",
+  "forbidden_current_frontier_flags": [
+    "--allow-decoder",
+    "--allow-denoise",
+    "--allow-runtime"
+  ],
+  "metrics": {
+    "allowed_current_frontier_flags": 3,
+    "arxiv_write_authorized": false,
+    "data_mining_authorized": false,
+    "dataset_files_opened": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "decoder_loss_rows_under_current_policy": 0,
+    "denoise_ce_authorized": false,
+    "denoise_loss_rows_under_current_policy": 0,
+    "forbidden_current_frontier_flags": 3,
+    "gemma_execution_attempted": false,
+    "harness_scoring_attempted": false,
+    "manifest_compile_authorized_now": false,
+    "manifest_materialized_now": false,
+    "model_execution_attempted": false,
+    "repository_source_bodies_read_now": false,
+    "row_bodies_read_now": false,
+    "runtime_authorized_flag": false,
+    "runtime_loss_rows_under_current_policy": 0,
+    "synthetic_rows": 4,
+    "trainer_dry_run_execution_authorized_now": false,
+    "training_authorized": false,
+    "unsafe_compiler_flags_rejected": true
+  },
+  "safe_command_policy": {
+    "allowed": true,
+    "forbidden_flags": []
+  },
+  "stage": 9022,
+  "stage_name": "stage9022_current_frontier_compiler_invocation_policy_audit",
+  "status": "CURRENT_FRONTIER_COMPILER_INVOCATION_POLICY_AUDIT_NO_DATA",
+  "synthetic_compile_card": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "compiler_options": {
+      "allow_decoder": false,
+      "allow_denoise": false,
+      "allow_runtime": false,
+      "require_recovered_gates": false
+    },
+    "gate_rejected_examples": [],
+    "gate_rejected_rows": 0,
+    "loss_counts": {
+      "action_sequence_ce": 1,
+      "allowed_import_policy_ce": 1,
+      "blocked_import_policy_ce": 1,
+      "build_mode_ce": 1,
+      "decoder_ce": 0,
+      "denoise_ce": 0,
+      "edit_localization_ce": 1,
+      "file_plan_ce": 1,
+      "patch_operator_ce": 1,
+      "repair_surface_ce": 1,
+      "repo_dependency_policy_ce": 1,
+      "runtime_reward": 0,
+      "surface_role_ce": 1,
+      "symbol_binding_ce": 1,
+      "verifier_repair_ce": 1
+    },
+    "objective_counts": {
+      "bounded_decoder_ce": 1,
+      "denoise_repair": 1,
+      "long_output_holdout": 1,
+      "structured_state": 1
+    },
+    "rejected_or_holdout_examples": [],
+    "required_recovered_gate_references": [
+      "source_inventory_lineage",
+      "source_provenance",
+      "contamination_leakage_detector",
+      "golden_locked_eval_suite",
+      "drift_canary_regression_monitor",
+      "cluster_slice_near_duplicate_detector",
+      "dataset_junk_ood_ranker_v1",
+      "schema_drift_detector"
+    ],
+    "route_counts": {
+      "HOLD_LONG_OUTPUT": 1,
+      "KEEP_BOUNDED_DECODER": 1,
+      "KEEP_STRUCTURED": 1,
+      "USE_FOR_DENOISE_REPAIR": 1
+    },
+    "rows": 4,
+    "split_counts": {
+      "eval": 1,
+      "strict_eval": 2,
+      "train": 1
+    }
+  },
+  "synthetic_objective_counts": {
+    "bounded_decoder_ce": 1,
+    "denoise_repair": 1,
+    "long_output_holdout": 1,
+    "structured_state": 1
+  },
+  "unsafe_command_policy": {
+    "allowed": false,
+    "forbidden_flags": [
+      "--allow-decoder"
+    ]
+  }
+}
