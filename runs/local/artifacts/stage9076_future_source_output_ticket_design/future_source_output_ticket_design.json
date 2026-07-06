@@ -1,0 +1,181 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_recorded": true,
+    "post_artifacts_recorded": true,
+    "preflight_artifacts_recorded": true,
+    "registry_frontier_stage9075": true,
+    "required_ticket_fields_recorded": true,
+    "source_stage9059_passed": true,
+    "source_stage9059_present": true,
+    "source_stage9075_passed": true,
+    "source_stage9075_present": true,
+    "template_authority_closed": true,
+    "template_blocks_body_access": true,
+    "template_blocks_cleanup": true,
+    "template_blocks_current_arxiv_io": true,
+    "template_records_never_delete_arxiv": true
+  },
+  "decision": "Future source/output ticket schema is defined as inactive. It grants no current source metadata reads, row/source body reads, route-card materialization, indexing, candidate mining, /arxiv IO, cleanup, trainer dry run, model execution, or training.",
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "candidate_mining_authorized": false,
+    "candidate_rows_materialized": 0,
+    "cleanup_authorized_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_operations": 16,
+    "index_building_authorized": false,
+    "model_forward_attempted": false,
+    "repository_source_bodies_read_now": false,
+    "required_post_artifacts": 5,
+    "required_preflight_artifacts": 5,
+    "required_ticket_fields": 17,
+    "route_cards_materialized_now": false,
+    "row_bodies_read_now": false,
+    "runtime_authorized_flag": false,
+    "source_metadata_read_now": false,
+    "ticket_instantiated_now": false,
+    "trainer_dry_run_executed_now": false,
+    "training_authorized": false,
+    "training_ready": false
+  },
+  "required_ticket_fields": [
+    "ticket_id",
+    "ticket_stage",
+    "scope",
+    "allowed_source_roots",
+    "allowed_output_roots",
+    "metadata_access_policy",
+    "body_access_policy",
+    "route_card_policy",
+    "index_policy",
+    "candidate_policy",
+    "arxiv_policy",
+    "cleanup_policy",
+    "caps",
+    "required_preflight_artifacts",
+    "required_post_artifacts",
+    "forbidden_operations",
+    "authority"
+  ],
+  "stage": 9076,
+  "stage_name": "stage9076_future_source_output_ticket_design",
+  "status": "FUTURE_SOURCE_OUTPUT_TICKET_DESIGN_INACTIVE_NO_ACCESS",
+  "ticket_template": {
+    "allowed_output_roots": [
+      "runs/local/artifacts/future_ticket_placeholder"
+    ],
+    "allowed_source_roots": [],
+    "arxiv_policy": {
+      "arxiv_is_backup_root": true,
+      "arxiv_read_authorized_now": false,
+      "arxiv_write_authorized_now": false,
+      "never_delete_arxiv": true,
+      "write_requires_separate_backup_ticket": true
+    },
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_access_policy": {
+      "read_decoder_targets": false,
+      "read_private_session_bodies": false,
+      "read_row_bodies": false,
+      "read_source_bodies": false
+    },
+    "candidate_policy": {
+      "candidate_rows_materialized_now": 0,
+      "requires_compound_candidate_guard": true,
+      "requires_dispersion_guard": true,
+      "requires_junk_ood_route": true,
+      "requires_loss_mask_translation": true
+    },
+    "caps": {
+      "max_candidate_rows_future": 0,
+      "max_metadata_paths_future": 0,
+      "max_output_bytes_future": 0,
+      "max_route_cards_future": 0
+    },
+    "cleanup_policy": {
+      "cleanup_authorized_now": false,
+      "forbid_arxiv_cleanup": true,
+      "forbid_root_cleanup": true,
+      "must_use_safe_cleanup_only": true
+    },
+    "forbidden_operations": [
+      "READ_ROW_BODY_TEXT",
+      "READ_REPOSITORY_SOURCE_BODY",
+      "READ_PRIVATE_SESSION_BODY",
+      "MATERIALIZE_TRAINING_MANIFEST",
+      "RUN_TRAINER_DRY_RUN",
+      "START_TRAINING",
+      "RUN_MODEL",
+      "RUN_RUNTIME",
+      "RUN_GEMMA",
+      "RUN_HARNESS_SCORING",
+      "AUTHORIZE_DECODER_CE",
+      "AUTHORIZE_DENOISE_CE",
+      "DELETE_ANY_SOURCE_ROOT",
+      "DELETE_ARXIV",
+      "WRITE_TO_ARXIV_WITHOUT_BACKUP_TICKET",
+      "CLEANUP_OUTSIDE_RUN_ARTIFACT_DIR"
+    ],
+    "index_policy": {
+      "build_index_now": false,
+      "candidate_mining_now": false,
+      "compound_only_optional_future_flag": true
+    },
+    "metadata_access_policy": {
+      "list_paths_allowed": false,
+      "read_file_sizes_hashes_allowed": false,
+      "read_metadata_indexes_allowed": false
+    },
+    "required_post_artifacts": [
+      "source_output_access_audit.json",
+      "route_card_materialization_audit.json",
+      "path_lineage_card.json",
+      "no_body_read_proof.json",
+      "no_arxiv_write_without_explicit_backup_ticket.json"
+    ],
+    "required_preflight_artifacts": [
+      "source_output_ticket_authorization_card.json",
+      "allowed_roots_inventory.json",
+      "no_row_body_read_plan.json",
+      "no_destructive_cleanup_plan.json",
+      "output_path_policy_card.json"
+    ],
+    "route_card_policy": {
+      "compiler_ready_default": false,
+      "materialize_route_cards": false,
+      "requires_stage9059_audit": true,
+      "training_ready_default": false
+    },
+    "scope": "metadata_only_source_output_for_long_context_route_cards",
+    "ticket_id": "future_stage9xxx_source_output_ticket_inactive",
+    "ticket_stage": "future_stage9xxx"
+  }
+}

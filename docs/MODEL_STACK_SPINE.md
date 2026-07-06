@@ -2476,3 +2476,9 @@ Trainer execution, row loading, repository source/body loading, candidate mining
 Stage9075 reconciles the current frontier after Stage9074. Trainer dry-run documentation controls are now attached to the graph; the next safe branches remain future source/output ticket design or route-card audit design.
 
 Trainer execution, row loading, candidate mining, model forward, decoder CE, denoise CE, runtime, /arxiv compiler IO, and training remain closed.
+
+## Stage9076 Future Source/Output Ticket Design
+
+Stage9076 defines an inactive future source/output ticket schema for route-card materialization and long-context candidate work. It records allowed future policy fields, forbidden operations, path/output controls, and the permanent rule that `/arxiv` is a backup root and must never be deleted.
+
+No source metadata read, row/source body read, route-card materialization, index build, candidate mining, /arxiv IO, cleanup, trainer dry run, model forward, decoder CE, denoise CE, runtime, or training is authorized.
