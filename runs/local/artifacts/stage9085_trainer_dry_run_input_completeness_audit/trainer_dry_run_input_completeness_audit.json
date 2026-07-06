@@ -1,0 +1,108 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_failures": [],
+  "checks": {
+    "additional_inputs_present": true,
+    "authority_closed": true,
+    "base_checklist_passes": true,
+    "blocking_assertions_present": true,
+    "negative_cases_rejected": true,
+    "no_rows_or_route_cards_materialized": true,
+    "source_stage9084_passed": true,
+    "source_stage9084_present": true,
+    "trainer_closed": true
+  },
+  "decision": "Trainer dry-run input completeness checklist passes the no-execution audit and rejects missing control inputs, premature row/route-card materialization, /arxiv compiler access, trainer readiness, and open authority.",
+  "failures": [],
+  "metrics": {
+    "additional_inputs_checked": 8,
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "blocking_assertions_checked": 7,
+    "candidate_rows_materialized": 0,
+    "compiler_handoff_ready_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_forward_attempted": false,
+    "negative_cases": 9,
+    "negative_cases_rejected": 9,
+    "route_cards_materialized_now": false,
+    "runtime_authorized_flag": false,
+    "source_output_ticket_instantiated_now": false,
+    "trainer_dry_run_executed_now": false,
+    "trainer_dry_run_ready_now": false,
+    "training_authorized": false,
+    "training_ready": false
+  },
+  "negative_cases": {
+    "arxiv_read_authorized_for_compiler": {
+      "failures": [
+        "arxiv_read_authorized_for_compiler"
+      ],
+      "rejected": true
+    },
+    "authority_open_decoder_ce": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "candidate_rows_materialized": {
+      "failures": [
+        "candidate_rows_materialized"
+      ],
+      "rejected": true
+    },
+    "missing_route_card_materialization_audit_output": {
+      "failures": [
+        "missing_additional_input:route_card_materialization_audit_output.json"
+      ],
+      "rejected": true
+    },
+    "missing_source_output_ticket_authorization": {
+      "failures": [
+        "missing_additional_input:source_output_ticket_authorization_card.json"
+      ],
+      "rejected": true
+    },
+    "missing_trainer_blocking_assertion": {
+      "failures": [
+        "missing_blocking_assertion:trainer_dry_run_blocked_until_route_card_audit_passes"
+      ],
+      "rejected": true
+    },
+    "route_cards_materialized_now": {
+      "failures": [
+        "route_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "trainer_dry_run_ready_now": {
+      "failures": [
+        "trainer_dry_run_ready_now"
+      ],
+      "rejected": true
+    },
+    "unexpected_registry_frontier": {
+      "failures": [
+        "unexpected_registry_frontier:9999"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "stage": 9085,
+  "stage_name": "stage9085_trainer_dry_run_input_completeness_audit"
+}
