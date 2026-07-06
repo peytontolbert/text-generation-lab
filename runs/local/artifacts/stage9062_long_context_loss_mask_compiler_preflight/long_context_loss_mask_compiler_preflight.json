@@ -1,0 +1,125 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_closed": true,
+    "closed_card_passes": true,
+    "decoder_denoise_runtime_closed": true,
+    "negative_cases_rejected": true,
+    "route_loss_keys_known": true,
+    "source_stage9061_passed": true,
+    "source_stage9061_present": true,
+    "structured_after_all_gates_passes_preflight_only": true,
+    "trainer_loss_keys_known": true,
+    "training_ready_rows_now_zero": true
+  },
+  "closed_card_failures": [],
+  "decision": "Route-card losses are explicitly translated into trainer loss-mask keys, but long-context compiler handoff remains preflight-only with decoder/denoise/runtime/training closed.",
+  "failures": [],
+  "forbidden_route_losses_now": [
+    "decoder_ce",
+    "denoise_ce",
+    "retrieval_loss",
+    "runtime_reward"
+  ],
+  "forbidden_trainer_losses_now": [
+    "decoder_ce",
+    "denoise_ce",
+    "runtime_reward"
+  ],
+  "metrics": {
+    "compiler_ready_rows_now": 0,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "model_execution_attempted": false,
+    "model_input_rows_now": 0,
+    "negative_cases": 7,
+    "route_loss_keys": 5,
+    "runtime_authorized_flag": false,
+    "trainer_loss_keys": 15,
+    "training_authorized": false,
+    "training_ready_rows_now": 0
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "compiler_ready_missing_loss_mask_card": {
+      "failures": [
+        "compiler_ready_missing_handoff_artifacts"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_open": {
+      "failures": [
+        "forbidden_route_loss_open:decoder_ce",
+        "forbidden_trainer_loss_open:decoder_ce"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_open": {
+      "failures": [
+        "forbidden_route_loss_open:denoise_ce",
+        "forbidden_trainer_loss_open:denoise_ce"
+      ],
+      "rejected": true
+    },
+    "runtime_reward_open": {
+      "failures": [
+        "forbidden_route_loss_open:runtime_reward",
+        "forbidden_trainer_loss_open:runtime_reward"
+      ],
+      "rejected": true
+    },
+    "structured_loss_before_compiler_ready": {
+      "failures": [
+        "loss_open_before_compiler_ready"
+      ],
+      "rejected": true
+    },
+    "training_ready_open": {
+      "failures": [
+        "training_ready_not_allowed_by_loss_mask_preflight"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "route_to_trainer_loss_translation": {
+    "decoder_ce": [
+      "decoder_ce"
+    ],
+    "denoise_ce": [
+      "denoise_ce"
+    ],
+    "retrieval_loss": [],
+    "runtime_reward": [
+      "runtime_reward"
+    ],
+    "structured_aux_ce": [
+      "surface_role_ce",
+      "repair_surface_ce",
+      "symbol_binding_ce",
+      "edit_localization_ce",
+      "patch_operator_ce",
+      "verifier_repair_ce"
+    ]
+  },
+  "stage": 9062,
+  "stage_name": "stage9062_long_context_loss_mask_compiler_preflight",
+  "structured_after_all_gates_failures": []
+}

@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "preflight": "runs/local/artifacts/stage9062_long_context_loss_mask_compiler_preflight/long_context_loss_mask_compiler_preflight.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-06T19:42:42Z",
+  "decision": "Route-card losses are explicitly translated into trainer loss-mask keys, but long-context compiler handoff remains preflight-only with decoder/denoise/runtime/training closed.",
+  "metrics": {
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "compiler_ready_rows_now": 0,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_authorized": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_authorized": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_attempted": false,
+    "model_execution_authorized_next": false,
+    "model_input_rows_now": 0,
+    "negative_cases": 7,
+    "promotion_ready": false,
+    "route_loss_keys": 5,
+    "runtime_authorized": false,
+    "runtime_authorized_flag": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "trainer_loss_keys": 15,
+    "training_authorized": false,
+    "training_ready_rows_now": 0
+  },
+  "next_best_step": "Continue no-data recovery by attaching Stage9061-9062 compiler/loss-mask blockers to the central graph and training readiness matrix.",
+  "passed": true,
+  "stage": 9062,
+  "stage_name": "stage9062_long_context_loss_mask_compiler_preflight"
+}
