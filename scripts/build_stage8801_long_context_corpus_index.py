@@ -5,7 +5,7 @@ import json
 from collections import Counter, defaultdict
 from itertools import combinations
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 
 from long_context_common import (
     approx_token_count,
@@ -156,6 +156,62 @@ def _mention_rows(chunk: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
+def _repo_file_priority(path: Path, *, source_root: Path) -> tuple[int, str]:
+    rel = str(path.relative_to(source_root)).lower()
+    suffix = path.suffix.lower()
+    score = 0
+    if suffix in {'.py', '.ts', '.tsx', '.js', '.jsx', '.java', '.go', '.rs', '.c', '.cc', '.cpp', '.h', '.hpp', '.sh'}:
+        score += 10
+    if any(part in rel for part in ['/src/', '/lib/', '/app/', '/core/']):
+        score += 6
+    if any(part in rel for part in ['/test', '/tests']):
+        score += 2
+    if any(part in rel for part in ['/assets/', '/translations/', '/i18n/', '/locale/', '/locales/', '/fixtures/']):
+        score -= 8
+    if any(part in rel for part in ['/dist/', '/build/', '/coverage/', '/vendor/', '/node_modules/']):
+        score -= 10
+    if any(name in rel for name in ['package-lock.json', 'pnpm-lock.yaml', 'yarn.lock', 'poetry.lock', 'cargo.lock']):
+        score -= 10
+    if rel.endswith(('.json', '.yaml', '.yml', '.toml', '.cfg', '.ini')):
+        score -= 3
+    if 'readme' in rel or rel.endswith('.md'):
+        score -= 4
+    return (-score, rel)
+
+
+def _iter_root_files(root: Path, declared_type: str, max_files_per_root: int | None) -> Iterator[Path]:
+    if declared_type != 'repo' or max_files_per_root is None:
+        for index, path in enumerate(iter_text_files(root)):
+            if max_files_per_root is not None and index >= max_files_per_root:
+                break
+            yield path
+        return
+
+    grouped: dict[str, list[Path]] = defaultdict(list)
+    for path in iter_text_files(root):
+        grouped[source_id_from_path(path, source_root=root)].append(path)
+    for paths in grouped.values():
+        paths.sort(key=lambda item: _repo_file_priority(item, source_root=root))
+
+    source_ids = sorted(grouped)
+    emitted = 0
+    depth = 0
+    while emitted < max_files_per_root:
+        made_progress = False
+        for source_id in source_ids:
+            paths = grouped[source_id]
+            if depth >= len(paths):
+                continue
+            yield paths[depth]
+            emitted += 1
+            made_progress = True
+            if emitted >= max_files_per_root:
+                return
+        if not made_progress:
+            return
+        depth += 1
+
+
 def build_chunk_and_mention_shards(
     *,
     paper_roots: list[Path],
@@ -188,9 +244,7 @@ def build_chunk_and_mention_shards(
             inventory.append({'root': str(root), 'declared_type': declared_type, 'exists': False, 'files_scanned': 0})
             continue
         scanned = 0
-        for index, path in enumerate(iter_text_files(root)):
-            if max_files_per_root is not None and index >= max_files_per_root:
-                break
+        for path in _iter_root_files(root, declared_type, max_files_per_root):
             scanned += 1
             file_count += 1
             raw = safe_read_text(path, max_chars=max_chars_per_file)
