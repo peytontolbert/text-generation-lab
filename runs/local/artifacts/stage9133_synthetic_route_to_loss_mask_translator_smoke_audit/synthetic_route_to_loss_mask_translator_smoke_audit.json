@@ -1,0 +1,122 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "card_failures": [],
+  "checks": {
+    "authority_closed": true,
+    "authority_counts_zero": true,
+    "card_failures_empty": true,
+    "negative_cases_rejected": true,
+    "no_real_dataset_rows": true,
+    "no_real_route_cards": true,
+    "registry_frontier_stage9132": true,
+    "source_stage9132_passed": true,
+    "synthetic_loss_mask_count": true,
+    "synthetic_loss_mask_file_present": true
+  },
+  "decision": "Audited synthetic loss-mask smoke outputs and rejected unsafe mutated cards. Real route cards, real loss masks, compiler handoff, trainer/model paths, uploads, cleanup, runtime, and training remain closed.",
+  "failures": [],
+  "metrics": {
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 10,
+    "negative_cases_rejected": 10,
+    "network_upload_performed": false,
+    "real_loss_masks_materialized": 0,
+    "real_route_cards_used": 0,
+    "repository_source_bodies_loaded": false,
+    "route_cards_materialized_now": false,
+    "runtime_authorized_flag": false,
+    "synthetic_loss_masks_audited": 6,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "denoise_decoder_ce": {
+      "failures": [
+        "synthetic_use_for_denoise_repair:decoder_ce_route_violation"
+      ],
+      "rejected": true
+    },
+    "holdout_decoder_ce": {
+      "failures": [
+        "synthetic_hold_long_output:decoder_ce_route_violation",
+        "synthetic_hold_long_output:hold_long_output_decoder_ce"
+      ],
+      "rejected": true
+    },
+    "missing_required_field": {
+      "failures": [
+        "synthetic_keep_structured:missing_required_field:loss_weights"
+      ],
+      "rejected": true
+    },
+    "missing_telemetry": {
+      "failures": [
+        "synthetic_keep_structured:missing_telemetry:row_field_losses",
+        "synthetic_keep_structured:missing_telemetry:row_field_logits",
+        "synthetic_keep_structured:missing_telemetry:row_token_loss_if_decoder_ce",
+        "synthetic_keep_structured:missing_telemetry:loss_mask_enforcement_audit",
+        "synthetic_keep_structured:missing_telemetry:module_delta_norms",
+        "synthetic_keep_structured:missing_telemetry:failure_bucket_card"
+      ],
+      "rejected": true
+    },
+    "needs_retrieval_decoder_ce": {
+      "failures": [
+        "synthetic_needs_retrieval:decoder_ce_route_violation",
+        "synthetic_needs_retrieval:needs_retrieval_decoder_ce"
+      ],
+      "rejected": true
+    },
+    "open_authority": {
+      "failures": [
+        "synthetic_keep_structured:authority_open"
+      ],
+      "rejected": true
+    },
+    "quarantine_enabled_loss": {
+      "failures": [
+        "synthetic_quarantine_label_conflict:quarantine_has_enabled_losses"
+      ],
+      "rejected": true
+    },
+    "real_route_card_used": {
+      "failures": [
+        "synthetic_keep_structured:real_route_card_used"
+      ],
+      "rejected": true
+    },
+    "runtime_reward_allowed": {
+      "failures": [
+        "synthetic_keep_structured:runtime_reward_allowed"
+      ],
+      "rejected": true
+    },
+    "structured_decoder_ce": {
+      "failures": [
+        "synthetic_keep_structured:decoder_ce_route_violation"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "stage": 9133,
+  "stage_name": "stage9133_synthetic_route_to_loss_mask_translator_smoke_audit"
+}
