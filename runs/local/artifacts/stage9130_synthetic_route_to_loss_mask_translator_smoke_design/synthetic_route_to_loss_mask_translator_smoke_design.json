@@ -1,0 +1,155 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "decoder_ce_only_for_keep_bounded_decoder": true,
+    "keep_bounded_decoder_fixture_present": true,
+    "quarantine_fixture_present": true,
+    "registry_frontier_stage9129": true,
+    "required_smoke_checks_recorded": true,
+    "source_stage9127_passed": true,
+    "source_stage9129_passed": true,
+    "synthetic_fixtures_recorded": true
+  },
+  "decision": "Designed a synthetic-only route-card to loss-mask translator smoke. No real route cards, real loss masks, compiler handoff, trainer/model paths, uploads, cleanup, or training are materialized.",
+  "metrics": {
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "network_upload_performed": false,
+    "real_loss_masks_materialized": 0,
+    "real_route_cards_used": 0,
+    "repository_source_bodies_loaded": false,
+    "required_smoke_checks": 9,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_authorized_flag": false,
+    "synthetic_fixtures": 6,
+    "synthetic_loss_masks_materialized_now": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "required_smoke_checks": [
+    "synthetic_only_inputs",
+    "all_route_fixtures_present",
+    "decoder_ce_only_for_keep_bounded_decoder",
+    "quarantine_fixture_has_no_enabled_losses",
+    "hold_long_output_blocks_decoder_ce",
+    "needs_retrieval_blocks_decoder_ce",
+    "denoise_route_blocks_decoder_ce",
+    "all_fixtures_emit_authority_closed",
+    "all_fixtures_emit_telemetry_required"
+  ],
+  "stage": 9130,
+  "stage_name": "stage9130_synthetic_route_to_loss_mask_translator_smoke_design",
+  "status": "SYNTHETIC_ROUTE_TO_LOSS_MASK_TRANSLATOR_SMOKE_DESIGN_NO_REAL_DATA",
+  "synthetic_fixtures": [
+    {
+      "decode_allowed": false,
+      "decoder_budget_ok": false,
+      "expected_disabled_losses": [
+        "decoder_ce",
+        "denoise_ce",
+        "runtime_reward"
+      ],
+      "expected_enabled_losses": [
+        "surface_role_ce",
+        "repair_surface_ce",
+        "action_ce",
+        "evidence_state_ce",
+        "budget_gate_ce",
+        "decode_gate_ce"
+      ],
+      "fixture_id": "synthetic_keep_structured",
+      "route": "KEEP_STRUCTURED"
+    },
+    {
+      "decode_allowed": true,
+      "decoder_budget_ok": true,
+      "expected_disabled_losses": [
+        "denoise_ce",
+        "runtime_reward"
+      ],
+      "expected_enabled_losses": [
+        "decoder_ce"
+      ],
+      "fixture_id": "synthetic_keep_bounded_decoder",
+      "route": "KEEP_BOUNDED_DECODER",
+      "target_token_len": 128
+    },
+    {
+      "decode_allowed": false,
+      "decoder_budget_ok": false,
+      "expected_disabled_losses": [
+        "decoder_ce",
+        "denoise_ce",
+        "runtime_reward"
+      ],
+      "expected_enabled_losses": [
+        "long_output_holdout_supervision"
+      ],
+      "fixture_id": "synthetic_hold_long_output",
+      "route": "HOLD_LONG_OUTPUT",
+      "target_token_len": 12000
+    },
+    {
+      "decode_allowed": false,
+      "decoder_budget_ok": true,
+      "expected_disabled_losses": [
+        "decoder_ce",
+        "runtime_reward"
+      ],
+      "expected_enabled_losses": [
+        "denoise_ce"
+      ],
+      "fixture_id": "synthetic_use_for_denoise_repair",
+      "repair_route": true,
+      "route": "USE_FOR_DENOISE_REPAIR"
+    },
+    {
+      "decode_allowed": false,
+      "decoder_budget_ok": true,
+      "expected_disabled_losses": [
+        "decoder_ce",
+        "denoise_ce",
+        "runtime_reward"
+      ],
+      "expected_enabled_losses": [
+        "retrieve_more_ce",
+        "decode_block_ce"
+      ],
+      "fixture_id": "synthetic_needs_retrieval",
+      "route": "NEEDS_RETRIEVAL"
+    },
+    {
+      "decode_allowed": false,
+      "decoder_budget_ok": true,
+      "expected_disabled_losses": [
+        "decoder_ce",
+        "denoise_ce",
+        "runtime_reward",
+        "surface_role_ce",
+        "action_ce"
+      ],
+      "expected_enabled_losses": [],
+      "fixture_id": "synthetic_quarantine_label_conflict",
+      "route": "QUARANTINE_LABEL_CONFLICT"
+    }
+  ]
+}
