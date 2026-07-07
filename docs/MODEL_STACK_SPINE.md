@@ -2578,3 +2578,7 @@ Stage9103 reconciles the current frontier after Stage9102. Trainer command contr
 ## Stage9106 Execution Authorization Graph Attachment
 
 Stage9106 attaches Stage9104/9105 trainer execution authorization review controls to the central graph. Same-stage execution, next-stage execution, trainer invocation, contract-only invocation, model rows, model forward, decoder CE, denoise CE, runtime, cleanup, and training remain closed.
+
+## Stage9107 Current Frontier After Execution Authorization Graph
+
+Stage9107 reconciles the current frontier after Stage9106. Execution authorization controls are graph-visible, but same-stage execution, next-stage execution, data access, route-card materialization, route-to-loss translation, compiler handoff, trainer dry run, trainer invocation, contract-only invocation, runtime assertions, model forward, decoder CE, denoise CE, runtime, cleanup, /arxiv IO, and training remain closed.
