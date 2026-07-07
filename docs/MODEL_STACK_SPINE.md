@@ -2574,3 +2574,7 @@ Stage9102 attaches Stage9100/9101 contract-only artifact schema controls to the 
 ## Stage9103 Current Frontier After Contract-Only Schema Graph
 
 Stage9103 reconciles the current frontier after Stage9102. Trainer command controls, runtime assertion controls, and contract-only artifact schema controls are graph-visible, but trainer dry run, trainer invocation, contract-only invocation, runtime assertion execution, model rows, model forward, decoder CE, denoise CE, runtime, cleanup, /arxiv IO, and training remain closed.
+
+## Stage9106 Execution Authorization Graph Attachment
+
+Stage9106 attaches Stage9104/9105 trainer execution authorization review controls to the central graph. Same-stage execution, next-stage execution, trainer invocation, contract-only invocation, model rows, model forward, decoder CE, denoise CE, runtime, cleanup, and training remain closed.
