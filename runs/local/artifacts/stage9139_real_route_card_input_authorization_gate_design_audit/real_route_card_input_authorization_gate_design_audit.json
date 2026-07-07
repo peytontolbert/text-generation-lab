@@ -1,0 +1,128 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_failures": [],
+  "checks": {
+    "authority_closed": true,
+    "authority_counts_zero": true,
+    "base_design_passes": true,
+    "dataset_loading_closed": true,
+    "forbidden_input_fields_complete": true,
+    "negative_cases_rejected": true,
+    "real_input_closed": true,
+    "registry_frontier_stage9138": true,
+    "required_preflight_checks_complete": true,
+    "required_ticket_fields_complete": true,
+    "source_stage9138_passed": true
+  },
+  "decision": "Audited real route-card input authorization gate design and rejected missing fields, missing preflights, missing forbidden fields, real input authorization, dataset loading, route-card materialization, training, runtime, and authority openings.",
+  "failures": [],
+  "metrics": {
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 12,
+    "negative_cases_rejected": 12,
+    "network_upload_performed": false,
+    "real_input_authorized_now": false,
+    "real_judge_rows_used": 0,
+    "real_ranker_rows_used": 0,
+    "real_route_cards_materialized": 0,
+    "route_cards_materialized_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authorizes_real_input": {
+      "failures": [
+        "real_input_authorized_now"
+      ],
+      "rejected": true
+    },
+    "bad_registry_frontier": {
+      "failures": [
+        "unexpected_registry_frontier:9999"
+      ],
+      "rejected": true
+    },
+    "loads_dataset_rows": {
+      "failures": [
+        "dataset_rows_loaded"
+      ],
+      "rejected": true
+    },
+    "materializes_route_cards": {
+      "failures": [
+        "route_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "missing_arxiv_preflight": {
+      "failures": [
+        "missing_preflight_check:no_arxiv_path_without_separate_authorization"
+      ],
+      "rejected": true
+    },
+    "missing_forbidden_decoder_target": {
+      "failures": [
+        "missing_forbidden_input_field:decoder_target"
+      ],
+      "rejected": true
+    },
+    "missing_judge_ticket_field": {
+      "failures": [
+        "missing_ticket_field:judge_rows_path"
+      ],
+      "rejected": true
+    },
+    "missing_ranker_ticket_field": {
+      "failures": [
+        "missing_ticket_field:junk_ranker_rows_path"
+      ],
+      "rejected": true
+    },
+    "missing_source_body_preflight": {
+      "failures": [
+        "missing_preflight_check:no_source_body_fields_present"
+      ],
+      "rejected": true
+    },
+    "opens_authority": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "opens_runtime": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "opens_training": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "stage": 9139,
+  "stage_name": "stage9139_real_route_card_input_authorization_gate_design_audit"
+}
