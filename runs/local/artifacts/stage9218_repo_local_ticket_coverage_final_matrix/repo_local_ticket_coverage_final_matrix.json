@@ -1,0 +1,79 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blocked_until_explicit_request": [
+    "final_pre_execution_audit",
+    "live_one_run_ticket_materialization",
+    "trainer_execution",
+    "model_forward",
+    "backward_or_optimizer_step",
+    "checkpoint_write_or_export",
+    "cleanup",
+    "runtime_or_runtime_verifier",
+    "arxiv_access_or_mining"
+  ],
+  "checks": {
+    "all_authority_closed": true,
+    "all_family_ticket_audits_passed": true,
+    "bounded_decoder_covered": true,
+    "denoise_covered": true,
+    "next_stage_execution_closed": true,
+    "same_stage_execution_closed": true,
+    "source_stage9213_matrix_passed": true,
+    "source_stage9217_passed": true,
+    "structured_covered": true,
+    "three_family_ticket_audits_present": true
+  },
+  "decision": "All three repo-local probe families have inactive audited ticket coverage. This is not execution authorization; final pre-execution audit remains blocked until an explicit one-run request.",
+  "failures": [],
+  "family_ticket_coverage": [
+    {
+      "audit_path": "runs/local/artifacts/stage9210_repo_local_structured_one_run_ticket_audit/repo_local_structured_one_run_ticket_audit.json",
+      "audit_stage": 9210,
+      "design_stage": 9209,
+      "execution_authorized_now": false,
+      "failures": [],
+      "mode": "structured_policy_probe",
+      "next_stage_execution_authorized": false,
+      "passed": true,
+      "ticket_path": "runs/local/artifacts/stage9209_repo_local_structured_one_run_ticket_design/repo_local_structured_one_run_ticket_inactive.json"
+    },
+    {
+      "audit_path": "runs/local/artifacts/stage9215_repo_local_bounded_decoder_one_run_ticket_audit/repo_local_bounded_decoder_one_run_ticket_audit.json",
+      "audit_stage": 9215,
+      "design_stage": 9214,
+      "execution_authorized_now": false,
+      "failures": [],
+      "mode": "bounded_decoder_ce_probe",
+      "next_stage_execution_authorized": false,
+      "passed": true,
+      "ticket_path": "runs/local/artifacts/stage9214_repo_local_bounded_decoder_one_run_ticket_design/repo_local_bounded_decoder_one_run_ticket_inactive.json"
+    },
+    {
+      "audit_path": "runs/local/artifacts/stage9217_repo_local_denoise_one_run_ticket_audit/repo_local_denoise_one_run_ticket_audit.json",
+      "audit_stage": 9217,
+      "design_stage": 9216,
+      "execution_authorized_now": false,
+      "failures": [],
+      "mode": "denoise_repair_probe",
+      "next_stage_execution_authorized": false,
+      "passed": true,
+      "ticket_path": "runs/local/artifacts/stage9216_repo_local_denoise_one_run_ticket_schema/repo_local_denoise_one_run_ticket_inactive.json"
+    }
+  ],
+  "next_best_step": "Stop no-execution handoff churn. If explicitly requested later, choose exactly one family and run a fresh final pre-execution audit before any trainer invocation.",
+  "passed": true,
+  "stage": 9218,
+  "stage_name": "stage9218_repo_local_ticket_coverage_final_matrix"
+}
