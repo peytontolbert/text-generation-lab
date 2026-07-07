@@ -1,0 +1,125 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "card_failures": [],
+  "checks": {
+    "all_routes_covered": true,
+    "authority_closed": true,
+    "authority_counts_zero": true,
+    "card_failures_empty": true,
+    "negative_cases_rejected": true,
+    "no_real_inputs": true,
+    "registry_frontier_stage9136": true,
+    "route_card_count": true,
+    "source_stage9136_passed": true,
+    "synthetic_route_card_file_present": true
+  },
+  "decision": "Audited synthetic route-card materializer outputs and rejected unsafe mutated cards. Real judge/ranker inputs, real route cards, compiler handoff, trainer/model paths, uploads, cleanup, runtime, and training remain closed.",
+  "failures": [],
+  "metrics": {
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 9,
+    "negative_cases_rejected": 9,
+    "network_upload_performed": false,
+    "real_judge_rows_used": 0,
+    "real_ranker_rows_used": 0,
+    "real_route_cards_materialized": 0,
+    "repository_source_bodies_loaded": false,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "routes_covered": 9,
+    "runtime_authorized_flag": false,
+    "synthetic_route_cards_audited": 9,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "bounded_decoder_budget_false": {
+      "failures": [
+        "synthetic_route_keep_bounded_decoder:bounded_decoder_without_budget_ok"
+      ],
+      "rejected": true
+    },
+    "duplicate_row_id": {
+      "failures": [
+        "synthetic_route_keep_structured:duplicate_row_id"
+      ],
+      "rejected": true
+    },
+    "holdout_wrong_bucket": {
+      "failures": [
+        "synthetic_route_hold_long_output:hold_long_output_without_long_bucket"
+      ],
+      "rejected": true
+    },
+    "missing_anti_cheat": {
+      "failures": [
+        "synthetic_route_keep_structured:missing_anti_cheat:label_leak_checked"
+      ],
+      "rejected": true
+    },
+    "missing_required_field": {
+      "failures": [
+        "synthetic_route_keep_structured:missing_required_field:loss_mask_ref"
+      ],
+      "rejected": true
+    },
+    "open_authority": {
+      "failures": [
+        "synthetic_route_keep_structured:authority_open"
+      ],
+      "rejected": true
+    },
+    "recommended_action_mismatch": {
+      "failures": [
+        "synthetic_route_keep_structured:recommended_action_route_mismatch"
+      ],
+      "rejected": true
+    },
+    "risk_bucket_mismatch": {
+      "failures": [
+        "synthetic_route_keep_structured:risk_bucket_route_mismatch"
+      ],
+      "rejected": true
+    },
+    "unknown_route": {
+      "failures": [
+        "synthetic_route_keep_structured:unknown_route:UNKNOWN",
+        "synthetic_route_keep_structured:risk_bucket_route_mismatch",
+        "synthetic_route_keep_structured:recommended_action_route_mismatch"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "route_counts": {
+    "DROP_DUPLICATE": 1,
+    "HOLD_LONG_OUTPUT": 1,
+    "KEEP_BOUNDED_DECODER": 1,
+    "KEEP_STRUCTURED": 1,
+    "NEEDS_HUMAN_REVIEW": 1,
+    "NEEDS_RETRIEVAL": 1,
+    "QUARANTINE_LABEL_CONFLICT": 1,
+    "USE_AS_NEGATIVE": 1,
+    "USE_FOR_DENOISE_REPAIR": 1
+  },
+  "stage": 9137,
+  "stage_name": "stage9137_synthetic_route_card_materializer_smoke_audit"
+}
