@@ -2613,3 +2613,12 @@ This opens no execution authority. A fresh final pre-execution audit remains blo
 Still blocked: trainer execution, model forward/backward, optimizer, checkpoint writes/export, cleanup, runtime/runtime-verifier, decoder CE execution, denoise CE execution, /arxiv access, mining, source/body emission, Gemma, scoring, controller merge, and promotion.
 
 Next: Stop before final pre-execution audit unless the user explicitly selects exactly one family for a future one-run request.
+
+## Stage9220 No-Execution Trainer Readiness Gap Ledger
+
+Stage9220 separates ticket coverage from trainer execution readiness. The structured-policy, bounded-decoder CE, and denoise-repair families have inactive audited coverage, but no family is selected for live execution.
+Trainer invocation remains blocked by missing explicit one-family request, missing live ticket materialization, and missing fresh final pre-execution audit.
+
+No training, model forward/backward, optimizer, checkpoint write/export, cleanup, runtime, /arxiv IO, mining, source/body emission, Gemma, scoring, controller merge, or promotion is authorized.
+
+Next: Await an explicit one-family request, or continue no-execution central graph/documentation review.

@@ -1,0 +1,93 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers_before_any_trainer_invocation": [
+    "explicit_one_family_user_request_missing",
+    "single_family_selection_not_bound_to_live_ticket",
+    "fresh_final_pre_execution_audit_missing",
+    "live_one_run_ticket_not_materialized",
+    "runtime_assertion_contract_not_rechecked_for_selected_family",
+    "telemetry_artifact_contract_not_rechecked_for_selected_family",
+    "safe_cleanup_dry_run_not_rechecked_for_selected_output_dir",
+    "no_model_execution_authority"
+  ],
+  "checks": {
+    "all_three_repo_local_families_covered": true,
+    "blockers_recorded": true,
+    "forbidden_now_recorded": true,
+    "no_authority_open": true,
+    "previous_stage9219_passed": true,
+    "previous_stage_kept_execution_closed": true,
+    "registry_contains_passed_stage9219": true
+  },
+  "covered_families": [
+    "structured_policy_probe",
+    "bounded_decoder_ce_probe",
+    "denoise_repair_probe"
+  ],
+  "decision": "Trainer coverage is not trainer execution readiness. Stage9220 records that the three repo-local families have inactive audited coverage, but trainer invocation remains blocked until an explicit one-family request, live ticket materialization, and fresh final pre-execution audit all pass.",
+  "forbidden_now": [
+    "trainer_invocation",
+    "model_forward",
+    "backward_or_optimizer_step",
+    "checkpoint_write_or_export",
+    "cleanup",
+    "runtime_or_runtime_verifier",
+    "source_or_body_emission",
+    "gemma_or_harness_or_scoring",
+    "arxiv_read_write_or_mining",
+    "data_mining_or_dataset_expansion"
+  ],
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "backward_attempted": false,
+    "blockers_before_trainer_invocation": 8,
+    "checkpoint_written_now": false,
+    "cleanup_authorized_now": false,
+    "covered_families": 3,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "explicit_one_family_request_present": false,
+    "final_pre_execution_audit_ready": false,
+    "forbidden_now_items": 10,
+    "live_ticket_materialized_now": false,
+    "model_forward_attempted": false,
+    "next_stage_execution_authorized": false,
+    "optimizer_created": false,
+    "ready_but_not_authorized_items": 5,
+    "runtime_authorized_flag": false,
+    "runtime_verifier_execution_authorized": false,
+    "same_stage_execution_authorized": false,
+    "ticket_coverage_ready": true,
+    "trainer_executed_now": false,
+    "trainer_ready_for_execution": false
+  },
+  "next_allowed_no_execution_work": [
+    "select exactly one family only if the user asks for a future one-run path",
+    "write a fresh final pre-execution audit for that one family only",
+    "or continue documentation/central-graph review with all execution closed"
+  ],
+  "ready_but_not_authorized": [
+    "inactive_audited_ticket_coverage_for_three_repo_local_families",
+    "tiny_cap_manifests_for_bounded_decoder_and_denoise",
+    "structured_repo_local_manifest_selected_by_stage9206",
+    "safe_cleanup_contract_exists_but_cleanup_not_authorized",
+    "loss_mask_and_route_contracts_recovered"
+  ],
+  "stage": 9220,
+  "stage_name": "stage9220_no_execution_trainer_readiness_gap_ledger",
+  "status": "NO_EXECUTION_TRAINER_READINESS_GAP_LEDGER"
+}
