@@ -2596,3 +2596,7 @@ Stage9109 designs a future metadata-only availability preflight for /arxiv/datas
 ## Stage9111 Metadata-Only Preflight Graph Attachment
 
 Stage9111 attaches Stage9109/9110 metadata-only real-data availability preflight controls to the central graph. The graph now explicitly blocks `/arxiv` access/stat, dataset row reads, parquet group reads, repository source-body reads, `/arxiv` writes, mining, route-card materialization, route-to-loss translation, trainer invocation, model forward, decoder CE, denoise CE, runtime, uploads, cleanup, and training until later ticketed gates authorize each action.
+
+## Stage9112 Current Frontier After Metadata Preflight Graph
+
+Stage9112 reconciles Stage9109-9111 into the active frontier. Metadata-only real-data preflight controls are now graph-visible, but actual `/arxiv` metadata inventory still requires a future audited ticket. Row reads, source-body reads, writes, mining, route-card materialization, route-to-loss translation, compiler handoff, trainer invocation, model forward, decoder CE, denoise CE, runtime, uploads, cleanup, and training remain closed.
