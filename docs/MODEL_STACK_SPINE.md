@@ -2570,3 +2570,7 @@ No source/output ticket, data access, route-card materialization, route-to-loss 
 ## Stage9102 Contract-Only Schema Graph Attachment
 
 Stage9102 attaches Stage9100/9101 contract-only artifact schema controls to the central graph. Trainer invocation, contract-only invocation, runtime assertions, model rows, model forward, decoder CE, denoise CE, runtime, cleanup, and training remain closed.
+
+## Stage9103 Current Frontier After Contract-Only Schema Graph
+
+Stage9103 reconciles the current frontier after Stage9102. Trainer command controls, runtime assertion controls, and contract-only artifact schema controls are graph-visible, but trainer dry run, trainer invocation, contract-only invocation, runtime assertion execution, model rows, model forward, decoder CE, denoise CE, runtime, cleanup, /arxiv IO, and training remain closed.
