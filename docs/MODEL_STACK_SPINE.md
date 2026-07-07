@@ -2604,3 +2604,12 @@ Stage9112 reconciles Stage9109-9111 into the active frontier. Metadata-only real
 ## Stage9122 Current Frontier After Metadata Inventory Gates
 
 Stage9122 reconciles metadata inventory controls through Stage9121. Metadata inventory execution remains blocked without explicit user authorization, and training/runtime/decoder/denoise authority remains closed. The active safe branch returns to compiler/training recovery gap work.
+
+## Stage9219 Current Frontier After Repo-Local Ticket Coverage
+
+Stage9219 reconciles Stage9218 into the active frontier: structured-policy, bounded-decoder CE, and denoise-repair repo-local families have inactive audited ticket coverage.
+This opens no execution authority. A fresh final pre-execution audit remains blocked until an explicit request selects exactly one family.
+
+Still blocked: trainer execution, model forward/backward, optimizer, checkpoint writes/export, cleanup, runtime/runtime-verifier, decoder CE execution, denoise CE execution, /arxiv access, mining, source/body emission, Gemma, scoring, controller merge, and promotion.
+
+Next: Stop before final pre-execution audit unless the user explicitly selects exactly one family for a future one-run request.

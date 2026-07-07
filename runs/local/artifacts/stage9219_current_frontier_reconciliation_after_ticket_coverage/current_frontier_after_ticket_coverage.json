@@ -1,0 +1,70 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blocked_until_explicit_request": [
+    "final_pre_execution_audit",
+    "live_one_run_ticket_materialization",
+    "trainer_execution",
+    "model_forward",
+    "backward_or_optimizer_step",
+    "checkpoint_write_or_export",
+    "cleanup",
+    "runtime_or_runtime_verifier",
+    "arxiv_access_or_mining"
+  ],
+  "checks": {
+    "all_expected_families_covered": true,
+    "authority_counts_zero": true,
+    "blocked_items_recorded": true,
+    "family_ticket_audits_passed": true,
+    "registry_contains_passed_stage9218": true,
+    "source_matrix_passed": true,
+    "source_stage9218_passed": true
+  },
+  "covered_families": [
+    "bounded_decoder_ce_probe",
+    "denoise_repair_probe",
+    "structured_policy_probe"
+  ],
+  "decision": "Frontier reconciled after Stage9218: structured, bounded-decoder, and denoise repo-local families all have inactive audited ticket coverage. This is not execution authorization; final pre-execution audit and all trainer/model/runtime/cleanup paths remain blocked without an explicit one-family request.",
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "backward_attempted": false,
+    "blocked_until_explicit_request": 9,
+    "checkpoint_written_now": false,
+    "cleanup_authorized_now": false,
+    "covered_families": 3,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "final_pre_execution_audit_authorized_now": false,
+    "live_ticket_materialized_now": false,
+    "model_forward_attempted": false,
+    "next_stage_execution_authorized": false,
+    "optimizer_created": false,
+    "runtime_authorized_flag": false,
+    "runtime_verifier_execution_authorized": false,
+    "same_stage_execution_authorized": false,
+    "trainer_executed_now": false
+  },
+  "next_allowed_no_execution_branches": [
+    "refresh central graph docs only",
+    "review unrelated long-context worktree files separately",
+    "prepare a final pre-execution audit design only after explicit one-family request"
+  ],
+  "stage": 9219,
+  "stage_name": "stage9219_current_frontier_reconciliation_after_ticket_coverage",
+  "status": "CURRENT_FRONTIER_RECONCILED_AFTER_REPO_LOCAL_TICKET_COVERAGE"
+}
