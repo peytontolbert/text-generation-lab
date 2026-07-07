@@ -1,0 +1,125 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_translations_recorded": true,
+    "loss_authority_rules_recorded": true,
+    "quarantine_routes_have_no_losses": true,
+    "registry_frontier_stage9125": true,
+    "route_to_losses_recorded": true,
+    "source_stage9125_passed": true
+  },
+  "decision": "Recovered route-to-loss translation contract design. Translation is not ready and no loss masks, compiler handoff, trainer/model paths, uploads, cleanup, or training are materialized.",
+  "forbidden_translations": [
+    "QUARANTINE_LABEL_CONFLICT_to_any_loss",
+    "DROP_DUPLICATE_to_any_loss",
+    "NEEDS_HUMAN_REVIEW_to_any_loss",
+    "HOLD_LONG_OUTPUT_to_decoder_ce",
+    "USE_AS_NEGATIVE_to_decoder_ce",
+    "NEEDS_RETRIEVAL_to_decoder_ce",
+    "KEEP_STRUCTURED_to_decoder_ce",
+    "KEEP_BOUNDED_DECODER_to_runtime_reward"
+  ],
+  "loss_authority_rules": {
+    "action_ce": [
+      "structured_route",
+      "target_not_in_input"
+    ],
+    "budget_gate_ce": [
+      "structured_route",
+      "deterministic_budget_fact_available"
+    ],
+    "decode_gate_ce": [
+      "structured_route",
+      "deterministic_overlay_available"
+    ],
+    "decoder_ce": [
+      "decoder_budget_ok",
+      "decode_allowed",
+      "authority_closed",
+      "no_long_blob",
+      "no_html_doc_fragment"
+    ],
+    "denoise_ce": [
+      "repair_route",
+      "authority_closed",
+      "clean_target_available"
+    ],
+    "evidence_state_ce": [
+      "structured_route",
+      "target_not_in_input"
+    ],
+    "repair_surface_ce": [
+      "structured_route",
+      "target_not_in_input"
+    ],
+    "surface_role_ce": [
+      "structured_route",
+      "target_not_in_input"
+    ]
+  },
+  "metrics": {
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_translations": 8,
+    "loss_authority_rules": 8,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "network_upload_performed": false,
+    "repository_source_bodies_loaded": false,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "routes": 9,
+    "runtime_authorized_flag": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "route_to_losses": {
+    "DROP_DUPLICATE": [],
+    "HOLD_LONG_OUTPUT": [
+      "long_output_holdout_supervision"
+    ],
+    "KEEP_BOUNDED_DECODER": [
+      "decoder_ce"
+    ],
+    "KEEP_STRUCTURED": [
+      "surface_role_ce",
+      "repair_surface_ce",
+      "action_ce",
+      "evidence_state_ce",
+      "budget_gate_ce",
+      "decode_gate_ce"
+    ],
+    "NEEDS_HUMAN_REVIEW": [],
+    "NEEDS_RETRIEVAL": [
+      "retrieve_more_ce",
+      "decode_block_ce"
+    ],
+    "QUARANTINE_LABEL_CONFLICT": [],
+    "USE_AS_NEGATIVE": [
+      "abstain_ce",
+      "suppress_decode_ce"
+    ],
+    "USE_FOR_DENOISE_REPAIR": [
+      "denoise_ce"
+    ]
+  },
+  "stage": 9126,
+  "stage_name": "stage9126_route_to_loss_translation_contract_design",
+  "status": "ROUTE_TO_LOSS_TRANSLATION_CONTRACT_DESIGN_NO_TRANSLATION_READY"
+}
