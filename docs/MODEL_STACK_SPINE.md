@@ -2629,3 +2629,10 @@ Stage9221 maps the only valid branches after Stage9220. If no family is explicit
 Each family remains inactive-ticket-covered but not live: structured-policy, bounded-decoder CE, and denoise-repair.
 
 Next: If training is desired later, explicitly select one family; otherwise continue no-execution central graph review.
+
+## Stage9222 Family-Specific Preexecution Gap Map
+
+Stage9222 makes the remaining pre-execution gaps family-specific: structured-policy, bounded-decoder CE, and denoise-repair each require selected-manifest/loss-mask, command, runtime assertion, telemetry, and safe-cleanup dry-run rechecks before any future live ticket can run.
+This stage does not select a family and opens no execution authority.
+
+Next: Either stop, or if the user explicitly chooses one family, build that family-specific final pre-execution audit design only.

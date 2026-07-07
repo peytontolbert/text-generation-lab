@@ -1,0 +1,98 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_previous_families_have_gap_maps": true,
+    "common_gap_count_sufficient": true,
+    "each_family_has_five_specific_gaps": true,
+    "global_forbidden_blocks_cleanup_arxiv_runtime": true,
+    "no_previous_authority_open": true,
+    "previous_stage9221_passed": true,
+    "registry_frontier_stage9221_or_later": true
+  },
+  "common_preexecution_gaps": [
+    "explicit_one_family_request",
+    "fresh_family_specific_final_preexecution_audit",
+    "live_ticket_materialization_from_inactive_ticket",
+    "selected_manifest_hash_recheck",
+    "selected_loss_mask_hash_recheck",
+    "trainer_command_surface_recheck",
+    "runtime_assertion_contract_recheck",
+    "telemetry_artifact_contract_recheck",
+    "safe_cleanup_dry_run_recheck_without_cleanup_execution",
+    "clean_nonconflicting_worktree_scope_for_selected_files"
+  ],
+  "decision": "Family-specific pre-execution gaps are now explicit. This is a no-execution map only: selecting a family, materializing a live ticket, final pre-execution audit, trainer/model invocation, cleanup, runtime, mining, and /arxiv access all remain closed.",
+  "family_specific_gaps": {
+    "bounded_decoder_ce_probe": [
+      "bounded_decoder_only_loss_mask_recheck",
+      "target_token_cap_recheck",
+      "row_token_loss_real_per_position_required",
+      "eos_length_short_junk_repetition_leak_required",
+      "decoder_module_delta_guard_required"
+    ],
+    "denoise_repair_probe": [
+      "denoise_only_loss_mask_recheck",
+      "target_resolver_readonly_recheck",
+      "corrupted_to_clean_pair_integrity_recheck",
+      "repair_output_leak_short_repetition_required",
+      "no_runtime_verifier_execution_recheck"
+    ],
+    "structured_policy_probe": [
+      "structured_aux_only_loss_mask_recheck",
+      "decoder_ce_weight_zero_recheck",
+      "denoise_weight_zero_recheck",
+      "row_field_logits_losses_gradients_required",
+      "collapse_and_confusion_matrix_required"
+    ]
+  },
+  "global_forbidden": [
+    "training_without_family_selection",
+    "multi_family_live_ticket",
+    "trainer_execution_before_final_audit",
+    "checkpoint_write_or_export_before_live_authority",
+    "cleanup_execution_before_live_authority",
+    "arxiv_read_write_mining_before_source_ticket",
+    "runtime_or_verifier_runtime_before_runtime_ticket",
+    "body_source_patch_emission_before_authority"
+  ],
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "backward_attempted": false,
+    "checkpoint_written_now": false,
+    "cleanup_authorized_now": false,
+    "common_preexecution_gaps": 10,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "explicit_one_family_request_present": false,
+    "family_gap_maps": 3,
+    "family_selected_now": false,
+    "family_specific_gap_total": 15,
+    "final_pre_execution_audit_authorized_now": false,
+    "global_forbidden_items": 8,
+    "live_ticket_materialized_now": false,
+    "model_forward_attempted": false,
+    "next_stage_execution_authorized": false,
+    "optimizer_created": false,
+    "runtime_authorized_flag": false,
+    "runtime_verifier_execution_authorized": false,
+    "same_stage_execution_authorized": false,
+    "trainer_executed_now": false
+  },
+  "stage": 9222,
+  "stage_name": "stage9222_family_specific_preexecution_gap_map",
+  "status": "FAMILY_SPECIFIC_PREEXECUTION_GAP_MAP_NO_EXECUTION"
+}
