@@ -1,0 +1,206 @@
+{
+  "checks": {
+    "bounded_decoder_command_absent": true,
+    "denoise_command_absent": true,
+    "exactly_one_structured_command_present": true,
+    "judge_rows_exist": true,
+    "loss_mask_cards_written": true,
+    "materialization_passed": true,
+    "objective_rows_exist": true,
+    "ranker_rows_exist": true,
+    "route_cards_written": true,
+    "source_stage9200_passed": true,
+    "structured_cleanup_proof_written": true,
+    "structured_contract_audit_written": true,
+    "structured_contract_only_passed": true,
+    "structured_manifest_nonempty": true,
+    "structured_manifest_written": true,
+    "trainer_rows_written": true
+  },
+  "decision": "Materialized a repo-local real package from existing compiler outputs and proved the recovered trainer can consume the resulting structured-policy manifest in contract-only mode. Real repo-local package handoff is working without opening model execution or runtime.",
+  "failures": [],
+  "materialization_result": {
+    "loss_audit": {
+      "authority_closed": true,
+      "enabled_loss_counts": {
+        "action_sequence_ce": 2,
+        "allowed_import_policy_ce": 1,
+        "blocked_import_policy_ce": 1,
+        "build_mode_ce": 1,
+        "edit_localization_ce": 1,
+        "file_plan_ce": 1,
+        "patch_operator_ce": 1,
+        "repair_surface_ce": 1,
+        "repo_dependency_policy_ce": 1,
+        "surface_role_ce": 1,
+        "symbol_binding_ce": 1,
+        "verifier_repair_ce": 1
+      },
+      "forbidden_enabled_count": 0,
+      "forbidden_enabled_examples": [],
+      "loss_mask_cards": 3,
+      "missing_objective_examples": [],
+      "missing_objective_rows": 0,
+      "route_cards": 3
+    },
+    "passed": true,
+    "route_audit": {
+      "authority_closed": true,
+      "judge_rows": 3,
+      "materialized_route_cards": 3,
+      "missing_judge_examples": [],
+      "missing_judge_rows": 0,
+      "missing_ranker_examples": [],
+      "missing_ranker_rows": 0,
+      "objective_rows": 3,
+      "ranker_rows": 3,
+      "route_counts": {
+        "HOLD_LONG_OUTPUT": 1,
+        "KEEP_STRUCTURED": 1,
+        "NEEDS_RETRIEVAL": 1
+      },
+      "split_counts": {
+        "eval": 1,
+        "strict_eval": 1,
+        "train": 1
+      },
+      "validation_failure_count": 0,
+      "validation_failures": []
+    },
+    "trainer_audit": {
+      "authority_closed": true,
+      "decoder_rows": 0,
+      "denoise_rows": 0,
+      "missing_loss_mask_cards": 0,
+      "missing_loss_mask_examples": [],
+      "missing_route_cards": 0,
+      "missing_route_examples": [],
+      "objective_rows": 3,
+      "route_counts": {
+        "HOLD_LONG_OUTPUT": 1,
+        "KEEP_STRUCTURED": 1,
+        "NEEDS_RETRIEVAL": 1
+      },
+      "split_counts": {
+        "eval": 1,
+        "strict_eval": 1,
+        "train": 1
+      },
+      "structured_rows": 2,
+      "trainer_rows": 3
+    },
+    "trainer_input": {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "loss_mask_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9201_repo_local_real_package_contract_only_smoke/materialized_setup/loss_mask_cards.jsonl",
+      "manifest_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9201_repo_local_real_package_contract_only_smoke/materialized_setup/trainer_rows.jsonl",
+      "notes": [
+        "This setup materializes trainer-ready rows locally.",
+        "It does not guarantee competitive quality against larger baselines.",
+        "Use tokenizer_json/tokenizer_config flags if you want the recovered BPE path instead of byte fallback."
+      ],
+      "recommended_commands": [
+        {
+          "command": [
+            "python",
+            "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+            "--manifest",
+            "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9201_repo_local_real_package_contract_only_smoke/materialized_setup/trainer_rows.jsonl",
+            "--mode",
+            "structured_policy_probe",
+            "--max-train-rows",
+            "1",
+            "--max-eval-rows",
+            "1",
+            "--max-strict-rows",
+            "1",
+            "--max-steps",
+            "8",
+            "--decoder-ce-weight",
+            "0.0",
+            "--structured-aux-weight",
+            "1.0",
+            "--denoise-weight",
+            "0.0",
+            "--require-loss-mask-enforcement-audit",
+            "--no-final-checkpoint-export",
+            "--skip-final-model-save",
+            "1",
+            "--output-dir",
+            "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9201_repo_local_real_package_contract_only_smoke/materialized_setup/structured_probe",
+            "--run-id",
+            "materialized_structured_probe",
+            "--execution-authorized-for-recovery-probe"
+          ],
+          "mode": "structured_policy_probe"
+        }
+      ],
+      "route_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9201_repo_local_real_package_contract_only_smoke/materialized_setup/route_cards.jsonl",
+      "split_counts": {
+        "eval": 1,
+        "strict_eval": 1,
+        "train": 1
+      },
+      "trainer_rows": 3
+    }
+  },
+  "next_best_step": "Promote this repo-local real-package handoff into a reusable audited input selector, then repeat the same contract-only path for the next eligible real probe family before any explicit execution authorization.",
+  "passed": true,
+  "real_inputs": {
+    "judge_rows": "runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/judged_rows.jsonl",
+    "objective_rows": "runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/normalized_input_rows.jsonl",
+    "ranker_rows": "runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/ranked_rows.jsonl"
+  },
+  "stage": 9201,
+  "stage_name": "stage9201_repo_local_real_package_contract_only_smoke",
+  "structured_contract_only_smoke": {
+    "cleanup_proof_exists": true,
+    "command": [
+      "python",
+      "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+      "--manifest",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9201_repo_local_real_package_contract_only_smoke/materialized_setup/structured_policy_probe_manifest.jsonl",
+      "--mode",
+      "structured_policy_probe",
+      "--max-train-rows",
+      "1",
+      "--max-eval-rows",
+      "1",
+      "--max-strict-rows",
+      "1",
+      "--max-steps",
+      "8",
+      "--decoder-ce-weight",
+      "0.0",
+      "--structured-aux-weight",
+      "1.0",
+      "--denoise-weight",
+      "0.0",
+      "--require-loss-mask-enforcement-audit",
+      "--no-final-checkpoint-export",
+      "--skip-final-model-save",
+      "1",
+      "--output-dir",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9201_repo_local_real_package_contract_only_smoke/materialized_setup/structured_probe",
+      "--run-id",
+      "materialized_structured_probe",
+      "--contract-only"
+    ],
+    "contract_audit_exists": true,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\n  \"allowed_losses\": [\n    \"action_sequence_ce\",\n    \"allowed_import_policy_ce\",\n    \"blocked_import_policy_ce\",\n    \"build_mode_ce\",\n    \"file_plan_ce\",\n    \"repair_surface_ce\",\n    \"repo_dependency_policy_ce\",\n    \"surface_role_ce\"\n  ],\n  \"authority_row_ids\": [],\n  \"authority_rows\": 0,\n  \"caps\": {\n    \"max_decoder_tokens\": 768,\n    \"max_eval_rows\": 1,\n    \"max_steps\": 8,\n    \"max_strict_rows\": 1,\n    \"max_train_rows\": 1\n  },\n  \"cleanup_requested\": false,\n  \"counterfactual_obligation_audit_required\": false,\n  \"counterfactual_obligation_card\": null,\n  \"errors\": [],\n  \"final_checkpoint_export_disabled\": true,\n  \"final_model_save_skipped\": true,\n  \"implementation\": \"transformer\",\n  \"implementation_contract\": {\n    \"scaffold\": false,\n    \"target_implementation_guard\": {\n      \"allowed_for_recovered_100m_target\": true,\n      \"errors\": [],\n      \"features\": {\n        \"has_agent_policy_heads\": true,\n        \"has_retrieval_heads\": true,\n        \"has_rotary\": true,\n        \"has_scalar_invariant\": true\n      },\n      \"implementation_path\": \"/data/agentkernel-seq2seq-text-lab/legacy_src/agentkernel_lite/modeling_transformer.py\",\n      \"missing_features\": [],\n      \"selected\": \"transformer\",\n      \"target_requires_recovered_transformer\": true\n    },\n    \"transformer_execution_requires_explicit_authorization\": true,\n    \"transformer_module\": \"legacy_src/agentkernel_lite/modeling_transformer.py\"\n  },\n  \"loss_counts\": {\n    \"action_sequence_ce\": 2,\n    \"allowed_import_policy_ce\": 1,\n    \"blocked_import_policy_ce\": 1,\n    \"build_mode_ce\": 1,\n    \"decoder_ce\": 0,\n    \"denoise_ce\": 0,\n    \"edit_localization_ce\": 0,\n    \"file_plan_ce\": 1,\n    \"patch_operator_ce\": 0,\n    \"repair_surface_ce\": 1,\n    \"repo_dependency_policy_ce\": 1,\n    \"runtime_reward\": 0,\n    \"surface_role_ce\": 1,\n    \"symbol_binding_ce\": 0,\n    \"verifier_repair_ce\": 0\n  },\n  \"manifest\": \"/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9201_repo_local_real_package_contract_only_smoke/materialized_setup/structured_policy_probe_manifest.jsonl\",\n  \"manifest_sha256\": \"5f0fddd6079deb61876ecaedaea0ee27192011f780fff683762b58b6c2bb4cc5\",\n  \"mode\": \"structured_policy_probe\",\n  \"model_execution_attempted\": false,\n  \"passed\": true,\n  \"row_ids\": [\n    \"stage8937_pos\",\n    \"stage8937_retrieve\"\n  ],\n  \"rows\": 2,\n  \"split_counts\": {\n    \"eval\": 1,\n    \"other\": 0,\n    \"strict_eval\": 0,\n    \"train\": 1\n  },\n  \"tokenizer_contract\": {\n    \"byte_fallback_used_when_unset\": true,\n    \"target_100m_vocab_size\": 1506,\n    \"tokenizer_config\": null,\n    \"tokenizer_json\": null\n  },\n  \"unsafe_loss_row_examples\": [],\n  \"unsafe_loss_rows\": 0,\n  \"weights\": {\n    \"decoder_ce_weight\": 0.0,\n    \"denoise_weight\": 0.0,\n    \"structured_aux_weight\": 1.0\n  }\n}\n"
+  },
+  "structured_manifest_rows": 2
+}
