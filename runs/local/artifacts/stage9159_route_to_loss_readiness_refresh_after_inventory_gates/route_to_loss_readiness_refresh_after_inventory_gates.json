@@ -1,0 +1,324 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "card": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "card_type": "route_to_loss_readiness_refresh_after_inventory_gates_v1",
+    "decision": "Route-to-loss readiness is refreshed against the new inventory and route-card quality gates. Translation remains blocked until real route cards exist and pass the quality/materialization audits.",
+    "forbidden_translations": [
+      "QUARANTINE_LABEL_CONFLICT_to_any_loss",
+      "DROP_DUPLICATE_to_any_loss",
+      "NEEDS_HUMAN_REVIEW_to_any_loss",
+      "HOLD_LONG_OUTPUT_to_decoder_ce",
+      "USE_AS_NEGATIVE_to_decoder_ce",
+      "NEEDS_RETRIEVAL_to_decoder_ce",
+      "KEEP_STRUCTURED_to_decoder_ce",
+      "KEEP_BOUNDED_DECODER_to_runtime_reward"
+    ],
+    "loss_authority_rules": {
+      "action_ce": [
+        "structured_route",
+        "target_not_in_input"
+      ],
+      "budget_gate_ce": [
+        "structured_route",
+        "deterministic_budget_fact_available"
+      ],
+      "decode_gate_ce": [
+        "structured_route",
+        "deterministic_overlay_available"
+      ],
+      "decoder_ce": [
+        "decoder_budget_ok",
+        "decode_allowed",
+        "authority_closed",
+        "no_long_blob",
+        "no_html_doc_fragment"
+      ],
+      "denoise_ce": [
+        "repair_route",
+        "authority_closed",
+        "clean_target_available"
+      ],
+      "evidence_state_ce": [
+        "structured_route",
+        "target_not_in_input"
+      ],
+      "repair_surface_ce": [
+        "structured_route",
+        "target_not_in_input"
+      ],
+      "surface_role_ce": [
+        "structured_route",
+        "target_not_in_input"
+      ]
+    },
+    "metrics": {
+      "arxiv_accessed": false,
+      "cleanup_authorized_now": false,
+      "compiler_handoff_ready_now": false,
+      "dataset_rows_loaded": false,
+      "decoder_ce_authorized": false,
+      "denoise_ce_authorized": false,
+      "file_content_read": false,
+      "forbidden_translations": 8,
+      "loss_authority_rules": 8,
+      "loss_mask_cards_materialized_now": false,
+      "metadata_inventory_executed_now": false,
+      "metadata_path_inventory_materialized_now": false,
+      "model_forward_attempted": false,
+      "readiness_outputs_blocked": 5,
+      "refresh_only": true,
+      "required_upstream_gates": 9,
+      "route_cards_materialized_now": false,
+      "route_to_loss_translation_ready_now": false,
+      "routes": 9,
+      "runtime_authorized_flag": false,
+      "source_stage9151_passed": true,
+      "source_stage9153_passed": true,
+      "source_stage9157_passed": true,
+      "source_stage9158_passed": true,
+      "trainer_dry_run_ready_now": false,
+      "trainer_executed_now": false,
+      "training_authorized": false,
+      "translation_blockers": 6
+    },
+    "readiness_outputs_blocked": [
+      "route_to_loss_translation_status.json",
+      "route_loss_to_trainer_loss_map.json",
+      "loss_mask_cards.jsonl",
+      "loss_mask_authority_audit.json",
+      "trainer_dry_run_input.json"
+    ],
+    "required_upstream_gates": [
+      "stage9151_candidate_quality_gate_contract_passed",
+      "stage9153_route_card_preflight_quality_gate_audit_passed",
+      "stage9157_inventory_final_authorization_audit_passed",
+      "stage9158_compiler_trainer_no_data_matrix_passed",
+      "metadata_inventory_output_exists_and_audited",
+      "route_card_materialization_audit_passed",
+      "route_cards_schema_validated",
+      "route_cards_quality_gate_attached",
+      "loss_mask_schema_audit_passed"
+    ],
+    "route_to_losses": {
+      "DROP_DUPLICATE": [],
+      "HOLD_LONG_OUTPUT": [
+        "long_output_holdout_supervision"
+      ],
+      "KEEP_BOUNDED_DECODER": [
+        "decoder_ce"
+      ],
+      "KEEP_STRUCTURED": [
+        "surface_role_ce",
+        "repair_surface_ce",
+        "action_ce",
+        "evidence_state_ce",
+        "budget_gate_ce",
+        "decode_gate_ce"
+      ],
+      "NEEDS_HUMAN_REVIEW": [],
+      "NEEDS_RETRIEVAL": [
+        "retrieve_more_ce",
+        "decode_block_ce"
+      ],
+      "QUARANTINE_LABEL_CONFLICT": [],
+      "USE_AS_NEGATIVE": [
+        "abstain_ce",
+        "suppress_decode_ce"
+      ],
+      "USE_FOR_DENOISE_REPAIR": [
+        "denoise_ce"
+      ]
+    },
+    "source_stage_passes": {
+      "stage9151": true,
+      "stage9153": true,
+      "stage9157": true,
+      "stage9158": true
+    },
+    "stage": 9159,
+    "stage_name": "stage9159_route_to_loss_readiness_refresh_after_inventory_gates",
+    "translation_blockers": [
+      "metadata_inventory_not_executed",
+      "route_cards_not_materialized",
+      "route_card_materialization_audit_missing",
+      "route_card_candidate_quality_gate_not_applied_to_real_candidates",
+      "loss_mask_schema_not_refreshed_after_new_gates",
+      "trainer_input_completeness_not_refreshed"
+    ]
+  },
+  "checks": {
+    "authority_closed": true,
+    "card_passes": true,
+    "inventory_output_required": true,
+    "negative_cases_rejected": true,
+    "quality_gate_required": true,
+    "translation_blocked": true
+  },
+  "decision": "Route-to-loss readiness is refreshed against the new inventory and route-card quality gates. Translation remains blocked until real route cards exist and pass the quality/materialization audits.",
+  "failures": [],
+  "metrics": {
+    "arxiv_accessed": false,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "file_content_read": false,
+    "forbidden_translations": 8,
+    "loss_authority_rules": 8,
+    "loss_mask_cards_materialized_now": false,
+    "metadata_inventory_executed_now": false,
+    "metadata_path_inventory_materialized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 17,
+    "negative_cases_rejected": 17,
+    "readiness_outputs_blocked": 5,
+    "refresh_only": true,
+    "required_upstream_gates": 9,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "routes": 9,
+    "runtime_authorized_flag": false,
+    "source_stage9151_passed": true,
+    "source_stage9153_passed": true,
+    "source_stage9157_passed": true,
+    "source_stage9158_passed": true,
+    "trainer_dry_run_ready_now": false,
+    "trainer_executed_now": false,
+    "training_authorized": false,
+    "translation_blockers": 6
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "compiler_handoff_ready": {
+      "failures": [
+        "compiler_handoff_ready_now"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_authorized": {
+      "failures": [
+        "denoise_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "loss_masks_materialized": {
+      "failures": [
+        "loss_mask_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "missing_blocked_output": {
+      "failures": [
+        "missing_blocked_output:loss_mask_cards.jsonl"
+      ],
+      "rejected": true
+    },
+    "missing_translation_blocker": {
+      "failures": [
+        "missing_translation_blocker:route_cards_not_materialized"
+      ],
+      "rejected": true
+    },
+    "missing_upstream_gate": {
+      "failures": [
+        "missing_upstream_gate:route_cards_quality_gate_attached"
+      ],
+      "rejected": true
+    },
+    "route_cards_materialized": {
+      "failures": [
+        "route_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "source_stage9151_missing": {
+      "failures": [
+        "stage9151_not_passed"
+      ],
+      "rejected": true
+    },
+    "source_stage9153_missing": {
+      "failures": [
+        "stage9153_not_passed"
+      ],
+      "rejected": true
+    },
+    "source_stage9157_missing": {
+      "failures": [
+        "stage9157_not_passed"
+      ],
+      "rejected": true
+    },
+    "source_stage9158_missing": {
+      "failures": [
+        "stage9158_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_ready": {
+      "failures": [
+        "trainer_dry_run_ready_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    },
+    "translation_ready": {
+      "failures": [
+        "route_to_loss_translation_ready_now"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "Design loss-mask materialization preflight against refreshed route-to-loss blockers; still do not materialize loss masks or train.",
+  "passed": true,
+  "stage": 9159,
+  "stage_name": "stage9159_route_to_loss_readiness_refresh_after_inventory_gates"
+}
