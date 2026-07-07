@@ -1,0 +1,115 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_three_families_mapped": true,
+    "default_branch_blocks_live_ticket": true,
+    "forbidden_list_blocks_cleanup_and_arxiv": true,
+    "no_authority_open": true,
+    "previous_stage9220_passed": true,
+    "registry_latest_stage9220_or_later": true
+  },
+  "decision": "No-execution next-decision map recorded. Without an explicit one-family request, the only valid branch is documentation/central-graph review; live tickets, final pre-execution audit, trainer/model/runtime, cleanup, mining, and /arxiv access remain blocked.",
+  "default_branch_when_no_family_selected": [
+    "do_not_materialize_live_ticket",
+    "do_not_run_final_pre_execution_audit",
+    "do_not_invoke_trainer_or_model",
+    "continue_docs_central_graph_or_code_review_only"
+  ],
+  "family_decisions": {
+    "bounded_decoder_ce_probe": {
+      "forbidden_losses": [
+        "structured_aux_unless_explicit_weighted_zero_or_audited",
+        "denoise_ce",
+        "runtime_reward"
+      ],
+      "requires_before_any_run": [
+        "explicit_user_selects_bounded_decoder_ce_probe",
+        "fresh_final_pre_execution_audit_for_bounded_decoder_only",
+        "live_ticket_materialization_from_audited_inactive_ticket",
+        "row_token_loss_and_generation_telemetry_contract_recheck",
+        "safe_cleanup_dry_run_recheck_without_cleanup_execution"
+      ],
+      "status": "inactive_ticket_covered_not_live"
+    },
+    "denoise_repair_probe": {
+      "forbidden_losses": [
+        "decoder_ce",
+        "structured_aux_unless_explicit_weighted_zero_or_audited",
+        "runtime_reward"
+      ],
+      "requires_before_any_run": [
+        "explicit_user_selects_denoise_repair_probe",
+        "fresh_final_pre_execution_audit_for_denoise_only",
+        "live_ticket_materialization_from_audited_inactive_ticket",
+        "target_resolver_readonly_contract_recheck",
+        "safe_cleanup_dry_run_recheck_without_cleanup_execution"
+      ],
+      "status": "inactive_ticket_covered_not_live"
+    },
+    "structured_policy_probe": {
+      "forbidden_losses": [
+        "decoder_ce",
+        "denoise_ce",
+        "runtime_reward"
+      ],
+      "requires_before_any_run": [
+        "explicit_user_selects_structured_policy_probe",
+        "fresh_final_pre_execution_audit_for_structured_only",
+        "live_ticket_materialization_from_audited_inactive_ticket",
+        "telemetry_contract_recheck",
+        "safe_cleanup_dry_run_recheck_without_cleanup_execution"
+      ],
+      "status": "inactive_ticket_covered_not_live"
+    }
+  },
+  "forbidden_always_without_explicit_live_ticket": [
+    "trainer_execution",
+    "model_forward_or_generation",
+    "backward_or_optimizer",
+    "checkpoint_write_or_export",
+    "cleanup_execution",
+    "runtime_or_verifier_runtime",
+    "arxiv_access_or_mining",
+    "source_body_or_patch_body_emission",
+    "gemma_harness_or_scoring",
+    "promotion_or_controller_merge"
+  ],
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "backward_attempted": false,
+    "checkpoint_written_now": false,
+    "cleanup_authorized_now": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "default_branch_blocks": 4,
+    "denoise_ce_authorized": false,
+    "explicit_one_family_request_present": false,
+    "family_decision_count": 3,
+    "final_pre_execution_audit_authorized_now": false,
+    "forbidden_without_live_ticket": 10,
+    "live_ticket_materialized_now": false,
+    "model_forward_attempted": false,
+    "next_stage_execution_authorized": false,
+    "optimizer_created": false,
+    "runtime_authorized_flag": false,
+    "runtime_verifier_execution_authorized": false,
+    "same_stage_execution_authorized": false,
+    "trainer_executed_now": false
+  },
+  "stage": 9221,
+  "stage_name": "stage9221_no_execution_next_decision_map",
+  "status": "NO_EXECUTION_NEXT_DECISION_MAP"
+}

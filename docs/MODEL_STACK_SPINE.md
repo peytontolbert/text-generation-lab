@@ -2622,3 +2622,10 @@ Trainer invocation remains blocked by missing explicit one-family request, missi
 No training, model forward/backward, optimizer, checkpoint write/export, cleanup, runtime, /arxiv IO, mining, source/body emission, Gemma, scoring, controller merge, or promotion is authorized.
 
 Next: Await an explicit one-family request, or continue no-execution central graph/documentation review.
+
+## Stage9221 No-Execution Next Decision Map
+
+Stage9221 maps the only valid branches after Stage9220. If no family is explicitly selected, no live ticket, final pre-execution audit, trainer invocation, model forward/backward, cleanup, runtime, mining, or /arxiv access may occur.
+Each family remains inactive-ticket-covered but not live: structured-policy, bounded-decoder CE, and denoise-repair.
+
+Next: If training is desired later, explicitly select one family; otherwise continue no-execution central graph review.
