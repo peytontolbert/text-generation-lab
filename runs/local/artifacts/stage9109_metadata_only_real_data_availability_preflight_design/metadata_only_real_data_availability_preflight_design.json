@@ -1,0 +1,93 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_operations_declared": true,
+    "future_metadata_steps_declared": true,
+    "future_outputs_declared": true,
+    "no_arxiv_access_performed": true,
+    "no_training_or_mining_authorized": true,
+    "protected_roots_declared": true,
+    "registry_frontier_stage9108": true,
+    "source_stage9108_passed": true
+  },
+  "decision": "Metadata-only real-data availability preflight is designed but not executed. This stage does not stat /arxiv, read dataset rows, read repository source bodies, mine data, materialize route cards, invoke trainer contract-only mode, train, clean, or upload anything.",
+  "forbidden_in_this_stage": [
+    "stat_arxiv_paths_now",
+    "read_dataset_rows",
+    "read_dataset_parquet_groups",
+    "read_repository_source_body",
+    "write_to_arxiv",
+    "delete_or_cleanup_arxiv",
+    "start_mining",
+    "materialize_route_cards",
+    "translate_route_to_loss",
+    "invoke_trainer_contract_only",
+    "execute_training",
+    "network_upload"
+  ],
+  "future_metadata_only_steps": [
+    "verify_arxiv_roots_exist_without_writing",
+    "inventory_dataset_files_by_name_size_extension_mtime_only",
+    "inventory_repository_roots_by_name_size_mtime_only",
+    "count_candidate_dataset_files_without_opening_rows",
+    "count_repository_root_entries_without_reading_source_bodies",
+    "record_expected_dataset_families_without_sampling_rows",
+    "record_expected_repository_library_roots_without_source_body_reads",
+    "write_outputs_only_under_runs_local_artifacts",
+    "require_source_output_ticket_before_body_reads",
+    "require_route_card_materialization_ticket_before_compiler_handoff"
+  ],
+  "metrics": {
+    "arxiv_access_performed": false,
+    "arxiv_stat_performed": false,
+    "arxiv_write_authorized": false,
+    "cleanup_authorized_now": false,
+    "contract_only_invoked_now": false,
+    "data_mining_authorized": false,
+    "dataset_parquet_groups_read": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_operations": 12,
+    "future_metadata_steps": 10,
+    "model_forward_attempted": false,
+    "network_upload_performed": false,
+    "protected_roots": 3,
+    "repository_source_bodies_loaded": false,
+    "required_future_outputs": 6,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "protected_roots": [
+    "/arxiv",
+    "/arxiv/datasets",
+    "/arxiv/repositories"
+  ],
+  "required_future_outputs": [
+    "arxiv_root_metadata_card.json",
+    "dataset_file_inventory_metadata_only.jsonl",
+    "repository_root_inventory_metadata_only.jsonl",
+    "protected_path_policy_card.json",
+    "source_output_ticket_requirement_card.json",
+    "real_data_availability_preflight_decision_card.json"
+  ],
+  "stage": 9109,
+  "stage_name": "stage9109_metadata_only_real_data_availability_preflight_design",
+  "status": "METADATA_ONLY_REAL_DATA_AVAILABILITY_PREFLIGHT_DESIGN_NO_ARXIV_ACCESS"
+}

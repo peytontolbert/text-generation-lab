@@ -2588,3 +2588,7 @@ Stage9107 reconciles the current frontier after Stage9106. Execution authorizati
 Stage9108 confirms trainer command, runtime assertion, contract-only artifact schema, and execution authorization controls are present in the central graph. Remaining blockers are source/output ticket, route-card materialization, route-to-loss translation, contract-only artifacts, final pre-execution audit, one-run ticket, and explicit user execution request.
 
 No data access, route-card materialization, route-to-loss translation, compiler handoff, trainer dry run, trainer invocation, contract-only invocation, runtime assertion execution, model forward, decoder CE, denoise CE, runtime, cleanup, /arxiv IO, or training is authorized.
+
+## Stage9109 Metadata-Only Real-Data Availability Preflight Design
+
+Stage9109 designs a future metadata-only availability preflight for /arxiv/datasets and /arxiv/repositories without performing /arxiv access. It preserves /arxiv as backup storage and keeps data rows, repository source bodies, route cards, route-to-loss translation, trainer invocation, cleanup, mining, and training closed.
