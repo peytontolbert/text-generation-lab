@@ -1,0 +1,65 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "loss_mask_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9202_repo_local_real_input_selector/stage8937_tiny_explicit_manifest_cli_audit/materialization_preview/loss_mask_cards.jsonl",
+  "manifest_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9202_repo_local_real_input_selector/stage8937_tiny_explicit_manifest_cli_audit/materialization_preview/trainer_rows.jsonl",
+  "notes": [
+    "This setup materializes trainer-ready rows locally.",
+    "It does not guarantee competitive quality against larger baselines.",
+    "Use tokenizer_json/tokenizer_config flags if you want the recovered BPE path instead of byte fallback."
+  ],
+  "recommended_commands": [
+    {
+      "command": [
+        "python",
+        "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+        "--manifest",
+        "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9202_repo_local_real_input_selector/stage8937_tiny_explicit_manifest_cli_audit/materialization_preview/trainer_rows.jsonl",
+        "--mode",
+        "structured_policy_probe",
+        "--max-train-rows",
+        "1",
+        "--max-eval-rows",
+        "1",
+        "--max-strict-rows",
+        "1",
+        "--max-steps",
+        "8",
+        "--decoder-ce-weight",
+        "0.0",
+        "--structured-aux-weight",
+        "1.0",
+        "--denoise-weight",
+        "0.0",
+        "--require-loss-mask-enforcement-audit",
+        "--no-final-checkpoint-export",
+        "--skip-final-model-save",
+        "1",
+        "--output-dir",
+        "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9202_repo_local_real_input_selector/stage8937_tiny_explicit_manifest_cli_audit/materialization_preview/structured_probe",
+        "--run-id",
+        "materialized_structured_probe",
+        "--execution-authorized-for-recovery-probe"
+      ],
+      "mode": "structured_policy_probe"
+    }
+  ],
+  "route_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9202_repo_local_real_input_selector/stage8937_tiny_explicit_manifest_cli_audit/materialization_preview/route_cards.jsonl",
+  "split_counts": {
+    "eval": 1,
+    "strict_eval": 1,
+    "train": 1
+  },
+  "trainer_rows": 3
+}
