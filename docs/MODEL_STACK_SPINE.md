@@ -2592,3 +2592,7 @@ No data access, route-card materialization, route-to-loss translation, compiler 
 ## Stage9109 Metadata-Only Real-Data Availability Preflight Design
 
 Stage9109 designs a future metadata-only availability preflight for /arxiv/datasets and /arxiv/repositories without performing /arxiv access. It preserves /arxiv as backup storage and keeps data rows, repository source bodies, route cards, route-to-loss translation, trainer invocation, cleanup, mining, and training closed.
+
+## Stage9111 Metadata-Only Preflight Graph Attachment
+
+Stage9111 attaches Stage9109/9110 metadata-only real-data availability preflight controls to the central graph. The graph now explicitly blocks `/arxiv` access/stat, dataset row reads, parquet group reads, repository source-body reads, `/arxiv` writes, mining, route-card materialization, route-to-loss translation, trainer invocation, model forward, decoder CE, denoise CE, runtime, uploads, cleanup, and training until later ticketed gates authorize each action.

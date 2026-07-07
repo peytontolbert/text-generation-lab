@@ -1,0 +1,187 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authority_rows_zero": true,
+    "base_graph_present": true,
+    "execution_authorization_contract_present": true,
+    "new_edges_present": true,
+    "new_nodes_present": true,
+    "registry_frontier_stage9110": true,
+    "source_stage9109_passed": true,
+    "source_stage9110_passed": true,
+    "stage9110_negative_cases_rejected": true
+  },
+  "decision": "Attached metadata-only real-data availability preflight controls to the central graph. /arxiv access/stat, dataset row reads, parquet group reads, repository source-body reads, /arxiv writes, mining, route-card materialization, route-to-loss translation, trainer invocation, model forward, decoder CE, denoise CE, runtime, uploads, cleanup, and training remain closed.",
+  "metrics": {
+    "added_edges": 24,
+    "added_nodes": 7,
+    "arxiv_access_performed": false,
+    "arxiv_stat_performed": false,
+    "arxiv_write_authorized": false,
+    "authority_rows": 0,
+    "cleanup_authorized_now": false,
+    "contract_only_invoked_now": false,
+    "data_mining_authorized": false,
+    "dataset_parquet_groups_read": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "graph_edges": 2925,
+    "graph_nodes": 1956,
+    "model_forward_attempted": false,
+    "network_upload_performed": false,
+    "repository_source_bodies_loaded": false,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "new_edges": [
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "audited_by",
+      "audit:metadata_only_real_data_availability_preflight_negative_cases_v1"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "requires",
+      "gate:metadata_preflight_blocks_arxiv_access"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "requires",
+      "gate:metadata_preflight_blocks_row_source_reads"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "requires",
+      "gate:metadata_preflight_blocks_arxiv_writes_cleanup"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "requires",
+      "gate:metadata_preflight_requires_source_output_ticket_for_body_reads"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "requires",
+      "gate:metadata_preflight_requires_route_card_ticket_for_compiler_handoff"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:arxiv_access"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:arxiv_stat"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:dataset_row_read"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:dataset_parquet_group_read"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:repository_source_body_read"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:write_to_arxiv"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:data_mining"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:route_card_materialization"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:route_to_loss_translation"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:trainer_execution"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:network_upload"
+    ],
+    [
+      "contract:metadata_only_real_data_availability_preflight_v1",
+      "blocks",
+      "operation:cleanup_execution"
+    ],
+    [
+      "audit:metadata_only_real_data_availability_preflight_negative_cases_v1",
+      "rejects",
+      "failure:arxiv_access_performed"
+    ],
+    [
+      "audit:metadata_only_real_data_availability_preflight_negative_cases_v1",
+      "rejects",
+      "failure:dataset_rows_loaded"
+    ],
+    [
+      "audit:metadata_only_real_data_availability_preflight_negative_cases_v1",
+      "rejects",
+      "failure:repository_source_bodies_loaded"
+    ],
+    [
+      "audit:metadata_only_real_data_availability_preflight_negative_cases_v1",
+      "rejects",
+      "failure:arxiv_write_authorized"
+    ],
+    [
+      "audit:metadata_only_real_data_availability_preflight_negative_cases_v1",
+      "rejects",
+      "failure:trainer_executed_now"
+    ],
+    [
+      "audit:metadata_only_real_data_availability_preflight_negative_cases_v1",
+      "rejects",
+      "failure:cleanup_authorized_now"
+    ]
+  ],
+  "new_node_ids": [
+    "contract:metadata_only_real_data_availability_preflight_v1",
+    "audit:metadata_only_real_data_availability_preflight_negative_cases_v1",
+    "gate:metadata_preflight_blocks_arxiv_access",
+    "gate:metadata_preflight_blocks_row_source_reads",
+    "gate:metadata_preflight_blocks_arxiv_writes_cleanup",
+    "gate:metadata_preflight_requires_source_output_ticket_for_body_reads",
+    "gate:metadata_preflight_requires_route_card_ticket_for_compiler_handoff"
+  ],
+  "stage": 9111,
+  "stage_name": "stage9111_metadata_only_preflight_graph_attachment",
+  "status": "METADATA_ONLY_PREFLIGHT_GRAPH_ATTACHMENT_NO_ARXIV_ACCESS"
+}
