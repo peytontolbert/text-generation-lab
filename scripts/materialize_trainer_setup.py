@@ -11,6 +11,7 @@ from curriculum_compiler import LOSS_KEYS, ROUTE_TO_LOSSES
 from diagnostic_ticket_contract import AUTHORITY_CLOSED
 from loss_mask_card import FORBIDDEN_BY_DEFAULT
 from route_card_materializer import materialize_route_card, validate_route_card
+from safe_paths import assert_no_destructive_command_tokens
 from build_stage9128_loss_mask_card_schema_recovery_design import (
     REQUIRED_DISABLED_BY_DEFAULT,
     REQUIRED_TELEMETRY,
@@ -406,6 +407,9 @@ def build_trainer_dry_run_input(
                 ],
             }
         )
+
+    for item in commands:
+        assert_no_destructive_command_tokens(item["command"])
 
     return {
         "manifest_path": str(manifest_path),

@@ -13,6 +13,7 @@ from scripts.materialize_trainer_setup import (  # noqa: E402
     materialize_loss_masks,
     materialize_training_setup,
 )
+from scripts.safe_paths import assert_no_destructive_command_tokens  # noqa: E402
 
 
 def objective_rows() -> list[dict[str, object]]:
@@ -182,3 +183,15 @@ def test_materialize_training_setup_writes_end_to_end_outputs(tmp_path: Path) ->
     assert "bounded_decoder_ce_probe" in modes
     assert "structured_policy_probe" in modes
     assert "denoise_repair_probe" in modes
+
+def test_materialized_trainer_commands_are_non_destructive(tmp_path: Path) -> None:
+    result = materialize_training_setup(
+        objective_rows(),
+        judge_rows(),
+        ranker_rows(),
+        output_dir=tmp_path,
+    )
+
+    for item in result["trainer_input"]["recommended_commands"]:
+        assert_no_destructive_command_tokens(item["command"])
+
