@@ -2582,3 +2582,9 @@ Stage9106 attaches Stage9104/9105 trainer execution authorization review control
 ## Stage9107 Current Frontier After Execution Authorization Graph
 
 Stage9107 reconciles the current frontier after Stage9106. Execution authorization controls are graph-visible, but same-stage execution, next-stage execution, data access, route-card materialization, route-to-loss translation, compiler handoff, trainer dry run, trainer invocation, contract-only invocation, runtime assertions, model forward, decoder CE, denoise CE, runtime, cleanup, /arxiv IO, and training remain closed.
+
+## Stage9108 Central Graph Gap Walk Remaining Trainer Blockers
+
+Stage9108 confirms trainer command, runtime assertion, contract-only artifact schema, and execution authorization controls are present in the central graph. Remaining blockers are source/output ticket, route-card materialization, route-to-loss translation, contract-only artifacts, final pre-execution audit, one-run ticket, and explicit user execution request.
+
+No data access, route-card materialization, route-to-loss translation, compiler handoff, trainer dry run, trainer invocation, contract-only invocation, runtime assertion execution, model forward, decoder CE, denoise CE, runtime, cleanup, /arxiv IO, or training is authorized.

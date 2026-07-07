@@ -1,0 +1,125 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authority_rows_zero": true,
+    "base_graph_present": true,
+    "next_safe_branches_recorded": true,
+    "registry_frontier_stage9107": true,
+    "remaining_blockers_recorded": true,
+    "required_control_nodes_present": true,
+    "source_stage9107_passed": true
+  },
+  "decision": "Central graph gap walk confirms trainer command, runtime assertion, contract-only artifact schema, and execution authorization controls are present. Remaining blockers are source/output ticket, route-card materialization, route-to-loss translation, contract-only artifact materialization, final pre-execution audit, one-run ticket, and explicit user execution request. Execution and training remain closed.",
+  "graph_source": "runs/local/artifacts/stage9106_execution_authorization_graph_attachment/central_research_graph_with_execution_authorization_controls.json",
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "authority_rows": 0,
+    "candidate_rows_materialized": 0,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "contract_only_invoked_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "graph_edges": 2901,
+    "graph_nodes": 1937,
+    "missing_control_nodes": 0,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "next_safe_branches": 4,
+    "next_stage_execution_authorized": false,
+    "present_control_nodes": 8,
+    "remaining_blockers": 7,
+    "repository_source_bodies_read_now": false,
+    "required_control_nodes": 8,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "row_bodies_read_now": false,
+    "runtime_assertions_executed_now": false,
+    "runtime_authorized_flag": false,
+    "same_stage_execution_authorized": false,
+    "source_metadata_read_now": false,
+    "source_output_ticket_instantiated_now": false,
+    "trainer_dry_run_ready_now": false,
+    "trainer_executed_now": false,
+    "training_authorized": false,
+    "training_ready": false
+  },
+  "missing_control_nodes": [],
+  "next_safe_branches": [
+    "metadata-only real-data availability preflight design without /arxiv writes",
+    "source-output ticket design without reading row bodies",
+    "contract-only dry-run input materialization design without invocation",
+    "central graph attachment for this gap-walk result"
+  ],
+  "present_control_nodes": [
+    "contract:trainer_command_surface_static_v1",
+    "contract:trainer_contract_only_artifact_schema_v1",
+    "contract:trainer_execution_authorization_review_v1",
+    "contract:trainer_runtime_assertion_inventory_v1",
+    "gate:execution_requires_contract_only_artifacts",
+    "gate:execution_requires_explicit_user_request",
+    "gate:execution_requires_final_pre_execution_audit",
+    "gate:execution_requires_one_run_training_ticket"
+  ],
+  "remaining_blockers": [
+    {
+      "authority_closed": true,
+      "blocker": "explicit_user_execution_request_missing",
+      "priority": 1,
+      "required_next": "Do not execute until the user explicitly requests a specific one-run trainer action."
+    },
+    {
+      "authority_closed": true,
+      "blocker": "real_source_output_ticket_not_instantiated",
+      "priority": 2,
+      "required_next": "Design/instantiate a source-output ticket before any real row bodies, route cards, or source/repository bodies are read."
+    },
+    {
+      "authority_closed": true,
+      "blocker": "route_cards_not_materialized",
+      "priority": 3,
+      "required_next": "Materialize route cards only after a source-output ticket and row-sample judge path authorize metadata/data access."
+    },
+    {
+      "authority_closed": true,
+      "blocker": "route_to_loss_translation_not_materialized",
+      "priority": 4,
+      "required_next": "Translate approved route cards to row-level loss masks only after route-card materialization passes."
+    },
+    {
+      "authority_closed": true,
+      "blocker": "trainer_contract_only_artifacts_not_materialized",
+      "priority": 5,
+      "required_next": "Run a future trainer contract-only instance only after locked manifest, schema lock, loss masks, and artifact schema inputs exist."
+    },
+    {
+      "authority_closed": true,
+      "blocker": "final_pre_execution_audit_missing",
+      "priority": 6,
+      "required_next": "Run a final pre-execution audit after contract-only artifacts pass and before any one-run ticket."
+    },
+    {
+      "authority_closed": true,
+      "blocker": "one_run_training_ticket_missing",
+      "priority": 7,
+      "required_next": "Instantiate a one-run ticket only after explicit user request, passing contract-only artifacts, and final pre-execution audit."
+    }
+  ],
+  "stage": 9108,
+  "stage_name": "stage9108_central_graph_gap_walk_remaining_trainer_blockers",
+  "status": "CENTRAL_GRAPH_GAP_WALK_REMAINING_TRAINER_BLOCKERS_NO_EXECUTION"
+}
