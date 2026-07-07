@@ -1,0 +1,83 @@
+{
+  "adapters": [
+    {
+      "audit": {
+        "caps_met": true,
+        "exclusive_loss_rows": true,
+        "rejected_loss_rows": 0,
+        "selected_counts": {
+          "eval": 16,
+          "strict_eval": 16,
+          "train": 32
+        },
+        "selected_rows": 64
+      },
+      "caps": {
+        "eval": 16,
+        "strict_eval": 16,
+        "train": 32
+      },
+      "enabled_loss": "decoder_ce",
+      "failures": [],
+      "max_steps": 16,
+      "mode": "bounded_decoder_ce_probe",
+      "output_manifest": "runs/local/artifacts/stage9211_repo_local_tiny_cap_adapters/bounded_decoder_tiny_cap_manifest.jsonl",
+      "passed": true,
+      "source_manifest": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8592_bounded_decoder_bundle/materialization_preview/trainer_rows.jsonl"
+    },
+    {
+      "audit": {
+        "caps_met": true,
+        "exclusive_loss_rows": true,
+        "rejected_loss_rows": 0,
+        "selected_counts": {
+          "eval": 16,
+          "strict_eval": 16,
+          "train": 32
+        },
+        "selected_rows": 64
+      },
+      "caps": {
+        "eval": 16,
+        "strict_eval": 16,
+        "train": 32
+      },
+      "enabled_loss": "denoise_ce",
+      "failures": [],
+      "max_steps": 8,
+      "mode": "denoise_repair_probe",
+      "output_manifest": "runs/local/artifacts/stage9211_repo_local_tiny_cap_adapters/denoise_tiny_cap_manifest.jsonl",
+      "passed": true,
+      "source_manifest": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8647_denoise_bundle/materialization_preview/trainer_rows.jsonl"
+    }
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "adapters_written": true,
+    "all_adapters_passed": true,
+    "all_authority_closed": true,
+    "all_caps_met": true,
+    "all_losses_exclusive": true,
+    "matrix_stage9208_passed": true,
+    "no_arxiv_paths": true,
+    "source_stage9210_passed": true
+  },
+  "decision": "Built repo-local tiny-cap manifests for bounded decoder and denoise from existing Stage9206 contract-only trainer rows. No trainer execution, model execution, cleanup, runtime, or /arxiv access occurred.",
+  "failures": [],
+  "next_best_step": "Audit the tiny-cap adapters, then refresh the execution review matrix so bounded decoder and denoise can be evaluated against explicit future ticket requirements.",
+  "passed": true,
+  "stage": 9211,
+  "stage_name": "stage9211_repo_local_tiny_cap_adapters"
+}
