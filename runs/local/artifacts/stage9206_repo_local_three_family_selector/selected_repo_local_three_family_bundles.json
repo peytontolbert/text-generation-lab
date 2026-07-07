@@ -1,0 +1,650 @@
+[
+  {
+    "bundle_id": "stage8592_bounded_decoder_bundle",
+    "bundle_kind": "repo_local_real_input_bundle_v1",
+    "bundle_preview": {
+      "eligible_modes": [
+        "bounded_decoder_ce_probe"
+      ],
+      "judge_rows": 96,
+      "loss_audit": {
+        "authority_closed": true,
+        "enabled_loss_counts": {
+          "decoder_ce": 96
+        },
+        "forbidden_enabled_count": 0,
+        "forbidden_enabled_examples": [],
+        "loss_mask_cards": 96,
+        "missing_objective_examples": [],
+        "missing_objective_rows": 0,
+        "route_cards": 96
+      },
+      "materialization_passed": true,
+      "objective_rows": 96,
+      "ranker_rows": 96,
+      "route_audit": {
+        "authority_closed": true,
+        "judge_rows": 96,
+        "materialized_route_cards": 96,
+        "missing_judge_examples": [],
+        "missing_judge_rows": 0,
+        "missing_ranker_examples": [],
+        "missing_ranker_rows": 0,
+        "objective_rows": 96,
+        "ranker_rows": 96,
+        "route_counts": {
+          "KEEP_BOUNDED_DECODER": 96
+        },
+        "split_counts": {
+          "eval": 32,
+          "strict_eval": 32,
+          "train": 32
+        },
+        "validation_failure_count": 0,
+        "validation_failures": []
+      },
+      "trainer_audit": {
+        "authority_closed": true,
+        "decoder_rows": 96,
+        "denoise_rows": 0,
+        "missing_loss_mask_cards": 0,
+        "missing_loss_mask_examples": [],
+        "missing_route_cards": 0,
+        "missing_route_examples": [],
+        "objective_rows": 96,
+        "route_counts": {
+          "KEEP_BOUNDED_DECODER": 96
+        },
+        "split_counts": {
+          "eval": 32,
+          "strict_eval": 32,
+          "train": 32
+        },
+        "structured_rows": 0,
+        "trainer_rows": 96
+      },
+      "trainer_input": {
+        "authority": {
+          "body_emission_authorized": false,
+          "controller_complete_merge_authorized_next": false,
+          "decoder_ce_training_authorized_next": false,
+          "denoise_ce_training_authorized_next": false,
+          "gemma_execution_authorized_next": false,
+          "harness_execution_authorized_next": false,
+          "model_execution_authorized_next": false,
+          "promotion_ready": false,
+          "runtime_authorized": false,
+          "scoring_authorized_next": false,
+          "source_emission_authorized": false
+        },
+        "loss_mask_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8592_bounded_decoder_bundle/materialization_preview/loss_mask_cards.jsonl",
+        "manifest_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8592_bounded_decoder_bundle/materialization_preview/trainer_rows.jsonl",
+        "notes": [
+          "This setup materializes trainer-ready rows locally.",
+          "It does not guarantee competitive quality against larger baselines.",
+          "Use tokenizer_json/tokenizer_config flags if you want the recovered BPE path instead of byte fallback."
+        ],
+        "recommended_commands": [
+          {
+            "command": [
+              "python",
+              "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+              "--manifest",
+              "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8592_bounded_decoder_bundle/materialization_preview/trainer_rows.jsonl",
+              "--mode",
+              "bounded_decoder_ce_probe",
+              "--max-train-rows",
+              "32",
+              "--max-eval-rows",
+              "32",
+              "--max-strict-rows",
+              "32",
+              "--max-steps",
+              "8",
+              "--decoder-ce-weight",
+              "1.0",
+              "--structured-aux-weight",
+              "0.0",
+              "--denoise-weight",
+              "0.0",
+              "--require-loss-mask-enforcement-audit",
+              "--no-final-checkpoint-export",
+              "--skip-final-model-save",
+              "1",
+              "--output-dir",
+              "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8592_bounded_decoder_bundle/materialization_preview/bounded_decoder_probe",
+              "--run-id",
+              "materialized_bounded_decoder_probe",
+              "--execution-authorized-for-recovery-probe"
+            ],
+            "mode": "bounded_decoder_ce_probe"
+          }
+        ],
+        "route_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8592_bounded_decoder_bundle/materialization_preview/route_cards.jsonl",
+        "split_counts": {
+          "eval": 32,
+          "strict_eval": 32,
+          "train": 32
+        },
+        "trainer_rows": 96
+      }
+    },
+    "judge_rows_path": "runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_candidate_package/rows.jsonl",
+    "junk_ranker_rows_path": "runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_candidate_package/rows.jsonl",
+    "normalization_profile": "stage9204_stage8592_bounded_decoder_adapter_v1",
+    "objective_rows_path": "runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_candidate_package/rows.jsonl",
+    "path_validation": {
+      "judge": {
+        "allowed": true,
+        "allowed_input_roots": [
+          "runs/local/artifacts",
+          "runs/local/recovered",
+          "runs/local/manifests",
+          "datasets/recovered"
+        ],
+        "data_mining_authorized": false,
+        "exists": true,
+        "failures": [],
+        "forbidden_absolute_roots": [
+          "/",
+          "/arxiv",
+          "/data"
+        ],
+        "input_path": "runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_candidate_package/rows.jsonl",
+        "must_exist": true,
+        "recursive_scan_authorized": false,
+        "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_candidate_package/rows.jsonl",
+        "root_label": "runs/local/artifacts",
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "objective": {
+        "allowed": true,
+        "allowed_input_roots": [
+          "runs/local/artifacts",
+          "runs/local/recovered",
+          "runs/local/manifests",
+          "datasets/recovered"
+        ],
+        "data_mining_authorized": false,
+        "exists": true,
+        "failures": [],
+        "forbidden_absolute_roots": [
+          "/",
+          "/arxiv",
+          "/data"
+        ],
+        "input_path": "runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_candidate_package/rows.jsonl",
+        "must_exist": true,
+        "recursive_scan_authorized": false,
+        "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_candidate_package/rows.jsonl",
+        "root_label": "runs/local/artifacts",
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "paths_valid": true,
+      "ranker": {
+        "allowed": true,
+        "allowed_input_roots": [
+          "runs/local/artifacts",
+          "runs/local/recovered",
+          "runs/local/manifests",
+          "datasets/recovered"
+        ],
+        "data_mining_authorized": false,
+        "exists": true,
+        "failures": [],
+        "forbidden_absolute_roots": [
+          "/",
+          "/arxiv",
+          "/data"
+        ],
+        "input_path": "runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_candidate_package/rows.jsonl",
+        "must_exist": true,
+        "recursive_scan_authorized": false,
+        "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage8592_reconstructed_bounded_decoder_ce_candidate_package/rows.jsonl",
+        "root_label": "runs/local/artifacts",
+        "runtime_authorized": false,
+        "training_authorized": false
+      }
+    },
+    "preferred_mode": "bounded_decoder_ce_probe"
+  },
+  {
+    "bundle_id": "stage8647_denoise_bundle",
+    "bundle_kind": "repo_local_real_input_bundle_v1",
+    "bundle_preview": {
+      "eligible_modes": [
+        "denoise_repair_probe"
+      ],
+      "judge_rows": 360,
+      "loss_audit": {
+        "authority_closed": true,
+        "enabled_loss_counts": {
+          "denoise_ce": 360
+        },
+        "forbidden_enabled_count": 0,
+        "forbidden_enabled_examples": [],
+        "loss_mask_cards": 360,
+        "missing_objective_examples": [],
+        "missing_objective_rows": 0,
+        "route_cards": 360
+      },
+      "materialization_passed": true,
+      "objective_rows": 360,
+      "ranker_rows": 360,
+      "route_audit": {
+        "authority_closed": true,
+        "judge_rows": 360,
+        "materialized_route_cards": 360,
+        "missing_judge_examples": [],
+        "missing_judge_rows": 0,
+        "missing_ranker_examples": [],
+        "missing_ranker_rows": 0,
+        "objective_rows": 360,
+        "ranker_rows": 360,
+        "route_counts": {
+          "USE_FOR_DENOISE_REPAIR": 360
+        },
+        "split_counts": {
+          "eval": 120,
+          "strict_eval": 120,
+          "train": 120
+        },
+        "validation_failure_count": 0,
+        "validation_failures": []
+      },
+      "trainer_audit": {
+        "authority_closed": true,
+        "decoder_rows": 0,
+        "denoise_rows": 360,
+        "missing_loss_mask_cards": 0,
+        "missing_loss_mask_examples": [],
+        "missing_route_cards": 0,
+        "missing_route_examples": [],
+        "objective_rows": 360,
+        "route_counts": {
+          "USE_FOR_DENOISE_REPAIR": 360
+        },
+        "split_counts": {
+          "eval": 120,
+          "strict_eval": 120,
+          "train": 120
+        },
+        "structured_rows": 0,
+        "trainer_rows": 360
+      },
+      "trainer_input": {
+        "authority": {
+          "body_emission_authorized": false,
+          "controller_complete_merge_authorized_next": false,
+          "decoder_ce_training_authorized_next": false,
+          "denoise_ce_training_authorized_next": false,
+          "gemma_execution_authorized_next": false,
+          "harness_execution_authorized_next": false,
+          "model_execution_authorized_next": false,
+          "promotion_ready": false,
+          "runtime_authorized": false,
+          "scoring_authorized_next": false,
+          "source_emission_authorized": false
+        },
+        "loss_mask_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8647_denoise_bundle/materialization_preview/loss_mask_cards.jsonl",
+        "manifest_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8647_denoise_bundle/materialization_preview/trainer_rows.jsonl",
+        "notes": [
+          "This setup materializes trainer-ready rows locally.",
+          "It does not guarantee competitive quality against larger baselines.",
+          "Use tokenizer_json/tokenizer_config flags if you want the recovered BPE path instead of byte fallback."
+        ],
+        "recommended_commands": [
+          {
+            "command": [
+              "python",
+              "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+              "--manifest",
+              "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8647_denoise_bundle/materialization_preview/trainer_rows.jsonl",
+              "--mode",
+              "denoise_repair_probe",
+              "--max-train-rows",
+              "120",
+              "--max-eval-rows",
+              "120",
+              "--max-strict-rows",
+              "120",
+              "--max-steps",
+              "8",
+              "--decoder-ce-weight",
+              "0.0",
+              "--structured-aux-weight",
+              "0.0",
+              "--denoise-weight",
+              "1.0",
+              "--require-loss-mask-enforcement-audit",
+              "--no-final-checkpoint-export",
+              "--skip-final-model-save",
+              "1",
+              "--output-dir",
+              "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8647_denoise_bundle/materialization_preview/denoise_probe",
+              "--run-id",
+              "materialized_denoise_probe",
+              "--execution-authorized-for-recovery-probe"
+            ],
+            "mode": "denoise_repair_probe"
+          }
+        ],
+        "route_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8647_denoise_bundle/materialization_preview/route_cards.jsonl",
+        "split_counts": {
+          "eval": 120,
+          "strict_eval": 120,
+          "train": 120
+        },
+        "trainer_rows": 360
+      }
+    },
+    "judge_rows_path": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+    "junk_ranker_rows_path": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+    "normalization_profile": "stage9206_stage8647_denoise_adapter_v1",
+    "objective_rows_path": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+    "path_validation": {
+      "judge": {
+        "allowed": true,
+        "allowed_input_roots": [
+          "runs/local/artifacts",
+          "runs/local/recovered",
+          "runs/local/manifests",
+          "datasets/recovered"
+        ],
+        "data_mining_authorized": false,
+        "exists": true,
+        "failures": [],
+        "forbidden_absolute_roots": [
+          "/",
+          "/arxiv",
+          "/data"
+        ],
+        "input_path": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+        "must_exist": true,
+        "recursive_scan_authorized": false,
+        "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+        "root_label": "runs/local/artifacts",
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "objective": {
+        "allowed": true,
+        "allowed_input_roots": [
+          "runs/local/artifacts",
+          "runs/local/recovered",
+          "runs/local/manifests",
+          "datasets/recovered"
+        ],
+        "data_mining_authorized": false,
+        "exists": true,
+        "failures": [],
+        "forbidden_absolute_roots": [
+          "/",
+          "/arxiv",
+          "/data"
+        ],
+        "input_path": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+        "must_exist": true,
+        "recursive_scan_authorized": false,
+        "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+        "root_label": "runs/local/artifacts",
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "paths_valid": true,
+      "ranker": {
+        "allowed": true,
+        "allowed_input_roots": [
+          "runs/local/artifacts",
+          "runs/local/recovered",
+          "runs/local/manifests",
+          "datasets/recovered"
+        ],
+        "data_mining_authorized": false,
+        "exists": true,
+        "failures": [],
+        "forbidden_absolute_roots": [
+          "/",
+          "/arxiv",
+          "/data"
+        ],
+        "input_path": "runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+        "must_exist": true,
+        "recursive_scan_authorized": false,
+        "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage8647_output_repair_denoise_neutral_manifest/output_repair_denoise_neutral_manifest.jsonl",
+        "root_label": "runs/local/artifacts",
+        "runtime_authorized": false,
+        "training_authorized": false
+      }
+    },
+    "preferred_mode": "denoise_repair_probe"
+  },
+  {
+    "bundle_id": "stage8937_structured_policy_bundle",
+    "bundle_kind": "repo_local_real_input_bundle_v1",
+    "bundle_preview": {
+      "eligible_modes": [
+        "structured_policy_probe"
+      ],
+      "judge_rows": 3,
+      "loss_audit": {
+        "authority_closed": true,
+        "enabled_loss_counts": {
+          "action_sequence_ce": 2,
+          "allowed_import_policy_ce": 1,
+          "blocked_import_policy_ce": 1,
+          "build_mode_ce": 1,
+          "edit_localization_ce": 1,
+          "file_plan_ce": 1,
+          "patch_operator_ce": 1,
+          "repair_surface_ce": 1,
+          "repo_dependency_policy_ce": 1,
+          "surface_role_ce": 1,
+          "symbol_binding_ce": 1,
+          "verifier_repair_ce": 1
+        },
+        "forbidden_enabled_count": 0,
+        "forbidden_enabled_examples": [],
+        "loss_mask_cards": 3,
+        "missing_objective_examples": [],
+        "missing_objective_rows": 0,
+        "route_cards": 3
+      },
+      "materialization_passed": true,
+      "objective_rows": 3,
+      "ranker_rows": 3,
+      "route_audit": {
+        "authority_closed": true,
+        "judge_rows": 3,
+        "materialized_route_cards": 3,
+        "missing_judge_examples": [],
+        "missing_judge_rows": 0,
+        "missing_ranker_examples": [],
+        "missing_ranker_rows": 0,
+        "objective_rows": 3,
+        "ranker_rows": 3,
+        "route_counts": {
+          "HOLD_LONG_OUTPUT": 1,
+          "KEEP_STRUCTURED": 1,
+          "NEEDS_RETRIEVAL": 1
+        },
+        "split_counts": {
+          "eval": 1,
+          "strict_eval": 1,
+          "train": 1
+        },
+        "validation_failure_count": 0,
+        "validation_failures": []
+      },
+      "trainer_audit": {
+        "authority_closed": true,
+        "decoder_rows": 0,
+        "denoise_rows": 0,
+        "missing_loss_mask_cards": 0,
+        "missing_loss_mask_examples": [],
+        "missing_route_cards": 0,
+        "missing_route_examples": [],
+        "objective_rows": 3,
+        "route_counts": {
+          "HOLD_LONG_OUTPUT": 1,
+          "KEEP_STRUCTURED": 1,
+          "NEEDS_RETRIEVAL": 1
+        },
+        "split_counts": {
+          "eval": 1,
+          "strict_eval": 1,
+          "train": 1
+        },
+        "structured_rows": 2,
+        "trainer_rows": 3
+      },
+      "trainer_input": {
+        "authority": {
+          "body_emission_authorized": false,
+          "controller_complete_merge_authorized_next": false,
+          "decoder_ce_training_authorized_next": false,
+          "denoise_ce_training_authorized_next": false,
+          "gemma_execution_authorized_next": false,
+          "harness_execution_authorized_next": false,
+          "model_execution_authorized_next": false,
+          "promotion_ready": false,
+          "runtime_authorized": false,
+          "scoring_authorized_next": false,
+          "source_emission_authorized": false
+        },
+        "loss_mask_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8937_structured_policy_bundle/materialization_preview/loss_mask_cards.jsonl",
+        "manifest_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8937_structured_policy_bundle/materialization_preview/trainer_rows.jsonl",
+        "notes": [
+          "This setup materializes trainer-ready rows locally.",
+          "It does not guarantee competitive quality against larger baselines.",
+          "Use tokenizer_json/tokenizer_config flags if you want the recovered BPE path instead of byte fallback."
+        ],
+        "recommended_commands": [
+          {
+            "command": [
+              "python",
+              "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+              "--manifest",
+              "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8937_structured_policy_bundle/materialization_preview/trainer_rows.jsonl",
+              "--mode",
+              "structured_policy_probe",
+              "--max-train-rows",
+              "1",
+              "--max-eval-rows",
+              "1",
+              "--max-strict-rows",
+              "1",
+              "--max-steps",
+              "8",
+              "--decoder-ce-weight",
+              "0.0",
+              "--structured-aux-weight",
+              "1.0",
+              "--denoise-weight",
+              "0.0",
+              "--require-loss-mask-enforcement-audit",
+              "--no-final-checkpoint-export",
+              "--skip-final-model-save",
+              "1",
+              "--output-dir",
+              "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8937_structured_policy_bundle/materialization_preview/structured_probe",
+              "--run-id",
+              "materialized_structured_probe",
+              "--execution-authorized-for-recovery-probe"
+            ],
+            "mode": "structured_policy_probe"
+          }
+        ],
+        "route_cards_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8937_structured_policy_bundle/materialization_preview/route_cards.jsonl",
+        "split_counts": {
+          "eval": 1,
+          "strict_eval": 1,
+          "train": 1
+        },
+        "trainer_rows": 3
+      }
+    },
+    "judge_rows_path": "runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/judged_rows.jsonl",
+    "junk_ranker_rows_path": "runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/ranked_rows.jsonl",
+    "normalization_profile": "stage9201_stage8937_adapter_v1",
+    "objective_rows_path": "runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/normalized_input_rows.jsonl",
+    "path_validation": {
+      "judge": {
+        "allowed": true,
+        "allowed_input_roots": [
+          "runs/local/artifacts",
+          "runs/local/recovered",
+          "runs/local/manifests",
+          "datasets/recovered"
+        ],
+        "data_mining_authorized": false,
+        "exists": true,
+        "failures": [],
+        "forbidden_absolute_roots": [
+          "/",
+          "/arxiv",
+          "/data"
+        ],
+        "input_path": "runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/judged_rows.jsonl",
+        "must_exist": true,
+        "recursive_scan_authorized": false,
+        "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/judged_rows.jsonl",
+        "root_label": "runs/local/artifacts",
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "objective": {
+        "allowed": true,
+        "allowed_input_roots": [
+          "runs/local/artifacts",
+          "runs/local/recovered",
+          "runs/local/manifests",
+          "datasets/recovered"
+        ],
+        "data_mining_authorized": false,
+        "exists": true,
+        "failures": [],
+        "forbidden_absolute_roots": [
+          "/",
+          "/arxiv",
+          "/data"
+        ],
+        "input_path": "runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/normalized_input_rows.jsonl",
+        "must_exist": true,
+        "recursive_scan_authorized": false,
+        "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/normalized_input_rows.jsonl",
+        "root_label": "runs/local/artifacts",
+        "runtime_authorized": false,
+        "training_authorized": false
+      },
+      "paths_valid": true,
+      "ranker": {
+        "allowed": true,
+        "allowed_input_roots": [
+          "runs/local/artifacts",
+          "runs/local/recovered",
+          "runs/local/manifests",
+          "datasets/recovered"
+        ],
+        "data_mining_authorized": false,
+        "exists": true,
+        "failures": [],
+        "forbidden_absolute_roots": [
+          "/",
+          "/arxiv",
+          "/data"
+        ],
+        "input_path": "runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/ranked_rows.jsonl",
+        "must_exist": true,
+        "recursive_scan_authorized": false,
+        "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage8937_tiny_explicit_manifest_cli_audit/compiler_output/ranked_rows.jsonl",
+        "root_label": "runs/local/artifacts",
+        "runtime_authorized": false,
+        "training_authorized": false
+      }
+    },
+    "preferred_mode": "structured_policy_probe"
+  }
+]
