@@ -1,0 +1,311 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "allowed_roots_exact": true,
+    "arxiv_forbidden": true,
+    "authority_closed": true,
+    "design_passes": true,
+    "execution_not_authorized": true,
+    "negative_cases_rejected": true,
+    "route_materialization_not_authorized": true
+  },
+  "decision": "Designed a future single-run repo-local metadata inventory ticket instance. Execution remains unauthorized; no inventory, route-card materialization, loss-mask materialization, compiler handoff, trainer path, runtime, or training is opened.",
+  "design": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "contract_type": "repo_local_metadata_inventory_single_run_ticket_instance_design_v1",
+    "decision": "Designed a future single-run repo-local metadata inventory ticket instance. Execution remains unauthorized; no inventory, route-card materialization, loss-mask materialization, compiler handoff, trainer path, runtime, or training is opened.",
+    "metrics": {
+      "arxiv_accessed": false,
+      "candidate_rows_loaded": 0,
+      "cleanup_authorized_now": false,
+      "compiler_handoff_ready_now": false,
+      "dataset_rows_loaded": false,
+      "decoder_ce_authorized": false,
+      "denoise_ce_authorized": false,
+      "design_only": true,
+      "file_content_read": false,
+      "inventory_runner_executed_now": false,
+      "json_parsed": false,
+      "jsonl_rows_counted": false,
+      "loss_mask_cards_materialized_now": false,
+      "metadata_inventory_execution_authorized_next": false,
+      "metadata_inventory_execution_authorized_now": false,
+      "metadata_path_inventory_loaded_now": false,
+      "model_forward_attempted": false,
+      "network_upload_performed": false,
+      "path_inventory_rows_loaded": 0,
+      "route_cards_materialized_now": false,
+      "runtime_authorized_flag": false,
+      "source_stage9153_passed": true,
+      "ticket_instance_materialized_for_execution": false,
+      "trainer_executed_now": false,
+      "training_authorized": false
+    },
+    "purpose": "Design the bounded single-run ticket instance shape for a future repo-local metadata-only inventory over recovery artifacts. This does not authorize or execute the inventory.",
+    "stage": 9154,
+    "stage_name": "stage9154_repo_local_inventory_single_run_ticket_instance_design",
+    "ticket_fields": [
+      "ticket_schema_version",
+      "ticket_kind",
+      "ticket_id",
+      "created_by_stage",
+      "approved_for_metadata_inventory_execution",
+      "approved_for_route_card_materialization",
+      "allowed_roots",
+      "forbidden_roots",
+      "search_patterns",
+      "max_depth",
+      "output_dir",
+      "list_paths_only",
+      "no_file_content_reads",
+      "no_json_parse",
+      "no_jsonl_row_count",
+      "no_dataset_row_load",
+      "no_arxiv_access",
+      "no_route_card_materialization",
+      "no_loss_mask_materialization",
+      "no_compiler_handoff",
+      "no_trainer_execution",
+      "authority"
+    ],
+    "ticket_instance_template": {
+      "allowed_roots": [
+        "runs/local/artifacts",
+        "runs/summaries"
+      ],
+      "approved_for_metadata_inventory_execution": false,
+      "approved_for_route_card_materialization": false,
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "created_by_stage": 9154,
+      "forbidden_roots": [
+        "/",
+        "/data",
+        "/arxiv",
+        "/home",
+        "/tmp"
+      ],
+      "list_paths_only": true,
+      "max_depth": 8,
+      "no_arxiv_access": true,
+      "no_compiler_handoff": true,
+      "no_dataset_row_load": true,
+      "no_file_content_reads": true,
+      "no_json_parse": true,
+      "no_jsonl_row_count": true,
+      "no_loss_mask_materialization": true,
+      "no_route_card_materialization": true,
+      "no_trainer_execution": true,
+      "output_dir": "runs/local/artifacts/stage9154_repo_local_inventory_single_run_ticket_instance_design/future_inventory_output",
+      "search_patterns": "reuse scripts.metadata_only_path_inventory.SEARCH_PATTERNS",
+      "ticket_id": "future-ticket-id-required",
+      "ticket_kind": "repo_local_metadata_inventory_single_run",
+      "ticket_schema_version": "repo_local_metadata_inventory_single_run_v1"
+    },
+    "ticket_invariants": [
+      "ticket_kind_must_be_repo_local_metadata_inventory_single_run",
+      "approved_for_metadata_inventory_execution_false_until_final_audit",
+      "approved_for_route_card_materialization_false",
+      "allowed_roots_must_equal_repo_local_artifact_roots",
+      "forbidden_roots_must_include_arxiv_and_data_outside_repo",
+      "list_paths_only_true",
+      "file_content_reads_forbidden",
+      "json_parse_forbidden",
+      "jsonl_row_count_forbidden",
+      "dataset_row_load_forbidden",
+      "route_card_materialization_forbidden",
+      "trainer_execution_forbidden",
+      "authority_closed"
+    ]
+  },
+  "failures": [],
+  "metrics": {
+    "allowed_roots": 2,
+    "arxiv_accessed": false,
+    "candidate_rows_loaded": 0,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "design_only": true,
+    "file_content_read": false,
+    "forbidden_roots": 5,
+    "inventory_runner_executed_now": false,
+    "json_parsed": false,
+    "jsonl_rows_counted": false,
+    "loss_mask_cards_materialized_now": false,
+    "metadata_inventory_execution_authorized_next": false,
+    "metadata_inventory_execution_authorized_now": false,
+    "metadata_path_inventory_loaded_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 19,
+    "negative_cases_rejected": 19,
+    "network_upload_performed": false,
+    "path_inventory_rows_loaded": 0,
+    "route_cards_materialized_now": false,
+    "runtime_authorized_flag": false,
+    "source_stage9153_passed": true,
+    "ticket_fields": 22,
+    "ticket_instance_materialized_for_execution": false,
+    "ticket_invariants": 13,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "allowed_root_missing": {
+      "failures": [
+        "allowed_roots_not_exact"
+      ],
+      "rejected": true
+    },
+    "arxiv_not_forbidden": {
+      "failures": [
+        "missing_forbidden_root:/arxiv"
+      ],
+      "rejected": true
+    },
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "compiler_handoff_ready": {
+      "failures": [
+        "compiler_handoff_ready_now"
+      ],
+      "rejected": true
+    },
+    "dataset_row_load_allowed": {
+      "failures": [
+        "no_dataset_row_load_not_true"
+      ],
+      "rejected": true
+    },
+    "execution_authorized_now": {
+      "failures": [
+        "metadata_inventory_execution_authorized_now",
+        "metadata_inventory_execution_authorized_now"
+      ],
+      "rejected": true
+    },
+    "file_content_read_allowed": {
+      "failures": [
+        "no_file_content_reads_not_true"
+      ],
+      "rejected": true
+    },
+    "inventory_executed_now": {
+      "failures": [
+        "inventory_runner_executed_now"
+      ],
+      "rejected": true
+    },
+    "json_parse_allowed": {
+      "failures": [
+        "no_json_parse_not_true"
+      ],
+      "rejected": true
+    },
+    "jsonl_row_count_allowed": {
+      "failures": [
+        "no_jsonl_row_count_not_true"
+      ],
+      "rejected": true
+    },
+    "list_paths_only_disabled": {
+      "failures": [
+        "list_paths_only_not_true"
+      ],
+      "rejected": true
+    },
+    "loss_masks_materialized": {
+      "failures": [
+        "loss_mask_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "missing_ticket_field": {
+      "failures": [
+        "missing_ticket_field:allowed_roots"
+      ],
+      "rejected": true
+    },
+    "missing_ticket_invariant": {
+      "failures": [
+        "missing_ticket_invariant:allowed_roots_must_equal_repo_local_artifact_roots"
+      ],
+      "rejected": true
+    },
+    "route_card_materialization_authorized_now": {
+      "failures": [
+        "route_card_materialization_authorized_now"
+      ],
+      "rejected": true
+    },
+    "route_cards_materialized": {
+      "failures": [
+        "route_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "source_stage_missing": {
+      "failures": [
+        "source_stage9153_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_executed": {
+      "failures": [
+        "trainer_executed_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "Audit the Stage9154 ticket-instance design before any inventory execution authorization.",
+  "passed": true,
+  "stage": 9154,
+  "stage_name": "stage9154_repo_local_inventory_single_run_ticket_instance_design"
+}
