@@ -1,0 +1,164 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "forbidden_until_unblocked_recorded": true,
+    "registry_frontier_stage9143": true,
+    "required_blockers_recorded": true,
+    "source_stage9143_passed": true
+  },
+  "decision": "Blocked bounded real route-card input ticket instance creation because explicit approval and concrete repo-local artifact paths are not present. No real input, route-card materialization, loss-mask materialization, compiler handoff, training, runtime, cleanup, or model execution was opened.",
+  "failures": [],
+  "forbidden_until_unblocked": [
+    "ticket_instance_materialized",
+    "real_input_authorized_now",
+    "dataset_rows_loaded",
+    "route_cards_materialized_now",
+    "route_to_loss_translation_ready_now",
+    "loss_mask_cards_materialized_now",
+    "compiler_handoff_ready_now",
+    "trainer_executed_now",
+    "model_forward_attempted",
+    "training_authorized",
+    "decoder_ce_authorized",
+    "denoise_ce_authorized",
+    "runtime_authorized_flag",
+    "cleanup_authorized_now"
+  ],
+  "metrics": {
+    "approved_for_preflight_only": false,
+    "approved_for_route_card_materialization": false,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "forbidden_until_unblocked": 14,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 11,
+    "negative_cases_rejected": 11,
+    "network_upload_performed": false,
+    "real_input_authorized_now": false,
+    "real_judge_rows_used": 0,
+    "real_ranker_rows_used": 0,
+    "real_route_cards_materialized": 0,
+    "repository_source_bodies_loaded": false,
+    "required_blockers": 9,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_authorized_flag": false,
+    "ticket_instance_blocked": true,
+    "ticket_instance_materialized": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "bad_registry_frontier": {
+      "failures": [
+        "unexpected_registry_frontier:9999"
+      ],
+      "rejected": true
+    },
+    "dataset_rows_loaded": {
+      "failures": [
+        "dataset_rows_loaded"
+      ],
+      "rejected": true
+    },
+    "missing_explicit_approval_blocker": {
+      "failures": [
+        "missing_blocker:explicit_user_approval_for_ticket_instance_missing"
+      ],
+      "rejected": true
+    },
+    "missing_objective_path_blocker": {
+      "failures": [
+        "missing_blocker:objective_rows_path_missing"
+      ],
+      "rejected": true
+    },
+    "real_input_authorized_now": {
+      "failures": [
+        "real_input_authorized_now"
+      ],
+      "rejected": true
+    },
+    "route_cards_materialized_now": {
+      "failures": [
+        "route_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized_flag": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "ticket_instance_materialized": {
+      "failures": [
+        "ticket_instance_materialized"
+      ],
+      "rejected": true
+    },
+    "ticket_instance_unblocked": {
+      "failures": [
+        "ticket_instance_not_blocked"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "required_blockers": [
+    "explicit_user_approval_for_ticket_instance_missing",
+    "objective_rows_path_missing",
+    "judge_rows_path_missing",
+    "junk_ranker_rows_path_missing",
+    "shortcut_baseline_card_path_missing",
+    "counterfactual_obligation_card_path_missing",
+    "source_lineage_card_path_missing",
+    "max_rows_not_selected",
+    "output_dir_not_selected"
+  ],
+  "stage": 9144,
+  "stage_name": "stage9144_real_route_card_input_ticket_instance_blocker_audit",
+  "status": "TICKET_INSTANCE_BLOCKED_NO_CONCRETE_INPUT_PATHS",
+  "unblock_requirements": {
+    "arxiv_policy": "/arxiv remains blocked unless separately authorized",
+    "concrete_repo_local_paths": [
+      "objective_rows_path",
+      "judge_rows_path",
+      "junk_ranker_rows_path",
+      "shortcut_baseline_card_path",
+      "counterfactual_obligation_card_path",
+      "source_lineage_card_path"
+    ],
+    "explicit_user_approval": "required before any ticket instance is created",
+    "output_policy": "output_dir must remain repo-local under runs/local/artifacts"
+  }
+}
