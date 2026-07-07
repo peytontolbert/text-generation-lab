@@ -1,0 +1,254 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_pipeline_gates_blocked": true,
+    "authority_closed": true,
+    "matrix_passes": true,
+    "negative_cases_rejected": true
+  },
+  "decision": "Compiler/trainer readiness remains blocked at the data handoff boundary. The next work is non-executing preflight refresh, not inventory execution, route-card materialization, loss-mask materialization, trainer dry run, or training.",
+  "failures": [],
+  "matrix": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "current_blockers": [
+      "metadata_inventory_not_executed",
+      "route_cards_not_materialized",
+      "route_to_loss_not_translated",
+      "loss_masks_not_materialized",
+      "trainer_contract_dry_run_not_authorized",
+      "model_training_not_authorized",
+      "decoder_ce_not_authorized",
+      "denoise_ce_not_authorized",
+      "runtime_not_authorized"
+    ],
+    "decision": "Compiler/trainer readiness remains blocked at the data handoff boundary. The next work is non-executing preflight refresh, not inventory execution, route-card materialization, loss-mask materialization, trainer dry run, or training.",
+    "matrix_type": "compiler_trainer_no_data_readiness_matrix_v1",
+    "metrics": {
+      "arxiv_accessed": false,
+      "cleanup_authorized_now": false,
+      "compiler_handoff_ready_now": false,
+      "current_blockers": 9,
+      "dataset_rows_loaded": false,
+      "decoder_ce_authorized": false,
+      "denoise_ce_authorized": false,
+      "file_content_read": false,
+      "loss_mask_cards_materialized_now": false,
+      "matrix_only": true,
+      "metadata_inventory_executed_now": false,
+      "metadata_path_inventory_materialized_now": false,
+      "model_forward_attempted": false,
+      "pipeline_gates": 6,
+      "required_next_non_executing_stages": 4,
+      "route_cards_materialized_now": false,
+      "route_to_loss_translation_ready_now": false,
+      "runtime_authorized_flag": false,
+      "source_stage9157_passed": true,
+      "trainer_dry_run_authorized_now": false,
+      "trainer_executed_now": false,
+      "training_authorized": false
+    },
+    "pipeline_gates": [
+      {
+        "gate": "metadata_inventory",
+        "opens": [],
+        "requires": [
+          "stage9157_passed",
+          "one_run_execution_review"
+        ],
+        "status": "blocked_without_explicit_execution_request"
+      },
+      {
+        "gate": "route_card_materialization",
+        "opens": [],
+        "requires": [
+          "metadata_inventory_output",
+          "stage9151_candidate_quality_gate",
+          "stage9153_preflight_audit"
+        ],
+        "status": "blocked_without_inventory_and_quality_gate"
+      },
+      {
+        "gate": "route_to_loss_translation",
+        "opens": [],
+        "requires": [
+          "route_cards.jsonl",
+          "route_card_materialization_audit.json",
+          "stage9127_route_to_loss_contract_audit"
+        ],
+        "status": "blocked_without_route_cards"
+      },
+      {
+        "gate": "loss_mask_materialization",
+        "opens": [],
+        "requires": [
+          "route_to_loss_translation_audit",
+          "stage9129_loss_mask_schema_audit"
+        ],
+        "status": "blocked_without_route_to_loss_translation"
+      },
+      {
+        "gate": "trainer_contract_dry_run",
+        "opens": [],
+        "requires": [
+          "loss_mask_cards",
+          "trainer_input_completeness_audit",
+          "explicit_contract_only_ticket"
+        ],
+        "status": "blocked_without_loss_mask_cards_and_explicit_ticket"
+      },
+      {
+        "gate": "model_training",
+        "opens": [],
+        "requires": [
+          "trainer_contract_dry_run_passed",
+          "telemetry_contract",
+          "execution_authorization_review"
+        ],
+        "status": "blocked_without_tiny_probe_execution_authorization"
+      }
+    ],
+    "required_next_non_executing_stages": [
+      "route_card_materialization_preflight_instance_audit_after_inventory_ticket",
+      "route_to_loss_readiness_refresh_after_route_card_gate",
+      "loss_mask_materialization_preflight_design",
+      "trainer_contract_dry_run_input_readiness_refresh"
+    ],
+    "source_stage9157_passed": true,
+    "stage": 9158,
+    "stage_name": "stage9158_compiler_trainer_no_data_readiness_matrix"
+  },
+  "metrics": {
+    "arxiv_accessed": false,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "current_blockers": 9,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "file_content_read": false,
+    "loss_mask_cards_materialized_now": false,
+    "matrix_only": true,
+    "metadata_inventory_executed_now": false,
+    "metadata_path_inventory_materialized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 13,
+    "negative_cases_rejected": 13,
+    "pipeline_gates": 6,
+    "required_next_non_executing_stages": 4,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_authorized_flag": false,
+    "source_stage9157_passed": true,
+    "trainer_dry_run_authorized_now": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_authorized": {
+      "failures": [
+        "denoise_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "loss_masks_materialized": {
+      "failures": [
+        "loss_mask_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "metadata_inventory_executed": {
+      "failures": [
+        "metadata_inventory_executed_now"
+      ],
+      "rejected": true
+    },
+    "missing_current_blocker": {
+      "failures": [
+        "missing_current_blocker:route_cards_not_materialized"
+      ],
+      "rejected": true
+    },
+    "missing_next_stage": {
+      "failures": [
+        "missing_next_stage:loss_mask_materialization_preflight_design"
+      ],
+      "rejected": true
+    },
+    "missing_pipeline_gate": {
+      "failures": [
+        "missing_pipeline_gate:route_to_loss_translation"
+      ],
+      "rejected": true
+    },
+    "route_cards_materialized": {
+      "failures": [
+        "route_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "source_stage_missing": {
+      "failures": [
+        "source_stage9157_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_dry_run_authorized": {
+      "failures": [
+        "trainer_dry_run_authorized_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "Refresh route-to-loss readiness against the new route-card quality and inventory gates; still do not materialize route cards or train.",
+  "passed": true,
+  "stage": 9158,
+  "stage_name": "stage9158_compiler_trainer_no_data_readiness_matrix"
+}
