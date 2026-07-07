@@ -1,0 +1,244 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "decision": "Designed an explicit trainer-setup materialization authorization stage. If later instantiated and audited, it may allow route/loss/trainer-row emission only, while trainer invocation, model forward, optimizer/backward, and runtime remain closed.",
+  "design": {
+    "allowable_outputs_if_authorized": [
+      "route_cards.jsonl",
+      "loss_mask_cards.jsonl",
+      "trainer_rows.jsonl",
+      "trainer_dry_run_input.json",
+      "route_card_materialization_audit.json",
+      "loss_mask_authority_audit.json",
+      "loss_mask_enforcement_audit.json",
+      "trainer_input_audit.json"
+    ],
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "decision": "Designed an explicit trainer-setup materialization authorization stage. If later instantiated and audited, it may allow route/loss/trainer-row emission only, while trainer invocation, model forward, optimizer/backward, and runtime remain closed.",
+    "design_type": "trainer_setup_materialization_authorization_v1",
+    "metrics": {
+      "allowable_outputs_if_authorized": 8,
+      "arxiv_accessed": false,
+      "backward_called": false,
+      "decoder_ce_authorized": false,
+      "denoise_ce_authorized": false,
+      "design_only": true,
+      "materialization_authorized_now": false,
+      "model_forward_attempted": false,
+      "optimizer_created": false,
+      "registry_frontier_stage9168": true,
+      "repository_source_bodies_loaded": false,
+      "required_authorization_guards": 10,
+      "required_authorization_inputs": 10,
+      "runtime_authorized_flag": false,
+      "source_stage9168_passed": true,
+      "still_blocked_outputs": 5,
+      "trainer_input_materialized_now": false,
+      "trainer_invoked_now": false,
+      "training_authorized": false
+    },
+    "next_best_step": "Audit the materialization authorization design; do not materialize outputs yet.",
+    "registry_frontier_stage9168": true,
+    "required_authorization_guards": [
+      "authorization_requires_stage9168_passed",
+      "authorization_allows_materialization_only_not_execution",
+      "authorization_requires_repo_local_output_dir",
+      "authorization_requires_no_arxiv_reads",
+      "authorization_requires_no_source_body_reads",
+      "authorization_requires_no_model_forward",
+      "authorization_requires_no_optimizer_or_backward",
+      "authorization_requires_no_trainer_invocation",
+      "authorization_requires_output_cardinality_audit",
+      "authorization_requires_output_provenance_join_audit"
+    ],
+    "required_authorization_inputs": [
+      "source_stage9168_audit_ref",
+      "wrapper_ticket_instance_ref",
+      "objective_rows_ref",
+      "judge_rows_ref",
+      "ranker_rows_ref",
+      "route_card_audit_ref",
+      "loss_mask_authority_audit_ref",
+      "loss_mask_enforcement_audit_ref",
+      "trainer_input_schema_lock_ref",
+      "telemetry_artifact_manifest_ref"
+    ],
+    "source_stage9168_passed": true,
+    "stage": 9169,
+    "stage_name": "stage9169_trainer_setup_materialization_authorization_design",
+    "still_blocked_outputs": [
+      "model_input_rows.jsonl",
+      "trainer_contract_only_output.json",
+      "trainer_execution_report.json",
+      "sample_generation_audit.json",
+      "checkpoint.pt"
+    ]
+  },
+  "failures": [],
+  "metrics": {
+    "allowable_outputs_if_authorized": 8,
+    "arxiv_accessed": false,
+    "backward_called": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "design_only": true,
+    "materialization_authorized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 19,
+    "negative_cases_rejected": 19,
+    "optimizer_created": false,
+    "registry_frontier_stage9168": true,
+    "repository_source_bodies_loaded": false,
+    "required_authorization_guards": 10,
+    "required_authorization_inputs": 10,
+    "runtime_authorized_flag": false,
+    "source_stage9168_passed": true,
+    "still_blocked_outputs": 5,
+    "trainer_input_materialized_now": false,
+    "trainer_invoked_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "arxiv_accessed": {
+      "failures": [
+        "arxiv_accessed"
+      ],
+      "rejected": true
+    },
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "backward_called": {
+      "failures": [
+        "backward_called"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_authorized": {
+      "failures": [
+        "denoise_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "materialization_authorized_now": {
+      "failures": [
+        "materialization_authorized_now"
+      ],
+      "rejected": true
+    },
+    "missing_allowable_output": {
+      "failures": [
+        "missing_allowable_output:trainer_rows.jsonl"
+      ],
+      "rejected": true
+    },
+    "missing_authorization_guard": {
+      "failures": [
+        "missing_authorization_guard:authorization_requires_no_trainer_invocation"
+      ],
+      "rejected": true
+    },
+    "missing_authorization_input": {
+      "failures": [
+        "missing_authorization_input:wrapper_ticket_instance_ref"
+      ],
+      "rejected": true
+    },
+    "missing_blocked_output": {
+      "failures": [
+        "missing_blocked_output:model_input_rows.jsonl"
+      ],
+      "rejected": true
+    },
+    "model_forward": {
+      "failures": [
+        "model_forward_attempted"
+      ],
+      "rejected": true
+    },
+    "optimizer_created": {
+      "failures": [
+        "optimizer_created"
+      ],
+      "rejected": true
+    },
+    "registry_frontier_bad": {
+      "failures": [
+        "registry_frontier_stage9168"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "source_body_reads": {
+      "failures": [
+        "repository_source_bodies_loaded"
+      ],
+      "rejected": true
+    },
+    "source_stage_missing": {
+      "failures": [
+        "source_stage9168_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_input_materialized_now": {
+      "failures": [
+        "trainer_input_materialized_now"
+      ],
+      "rejected": true
+    },
+    "trainer_invoked_now": {
+      "failures": [
+        "trainer_invoked_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "Audit the materialization authorization design; do not materialize outputs yet.",
+  "passed": true,
+  "stage": 9169,
+  "stage_name": "stage9169_trainer_setup_materialization_authorization_design"
+}
