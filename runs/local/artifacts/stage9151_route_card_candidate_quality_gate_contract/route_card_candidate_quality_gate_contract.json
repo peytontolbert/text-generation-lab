@@ -1,0 +1,235 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_closed": true,
+    "contract_passes": true,
+    "future_inputs_declared": true,
+    "negative_cases_rejected": true,
+    "quality_gate_rules_declared": true,
+    "required_candidate_fields_declared": true
+  },
+  "contract": {
+    "active_blockers": [
+      "stage9150_or_later_inventory_runner_audit_not_consumed_here",
+      "no_metadata_path_inventory_manifest_loaded",
+      "no_route_card_candidates_materialized",
+      "no_loss_mask_cards_materialized",
+      "no_compiler_handoff",
+      "no_trainer_dry_run"
+    ],
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "contract_type": "route_card_candidate_quality_gate_v1",
+    "decision": "This is a downstream contract only. It does not consume Stage9150 worker outputs, execute an inventory runner, open repo artifacts, materialize route cards, compile loss masks, hand off to the compiler, or authorize training.",
+    "future_inputs": [
+      "audited_metadata_only_inventory_runner_dry_run",
+      "metadata_only_repo_local_path_inventory_manifest",
+      "real_route_card_input_ticket_instance",
+      "route_card_schema_recovery_contract",
+      "route_to_loss_translation_contract"
+    ],
+    "metrics": {
+      "arxiv_accessed": false,
+      "candidate_rows_loaded": 0,
+      "cleanup_authorized_now": false,
+      "compiler_handoff_ready_now": false,
+      "contract_only": true,
+      "dataset_rows_loaded": false,
+      "decoder_ce_authorized": false,
+      "denoise_ce_authorized": false,
+      "file_content_read": false,
+      "hidden_eval_allowed": false,
+      "inventory_runner_executed_now": false,
+      "locked_eval_allowed": false,
+      "loss_mask_cards_materialized_now": false,
+      "metadata_path_inventory_loaded_now": false,
+      "model_forward_attempted": false,
+      "network_upload_performed": false,
+      "path_inventory_rows_loaded": 0,
+      "route_cards_materialized_now": false,
+      "runtime_authorized_flag": false,
+      "trainer_dry_run_passed_now": false,
+      "trainer_executed_now": false,
+      "training_authorized": false
+    },
+    "purpose": "Define the no-execution quality gate a future metadata-inventory-derived route-card candidate must pass before route-card materialization or route-to-loss translation can be considered.",
+    "quality_gate_rules": [
+      "metadata_only_source_refs",
+      "repo_local_paths_only",
+      "no_file_content_or_body_fields",
+      "no_hidden_or_locked_eval_sources",
+      "no_arxiv_reads_in_candidate_gate",
+      "schema_version_pinned",
+      "known_route_family_required",
+      "evidence_refs_nonempty",
+      "gate_status_all_recovered_support_modules_explicit",
+      "loss_mask_policy_defaults_closed",
+      "compiler_handoff_requires_separate_audit",
+      "training_requires_separate_dry_run_ticket"
+    ],
+    "required_candidate_fields": [
+      "candidate_id",
+      "source_inventory_ref",
+      "source_inventory_lineage",
+      "source_provenance",
+      "route_card_schema_version",
+      "route_family",
+      "task_family",
+      "language_family",
+      "operator_category",
+      "evidence_refs",
+      "gate_status",
+      "loss_mask_policy",
+      "authority"
+    ],
+    "stage": 9151,
+    "stage_name": "stage9151_route_card_candidate_quality_gate_contract"
+  },
+  "decision": "This is a downstream contract only. It does not consume Stage9150 worker outputs, execute an inventory runner, open repo artifacts, materialize route cards, compile loss masks, hand off to the compiler, or authorize training.",
+  "failures": [],
+  "metrics": {
+    "active_blockers": 6,
+    "arxiv_accessed": false,
+    "candidate_rows_loaded": 0,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "contract_only": true,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "file_content_read": false,
+    "future_inputs": 5,
+    "hidden_eval_allowed": false,
+    "inventory_runner_executed_now": false,
+    "locked_eval_allowed": false,
+    "loss_mask_cards_materialized_now": false,
+    "metadata_path_inventory_loaded_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 14,
+    "negative_cases_rejected": 14,
+    "network_upload_performed": false,
+    "path_inventory_rows_loaded": 0,
+    "quality_gate_rules": 12,
+    "required_candidate_fields": 13,
+    "route_cards_materialized_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_passed_now": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "compiler_handoff_ready": {
+      "failures": [
+        "compiler_handoff_ready_now"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_authorized": {
+      "failures": [
+        "denoise_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "file_content_read": {
+      "failures": [
+        "file_content_read"
+      ],
+      "rejected": true
+    },
+    "hidden_eval_allowed": {
+      "failures": [
+        "hidden_eval_allowed"
+      ],
+      "rejected": true
+    },
+    "inventory_executed_now": {
+      "failures": [
+        "inventory_runner_executed_now"
+      ],
+      "rejected": true
+    },
+    "loss_masks_materialized": {
+      "failures": [
+        "loss_mask_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "missing_future_input": {
+      "failures": [
+        "missing_future_input:metadata_only_repo_local_path_inventory_manifest"
+      ],
+      "rejected": true
+    },
+    "missing_quality_gate_rule": {
+      "failures": [
+        "missing_quality_gate_rule:no_file_content_or_body_fields"
+      ],
+      "rejected": true
+    },
+    "missing_required_candidate_field": {
+      "failures": [
+        "missing_required_candidate_field:source_provenance"
+      ],
+      "rejected": true
+    },
+    "path_inventory_loaded_now": {
+      "failures": [
+        "metadata_path_inventory_loaded_now",
+        "path_inventory_rows_loaded"
+      ],
+      "rejected": true
+    },
+    "route_cards_materialized": {
+      "failures": [
+        "route_cards_materialized_now",
+        "candidate_rows_loaded"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "After the inventory-runner dry-run audit is committed, attach this candidate quality gate to the route-card materialization preflight; still do not materialize route cards or train.",
+  "passed": true,
+  "stage": 9151,
+  "stage_name": "stage9151_route_card_candidate_quality_gate_contract"
+}
