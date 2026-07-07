@@ -1,0 +1,117 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "registry_frontier_stage9103": true,
+    "review_items_pass": true
+  },
+  "current_blockers": [
+    "no_explicit_user_execution_request_for_trainer",
+    "contract_only_artifacts_not_materialized",
+    "no_final_pre_execution_audit_for_current_frontier",
+    "no_one_run_training_ticket",
+    "no_manifest_rows_loaded"
+  ],
+  "decision": "Trainer execution authorization remains closed. The review refresh records prerequisites and blockers for a possible future explicit request, but it does not authorize same-stage execution, next-stage execution, trainer contract-only invocation, model forward, decoder CE, denoise CE, runtime, cleanup, /arxiv IO, or training.",
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "backward_attempted": false,
+    "candidate_rows_materialized": 0,
+    "cleanup_authorized_now": false,
+    "contract_only_invoked_now": false,
+    "current_blockers": 5,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "future_execution_requirements": 7,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "model_weights_loaded": false,
+    "next_stage_execution_authorized": false,
+    "optimizer_created": false,
+    "review_failures": 0,
+    "review_items": 11,
+    "runtime_assertions_executed_now": false,
+    "runtime_authorized_flag": false,
+    "same_stage_execution_authorized": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "passed": true,
+  "required_before_any_future_execution": [
+    "explicit_user_execution_request",
+    "real_locked_manifest_present",
+    "loss_mask_card_present",
+    "manifest_schema_lock_present",
+    "contract_only_artifacts_materialized_and_passing",
+    "final_pre_execution_audit_passed",
+    "safe_cleanup_marker_and_dry_run_passed"
+  ],
+  "required_upstream_controls": [
+    "stage9100_contract_only_artifact_schema_design",
+    "stage9101_contract_only_artifact_schema_audit",
+    "stage9102_contract_only_schema_graph_attachment",
+    "stage9103_frontier_reconciliation"
+  ],
+  "review_items": [
+    {
+      "item": "stage9100_schema_design_passed",
+      "passed": true
+    },
+    {
+      "item": "stage9101_schema_audit_passed",
+      "passed": true
+    },
+    {
+      "item": "stage9102_schema_graph_passed",
+      "passed": true
+    },
+    {
+      "item": "stage9103_frontier_passed",
+      "passed": true
+    },
+    {
+      "item": "authority_counts_zero",
+      "passed": true
+    },
+    {
+      "item": "contract_only_schema_negative_cases_rejected",
+      "passed": true
+    },
+    {
+      "item": "contract_only_schema_graph_attached",
+      "passed": true
+    },
+    {
+      "item": "current_blockers_recorded",
+      "passed": true
+    },
+    {
+      "item": "future_execution_requirements_recorded",
+      "passed": true
+    },
+    {
+      "item": "same_stage_execution_forbidden",
+      "passed": true
+    },
+    {
+      "item": "next_stage_execution_forbidden",
+      "passed": true
+    }
+  ],
+  "stage": 9104,
+  "stage_name": "stage9104_trainer_execution_authorization_review_refresh",
+  "status": "TRAINER_EXECUTION_AUTHORIZATION_REVIEW_REFRESH_NO_EXECUTION"
+}
