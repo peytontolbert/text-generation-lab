@@ -1,0 +1,139 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_counts_zero": true,
+    "authority_rows_zero": true,
+    "base_graph_present": true,
+    "new_edges_present": true,
+    "new_nodes_present": true,
+    "registry_frontier_stage9101": true,
+    "runtime_assertion_contract_present": true,
+    "schema_negative_cases_rejected": true,
+    "source_stage9100_passed": true,
+    "source_stage9101_passed": true
+  },
+  "decision": "Attached contract-only artifact schema controls to the central graph. Trainer invocation, contract-only invocation, runtime assertions, model rows, model forward, decoder CE, denoise CE, runtime, cleanup, and training remain closed.",
+  "metrics": {
+    "added_edges": 16,
+    "added_nodes": 6,
+    "authority_rows": 0,
+    "candidate_rows_materialized": 0,
+    "cleanup_authorized_now": false,
+    "contract_only_invoked_now": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "graph_edges": 2885,
+    "graph_nodes": 1928,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "runtime_assertions_executed_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "new_edges": [
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "audited_by",
+      "audit:trainer_contract_only_artifact_schema_negative_cases_v1"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "requires",
+      "contract:trainer_runtime_assertion_inventory_v1"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "requires",
+      "contract:trainer_command_surface_static_v1"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "requires",
+      "gate:contract_only_requires_no_model_forward_proof"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "requires",
+      "gate:contract_only_requires_no_training_execution_proof"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "requires",
+      "gate:contract_only_requires_runtime_assertion_plan"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "requires",
+      "gate:contract_only_requires_telemetry_artifact_plan"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "blocks",
+      "operation:trainer_contract_only_invocation"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "blocks",
+      "operation:trainer_execution"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "blocks",
+      "operation:model_forward"
+    ],
+    [
+      "contract:trainer_contract_only_artifact_schema_v1",
+      "blocks",
+      "operation:cleanup_execution"
+    ],
+    [
+      "audit:trainer_contract_only_artifact_schema_negative_cases_v1",
+      "rejects",
+      "failure:missing_no_model_forward_proof_schema"
+    ],
+    [
+      "audit:trainer_contract_only_artifact_schema_negative_cases_v1",
+      "rejects",
+      "failure:missing_required_telemetry_artifact"
+    ],
+    [
+      "audit:trainer_contract_only_artifact_schema_negative_cases_v1",
+      "rejects",
+      "failure:missing_forbidden_operation"
+    ],
+    [
+      "audit:trainer_contract_only_artifact_schema_negative_cases_v1",
+      "rejects",
+      "failure:contract_only_invoked_now"
+    ],
+    [
+      "audit:trainer_contract_only_artifact_schema_negative_cases_v1",
+      "rejects",
+      "failure:cleanup_authorized_now"
+    ]
+  ],
+  "new_node_ids": [
+    "contract:trainer_contract_only_artifact_schema_v1",
+    "audit:trainer_contract_only_artifact_schema_negative_cases_v1",
+    "gate:contract_only_requires_no_model_forward_proof",
+    "gate:contract_only_requires_no_training_execution_proof",
+    "gate:contract_only_requires_runtime_assertion_plan",
+    "gate:contract_only_requires_telemetry_artifact_plan"
+  ],
+  "stage": 9102,
+  "stage_name": "stage9102_contract_only_schema_graph_attachment",
+  "status": "CONTRACT_ONLY_SCHEMA_GRAPH_ATTACHMENT_NO_INVOCATION"
+}
