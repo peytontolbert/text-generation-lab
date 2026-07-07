@@ -1,0 +1,164 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "all_authority_closed": true,
+    "at_least_one_future_review_candidate": true,
+    "authorization_sources_present": true,
+    "next_stage_execution_closed": true,
+    "same_stage_execution_closed": true,
+    "selected_bundles_present": true,
+    "source_stage9207_passed": true,
+    "three_family_reviews_written": true,
+    "trainer_execution_review_passed": true
+  },
+  "decision": "Repo-local contract-only handoff is complete. The structured-policy bundle is the only current family close enough for a future explicit one-run ticket review. Bounded decoder and denoise remain blocked on tiny-cap/ticket-schema work. This stage authorizes no execution.",
+  "denied_operations_now": [
+    "run_trainer",
+    "instantiate_model",
+    "run_model_forward",
+    "run_backward",
+    "create_optimizer",
+    "write_checkpoint",
+    "export_checkpoint",
+    "run_runtime",
+    "call_gemma",
+    "score_output",
+    "emit_source_body",
+    "walk_arxiv",
+    "mine_repositories",
+    "cleanup_checkpoints"
+  ],
+  "failures": [],
+  "family_reviews": [
+    {
+      "authorization_source_passed": true,
+      "bundle_id": "stage8592_bounded_decoder_bundle",
+      "limits": {
+        "observed": {
+          "max_eval_rows": 32,
+          "max_steps": 8,
+          "max_strict_rows": 32,
+          "max_train_rows": 32
+        },
+        "required_caps": {
+          "max_eval_rows": 16,
+          "max_steps": 16,
+          "max_strict_rows": 16,
+          "max_train_rows": 32
+        }
+      },
+      "loss_weights": {
+        "decoder_ce_weight": "1.0",
+        "denoise_weight": "0.0",
+        "structured_aux_weight": "0.0"
+      },
+      "manifest_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8592_bounded_decoder_bundle/materialization_preview/trainer_rows.jsonl",
+      "mode": "bounded_decoder_ce_probe",
+      "next_stage_execution_authorized": false,
+      "output_dir": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8592_bounded_decoder_bundle/materialization_preview/bounded_decoder_probe",
+      "review_failures": [
+        "max_eval_rows:32>16",
+        "max_strict_rows:32>16"
+      ],
+      "same_stage_execution_authorized": false,
+      "split_counts": {
+        "eval": 32,
+        "strict_eval": 32,
+        "train": 32
+      },
+      "status": "requires_tiny_cap_adapter_before_ticket"
+    },
+    {
+      "authorization_source_passed": true,
+      "bundle_id": "stage8647_denoise_bundle",
+      "limits": {
+        "observed": {
+          "max_eval_rows": 120,
+          "max_steps": 8,
+          "max_strict_rows": 120,
+          "max_train_rows": 120
+        },
+        "required_caps": {
+          "max_eval_rows": 16,
+          "max_steps": 8,
+          "max_strict_rows": 16,
+          "max_train_rows": 32
+        }
+      },
+      "loss_weights": {
+        "decoder_ce_weight": "0.0",
+        "denoise_weight": "1.0",
+        "structured_aux_weight": "0.0"
+      },
+      "manifest_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8647_denoise_bundle/materialization_preview/trainer_rows.jsonl",
+      "mode": "denoise_repair_probe",
+      "next_stage_execution_authorized": false,
+      "output_dir": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8647_denoise_bundle/materialization_preview/denoise_probe",
+      "review_failures": [
+        "max_train_rows:120>32",
+        "max_eval_rows:120>16",
+        "max_strict_rows:120>16"
+      ],
+      "same_stage_execution_authorized": false,
+      "split_counts": {
+        "eval": 120,
+        "strict_eval": 120,
+        "train": 120
+      },
+      "status": "requires_dedicated_one_run_schema_and_tiny_cap_adapter"
+    },
+    {
+      "authorization_source_passed": true,
+      "bundle_id": "stage8937_structured_policy_bundle",
+      "limits": {
+        "observed": {
+          "max_eval_rows": 1,
+          "max_steps": 8,
+          "max_strict_rows": 1,
+          "max_train_rows": 1
+        },
+        "required_caps": {
+          "max_eval_rows": 16,
+          "max_steps": 8,
+          "max_strict_rows": 16,
+          "max_train_rows": 32
+        }
+      },
+      "loss_weights": {
+        "decoder_ce_weight": "0.0",
+        "denoise_weight": "0.0",
+        "structured_aux_weight": "1.0"
+      },
+      "manifest_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8937_structured_policy_bundle/materialization_preview/trainer_rows.jsonl",
+      "mode": "structured_policy_probe",
+      "next_stage_execution_authorized": false,
+      "output_dir": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8937_structured_policy_bundle/materialization_preview/structured_probe",
+      "review_failures": [],
+      "same_stage_execution_authorized": false,
+      "split_counts": {
+        "eval": 1,
+        "strict_eval": 1,
+        "train": 1
+      },
+      "status": "future_review_candidate"
+    }
+  ],
+  "next_best_step": "Build a structured-policy one-run ticket design from the repo-local Stage9206 manifest, or patch tiny-cap adapters for bounded decoder and denoise. Do not execute trainer from this review matrix.",
+  "passed": true,
+  "recommended_first_future_ticket": "structured_policy_probe",
+  "stage": 9208,
+  "stage_name": "stage9208_repo_local_execution_review_matrix",
+  "status": "REPO_LOCAL_EXECUTION_REVIEW_MATRIX_NO_EXECUTION"
+}
