@@ -1,0 +1,129 @@
+{
+  "allowed_search_roots": [
+    "runs/local/artifacts",
+    "runs/summaries"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "allowed_roots_reused": true,
+    "authority_counts_zero": true,
+    "candidate_types_reused": true,
+    "forbidden_roots_reused": true,
+    "inventory_output_fields_recorded": true,
+    "inventory_rules_recorded": true,
+    "registry_frontier_stage9146": true,
+    "source_stage9146_passed": true
+  },
+  "decision": "Designed a metadata-only repo-local path inventory. This stage does not execute the inventory, read file contents, parse JSON, count JSONL rows, access /arxiv, create a ticket instance, materialize route cards, or open training/runtime.",
+  "forbidden_search_roots": [
+    "/",
+    "/data",
+    "/arxiv",
+    "/home",
+    "/tmp"
+  ],
+  "inventory_output_fields": [
+    "candidate_type",
+    "path",
+    "relative_path",
+    "extension",
+    "stage_hint",
+    "path_allowed",
+    "content_read",
+    "row_count_read"
+  ],
+  "inventory_rules": [
+    "list_paths_only",
+    "do_not_open_candidate_files",
+    "do_not_count_jsonl_rows",
+    "do_not_parse_json",
+    "exclude_forbidden_roots",
+    "repo_local_relative_paths_only",
+    "write_inventory_under_runs_local_artifacts",
+    "no_ticket_instance_creation",
+    "no_route_card_materialization",
+    "no_training_or_runtime"
+  ],
+  "metrics": {
+    "arxiv_accessed": false,
+    "candidate_types": 6,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "file_content_read": false,
+    "inventory_output_fields": 8,
+    "inventory_rules": 10,
+    "json_parsed": false,
+    "jsonl_rows_counted": false,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "network_upload_performed": false,
+    "path_inventory_design_created": true,
+    "path_inventory_executed": false,
+    "path_inventory_materialized": false,
+    "real_input_authorized_now": false,
+    "real_judge_rows_used": 0,
+    "real_ranker_rows_used": 0,
+    "real_route_cards_materialized": 0,
+    "repository_source_bodies_loaded": false,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_authorized_flag": false,
+    "ticket_instance_materialized": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "required_candidate_types": [
+    "objective_rows_jsonl",
+    "judge_rows_jsonl",
+    "junk_ranker_rows_jsonl",
+    "shortcut_baseline_card_json",
+    "counterfactual_obligation_card_json",
+    "source_lineage_card_json"
+  ],
+  "search_patterns": {
+    "counterfactual_obligation_card_json": [
+      "*counterfactual*obligation*.json",
+      "*counterfactual*.json"
+    ],
+    "judge_rows_jsonl": [
+      "*judge*.jsonl",
+      "*judged*.jsonl"
+    ],
+    "junk_ranker_rows_jsonl": [
+      "*ranker*.jsonl",
+      "*ranked*.jsonl",
+      "*junk*.jsonl"
+    ],
+    "objective_rows_jsonl": [
+      "*objective*.jsonl",
+      "*rows*.jsonl",
+      "*manifest*.jsonl"
+    ],
+    "shortcut_baseline_card_json": [
+      "*shortcut*baseline*.json",
+      "*shortcut*.json"
+    ],
+    "source_lineage_card_json": [
+      "*source*lineage*.json",
+      "*lineage*.json"
+    ]
+  },
+  "stage": 9147,
+  "stage_name": "stage9147_metadata_only_repo_local_path_inventory_design",
+  "status": "METADATA_ONLY_REPO_LOCAL_PATH_INVENTORY_DESIGN_NO_EXECUTION"
+}
