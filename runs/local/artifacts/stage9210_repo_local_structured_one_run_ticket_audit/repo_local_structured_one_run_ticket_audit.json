@@ -1,0 +1,122 @@
+{
+  "checks": {
+    "all_authority_closed": true,
+    "all_negative_cases_rejected": true,
+    "allowed_operations_empty": true,
+    "command_not_materialized": true,
+    "execution_not_authorized_now": true,
+    "positive_ticket_audit_passed": true,
+    "run_trainer_denied": true,
+    "source_audit_exists": true,
+    "source_audit_passed": true,
+    "source_stage9209_passed": true,
+    "source_ticket_exists": true,
+    "ticket_inactive": true,
+    "walk_arxiv_denied": true
+  },
+  "decision": "The inactive repo-local structured one-run ticket design passes positive audit and rejects unsafe negative cases. This still creates no live ticket and authorizes no execution.",
+  "denied_operations_now": [
+    "materialize_executable_command",
+    "run_trainer",
+    "instantiate_model",
+    "run_model_forward",
+    "run_backward",
+    "create_optimizer",
+    "write_checkpoint",
+    "export_checkpoint",
+    "run_runtime",
+    "call_gemma",
+    "score_output",
+    "emit_source_body",
+    "walk_arxiv",
+    "mine_repositories",
+    "cleanup_checkpoints"
+  ],
+  "failures": [],
+  "negative_cases": [
+    {
+      "case": "execution_authorized_now_true",
+      "failures": [
+        "execution_authorized_now_not_false"
+      ],
+      "rejected": true
+    },
+    {
+      "case": "command_materialized_true",
+      "failures": [
+        "command_materialized_not_false"
+      ],
+      "rejected": true
+    },
+    {
+      "case": "allowed_operations_not_empty",
+      "failures": [
+        "allowed_operations_now_not_empty"
+      ],
+      "rejected": true
+    },
+    {
+      "case": "run_trainer_not_denied",
+      "failures": [
+        "missing_denied_operation:run_trainer"
+      ],
+      "rejected": true
+    },
+    {
+      "case": "authority_open",
+      "failures": [
+        "authority_open",
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    {
+      "case": "future_output_dir_arxiv",
+      "failures": [
+        "future_output_dir_outside_repo",
+        "future_output_dir_mentions_arxiv"
+      ],
+      "rejected": true
+    },
+    {
+      "case": "decoder_ce_weight_opened",
+      "failures": [
+        "limit_mismatch:decoder_ce_weight"
+      ],
+      "rejected": true
+    }
+  ],
+  "next_best_step": "Stop before final pre-execution audit unless an explicit one-run execution request is made. For non-execution work, patch tiny-cap adapters for bounded decoder and denoise.",
+  "passed": true,
+  "positive_audit": {
+    "diagnostic_contract_failures": [],
+    "failures": [],
+    "manifest_validation": {
+      "allowed": true,
+      "allowed_input_roots": [
+        "runs/local/artifacts",
+        "runs/local/recovered",
+        "runs/local/manifests",
+        "datasets/recovered"
+      ],
+      "data_mining_authorized": false,
+      "exists": true,
+      "failures": [],
+      "forbidden_absolute_roots": [
+        "/",
+        "/arxiv",
+        "/data"
+      ],
+      "input_path": "runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8937_structured_policy_bundle/materialization_preview/trainer_rows.jsonl",
+      "must_exist": true,
+      "recursive_scan_authorized": false,
+      "resolved_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9206_repo_local_three_family_selector/stage8937_structured_policy_bundle/materialization_preview/trainer_rows.jsonl",
+      "root_label": "runs/local/artifacts",
+      "runtime_authorized": false,
+      "training_authorized": false
+    },
+    "passed": true
+  },
+  "stage": 9210,
+  "stage_name": "stage9210_repo_local_structured_one_run_ticket_audit"
+}
