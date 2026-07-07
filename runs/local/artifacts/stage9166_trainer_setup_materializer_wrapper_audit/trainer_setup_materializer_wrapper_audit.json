@@ -1,0 +1,187 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_failures": [],
+  "checks": {
+    "authority_closed": true,
+    "authority_counts_zero": true,
+    "base_design_passes": true,
+    "blocked_outputs_complete": true,
+    "contract_only_outputs_complete": true,
+    "model_input_rows_blocked": true,
+    "negative_cases_rejected": true,
+    "no_materialization": true,
+    "no_materializer_invocation": true,
+    "no_model_forward": true,
+    "no_optimizer_or_backward": true,
+    "registry_frontier_stage9165": true,
+    "required_wrapper_guards_complete": true,
+    "required_wrapper_inputs_complete": true,
+    "source_stage9165_passed": true,
+    "trainer_input_blocked": true
+  },
+  "decision": "Audited the contract-only materializer wrapper design and kept invocation, trainer-input materialization, model input rows, model forward, optimizer/backward, training, decoder CE, denoise CE, runtime, and /arxiv access closed.",
+  "failures": [],
+  "metrics": {
+    "arxiv_accessed": false,
+    "backward_called": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "file_content_read": false,
+    "materializer_invoked_now": false,
+    "model_forward_attempted": false,
+    "model_input_rows_materialized_now": false,
+    "negative_cases": 21,
+    "negative_cases_rejected": 21,
+    "optimizer_created": false,
+    "repository_source_bodies_loaded": false,
+    "runtime_authorized_flag": false,
+    "trainer_input_materialized_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "arxiv_accessed": {
+      "failures": [
+        "arxiv_accessed"
+      ],
+      "rejected": true
+    },
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "backward_called": {
+      "failures": [
+        "backward_called"
+      ],
+      "rejected": true
+    },
+    "bad_registry_frontier": {
+      "failures": [
+        "registry_frontier_stage9164",
+        "unexpected_registry_frontier:9999"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_authorized": {
+      "failures": [
+        "denoise_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "materializer_invoked": {
+      "failures": [
+        "materializer_invoked_now"
+      ],
+      "rejected": true
+    },
+    "materializer_missing": {
+      "failures": [
+        "materializer_present"
+      ],
+      "rejected": true
+    },
+    "missing_blocked_model_input_rows": {
+      "failures": [
+        "missing_blocked_output:model_input_rows.jsonl"
+      ],
+      "rejected": true
+    },
+    "missing_blocked_output": {
+      "failures": [
+        "missing_blocked_output:trainer_dry_run_input.json"
+      ],
+      "rejected": true
+    },
+    "missing_contract_only_output": {
+      "failures": [
+        "missing_contract_only_output:materializer_wrapper_ticket.json"
+      ],
+      "rejected": true
+    },
+    "missing_wrapper_guard": {
+      "failures": [
+        "missing_wrapper_guard:wrapper_rejects_trainer_input_write_without_ticket"
+      ],
+      "rejected": true
+    },
+    "missing_wrapper_input": {
+      "failures": [
+        "missing_wrapper_input:stage9164_materializer_audit_ref"
+      ],
+      "rejected": true
+    },
+    "model_forward": {
+      "failures": [
+        "model_forward_attempted"
+      ],
+      "rejected": true
+    },
+    "model_input_rows_materialized": {
+      "failures": [
+        "model_input_rows_materialized_now"
+      ],
+      "rejected": true
+    },
+    "optimizer_created": {
+      "failures": [
+        "optimizer_created"
+      ],
+      "rejected": true
+    },
+    "registry_frontier_bad": {
+      "failures": [
+        "registry_frontier_stage9164"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "source_stage_missing": {
+      "failures": [
+        "source_stage9164_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_input_materialized": {
+      "failures": [
+        "trainer_input_materialized_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "Design the contract-only wrapper ticket instance; still do not invoke the materializer.",
+  "passed": true,
+  "stage": 9166,
+  "stage_name": "stage9166_trainer_setup_materializer_wrapper_audit"
+}

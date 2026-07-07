@@ -1,0 +1,112 @@
+{
+  "analysis": {
+    "blocking_findings": [
+      "writes_trainer_rows_jsonl_before_ticket",
+      "writes_trainer_dry_run_input_before_ticket",
+      "embeds_execution_ready_commands",
+      "embeds_execution_authorized_probe_flag",
+      "copies_decoder_text_into_materialized_rows"
+    ],
+    "outputs_detected": [
+      "route_cards.jsonl",
+      "loss_mask_cards.jsonl",
+      "trainer_rows.jsonl",
+      "trainer_dry_run_input.json"
+    ],
+    "required_symbols_present": [
+      "materialize_training_setup",
+      "build_trainer_dry_run_input",
+      "translate_route_card_to_loss_mask"
+    ]
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_closed": true,
+    "blocking_findings_present": true,
+    "materializer_present": true,
+    "registry_frontier_stage9163": true,
+    "required_outputs_detected": true,
+    "required_symbols_present": true,
+    "source_stage9163_passed": true
+  },
+  "decision": "Audited the existing trainer setup materializer as a pre-authorization candidate. The current script is retained for recovery context but remains blocked because it materializes trainer rows and dry-run input before a dedicated ticket and audit path.",
+  "failures": [],
+  "metrics": {
+    "arxiv_accessed": false,
+    "blocking_findings": 5,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "file_content_read": false,
+    "model_forward_attempted": false,
+    "negative_cases": 7,
+    "negative_cases_rejected": 7,
+    "repository_source_bodies_loaded": false,
+    "required_outputs_detected": 4,
+    "required_symbols_present": 3,
+    "runtime_authorized_flag": false,
+    "trainer_executed_now": false,
+    "trainer_input_materialized_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_closed"
+      ],
+      "rejected": true
+    },
+    "materializer_missing": {
+      "failures": [
+        "materializer_present"
+      ],
+      "rejected": true
+    },
+    "missing_blocking_finding": {
+      "failures": [
+        "blocking_findings_present"
+      ],
+      "rejected": true
+    },
+    "missing_required_output": {
+      "failures": [
+        "required_outputs_detected"
+      ],
+      "rejected": true
+    },
+    "missing_required_symbol": {
+      "failures": [
+        "required_symbols_present"
+      ],
+      "rejected": true
+    },
+    "registry_frontier_bad": {
+      "failures": [
+        "registry_frontier_stage9163"
+      ],
+      "rejected": true
+    },
+    "source_stage_missing": {
+      "failures": [
+        "source_stage9163_passed"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "Design a ticketed contract-only wrapper around the materializer; do not invoke it or materialize trainer input yet.",
+  "passed": true,
+  "stage": 9164,
+  "stage_name": "stage9164_trainer_setup_materializer_pre_authorization_audit"
+}

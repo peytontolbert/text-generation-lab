@@ -1,0 +1,246 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "decision": "Designed a contract-only wrapper around the recovered trainer setup materializer. The wrapper may emit only ticket and blocker metadata until a later authorization stage explicitly permits materialization.",
+  "design": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "blocked_outputs": [
+      "route_cards.jsonl",
+      "loss_mask_cards.jsonl",
+      "trainer_rows.jsonl",
+      "trainer_dry_run_input.json",
+      "model_input_rows.jsonl"
+    ],
+    "contract_only_outputs": [
+      "materializer_wrapper_ticket.json",
+      "materializer_wrapper_plan.json",
+      "materializer_wrapper_blockers.json"
+    ],
+    "decision": "Designed a contract-only wrapper around the recovered trainer setup materializer. The wrapper may emit only ticket and blocker metadata until a later authorization stage explicitly permits materialization.",
+    "design_type": "trainer_setup_materializer_wrapper_contract_only_v1",
+    "materializer_present": true,
+    "metrics": {
+      "arxiv_accessed": false,
+      "backward_called": false,
+      "blocked_outputs": 5,
+      "contract_only_outputs": 3,
+      "dataset_rows_loaded": false,
+      "decoder_ce_authorized": false,
+      "denoise_ce_authorized": false,
+      "design_only": true,
+      "file_content_read": false,
+      "materializer_invoked_now": false,
+      "materializer_present": true,
+      "model_forward_attempted": false,
+      "model_input_rows_materialized_now": false,
+      "optimizer_created": false,
+      "registry_frontier_stage9164": true,
+      "repository_source_bodies_loaded": false,
+      "required_wrapper_guards": 10,
+      "required_wrapper_inputs": 10,
+      "runtime_authorized_flag": false,
+      "source_stage9164_passed": true,
+      "trainer_input_materialized_now": false,
+      "training_authorized": false
+    },
+    "next_best_step": "Audit the contract-only wrapper design; still do not invoke the materializer or emit trainer input.",
+    "registry_frontier_stage9164": true,
+    "required_wrapper_guards": [
+      "wrapper_rejects_missing_stage9164_audit",
+      "wrapper_rejects_open_authority",
+      "wrapper_rejects_materializer_invocation_without_ticket",
+      "wrapper_rejects_trainer_input_write_without_ticket",
+      "wrapper_rejects_model_input_row_write_without_ticket",
+      "wrapper_rejects_model_forward",
+      "wrapper_rejects_optimizer_or_backward",
+      "wrapper_rejects_arxiv_reads",
+      "wrapper_restricts_writes_to_repo_local_artifacts",
+      "wrapper_requires_explicit_contract_only_mode"
+    ],
+    "required_wrapper_inputs": [
+      "objective_rows_ref",
+      "judge_rows_ref",
+      "ranker_rows_ref",
+      "route_card_audit_ref",
+      "loss_mask_preflight_ref",
+      "loss_mask_authority_audit_ref",
+      "loss_mask_enforcement_audit_ref",
+      "stage9164_materializer_audit_ref",
+      "trainer_input_schema_lock_ref",
+      "telemetry_artifact_manifest_ref"
+    ],
+    "source_stage9164_passed": true,
+    "stage": 9165,
+    "stage_name": "stage9165_trainer_setup_materializer_wrapper_design"
+  },
+  "failures": [],
+  "metrics": {
+    "arxiv_accessed": false,
+    "backward_called": false,
+    "blocked_outputs": 5,
+    "contract_only_outputs": 3,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "design_only": true,
+    "file_content_read": false,
+    "materializer_invoked_now": false,
+    "materializer_present": true,
+    "model_forward_attempted": false,
+    "model_input_rows_materialized_now": false,
+    "negative_cases": 19,
+    "negative_cases_rejected": 19,
+    "optimizer_created": false,
+    "registry_frontier_stage9164": true,
+    "repository_source_bodies_loaded": false,
+    "required_wrapper_guards": 10,
+    "required_wrapper_inputs": 10,
+    "runtime_authorized_flag": false,
+    "source_stage9164_passed": true,
+    "trainer_input_materialized_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "arxiv_accessed": {
+      "failures": [
+        "arxiv_accessed"
+      ],
+      "rejected": true
+    },
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "backward_called": {
+      "failures": [
+        "backward_called"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_authorized": {
+      "failures": [
+        "denoise_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "materializer_invoked": {
+      "failures": [
+        "materializer_invoked_now"
+      ],
+      "rejected": true
+    },
+    "materializer_missing": {
+      "failures": [
+        "materializer_present"
+      ],
+      "rejected": true
+    },
+    "missing_blocked_output": {
+      "failures": [
+        "missing_blocked_output:trainer_dry_run_input.json"
+      ],
+      "rejected": true
+    },
+    "missing_contract_only_output": {
+      "failures": [
+        "missing_contract_only_output:materializer_wrapper_ticket.json"
+      ],
+      "rejected": true
+    },
+    "missing_wrapper_guard": {
+      "failures": [
+        "missing_wrapper_guard:wrapper_rejects_trainer_input_write_without_ticket"
+      ],
+      "rejected": true
+    },
+    "missing_wrapper_input": {
+      "failures": [
+        "missing_wrapper_input:stage9164_materializer_audit_ref"
+      ],
+      "rejected": true
+    },
+    "model_forward": {
+      "failures": [
+        "model_forward_attempted"
+      ],
+      "rejected": true
+    },
+    "model_input_rows_materialized": {
+      "failures": [
+        "model_input_rows_materialized_now"
+      ],
+      "rejected": true
+    },
+    "optimizer_created": {
+      "failures": [
+        "optimizer_created"
+      ],
+      "rejected": true
+    },
+    "registry_frontier_bad": {
+      "failures": [
+        "registry_frontier_stage9164"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "source_stage_missing": {
+      "failures": [
+        "source_stage9164_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_input_materialized": {
+      "failures": [
+        "trainer_input_materialized_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "Audit the contract-only wrapper design; still do not invoke the materializer or emit trainer input.",
+  "passed": true,
+  "stage": 9165,
+  "stage_name": "stage9165_trainer_setup_materializer_wrapper_design"
+}
