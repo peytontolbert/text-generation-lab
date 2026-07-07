@@ -1,0 +1,271 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "authority_closed": true,
+    "design_passes": true,
+    "loss_mask_output_blocked": true,
+    "negative_cases_rejected": true,
+    "trainer_input_blocked": true
+  },
+  "decision": "Designed loss-mask materialization preflight against the refreshed route-to-loss blockers. This stage does not materialize loss masks, trainer inputs, compiler handoff artifacts, or training rows.",
+  "design": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "blocked_outputs": [
+      "loss_mask_cards.jsonl",
+      "loss_mask_authority_audit.json",
+      "loss_mask_enforcement_audit.json",
+      "trainer_dry_run_input.json"
+    ],
+    "decision": "Designed loss-mask materialization preflight against the refreshed route-to-loss blockers. This stage does not materialize loss masks, trainer inputs, compiler handoff artifacts, or training rows.",
+    "design_type": "loss_mask_materialization_preflight_design_v1",
+    "loss_mask_preflight_checks": [
+      "row_id_join_integrity",
+      "route_card_ref_resolves",
+      "enabled_losses_subset_of_route_translation",
+      "disabled_losses_include_forbidden_defaults",
+      "decoder_ce_requires_keep_bounded_decoder_and_budget_ok",
+      "denoise_ce_requires_repair_route_and_clean_target",
+      "runtime_reward_forbidden",
+      "source_body_loss_forbidden",
+      "gemma_distill_loss_forbidden",
+      "harness_score_loss_forbidden",
+      "telemetry_required_for_every_enabled_loss",
+      "authority_closed_for_every_row"
+    ],
+    "metrics": {
+      "arxiv_accessed": false,
+      "blocked_outputs": 4,
+      "cleanup_authorized_now": false,
+      "compiler_handoff_ready_now": false,
+      "dataset_rows_loaded": false,
+      "decoder_ce_authorized": false,
+      "denoise_ce_authorized": false,
+      "design_only": true,
+      "file_content_read": false,
+      "loss_mask_cards_materialized_now": false,
+      "loss_mask_preflight_checks": 12,
+      "metadata_inventory_executed_now": false,
+      "model_forward_attempted": false,
+      "required_disabled_by_default": 6,
+      "required_inputs_before_loss_masks": 9,
+      "required_loss_mask_fields": 20,
+      "required_telemetry": 6,
+      "route_cards_materialized_now": false,
+      "route_to_loss_translation_ready_now": false,
+      "runtime_authorized_flag": false,
+      "source_stage9159_passed": true,
+      "trainer_dry_run_ready_now": false,
+      "trainer_executed_now": false,
+      "trainer_input_materialized_now": false,
+      "training_authorized": false
+    },
+    "required_disabled_by_default": [
+      "decoder_ce",
+      "denoise_ce",
+      "runtime_reward",
+      "source_body_loss",
+      "gemma_distill_loss",
+      "harness_score_loss"
+    ],
+    "required_inputs_before_loss_masks": [
+      "stage9159_route_to_loss_readiness_refresh_passed",
+      "metadata_inventory_output_audited",
+      "route_cards_jsonl_materialized_and_audited",
+      "route_card_candidate_quality_gate_applied",
+      "route_to_loss_translation_status_passed",
+      "route_loss_to_trainer_loss_map_validated",
+      "loss_mask_schema_audit_passed",
+      "all_rows_have_authority_closed",
+      "all_forbidden_losses_disabled_by_default"
+    ],
+    "required_loss_mask_fields": [
+      "row_id",
+      "route_card_ref",
+      "enabled_losses",
+      "disabled_losses",
+      "loss_weights",
+      "decoder_ce_allowed",
+      "denoise_ce_allowed",
+      "structured_aux_allowed",
+      "runtime_reward_allowed",
+      "authority",
+      "decoder_budget_ok",
+      "decode_allowed",
+      "target_token_len",
+      "target_length_bucket",
+      "loss_authority_evidence",
+      "forbidden_loss_reasons",
+      "telemetry_required",
+      "anti_cheat",
+      "created_by_stage",
+      "schema_version"
+    ],
+    "required_telemetry": [
+      "row_field_losses",
+      "row_field_logits",
+      "row_token_loss_if_decoder_ce",
+      "loss_mask_enforcement_audit",
+      "module_delta_norms",
+      "failure_bucket_card"
+    ],
+    "source_stage9159_passed": true,
+    "stage": 9160,
+    "stage_name": "stage9160_loss_mask_materialization_preflight_design"
+  },
+  "failures": [],
+  "metrics": {
+    "arxiv_accessed": false,
+    "blocked_outputs": 4,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "design_only": true,
+    "file_content_read": false,
+    "loss_mask_cards_materialized_now": false,
+    "loss_mask_preflight_checks": 12,
+    "metadata_inventory_executed_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 16,
+    "negative_cases_rejected": 16,
+    "required_disabled_by_default": 6,
+    "required_inputs_before_loss_masks": 9,
+    "required_loss_mask_fields": 20,
+    "required_telemetry": 6,
+    "route_cards_materialized_now": false,
+    "route_to_loss_translation_ready_now": false,
+    "runtime_authorized_flag": false,
+    "source_stage9159_passed": true,
+    "trainer_dry_run_ready_now": false,
+    "trainer_executed_now": false,
+    "trainer_input_materialized_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "compiler_handoff_ready": {
+      "failures": [
+        "compiler_handoff_ready_now"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_authorized": {
+      "failures": [
+        "denoise_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "loss_masks_materialized": {
+      "failures": [
+        "loss_mask_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "missing_blocked_output": {
+      "failures": [
+        "missing_blocked_output:loss_mask_cards.jsonl"
+      ],
+      "rejected": true
+    },
+    "missing_disabled_default": {
+      "failures": [
+        "missing_disabled_default:runtime_reward"
+      ],
+      "rejected": true
+    },
+    "missing_loss_mask_field": {
+      "failures": [
+        "missing_loss_mask_field:loss_authority_evidence"
+      ],
+      "rejected": true
+    },
+    "missing_preflight_check": {
+      "failures": [
+        "missing_preflight_check:decoder_ce_requires_keep_bounded_decoder_and_budget_ok"
+      ],
+      "rejected": true
+    },
+    "missing_required_input": {
+      "failures": [
+        "missing_required_input:route_cards_jsonl_materialized_and_audited"
+      ],
+      "rejected": true
+    },
+    "missing_telemetry": {
+      "failures": [
+        "missing_telemetry:loss_mask_enforcement_audit"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "source_stage_missing": {
+      "failures": [
+        "source_stage9159_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_input_materialized": {
+      "failures": [
+        "trainer_input_materialized_now"
+      ],
+      "rejected": true
+    },
+    "trainer_ready": {
+      "failures": [
+        "trainer_dry_run_ready_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "Audit the loss-mask materialization preflight; still do not materialize loss masks or train.",
+  "passed": true,
+  "stage": 9160,
+  "stage_name": "stage9160_loss_mask_materialization_preflight_design"
+}

@@ -1,0 +1,164 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_failures": [],
+  "checks": {
+    "authority_closed": true,
+    "authority_counts_zero": true,
+    "base_design_passes": true,
+    "blocked_outputs_complete": true,
+    "loss_masks_blocked": true,
+    "negative_cases_rejected": true,
+    "no_loss_mask_materialization": true,
+    "no_trainer_input_materialization": true,
+    "preflight_checks_complete": true,
+    "registry_frontier_stage9160": true,
+    "required_inputs_complete": true,
+    "source_stage9160_passed": true,
+    "trainer_input_blocked": true
+  },
+  "decision": "Audited loss-mask materialization preflight and rejected missing inputs, missing checks, missing blocked outputs, loss-mask materialization, trainer input materialization, compiler handoff, trainer readiness, training, decoder CE, denoise CE, runtime, and authority openings.",
+  "failures": [],
+  "metrics": {
+    "arxiv_accessed": false,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "file_content_read": false,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 18,
+    "negative_cases_rejected": 18,
+    "runtime_authorized_flag": false,
+    "trainer_dry_run_ready_now": false,
+    "trainer_executed_now": false,
+    "trainer_input_materialized_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "bad_registry_frontier": {
+      "failures": [
+        "unexpected_registry_frontier:9999"
+      ],
+      "rejected": true
+    },
+    "compiler_handoff_ready": {
+      "failures": [
+        "compiler_handoff_ready_now"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_authorized": {
+      "failures": [
+        "denoise_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "loss_masks_materialized": {
+      "failures": [
+        "loss_mask_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "missing_blocked_output": {
+      "failures": [
+        "missing_blocked_output:loss_mask_cards.jsonl"
+      ],
+      "rejected": true
+    },
+    "missing_disabled_default": {
+      "failures": [
+        "missing_disabled_default:runtime_reward"
+      ],
+      "rejected": true
+    },
+    "missing_loss_mask_field": {
+      "failures": [
+        "missing_loss_mask_field:loss_authority_evidence"
+      ],
+      "rejected": true
+    },
+    "missing_preflight_check": {
+      "failures": [
+        "missing_preflight_check:decoder_ce_requires_keep_bounded_decoder_and_budget_ok"
+      ],
+      "rejected": true
+    },
+    "missing_required_input": {
+      "failures": [
+        "missing_required_input:route_cards_jsonl_materialized_and_audited"
+      ],
+      "rejected": true
+    },
+    "missing_telemetry": {
+      "failures": [
+        "missing_telemetry:loss_mask_enforcement_audit"
+      ],
+      "rejected": true
+    },
+    "missing_trainer_input_block": {
+      "failures": [
+        "missing_blocked_output:trainer_dry_run_input.json"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "source_stage_missing": {
+      "failures": [
+        "source_stage9159_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_input_materialized": {
+      "failures": [
+        "trainer_input_materialized_now"
+      ],
+      "rejected": true
+    },
+    "trainer_ready": {
+      "failures": [
+        "trainer_dry_run_ready_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "stage": 9161,
+  "stage_name": "stage9161_loss_mask_materialization_preflight_audit"
+}
