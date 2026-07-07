@@ -1,0 +1,153 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_failures": [],
+  "checks": {
+    "authority_closed": true,
+    "authority_counts_zero": true,
+    "base_design_passes": true,
+    "blockers_complete": true,
+    "negative_cases_rejected": true,
+    "no_dataset_loading": true,
+    "no_route_materialization": true,
+    "registry_frontier_stage9134": true,
+    "required_inputs_complete": true,
+    "required_outputs_complete": true,
+    "route_rules_complete": true,
+    "source_stage9134_passed": true
+  },
+  "decision": "Audited real route-card materialization design and rejected missing inputs, missing outputs, missing blockers, route-rule omissions, materialization, dataset loading, compiler handoff, training, decoder CE, runtime, and authority openings.",
+  "failures": [],
+  "metrics": {
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 14,
+    "negative_cases_rejected": 14,
+    "network_upload_performed": false,
+    "real_route_cards_used": 0,
+    "repository_source_bodies_loaded": false,
+    "route_cards_materialized_now": false,
+    "runtime_authorized_flag": false,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "bad_registry_frontier": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "unexpected_registry_frontier:9999"
+      ],
+      "rejected": true
+    },
+    "loads_dataset_rows": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "dataset_rows_loaded"
+      ],
+      "rejected": true
+    },
+    "materializes_route_cards": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "route_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "missing_blocker_authority": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "missing_blocker:authority_open"
+      ],
+      "rejected": true
+    },
+    "missing_blocker_shortcut": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "missing_blocker:shortcut_dominance"
+      ],
+      "rejected": true
+    },
+    "missing_judge_input": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "missing_required_input:judge_rows_jsonl"
+      ],
+      "rejected": true
+    },
+    "missing_keep_bounded_rule": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "missing_route_source_rule:KEEP_BOUNDED_DECODER"
+      ],
+      "rejected": true
+    },
+    "missing_ranker_input": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "missing_required_input:junk_ranker_rows_jsonl"
+      ],
+      "rejected": true
+    },
+    "missing_route_cards_output": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "missing_required_output:route_cards.jsonl"
+      ],
+      "rejected": true
+    },
+    "opens_authority": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "opens_compiler_handoff": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "compiler_handoff_ready_now"
+      ],
+      "rejected": true
+    },
+    "opens_decoder_ce": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "opens_runtime": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "opens_training": {
+      "failures": [
+        "registry_frontier_stage9133",
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "passed": true,
+  "stage": 9135,
+  "stage_name": "stage9135_real_route_card_materialization_design_audit"
+}
