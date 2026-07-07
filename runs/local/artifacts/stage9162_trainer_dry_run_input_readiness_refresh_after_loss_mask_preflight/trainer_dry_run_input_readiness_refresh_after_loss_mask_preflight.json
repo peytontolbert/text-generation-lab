@@ -1,0 +1,281 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "card": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "blocked_outputs": [
+      "trainer_dry_run_input.json",
+      "trainer_contract_only_output.json",
+      "trainer_telemetry_stub_dir",
+      "model_input_rows.jsonl"
+    ],
+    "card_type": "trainer_dry_run_input_readiness_refresh_after_loss_mask_preflight_v1",
+    "decision": "Refreshed trainer dry-run input readiness after the audited loss-mask preflight. This stage does not materialize trainer input, invoke contract-only trainer mode, run trainer, load model weights, or train.",
+    "documented_hard_stops": [
+      "dry_run_stops_before_model_forward",
+      "no_model_weights_loaded",
+      "no_optimizer_created",
+      "no_backward_called",
+      "no_dataset_row_body_loaded",
+      "no_repository_source_body_loaded",
+      "no_long_context_rows_loaded_without_source_ticket",
+      "route_to_trainer_loss_translation_blocks_decoder_denoise_runtime",
+      "no_final_checkpoint_export_path"
+    ],
+    "metrics": {
+      "arxiv_accessed": false,
+      "backward_called": false,
+      "blocked_outputs": 4,
+      "cleanup_authorized_now": false,
+      "dataset_rows_loaded": false,
+      "decoder_ce_authorized": false,
+      "denoise_ce_authorized": false,
+      "documented_hard_stops": 9,
+      "file_content_read": false,
+      "loss_mask_cards_materialized_now": false,
+      "model_forward_attempted": false,
+      "model_input_rows_now": 0,
+      "model_weights_loaded": false,
+      "optimizer_created": false,
+      "refresh_only": true,
+      "repository_source_bodies_loaded": false,
+      "required_assertions": 26,
+      "required_inputs": 13,
+      "required_telemetry_stubs": 15,
+      "runtime_authorized_flag": false,
+      "source_stage9161_passed": true,
+      "trainer_contract_only_invoked_now": false,
+      "trainer_dry_run_ready_now": false,
+      "trainer_executed_now": false,
+      "trainer_input_materialized_now": false,
+      "training_authorized": false
+    },
+    "required_assertions": [
+      "manifest_schema_hash_matches",
+      "manifest_rows_subset_of_locked_manifest",
+      "loss_masks_present_for_every_row",
+      "forbidden_losses_zero_weight",
+      "decoder_ce_disabled_unless_row_loss_mask_allows",
+      "denoise_ce_disabled_unless_row_loss_mask_allows",
+      "runtime_reward_disabled",
+      "no_final_checkpoint_export_path",
+      "telemetry_output_paths_under_runs_local_artifacts",
+      "dry_run_stops_before_model_forward",
+      "no_model_weights_loaded",
+      "no_optimizer_created",
+      "no_backward_called",
+      "no_dataset_row_body_loaded",
+      "no_repository_source_body_loaded",
+      "authority_ticket_required_for_real_training",
+      "long_context_compiler_handoff_blocker_passed",
+      "long_context_loss_mask_preflight_passed",
+      "route_card_materialization_audit_passed_if_route_rows_present",
+      "route_to_trainer_loss_translation_blocks_decoder_denoise_runtime",
+      "no_long_context_rows_loaded_without_source_ticket",
+      "loss_mask_cards_materialized_and_audited_before_trainer_input",
+      "trainer_input_rows_are_metadata_only_until_contract_dry_run",
+      "trainer_input_materialization_requires_separate_ticket",
+      "contract_only_trainer_dry_run_requires_separate_execution_review",
+      "no_model_forward_during_input_readiness"
+    ],
+    "required_inputs": [
+      "locked_tiny_training_manifest.jsonl",
+      "loss_mask_card.json",
+      "manifest_schema_lock.json",
+      "trainer_contract_dry_run_input.json",
+      "long_context_compiler_handoff_blocker_audit.json",
+      "long_context_loss_mask_compiler_preflight.json",
+      "long_context_route_card_materialization_audit_contract.json",
+      "training_readiness_refresh_after_long_context_controls.json",
+      "loss_mask_cards.jsonl",
+      "loss_mask_authority_audit.json",
+      "loss_mask_enforcement_audit.json",
+      "trainer_dry_run_input_schema_lock.json",
+      "telemetry_artifact_manifest.json"
+    ],
+    "required_telemetry_stubs": [
+      "trainer_contract_dry_run_report.json",
+      "loss_mask_enforcement_audit.json",
+      "telemetry_artifact_plan.json",
+      "module_delta_expected_zero_card.json",
+      "no_model_forward_proof.json",
+      "no_training_execution_proof.json",
+      "next_one_run_training_ticket_input.json",
+      "row_field_logits.jsonl",
+      "row_field_losses.jsonl",
+      "row_token_loss.jsonl",
+      "row_gradient_norms.jsonl",
+      "feature_ablation_attribution.jsonl",
+      "activation_probe_cache.pt",
+      "module_delta_norms.json",
+      "failure_bucket_card.json"
+    ],
+    "source_stage9161_passed": true,
+    "stage": 9162,
+    "stage_name": "stage9162_trainer_dry_run_input_readiness_refresh_after_loss_mask_preflight"
+  },
+  "checks": {
+    "authority_closed": true,
+    "card_passes": true,
+    "contract_only_output_blocked": true,
+    "negative_cases_rejected": true,
+    "trainer_input_blocked": true
+  },
+  "decision": "Refreshed trainer dry-run input readiness after the audited loss-mask preflight. This stage does not materialize trainer input, invoke contract-only trainer mode, run trainer, load model weights, or train.",
+  "failures": [],
+  "metrics": {
+    "arxiv_accessed": false,
+    "backward_called": false,
+    "blocked_outputs": 4,
+    "cleanup_authorized_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "documented_hard_stops": 9,
+    "file_content_read": false,
+    "loss_mask_cards_materialized_now": false,
+    "model_forward_attempted": false,
+    "model_input_rows_now": 0,
+    "model_weights_loaded": false,
+    "negative_cases": 16,
+    "negative_cases_rejected": 16,
+    "optimizer_created": false,
+    "refresh_only": true,
+    "repository_source_bodies_loaded": false,
+    "required_assertions": 26,
+    "required_inputs": 13,
+    "required_telemetry_stubs": 15,
+    "runtime_authorized_flag": false,
+    "source_stage9161_passed": true,
+    "trainer_contract_only_invoked_now": false,
+    "trainer_dry_run_ready_now": false,
+    "trainer_executed_now": false,
+    "trainer_input_materialized_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "decoder_ce_authorized": {
+      "failures": [
+        "decoder_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "denoise_ce_authorized": {
+      "failures": [
+        "denoise_ce_authorized"
+      ],
+      "rejected": true
+    },
+    "loss_masks_materialized": {
+      "failures": [
+        "loss_mask_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "missing_blocked_output": {
+      "failures": [
+        "missing_blocked_output:trainer_dry_run_input.json"
+      ],
+      "rejected": true
+    },
+    "missing_hard_stop": {
+      "failures": [
+        "missing_hard_stop:dry_run_stops_before_model_forward"
+      ],
+      "rejected": true
+    },
+    "missing_required_assertion": {
+      "failures": [
+        "missing_required_assertion:no_model_forward_during_input_readiness"
+      ],
+      "rejected": true
+    },
+    "missing_required_input": {
+      "failures": [
+        "missing_required_input:loss_mask_cards.jsonl"
+      ],
+      "rejected": true
+    },
+    "missing_telemetry_stub": {
+      "failures": [
+        "missing_telemetry_stub:row_field_logits.jsonl"
+      ],
+      "rejected": true
+    },
+    "model_forward": {
+      "failures": [
+        "model_forward_attempted"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "source_stage_missing": {
+      "failures": [
+        "source_stage9161_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_dry_run_ready": {
+      "failures": [
+        "trainer_dry_run_ready_now"
+      ],
+      "rejected": true
+    },
+    "trainer_executed": {
+      "failures": [
+        "trainer_executed_now"
+      ],
+      "rejected": true
+    },
+    "trainer_input_materialized": {
+      "failures": [
+        "trainer_input_materialized_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "Audit trainer dry-run input readiness refresh; still do not materialize trainer input or execute trainer.",
+  "passed": true,
+  "stage": 9162,
+  "stage_name": "stage9162_trainer_dry_run_input_readiness_refresh_after_loss_mask_preflight"
+}
