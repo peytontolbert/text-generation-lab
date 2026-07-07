@@ -1,0 +1,316 @@
+{
+  "audit_card": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "authorization_boundaries": [
+      "may_only_authorize_one_metadata_inventory_run_after_separate_explicit_user_request",
+      "must_not_authorize_route_card_materialization",
+      "must_not_authorize_loss_mask_materialization",
+      "must_not_authorize_compiler_handoff",
+      "must_not_authorize_trainer_dry_run",
+      "must_not_authorize_model_forward",
+      "must_not_authorize_decoder_or_denoise_ce",
+      "must_not_authorize_runtime_or_harness",
+      "must_not_read_file_contents",
+      "must_not_access_arxiv_or_external_roots"
+    ],
+    "authorized_future_outputs_only": [
+      "metadata_only_path_inventory.json",
+      "metadata_only_path_inventory_summary.json",
+      "inventory_scope_card.json",
+      "inventory_execution_proof.json"
+    ],
+    "contract_type": "repo_local_inventory_final_authorization_audit_v1",
+    "current_blockers": [
+      "explicit_user_inventory_execution_request_missing",
+      "executable_ticket_instance_missing",
+      "final_negative_case_audit_missing",
+      "no_current_execution_window"
+    ],
+    "decision": "Audits the Stage9156 repo-local inventory final pre-execution authorization design and reconciles the blocker contract. Inventory execution remains blocked until a separate explicit execution request and one-run final authorization review exist.",
+    "forbidden_during_execution": [
+      "open_file_contents",
+      "parse_json_payloads",
+      "count_jsonl_rows",
+      "load_dataset_rows",
+      "access_arxiv",
+      "follow_symlink_outside_allowed_roots",
+      "materialize_route_cards",
+      "materialize_loss_masks",
+      "invoke_compiler",
+      "invoke_trainer",
+      "model_forward",
+      "runtime_execution",
+      "cleanup_execution"
+    ],
+    "metrics": {
+      "arxiv_accessed": false,
+      "audit_only": true,
+      "candidate_rows_loaded": 0,
+      "cleanup_authorized_now": false,
+      "compiler_handoff_ready_now": false,
+      "dataset_rows_loaded": false,
+      "decoder_ce_authorized": false,
+      "denoise_ce_authorized": false,
+      "file_content_read": false,
+      "inventory_execution_authorized_next": false,
+      "inventory_execution_authorized_now": false,
+      "inventory_runner_executed_now": false,
+      "json_parsed": false,
+      "jsonl_rows_counted": false,
+      "loss_mask_cards_materialized_now": false,
+      "metadata_path_inventory_loaded_now": false,
+      "metadata_path_inventory_materialized_now": false,
+      "model_forward_attempted": false,
+      "network_upload_performed": false,
+      "path_inventory_rows_loaded": 0,
+      "route_cards_materialized_now": false,
+      "runtime_authorized_flag": false,
+      "source_stage9156_design_failures": 0,
+      "source_stage9156_passed": true,
+      "trainer_executed_now": false,
+      "training_authorized": false
+    },
+    "required_before_execution": [
+      "stage9155_ticket_design_audit_passed",
+      "explicit_user_inventory_execution_request",
+      "single_run_ticket_instance_materialized",
+      "ticket_output_dir_under_runs_local_artifacts",
+      "allowed_roots_exact_runs_local_artifacts_and_runs_summaries",
+      "forbidden_roots_include_arxiv_data_home_tmp_root",
+      "list_paths_only_true",
+      "no_file_content_reads_true",
+      "no_json_parse_true",
+      "no_jsonl_row_count_true",
+      "no_dataset_row_load_true",
+      "no_route_card_materialization_true",
+      "no_loss_mask_materialization_true",
+      "no_compiler_handoff_true",
+      "no_trainer_execution_true",
+      "final_negative_case_audit_passed"
+    ],
+    "required_blocker_evidence": [
+      "stage9150_metadata_only_inventory_runner_dry_run_audit_passed",
+      "stage9154_repo_local_inventory_single_run_ticket_instance_design_passed",
+      "stage9155_repo_local_inventory_single_run_ticket_instance_design_audit_passed",
+      "stage9156_repo_local_inventory_final_pre_execution_authorization_design_passed",
+      "registry_has_no_open_authority_counts",
+      "working_tree_collision_review_required_before_execution"
+    ],
+    "source_stage9156_design_failures": [],
+    "source_stage9156_passed": true,
+    "stage": 9157,
+    "stage_name": "stage9157_repo_local_inventory_final_authorization_design_audit"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "base_failures": [],
+  "checks": {
+    "authority_closed": true,
+    "authority_counts_zero": true,
+    "authorization_boundaries_complete": true,
+    "card_passes": true,
+    "execution_not_authorized_next": true,
+    "execution_not_authorized_now": true,
+    "negative_cases_rejected": true,
+    "no_inventory_materialization": true,
+    "registry_frontier_stage9156": true,
+    "required_blocker_evidence_complete": true,
+    "source_design_valid": true,
+    "source_stage9156_passed": true
+  },
+  "decision": "Audits the Stage9156 repo-local inventory final pre-execution authorization design and reconciles the blocker contract. Inventory execution remains blocked until a separate explicit execution request and one-run final authorization review exist.",
+  "failures": [],
+  "metrics": {
+    "arxiv_accessed": false,
+    "audit_only": true,
+    "authorization_boundaries": 10,
+    "candidate_rows_loaded": 0,
+    "cleanup_authorized_now": false,
+    "compiler_handoff_ready_now": false,
+    "dataset_rows_loaded": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "file_content_read": false,
+    "inventory_execution_authorized_next": false,
+    "inventory_execution_authorized_now": false,
+    "inventory_runner_executed_now": false,
+    "json_parsed": false,
+    "jsonl_rows_counted": false,
+    "loss_mask_cards_materialized_now": false,
+    "metadata_path_inventory_loaded_now": false,
+    "metadata_path_inventory_materialized_now": false,
+    "model_forward_attempted": false,
+    "negative_cases": 22,
+    "negative_cases_rejected": 22,
+    "network_upload_performed": false,
+    "path_inventory_rows_loaded": 0,
+    "required_blocker_evidence": 6,
+    "route_cards_materialized_now": false,
+    "runtime_authorized_flag": false,
+    "source_stage9156_design_failures": 0,
+    "source_stage9156_passed": true,
+    "trainer_executed_now": false,
+    "training_authorized": false
+  },
+  "negative_cases": {
+    "arxiv_accessed": {
+      "failures": [
+        "arxiv_accessed"
+      ],
+      "rejected": true
+    },
+    "authority_open": {
+      "failures": [
+        "authority_open"
+      ],
+      "rejected": true
+    },
+    "bad_registry_frontier": {
+      "failures": [
+        "unexpected_registry_frontier:9999"
+      ],
+      "rejected": true
+    },
+    "compiler_handoff_ready": {
+      "failures": [
+        "compiler_handoff_ready_now"
+      ],
+      "rejected": true
+    },
+    "dataset_rows_loaded": {
+      "failures": [
+        "dataset_rows_loaded"
+      ],
+      "rejected": true
+    },
+    "execution_authorized_next": {
+      "failures": [
+        "inventory_execution_authorized_next"
+      ],
+      "rejected": true
+    },
+    "execution_authorized_now": {
+      "failures": [
+        "inventory_execution_authorized_now"
+      ],
+      "rejected": true
+    },
+    "file_content_read": {
+      "failures": [
+        "file_content_read"
+      ],
+      "rejected": true
+    },
+    "inventory_materialized_now": {
+      "failures": [
+        "metadata_path_inventory_materialized_now"
+      ],
+      "rejected": true
+    },
+    "json_parsed": {
+      "failures": [
+        "json_parsed"
+      ],
+      "rejected": true
+    },
+    "jsonl_rows_counted": {
+      "failures": [
+        "jsonl_rows_counted"
+      ],
+      "rejected": true
+    },
+    "loss_masks_materialized": {
+      "failures": [
+        "loss_mask_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "missing_authorization_boundary": {
+      "failures": [
+        "missing_authorization_boundary:must_not_authorize_route_card_materialization"
+      ],
+      "rejected": true
+    },
+    "missing_blocker_evidence": {
+      "failures": [
+        "missing_blocker_evidence:registry_has_no_open_authority_counts"
+      ],
+      "rejected": true
+    },
+    "missing_current_blocker": {
+      "failures": [
+        "missing_current_blocker:explicit_user_inventory_execution_request_missing"
+      ],
+      "rejected": true
+    },
+    "missing_forbidden_during_execution": {
+      "failures": [
+        "missing_forbidden_during_execution:access_arxiv"
+      ],
+      "rejected": true
+    },
+    "missing_required_before_execution": {
+      "failures": [
+        "missing_required_before_execution:explicit_user_inventory_execution_request"
+      ],
+      "rejected": true
+    },
+    "route_cards_materialized": {
+      "failures": [
+        "route_cards_materialized_now"
+      ],
+      "rejected": true
+    },
+    "runtime_authorized": {
+      "failures": [
+        "runtime_authorized_flag"
+      ],
+      "rejected": true
+    },
+    "source_stage9156_missing": {
+      "failures": [
+        "source_stage9156_not_passed"
+      ],
+      "rejected": true
+    },
+    "trainer_executed": {
+      "failures": [
+        "trainer_executed_now"
+      ],
+      "rejected": true
+    },
+    "training_authorized": {
+      "failures": [
+        "training_authorized"
+      ],
+      "rejected": true
+    }
+  },
+  "next_best_step": "If the user explicitly requests it, create a one-run execution review for metadata-only repo-local path inventory. Otherwise continue rebuilding compiler/trainer contracts without executing inventory.",
+  "passed": true,
+  "stage": 9157,
+  "stage_name": "stage9157_repo_local_inventory_final_authorization_design_audit"
+}
