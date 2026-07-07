@@ -19,6 +19,13 @@ class SafeCleanupPlan:
     deletable_children: tuple[Path, ...]
 
 
+FORBIDDEN_CLEANUP_ROOTS = (
+    Path("/").resolve(),
+    Path("/data").resolve(),
+    Path("/arxiv").resolve(),
+)
+
+
 def _resolve_existing_or_parent(path: Path) -> Path:
     """Resolve a path even when its leaf may not exist yet."""
     path = Path(path).expanduser()
@@ -38,13 +45,28 @@ def _is_relative_to(child: Path, parent: Path) -> bool:
         return False
 
 
+def _is_forbidden_root_or_descendant(path: Path, *, allow_under_repo: Path | None = None) -> bool:
+    resolved = path.resolve(strict=False)
+    if resolved == Path("/").resolve():
+        return True
+    arxiv = Path("/arxiv").resolve()
+    data = Path("/data").resolve()
+    if resolved == arxiv or _is_relative_to(resolved, arxiv):
+        if allow_under_repo is not None and _is_relative_to(resolved, allow_under_repo.resolve(strict=False)):
+            return False
+        return True
+    if resolved == data:
+        return True
+    return False
+
+
 def require_safe_child_path(*, repo_root: Path, output_dir: Path, candidate: Path) -> Path:
     repo = Path(repo_root).expanduser().resolve()
     out = Path(output_dir).expanduser().resolve()
     cand = _resolve_existing_or_parent(Path(candidate))
 
-    forbidden = {Path('/').resolve(), Path('/data').resolve(), Path('/arxiv').resolve(), repo, repo.parent, out.parent}
-    if cand in forbidden:
+    forbidden = {repo, repo.parent, out.parent}
+    if cand in forbidden or _is_forbidden_root_or_descendant(cand, allow_under_repo=repo):
         raise UnsafePathError(f"refusing cleanup target {cand}: forbidden root/parent path")
     if not _is_relative_to(out, repo):
         raise UnsafePathError(f"output_dir {out} is not under repo_root {repo}")
@@ -66,9 +88,11 @@ def build_safe_cleanup_plan(*, repo_root: Path, output_dir: Path, run_id: str, m
     out = Path(output_dir).expanduser().resolve()
     if not run_id or '/' in run_id or '\\' in run_id or run_id in {'.', '..'}:
         raise UnsafePathError("cleanup requires a non-empty simple run_id")
+    if _is_forbidden_root_or_descendant(repo):
+        raise UnsafePathError(f"refusing unsafe repo_root {repo}")
     if not _is_relative_to(out, repo):
         raise UnsafePathError(f"output_dir {out} is not under repo_root {repo}")
-    if out in {Path('/').resolve(), Path('/data').resolve(), Path('/arxiv').resolve(), repo, repo.parent}:
+    if out in {repo, repo.parent} or _is_forbidden_root_or_descendant(out, allow_under_repo=repo):
         raise UnsafePathError(f"refusing unsafe output_dir {out}")
     marker = out / marker_name
     if not marker.is_file():
@@ -88,12 +112,18 @@ def assert_no_destructive_command_tokens(argv: list[str] | tuple[str, ...]) -> N
     text = ' '.join(str(x) for x in argv)
     forbidden_fragments = [
         'rm -rf /',
+        'rm -rf /data',
+        'rm -rf /arxiv',
         'rm -rf .',
         'rm -rf *',
         'shutil.rmtree(.)',
         "shutil.rmtree('.')",
         'shutil.rmtree(repo_root)',
         'shutil.rmtree(output_dir.parent)',
+        "os.remove('/data')",
+        "os.remove('/arxiv')",
+        "Path('/data').unlink",
+        "Path('/arxiv').unlink",
     ]
     compact = text.replace(' ', '')
     for frag in forbidden_fragments:

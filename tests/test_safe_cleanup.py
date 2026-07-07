@@ -83,3 +83,45 @@ def test_refuses_known_destructive_command_tokens() -> None:
 def test_refuses_arxiv_as_cleanup_output() -> None:
     with pytest.raises(UnsafePathError):
         build_safe_cleanup_plan(repo_root=Path('/data/agentkernel-seq2seq-text-lab'), output_dir=Path('/arxiv'), run_id='stage8584')
+
+def test_refuses_arxiv_descendant_as_cleanup_output() -> None:
+    with pytest.raises(UnsafePathError):
+        build_safe_cleanup_plan(
+            repo_root=Path('/data/agentkernel-seq2seq-text-lab'),
+            output_dir=Path('/arxiv/backups/probe_output'),
+            run_id='stage8584',
+        )
+
+
+def test_refuses_data_root_as_cleanup_output() -> None:
+    with pytest.raises(UnsafePathError):
+        build_safe_cleanup_plan(
+            repo_root=Path('/data/agentkernel-seq2seq-text-lab'),
+            output_dir=Path('/data'),
+            run_id='stage8584',
+        )
+
+
+def test_refuses_root_as_cleanup_output() -> None:
+    with pytest.raises(UnsafePathError):
+        build_safe_cleanup_plan(
+            repo_root=Path('/data/agentkernel-seq2seq-text-lab'),
+            output_dir=Path('/'),
+            run_id='stage8584',
+        )
+
+
+def test_refuses_arxiv_repo_root() -> None:
+    with pytest.raises(UnsafePathError):
+        build_safe_cleanup_plan(
+            repo_root=Path('/arxiv'),
+            output_dir=Path('/arxiv/probe_output'),
+            run_id='stage8584',
+        )
+
+def test_refuses_destructive_command_tokens_for_arxiv_and_data() -> None:
+    with pytest.raises(UnsafePathError):
+        assert_no_destructive_command_tokens(['bash', '-lc', 'rm -rf /arxiv'])
+    with pytest.raises(UnsafePathError):
+        assert_no_destructive_command_tokens(['bash', '-lc', 'rm -rf /data'])
+

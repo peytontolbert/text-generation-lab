@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT / "scripts" / "training_runtime_contract.py"
 AUDIT = ROOT / "scripts" / "audit_training_runtime_contract.py"
 TELEMETRY = ROOT / "scripts" / "training_telemetry.py"
+TRAINER = ROOT / "legacy_src" / "scripts" / "train_agentkernel_lite_encdec.py"
 
 
 def test_training_runtime_contract_and_audit(tmp_path: Path) -> None:
@@ -49,3 +50,11 @@ def test_training_telemetry_emits_required_artifacts(tmp_path: Path) -> None:
         "cleanup_proof.json",
     ]:
         assert (out / name).is_file()
+
+def test_trainer_uses_safe_cleanup_only() -> None:
+    trainer = TRAINER.read_text(encoding="utf-8")
+    assert "from safe_cleanup import safe_cleanup_checkpoints" in trainer
+    assert "safe_cleanup_checkpoints(" in trainer
+    assert "shutil.rmtree" not in trainer
+    assert ".unlink(" not in trainer
+
