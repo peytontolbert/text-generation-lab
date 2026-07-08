@@ -167,6 +167,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-size", type=_positive_int, default=2)
     parser.add_argument("--max-encoder-tokens", type=_positive_int, default=256)
     parser.add_argument("--learning-rate", type=float, default=5e-5)
+    parser.add_argument("--eval-interval", type=_positive_int, default=0, help="Optional structured-probe eval interval for checkpoint-selection telemetry; 0 disables interval eval.")
     parser.add_argument("--enable-generation-audit", action="store_true", help="Run bounded greedy generation quality audit after authorized bounded decoder CE probes.")
     parser.add_argument("--max-generation-rows", type=_positive_int, default=8)
     parser.add_argument("--max-generation-tokens", type=_positive_int, default=96)
@@ -436,6 +437,7 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
             "eos_loss_weight": args.eos_loss_weight,
             "structured_aux_weight": args.structured_aux_weight,
             "denoise_weight": args.denoise_weight,
+            "eval_interval": args.eval_interval,
         },
         "implementation": str(getattr(args, "implementation", "transformer")),
         "probe_scale": str(getattr(args, "probe_scale", "tiny_transformer")),
@@ -596,6 +598,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
             "eos_loss_weight": args.eos_loss_weight,
             "structured_aux_weight": args.structured_aux_weight,
             "denoise_weight": args.denoise_weight,
+            "eval_interval": args.eval_interval,
         },
         "implementation": str(getattr(args, "implementation", "transformer")),
         "probe_scale": str(getattr(args, "probe_scale", "tiny_transformer")),
@@ -724,6 +727,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
         max_encoder_tokens=args.max_encoder_tokens,
         max_decoder_tokens=args.max_decoder_tokens,
         learning_rate=args.learning_rate,
+        eval_interval=args.eval_interval,
         implementation=args.implementation,
         probe_scale=args.probe_scale,
         model_config=args.model_config,

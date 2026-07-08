@@ -1420,6 +1420,7 @@ def run_structured_aux_probe(
     model_config: Path | None = None,
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
+    eval_interval: int = 0,
 ) -> dict[str, Any]:
     """Run a tiny structured-head probe with native interpretability telemetry."""
     random.seed(seed)
@@ -1509,6 +1510,35 @@ def run_structured_aux_probe(
             raise ValueError("structured aux probe batch produced no active losses")
         return sum(losses) / len(losses), field_loss, field_correct, field_rows, _activation_summary(batch.row_ids, out, split=split, step=step)
 
+    def checkpoint_eval_split(name: str, split_rows: list[dict[str, Any]], *, step: int) -> dict[str, Any]:
+        if not split_rows:
+            return {"split": name, "rows": 0, "step": step, "checkpoint_eval": True}
+        model.eval()
+        with torch.no_grad():
+            loss, field_loss, _, field_rows, _ = structured_loss(split_rows, split=name, step=step)
+        model.train()
+        total = 0
+        correct = 0
+        by_field = {}
+        for field, records in field_rows.items():
+            f_total = len(records)
+            f_correct = sum(int(record["correct"]) for record in records)
+            total += f_total
+            correct += f_correct
+            by_field[field] = {"rows": f_total, "exact": f_correct / f_total if f_total else None}
+        record = {
+            "split": name,
+            "rows": len(split_rows),
+            "loss": float(loss.item()),
+            "field_loss": field_loss,
+            "field_exact": by_field,
+            "joint_proxy_exact": correct / total if total else None,
+            "step": step,
+            "checkpoint_eval": True,
+        }
+        _append_jsonl(output_dir / "eval_loss_by_checkpoint.jsonl", record)
+        return record
+
     for step in range(1, max_steps + 1):
         batch_rows = [train_rows[(step * batch_size + i) % len(train_rows)] for i in range(batch_size)]
         optimizer.zero_grad(set_to_none=True)
@@ -1523,6 +1553,9 @@ def run_structured_aux_probe(
         optimizer.step()
         _write_jsonl_rows(output_dir / "activation_summary.jsonl", activation_rows)
         _append_jsonl(output_dir / "loss_by_step.jsonl", {"step": step, "loss": float(loss.detach().item()), "grad_norm": float(grad_norm), "field_loss": field_loss, "field_correct": field_correct})
+        if eval_interval and step % int(eval_interval) == 0:
+            checkpoint_eval_split("eval", eval_rows, step=step)
+            checkpoint_eval_split("strict_eval", strict_rows, step=step)
 
     confusion: dict[str, dict[str, dict[str, int]]] = {}
     all_eval_records: list[dict[str, Any]] = []
