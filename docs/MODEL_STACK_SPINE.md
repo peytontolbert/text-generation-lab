@@ -2682,3 +2682,11 @@ Stage9228 clarifies that even a future valid explicit one-family request only pe
 With no valid request currently present, family selection and audit instantiation remain blocked.
 
 Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
+
+## Stage9229 Family Audit Design Output Schema
+
+Stage9229 defines the allowed output shape for a future family-specific final pre-execution audit design: JSON, doc, and tests only.
+The schema forbids live tickets, executable trainer commands, model outputs, checkpoints, cleanup/runtime results, `/arxiv` inventories, and source/patch bodies.
+No valid request is present, no family is selected, and no execution authority is opened.
+
+Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
