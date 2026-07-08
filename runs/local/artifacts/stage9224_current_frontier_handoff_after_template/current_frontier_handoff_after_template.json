@@ -1,0 +1,84 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "inactive_template_exists_and_supports_three_families": true,
+    "invalid_next_branches_block_execution_cleanup_arxiv": true,
+    "no_previous_authority_open": true,
+    "only_valid_next_branches_recorded": true,
+    "previous_stage9223_passed": true,
+    "registry_frontier_stage9223_or_later": true,
+    "resume_pointers_all_exist": true
+  },
+  "decision": "Current frontier handoff recorded after the inactive final pre-execution audit template. The project is ready to pause or continue no-execution graph review; any future training path still requires explicit selection of exactly one family and a family-specific final pre-execution audit design.",
+  "frontier_facts": [
+    "stage9218_all_three_repo_local_families_have_inactive_audited_ticket_coverage",
+    "stage9219_frontier_reconciled_after_ticket_coverage",
+    "stage9220_ticket_coverage_not_trainer_execution_readiness",
+    "stage9221_no_execution_next_decision_map_active",
+    "stage9222_family_specific_preexecution_gaps_recorded",
+    "stage9223_inactive_final_preexecution_audit_template_available"
+  ],
+  "invalid_next_branches": [
+    "run_trainer",
+    "run_model_forward_or_generation",
+    "run_backward_or_optimizer",
+    "write_or_export_checkpoint",
+    "execute_cleanup",
+    "read_write_or_mine_arxiv",
+    "run_runtime_or_verifier_runtime",
+    "emit_source_body_or_patch_body",
+    "run_gemma_harness_or_scoring",
+    "merge_controller_or_promote"
+  ],
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "backward_attempted": false,
+    "checkpoint_export_authorized": false,
+    "checkpoint_written_now": false,
+    "cleanup_authorized_now": false,
+    "cleanup_executed_now": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "final_pre_execution_audit_authorized_now": false,
+    "frontier_facts": 6,
+    "generation_attempted": false,
+    "invalid_next_branches": 10,
+    "live_ticket_materialized_now": false,
+    "model_forward_attempted": false,
+    "only_valid_next_branches": 3,
+    "optimizer_created": false,
+    "resume_pointers": 5,
+    "runtime_authorized_flag": false,
+    "runtime_verifier_execution_authorized": false,
+    "trainer_executed_now": false
+  },
+  "only_valid_next_branches": [
+    "stop_and_wait_for_explicit_one_family_request",
+    "continue_no_execution_documentation_or_central_graph_review",
+    "if_user_selects_exactly_one_family_build_family_specific_final_preexecution_audit_design_only"
+  ],
+  "resume_pointers": {
+    "decision_map": "runs/local/artifacts/stage9221_no_execution_next_decision_map/no_execution_next_decision_map.json",
+    "gap_map": "runs/local/artifacts/stage9222_family_specific_preexecution_gap_map/family_specific_preexecution_gap_map.json",
+    "inactive_template": "runs/local/artifacts/stage9223_inactive_final_preexecution_audit_template/inactive_final_preexecution_audit_template.json",
+    "readiness_ledger": "runs/local/artifacts/stage9220_no_execution_trainer_readiness_gap_ledger/no_execution_trainer_readiness_gap_ledger.json",
+    "registry": "runs/local/artifacts/reconstructed_stage_registry.json"
+  },
+  "stage": 9224,
+  "stage_name": "stage9224_current_frontier_handoff_after_template",
+  "status": "CURRENT_FRONTIER_HANDOFF_AFTER_INACTIVE_TEMPLATE_NO_EXECUTION"
+}
