@@ -156,6 +156,41 @@ def _gradient_norm_card(row_id: str, model: torch.nn.Module, *, losses_enabled: 
     }
 
 
+
+def _total_grad_norm(model: torch.nn.Module) -> float:
+    total_sq = 0.0
+    for parameter in model.parameters():
+        if parameter.grad is None:
+            continue
+        norm = float(parameter.grad.detach().float().norm().item())
+        total_sq += norm * norm
+    return total_sq ** 0.5
+
+
+def _decoder_ce_loss(
+    model: torch.nn.Module,
+    logits: torch.Tensor,
+    labels: torch.Tensor,
+    row_mask: torch.Tensor | None,
+    *,
+    eos_id: int,
+    eos_loss_weight: float,
+) -> torch.Tensor:
+    if eos_loss_weight == 1.0:
+        return model.decoder_ce_loss(logits, labels, row_mask)
+    token_loss = F.cross_entropy(logits.reshape(-1, logits.size(-1)), labels.reshape(-1), ignore_index=0, reduction="none").reshape(labels.shape)
+    nonpad = labels.ne(0).float()
+    weights = torch.ones_like(token_loss)
+    weights = torch.where(labels.eq(int(eos_id)), torch.full_like(weights, float(eos_loss_weight)), weights)
+    weighted = token_loss * weights * nonpad
+    denom = (weights * nonpad).sum(dim=1).clamp_min(1.0)
+    row_loss = weighted.sum(dim=1) / denom
+    if row_mask is not None:
+        active = row_mask.float()
+        return (row_loss * active).sum() / active.sum().clamp_min(1.0)
+    return row_loss.mean()
+
+
 def _tensor_stats(tensor: torch.Tensor) -> dict[str, Any]:
     values = tensor.detach().float()
     if values.numel() == 0:
@@ -410,6 +445,20 @@ def _write_generation_audits(
     _write_json(output_dir / "repetition_probe.json", repetition_card)
     _write_json(output_dir / "internal_leak_probe.json", leak_card)
     _write_json(output_dir / "failure_bucket_card.json", failure_card)
+    negative_rows = [
+        {
+            "row_id": row["row_id"],
+            "negative_row": True,
+            "corruption_type": "degenerate_repetition",
+            "bad_output": row["generated_text"],
+            "target_text": row["target_text"],
+            "recommended_route": "USE_FOR_DENOISE_REPAIR",
+        }
+        for row in repetition_rows
+    ]
+    if not negative_rows:
+        negative_rows.append({"negative_row": False, "reason": "no_degenerate_repetition_rows_observed"})
+    _write_jsonl_rows(output_dir / "generated_repetition_negative_rows.jsonl", negative_rows)
     return sample_card
 
 
@@ -722,6 +771,7 @@ def run_bounded_decoder_ce_probe(
     enable_generation_audit: bool = False,
     max_generation_rows: int = 8,
     max_generation_tokens: int = 96,
+    eos_loss_weight: float = 1.0,
 ) -> dict[str, Any]:
     """Run a tiny bounded decoder CE probe with native interpretability telemetry."""
     random.seed(seed)
@@ -763,13 +813,21 @@ def run_bounded_decoder_ce_probe(
         batch = build_batch(batch_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
         optimizer.zero_grad(set_to_none=True)
         out = model(batch.input_ids, batch.decoder_input_ids)
-        loss = model.decoder_ce_loss(out["decoder_logits"], batch.labels, batch.loss_mask.get("decoder_ce"))
+        loss = _decoder_ce_loss(
+            model,
+            out["decoder_logits"],
+            batch.labels,
+            batch.loss_mask.get("decoder_ce"),
+            eos_id=int(getattr(tokenizer, "eos_id", 2)),
+            eos_loss_weight=eos_loss_weight,
+        )
         loss.backward()
         for row_id in batch.row_ids:
             grad_card = _gradient_norm_card(row_id, model, losses_enabled=["decoder_ce"])
             grad_card.update({"step": step, "gradient_scope": "batch_shared", "batch_row_ids": batch.row_ids})
             _append_jsonl(output_dir / "row_gradient_norms.jsonl", grad_card)
-        grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+        pre_clip_grad_norm = float(torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0))
+        post_clip_grad_norm = _total_grad_norm(model)
         _write_jsonl_rows(output_dir / "activation_summary.jsonl", _activation_summary(batch.row_ids, out, split="train", step=step))
         token_rows = _token_loss_rows(row_ids=batch.row_ids, logits=out["decoder_logits"].detach(), labels=batch.labels, tokenizer=tokenizer)
         for token_row in token_rows:
@@ -778,7 +836,14 @@ def run_bounded_decoder_ce_probe(
         optimizer.step()
         _append_jsonl(
             output_dir / "loss_by_step.jsonl",
-            {"step": step, "loss": float(loss.detach().item()), "grad_norm": float(grad_norm), "row_ids": batch.row_ids},
+            {
+                "step": step,
+                "loss": float(loss.detach().item()),
+                "grad_norm": pre_clip_grad_norm,
+                "pre_clip_grad_norm": pre_clip_grad_norm,
+                "post_clip_grad_norm": post_clip_grad_norm,
+                "row_ids": batch.row_ids,
+            },
         )
 
     def eval_split(name: str, split_rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -788,7 +853,14 @@ def run_bounded_decoder_ce_probe(
         with torch.no_grad():
             batch = build_batch(split_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
             out = model(batch.input_ids, batch.decoder_input_ids)
-            loss = model.decoder_ce_loss(out["decoder_logits"], batch.labels, batch.loss_mask.get("decoder_ce"))
+            loss = _decoder_ce_loss(
+                model,
+                out["decoder_logits"],
+                batch.labels,
+                batch.loss_mask.get("decoder_ce"),
+                eos_id=int(getattr(tokenizer, "eos_id", 2)),
+                eos_loss_weight=eos_loss_weight,
+            )
             token_rows = _token_loss_rows(row_ids=batch.row_ids, logits=out["decoder_logits"], labels=batch.labels, tokenizer=tokenizer)
         for token_row in token_rows:
             token_row.update({"split": name, "step": None})
@@ -827,7 +899,30 @@ def run_bounded_decoder_ce_probe(
 
     target_internal_token_rows = sum(1 for row in token_records if any(pos.get("is_internal_or_control_token") for pos in row.get("positions", [])))
     target_repetition_rows = sum(1 for row in token_records if row.get("repeated_token_positions"))
-    _write_json(output_dir / "eos_length_audit.json", {"rows_checked": len(token_records), "max_decoder_tokens": max_decoder_tokens})
+    length_buckets: dict[str, dict[str, Any]] = {}
+    for row in eval_rows + strict_rows:
+        key = "::".join([
+            str(row.get("language_family") or row.get("language_group") or "unknown_language"),
+            str(row.get("surface") or row.get("repair_surface") or "unknown_surface"),
+        ])
+        bucket = length_buckets.setdefault(key, {"rows": 0, "target_token_lens": []})
+        bucket["rows"] += 1
+        value = row.get("decoder_token_len") or row.get("target_token_len")
+        if isinstance(value, int):
+            bucket["target_token_lens"].append(value)
+    for bucket in length_buckets.values():
+        lengths = bucket.pop("target_token_lens")
+        bucket["target_token_len_max"] = max(lengths) if lengths else None
+        bucket["target_token_len_mean"] = sum(lengths) / len(lengths) if lengths else None
+    _write_json(
+        output_dir / "eos_length_audit.json",
+        {
+            "rows_checked": len(token_records),
+            "max_decoder_tokens": max_decoder_tokens,
+            "eos_loss_weight": eos_loss_weight,
+            "length_buckets": length_buckets,
+        },
+    )
     if enable_generation_audit:
         generation_rows = eval_rows + strict_rows
         generation_card = _write_generation_audits(
@@ -848,6 +943,7 @@ def run_bounded_decoder_ce_probe(
         _write_json(output_dir / "internal_leak_probe.json", {"target_internal_token_rows": target_internal_token_rows, "generated_internal_token_rows": None})
         _write_json(output_dir / "sample_generation_audit.json", generation_card)
         _write_json(output_dir / "failure_bucket_card.json", {"failure_rows": 0, "buckets": {}, "token_loss_rows": len(token_records), "generation_audit_enabled": False})
+        _write_jsonl_rows(output_dir / "generated_repetition_negative_rows.jsonl", [{"negative_row": False, "reason": "generation_audit_disabled"}])
     _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "training loop does not write checkpoints", "run_id": run_id})
 
     return {
@@ -869,6 +965,7 @@ def run_bounded_decoder_ce_probe(
         "generation_audit_enabled": bool(enable_generation_audit),
         "generated_rows": int(generation_card.get("generated_rows", 0)),
         "contentful_generation_rate": generation_card.get("contentful_rate"),
+        "eos_loss_weight": eos_loss_weight,
     }
 
 def run_structured_aux_probe(

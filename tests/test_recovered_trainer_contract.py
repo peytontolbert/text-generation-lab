@@ -108,6 +108,7 @@ def test_recovered_trainer_help_exposes_stage8580_flags() -> None:
         "--manifest",
         "--mode",
         "--decoder-ce-weight",
+        "--eos-loss-weight",
         "--denoise-weight",
         "--structured-aux-weight",
         "--max-strict-rows",
@@ -331,10 +332,41 @@ def test_authorized_tiny_transformer_generation_audit_writes_quality_cards(tmp_p
     short = json.loads((out / "short_output_probe.json").read_text())
     leak = json.loads((out / "internal_leak_probe.json").read_text())
     repetition = json.loads((out / "repetition_probe.json").read_text())
+    eos = json.loads((out / "eos_length_audit.json").read_text())
+    loss_rows = [json.loads(line) for line in (out / "loss_by_step.jsonl").read_text().splitlines() if line.strip()]
     assert sample["generated_rows"] == 2
     assert len(sample["samples"]) == 2
     assert "contentful_rate" in sample
     assert short["generated_rows"] == 2
     assert leak["generated_internal_token_rows"] >= 0
     assert repetition["generated_rows"] == 2
+    assert eos["eos_loss_weight"] == 1.0
+    assert "post_clip_grad_norm" in loss_rows[0]
+    assert (out / "generated_repetition_negative_rows.jsonl").is_file()
 
+
+
+def test_authorized_tiny_transformer_accepts_eos_loss_weight(tmp_path: Path) -> None:
+    try:
+        import torch  # noqa: F401
+    except Exception:
+        pytest.skip("torch is required for authorized stabilization smoke")
+    manifest = tmp_path / "manifest.jsonl"
+    write_manifest(manifest, rows=6)
+    cmd = base_cmd(tmp_path, manifest) + [
+        "--implementation",
+        "transformer",
+        "--probe-scale",
+        "tiny_transformer",
+        "--max-steps",
+        "1",
+        "--eos-loss-weight",
+        "4.0",
+        "--execution-authorized-for-recovery-probe",
+    ]
+    subprocess.run(cmd, check=True, text=True, capture_output=True)
+    out = tmp_path / "repo" / "runs" / "local" / "probes" / "stage8584"
+    eos = json.loads((out / "eos_length_audit.json").read_text())
+    loss_rows = [json.loads(line) for line in (out / "loss_by_step.jsonl").read_text().splitlines() if line.strip()]
+    assert eos["eos_loss_weight"] == 4.0
+    assert loss_rows[0]["post_clip_grad_norm"] <= loss_rows[0]["pre_clip_grad_norm"]

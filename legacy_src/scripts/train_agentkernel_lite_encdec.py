@@ -126,6 +126,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-steps", type=_positive_int, default=0)
     parser.add_argument("--max-decoder-tokens", type=_positive_int, default=768)
     parser.add_argument("--decoder-ce-weight", type=float, default=0.0)
+    parser.add_argument("--eos-loss-weight", type=float, default=1.0, help="Optional EOS token CE multiplier for bounded decoder stabilization probes.")
     parser.add_argument("--structured-aux-weight", type=float, default=0.0)
     parser.add_argument("--denoise-weight", type=float, default=0.0)
     parser.add_argument("--require-loss-mask-enforcement-audit", action="store_true")
@@ -278,6 +279,8 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
     errors.extend(_validate_target_100m_files(args))
     if args.decoder_ce_weight <= 0:
         errors.append("bounded decoder CE probe requires --decoder-ce-weight > 0")
+    if args.eos_loss_weight < 1.0:
+        errors.append("bounded decoder CE probe requires --eos-loss-weight >= 1.0")
     if args.structured_aux_weight != 0:
         errors.append("bounded decoder CE probe requires --structured-aux-weight 0")
     if args.denoise_weight != 0:
@@ -349,6 +352,7 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "unsafe_loss_row_examples": unsafe_loss_rows[:50],
         "weights": {
             "decoder_ce_weight": args.decoder_ce_weight,
+            "eos_loss_weight": args.eos_loss_weight,
             "structured_aux_weight": args.structured_aux_weight,
             "denoise_weight": args.denoise_weight,
         },
@@ -375,6 +379,7 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
             "max_strict_rows": args.max_strict_rows,
             "max_steps": args.max_steps,
             "max_decoder_tokens": args.max_decoder_tokens,
+            "eos_loss_weight": args.eos_loss_weight,
         },
         "final_checkpoint_export_disabled": bool(args.no_final_checkpoint_export),
         "final_model_save_skipped": args.skip_final_model_save == 1,
@@ -477,6 +482,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "counterfactual_obligation_card": counterfactual_card,
         "weights": {
             "decoder_ce_weight": args.decoder_ce_weight,
+            "eos_loss_weight": args.eos_loss_weight,
             "structured_aux_weight": args.structured_aux_weight,
             "denoise_weight": args.denoise_weight,
         },
@@ -611,6 +617,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             enable_generation_audit=args.enable_generation_audit,
             max_generation_rows=args.max_generation_rows,
             max_generation_tokens=args.max_generation_tokens,
+            eos_loss_weight=args.eos_loss_weight,
         )
     elif args.mode in STRUCTURED_MODE_ALLOWED_LOSSES and args.mode != "repo_graph_probe":
         result = run_structured_aux_probe(mode=args.mode, **common)
