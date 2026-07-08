@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9449_episode_step_denoise_wrapper_design_audit/episode_step_denoise_wrapper_design_audit.json",
+    "doc": "docs/EPISODE_STEP_DENOISE_WRAPPER_DESIGN_AUDIT_STAGE9449.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T22:07:05Z",
+  "decision": "Audited the no-execution episode-step wrapper design; execution remains blocked pending trainer contract-only support.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "blocked_until": [
+      "trainer accepts episode_step_* schema in contract-only mode",
+      "trainer can emit episode-step target leak audit",
+      "separate preexecution stage explicitly authorizes any model execution"
+    ],
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "execution_authorized": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "required_artifact_count": 4,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9448_episode_step_denoise_wrapper_design",
+    "wrapper_mode": "episode_step_denoise_contract_only"
+  },
+  "name": "stage9449_episode_step_denoise_wrapper_design_audit",
+  "next_best_step": "Patch trainer contract-only support for episode_step_denoise_contract_only, then run a static wrapper preflight with max_steps=0 and all weights zero.",
+  "passed": true,
+  "stage": 9449,
+  "stage_name": "stage9449_episode_step_denoise_wrapper_design_audit"
+}

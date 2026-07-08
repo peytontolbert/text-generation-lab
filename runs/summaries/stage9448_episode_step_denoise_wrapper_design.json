@@ -1,0 +1,91 @@
+{
+  "artifacts": {
+    "design": "runs/local/artifacts/stage9448_episode_step_denoise_wrapper_design/episode_step_denoise_wrapper_design.json",
+    "doc": "docs/EPISODE_STEP_DENOISE_WRAPPER_DESIGN_STAGE9448.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T22:06:25Z",
+  "decision": "Designed a no-execution episode-step denoise wrapper; no training or model execution is authorized.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "blocked_until": [
+      "trainer accepts episode_step_* schema in contract-only mode",
+      "trainer can emit episode-step target leak audit",
+      "separate preexecution stage explicitly authorizes any model execution"
+    ],
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "execution_authorized": false,
+    "failures": [],
+    "future_training_gate_if_authorized_later": {
+      "boundary_next_token_match_rate": 1.0,
+      "contentful_rate": 1.0,
+      "decoder_ce_rows": 0,
+      "degenerate_repetition_rows": 0,
+      "internal_leak_rows": 0,
+      "short_or_junk_rows": 0,
+      "target_prefix_match_rate": 1.0,
+      "unterminated_rows": 0
+    },
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "manifest": "runs/local/artifacts/stage9446_episode_step_suffix_repair_manifest/episode_step_suffix_repair_manifest.jsonl",
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "required_trainer_semantics": {
+      "accept_episode_step_transition_schema": "episode_step_suffix_transition_v1",
+      "all_training_weights_zero": true,
+      "contract_only_default": true,
+      "decoder_ce_must_be_zero": true,
+      "loss_masks_must_be_closed": true,
+      "max_steps": 0,
+      "required_artifacts": [
+        "episode_step_contract_audit.json",
+        "episode_step_loss_mask_audit.json",
+        "target_leak_audit.json",
+        "wrapper_static_command.json"
+      ],
+      "runtime_reward_must_be_zero": true,
+      "target_suffix_choice_must_not_be_serialized_in_state_t_or_action_t": true,
+      "target_text_must_not_be_serialized_in_model_input": true
+    },
+    "rows": 50,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9447_episode_step_suffix_repair_manifest_audit",
+    "wrapper_mode": "episode_step_denoise_contract_only"
+  },
+  "name": "stage9448_episode_step_denoise_wrapper_design",
+  "next_best_step": "Audit Stage9448 wrapper design, then patch trainer contract-only support for episode_step_denoise_contract_only if the audit passes.",
+  "passed": true,
+  "stage": 9448,
+  "stage_name": "stage9448_episode_step_denoise_wrapper_design"
+}
