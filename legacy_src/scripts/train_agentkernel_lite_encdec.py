@@ -160,6 +160,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-generation-rows", type=_positive_int, default=8)
     parser.add_argument("--max-generation-tokens", type=_positive_int, default=96)
     parser.add_argument(
+        "--generation-prefix-field",
+        default=None,
+        help="Optional dotted manifest field used to prime decoder generation during audits, for example model_input.copy_prefix_span.",
+    )
+    parser.add_argument(
         "--implementation",
         choices=("scaffold", "transformer"),
         default="transformer",
@@ -235,6 +240,48 @@ def _decoder_target_text(row: dict[str, Any]) -> str:
     return ""
 
 
+def _nested_manifest_value(row: dict[str, Any], path: str | None) -> str:
+    if not path:
+        return ""
+    value: Any = row
+    for part in str(path).split("."):
+        if isinstance(value, dict):
+            value = value.get(part)
+        else:
+            return ""
+    return value if isinstance(value, str) else ""
+
+
+def validate_generation_prefix_contract(args: argparse.Namespace, rows: list[dict[str, Any]]) -> list[str]:
+    generation_prefix_field = getattr(args, "generation_prefix_field", None)
+    if not generation_prefix_field:
+        return []
+    errors: list[str] = []
+    if not args.enable_generation_audit:
+        errors.append("--generation-prefix-field requires --enable-generation-audit")
+    if args.max_generation_tokens < 8:
+        errors.append("--generation-prefix-field requires --max-generation-tokens >= 8")
+    bad_rows = []
+    for index, row in enumerate(rows):
+        row_id = str(row.get("row_id") or index)
+        prefix = _nested_manifest_value(row, generation_prefix_field)
+        target = _decoder_target_text(row)
+        if not prefix:
+            bad_rows.append({"row_id": row_id, "reason": "missing_prefix"})
+            continue
+        if len(prefix.split()) > 8 or len(prefix) > 96:
+            bad_rows.append({"row_id": row_id, "reason": "prefix_over_cap", "prefix": prefix})
+            continue
+        if prefix == target:
+            bad_rows.append({"row_id": row_id, "reason": "full_target_prefix"})
+            continue
+        if target and not target.startswith(prefix):
+            bad_rows.append({"row_id": row_id, "reason": "prefix_not_target_start", "prefix": prefix})
+    if bad_rows:
+        errors.append(f"invalid generation prefix rows present: {len(bad_rows)}")
+    return errors
+
+
 def _manifest_hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -308,6 +355,7 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         errors.append("--no-final-checkpoint-export is required")
     if args.skip_final_model_save != 1:
         errors.append("--skip-final-model-save 1 is required")
+    errors.extend(validate_generation_prefix_contract(args, rows))
 
     for index, row in enumerate(rows):
         row_id = str(row.get("row_id") or f"row_{index}")
@@ -404,6 +452,7 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "generation_audit_requested": bool(args.enable_generation_audit),
         "max_generation_rows": int(args.max_generation_rows),
         "max_generation_tokens": int(args.max_generation_tokens),
+        "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "model_execution_attempted": False,
     }
 
@@ -435,6 +484,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         errors.append("--no-final-checkpoint-export is required")
     if args.skip_final_model_save != 1:
         errors.append("--skip-final-model-save 1 is required")
+    errors.extend(validate_generation_prefix_contract(args, rows))
 
     for index, row in enumerate(rows):
         row_id = str(row.get("row_id") or f"row_{index}")
@@ -533,6 +583,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "generation_audit_requested": bool(args.enable_generation_audit),
         "max_generation_rows": int(args.max_generation_rows),
         "max_generation_tokens": int(args.max_generation_tokens),
+        "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "model_execution_attempted": False,
     }
 
@@ -640,6 +691,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             max_generation_rows=args.max_generation_rows,
             max_generation_tokens=args.max_generation_tokens,
             eos_loss_weight=args.eos_loss_weight,
+            generation_prefix_field=args.generation_prefix_field,
         )
     elif args.mode == "denoise_repair_probe":
         result = run_denoise_repair_probe(
@@ -648,6 +700,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             enable_generation_audit=args.enable_generation_audit,
             max_generation_rows=args.max_generation_rows,
             max_generation_tokens=args.max_generation_tokens,
+            generation_prefix_field=args.generation_prefix_field,
         )
     elif args.mode in STRUCTURED_MODE_ALLOWED_LOSSES and args.mode != "repo_graph_probe":
         result = run_structured_aux_probe(mode=args.mode, **common)

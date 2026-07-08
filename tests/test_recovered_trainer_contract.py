@@ -63,6 +63,76 @@ def write_hashlocked_tokenizer_files(tmp_path: Path) -> tuple[Path, Path, Path]:
     )
     return tok_json, tok_cfg, hashlock
 
+def write_denoise_prefix_manifest(path: Path, *, bad_prefix: bool = False, full_prefix: bool = False) -> None:
+    payloads = []
+    splits = ["train", "eval", "strict_eval", "train", "eval", "strict_eval"]
+    target = "Return the module reference for the bounded repair step."
+    prefix = target if full_prefix else ("Select wrong prefix" if bad_prefix else "Return the module reference")
+    for index, split in enumerate(splits):
+        payloads.append(
+            {
+                "row_id": f"d{index}",
+                "split": split,
+                "language_family": "python",
+                "target": {"decoder_text": target},
+                "corrupted_output": "bad output",
+                "model_input": {"copy_prefix_span": prefix},
+                "loss_mask": {"decoder_ce": False, "denoise_ce": True, "runtime_reward": False},
+                "authority": {
+                    "model_execution_authorized_next": False,
+                    "decoder_ce_training_authorized_next": False,
+                    "runtime_authorized": False,
+                    "source_emission_authorized": False,
+                    "body_emission_authorized": False,
+                    "gemma_execution_authorized_next": False,
+                    "harness_execution_authorized_next": False,
+                    "scoring_authorized_next": False,
+                    "controller_complete_merge_authorized_next": False,
+                    "promotion_ready": False,
+                },
+            }
+        )
+    path.write_text("\n".join(json.dumps(row, sort_keys=True) for row in payloads) + "\n", encoding="utf-8")
+
+
+def denoise_cmd(tmp_path: Path, manifest: Path) -> list[str]:
+    probe_repo = tmp_path / "repo"
+    probe_repo.mkdir(exist_ok=True)
+    return [
+        sys.executable,
+        str(TRAINER),
+        "--repo-root",
+        str(probe_repo),
+        "--manifest",
+        str(manifest),
+        "--mode",
+        "denoise_repair_probe",
+        "--max-train-rows",
+        "2",
+        "--max-eval-rows",
+        "2",
+        "--max-strict-rows",
+        "2",
+        "--max-steps",
+        "1",
+        "--decoder-ce-weight",
+        "0.0",
+        "--structured-aux-weight",
+        "0.0",
+        "--denoise-weight",
+        "1.0",
+        "--require-loss-mask-enforcement-audit",
+        "--no-final-checkpoint-export",
+        "--cleanup-checkpoints-after-probe",
+        "--skip-final-model-save",
+        "1",
+        "--output-dir",
+        str(probe_repo / "runs" / "local" / "probes" / "stage9276"),
+        "--run-id",
+        "stage9276",
+    ]
+
+
 def base_cmd(tmp_path: Path, manifest: Path) -> list[str]:
     probe_repo = tmp_path / "repo"
     probe_repo.mkdir(exist_ok=True)
@@ -129,6 +199,7 @@ def test_recovered_trainer_help_exposes_stage8580_flags() -> None:
         "--enable-generation-audit",
         "--max-generation-rows",
         "--max-generation-tokens",
+        "--generation-prefix-field",
     ]:
         assert flag in result.stdout
 
@@ -370,3 +441,62 @@ def test_authorized_tiny_transformer_accepts_eos_loss_weight(tmp_path: Path) -> 
     loss_rows = [json.loads(line) for line in (out / "loss_by_step.jsonl").read_text().splitlines() if line.strip()]
     assert eos["eos_loss_weight"] == 4.0
     assert loss_rows[0]["post_clip_grad_norm"] <= loss_rows[0]["pre_clip_grad_norm"]
+
+
+def test_denoise_contract_accepts_valid_generation_prefix_field(tmp_path: Path) -> None:
+    manifest = tmp_path / "denoise.jsonl"
+    write_denoise_prefix_manifest(manifest)
+    cmd = denoise_cmd(tmp_path, manifest) + [
+        "--enable-generation-audit",
+        "--generation-prefix-field",
+        "model_input.copy_prefix_span",
+        "--contract-only",
+    ]
+    result = subprocess.run(cmd, check=True, text=True, capture_output=True)
+    card = json.loads(result.stdout)
+    assert card["passed"] is True
+    assert card["generation_prefix_field"] == "model_input.copy_prefix_span"
+
+
+def test_denoise_contract_rejects_generation_prefix_without_generation_audit(tmp_path: Path) -> None:
+    manifest = tmp_path / "denoise.jsonl"
+    write_denoise_prefix_manifest(manifest)
+    cmd = denoise_cmd(tmp_path, manifest) + [
+        "--generation-prefix-field",
+        "model_input.copy_prefix_span",
+        "--contract-only",
+    ]
+    result = subprocess.run(cmd, text=True, capture_output=True)
+    assert result.returncode == 1
+    card = json.loads(result.stdout)
+    assert "--generation-prefix-field requires --enable-generation-audit" in card["errors"]
+
+
+def test_denoise_contract_rejects_invalid_generation_prefix_rows(tmp_path: Path) -> None:
+    manifest = tmp_path / "denoise.jsonl"
+    write_denoise_prefix_manifest(manifest, bad_prefix=True)
+    cmd = denoise_cmd(tmp_path, manifest) + [
+        "--enable-generation-audit",
+        "--generation-prefix-field",
+        "model_input.copy_prefix_span",
+        "--contract-only",
+    ]
+    result = subprocess.run(cmd, text=True, capture_output=True)
+    assert result.returncode == 1
+    card = json.loads(result.stdout)
+    assert any(error.startswith("invalid generation prefix rows present") for error in card["errors"])
+
+
+def test_denoise_contract_rejects_full_target_generation_prefix(tmp_path: Path) -> None:
+    manifest = tmp_path / "denoise.jsonl"
+    write_denoise_prefix_manifest(manifest, full_prefix=True)
+    cmd = denoise_cmd(tmp_path, manifest) + [
+        "--enable-generation-audit",
+        "--generation-prefix-field",
+        "model_input.copy_prefix_span",
+        "--contract-only",
+    ]
+    result = subprocess.run(cmd, text=True, capture_output=True)
+    assert result.returncode == 1
+    card = json.loads(result.stdout)
+    assert any(error.startswith("invalid generation prefix rows present") for error in card["errors"])

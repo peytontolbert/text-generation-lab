@@ -324,6 +324,18 @@ def _has_degenerate_repetition(token_ids: list[int], text: str) -> bool:
     return False
 
 
+def _nested_row_value(row: dict[str, Any], path: str | None) -> str:
+    if not path:
+        return ""
+    value: Any = row
+    for part in path.split("."):
+        if isinstance(value, dict):
+            value = value.get(part)
+        else:
+            return ""
+    return value if isinstance(value, str) else ""
+
+
 def _generate_greedy_text(
     model: torch.nn.Module,
     row: dict[str, Any],
@@ -331,23 +343,29 @@ def _generate_greedy_text(
     tokenizer: Any,
     max_encoder_tokens: int,
     max_new_tokens: int,
+    generation_prefix_field: str | None = None,
 ) -> dict[str, Any]:
     batch = build_batch([row], max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=2, tokenizer=tokenizer)
     bos_id = int(getattr(tokenizer, "bos_id", 1))
     eos_id = int(getattr(tokenizer, "eos_id", 2))
     pad_id = int(getattr(tokenizer, "pad_id", 0))
-    decoder_ids = torch.tensor([[bos_id]], dtype=torch.long, device=batch.input_ids.device)
-    generated_ids: list[int] = []
+    generation_prefix_text = _nested_row_value(row, generation_prefix_field) if generation_prefix_field else ""
+    prefix_ids: list[int] = []
+    if generation_prefix_text:
+        encoded_prefix = tokenizer.encode(str(generation_prefix_text), max_length=max_new_tokens + 2)
+        prefix_ids = [idx for idx in encoded_prefix if idx not in {pad_id, bos_id, eos_id}]
+    decoder_ids = torch.tensor([[bos_id] + prefix_ids], dtype=torch.long, device=batch.input_ids.device)
+    generated_ids: list[int] = list(prefix_ids)
     eos_position = None
     model.eval()
     with torch.no_grad():
-        for step in range(max_new_tokens):
+        for _step in range(max(0, max_new_tokens - len(prefix_ids))):
             out = model(batch.input_ids, decoder_ids)
             next_id = int(torch.argmax(out["decoder_logits"][0, -1]).detach().cpu().item())
             generated_ids.append(next_id)
             decoder_ids = torch.cat([decoder_ids, torch.tensor([[next_id]], dtype=torch.long, device=decoder_ids.device)], dim=1)
             if next_id == eos_id:
-                eos_position = step
+                eos_position = len(generated_ids) - 1
                 break
     clean_ids = [idx for idx in generated_ids if idx not in {pad_id, bos_id, eos_id}]
     text = tokenizer.decode(clean_ids)
@@ -361,6 +379,11 @@ def _generate_greedy_text(
         "generated_text": text,
         "generated_token_ids": generated_ids,
         "generated_token_count": len(clean_ids),
+        "prefix_primed": bool(prefix_ids),
+        "generation_prefix_field": generation_prefix_field,
+        "generation_prefix_text": str(generation_prefix_text),
+        "generation_prefix_token_count": len(prefix_ids),
+        "generation_prefix_start_match": bool(generation_prefix_text and text.startswith(str(generation_prefix_text))),
         "eos_position": eos_position,
         "stopped_on_eos": eos_position is not None,
         "empty_output": not stripped,
@@ -383,6 +406,7 @@ def _write_generation_audits(
     max_generation_tokens: int,
     target_internal_token_rows: int,
     target_repetition_rows: int,
+    generation_prefix_field: str | None = None,
 ) -> dict[str, Any]:
     selected = rows[:max_generation_rows]
     samples = [
@@ -392,6 +416,7 @@ def _write_generation_audits(
             tokenizer=tokenizer,
             max_encoder_tokens=max_encoder_tokens,
             max_new_tokens=max_generation_tokens,
+            generation_prefix_field=generation_prefix_field,
         )
         for row in selected
     ]
@@ -409,6 +434,8 @@ def _write_generation_audits(
         and row["stopped_on_eos"]
     ]
     prefix_rows = [row for row in samples if row["target_prefix_match"]]
+    primed_rows = [row for row in samples if row.get("prefix_primed")]
+    primed_start_rows = [row for row in samples if row.get("generation_prefix_start_match")]
     exact_rows = [row for row in samples if row["exact_match"]]
     sample_card = {
         "generated_rows": generated_rows,
@@ -417,6 +444,11 @@ def _write_generation_audits(
         "contentful_rate": len(contentful_rows) / generated_rows if generated_rows else None,
         "target_prefix_match_rows": len(prefix_rows),
         "target_prefix_match_rate": len(prefix_rows) / generated_rows if generated_rows else None,
+        "generation_prefix_field": generation_prefix_field,
+        "prefix_primed_rows": len(primed_rows),
+        "prefix_primed_rate": len(primed_rows) / generated_rows if generated_rows else None,
+        "generation_prefix_start_rows": len(primed_start_rows),
+        "generation_prefix_start_rate": len(primed_start_rows) / generated_rows if generated_rows else None,
         "exact_match_rows": len(exact_rows),
         "unterminated_rows": len(unterminated_rows),
         "unterminated_rate": len(unterminated_rows) / generated_rows if generated_rows else None,
@@ -789,6 +821,7 @@ def run_bounded_decoder_ce_probe(
     max_generation_rows: int = 8,
     max_generation_tokens: int = 96,
     eos_loss_weight: float = 1.0,
+    generation_prefix_field: str | None = None,
 ) -> dict[str, Any]:
     """Run a tiny bounded decoder CE probe with native interpretability telemetry."""
     random.seed(seed)
@@ -952,6 +985,7 @@ def run_bounded_decoder_ce_probe(
             max_generation_tokens=max_generation_tokens,
             target_internal_token_rows=target_internal_token_rows,
             target_repetition_rows=target_repetition_rows,
+            generation_prefix_field=generation_prefix_field,
         )
     else:
         generation_card = {"generated_rows": 0, "samples": [], "note": "sampling disabled for bounded CE implementation recovery"}
@@ -1009,6 +1043,7 @@ def run_denoise_repair_probe(
     enable_generation_audit: bool = False,
     max_generation_rows: int = 8,
     max_generation_tokens: int = 96,
+    generation_prefix_field: str | None = None,
 ) -> dict[str, Any]:
     """Run a tiny denoise repair probe over corrupted-output -> clean-target rows."""
     random.seed(seed)
@@ -1147,6 +1182,7 @@ def run_denoise_repair_probe(
             max_generation_tokens=max_generation_tokens,
             target_internal_token_rows=target_internal_token_rows,
             target_repetition_rows=target_repetition_rows,
+            generation_prefix_field=generation_prefix_field,
         )
     else:
         generation_card = {"generated_rows": 0, "samples": [], "note": "generation audit disabled for denoise repair probe"}
@@ -1176,6 +1212,8 @@ def run_denoise_repair_probe(
         "degenerate_repetition_rate": generation_card.get("degenerate_repetition_rate"),
         "generated_internal_token_rows": generation_card.get("generated_internal_token_rows"),
         "target_prefix_match_rate": generation_card.get("target_prefix_match_rate"),
+        "generation_prefix_field": generation_prefix_field,
+        "generation_prefix_start_rate": generation_card.get("generation_prefix_start_rate"),
     }
     _write_json(output_dir / "denoise_repair_quality_audit.json", quality_card)
     _write_json(output_dir / "failure_bucket_card.json", {"mode": "denoise_repair_probe", "eval": eval_card, "token_loss_rows": len(token_records), "target_repetition_rows": target_repetition_rows, "generation_audit_enabled": bool(enable_generation_audit)})
@@ -1206,6 +1244,8 @@ def run_denoise_repair_probe(
         "degenerate_repetition_rate": generation_card.get("degenerate_repetition_rate"),
         "generated_internal_token_rows": generation_card.get("generated_internal_token_rows"),
         "target_prefix_match_rate": generation_card.get("target_prefix_match_rate"),
+        "generation_prefix_field": generation_prefix_field,
+        "generation_prefix_start_rate": generation_card.get("generation_prefix_start_rate"),
     }
 
 def run_structured_aux_probe(
