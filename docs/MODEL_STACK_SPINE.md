@@ -2705,3 +2705,10 @@ Stage9231 reconciles the frontier after Stage9230. Request validation and family
 No valid request is present, no family is selected, and no live audit/ticket/trainer/model/runtime/checkpoint/cleanup/mining/arxiv/source-body/scoring/promotion authority is opened.
 
 Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
+
+## Stage9232 Explicit Request Intake Checklist
+
+Stage9232 records an intake checklist before Stage9225 request validation. Casual continuation is ambiguous, not a family selection; unsafe run/training/cleanup/runtime/arxiv/checkpoint language is rejected.
+No request is processed and no authority is opened.
+
+Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.

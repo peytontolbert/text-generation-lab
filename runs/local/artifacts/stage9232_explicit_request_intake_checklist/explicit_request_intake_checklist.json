@@ -1,0 +1,118 @@
+{
+  "ambiguous_or_unsafe_phrases": {
+    "clean up": "cleanup_requested",
+    "continue": "not_a_family_selection",
+    "execute runtime": "runtime_requested",
+    "read arxiv": "arxiv_access_requested",
+    "run it": "execution_requested",
+    "start training": "trainer_invocation_requested",
+    "use all families": "multiple_families_requested",
+    "write checkpoint": "checkpoint_requested"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "continue_is_not_valid_request": true,
+    "no_previous_authority_open": true,
+    "previous_stage9231_passed": true,
+    "registry_frontier_stage9231_or_later": true,
+    "required_signals_recorded": true,
+    "supported_families_three": true,
+    "unsafe_examples_rejected": true,
+    "valid_example_is_design_only": true
+  },
+  "decision": "Explicit request intake checklist recorded. Casual continuation is not a valid family selection; unsafe execution, cleanup, runtime, checkpoint, training, and /arxiv phrasing remains rejected.",
+  "examples": {
+    "casual_continue": {
+      "decision": "ambiguous_request",
+      "family_hits": [],
+      "reasons": [
+        "required_intent_signals_missing"
+      ]
+    },
+    "unsafe_cleanup": {
+      "decision": "unsafe_request",
+      "family_hits": [],
+      "reasons": [
+        "trainer_invocation_requested",
+        "cleanup_requested"
+      ]
+    },
+    "unsafe_run": {
+      "decision": "unsafe_request",
+      "family_hits": [
+        "bounded_decoder_ce_probe"
+      ],
+      "reasons": [
+        "execution_requested"
+      ]
+    },
+    "valid_structured_design": {
+      "decision": "valid_design_request",
+      "family_hits": [
+        "structured_policy_probe"
+      ],
+      "reasons": []
+    }
+  },
+  "intake_decisions": {
+    "ambiguous_request": "continue_no_execution_review_or_ask_for_precise_family",
+    "unsafe_request": "reject_execution_and_keep_authority_closed",
+    "valid_design_request": "may_build_family_specific_final_preexecution_audit_design_only"
+  },
+  "metrics": {
+    "ambiguous_or_unsafe_phrases": 8,
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "backward_attempted": false,
+    "checkpoint_export_authorized": false,
+    "checkpoint_written_now": false,
+    "cleanup_authorized_now": false,
+    "cleanup_executed_now": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "family_selected_now": false,
+    "family_specific_final_audit_design_instantiated_now": false,
+    "generation_attempted": false,
+    "intake_examples": 4,
+    "intake_request_processed_now": false,
+    "live_ticket_materialized_now": false,
+    "model_forward_attempted": false,
+    "next_stage_execution_authorized": false,
+    "optimizer_created": false,
+    "required_user_intent_signals": 5,
+    "runtime_authorized_flag": false,
+    "runtime_verifier_execution_authorized": false,
+    "same_stage_execution_authorized": false,
+    "supported_families": 3,
+    "trainer_executed_now": false,
+    "valid_request_present": false
+  },
+  "required_user_intent_signals": [
+    "names_exactly_one_supported_family",
+    "says_design_family_specific_final_preexecution_audit_only",
+    "keeps_same_stage_execution_false",
+    "keeps_trainer_model_cleanup_runtime_arxiv_false",
+    "accepts_no_live_ticket_materialization"
+  ],
+  "stage": 9232,
+  "stage_name": "stage9232_explicit_request_intake_checklist",
+  "status": "EXPLICIT_REQUEST_INTAKE_CHECKLIST_NO_EXECUTION",
+  "supported_families": [
+    "structured_policy_probe",
+    "bounded_decoder_ce_probe",
+    "denoise_repair_probe"
+  ]
+}
