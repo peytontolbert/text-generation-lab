@@ -220,6 +220,199 @@ def _field_telemetry_record(*, row_id: str, split: str, field: str, target: str,
     }
 
 
+def _is_short_or_junk(text: str) -> bool:
+    stripped = text.strip()
+    if len(stripped) < 8:
+        return True
+    alnum = {ch.lower() for ch in stripped if ch.isalnum()}
+    return len(alnum) < 3
+
+
+def _has_repeated_token_pattern(token_ids: list[int], *, repeats: int = 3) -> bool:
+    if len(token_ids) < repeats:
+        return False
+    max_width = min(16, max(1, len(token_ids) // repeats))
+    for width in range(1, max_width + 1):
+        for start in range(0, len(token_ids) - width * repeats + 1):
+            chunk = token_ids[start: start + width]
+            if len(set(chunk)) == 1 and width > 1:
+                continue
+            if all(token_ids[start + width * rep: start + width * (rep + 1)] == chunk for rep in range(1, repeats)):
+                return True
+    return False
+
+
+def _has_repeated_text_pattern(text: str, *, repeats: int = 3) -> bool:
+    compact = "".join(ch for ch in text.lower() if not ch.isspace())
+    if len(compact) < 12:
+        return False
+    max_width = min(40, max(3, len(compact) // repeats))
+    for width in range(3, max_width + 1):
+        for start in range(0, len(compact) - width * repeats + 1):
+            chunk = compact[start: start + width]
+            if len(set(chunk)) <= 1:
+                continue
+            if all(compact[start + width * rep: start + width * (rep + 1)] == chunk for rep in range(1, repeats)):
+                return True
+    return False
+
+
+def _has_degenerate_repetition(token_ids: list[int], text: str) -> bool:
+    if any(token_ids[idx] == token_ids[idx - 1] == token_ids[idx - 2] for idx in range(2, len(token_ids))):
+        return True
+    if _has_repeated_token_pattern(token_ids):
+        return True
+    if _has_repeated_text_pattern(text):
+        return True
+    words = [word for word in text.lower().split() if word]
+    if len(words) >= 6:
+        trigrams = [tuple(words[idx: idx + 3]) for idx in range(len(words) - 2)]
+        if len(set(trigrams)) <= max(1, len(trigrams) // 3):
+            return True
+    return False
+
+
+def _generate_greedy_text(
+    model: torch.nn.Module,
+    row: dict[str, Any],
+    *,
+    tokenizer: Any,
+    max_encoder_tokens: int,
+    max_new_tokens: int,
+) -> dict[str, Any]:
+    batch = build_batch([row], max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=2, tokenizer=tokenizer)
+    bos_id = int(getattr(tokenizer, "bos_id", 1))
+    eos_id = int(getattr(tokenizer, "eos_id", 2))
+    pad_id = int(getattr(tokenizer, "pad_id", 0))
+    decoder_ids = torch.tensor([[bos_id]], dtype=torch.long, device=batch.input_ids.device)
+    generated_ids: list[int] = []
+    eos_position = None
+    model.eval()
+    with torch.no_grad():
+        for step in range(max_new_tokens):
+            out = model(batch.input_ids, decoder_ids)
+            next_id = int(torch.argmax(out["decoder_logits"][0, -1]).detach().cpu().item())
+            generated_ids.append(next_id)
+            decoder_ids = torch.cat([decoder_ids, torch.tensor([[next_id]], dtype=torch.long, device=decoder_ids.device)], dim=1)
+            if next_id == eos_id:
+                eos_position = step
+                break
+    clean_ids = [idx for idx in generated_ids if idx not in {pad_id, bos_id, eos_id}]
+    text = tokenizer.decode(clean_ids)
+    target = _target_text(row)
+    stripped = text.strip()
+    return {
+        "row_id": str(row.get("row_id")),
+        "split": str(row.get("split") or row.get("package_split") or ""),
+        "surface": str(row.get("surface") or row.get("repair_surface") or ""),
+        "target_text": target,
+        "generated_text": text,
+        "generated_token_ids": generated_ids,
+        "generated_token_count": len(clean_ids),
+        "eos_position": eos_position,
+        "stopped_on_eos": eos_position is not None,
+        "empty_output": not stripped,
+        "short_or_junk": _is_short_or_junk(text),
+        "internal_token_leak": _has_internal_token(text) or _looks_internal_token_text(text),
+        "degenerate_repetition": _has_degenerate_repetition(clean_ids, text),
+        "target_prefix_match": bool(stripped and target.startswith(stripped)),
+        "exact_match": stripped == target.strip(),
+    }
+
+
+def _write_generation_audits(
+    output_dir: Path,
+    *,
+    model: torch.nn.Module,
+    rows: list[dict[str, Any]],
+    tokenizer: Any,
+    max_encoder_tokens: int,
+    max_generation_rows: int,
+    max_generation_tokens: int,
+    target_internal_token_rows: int,
+    target_repetition_rows: int,
+) -> dict[str, Any]:
+    selected = rows[:max_generation_rows]
+    samples = [
+        _generate_greedy_text(
+            model,
+            row,
+            tokenizer=tokenizer,
+            max_encoder_tokens=max_encoder_tokens,
+            max_new_tokens=max_generation_tokens,
+        )
+        for row in selected
+    ]
+    generated_rows = len(samples)
+    short_rows = [row for row in samples if row["short_or_junk"]]
+    leak_rows = [row for row in samples if row["internal_token_leak"]]
+    repetition_rows = [row for row in samples if row["degenerate_repetition"]]
+    unterminated_rows = [row for row in samples if not row["stopped_on_eos"]]
+    contentful_rows = [
+        row
+        for row in samples
+        if not row["short_or_junk"]
+        and not row["internal_token_leak"]
+        and not row["degenerate_repetition"]
+        and row["stopped_on_eos"]
+    ]
+    prefix_rows = [row for row in samples if row["target_prefix_match"]]
+    exact_rows = [row for row in samples if row["exact_match"]]
+    sample_card = {
+        "generated_rows": generated_rows,
+        "max_generation_tokens": max_generation_tokens,
+        "contentful_rows": len(contentful_rows),
+        "contentful_rate": len(contentful_rows) / generated_rows if generated_rows else None,
+        "target_prefix_match_rows": len(prefix_rows),
+        "target_prefix_match_rate": len(prefix_rows) / generated_rows if generated_rows else None,
+        "exact_match_rows": len(exact_rows),
+        "unterminated_rows": len(unterminated_rows),
+        "unterminated_rate": len(unterminated_rows) / generated_rows if generated_rows else None,
+        "samples": samples,
+    }
+    short_card = {
+        "generated_rows": generated_rows,
+        "short_or_junk_rows": len(short_rows),
+        "short_or_junk_rate": len(short_rows) / generated_rows if generated_rows else None,
+        "row_ids": [row["row_id"] for row in short_rows],
+    }
+    repetition_card = {
+        "generated_rows": generated_rows,
+        "generated_repetition_rows": len(repetition_rows),
+        "degenerate_repetition_rate": len(repetition_rows) / generated_rows if generated_rows else None,
+        "target_repetition_rows": target_repetition_rows,
+        "unterminated_rows": len(unterminated_rows),
+        "unterminated_rate": len(unterminated_rows) / generated_rows if generated_rows else None,
+        "unterminated_row_ids": [row["row_id"] for row in unterminated_rows],
+        "row_ids": [row["row_id"] for row in repetition_rows],
+    }
+    leak_card = {
+        "target_internal_token_rows": target_internal_token_rows,
+        "generated_internal_token_rows": len(leak_rows),
+        "generated_internal_token_rate": len(leak_rows) / generated_rows if generated_rows else None,
+        "row_ids": [row["row_id"] for row in leak_rows],
+    }
+    buckets = {
+        "short_or_junk": len(short_rows),
+        "internal_leak": len(leak_rows),
+        "degenerate_repetition": len(repetition_rows),
+        "unterminated_generation": len(unterminated_rows),
+        "prefix_miss": generated_rows - len(prefix_rows),
+    }
+    failure_card = {
+        "failure_rows": len({row["row_id"] for row in short_rows + leak_rows + repetition_rows + unterminated_rows if row}),
+        "buckets": buckets,
+        "token_loss_rows": None,
+        "generation_audit_enabled": True,
+    }
+    _write_json(output_dir / "sample_generation_audit.json", sample_card)
+    _write_json(output_dir / "short_output_probe.json", short_card)
+    _write_json(output_dir / "repetition_probe.json", repetition_card)
+    _write_json(output_dir / "internal_leak_probe.json", leak_card)
+    _write_json(output_dir / "failure_bucket_card.json", failure_card)
+    return sample_card
+
+
 def _token_loss_rows(*, row_ids: list[str], logits: torch.Tensor, labels: torch.Tensor, tokenizer: Any) -> list[dict[str, Any]]:
     token_loss = F.cross_entropy(logits.reshape(-1, logits.size(-1)), labels.reshape(-1), ignore_index=0, reduction="none").reshape(labels.shape)
     probs = torch.softmax(logits.detach().float(), dim=-1)
@@ -526,6 +719,9 @@ def run_bounded_decoder_ce_probe(
     model_config: Path | None = None,
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
+    enable_generation_audit: bool = False,
+    max_generation_rows: int = 8,
+    max_generation_tokens: int = 96,
 ) -> dict[str, Any]:
     """Run a tiny bounded decoder CE probe with native interpretability telemetry."""
     random.seed(seed)
@@ -629,12 +825,29 @@ def run_bounded_decoder_ce_probe(
         )
         _append_jsonl(output_dir / "row_dynamics_history.jsonl", dyn)
 
+    target_internal_token_rows = sum(1 for row in token_records if any(pos.get("is_internal_or_control_token") for pos in row.get("positions", [])))
+    target_repetition_rows = sum(1 for row in token_records if row.get("repeated_token_positions"))
     _write_json(output_dir / "eos_length_audit.json", {"rows_checked": len(token_records), "max_decoder_tokens": max_decoder_tokens})
-    _write_json(output_dir / "short_output_probe.json", {"generated_rows": 0, "short_or_junk_rate": None, "note": "generation audit disabled; CE token telemetry is present"})
-    _write_json(output_dir / "repetition_probe.json", {"generated_rows": 0, "degenerate_repetition_rate": None, "target_repetition_rows": sum(1 for row in token_records if row.get("repeated_token_positions"))})
-    _write_json(output_dir / "internal_leak_probe.json", {"target_internal_token_rows": sum(1 for row in token_records if any(pos.get("is_internal_or_control_token") for pos in row.get("positions", []))), "generated_internal_token_rows": None})
-    _write_json(output_dir / "sample_generation_audit.json", {"generated_rows": 0, "samples": [], "note": "sampling disabled for bounded CE implementation recovery"})
-    _write_json(output_dir / "failure_bucket_card.json", {"failure_rows": 0, "buckets": {}, "token_loss_rows": len(token_records)})
+    if enable_generation_audit:
+        generation_rows = eval_rows + strict_rows
+        generation_card = _write_generation_audits(
+            output_dir,
+            model=model,
+            rows=generation_rows,
+            tokenizer=tokenizer,
+            max_encoder_tokens=max_encoder_tokens,
+            max_generation_rows=max_generation_rows,
+            max_generation_tokens=max_generation_tokens,
+            target_internal_token_rows=target_internal_token_rows,
+            target_repetition_rows=target_repetition_rows,
+        )
+    else:
+        generation_card = {"generated_rows": 0, "samples": [], "note": "sampling disabled for bounded CE implementation recovery"}
+        _write_json(output_dir / "short_output_probe.json", {"generated_rows": 0, "short_or_junk_rate": None, "note": "generation audit disabled; CE token telemetry is present"})
+        _write_json(output_dir / "repetition_probe.json", {"generated_rows": 0, "degenerate_repetition_rate": None, "target_repetition_rows": target_repetition_rows})
+        _write_json(output_dir / "internal_leak_probe.json", {"target_internal_token_rows": target_internal_token_rows, "generated_internal_token_rows": None})
+        _write_json(output_dir / "sample_generation_audit.json", generation_card)
+        _write_json(output_dir / "failure_bucket_card.json", {"failure_rows": 0, "buckets": {}, "token_loss_rows": len(token_records), "generation_audit_enabled": False})
     _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "training loop does not write checkpoints", "run_id": run_id})
 
     return {
@@ -653,6 +866,9 @@ def run_bounded_decoder_ce_probe(
         "gemma_executed": False,
         "harness_executed": False,
         "required_artifacts_written": all((output_dir / name).exists() and (not name.endswith(".jsonl") or (output_dir / name).stat().st_size > 0) for name in REQUIRED_RUNTIME_ARTIFACTS),
+        "generation_audit_enabled": bool(enable_generation_audit),
+        "generated_rows": int(generation_card.get("generated_rows", 0)),
+        "contentful_generation_rate": generation_card.get("contentful_rate"),
     }
 
 def run_structured_aux_probe(

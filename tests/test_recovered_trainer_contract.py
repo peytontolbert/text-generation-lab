@@ -4,6 +4,8 @@ import hashlib
 import json
 import subprocess
 import sys
+
+import pytest
 from pathlib import Path
 
 
@@ -123,6 +125,9 @@ def test_recovered_trainer_help_exposes_stage8580_flags() -> None:
         "--tokenizer-json",
         "--tokenizer-config",
         "--tokenizer-hashlock",
+        "--enable-generation-audit",
+        "--max-generation-rows",
+        "--max-generation-tokens",
     ]:
         assert flag in result.stdout
 
@@ -284,4 +289,52 @@ def test_contract_rejects_target_100m_tokenizer_hash_mismatch(tmp_path: Path) ->
     card = json.loads(result.stdout)
     assert card["passed"] is False
     assert "tokenizer json sha256 mismatch against hashlock" in card["errors"]
+
+
+def test_generation_audit_detects_substring_repetition() -> None:
+    try:
+        import torch  # noqa: F401
+    except Exception:
+        pytest.skip("torch is required for generation-audit helper import")
+    sys.path.insert(0, str(ROOT / "legacy_src"))
+    from agentkernel_lite.training_loop import _has_degenerate_repetition
+
+    repeated = "train_refamily_refamily_refamily_refamily_refamily_refamily_refamily"
+    assert _has_degenerate_repetition([233, 438, 357, 212, 351, 219, 526, 222, 440] * 4, repeated) is True
+
+
+def test_authorized_tiny_transformer_generation_audit_writes_quality_cards(tmp_path: Path) -> None:
+    try:
+        import torch  # noqa: F401
+    except Exception:
+        pytest.skip("torch is required for authorized generation-audit execution smoke")
+    manifest = tmp_path / "manifest.jsonl"
+    write_manifest(manifest, rows=6)
+    cmd = base_cmd(tmp_path, manifest) + [
+        "--implementation",
+        "transformer",
+        "--probe-scale",
+        "tiny_transformer",
+        "--max-steps",
+        "1",
+        "--max-generation-rows",
+        "2",
+        "--max-generation-tokens",
+        "8",
+        "--enable-generation-audit",
+        "--execution-authorized-for-recovery-probe",
+    ]
+    result = subprocess.run(cmd, check=True, text=True, capture_output=True)
+    assert '"generation_audit_enabled": true' in result.stdout
+    out = tmp_path / "repo" / "runs" / "local" / "probes" / "stage8584"
+    sample = json.loads((out / "sample_generation_audit.json").read_text())
+    short = json.loads((out / "short_output_probe.json").read_text())
+    leak = json.loads((out / "internal_leak_probe.json").read_text())
+    repetition = json.loads((out / "repetition_probe.json").read_text())
+    assert sample["generated_rows"] == 2
+    assert len(sample["samples"]) == 2
+    assert "contentful_rate" in sample
+    assert short["generated_rows"] == 2
+    assert leak["generated_internal_token_rows"] >= 0
+    assert repetition["generated_rows"] == 2
 

@@ -1,0 +1,124 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "contract": {
+    "authority_rows": 0,
+    "generation_audit_requested": true,
+    "loss_counts": {
+      "action_sequence_ce": 0,
+      "allowed_import_policy_ce": 0,
+      "blocked_import_policy_ce": 0,
+      "build_mode_ce": 0,
+      "decoder_ce": 64,
+      "denoise_ce": 0,
+      "edit_localization_ce": 0,
+      "file_plan_ce": 0,
+      "patch_operator_ce": 0,
+      "repair_surface_ce": 0,
+      "repo_dependency_policy_ce": 0,
+      "runtime_reward": 0,
+      "surface_role_ce": 0,
+      "symbol_binding_ce": 0,
+      "verifier_repair_ce": 0
+    },
+    "manifest": "runs/local/artifacts/stage9211_repo_local_tiny_cap_adapters/bounded_decoder_tiny_cap_manifest.jsonl",
+    "manifest_sha256": "1d0c04e9d4aa97d949df7033144b129428a2ebdce02aa7d1a08be6da6de26e28",
+    "max_generation_rows": 16,
+    "max_generation_tokens": 96,
+    "over_cap_rows": 0,
+    "rows": 64,
+    "split_counts": {
+      "eval": 16,
+      "other": 0,
+      "strict_eval": 16,
+      "train": 32
+    },
+    "unsafe_loss_rows": 0
+  },
+  "execution": {
+    "batch_size": 2,
+    "eval_rows": 16,
+    "final_checkpoint_exported": false,
+    "gemma_executed": false,
+    "harness_executed": false,
+    "implementation": {
+      "d_ff": 2048,
+      "d_model": 640,
+      "estimated_parameter_count": 102668531,
+      "full_100m_target_execution_authorized": true,
+      "implementation": "transformer",
+      "model_class": "AgentKernelLiteTransformerSeq2Seq",
+      "model_config": "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "n_heads": 10,
+      "n_layers": 6,
+      "probe_scale": "target_100m",
+      "vocab_size": 1506
+    },
+    "max_steps": 16,
+    "probe_scale": "target_100m",
+    "runtime_executed": false,
+    "strict_rows": 16,
+    "train_rows": 32
+  },
+  "failure_reason": "bounded_generation_quality_failed_degenerate_repetition_and_no_eos",
+  "generation_metrics": {
+    "contentful_generation_rate": 0.0,
+    "degenerate_repetition_rate": 1.0,
+    "exact_match_rows": 0,
+    "failure_buckets": {
+      "degenerate_repetition": 16,
+      "internal_leak": 0,
+      "prefix_miss": 16,
+      "short_or_junk": 0,
+      "unterminated_generation": 16
+    },
+    "first_generated_text": "train_refamily_refamily_refamily_refamily_refamily_refamily_refamily_refamily_refamily_refamily_refamily_refamily_refamily_refamily_refamily_ref",
+    "generated_internal_token_rate": 0.0,
+    "generated_internal_token_rows": 0,
+    "generated_repetition_rows": 16,
+    "generated_rows": 16,
+    "short_or_junk_rate": 0.0,
+    "target_prefix_match_rate": 0.0,
+    "unterminated_rate": 1.0,
+    "unterminated_rows": 16
+  },
+  "interpretation": [
+    "The target 100M transformer executes safely under the bounded decoder CE contract and records loss/telemetry.",
+    "Loss decreases on the tiny package, but generation quality fails: all audited generations loop and never emit EOS.",
+    "No internal-token leakage was observed in generated rows, but leak absence is insufficient because output quality fails.",
+    "The current target_ref placeholder decoder package is not capability-ready; it is a trainer/runtime measurement package."
+  ],
+  "loss_metrics": {
+    "eval_loss": 13.711634635925293,
+    "strict_eval_loss": 18.407922744750977,
+    "train_step_1_loss": 84.9995346069336,
+    "train_step_last_loss": 7.893095970153809,
+    "train_steps": 16
+  },
+  "name": "stage9236_target_100m_bounded_generation_quality_audit_probe",
+  "next": "build_source_backed_bounded_decoder_targets_with_eos_and_repetition_counterexamples_before_widening",
+  "next_best_step": "build_source_backed_bounded_decoder_targets_with_eos_and_repetition_counterexamples_before_widening",
+  "passed": false,
+  "required_next_gates": [
+    "replace target_ref placeholders with source-backed bounded argument text",
+    "add EOS/termination-positive and repetition-negative target rows",
+    "rerun contract-only preflight before any execution",
+    "require generated_repetition_rows == 0 and unterminated_rows == 0 before widening",
+    "keep runtime/Gemma/harness/source/body/promotion closed"
+  ],
+  "stage": 9236,
+  "supersedes": [
+    "stage9235_target_100m_bounded_generation_audit_probe"
+  ],
+  "why_stage9235_was_superseded": "Stage9235 exposed that the original repetition detector missed repeated subtoken/text loops; Stage9236 reran the same tiny probe after detector repair."
+}

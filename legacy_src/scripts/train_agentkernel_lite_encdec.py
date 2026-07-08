@@ -138,6 +138,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-size", type=_positive_int, default=2)
     parser.add_argument("--max-encoder-tokens", type=_positive_int, default=256)
     parser.add_argument("--learning-rate", type=float, default=5e-5)
+    parser.add_argument("--enable-generation-audit", action="store_true", help="Run bounded greedy generation quality audit after authorized bounded decoder CE probes.")
+    parser.add_argument("--max-generation-rows", type=_positive_int, default=8)
+    parser.add_argument("--max-generation-tokens", type=_positive_int, default=96)
     parser.add_argument(
         "--implementation",
         choices=("scaffold", "transformer"),
@@ -376,6 +379,9 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "final_checkpoint_export_disabled": bool(args.no_final_checkpoint_export),
         "final_model_save_skipped": args.skip_final_model_save == 1,
         "cleanup_requested": bool(args.cleanup_checkpoints_after_probe),
+        "generation_audit_requested": bool(args.enable_generation_audit),
+        "max_generation_rows": int(args.max_generation_rows),
+        "max_generation_tokens": int(args.max_generation_tokens),
         "model_execution_attempted": False,
     }
 
@@ -501,6 +507,9 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "final_checkpoint_export_disabled": bool(args.no_final_checkpoint_export),
         "final_model_save_skipped": args.skip_final_model_save == 1,
         "cleanup_requested": bool(args.cleanup_checkpoints_after_probe),
+        "generation_audit_requested": bool(args.enable_generation_audit),
+        "max_generation_rows": int(args.max_generation_rows),
+        "max_generation_tokens": int(args.max_generation_tokens),
         "model_execution_attempted": False,
     }
 
@@ -597,7 +606,12 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
         tokenizer_config=args.tokenizer_config,
     )
     if args.mode == "bounded_decoder_ce_probe":
-        result = run_bounded_decoder_ce_probe(**common)
+        result = run_bounded_decoder_ce_probe(
+            **common,
+            enable_generation_audit=args.enable_generation_audit,
+            max_generation_rows=args.max_generation_rows,
+            max_generation_tokens=args.max_generation_tokens,
+        )
     elif args.mode in STRUCTURED_MODE_ALLOWED_LOSSES and args.mode != "repo_graph_probe":
         result = run_structured_aux_probe(mode=args.mode, **common)
     else:
