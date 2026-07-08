@@ -1,0 +1,114 @@
+{
+  "allowed_losses": [
+    "denoise_ce"
+  ],
+  "authority_row_ids": [],
+  "authority_rows": 0,
+  "caps": {
+    "max_decoder_tokens": 768,
+    "max_eval_rows": 7,
+    "max_steps": 80,
+    "max_strict_rows": 6,
+    "max_train_rows": 8
+  },
+  "cleanup_requested": true,
+  "counterfactual_obligation_audit_required": false,
+  "counterfactual_obligation_card": null,
+  "errors": [],
+  "final_checkpoint_export_disabled": true,
+  "final_model_save_skipped": true,
+  "generation_audit_requested": true,
+  "generation_prefix_field": "model_input.copy_prefix_span",
+  "implementation": "transformer",
+  "implementation_contract": {
+    "model_config": "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "scaffold": false,
+    "target_100m_requires_model_config": true,
+    "target_implementation_guard": {
+      "allowed_for_recovered_100m_target": true,
+      "errors": [],
+      "features": {
+        "has_agent_policy_heads": true,
+        "has_retrieval_heads": true,
+        "has_rotary": true,
+        "has_scalar_invariant": true
+      },
+      "implementation_path": "/data/agentkernel-seq2seq-text-lab/legacy_src/agentkernel_lite/modeling_transformer.py",
+      "missing_features": [],
+      "selected": "transformer",
+      "target_requires_recovered_transformer": true
+    },
+    "transformer_execution_requires_explicit_authorization": true,
+    "transformer_module": "legacy_src/agentkernel_lite/modeling_transformer.py"
+  },
+  "loss_counts": {
+    "action_sequence_ce": 0,
+    "allowed_import_policy_ce": 0,
+    "blocked_import_policy_ce": 0,
+    "build_mode_ce": 0,
+    "decoder_ce": 0,
+    "denoise_ce": 21,
+    "edit_localization_ce": 0,
+    "file_plan_ce": 0,
+    "patch_operator_ce": 0,
+    "repair_surface_ce": 0,
+    "repo_dependency_policy_ce": 0,
+    "runtime_reward": 0,
+    "surface_role_ce": 0,
+    "symbol_binding_ce": 0,
+    "verifier_repair_ce": 0
+  },
+  "manifest": "runs/local/artifacts/stage9277_continuation_bridge_denoise_manifest/continuation_bridge_denoise_manifest.jsonl",
+  "manifest_sha256": "859c3a5a4f2d76577be62bfd9bff3102fa9562b7b4a9045fa53bf76727b08d56",
+  "max_generation_rows": 13,
+  "max_generation_tokens": 96,
+  "mode": "denoise_repair_probe",
+  "model_execution_attempted": false,
+  "passed": true,
+  "probe_scale": "target_100m",
+  "row_ids": [
+    "stage9277_bridge_denoise_repetition_000_93c9428fa637",
+    "stage9277_bridge_denoise_repetition_001_1a4d4df39358",
+    "stage9277_bridge_denoise_repetition_002_1080d4b88be4",
+    "stage9277_bridge_denoise_repetition_003_9abedc8b378a",
+    "stage9277_bridge_denoise_repetition_004_a0d24c74523e",
+    "stage9277_bridge_denoise_repetition_005_8ffa81f52a54",
+    "stage9277_bridge_eos_calibration_000_c606d22be1f8",
+    "stage9277_bridge_eos_calibration_001_fd99250ab59c",
+    "stage9277_bridge_eos_calibration_002_4b8cce1bb19b",
+    "stage9277_bridge_eos_calibration_003_93c9428fa637",
+    "stage9277_bridge_eos_calibration_004_1a4d4df39358",
+    "stage9277_bridge_eos_calibration_006_c96522bdb0dd",
+    "stage9277_bridge_eos_calibration_007_1080d4b88be4",
+    "stage9277_bridge_eos_calibration_008_eb5365e34136",
+    "stage9277_bridge_eos_calibration_009_9abedc8b378a",
+    "stage9277_bridge_eos_calibration_010_bad065b97c68",
+    "stage9277_bridge_eos_calibration_011_a0d24c74523e",
+    "stage9277_bridge_eos_calibration_012_78878b57bcc3",
+    "stage9277_bridge_eos_calibration_013_6cc657209191",
+    "stage9277_bridge_eos_calibration_014_426f28f6a7a6",
+    "stage9277_bridge_eos_calibration_015_8ffa81f52a54"
+  ],
+  "rows": 21,
+  "split_counts": {
+    "eval": 7,
+    "other": 0,
+    "strict_eval": 6,
+    "train": 8
+  },
+  "tokenizer_contract": {
+    "byte_fallback_used_when_unset": false,
+    "target_100m_vocab_size": 1506,
+    "tokenizer_config": "configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "tokenizer_hashlock": "configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "tokenizer_json": "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+  },
+  "unsafe_loss_row_examples": [],
+  "unsafe_loss_rows": 0,
+  "weights": {
+    "decoder_ce_weight": 0.0,
+    "denoise_weight": 1.0,
+    "eos_loss_weight": 4.0,
+    "structured_aux_weight": 0.0
+  }
+}
