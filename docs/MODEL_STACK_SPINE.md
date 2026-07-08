@@ -2660,3 +2660,10 @@ The schema only permits a design-only request for one of structured-policy, boun
 No family is selected by this stage and no authority is opened.
 
 Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
+
+## Stage9226 Explicit One-Family Request Schema Audit
+
+Stage9226 audits Stage9225 request validation with `12` negative cases. All unsafe request classes are rejected before any family-specific final audit can be instantiated.
+The audit opens no trainer/model/runtime/cleanup/mining/arxiv/checkpoint authority.
+
+Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
