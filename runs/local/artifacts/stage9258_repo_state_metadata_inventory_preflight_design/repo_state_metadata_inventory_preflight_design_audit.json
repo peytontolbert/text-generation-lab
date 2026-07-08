@@ -1,0 +1,61 @@
+{
+  "audit": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "failures": [],
+    "passed": true
+  },
+  "negative": {
+    "negative_cases": 5,
+    "negative_cases_rejected": 5,
+    "results": [
+      {
+        "case_id": "body_read_true",
+        "failures": [
+          "control_not_false:read_source_bodies_now"
+        ],
+        "rejected": true
+      },
+      {
+        "case_id": "arxiv_root_true",
+        "failures": [
+          "control_not_false:read_arxiv_now"
+        ],
+        "rejected": true
+      },
+      {
+        "case_id": "runtime_true",
+        "failures": [
+          "control_not_false:runtime_authorized_now"
+        ],
+        "rejected": true
+      },
+      {
+        "case_id": "absolute_arxiv_path",
+        "failures": [
+          "input_root_forbidden"
+        ],
+        "rejected": true
+      },
+      {
+        "case_id": "missing_hash",
+        "failures": [
+          "control_not_true:require_content_hash_without_reading_body"
+        ],
+        "rejected": true
+      }
+    ]
+  },
+  "passed": true
+}

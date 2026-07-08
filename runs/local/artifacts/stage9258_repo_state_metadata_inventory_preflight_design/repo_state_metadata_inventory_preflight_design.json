@@ -1,0 +1,109 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "controls": {
+    "body_emission_authorized_now": false,
+    "decoder_ce_authorized_now": false,
+    "metadata_only": true,
+    "model_execution_authorized_now": false,
+    "read_arxiv_now": false,
+    "read_source_bodies_now": false,
+    "require_content_hash_without_reading_body": true,
+    "require_opaque_ids": true,
+    "require_safe_cleanup_single_entrypoint": true,
+    "require_symlink_boundary_check": true,
+    "runtime_authorized_now": false,
+    "training_authorized_now": false,
+    "write_arxiv_now": false
+  },
+  "denied_operations": [
+    "read_source_body",
+    "read_arxiv_repository_body",
+    "write_arxiv",
+    "execute_runtime",
+    "run_tests",
+    "emit_decoder_text",
+    "train_model",
+    "export_checkpoint",
+    "follow_symlink_outside_repo_root",
+    "delete_any_path"
+  ],
+  "design_status": "NO_EXECUTION_METADATA_ONLY_PREFLIGHT",
+  "input_root": "future:explicit_repo_root_not_arxiv",
+  "inventory_fields": [
+    "repo_id",
+    "commit_hash",
+    "path_id",
+    "relative_path_hash",
+    "file_extension",
+    "language_hint",
+    "size_bytes",
+    "mtime_bucket",
+    "content_sha256",
+    "candidate_extractors",
+    "cache_layers_requested",
+    "body_read_authorized",
+    "runtime_authorized",
+    "arxiv_root_access_authorized"
+  ],
+  "negative_cases": [
+    {
+      "case_id": "body_read_true",
+      "expected_rejection": "read_source_bodies_now",
+      "patch": {
+        "read_source_bodies_now": true
+      }
+    },
+    {
+      "case_id": "arxiv_root_true",
+      "expected_rejection": "read_arxiv_now",
+      "patch": {
+        "read_arxiv_now": true
+      }
+    },
+    {
+      "case_id": "runtime_true",
+      "expected_rejection": "runtime_authorized_now",
+      "patch": {
+        "runtime_authorized_now": true
+      }
+    },
+    {
+      "case_id": "absolute_arxiv_path",
+      "expected_rejection": "input_root_forbidden",
+      "patch": {
+        "input_root": "/arxiv/repositories"
+      }
+    },
+    {
+      "case_id": "missing_hash",
+      "expected_rejection": "require_content_hash_without_reading_body",
+      "patch": {
+        "require_content_hash_without_reading_body": false
+      }
+    }
+  ],
+  "output_root": "runs/local/artifacts/repo_state_metadata_inventory/<run_id>/",
+  "preflight_outputs": [
+    "metadata_inventory_rows.jsonl",
+    "inventory_cell_card.json",
+    "extractor_plan_without_body_reads.json",
+    "cache_key_preview.jsonl",
+    "blocked_operations_card.json"
+  ],
+  "purpose": "Design the first real repo-state compiler inventory preflight while keeping source-body reads and /arxiv access closed.",
+  "source_stage": 9257,
+  "stage": 9258,
+  "stage_name": "stage9258_repo_state_metadata_inventory_preflight_design"
+}
