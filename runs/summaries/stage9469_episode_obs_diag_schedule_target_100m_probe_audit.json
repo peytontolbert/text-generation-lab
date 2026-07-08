@@ -1,0 +1,108 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9469_episode_obs_diag_schedule_target_100m_probe/stage9469_schedule_probe_audit.json",
+    "doc": "docs/EPISODE_OBS_DIAG_SCHEDULE_TARGET_100M_PROBE_AUDIT_STAGE9469.md",
+    "execution_result": "runs/local/artifacts/stage9469_episode_obs_diag_schedule_target_100m_probe/execution_result.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T23:00:47Z",
+  "decision": "Stage9469 executed safely and fixed strict residual but failed eval success; no further execution is authorized by this audit.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "The 96-step full-manifest schedule fixed strict residual exactness but overcorrected eval success outcome/value with low margins. Next stage should add balanced eval/strict support or checkpoint-selection/early-stop telemetry rather than opening decoder CE.",
+    "estimated_parameter_count": 102703145,
+    "eval_field_exact": {
+      "episode_failure_type": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_repair_outcome": {
+        "exact": 0.0,
+        "rows": 1
+      },
+      "episode_step_value": {
+        "exact": 0.0,
+        "rows": 1
+      }
+    },
+    "eval_joint_proxy_exact": 0.3333333333333333,
+    "eval_rows": 1,
+    "failures": [
+      "quality_gate_not_passed"
+    ],
+    "final_checkpoint_exported": false,
+    "gemma_executed": false,
+    "gemma_execution_authorized_next": false,
+    "harness_executed": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_rows": 0,
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "passed": false,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_passed": false,
+    "required_artifacts_written": true,
+    "runtime_authorized": false,
+    "runtime_executed": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9468_episode_obs_diag_schedule_target_100m_preflight_audit",
+    "strict_field_exact": {
+      "episode_failure_type": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_repair_outcome": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_step_value": {
+        "exact": 1.0,
+        "rows": 1
+      }
+    },
+    "strict_joint_proxy_exact": 1.0,
+    "strict_rows": 1,
+    "train_rows": 48,
+    "wrong_by_split_field": {
+      "eval::episode_repair_outcome": 1,
+      "eval::episode_step_value": 1
+    }
+  },
+  "name": "stage9469_episode_obs_diag_schedule_target_100m_probe_audit",
+  "next_best_step": "Build Stage9470 balanced validation/checkpoint-selection design for observation diagnosis before another target-100M execution.",
+  "passed": false,
+  "stage": 9469,
+  "stage_name": "stage9469_episode_obs_diag_schedule_target_100m_probe_audit"
+}
