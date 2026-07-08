@@ -27,6 +27,11 @@ DEFAULT_STRUCTURED_HEAD_DIMS: dict[str, int] = {
     "patch_operator": 12,
     "verifier_repair": 9,
     "suffix_choice": 32,
+    "episode_repair_outcome": 4,
+    "episode_failure_type": 12,
+    "episode_boundary_match": 2,
+    "episode_target_prefix_match": 2,
+    "episode_step_value": 2,
 }
 
 

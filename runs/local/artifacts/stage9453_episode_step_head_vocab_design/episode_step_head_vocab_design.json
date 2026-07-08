@@ -1,0 +1,83 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "decoder_ce_reopened": false,
+  "denoise_ce_reopened": false,
+  "failures": [],
+  "head_contract": {
+    "episode_boundary_match": {
+      "head_dim": 2,
+      "kind": "classification",
+      "labels": [
+        "false",
+        "true"
+      ],
+      "loss_key": "episode_boundary_match_ce"
+    },
+    "episode_failure_type": {
+      "head_dim": 12,
+      "kind": "classification",
+      "labels": [
+        "none",
+        "not_exact",
+        "target_prefix_miss",
+        "boundary_next_token_miss",
+        "degenerate_repetition",
+        "unterminated",
+        "not_contentful",
+        "compound_failure"
+      ],
+      "loss_key": "episode_failure_type_ce"
+    },
+    "episode_repair_outcome": {
+      "head_dim": 4,
+      "kind": "classification",
+      "labels": [
+        "successful_suffix_repair_step",
+        "residual_suffix_repair_step"
+      ],
+      "loss_key": "episode_repair_outcome_ce"
+    },
+    "episode_step_value": {
+      "head_dim": 2,
+      "implementation_note": "Use classification proxy first unless scalar regression plumbing is added separately.",
+      "kind": "scalar_regression_or_two_class_proxy",
+      "labels": [
+        "0.0",
+        "1.0"
+      ],
+      "loss_key": "episode_step_value_mse"
+    },
+    "episode_target_prefix_match": {
+      "head_dim": 2,
+      "kind": "classification",
+      "labels": [
+        "false",
+        "true"
+      ],
+      "loss_key": "episode_target_prefix_match_ce"
+    }
+  },
+  "passed": true,
+  "required_code_changes_next": [
+    "add default structured head dims for episode_* fields",
+    "map episode_* loss keys to fields in training_loop",
+    "derive clean values from episode_transition for episode_* fields",
+    "keep episode_step_denoise_contract_only no-loss mode unchanged",
+    "add trainable mode only after leakage and baseline audits"
+  ],
+  "runtime_reopened": false,
+  "source_stage": "stage9452_episode_step_loss_key_registry_audit",
+  "training_remains_closed": true
+}

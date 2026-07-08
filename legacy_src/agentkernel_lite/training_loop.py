@@ -80,6 +80,11 @@ STRUCTURED_LOSS_TO_FIELD = {
     "patch_operator_ce": "patch_operator",
     "verifier_repair_ce": "verifier_repair",
     "suffix_choice_ce": "suffix_choice",
+    "episode_repair_outcome_ce": "episode_repair_outcome",
+    "episode_failure_type_ce": "episode_failure_type",
+    "episode_boundary_match_ce": "episode_boundary_match",
+    "episode_target_prefix_match_ce": "episode_target_prefix_match",
+    "episode_step_value_mse": "episode_step_value",
 }
 
 
@@ -796,7 +801,35 @@ def _target_text(row: dict[str, Any]) -> str:
     return str(target.get("decoder_text") or row.get("decoder_text") or target.get("target_ref") or row.get("target_ref") or "")
 
 
+def _episode_step_value(row: dict[str, Any], field: str) -> str | None:
+    transition = row.get("episode_transition") if isinstance(row.get("episode_transition"), dict) else {}
+    observation = transition.get("observation_t") if isinstance(transition.get("observation_t"), dict) else {}
+    verifier = transition.get("reward_or_verifier") if isinstance(transition.get("reward_or_verifier"), dict) else {}
+    next_state = transition.get("state_t_plus_1") if isinstance(transition.get("state_t_plus_1"), dict) else {}
+    if field == "episode_repair_outcome":
+        value = next_state.get("repair_outcome")
+    elif field == "episode_failure_type":
+        value = verifier.get("failure_type")
+        if not value:
+            reasons = observation.get("residual_reasons")
+            value = "none" if not reasons else ("compound_failure" if isinstance(reasons, list) and len(reasons) > 1 else str(reasons[0] if isinstance(reasons, list) else reasons))
+    elif field == "episode_boundary_match":
+        value = observation.get("boundary_next_token_match")
+    elif field == "episode_target_prefix_match":
+        value = observation.get("target_prefix_match")
+    elif field == "episode_step_value":
+        reward = verifier.get("reward")
+        value = "1.0" if float(reward or 0.0) >= 0.5 else "0.0"
+    else:
+        return None
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    return None if value is None else str(value)
+
+
 def _clean_value(row: dict[str, Any], field: str) -> str | None:
+    if field.startswith("episode_"):
+        return _episode_step_value(row, field)
     clean = row.get("clean_state") if isinstance(row.get("clean_state"), dict) else {}
     target = row.get("target") if isinstance(row.get("target"), dict) else {}
     value = clean.get(field, target.get(field, row.get(field)))

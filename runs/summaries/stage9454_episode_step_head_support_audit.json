@@ -1,0 +1,99 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9454_episode_step_head_support_audit/episode_step_head_support_audit.json",
+    "doc": "docs/EPISODE_STEP_HEAD_SUPPORT_AUDIT_STAGE9454.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T22:24:40Z",
+  "decision": "Static episode-step head support exists, but training remains closed pending a manifest/loss-mask enablement audit.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "contract_only_allowed_losses": [],
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_reopened": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_reopened": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "labels_by_field": {
+      "episode_boundary_match": [
+        "false",
+        "true"
+      ],
+      "episode_failure_type": [
+        "none",
+        "not_exact+target_prefix_miss",
+        "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+        "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated"
+      ],
+      "episode_repair_outcome": [
+        "residual_suffix_repair_step",
+        "successful_suffix_repair_step"
+      ],
+      "episode_step_value": [
+        "0.0",
+        "1.0"
+      ],
+      "episode_target_prefix_match": [
+        "false",
+        "true"
+      ]
+    },
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "required_dims": {
+      "episode_boundary_match": 2,
+      "episode_failure_type": 12,
+      "episode_repair_outcome": 4,
+      "episode_step_value": 2,
+      "episode_target_prefix_match": 2
+    },
+    "required_map": {
+      "episode_boundary_match_ce": "episode_boundary_match",
+      "episode_failure_type_ce": "episode_failure_type",
+      "episode_repair_outcome_ce": "episode_repair_outcome",
+      "episode_step_value_mse": "episode_step_value",
+      "episode_target_prefix_match_ce": "episode_target_prefix_match"
+    },
+    "rows_checked": 50,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9453_episode_step_head_vocab_design",
+    "training_authorized_now": false
+  },
+  "name": "stage9454_episode_step_head_support_audit",
+  "next_best_step": "Build an episode-step trainable manifest with only episode_* losses enabled, then audit shortcut leakage and decoder CE closure before any preexecution authorization.",
+  "passed": true,
+  "stage": 9454,
+  "stage_name": "stage9454_episode_step_head_support_audit"
+}
