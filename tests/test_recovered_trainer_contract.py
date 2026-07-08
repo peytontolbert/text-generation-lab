@@ -231,7 +231,11 @@ def test_contract_records_recovered_target_100m_model_config_without_execution(t
     manifest = tmp_path / "manifest.jsonl"
     write_manifest(manifest)
     model_config = ROOT / "configs" / "model" / "agentkernel_100m_seq2seq_recovered_target.json"
-    tok_json, tok_cfg, hashlock = write_hashlocked_tokenizer_files(tmp_path)
+    pointer = json.loads((ROOT / "configs" / "tokenizer" / "agentkernel_bpe_1506_recovered_pointer.json").read_text())
+    repo_local = pointer["repo_local_paths"]
+    tok_json = ROOT / repo_local["tokenizer_json"]
+    tok_cfg = ROOT / repo_local["tokenizer_config"]
+    hashlock = ROOT / "configs" / "tokenizer" / "agentkernel_bpe_1506_recovered_pointer.json"
     cmd = base_cmd(tmp_path, manifest) + [
         "--probe-scale",
         "target_100m",
