@@ -1,0 +1,138 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "name": "stage9379_bounded_decoder_ce_readiness_bridge",
+  "next_probe_contract": {
+    "batch_size": 2,
+    "decoder_ce_weight": 1.0,
+    "denoise_weight": 0.0,
+    "eos_loss_weight": 4.0,
+    "implementation": "transformer",
+    "learning_rate": 1e-05,
+    "manifest": "runs/local/artifacts/stage9249_semantic_bounded_decoder_target_repair_package/semantic_bounded_decoder_target_repair_manifest.jsonl",
+    "max_decoder_tokens": 768,
+    "max_encoder_tokens": 256,
+    "max_eval_rows": 16,
+    "max_generation_rows": 16,
+    "max_generation_tokens": 96,
+    "max_steps": 16,
+    "max_strict_rows": 16,
+    "max_train_rows": 32,
+    "mode": "bounded_decoder_ce_probe",
+    "probe_scale": "target_100m",
+    "required_telemetry": [
+      "probe_contract_audit.json",
+      "loss_by_step.jsonl",
+      "eval_loss_by_checkpoint.jsonl",
+      "row_token_loss.jsonl",
+      "row_gradient_norms.jsonl",
+      "boundary_next_token_logits.jsonl",
+      "sample_generation_audit.json",
+      "short_output_probe.json",
+      "repetition_probe.json",
+      "internal_leak_probe.json",
+      "module_delta_norms.json",
+      "cleanup_proof.json"
+    ],
+    "stage": 9380,
+    "structured_aux_weight": 0.0
+  },
+  "purpose": "Bridge the passed denoise repair loop back to bounded decoder CE readiness without opening decoder CE execution.",
+  "readiness_claim": {
+    "bounded_decoder_candidate_package_available": true,
+    "decoder_ce_training_authorized_now": false,
+    "denoise_failure_loop_resolved": true,
+    "execution_authorized_now": false,
+    "fresh_preexecution_required": true,
+    "model_execution_authorized_now": false,
+    "trainer_contract_available": true
+  },
+  "source_evidence": {
+    "bounded_decoder_failure_source": {
+      "contentful_generation_rate": 0.0625,
+      "degenerate_repetition_rate": 0.375,
+      "failure_buckets": {
+        "degenerate_repetition": 6,
+        "internal_leak": 0,
+        "prefix_miss": 16,
+        "short_or_junk": 0,
+        "unterminated_generation": 15
+      },
+      "passed_safety": true,
+      "quality_gate_passed": false,
+      "summary": "runs/summaries/stage9266_stage9265_stabilized_probe_diagnostic_audit.json",
+      "target_prefix_match_rate": 0.0,
+      "unterminated_generation_rate": 0.9375
+    },
+    "bounded_decoder_package": {
+      "authority_rows": 0,
+      "first_token_dominance_rate": 0.28125,
+      "language_counts": {
+        "cpp": 16,
+        "python": 16,
+        "rust": 16,
+        "web_js_ts_html": 16
+      },
+      "loss_counts": {
+        "decoder_ce": 64
+      },
+      "over_cap_rows": 0,
+      "passed": true,
+      "rows": 64,
+      "split_counts": {
+        "eval": 16,
+        "strict_eval": 16,
+        "train": 32
+      },
+      "summary": "runs/summaries/stage9249_semantic_bounded_decoder_target_repair_package.json",
+      "unsafe_loss_rows": 0
+    },
+    "denoise_rejoin": {
+      "boundary_next_token_match_rows": 276,
+      "contentful_rows": 276,
+      "degenerate_repetition_rows": 0,
+      "exact_match_rows": 276,
+      "generated_internal_token_rows": 0,
+      "generated_rows": 276,
+      "passed": true,
+      "short_or_junk_rows": 0,
+      "summary": "runs/summaries/stage9378_full_rejoin_probe_audit.json"
+    },
+    "denoise_seed": {
+      "eos_calibration_rows": 15,
+      "passed": true,
+      "repair_rows": 6,
+      "summary": "runs/summaries/stage9267_repetition_to_denoise_repair_manifest.json"
+    },
+    "prior_contract_preflight": {
+      "decoder_ce_rows": 64,
+      "decoder_ce_weight": 1.0,
+      "eos_loss_weight": 4.0,
+      "manifest_sha256": "e9cf97f57f92b710e01b72350178c557a5ca7e05dbb44c7a29a8a7aedce8d06b",
+      "model_execution_attempted": false,
+      "passed": true,
+      "rows": 64,
+      "summary": "runs/summaries/stage9263_stabilized_bounded_decoder_contract_preflight.json"
+    },
+    "trainer_loss_mask_readiness": {
+      "over_cap_rows": 0,
+      "passed": true,
+      "summary": "runs/summaries/stage8954_bounded_decoder_trainer_loss_mask_readiness_refresh.json",
+      "trainer_missing_required_flags": 0,
+      "trainer_missing_runtime_guard_strings": 0,
+      "unsafe_loss_rows": 0
+    }
+  },
+  "stage": 9379
+}
