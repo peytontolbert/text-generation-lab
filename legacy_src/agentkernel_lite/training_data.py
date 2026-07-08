@@ -101,6 +101,13 @@ def _row_text(row: dict[str, Any]) -> str:
     if isinstance(row.get("verifier_failure"), str):
         parts.append(f"verifier_failure={row.get('verifier_failure')}")
     _append_structured(parts, "state", state)
+    transition = row.get("episode_transition") if isinstance(row.get("episode_transition"), dict) else {}
+    # Episode-step rows expose only pre-action state/action context to the encoder.
+    # Observation, verifier/reward, and state_t_plus_1 are targets/telemetry and must stay hidden.
+    episode_state = transition.get("state_t") if isinstance(transition.get("state_t"), dict) else {}
+    episode_action = transition.get("action_t") if isinstance(transition.get("action_t"), dict) else {}
+    _append_structured(parts, "episode.state", episode_state)
+    _append_structured(parts, "episode.action", episode_action)
     model_input = row.get("model_input") if isinstance(row.get("model_input"), dict) else {}
     _append_structured(parts, "model", model_input)
     query = row.get("query") if isinstance(row.get("query"), dict) else {}
