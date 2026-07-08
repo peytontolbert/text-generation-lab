@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import hashlib
+import json
+import time
+from pathlib import Path
+from typing import Any
+
+try:
+    from diagnostic_ticket_contract import AUTHORITY_CLOSED
+except ModuleNotFoundError:  # pragma: no cover
+    from scripts.diagnostic_ticket_contract import AUTHORITY_CLOSED  # type: ignore
+
+ROOT = Path(__file__).resolve().parents[1]
+STAGE = 9288
+NAME = "stage9288_train_generation_memorization_preexecution"
+SOURCE_SUMMARY = ROOT / "runs/summaries/stage9287_generation_audit_split_selector_patch_audit.json"
+MANIFEST = ROOT / "runs/local/artifacts/stage9282_suffix_step_micro_overfit_manifest/suffix_step_micro_overfit_manifest.jsonl"
+OUTPUT_DIR = ROOT / "runs/local/artifacts/stage9289_train_generation_memorization_probe"
+OUT_DIR = ROOT / "runs/local/artifacts" / NAME
+AUDIT = OUT_DIR / "train_generation_memorization_preexecution_audit.json"
+COMMAND_JSON = OUT_DIR / "stage9289_train_generation_memorization_probe_command.json"
+SUMMARY = ROOT / "runs/summaries" / f"{NAME}.json"
+DOC = ROOT / "docs" / "TRAIN_GENERATION_MEMORIZATION_PREEXECUTION_STAGE9288.md"
+REGISTRY = ROOT / "runs/local/artifacts/reconstructed_stage_registry.json"
+TRAINER = ROOT / "legacy_src/scripts/train_agentkernel_lite_encdec.py"
+MODEL_CONFIG = ROOT / "configs/model/agentkernel_100m_seq2seq_recovered_target.json"
+TOKENIZER_JSON = ROOT / "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+TOKENIZER_CONFIG = ROOT / "configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+TOKENIZER_HASHLOCK = ROOT / "configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json"
+EXPECTED_MANIFEST_SHA = "afe99e19e26260bbb63976800741c78ad344b5c49e19d55c73f1c911a0594d64"
+
+AUTHORITY_RUN = dict(AUTHORITY_CLOSED)
+AUTHORITY_RUN["model_execution_authorized_next"] = True
+AUTHORITY_RUN["denoise_ce_training_authorized_next"] = True
+
+COMMAND = [
+    "conda", "run", "-n", "trellis", "python", str(TRAINER),
+    "--repo-root", str(ROOT), "--manifest", str(MANIFEST),
+    "--mode", "denoise_repair_probe", "--probe-scale", "target_100m", "--implementation", "transformer",
+    "--model-config", str(MODEL_CONFIG), "--tokenizer-json", str(TOKENIZER_JSON),
+    "--tokenizer-config", str(TOKENIZER_CONFIG), "--tokenizer-hashlock", str(TOKENIZER_HASHLOCK),
+    "--max-train-rows", "5", "--max-eval-rows", "1", "--max-strict-rows", "2",
+    "--max-steps", "16", "--batch-size", "2", "--learning-rate", "1e-5",
+    "--max-encoder-tokens", "256", "--max-decoder-tokens", "160",
+    "--decoder-ce-weight", "0.0", "--structured-aux-weight", "0.0", "--denoise-weight", "1.0", "--eos-loss-weight", "1.0",
+    "--enable-generation-audit", "--max-generation-rows", "8", "--max-generation-tokens", "64",
+    "--generation-prefix-field", "model_input.bridge_priming_span", "--generation-audit-splits", "train,eval,strict_eval",
+    "--require-loss-mask-enforcement-audit", "--no-final-checkpoint-export", "--cleanup-checkpoints-after-probe", "--skip-final-model-save", "1",
+    "--execution-authorized-for-recovery-probe", "--output-dir", str(OUTPUT_DIR), "--run-id", "stage9289_train_generation_memorization_probe",
+]
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()] if path.exists() else []
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else ""
+
+
+def has_pair(flag: str, value: str) -> bool:
+    return any(COMMAND[i] == flag and COMMAND[i + 1] == value for i in range(len(COMMAND) - 1))
+
+
+def audit() -> dict[str, Any]:
+    source = load_json(SOURCE_SUMMARY)
+    rows = load_jsonl(MANIFEST)
+    failures: list[str] = []
+    if source.get("passed") is not True:
+        failures.append("source_stage9287_not_passed")
+    if sha256(MANIFEST) != EXPECTED_MANIFEST_SHA:
+        failures.append("manifest_hash_mismatch")
+    if len(rows) != 8:
+        failures.append("manifest_row_count_not_8")
+    required_pairs = {
+        "--mode": "denoise_repair_probe", "--probe-scale": "target_100m", "--max-train-rows": "5",
+        "--max-eval-rows": "1", "--max-strict-rows": "2", "--max-steps": "16",
+        "--decoder-ce-weight": "0.0", "--denoise-weight": "1.0",
+        "--generation-prefix-field": "model_input.bridge_priming_span",
+        "--generation-audit-splits": "train,eval,strict_eval", "--output-dir": str(OUTPUT_DIR),
+    }
+    for flag, value in required_pairs.items():
+        if not has_pair(flag, value):
+            failures.append(f"missing_pair:{flag}={value}")
+    for flag in ["--execution-authorized-for-recovery-probe", "--require-loss-mask-enforcement-audit", "--no-final-checkpoint-export", "--cleanup-checkpoints-after-probe", "--enable-generation-audit"]:
+        if flag not in COMMAND:
+            failures.append(f"missing_flag:{flag}")
+    if not str(OUTPUT_DIR.resolve()).startswith(str((ROOT / "runs/local/artifacts").resolve())) or "/arxiv" in str(OUTPUT_DIR):
+        failures.append("unsafe_output_dir")
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "manifest_rows": len(rows),
+        "manifest_sha256": sha256(MANIFEST),
+        "command": COMMAND,
+        "command_ready": not failures,
+        "will_execute_now": False,
+        "authorized_next_stage": 9289,
+        "generation_audit_splits": "train,eval,strict_eval",
+        "authority": AUTHORITY_RUN if not failures else dict(AUTHORITY_CLOSED),
+    }
+
+
+def update_registry(summary: dict[str, Any]) -> None:
+    registry = load_json(REGISTRY) or {"rows": [], "metrics": {}}
+    rows = [row for row in registry.get("rows", []) if row.get("stage") != STAGE and row.get("stage_name") != NAME]
+    rows.append({"stage": STAGE, "stage_name": NAME, "passed": summary["passed"], "path": str(SUMMARY), "authority": summary["authority"], "next_best_step": summary["next_best_step"]})
+    rows = sorted(rows, key=lambda row: (int(row.get("stage", -1)), row.get("stage_name", "")))
+    authority_counts = {key: 0 for key in AUTHORITY_CLOSED}
+    for row in rows:
+        auth = row.get("authority") if isinstance(row.get("authority"), dict) else {}
+        for key in authority_counts:
+            authority_counts[key] += int(bool(auth.get(key, False)))
+    registry["rows"] = rows
+    registry["passed"] = summary["passed"]
+    registry["metrics"] = {**(registry.get("metrics") or {}), "latest_stage": STAGE, "latest_stage_name": NAME, "latest_stage_next_best_step": summary["next_best_step"], "max_stage": STAGE, "registry_rows": len(rows), "authority_counts": authority_counts}
+    REGISTRY.write_text(json.dumps(registry, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def main() -> None:
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    SUMMARY.parent.mkdir(parents=True, exist_ok=True)
+    DOC.parent.mkdir(parents=True, exist_ok=True)
+    card = audit()
+    AUDIT.write_text(json.dumps({k: v for k, v in card.items() if k != "command"}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    COMMAND_JSON.write_text(json.dumps({"command": COMMAND, "cwd": str(ROOT), "env": "trellis"}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    summary = {
+        "stage": STAGE, "stage_name": NAME, "name": NAME, "passed": card["passed"], "authority": card["authority"],
+        "metrics": {**{key: bool(card["authority"].get(key, False)) for key in AUTHORITY_CLOSED}, "command_ready": card["command_ready"], "will_execute_now": False, "authorized_next_stage": 9289, "manifest_rows": card["manifest_rows"], "generation_audit_splits": card["generation_audit_splits"], "failures": len(card["failures"])},
+        "artifacts": {"audit": str(AUDIT.relative_to(ROOT)), "command": str(COMMAND_JSON.relative_to(ROOT)), "doc": str(DOC.relative_to(ROOT))},
+        "decision": "Prepared a train/eval/strict generation memorization diagnostic command; not executed in this stage.",
+        "next_best_step": "Execute Stage9289 train-generation memorization probe under trellis, then audit whether train rows generate target suffixes.",
+        "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    }
+    SUMMARY.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    DOC.write_text("\n".join(["# Stage9288 Train Generation Memorization Preexecution", "", f"Passed: `{card['passed']}`", "Generation audit splits: `train,eval,strict_eval`", "Command artifact prepares Stage9289 but does not execute it.", ""]) , encoding="utf-8")
+    update_registry(summary)
+    print(json.dumps({"stage": STAGE, "passed": summary["passed"], "metrics": summary["metrics"]}, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()
