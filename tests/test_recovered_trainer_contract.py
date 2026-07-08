@@ -202,11 +202,12 @@ def test_tokenizer_contract_records_recovered_bpe_pointer(tmp_path: Path) -> Non
     write_manifest(manifest)
     tok_json = ROOT / "configs" / "tokenizer" / "agentkernel_bpe_1506_recovered_pointer.json"
     pointer = json.loads(tok_json.read_text())
+    repo_local = pointer.get("repo_local_paths") or pointer["primary_recovered_paths"]
     cmd = base_cmd(tmp_path, manifest) + [
         "--tokenizer-json",
-        pointer["primary_recovered_paths"]["tokenizer_json"],
+        str(ROOT / repo_local["tokenizer_json"] if not str(repo_local["tokenizer_json"]).startswith("/") else repo_local["tokenizer_json"]),
         "--tokenizer-config",
-        pointer["primary_recovered_paths"]["tokenizer_config"],
+        str(ROOT / repo_local["tokenizer_config"] if not str(repo_local["tokenizer_config"]).startswith("/") else repo_local["tokenizer_config"]),
         "--contract-only",
     ]
     result = subprocess.run(cmd, check=True, text=True, capture_output=True)
