@@ -377,14 +377,55 @@ def _generate_greedy_text(
     if generation_prefix_text:
         encoded_prefix = tokenizer.encode(str(generation_prefix_text), max_length=max_new_tokens + 2)
         prefix_ids = [idx for idx in encoded_prefix if idx not in {pad_id, bos_id, eos_id}]
+    target_ids = [idx for idx in tokenizer.encode(_target_text(row), max_length=max_new_tokens + len(prefix_ids) + 8) if idx not in {pad_id, bos_id, eos_id}]
+    expected_next_id = target_ids[len(prefix_ids)] if prefix_ids and target_ids[: len(prefix_ids)] == prefix_ids and len(target_ids) > len(prefix_ids) else None
     decoder_ids = torch.tensor([[bos_id] + prefix_ids], dtype=torch.long, device=batch.input_ids.device)
     generated_ids: list[int] = list(prefix_ids)
     eos_position = None
+    boundary_next_token: dict[str, Any] = {
+        "available": bool(prefix_ids and expected_next_id is not None),
+        "expected_token_id": expected_next_id,
+        "expected_token_text": tokenizer.decode([expected_next_id]) if expected_next_id is not None else "",
+        "generated_token_id": None,
+        "generated_token_text": "",
+        "match": False,
+        "expected_rank": None,
+        "expected_probability": None,
+        "top_k": [],
+    }
     model.eval()
     with torch.no_grad():
-        for _step in range(max(0, max_new_tokens - len(prefix_ids))):
+        for step_idx in range(max(0, max_new_tokens - len(prefix_ids))):
             out = model(batch.input_ids, decoder_ids)
-            next_id = int(torch.argmax(out["decoder_logits"][0, -1]).detach().cpu().item())
+            next_logits = out["decoder_logits"][0, -1].detach().float().cpu()
+            next_probs = torch.softmax(next_logits, dim=-1)
+            next_id = int(torch.argmax(next_logits).item())
+            if step_idx == 0:
+                top_count = min(10, int(next_logits.numel()))
+                top_probs, top_indices = torch.topk(next_probs, k=top_count)
+                boundary_next_token["generated_token_id"] = next_id
+                boundary_next_token["generated_token_text"] = tokenizer.decode([next_id])
+                boundary_next_token["match"] = bool(expected_next_id is not None and next_id == expected_next_id)
+                boundary_next_token["top_k"] = [
+                    {
+                        "token_id": int(token_idx.item()),
+                        "token_text": tokenizer.decode([int(token_idx.item())]),
+                        "probability": float(prob.item()),
+                        "logit": float(next_logits[int(token_idx.item())].item()),
+                    }
+                    for prob, token_idx in zip(top_probs, top_indices)
+                ]
+                if expected_next_id is not None:
+                    expected_prob = float(next_probs[int(expected_next_id)].item())
+                    expected_logit = float(next_logits[int(expected_next_id)].item())
+                    expected_rank = int((next_logits > next_logits[int(expected_next_id)]).sum().item()) + 1
+                    boundary_next_token.update(
+                        {
+                            "expected_rank": expected_rank,
+                            "expected_probability": expected_prob,
+                            "expected_logit": expected_logit,
+                        }
+                    )
             generated_ids.append(next_id)
             decoder_ids = torch.cat([decoder_ids, torch.tensor([[next_id]], dtype=torch.long, device=decoder_ids.device)], dim=1)
             if next_id == eos_id:
@@ -407,6 +448,7 @@ def _generate_greedy_text(
         "generation_prefix_text": str(generation_prefix_text),
         "generation_prefix_token_count": len(prefix_ids),
         "generation_prefix_start_match": bool(generation_prefix_text and text.startswith(str(generation_prefix_text))),
+        "boundary_next_token": boundary_next_token,
         "eos_position": eos_position,
         "stopped_on_eos": eos_position is not None,
         "empty_output": not stripped,
@@ -460,6 +502,13 @@ def _write_generation_audits(
     primed_rows = [row for row in samples if row.get("prefix_primed")]
     primed_start_rows = [row for row in samples if row.get("generation_prefix_start_match")]
     exact_rows = [row for row in samples if row["exact_match"]]
+    boundary_available_rows = [row for row in samples if (row.get("boundary_next_token") or {}).get("available")]
+    boundary_match_rows = [row for row in boundary_available_rows if (row.get("boundary_next_token") or {}).get("match")]
+    boundary_expected_ranks = [
+        int((row.get("boundary_next_token") or {}).get("expected_rank"))
+        for row in boundary_available_rows
+        if (row.get("boundary_next_token") or {}).get("expected_rank") is not None
+    ]
     sample_card = {
         "generated_rows": generated_rows,
         "max_generation_tokens": max_generation_tokens,
@@ -473,6 +522,10 @@ def _write_generation_audits(
         "generation_prefix_start_rows": len(primed_start_rows),
         "generation_prefix_start_rate": len(primed_start_rows) / generated_rows if generated_rows else None,
         "exact_match_rows": len(exact_rows),
+        "boundary_next_token_available_rows": len(boundary_available_rows),
+        "boundary_next_token_match_rows": len(boundary_match_rows),
+        "boundary_next_token_match_rate": len(boundary_match_rows) / len(boundary_available_rows) if boundary_available_rows else None,
+        "boundary_next_token_mean_expected_rank": sum(boundary_expected_ranks) / len(boundary_expected_ranks) if boundary_expected_ranks else None,
         "unterminated_rows": len(unterminated_rows),
         "unterminated_rate": len(unterminated_rows) / generated_rows if generated_rows else None,
         "samples": samples,
@@ -513,6 +566,19 @@ def _write_generation_audits(
         "generation_audit_enabled": True,
     }
     _write_json(output_dir / "sample_generation_audit.json", sample_card)
+    _write_jsonl_rows(
+        output_dir / "boundary_next_token_logits.jsonl",
+        [
+            {
+                "row_id": row["row_id"],
+                "split": row["split"],
+                "target_text": row["target_text"],
+                "generation_prefix_text": row.get("generation_prefix_text", ""),
+                **(row.get("boundary_next_token") or {}),
+            }
+            for row in samples
+        ],
+    )
     _write_json(output_dir / "short_output_probe.json", short_card)
     _write_json(output_dir / "repetition_probe.json", repetition_card)
     _write_json(output_dir / "internal_leak_probe.json", leak_card)
