@@ -28,6 +28,7 @@ SUPPORTED_MODES = (
     "verifier_repair_probe",
     "bounded_decoder_ce_probe",
     "denoise_repair_probe",
+    "episode_step_denoise_contract_only",
 )
 
 AUTHORITY_FLAGS = (
@@ -114,6 +115,7 @@ STRUCTURED_MODE_ALLOWED_LOSSES = {
     "patch_operator_probe": {"patch_operator_ce"},
     "verifier_repair_probe": {"verifier_repair_ce"},
     "denoise_repair_probe": {"denoise_ce"},
+    "episode_step_denoise_contract_only": set(),
 }
 
 
@@ -461,6 +463,7 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
         "model_execution_attempted": False,
+        "episode_step_contract_only_probe": bool(episode_step_contract_only_probe),
     }
 
 
@@ -482,6 +485,16 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         and rows
         and all(bool(row.get("candidate_only_no_loss")) for row in rows)
     )
+    episode_step_contract_only_probe = (
+        bool(getattr(args, "contract_only", False))
+        and args.mode == "episode_step_denoise_contract_only"
+        and int(getattr(args, "max_steps", 1)) == 0
+        and float(getattr(args, "decoder_ce_weight", 1.0)) == 0.0
+        and float(getattr(args, "structured_aux_weight", 1.0)) == 0.0
+        and float(getattr(args, "denoise_weight", 1.0)) == 0.0
+        and rows
+        and all(str(row.get("transition_schema")) == "episode_step_suffix_transition_v1" for row in rows)
+    )
 
     if not implementation_guard["allowed_for_recovered_100m_target"]:
         errors.extend(str(error) for error in implementation_guard["errors"])
@@ -492,7 +505,9 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         errors.append("non-denoise structured probes require --denoise-weight 0")
     if args.mode == "denoise_repair_probe" and args.denoise_weight <= 0 and not contract_only_no_loss_probe:
         errors.append("denoise repair probe requires --denoise-weight > 0")
-    if args.mode != "repo_graph_probe" and args.mode != "denoise_repair_probe" and args.structured_aux_weight <= 0:
+    if args.mode == "episode_step_denoise_contract_only" and not episode_step_contract_only_probe:
+        errors.append("episode-step denoise contract-only mode requires --contract-only, --max-steps 0, all weights 0, and episode_step_suffix_transition_v1 rows")
+    if args.mode not in {"repo_graph_probe", "denoise_repair_probe", "episode_step_denoise_contract_only"} and args.structured_aux_weight <= 0:
         errors.append("structured probe requires --structured-aux-weight > 0")
     if not args.require_loss_mask_enforcement_audit:
         errors.append("--require-loss-mask-enforcement-audit is required")
@@ -510,7 +525,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         enabled = {key for key, value in mask.items() if value}
         for key, value in mask.items():
             loss_counts[key] += int(value)
-        row_allows_no_loss = contract_only_no_loss_probe and bool(row.get("candidate_only_no_loss"))
+        row_allows_no_loss = (contract_only_no_loss_probe and bool(row.get("candidate_only_no_loss"))) or episode_step_contract_only_probe
         if not enabled and not row_allows_no_loss:
             unsafe_loss_rows.append({"row_id": row_id, "enabled_losses": []})
         forbidden = enabled - allowed_losses
