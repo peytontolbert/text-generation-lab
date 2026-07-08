@@ -431,20 +431,56 @@ def _module_delta_norms(before: dict[str, torch.Tensor], after: dict[str, torch.
     return out
 
 
-def _build_probe_model(implementation: str, *, vocab_size: int) -> tuple[torch.nn.Module, dict[str, Any]]:
+def _build_probe_model(
+    implementation: str,
+    *,
+    vocab_size: int,
+    probe_scale: str = "tiny_transformer",
+    model_config: Path | None = None,
+) -> tuple[torch.nn.Module, dict[str, Any]]:
     if implementation == "scaffold":
         return AgentKernelLiteSeq2Seq(AgentKernelLiteConfig(vocab_size=vocab_size)), {
             "implementation": "scaffold",
             "model_class": "AgentKernelLiteSeq2Seq",
             "probe_scale": "gru_scaffold",
             "vocab_size": vocab_size,
+            "full_100m_target_execution_authorized": False,
         }
     if implementation == "transformer":
-        from .modeling_transformer import AgentKernelLiteTransformerConfig, AgentKernelLiteTransformerSeq2Seq
+        from .modeling_transformer import (
+            AgentKernelLiteTransformerConfig,
+            AgentKernelLiteTransformerSeq2Seq,
+            estimate_transformer_parameter_count,
+        )
 
+        if probe_scale == "target_100m":
+            if model_config is None:
+                raise ValueError("target_100m probe scale requires model_config")
+            payload = json.loads(model_config.read_text(encoding="utf-8"))
+            config = AgentKernelLiteTransformerConfig.from_recovered_target_json(payload)
+            if int(config.vocab_size) != int(vocab_size):
+                raise ValueError(
+                    f"target_100m vocab mismatch: config={config.vocab_size} tokenizer={vocab_size}; "
+                    "pass the recovered 1506-token tokenizer"
+                )
+            return AgentKernelLiteTransformerSeq2Seq(config), {
+                "implementation": "transformer",
+                "model_class": "AgentKernelLiteTransformerSeq2Seq",
+                "probe_scale": "target_100m",
+                "model_config": str(model_config),
+                "vocab_size": vocab_size,
+                "d_model": config.d_model,
+                "d_ff": config.d_ff,
+                "n_layers": config.n_layers,
+                "n_heads": config.n_heads,
+                "estimated_parameter_count": estimate_transformer_parameter_count(config),
+                "full_100m_target_execution_authorized": True,
+            }
+        if probe_scale != "tiny_transformer":
+            raise ValueError(f"unsupported transformer probe scale: {probe_scale}")
         # Tiny execution probes verify the recovered transformer code path without
-        # allocating the full 100M target. Full-size target execution remains a
-        # separate authorization problem and should use the recovered target config.
+        # allocating the full 100M target. Full-size target execution requires
+        # --probe-scale target_100m plus the recovered target config/tokenizer.
         config = AgentKernelLiteTransformerConfig(
             vocab_size=vocab_size,
             d_model=64,
@@ -464,6 +500,7 @@ def _build_probe_model(implementation: str, *, vocab_size: int) -> tuple[torch.n
             "d_ff": config.d_ff,
             "n_layers": config.n_layers,
             "n_heads": config.n_heads,
+            "estimated_parameter_count": estimate_transformer_parameter_count(config),
             "full_100m_target_execution_authorized": False,
         }
     raise ValueError(f"unsupported implementation: {implementation}")
@@ -485,6 +522,8 @@ def run_bounded_decoder_ce_probe(
     learning_rate: float = 5e-5,
     seed: int = 1337,
     implementation: str = "scaffold",
+    probe_scale: str = "tiny_transformer",
+    model_config: Path | None = None,
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
 ) -> dict[str, Any]:
@@ -503,7 +542,12 @@ def run_bounded_decoder_ce_probe(
     from .training_data import load_tokenizer
 
     tokenizer = load_tokenizer(tokenizer_json, tokenizer_config)
-    model, implementation_card = _build_probe_model(implementation, vocab_size=tokenizer.vocab_size)
+    model, implementation_card = _build_probe_model(
+        implementation,
+        vocab_size=tokenizer.vocab_size,
+        probe_scale=probe_scale,
+        model_config=model_config,
+    )
     tokenizer_card = {
         "tokenizer_kind": getattr(tokenizer, "tokenizer_kind", "unknown"),
         "vocab_size": int(getattr(tokenizer, "vocab_size", 0)),
@@ -627,6 +671,8 @@ def run_structured_aux_probe(
     learning_rate: float = 5e-5,
     seed: int = 1337,
     implementation: str = "transformer",
+    probe_scale: str = "tiny_transformer",
+    model_config: Path | None = None,
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
 ) -> dict[str, Any]:
@@ -651,7 +697,12 @@ def run_structured_aux_probe(
     from .training_data import load_tokenizer
 
     tokenizer = load_tokenizer(tokenizer_json, tokenizer_config)
-    model, implementation_card = _build_probe_model(implementation, vocab_size=tokenizer.vocab_size)
+    model, implementation_card = _build_probe_model(
+        implementation,
+        vocab_size=tokenizer.vocab_size,
+        probe_scale=probe_scale,
+        model_config=model_config,
+    )
     for field, vocab in vocabs.items():
         head = getattr(model, "structured_heads", {}).get(field) if hasattr(model, "structured_heads") else None
         if head is None:

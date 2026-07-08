@@ -95,6 +95,8 @@ def test_recovered_trainer_help_exposes_stage8580_flags() -> None:
         "--batch-size",
         "--learning-rate",
         "--implementation",
+        "--probe-scale",
+        "--model-config",
         "--tokenizer-json",
         "--tokenizer-config",
     ]:
@@ -188,3 +190,34 @@ def test_tokenizer_contract_records_recovered_bpe_pointer(tmp_path: Path) -> Non
     assert card["passed"] is True
     assert card["tokenizer_contract"]["target_100m_vocab_size"] == 1506
     assert card["tokenizer_contract"]["byte_fallback_used_when_unset"] is False
+
+def test_contract_rejects_target_100m_without_model_config(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.jsonl"
+    write_manifest(manifest)
+    cmd = base_cmd(tmp_path, manifest) + ["--probe-scale", "target_100m", "--contract-only"]
+    result = subprocess.run(cmd, text=True, capture_output=True)
+    assert result.returncode == 1
+    card = json.loads(result.stdout)
+    assert card["passed"] is False
+    assert "--probe-scale target_100m requires --model-config" in card["errors"]
+
+
+def test_contract_records_recovered_target_100m_model_config_without_execution(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.jsonl"
+    write_manifest(manifest)
+    model_config = ROOT / "configs" / "model" / "agentkernel_100m_seq2seq_recovered_target.json"
+    cmd = base_cmd(tmp_path, manifest) + [
+        "--probe-scale",
+        "target_100m",
+        "--model-config",
+        str(model_config),
+        "--contract-only",
+    ]
+    result = subprocess.run(cmd, check=True, text=True, capture_output=True)
+    card = json.loads(result.stdout)
+    assert card["passed"] is True
+    assert card["model_execution_attempted"] is False
+    assert card["probe_scale"] == "target_100m"
+    assert card["implementation_contract"]["model_config"] == str(model_config)
+    assert card["implementation_contract"]["target_100m_requires_model_config"] is True
+

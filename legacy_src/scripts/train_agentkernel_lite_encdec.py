@@ -147,9 +147,25 @@ def parse_args() -> argparse.Namespace:
             "contract requires transformer; scaffold is retained only for legacy interface tests."
         ),
     )
+    parser.add_argument(
+        "--probe-scale",
+        choices=("tiny_transformer", "target_100m"),
+        default="tiny_transformer",
+        help=(
+            "Select runtime model scale for explicitly authorized probes. tiny_transformer is the "
+            "safe default for path validation; target_100m requires --model-config and the recovered "
+            "1506-token tokenizer."
+        ),
+    )
+    parser.add_argument(
+        "--model-config",
+        type=Path,
+        default=None,
+        help="Optional recovered 100M target model config JSON for --probe-scale target_100m.",
+    )
     parser.add_argument("--tokenizer-json", type=Path, default=None, help="Optional recovered tokenizer.json for authorized probes; default is byte fallback.")
     parser.add_argument("--tokenizer-config", type=Path, default=None, help="Optional tokenizer_config.json paired with --tokenizer-json.")
-    parser.add_argument("--execution-authorized-for-recovery-probe", action="store_true", help="Explicitly run the tiny recovered probe implementation. Requires all contract checks to pass.")
+    parser.add_argument("--execution-authorized-for-recovery-probe", action="store_true", help="Explicitly run the recovered probe implementation selected by --probe-scale. Requires all contract checks to pass.")
     parser.add_argument(
         "--contract-only",
         action="store_true",
@@ -214,6 +230,10 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
 
     if not implementation_guard["allowed_for_recovered_100m_target"]:
         errors.extend(str(error) for error in implementation_guard["errors"])
+    if args.probe_scale == "target_100m" and args.model_config is None:
+        errors.append("--probe-scale target_100m requires --model-config")
+    if args.model_config is not None and not args.model_config.is_file():
+        errors.append(f"model config does not exist: {args.model_config}")
     if args.decoder_ce_weight <= 0:
         errors.append("bounded decoder CE probe requires --decoder-ce-weight > 0")
     if args.structured_aux_weight != 0:
@@ -291,11 +311,14 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
             "denoise_weight": args.denoise_weight,
         },
         "implementation": str(getattr(args, "implementation", "transformer")),
+        "probe_scale": str(getattr(args, "probe_scale", "tiny_transformer")),
         "implementation_contract": {
             "target_implementation_guard": implementation_guard,
             "scaffold": bool(getattr(args, "implementation", "transformer") == "scaffold"),
             "transformer_module": "legacy_src/agentkernel_lite/modeling_transformer.py",
             "transformer_execution_requires_explicit_authorization": True,
+            "model_config": str(args.model_config) if args.model_config else None,
+            "target_100m_requires_model_config": args.probe_scale == "target_100m",
         },
         "tokenizer_contract": {
             "tokenizer_json": str(args.tokenizer_json) if args.tokenizer_json else None,
@@ -329,6 +352,10 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
 
     if not implementation_guard["allowed_for_recovered_100m_target"]:
         errors.extend(str(error) for error in implementation_guard["errors"])
+    if args.probe_scale == "target_100m" and args.model_config is None:
+        errors.append("--probe-scale target_100m requires --model-config")
+    if args.model_config is not None and not args.model_config.is_file():
+        errors.append(f"model config does not exist: {args.model_config}")
     if args.decoder_ce_weight != 0:
         errors.append("structured probes require --decoder-ce-weight 0")
     if args.mode != "denoise_repair_probe" and args.denoise_weight != 0:
@@ -411,11 +438,14 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
             "denoise_weight": args.denoise_weight,
         },
         "implementation": str(getattr(args, "implementation", "transformer")),
+        "probe_scale": str(getattr(args, "probe_scale", "tiny_transformer")),
         "implementation_contract": {
             "target_implementation_guard": implementation_guard,
             "scaffold": bool(getattr(args, "implementation", "transformer") == "scaffold"),
             "transformer_module": "legacy_src/agentkernel_lite/modeling_transformer.py",
             "transformer_execution_requires_explicit_authorization": True,
+            "model_config": str(args.model_config) if args.model_config else None,
+            "target_100m_requires_model_config": args.probe_scale == "target_100m",
         },
         "tokenizer_contract": {
             "tokenizer_json": str(args.tokenizer_json) if args.tokenizer_json else None,
@@ -523,6 +553,8 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
         max_decoder_tokens=args.max_decoder_tokens,
         learning_rate=args.learning_rate,
         implementation=args.implementation,
+        probe_scale=args.probe_scale,
+        model_config=args.model_config,
         tokenizer_json=args.tokenizer_json,
         tokenizer_config=args.tokenizer_config,
     )
