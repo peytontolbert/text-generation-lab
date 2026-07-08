@@ -1421,6 +1421,7 @@ def run_structured_aux_probe(
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
     eval_interval: int = 0,
+    restore_best_structured_state: bool = False,
 ) -> dict[str, Any]:
     """Run a tiny structured-head probe with native interpretability telemetry."""
     random.seed(seed)
@@ -1461,6 +1462,43 @@ def run_structured_aux_probe(
     optimizer = AdamW(model.parameters(), lr=learning_rate)
     model.train()
     row_dynamics: dict[str, dict[str, Any]] = {}
+
+    best_structured_state: dict[str, Any] | None = None
+    best_state_selection: dict[str, Any] = {
+        "enabled": bool(restore_best_structured_state),
+        "restored": False,
+        "selected_step": None,
+        "eval_joint_proxy_exact": None,
+        "strict_joint_proxy_exact": None,
+        "eval_loss": None,
+        "strict_loss": None,
+        "selection_score": None,
+        "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+        "checkpoint_exported": False,
+        "promotion_ready": False,
+    }
+
+    def maybe_record_best_structured_state(step: int, eval_record: dict[str, Any], strict_record: dict[str, Any]) -> None:
+        nonlocal best_structured_state
+        if not restore_best_structured_state:
+            return
+        if eval_record.get("joint_proxy_exact") != 1.0 or strict_record.get("joint_proxy_exact") != 1.0:
+            return
+        score = float(eval_record.get("loss", 0.0)) + float(strict_record.get("loss", 0.0))
+        previous = best_state_selection.get("selection_score")
+        if previous is not None and score >= float(previous):
+            return
+        best_structured_state = {name: value.detach().cpu().clone() for name, value in model.state_dict().items()}
+        best_state_selection.update(
+            {
+                "selected_step": int(step),
+                "eval_joint_proxy_exact": float(eval_record.get("joint_proxy_exact")),
+                "strict_joint_proxy_exact": float(strict_record.get("joint_proxy_exact")),
+                "eval_loss": float(eval_record.get("loss", 0.0)),
+                "strict_loss": float(strict_record.get("loss", 0.0)),
+                "selection_score": score,
+            }
+        )
 
     def structured_loss(batch_rows: list[dict[str, Any]], *, split: str, step: int | None = None) -> tuple[torch.Tensor, dict[str, float], dict[str, int], dict[str, list[dict[str, Any]]], list[dict[str, Any]]]:
         batch = build_batch(batch_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
@@ -1554,12 +1592,18 @@ def run_structured_aux_probe(
         _write_jsonl_rows(output_dir / "activation_summary.jsonl", activation_rows)
         _append_jsonl(output_dir / "loss_by_step.jsonl", {"step": step, "loss": float(loss.detach().item()), "grad_norm": float(grad_norm), "field_loss": field_loss, "field_correct": field_correct})
         if eval_interval and step % int(eval_interval) == 0:
-            checkpoint_eval_split("eval", eval_rows, step=step)
-            checkpoint_eval_split("strict_eval", strict_rows, step=step)
+            eval_record = checkpoint_eval_split("eval", eval_rows, step=step)
+            strict_record = checkpoint_eval_split("strict_eval", strict_rows, step=step)
+            maybe_record_best_structured_state(step, eval_record, strict_record)
 
     confusion: dict[str, dict[str, dict[str, int]]] = {}
     all_eval_records: list[dict[str, Any]] = []
     field_cell_totals: dict[str, dict[str, dict[str, int]]] = {}
+
+    if restore_best_structured_state and best_structured_state is not None:
+        model.load_state_dict(best_structured_state)
+        best_state_selection["restored"] = True
+    _write_json(output_dir / "best_structured_state_selection.json", best_state_selection)
 
     def eval_split(name: str, split_rows: list[dict[str, Any]]) -> dict[str, Any]:
         if not split_rows:
@@ -1640,6 +1684,7 @@ def run_structured_aux_probe(
         "fields": fields,
         "implementation": implementation_card,
         "eval": eval_card,
+        "best_state_selection": best_state_selection,
         "final_checkpoint_exported": False,
         "runtime_executed": False,
         "gemma_executed": False,

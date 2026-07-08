@@ -168,6 +168,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-encoder-tokens", type=_positive_int, default=256)
     parser.add_argument("--learning-rate", type=float, default=5e-5)
     parser.add_argument("--eval-interval", type=_positive_int, default=0, help="Optional structured-probe eval interval for checkpoint-selection telemetry; 0 disables interval eval.")
+    parser.add_argument(
+        "--restore-best-structured-state",
+        action="store_true",
+        help="Restore the best in-memory structured-probe state selected by interval eval; never exports or promotes a checkpoint.",
+    )
     parser.add_argument("--enable-generation-audit", action="store_true", help="Run bounded greedy generation quality audit after authorized bounded decoder CE probes.")
     parser.add_argument("--max-generation-rows", type=_positive_int, default=8)
     parser.add_argument("--max-generation-tokens", type=_positive_int, default=96)
@@ -526,6 +531,13 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         errors.append("--no-final-checkpoint-export is required")
     if args.skip_final_model_save != 1:
         errors.append("--skip-final-model-save 1 is required")
+    if args.restore_best_structured_state:
+        if args.eval_interval <= 0:
+            errors.append("--restore-best-structured-state requires --eval-interval > 0")
+        if args.max_eval_rows <= 0 or args.max_strict_rows <= 0:
+            errors.append("--restore-best-structured-state requires eval and strict row caps")
+        if not args.no_final_checkpoint_export or args.skip_final_model_save != 1:
+            errors.append("--restore-best-structured-state requires checkpoint export to remain disabled")
     errors.extend(validate_generation_prefix_contract(args, rows))
 
     for index, row in enumerate(rows):
@@ -599,6 +611,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
             "structured_aux_weight": args.structured_aux_weight,
             "denoise_weight": args.denoise_weight,
             "eval_interval": args.eval_interval,
+            "restore_best_structured_state": bool(args.restore_best_structured_state),
         },
         "implementation": str(getattr(args, "implementation", "transformer")),
         "probe_scale": str(getattr(args, "probe_scale", "tiny_transformer")),
@@ -727,7 +740,6 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
         max_encoder_tokens=args.max_encoder_tokens,
         max_decoder_tokens=args.max_decoder_tokens,
         learning_rate=args.learning_rate,
-        eval_interval=args.eval_interval,
         implementation=args.implementation,
         probe_scale=args.probe_scale,
         model_config=args.model_config,
@@ -755,7 +767,12 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             generation_audit_splits=args.generation_audit_splits,
         )
     elif args.mode in STRUCTURED_MODE_ALLOWED_LOSSES and args.mode != "repo_graph_probe":
-        result = run_structured_aux_probe(mode=args.mode, **common)
+        result = run_structured_aux_probe(
+            mode=args.mode,
+            eval_interval=args.eval_interval,
+            restore_best_structured_state=args.restore_best_structured_state,
+            **common,
+        )
     else:
         raise ProbeContractError(f"execution is not restored for mode: {args.mode}")
     _write_json(args.output_dir / "execution_result.json", result)
