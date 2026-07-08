@@ -13,12 +13,12 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9351,
-    "latest_stage_name": "stage9351_operator_terminal_probe_audit",
-    "latest_stage_next_best_step": "Merge the Stage9346 schema-normalized bridge rows plus Stage9349 operator-terminal rows back into the full mixture and run another closed rejoin probe before decoder CE.",
-    "max_stage": 9351,
+    "latest_stage": 9357,
+    "latest_stage_name": "stage9357_non_operator_residual_probe_audit",
+    "latest_stage_next_best_step": "Merge Stage9355 rows back into the full mixture and rerun a closed rejoin probe before any bounded decoder CE step.",
+    "max_stage": 9357,
     "min_stage": 8530,
-    "registry_rows": 841
+    "registry_rows": 847
   },
   "passed": true,
   "rows": [
@@ -16841,6 +16841,126 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9351_operator_terminal_probe_audit.json",
       "stage": 9351,
       "stage_name": "stage9351_operator_terminal_probe_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build Stage9353 preexecution and run a 122-row closed full-mixture rejoin probe before any decoder CE step.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9352_full_mixture_with_schema_and_terminal_repairs_manifest.json",
+      "stage": 9352,
+      "stage_name": "stage9352_full_mixture_with_schema_and_terminal_repairs_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": true,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": true,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Execute Stage9354 schema-terminal rejoin probe under trellis and audit whether the full mixture is clean enough to approach bounded decoder CE again.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9353_schema_terminal_rejoin_probe_preexecution.json",
+      "stage": 9353,
+      "stage_name": "stage9353_schema_terminal_rejoin_probe_preexecution"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build Stage9355 non-operator residual repair rows for dependency `patch inside`, numeric `preserves`, and file-path `localized edit`, then probe in isolation before another rejoin.",
+      "passed": false,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9354_schema_terminal_rejoin_probe_audit.json",
+      "stage": 9354,
+      "stage_name": "stage9354_schema_terminal_rejoin_probe_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build Stage9356 preexecution for a 32-row non-operator residual probe; keep decoder CE closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9355_non_operator_residual_repair_manifest.json",
+      "stage": 9355,
+      "stage_name": "stage9355_non_operator_residual_repair_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": true,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": true,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Execute Stage9357 non-operator residual probe under trellis and audit exactness before another full rejoin.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9356_non_operator_residual_probe_preexecution.json",
+      "stage": 9356,
+      "stage_name": "stage9356_non_operator_residual_probe_preexecution"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Merge Stage9355 rows back into the full mixture and rerun a closed rejoin probe before any bounded decoder CE step.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9357_non_operator_residual_probe_audit.json",
+      "stage": 9357,
+      "stage_name": "stage9357_non_operator_residual_probe_audit"
     }
   ]
 }
