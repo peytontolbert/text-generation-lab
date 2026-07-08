@@ -79,6 +79,7 @@ STRUCTURED_LOSS_TO_FIELD = {
     "edit_localization_ce": "edit_localization",
     "patch_operator_ce": "patch_operator",
     "verifier_repair_ce": "verifier_repair",
+    "suffix_choice_ce": "suffix_choice",
 }
 
 
@@ -1414,8 +1415,9 @@ def run_structured_aux_probe(
         probe_scale=probe_scale,
         model_config=model_config,
     )
+    structured_heads = getattr(model, "structured_heads", None)
     for field, vocab in vocabs.items():
-        head = getattr(model, "structured_heads", {}).get(field) if hasattr(model, "structured_heads") else None
+        head = structured_heads[field] if structured_heads is not None and field in structured_heads else None
         if head is None:
             raise ValueError(f"model implementation lacks structured head: {field}")
         if getattr(head, "out_features", 0) < len(vocab):

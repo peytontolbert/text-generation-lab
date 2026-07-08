@@ -1,0 +1,59 @@
+{
+  "artifacts": {
+    "diagnosis": "runs/local/artifacts/stage9420_balanced_suffix_choice_residual_diagnosis/balanced_suffix_choice_residual_diagnosis.json",
+    "doc": "docs/BALANCED_SUFFIX_CHOICE_RESIDUAL_DIAGNOSIS_STAGE9420.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T20:52:37Z",
+  "decision": "Balanced suffix-choice support improved control but left low-margin residual confusions requiring targeted contrastive rows.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "confusion_counts": {
+      "checked_symbol_evidence__keep_decision_compatible => localized_repair_step__keep_response": 2,
+      "expected_assertion_behavior__keep_value_small => localized_repair_step__keep_response": 1,
+      "repaired_state__keep_answer_focused => wrapper_plan__keep_answer_focused": 2,
+      "verified_patch_operator__use_repo => localized_repair_step__keep_response": 2
+    },
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "findings": [
+      "balanced_train_support_improves_suffix_choice_from_1_16_to_9_16_heldout",
+      "target_pair_improves_from_0_4_to_3_4",
+      "remaining_errors_are_low_confidence_small_margin",
+      "next_patch_should_add_contrastive_support_for_specific_confusion_pairs_not_more_generic_balance"
+    ],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "quality_passed": false,
+    "runtime_authorized": false,
+    "safety_preserved": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": 9419,
+    "suffix_choice_errors": 7,
+    "suffix_choice_records": 16,
+    "target_pair_exact_rows": 3,
+    "target_pair_rows": 4
+  },
+  "name": "stage9420_balanced_suffix_choice_residual_diagnosis",
+  "next_best_step": "Build targeted suffix-choice confusion repair rows for the four low-margin residual pairs.",
+  "passed": true,
+  "stage": 9420,
+  "stage_name": "stage9420_balanced_suffix_choice_residual_diagnosis"
+}

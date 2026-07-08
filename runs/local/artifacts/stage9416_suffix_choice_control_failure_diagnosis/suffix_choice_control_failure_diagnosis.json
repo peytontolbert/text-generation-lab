@@ -1,0 +1,105 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "findings": [
+    "suffix_choice_head_runtime_contract_is_fixed",
+    "suffix_choice_probe_is_safety_clean",
+    "suffix_choice_quality_fails_from_sparse_per_class_train_coverage",
+    "heldout_predictions_collapse_toward_generic_suffix_choice",
+    "next_manifest_should_balance_train_support_per_suffix_choice_class_before_generation_reconnect"
+  ],
+  "heldout_prediction_counts": {
+    "generic_suffix_choice": 15,
+    "wrapper_plan__keep_answer_focused": 1
+  },
+  "heldout_target_counts": {
+    "checked_symbol_evidence__keep_decision_compatible": 2,
+    "current_repair_invariant__do_not_introduce": 2,
+    "dependency_constraint__keep_output_limited": 1,
+    "expected_assertion_behavior__keep_value_small": 2,
+    "localized_edit_target__keep_path_reference": 2,
+    "localized_repair_step__keep_response": 1,
+    "repaired_state__keep_answer_focused": 2,
+    "verified_patch_operator__use_repo": 2,
+    "whitelist_patch__use_symbol": 1,
+    "wrapper_plan__keep_answer_focused": 1
+  },
+  "low_train_label_coverage": {
+    "checked_symbol_evidence__keep_decision_compatible": 1,
+    "current_repair_invariant__do_not_introduce": 1,
+    "dependency_constraint__keep_output_limited": 2,
+    "expected_assertion_behavior__keep_value_small": 1,
+    "localized_edit_target__keep_path_reference": 1,
+    "localized_repair_step__keep_response": 1,
+    "repaired_state__keep_answer_focused": 1,
+    "verified_patch_operator__use_repo": 1,
+    "whitelist_patch__use_symbol": 1,
+    "wrapper_plan__keep_answer_focused": 1
+  },
+  "passed": true,
+  "quality_passed": false,
+  "recommended_contract": {
+    "branch_from": "stage9413_suffix_choice_control_manifest",
+    "keep_closed": [
+      "decoder_ce",
+      "denoise_ce",
+      "runtime",
+      "gemma",
+      "harness",
+      "checkpoint_export"
+    ],
+    "minimum_train_support_per_choice": 4,
+    "next_patch_type": "balanced_suffix_choice_train_support_manifest",
+    "pass_gate": [
+      "eval_suffix_choice_exact >= 0.85",
+      "strict_suffix_choice_exact >= 0.85",
+      "target_pair_exact == 4/4",
+      "high_confidence_wrong_rows == 0"
+    ]
+  },
+  "safety_preserved": true,
+  "source_stage": 9415,
+  "split_label_counts": {
+    "eval": {
+      "current_repair_invariant__do_not_introduce": 1,
+      "dependency_constraint__keep_output_limited": 1,
+      "expected_assertion_behavior__keep_value_small": 1,
+      "localized_edit_target__keep_path_reference": 1,
+      "repaired_state__keep_answer_focused": 2,
+      "verified_patch_operator__use_repo": 2,
+      "wrapper_plan__keep_answer_focused": 1
+    },
+    "strict_eval": {
+      "checked_symbol_evidence__keep_decision_compatible": 2,
+      "current_repair_invariant__do_not_introduce": 1,
+      "expected_assertion_behavior__keep_value_small": 1,
+      "localized_edit_target__keep_path_reference": 1,
+      "localized_repair_step__keep_response": 1,
+      "whitelist_patch__use_symbol": 1
+    },
+    "train": {
+      "checked_symbol_evidence__keep_decision_compatible": 1,
+      "current_repair_invariant__do_not_introduce": 1,
+      "dependency_constraint__keep_output_limited": 2,
+      "expected_assertion_behavior__keep_value_small": 1,
+      "generic_suffix_choice": 4,
+      "localized_edit_target__keep_path_reference": 1,
+      "localized_repair_step__keep_response": 1,
+      "repaired_state__keep_answer_focused": 1,
+      "verified_patch_operator__use_repo": 1,
+      "whitelist_patch__use_symbol": 1,
+      "wrapper_plan__keep_answer_focused": 1
+    }
+  }
+}

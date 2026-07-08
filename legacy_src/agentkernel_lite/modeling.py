@@ -26,6 +26,7 @@ class AgentKernelLiteConfig:
         "blocked_import_policy": 4,
         "repo_dependency_policy": 5,
         "file_plan": 64,
+        "suffix_choice": 32,
     })
 
     @classmethod

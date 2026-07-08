@@ -106,6 +106,7 @@ STRUCTURED_MODE_ALLOWED_LOSSES = {
         "repo_dependency_policy_ce",
         "action_sequence_ce",
         "file_plan_ce",
+        "suffix_choice_ce",
     },
     "repo_graph_probe": set(),
     "symbol_binding_probe": {"symbol_binding_ce"},

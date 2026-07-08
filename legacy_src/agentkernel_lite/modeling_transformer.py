@@ -26,6 +26,7 @@ DEFAULT_STRUCTURED_HEAD_DIMS: dict[str, int] = {
     "edit_localization": 7,
     "patch_operator": 12,
     "verifier_repair": 9,
+    "suffix_choice": 32,
 }
 
 

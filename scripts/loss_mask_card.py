@@ -18,6 +18,7 @@ LOSS_KEYS = (
     "edit_localization_ce",
     "patch_operator_ce",
     "verifier_repair_ce",
+    "suffix_choice_ce",
     "decoder_ce",
     "denoise_ce",
     "runtime_reward",
