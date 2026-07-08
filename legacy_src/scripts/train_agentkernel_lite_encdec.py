@@ -463,7 +463,6 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
         "model_execution_attempted": False,
-        "episode_step_contract_only_probe": bool(episode_step_contract_only_probe),
     }
 
 
@@ -621,6 +620,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
         "model_execution_attempted": False,
+        "episode_step_contract_only_probe": bool(episode_step_contract_only_probe),
     }
 
 def validate_contract(args: argparse.Namespace, rows: list[dict[str, Any]]) -> dict[str, Any]:

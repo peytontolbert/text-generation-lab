@@ -37,6 +37,12 @@ LOSS_KEYS = [
     "edit_localization_ce",
     "patch_operator_ce",
     "verifier_repair_ce",
+    "suffix_choice_ce",
+    "episode_repair_outcome_ce",
+    "episode_failure_type_ce",
+    "episode_boundary_match_ce",
+    "episode_target_prefix_match_ce",
+    "episode_step_value_mse",
     "decoder_ce",
     "denoise_ce",
     "runtime_reward",
@@ -55,6 +61,12 @@ STRUCTURED_LOSSES = {
     "edit_localization_ce",
     "patch_operator_ce",
     "verifier_repair_ce",
+    "suffix_choice_ce",
+    "episode_repair_outcome_ce",
+    "episode_failure_type_ce",
+    "episode_boundary_match_ce",
+    "episode_target_prefix_match_ce",
+    "episode_step_value_mse",
 }
 
 

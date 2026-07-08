@@ -500,3 +500,95 @@ def test_denoise_contract_rejects_full_target_generation_prefix(tmp_path: Path) 
     assert result.returncode == 1
     card = json.loads(result.stdout)
     assert any(error.startswith("invalid generation prefix rows present") for error in card["errors"])
+
+
+def write_episode_step_manifest(path: Path) -> None:
+    authority = {
+        "model_execution_authorized_next": False,
+        "decoder_ce_training_authorized_next": False,
+        "runtime_authorized": False,
+        "source_emission_authorized": False,
+        "body_emission_authorized": False,
+        "gemma_execution_authorized_next": False,
+        "harness_execution_authorized_next": False,
+        "scoring_authorized_next": False,
+        "controller_complete_merge_authorized_next": False,
+        "promotion_ready": False,
+    }
+    rows = []
+    for index, split in enumerate(["train", "eval", "strict_eval"]):
+        rows.append(
+            {
+                "row_id": f"episode_step_{index}",
+                "split": split,
+                "transition_schema": "episode_step_suffix_transition_v1",
+                "episode_transition": {
+                    "state_t": {"active_generation_prefix_span": "Return the module reference"},
+                    "action_t": {"action": "REPAIR_SUFFIX_CONTINUATION"},
+                    "observation_t": {"boundary_next_token_match": index == 0},
+                    "reward_or_verifier": {"reward": 1.0 if index == 0 else 0.0},
+                    "state_t_plus_1": {"repair_outcome": "successful_suffix_repair_step" if index == 0 else "residual_suffix_repair_step"},
+                },
+                "loss_mask": {
+                    "decoder_ce": False,
+                    "denoise_ce": False,
+                    "runtime_reward": False,
+                    "episode_repair_outcome_ce": False,
+                    "episode_failure_type_ce": False,
+                    "episode_boundary_match_ce": False,
+                    "episode_target_prefix_match_ce": False,
+                    "episode_step_value_mse": False,
+                },
+                "authority": authority,
+            }
+        )
+    path.write_text("\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n", encoding="utf-8")
+
+
+def test_episode_step_contract_only_accepts_closed_loss_rows(tmp_path: Path) -> None:
+    manifest = tmp_path / "episode_steps.jsonl"
+    write_episode_step_manifest(manifest)
+    probe_repo = tmp_path / "repo"
+    probe_repo.mkdir(exist_ok=True)
+    cmd = [
+        sys.executable,
+        str(TRAINER),
+        "--repo-root",
+        str(probe_repo),
+        "--manifest",
+        str(manifest),
+        "--mode",
+        "episode_step_denoise_contract_only",
+        "--max-train-rows",
+        "1",
+        "--max-eval-rows",
+        "1",
+        "--max-strict-rows",
+        "1",
+        "--max-steps",
+        "0",
+        "--decoder-ce-weight",
+        "0.0",
+        "--structured-aux-weight",
+        "0.0",
+        "--denoise-weight",
+        "0.0",
+        "--require-loss-mask-enforcement-audit",
+        "--no-final-checkpoint-export",
+        "--cleanup-checkpoints-after-probe",
+        "--skip-final-model-save",
+        "1",
+        "--output-dir",
+        str(probe_repo / "runs" / "local" / "probes" / "stage9450"),
+        "--run-id",
+        "stage9450",
+        "--contract-only",
+    ]
+    result = subprocess.run(cmd, check=True, text=True, capture_output=True)
+    card = json.loads(result.stdout)
+    assert card["passed"] is True
+    assert card["mode"] == "episode_step_denoise_contract_only"
+    assert card["model_execution_attempted"] is False
+    assert card["episode_step_contract_only_probe"] is True
+    assert card["unsafe_loss_rows"] == 0
+    assert all(value == 0 for value in card["loss_counts"].values())
