@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "design": "runs/local/artifacts/stage9451_episode_step_denoise_objective_design/episode_step_denoise_objective_design.json",
+    "doc": "docs/EPISODE_STEP_DENOISE_OBJECTIVE_DESIGN_STAGE9451.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T22:12:40Z",
+  "decision": "Designed guarded episode-step supervision targets; no training or execution authority opened.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "execution_authorized": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "not_trainable_yet": {
+      "decoder_text": "do not reopen decoder CE from this manifest",
+      "runtime_reward": "runtime remains closed; reward is telemetry label only",
+      "target_suffix_choice": "do not expose as input; future head may predict from state only after shortcut audit"
+    },
+    "objective_name": "episode_step_denoise_supervision_v1",
+    "passed": true,
+    "promotion_ready": false,
+    "required_audits_before_any_execution": [
+      "loss-key registry update audit",
+      "episode-step target leakage audit",
+      "majority and single-feature baseline audit",
+      "train/eval/strict cell balance audit",
+      "high-confidence-wrong telemetry requirement",
+      "module-delta decoder guard"
+    ],
+    "required_new_loss_keys_before_training": [
+      "episode_repair_outcome_ce",
+      "episode_failure_type_ce",
+      "episode_boundary_match_ce",
+      "episode_target_prefix_match_ce",
+      "episode_step_value_mse"
+    ],
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9450_episode_step_denoise_contract_preflight_audit",
+    "trainable_targets_later_only_after_preexecution": {
+      "boundary_match_ce": "whether first post-prefix token matched expected target continuation",
+      "failure_type_ce": "none vs boundary_next_token_miss/target_prefix_miss/degenerate_repetition/unterminated combinations",
+      "repair_outcome_ce": "successful_suffix_repair_step vs residual_suffix_repair_step; classifier target only, not decoder text",
+      "step_value_regression": "verifier reward 1.0/0.0 from generation audit",
+      "target_prefix_match_ce": "whether generated continuation stayed on target prefix"
+    }
+  },
+  "name": "stage9451_episode_step_denoise_objective_design",
+  "next_best_step": "Patch the loss-key registry and loss-mask card for episode-step supervision keys, then audit that decoder CE remains closed.",
+  "passed": true,
+  "stage": 9451,
+  "stage_name": "stage9451_episode_step_denoise_objective_design"
+}
