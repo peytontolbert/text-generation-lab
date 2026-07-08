@@ -1,0 +1,93 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9404_second_span_support_interference_audit/second_span_support_interference_audit.json",
+    "doc": "docs/SECOND_SPAN_SUPPORT_INTERFERENCE_AUDIT_STAGE9404.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T19:55:37Z",
+  "decision": "Do not build on Stage9401/9403 second-span support as-is. It adds too much competing phrase mass and reintroduces repetition. Branch next work from the Stage9397/9399 basis instead.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decision": "Do not build on Stage9401/9403 second-span support as-is. It adds too much competing phrase mass and reintroduces repetition. Branch next work from the Stage9397/9399 basis instead.",
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "next_patch_contract": {
+      "avoid_source_basis": "stage9401_suffix_second_span_support_manifest",
+      "closed_authority": [
+        "decoder_ce",
+        "runtime",
+        "gemma",
+        "harness",
+        "source_body_emission",
+        "promotion"
+      ],
+      "first_target": "expected_assertion_behavior vs current_repair_invariant, because these still miss boundary token and confuse semantic route.",
+      "objective": "minimal_residual_phrase_disambiguation_manifest",
+      "row_strategy": "Add only one or two discriminative train rows for the worst residual class at a time, then probe; do not add broad multi-family support in one step.",
+      "source_basis": "stage9397_heldout_contrastive_suffix_support_manifest"
+    },
+    "passed": true,
+    "promotion_ready": false,
+    "regression_from_stage9399": {
+      "contentful_generation": "regressed; several outputs contain malformed interpolations",
+      "degenerate_repetition_rows": "0 -> 6",
+      "eval_loss": "improved numerically but generation quality regressed",
+      "heldout_exact_rows": "5/16 -> 0/16"
+    },
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": 9403,
+    "stage9403_boundary_by_split": {
+      "eval": 8,
+      "strict_eval": 4,
+      "train": 21
+    },
+    "stage9403_degenerate_repetition_rows": 6,
+    "stage9403_exact_by_split": {
+      "eval": 0,
+      "strict_eval": 0,
+      "train": 12
+    },
+    "stage9403_heldout_exact_rows": 0,
+    "stage9403_heldout_rows": 16,
+    "stage9403_leak_rows": 0,
+    "stage9403_short_or_junk_rows": 0,
+    "stage9403_unterminated_rows": 0
+  },
+  "name": "stage9404_second_span_support_interference_audit",
+  "next_best_step": "Build a minimal residual phrase-disambiguation manifest from the Stage9397/9399 basis, starting with expected_assertion_behavior vs current_repair_invariant.",
+  "passed": true,
+  "stage": 9404,
+  "stage_name": "stage9404_second_span_support_interference_audit"
+}
