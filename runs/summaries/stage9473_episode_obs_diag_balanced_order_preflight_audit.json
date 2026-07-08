@@ -1,0 +1,112 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9473_episode_obs_diag_balanced_order_target_100m_contract_preflight/stage9473_preflight_audit.json",
+    "contract": "runs/local/artifacts/stage9473_episode_obs_diag_balanced_order_target_100m_contract_preflight/probe_contract_audit.json",
+    "doc": "docs/EPISODE_OBS_DIAG_BALANCED_ORDER_PREFLIGHT_AUDIT_STAGE9473.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T23:08:44Z",
+  "decision": "Authorized only the next target-100M balanced-order observation-diagnosis probe if this preflight passes.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": true,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "caps": {
+      "max_decoder_tokens": 768,
+      "max_eval_rows": 1,
+      "max_steps": 96,
+      "max_strict_rows": 1,
+      "max_train_rows": 56
+    },
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "execution_authorized_for_next_stage": true,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_counts": {
+      "action_sequence_ce": 0,
+      "allowed_import_policy_ce": 0,
+      "blocked_import_policy_ce": 0,
+      "build_mode_ce": 0,
+      "decoder_ce": 0,
+      "denoise_ce": 0,
+      "edit_localization_ce": 0,
+      "episode_boundary_match_ce": 0,
+      "episode_failure_type_ce": 58,
+      "episode_repair_outcome_ce": 58,
+      "episode_step_value_mse": 58,
+      "episode_target_prefix_match_ce": 0,
+      "file_plan_ce": 0,
+      "patch_operator_ce": 0,
+      "repair_surface_ce": 0,
+      "repo_dependency_policy_ce": 0,
+      "runtime_reward": 0,
+      "suffix_choice_ce": 0,
+      "surface_role_ce": 0,
+      "symbol_binding_ce": 0,
+      "verifier_repair_ce": 0
+    },
+    "manifest_sha256": "fb2eeebd2d731c2a5aaed47028c0db94fcf95c7c8015fc479446474c18a2b91f",
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": true,
+    "passed": true,
+    "preflight_contract": "runs/local/artifacts/stage9473_episode_obs_diag_balanced_order_target_100m_contract_preflight/probe_contract_audit.json",
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "rows": 58,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9472_episode_obs_diag_balanced_order_manifest",
+    "split_counts": {
+      "eval": 1,
+      "other": 0,
+      "strict_eval": 1,
+      "train": 56
+    },
+    "tokenizer_contract": {
+      "byte_fallback_used_when_unset": false,
+      "target_100m_vocab_size": 1506,
+      "tokenizer_config": "configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "weights": {
+      "decoder_ce_weight": 0.0,
+      "denoise_weight": 0.0,
+      "eos_loss_weight": 1.0,
+      "eval_interval": 8,
+      "structured_aux_weight": 1.0
+    }
+  },
+  "name": "stage9473_episode_obs_diag_balanced_order_preflight_audit",
+  "next_best_step": "Run Stage9474 balanced-order observation-diagnosis probe under trellis, then audit eval/strict exactness and interval snapshots.",
+  "passed": true,
+  "stage": 9473,
+  "stage_name": "stage9473_episode_obs_diag_balanced_order_preflight_audit"
+}
