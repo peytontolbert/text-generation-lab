@@ -141,16 +141,19 @@ class MultiHeadAttention(nn.Module):
             cos, sin = self.rotary(q.shape[-2], device=q.device, dtype=q.dtype)
             q, k = apply_rotary(q, k, cos, sin)
         attn_mask = None
+        mask_dtype = q.dtype if q.dtype.is_floating_point else torch.float32
         if self.causal:
             t = q.shape[-2]
-            attn_mask = torch.ones((t, t), dtype=torch.bool, device=q.device).triu(1)
+            future_block = torch.ones((t, t), dtype=torch.bool, device=q.device).triu(1)
+            attn_mask = torch.zeros((t, t), dtype=mask_dtype, device=q.device).masked_fill(future_block, float("-inf"))
         if key_padding_mask is not None:
             padding_block = ~key_padding_mask.to(device=q.device, dtype=torch.bool)
             padding_block = padding_block[:, None, None, :]
+            padding_mask = torch.zeros(padding_block.shape, dtype=mask_dtype, device=q.device).masked_fill(padding_block, float("-inf"))
             if attn_mask is None:
-                attn_mask = padding_block
+                attn_mask = padding_mask
             else:
-                attn_mask = attn_mask[None, None, :, :] | padding_block
+                attn_mask = attn_mask[None, None, :, :] + padding_mask
         out = F.scaled_dot_product_attention(
             q,
             k,

@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9301_transformer_attention_mask_patch_audit/transformer_attention_mask_patch_audit.json",
+    "doc": "docs/TRANSFORMER_ATTENTION_MASK_PATCH_STAGE9301.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T14:13:06Z",
+  "decision": "Patched transformer attention to use additive -inf causal/padding masks for PyTorch SDPA, preventing teacher-forced future-token leakage from a backwards boolean mask.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "execution_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "has_causal_mask_test": true,
+    "has_padding_mask_test": true,
+    "missing_snippets": [],
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_boundary_match_rate": 0.3333333333333333,
+    "source_boundary_mean_expected_rank": 217.83333333333334,
+    "source_emission_authorized": false,
+    "source_stage": 9300,
+    "uses_additive_future_mask": true,
+    "uses_additive_padding_mask": true
+  },
+  "name": "stage9301_transformer_attention_mask_patch_audit",
+  "next_best_step": "Build a final pre-execution audit and rerun the six-row post-prefix boundary probe with corrected causal masking.",
+  "passed": true,
+  "stage": 9301,
+  "stage_name": "stage9301_transformer_attention_mask_patch_audit"
+}
