@@ -1,0 +1,187 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9400_suffix_second_span_residual_diagnosis/suffix_second_span_residual_diagnosis.json",
+    "doc": "docs/SUFFIX_SECOND_SPAN_RESIDUAL_DIAGNOSIS_STAGE9400.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T19:41:55Z",
+  "decision": "Recorded that Stage9399 improved heldout suffix recovery but left second-span continuation residuals.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Stage9399 support fixed first-token/boundary behavior for most heldout failures, but continuation after the boundary token remains under-supported.",
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "heldout_residual_by_split": {
+      "eval": 7,
+      "strict_eval": 4
+    },
+    "heldout_residual_by_target_family": {
+      "current repair invariant. Do not introduce an": 2,
+      "expected assertion behavior. Keep the value small": 2,
+      "localized edit target. Keep the path reference": 2,
+      "patch inside the whitelist. Use the symbol": 1,
+      "patch operator should update. Use the repo": 2,
+      "the repaired state. Keep the answer focused": 2
+    },
+    "heldout_residual_first_token_fixed_rows": 7,
+    "heldout_residual_rows": 11,
+    "model_execution_authorized_next": false,
+    "next_patch_contract": {
+      "audit_requirements": [
+        "heldout exact by split",
+        "boundary next-token by split",
+        "second-span family coverage",
+        "no target text in model_input"
+      ],
+      "do_not": [
+        "open decoder_ce",
+        "copy heldout row ids into model input",
+        "authorize runtime/gemma/harness",
+        "promote checkpoint"
+      ],
+      "objective": "suffix_second_span_support_manifest",
+      "train_support": "Add train-only analogous rows for the 7-word post-prefix target spans that still fail, especially patch operator/update, repaired state, localized edit target, current repair invariant, expected assertion behavior, checked symbol evidence."
+    },
+    "passed": true,
+    "promotion_ready": false,
+    "residual_examples": [
+      {
+        "boundary_next_token_match": false,
+        "expected_rank": 16,
+        "generated_text": "Select the small constant that preserves the checked sch ins",
+        "row_id": "stage9391_short_suffix_resolved_001_1df827ac6b67a3ee",
+        "split": "eval",
+        "target_family_7_words": "expected assertion behavior. Keep the value small",
+        "target_text": "Select the small constant that preserves the expected assertion behavior. Keep the value small"
+      },
+      {
+        "boundary_next_token_match": true,
+        "expected_rank": 1,
+        "generated_text": "Select the callable endpoint that the verified patch inside the response",
+        "row_id": "stage9391_short_suffix_resolved_007_49742e384786ed9c",
+        "split": "eval",
+        "target_family_7_words": "patch operator should update. Use the repo",
+        "target_text": "Select the callable endpoint that the verified patch operator should update. Use the repo"
+      },
+      {
+        "boundary_next_token_match": true,
+        "expected_rank": 1,
+        "generated_text": "Emit the local name that should receive the answer focused",
+        "row_id": "stage9391_short_suffix_resolved_010_14823e24635189a0",
+        "split": "eval",
+        "target_family_7_words": "the repaired state. Keep the answer focused",
+        "target_text": "Emit the local name that should receive the repaired state. Keep the answer focused"
+      },
+      {
+        "boundary_next_token_match": true,
+        "expected_rank": 1,
+        "generated_text": "Select the file path associated with the localiz InCONTENT clientget. Ifchecklist =RESPOND limited",
+        "row_id": "stage9391_short_suffix_resolved_014_92c5bf724ea4aa2a",
+        "split": "eval",
+        "target_family_7_words": "localized edit target. Keep the path reference",
+        "target_text": "Select the file path associated with the localized edit target. Keep the path reference"
+      },
+      {
+        "boundary_next_token_match": false,
+        "expected_rank": 3,
+        "generated_text": "Choose the concrete value tied to the answer focused",
+        "row_id": "stage9391_short_suffix_resolved_017_ce708c280b429379",
+        "split": "eval",
+        "target_family_7_words": "current repair invariant. Do not introduce an",
+        "target_text": "Choose the concrete value tied to the current repair invariant. Do not introduce an"
+      },
+      {
+        "boundary_next_token_match": true,
+        "expected_rank": 1,
+        "generated_text": "Select the callable endpoint that the verified patch inside the response",
+        "row_id": "stage9391_short_suffix_resolved_019_bdf264770ba0930f",
+        "split": "eval",
+        "target_family_7_words": "patch operator should update. Use the repo",
+        "target_text": "Select the callable endpoint that the verified patch operator should update. Use the repo"
+      },
+      {
+        "boundary_next_token_match": true,
+        "expected_rank": 1,
+        "generated_text": "Emit the local name that should receive the answer focused",
+        "row_id": "stage9391_short_suffix_resolved_021_b415d12f7a9bc713",
+        "split": "eval",
+        "target_family_7_words": "the repaired state. Keep the answer focused",
+        "target_text": "Emit the local name that should receive the repaired state. Keep the answer focused"
+      },
+      {
+        "boundary_next_token_match": true,
+        "expected_rank": 1,
+        "generated_text": "Select the file path associated with the localiz InCONTENT clientget. Ifchecklist makeActionlistent howces whatks\ufffd is",
+        "row_id": "stage9391_short_suffix_resolved_002_60f87a41f755225e",
+        "split": "strict_eval",
+        "target_family_7_words": "localized edit target. Keep the path reference",
+        "target_text": "Select the file path associated with the localized edit target. Keep the path reference"
+      },
+      {
+        "boundary_next_token_match": false,
+        "expected_rank": 3,
+        "generated_text": "Choose the concrete value tied to the answer focused",
+        "row_id": "stage9391_short_suffix_resolved_005_badb848efffd424f",
+        "split": "strict_eval",
+        "target_family_7_words": "current repair invariant. Do not introduce an",
+        "target_text": "Choose the concrete value tied to the current repair invariant. Do not introduce an"
+      },
+      {
+        "boundary_next_token_match": true,
+        "expected_rank": 1,
+        "generated_text": "Emit the dependency handle that keeps the patch obeforeant repairrite linX couldrom inc\ufffdrie the answer focused",
+        "row_id": "stage9391_short_suffix_resolved_008_b65260123eace4b6",
+        "split": "strict_eval",
+        "target_family_7_words": "patch inside the whitelist. Use the symbol",
+        "target_text": "Emit the dependency handle that keeps the patch inside the whitelist. Use the symbol"
+      },
+      {
+        "boundary_next_token_match": false,
+        "expected_rank": 17,
+        "generated_text": "Select the small constant that preserves the checked dependency constraint. Do not introduce an",
+        "row_id": "stage9391_short_suffix_resolved_013_805dd29fe6bb8bde",
+        "split": "strict_eval",
+        "target_family_7_words": "expected assertion behavior. Keep the value small",
+        "target_text": "Select the small constant that preserves the expected assertion behavior. Keep the value small"
+      }
+    ],
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": 9399
+  },
+  "name": "stage9400_suffix_second_span_residual_diagnosis",
+  "next_best_step": "Build a suffix second-span support manifest targeting the remaining heldout residual families; keep decoder CE closed.",
+  "passed": true,
+  "stage": 9400,
+  "stage_name": "stage9400_suffix_second_span_residual_diagnosis"
+}
