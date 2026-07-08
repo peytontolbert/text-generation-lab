@@ -141,8 +141,8 @@ def build_rows() -> list[dict[str, Any]]:
                     "decoder_budget_ok": True,
                 },
                 "model_input": {
-                    "active_generation_prefix_span": bad,
-                    "active_generation_prefix_words": len(bad.split()),
+                    "active_generation_prefix_span": " ".join(spec["target"].split()[:5]),
+                    "active_generation_prefix_words": 5,
                     "target_grounding_mode": "lexical_bridge_bad_output_repair_v1",
                     "bad_output_visible_for_repair": True,
                     "bridge_family": spec["bridge_family"],
