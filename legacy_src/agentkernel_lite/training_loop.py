@@ -215,11 +215,14 @@ def _decoder_ce_loss(
     *,
     eos_id: int,
     eos_loss_weight: float,
+    token_loss_mask: torch.Tensor | None = None,
 ) -> torch.Tensor:
-    if eos_loss_weight == 1.0:
+    if eos_loss_weight == 1.0 and token_loss_mask is None:
         return model.decoder_ce_loss(logits, labels, row_mask)
     token_loss = F.cross_entropy(logits.reshape(-1, logits.size(-1)), labels.reshape(-1), ignore_index=0, reduction="none").reshape(labels.shape)
     nonpad = labels.ne(0).float()
+    if token_loss_mask is not None:
+        nonpad = nonpad * token_loss_mask.to(device=labels.device, dtype=nonpad.dtype)
     weights = torch.ones_like(token_loss)
     weights = torch.where(labels.eq(int(eos_id)), torch.full_like(weights, float(eos_loss_weight)), weights)
     weighted = token_loss * weights * nonpad
@@ -229,6 +232,26 @@ def _decoder_ce_loss(
         active = row_mask.float()
         return (row_loss * active).sum() / active.sum().clamp_min(1.0)
     return row_loss.mean()
+
+
+def _post_prefix_loss_mask(labels: torch.Tensor, rows: list[dict[str, Any]], *, tokenizer: Any, generation_prefix_field: str | None) -> torch.Tensor | None:
+    if not generation_prefix_field:
+        return None
+    pad_id = int(getattr(tokenizer, "pad_id", 0))
+    bos_id = int(getattr(tokenizer, "bos_id", 1))
+    eos_id = int(getattr(tokenizer, "eos_id", 2))
+    mask = torch.zeros_like(labels, dtype=torch.bool)
+    any_prefix = False
+    for row_idx, row in enumerate(rows):
+        prefix_text = _nested_row_value(row, generation_prefix_field)
+        if not prefix_text:
+            mask[row_idx] = labels[row_idx].ne(pad_id)
+            continue
+        prefix_ids = [idx for idx in tokenizer.encode(str(prefix_text), max_length=labels.shape[1] + 2) if idx not in {pad_id, bos_id, eos_id}]
+        start = min(len(prefix_ids), labels.shape[1])
+        mask[row_idx, start:] = labels[row_idx, start:].ne(pad_id)
+        any_prefix = True
+    return mask if any_prefix else None
 
 
 def _tensor_stats(tensor: torch.Tensor) -> dict[str, Any]:
@@ -1175,6 +1198,7 @@ def run_denoise_repair_probe(
         batch = build_batch(batch_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
         optimizer.zero_grad(set_to_none=True)
         out = model(batch.input_ids, batch.decoder_input_ids)
+        suffix_loss_mask = _post_prefix_loss_mask(batch.labels, batch_rows, tokenizer=tokenizer, generation_prefix_field=generation_prefix_field)
         loss = _decoder_ce_loss(
             model,
             out["decoder_logits"],
@@ -1182,6 +1206,7 @@ def run_denoise_repair_probe(
             batch.loss_mask.get("denoise_ce"),
             eos_id=int(getattr(tokenizer, "eos_id", 2)),
             eos_loss_weight=eos_loss_weight,
+            token_loss_mask=suffix_loss_mask,
         )
         loss.backward()
         for row_id in batch.row_ids:
@@ -1218,6 +1243,7 @@ def run_denoise_repair_probe(
         with torch.no_grad():
             batch = build_batch(split_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
             out = model(batch.input_ids, batch.decoder_input_ids)
+            suffix_loss_mask = _post_prefix_loss_mask(batch.labels, split_rows, tokenizer=tokenizer, generation_prefix_field=generation_prefix_field)
             loss = _decoder_ce_loss(
                 model,
                 out["decoder_logits"],
@@ -1225,6 +1251,7 @@ def run_denoise_repair_probe(
                 batch.loss_mask.get("denoise_ce"),
                 eos_id=int(getattr(tokenizer, "eos_id", 2)),
                 eos_loss_weight=eos_loss_weight,
+                token_loss_mask=suffix_loss_mask,
             )
             token_rows = _token_loss_rows(row_ids=batch.row_ids, logits=out["decoder_logits"], labels=batch.labels, tokenizer=tokenizer)
         for token_row in token_rows:

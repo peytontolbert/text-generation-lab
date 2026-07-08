@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9298_post_prefix_denoise_loss_patch_audit/post_prefix_denoise_loss_patch_audit.json",
+    "doc": "docs/POST_PREFIX_DENOISE_LOSS_PATCH_STAGE9298.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T14:02:53Z",
+  "decision": "Patched denoise CE to mask copied bridge-prefix target positions and train only post-prefix suffix/EOS positions when a generation prefix is configured.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "decoder_loss_accepts_token_mask": true,
+    "denoise_ce_training_authorized_next": false,
+    "eval_loop_uses_post_prefix_mask": true,
+    "execution_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "missing_snippets": [],
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "post_prefix_loss_mask_present": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_boundary_match_rate": 0.0,
+    "source_boundary_mean_expected_rank": 402.5,
+    "source_emission_authorized": false,
+    "source_stage": 9297,
+    "train_loop_uses_post_prefix_mask": true
+  },
+  "name": "stage9298_post_prefix_denoise_loss_patch_audit",
+  "next_best_step": "Build a final pre-execution audit and rerun the six-row one-next-token probe to test whether suffix-token rank improves under post-prefix loss masking.",
+  "passed": true,
+  "stage": 9298,
+  "stage_name": "stage9298_post_prefix_denoise_loss_patch_audit"
+}
