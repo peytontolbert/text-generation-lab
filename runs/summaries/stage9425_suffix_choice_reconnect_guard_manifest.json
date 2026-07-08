@@ -1,0 +1,81 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9425_suffix_choice_reconnect_guard_manifest/suffix_choice_reconnect_guard_audit.json",
+    "doc": "docs/SUFFIX_CHOICE_RECONNECT_GUARD_MANIFEST_STAGE9425.md",
+    "promotion_manifest": "runs/local/artifacts/stage9425_suffix_choice_reconnect_guard_manifest/suffix_choice_reconnect_guard_manifest.jsonl",
+    "quarantine_manifest": "runs/local/artifacts/stage9425_suffix_choice_reconnect_guard_manifest/suffix_choice_residual_quarantine_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T21:03:48Z",
+  "decision": "Promoted only Stage9419-correct suffix-choice decisions as controller priors and quarantined all residuals; no generation authority opened.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decision": "controller_prior_only; no generation reconnect until a separate denoise reconnect probe is designed",
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "generation_reconnect_allowed_rows": 0,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promoted_choice_counts": {
+      "current_repair_invariant__do_not_introduce": 2,
+      "dependency_constraint__keep_output_limited": 1,
+      "expected_assertion_behavior__keep_value_small": 1,
+      "localized_edit_target__keep_path_reference": 2,
+      "localized_repair_step__keep_response": 1,
+      "whitelist_patch__use_symbol": 1,
+      "wrapper_plan__keep_answer_focused": 1
+    },
+    "promoted_rows": 9,
+    "promotion_ready": false,
+    "quarantined_choice_counts": {
+      "checked_symbol_evidence__keep_decision_compatible": 2,
+      "expected_assertion_behavior__keep_value_small": 1,
+      "repaired_state__keep_answer_focused": 2,
+      "verified_patch_operator__use_repo": 2
+    },
+    "quarantined_rows": 7,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9419_best_suffix_choice_probe",
+    "split_counts": {
+      "eval": 9,
+      "strict_eval": 7
+    },
+    "target_pair_promoted_rows": 3
+  },
+  "name": "stage9425_suffix_choice_reconnect_guard_manifest",
+  "next_best_step": "Design a no-generation denoise reconnect preflight that consumes only ELIGIBLE_SUFFIX_CHOICE_PRIOR rows and keeps residual quarantines enforced.",
+  "passed": true,
+  "stage": 9425,
+  "stage_name": "stage9425_suffix_choice_reconnect_guard_manifest"
+}

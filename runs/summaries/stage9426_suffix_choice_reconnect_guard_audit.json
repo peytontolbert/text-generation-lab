@@ -1,0 +1,65 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9426_suffix_choice_reconnect_guard_audit/suffix_choice_reconnect_guard_audit.json",
+    "doc": "docs/SUFFIX_CHOICE_RECONNECT_GUARD_AUDIT_STAGE9426.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T21:04:34Z",
+  "decision": "Verified suffix-choice reconnect guard: promoted rows are controller priors only and residual rows are hard-quarantined.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "future_reconnect_requirements": [
+      "consume only ELIGIBLE_SUFFIX_CHOICE_PRIOR rows",
+      "reject any source_row_id in quarantine manifest",
+      "keep decoder_ce closed until denoise reconnect generation audit passes",
+      "keep runtime/gemma/harness closed until separate authority stage"
+    ],
+    "gemma_execution_authorized_next": false,
+    "generation_reconnect_allowed_now": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promoted_quarantine_overlap": 0,
+    "promoted_rows": 9,
+    "promotion_ready": false,
+    "quarantined_rows": 7,
+    "residual_guard_promoted_rows": 2,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "name": "stage9426_suffix_choice_reconnect_guard_audit",
+  "next_best_step": "Build a no-execution denoise reconnect design that references the promotion/quarantine manifests and fails if quarantined rows are included.",
+  "passed": true,
+  "stage": 9426,
+  "stage_name": "stage9426_suffix_choice_reconnect_guard_audit"
+}
