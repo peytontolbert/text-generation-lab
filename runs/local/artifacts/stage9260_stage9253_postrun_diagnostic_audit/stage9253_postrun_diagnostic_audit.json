@@ -1,0 +1,134 @@
+{
+  "artifacts": {
+    "checkpoint_like_artifacts": [],
+    "details": {
+      "activation_summary.jsonl": {
+        "exists": true,
+        "size_bytes": 29503
+      },
+      "cleanup_proof.json": {
+        "exists": true,
+        "size_bytes": 175
+      },
+      "eos_length_audit.json": {
+        "exists": true,
+        "size_bytes": 54
+      },
+      "eval_loss_by_checkpoint.jsonl": {
+        "exists": true,
+        "size_bytes": 122
+      },
+      "execution_result.json": {
+        "exists": true,
+        "size_bytes": 1444
+      },
+      "failure_bucket_card.json": {
+        "exists": true,
+        "size_bytes": 245
+      },
+      "internal_leak_probe.json": {
+        "exists": true,
+        "size_bytes": 133
+      },
+      "internal_token_logit_summary.json": {
+        "exists": true,
+        "size_bytes": 106
+      },
+      "loss_by_step.jsonl": {
+        "exists": true,
+        "size_bytes": 3185
+      },
+      "module_delta_norms.json": {
+        "exists": true,
+        "size_bytes": 13968
+      },
+      "probe_contract_audit.json": {
+        "exists": true,
+        "size_bytes": 6921
+      },
+      "repetition_probe.json": {
+        "exists": true,
+        "size_bytes": 1619
+      },
+      "row_dynamics_history.jsonl": {
+        "exists": true,
+        "size_bytes": 16824
+      },
+      "row_gradient_norms.jsonl": {
+        "exists": true,
+        "size_bytes": 23398
+      },
+      "row_token_loss.jsonl": {
+        "exists": true,
+        "size_bytes": 511252
+      },
+      "sample_generation_audit.json": {
+        "exists": true,
+        "size_bytes": 39148
+      },
+      "short_output_probe.json": {
+        "exists": true,
+        "size_bytes": 100
+      }
+    },
+    "empty_artifacts": [],
+    "missing_artifacts": [],
+    "required_artifacts": 17
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "diagnosis": {
+    "interpretation": "The 100M target path executes and learns CE signal, but the decoder still lacks EOS/continuation control and produces repeated non-target text.",
+    "next_patch": "Build a bounded decoder stabilization package with EOS-positive/negative weighting, generated-repetition negatives, and a lower-LR/warmer micro-overfit rerun before scaling rows.",
+    "primary_failure": "unterminated_repetitive_generation_after_ce_loss_drop"
+  },
+  "failures": [
+    "decoder_quality_gate_failed",
+    "initial_gradient_explosion_observed"
+  ],
+  "metrics": {
+    "checkpoint_like_artifacts": 0,
+    "cleanup_executed": false,
+    "contentful_generation_rate": 0.0,
+    "decoder_delta_norm": 2.0328308132259516,
+    "decoder_quality_passed": false,
+    "degenerate_repetition_rate": 0.4375,
+    "empty_artifacts": 0,
+    "encoder_delta_norm": 1.0439769784094377,
+    "estimated_parameter_count": 102668531,
+    "eval_loss": 24.623144149780273,
+    "execution_safety_passed": true,
+    "failure_buckets": {
+      "degenerate_repetition": 7,
+      "internal_leak": 0,
+      "prefix_miss": 16,
+      "short_or_junk": 0,
+      "unterminated_generation": 16
+    },
+    "generated_internal_token_rows": 0,
+    "generated_rows": 16,
+    "missing_artifacts": 0,
+    "short_or_junk_rate": 0.0,
+    "strict_eval_loss": 24.91276741027832,
+    "structured_head_delta_norm": 0.0,
+    "target_prefix_match_rate": 0.0,
+    "train_loss_drop": 59.23133659362793,
+    "train_loss_drop_rate": 0.7028918440833579,
+    "train_loss_first": 84.26806640625,
+    "train_loss_last": 25.03672981262207,
+    "unterminated_generation_rate": 1.0
+  },
+  "passed": true,
+  "probe_quality_passed": false
+}
