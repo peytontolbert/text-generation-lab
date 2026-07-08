@@ -2652,3 +2652,11 @@ The only valid branches are pause, continue no-execution central graph review, o
 All trainer/model/runtime/cleanup/mining/arxiv/source-body/Gemma/scoring/promotion authority remains closed.
 
 Next: Pause or continue no-execution central graph review; do not instantiate a live family audit without explicit one-family request.
+
+## Stage9225 Explicit One-Family Request Schema
+
+Stage9225 defines what an explicit one-family request must look like before any family-specific final pre-execution audit design can be instantiated.
+The schema only permits a design-only request for one of structured-policy, bounded-decoder CE, or denoise-repair. It rejects trainer/model execution, cleanup, runtime, checkpoint export, mining, and `/arxiv` access.
+No family is selected by this stage and no authority is opened.
+
+Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
