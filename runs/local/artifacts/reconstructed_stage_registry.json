@@ -4,21 +4,21 @@
       "body_emission_authorized": 0,
       "controller_complete_merge_authorized_next": 0,
       "decoder_ce_training_authorized_next": 0,
-      "denoise_ce_training_authorized_next": 3,
+      "denoise_ce_training_authorized_next": 0,
       "gemma_execution_authorized_next": 0,
       "harness_execution_authorized_next": 0,
-      "model_execution_authorized_next": 3,
+      "model_execution_authorized_next": 0,
       "promotion_ready": 0,
       "runtime_authorized": 0,
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9288,
-    "latest_stage_name": "stage9288_train_generation_memorization_preexecution",
-    "latest_stage_next_best_step": "Execute Stage9289 train-generation memorization probe under trellis, then audit whether train rows generate target suffixes.",
-    "max_stage": 9288,
+    "latest_stage": 9289,
+    "latest_stage_name": "stage9289_train_generation_memorization_probe_audit",
+    "latest_stage_next_best_step": "Patch the micro-overfit objective to train/generate exactly one next suffix token first, or add scheduled-sampling/free-run loss; do not widen data.",
+    "max_stage": 9289,
     "min_stage": 8530,
-    "registry_rows": 778
+    "registry_rows": 779
   },
   "passed": true,
   "rows": [
@@ -15581,6 +15581,26 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9288_train_generation_memorization_preexecution.json",
       "stage": 9288,
       "stage_name": "stage9288_train_generation_memorization_preexecution"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Patch the micro-overfit objective to train/generate exactly one next suffix token first, or add scheduled-sampling/free-run loss; do not widen data.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9289_train_generation_memorization_probe_audit.json",
+      "stage": 9289,
+      "stage_name": "stage9289_train_generation_memorization_probe_audit"
     }
   ]
 }

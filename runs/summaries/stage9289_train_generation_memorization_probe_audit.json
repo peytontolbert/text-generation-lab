@@ -1,0 +1,96 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9289_train_generation_memorization_probe/stage9289_train_generation_memorization_probe_audit.json",
+    "doc": "docs/TRAIN_GENERATION_MEMORIZATION_PROBE_AUDIT_STAGE9289.md",
+    "run_dir": "runs/local/artifacts/stage9289_train_generation_memorization_probe"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T13:31:39Z",
+  "decision": "Train rows fail generation too: the probe starts from the forced prefix but cannot autoregressively emit the memorized suffix even after teacher-forced loss drops.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "contentful_generation_rate": 0.0,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "degenerate_repetition_rate": 0.25,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "train_suffix_generation_fails_despite_teacher_forced_loss_drop",
+    "failures": [],
+    "final_checkpoint_exported": false,
+    "gemma_executed": false,
+    "gemma_execution_authorized_next": false,
+    "generated_internal_token_rows": 0,
+    "generated_rows": 8,
+    "generation_audit_splits": "train,eval,strict_eval",
+    "generation_prefix_start_rate": 1.0,
+    "harness_executed": false,
+    "harness_execution_authorized_next": false,
+    "missing_artifacts": [],
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "quality_gate_passed": false,
+    "rows": 8,
+    "runtime_authorized": false,
+    "runtime_executed": false,
+    "safety_gate_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_generation_summary": {
+      "eval": {
+        "degenerate_repetition_rows": 0,
+        "rows": 1,
+        "target_prefix_match_rows": 0,
+        "unterminated_rows": 1
+      },
+      "strict_eval": {
+        "degenerate_repetition_rows": 1,
+        "rows": 2,
+        "target_prefix_match_rows": 0,
+        "unterminated_rows": 2
+      },
+      "train": {
+        "degenerate_repetition_rows": 1,
+        "rows": 5,
+        "target_prefix_match_rows": 0,
+        "unterminated_rows": 5
+      }
+    },
+    "target_prefix_match_rate": 0.0,
+    "train_loss_decreased": true,
+    "train_loss_end": 24.233970642089844,
+    "train_loss_start": 86.53744506835938,
+    "train_memorization_passed": false,
+    "unterminated_generation_rate": 1.0
+  },
+  "name": "stage9289_train_generation_memorization_probe_audit",
+  "next_best_step": "Patch the micro-overfit objective to train/generate exactly one next suffix token first, or add scheduled-sampling/free-run loss; do not widen data.",
+  "passed": true,
+  "stage": 9289,
+  "stage_name": "stage9289_train_generation_memorization_probe_audit"
+}
