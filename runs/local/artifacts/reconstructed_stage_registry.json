@@ -13,12 +13,12 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9278,
-    "latest_stage_name": "stage9278_continuation_bridge_denoise_probe_audit",
-    "latest_stage_next_best_step": "Add decoder-side bridge priming or a shorter next-token bridge objective to separate continuation-copy mechanics from longer semantic generation.",
-    "max_stage": 9278,
+    "latest_stage": 9280,
+    "latest_stage_name": "stage9280_bridge_primed_denoise_probe_audit",
+    "latest_stage_next_best_step": "Stop increasing forced prefix length; inspect per-token loss around the first unforced suffix token and build a next-token/suffix micro-overfit probe.",
+    "max_stage": 9280,
     "min_stage": 8530,
-    "registry_rows": 768
+    "registry_rows": 770
   },
   "passed": true,
   "rows": [
@@ -15381,6 +15381,46 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9278_continuation_bridge_denoise_probe_audit.json",
       "stage": 9278,
       "stage_name": "stage9278_continuation_bridge_denoise_probe_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Run a contract-only preflight, then a tiny target-100M bridge-primed denoise probe using --generation-prefix-field model_input.bridge_priming_span.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9279_bridge_primed_denoise_manifest.json",
+      "stage": 9279,
+      "stage_name": "stage9279_bridge_primed_denoise_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Stop increasing forced prefix length; inspect per-token loss around the first unforced suffix token and build a next-token/suffix micro-overfit probe.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9280_bridge_primed_denoise_probe_audit.json",
+      "stage": 9280,
+      "stage_name": "stage9280_bridge_primed_denoise_probe_audit"
     }
   ]
 }

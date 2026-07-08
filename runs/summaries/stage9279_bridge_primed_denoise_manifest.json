@@ -1,0 +1,78 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9279_bridge_primed_denoise_manifest/bridge_primed_denoise_manifest_audit.json",
+    "doc": "docs/BRIDGE_PRIMED_DENOISE_MANIFEST_STAGE9279.md",
+    "manifest": "runs/local/artifacts/stage9279_bridge_primed_denoise_manifest/bridge_primed_denoise_manifest.jsonl",
+    "priming_card": "runs/local/artifacts/stage9279_bridge_primed_denoise_manifest/bridge_priming_card.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T05:52:49Z",
+  "decision": "Built bridge-primed rows with an 8-word decoder priming span to isolate continuation beyond the first bridge fragment.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "excessive_priming_rows": 0,
+    "failures": [],
+    "forbidden_key_rows": 0,
+    "full_target_visible_rows": 0,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "invalid_priming_rows": 0,
+    "language_counts": {
+      "cpp": 4,
+      "python": 5,
+      "rust": 4,
+      "web_js_ts_html": 8
+    },
+    "max_priming_chars": 112,
+    "max_priming_words": 8,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "priming_visible_rows": 21,
+    "promotion_ready": false,
+    "rows": 21,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_counts": {
+      "eval": 7,
+      "strict_eval": 6,
+      "train": 8
+    },
+    "target_remainder_visible_rows": 0,
+    "unsafe_loss_rows": 0
+  },
+  "name": "stage9279_bridge_primed_denoise_manifest",
+  "next_best_step": "Run a contract-only preflight, then a tiny target-100M bridge-primed denoise probe using --generation-prefix-field model_input.bridge_priming_span.",
+  "passed": true,
+  "stage": 9279,
+  "stage_name": "stage9279_bridge_primed_denoise_manifest"
+}
