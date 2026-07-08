@@ -1,0 +1,57 @@
+{
+  "blocked_actions": [
+    "do_not_reopen_decoder_ce",
+    "do_not_widen_to_real_decoder_rows",
+    "do_not_run_runtime_or_harness",
+    "do_not_export_checkpoint"
+  ],
+  "diagnosis": "boundary_next_token_is_solved_but_copy_prefix_free_run_suffix_continuation_is_not_stable",
+  "exact_match_rows": 3,
+  "failure_types": {
+    "late_suffix_repetition": 2,
+    "subword_bridge_collapse": 2
+  },
+  "generated_rows": 7,
+  "passed": true,
+  "recommended_patch": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "intent": "bridge teacher-forced suffix learning to free-run continuation by training/auditing multiple prefix lengths per target",
+    "name": "prefix_ladder_supported_suffix_manifest",
+    "prefix_fields_to_materialize": [
+      "model_input.copy_prefix_span",
+      "model_input.prefix_ladder_6w",
+      "model_input.prefix_ladder_7w",
+      "model_input.bridge_priming_span"
+    ],
+    "required_audits": [
+      "first_token_boundary_rank_by_prefix_length",
+      "exact_generation_by_prefix_length",
+      "suffix_repetition_rate",
+      "early_eos_rate",
+      "subword_bridge_collapse_rows",
+      "row_token_loss_on_unmasked_suffix_only"
+    ],
+    "row_variants": [
+      "copy_prefix_to_full_suffix",
+      "six_word_prefix_to_remaining_suffix",
+      "seven_word_prefix_to_remaining_suffix",
+      "bridge_prefix_to_final_suffix",
+      "observed_bad_free_run_to_clean_target"
+    ]
+  },
+  "source_quality_gate_passed": false,
+  "source_stage": 9308,
+  "target_prefix_match_rate": 0.42857142857142855
+}
