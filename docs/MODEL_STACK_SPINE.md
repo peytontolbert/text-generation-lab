@@ -2698,3 +2698,10 @@ Forbidden live-ticket, trainer/model output, checkpoint, cleanup, runtime, `/arx
 No request/family/live-ticket/trainer/model/runtime/cleanup/mining authority is opened.
 
 Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
+
+## Stage9231 Frontier After Audit Design Schema Audit
+
+Stage9231 reconciles the frontier after Stage9230. Request validation and family-audit-design output validation both exist and have negative-case audits.
+No valid request is present, no family is selected, and no live audit/ticket/trainer/model/runtime/checkpoint/cleanup/mining/arxiv/source-body/scoring/promotion authority is opened.
+
+Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
