@@ -1,0 +1,46 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "curriculum_mapping": {
+    "episode": "one complete software-maintenance attempt, from task observation through verified finish or abstain",
+    "step": "one observe/action/reward-or-verifier/next-state transition inside the episode",
+    "suffix_choice_row": "one repair step, usually phase=repair or decode, where the next continuation is conditioned on route-local state"
+  },
+  "failures": [],
+  "passed": true,
+  "probe_gate_next": {
+    "boundary_next_token_match_rate": 1.0,
+    "contentful_rate": 1.0,
+    "decoder_ce_rows": 0,
+    "degenerate_repetition_rows": 0,
+    "internal_leak_rows": 0,
+    "target_prefix_match_rate": 1.0,
+    "unterminated_rows": 0
+  },
+  "problem_reframed": {
+    "current_residual_target": "suffix-token misses and a small repetition/unterminated repair pocket",
+    "new_transition_surface": "episode-step repair transitions with phase/action/verifier fields",
+    "previous_flat_surface": "mixed prefix-primed denoise rows with route-local suffix interference"
+  },
+  "required_compiler_changes_next": [
+    "assign episode_id and step_index to denoise/decoder repair rows",
+    "separate phase labels from target labels",
+    "carry verifier_failure_type and reward_or_verifier into repair rows",
+    "include route-local suffix choice as target, not visible input shortcut",
+    "emit per-step loss masks so denoise rows do not authorize decoder CE",
+    "audit that query/step ids alone do not solve target suffix or repair route"
+  ],
+  "schema_path": "runs/local/artifacts/stage9445_episode_step_suffix_transition_contract/episode_step_suffix_transition_schema.json",
+  "source_stage": "stage9444_gated_prior_rejoin_residual_diagnosis"
+}

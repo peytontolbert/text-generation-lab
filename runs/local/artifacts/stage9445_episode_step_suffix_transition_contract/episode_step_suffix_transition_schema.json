@@ -1,0 +1,31 @@
+{
+  "episode_equation": "episode = ordered sequence of step_transition rows",
+  "forbidden_input_fields": [
+    "target_suffix_choice visible as a label token in state_t",
+    "decoder_target copied into model input",
+    "stage/objective labels in opaque ids",
+    "hidden scoring references",
+    "runtime/body/source authority fields set true"
+  ],
+  "purpose": "Represent decoder/denoise repair as ordered maintainer episode steps instead of flat mixed repair rows.",
+  "required_fields": {
+    "action_t": "Typed action taken or proposed at the step.",
+    "active_generation_prefix_span": "Bounded prefix shown to the decoder/denoiser.",
+    "authority": "Closed authority flags for body/source/runtime/Gemma/harness/scoring/promotion.",
+    "decoder_target": "Bounded target text for authorized denoise or future gated decode.",
+    "episode_id": "Opaque id for a full maintenance attempt or synthetic repair trajectory.",
+    "language_family": "python|rust|c_family|web_js_ts_html or other audited family.",
+    "loss_mask": "Per-loss authorization card. Decoder CE remains false until separately authorized.",
+    "observation_t": "Tool/verifier/model observation used by the repair step.",
+    "phase": "observe|orient|act|decode|verify|repair|terminate.",
+    "reward_or_verifier": "Verifier-derived signal: pass/fail/failure type/confidence, not hidden scoring.",
+    "split": "train|eval|strict_eval.",
+    "state_t": "Structured state before the step; no target labels or hidden authority.",
+    "state_t_plus_1": "Clean next state or repaired state target.",
+    "step_id": "Opaque row-local step id within the episode.",
+    "step_index": "Integer transition index in the episode.",
+    "target_suffix_choice": "Route-local continuation class for suffix/token repair."
+  },
+  "schema_name": "episode_step_suffix_transition_v1",
+  "step_transition_equation": "state_t + action_t + observation_t -> state_t_plus_1"
+}

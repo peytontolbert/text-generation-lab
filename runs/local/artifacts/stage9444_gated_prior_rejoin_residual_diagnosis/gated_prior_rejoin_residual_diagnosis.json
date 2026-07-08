@@ -1,0 +1,98 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "boundary_expected_rank_histogram": {
+    "1": 37,
+    "15": 1,
+    "20": 1,
+    "3": 2,
+    "33": 2,
+    "40": 1,
+    "60": 1,
+    "61": 1,
+    "7": 2,
+    "72": 1,
+    "73": 1
+  },
+  "boundary_generated_token_histogram": {
+    " al": 24,
+    " decision": 2,
+    " evidence": 2,
+    " exp": 3,
+    " p": 4,
+    " the": 11,
+    "X": 2,
+    "ma": 2
+  },
+  "diagnosis": "The gated rejoin did not fail by leak or short-output collapse. The dominant residual is still suffix choice/token selection: many rows are contentful and prefix-primed but choose the wrong continuation. A smaller quality pocket remains around unterminated/repetition rows.",
+  "failures": [],
+  "manifest_rows": 50,
+  "next_patch_target": "stage9445_episode_step_suffix_transition_contract",
+  "passed": true,
+  "prior_source_metrics": {
+    "gold_train_suffix_choice_support": {
+      "residual": 28,
+      "rows": 48
+    },
+    "stage9419_correct_controller_prior": {
+      "residual": 1,
+      "rows": 2
+    }
+  },
+  "quality_residual_rows": 3,
+  "reason_counts": {
+    "boundary_next_token_miss": 13,
+    "degenerate_repetition": 2,
+    "not_exact": 29,
+    "target_prefix_miss": 29,
+    "unterminated": 3
+  },
+  "residual_rows": 29,
+  "route_metrics": {
+    "USE_FOR_DENOISE_REPAIR_ANTI_REPETITION_WITH_GATED_PRIOR": {
+      "residual": 4,
+      "rows": 4
+    },
+    "USE_FOR_DENOISE_REPAIR_WITH_GATED_SUFFIX_CHOICE_PRIOR": {
+      "residual": 25,
+      "rows": 46
+    }
+  },
+  "sample_rows": 50,
+  "source_stage": "stage9443_gated_prior_fusion_rejoin_probe_audit",
+  "split_metrics": {
+    "eval": {
+      "boundary_miss": 0,
+      "prefix_miss": 0,
+      "quality": 0,
+      "residual": 0,
+      "rows": 1
+    },
+    "strict_eval": {
+      "boundary_miss": 0,
+      "prefix_miss": 1,
+      "quality": 0,
+      "residual": 1,
+      "rows": 1
+    },
+    "train": {
+      "boundary_miss": 13,
+      "prefix_miss": 28,
+      "quality": 3,
+      "residual": 28,
+      "rows": 48
+    }
+  },
+  "suffix_token_miss_rows": 29
+}
