@@ -2712,3 +2712,7 @@ Stage9232 records an intake checklist before Stage9225 request validation. Casua
 No request is processed and no authority is opened.
 
 Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
+
+## Stage9255 Precomputed Repo-State Transformation Spine
+
+Stage9255 records the repo-as-precomputed-state formulation: Repo -> Psi_R, Task -> O_q, S_t = Contract(Psi_R, O_q, h_t), a_t = pi_theta(S_t). This folds the tensor-network/codebase-prior idea into the central maintainer spine without opening execution.
