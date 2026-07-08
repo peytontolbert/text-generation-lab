@@ -1,0 +1,120 @@
+{
+  "artifacts": {
+    "design": "runs/local/artifacts/stage9457_episode_step_structured_probe_wrapper_design/episode_step_structured_probe_wrapper_design.json",
+    "doc": "docs/EPISODE_STEP_STRUCTURED_PROBE_WRAPPER_DESIGN_STAGE9457.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T22:35:19Z",
+  "decision": "Designed a closed-boundary trainable episode-step structured probe wrapper; no execution authority is opened.",
+  "metrics": {
+    "allowed_losses": [
+      "episode_repair_outcome_ce",
+      "episode_failure_type_ce",
+      "episode_boundary_match_ce",
+      "episode_target_prefix_match_ce",
+      "episode_step_value_mse"
+    ],
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "forbidden_losses": [
+      "decoder_ce",
+      "denoise_ce",
+      "runtime_reward"
+    ],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "manifest": "runs/local/artifacts/stage9455_episode_step_trainable_manifest/episode_step_trainable_manifest.jsonl",
+    "max_steps_cap": 16,
+    "model_execution_authorized_next": false,
+    "new_trainer_mode": "episode_step_structured_probe",
+    "pass_gate": {
+      "decoder_delta_norm_max": 0.0,
+      "forbidden_artifacts_missing": true,
+      "no_single_class_collapse": true,
+      "strict_boundary_match_exact_min": 0.8,
+      "strict_episode_failure_type_exact_min": 0.8,
+      "strict_episode_repair_outcome_exact_min": 0.8,
+      "strict_joint_exact_min": 0.8,
+      "strict_joint_exact_must_exceed_majority_baseline_by": 0.1,
+      "strict_target_prefix_match_exact_min": 0.8
+    },
+    "passed": true,
+    "promotion_ready": false,
+    "required_runtime_assertions": [
+      "all rows transition_schema == episode_step_suffix_transition_v1",
+      "all enabled losses are episode_* structured losses",
+      "decoder_ce_weight == 0",
+      "denoise_weight == 0",
+      "structured_aux_weight > 0",
+      "row caps enforced",
+      "authority flags closed for every row",
+      "no final checkpoint export",
+      "cleanup uses safe_cleanup.py only"
+    ],
+    "required_telemetry_artifacts": [
+      "loss_by_step.jsonl",
+      "eval_loss_by_checkpoint.jsonl",
+      "row_field_logits.jsonl",
+      "row_field_losses.jsonl",
+      "row_gradient_norms.jsonl",
+      "activation_summary.jsonl",
+      "feature_ablation_attribution.jsonl",
+      "activation_patch_recovery.jsonl",
+      "row_dynamics_history.jsonl",
+      "field_exact_by_cell.json",
+      "field_label_vocabs.json",
+      "structured_confusion_matrix.json",
+      "module_delta_norms.json",
+      "failure_bucket_card.json",
+      "cleanup_proof.json"
+    ],
+    "required_weights": {
+      "decoder_ce_weight": 0.0,
+      "denoise_weight": 0.0,
+      "structured_aux_weight_min": 1.0
+    },
+    "row_caps": {
+      "eval": 1,
+      "strict_eval": 1,
+      "total": 50,
+      "train": 48
+    },
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9456_episode_step_trainable_manifest_audit"
+  },
+  "name": "stage9457_episode_step_structured_probe_wrapper_design",
+  "next_best_step": "Patch trainer command surface with episode_step_structured_probe mode, then run a static wrapper audit before any execution authorization.",
+  "passed": true,
+  "stage": 9457,
+  "stage_name": "stage9457_episode_step_structured_probe_wrapper_design"
+}

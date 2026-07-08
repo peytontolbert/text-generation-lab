@@ -29,6 +29,7 @@ SUPPORTED_MODES = (
     "bounded_decoder_ce_probe",
     "denoise_repair_probe",
     "episode_step_denoise_contract_only",
+    "episode_step_structured_probe",
 )
 
 AUTHORITY_FLAGS = (
@@ -116,6 +117,13 @@ STRUCTURED_MODE_ALLOWED_LOSSES = {
     "verifier_repair_probe": {"verifier_repair_ce"},
     "denoise_repair_probe": {"denoise_ce"},
     "episode_step_denoise_contract_only": set(),
+    "episode_step_structured_probe": {
+        "episode_repair_outcome_ce",
+        "episode_failure_type_ce",
+        "episode_boundary_match_ce",
+        "episode_target_prefix_match_ce",
+        "episode_step_value_mse",
+    },
 }
 
 
@@ -506,6 +514,8 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         errors.append("denoise repair probe requires --denoise-weight > 0")
     if args.mode == "episode_step_denoise_contract_only" and not episode_step_contract_only_probe:
         errors.append("episode-step denoise contract-only mode requires --contract-only, --max-steps 0, all weights 0, and episode_step_suffix_transition_v1 rows")
+    if args.mode == "episode_step_structured_probe" and not all(str(row.get("transition_schema")) == "episode_step_suffix_transition_v1" for row in rows):
+        errors.append("episode-step structured probe requires episode_step_suffix_transition_v1 rows")
     if args.mode not in {"repo_graph_probe", "denoise_repair_probe", "episode_step_denoise_contract_only"} and args.structured_aux_weight <= 0:
         errors.append("structured probe requires --structured-aux-weight > 0")
     if not args.require_loss_mask_enforcement_audit:
