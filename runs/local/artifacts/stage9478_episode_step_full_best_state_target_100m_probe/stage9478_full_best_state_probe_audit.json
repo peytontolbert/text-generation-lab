@@ -1,0 +1,366 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "best_state_selection": {
+    "checkpoint_exported": false,
+    "enabled": true,
+    "eval_joint_proxy_exact": null,
+    "eval_loss": null,
+    "promotion_ready": false,
+    "restored": false,
+    "selected_step": null,
+    "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+    "selection_score": null,
+    "strict_joint_proxy_exact": null,
+    "strict_loss": null
+  },
+  "both_exact_checkpoints": [],
+  "checkpoint_like_artifacts": [],
+  "decoder_ce_training_authorized_next": false,
+  "denoise_ce_training_authorized_next": false,
+  "diagnosis": "Full five-head episode-step structured probe is safe but not quality-passing. Eval and strict become exact at different intervals; the final residual is eval episode_target_prefix_match. Next patch should balance/counterbalance target-prefix supervision or split full five-head objective from diagnosis heads.",
+  "estimated_parameter_count": 102703145,
+  "eval_exact_strict_miss": [
+    {
+      "eval_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 1.0,
+          "rows": 1
+        }
+      },
+      "eval_joint": 1.0,
+      "eval_loss": 0.377244234085083,
+      "step": 16,
+      "strict_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 0.0,
+          "rows": 1
+        }
+      },
+      "strict_joint": 0.2,
+      "strict_loss": 1.2876144647598267
+    },
+    {
+      "eval_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 1.0,
+          "rows": 1
+        }
+      },
+      "eval_joint": 1.0,
+      "eval_loss": 0.5811834931373596,
+      "step": 64,
+      "strict_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 0.0,
+          "rows": 1
+        }
+      },
+      "strict_joint": 0.2,
+      "strict_loss": 0.7539260983467102
+    },
+    {
+      "eval_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 1.0,
+          "rows": 1
+        }
+      },
+      "eval_joint": 1.0,
+      "eval_loss": 0.5312715768814087,
+      "step": 88,
+      "strict_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 0.0,
+          "rows": 1
+        }
+      },
+      "strict_joint": 0.6,
+      "strict_loss": 0.6942464709281921
+    }
+  ],
+  "eval_rows": 1,
+  "failed_eval_fields": [
+    "episode_target_prefix_match"
+  ],
+  "failed_strict_fields": [],
+  "failures": [
+    "final_eval_not_joint_exact",
+    "no_jointly_exact_best_state_to_restore",
+    "no_jointly_exact_interval"
+  ],
+  "final_eval_joint_proxy_exact": 0.8,
+  "final_strict_joint_proxy_exact": 1.0,
+  "mode": "episode_step_structured_probe",
+  "model_execution_authorized_next": false,
+  "passed": false,
+  "probe_scale": "target_100m",
+  "quality_passed": false,
+  "safety_failures": [],
+  "safety_passed": true,
+  "source_stage": "stage9477_episode_step_full_best_state_preflight_audit",
+  "strict_exact_eval_miss": [
+    {
+      "eval_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 0.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 0.0,
+          "rows": 1
+        }
+      },
+      "eval_joint": 0.2,
+      "eval_loss": 1.0287282466888428,
+      "step": 32,
+      "strict_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 1.0,
+          "rows": 1
+        }
+      },
+      "strict_joint": 1.0,
+      "strict_loss": 0.4138868749141693
+    },
+    {
+      "eval_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 0.0,
+          "rows": 1
+        }
+      },
+      "eval_joint": 0.8,
+      "eval_loss": 0.6305893659591675,
+      "step": 96,
+      "strict_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 1.0,
+          "rows": 1
+        }
+      },
+      "strict_joint": 1.0,
+      "strict_loss": 0.48961392045021057
+    },
+    {
+      "eval_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 0.0,
+          "rows": 1
+        }
+      },
+      "eval_joint": 0.8,
+      "eval_loss": 0.6305893659591675,
+      "step": "final",
+      "strict_field_exact": {
+        "episode_boundary_match": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_failure_type": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_repair_outcome": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_step_value": {
+          "exact": 1.0,
+          "rows": 1
+        },
+        "episode_target_prefix_match": {
+          "exact": 1.0,
+          "rows": 1
+        }
+      },
+      "strict_joint": 1.0,
+      "strict_loss": 0.48961392045021057
+    }
+  ],
+  "strict_rows": 1,
+  "train_rows": 48
+}
