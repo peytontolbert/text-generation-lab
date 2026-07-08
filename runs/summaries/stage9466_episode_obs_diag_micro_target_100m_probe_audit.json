@@ -1,0 +1,89 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9466_episode_obs_diag_micro_target_100m_probe/stage9466_micro_probe_audit.json",
+    "doc": "docs/EPISODE_OBS_DIAG_MICRO_TARGET_100M_PROBE_AUDIT_STAGE9466.md",
+    "execution_result": "runs/local/artifacts/stage9466_episode_obs_diag_micro_target_100m_probe/execution_result.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T22:56:30Z",
+  "decision": "Micro-overfit passed; next patch should fix full-manifest schedule/cap exposure before rerunning broad observation diagnosis.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Target-100M can learn the observation-diagnosis success/residual rule when the train schedule repeatedly covers both cells. Stage9463 failure is therefore schedule/cap exposure, not an impossible representation or missing label problem.",
+    "estimated_parameter_count": 102703145,
+    "eval_joint_proxy_exact": 1.0,
+    "eval_loss": 0.0015247194096446037,
+    "eval_rows": 1,
+    "failures": [],
+    "final_checkpoint_exported": false,
+    "gemma_executed": false,
+    "gemma_execution_authorized_next": false,
+    "harness_executed": false,
+    "harness_execution_authorized_next": false,
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_passed": true,
+    "required_artifacts_written": true,
+    "runtime_authorized": false,
+    "runtime_executed": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9465_episode_obs_diag_micro_target_100m_preflight_audit",
+    "strict_field_exact": {
+      "episode_failure_type": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_repair_outcome": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_step_value": {
+        "exact": 1.0,
+        "rows": 1
+      }
+    },
+    "strict_joint_proxy_exact": 1.0,
+    "strict_loss": 0.0012421851279214025,
+    "strict_rows": 1,
+    "train_rows": 16
+  },
+  "name": "stage9466_episode_obs_diag_micro_target_100m_probe_audit",
+  "next_best_step": "Design Stage9467 full-manifest schedule-coverage probe with enough steps to expose all 48 train rows, then preflight before execution.",
+  "passed": true,
+  "stage": 9466,
+  "stage_name": "stage9466_episode_obs_diag_micro_target_100m_probe_audit"
+}
