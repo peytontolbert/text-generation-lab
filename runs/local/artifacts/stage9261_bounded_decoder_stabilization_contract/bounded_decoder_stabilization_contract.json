@@ -1,0 +1,100 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blocked_until_patched": [
+    "second_target_100m_bounded_decoder_execution",
+    "decoder_ce_row_scaleup",
+    "bounded_decoder_success_claim",
+    "gemma_comparison",
+    "harness_or_product_scoring",
+    "checkpoint_promotion"
+  ],
+  "contract_status": "DESIGN_ONLY_NO_EXECUTION",
+  "next_probe_limits": {
+    "batch_size": 2,
+    "checkpoint_export": false,
+    "decoder_ce_weight": 1.0,
+    "denoise_weight": 0.0,
+    "eos_loss_weight": 4.0,
+    "gemma": false,
+    "harness": false,
+    "learning_rate": 1e-05,
+    "max_eval_rows": 16,
+    "max_generation_rows": 16,
+    "max_generation_tokens": 96,
+    "max_steps": 16,
+    "max_strict_rows": 16,
+    "max_train_rows": 32,
+    "runtime": false,
+    "structured_aux_weight": 0.0
+  },
+  "observed_failure": {
+    "contentful_generation_rate": 0.0,
+    "degenerate_repetition_rate": 0.4375,
+    "eval_loss": 24.623144149780273,
+    "generated_internal_token_rows": 0,
+    "initial_gradient_explosion_observed": true,
+    "strict_eval_loss": 24.91276741027832,
+    "target_prefix_match_rate": 0.0,
+    "train_loss_drop_rate": 0.7028918440833579,
+    "unterminated_generation_rate": 1.0
+  },
+  "quality_gates_for_next_probe": {
+    "checkpoint_like_artifacts": 0,
+    "contentful_generation_rate_min": 0.5,
+    "degenerate_repetition_rate_max": 0.1,
+    "execution_safety_passed": true,
+    "generated_internal_token_rows": 0,
+    "post_clip_grad_norm_max": 10.0,
+    "short_or_junk_rate_max": 0.0,
+    "target_prefix_match_rate_min": 0.1,
+    "unterminated_generation_rate_max": 0.25
+  },
+  "required_trainer_patches": [
+    {
+      "default_for_next_probe": 4.0,
+      "patch_id": "eos_weighted_token_loss",
+      "reason": "Stage9253 generated 16/16 unterminated rows; EOS token positions need explicit weighted CE telemetry.",
+      "required_flag": "--eos-loss-weight"
+    },
+    {
+      "patch_id": "post_clip_gradient_telemetry",
+      "reason": "Stage9253 first pre-clip grad norm was 3.4698182656e11, so the next probe must distinguish clipped stability from raw explosion.",
+      "required_field": "post_clip_grad_norm",
+      "threshold_for_next_probe": 10.0
+    },
+    {
+      "patch_id": "repetition_negative_replay",
+      "reason": "Stage9253 had 7/16 degenerate repetition rows; generated failures should become explicit negative/stabilization examples.",
+      "required_artifact": "generated_repetition_negative_rows.jsonl"
+    },
+    {
+      "patch_id": "eos_length_bucket_audit",
+      "reason": "The next probe must report EOS hit rate and target length by language/surface, not only aggregate generation rows.",
+      "required_artifact": "eos_length_bucket_audit.json"
+    },
+    {
+      "patch_id": "lower_lr_rerun_ticket",
+      "reason": "The next target-100M rerun should test stabilization, not scale exposure.",
+      "required_limit": {
+        "learning_rate": 1e-05,
+        "max_steps": 16,
+        "max_train_rows": 32
+      }
+    }
+  ],
+  "source_stage": 9260,
+  "stage": 9261,
+  "stage_name": "stage9261_bounded_decoder_stabilization_contract"
+}
