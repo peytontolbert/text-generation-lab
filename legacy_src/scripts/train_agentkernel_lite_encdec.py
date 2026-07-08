@@ -473,6 +473,15 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
     authority_rows: list[str] = []
     unsafe_loss_rows: list[dict[str, Any]] = []
     implementation_guard = evaluate_implementation_selection(str(getattr(args, "implementation", "transformer")))
+    contract_only_no_loss_probe = (
+        bool(getattr(args, "contract_only", False))
+        and int(getattr(args, "max_steps", 1)) == 0
+        and float(getattr(args, "decoder_ce_weight", 1.0)) == 0.0
+        and float(getattr(args, "structured_aux_weight", 1.0)) == 0.0
+        and float(getattr(args, "denoise_weight", 1.0)) == 0.0
+        and rows
+        and all(bool(row.get("candidate_only_no_loss")) for row in rows)
+    )
 
     if not implementation_guard["allowed_for_recovered_100m_target"]:
         errors.extend(str(error) for error in implementation_guard["errors"])
@@ -481,7 +490,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         errors.append("structured probes require --decoder-ce-weight 0")
     if args.mode != "denoise_repair_probe" and args.denoise_weight != 0:
         errors.append("non-denoise structured probes require --denoise-weight 0")
-    if args.mode == "denoise_repair_probe" and args.denoise_weight <= 0:
+    if args.mode == "denoise_repair_probe" and args.denoise_weight <= 0 and not contract_only_no_loss_probe:
         errors.append("denoise repair probe requires --denoise-weight > 0")
     if args.mode != "repo_graph_probe" and args.mode != "denoise_repair_probe" and args.structured_aux_weight <= 0:
         errors.append("structured probe requires --structured-aux-weight > 0")
@@ -501,7 +510,8 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         enabled = {key for key, value in mask.items() if value}
         for key, value in mask.items():
             loss_counts[key] += int(value)
-        if not enabled:
+        row_allows_no_loss = contract_only_no_loss_probe and bool(row.get("candidate_only_no_loss"))
+        if not enabled and not row_allows_no_loss:
             unsafe_loss_rows.append({"row_id": row_id, "enabled_losses": []})
         forbidden = enabled - allowed_losses
         if forbidden:
@@ -513,7 +523,10 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
             allow_runtime=False,
         )
         if mask_errors:
-            unsafe_loss_rows.append({"row_id": row_id, "mask_errors": mask_errors})
+            if row_allows_no_loss:
+                mask_errors = [error for error in mask_errors if error != "no losses enabled"]
+            if mask_errors:
+                unsafe_loss_rows.append({"row_id": row_id, "mask_errors": mask_errors})
         auth = _row_authority(row)
         if any(auth.values()):
             authority_rows.append(row_id)
