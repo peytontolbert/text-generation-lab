@@ -1,0 +1,68 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9440_antirepetition_support_sufficiency_audit/antirepetition_support_sufficiency_audit.json",
+    "doc": "docs/ANTIREPETITION_SUPPORT_SUFFICIENCY_AUDIT_STAGE9440.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T21:45:11Z",
+  "decision": "The 4 anti-repetition rows are useful support but too small as a standalone probe.",
+  "metrics": {
+    "anti_repetition_label_counts": {
+      "expected_assertion_behavior__keep_value_small": 1,
+      "localized_edit_target__keep_path_reference": 1,
+      "verified_patch_operator__use_repo": 2
+    },
+    "anti_repetition_rows": 4,
+    "anti_repetition_split_counts": {
+      "train": 4
+    },
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decision": "do not run a 4-row standalone anti-repetition probe; merge support into gated prior-fusion manifest",
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "heldout_repetition_quarantine_rows": 2,
+    "low_confidence_quarantine_rows": 6,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9439_heldout_prior_confidence_antirepetition_manifest",
+    "standalone_probe_recommended": false
+  },
+  "name": "stage9440_antirepetition_support_sufficiency_audit",
+  "next_best_step": "Build a gated prior-fusion rejoin manifest: keep train support, add anti-repetition rows, and exclude low-confidence heldout priors from generation.",
+  "passed": true,
+  "stage": 9440,
+  "stage_name": "stage9440_antirepetition_support_sufficiency_audit"
+}
