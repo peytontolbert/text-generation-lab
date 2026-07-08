@@ -1,0 +1,83 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9274_prefix_copy_denoise_manifest/prefix_copy_denoise_manifest_audit.json",
+    "doc": "docs/PREFIX_COPY_DENOISE_MANIFEST_STAGE9274.md",
+    "manifest": "runs/local/artifacts/stage9274_prefix_copy_denoise_manifest/prefix_copy_denoise_manifest.jsonl",
+    "prefix_card": "runs/local/artifacts/stage9274_prefix_copy_denoise_manifest/prefix_copy_card.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T05:20:24Z",
+  "decision": "Built prefix-copy denoise rows that intentionally expose only a capped target prefix span so the repair decoder can learn to start correctly without seeing the target suffix.",
+  "metrics": {
+    "approved_prefix_visible_rows": 21,
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "empty_targets": 0,
+    "excessive_prefix_rows": 0,
+    "failures": [],
+    "forbidden_key_rows": 0,
+    "full_target_visible_rows": 0,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "language_counts": {
+      "cpp": 4,
+      "python": 5,
+      "rust": 4,
+      "web_js_ts_html": 8
+    },
+    "max_prefix_chars": 64,
+    "max_prefix_words": 5,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "prefix_not_target_prefix_rows": 0,
+    "promotion_ready": false,
+    "route_counts": {
+      "EOS_CALIBRATION": 15,
+      "USE_FOR_DENOISE_REPAIR": 6
+    },
+    "rows": 21,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_counts": {
+      "eval": 7,
+      "strict_eval": 6,
+      "train": 8
+    },
+    "suffix_visible_rows": 0,
+    "unsafe_loss_rows": 0
+  },
+  "name": "stage9274_prefix_copy_denoise_manifest",
+  "next_best_step": "Run a contract-only preflight, then a tiny target-100M prefix-copy denoise probe and audit anchor-prefix match, target-prefix match, termination, repetition, and leaks.",
+  "passed": true,
+  "stage": 9274,
+  "stage_name": "stage9274_prefix_copy_denoise_manifest"
+}
