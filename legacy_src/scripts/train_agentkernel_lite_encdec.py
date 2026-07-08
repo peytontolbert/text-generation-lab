@@ -165,6 +165,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--tokenizer-json", type=Path, default=None, help="Optional recovered tokenizer.json for authorized probes; default is byte fallback.")
     parser.add_argument("--tokenizer-config", type=Path, default=None, help="Optional tokenizer_config.json paired with --tokenizer-json.")
+    parser.add_argument(
+        "--tokenizer-hashlock",
+        type=Path,
+        default=REPO_ROOT / "configs" / "tokenizer" / "agentkernel_bpe_1506_recovered_pointer.json",
+        help="Tokenizer hashlock JSON required for --probe-scale target_100m.",
+    )
     parser.add_argument("--execution-authorized-for-recovery-probe", action="store_true", help="Explicitly run the recovered probe implementation selected by --probe-scale. Requires all contract checks to pass.")
     parser.add_argument(
         "--contract-only",
@@ -212,6 +218,42 @@ def _manifest_hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _validate_target_100m_files(args: argparse.Namespace) -> list[str]:
+    errors: list[str] = []
+    if args.probe_scale != "target_100m":
+        return errors
+    if args.model_config is None:
+        errors.append("--probe-scale target_100m requires --model-config")
+    elif not args.model_config.is_file():
+        errors.append(f"model config does not exist: {args.model_config}")
+    if args.tokenizer_json is None:
+        errors.append("--probe-scale target_100m requires --tokenizer-json")
+    elif not args.tokenizer_json.is_file():
+        errors.append(f"tokenizer json does not exist: {args.tokenizer_json}")
+    if args.tokenizer_config is None:
+        errors.append("--probe-scale target_100m requires --tokenizer-config")
+    elif not args.tokenizer_config.is_file():
+        errors.append(f"tokenizer config does not exist: {args.tokenizer_config}")
+    if args.tokenizer_hashlock is None:
+        errors.append("--probe-scale target_100m requires --tokenizer-hashlock")
+    elif not args.tokenizer_hashlock.is_file():
+        errors.append(f"tokenizer hashlock does not exist: {args.tokenizer_hashlock}")
+    elif args.tokenizer_json is not None and args.tokenizer_json.is_file() and args.tokenizer_config is not None and args.tokenizer_config.is_file():
+        payload = json.loads(args.tokenizer_hashlock.read_text(encoding="utf-8"))
+        expected = payload.get("sha256") if isinstance(payload.get("sha256"), dict) else {}
+        expected_json = expected.get("tokenizer_json")
+        expected_config = expected.get("tokenizer_config")
+        if expected_json and _sha256_file(args.tokenizer_json) != expected_json:
+            errors.append("tokenizer json sha256 mismatch against hashlock")
+        if expected_config and _sha256_file(args.tokenizer_config) != expected_config:
+            errors.append("tokenizer config sha256 mismatch against hashlock")
+    return errors
+
+
 def load_manifest(path: Path) -> list[dict[str, Any]]:
     if not path.is_file():
         raise ProbeContractError(f"manifest does not exist: {path}")
@@ -230,10 +272,7 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
 
     if not implementation_guard["allowed_for_recovered_100m_target"]:
         errors.extend(str(error) for error in implementation_guard["errors"])
-    if args.probe_scale == "target_100m" and args.model_config is None:
-        errors.append("--probe-scale target_100m requires --model-config")
-    if args.model_config is not None and not args.model_config.is_file():
-        errors.append(f"model config does not exist: {args.model_config}")
+    errors.extend(_validate_target_100m_files(args))
     if args.decoder_ce_weight <= 0:
         errors.append("bounded decoder CE probe requires --decoder-ce-weight > 0")
     if args.structured_aux_weight != 0:
@@ -323,6 +362,7 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "tokenizer_contract": {
             "tokenizer_json": str(args.tokenizer_json) if args.tokenizer_json else None,
             "tokenizer_config": str(args.tokenizer_config) if args.tokenizer_config else None,
+            "tokenizer_hashlock": str(args.tokenizer_hashlock) if args.tokenizer_hashlock else None,
             "byte_fallback_used_when_unset": args.tokenizer_json is None,
             "target_100m_vocab_size": 1506,
         },
@@ -352,10 +392,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
 
     if not implementation_guard["allowed_for_recovered_100m_target"]:
         errors.extend(str(error) for error in implementation_guard["errors"])
-    if args.probe_scale == "target_100m" and args.model_config is None:
-        errors.append("--probe-scale target_100m requires --model-config")
-    if args.model_config is not None and not args.model_config.is_file():
-        errors.append(f"model config does not exist: {args.model_config}")
+    errors.extend(_validate_target_100m_files(args))
     if args.decoder_ce_weight != 0:
         errors.append("structured probes require --decoder-ce-weight 0")
     if args.mode != "denoise_repair_probe" and args.denoise_weight != 0:
@@ -450,6 +487,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "tokenizer_contract": {
             "tokenizer_json": str(args.tokenizer_json) if args.tokenizer_json else None,
             "tokenizer_config": str(args.tokenizer_config) if args.tokenizer_config else None,
+            "tokenizer_hashlock": str(args.tokenizer_hashlock) if args.tokenizer_hashlock else None,
             "byte_fallback_used_when_unset": args.tokenizer_json is None,
             "target_100m_vocab_size": 1506,
         },

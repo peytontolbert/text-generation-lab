@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
@@ -37,6 +38,28 @@ def write_manifest(path: Path, *, rows: int = 3, bad_loss: bool = False, over_ca
         )
     path.write_text("\n".join(json.dumps(row, sort_keys=True) for row in payloads) + "\n", encoding="utf-8")
 
+
+
+def write_hashlocked_tokenizer_files(tmp_path: Path) -> tuple[Path, Path, Path]:
+    tok_json = tmp_path / "tokenizer.json"
+    tok_cfg = tmp_path / "tokenizer_config.json"
+    hashlock = tmp_path / "tokenizer_hashlock.json"
+    tok_json.write_text('{"dummy":"contract-only"}\n', encoding="utf-8")
+    tok_cfg.write_text('{"vocab_size":1506,"pad_token_id":0,"bos_token_id":1,"eos_token_id":2}\n', encoding="utf-8")
+    hashlock.write_text(
+        json.dumps(
+            {
+                "sha256": {
+                    "tokenizer_json": hashlib.sha256(tok_json.read_bytes()).hexdigest(),
+                    "tokenizer_config": hashlib.sha256(tok_cfg.read_bytes()).hexdigest(),
+                }
+            },
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return tok_json, tok_cfg, hashlock
 
 def base_cmd(tmp_path: Path, manifest: Path) -> list[str]:
     probe_repo = tmp_path / "repo"
@@ -99,6 +122,7 @@ def test_recovered_trainer_help_exposes_stage8580_flags() -> None:
         "--model-config",
         "--tokenizer-json",
         "--tokenizer-config",
+        "--tokenizer-hashlock",
     ]:
         assert flag in result.stdout
 
@@ -206,11 +230,18 @@ def test_contract_records_recovered_target_100m_model_config_without_execution(t
     manifest = tmp_path / "manifest.jsonl"
     write_manifest(manifest)
     model_config = ROOT / "configs" / "model" / "agentkernel_100m_seq2seq_recovered_target.json"
+    tok_json, tok_cfg, hashlock = write_hashlocked_tokenizer_files(tmp_path)
     cmd = base_cmd(tmp_path, manifest) + [
         "--probe-scale",
         "target_100m",
         "--model-config",
         str(model_config),
+        "--tokenizer-json",
+        str(tok_json),
+        "--tokenizer-config",
+        str(tok_cfg),
+        "--tokenizer-hashlock",
+        str(hashlock),
         "--contract-only",
     ]
     result = subprocess.run(cmd, check=True, text=True, capture_output=True)
@@ -220,4 +251,32 @@ def test_contract_records_recovered_target_100m_model_config_without_execution(t
     assert card["probe_scale"] == "target_100m"
     assert card["implementation_contract"]["model_config"] == str(model_config)
     assert card["implementation_contract"]["target_100m_requires_model_config"] is True
+    assert card["tokenizer_contract"]["tokenizer_json"] == str(tok_json)
+    assert card["tokenizer_contract"]["tokenizer_config"] == str(tok_cfg)
+    assert card["tokenizer_contract"]["tokenizer_hashlock"] == str(hashlock)
+
+def test_contract_rejects_target_100m_tokenizer_hash_mismatch(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.jsonl"
+    write_manifest(manifest)
+    model_config = ROOT / "configs" / "model" / "agentkernel_100m_seq2seq_recovered_target.json"
+    tok_json, tok_cfg, hashlock = write_hashlocked_tokenizer_files(tmp_path)
+    tok_json.write_text('{"changed":"hash-mismatch"}\n', encoding="utf-8")
+    cmd = base_cmd(tmp_path, manifest) + [
+        "--probe-scale",
+        "target_100m",
+        "--model-config",
+        str(model_config),
+        "--tokenizer-json",
+        str(tok_json),
+        "--tokenizer-config",
+        str(tok_cfg),
+        "--tokenizer-hashlock",
+        str(hashlock),
+        "--contract-only",
+    ]
+    result = subprocess.run(cmd, text=True, capture_output=True)
+    assert result.returncode == 1
+    card = json.loads(result.stdout)
+    assert card["passed"] is False
+    assert "tokenizer json sha256 mismatch against hashlock" in card["errors"]
 
