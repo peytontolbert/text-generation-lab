@@ -1,0 +1,114 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9474_episode_obs_diag_balanced_order_target_100m_probe/stage9474_balanced_order_probe_audit.json",
+    "doc": "docs/EPISODE_OBS_DIAG_BALANCED_ORDER_PROBE_AUDIT_STAGE9474.md",
+    "execution_result": "runs/local/artifacts/stage9474_episode_obs_diag_balanced_order_target_100m_probe/execution_result.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T23:11:10Z",
+  "decision": "Balanced-order probe found jointly exact checkpoint intervals; final drift means next work is early-stop/best-state selection, not decoder CE.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "both_exact_checkpoints": [
+      {
+        "eval_joint": 1.0,
+        "eval_loss": 0.6468884944915771,
+        "step": 24,
+        "strict_joint": 1.0,
+        "strict_loss": 0.6726770401000977
+      },
+      {
+        "eval_joint": 1.0,
+        "eval_loss": 0.23208296298980713,
+        "step": 48,
+        "strict_joint": 1.0,
+        "strict_loss": 0.5860256552696228
+      },
+      {
+        "eval_joint": 1.0,
+        "eval_loss": 0.016619263216853142,
+        "step": 56,
+        "strict_joint": 1.0,
+        "strict_loss": 0.2488381713628769
+      },
+      {
+        "eval_joint": 1.0,
+        "eval_loss": 0.003307117149233818,
+        "step": 64,
+        "strict_joint": 1.0,
+        "strict_loss": 0.14015011489391327
+      },
+      {
+        "eval_joint": 1.0,
+        "eval_loss": 0.00408231932669878,
+        "step": 88,
+        "strict_joint": 1.0,
+        "strict_loss": 0.0770057737827301
+      }
+    ],
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Balanced train ordering produces multiple jointly exact eval/strict intervals, but final weights drift. Next trainer patch should support early-stop/checkpoint-selection telemetry or temporary best-state restore without promotion/export.",
+    "estimated_parameter_count": 102703145,
+    "failures": [],
+    "final_checkpoint_exported": false,
+    "final_eval_joint_proxy_exact": 1.0,
+    "final_strict_joint_proxy_exact": 0.0,
+    "gemma_executed": false,
+    "gemma_execution_authorized_next": false,
+    "harness_executed": false,
+    "harness_execution_authorized_next": false,
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "paired_checkpoint_records": 13,
+    "passed": true,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_passed": true,
+    "runtime_authorized": false,
+    "runtime_executed": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "selected_checkpoint_proxy": {
+      "eval_joint": 1.0,
+      "eval_loss": 0.00408231932669878,
+      "step": 88,
+      "strict_joint": 1.0,
+      "strict_loss": 0.0770057737827301
+    },
+    "source_emission_authorized": false,
+    "source_stage": "stage9473_episode_obs_diag_balanced_order_preflight_audit"
+  },
+  "name": "stage9474_episode_obs_diag_balanced_order_probe_audit",
+  "next_best_step": "Build Stage9475 early-stop/best-state selection design for structured probes with no final checkpoint export or promotion.",
+  "passed": true,
+  "stage": 9474,
+  "stage_name": "stage9474_episode_obs_diag_balanced_order_probe_audit"
+}
