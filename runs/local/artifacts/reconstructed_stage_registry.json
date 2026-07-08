@@ -4,21 +4,21 @@
       "body_emission_authorized": 0,
       "controller_complete_merge_authorized_next": 0,
       "decoder_ce_training_authorized_next": 1,
-      "denoise_ce_training_authorized_next": 36,
+      "denoise_ce_training_authorized_next": 39,
       "gemma_execution_authorized_next": 0,
       "harness_execution_authorized_next": 0,
-      "model_execution_authorized_next": 37,
+      "model_execution_authorized_next": 40,
       "promotion_ready": 0,
       "runtime_authorized": 0,
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9387,
-    "latest_stage_name": "stage9387_prefix_primed_bounded_decoder_failure_denoise_probe_audit",
-    "latest_stage_next_best_step": "Build a bounded decoder short-suffix bridge manifest with one-next/short continuation targets before another denoise probe.",
-    "max_stage": 9387,
+    "latest_stage": 9395,
+    "latest_stage_name": "stage9395_bounded_decoder_short_suffix_generation_cap_probe_audit",
+    "latest_stage_next_best_step": "Inspect generation-cap residuals; if train rows still pass but eval fails, add heldout contrastive suffix support before widening.",
+    "max_stage": 9395,
     "min_stage": 8530,
-    "registry_rows": 878
+    "registry_rows": 886
   },
   "passed": true,
   "rows": [
@@ -17581,6 +17581,166 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9387_prefix_primed_bounded_decoder_failure_denoise_probe_audit.json",
       "stage": 9387,
       "stage_name": "stage9387_prefix_primed_bounded_decoder_failure_denoise_probe_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build Stage9389 preexecution for the 23-row short-suffix denoise bridge probe; keep decoder CE closed.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9388_bounded_decoder_short_suffix_bridge_manifest.json",
+      "stage": 9388,
+      "stage_name": "stage9388_bounded_decoder_short_suffix_bridge_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": true,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": true,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Execute Stage9390 bounded decoder short-suffix bridge probe under trellis and audit exact short-suffix recovery.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9389_bounded_decoder_short_suffix_bridge_preexecution.json",
+      "stage": 9389,
+      "stage_name": "stage9389_bounded_decoder_short_suffix_bridge_preexecution"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Inspect short-suffix residual buckets and patch the smallest failing continuation family.",
+      "passed": false,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9390_bounded_decoder_short_suffix_bridge_probe_audit.json",
+      "stage": 9390,
+      "stage_name": "stage9390_bounded_decoder_short_suffix_bridge_probe_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build Stage9392 preexecution for the target-resolved short-suffix bridge probe.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9391_bounded_decoder_short_suffix_target_resolved_manifest.json",
+      "stage": 9391,
+      "stage_name": "stage9391_bounded_decoder_short_suffix_target_resolved_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": true,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": true,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Execute Stage9393 target-resolved short-suffix probe under trellis and audit exact short target recovery.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9392_bounded_decoder_short_suffix_target_resolved_preexecution.json",
+      "stage": 9392,
+      "stage_name": "stage9392_bounded_decoder_short_suffix_target_resolved_preexecution"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Inspect target-resolved short-suffix residual buckets before any wider decoder work.",
+      "passed": false,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9393_bounded_decoder_short_suffix_target_resolved_probe_audit.json",
+      "stage": 9393,
+      "stage_name": "stage9393_bounded_decoder_short_suffix_target_resolved_probe_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": true,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": true,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Execute Stage9395 generation-cap rerun and audit whether unterminated rows disappear.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9394_bounded_decoder_short_suffix_generation_cap_preexecution.json",
+      "stage": 9394,
+      "stage_name": "stage9394_bounded_decoder_short_suffix_generation_cap_preexecution"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Inspect generation-cap residuals; if train rows still pass but eval fails, add heldout contrastive suffix support before widening.",
+      "passed": false,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9395_bounded_decoder_short_suffix_generation_cap_probe_audit.json",
+      "stage": 9395,
+      "stage_name": "stage9395_bounded_decoder_short_suffix_generation_cap_probe_audit"
     }
   ]
 }
