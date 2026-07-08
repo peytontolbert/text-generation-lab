@@ -1,0 +1,69 @@
+{
+  "artifacts": {
+    "diagnosis": "runs/local/artifacts/stage9424_targeted_suffix_choice_interference_diagnosis/targeted_suffix_choice_interference_diagnosis.json",
+    "doc": "docs/TARGETED_SUFFIX_CHOICE_INTERFERENCE_DIAGNOSIS_STAGE9424.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T21:00:28Z",
+  "decision": "Stage9423 is safety-clean but interferes with suffix-choice quality; branch back to Stage9417/9419.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "confusion_counts": {
+      "checked_symbol_evidence__keep_decision_compatible => localized_repair_step__keep_response": 2,
+      "current_repair_invariant__do_not_introduce => repaired_state__keep_answer_focused": 2,
+      "dependency_constraint__keep_output_limited => expected_assertion_behavior__keep_value_small": 1,
+      "expected_assertion_behavior__keep_value_small => localized_repair_step__keep_response": 2,
+      "localized_edit_target__keep_path_reference => wrapper_plan__keep_answer_focused": 2,
+      "verified_patch_operator__use_repo => localized_repair_step__keep_response": 2,
+      "whitelist_patch__use_symbol => repaired_state__keep_answer_focused": 1
+    },
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "findings": [
+      "targeted_confusion_support_preserved_safety",
+      "targeted_confusion_support_regressed_quality_vs_stage9419",
+      "targeted_feature_support_overbiased_localized_or_checked_choices",
+      "do_not_build_on_stage9421_or_stage9423",
+      "branch_back_to_stage9417_or_stage9419_for_next_patch"
+    ],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "quality_passed": false,
+    "runtime_authorized": false,
+    "safety_preserved": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": 9423,
+    "stage9419_baseline_exact_by_split": {
+      "eval": 5,
+      "strict_eval": 4
+    },
+    "stage9419_baseline_target_pair_exact": "3/4",
+    "stage9423_exact_by_split": {
+      "eval": 3,
+      "strict_eval": 1
+    },
+    "stage9423_target_pair_exact": "0/4"
+  },
+  "name": "stage9424_targeted_suffix_choice_interference_diagnosis",
+  "next_best_step": "Design a lower-interference suffix-choice patch from Stage9417, or reconnect only the Stage9419-passing control decisions to denoise generation with residual guardrails.",
+  "passed": true,
+  "stage": 9424,
+  "stage_name": "stage9424_targeted_suffix_choice_interference_diagnosis"
+}

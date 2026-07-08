@@ -1,0 +1,61 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "confusion_counts": {
+    "checked_symbol_evidence__keep_decision_compatible => localized_repair_step__keep_response": 2,
+    "current_repair_invariant__do_not_introduce => repaired_state__keep_answer_focused": 2,
+    "dependency_constraint__keep_output_limited => expected_assertion_behavior__keep_value_small": 1,
+    "expected_assertion_behavior__keep_value_small => localized_repair_step__keep_response": 2,
+    "localized_edit_target__keep_path_reference => wrapper_plan__keep_answer_focused": 2,
+    "verified_patch_operator__use_repo => localized_repair_step__keep_response": 2,
+    "whitelist_patch__use_symbol => repaired_state__keep_answer_focused": 1
+  },
+  "findings": [
+    "targeted_confusion_support_preserved_safety",
+    "targeted_confusion_support_regressed_quality_vs_stage9419",
+    "targeted_feature_support_overbiased_localized_or_checked_choices",
+    "do_not_build_on_stage9421_or_stage9423",
+    "branch_back_to_stage9417_or_stage9419_for_next_patch"
+  ],
+  "passed": true,
+  "quality_passed": false,
+  "recommended_contract": {
+    "branch_from": "stage9417_balanced_suffix_choice_support_manifest",
+    "do_not_build_on": [
+      "stage9421_targeted_suffix_choice_confusion_repair_manifest",
+      "stage9423_targeted_suffix_choice_control_probe"
+    ],
+    "keep_closed": [
+      "decoder_ce",
+      "denoise_ce",
+      "runtime",
+      "gemma",
+      "harness",
+      "checkpoint_export"
+    ],
+    "next_patch_type": "lower_weight_or_holdout_specific_boundary_choice_probe"
+  },
+  "safety_preserved": true,
+  "source_stage": 9423,
+  "stage9419_baseline_exact_by_split": {
+    "eval": 5,
+    "strict_eval": 4
+  },
+  "stage9419_baseline_target_pair_exact": "3/4",
+  "stage9423_exact_by_split": {
+    "eval": 3,
+    "strict_eval": 1
+  },
+  "stage9423_target_pair_exact": "0/4"
+}
