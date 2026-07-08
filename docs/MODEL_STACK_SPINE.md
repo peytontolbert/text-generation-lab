@@ -2675,3 +2675,10 @@ Valid next work remains limited to waiting for a valid request or continuing no-
 All trainer/model/runtime/cleanup/mining/arxiv/checkpoint/source-body/Gemma/scoring/promotion authority remains closed.
 
 Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.
+
+## Stage9228 Request To Audit Instantiation Blocker
+
+Stage9228 clarifies that even a future valid explicit one-family request only permits a family-specific final pre-execution audit design. It does not permit live ticket materialization, trainer/model/runtime execution, checkpoint writes, cleanup, mining, or `/arxiv` access.
+With no valid request currently present, family selection and audit instantiation remain blocked.
+
+Next: Wait for a valid explicit one-family request, or continue no-execution central graph review.

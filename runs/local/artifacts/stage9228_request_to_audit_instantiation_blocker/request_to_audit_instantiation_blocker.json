@@ -1,0 +1,103 @@
+{
+  "audit_design_only_outputs": [
+    "family_specific_final_preexecution_audit_design_json",
+    "family_specific_final_preexecution_audit_design_doc",
+    "family_specific_final_preexecution_audit_design_tests"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers_when_no_valid_request": [
+    "cannot_select_family",
+    "cannot_instantiate_family_specific_final_audit",
+    "cannot_materialize_live_ticket",
+    "cannot_run_final_preexecution_audit",
+    "cannot_invoke_trainer",
+    "cannot_invoke_model",
+    "cannot_write_checkpoint",
+    "cannot_execute_cleanup",
+    "cannot_access_arxiv",
+    "cannot_run_runtime"
+  ],
+  "checks": {
+    "blockers_cover_training_cleanup_arxiv": true,
+    "chain_records_design_before_live_ticket": true,
+    "design_outputs_do_not_include_live_artifacts": true,
+    "forbidden_outputs_cover_runtime_checkpoint_body": true,
+    "no_previous_authority_open": true,
+    "previous_frontier_has_no_valid_request": true,
+    "previous_stage9227_passed": true,
+    "registry_frontier_stage9227_or_later": true
+  },
+  "decision": "Request-to-audit instantiation blocker recorded. A valid explicit one-family request is only permission to build a family-specific final pre-execution audit design; it is not permission to materialize a live ticket, run an audit, invoke trainer/model/runtime, write checkpoints, cleanup, mine, or access /arxiv.",
+  "forbidden_design_outputs": [
+    "live_ticket",
+    "trainer_command_execution",
+    "model_output",
+    "checkpoint",
+    "cleanup_result",
+    "runtime_result",
+    "arxiv_inventory",
+    "source_body_or_patch_body"
+  ],
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "audit_design_only_outputs": 3,
+    "backward_attempted": false,
+    "blockers_when_no_valid_request": 10,
+    "checkpoint_export_authorized": false,
+    "checkpoint_written_now": false,
+    "cleanup_authorized_now": false,
+    "cleanup_executed_now": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "family_selected_now": false,
+    "family_specific_final_audit_design_instantiated_now": false,
+    "family_specific_final_audit_executed_now": false,
+    "forbidden_design_outputs": 8,
+    "generation_attempted": false,
+    "live_ticket_materialized_now": false,
+    "model_forward_attempted": false,
+    "next_stage_execution_authorized": false,
+    "optimizer_created": false,
+    "request_to_audit_chain_steps": 6,
+    "request_validated_now": false,
+    "required_family_design_inputs": 6,
+    "runtime_authorized_flag": false,
+    "runtime_verifier_execution_authorized": false,
+    "same_stage_execution_authorized": false,
+    "trainer_executed_now": false,
+    "valid_request_present": false
+  },
+  "request_to_audit_chain": [
+    "valid_explicit_one_family_request_received",
+    "request_schema_validation_passes",
+    "selected_family_matches_supported_family",
+    "family_specific_final_preexecution_audit_design_built",
+    "family_specific_final_preexecution_audit_design_audited",
+    "only_then_consider_separate_live_ticket_design"
+  ],
+  "required_family_design_inputs": [
+    "validated_request_object",
+    "stage9223_inactive_template",
+    "selected_family_inactive_ticket_audit",
+    "selected_manifest_reference",
+    "selected_loss_mask_reference",
+    "selected_family_telemetry_requirements"
+  ],
+  "stage": 9228,
+  "stage_name": "stage9228_request_to_audit_instantiation_blocker",
+  "status": "REQUEST_TO_AUDIT_INSTANTIATION_BLOCKER_NO_EXECUTION"
+}
