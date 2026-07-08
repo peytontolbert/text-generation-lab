@@ -1,0 +1,98 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9463_episode_obs_diag_target_100m_tiny_probe/stage9463_tiny_probe_audit.json",
+    "doc": "docs/EPISODE_OBS_DIAG_TARGET_100M_TINY_PROBE_AUDIT_STAGE9463.md",
+    "execution_result": "runs/local/artifacts/stage9463_episode_obs_diag_target_100m_tiny_probe/execution_result.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T22:50:36Z",
+  "decision": "Stage9463 executed safely but failed strict observation-diagnosis quality; no further execution is authorized by this audit.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Observation diagnosis exposed a discriminating prefix-alignment feature, but the 16-step target-100M probe still learned the success prior and failed the strict residual row. Next step should be a controlled two-cell/micro-overfit probe or stronger residual weighting before widening.",
+    "estimated_parameter_count": 102703145,
+    "eval_joint_proxy_exact": 1.0,
+    "eval_rows": 1,
+    "failures": [
+      "quality_gate_not_passed"
+    ],
+    "final_checkpoint_exported": false,
+    "gemma_executed": false,
+    "gemma_execution_authorized_next": false,
+    "harness_executed": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_rows": 0,
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "passed": false,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_passed": false,
+    "required_artifacts_written": true,
+    "runtime_authorized": false,
+    "runtime_executed": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9462_episode_obs_diag_target_100m_preflight_audit",
+    "split_feature_counts": {
+      "eval": {
+        "prefix=True|outcome=successful_suffix_repair_step": 1
+      },
+      "strict_eval": {
+        "prefix=False|outcome=residual_suffix_repair_step": 1
+      },
+      "train": {
+        "prefix=False|outcome=residual_suffix_repair_step": 28,
+        "prefix=True|outcome=successful_suffix_repair_step": 20
+      }
+    },
+    "strict_field_exact": {
+      "episode_failure_type": 0.0,
+      "episode_repair_outcome": 0.0,
+      "episode_step_value": 0.0
+    },
+    "strict_joint_proxy_exact": 0.0,
+    "strict_rows": 1,
+    "train_rows": 48,
+    "wrong_by_field": {
+      "episode_failure_type": 1,
+      "episode_repair_outcome": 1,
+      "episode_step_value": 1
+    }
+  },
+  "name": "stage9463_episode_obs_diag_target_100m_tiny_probe_audit",
+  "next_best_step": "Build Stage9464 two-cell residual/support micro-overfit design or add class-balanced residual weighting before another target-100M run.",
+  "passed": false,
+  "stage": 9463,
+  "stage_name": "stage9463_episode_obs_diag_target_100m_tiny_probe_audit"
+}
