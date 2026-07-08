@@ -1,0 +1,179 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "every_section_has_requirements": true,
+    "family_telemetry_declared_for_all_families": true,
+    "no_previous_authority_open": true,
+    "previous_stage9222_passed": true,
+    "registry_frontier_stage9222_or_later": true,
+    "required_sections_present": true,
+    "supported_families_match_previous_gap_map": true,
+    "template_false_metric_count_sufficient": true
+  },
+  "decision": "Inactive final pre-execution audit template recorded. It can be used later to build a family-specific audit after an explicit one-family request, but this template selects no family, materializes no live ticket, and authorizes no trainer/model/runtime/cleanup/mining/arxiv operation.",
+  "family_telemetry_requirements": {
+    "bounded_decoder_ce_probe": [
+      "row_token_loss.jsonl",
+      "eos_length_audit.json",
+      "short_output_probe.json",
+      "repetition_probe.json",
+      "internal_leak_probe.json",
+      "module_delta_norms.json"
+    ],
+    "denoise_repair_probe": [
+      "repair_pair_integrity.json",
+      "denoise_row_loss.jsonl",
+      "repair_output_quality.json",
+      "internal_leak_probe.json",
+      "repetition_probe.json",
+      "target_resolver_readonly_proof.json"
+    ],
+    "structured_policy_probe": [
+      "row_field_logits.jsonl",
+      "row_field_losses.jsonl",
+      "row_gradient_norms.jsonl",
+      "confusion_matrix.json",
+      "collapse_rate_card.json"
+    ]
+  },
+  "metrics": {
+    "arxiv_read_authorized_for_compiler": false,
+    "arxiv_write_authorized": false,
+    "backward_attempted": false,
+    "checkpoint_export_authorized": false,
+    "checkpoint_written_now": false,
+    "cleanup_authorized_now": false,
+    "cleanup_executed_now": false,
+    "data_mining_authorized": false,
+    "decoder_ce_authorized": false,
+    "denoise_ce_authorized": false,
+    "family_selected_now": false,
+    "family_telemetry_artifacts": 17,
+    "generation_attempted": false,
+    "live_ticket_materialized_now": false,
+    "model_forward_attempted": false,
+    "next_stage_execution_authorized": false,
+    "optimizer_created": false,
+    "required_sections": 9,
+    "runtime_authorized_flag": false,
+    "runtime_verifier_execution_authorized": false,
+    "same_stage_execution_authorized": false,
+    "section_requirement_total": 40,
+    "supported_families": 3,
+    "template_false_metrics": 20,
+    "trainer_executed_now": false
+  },
+  "required_sections": [
+    "identity_and_family_selection",
+    "manifest_and_loss_mask_hashes",
+    "trainer_command_surface",
+    "runtime_assertion_contract",
+    "telemetry_artifact_contract",
+    "safe_cleanup_dry_run_contract",
+    "authority_and_forbidden_paths",
+    "worktree_scope",
+    "decision_and_next_stage"
+  ],
+  "section_requirements": {
+    "authority_and_forbidden_paths": [
+      "model_execution_authority_false_in_template",
+      "trainer_execution_false_in_template",
+      "runtime_false_in_template",
+      "arxiv_io_false_in_template",
+      "source_body_emission_false_in_template"
+    ],
+    "decision_and_next_stage": [
+      "template_never_authorizes_same_stage_execution",
+      "future_instance_may_only_recommend_next_stage_review",
+      "execution_requires_separate_live_ticket_after_audit"
+    ],
+    "identity_and_family_selection": [
+      "exactly_one_family_selected_in_future_instance",
+      "family_in_supported_families",
+      "inactive_template_cannot_select_family",
+      "no_multi_family_ticket"
+    ],
+    "manifest_and_loss_mask_hashes": [
+      "selected_manifest_path_recorded",
+      "selected_manifest_hash_recorded",
+      "loss_mask_hash_recorded",
+      "row_caps_recorded",
+      "split_counts_recorded"
+    ],
+    "runtime_assertion_contract": [
+      "row_count_assertions",
+      "loss_mask_assertions",
+      "forbidden_loss_assertions",
+      "checkpoint_export_assertions",
+      "authority_closed_assertions"
+    ],
+    "safe_cleanup_dry_run_contract": [
+      "safe_cleanup_entrypoint_only",
+      "dry_run_only_before_live_authority",
+      "repo_root_data_root_arxiv_forbidden",
+      "output_dir_marker_required",
+      "cleanup_execution_false"
+    ],
+    "telemetry_artifact_contract": [
+      "required_artifacts_declared",
+      "non_empty_artifact_gate_declared",
+      "row_level_failure_attribution_declared",
+      "family_specific_telemetry_declared"
+    ],
+    "trainer_command_surface": [
+      "mode_matches_family",
+      "manifest_flag_present",
+      "max_rows_flags_match_caps",
+      "max_steps_recorded",
+      "no_final_checkpoint_export_flag_present",
+      "require_loss_mask_enforcement_audit_flag_present"
+    ],
+    "worktree_scope": [
+      "selected_files_only",
+      "unrelated_dirty_files_ignored",
+      "no_cleanup_of_untracked_files"
+    ]
+  },
+  "stage": 9223,
+  "stage_name": "stage9223_inactive_final_preexecution_audit_template",
+  "status": "INACTIVE_FINAL_PREEXECUTION_AUDIT_TEMPLATE_NO_EXECUTION",
+  "supported_families": [
+    "structured_policy_probe",
+    "bounded_decoder_ce_probe",
+    "denoise_repair_probe"
+  ],
+  "template_false_metrics": [
+    "family_selected_now",
+    "live_ticket_materialized_now",
+    "same_stage_execution_authorized",
+    "next_stage_execution_authorized",
+    "trainer_executed_now",
+    "model_forward_attempted",
+    "generation_attempted",
+    "backward_attempted",
+    "optimizer_created",
+    "checkpoint_written_now",
+    "checkpoint_export_authorized",
+    "cleanup_authorized_now",
+    "cleanup_executed_now",
+    "runtime_authorized_flag",
+    "runtime_verifier_execution_authorized",
+    "decoder_ce_authorized",
+    "denoise_ce_authorized",
+    "arxiv_read_authorized_for_compiler",
+    "arxiv_write_authorized",
+    "data_mining_authorized"
+  ]
+}

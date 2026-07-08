@@ -2636,3 +2636,11 @@ Stage9222 makes the remaining pre-execution gaps family-specific: structured-pol
 This stage does not select a family and opens no execution authority.
 
 Next: Either stop, or if the user explicitly chooses one family, build that family-specific final pre-execution audit design only.
+
+## Stage9223 Inactive Final Preexecution Audit Template
+
+Stage9223 records a reusable inactive final pre-execution audit template for the three repo-local families. It is schema/control-plane only and selects no family.
+The template requires manifest/loss-mask hashes, command-surface checks, runtime assertions, telemetry contracts, safe-cleanup dry-run checks, authority closure, and worktree-scope checks before any future family-specific audit can pass.
+No trainer, model, runtime, cleanup, mining, `/arxiv`, source/body emission, Gemma, scoring, controller merge, or promotion authority is opened.
+
+Next: Wait for explicit one-family request before instantiating this template; otherwise continue no-execution review.
