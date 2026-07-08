@@ -1,0 +1,65 @@
+{
+  "artifacts": {
+    "diagnosis": "runs/local/artifacts/stage9408_minimal_phrase_disambiguation_failure_diagnosis/minimal_phrase_disambiguation_failure_diagnosis.json",
+    "doc": "docs/MINIMAL_PHRASE_DISAMBIGUATION_FAILURE_DIAGNOSIS_STAGE9408.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T20:08:36Z",
+  "decision": "Stage9407 preserved safety but failed quality; phrase-text support is unstable and should not be extended.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "exact_match_rows": 6,
+    "findings": [
+      "safety_contract_held",
+      "target_pair_exact_regressed_to_zero",
+      "expected_assertion_first_boundary_recovered_but_suffix_copied_support",
+      "current_repair_invariant_boundary_still_loses_to_answer_focused",
+      "new_phrase_support_row_reintroduced_repetition",
+      "new_phrase_support_rows_not_self_stable"
+    ],
+    "gemma_execution_authorized_next": false,
+    "generated_internal_token_rows": 0,
+    "generated_repetition_rows": 1,
+    "generated_rows": 33,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "quality_passed": false,
+    "runtime_authorized": false,
+    "safety_preserved": true,
+    "scoring_authorized_next": false,
+    "short_or_junk_rows": 0,
+    "source_emission_authorized": false,
+    "source_stage": 9407,
+    "support_exact_rows": 0,
+    "support_repetition_rows": [
+      "stage9405_phrase_disambig_001_b7b69cd1deaf3ca8"
+    ],
+    "support_rows": 2,
+    "target_pair_boundary_rows": 2,
+    "target_pair_exact_rows": 0,
+    "target_pair_heldout_rows": 4,
+    "unterminated_rows": 1
+  },
+  "name": "stage9408_minimal_phrase_disambiguation_failure_diagnosis",
+  "next_best_step": "Build a structured suffix-route disambiguation/choice-control manifest from the Stage9397 basis; do not add more phrase-text support rows.",
+  "passed": true,
+  "stage": 9408,
+  "stage_name": "stage9408_minimal_phrase_disambiguation_failure_diagnosis"
+}

@@ -1,0 +1,141 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "exact_match_rows": 6,
+  "findings": [
+    "safety_contract_held",
+    "target_pair_exact_regressed_to_zero",
+    "expected_assertion_first_boundary_recovered_but_suffix_copied_support",
+    "current_repair_invariant_boundary_still_loses_to_answer_focused",
+    "new_phrase_support_row_reintroduced_repetition",
+    "new_phrase_support_rows_not_self_stable"
+  ],
+  "generated_internal_token_rows": 0,
+  "generated_repetition_rows": 1,
+  "generated_rows": 33,
+  "heldout_pair_residuals": [
+    {
+      "boundary_match": true,
+      "exact_match": false,
+      "expected_rank": 1,
+      "expected_token_text": " exp",
+      "generated_text": "Select the small constant that preserves the expected assertion behavior. Keep the checked value",
+      "generated_token_text": " exp",
+      "pair": "expected_assertion_behavior",
+      "row_id": "stage9391_short_suffix_resolved_001_1df827ac6b67a3ee",
+      "split": "eval",
+      "target_text": "Select the small constant that preserves the expected assertion behavior. Keep the value small"
+    },
+    {
+      "boundary_match": false,
+      "exact_match": false,
+      "expected_rank": 2,
+      "expected_token_text": " current",
+      "generated_text": "Choose the concrete value tied to the answer focused",
+      "generated_token_text": " answer",
+      "pair": "current_repair_invariant",
+      "row_id": "stage9391_short_suffix_resolved_017_ce708c280b429379",
+      "split": "eval",
+      "target_text": "Choose the concrete value tied to the current repair invariant. Do not introduce an"
+    },
+    {
+      "boundary_match": false,
+      "exact_match": false,
+      "expected_rank": 3,
+      "expected_token_text": " current",
+      "generated_text": "Choose the concrete value tied to the answer focused",
+      "generated_token_text": " answer",
+      "pair": "current_repair_invariant",
+      "row_id": "stage9391_short_suffix_resolved_005_badb848efffd424f",
+      "split": "strict_eval",
+      "target_text": "Choose the concrete value tied to the current repair invariant. Do not introduce an"
+    },
+    {
+      "boundary_match": true,
+      "exact_match": false,
+      "expected_rank": 1,
+      "expected_token_text": " exp",
+      "generated_text": "Select the small constant that preserves the expected assertion behavior. Keep the checked value",
+      "generated_token_text": " exp",
+      "pair": "expected_assertion_behavior",
+      "row_id": "stage9391_short_suffix_resolved_013_805dd29fe6bb8bde",
+      "split": "strict_eval",
+      "target_text": "Select the small constant that preserves the expected assertion behavior. Keep the value small"
+    }
+  ],
+  "passed": true,
+  "quality_passed": false,
+  "recommended_contract": {
+    "blocked_patch_type": "more_surface_phrase_text_support_rows",
+    "branch_from": "stage9397_heldout_contrastive_suffix_support_manifest",
+    "candidate_fields": [
+      "suffix_route_family",
+      "suffix_intent_class",
+      "post_prefix_continuation_class",
+      "avoid_answer_focused_prior",
+      "value_small_vs_checked_value_discriminator",
+      "current_invariant_vs_generic_answer_discriminator"
+    ],
+    "do_not_build_on": [
+      "stage9401_suffix_second_span_support_manifest",
+      "stage9405_minimal_phrase_disambiguation_manifest"
+    ],
+    "next_patch_type": "structured_suffix_route_disambiguation_or_suffix_choice_control",
+    "requirements": [
+      "Keep decoder CE closed.",
+      "Use denoise-only or structured-control loss masks.",
+      "Do not add exact heldout target copies to train.",
+      "Add route/discriminator features outside copied target text, then audit single-feature shortcuts.",
+      "Pass support-row self-stability before measuring heldout recovery."
+    ]
+  },
+  "safety_preserved": true,
+  "short_or_junk_rows": 0,
+  "source_stage": 9407,
+  "support_exact_rows": 0,
+  "support_repetition_rows": [
+    "stage9405_phrase_disambig_001_b7b69cd1deaf3ca8"
+  ],
+  "support_residuals": [
+    {
+      "boundary_match": true,
+      "exact_match": false,
+      "expected_rank": 1,
+      "expected_token_text": " exp",
+      "generated_text": "Select the small constant that preserves the expected assertion behavior. Keep the value",
+      "generated_token_text": " exp",
+      "pair": "expected_assertion_behavior",
+      "row_id": "stage9405_phrase_disambig_000_2c996efa3a57136b",
+      "split": "train",
+      "target_text": "Select the small constant that preserves the expected assertion behavior. Keep the checked value"
+    },
+    {
+      "boundary_match": true,
+      "exact_match": false,
+      "expected_rank": 1,
+      "expected_token_text": " current",
+      "generated_text": "Choose the concrete value tied to the current repair invariant. Avoid wid wid wid wid wid wid wid wid wid wid wid wid wid wid wid wid wid wid wid",
+      "generated_token_text": " current",
+      "pair": "current_repair_invariant",
+      "row_id": "stage9405_phrase_disambig_001_b7b69cd1deaf3ca8",
+      "split": "train",
+      "target_text": "Choose the concrete value tied to the current repair invariant. Avoid widening scope"
+    }
+  ],
+  "support_rows": 2,
+  "target_pair_boundary_rows": 2,
+  "target_pair_exact_rows": 0,
+  "target_pair_heldout_rows": 4,
+  "unterminated_rows": 1
+}
