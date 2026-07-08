@@ -49,6 +49,19 @@ REQUIRED_STRUCTURED_ARTIFACTS = [
     "cleanup_proof.json",
 ]
 
+REQUIRED_DENOISE_ARTIFACTS = [
+    "loss_by_step.jsonl",
+    "eval_loss_by_checkpoint.jsonl",
+    "row_token_loss.jsonl",
+    "row_gradient_norms.jsonl",
+    "activation_summary.jsonl",
+    "row_dynamics_history.jsonl",
+    "denoise_repair_quality_audit.json",
+    "module_delta_norms.json",
+    "failure_bucket_card.json",
+    "cleanup_proof.json",
+]
+
 STRUCTURED_LOSS_TO_FIELD = {
     "surface_role_ce": "surface_role",
     "repair_surface_ce": "repair_surface",
@@ -966,6 +979,193 @@ def run_bounded_decoder_ce_probe(
         "generated_rows": int(generation_card.get("generated_rows", 0)),
         "contentful_generation_rate": generation_card.get("contentful_rate"),
         "eos_loss_weight": eos_loss_weight,
+    }
+
+
+def run_denoise_repair_probe(
+    rows: list[dict[str, Any]],
+    *,
+    output_dir: Path,
+    run_id: str,
+    max_train_rows: int,
+    max_eval_rows: int,
+    max_strict_rows: int,
+    max_steps: int,
+    batch_size: int,
+    max_encoder_tokens: int,
+    max_decoder_tokens: int,
+    learning_rate: float = 5e-5,
+    seed: int = 1337,
+    implementation: str = "transformer",
+    probe_scale: str = "tiny_transformer",
+    model_config: Path | None = None,
+    tokenizer_json: Path | None = None,
+    tokenizer_config: Path | None = None,
+    eos_loss_weight: float = 1.0,
+) -> dict[str, Any]:
+    """Run a tiny denoise repair probe over corrupted-output -> clean-target rows."""
+    random.seed(seed)
+    torch.manual_seed(seed)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / ".agentkernel_probe_output").write_text(f"run_id={run_id}\nmode=denoise_repair_probe\n", encoding="utf-8")
+
+    train_rows = _split_rows(rows, "train", max_train_rows)
+    eval_rows = _split_rows(rows, "eval", max_eval_rows)
+    strict_rows = _split_rows(rows, "strict_eval", max_strict_rows)
+    if not train_rows:
+        raise ValueError("denoise repair probe requires train rows")
+
+    from .training_data import load_tokenizer
+
+    tokenizer = load_tokenizer(tokenizer_json, tokenizer_config)
+    model, implementation_card = _build_probe_model(
+        implementation,
+        vocab_size=tokenizer.vocab_size,
+        probe_scale=probe_scale,
+        model_config=model_config,
+    )
+    tokenizer_card = {
+        "tokenizer_kind": getattr(tokenizer, "tokenizer_kind", "unknown"),
+        "vocab_size": int(getattr(tokenizer, "vocab_size", 0)),
+        "pad_id": int(getattr(tokenizer, "pad_id", 0)),
+        "bos_id": int(getattr(tokenizer, "bos_id", 1)),
+        "eos_id": int(getattr(tokenizer, "eos_id", 2)),
+        "tokenizer_json": str(tokenizer_json) if tokenizer_json else None,
+        "tokenizer_config": str(tokenizer_config) if tokenizer_config else None,
+    }
+    before = {name: value.detach().clone() for name, value in model.state_dict().items()}
+    optimizer = AdamW(model.parameters(), lr=learning_rate)
+    row_dynamics: dict[str, dict[str, Any]] = {}
+    model.train()
+
+    for step in range(1, max_steps + 1):
+        batch_rows = [train_rows[(step * batch_size + i) % len(train_rows)] for i in range(batch_size)]
+        batch = build_batch(batch_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
+        optimizer.zero_grad(set_to_none=True)
+        out = model(batch.input_ids, batch.decoder_input_ids)
+        loss = _decoder_ce_loss(
+            model,
+            out["decoder_logits"],
+            batch.labels,
+            batch.loss_mask.get("denoise_ce"),
+            eos_id=int(getattr(tokenizer, "eos_id", 2)),
+            eos_loss_weight=eos_loss_weight,
+        )
+        loss.backward()
+        for row_id in batch.row_ids:
+            grad_card = _gradient_norm_card(row_id, model, losses_enabled=["denoise_ce"])
+            grad_card.update({"step": step, "gradient_scope": "batch_shared", "batch_row_ids": batch.row_ids})
+            _append_jsonl(output_dir / "row_gradient_norms.jsonl", grad_card)
+        pre_clip_grad_norm = float(torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0))
+        post_clip_grad_norm = _total_grad_norm(model)
+        _write_jsonl_rows(output_dir / "activation_summary.jsonl", _activation_summary(batch.row_ids, out, split="train", step=step))
+        token_rows = _token_loss_rows(row_ids=batch.row_ids, logits=out["decoder_logits"].detach(), labels=batch.labels, tokenizer=tokenizer)
+        for token_row in token_rows:
+            token_row.update({"split": "train", "step": step})
+            _append_jsonl(output_dir / "row_token_loss.jsonl", token_row)
+            dyn = row_dynamics.setdefault(token_row["row_id"], {"row_id": token_row["row_id"], "loss_history": [], "confidence_history": [], "correct_history": []})
+            dyn["loss_history"].append(token_row["mean_loss"])
+        optimizer.step()
+        _append_jsonl(
+            output_dir / "loss_by_step.jsonl",
+            {
+                "step": step,
+                "loss": float(loss.detach().item()),
+                "grad_norm": pre_clip_grad_norm,
+                "pre_clip_grad_norm": pre_clip_grad_norm,
+                "post_clip_grad_norm": post_clip_grad_norm,
+                "row_ids": batch.row_ids,
+                "losses_enabled": ["denoise_ce"],
+            },
+        )
+
+    def eval_split(name: str, split_rows: list[dict[str, Any]]) -> dict[str, Any]:
+        if not split_rows:
+            return {"split": name, "rows": 0, "loss": None}
+        model.eval()
+        with torch.no_grad():
+            batch = build_batch(split_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
+            out = model(batch.input_ids, batch.decoder_input_ids)
+            loss = _decoder_ce_loss(
+                model,
+                out["decoder_logits"],
+                batch.labels,
+                batch.loss_mask.get("denoise_ce"),
+                eos_id=int(getattr(tokenizer, "eos_id", 2)),
+                eos_loss_weight=eos_loss_weight,
+            )
+            token_rows = _token_loss_rows(row_ids=batch.row_ids, logits=out["decoder_logits"], labels=batch.labels, tokenizer=tokenizer)
+        for token_row in token_rows:
+            token_row.update({"split": name, "step": None})
+            _append_jsonl(output_dir / "row_token_loss.jsonl", token_row)
+            dyn = row_dynamics.setdefault(token_row["row_id"], {"row_id": token_row["row_id"], "loss_history": [], "confidence_history": [], "correct_history": []})
+            dyn["loss_history"].append(token_row["mean_loss"])
+        _write_jsonl_rows(output_dir / "activation_summary.jsonl", _activation_summary(batch.row_ids, out, split=name, step=None))
+        record = {"split": name, "rows": len(split_rows), "loss": float(loss.item())}
+        _append_jsonl(output_dir / "eval_loss_by_checkpoint.jsonl", record)
+        return record
+
+    eval_card = {"eval": eval_split("eval", eval_rows), "strict_eval": eval_split("strict_eval", strict_rows)}
+    after = {name: value.detach().clone() for name, value in model.state_dict().items()}
+    _write_json(output_dir / "module_delta_norms.json", _module_delta_norm_card(before, after))
+
+    token_records = [json.loads(line) for line in (output_dir / "row_token_loss.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    for row_id, dyn in sorted(row_dynamics.items()):
+        losses = [float(value) for value in dyn.get("loss_history", [])]
+        mean = sum(losses) / max(1, len(losses))
+        dyn.update(
+            {
+                "loss_mean": mean,
+                "loss_variance": sum((value - mean) ** 2 for value in losses) / max(1, len(losses)),
+                "forgetting_events": 0,
+                "prediction_flip_count": 0,
+            }
+        )
+        _append_jsonl(output_dir / "row_dynamics_history.jsonl", dyn)
+
+    target_internal_token_rows = sum(1 for row in token_records if any(pos.get("is_internal_or_control_token") for pos in row.get("positions", [])))
+    target_repetition_rows = sum(1 for row in token_records if row.get("repeated_token_positions"))
+    repair_route_counts: dict[str, int] = {}
+    for row in rows:
+        route = str(row.get("route") or "unknown")
+        repair_route_counts[route] = repair_route_counts.get(route, 0) + 1
+    quality_card = {
+        "mode": "denoise_repair_probe",
+        "rows": len(rows),
+        "train_rows": len(train_rows),
+        "eval_rows": len(eval_rows),
+        "strict_rows": len(strict_rows),
+        "route_counts": repair_route_counts,
+        "eval": eval_card,
+        "target_internal_token_rows": target_internal_token_rows,
+        "target_repetition_rows": target_repetition_rows,
+        "decoder_ce_rows": 0,
+        "runtime_executed": False,
+        "gemma_executed": False,
+        "harness_executed": False,
+    }
+    _write_json(output_dir / "denoise_repair_quality_audit.json", quality_card)
+    _write_json(output_dir / "failure_bucket_card.json", {"mode": "denoise_repair_probe", "eval": eval_card, "token_loss_rows": len(token_records), "target_repetition_rows": target_repetition_rows})
+    _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "denoise loop does not write checkpoints", "run_id": run_id})
+
+    return {
+        "run_id": run_id,
+        "mode": "denoise_repair_probe",
+        "train_rows": len(train_rows),
+        "eval_rows": len(eval_rows),
+        "strict_rows": len(strict_rows),
+        "max_steps": max_steps,
+        "batch_size": batch_size,
+        "implementation": implementation_card,
+        "tokenizer": tokenizer_card,
+        "eval": eval_card,
+        "final_checkpoint_exported": False,
+        "runtime_executed": False,
+        "gemma_executed": False,
+        "harness_executed": False,
+        "decoder_ce_rows": 0,
+        "denoise_ce_rows": len(rows),
+        "required_artifacts_written": all((output_dir / name).exists() and (not name.endswith(".jsonl") or (output_dir / name).stat().st_size > 0) for name in REQUIRED_DENOISE_ARTIFACTS),
     }
 
 def run_structured_aux_probe(

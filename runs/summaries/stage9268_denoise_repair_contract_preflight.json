@@ -1,0 +1,111 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9268_denoise_repair_contract_preflight/denoise_repair_contract_preflight_audit.json",
+    "doc": "docs/DENOISE_REPAIR_CONTRACT_PREFLIGHT_STAGE9268.md",
+    "manifest": "runs/local/artifacts/stage9267_repetition_to_denoise_repair_manifest/repetition_to_denoise_repair_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T04:49:31Z",
+  "decision": "Stage9267 passes the denoise-only manifest and trainer contract preflight. Native denoise runtime support is present, but execution authority remains closed until a dedicated execution review is built.",
+  "metrics": {
+    "allowed_losses": [
+      "denoise_ce"
+    ],
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "denoise_execution_ready": true,
+    "empty_targets": 0,
+    "execution_authorized_now": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_counts": {
+      "action_sequence_ce": 0,
+      "allowed_import_policy_ce": 0,
+      "blocked_import_policy_ce": 0,
+      "build_mode_ce": 0,
+      "decoder_ce": 0,
+      "denoise_ce": 21,
+      "edit_localization_ce": 0,
+      "file_plan_ce": 0,
+      "patch_operator_ce": 0,
+      "repair_surface_ce": 0,
+      "repo_dependency_policy_ce": 0,
+      "runtime_reward": 0,
+      "surface_role_ce": 0,
+      "symbol_binding_ce": 0,
+      "verifier_repair_ce": 0
+    },
+    "manifest_sha256": "e7c542553b87985845d24e6810a5f83aef2726a40fdfe5580313de8337253f31",
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "required_runtime_artifacts": [
+      "loss_by_step.jsonl",
+      "eval_loss_by_checkpoint.jsonl",
+      "row_token_loss.jsonl",
+      "row_gradient_norms.jsonl",
+      "activation_summary.jsonl",
+      "row_dynamics_history.jsonl",
+      "denoise_repair_quality_audit.json",
+      "module_delta_norms.json",
+      "failure_bucket_card.json",
+      "cleanup_proof.json"
+    ],
+    "route_counts": {
+      "EOS_CALIBRATION": 15,
+      "USE_FOR_DENOISE_REPAIR": 6
+    },
+    "rows": 21,
+    "runtime_authorized": false,
+    "runtime_support": {
+      "execution_supported": true,
+      "has_native_denoise_runner": true,
+      "structured_loss_maps_denoise_ce": false,
+      "trainer_dispatches_native_denoise_runner": true
+    },
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_counts": {
+      "eval": 7,
+      "strict_eval": 6,
+      "train": 8
+    },
+    "trainer_contract_errors": [],
+    "trainer_contract_passed": true,
+    "unsafe_loss_rows": 0
+  },
+  "name": "stage9268_denoise_repair_contract_preflight",
+  "next_best_step": "Build a no-runtime denoise repair execution review for one tiny target-100M denoise probe, then run a final pre-execution audit before any model execution.",
+  "passed": true,
+  "stage": 9268,
+  "stage_name": "stage9268_denoise_repair_contract_preflight"
+}

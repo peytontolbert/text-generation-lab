@@ -96,6 +96,10 @@ def _row_text(row: dict[str, Any]) -> str:
         parts.append(f"objective={row.get('objective_family')}")
     if row.get("surface"):
         parts.append(f"surface={row.get('surface')}")
+    if isinstance(row.get("corrupted_output"), str):
+        parts.append(f"corrupted_output={row.get('corrupted_output')}")
+    if isinstance(row.get("verifier_failure"), str):
+        parts.append(f"verifier_failure={row.get('verifier_failure')}")
     _append_structured(parts, "state", state)
     model_input = row.get("model_input") if isinstance(row.get("model_input"), dict) else {}
     _append_structured(parts, "model", model_input)

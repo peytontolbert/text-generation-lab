@@ -79,6 +79,19 @@ REQUIRED_STRUCTURED_ARTIFACTS = (
     "cleanup_proof.json",
 )
 
+REQUIRED_DENOISE_ARTIFACTS = (
+    "loss_by_step.jsonl",
+    "eval_loss_by_checkpoint.jsonl",
+    "row_token_loss.jsonl",
+    "row_gradient_norms.jsonl",
+    "activation_summary.jsonl",
+    "row_dynamics_history.jsonl",
+    "denoise_repair_quality_audit.json",
+    "module_delta_norms.json",
+    "failure_bucket_card.json",
+    "cleanup_proof.json",
+)
+
 STRUCTURED_MODE_ALLOWED_LOSSES = {
     "structured_policy_probe": {
         "surface_role_ce",
@@ -552,7 +565,12 @@ def emit_contract_artifacts(args: argparse.Namespace, card: dict[str, Any]) -> N
             "output_dir": str(out.resolve()),
         },
     )
-    required_artifacts = REQUIRED_BOUNDED_ARTIFACTS if args.mode == "bounded_decoder_ce_probe" else REQUIRED_STRUCTURED_ARTIFACTS
+    if args.mode == "bounded_decoder_ce_probe":
+        required_artifacts = REQUIRED_BOUNDED_ARTIFACTS
+    elif args.mode == "denoise_repair_probe":
+        required_artifacts = REQUIRED_DENOISE_ARTIFACTS
+    else:
+        required_artifacts = REQUIRED_STRUCTURED_ARTIFACTS
     for artifact in required_artifacts:
         path = out / artifact
         if path.name == "cleanup_proof.json":
@@ -591,7 +609,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
     legacy_src = REPO_ROOT / "legacy_src"
     if str(legacy_src) not in sys.path:
         sys.path.insert(0, str(legacy_src))
-    from agentkernel_lite.training_loop import run_bounded_decoder_ce_probe, run_structured_aux_probe
+    from agentkernel_lite.training_loop import run_bounded_decoder_ce_probe, run_denoise_repair_probe, run_structured_aux_probe
 
     common = dict(
         rows=rows,
@@ -617,6 +635,11 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             enable_generation_audit=args.enable_generation_audit,
             max_generation_rows=args.max_generation_rows,
             max_generation_tokens=args.max_generation_tokens,
+            eos_loss_weight=args.eos_loss_weight,
+        )
+    elif args.mode == "denoise_repair_probe":
+        result = run_denoise_repair_probe(
+            **common,
             eos_loss_weight=args.eos_loss_weight,
         )
     elif args.mode in STRUCTURED_MODE_ALLOWED_LOSSES and args.mode != "repo_graph_probe":
