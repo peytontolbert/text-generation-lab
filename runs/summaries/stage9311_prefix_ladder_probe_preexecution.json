@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9311_prefix_ladder_probe_preexecution/prefix_ladder_probe_preexecution_audit.json",
+    "command": "runs/local/artifacts/stage9311_prefix_ladder_probe_preexecution/stage9312_prefix_ladder_probe_command.json",
+    "doc": "docs/PREFIX_LADDER_PROBE_PREEXECUTION_STAGE9311.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": true,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T14:46:08Z",
+  "decision": "Prepared a target-100M denoise probe over the Stage9310 prefix-ladder suffix curriculum; decoder CE and all external authority remain closed.",
+  "metrics": {
+    "authorized_next_stage": 9312,
+    "body_emission_authorized": false,
+    "command_ready": true,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": true,
+    "failures": 0,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "manifest_rows": 32,
+    "model_execution_authorized_next": true,
+    "prefix_counts": {
+      "5": 7,
+      "6": 9,
+      "7": 7,
+      "8": 9
+    },
+    "promotion_ready": false,
+    "required_postrun_artifacts": [
+      "sample_generation_audit.json",
+      "boundary_next_token_logits.jsonl",
+      "row_token_loss.jsonl",
+      "module_delta_norms.json",
+      "cleanup_proof.json"
+    ],
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_counts": {
+      "eval": 5,
+      "strict_eval": 4,
+      "train": 23
+    },
+    "tmpdir": "/data/tmp",
+    "will_execute_now": false
+  },
+  "name": "stage9311_prefix_ladder_probe_preexecution",
+  "next_best_step": "Execute Stage9312 prefix-ladder supported-suffix probe under trellis, then audit generation by split, prefix length, and variant type.",
+  "passed": true,
+  "stage": 9311,
+  "stage_name": "stage9311_prefix_ladder_probe_preexecution"
+}
