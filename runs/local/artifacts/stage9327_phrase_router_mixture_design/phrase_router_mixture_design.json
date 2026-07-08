@@ -1,0 +1,54 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "diagnosis": "phrase_a_and_phrase_b_are_individually_learnable_but_interfere_when_mixed_without_a_router_or_semantic_discriminator",
+  "evidence": {
+    "phrase_a_exact_rate": 1.0,
+    "phrase_a_target_prefix_match_rate": 1.0,
+    "phrase_b_exact_rate": 1.0,
+    "phrase_b_target_prefix_match_rate": 1.0,
+    "prior_combined_phrase_a_exact_rate": 0.0,
+    "prior_combined_phrase_b_exact_rate": 0.0,
+    "prior_combined_stage": 9321
+  },
+  "failures": [],
+  "passed": true,
+  "recommended_patch": {
+    "forbidden_model_inputs": [
+      "literal target suffix",
+      "external phrase label text",
+      "bad continuation literal outside corruption rows"
+    ],
+    "manifest_name": "phrase_router_mixture_manifest",
+    "probe_gate": {
+      "combined_exact_match_rate": "1.0 before rejoining Stage9310 ladder",
+      "decoder_ce_rows": 0,
+      "phrase_router_exact_by_split": "1.0 for tiny probe",
+      "runtime_gemma_harness": "closed"
+    },
+    "required_model_inputs": [
+      "opaque_phrase_route_id",
+      "semantic_surface_kind: dependency_handle|patch_operator_argument|constant_argument",
+      "anchor_object_kind",
+      "language_family",
+      "active_generation_prefix_span"
+    ],
+    "rows": [
+      "phrase_router_head_rows: prefix/context -> phrase_a|phrase_b|phrase_c",
+      "phrase_conditioned_denoise_rows: include opaque phrase route plus non-label semantic discriminator",
+      "cross_negative_rows: phrase_a prefix with phrase_b forbidden only as loss-negative telemetry, not visible target text",
+      "balanced_mixture_rows: equal train/eval/strict coverage by phrase family and prefix length"
+    ]
+  }
+}

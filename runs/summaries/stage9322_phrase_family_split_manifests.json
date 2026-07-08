@@ -1,0 +1,89 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9322_phrase_family_split_manifests/phrase_family_split_manifest_audit.json",
+    "doc": "docs/PHRASE_FAMILY_SPLIT_MANIFESTS_STAGE9322.md",
+    "phrase_a_manifest": "runs/local/artifacts/stage9322_phrase_family_split_manifests/phrase_a_patch_inside_manifest.jsonl",
+    "phrase_b_manifest": "runs/local/artifacts/stage9322_phrase_family_split_manifests/phrase_b_patch_operator_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T15:14:16Z",
+  "decision": "Split phrase A and phrase B into isolated denoise manifests to test whether failures are family-local or cross-family interference.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "phrase_a": {
+      "authority_rows": [],
+      "rows": 8,
+      "split_counts": {
+        "eval": 3,
+        "strict_eval": 2,
+        "train": 3
+      },
+      "suffix_visible_rows": [],
+      "unsafe_rows": [],
+      "variant_counts": {
+        "clean_prefix_to_phrase_completion": 4,
+        "observed_or_synthetic_phrase_error_to_clean_target": 4
+      }
+    },
+    "phrase_a_manifest_sha256": "204b745214cde76070bd9ec4ba504abec8c5ffe98d742d61273f74af1df05976",
+    "phrase_b": {
+      "authority_rows": [],
+      "rows": 8,
+      "split_counts": {
+        "eval": 2,
+        "strict_eval": 3,
+        "train": 3
+      },
+      "suffix_visible_rows": [],
+      "unsafe_rows": [],
+      "variant_counts": {
+        "clean_prefix_to_phrase_completion": 4,
+        "observed_or_synthetic_phrase_error_to_clean_target": 4
+      }
+    },
+    "phrase_b_manifest_sha256": "b054df82ba210e34892b41996f96796918b73504afaa52454e8c930b1267a5d7",
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage9321_safety_passed": true
+  },
+  "name": "stage9322_phrase_family_split_manifests",
+  "next_best_step": "Run isolated target-100M denoise probes for phrase A and phrase B before any merge back into the combined suffix curriculum.",
+  "passed": true,
+  "stage": 9322,
+  "stage_name": "stage9322_phrase_family_split_manifests"
+}
