@@ -1,0 +1,101 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9396_training_loop_frontier_diagnosis_contract/training_loop_frontier_diagnosis_contract.json",
+    "doc": "docs/TRAINING_LOOP_FRONTIER_DIAGNOSIS_CONTRACT_STAGE9396.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T19:29:47Z",
+  "decision": "Recorded the training-loop mechanics that explain Stage9395: safety and EOS/generation cap are fixed, train rows overfit, heldout suffix support remains the active blocker.",
+  "metrics": {
+    "active_training_loop_mechanics": {
+      "checkpoint_safety": "no final checkpoint export, skip final model save, cleanup proof emitted",
+      "evaluation": "eval and strict_eval run under no_grad with separate loss records",
+      "generation_audit": "greedy generation with active prefix field, exact/prefix/boundary/contentful/short/repetition/leak checks",
+      "gradient_clipping": "clip_grad_norm_ max_norm=1.0 and log pre/post clip norms",
+      "loss_masking": "row loss masks select denoise_ce only for current probes; decoder_ce remains closed",
+      "optimizer": "AdamW over model parameters with fixed tiny-probe learning rate",
+      "post_prefix_loss_mask": "denoise probes mask prefix tokens and train only post-prefix suffix targets",
+      "telemetry": "row_token_loss, row_gradient_norms, row_dynamics_history, activation_summary, module_delta_norms",
+      "tokenization": "agentkernel_bytelevel_bpe_v1, vocab 1506, tokenizer hashlock required"
+    },
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "next_patch_contract": {
+      "must_keep_closed": [
+        "decoder_ce",
+        "runtime",
+        "gemma",
+        "harness",
+        "source_body_emission",
+        "promotion"
+      ],
+      "objective": "heldout_contrastive_suffix_support_manifest",
+      "pass_gate": "strict exact, prefix, boundary, contentful all 23/23 with short/junk/repetition/leak/unterminated rows all zero before rejoining bounded decoder repair",
+      "required_audits": [
+        "target resolver surfaces all agree",
+        "post-prefix suffix loss mask active",
+        "train/eval/strict family coverage card",
+        "single-template shortcut audit",
+        "generation cap >= observed target token max plus EOS margin",
+        "row_token_loss and boundary_next_token telemetry required"
+      ],
+      "required_rows": "add train support rows for failing eval/strict suffix families without copying heldout row IDs or exact target text into model input"
+    },
+    "not_yet_scale_features": {
+      "checkpoint_resume": "disabled for safety probes; only reintroduce under safe checkpoint contract",
+      "distributed_training": "not relevant until compiler produces scaled manifests",
+      "gradient_accumulation": "not required for tiny 23-row probes; add before large batches",
+      "mixed_precision_bf16": "not required for current probe; add only behind determinism/NaN guards",
+      "optimizer_param_groups": "current AdamW uses all params together; add no-decay groups before longer runs"
+    },
+    "passed": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_contentful_rate": 1.0,
+    "source_emission_authorized": false,
+    "source_exact_match_rate": 0.391304347826087,
+    "source_quality_gate_passed": false,
+    "source_safety_gate_passed": true,
+    "source_stage": 9395,
+    "source_target_prefix_match_rate": 0.391304347826087,
+    "source_unterminated_rows": 0,
+    "stage9395_diagnosis": "Train rows overfit exactly after target resolver and generation-cap fixes, but eval/strict rows remain weak. The next blocker is heldout suffix support/generalization, not safety, EOS clipping, leaks, repetition, or decoder CE."
+  },
+  "name": "stage9396_training_loop_frontier_diagnosis_contract",
+  "next_best_step": "Build a heldout contrastive suffix-support manifest with family-balanced train support for eval/strict suffix failures; keep decoder CE closed.",
+  "passed": true,
+  "stage": 9396,
+  "stage_name": "stage9396_training_loop_frontier_diagnosis_contract"
+}
