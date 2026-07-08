@@ -1,0 +1,66 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9287_generation_audit_split_selector_patch_audit/generation_audit_split_selector_patch_audit.json",
+    "doc": "docs/GENERATION_AUDIT_SPLIT_SELECTOR_PATCH_STAGE9287.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T13:26:53Z",
+  "decision": "Added a diagnostic-only generation audit split selector. Default generation audits remain eval/strict; train split generation must be explicitly requested.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "checks": {
+      "bounded_runner_accepts_generation_audit_splits": true,
+      "cli_flag_present": true,
+      "contract_records_generation_audit_splits": true,
+      "default_eval_strict_preserved": true,
+      "denoise_runner_accepts_generation_audit_splits": true,
+      "runtime_runtime_closed": true,
+      "source_stage9286_passed": true,
+      "split_selector_helper_present": true,
+      "train_split_can_be_selected": true
+    },
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnostic_use": "train,eval,strict_eval can now be requested explicitly for generation memorization diagnostics; default remains eval,strict_eval.",
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "name": "stage9287_generation_audit_split_selector_patch_audit",
+  "next_best_step": "Run a final pre-execution audit for a train-split memorization generation diagnostic using --generation-audit-splits train,eval,strict_eval.",
+  "passed": true,
+  "stage": 9287,
+  "stage_name": "stage9287_generation_audit_split_selector_patch_audit"
+}

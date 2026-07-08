@@ -102,6 +102,29 @@ def _split_rows(rows: list[dict[str, Any]], split: str, cap: int) -> list[dict[s
     return selected[:cap]
 
 
+def _generation_audit_rows(
+    *,
+    train_rows: list[dict[str, Any]],
+    eval_rows: list[dict[str, Any]],
+    strict_rows: list[dict[str, Any]],
+    generation_audit_splits: str = "eval,strict_eval",
+) -> list[dict[str, Any]]:
+    split_map = {"train": train_rows, "eval": eval_rows, "strict_eval": strict_rows, "strict": strict_rows}
+    selected: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for raw_split in str(generation_audit_splits or "eval,strict_eval").split(","):
+        split = raw_split.strip()
+        if not split:
+            continue
+        for row in split_map.get(split, []):
+            row_id = str(row.get("row_id"))
+            if row_id in seen:
+                continue
+            seen.add(row_id)
+            selected.append(row)
+    return selected
+
+
 def _has_internal_token(text: str) -> bool:
     markers = ["<MTC", "POLICY_", "<COPY", "INTERNAL", "decoder_control"]
     return any(marker in text for marker in markers)
@@ -822,6 +845,7 @@ def run_bounded_decoder_ce_probe(
     max_generation_tokens: int = 96,
     eos_loss_weight: float = 1.0,
     generation_prefix_field: str | None = None,
+    generation_audit_splits: str = "eval,strict_eval",
 ) -> dict[str, Any]:
     """Run a tiny bounded decoder CE probe with native interpretability telemetry."""
     random.seed(seed)
@@ -974,11 +998,10 @@ def run_bounded_decoder_ce_probe(
         },
     )
     if enable_generation_audit:
-        generation_rows = eval_rows + strict_rows
         generation_card = _write_generation_audits(
             output_dir,
             model=model,
-            rows=generation_rows,
+            rows=_generation_audit_rows(train_rows=train_rows, eval_rows=eval_rows, strict_rows=strict_rows, generation_audit_splits=generation_audit_splits),
             tokenizer=tokenizer,
             max_encoder_tokens=max_encoder_tokens,
             max_generation_rows=max_generation_rows,
@@ -1044,6 +1067,7 @@ def run_denoise_repair_probe(
     max_generation_rows: int = 8,
     max_generation_tokens: int = 96,
     generation_prefix_field: str | None = None,
+    generation_audit_splits: str = "eval,strict_eval",
 ) -> dict[str, Any]:
     """Run a tiny denoise repair probe over corrupted-output -> clean-target rows."""
     random.seed(seed)
@@ -1175,7 +1199,7 @@ def run_denoise_repair_probe(
         generation_card = _write_generation_audits(
             output_dir,
             model=model,
-            rows=eval_rows + strict_rows,
+            rows=_generation_audit_rows(train_rows=train_rows, eval_rows=eval_rows, strict_rows=strict_rows, generation_audit_splits=generation_audit_splits),
             tokenizer=tokenizer,
             max_encoder_tokens=max_encoder_tokens,
             max_generation_rows=max_generation_rows,
@@ -1206,6 +1230,7 @@ def run_denoise_repair_probe(
         "gemma_executed": False,
         "harness_executed": False,
         "generation_audit_enabled": bool(enable_generation_audit),
+        "generation_audit_splits": generation_audit_splits,
         "generated_rows": generation_card.get("generated_rows"),
         "contentful_generation_rate": generation_card.get("contentful_rate"),
         "short_or_junk_rate": generation_card.get("short_or_junk_rate"),

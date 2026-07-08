@@ -165,6 +165,11 @@ def parse_args() -> argparse.Namespace:
         help="Optional dotted manifest field used to prime decoder generation during audits, for example model_input.copy_prefix_span.",
     )
     parser.add_argument(
+        "--generation-audit-splits",
+        default="eval,strict_eval",
+        help="Comma-separated splits sampled by generation audit. Defaults to eval,strict_eval; use train,eval,strict_eval only for memorization diagnostics.",
+    )
+    parser.add_argument(
         "--implementation",
         choices=("scaffold", "transformer"),
         default="transformer",
@@ -453,6 +458,7 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "max_generation_rows": int(args.max_generation_rows),
         "max_generation_tokens": int(args.max_generation_tokens),
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
+        "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
         "model_execution_attempted": False,
     }
 
@@ -584,6 +590,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "max_generation_rows": int(args.max_generation_rows),
         "max_generation_tokens": int(args.max_generation_tokens),
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
+        "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
         "model_execution_attempted": False,
     }
 
@@ -692,6 +699,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             max_generation_tokens=args.max_generation_tokens,
             eos_loss_weight=args.eos_loss_weight,
             generation_prefix_field=args.generation_prefix_field,
+            generation_audit_splits=args.generation_audit_splits,
         )
     elif args.mode == "denoise_repair_probe":
         result = run_denoise_repair_probe(
@@ -701,6 +709,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             max_generation_rows=args.max_generation_rows,
             max_generation_tokens=args.max_generation_tokens,
             generation_prefix_field=args.generation_prefix_field,
+            generation_audit_splits=args.generation_audit_splits,
         )
     elif args.mode in STRUCTURED_MODE_ALLOWED_LOSSES and args.mode != "repo_graph_probe":
         result = run_structured_aux_probe(mode=args.mode, **common)
