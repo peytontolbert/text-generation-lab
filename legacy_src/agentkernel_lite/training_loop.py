@@ -57,6 +57,10 @@ REQUIRED_DENOISE_ARTIFACTS = [
     "activation_summary.jsonl",
     "row_dynamics_history.jsonl",
     "denoise_repair_quality_audit.json",
+    "short_output_probe.json",
+    "repetition_probe.json",
+    "internal_leak_probe.json",
+    "sample_generation_audit.json",
     "module_delta_norms.json",
     "failure_bucket_card.json",
     "cleanup_proof.json",
@@ -1002,6 +1006,9 @@ def run_denoise_repair_probe(
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
     eos_loss_weight: float = 1.0,
+    enable_generation_audit: bool = False,
+    max_generation_rows: int = 8,
+    max_generation_tokens: int = 96,
 ) -> dict[str, Any]:
     """Run a tiny denoise repair probe over corrupted-output -> clean-target rows."""
     random.seed(seed)
@@ -1129,6 +1136,25 @@ def run_denoise_repair_probe(
     for row in rows:
         route = str(row.get("route") or "unknown")
         repair_route_counts[route] = repair_route_counts.get(route, 0) + 1
+    if enable_generation_audit:
+        generation_card = _write_generation_audits(
+            output_dir,
+            model=model,
+            rows=eval_rows + strict_rows,
+            tokenizer=tokenizer,
+            max_encoder_tokens=max_encoder_tokens,
+            max_generation_rows=max_generation_rows,
+            max_generation_tokens=max_generation_tokens,
+            target_internal_token_rows=target_internal_token_rows,
+            target_repetition_rows=target_repetition_rows,
+        )
+    else:
+        generation_card = {"generated_rows": 0, "samples": [], "note": "generation audit disabled for denoise repair probe"}
+        _write_json(output_dir / "short_output_probe.json", {"generated_rows": 0, "short_or_junk_rate": None, "note": "generation audit disabled"})
+        _write_json(output_dir / "repetition_probe.json", {"generated_rows": 0, "degenerate_repetition_rate": None, "target_repetition_rows": target_repetition_rows})
+        _write_json(output_dir / "internal_leak_probe.json", {"target_internal_token_rows": target_internal_token_rows, "generated_internal_token_rows": None})
+        _write_json(output_dir / "sample_generation_audit.json", generation_card)
+        _write_jsonl_rows(output_dir / "generated_repetition_negative_rows.jsonl", [{"negative_row": False, "reason": "generation_audit_disabled"}])
     quality_card = {
         "mode": "denoise_repair_probe",
         "rows": len(rows),
@@ -1143,9 +1169,16 @@ def run_denoise_repair_probe(
         "runtime_executed": False,
         "gemma_executed": False,
         "harness_executed": False,
+        "generation_audit_enabled": bool(enable_generation_audit),
+        "generated_rows": generation_card.get("generated_rows"),
+        "contentful_generation_rate": generation_card.get("contentful_rate"),
+        "short_or_junk_rate": generation_card.get("short_or_junk_rate"),
+        "degenerate_repetition_rate": generation_card.get("degenerate_repetition_rate"),
+        "generated_internal_token_rows": generation_card.get("generated_internal_token_rows"),
+        "target_prefix_match_rate": generation_card.get("target_prefix_match_rate"),
     }
     _write_json(output_dir / "denoise_repair_quality_audit.json", quality_card)
-    _write_json(output_dir / "failure_bucket_card.json", {"mode": "denoise_repair_probe", "eval": eval_card, "token_loss_rows": len(token_records), "target_repetition_rows": target_repetition_rows})
+    _write_json(output_dir / "failure_bucket_card.json", {"mode": "denoise_repair_probe", "eval": eval_card, "token_loss_rows": len(token_records), "target_repetition_rows": target_repetition_rows, "generation_audit_enabled": bool(enable_generation_audit)})
     _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "denoise loop does not write checkpoints", "run_id": run_id})
 
     return {
@@ -1166,6 +1199,13 @@ def run_denoise_repair_probe(
         "decoder_ce_rows": 0,
         "denoise_ce_rows": len(rows),
         "required_artifacts_written": all((output_dir / name).exists() and (not name.endswith(".jsonl") or (output_dir / name).stat().st_size > 0) for name in REQUIRED_DENOISE_ARTIFACTS),
+        "generation_audit_enabled": bool(enable_generation_audit),
+        "generated_rows": int(generation_card.get("generated_rows", 0)),
+        "contentful_generation_rate": generation_card.get("contentful_rate"),
+        "short_or_junk_rate": generation_card.get("short_or_junk_rate"),
+        "degenerate_repetition_rate": generation_card.get("degenerate_repetition_rate"),
+        "generated_internal_token_rows": generation_card.get("generated_internal_token_rows"),
+        "target_prefix_match_rate": generation_card.get("target_prefix_match_rate"),
     }
 
 def run_structured_aux_probe(

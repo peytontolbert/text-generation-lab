@@ -87,6 +87,10 @@ REQUIRED_DENOISE_ARTIFACTS = (
     "activation_summary.jsonl",
     "row_dynamics_history.jsonl",
     "denoise_repair_quality_audit.json",
+    "short_output_probe.json",
+    "repetition_probe.json",
+    "internal_leak_probe.json",
+    "sample_generation_audit.json",
     "module_delta_norms.json",
     "failure_bucket_card.json",
     "cleanup_proof.json",
@@ -641,6 +645,9 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
         result = run_denoise_repair_probe(
             **common,
             eos_loss_weight=args.eos_loss_weight,
+            enable_generation_audit=args.enable_generation_audit,
+            max_generation_rows=args.max_generation_rows,
+            max_generation_tokens=args.max_generation_tokens,
         )
     elif args.mode in STRUCTURED_MODE_ALLOWED_LOSSES and args.mode != "repo_graph_probe":
         result = run_structured_aux_probe(mode=args.mode, **common)
