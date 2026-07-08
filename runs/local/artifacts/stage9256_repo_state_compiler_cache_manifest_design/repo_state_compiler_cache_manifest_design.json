@@ -1,0 +1,228 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "cache_layers": [
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "path",
+        "source_sha256",
+        "extractor_version"
+      ],
+      "consumers": [
+        "symbol_binding",
+        "edit_localization",
+        "patch_operator",
+        "bounded_decoder_arguments"
+      ],
+      "extractor_module": "scripts/program_state_ast_cst_extractor.py",
+      "future_artifact": "repo_ast_cst_packets.jsonl",
+      "layer_id": "psi_ast_cst_structure",
+      "modality": "cst_ast"
+    },
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "path",
+        "source_sha256",
+        "extractor_version"
+      ],
+      "consumers": [
+        "symbol_binding",
+        "edit_localization",
+        "task_observable"
+      ],
+      "extractor_module": "scripts/program_state_symbol_table_extractor.py",
+      "future_artifact": "repo_symbol_table_packets.jsonl",
+      "layer_id": "psi_symbol_table",
+      "modality": "symbol_table"
+    },
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "path",
+        "source_sha256",
+        "dependency_lock_hash",
+        "extractor_version"
+      ],
+      "consumers": [
+        "intent_to_build_strategy",
+        "allowed_import_policy",
+        "dependency_capability_cards"
+      ],
+      "extractor_module": "scripts/program_state_import_dependency_extractor.py",
+      "future_artifact": "repo_import_dependency_packets.jsonl",
+      "layer_id": "psi_import_dependency_graph",
+      "modality": "import_export_graph"
+    },
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "path",
+        "source_sha256",
+        "extractor_version"
+      ],
+      "consumers": [
+        "patch_operator",
+        "verifier_repair",
+        "bounded_decoder_arguments"
+      ],
+      "extractor_module": "scripts/program_state_type_signature_extractor.py",
+      "future_artifact": "repo_type_signature_packets.jsonl",
+      "layer_id": "psi_type_signature_map",
+      "modality": "type_signature_schema_map"
+    },
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "path",
+        "source_sha256",
+        "extractor_version"
+      ],
+      "consumers": [
+        "symbol_binding",
+        "edit_localization",
+        "blast_radius_map"
+      ],
+      "extractor_module": "scripts/program_state_call_graph_extractor.py",
+      "future_artifact": "repo_call_graph_packets.jsonl",
+      "layer_id": "psi_call_graph",
+      "modality": "call_graph"
+    },
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "path",
+        "source_sha256",
+        "extractor_version"
+      ],
+      "consumers": [
+        "patch_operator",
+        "verifier_repair",
+        "semantic_equivalence_verifier"
+      ],
+      "extractor_module": "scripts/program_state_data_control_flow_extractor.py",
+      "future_artifact": "repo_data_control_flow_packets.jsonl",
+      "layer_id": "psi_data_control_flow",
+      "modality": "data_flow_graph+control_flow_graph"
+    },
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "event_stream_hash",
+        "compressor_version",
+        "token_budget"
+      ],
+      "consumers": [
+        "active_subgraph_contraction_packet",
+        "task_conditioned_context_packer",
+        "100m_policy_state"
+      ],
+      "extractor_module": "scripts/state_space_repo_state_compressor.py",
+      "future_artifact": "repo_state_compressed_stream.jsonl",
+      "layer_id": "psi_repo_state_compressed_stream",
+      "modality": "state_space_compressed_repo_memory"
+    },
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "test_index_hash",
+        "extractor_version"
+      ],
+      "consumers": [
+        "verifier_plan",
+        "edit_localization",
+        "failure_to_repair_loop"
+      ],
+      "extractor_module": "future:no_runtime_static_test_indexer",
+      "future_artifact": "repo_test_coverage_static_packets.jsonl",
+      "layer_id": "psi_test_coverage_graph",
+      "modality": "tests_fixtures_ci"
+    },
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "symbol_table_hash",
+        "call_graph_hash",
+        "extractor_version"
+      ],
+      "consumers": [
+        "patch_operator",
+        "bounded_decoder_arguments",
+        "repair_denoise"
+      ],
+      "extractor_module": "future:no_execution_affordance_compiler",
+      "future_artifact": "repo_patch_affordance_packets.jsonl",
+      "layer_id": "psi_patch_affordance_index",
+      "modality": "patch_affordance_index"
+    },
+    {
+      "cache_key_fields": [
+        "repo_id",
+        "commit_hash",
+        "import_graph_hash",
+        "path_cluster_hash",
+        "extractor_version"
+      ],
+      "consumers": [
+        "active_subgraph_contraction_packet",
+        "blast_radius_map",
+        "context_packer"
+      ],
+      "extractor_module": "future:module_boundary_static_compiler",
+      "future_artifact": "repo_module_boundary_packets.jsonl",
+      "layer_id": "psi_module_boundary_cache",
+      "modality": "module_boundary_cache"
+    }
+  ],
+  "cache_root_future": "runs/local/artifacts/repo_state_cache/<repo_id>/<commit_hash>/",
+  "controls": {
+    "cache_invalidation_required": true,
+    "decoder_text_forbidden": true,
+    "design_only_no_extraction": true,
+    "future_cache_root_under_repo_only": true,
+    "hidden_or_locked_eval_forbidden": true,
+    "manifest_hash_required_before_use": true,
+    "model_execution_authorized_now": false,
+    "opaque_ids_required": true,
+    "raw_target_text_forbidden": true,
+    "read_arxiv_now": false,
+    "read_repository_bodies_now": false,
+    "runtime_authorized_now": false,
+    "source_body_emission_authorized_now": false,
+    "training_authorized_now": false,
+    "write_arxiv_now": false
+  },
+  "equation": "S_t = Contract(Psi_R, O_q, h_t)",
+  "manifest_status": "DESIGN_ONLY_NO_EXTRACTION_NO_EXECUTION",
+  "source_stage": 9255,
+  "stage": 9256,
+  "stage_name": "stage9256_repo_state_compiler_cache_manifest_design",
+  "task_time_products": [
+    "task_observable_schema",
+    "active_subgraph_contraction_packet",
+    "maintenance_state_packet",
+    "edit_affordance_tensor_rows",
+    "verifier_feedback_state_update_rows"
+  ]
+}

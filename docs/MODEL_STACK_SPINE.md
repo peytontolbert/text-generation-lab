@@ -2716,3 +2716,7 @@ Next: Wait for a valid explicit one-family request, or continue no-execution cen
 ## Stage9255 Precomputed Repo-State Transformation Spine
 
 Stage9255 records the repo-as-precomputed-state formulation: Repo -> Psi_R, Task -> O_q, S_t = Contract(Psi_R, O_q, h_t), a_t = pi_theta(S_t). This folds the tensor-network/codebase-prior idea into the central maintainer spine without opening execution.
+
+## Stage9256 Repo-State Compiler Cache Manifest Design
+
+Stage9256 defines the design-only `repo_state_compiler_cache_manifest`: cache layers for AST/CST, symbols, imports, types, calls, data/control flow, compressed repo stream, test coverage, patch affordances, and module boundaries. It keeps extraction, runtime, training, mining, and /arxiv access closed.
