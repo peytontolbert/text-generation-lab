@@ -1,0 +1,100 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9437_suffix_choice_prior_fusion_denoise_probe/stage9437_suffix_choice_prior_fusion_denoise_probe_audit.json",
+    "doc": "docs/SUFFIX_CHOICE_PRIOR_FUSION_DENOISE_PROBE_AUDIT_STAGE9437.md",
+    "run_dir": "runs/local/artifacts/stage9437_suffix_choice_prior_fusion_denoise_probe"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-08T21:39:25Z",
+  "decision": "The suffix-choice-prior fusion denoise probe is safety-clean but not quality-passing; decoder CE remains closed.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "boundary_next_token_match_rate": 0.6226415094339622,
+    "boundary_next_token_match_rows": 33,
+    "contentful_rate": 0.8867924528301887,
+    "contentful_rows": 47,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "degenerate_repetition_rate": 0.11320754716981132,
+    "degenerate_repetition_rows": 6,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Suffix-choice prior fusion is execution-safe and improves train exactness, but heldout exact remains 2/9 and repetition reappears. The controller prior should not be widened to decoder CE.",
+    "exact_match_rows": 21,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "generated_internal_token_rows": 0,
+    "generated_rows": 53,
+    "harness_execution_authorized_next": false,
+    "heldout_exact_rows": 2,
+    "heldout_rows": 9,
+    "missing_artifacts": [],
+    "model_execution_authorized_next": false,
+    "next_patch_target": "heldout suffix-prior residual quarantine and train-support balance audit",
+    "passed": false,
+    "promotion_ready": false,
+    "quality_gate_passed": false,
+    "runtime_authorized": false,
+    "safety_gate_passed": true,
+    "scoring_authorized_next": false,
+    "short_or_junk_rows": 0,
+    "source_emission_authorized": false,
+    "split_metrics": {
+      "eval": {
+        "boundary": 2,
+        "exact": 1,
+        "prefix": 1,
+        "repetition": 1,
+        "rows": 5,
+        "short": 0
+      },
+      "strict_eval": {
+        "boundary": 1,
+        "exact": 1,
+        "prefix": 1,
+        "repetition": 1,
+        "rows": 4,
+        "short": 0
+      },
+      "train": {
+        "boundary": 30,
+        "exact": 19,
+        "prefix": 19,
+        "repetition": 4,
+        "rows": 44,
+        "short": 0
+      }
+    },
+    "target_prefix_match_rate": 0.39622641509433965,
+    "target_prefix_match_rows": 21
+  },
+  "name": "stage9437_suffix_choice_prior_fusion_denoise_probe_audit",
+  "next_best_step": "Build a residual diagnosis for Stage9437: quarantine heldout prior-fusion failures and identify whether repetition comes from duplicated train support or weak suffix-prior confidence.",
+  "passed": false,
+  "stage": 9437,
+  "stage_name": "stage9437_suffix_choice_prior_fusion_denoise_probe_audit"
+}
