@@ -1,0 +1,113 @@
+{
+  "artifacts": {
+    "card": "runs/local/artifacts/stage9487_full_episode_with_observe_prefix_manifest/full_episode_with_observe_prefix_manifest_card.json",
+    "doc": "docs/FULL_EPISODE_WITH_OBSERVE_PREFIX_MANIFEST_STAGE9487.md",
+    "manifest": "runs/local/artifacts/stage9487_full_episode_with_observe_prefix_manifest/full_episode_with_observe_prefix_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T00:20:10Z",
+  "decision": "Composed full episode-step structured manifest with target-prefix supervision moved from pre-action rows to observe-phase verifier rows.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "authority_row_ids": [],
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "design_note": "Full episode-step rejoin manifest: four pre-action heads remain on Stage9455 rows, while target-prefix moves to Stage9484 observe/verifier-phase rows.",
+    "expected_loss_counts": {
+      "episode_boundary_match_ce": 50,
+      "episode_failure_type_ce": 50,
+      "episode_repair_outcome_ce": 50,
+      "episode_step_value_mse": 50,
+      "episode_target_prefix_match_ce": 66
+    },
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_counts": {
+      "episode_boundary_match_ce": 50,
+      "episode_failure_type_ce": 50,
+      "episode_repair_outcome_ce": 50,
+      "episode_step_value_mse": 50,
+      "episode_target_prefix_match_ce": 66
+    },
+    "manifest": "runs/local/artifacts/stage9487_full_episode_with_observe_prefix_manifest/full_episode_with_observe_prefix_manifest.jsonl",
+    "model_execution_authorized_next": false,
+    "observe_prefix_label_by_split_language": {
+      "eval::cpp::False": 1,
+      "eval::cpp::True": 1,
+      "eval::python::False": 1,
+      "eval::python::True": 1,
+      "eval::web_js_ts_html::False": 1,
+      "eval::web_js_ts_html::True": 1,
+      "strict_eval::cpp::False": 1,
+      "strict_eval::cpp::True": 1,
+      "strict_eval::python::False": 1,
+      "strict_eval::python::True": 1,
+      "strict_eval::web_js_ts_html::False": 1,
+      "strict_eval::web_js_ts_html::True": 1,
+      "train::cpp::False": 9,
+      "train::cpp::True": 4,
+      "train::python::False": 3,
+      "train::python::True": 4,
+      "train::rust::False": 9,
+      "train::rust::True": 19,
+      "train::web_js_ts_html::False": 2,
+      "train::web_js_ts_html::True": 4
+    },
+    "passed": true,
+    "phase_by_split": {
+      "eval::episode_step_observe_phase_target_prefix_verifier": 6,
+      "eval::episode_step_pre_action_structured_supervision": 1,
+      "strict_eval::episode_step_observe_phase_target_prefix_verifier": 6,
+      "strict_eval::episode_step_pre_action_structured_supervision": 1,
+      "train::episode_step_observe_phase_target_prefix_verifier": 54,
+      "train::episode_step_pre_action_structured_supervision": 48
+    },
+    "promotion_ready": false,
+    "rows": 116,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_full_manifest": "runs/local/artifacts/stage9455_episode_step_trainable_manifest/episode_step_trainable_manifest.jsonl",
+    "source_full_rows": 50,
+    "source_observe_prefix_manifest": "runs/local/artifacts/stage9484_target_prefix_observe_phase_manifest/target_prefix_observe_phase_manifest.jsonl",
+    "source_observe_prefix_rows": 66,
+    "split_counts": {
+      "eval": 7,
+      "strict_eval": 7,
+      "train": 102
+    }
+  },
+  "name": "stage9487_full_episode_with_observe_prefix_manifest",
+  "next_best_step": "Run Stage9488 contract-only target-100M preflight for the full episode-step observe-prefix rejoin manifest; do not execute until it passes.",
+  "passed": true,
+  "stage": 9487,
+  "stage_name": "stage9487_full_episode_with_observe_prefix_manifest"
+}

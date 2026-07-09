@@ -1,0 +1,582 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9489_full_episode_observe_prefix_target_100m_probe/stage9489_full_episode_observe_prefix_probe_audit.json",
+    "doc": "docs/FULL_EPISODE_OBSERVE_PREFIX_PROBE_AUDIT_STAGE9489.md",
+    "execution_result": "runs/local/artifacts/stage9489_full_episode_observe_prefix_target_100m_probe/execution_result.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T00:25:05Z",
+  "decision": "Full observe-prefix rejoin probe failed quality safely; keep decoder closed and split verifier-derived fields into observe-phase supervision.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "best_state_selection": {
+      "checkpoint_exported": false,
+      "enabled": true,
+      "eval_joint_proxy_exact": null,
+      "eval_loss": null,
+      "promotion_ready": false,
+      "restored": false,
+      "selected_step": null,
+      "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+      "selection_score": null,
+      "strict_joint_proxy_exact": null,
+      "strict_loss": null
+    },
+    "body_emission_authorized": false,
+    "checkpoint_like_artifacts": [],
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Safe quality failure. Moving target-prefix to observe-phase helped during interval evaluation, but the jointly exact restore gate never opened because verifier-derived failure_type/outcome/value are still being trained as pre-action targets. The next patch should make episode verifier fields phase-aware instead of treating all five heads as one policy surface.",
+    "estimated_parameter_count": 102703145,
+    "eval_rows": 7,
+    "failures": [
+      "final_eval_not_exact",
+      "final_strict_not_exact",
+      "no_jointly_exact_best_state_to_restore"
+    ],
+    "fields": [
+      "episode_boundary_match",
+      "episode_failure_type",
+      "episode_repair_outcome",
+      "episode_step_value",
+      "episode_target_prefix_match"
+    ],
+    "final_eval_field_exact": {
+      "episode_boundary_match": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_failure_type": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_repair_outcome": {
+        "exact": 0.0,
+        "rows": 1
+      },
+      "episode_step_value": {
+        "exact": 0.0,
+        "rows": 1
+      },
+      "episode_target_prefix_match": {
+        "exact": 0.5,
+        "rows": 6
+      }
+    },
+    "final_eval_joint_proxy_exact": 0.5,
+    "final_strict_field_exact": {
+      "episode_boundary_match": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_failure_type": {
+        "exact": 0.0,
+        "rows": 1
+      },
+      "episode_repair_outcome": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_step_value": {
+        "exact": 1.0,
+        "rows": 1
+      },
+      "episode_target_prefix_match": {
+        "exact": 0.5,
+        "rows": 6
+      }
+    },
+    "final_strict_joint_proxy_exact": 0.6,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_rows": [],
+    "missing_required_artifacts": [],
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "module_delta_norms": {
+      "decoder_delta_norm": 0.29827168583869934,
+      "delta_norm_by_bucket": {
+        "decoder": 0.0,
+        "decoder_attention": 0.0,
+        "decoder_mlp": 0.0,
+        "embeddings": 0.29827168583869934,
+        "encoder": 0.0774287962840231,
+        "encoder_attention": 2.3160190739222983,
+        "encoder_mlp": 3.4811976728027196,
+        "lm_head": 0.29827168583869934,
+        "other": 0.024859443300652786,
+        "policy_retrieval_heads": 0.0,
+        "structured_heads": 0.12768042526236015
+      },
+      "encoder_delta_norm": 4.1819465331820025
+    },
+    "near_exact_checkpoints": [
+      {
+        "eval_field_exact": {
+          "episode_boundary_match": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_failure_type": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_repair_outcome": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_step_value": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_target_prefix_match": {
+            "exact": 1.0,
+            "rows": 6
+          }
+        },
+        "eval_joint": 1.0,
+        "eval_loss": 0.5864683985710144,
+        "step": 72,
+        "strict_field_exact": {
+          "episode_boundary_match": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_failure_type": {
+            "exact": 0.0,
+            "rows": 1
+          },
+          "episode_repair_outcome": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_step_value": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_target_prefix_match": {
+            "exact": 1.0,
+            "rows": 6
+          }
+        },
+        "strict_joint": 0.9,
+        "strict_loss": 0.7858359217643738
+      },
+      {
+        "eval_field_exact": {
+          "episode_boundary_match": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_failure_type": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_repair_outcome": {
+            "exact": 0.0,
+            "rows": 1
+          },
+          "episode_step_value": {
+            "exact": 0.0,
+            "rows": 1
+          },
+          "episode_target_prefix_match": {
+            "exact": 1.0,
+            "rows": 6
+          }
+        },
+        "eval_joint": 0.8,
+        "eval_loss": 0.7472311854362488,
+        "step": 80,
+        "strict_field_exact": {
+          "episode_boundary_match": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_failure_type": {
+            "exact": 0.0,
+            "rows": 1
+          },
+          "episode_repair_outcome": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_step_value": {
+            "exact": 1.0,
+            "rows": 1
+          },
+          "episode_target_prefix_match": {
+            "exact": 1.0,
+            "rows": 6
+          }
+        },
+        "strict_joint": 0.9,
+        "strict_loss": 0.5814884305000305
+      }
+    ],
+    "passed": false,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_passed": false,
+    "runtime_authorized": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9488_full_episode_observe_prefix_preflight_audit",
+    "strict_rows": 7,
+    "train_rows": 102,
+    "wrong_by_field_split": {
+      "eval::episode_repair_outcome::successful_suffix_repair_step=>residual_suffix_repair_step": 1,
+      "eval::episode_step_value::1.0=>0.0": 1,
+      "eval::episode_target_prefix_match::true=>false": 3,
+      "strict_eval::episode_failure_type::not_exact+target_prefix_miss=>none": 1,
+      "strict_eval::episode_target_prefix_match::true=>false": 3
+    },
+    "wrong_rows": [
+      {
+        "cell_key": "rust::episode_step_pre_action_structured_supervision::KEEP_EPISODE_STEP_PRE_ACTION_STRUCTURED",
+        "confidence": 0.5038427710533142,
+        "correct": false,
+        "entropy": 0.8617407083511353,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": false,
+        "margin": 0.04834607243537903,
+        "pred": "residual_suffix_repair_step",
+        "pred_index": 0,
+        "row_id": "stage9487_pre_action_0004",
+        "split": "eval",
+        "step": null,
+        "target": "successful_suffix_repair_step",
+        "target_index": 1,
+        "top1_label": "residual_suffix_repair_step",
+        "top1_logit": 1.427743911743164,
+        "top2_label": "successful_suffix_repair_step",
+        "top2_logit": 1.3268681764602661,
+        "top_k": [
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": 1.427743911743164,
+            "prob": 0.5038427710533142
+          },
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 1.3268681764602661,
+            "prob": 0.4554966986179352
+          },
+          {
+            "label": "verified_target_prefix_positive",
+            "logit": -1.6824067831039429,
+            "prob": 0.022468479350209236
+          },
+          {
+            "label": "3",
+            "logit": -1.8935389518737793,
+            "prob": 0.01819198951125145
+          }
+        ]
+      },
+      {
+        "cell_key": "rust::episode_step_pre_action_structured_supervision::KEEP_EPISODE_STEP_PRE_ACTION_STRUCTURED",
+        "confidence": 0.5164437294006348,
+        "correct": false,
+        "entropy": 0.6926063299179077,
+        "field": "episode_step_value",
+        "high_confidence_wrong": false,
+        "margin": 0.032887428998947144,
+        "pred": "0.0",
+        "pred_index": 0,
+        "row_id": "stage9487_pre_action_0004",
+        "split": "eval",
+        "step": null,
+        "target": "1.0",
+        "target_index": 1,
+        "top1_label": "0.0",
+        "top1_logit": 0.1747041940689087,
+        "top2_label": "1.0",
+        "top2_logit": 0.10890557616949081,
+        "top_k": [
+          {
+            "label": "0.0",
+            "logit": 0.1747041940689087,
+            "prob": 0.5164437294006348
+          },
+          {
+            "label": "1.0",
+            "logit": 0.10890557616949081,
+            "prob": 0.4835563004016876
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_step_observe_phase_target_prefix_verifier::KEEP_EPISODE_STEP_OBSERVE_PREFIX_VERIFIER",
+        "confidence": 0.5009291172027588,
+        "correct": false,
+        "entropy": 0.6931454539299011,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.0018582046031951904,
+        "pred": "false",
+        "pred_index": 0,
+        "row_id": "stage9487_observe_prefix_0050",
+        "split": "eval",
+        "step": null,
+        "target": "true",
+        "target_index": 1,
+        "top1_label": "false",
+        "top1_logit": -0.12208578735589981,
+        "top2_label": "true",
+        "top2_logit": -0.1258021593093872,
+        "top_k": [
+          {
+            "label": "false",
+            "logit": -0.12208578735589981,
+            "prob": 0.5009291172027588
+          },
+          {
+            "label": "true",
+            "logit": -0.1258021593093872,
+            "prob": 0.4990709125995636
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_step_observe_phase_target_prefix_verifier::KEEP_EPISODE_STEP_OBSERVE_PREFIX_VERIFIER",
+        "confidence": 0.518425703048706,
+        "correct": false,
+        "entropy": 0.6924680471420288,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.036851346492767334,
+        "pred": "false",
+        "pred_index": 0,
+        "row_id": "stage9487_observe_prefix_0054",
+        "split": "eval",
+        "step": null,
+        "target": "true",
+        "target_index": 1,
+        "top1_label": "false",
+        "top1_logit": -0.08105755597352982,
+        "top2_label": "true",
+        "top2_logit": -0.15479367971420288,
+        "top_k": [
+          {
+            "label": "false",
+            "logit": -0.08105755597352982,
+            "prob": 0.518425703048706
+          },
+          {
+            "label": "true",
+            "logit": -0.15479367971420288,
+            "prob": 0.4815743565559387
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_step_observe_phase_target_prefix_verifier::KEEP_EPISODE_STEP_OBSERVE_PREFIX_VERIFIER",
+        "confidence": 0.5694028735160828,
+        "correct": false,
+        "entropy": 0.6834825277328491,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.13880577683448792,
+        "pred": "false",
+        "pred_index": 0,
+        "row_id": "stage9487_observe_prefix_0060",
+        "split": "eval",
+        "step": null,
+        "target": "true",
+        "target_index": 1,
+        "top1_label": "false",
+        "top1_logit": 0.010400202125310898,
+        "top2_label": "true",
+        "top2_logit": -0.26901522278785706,
+        "top_k": [
+          {
+            "label": "false",
+            "logit": 0.010400202125310898,
+            "prob": 0.5694028735160828
+          },
+          {
+            "label": "true",
+            "logit": -0.26901522278785706,
+            "prob": 0.43059709668159485
+          }
+        ]
+      },
+      {
+        "cell_key": "rust::episode_step_pre_action_structured_supervision::KEEP_EPISODE_STEP_PRE_ACTION_STRUCTURED",
+        "confidence": 0.35493242740631104,
+        "correct": false,
+        "entropy": 1.5889805555343628,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": false,
+        "margin": 0.025923997163772583,
+        "pred": "none",
+        "pred_index": 0,
+        "row_id": "stage9487_pre_action_0005",
+        "split": "strict_eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss",
+        "target_index": 1,
+        "top1_label": "none",
+        "top1_logit": 2.306988000869751,
+        "top2_label": "not_exact+target_prefix_miss",
+        "top2_logit": 2.2311439514160156,
+        "top_k": [
+          {
+            "label": "none",
+            "logit": 2.306988000869751,
+            "prob": 0.35493242740631104
+          },
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 2.2311439514160156,
+            "prob": 0.32900843024253845
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 1.6437914371490479,
+            "prob": 0.1828618347644806
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 0.04593665152788162,
+            "prob": 0.036998450756073
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": -0.6576159596443176,
+            "prob": 0.018307732418179512
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_step_observe_phase_target_prefix_verifier::KEEP_EPISODE_STEP_OBSERVE_PREFIX_VERIFIER",
+        "confidence": 0.5871229767799377,
+        "correct": false,
+        "entropy": 0.6778886318206787,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.1742459237575531,
+        "pred": "false",
+        "pred_index": 0,
+        "row_id": "stage9487_observe_prefix_0051",
+        "split": "strict_eval",
+        "step": null,
+        "target": "true",
+        "target_index": 1,
+        "top1_label": "false",
+        "top1_logit": 0.035611607134342194,
+        "top2_label": "true",
+        "top2_logit": -0.3164728283882141,
+        "top_k": [
+          {
+            "label": "false",
+            "logit": 0.035611607134342194,
+            "prob": 0.5871229767799377
+          },
+          {
+            "label": "true",
+            "logit": -0.3164728283882141,
+            "prob": 0.41287705302238464
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_step_observe_phase_target_prefix_verifier::KEEP_EPISODE_STEP_OBSERVE_PREFIX_VERIFIER",
+        "confidence": 0.570404589176178,
+        "correct": false,
+        "entropy": 0.6832005381584167,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.14080911874771118,
+        "pred": "false",
+        "pred_index": 0,
+        "row_id": "stage9487_observe_prefix_0055",
+        "split": "strict_eval",
+        "step": null,
+        "target": "true",
+        "target_index": 1,
+        "top1_label": "false",
+        "top1_logit": 0.00435982272028923,
+        "top2_label": "true",
+        "top2_logit": -0.2791420519351959,
+        "top_k": [
+          {
+            "label": "false",
+            "logit": 0.00435982272028923,
+            "prob": 0.570404589176178
+          },
+          {
+            "label": "true",
+            "logit": -0.2791420519351959,
+            "prob": 0.4295954704284668
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_step_observe_phase_target_prefix_verifier::KEEP_EPISODE_STEP_OBSERVE_PREFIX_VERIFIER",
+        "confidence": 0.521077036857605,
+        "correct": false,
+        "entropy": 0.6922584772109985,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.042154133319854736,
+        "pred": "false",
+        "pred_index": 0,
+        "row_id": "stage9487_observe_prefix_0061",
+        "split": "strict_eval",
+        "step": null,
+        "target": "true",
+        "target_index": 1,
+        "top1_label": "false",
+        "top1_logit": -0.08833171427249908,
+        "top2_label": "true",
+        "top2_logit": -0.1726900041103363,
+        "top_k": [
+          {
+            "label": "false",
+            "logit": -0.08833171427249908,
+            "prob": 0.521077036857605
+          },
+          {
+            "label": "true",
+            "logit": -0.1726900041103363,
+            "prob": 0.47892290353775024
+          }
+        ]
+      }
+    ]
+  },
+  "name": "stage9489_full_episode_observe_prefix_probe_audit",
+  "next_best_step": "Build Stage9490 phase-aware episode verifier manifest: move failure_type, repair_outcome, step_value, and target_prefix_match to observe/verifier-phase rows with visible observation evidence; keep boundary/action policy separate.",
+  "passed": false,
+  "stage": 9489,
+  "stage_name": "stage9489_full_episode_observe_prefix_probe_audit"
+}
