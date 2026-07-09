@@ -201,6 +201,12 @@ def parse_args() -> argparse.Namespace:
         help="Comma-separated splits sampled by generation audit. Defaults to eval,strict_eval; use train,eval,strict_eval only for memorization diagnostics.",
     )
     parser.add_argument(
+        "--generation-repetition-guard",
+        action="store_true",
+        help="During generation audits, choose the best top-k token that does not create immediate degenerate repetition.",
+    )
+    parser.add_argument("--generation-repetition-guard-top-k", type=_positive_int, default=16)
+    parser.add_argument(
         "--implementation",
         choices=("scaffold", "transformer"),
         default="transformer",
@@ -392,6 +398,8 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
     if args.skip_final_model_save != 1:
         errors.append("--skip-final-model-save 1 is required")
     errors.extend(validate_generation_prefix_contract(args, rows))
+    if getattr(args, "generation_repetition_guard", False) and not args.enable_generation_audit:
+        errors.append("--generation-repetition-guard requires --enable-generation-audit")
 
     for index, row in enumerate(rows):
         row_id = str(row.get("row_id") or f"row_{index}")
@@ -491,6 +499,8 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "max_generation_tokens": int(args.max_generation_tokens),
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
+        "generation_repetition_guard": bool(getattr(args, "generation_repetition_guard", False)),
+        "generation_repetition_guard_top_k": int(getattr(args, "generation_repetition_guard_top_k", 16)),
         "model_execution_attempted": False,
     }
 
@@ -553,6 +563,8 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         if not args.no_final_checkpoint_export or args.skip_final_model_save != 1:
             errors.append("--restore-best-structured-state requires checkpoint export to remain disabled")
     errors.extend(validate_generation_prefix_contract(args, rows))
+    if getattr(args, "generation_repetition_guard", False) and not args.enable_generation_audit:
+        errors.append("--generation-repetition-guard requires --enable-generation-audit")
 
     for index, row in enumerate(rows):
         row_id = str(row.get("row_id") or f"row_{index}")
@@ -659,6 +671,8 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "max_generation_tokens": int(args.max_generation_tokens),
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
+        "generation_repetition_guard": bool(getattr(args, "generation_repetition_guard", False)),
+        "generation_repetition_guard_top_k": int(getattr(args, "generation_repetition_guard_top_k", 16)),
         "model_execution_attempted": False,
         "episode_step_contract_only_probe": bool(episode_step_contract_only_probe),
     }
@@ -712,6 +726,8 @@ def validate_tri_phase_suffix_phrase_residual_reconnect_probe(args: argparse.Nam
         errors.append("tri-phase reconnect requires --restore-best-structured-state for phase1")
     if args.eval_interval <= 0:
         errors.append("tri-phase reconnect requires --eval-interval > 0")
+    if getattr(args, "generation_repetition_guard", False) and not args.enable_generation_audit:
+        errors.append("--generation-repetition-guard requires --enable-generation-audit")
 
     phase1_args = _namespace_with(
         args,
@@ -807,6 +823,8 @@ def validate_tri_phase_suffix_phrase_residual_reconnect_probe(args: argparse.Nam
         "max_generation_tokens": int(args.max_generation_tokens),
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
+        "generation_repetition_guard": bool(getattr(args, "generation_repetition_guard", False)),
+        "generation_repetition_guard_top_k": int(getattr(args, "generation_repetition_guard_top_k", 16)),
         "model_execution_attempted": False,
         "contract_only": bool(args.contract_only),
     }
@@ -839,6 +857,8 @@ def validate_two_phase_suffix_denoise_reconnect_probe(args: argparse.Namespace, 
         errors.append("two-phase suffix/denoise reconnect requires --restore-best-structured-state for phase1")
     if args.eval_interval <= 0:
         errors.append("two-phase suffix/denoise reconnect requires --eval-interval > 0")
+    if getattr(args, "generation_repetition_guard", False) and not args.enable_generation_audit:
+        errors.append("--generation-repetition-guard requires --enable-generation-audit")
 
     phase1_args = _namespace_with(
         args,
@@ -908,6 +928,8 @@ def validate_two_phase_suffix_denoise_reconnect_probe(args: argparse.Namespace, 
         "max_generation_tokens": int(args.max_generation_tokens),
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
+        "generation_repetition_guard": bool(getattr(args, "generation_repetition_guard", False)),
+        "generation_repetition_guard_top_k": int(getattr(args, "generation_repetition_guard_top_k", 16)),
         "model_execution_attempted": False,
         "contract_only": bool(getattr(args, "contract_only", False)),
         "two_phase_in_memory_required": True,
@@ -1057,6 +1079,8 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             max_generation_tokens=args.max_generation_tokens,
             generation_prefix_field=args.generation_prefix_field,
             generation_audit_splits=args.generation_audit_splits,
+            generation_repetition_guard=args.generation_repetition_guard,
+            generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
         )
     elif args.mode == "two_phase_suffix_denoise_reconnect_probe":
         if args.phase2_manifest is None:
@@ -1092,6 +1116,8 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             max_generation_tokens=args.max_generation_tokens,
             generation_prefix_field=args.generation_prefix_field,
             generation_audit_splits=args.generation_audit_splits,
+            generation_repetition_guard=args.generation_repetition_guard,
+            generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
         )
     elif args.mode == "bounded_decoder_ce_probe":
         result = run_bounded_decoder_ce_probe(
@@ -1102,6 +1128,8 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             eos_loss_weight=args.eos_loss_weight,
             generation_prefix_field=args.generation_prefix_field,
             generation_audit_splits=args.generation_audit_splits,
+            generation_repetition_guard=args.generation_repetition_guard,
+            generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
         )
     elif args.mode == "denoise_repair_probe":
         result = run_denoise_repair_probe(
@@ -1112,6 +1140,8 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             max_generation_tokens=args.max_generation_tokens,
             generation_prefix_field=args.generation_prefix_field,
             generation_audit_splits=args.generation_audit_splits,
+            generation_repetition_guard=args.generation_repetition_guard,
+            generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
         )
     elif args.mode in STRUCTURED_MODE_ALLOWED_LOSSES and args.mode != "repo_graph_probe":
         result = run_structured_aux_probe(

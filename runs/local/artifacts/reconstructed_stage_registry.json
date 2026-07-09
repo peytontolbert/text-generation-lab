@@ -13,12 +13,12 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9628,
-    "latest_stage_name": "stage9628_hard_phrase_tri_phase_regression_audit",
-    "latest_stage_next_best_step": "Return to the Stage9623 tri-phase baseline and design a non-generative anti-repetition/EOS continuation objective or decoding-time repetition guard audit before further denoise execution.",
-    "max_stage": 9628,
+    "latest_stage": 9631,
+    "latest_stage_name": "stage9631_repetition_guard_probe_audit",
+    "latest_stage_next_best_step": "Build Stage9632 non-generative anti-repetition/EOS continuation objective preflight; do not run another broad denoise expansion from Stage9630.",
+    "max_stage": 9631,
     "min_stage": 8530,
-    "registry_rows": 1119
+    "registry_rows": 1122
   },
   "passed": true,
   "rows": [
@@ -22401,6 +22401,66 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9628_hard_phrase_tri_phase_regression_audit.json",
       "stage": 9628,
       "stage_name": "stage9628_hard_phrase_tri_phase_regression_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Run Stage9630 tiny tri-phase baseline with the audited generation repetition guard and compare against Stage9623/9627 quality.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9629_tri_phase_repetition_guard_contract_preflight.json",
+      "stage": 9629,
+      "stage_name": "stage9629_tri_phase_repetition_guard_contract_preflight"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Audit Stage9630 guarded samples against Stage9630 baseline; if quality still fails, move from decoding guard to non-generative anti-repetition/EOS continuation objective.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9630_tri_phase_repetition_guard_tiny_probe.json",
+      "stage": 9630,
+      "stage_name": "stage9630_tri_phase_repetition_guard_tiny_probe"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build Stage9632 non-generative anti-repetition/EOS continuation objective preflight; do not run another broad denoise expansion from Stage9630.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9631_repetition_guard_probe_audit.json",
+      "stage": 9631,
+      "stage_name": "stage9631_repetition_guard_probe_audit"
     }
   ]
 }

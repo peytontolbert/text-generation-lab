@@ -370,10 +370,37 @@ def _has_degenerate_repetition(token_ids: list[int], text: str) -> bool:
         return True
     words = [word for word in text.lower().split() if word]
     if len(words) >= 6:
+        for width in (1, 2, 3):
+            ngrams = [tuple(words[idx: idx + width]) for idx in range(len(words) - width + 1)]
+            if not ngrams:
+                continue
+            counts: dict[tuple[str, ...], int] = {}
+            for ngram in ngrams:
+                counts[ngram] = counts.get(ngram, 0) + 1
+            if max(counts.values()) >= 4:
+                return True
         trigrams = [tuple(words[idx: idx + 3]) for idx in range(len(words) - 2)]
         if len(set(trigrams)) <= max(1, len(trigrams) // 3):
             return True
     return False
+
+
+def _candidate_creates_repetition(
+    token_ids: list[int],
+    candidate_id: int,
+    *,
+    tokenizer: Any,
+    eos_id: int,
+    pad_id: int,
+    bos_id: int,
+) -> bool:
+    if candidate_id == eos_id:
+        return False
+    candidate_ids = token_ids + [candidate_id]
+    clean_ids = [idx for idx in candidate_ids if idx not in {pad_id, bos_id, eos_id}]
+    if len(clean_ids) >= 3 and clean_ids[-1] == clean_ids[-2] == clean_ids[-3]:
+        return True
+    return _has_degenerate_repetition(clean_ids, tokenizer.decode(clean_ids))
 
 
 def _nested_row_value(row: dict[str, Any], path: str | None) -> str:
@@ -396,6 +423,8 @@ def _generate_greedy_text(
     max_encoder_tokens: int,
     max_new_tokens: int,
     generation_prefix_field: str | None = None,
+    generation_repetition_guard: bool = False,
+    generation_repetition_guard_top_k: int = 16,
 ) -> dict[str, Any]:
     batch = build_batch([row], max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=2, tokenizer=tokenizer)
     bos_id = int(getattr(tokenizer, "bos_id", 1))
@@ -422,13 +451,40 @@ def _generate_greedy_text(
         "expected_probability": None,
         "top_k": [],
     }
+    repetition_guard_events: list[dict[str, Any]] = []
     model.eval()
     with torch.no_grad():
         for step_idx in range(max(0, max_new_tokens - len(prefix_ids))):
             out = model(batch.input_ids, decoder_ids)
             next_logits = out["decoder_logits"][0, -1].detach().float().cpu()
             next_probs = torch.softmax(next_logits, dim=-1)
-            next_id = int(torch.argmax(next_logits).item())
+            raw_next_id = int(torch.argmax(next_logits).item())
+            next_id = raw_next_id
+            if generation_repetition_guard:
+                top_count = min(max(1, int(generation_repetition_guard_top_k)), int(next_logits.numel()))
+                _, candidate_indices = torch.topk(next_logits, k=top_count)
+                for candidate_tensor in candidate_indices:
+                    candidate_id = int(candidate_tensor.item())
+                    if not _candidate_creates_repetition(
+                        generated_ids,
+                        candidate_id,
+                        tokenizer=tokenizer,
+                        eos_id=eos_id,
+                        pad_id=pad_id,
+                        bos_id=bos_id,
+                    ):
+                        next_id = candidate_id
+                        break
+                if next_id != raw_next_id:
+                    repetition_guard_events.append(
+                        {
+                            "step": step_idx,
+                            "blocked_token_id": raw_next_id,
+                            "blocked_token_text": tokenizer.decode([raw_next_id]),
+                            "selected_token_id": next_id,
+                            "selected_token_text": tokenizer.decode([next_id]),
+                        }
+                    )
             if step_idx == 0:
                 top_count = min(10, int(next_logits.numel()))
                 top_probs, top_indices = torch.topk(next_probs, k=top_count)
@@ -477,6 +533,10 @@ def _generate_greedy_text(
         "generation_prefix_text": str(generation_prefix_text),
         "generation_prefix_token_count": len(prefix_ids),
         "generation_prefix_start_match": bool(generation_prefix_text and text.startswith(str(generation_prefix_text))),
+        "generation_repetition_guard": bool(generation_repetition_guard),
+        "generation_repetition_guard_top_k": int(generation_repetition_guard_top_k),
+        "generation_repetition_guard_events": repetition_guard_events,
+        "generation_repetition_guard_event_count": len(repetition_guard_events),
         "boundary_next_token": boundary_next_token,
         "eos_position": eos_position,
         "stopped_on_eos": eos_position is not None,
@@ -501,6 +561,8 @@ def _write_generation_audits(
     target_internal_token_rows: int,
     target_repetition_rows: int,
     generation_prefix_field: str | None = None,
+    generation_repetition_guard: bool = False,
+    generation_repetition_guard_top_k: int = 16,
 ) -> dict[str, Any]:
     selected = rows[:max_generation_rows]
     samples = [
@@ -511,6 +573,8 @@ def _write_generation_audits(
             max_encoder_tokens=max_encoder_tokens,
             max_new_tokens=max_generation_tokens,
             generation_prefix_field=generation_prefix_field,
+            generation_repetition_guard=generation_repetition_guard,
+            generation_repetition_guard_top_k=generation_repetition_guard_top_k,
         )
         for row in selected
     ]
@@ -543,6 +607,12 @@ def _write_generation_audits(
         "max_generation_tokens": max_generation_tokens,
         "contentful_rows": len(contentful_rows),
         "contentful_rate": len(contentful_rows) / generated_rows if generated_rows else None,
+        "short_or_junk_rows": len(short_rows),
+        "short_or_junk_rate": len(short_rows) / generated_rows if generated_rows else None,
+        "degenerate_repetition_rows": len(repetition_rows),
+        "degenerate_repetition_rate": len(repetition_rows) / generated_rows if generated_rows else None,
+        "generated_internal_token_rows": len(leak_rows),
+        "generated_internal_token_rate": len(leak_rows) / generated_rows if generated_rows else None,
         "target_prefix_match_rows": len(prefix_rows),
         "target_prefix_match_rate": len(prefix_rows) / generated_rows if generated_rows else None,
         "generation_prefix_field": generation_prefix_field,
@@ -550,6 +620,10 @@ def _write_generation_audits(
         "prefix_primed_rate": len(primed_rows) / generated_rows if generated_rows else None,
         "generation_prefix_start_rows": len(primed_start_rows),
         "generation_prefix_start_rate": len(primed_start_rows) / generated_rows if generated_rows else None,
+        "generation_repetition_guard": bool(generation_repetition_guard),
+        "generation_repetition_guard_top_k": int(generation_repetition_guard_top_k),
+        "generation_repetition_guard_event_rows": sum(1 for row in samples if row.get("generation_repetition_guard_event_count")),
+        "generation_repetition_guard_events": sum(int(row.get("generation_repetition_guard_event_count") or 0) for row in samples),
         "exact_match_rows": len(exact_rows),
         "boundary_next_token_available_rows": len(boundary_available_rows),
         "boundary_next_token_match_rows": len(boundary_match_rows),
@@ -972,6 +1046,8 @@ def run_bounded_decoder_ce_probe(
     eos_loss_weight: float = 1.0,
     generation_prefix_field: str | None = None,
     generation_audit_splits: str = "eval,strict_eval",
+    generation_repetition_guard: bool = False,
+    generation_repetition_guard_top_k: int = 16,
 ) -> dict[str, Any]:
     """Run a tiny bounded decoder CE probe with native interpretability telemetry."""
     random.seed(seed)
@@ -1141,6 +1217,8 @@ def run_bounded_decoder_ce_probe(
             target_internal_token_rows=target_internal_token_rows,
             target_repetition_rows=target_repetition_rows,
             generation_prefix_field=generation_prefix_field,
+            generation_repetition_guard=generation_repetition_guard,
+            generation_repetition_guard_top_k=generation_repetition_guard_top_k,
         )
     else:
         generation_card = {"generated_rows": 0, "samples": [], "note": "sampling disabled for bounded CE implementation recovery"}
@@ -1171,6 +1249,10 @@ def run_bounded_decoder_ce_probe(
         "generation_audit_enabled": bool(enable_generation_audit),
         "generated_rows": int(generation_card.get("generated_rows", 0)),
         "contentful_generation_rate": generation_card.get("contentful_rate"),
+        "generation_repetition_guard": bool(generation_repetition_guard),
+        "generation_repetition_guard_top_k": int(generation_repetition_guard_top_k),
+        "generation_repetition_guard_events": int(generation_card.get("generation_repetition_guard_events") or 0),
+        "generation_repetition_guard_event_rows": int(generation_card.get("generation_repetition_guard_event_rows") or 0),
         "eos_loss_weight": eos_loss_weight,
     }
 
@@ -1203,6 +1285,8 @@ def run_denoise_repair_probe(
     max_generation_tokens: int = 96,
     generation_prefix_field: str | None = None,
     generation_audit_splits: str = "eval,strict_eval",
+    generation_repetition_guard: bool = False,
+    generation_repetition_guard_top_k: int = 16,
     return_runtime_state: bool = False,
 ) -> dict[str, Any]:
     """Run a tiny denoise repair probe over corrupted-output -> clean-target rows."""
@@ -1353,6 +1437,8 @@ def run_denoise_repair_probe(
             target_internal_token_rows=target_internal_token_rows,
             target_repetition_rows=target_repetition_rows,
             generation_prefix_field=generation_prefix_field,
+            generation_repetition_guard=generation_repetition_guard,
+            generation_repetition_guard_top_k=generation_repetition_guard_top_k,
         )
     else:
         generation_card = {"generated_rows": 0, "samples": [], "note": "generation audit disabled for denoise repair probe"}
@@ -1385,6 +1471,10 @@ def run_denoise_repair_probe(
         "target_prefix_match_rate": generation_card.get("target_prefix_match_rate"),
         "generation_prefix_field": generation_prefix_field,
         "generation_prefix_start_rate": generation_card.get("generation_prefix_start_rate"),
+        "generation_repetition_guard": bool(generation_repetition_guard),
+        "generation_repetition_guard_top_k": int(generation_repetition_guard_top_k),
+        "generation_repetition_guard_events": int(generation_card.get("generation_repetition_guard_events") or 0),
+        "generation_repetition_guard_event_rows": int(generation_card.get("generation_repetition_guard_event_rows") or 0),
     }
     _write_json(output_dir / "denoise_repair_quality_audit.json", quality_card)
     _write_json(output_dir / "failure_bucket_card.json", {"mode": "denoise_repair_probe", "eval": eval_card, "token_loss_rows": len(token_records), "target_repetition_rows": target_repetition_rows, "generation_audit_enabled": bool(enable_generation_audit)})
@@ -1417,6 +1507,10 @@ def run_denoise_repair_probe(
         "target_prefix_match_rate": generation_card.get("target_prefix_match_rate"),
         "generation_prefix_field": generation_prefix_field,
         "generation_prefix_start_rate": generation_card.get("generation_prefix_start_rate"),
+        "generation_repetition_guard": bool(generation_repetition_guard),
+        "generation_repetition_guard_top_k": int(generation_repetition_guard_top_k),
+        "generation_repetition_guard_events": int(generation_card.get("generation_repetition_guard_events") or 0),
+        "generation_repetition_guard_event_rows": int(generation_card.get("generation_repetition_guard_event_rows") or 0),
     }
     if return_runtime_state:
         result["_runtime_model"] = model
@@ -1769,6 +1863,8 @@ def run_two_phase_suffix_denoise_reconnect_probe(
     max_generation_tokens: int = 96,
     generation_prefix_field: str | None = None,
     generation_audit_splits: str = "eval,strict_eval",
+    generation_repetition_guard: bool = False,
+    generation_repetition_guard_top_k: int = 16,
 ) -> dict[str, Any]:
     """Run suffix_choice structured control then residual denoise on one in-memory model."""
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1827,6 +1923,8 @@ def run_two_phase_suffix_denoise_reconnect_probe(
         max_generation_tokens=max_generation_tokens,
         generation_prefix_field=generation_prefix_field,
         generation_audit_splits=generation_audit_splits,
+        generation_repetition_guard=generation_repetition_guard,
+        generation_repetition_guard_top_k=generation_repetition_guard_top_k,
     )
     phase1_eval = phase1_result.get("eval") if isinstance(phase1_result.get("eval"), dict) else {}
     phase1_eval_exact = (((phase1_eval.get("eval") or {}).get("field_exact") or {}).get("suffix_choice") or {}).get("exact")
@@ -1850,6 +1948,8 @@ def run_two_phase_suffix_denoise_reconnect_probe(
         "denoise_ce_rows": int(phase2_result.get("denoise_ce_rows") or 0),
         "model_reused_in_memory_between_phases": True,
         "checkpoint_export_allowed_between_phases": False,
+        "generation_repetition_guard": bool(generation_repetition_guard),
+        "generation_repetition_guard_top_k": int(generation_repetition_guard_top_k),
         "required_artifacts_written": bool(phase1_result.get("required_artifacts_written")) and bool(phase2_result.get("required_artifacts_written")),
     }
     _write_json(output_dir / "two_phase_execution_result.json", result)
@@ -1896,6 +1996,8 @@ def run_tri_phase_suffix_phrase_residual_reconnect_probe(
     max_generation_tokens: int = 96,
     generation_prefix_field: str | None = None,
     generation_audit_splits: str = "eval,strict_eval",
+    generation_repetition_guard: bool = False,
+    generation_repetition_guard_top_k: int = 16,
 ) -> dict[str, Any]:
     """Run suffix-choice, phrase warm-up, then full residual denoise on one in-memory model."""
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1955,6 +2057,8 @@ def run_tri_phase_suffix_phrase_residual_reconnect_probe(
         max_generation_tokens=max_generation_tokens,
         generation_prefix_field=generation_prefix_field,
         generation_audit_splits=generation_audit_splits,
+        generation_repetition_guard=generation_repetition_guard,
+        generation_repetition_guard_top_k=generation_repetition_guard_top_k,
         return_runtime_state=True,
     )
     model = phase2_result.pop("_runtime_model")
@@ -1986,6 +2090,8 @@ def run_tri_phase_suffix_phrase_residual_reconnect_probe(
         max_generation_tokens=max_generation_tokens,
         generation_prefix_field=generation_prefix_field,
         generation_audit_splits=generation_audit_splits,
+        generation_repetition_guard=generation_repetition_guard,
+        generation_repetition_guard_top_k=generation_repetition_guard_top_k,
     )
     phase1_eval = phase1_result.get("eval") if isinstance(phase1_result.get("eval"), dict) else {}
     phase1_eval_exact = (((phase1_eval.get("eval") or {}).get("field_exact") or {}).get("suffix_choice") or {}).get("exact")
@@ -2013,6 +2119,8 @@ def run_tri_phase_suffix_phrase_residual_reconnect_probe(
         "denoise_ce_rows": int(phase2_result.get("denoise_ce_rows") or 0) + int(phase3_result.get("denoise_ce_rows") or 0),
         "model_reused_in_memory_between_phases": True,
         "checkpoint_export_allowed_between_phases": False,
+        "generation_repetition_guard": bool(generation_repetition_guard),
+        "generation_repetition_guard_top_k": int(generation_repetition_guard_top_k),
         "required_artifacts_written": bool(phase1_result.get("required_artifacts_written")) and bool(phase2_result.get("required_artifacts_written")) and bool(phase3_result.get("required_artifacts_written")),
     }
     _write_json(output_dir / "tri_phase_execution_result.json", result)
