@@ -1,0 +1,188 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "failures": [],
+  "feature_ablation_native_rerun_available": false,
+  "feature_ablation_proxy_rows": 160,
+  "gradient_diagnostics": {
+    "decoder_grad_nonzero_rows": 0,
+    "decoder_grad_norm": {
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0
+    },
+    "encoder_grad_norm": {
+      "max": 9.849030394263034,
+      "mean": 7.87350032344712,
+      "min": 3.9835455139012574
+    },
+    "rows": 16,
+    "structured_head_grad_norm": {
+      "max": 10.71345452670022,
+      "mean": 8.090641299165394,
+      "min": 3.6652003657210717
+    },
+    "total_grad_norm": {
+      "max": 14.371226073899543,
+      "mean": 11.319027895773784,
+      "min": 5.420832492193441
+    }
+  },
+  "loss_diagnostics": {
+    "correct_by_step": [
+      0,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "first_loss": 1.9122545719146729,
+    "last_loss": 3.30613112449646,
+    "last_three_correct_total": 0,
+    "loss_increased_from_first_to_last": true,
+    "max_loss": 3.58054256439209,
+    "mean_loss": 2.3513844907283783,
+    "min_loss": 1.0407533645629883,
+    "rows": 8
+  },
+  "manifest": "runs/local/artifacts/stage9695_multisurface_structured_tiny_execution_review/tiny_structured_manifests/symbol_binding_tiny.jsonl",
+  "manifest_balance": {
+    "label_counts": {
+      "ABSTAIN_UNBOUND": 9,
+      "BIND_CALL_TO_SYMBOL": 16,
+      "BIND_IMPORT_TO_MODULE": 7,
+      "BIND_TEST_TO_SYMBOL": 16,
+      "RETRIEVE_MORE": 16
+    },
+    "labels_missing_from_eval_or_strict": [
+      "BIND_IMPORT_TO_MODULE"
+    ],
+    "missing_labels_by_split": {
+      "eval": [
+        "BIND_IMPORT_TO_MODULE"
+      ],
+      "strict_eval": [
+        "BIND_IMPORT_TO_MODULE"
+      ],
+      "train": []
+    },
+    "query_kind_counts": {
+      "callsite": 28,
+      "import": 16,
+      "test": 20
+    },
+    "rows": 64,
+    "split_label_counts": {
+      "eval": {
+        "ABSTAIN_UNBOUND": 1,
+        "BIND_CALL_TO_SYMBOL": 5,
+        "BIND_TEST_TO_SYMBOL": 5,
+        "RETRIEVE_MORE": 5
+      },
+      "strict_eval": {
+        "ABSTAIN_UNBOUND": 2,
+        "BIND_CALL_TO_SYMBOL": 5,
+        "BIND_TEST_TO_SYMBOL": 5,
+        "RETRIEVE_MORE": 4
+      },
+      "train": {
+        "ABSTAIN_UNBOUND": 6,
+        "BIND_CALL_TO_SYMBOL": 6,
+        "BIND_IMPORT_TO_MODULE": 7,
+        "BIND_TEST_TO_SYMBOL": 6,
+        "RETRIEVE_MORE": 7
+      }
+    },
+    "split_query_kind_counts": {
+      "eval": {
+        "callsite": 9,
+        "import": 1,
+        "test": 6
+      },
+      "strict_eval": {
+        "callsite": 9,
+        "import": 2,
+        "test": 5
+      },
+      "train": {
+        "callsite": 10,
+        "import": 13,
+        "test": 9
+      }
+    }
+  },
+  "name": "stage9699_symbol_binding_postrun_diagnostics",
+  "passed": true,
+  "prediction_diagnostics": {
+    "by_split_pred": {
+      "eval": {
+        "BIND_CALL_TO_SYMBOL": 16
+      },
+      "strict_eval": {
+        "BIND_CALL_TO_SYMBOL": 16
+      }
+    },
+    "by_split_target": {
+      "eval": {
+        "ABSTAIN_UNBOUND": 1,
+        "BIND_CALL_TO_SYMBOL": 5,
+        "BIND_TEST_TO_SYMBOL": 5,
+        "RETRIEVE_MORE": 5
+      },
+      "strict_eval": {
+        "ABSTAIN_UNBOUND": 2,
+        "BIND_CALL_TO_SYMBOL": 5,
+        "BIND_TEST_TO_SYMBOL": 5,
+        "RETRIEVE_MORE": 4
+      }
+    },
+    "confidence_mean": 0.5497024841606617,
+    "confusion": {
+      "ABSTAIN_UNBOUND": {
+        "BIND_CALL_TO_SYMBOL": 3
+      },
+      "BIND_CALL_TO_SYMBOL": {
+        "BIND_CALL_TO_SYMBOL": 10
+      },
+      "BIND_TEST_TO_SYMBOL": {
+        "BIND_CALL_TO_SYMBOL": 10
+      },
+      "RETRIEVE_MORE": {
+        "BIND_CALL_TO_SYMBOL": 9
+      }
+    },
+    "exact": 0.3125,
+    "high_confidence_wrong_rows": 0,
+    "margin_mean": 0.20451139006763697,
+    "prediction_collapse_label": "BIND_CALL_TO_SYMBOL",
+    "prediction_collapse_rate": 1.0,
+    "prediction_counts": {
+      "BIND_CALL_TO_SYMBOL": 32
+    },
+    "rows": 32,
+    "wrong_confidence_mean": 0.5477500476620414,
+    "wrong_count": 22,
+    "wrong_margin_max": 0.21099841594696045,
+    "wrong_margin_min": 0.19126367568969727
+  },
+  "promotion_ready": false,
+  "quality_passed": false,
+  "repair_queue": "runs/local/artifacts/stage9699_symbol_binding_postrun_diagnostics/stage9700_symbol_binding_repair_queue.jsonl",
+  "run_dir": "runs/local/artifacts/stage9698_symbol_binding_target_100m_structured_tiny_probe/symbol_binding_probe_after_alias_patch",
+  "source_stage9698_summary": "runs/summaries/stage9698_symbol_binding_target_100m_structured_tiny_probe_audit.json",
+  "stage": 9699
+}
