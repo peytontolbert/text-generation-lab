@@ -1,0 +1,1243 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9492_phase_aware_episode_verifier_target_100m_probe/stage9492_phase_aware_episode_verifier_probe_audit.json",
+    "doc": "docs/PHASE_AWARE_EPISODE_VERIFIER_PROBE_AUDIT_STAGE9492.md",
+    "execution_result": "runs/local/artifacts/stage9492_phase_aware_episode_verifier_target_100m_probe/execution_result.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T00:31:44Z",
+  "decision": "Phase-aware observe verifier probe failed quality safely; do not widen. Split verifier heads or add deterministic verifier-feature overlay before rejoin.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "best_state_selection": {
+      "checkpoint_exported": false,
+      "enabled": true,
+      "eval_joint_proxy_exact": null,
+      "eval_loss": null,
+      "promotion_ready": false,
+      "restored": false,
+      "selected_step": null,
+      "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+      "selection_score": null,
+      "strict_joint_proxy_exact": null,
+      "strict_loss": null
+    },
+    "body_emission_authorized": false,
+    "checkpoint_like_artifacts": [],
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Safe quality failure. Combined observe-phase verifier heads collapsed toward majority/default classes on the tiny 66-row set. Target-prefix alone is learnable, but all verifier labels together need either deterministic verifier-feature overlays or per-head staged curricula before rejoining.",
+    "estimated_parameter_count": 102703145,
+    "eval_rows": 6,
+    "failures": [
+      "final_eval_not_exact",
+      "final_strict_not_exact",
+      "no_jointly_exact_best_state_to_restore"
+    ],
+    "fields": [
+      "episode_boundary_match",
+      "episode_failure_type",
+      "episode_repair_outcome",
+      "episode_step_value",
+      "episode_target_prefix_match"
+    ],
+    "final_eval_field_exact": {
+      "episode_boundary_match": {
+        "exact": 0.6666666666666666,
+        "rows": 6
+      },
+      "episode_failure_type": {
+        "exact": 0.5,
+        "rows": 6
+      },
+      "episode_repair_outcome": {
+        "exact": 0.5,
+        "rows": 6
+      },
+      "episode_step_value": {
+        "exact": 0.5,
+        "rows": 6
+      },
+      "episode_target_prefix_match": {
+        "exact": 0.5,
+        "rows": 6
+      }
+    },
+    "final_eval_joint_proxy_exact": 0.5333333333333333,
+    "final_strict_field_exact": {
+      "episode_boundary_match": {
+        "exact": 0.6666666666666666,
+        "rows": 6
+      },
+      "episode_failure_type": {
+        "exact": 0.5,
+        "rows": 6
+      },
+      "episode_repair_outcome": {
+        "exact": 0.3333333333333333,
+        "rows": 6
+      },
+      "episode_step_value": {
+        "exact": 0.5,
+        "rows": 6
+      },
+      "episode_target_prefix_match": {
+        "exact": 0.5,
+        "rows": 6
+      }
+    },
+    "final_strict_joint_proxy_exact": 0.5,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_rows": [],
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "passed": false,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_passed": false,
+    "runtime_authorized": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9491_phase_aware_episode_verifier_preflight_audit",
+    "strict_rows": 6,
+    "train_rows": 54,
+    "wrong_by_field_split": {
+      "eval::episode_boundary_match::false=>true": 2,
+      "eval::episode_failure_type::not_exact+target_prefix_miss+boundary_next_token_miss=>none": 2,
+      "eval::episode_failure_type::not_exact+target_prefix_miss=>none": 1,
+      "eval::episode_repair_outcome::verified_target_prefix_positive=>successful_suffix_repair_step": 3,
+      "eval::episode_step_value::0.0=>1.0": 3,
+      "eval::episode_target_prefix_match::false=>true": 3,
+      "strict_eval::episode_boundary_match::false=>true": 2,
+      "strict_eval::episode_failure_type::not_exact+target_prefix_miss+boundary_next_token_miss=>none": 2,
+      "strict_eval::episode_failure_type::not_exact+target_prefix_miss=>none": 1,
+      "strict_eval::episode_repair_outcome::residual_suffix_repair_step=>successful_suffix_repair_step": 1,
+      "strict_eval::episode_repair_outcome::verified_target_prefix_positive=>successful_suffix_repair_step": 3,
+      "strict_eval::episode_step_value::0.0=>1.0": 3,
+      "strict_eval::episode_target_prefix_match::false=>true": 3
+    },
+    "wrong_rows": [
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.7241275906562805,
+        "correct": false,
+        "entropy": 0.589012622833252,
+        "field": "episode_boundary_match",
+        "high_confidence_wrong": false,
+        "margin": 0.44825512170791626,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0003",
+        "split": "eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.5508691668510437,
+        "top2_label": "false",
+        "top2_logit": -0.41415977478027344,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.5508691668510437,
+            "prob": 0.7241275906562805
+          },
+          {
+            "label": "false",
+            "logit": -0.41415977478027344,
+            "prob": 0.27587246894836426
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.710685670375824,
+        "correct": false,
+        "entropy": 0.6015366315841675,
+        "field": "episode_boundary_match",
+        "high_confidence_wrong": false,
+        "margin": 0.4213712811470032,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0020",
+        "split": "eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.4956616461277008,
+        "top2_label": "false",
+        "top2_logit": -0.40305468440055847,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.4956616461277008,
+            "prob": 0.710685670375824
+          },
+          {
+            "label": "false",
+            "logit": -0.40305468440055847,
+            "prob": 0.2893143892288208
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.5294566750526428,
+        "correct": false,
+        "entropy": 1.469096064567566,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": false,
+        "margin": 0.3495050519704819,
+        "pred": "none",
+        "pred_index": 0,
+        "row_id": "stage9490_observe_verifier_0003",
+        "split": "eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "target_index": 2,
+        "top1_label": "none",
+        "top1_logit": 2.771080493927002,
+        "top2_label": "not_exact+target_prefix_miss",
+        "top2_logit": 1.6919171810150146,
+        "top_k": [
+          {
+            "label": "none",
+            "logit": 2.771080493927002,
+            "prob": 0.5294566750526428
+          },
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 1.6919171810150146,
+            "prob": 0.17995162308216095
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 1.5043936967849731,
+            "prob": 0.14918161928653717
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 0.499029278755188,
+            "prob": 0.0545872338116169
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": -0.1770457774400711,
+            "prob": 0.027763577178120613
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.5352543592453003,
+        "correct": false,
+        "entropy": 1.4761137962341309,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": false,
+        "margin": 0.3554307669401169,
+        "pred": "none",
+        "pred_index": 0,
+        "row_id": "stage9490_observe_verifier_0006",
+        "split": "eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss",
+        "target_index": 1,
+        "top1_label": "none",
+        "top1_logit": 2.753383159637451,
+        "top2_label": "not_exact+target_prefix_miss",
+        "top2_logit": 1.6626174449920654,
+        "top_k": [
+          {
+            "label": "none",
+            "logit": 2.753383159637451,
+            "prob": 0.5352543592453003
+          },
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 1.6626174449920654,
+            "prob": 0.1798235923051834
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 1.3857699632644653,
+            "prob": 0.13633687794208527
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 0.5090373158454895,
+            "prob": 0.05673527345061302
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": -0.1624467670917511,
+            "prob": 0.028988877311348915
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.5417527556419373,
+        "correct": false,
+        "entropy": 1.4732065200805664,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": false,
+        "margin": 0.37338098883628845,
+        "pred": "none",
+        "pred_index": 0,
+        "row_id": "stage9490_observe_verifier_0020",
+        "split": "eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "target_index": 2,
+        "top1_label": "none",
+        "top1_logit": 2.7610738277435303,
+        "top2_label": "not_exact+target_prefix_miss",
+        "top2_logit": 1.5924384593963623,
+        "top_k": [
+          {
+            "label": "none",
+            "logit": 2.7610738277435303,
+            "prob": 0.5417527556419373
+          },
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 1.5924384593963623,
+            "prob": 0.1683717668056488
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 1.4029340744018555,
+            "prob": 0.13930557668209076
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 0.5025322437286377,
+            "prob": 0.056614670902490616
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": -0.10012470185756683,
+            "prob": 0.03098835051059723
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.49437397718429565,
+        "correct": false,
+        "entropy": 1.0976195335388184,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": false,
+        "margin": 0.18926197290420532,
+        "pred": "successful_suffix_repair_step",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0050",
+        "split": "eval",
+        "step": null,
+        "target": "verified_target_prefix_positive",
+        "target_index": 2,
+        "top1_label": "successful_suffix_repair_step",
+        "top1_logit": 0.8612579703330994,
+        "top2_label": "verified_target_prefix_positive",
+        "top2_logit": 0.3786446452140808,
+        "top_k": [
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 0.8612579703330994,
+            "prob": 0.49437397718429565
+          },
+          {
+            "label": "verified_target_prefix_positive",
+            "logit": 0.3786446452140808,
+            "prob": 0.30511200428009033
+          },
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": -0.14594721794128418,
+            "prob": 0.18056431412696838
+          },
+          {
+            "label": "3",
+            "logit": -2.348820686340332,
+            "prob": 0.019949689507484436
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.4823205769062042,
+        "correct": false,
+        "entropy": 1.0996451377868652,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": false,
+        "margin": 0.16243717074394226,
+        "pred": "successful_suffix_repair_step",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0054",
+        "split": "eval",
+        "step": null,
+        "target": "verified_target_prefix_positive",
+        "target_index": 2,
+        "top1_label": "successful_suffix_repair_step",
+        "top1_logit": 0.832981288433075,
+        "top2_label": "verified_target_prefix_positive",
+        "top2_logit": 0.4223288297653198,
+        "top_k": [
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 0.832981288433075,
+            "prob": 0.4823205769062042
+          },
+          {
+            "label": "verified_target_prefix_positive",
+            "logit": 0.4223288297653198,
+            "prob": 0.31988340616226196
+          },
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": -0.16002652049064636,
+            "prob": 0.17868083715438843
+          },
+          {
+            "label": "3",
+            "logit": -2.3951399326324463,
+            "prob": 0.019115272909402847
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.45579084753990173,
+        "correct": false,
+        "entropy": 1.1171425580978394,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": false,
+        "margin": 0.12083414196968079,
+        "pred": "successful_suffix_repair_step",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0060",
+        "split": "eval",
+        "step": null,
+        "target": "verified_target_prefix_positive",
+        "target_index": 2,
+        "top1_label": "successful_suffix_repair_step",
+        "top1_logit": 0.7562015652656555,
+        "top2_label": "verified_target_prefix_positive",
+        "top2_logit": 0.4481687843799591,
+        "top_k": [
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 0.7562015652656555,
+            "prob": 0.45579084753990173
+          },
+          {
+            "label": "verified_target_prefix_positive",
+            "logit": 0.4481687843799591,
+            "prob": 0.33495670557022095
+          },
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": -0.12128458172082901,
+            "prob": 0.18953010439872742
+          },
+          {
+            "label": "3",
+            "logit": -2.384082078933716,
+            "prob": 0.019722308963537216
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.577821671962738,
+        "correct": false,
+        "entropy": 0.6809853911399841,
+        "field": "episode_step_value",
+        "high_confidence_wrong": false,
+        "margin": 0.15564340353012085,
+        "pred": "1.0",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0003",
+        "split": "eval",
+        "step": null,
+        "target": "0.0",
+        "target_index": 0,
+        "top1_label": "1.0",
+        "top1_logit": 0.27020910382270813,
+        "top2_label": "0.0",
+        "top2_logit": -0.043628543615341187,
+        "top_k": [
+          {
+            "label": "1.0",
+            "logit": 0.27020910382270813,
+            "prob": 0.577821671962738
+          },
+          {
+            "label": "0.0",
+            "logit": -0.043628543615341187,
+            "prob": 0.4221782684326172
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.6042224764823914,
+        "correct": false,
+        "entropy": 0.6712623834609985,
+        "field": "episode_step_value",
+        "high_confidence_wrong": false,
+        "margin": 0.20844495296478271,
+        "pred": "1.0",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0006",
+        "split": "eval",
+        "step": null,
+        "target": "0.0",
+        "target_index": 0,
+        "top1_label": "1.0",
+        "top1_logit": 0.33543598651885986,
+        "top2_label": "0.0",
+        "top2_logit": -0.08765427023172379,
+        "top_k": [
+          {
+            "label": "1.0",
+            "logit": 0.33543598651885986,
+            "prob": 0.6042224764823914
+          },
+          {
+            "label": "0.0",
+            "logit": -0.08765427023172379,
+            "prob": 0.39577752351760864
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.6034621596336365,
+        "correct": false,
+        "entropy": 0.6715828776359558,
+        "field": "episode_step_value",
+        "high_confidence_wrong": false,
+        "margin": 0.20692434906959534,
+        "pred": "1.0",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0020",
+        "split": "eval",
+        "step": null,
+        "target": "0.0",
+        "target_index": 0,
+        "top1_label": "1.0",
+        "top1_logit": 0.3406751751899719,
+        "top2_label": "0.0",
+        "top2_logit": -0.07923680543899536,
+        "top_k": [
+          {
+            "label": "1.0",
+            "logit": 0.3406751751899719,
+            "prob": 0.6034621596336365
+          },
+          {
+            "label": "0.0",
+            "logit": -0.07923680543899536,
+            "prob": 0.39653781056404114
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.6309041380882263,
+        "correct": false,
+        "entropy": 0.6584727168083191,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.26180827617645264,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0003",
+        "split": "eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.026802781969308853,
+        "top2_label": "false",
+        "top2_logit": -0.5092947483062744,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.026802781969308853,
+            "prob": 0.6309041380882263
+          },
+          {
+            "label": "false",
+            "logit": -0.5092947483062744,
+            "prob": 0.3690958619117737
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.6445018649101257,
+        "correct": false,
+        "entropy": 0.650783896446228,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.28900372982025146,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0006",
+        "split": "eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.06385016441345215,
+        "top2_label": "false",
+        "top2_logit": -0.531107485294342,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.06385016441345215,
+            "prob": 0.6445018649101257
+          },
+          {
+            "label": "false",
+            "logit": -0.531107485294342,
+            "prob": 0.35549813508987427
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.651421844959259,
+        "correct": false,
+        "entropy": 0.6465620398521423,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.3028436601161957,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0020",
+        "split": "eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.06680448353290558,
+        "top2_label": "false",
+        "top2_logit": -0.5584904551506042,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.06680448353290558,
+            "prob": 0.651421844959259
+          },
+          {
+            "label": "false",
+            "logit": -0.5584904551506042,
+            "prob": 0.34857818484306335
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.7011369466781616,
+        "correct": false,
+        "entropy": 0.6098979115486145,
+        "field": "episode_boundary_match",
+        "high_confidence_wrong": false,
+        "margin": 0.40227389335632324,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0028",
+        "split": "strict_eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.4818691909313202,
+        "top2_label": "false",
+        "top2_logit": -0.3708485960960388,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.4818691909313202,
+            "prob": 0.7011369466781616
+          },
+          {
+            "label": "false",
+            "logit": -0.3708485960960388,
+            "prob": 0.2988630533218384
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.7532638907432556,
+        "correct": false,
+        "entropy": 0.5587208867073059,
+        "field": "episode_boundary_match",
+        "high_confidence_wrong": false,
+        "margin": 0.50652776658535,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0040",
+        "split": "strict_eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.6163854598999023,
+        "top2_label": "false",
+        "top2_logit": -0.49971073865890503,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.6163854598999023,
+            "prob": 0.7532638907432556
+          },
+          {
+            "label": "false",
+            "logit": -0.49971073865890503,
+            "prob": 0.24673612415790558
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.5191012620925903,
+        "correct": false,
+        "entropy": 1.507710337638855,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": false,
+        "margin": 0.34328578412532806,
+        "pred": "none",
+        "pred_index": 0,
+        "row_id": "stage9490_observe_verifier_0028",
+        "split": "strict_eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "target_index": 2,
+        "top1_label": "none",
+        "top1_logit": 2.686642646789551,
+        "top2_label": "not_exact+target_prefix_miss",
+        "top2_logit": 1.6039787530899048,
+        "top_k": [
+          {
+            "label": "none",
+            "logit": 2.686642646789551,
+            "prob": 0.5191012620925903
+          },
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 1.6039787530899048,
+            "prob": 0.17581547796726227
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 1.459340214729309,
+            "prob": 0.15213929116725922
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 0.48089510202407837,
+            "prob": 0.05718841403722763
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": -0.1581951081752777,
+            "prob": 0.030182471498847008
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.5278646945953369,
+        "correct": false,
+        "entropy": 1.4862849712371826,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": false,
+        "margin": 0.34303128719329834,
+        "pred": "none",
+        "pred_index": 0,
+        "row_id": "stage9490_observe_verifier_0037",
+        "split": "strict_eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss",
+        "target_index": 1,
+        "top1_label": "none",
+        "top1_logit": 2.73408579826355,
+        "top2_label": "not_exact+target_prefix_miss",
+        "top2_logit": 1.6847007274627686,
+        "top_k": [
+          {
+            "label": "none",
+            "logit": 2.73408579826355,
+            "prob": 0.5278646945953369
+          },
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 1.6847007274627686,
+            "prob": 0.18483340740203857
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 1.3900659084320068,
+            "prob": 0.1376645714044571
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 0.5180481672286987,
+            "prob": 0.05755852162837982
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": -0.17429371178150177,
+            "prob": 0.028802448883652687
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.5583360195159912,
+        "correct": false,
+        "entropy": 1.4371161460876465,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": false,
+        "margin": 0.39246077835559845,
+        "pred": "none",
+        "pred_index": 0,
+        "row_id": "stage9490_observe_verifier_0040",
+        "split": "strict_eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "target_index": 2,
+        "top1_label": "none",
+        "top1_logit": 2.831394910812378,
+        "top2_label": "not_exact+target_prefix_miss",
+        "top2_logit": 1.617669939994812,
+        "top_k": [
+          {
+            "label": "none",
+            "logit": 2.831394910812378,
+            "prob": 0.5583360195159912
+          },
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 1.617669939994812,
+            "prob": 0.16587524116039276
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 1.3961808681488037,
+            "prob": 0.13291993737220764
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 0.49754539132118225,
+            "prob": 0.05411500856280327
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": -0.1469738483428955,
+            "prob": 0.028405766934156418
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.4606541693210602,
+        "correct": false,
+        "entropy": 1.0461747646331787,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": false,
+        "margin": 0.05880972743034363,
+        "pred": "successful_suffix_repair_step",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0040",
+        "split": "strict_eval",
+        "step": null,
+        "target": "residual_suffix_repair_step",
+        "target_index": 0,
+        "top1_label": "successful_suffix_repair_step",
+        "top1_logit": 0.9243547320365906,
+        "top2_label": "residual_suffix_repair_step",
+        "top2_logit": 0.7877721786499023,
+        "top_k": [
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 0.9243547320365906,
+            "prob": 0.4606541693210602
+          },
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": 0.7877721786499023,
+            "prob": 0.40184444189071655
+          },
+          {
+            "label": "verified_target_prefix_positive",
+            "logit": -0.4103809893131256,
+            "prob": 0.12125695496797562
+          },
+          {
+            "label": "3",
+            "logit": -2.420539379119873,
+            "prob": 0.01624448411166668
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.4574742913246155,
+        "correct": false,
+        "entropy": 1.1217281818389893,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": false,
+        "margin": 0.12964126467704773,
+        "pred": "successful_suffix_repair_step",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0051",
+        "split": "strict_eval",
+        "step": null,
+        "target": "verified_target_prefix_positive",
+        "target_index": 2,
+        "top1_label": "successful_suffix_repair_step",
+        "top1_logit": 0.7465067505836487,
+        "top2_label": "verified_target_prefix_positive",
+        "top2_logit": 0.41329044103622437,
+        "top_k": [
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 0.7465067505836487,
+            "prob": 0.4574742913246155
+          },
+          {
+            "label": "verified_target_prefix_positive",
+            "logit": 0.41329044103622437,
+            "prob": 0.32783302664756775
+          },
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": -0.11127646267414093,
+            "prob": 0.19401538372039795
+          },
+          {
+            "label": "3",
+            "logit": -2.350177049636841,
+            "prob": 0.02067730948328972
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.44450676441192627,
+        "correct": false,
+        "entropy": 1.1282081604003906,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": false,
+        "margin": 0.10663384199142456,
+        "pred": "successful_suffix_repair_step",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0055",
+        "split": "strict_eval",
+        "step": null,
+        "target": "verified_target_prefix_positive",
+        "target_index": 2,
+        "top1_label": "successful_suffix_repair_step",
+        "top1_logit": 0.7046101689338684,
+        "top2_label": "verified_target_prefix_positive",
+        "top2_logit": 0.4303148090839386,
+        "top_k": [
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 0.7046101689338684,
+            "prob": 0.44450676441192627
+          },
+          {
+            "label": "verified_target_prefix_positive",
+            "logit": 0.4303148090839386,
+            "prob": 0.3378729224205017
+          },
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": -0.11166904121637344,
+            "prob": 0.1965046525001526
+          },
+          {
+            "label": "3",
+            "logit": -2.342338800430298,
+            "prob": 0.02111569046974182
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.5203996300697327,
+        "correct": false,
+        "entropy": 1.0760619640350342,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": false,
+        "margin": 0.23217841982841492,
+        "pred": "successful_suffix_repair_step",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0061",
+        "split": "strict_eval",
+        "step": null,
+        "target": "verified_target_prefix_positive",
+        "target_index": 2,
+        "top1_label": "successful_suffix_repair_step",
+        "top1_logit": 0.9440261125564575,
+        "top2_label": "verified_target_prefix_positive",
+        "top2_logit": 0.3531574010848999,
+        "top_k": [
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 0.9440261125564575,
+            "prob": 0.5203996300697327
+          },
+          {
+            "label": "verified_target_prefix_positive",
+            "logit": 0.3531574010848999,
+            "prob": 0.28822121024131775
+          },
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": -0.15890753269195557,
+            "prob": 0.17271855473518372
+          },
+          {
+            "label": "3",
+            "logit": -2.384159564971924,
+            "prob": 0.018660547211766243
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.5827279090881348,
+        "correct": false,
+        "entropy": 0.6793961524963379,
+        "field": "episode_step_value",
+        "high_confidence_wrong": false,
+        "margin": 0.16545578837394714,
+        "pred": "1.0",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0028",
+        "split": "strict_eval",
+        "step": null,
+        "target": "0.0",
+        "target_index": 0,
+        "top1_label": "1.0",
+        "top1_logit": 0.2753087282180786,
+        "top2_label": "0.0",
+        "top2_logit": -0.05867305397987366,
+        "top_k": [
+          {
+            "label": "1.0",
+            "logit": 0.2753087282180786,
+            "prob": 0.5827279090881348
+          },
+          {
+            "label": "0.0",
+            "logit": -0.05867305397987366,
+            "prob": 0.4172721207141876
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.5806455612182617,
+        "correct": false,
+        "entropy": 0.6800827980041504,
+        "field": "episode_step_value",
+        "high_confidence_wrong": false,
+        "margin": 0.16129112243652344,
+        "pred": "1.0",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0037",
+        "split": "strict_eval",
+        "step": null,
+        "target": "0.0",
+        "target_index": 0,
+        "top1_label": "1.0",
+        "top1_logit": 0.2902769148349762,
+        "top2_label": "0.0",
+        "top2_logit": -0.03514716029167175,
+        "top_k": [
+          {
+            "label": "1.0",
+            "logit": 0.2902769148349762,
+            "prob": 0.5806455612182617
+          },
+          {
+            "label": "0.0",
+            "logit": -0.03514716029167175,
+            "prob": 0.4193544387817383
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.6416075229644775,
+        "correct": false,
+        "entropy": 0.6524876952171326,
+        "field": "episode_step_value",
+        "high_confidence_wrong": false,
+        "margin": 0.2832150459289551,
+        "pred": "1.0",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0040",
+        "split": "strict_eval",
+        "step": null,
+        "target": "0.0",
+        "target_index": 0,
+        "top1_label": "1.0",
+        "top1_logit": 0.4257461130619049,
+        "top2_label": "0.0",
+        "top2_logit": -0.15660201013088226,
+        "top_k": [
+          {
+            "label": "1.0",
+            "logit": 0.4257461130619049,
+            "prob": 0.6416075229644775
+          },
+          {
+            "label": "0.0",
+            "logit": -0.15660201013088226,
+            "prob": 0.35839247703552246
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.6352270245552063,
+        "correct": false,
+        "entropy": 0.6561150550842285,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.2704540491104126,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0028",
+        "split": "strict_eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.0283082015812397,
+        "top2_label": "false",
+        "top2_logit": -0.5263990759849548,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.0283082015812397,
+            "prob": 0.6352270245552063
+          },
+          {
+            "label": "false",
+            "logit": -0.5263990759849548,
+            "prob": 0.3647729754447937
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.6342076063156128,
+        "correct": false,
+        "entropy": 0.656678318977356,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.2684152126312256,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0037",
+        "split": "strict_eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.021061379462480545,
+        "top2_label": "false",
+        "top2_logit": -0.5292491316795349,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.021061379462480545,
+            "prob": 0.6342076063156128
+          },
+          {
+            "label": "false",
+            "logit": -0.5292491316795349,
+            "prob": 0.3657923936843872
+          }
+        ]
+      },
+      {
+        "cell_key": "web_js_ts_html::episode_observe_phase_verifier_normalization::KEEP_EPISODE_OBSERVE_PHASE_VERIFIER",
+        "confidence": 0.6751298308372498,
+        "correct": false,
+        "entropy": 0.6304861307144165,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": false,
+        "margin": 0.3502596616744995,
+        "pred": "true",
+        "pred_index": 1,
+        "row_id": "stage9490_observe_verifier_0040",
+        "split": "strict_eval",
+        "step": null,
+        "target": "false",
+        "target_index": 0,
+        "top1_label": "true",
+        "top1_logit": 0.11338397860527039,
+        "top2_label": "false",
+        "top2_logit": -0.6180953979492188,
+        "top_k": [
+          {
+            "label": "true",
+            "logit": 0.11338397860527039,
+            "prob": 0.6751298308372498
+          },
+          {
+            "label": "false",
+            "logit": -0.6180953979492188,
+            "prob": 0.32487016916275024
+          }
+        ]
+      }
+    ]
+  },
+  "name": "stage9492_phase_aware_episode_verifier_probe_audit",
+  "next_best_step": "Build Stage9493 per-head verifier curriculum queue: keep target-prefix as passed, isolate boundary/failure/outcome/value heads with deterministic verifier features and balanced eval/strict cells.",
+  "passed": false,
+  "stage": 9492,
+  "stage_name": "stage9492_phase_aware_episode_verifier_probe_audit"
+}
