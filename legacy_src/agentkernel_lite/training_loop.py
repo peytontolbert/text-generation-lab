@@ -901,12 +901,25 @@ def _episode_step_value(row: dict[str, Any], field: str) -> str | None:
     return None if value is None else str(value)
 
 
+SOURCE_BACKED_FIELD_ALIASES = {
+    "symbol_binding": ("binding_action",),
+    "edit_localization": ("edit_localization_target",),
+    "patch_operator": ("patch_operator",),
+    "verifier_repair": ("verifier_repair_action",),
+}
+
+
 def _clean_value(row: dict[str, Any], field: str) -> str | None:
     if field.startswith("episode_"):
         return _episode_step_value(row, field)
     clean = row.get("clean_state") if isinstance(row.get("clean_state"), dict) else {}
     target = row.get("target") if isinstance(row.get("target"), dict) else {}
     value = clean.get(field, target.get(field, row.get(field)))
+    if value is None:
+        for alias in SOURCE_BACKED_FIELD_ALIASES.get(field, ()):  # source-backed canonical target names
+            value = clean.get(alias, target.get(alias, row.get(alias)))
+            if value is not None:
+                break
     if value is None:
         return None
     if isinstance(value, list):
