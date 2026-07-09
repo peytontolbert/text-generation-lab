@@ -71,13 +71,32 @@ def validate_suite(packs: list[dict[str, Any]]) -> dict[str, Any]:
 def builder_exclusion_decision(row: dict[str, Any], locked_source_ids: set[str]) -> dict[str, Any]:
     source_id = str(row.get("source_id") or "")
     lineage = row.get("source_lineage") if isinstance(row.get("source_lineage"), dict) else {}
-    lineage_source = str(lineage.get("source_id") or lineage.get("lineage_hash") or "")
-    blocked = source_id in locked_source_ids or lineage_source in locked_source_ids or row.get("split_role") in TRAIN_FORBIDDEN_ROLES
+    candidate_ids = {source_id}
+    if isinstance(row.get("source_ids"), list):
+        candidate_ids.update(str(value) for value in row["source_ids"] if value)
+    for key, value in lineage.items():
+        if (key.endswith("source_id") or key in {"source_id", "lineage_hash"}) and value:
+            candidate_ids.add(str(value))
+    candidate_ids.discard("")
+    matched_locked_ids = sorted(candidate_ids & locked_source_ids)
+    blocked = bool(matched_locked_ids) or row.get("split_role") in TRAIN_FORBIDDEN_ROLES
     return {
         "row_id": row.get("row_id") or row.get("candidate_id") or row.get("id"),
         "blocked_from_training": bool(blocked),
         "reason": "locked_eval_source_never_mined_into_training" if blocked else "not_locked_eval_source",
+        "matched_locked_source_ids": matched_locked_ids,
     }
+
+
+def load_locked_source_ids_from_exclusions(path: Path) -> set[str]:
+    locked: set[str] = set()
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        if row.get("blocked_from_training") is True and row.get("source_id"):
+            locked.add(str(row["source_id"]))
+    return locked
 
 
 def read_json(path: Path) -> Any:

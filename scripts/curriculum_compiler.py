@@ -6,6 +6,11 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+try:
+    from golden_locked_eval_suite import builder_exclusion_decision, load_locked_source_ids_from_exclusions
+except ModuleNotFoundError:
+    from scripts.golden_locked_eval_suite import builder_exclusion_decision, load_locked_source_ids_from_exclusions  # type: ignore
+
 AUTHORITY_CLOSED = {
     "model_execution_authorized_next": False,
     "decoder_ce_training_authorized_next": False,
@@ -145,18 +150,34 @@ def build_loss_mask(route: str, row: dict[str, Any], *, allow_decoder: bool, all
     return mask
 
 
-def compile_rows(rows: list[dict[str, Any]], *, allow_decoder: bool, allow_denoise: bool, allow_runtime: bool, require_recovered_gates: bool = False) -> tuple[dict[str, list[dict[str, Any]]], dict[str, Any]]:
+def compile_rows(
+    rows: list[dict[str, Any]],
+    *,
+    allow_decoder: bool,
+    allow_denoise: bool,
+    allow_runtime: bool,
+    require_recovered_gates: bool = False,
+    locked_source_ids: set[str] | None = None,
+) -> tuple[dict[str, list[dict[str, Any]]], dict[str, Any]]:
     buckets: dict[str, list[dict[str, Any]]] = defaultdict(list)
     route_counts: Counter[str] = Counter()
     split_counts: Counter[str] = Counter()
     loss_counts: Counter[str] = Counter()
     rejected: list[dict[str, Any]] = []
     gate_rejected: list[dict[str, Any]] = []
+    locked_source_ids = locked_source_ids or set()
+    locked_rejected: list[dict[str, Any]] = []
     for index, row in enumerate(rows):
         route = route_of(row)
         failed_gates = missing_or_failed_recovered_gates(row) if require_recovered_gates else []
+        locked_decision = builder_exclusion_decision(row, locked_source_ids)
+        compiler_block_reasons: list[str] = []
         if failed_gates:
             route = "NEEDS_HUMAN_REVIEW"
+            compiler_block_reasons.append("missing_or_failed_recovered_gates")
+        if locked_decision["blocked_from_training"]:
+            route = "NEEDS_HUMAN_REVIEW"
+            compiler_block_reasons.append("locked_eval_source_never_mined_into_training")
         objective = OBJECTIVE_BY_ROUTE.get(route, "quarantine")
         route_counts[route] += 1
         split_counts[split_of(row)] += 1
@@ -165,9 +186,12 @@ def compile_rows(rows: list[dict[str, Any]], *, allow_decoder: bool, allow_denoi
         out["route"] = route
         out["objective_family"] = objective
         out["authority"] = dict(AUTHORITY_CLOSED)
+        if compiler_block_reasons:
+            out["compiler_block_reasons"] = compiler_block_reasons
         if failed_gates:
-            out["compiler_block_reasons"] = ["missing_or_failed_recovered_gates"]
             out["missing_or_failed_recovered_gates"] = failed_gates
+        if locked_decision["blocked_from_training"]:
+            out["locked_source_exclusion_decision"] = locked_decision
         out["loss_mask"] = build_loss_mask(route, row, allow_decoder=allow_decoder, allow_denoise=allow_denoise, allow_runtime=allow_runtime)
         for key, enabled in out["loss_mask"].items():
             loss_counts[key] += int(enabled)
@@ -175,6 +199,8 @@ def compile_rows(rows: list[dict[str, Any]], *, allow_decoder: bool, allow_denoi
             rejected.append({"row_id": out["row_id"], "route": route, "objective_family": objective})
         if failed_gates:
             gate_rejected.append({"row_id": out["row_id"], "missing_or_failed_recovered_gates": failed_gates})
+        if locked_decision["blocked_from_training"]:
+            locked_rejected.append({"row_id": out["row_id"], "decision": locked_decision})
         buckets[objective].append(out)
     card = {
         "rows": len(rows),
@@ -185,6 +211,9 @@ def compile_rows(rows: list[dict[str, Any]], *, allow_decoder: bool, allow_denoi
         "rejected_or_holdout_examples": rejected[:100],
         "gate_rejected_examples": gate_rejected[:100],
         "gate_rejected_rows": len(gate_rejected),
+        "locked_source_exclusion_rows": len(locked_rejected),
+        "locked_source_exclusion_examples": locked_rejected[:100],
+        "locked_source_exclusion_count": len(locked_source_ids),
         "required_recovered_gate_references": REQUIRED_RECOVERED_GATE_REFERENCES,
         "authority": dict(AUTHORITY_CLOSED),
         "compiler_options": {
@@ -192,6 +221,7 @@ def compile_rows(rows: list[dict[str, Any]], *, allow_decoder: bool, allow_denoi
             "allow_denoise": allow_denoise,
             "allow_runtime": allow_runtime,
             "require_recovered_gates": require_recovered_gates,
+            "locked_source_exclusion_count": len(locked_source_ids),
         },
     }
     return dict(buckets), card
@@ -205,12 +235,21 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--allow-denoise", action="store_true")
     p.add_argument("--allow-runtime", action="store_true")
     p.add_argument("--require-recovered-gates", action="store_true")
+    p.add_argument("--locked-source-exclusions", type=Path, default=None)
     return p.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    buckets, card = compile_rows(read_jsonl(args.input), allow_decoder=args.allow_decoder, allow_denoise=args.allow_denoise, allow_runtime=args.allow_runtime, require_recovered_gates=args.require_recovered_gates)
+    locked_source_ids = load_locked_source_ids_from_exclusions(args.locked_source_exclusions) if args.locked_source_exclusions else set()
+    buckets, card = compile_rows(
+        read_jsonl(args.input),
+        allow_decoder=args.allow_decoder,
+        allow_denoise=args.allow_denoise,
+        allow_runtime=args.allow_runtime,
+        require_recovered_gates=args.require_recovered_gates,
+        locked_source_ids=locked_source_ids,
+    )
     args.output_dir.mkdir(parents=True, exist_ok=True)
     for objective, rows in buckets.items():
         write_jsonl(args.output_dir / f"{objective}.jsonl", rows)

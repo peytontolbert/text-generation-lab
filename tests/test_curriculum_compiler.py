@@ -83,3 +83,58 @@ def test_compiler_requires_recovered_gate_status_when_enabled(tmp_path: Path) ->
     assert "missing_or_failed_recovered_gates" in human_rows
     assert "contamination_leakage_detector" in card["required_recovered_gate_references"]
 
+
+
+
+def test_compiler_blocks_locked_eval_sources_even_when_decoder_allowed(tmp_path: Path) -> None:
+    inp = tmp_path / "rows.jsonl"
+    out = tmp_path / "compiled"
+    exclusions = tmp_path / "locked_exclusions.jsonl"
+    rows = [
+        {
+            "row_id": "locked_decoder",
+            "split": "train",
+            "route": "KEEP_BOUNDED_DECODER",
+            "source_id": "locked_eval_source::alpha",
+        },
+        {
+            "row_id": "open_decoder",
+            "split": "train",
+            "route": "KEEP_BOUNDED_DECODER",
+            "source_id": "open_source::beta",
+        },
+    ]
+    inp.write_text("\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8")
+    exclusions.write_text(
+        json.dumps({
+            "source_id": "locked_eval_source::alpha",
+            "blocked_from_training": True,
+            "reason": "locked_eval_source_never_mined_into_training",
+        }) + "\n",
+        encoding="utf-8",
+    )
+    subprocess.run(
+        [
+            sys.executable,
+            str(COMPILER),
+            "--input",
+            str(inp),
+            "--output-dir",
+            str(out),
+            "--allow-decoder",
+            "--locked-source-exclusions",
+            str(exclusions),
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    card = json.loads((out / "compile_card.json").read_text())
+    assert card["locked_source_exclusion_rows"] == 1
+    assert card["loss_counts"]["decoder_ce"] == 1
+    human_review = (out / "human_review.jsonl").read_text(encoding="utf-8")
+    assert "locked_decoder" in human_review
+    assert "locked_eval_source_never_mined_into_training" in human_review
+    bounded = (out / "bounded_decoder_ce.jsonl").read_text(encoding="utf-8")
+    assert "open_decoder" in bounded
+    assert "locked_decoder" not in bounded
