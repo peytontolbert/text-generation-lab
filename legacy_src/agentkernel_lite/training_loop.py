@@ -1458,8 +1458,21 @@ def run_structured_aux_probe(
         if getattr(head, "out_features", 0) < len(vocab):
             raise ValueError(f"structured head {field} has {getattr(head, 'out_features', 0)} classes but needs {len(vocab)}")
 
+    frozen_for_structured_probe: list[str] = []
+    trainable_for_structured_probe: list[str] = []
+    for name, parameter in model.named_parameters():
+        bucket = _module_bucket(name)
+        if bucket.startswith("decoder") or bucket in {"lm_head", "embeddings"}:
+            parameter.requires_grad_(False)
+            frozen_for_structured_probe.append(name)
+        else:
+            parameter.requires_grad_(True)
+            trainable_for_structured_probe.append(name)
+    if not trainable_for_structured_probe:
+        raise ValueError("structured aux probe found no trainable non-decoder parameters")
+
     before = {name: value.detach().clone() for name, value in model.state_dict().items()}
-    optimizer = AdamW(model.parameters(), lr=learning_rate)
+    optimizer = AdamW([parameter for parameter in model.parameters() if parameter.requires_grad], lr=learning_rate)
     model.train()
     row_dynamics: dict[str, dict[str, Any]] = {}
 
@@ -1690,4 +1703,8 @@ def run_structured_aux_probe(
         "gemma_executed": False,
         "harness_executed": False,
         "required_artifacts_written": all((output_dir / name).exists() and (not name.endswith(".jsonl") or (output_dir / name).stat().st_size > 0) for name in REQUIRED_STRUCTURED_ARTIFACTS),
+        "structured_optimizer_isolated": True,
+        "structured_optimizer_frozen_parameter_count": len(frozen_for_structured_probe),
+        "structured_optimizer_trainable_parameter_count": len(trainable_for_structured_probe),
+        "structured_optimizer_frozen_bucket_prefixes": ["decoder", "lm_head", "embeddings"],
     }
