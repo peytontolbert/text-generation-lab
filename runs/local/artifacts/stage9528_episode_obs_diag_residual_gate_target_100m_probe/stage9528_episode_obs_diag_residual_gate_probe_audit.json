@@ -1,0 +1,208 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "best_state_selection": {
+    "checkpoint_exported": false,
+    "enabled": true,
+    "eval_joint_proxy_exact": null,
+    "eval_loss": null,
+    "promotion_ready": false,
+    "restored": false,
+    "selected_step": null,
+    "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+    "selection_score": null,
+    "strict_joint_proxy_exact": null,
+    "strict_loss": null
+  },
+  "checkpoint_like_artifacts": [],
+  "comparison_to_stage9524": {
+    "residual_gate_eval_delta": 0.0,
+    "residual_gate_strict_delta": 0.16666666666666663,
+    "stage9524_eval_joint_proxy_exact": 0.9444444444444444,
+    "stage9524_high_confidence_wrong_rows": 2,
+    "stage9524_strict_joint_proxy_exact": 0.8333333333333334,
+    "stage9524_wrong_rows": 4
+  },
+  "decoder_ce_training_authorized_next": false,
+  "denoise_ce_training_authorized_next": false,
+  "diagnosis": "Safe partial quality recovery. Residual-gate features fixed strict residuals and removed the false-success high-confidence errors, but one eval boundary-miss failure-type row remains.",
+  "estimated_parameter_count": 102703145,
+  "eval_rows": 6,
+  "failures": [
+    "final_eval_not_exact",
+    "no_jointly_exact_best_state_to_restore"
+  ],
+  "field_exact_eval": {
+    "episode_failure_type": {
+      "exact": 0.8333333333333334,
+      "rows": 6
+    },
+    "episode_repair_outcome": {
+      "exact": 1.0,
+      "rows": 6
+    },
+    "episode_step_value": {
+      "exact": 1.0,
+      "rows": 6
+    }
+  },
+  "field_exact_strict": {
+    "episode_failure_type": {
+      "exact": 1.0,
+      "rows": 6
+    },
+    "episode_repair_outcome": {
+      "exact": 1.0,
+      "rows": 6
+    },
+    "episode_step_value": {
+      "exact": 1.0,
+      "rows": 6
+    }
+  },
+  "field_loss_eval": {
+    "episode_failure_type": 0.45613405108451843,
+    "episode_repair_outcome": 0.0004562285030260682,
+    "episode_step_value": 0.00022138160420581698
+  },
+  "field_loss_strict": {
+    "episode_failure_type": 0.05658990517258644,
+    "episode_repair_outcome": 0.00047546636778861284,
+    "episode_step_value": 0.00023035916092339903
+  },
+  "fields": [
+    "episode_failure_type",
+    "episode_repair_outcome",
+    "episode_step_value"
+  ],
+  "final_eval_joint_proxy_exact": 0.9444444444444444,
+  "final_strict_joint_proxy_exact": 1.0,
+  "high_confidence_wrong_count": 1,
+  "high_confidence_wrong_rows": [
+    {
+      "cell_key": "python::episode_observation_diagnosis_residual_gate::KEEP_EPISODE_OBS_DIAG_RESIDUAL_GATE",
+      "confidence": 0.8935211300849915,
+      "correct": false,
+      "entropy": 0.41732197999954224,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8123412504792213,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9525_obs_diag_resgate_0048",
+      "split": "eval",
+      "step": null,
+      "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "target_index": 2,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.820720672607422,
+      "top2_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "top2_logit": 3.422218084335327,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.820720672607422,
+          "prob": 0.8935211300849915
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+          "logit": 3.422218084335327,
+          "prob": 0.08117987960577011
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+          "logit": 1.8078618049621582,
+          "prob": 0.016156315803527832
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+          "logit": 1.1642240285873413,
+          "prob": 0.008488169871270657
+        },
+        {
+          "label": "none",
+          "logit": -1.9070141315460205,
+          "prob": 0.00039354313048534095
+        }
+      ]
+    }
+  ],
+  "mode": "episode_step_structured_probe",
+  "model_execution_authorized_next": false,
+  "next_repair_target": "Build a one-cell boundary-miss eval residual contrast patch focused on episode_failure_type only, without reopening decoder, denoise, runtime, or promotion.",
+  "passed": false,
+  "probe_scale": "target_100m",
+  "promotion_ready": false,
+  "quality_failures": [
+    "final_eval_not_exact",
+    "no_jointly_exact_best_state_to_restore"
+  ],
+  "quality_passed": false,
+  "safety_failures": [],
+  "safety_passed": true,
+  "source_stage": "stage9527_episode_obs_diag_residual_gate_preflight_audit",
+  "strict_residual_fixed": true,
+  "strict_rows": 6,
+  "train_rows": 46,
+  "wrong_row_count": 1,
+  "wrong_rows": [
+    {
+      "cell_key": "python::episode_observation_diagnosis_residual_gate::KEEP_EPISODE_OBS_DIAG_RESIDUAL_GATE",
+      "confidence": 0.8935211300849915,
+      "correct": false,
+      "entropy": 0.41732197999954224,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8123412504792213,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9525_obs_diag_resgate_0048",
+      "split": "eval",
+      "step": null,
+      "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "target_index": 2,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.820720672607422,
+      "top2_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "top2_logit": 3.422218084335327,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.820720672607422,
+          "prob": 0.8935211300849915
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+          "logit": 3.422218084335327,
+          "prob": 0.08117987960577011
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+          "logit": 1.8078618049621582,
+          "prob": 0.016156315803527832
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+          "logit": 1.1642240285873413,
+          "prob": 0.008488169871270657
+        },
+        {
+          "label": "none",
+          "logit": -1.9070141315460205,
+          "prob": 0.00039354313048534095
+        }
+      ]
+    }
+  ]
+}
