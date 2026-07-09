@@ -1,0 +1,330 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "best_state_selection": {
+    "checkpoint_exported": false,
+    "enabled": true,
+    "eval_joint_proxy_exact": null,
+    "eval_loss": null,
+    "promotion_ready": false,
+    "restored": false,
+    "selected_step": null,
+    "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+    "selection_score": null,
+    "strict_joint_proxy_exact": null,
+    "strict_loss": null
+  },
+  "checkpoint_like_artifacts": [],
+  "decoder_ce_training_authorized_next": false,
+  "denoise_ce_training_authorized_next": false,
+  "diagnosis": "Safe quality failure. Isolated boundary verifier matched the 4/6 majority baseline on eval and strict, with all false boundary examples predicted true at high confidence. The next data patch should counterbalance boundary-negative rows and/or expose deterministic generated/reference boundary-comparison features.",
+  "estimated_parameter_count": 102703145,
+  "eval_rows": 6,
+  "failures": [
+    "final_eval_not_exact",
+    "final_strict_not_exact",
+    "no_jointly_exact_best_state_to_restore"
+  ],
+  "fields": [
+    "episode_boundary_match"
+  ],
+  "final_eval_field_exact": {
+    "episode_boundary_match": {
+      "exact": 0.6666666666666666,
+      "rows": 6
+    }
+  },
+  "final_eval_joint_proxy_exact": 0.6666666666666666,
+  "final_strict_field_exact": {
+    "episode_boundary_match": {
+      "exact": 0.6666666666666666,
+      "rows": 6
+    }
+  },
+  "final_strict_joint_proxy_exact": 0.6666666666666666,
+  "high_confidence_wrong_rows": [
+    {
+      "cell_key": "python::episode_verifier_per_head_episode_boundary_match::KEEP_EPISODE_VERIFIER_PER_HEAD",
+      "confidence": 0.8753437995910645,
+      "correct": false,
+      "entropy": 0.3761005997657776,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": true,
+      "margin": 0.7506876215338707,
+      "pred": "true",
+      "pred_index": 1,
+      "row_id": "stage9493_episode_boundary_match_0003",
+      "split": "eval",
+      "step": null,
+      "target": "false",
+      "target_index": 0,
+      "top1_label": "true",
+      "top1_logit": 0.9344927668571472,
+      "top2_label": "false",
+      "top2_logit": -1.0145645141601562,
+      "top_k": [
+        {
+          "label": "true",
+          "logit": 0.9344927668571472,
+          "prob": 0.8753437995910645
+        },
+        {
+          "label": "false",
+          "logit": -1.0145645141601562,
+          "prob": 0.12465617805719376
+        }
+      ]
+    },
+    {
+      "cell_key": "web_js_ts_html::episode_verifier_per_head_episode_boundary_match::KEEP_EPISODE_VERIFIER_PER_HEAD",
+      "confidence": 0.872501790523529,
+      "correct": false,
+      "entropy": 0.38160306215286255,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": true,
+      "margin": 0.7450035810470581,
+      "pred": "true",
+      "pred_index": 1,
+      "row_id": "stage9493_episode_boundary_match_0020",
+      "split": "eval",
+      "step": null,
+      "target": "false",
+      "target_index": 0,
+      "top1_label": "true",
+      "top1_logit": 0.8991582989692688,
+      "top2_label": "false",
+      "top2_logit": -1.0241039991378784,
+      "top_k": [
+        {
+          "label": "true",
+          "logit": 0.8991582989692688,
+          "prob": 0.872501790523529
+        },
+        {
+          "label": "false",
+          "logit": -1.0241039991378784,
+          "prob": 0.12749820947647095
+        }
+      ]
+    },
+    {
+      "cell_key": "python::episode_verifier_per_head_episode_boundary_match::KEEP_EPISODE_VERIFIER_PER_HEAD",
+      "confidence": 0.8576465845108032,
+      "correct": false,
+      "entropy": 0.40921270847320557,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": true,
+      "margin": 0.7152931839227676,
+      "pred": "true",
+      "pred_index": 1,
+      "row_id": "stage9493_episode_boundary_match_0028",
+      "split": "strict_eval",
+      "step": null,
+      "target": "false",
+      "target_index": 0,
+      "top1_label": "true",
+      "top1_logit": 0.8501407504081726,
+      "top2_label": "false",
+      "top2_logit": -0.9457385540008545,
+      "top_k": [
+        {
+          "label": "true",
+          "logit": 0.8501407504081726,
+          "prob": 0.8576465845108032
+        },
+        {
+          "label": "false",
+          "logit": -0.9457385540008545,
+          "prob": 0.14235340058803558
+        }
+      ]
+    },
+    {
+      "cell_key": "web_js_ts_html::episode_verifier_per_head_episode_boundary_match::KEEP_EPISODE_VERIFIER_PER_HEAD",
+      "confidence": 0.8758981823921204,
+      "correct": false,
+      "entropy": 0.3750187158584595,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": true,
+      "margin": 0.7517963424324989,
+      "pred": "true",
+      "pred_index": 1,
+      "row_id": "stage9493_episode_boundary_match_0040",
+      "split": "strict_eval",
+      "step": null,
+      "target": "false",
+      "target_index": 0,
+      "top1_label": "true",
+      "top1_logit": 0.9246286749839783,
+      "top2_label": "false",
+      "top2_logit": -1.029518723487854,
+      "top_k": [
+        {
+          "label": "true",
+          "logit": 0.9246286749839783,
+          "prob": 0.8758981823921204
+        },
+        {
+          "label": "false",
+          "logit": -1.029518723487854,
+          "prob": 0.12410183995962143
+        }
+      ]
+    }
+  ],
+  "mode": "episode_step_structured_probe",
+  "model_execution_authorized_next": false,
+  "passed": false,
+  "probe_scale": "target_100m",
+  "quality_passed": false,
+  "safety_failures": [],
+  "safety_passed": true,
+  "source_stage": "stage9495_boundary_verifier_preflight_audit",
+  "strict_rows": 6,
+  "train_rows": 54,
+  "wrong_by_split_target_pred": {
+    "eval::false=>true": 2,
+    "strict_eval::false=>true": 2
+  },
+  "wrong_rows": [
+    {
+      "cell_key": "python::episode_verifier_per_head_episode_boundary_match::KEEP_EPISODE_VERIFIER_PER_HEAD",
+      "confidence": 0.8753437995910645,
+      "correct": false,
+      "entropy": 0.3761005997657776,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": true,
+      "margin": 0.7506876215338707,
+      "pred": "true",
+      "pred_index": 1,
+      "row_id": "stage9493_episode_boundary_match_0003",
+      "split": "eval",
+      "step": null,
+      "target": "false",
+      "target_index": 0,
+      "top1_label": "true",
+      "top1_logit": 0.9344927668571472,
+      "top2_label": "false",
+      "top2_logit": -1.0145645141601562,
+      "top_k": [
+        {
+          "label": "true",
+          "logit": 0.9344927668571472,
+          "prob": 0.8753437995910645
+        },
+        {
+          "label": "false",
+          "logit": -1.0145645141601562,
+          "prob": 0.12465617805719376
+        }
+      ]
+    },
+    {
+      "cell_key": "web_js_ts_html::episode_verifier_per_head_episode_boundary_match::KEEP_EPISODE_VERIFIER_PER_HEAD",
+      "confidence": 0.872501790523529,
+      "correct": false,
+      "entropy": 0.38160306215286255,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": true,
+      "margin": 0.7450035810470581,
+      "pred": "true",
+      "pred_index": 1,
+      "row_id": "stage9493_episode_boundary_match_0020",
+      "split": "eval",
+      "step": null,
+      "target": "false",
+      "target_index": 0,
+      "top1_label": "true",
+      "top1_logit": 0.8991582989692688,
+      "top2_label": "false",
+      "top2_logit": -1.0241039991378784,
+      "top_k": [
+        {
+          "label": "true",
+          "logit": 0.8991582989692688,
+          "prob": 0.872501790523529
+        },
+        {
+          "label": "false",
+          "logit": -1.0241039991378784,
+          "prob": 0.12749820947647095
+        }
+      ]
+    },
+    {
+      "cell_key": "python::episode_verifier_per_head_episode_boundary_match::KEEP_EPISODE_VERIFIER_PER_HEAD",
+      "confidence": 0.8576465845108032,
+      "correct": false,
+      "entropy": 0.40921270847320557,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": true,
+      "margin": 0.7152931839227676,
+      "pred": "true",
+      "pred_index": 1,
+      "row_id": "stage9493_episode_boundary_match_0028",
+      "split": "strict_eval",
+      "step": null,
+      "target": "false",
+      "target_index": 0,
+      "top1_label": "true",
+      "top1_logit": 0.8501407504081726,
+      "top2_label": "false",
+      "top2_logit": -0.9457385540008545,
+      "top_k": [
+        {
+          "label": "true",
+          "logit": 0.8501407504081726,
+          "prob": 0.8576465845108032
+        },
+        {
+          "label": "false",
+          "logit": -0.9457385540008545,
+          "prob": 0.14235340058803558
+        }
+      ]
+    },
+    {
+      "cell_key": "web_js_ts_html::episode_verifier_per_head_episode_boundary_match::KEEP_EPISODE_VERIFIER_PER_HEAD",
+      "confidence": 0.8758981823921204,
+      "correct": false,
+      "entropy": 0.3750187158584595,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": true,
+      "margin": 0.7517963424324989,
+      "pred": "true",
+      "pred_index": 1,
+      "row_id": "stage9493_episode_boundary_match_0040",
+      "split": "strict_eval",
+      "step": null,
+      "target": "false",
+      "target_index": 0,
+      "top1_label": "true",
+      "top1_logit": 0.9246286749839783,
+      "top2_label": "false",
+      "top2_logit": -1.029518723487854,
+      "top_k": [
+        {
+          "label": "true",
+          "logit": 0.9246286749839783,
+          "prob": 0.8758981823921204
+        },
+        {
+          "label": "false",
+          "logit": -1.029518723487854,
+          "prob": 0.12410183995962143
+        }
+      ]
+    }
+  ]
+}

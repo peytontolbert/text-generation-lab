@@ -1,0 +1,193 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "best_state_selection": {
+    "checkpoint_exported": false,
+    "enabled": true,
+    "eval_joint_proxy_exact": null,
+    "eval_loss": null,
+    "promotion_ready": false,
+    "restored": false,
+    "selected_step": null,
+    "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+    "selection_score": null,
+    "strict_joint_proxy_exact": null,
+    "strict_loss": null
+  },
+  "checkpoint_like_artifacts": [],
+  "decoder_ce_training_authorized_next": false,
+  "denoise_ce_training_authorized_next": false,
+  "diagnosis": "Safe quality failure. Counterbalancing removed the high-confidence true-majority collapse from Stage9496, but the boundary head now sits near chance with low margins. The next repair should add stronger deterministic boundary-comparison features or route this label to a non-learned verifier overlay.",
+  "estimated_parameter_count": 102703145,
+  "eval_rows": 4,
+  "failures": [
+    "final_eval_not_exact",
+    "final_strict_not_exact",
+    "no_jointly_exact_best_state_to_restore"
+  ],
+  "fields": [
+    "episode_boundary_match"
+  ],
+  "final_eval_joint_proxy_exact": 0.5,
+  "final_strict_joint_proxy_exact": 0.5,
+  "high_confidence_wrong_rows": [],
+  "mode": "episode_step_structured_probe",
+  "model_execution_authorized_next": false,
+  "passed": false,
+  "pred_counts": {
+    "eval::false=>false": 1,
+    "eval::false=>true": 1,
+    "eval::true=>false": 1,
+    "eval::true=>true": 1,
+    "strict_eval::false=>false": 2,
+    "strict_eval::true=>false": 2
+  },
+  "probe_scale": "target_100m",
+  "quality_passed": false,
+  "safety_failures": [],
+  "safety_passed": true,
+  "source_stage": "stage9498_boundary_counterbalance_preflight_audit",
+  "strict_rows": 4,
+  "train_rows": 18,
+  "wrong_rows": [
+    {
+      "cell_key": "python::episode_boundary_match_counterbalanced::KEEP_EPISODE_BOUNDARY_COUNTERBALANCED",
+      "confidence": 0.5086206197738647,
+      "correct": false,
+      "entropy": 0.6929985284805298,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": false,
+      "margin": 0.017241299152374268,
+      "pred": "true",
+      "pred_index": 1,
+      "row_id": "stage9497_boundary_counterbalance_0018",
+      "split": "eval",
+      "step": null,
+      "target": "false",
+      "target_index": 0,
+      "top1_label": "true",
+      "top1_logit": 0.012992093339562416,
+      "top2_label": "false",
+      "top2_logit": -0.02149393782019615,
+      "top_k": [
+        {
+          "label": "true",
+          "logit": 0.012992093339562416,
+          "prob": 0.5086206197738647
+        },
+        {
+          "label": "false",
+          "logit": -0.02149393782019615,
+          "prob": 0.4913793206214905
+        }
+      ]
+    },
+    {
+      "cell_key": "cpp::episode_boundary_match_counterbalanced::KEEP_EPISODE_BOUNDARY_COUNTERBALANCED",
+      "confidence": 0.512272834777832,
+      "correct": false,
+      "entropy": 0.6928459405899048,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": false,
+      "margin": 0.024545669555664062,
+      "pred": "false",
+      "pred_index": 0,
+      "row_id": "stage9497_boundary_counterbalance_0021",
+      "split": "eval",
+      "step": null,
+      "target": "true",
+      "target_index": 1,
+      "top1_label": "false",
+      "top1_logit": 0.035740967839956284,
+      "top2_label": "true",
+      "top2_logit": -0.013360245153307915,
+      "top_k": [
+        {
+          "label": "false",
+          "logit": 0.035740967839956284,
+          "prob": 0.512272834777832
+        },
+        {
+          "label": "true",
+          "logit": -0.013360245153307915,
+          "prob": 0.48772716522216797
+        }
+      ]
+    },
+    {
+      "cell_key": "cpp::episode_boundary_match_counterbalanced::KEEP_EPISODE_BOUNDARY_COUNTERBALANCED",
+      "confidence": 0.5209064483642578,
+      "correct": false,
+      "entropy": 0.6922727823257446,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": false,
+      "margin": 0.04181292653083801,
+      "pred": "false",
+      "pred_index": 0,
+      "row_id": "stage9497_boundary_counterbalance_0024",
+      "split": "strict_eval",
+      "step": null,
+      "target": "true",
+      "target_index": 1,
+      "top1_label": "false",
+      "top1_logit": 0.011952650733292103,
+      "top2_label": "true",
+      "top2_logit": -0.07172204554080963,
+      "top_k": [
+        {
+          "label": "false",
+          "logit": 0.011952650733292103,
+          "prob": 0.5209064483642578
+        },
+        {
+          "label": "true",
+          "logit": -0.07172204554080963,
+          "prob": 0.4790935218334198
+        }
+      ]
+    },
+    {
+      "cell_key": "cpp::episode_boundary_match_counterbalanced::KEEP_EPISODE_BOUNDARY_COUNTERBALANCED",
+      "confidence": 0.5317290425300598,
+      "correct": false,
+      "entropy": 0.6911323666572571,
+      "field": "episode_boundary_match",
+      "high_confidence_wrong": false,
+      "margin": 0.06345805525779724,
+      "pred": "false",
+      "pred_index": 0,
+      "row_id": "stage9497_boundary_counterbalance_0025",
+      "split": "strict_eval",
+      "step": null,
+      "target": "true",
+      "target_index": 1,
+      "top1_label": "false",
+      "top1_logit": 0.06784480810165405,
+      "top2_label": "true",
+      "top2_logit": -0.059242069721221924,
+      "top_k": [
+        {
+          "label": "false",
+          "logit": 0.06784480810165405,
+          "prob": 0.5317290425300598
+        },
+        {
+          "label": "true",
+          "logit": -0.059242069721221924,
+          "prob": 0.4682709872722626
+        }
+      ]
+    }
+  ]
+}
