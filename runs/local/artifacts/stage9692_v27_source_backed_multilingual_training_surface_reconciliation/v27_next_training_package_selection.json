@@ -1,0 +1,45 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "do_not_do_next": [
+    "broad repository mining",
+    "Gemma comparison",
+    "runtime harness execution",
+    "decoder CE execution",
+    "source/body emission",
+    "promotion or checkpoint export"
+  ],
+  "exclude_until_objective_exists": [
+    "final_user_facing_summary",
+    "intent_to_build_strategy",
+    "repo_state_graph_navigation",
+    "verifier_expectation"
+  ],
+  "include_skill_areas": [
+    "bounded_argument_rendering",
+    "edit_localization",
+    "patch_operator_selection",
+    "symbol_binding",
+    "verifier_failure_repair_or_abstain"
+  ],
+  "reason": "Non-template residual queue is empty; the next real v2.7 work is to refresh recovered source-backed maintainer surfaces under the locked-source guard before any broad mining or execution.",
+  "required_controls": [
+    "--locked-source-exclusions runs/local/artifacts/stage9685_locked_multilingual_task_pack_skeleton/v27_locked_source_exclusions.jsonl",
+    "loss masks created after locked-source exclusion",
+    "authority closed for runtime/source/body/Gemma/harness/scoring/promotion",
+    "shortcut and topology baselines rerun per surface",
+    "target_100m contract-only preflight before execution"
+  ],
+  "selected_next_package": "locked_guarded_source_backed_multisurface_compiler_refresh"
+}
