@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9651_same_prefix_probe_failure_audit/same_prefix_probe_failure_audit.json",
+    "doc": "docs/SAME_PREFIX_PROBE_FAILURE_AUDIT_STAGE9651.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T08:40:44Z",
+  "decision": "Stage9650 failed safely; add an explicit structured comparator feature before another probe.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "confidence_bins": {
+      "low": 16
+    },
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "decoder_delta_norm": 0.0,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Same-prefix contrast removed prefix identity as a shortcut, but target-100M stayed at chance with low confidence. The representation likely needs an explicit structured boundary_token_relation feature instead of asking the tiny probe to infer equality from two serialized text fields.",
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_audit": "runs/local/artifacts/stage9650_same_prefix_contrast_tiny_probe/same_prefix_contrast_tiny_probe_audit.json",
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9650_same_prefix_contrast_tiny_probe.json",
+    "strict_field_exact": {
+      "episode_boundary_match": 0.5,
+      "episode_target_prefix_match": 0.5
+    },
+    "wrong_pairs": {
+      "eval::episode_boundary_match::false=>true": 1,
+      "eval::episode_boundary_match::true=>false": 1,
+      "eval::episode_target_prefix_match::false=>true": 1,
+      "eval::episode_target_prefix_match::true=>false": 1,
+      "strict_eval::episode_boundary_match::false=>true": 1,
+      "strict_eval::episode_boundary_match::true=>false": 1,
+      "strict_eval::episode_target_prefix_match::false=>true": 2
+    }
+  },
+  "name": "stage9651_same_prefix_probe_failure_audit",
+  "next_best_step": "Build Stage9652 comparator-feature micro manifest with boundary_token_relation=same|different, then run contract audit before execution.",
+  "passed": true,
+  "stage": 9651,
+  "stage_name": "stage9651_same_prefix_probe_failure_audit"
+}

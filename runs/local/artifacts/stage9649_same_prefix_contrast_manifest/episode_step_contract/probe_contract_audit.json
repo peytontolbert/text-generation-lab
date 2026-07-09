@@ -1,0 +1,121 @@
+{
+  "allowed_losses": [
+    "episode_boundary_match_ce",
+    "episode_failure_type_ce",
+    "episode_repair_outcome_ce",
+    "episode_step_value_mse",
+    "episode_target_prefix_match_ce"
+  ],
+  "authority_row_ids": [],
+  "authority_rows": 0,
+  "caps": {
+    "max_decoder_tokens": 8,
+    "max_eval_rows": 4,
+    "max_steps": 0,
+    "max_strict_rows": 4,
+    "max_train_rows": 4
+  },
+  "cleanup_requested": true,
+  "counterfactual_obligation_audit_required": false,
+  "counterfactual_obligation_card": null,
+  "episode_step_contract_only_probe": false,
+  "errors": [],
+  "final_checkpoint_export_disabled": true,
+  "final_model_save_skipped": true,
+  "generation_audit_requested": false,
+  "generation_audit_splits": "eval,strict_eval",
+  "generation_prefix_field": null,
+  "generation_repetition_guard": false,
+  "generation_repetition_guard_top_k": 16,
+  "implementation": "transformer",
+  "implementation_contract": {
+    "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "scaffold": false,
+    "target_100m_requires_model_config": true,
+    "target_implementation_guard": {
+      "allowed_for_recovered_100m_target": true,
+      "errors": [],
+      "features": {
+        "has_agent_policy_heads": true,
+        "has_retrieval_heads": true,
+        "has_rotary": true,
+        "has_scalar_invariant": true
+      },
+      "implementation_path": "/data/agentkernel-seq2seq-text-lab/legacy_src/agentkernel_lite/modeling_transformer.py",
+      "missing_features": [],
+      "selected": "transformer",
+      "target_requires_recovered_transformer": true
+    },
+    "transformer_execution_requires_explicit_authorization": true,
+    "transformer_module": "legacy_src/agentkernel_lite/modeling_transformer.py"
+  },
+  "loss_counts": {
+    "action_sequence_ce": 0,
+    "allowed_import_policy_ce": 0,
+    "blocked_import_policy_ce": 0,
+    "build_mode_ce": 0,
+    "decoder_ce": 0,
+    "denoise_ce": 0,
+    "edit_localization_ce": 0,
+    "episode_boundary_match_ce": 12,
+    "episode_failure_type_ce": 0,
+    "episode_repair_outcome_ce": 0,
+    "episode_step_value_mse": 0,
+    "episode_target_prefix_match_ce": 12,
+    "file_plan_ce": 0,
+    "patch_operator_ce": 0,
+    "repair_surface_ce": 0,
+    "repo_dependency_policy_ce": 0,
+    "runtime_reward": 0,
+    "suffix_choice_ce": 0,
+    "surface_role_ce": 0,
+    "symbol_binding_ce": 0,
+    "verifier_repair_ce": 0
+  },
+  "manifest": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9649_same_prefix_contrast_manifest/same_prefix_contrast_manifest.jsonl",
+  "manifest_sha256": "91bf0ea4e12fea0c515e35de5b6595fc4433cd166bb7102c41f3294bc8ac944f",
+  "max_generation_rows": 8,
+  "max_generation_tokens": 96,
+  "mode": "episode_step_structured_probe",
+  "model_execution_attempted": false,
+  "passed": true,
+  "probe_scale": "target_100m",
+  "row_ids": [
+    "stage9649_train_00_positive",
+    "stage9649_train_01_negative",
+    "stage9649_train_02_positive",
+    "stage9649_train_03_negative",
+    "stage9649_eval_00_positive",
+    "stage9649_eval_01_negative",
+    "stage9649_eval_02_positive",
+    "stage9649_eval_03_negative",
+    "stage9649_strict_eval_00_positive",
+    "stage9649_strict_eval_01_negative",
+    "stage9649_strict_eval_02_positive",
+    "stage9649_strict_eval_03_negative"
+  ],
+  "rows": 12,
+  "split_counts": {
+    "eval": 4,
+    "other": 0,
+    "strict_eval": 4,
+    "train": 4
+  },
+  "tokenizer_contract": {
+    "byte_fallback_used_when_unset": false,
+    "target_100m_vocab_size": 1506,
+    "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+  },
+  "unsafe_loss_row_examples": [],
+  "unsafe_loss_rows": 0,
+  "weights": {
+    "decoder_ce_weight": 0.0,
+    "denoise_weight": 0.0,
+    "eos_loss_weight": 1.0,
+    "eval_interval": 0,
+    "restore_best_structured_state": false,
+    "structured_aux_weight": 1.0
+  }
+}

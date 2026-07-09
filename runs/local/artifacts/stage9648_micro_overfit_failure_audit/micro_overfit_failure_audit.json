@@ -1,0 +1,89 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "diagnosis": "Stage9647 did not prove the comparison operation. The manifest reused prefixes with opposite labels across splits, so the model could key on prefix identity instead of boundary_expected_token_text versus boundary_generated_token_text. Train logits were not emitted, so the recorded train exact proxy is not strong evidence. The next manifest must include same-prefix positive/negative pairs within every split.",
+  "failures": [],
+  "manifest": "runs/local/artifacts/stage9646_micro_overfit_boundary_prefix_manifest/micro_overfit_boundary_prefix_manifest.jsonl",
+  "module_delta_summary": "encoder and target structured heads changed; decoder delta remained zero",
+  "passed": true,
+  "pred_by_split": {
+    "eval::episode_boundary_match::false": 4,
+    "eval::episode_target_prefix_match::false": 4,
+    "strict_eval::episode_boundary_match::false": 2,
+    "strict_eval::episode_boundary_match::true": 2,
+    "strict_eval::episode_target_prefix_match::false": 2,
+    "strict_eval::episode_target_prefix_match::true": 2
+  },
+  "prefix_conflict_examples": {
+    "Choose the verifier route": {
+      "eval": {
+        "True": 1
+      },
+      "train": {
+        "False": 1
+      }
+    },
+    "Emit the repair surface": {
+      "eval": {
+        "True": 1
+      },
+      "train": {
+        "False": 1
+      }
+    },
+    "Identify the import binding": {
+      "eval": {
+        "False": 1
+      },
+      "strict_eval": {
+        "True": 1
+      }
+    },
+    "Pick the localized edit": {
+      "eval": {
+        "False": 1
+      },
+      "strict_eval": {
+        "True": 1
+      }
+    },
+    "Return the parser symbol": {
+      "strict_eval": {
+        "False": 1
+      },
+      "train": {
+        "True": 1
+      }
+    },
+    "Select the dependency action": {
+      "strict_eval": {
+        "False": 1
+      },
+      "train": {
+        "True": 1
+      }
+    }
+  },
+  "source_audit": "runs/local/artifacts/stage9647_micro_overfit_boundary_prefix_tiny_probe/micro_overfit_boundary_prefix_tiny_probe_audit.json",
+  "source_summary": "runs/summaries/stage9647_micro_overfit_boundary_prefix_tiny_probe.json",
+  "train_logits_rows": 0,
+  "wrong_pairs": {
+    "eval::episode_boundary_match::true=>false": 2,
+    "eval::episode_target_prefix_match::true=>false": 2,
+    "strict_eval::episode_boundary_match::false=>true": 2,
+    "strict_eval::episode_boundary_match::true=>false": 2,
+    "strict_eval::episode_target_prefix_match::false=>true": 2,
+    "strict_eval::episode_target_prefix_match::true=>false": 2
+  }
+}

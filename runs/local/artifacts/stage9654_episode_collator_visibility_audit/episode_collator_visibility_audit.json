@@ -1,0 +1,39 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "diagnosis": "The recovered collator builds encoder input through _row_text and does not consume encoder_text or state_features. The boundary evidence added in Stages9646-9653 was therefore mostly invisible except for state_t/action metadata. Put comparator evidence in model_input or input_state for the next probe.",
+  "encoder_text_consumed_by_row_text": false,
+  "failures": [],
+  "hidden_episode_fields": [
+    "episode_transition.observation_t",
+    "episode_transition.reward_or_verifier",
+    "episode_transition.state_t_plus_1",
+    "encoder_text",
+    "state_features"
+  ],
+  "input_state_consumed_by_row_text": true,
+  "model_input_consumed_by_row_text": true,
+  "passed": true,
+  "source_summary": "runs/summaries/stage9653_comparator_feature_tiny_probe.json",
+  "state_features_consumed_by_row_text": false,
+  "training_data_path": "legacy_src/agentkernel_lite/training_data.py",
+  "visible_episode_fields": [
+    "episode_transition.state_t",
+    "episode_transition.action_t",
+    "model_input",
+    "input_state",
+    "query",
+    "graph_input summaries"
+  ]
+}
