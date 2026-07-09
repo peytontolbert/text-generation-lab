@@ -1,0 +1,117 @@
+{
+  "acceptance_rule": {
+    "expert_maintainer": "rubric_scores_must_pass_all_required_skill_areas_with_failure_trace_attribution",
+    "harness": "100m_product_harness_score_by_language_and_overall_must_exceed_gemma12b_same_task_pack_after_anti_cheat_gates",
+    "no_eval_hacking": "any anti_cheat_failure_blocks_completion_and_training_promotion",
+    "standalone": "100m_score_by_language_and_overall_must_exceed_gemma12b_same_surface_after_anti_cheat_gates"
+  },
+  "anti_cheat_requirements": [
+    "hidden_reference_never_train_eligible",
+    "target_text_absent_from_model_input",
+    "label_coded_ids_rejected",
+    "surface_marker_shortcut_baseline_below_ceiling",
+    "requested_output_type_shortcut_baseline_below_ceiling",
+    "metadata_only_baseline_below_ceiling",
+    "graph_degree_baseline_below_ceiling",
+    "query_node_id_baseline_below_ceiling",
+    "split_semantic_overlap_zero_or_quarantined",
+    "duplicate_semantic_key_zero_or_quarantined",
+    "internal_token_leak_zero",
+    "short_junk_zero",
+    "repetition_guard_passed",
+    "long_target_budget_gate_enforced",
+    "runtime_and_gemma_outputs_not_ground_truth_without_authority",
+    "same_harness_prompt_surface_for_100m_and_gemma"
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "completion_requires_all_acceptance_cells_claim_ready": true,
+  "contract_name": "v27_multilingual_eval_acceptance_contract",
+  "current_frontier_interpretation": {
+    "completion_status": "not_complete",
+    "decoder_generation_status": "not_broadly_quality_passing",
+    "denoise_retry_queue_current_rows": 0,
+    "fixed_template_residuals": "handled_by_stage9681_renderer_and_stage9683_router",
+    "gemma_harness_status": "not_yet_authorized_or_scored"
+  },
+  "eval_modes_required": [
+    "standalone_100m_weights",
+    "full_product_harness"
+  ],
+  "languages_required": [
+    "python",
+    "rust",
+    "c_cpp",
+    "web_js_ts_html"
+  ],
+  "maintainer_skill_areas_required": [
+    "intent_to_build_strategy",
+    "repo_state_graph_navigation",
+    "symbol_binding",
+    "edit_localization",
+    "patch_operator_selection",
+    "bounded_argument_rendering",
+    "verifier_expectation",
+    "verifier_failure_repair_or_abstain",
+    "final_user_facing_summary"
+  ],
+  "missing_support_artifacts": [],
+  "not_completion_claim": true,
+  "passed": true,
+  "required_evidence_by_mode": {
+    "full_product_harness": [
+      "harness_run_id",
+      "same_task_pack_as_gemma12b",
+      "tool_trace_spans",
+      "verifier_results",
+      "patch_minimality_or_abstain_scores",
+      "expert_maintainer_rubric_scores",
+      "anti_cheat_cards"
+    ],
+    "standalone_100m_weights": [
+      "frozen_export_or_checkpoint_hash",
+      "standalone_generation_or_structured_action_outputs",
+      "same_prompt_surface_gemma12b_outputs",
+      "language_slice_scores",
+      "expert_maintainer_rubric_scores",
+      "anti_cheat_cards",
+      "telemetry_bundle"
+    ]
+  },
+  "required_support_artifacts": {
+    "bm25_retrieval_baseline": "scripts/audit_stage8666_repo_span_bm25_retrieval_baseline.py",
+    "dense_hybrid_retrieval_baseline": "scripts/audit_stage8671_dense_hybrid_retrieval_baseline.py",
+    "family_audit_design_schema": "scripts/build_stage9229_family_audit_design_output_schema.py",
+    "family_audit_design_schema_audit": "scripts/build_stage9230_family_audit_design_output_schema_audit.py",
+    "golden_locked_eval_suite": "scripts/golden_locked_eval_suite.py",
+    "heldout_non_ce_decoder_eval_design": "scripts/heldout_non_ce_decoder_eval_design_builder.py",
+    "leakage_locked_eval_boundary": "scripts/audit_stage8665_manifest_leakage_locked_eval_boundary.py",
+    "locked_benchmark_pack_manifest": "scripts/build_stage8672_locked_benchmark_pack_manifest.py",
+    "semantic_equivalence_metamorphic_verifier": "scripts/semantic_equivalence_metamorphic_verifier.py",
+    "traced_eval_observability": "scripts/traced_eval_observability.py"
+  },
+  "source_stage": 9683,
+  "support_artifact_presence": {
+    "bm25_retrieval_baseline": true,
+    "dense_hybrid_retrieval_baseline": true,
+    "family_audit_design_schema": true,
+    "family_audit_design_schema_audit": true,
+    "golden_locked_eval_suite": true,
+    "heldout_non_ce_decoder_eval_design": true,
+    "leakage_locked_eval_boundary": true,
+    "locked_benchmark_pack_manifest": true,
+    "semantic_equivalence_metamorphic_verifier": true,
+    "traced_eval_observability": true
+  }
+}
