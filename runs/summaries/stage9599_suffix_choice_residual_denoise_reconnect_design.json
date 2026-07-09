@@ -1,0 +1,106 @@
+{
+  "artifacts": {
+    "design": "runs/local/artifacts/stage9599_suffix_choice_residual_denoise_reconnect_design/suffix_choice_residual_denoise_reconnect_design.json",
+    "doc": "docs/SUFFIX_CHOICE_RESIDUAL_DENOISE_RECONNECT_DESIGN_STAGE9599.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T05:24:48Z",
+  "decision": "Designed the reconnect path from the now-passing suffix_choice sidecar to residual denoise rendering as a two-phase closed-boundary probe.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "denoise_source_manifest": "runs/local/artifacts/stage9566_residual_denoise_target_rendered_manifest/residual_denoise_target_rendered_manifest.jsonl",
+    "denoise_source_rows": 41,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "not_authorized_yet": [
+      "decoder_ce",
+      "runtime",
+      "source_or_body_emission",
+      "checkpoint_export",
+      "controller_merge",
+      "promotion"
+    ],
+    "pass_gates_for_future_execution": {
+      "phase_1_eval_suffix_choice_exact_min": 0.95,
+      "phase_1_frozen_decoder_lm_head_embedding_delta": 0.0,
+      "phase_1_strict_suffix_choice_exact_min": 0.95,
+      "phase_2_boundary_and_prefix_recall_min": 0.95,
+      "phase_2_contentful_rate": 1.0,
+      "phase_2_internal_leak_rows": 0,
+      "phase_2_repetition_rows": 0,
+      "phase_2_short_junk_rows": 0
+    },
+    "passed": true,
+    "promotion_ready": false,
+    "recommended_probe_shape": {
+      "mode_needed": "two_phase_suffix_choice_denoise_reconnect_probe",
+      "phase_1": {
+        "decoder_ce_weight": 0.0,
+        "denoise_weight": 0.0,
+        "export_checkpoint": false,
+        "manifest": "runs/local/artifacts/stage9591_residual_denoise_minimal_sidecar_manifest/residual_denoise_minimal_sidecar_manifest.jsonl",
+        "objective": "suffix_choice_ce",
+        "restore_best_structured_state": true,
+        "structured_aux_weight": 1.0
+      },
+      "phase_2": {
+        "condition_on": "effective_suffix_choice_from_phase_1_or_deterministic_verifier_overlay",
+        "decoder_ce_weight": 0.0,
+        "denoise_weight": 1.0,
+        "export_checkpoint": false,
+        "generation_audit_required": true,
+        "manifest": "runs/local/artifacts/stage9566_residual_denoise_target_rendered_manifest/residual_denoise_target_rendered_manifest.jsonl",
+        "objective": "denoise_ce",
+        "structured_aux_weight": 0.0
+      }
+    },
+    "required_architecture_contracts": {
+      "cleanup_via_safe_cleanup_only": true,
+      "encoder_rope_for_structured_heads": true,
+      "no_final_checkpoint_export": true,
+      "structured_phase_freezes_decoder_lm_head_embeddings": true
+    },
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "sidecar_manifest": "runs/local/artifacts/stage9591_residual_denoise_minimal_sidecar_manifest/residual_denoise_minimal_sidecar_manifest.jsonl",
+    "sidecar_rows": 96,
+    "sidecar_summary": "runs/summaries/stage9597_encoder_rope_minimal_sidecar_probe.json",
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9598_structured_head_architecture_contract.json"
+  },
+  "name": "stage9599_suffix_choice_residual_denoise_reconnect_design",
+  "next_best_step": "Implement a contract-only two-phase suffix-choice plus residual-denoise reconnect wrapper; do not execute nonzero denoise until that wrapper audit passes.",
+  "passed": true,
+  "stage": 9599,
+  "stage_name": "stage9599_suffix_choice_residual_denoise_reconnect_design"
+}
