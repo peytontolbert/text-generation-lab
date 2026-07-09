@@ -1,0 +1,78 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9645_balanced_per_head_probe_failure_audit/balanced_per_head_probe_failure_audit.json",
+    "doc": "docs/BALANCED_PER_HEAD_PROBE_FAILURE_AUDIT_STAGE9645.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T08:23:02Z",
+  "decision": "Stage9644 failed safely; return to a smaller micro-overfit learnability proof before widening.",
+  "metrics": {
+    "all_eval_strict_predictions_false": true,
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "confidence_bins": {
+      "medium": 112
+    },
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Stage9644 removed the high-confidence false collapse but still predicted false for every eval/strict boundary and target-prefix row. The next patch should not recombine heads. It should first prove a micro-overfit on a much smaller balanced per-head subset, or add stronger non-label positive evidence features before another 84-row target-100M run.",
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_rows": 0,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "pred_by_split_field": {
+      "eval::episode_boundary_match::false": 28,
+      "eval::episode_target_prefix_match::false": 28,
+      "strict_eval::episode_boundary_match::false": 28,
+      "strict_eval::episode_target_prefix_match::false": 28
+    },
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_audit": "runs/local/artifacts/stage9644_balanced_positive_per_head_observe_tiny_probe/balanced_positive_per_head_observe_tiny_probe_audit.json",
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9644_balanced_positive_per_head_observe_tiny_probe.json",
+    "strict_field_exact": {
+      "episode_boundary_match": 0.5,
+      "episode_target_prefix_match": 0.5
+    },
+    "wrong_pairs": {
+      "eval::episode_boundary_match::true=>false": 14,
+      "eval::episode_target_prefix_match::true=>false": 14,
+      "strict_eval::episode_boundary_match::true=>false": 14,
+      "strict_eval::episode_target_prefix_match::true=>false": 14
+    }
+  },
+  "name": "stage9645_balanced_per_head_probe_failure_audit",
+  "next_best_step": "Build Stage9646 micro-overfit per-head boundary/prefix subset with 4 train, 4 eval, 4 strict rows and stronger positive evidence; require train/eval exact before returning to 84-row balance.",
+  "passed": true,
+  "stage": 9645,
+  "stage_name": "stage9645_balanced_per_head_probe_failure_audit"
+}

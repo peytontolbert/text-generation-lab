@@ -1,0 +1,68 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "diagnosis": "The isolated two-head probe still learned a high-confidence false default. Train/eval were prefix-negative heavy while strict was positive-heavy, so strict positives failed as true=>false. The next manifest should balance true/false labels per split for both boundary and prefix, with counterpositive rows present in train/eval/strict.",
+  "failures": [],
+  "high_confidence_wrong_rows": 48,
+  "label_by_split": {
+    "eval": {
+      "episode_boundary_match": {
+        "False": 18,
+        "True": 10
+      },
+      "episode_target_prefix_match": {
+        "False": 22,
+        "True": 6
+      }
+    },
+    "strict_eval": {
+      "episode_boundary_match": {
+        "False": 12,
+        "True": 16
+      },
+      "episode_target_prefix_match": {
+        "False": 12,
+        "True": 16
+      }
+    },
+    "train": {
+      "episode_boundary_match": {
+        "False": 16,
+        "True": 12
+      },
+      "episode_target_prefix_match": {
+        "False": 22,
+        "True": 6
+      }
+    }
+  },
+  "manifest": "runs/local/artifacts/stage9640_per_head_boundary_prefix_observe_manifest/per_head_boundary_prefix_observe_manifest.jsonl",
+  "passed": true,
+  "source_audit": "runs/local/artifacts/stage9641_per_head_boundary_prefix_observe_tiny_probe/per_head_boundary_prefix_observe_tiny_probe_audit.json",
+  "source_summary": "runs/summaries/stage9641_per_head_boundary_prefix_observe_tiny_probe.json",
+  "strict_field_exact": {
+    "episode_boundary_match": 0.42857142857142855,
+    "episode_target_prefix_match": 0.42857142857142855
+  },
+  "wrong_pairs": {
+    "eval::episode_boundary_match::true=>false": 10,
+    "eval::episode_target_prefix_match::true=>false": 6,
+    "strict_eval::episode_boundary_match::true=>false": 16,
+    "strict_eval::episode_target_prefix_match::true=>false": 16
+  },
+  "wrong_source_families": {
+    "base": 6,
+    "counterpositive": 20
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9641_per_head_boundary_prefix_observe_tiny_probe/per_head_boundary_prefix_observe_tiny_probe_audit.json",
+    "doc": "docs/PER_HEAD_BOUNDARY_PREFIX_OBSERVE_TINY_PROBE_STAGE9641.md",
+    "execution_result": "runs/local/artifacts/stage9641_per_head_boundary_prefix_observe_tiny_probe/episode_step_probe/execution_result.json",
+    "run_dir": "runs/local/artifacts/stage9641_per_head_boundary_prefix_observe_tiny_probe/episode_step_probe"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T08:12:27Z",
+  "decision": "Tiny target-100M per-head boundary/prefix observe probe executed safely.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "estimated_parameter_count": 102703145,
+    "eval_field_exact": {
+      "episode_boundary_match": 0.6428571428571429,
+      "episode_target_prefix_match": 0.7857142857142857
+    },
+    "eval_joint_proxy_exact": 0.7142857142857143,
+    "eval_rows": 28,
+    "expected_fields": [
+      "episode_boundary_match",
+      "episode_target_prefix_match"
+    ],
+    "failures": [
+      "quality_gate_not_passed"
+    ],
+    "final_checkpoint_exported": false,
+    "gemma_executed": false,
+    "gemma_execution_authorized_next": false,
+    "harness_executed": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_rows": 48,
+    "manifest": "runs/local/artifacts/stage9640_per_head_boundary_prefix_observe_manifest/per_head_boundary_prefix_observe_manifest.jsonl",
+    "missing_fields": [],
+    "missing_required_artifacts": [],
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "passed": false,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_passed": false,
+    "required_artifacts_written": true,
+    "runtime_authorized": false,
+    "runtime_executed": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9640_per_head_boundary_prefix_observe_manifest.json",
+    "strict_field_exact": {
+      "episode_boundary_match": 0.42857142857142855,
+      "episode_target_prefix_match": 0.42857142857142855
+    },
+    "strict_joint_proxy_exact": 0.42857142857142855,
+    "strict_rows": 28,
+    "top_wrong_pred_pairs": {
+      "episode_boundary_match::true=>false": 26,
+      "episode_target_prefix_match::true=>false": 22
+    },
+    "train_rows": 28,
+    "trainer_returncode": 0,
+    "unexpected_fields": [],
+    "wrong_by_field": {
+      "episode_boundary_match": 26,
+      "episode_target_prefix_match": 22
+    }
+  },
+  "name": "stage9641_per_head_boundary_prefix_observe_tiny_probe",
+  "next_best_step": "If Stage9641 passes, add repair_outcome in a separate two-head follow-up; if it fails, inspect boundary/prefix wrong pairs and patch the per-head contrast set before recombining objectives.",
+  "passed": false,
+  "stage": 9641,
+  "stage_name": "stage9641_per_head_boundary_prefix_observe_tiny_probe"
+}

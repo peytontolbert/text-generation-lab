@@ -1,0 +1,129 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9640_per_head_boundary_prefix_observe_manifest/per_head_boundary_prefix_observe_manifest_audit.json",
+    "doc": "docs/PER_HEAD_BOUNDARY_PREFIX_OBSERVE_MANIFEST_STAGE9640.md",
+    "manifest": "runs/local/artifacts/stage9640_per_head_boundary_prefix_observe_manifest/per_head_boundary_prefix_observe_manifest.jsonl",
+    "run_dir": "runs/local/artifacts/stage9640_per_head_boundary_prefix_observe_manifest/episode_step_contract"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T08:08:37Z",
+  "decision": "Per-head boundary/prefix observe manifest passed shortcut and contract preflight; no model execution occurred.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "base_manifest": "runs/local/artifacts/stage9637_counternegative_upsample_observe_manifest/counternegative_upsample_observe_manifest.jsonl",
+    "body_emission_authorized": false,
+    "contract_passed": true,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "disabled_losses": [
+      "decoder_ce",
+      "denoise_ce",
+      "runtime_reward",
+      "episode_repair_outcome_ce",
+      "episode_failure_type_ce",
+      "episode_step_value_mse"
+    ],
+    "enabled_losses": [
+      "episode_boundary_match_ce",
+      "episode_target_prefix_match_ce"
+    ],
+    "failures": [],
+    "forbidden_encoder_label_marker_examples": [],
+    "forbidden_encoder_label_marker_rows": 0,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "label_counts": {
+      "boundary_match": {
+        "False": 46,
+        "True": 38
+      },
+      "target_prefix_match": {
+        "False": 56,
+        "True": 28
+      }
+    },
+    "loss_counts": {
+      "action_sequence_ce": 0,
+      "allowed_import_policy_ce": 0,
+      "blocked_import_policy_ce": 0,
+      "build_mode_ce": 0,
+      "decoder_ce": 0,
+      "denoise_ce": 0,
+      "edit_localization_ce": 0,
+      "episode_boundary_match_ce": 84,
+      "episode_failure_type_ce": 0,
+      "episode_repair_outcome_ce": 0,
+      "episode_step_value_mse": 0,
+      "episode_target_prefix_match_ce": 84,
+      "file_plan_ce": 0,
+      "patch_operator_ce": 0,
+      "repair_surface_ce": 0,
+      "repo_dependency_policy_ce": 0,
+      "runtime_reward": 0,
+      "suffix_choice_ce": 0,
+      "surface_role_ce": 0,
+      "symbol_binding_ce": 0,
+      "verifier_repair_ce": 0
+    },
+    "manifest": "runs/local/artifacts/stage9640_per_head_boundary_prefix_observe_manifest/per_head_boundary_prefix_observe_manifest.jsonl",
+    "model_execution_attempted": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "rows": 84,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "single_feature_baselines": {
+      "boundary_token_pair_visible->boundary_match": 0.9761904761904762,
+      "boundary_token_pair_visible->target_prefix_match": 0.8571428571428571,
+      "generated_len_bucket->boundary_match": 0.5833333333333334,
+      "generated_len_bucket->target_prefix_match": 0.6666666666666666,
+      "guard_event_count_bucket->boundary_match": 0.5714285714285714,
+      "guard_event_count_bucket->target_prefix_match": 0.6666666666666666,
+      "prefix_token_count_bucket->boundary_match": 0.5476190476190477,
+      "prefix_token_count_bucket->target_prefix_match": 0.6666666666666666,
+      "source_stage->boundary_match": 0.5476190476190477,
+      "source_stage->target_prefix_match": 0.6666666666666666
+    },
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9639_counternegative_upsample_probe_failure_audit.json",
+    "split_counts": {
+      "eval": 28,
+      "strict_eval": 28,
+      "train": 28
+    },
+    "strongest_non_boundary_pair_single_feature_baseline": 0.6666666666666666,
+    "strongest_single_feature_baseline": 0.9761904761904762,
+    "strongest_single_feature_baseline_key": "boundary_token_pair_visible->boundary_match"
+  },
+  "name": "stage9640_per_head_boundary_prefix_observe_manifest",
+  "next_best_step": "If Stage9640 passes, run Stage9641 tiny target-100M episode-step probe over only episode_boundary_match and episode_target_prefix_match; do not recombine repair/value heads yet.",
+  "passed": true,
+  "stage": 9640,
+  "stage_name": "stage9640_per_head_boundary_prefix_observe_manifest"
+}
