@@ -1,0 +1,73 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "failures": [],
+  "name": "stage9702_native_feature_ablation_trainer_patch_audit",
+  "next_best_step": "Run Stage9703 target-100M contract-only preflight on the Stage9700 repaired manifest with --require-native-feature-ablation-audit; do not execute until that preflight passes.",
+  "passed": true,
+  "promotion_ready": false,
+  "quality_passed": false,
+  "smoke_metrics": {
+    "ablation_modes": [
+      "native_grouped_mask_rerun"
+    ],
+    "decoder_delta_norm": 0.0,
+    "delta_norm_by_bucket": {
+      "decoder": 0.0,
+      "decoder_attention": 0.0,
+      "decoder_mlp": 0.0,
+      "embeddings": 0.0,
+      "encoder": 0.0011314875948339027,
+      "encoder_attention": 0.009046287455257901,
+      "encoder_mlp": 0.011083327525114199,
+      "lm_head": 0.0,
+      "other": 0.0005662880334052384,
+      "policy_retrieval_heads": 0.0,
+      "structured_heads": 0.0009875010270407084
+    },
+    "execution_result_present": true,
+    "feature_ablation_rows": 32,
+    "feature_groups": [
+      "graph_evidence",
+      "import_dependency_evidence",
+      "intent_features",
+      "query_kind",
+      "surface_role_features",
+      "verifier_feedback"
+    ],
+    "fields": [
+      "symbol_binding"
+    ],
+    "final_checkpoint_exported": false,
+    "full_100m_target_execution_authorized": false,
+    "gemma_executed": false,
+    "harness_executed": false,
+    "mode": "symbol_binding_probe",
+    "native_feature_ablation_audit_required": true,
+    "native_feature_ablation_rows": 32,
+    "probe_scale": "tiny_transformer_runtime_path",
+    "required_artifacts_written": true,
+    "runtime_executed": false,
+    "smoke_dir": "runs/local/artifacts/stage9702_native_feature_ablation_trainer_patch/smoke_probe"
+  },
+  "source_stage9701_summary": "runs/summaries/stage9701_symbol_binding_rebalanced_contract_preflight.json",
+  "stage": 9702,
+  "trainer_support": {
+    "cli_flag_present": true,
+    "contract_card_field_present": true,
+    "native_mode_present": true,
+    "query_kind_group_present": true,
+    "structured_probe_argument_present": true
+  }
+}

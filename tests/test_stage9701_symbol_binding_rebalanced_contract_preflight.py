@@ -46,9 +46,9 @@ def test_stage9701_shortcut_baselines_below_ceiling_but_query_kind_warns():
     assert strongest["exact"] < mod.SHORTCUT_CEILING
 
 
-def test_stage9701_execution_blocked_until_native_ablation_exists():
+def test_stage9701_native_ablation_support_reflects_current_trainer_patch():
     mod = _load()
     support = mod.native_ablation_support()
     assert support["proxy_ablation_present"] is True
-    assert support["native_grouped_ablation_function_present"] is False
-    assert support["native_grouped_ablation_cli_present"] is False
+    assert support["native_grouped_ablation_function_present"] is True
+    assert support["native_grouped_ablation_cli_present"] is True

@@ -17,7 +17,8 @@ STAGE = 9701
 NAME = "stage9701_symbol_binding_rebalanced_contract_preflight"
 SOURCE_SUMMARY = ROOT / "runs/summaries/stage9700_symbol_binding_repair_compiler.json"
 MANIFEST = ROOT / "runs/local/artifacts/stage9700_symbol_binding_repair_compiler/symbol_binding_tiny_rebalanced.jsonl"
-TRAINER = ROOT / "legacy_src/agentkernel_lite/training_loop.py"
+TRAINING_LOOP = ROOT / "legacy_src/agentkernel_lite/training_loop.py"
+TRAINER_SCRIPT = ROOT / "legacy_src/scripts/train_agentkernel_lite_encdec.py"
 OUT_DIR = ROOT / "runs/local/artifacts" / NAME
 PREFLIGHT = OUT_DIR / "symbol_binding_rebalanced_contract_preflight.json"
 SUMMARY = ROOT / "runs/summaries" / f"{NAME}.json"
@@ -100,13 +101,15 @@ def authority_violations(rows: list[dict[str, Any]]) -> list[str]:
 
 
 def native_ablation_support() -> dict[str, Any]:
-    text = TRAINER.read_text(encoding="utf-8")
+    loop_text = TRAINING_LOOP.read_text(encoding="utf-8")
+    script_text = TRAINER_SCRIPT.read_text(encoding="utf-8")
     return {
-        "trainer_path": str(TRAINER.relative_to(ROOT)),
-        "proxy_ablation_present": "_proxy_feature_ablation_records" in text,
-        "native_grouped_ablation_function_present": "native_grouped_feature_ablation" in text or "_native_feature_ablation" in text,
+        "training_loop_path": str(TRAINING_LOOP.relative_to(ROOT)),
+        "trainer_script_path": str(TRAINER_SCRIPT.relative_to(ROOT)),
+        "proxy_ablation_present": "_proxy_feature_ablation_records" in loop_text,
+        "native_grouped_ablation_function_present": "native_grouped_feature_ablation" in loop_text or "_native_feature_ablation" in loop_text,
         "native_grouped_ablation_cli_required": True,
-        "native_grouped_ablation_cli_present": "--require-native-feature-ablation-audit" in text,
+        "native_grouped_ablation_cli_present": "--require-native-feature-ablation-audit" in script_text,
     }
 
 

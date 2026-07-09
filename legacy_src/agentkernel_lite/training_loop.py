@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import random
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -815,6 +816,60 @@ def _proxy_feature_ablation_records(records: list[dict[str, Any]], row_by_id: di
     return rows
 
 
+def _delete_matching_keys(payload: Any, needles: tuple[str, ...]) -> Any:
+    if isinstance(payload, dict):
+        out: dict[str, Any] = {}
+        for key, value in payload.items():
+            if any(needle in str(key).lower() for needle in needles):
+                continue
+            out[key] = _delete_matching_keys(value, needles)
+        return out
+    if isinstance(payload, list):
+        return [_delete_matching_keys(item, needles) for item in payload]
+    return payload
+
+
+def _ablate_feature_group(row: dict[str, Any], group: str) -> dict[str, Any]:
+    ablated = deepcopy(row)
+    if group == "query_kind":
+        query = ablated.get("query") if isinstance(ablated.get("query"), dict) else {}
+        query.pop("query_kind", None)
+        graph = ablated.get("graph_input") if isinstance(ablated.get("graph_input"), dict) else {}
+        graph.pop("query_kind", None)
+    elif group == "intent_features":
+        for key in ("input_state", "model_input", "query"):
+            if isinstance(ablated.get(key), dict):
+                ablated[key] = _delete_matching_keys(ablated[key], ("intent", "goal", "request", "task"))
+    elif group == "import_dependency_evidence":
+        for key in ("input_state", "model_input", "query", "graph_input"):
+            if isinstance(ablated.get(key), dict):
+                ablated[key] = _delete_matching_keys(ablated[key], ("import", "dependency", "allowed", "blocked", "repo"))
+        ablated.pop("retrieval_control", None)
+    elif group == "graph_evidence":
+        graph = ablated.get("graph_input") if isinstance(ablated.get("graph_input"), dict) else {}
+        if graph:
+            graph["nodes"] = []
+            graph["edges"] = []
+    elif group == "surface_role_features":
+        for key in ("surface", "repair_surface", "surface_role", "repair_role", "route", "objective_family"):
+            ablated.pop(key, None)
+        if isinstance(ablated.get("model_input"), dict):
+            ablated["model_input"] = _delete_matching_keys(ablated["model_input"], ("surface", "role", "route"))
+    elif group == "verifier_feedback":
+        for key in ("verifier_failure", "corrupted_output"):
+            ablated.pop(key, None)
+        if isinstance(ablated.get("query"), dict):
+            ablated["query"] = _delete_matching_keys(ablated["query"], ("test", "failure", "trace", "verifier", "repair"))
+    return ablated
+
+
+def _target_stats(record: dict[str, Any], target: str) -> tuple[float, float]:
+    for item in record.get("top_k", []) if isinstance(record.get("top_k"), list) else []:
+        if item.get("label") == target:
+            return float(item.get("prob", 0.0)), float(item.get("logit", 0.0))
+    return 0.0, 0.0
+
+
 def _activation_patch_proxy_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     by_field: dict[str, list[dict[str, Any]]] = {}
     for record in records:
@@ -1552,6 +1607,7 @@ def run_structured_aux_probe(
     tokenizer_config: Path | None = None,
     eval_interval: int = 0,
     restore_best_structured_state: bool = False,
+    require_native_feature_ablation_audit: bool = False,
     return_runtime_state: bool = False,
 ) -> dict[str, Any]:
     """Run a tiny structured-head probe with native interpretability telemetry."""
@@ -1792,8 +1848,62 @@ def run_structured_aux_probe(
     _write_json(output_dir / "field_label_vocabs.json", vocabs)
     _write_json(output_dir / "structured_confusion_matrix.json", confusion)
 
-    for row in _proxy_feature_ablation_records(all_eval_records, row_by_id):
+    def native_grouped_feature_ablation_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        groups = ["query_kind", "intent_features", "import_dependency_evidence", "graph_evidence", "surface_role_features", "verifier_feedback"]
+        out_rows: list[dict[str, Any]] = []
+        model.eval()
+        with torch.no_grad():
+            for record in records:
+                row_id = str(record.get("row_id"))
+                source = row_by_id.get(row_id)
+                if not source:
+                    continue
+                target = str(record.get("target"))
+                baseline_prob, baseline_logit = _target_stats(record, target)
+                attribution = []
+                for group in groups:
+                    ablated = _ablate_feature_group(source, group)
+                    _, _, _, ablated_field_rows, _ = structured_loss([ablated], split=str(record.get("split") or "ablation"), step=None)
+                    field_records = ablated_field_rows.get(str(record.get("field")), [])
+                    ablated_record = field_records[0] if field_records else {}
+                    ablated_prob, ablated_logit = _target_stats(ablated_record, target)
+                    attribution.append(
+                        {
+                            "feature_group": group,
+                            "ablation_mode": "native_grouped_mask_rerun",
+                            "feature_group_present": _feature_group_present(source, group) or group == "query_kind",
+                            "gold_prob_drop": baseline_prob - ablated_prob,
+                            "gold_logit_drop": baseline_logit - ablated_logit,
+                            "ablated_gold_prob": ablated_prob,
+                            "ablated_gold_logit": ablated_logit,
+                            "ablated_pred": ablated_record.get("pred"),
+                        }
+                    )
+                out_rows.append(
+                    {
+                        "row_id": row_id,
+                        "split": record.get("split"),
+                        "field": record.get("field"),
+                        "gold_label": target,
+                        "baseline_gold_prob": baseline_prob,
+                        "baseline_gold_logit": baseline_logit,
+                        "feature_attribution": attribution,
+                        "top_feature_group": max(attribution, key=lambda item: item["gold_prob_drop"])["feature_group"] if attribution else None,
+                        "native_grouped_ablation": True,
+                    }
+                )
+        model.train()
+        return out_rows
+
+    ablation_rows = (
+        native_grouped_feature_ablation_records(all_eval_records)
+        if require_native_feature_ablation_audit
+        else _proxy_feature_ablation_records(all_eval_records, row_by_id)
+    )
+    for row in ablation_rows:
         _append_jsonl(output_dir / "feature_ablation_attribution.jsonl", row)
+    if require_native_feature_ablation_audit and not ablation_rows:
+        raise ValueError("native grouped feature ablation audit produced no rows")
     for row in _activation_patch_proxy_records(all_eval_records):
         _append_jsonl(output_dir / "activation_patch_recovery.jsonl", row)
     field_exact_by_cell = {
@@ -1838,6 +1948,8 @@ def run_structured_aux_probe(
         "structured_optimizer_frozen_parameter_count": len(frozen_for_structured_probe),
         "structured_optimizer_trainable_parameter_count": len(trainable_for_structured_probe),
         "structured_optimizer_frozen_bucket_prefixes": ["decoder", "lm_head", "embeddings"],
+        "native_feature_ablation_audit_required": bool(require_native_feature_ablation_audit),
+        "native_feature_ablation_rows": len(ablation_rows),
     }
     if return_runtime_state:
         result["_runtime_model"] = model

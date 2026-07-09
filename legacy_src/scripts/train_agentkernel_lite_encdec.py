@@ -172,6 +172,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--structured-aux-weight", type=float, default=0.0)
     parser.add_argument("--denoise-weight", type=float, default=0.0)
     parser.add_argument("--require-loss-mask-enforcement-audit", action="store_true")
+    parser.add_argument("--require-native-feature-ablation-audit", action="store_true", help="Require structured probes to emit native grouped mask-rerun feature ablation telemetry instead of proxy attribution.")
     parser.add_argument("--require-counterfactual-obligation-audit", action="store_true")
     parser.add_argument("--no-final-checkpoint-export", action="store_true")
     parser.add_argument("--cleanup-checkpoints-after-probe", action="store_true")
@@ -631,6 +632,8 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "unsafe_loss_row_examples": unsafe_loss_rows[:50],
         "counterfactual_obligation_audit_required": bool(args.require_counterfactual_obligation_audit),
         "counterfactual_obligation_card": counterfactual_card,
+        "native_feature_ablation_audit_required": bool(args.require_native_feature_ablation_audit),
+        "native_feature_ablation_artifact": "feature_ablation_attribution.jsonl",
         "weights": {
             "decoder_ce_weight": args.decoder_ce_weight,
             "eos_loss_weight": args.eos_loss_weight,
@@ -1148,6 +1151,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             mode=args.mode,
             eval_interval=args.eval_interval,
             restore_best_structured_state=args.restore_best_structured_state,
+            require_native_feature_ablation_audit=args.require_native_feature_ablation_audit,
             **common,
         )
     else:
