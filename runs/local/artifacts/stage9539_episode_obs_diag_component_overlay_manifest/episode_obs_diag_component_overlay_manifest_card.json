@@ -1,0 +1,79 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "authority_rows": [],
+  "composed_failure_type_counts": {
+    "none": 29,
+    "not_exact+target_prefix_miss": 16,
+    "not_exact+target_prefix_miss+boundary_next_token_miss": 10,
+    "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated": 2,
+    "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated": 1
+  },
+  "contract": {
+    "component_order": [
+      "not_exact",
+      "target_prefix_miss",
+      "boundary_next_token_miss",
+      "degenerate_repetition",
+      "unterminated"
+    ],
+    "component_source": "episode_transition.observation_t.residual_reasons",
+    "decoder_denoise_runtime_closed": true,
+    "effective_failure_type_source": "deterministic_observation_component_overlay",
+    "effective_labels_outside_model_input": true,
+    "learned_episode_failure_type_head": "telemetry_only",
+    "source_stage9525_only": true
+  },
+  "decoder_ce_training_authorized_next": false,
+  "denoise_ce_training_authorized_next": false,
+  "effective_leak_rows": [],
+  "expected_loss_counts": {
+    "episode_failure_type_ce": 58,
+    "episode_repair_outcome_ce": 58,
+    "episode_step_value_mse": 58
+  },
+  "failures": [],
+  "forbidden_loss_rows": [],
+  "loss_counts": {
+    "episode_failure_type_ce": 58,
+    "episode_repair_outcome_ce": 58,
+    "episode_step_value_mse": 58
+  },
+  "manifest": "runs/local/artifacts/stage9539_episode_obs_diag_component_overlay_manifest/episode_obs_diag_component_overlay_manifest.jsonl",
+  "mismatch_rows": [],
+  "missing_overlay_rows": [],
+  "model_execution_authorized_next": false,
+  "passed": true,
+  "promotion_ready": false,
+  "rejected_lineage_rows": [],
+  "rows": 58,
+  "runtime_authorized_next": false,
+  "source_manifest": "runs/local/artifacts/stage9525_episode_obs_diag_residual_gate_manifest/episode_obs_diag_residual_gate_manifest.jsonl",
+  "source_stage_prefix_counts": {
+    "stage9525": 58
+  },
+  "split_counts": {
+    "eval": 6,
+    "strict_eval": 6,
+    "train": 46
+  },
+  "stage9538_contract": "runs/local/artifacts/stage9538_episode_obs_diag_component_overlay_contract/episode_obs_diag_component_overlay_contract.json",
+  "target_failure_type_counts": {
+    "none": 29,
+    "not_exact+target_prefix_miss": 16,
+    "not_exact+target_prefix_miss+boundary_next_token_miss": 10,
+    "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated": 2,
+    "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated": 1
+  }
+}
