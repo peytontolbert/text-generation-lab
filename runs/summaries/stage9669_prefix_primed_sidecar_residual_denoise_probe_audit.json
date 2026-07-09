@@ -1,0 +1,419 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9669_prefix_primed_sidecar_residual_denoise_probe/stage9669_prefix_primed_sidecar_residual_denoise_probe_audit.json",
+    "doc": "docs/PREFIX_PRIMED_SIDECAR_RESIDUAL_DENOISE_PROBE_AUDIT_STAGE9669.md",
+    "run_dir": "runs/local/artifacts/stage9669_prefix_primed_sidecar_residual_denoise_probe"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T14:51:42Z",
+  "decision": "Stage9669 executed safely and prefix priming started every generation correctly, but post-prefix suffix discrimination failed; do not continue generic denoise tuning.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "by_repair_bucket": {
+      "REPAIR_PREFIX_AND_BOUNDARY": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "prefix_start": 10,
+        "prefix_start_rate": 1.0,
+        "rows": 10,
+        "target_prefix": 1,
+        "target_prefix_rate": 0.1
+      },
+      "REPAIR_PREFIX_ONLY": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "prefix_start": 16,
+        "prefix_start_rate": 1.0,
+        "rows": 16,
+        "target_prefix": 2,
+        "target_prefix_rate": 0.125
+      }
+    },
+    "contentful_rate": 1.0,
+    "contentful_rows": 26,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "decoder_delta_norm": 1.251598813108299,
+    "degenerate_repetition_rows": 0,
+    "denoise_ce_training_authorized_next": false,
+    "denoise_delta_norm": null,
+    "diagnosis": "prefix_scaffold_works_but_post_prefix_discriminating_suffix_tokens_fail",
+    "eval_loss": 24.461761474609375,
+    "eval_rows": 3,
+    "exact_match_rate": 0.0,
+    "exact_match_rows": 0,
+    "failed_sample_count": 26,
+    "failed_samples": [
+      {
+        "generated": "Return the method invocation target that matches the reference",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "reference",
+          "matching_words": 8,
+          "target_next": "localized"
+        },
+        "prefix": "Return the method invocation target",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0000",
+        "split": "train",
+        "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Return the project path that owns the relevant. If the evidence is",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "relevant.",
+          "matching_words": 7,
+          "target_next": "relevant"
+        },
+        "prefix": "Return the project path that",
+        "repair_bucket": "REPAIR_PREFIX_AND_BOUNDARY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0001",
+        "split": "train",
+        "target": "Return the project path that owns the relevant repair region. If the evidence is",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Return the constant value required by the evidence is",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "evidence",
+          "matching_words": 7,
+          "target_next": "checked"
+        },
+        "prefix": "Return the constant value required",
+        "repair_bucket": "REPAIR_PREFIX_AND_BOUNDARY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0002",
+        "split": "train",
+        "target": "Return the constant value required by the checked verifier condition. Do not introduce an",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Choose the approved library entry needed by the answer focused",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "answer",
+          "matching_words": 8,
+          "target_next": "wrapper"
+        },
+        "prefix": "Choose the approved library entry",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0003",
+        "split": "train",
+        "target": "Choose the approved library entry needed by the wrapper plan. Keep the answer focused",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Return the project path that owns the relevant. If the evidence is",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "relevant.",
+          "matching_words": 7,
+          "target_next": "relevant"
+        },
+        "prefix": "Return the project path that",
+        "repair_bucket": "REPAIR_PREFIX_AND_BOUNDARY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0004",
+        "split": "train",
+        "target": "Return the project path that owns the relevant repair region. If the evidence is",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Return the constant value required by the evidence is",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "evidence",
+          "matching_words": 7,
+          "target_next": "checked"
+        },
+        "prefix": "Return the constant value required",
+        "repair_bucket": "REPAIR_PREFIX_AND_BOUNDARY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0005",
+        "split": "train",
+        "target": "Return the constant value required by the checked verifier condition. Do not introduce an",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Choose the concrete value tied to the current repair invariant. Do not introduce",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "",
+          "matching_words": 13,
+          "target_next": "an"
+        },
+        "prefix": "Choose the concrete value tied",
+        "repair_bucket": "REPAIR_PREFIX_AND_BOUNDARY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0006",
+        "split": "train",
+        "target": "Choose the concrete value tied to the current repair invariant. Do not introduce an",
+        "target_prefix_match": true
+      },
+      {
+        "generated": "Select the file path associated with the path reference",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "path",
+          "matching_words": 7,
+          "target_next": "localized"
+        },
+        "prefix": "Select the file path associated",
+        "repair_bucket": "REPAIR_PREFIX_AND_BOUNDARY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0007",
+        "split": "train",
+        "target": "Select the file path associated with the localized edit target. Keep the path reference",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Select the file path associated with the path reference",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "path",
+          "matching_words": 7,
+          "target_next": "localized"
+        },
+        "prefix": "Select the file path associated",
+        "repair_bucket": "REPAIR_PREFIX_AND_BOUNDARY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0008",
+        "split": "train",
+        "target": "Select the file path associated with the localized edit target. Keep the path reference",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Return the method invocation target that matches the reference",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "reference",
+          "matching_words": 8,
+          "target_next": "localized"
+        },
+        "prefix": "Return the method invocation target",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0009",
+        "split": "train",
+        "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Return the method invocation target that matches the reference",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "reference",
+          "matching_words": 8,
+          "target_next": "localized"
+        },
+        "prefix": "Return the method invocation target",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0010",
+        "split": "train",
+        "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Return the method invocation target that matches the reference",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "reference",
+          "matching_words": 8,
+          "target_next": "localized"
+        },
+        "prefix": "Return the method invocation target",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0011",
+        "split": "train",
+        "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Emit the local name that should rece",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "rece",
+          "matching_words": 6,
+          "target_next": "receive"
+        },
+        "prefix": "Emit the local name that",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0012",
+        "split": "train",
+        "target": "Emit the local name that should receive the repaired state. Keep the answer focused",
+        "target_prefix_match": true
+      },
+      {
+        "generated": "Emit the local name that should rece",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "rece",
+          "matching_words": 6,
+          "target_next": "receive"
+        },
+        "prefix": "Emit the local name that",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0013",
+        "split": "train",
+        "target": "Emit the local name that should receive the repaired state. Keep the answer focused",
+        "target_prefix_match": true
+      },
+      {
+        "generated": "Select the callable endpoint that should update.  insaryREASON is",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "should",
+          "matching_words": 5,
+          "target_next": "the"
+        },
+        "prefix": "Select the callable endpoint that",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0014",
+        "split": "train",
+        "target": "Select the callable endpoint that the verified patch operator should update. Use the repo",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Select the callable endpoint that should update.  insaryREASON is",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "should",
+          "matching_words": 5,
+          "target_next": "the"
+        },
+        "prefix": "Select the callable endpoint that",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0015",
+        "split": "train",
+        "target": "Select the callable endpoint that the verified patch operator should update. Use the repo",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Emit the dependency handle that matches the answer f [ed by the syCONTENTsaryREASON is",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "matches",
+          "matching_words": 5,
+          "target_next": "keeps"
+        },
+        "prefix": "Emit the dependency handle that",
+        "repair_bucket": "REPAIR_PREFIX_AND_BOUNDARY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0016",
+        "split": "train",
+        "target": "Emit the dependency handle that keeps the patch inside the whitelist. Use the symbol",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Emit the dependency handle that matches the answer f [ed by the syCONTENTsaryREASON is",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "matches",
+          "matching_words": 5,
+          "target_next": "keeps"
+        },
+        "prefix": "Emit the dependency handle that",
+        "repair_bucket": "REPAIR_PREFIX_AND_BOUNDARY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0017",
+        "split": "train",
+        "target": "Emit the dependency handle that keeps the patch inside the whitelist. Use the symbol",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Choose the approved library entry needed by the answer focused",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "answer",
+          "matching_words": 8,
+          "target_next": "wrapper"
+        },
+        "prefix": "Choose the approved library entry",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0018",
+        "split": "train",
+        "target": "Choose the approved library entry needed by the wrapper plan. Keep the answer focused",
+        "target_prefix_match": false
+      },
+      {
+        "generated": "Choose the approved library entry needed by the answer focused",
+        "generation_prefix_start_match": true,
+        "mismatch": {
+          "generated_next": "answer",
+          "matching_words": 8,
+          "target_next": "wrapper"
+        },
+        "prefix": "Choose the approved library entry",
+        "repair_bucket": "REPAIR_PREFIX_ONLY",
+        "row_id": "stage9668_prefix_primed_sidecar_residual_denoise_0019",
+        "split": "train",
+        "target": "Choose the approved library entry needed by the wrapper plan. Keep the answer focused",
+        "target_prefix_match": false
+      }
+    ],
+    "failures": [],
+    "final_checkpoint_exported": false,
+    "gemma_executed": false,
+    "gemma_execution_authorized_next": false,
+    "generated_internal_token_rows": 0,
+    "generated_rows": 26,
+    "generation_prefix_start_rate": 1.0,
+    "generation_prefix_start_rows": 26,
+    "harness_executed": false,
+    "harness_execution_authorized_next": false,
+    "manifest_rows": 26,
+    "missing_artifacts": [],
+    "model_execution_authorized_next": false,
+    "next_patch_target": "post_prefix_suffix_choice_or_slot_discriminator_manifest",
+    "passed": false,
+    "promotion_ready": false,
+    "quality_passed": false,
+    "runtime_authorized": false,
+    "runtime_executed": false,
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "short_or_junk_rows": 0,
+    "source_emission_authorized": false,
+    "strict_eval_loss": 1.241764783859253,
+    "strict_rows": 3,
+    "target_prefix_match_rate": 0.11538461538461539,
+    "target_prefix_match_rows": 3,
+    "top_first_mismatch_pairs": {
+      "an=>": 1,
+      "checked=>evidence": 2,
+      "keeps=>matches": 2,
+      "localized=>path": 3,
+      "localized=>reference": 5,
+      "preserves=>should": 1,
+      "receive=>rece": 2,
+      "relevant=>relevant.": 2,
+      "the=>should": 4,
+      "wrapper=>answer": 4
+    },
+    "train_rows": 20
+  },
+  "name": "stage9669_prefix_primed_sidecar_residual_denoise_probe_audit",
+  "next_best_step": "Build Stage9670 post-prefix suffix-choice/slot discriminator manifest from Stage9669 mismatches; keep decoder/runtime/Gemma/harness closed.",
+  "passed": false,
+  "stage": 9669,
+  "stage_name": "stage9669_prefix_primed_sidecar_residual_denoise_probe_audit"
+}
