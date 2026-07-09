@@ -1,0 +1,151 @@
+{
+  "active_manifests": [
+    {
+      "context_rows_present": 0,
+      "graph_node_types": {
+        "coverage_evidence": 16,
+        "coverage_gap_evidence": 16,
+        "file": 51,
+        "repo": 32,
+        "retrieval_gap_marker": 16,
+        "symbol_candidate": 16,
+        "test_candidate": 32,
+        "test_query": 32
+      },
+      "has_candidate_symbol_nodes": true,
+      "has_raw_context_rows": false,
+      "has_test_coverage_nodes": true,
+      "model_input_rows": 32,
+      "path": "runs/local/artifacts/stage9714_isolated_symbol_binding_objectives/symbol_binding_test_coverage_binary.jsonl",
+      "rows": 32
+    },
+    {
+      "context_rows_present": 0,
+      "graph_node_types": {
+        "ambiguity_evidence": 17,
+        "callsite_query": 36,
+        "coverage_evidence": 16,
+        "coverage_gap_evidence": 16,
+        "file": 139,
+        "import_query": 24,
+        "module_candidate": 25,
+        "repo": 92,
+        "retrieval_gap_marker": 36,
+        "symbol_candidate": 48,
+        "test_candidate": 32,
+        "test_query": 32
+      },
+      "has_candidate_symbol_nodes": true,
+      "has_raw_context_rows": false,
+      "has_test_coverage_nodes": true,
+      "model_input_rows": 92,
+      "path": "runs/local/artifacts/stage9711_symbol_binding_retrieval_test_evidence_repair/symbol_binding_retrieval_test_evidence.jsonl",
+      "rows": 92
+    }
+  ],
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blockers": [
+    "trainer_default_max_encoder_tokens_toy:256",
+    "build_batch_default_max_encoder_tokens_toy:256",
+    "row_text_does_not_serialize_context_rows",
+    "long_context_pack_training_rows_drop_context_roles",
+    "long_context_pack_first_context_not_local_evidence",
+    "active_symbol_binding_manifests_have_no_context_rows"
+  ],
+  "long_context_packs": [
+    {
+      "context_role_counts": {},
+      "context_roles_preserved": false,
+      "exists": true,
+      "first_context_has_role": false,
+      "first_context_local_evidence_first": false,
+      "first_context_path": "11-47--gods_universe_codex_distill_god_seed_25k/recursive_seed_ai_25k.jsonl",
+      "first_context_row_count": 7816,
+      "first_context_source_type": "dataset",
+      "first_context_text_prefix": "id : seedai_877572 category : safety difficulty : expert instruction : A Recursive Seed AI wants to pursue reduce hallucination rate below 5 but must strictly o",
+      "first_pack_id": "lcp_pack_1_5000000_localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t13_13_10_019bff_438da671f4",
+      "first_pack_token_count": 4999862,
+      "missing_required_roles": [
+        "algorithm_grounding",
+        "cross_repo_analogue",
+        "repo_graph_neighbor",
+        "seed_change",
+        "test_neighbor",
+        "trace_analogue",
+        "verification_constraint"
+      ],
+      "path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_packs_v3_5m/long_context_pack_training_rows.jsonl",
+      "rows_sampled": 2,
+      "source_type_counts_top": {
+        "dataset": 687,
+        "local_repo": 305,
+        "paper": 3042,
+        "repo": 3782
+      }
+    },
+    {
+      "context_role_counts": {},
+      "context_roles_preserved": false,
+      "exists": true,
+      "first_context_has_role": false,
+      "first_context_local_evidence_first": false,
+      "first_context_path": "11-47--gods_universe_codex_distill_god_seed_25k/recursive_seed_ai_25k.jsonl",
+      "first_context_row_count": 2945,
+      "first_context_source_type": "dataset",
+      "first_context_text_prefix": "id : seedai_877572 category : safety difficulty : expert instruction : A Recursive Seed AI wants to pursue reduce hallucination rate below 5 but must strictly o",
+      "first_pack_id": "lcp_pack_1_10000000_selrepoepisode_external_repo_commit_tolbert_extcommitseed_tolbert_8c803c12aa1320_02cbe13c6a",
+      "first_pack_token_count": 1821278,
+      "missing_required_roles": [
+        "algorithm_grounding",
+        "cross_repo_analogue",
+        "repo_graph_neighbor",
+        "seed_change",
+        "test_neighbor",
+        "trace_analogue",
+        "verification_constraint"
+      ],
+      "path": "runs/local/artifacts/external_repo_commit_family_scale/augmented_selected_repo_commit_packs_testtouch_top40_strict_realindex_10m_family_reuse/long_context_pack_training_rows.jsonl",
+      "rows_sampled": 3,
+      "source_type_counts_top": {
+        "dataset": 415,
+        "paper": 1298,
+        "repo": 1232
+      }
+    }
+  ],
+  "name": "stage9715_software_maintenance_context_sufficiency_audit",
+  "next_best_step": "Patch the context compiler/trainer handoff so maintenance rows carry role-preserved, task-closed context_rows into encoder text; then rerun this sufficiency audit before more target-100M probes.",
+  "passed": true,
+  "promotion_ready": false,
+  "quality_passed": false,
+  "required_context_roles": [
+    "algorithm_grounding",
+    "cross_repo_analogue",
+    "repo_graph_neighbor",
+    "seed_change",
+    "test_neighbor",
+    "trace_analogue",
+    "verification_constraint"
+  ],
+  "stage": 9715,
+  "trainer": {
+    "build_batch_default_max_encoder_tokens": 256,
+    "row_text_serializes_context_rows": false,
+    "trainer_default_max_encoder_tokens": 256,
+    "trainer_path": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "training_data_path": "legacy_src/agentkernel_lite/training_data.py"
+  },
+  "training_blocked_by_context_sufficiency": true
+}
