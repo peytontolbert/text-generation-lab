@@ -5,15 +5,12 @@ Stage9715 checks whether the current trainer path actually gives the 100M mainta
 ## Finding
 
 - Training blocked by context sufficiency: `True`
-- Trainer default max encoder tokens: `256`
-- `build_batch` default max encoder tokens: `256`
-- `_row_text` serializes `context_rows`: `False`
+- Trainer default max encoder tokens: `2048`
+- `build_batch` default max encoder tokens: `2048`
+- `_row_text` serializes `context_rows`: `True`
 
 ## Blockers
 
-- `trainer_default_max_encoder_tokens_toy:256`
-- `build_batch_default_max_encoder_tokens_toy:256`
-- `row_text_does_not_serialize_context_rows`
 - `long_context_pack_training_rows_drop_context_roles`
 - `long_context_pack_first_context_not_local_evidence`
 - `active_symbol_binding_manifests_have_no_context_rows`

@@ -180,7 +180,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--run-id", default="bounded_decoder_ce_probe_contract")
     parser.add_argument("--batch-size", type=_positive_int, default=2)
-    parser.add_argument("--max-encoder-tokens", type=_positive_int, default=256)
+    parser.add_argument("--max-encoder-tokens", type=_positive_int, default=2048)
     parser.add_argument("--learning-rate", type=float, default=5e-5)
     parser.add_argument("--eval-interval", type=_positive_int, default=0, help="Optional structured-probe eval interval for checkpoint-selection telemetry; 0 disables interval eval.")
     parser.add_argument(

@@ -16,11 +16,11 @@ def _load():
     return module
 
 
-def test_stage9715_detects_toy_encoder_defaults_and_no_context_serialization():
+def test_stage9715_detects_toy_encoder_defaults_and_resolved_context_serialization():
     mod = _load()
-    assert mod.trainer_default_max_encoder_tokens() == 256
-    assert mod.build_batch_default_max_encoder_tokens() == 256
-    assert mod.row_text_serializes_context_rows() is False
+    assert mod.trainer_default_max_encoder_tokens() == 2048
+    assert mod.build_batch_default_max_encoder_tokens() == 2048
+    assert mod.row_text_serializes_context_rows() is True
 
 
 def test_stage9715_detects_long_context_roles_are_not_preserved_in_sample_pack():

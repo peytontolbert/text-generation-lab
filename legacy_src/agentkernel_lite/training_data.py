@@ -8,6 +8,10 @@ import json
 import torch
 
 
+MAX_CONTEXT_ROWS_FOR_ENCODER = 64
+MAX_CONTEXT_TEXT_CHARS = 512
+
+
 class ByteTokenizer:
     """UTF-8 byte tokenizer used by fallback recovery probes."""
 
@@ -85,6 +89,24 @@ def _append_structured(parts: list[str], prefix: str, payload: dict[str, Any]) -
                     parts.append(f"{prefix}.{key}.item={item}")
 
 
+def _append_context_rows(parts: list[str], rows: Any) -> None:
+    if not isinstance(rows, list) or not rows:
+        return
+    parts.append(f"context.rows.count={len(rows)}")
+    for index, row in enumerate(rows[:MAX_CONTEXT_ROWS_FOR_ENCODER]):
+        if not isinstance(row, dict):
+            continue
+        prefix = f"context.{index}"
+        for key in ("role", "source_type", "path", "token_count", "chunk_id", "chunk_ordinal"):
+            value = row.get(key)
+            if isinstance(value, (str, int, float, bool)):
+                parts.append(f"{prefix}.{key}={value}")
+        text = row.get("text")
+        if isinstance(text, str) and text:
+            snippet = " ".join(text.split())[:MAX_CONTEXT_TEXT_CHARS]
+            parts.append(f"{prefix}.text={snippet}")
+
+
 def _row_text(row: dict[str, Any]) -> str:
     state = row.get("input_state") if isinstance(row.get("input_state"), dict) else {}
     parts: list[str] = []
@@ -110,6 +132,9 @@ def _row_text(row: dict[str, Any]) -> str:
     _append_structured(parts, "episode.action", episode_action)
     model_input = row.get("model_input") if isinstance(row.get("model_input"), dict) else {}
     _append_structured(parts, "model", model_input)
+    # Preserve task-closure evidence exactly in compiler order. The compiler/ranker
+    # is responsible for placing local files, tests, traces, and graph evidence first.
+    _append_context_rows(parts, row.get("context_rows"))
     query = row.get("query") if isinstance(row.get("query"), dict) else {}
     if query.get("query_kind"):
         parts.append(f"query.kind={query.get('query_kind')}")
@@ -170,7 +195,7 @@ def _pad(seqs: list[list[int]], *, pad_id: int) -> torch.Tensor:
     return out
 
 
-def build_batch(rows: list[dict[str, Any]], *, max_encoder_tokens: int = 256, max_decoder_tokens: int = 256, tokenizer: ByteTokenizer | AgentKernelBPETokenizer | None = None) -> ManifestBatch:
+def build_batch(rows: list[dict[str, Any]], *, max_encoder_tokens: int = 2048, max_decoder_tokens: int = 256, tokenizer: ByteTokenizer | AgentKernelBPETokenizer | None = None) -> ManifestBatch:
     tok = tokenizer or ByteTokenizer()
     enc = [tok.encode(_row_text(row), max_length=max_encoder_tokens) for row in rows]
     tgt = [tok.encode(_target_text(row), max_length=max_decoder_tokens) for row in rows]
