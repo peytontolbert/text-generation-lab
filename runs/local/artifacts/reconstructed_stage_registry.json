@@ -4,21 +4,21 @@
       "body_emission_authorized": 0,
       "controller_complete_merge_authorized_next": 0,
       "decoder_ce_training_authorized_next": 1,
-      "denoise_ce_training_authorized_next": 46,
+      "denoise_ce_training_authorized_next": 47,
       "gemma_execution_authorized_next": 0,
       "harness_execution_authorized_next": 0,
-      "model_execution_authorized_next": 72,
+      "model_execution_authorized_next": 73,
       "promotion_ready": 0,
       "runtime_authorized": 0,
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9565,
-    "latest_stage_name": "stage9565_residual_denoise_target_rendering_diagnosis",
-    "latest_stage_next_best_step": "Build Stage9566 target-rendered residual-denoise manifest that writes a bounded target.label or target.decoder_text, rerun contract-only preflight, then rerun the tiny probe.",
-    "max_stage": 9565,
+    "latest_stage": 9569,
+    "latest_stage_name": "stage9569_residual_denoise_target_rendered_quality_audit",
+    "latest_stage_next_best_step": "Patch the denoise rerun with generation-quality diagnostics or a slightly longer capped schedule; do not widen residual-denoise training yet.",
+    "max_stage": 9569,
     "min_stage": 8530,
-    "registry_rows": 1056
+    "registry_rows": 1060
   },
   "passed": true,
   "rows": [
@@ -21141,6 +21141,86 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9565_residual_denoise_target_rendering_diagnosis.json",
       "stage": 9565,
       "stage_name": "stage9565_residual_denoise_target_rendering_diagnosis"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Run Stage9567 contract-only preflight on the target-rendered manifest; if it passes, execute Stage9568 tiny target_100M denoise rerun.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9566_residual_denoise_target_rendered_manifest.json",
+      "stage": 9566,
+      "stage_name": "stage9566_residual_denoise_target_rendered_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": true,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": true,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Execute Stage9568 target-rendered tiny residual-denoise target_100M probe, then audit whether non-EOS denoise targets now produce meaningful loss and generation.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9567_residual_denoise_target_rendered_contract_preflight_audit.json",
+      "stage": 9567,
+      "stage_name": "stage9567_residual_denoise_target_rendered_contract_preflight_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Audit Stage9568 quality and decide whether to add more residual-denoise rows or adjust generation/eval criteria before widening.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9568_residual_denoise_target_rendered_tiny_probe.json",
+      "stage": 9568,
+      "stage_name": "stage9568_residual_denoise_target_rendered_tiny_probe"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Patch the denoise rerun with generation-quality diagnostics or a slightly longer capped schedule; do not widen residual-denoise training yet.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9569_residual_denoise_target_rendered_quality_audit.json",
+      "stage": 9569,
+      "stage_name": "stage9569_residual_denoise_target_rendered_quality_audit"
     }
   ]
 }
