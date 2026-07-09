@@ -1,0 +1,80 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "diagnosis": "Stage9481 failed on a high-confidence CPP positive target-prefix row. Python and web have zero positive target-prefix rows, and CPP has only two. Queue constructs distinct positive target-prefix examples for CPP/Python/web before another probe.",
+  "existing_target_prefix_counts_by_language_label": {
+    "cpp::False": 11,
+    "cpp::True": 2,
+    "python::False": 5,
+    "rust::False": 9,
+    "rust::True": 19,
+    "web_js_ts_html::False": 4
+  },
+  "failures": [],
+  "minimum_positive_per_language": 6,
+  "passed": true,
+  "projected_positive_rows_by_language": {
+    "cpp": 6,
+    "python": 6,
+    "web_js_ts_html": 6
+  },
+  "queue": "runs/local/artifacts/stage9482_target_prefix_positive_repair_queue/target_prefix_positive_repair_queue.jsonl",
+  "queue_rows": 16,
+  "queued_positive_rows_by_language": {
+    "cpp": 4,
+    "python": 6,
+    "web_js_ts_html": 6
+  },
+  "source_audit": "runs/summaries/stage9481_episode_target_prefix_balance_probe_audit.json",
+  "source_manifest": "runs/local/artifacts/stage9479_episode_target_prefix_balance_manifest/episode_target_prefix_balance_manifest.jsonl",
+  "stage9481_high_confidence_wrong_rows": [
+    {
+      "cell_key": "cpp::episode_target_prefix_balance_repair::KEEP_EPISODE_TARGET_PREFIX_BALANCE",
+      "confidence": 0.9853218793869019,
+      "correct": false,
+      "entropy": 0.07653209567070007,
+      "field": "episode_target_prefix_match",
+      "high_confidence_wrong": true,
+      "margin": 0.9706437420099974,
+      "pred": "false",
+      "pred_index": 0,
+      "row_id": "stage9479_target_prefix_balance_0025",
+      "split": "strict_eval",
+      "step": null,
+      "target": "true",
+      "target_index": 1,
+      "top1_label": "false",
+      "top1_logit": 2.0243782997131348,
+      "top2_label": "true",
+      "top2_logit": -2.1822309494018555,
+      "top_k": [
+        {
+          "label": "false",
+          "logit": 2.0243782997131348,
+          "prob": 0.9853218793869019
+        },
+        {
+          "label": "true",
+          "logit": -2.1822309494018555,
+          "prob": 0.014678137376904488
+        }
+      ]
+    }
+  ],
+  "target_languages": [
+    "cpp",
+    "python",
+    "web_js_ts_html"
+  ]
+}
