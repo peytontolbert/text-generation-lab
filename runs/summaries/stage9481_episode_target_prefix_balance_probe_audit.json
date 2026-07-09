@@ -1,0 +1,155 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9481_episode_target_prefix_balance_target_100m_probe/stage9481_target_prefix_balance_probe_audit.json",
+    "doc": "docs/EPISODE_TARGET_PREFIX_BALANCE_PROBE_AUDIT_STAGE9481.md",
+    "execution_result": "runs/local/artifacts/stage9481_episode_target_prefix_balance_target_100m_probe/execution_result.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T00:01:24Z",
+  "decision": "Target-prefix focused probe failed strict safely; mine or construct non-Rust positive target-prefix rows before another execution.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "best_state_selection": {
+      "checkpoint_exported": false,
+      "enabled": true,
+      "eval_joint_proxy_exact": null,
+      "eval_loss": null,
+      "promotion_ready": false,
+      "restored": false,
+      "selected_step": null,
+      "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+      "selection_score": null,
+      "strict_joint_proxy_exact": null,
+      "strict_loss": null
+    },
+    "body_emission_authorized": false,
+    "checkpoint_like_artifacts": [],
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Focused target-prefix head is safe but not quality-passing. The remaining strict error is a high-confidence false prediction on the CPP positive target-prefix row, indicating sparse positive coverage for non-Rust languages rather than a generic optimizer issue.",
+    "estimated_parameter_count": 102703145,
+    "eval_rows": 2,
+    "failures": [
+      "final_strict_not_exact",
+      "no_jointly_exact_best_state_to_restore"
+    ],
+    "final_eval_joint_proxy_exact": 1.0,
+    "final_eval_loss": 0.018805982545018196,
+    "final_strict_joint_proxy_exact": 0.5,
+    "final_strict_loss": 2.1121697425842285,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_rows": [
+      {
+        "cell_key": "cpp::episode_target_prefix_balance_repair::KEEP_EPISODE_TARGET_PREFIX_BALANCE",
+        "confidence": 0.9853218793869019,
+        "correct": false,
+        "entropy": 0.07653209567070007,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": true,
+        "margin": 0.9706437420099974,
+        "pred": "false",
+        "pred_index": 0,
+        "row_id": "stage9479_target_prefix_balance_0025",
+        "split": "strict_eval",
+        "step": null,
+        "target": "true",
+        "target_index": 1,
+        "top1_label": "false",
+        "top1_logit": 2.0243782997131348,
+        "top2_label": "true",
+        "top2_logit": -2.1822309494018555,
+        "top_k": [
+          {
+            "label": "false",
+            "logit": 2.0243782997131348,
+            "prob": 0.9853218793869019
+          },
+          {
+            "label": "true",
+            "logit": -2.1822309494018555,
+            "prob": 0.014678137376904488
+          }
+        ]
+      }
+    ],
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "passed": false,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_passed": false,
+    "runtime_authorized": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9480_episode_target_prefix_balance_preflight_audit",
+    "strict_rows": 2,
+    "train_rows": 46,
+    "wrong_rows": [
+      {
+        "cell_key": "cpp::episode_target_prefix_balance_repair::KEEP_EPISODE_TARGET_PREFIX_BALANCE",
+        "confidence": 0.9853218793869019,
+        "correct": false,
+        "entropy": 0.07653209567070007,
+        "field": "episode_target_prefix_match",
+        "high_confidence_wrong": true,
+        "margin": 0.9706437420099974,
+        "pred": "false",
+        "pred_index": 0,
+        "row_id": "stage9479_target_prefix_balance_0025",
+        "split": "strict_eval",
+        "step": null,
+        "target": "true",
+        "target_index": 1,
+        "top1_label": "false",
+        "top1_logit": 2.0243782997131348,
+        "top2_label": "true",
+        "top2_logit": -2.1822309494018555,
+        "top_k": [
+          {
+            "label": "false",
+            "logit": 2.0243782997131348,
+            "prob": 0.9853218793869019
+          },
+          {
+            "label": "true",
+            "logit": -2.1822309494018555,
+            "prob": 0.014678137376904488
+          }
+        ]
+      }
+    ]
+  },
+  "name": "stage9481_episode_target_prefix_balance_probe_audit",
+  "next_best_step": "Build Stage9482 language-balanced positive target-prefix repair queue for CPP, Python, and web rows; keep decoder/runtime/checkpoint authority closed.",
+  "passed": false,
+  "stage": 9481,
+  "stage_name": "stage9481_episode_target_prefix_balance_probe_audit"
+}
