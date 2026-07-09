@@ -1,0 +1,206 @@
+{
+  "artifacts": {
+    "authority_map": "runs/local/artifacts/stage9501_verifier_label_authority_map/verifier_label_authority_map.json",
+    "doc": "docs/VERIFIER_LABEL_AUTHORITY_MAP_STAGE9501.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T00:53:03Z",
+  "decision": "Verifier-derived labels may be trained as telemetry/representation heads, but no verifier head may authorize acceptance, decoder promotion, scoring, runtime, or harness execution. Effective authority stays with deterministic verifier observations and transition records.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "authority_rows": [],
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decision": "Verifier-derived labels may be trained as telemetry/representation heads, but no verifier head may authorize acceptance, decoder promotion, scoring, runtime, or harness execution. Effective authority stays with deterministic verifier observations and transition records.",
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "expected_loss_counts": {
+      "episode_boundary_match_ce": 66,
+      "episode_failure_type_ce": 66,
+      "episode_repair_outcome_ce": 66,
+      "episode_step_value_mse": 66,
+      "episode_target_prefix_match_ce": 66
+    },
+    "failures": [],
+    "field_counts": {
+      "episode_boundary_match": {
+        "False": 13,
+        "True": 53
+      },
+      "episode_failure_type": {
+        "none": 37,
+        "not_exact+target_prefix_miss": 16,
+        "not_exact+target_prefix_miss+boundary_next_token_miss": 10,
+        "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated": 2,
+        "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated": 1
+      },
+      "episode_repair_outcome": {
+        "residual_suffix_repair_step": 29,
+        "successful_suffix_repair_step": 21,
+        "verified_target_prefix_positive": 16
+      },
+      "episode_step_value": {
+        "0.0": 29,
+        "1.0": 37
+      },
+      "episode_target_prefix_match": {
+        "False": 29,
+        "True": 37
+      }
+    },
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_counts": {
+      "episode_boundary_match_ce": 66,
+      "episode_failure_type_ce": 66,
+      "episode_repair_outcome_ce": 66,
+      "episode_step_value_mse": 66,
+      "episode_target_prefix_match_ce": 66
+    },
+    "missing_by_field": {},
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "probe_evidence": {
+      "stage9486_target_prefix": {
+        "final_eval_joint_proxy_exact": 1.0,
+        "final_strict_joint_proxy_exact": 1.0,
+        "passed": true
+      },
+      "stage9492_all_verifier": {
+        "final_eval_joint_proxy_exact": 0.5333333333333333,
+        "final_strict_joint_proxy_exact": 0.5,
+        "passed": false
+      },
+      "stage9500_boundary_overlay": {
+        "effective_boundary_exact": 1.0,
+        "effective_false_boundary_accept_rows": 0,
+        "passed": true
+      }
+    },
+    "promotion_ready": false,
+    "rows": 66,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_manifest": "runs/local/artifacts/stage9490_phase_aware_episode_verifier_manifest/phase_aware_episode_verifier_manifest.jsonl",
+    "split_field_counts": {
+      "episode_boundary_match": {
+        "eval::False": 2,
+        "eval::True": 4,
+        "strict_eval::False": 2,
+        "strict_eval::True": 4,
+        "train::False": 9,
+        "train::True": 45
+      },
+      "episode_failure_type": {
+        "eval::none": 3,
+        "eval::not_exact+target_prefix_miss": 1,
+        "eval::not_exact+target_prefix_miss+boundary_next_token_miss": 2,
+        "strict_eval::none": 3,
+        "strict_eval::not_exact+target_prefix_miss": 1,
+        "strict_eval::not_exact+target_prefix_miss+boundary_next_token_miss": 2,
+        "train::none": 31,
+        "train::not_exact+target_prefix_miss": 14,
+        "train::not_exact+target_prefix_miss+boundary_next_token_miss": 6,
+        "train::not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated": 2,
+        "train::not_exact+target_prefix_miss+boundary_next_token_miss+unterminated": 1
+      },
+      "episode_repair_outcome": {
+        "eval::residual_suffix_repair_step": 3,
+        "eval::verified_target_prefix_positive": 3,
+        "strict_eval::residual_suffix_repair_step": 3,
+        "strict_eval::verified_target_prefix_positive": 3,
+        "train::residual_suffix_repair_step": 23,
+        "train::successful_suffix_repair_step": 21,
+        "train::verified_target_prefix_positive": 10
+      },
+      "episode_step_value": {
+        "eval::0.0": 3,
+        "eval::1.0": 3,
+        "strict_eval::0.0": 3,
+        "strict_eval::1.0": 3,
+        "train::0.0": 23,
+        "train::1.0": 31
+      },
+      "episode_target_prefix_match": {
+        "eval::False": 3,
+        "eval::True": 3,
+        "strict_eval::False": 3,
+        "strict_eval::True": 3,
+        "train::False": 23,
+        "train::True": 31
+      }
+    },
+    "verifier_fields": {
+      "episode_boundary_match": {
+        "effective_authority": "deterministic_overlay",
+        "effective_rule": "observation_t.boundary_next_token_match",
+        "evidence": "Stage9500 effective exact 1.0 and zero false boundary accepts; Stage9496/9499 learned head did not quality-pass.",
+        "learned_head_role": "telemetry_only",
+        "loss": "episode_boundary_match_ce",
+        "may_authorize_acceptance": false
+      },
+      "episode_failure_type": {
+        "effective_authority": "deterministic_normalizer",
+        "effective_rule": "reward_or_verifier.failure_type derived from residual verifier reasons",
+        "evidence": "Stage9492 multi-head verifier probe collapsed on default/majority labels; no isolated failure-type pass exists yet.",
+        "learned_head_role": "telemetry_only_until_isolated_probe_passes",
+        "loss": "episode_failure_type_ce",
+        "may_authorize_acceptance": false
+      },
+      "episode_repair_outcome": {
+        "effective_authority": "transition_record",
+        "effective_rule": "state_t_plus_1.repair_outcome",
+        "evidence": "Outcome is post-step transition state. It is useful for diagnosis and curricula but should not be model authority.",
+        "learned_head_role": "telemetry_only_until_isolated_probe_passes",
+        "loss": "episode_repair_outcome_ce",
+        "may_authorize_acceptance": false
+      },
+      "episode_step_value": {
+        "effective_authority": "deterministic_reward",
+        "effective_rule": "reward_or_verifier.reward / reward_or_verifier.step_passed",
+        "evidence": "Value is verifier-backed reward. Learned value can rank actions later, but acceptance is verifier-driven.",
+        "learned_head_role": "value_estimate_only",
+        "loss": "episode_step_value_mse",
+        "may_authorize_acceptance": false
+      },
+      "episode_target_prefix_match": {
+        "effective_authority": "deterministic_overlay",
+        "effective_rule": "observation_t.target_prefix_match",
+        "evidence": "Stage9486 isolated target-prefix probe passed, but effective verifier acceptance must still use the deterministic observation.",
+        "learned_head_role": "telemetry_and_representation_probe",
+        "loss": "episode_target_prefix_match_ce",
+        "may_authorize_acceptance": false
+      }
+    }
+  },
+  "name": "stage9501_verifier_label_authority_map",
+  "next_best_step": "Build a verifier overlay rejoin manifest that uses deterministic effective verifier fields and keeps learned verifier heads telemetry-only, then audit it before any model execution.",
+  "passed": true,
+  "stage": 9501,
+  "stage_name": "stage9501_verifier_label_authority_map"
+}
