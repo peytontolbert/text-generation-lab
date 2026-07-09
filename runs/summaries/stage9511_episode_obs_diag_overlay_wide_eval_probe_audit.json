@@ -1,0 +1,468 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9511_episode_obs_diag_overlay_wide_eval_target_100m_probe/stage9511_episode_obs_diag_overlay_wide_eval_probe_audit.json",
+    "doc": "docs/EPISODE_OBS_DIAG_OVERLAY_WIDE_EVAL_PROBE_AUDIT_STAGE9511.md",
+    "execution_result": "runs/local/artifacts/stage9511_episode_obs_diag_overlay_wide_eval_target_100m_probe/execution_result.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T01:13:58Z",
+  "decision": "Widened observation-diagnosis overlay probe failed quality safely; do not broaden execution or reconnect decoder.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "best_state_selection": {
+      "checkpoint_exported": false,
+      "enabled": true,
+      "eval_joint_proxy_exact": null,
+      "eval_loss": null,
+      "promotion_ready": false,
+      "restored": false,
+      "selected_step": null,
+      "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+      "selection_score": null,
+      "strict_joint_proxy_exact": null,
+      "strict_loss": null
+    },
+    "body_emission_authorized": false,
+    "checkpoint_like_artifacts": [],
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Safe quality failure. Widening eval/strict exposed eval generalization errors hidden by the one-row Stage9507 diagnostic. Failure is concentrated in eval failure_type, repair_outcome, and step_value while strict remains exact.",
+    "estimated_parameter_count": 102703145,
+    "eval_rows": 6,
+    "failures": [
+      "final_eval_not_exact",
+      "no_jointly_exact_best_state_to_restore"
+    ],
+    "field_exact_eval": {
+      "episode_failure_type": {
+        "exact": 0.6666666666666666,
+        "rows": 6
+      },
+      "episode_repair_outcome": {
+        "exact": 0.8333333333333334,
+        "rows": 6
+      },
+      "episode_step_value": {
+        "exact": 0.8333333333333334,
+        "rows": 6
+      }
+    },
+    "field_exact_strict": {
+      "episode_failure_type": {
+        "exact": 1.0,
+        "rows": 6
+      },
+      "episode_repair_outcome": {
+        "exact": 1.0,
+        "rows": 6
+      },
+      "episode_step_value": {
+        "exact": 1.0,
+        "rows": 6
+      }
+    },
+    "field_loss_eval": {
+      "episode_failure_type": 2.5727527141571045,
+      "episode_repair_outcome": 1.8646303415298462,
+      "episode_step_value": 1.3326646089553833
+    },
+    "field_loss_strict": {
+      "episode_failure_type": 0.046245548874139786,
+      "episode_repair_outcome": 0.00015633074508514255,
+      "episode_step_value": 0.00022597407223656774
+    },
+    "fields": [
+      "episode_failure_type",
+      "episode_repair_outcome",
+      "episode_step_value"
+    ],
+    "final_eval_joint_proxy_exact": 0.7777777777777778,
+    "final_strict_joint_proxy_exact": 1.0,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_rows": [
+      {
+        "cell_key": "cpp::episode_observation_diagnosis_overlay_wide_eval::KEEP_EPISODE_OBS_DIAG_OVERLAY_WIDE_EVAL",
+        "confidence": 0.9997732043266296,
+        "correct": false,
+        "entropy": 0.0026409411802887917,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": true,
+        "margin": 0.999736238780315,
+        "pred": "none",
+        "pred_index": 0,
+        "row_id": "stage9508_obs_diag_wide_eval_0047",
+        "split": "eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss",
+        "target_index": 1,
+        "top1_label": "none",
+        "top1_logit": 9.985822677612305,
+        "top2_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "top2_logit": -0.21947437524795532,
+        "top_k": [
+          {
+            "label": "none",
+            "logit": 9.985822677612305,
+            "prob": 0.9997732043266296
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": -0.21947437524795532,
+            "prob": 3.696554631460458e-05
+          },
+          {
+            "label": "10",
+            "logit": -0.29104796051979065,
+            "prob": 3.4412263630656525e-05
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": -0.39554014801979065,
+            "prob": 3.09979404846672e-05
+          },
+          {
+            "label": "8",
+            "logit": -0.6212328672409058,
+            "prob": 2.4735218175919726e-05
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observation_diagnosis_overlay_wide_eval::KEEP_EPISODE_OBS_DIAG_OVERLAY_WIDE_EVAL",
+        "confidence": 0.9112817049026489,
+        "correct": false,
+        "entropy": 0.3697248697280884,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": true,
+        "margin": 0.8461145833134651,
+        "pred": "not_exact+target_prefix_miss",
+        "pred_index": 1,
+        "row_id": "stage9508_obs_diag_wide_eval_0048",
+        "split": "eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "target_index": 2,
+        "top1_label": "not_exact+target_prefix_miss",
+        "top1_logit": 6.101396083831787,
+        "top2_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "top2_logit": 3.463499069213867,
+        "top_k": [
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 6.101396083831787,
+            "prob": 0.9112817049026489
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 3.463499069213867,
+            "prob": 0.06516712158918381
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 1.8563941717147827,
+            "prob": 0.013063868507742882
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": 1.584566354751587,
+            "prob": 0.009954479523003101
+          },
+          {
+            "label": "none",
+            "logit": -1.613814115524292,
+            "prob": 0.00040642416570335627
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observation_diagnosis_overlay_wide_eval::KEEP_EPISODE_OBS_DIAG_OVERLAY_WIDE_EVAL",
+        "confidence": 0.9998587369918823,
+        "correct": false,
+        "entropy": 0.001521097612567246,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": true,
+        "margin": 0.9997748344685533,
+        "pred": "successful_suffix_repair_step",
+        "pred_index": 1,
+        "row_id": "stage9508_obs_diag_wide_eval_0047",
+        "split": "eval",
+        "step": null,
+        "target": "residual_suffix_repair_step",
+        "target_index": 0,
+        "top1_label": "successful_suffix_repair_step",
+        "top1_logit": 7.2671051025390625,
+        "top2_label": "3",
+        "top2_logit": -2.118608236312866,
+        "top_k": [
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 7.2671051025390625,
+            "prob": 0.9998587369918823
+          },
+          {
+            "label": "3",
+            "logit": -2.118608236312866,
+            "prob": 8.390252332901582e-05
+          },
+          {
+            "label": "2",
+            "logit": -2.7741928100585938,
+            "prob": 4.355704004410654e-05
+          },
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": -3.9197723865509033,
+            "prob": 1.3852864867658354e-05
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observation_diagnosis_overlay_wide_eval::KEEP_EPISODE_OBS_DIAG_OVERLAY_WIDE_EVAL",
+        "confidence": 0.9996627569198608,
+        "correct": false,
+        "entropy": 0.003033081768080592,
+        "field": "episode_step_value",
+        "high_confidence_wrong": true,
+        "margin": 0.999325551558286,
+        "pred": "1.0",
+        "pred_index": 1,
+        "row_id": "stage9508_obs_diag_wide_eval_0047",
+        "split": "eval",
+        "step": null,
+        "target": "0.0",
+        "target_index": 0,
+        "top1_label": "1.0",
+        "top1_logit": 4.039191722869873,
+        "top2_label": "0.0",
+        "top2_logit": -3.955289602279663,
+        "top_k": [
+          {
+            "label": "1.0",
+            "logit": 4.039191722869873,
+            "prob": 0.9996627569198608
+          },
+          {
+            "label": "0.0",
+            "logit": -3.955289602279663,
+            "prob": 0.00033720536157488823
+          }
+        ]
+      }
+    ],
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "passed": false,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_passed": false,
+    "runtime_authorized": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9510_episode_obs_diag_overlay_wide_eval_preflight_audit",
+    "strict_rows": 6,
+    "train_rows": 46,
+    "wrong_rows": [
+      {
+        "cell_key": "cpp::episode_observation_diagnosis_overlay_wide_eval::KEEP_EPISODE_OBS_DIAG_OVERLAY_WIDE_EVAL",
+        "confidence": 0.9997732043266296,
+        "correct": false,
+        "entropy": 0.0026409411802887917,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": true,
+        "margin": 0.999736238780315,
+        "pred": "none",
+        "pred_index": 0,
+        "row_id": "stage9508_obs_diag_wide_eval_0047",
+        "split": "eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss",
+        "target_index": 1,
+        "top1_label": "none",
+        "top1_logit": 9.985822677612305,
+        "top2_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "top2_logit": -0.21947437524795532,
+        "top_k": [
+          {
+            "label": "none",
+            "logit": 9.985822677612305,
+            "prob": 0.9997732043266296
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": -0.21947437524795532,
+            "prob": 3.696554631460458e-05
+          },
+          {
+            "label": "10",
+            "logit": -0.29104796051979065,
+            "prob": 3.4412263630656525e-05
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": -0.39554014801979065,
+            "prob": 3.09979404846672e-05
+          },
+          {
+            "label": "8",
+            "logit": -0.6212328672409058,
+            "prob": 2.4735218175919726e-05
+          }
+        ]
+      },
+      {
+        "cell_key": "python::episode_observation_diagnosis_overlay_wide_eval::KEEP_EPISODE_OBS_DIAG_OVERLAY_WIDE_EVAL",
+        "confidence": 0.9112817049026489,
+        "correct": false,
+        "entropy": 0.3697248697280884,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": true,
+        "margin": 0.8461145833134651,
+        "pred": "not_exact+target_prefix_miss",
+        "pred_index": 1,
+        "row_id": "stage9508_obs_diag_wide_eval_0048",
+        "split": "eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "target_index": 2,
+        "top1_label": "not_exact+target_prefix_miss",
+        "top1_logit": 6.101396083831787,
+        "top2_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "top2_logit": 3.463499069213867,
+        "top_k": [
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 6.101396083831787,
+            "prob": 0.9112817049026489
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 3.463499069213867,
+            "prob": 0.06516712158918381
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 1.8563941717147827,
+            "prob": 0.013063868507742882
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": 1.584566354751587,
+            "prob": 0.009954479523003101
+          },
+          {
+            "label": "none",
+            "logit": -1.613814115524292,
+            "prob": 0.00040642416570335627
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observation_diagnosis_overlay_wide_eval::KEEP_EPISODE_OBS_DIAG_OVERLAY_WIDE_EVAL",
+        "confidence": 0.9998587369918823,
+        "correct": false,
+        "entropy": 0.001521097612567246,
+        "field": "episode_repair_outcome",
+        "high_confidence_wrong": true,
+        "margin": 0.9997748344685533,
+        "pred": "successful_suffix_repair_step",
+        "pred_index": 1,
+        "row_id": "stage9508_obs_diag_wide_eval_0047",
+        "split": "eval",
+        "step": null,
+        "target": "residual_suffix_repair_step",
+        "target_index": 0,
+        "top1_label": "successful_suffix_repair_step",
+        "top1_logit": 7.2671051025390625,
+        "top2_label": "3",
+        "top2_logit": -2.118608236312866,
+        "top_k": [
+          {
+            "label": "successful_suffix_repair_step",
+            "logit": 7.2671051025390625,
+            "prob": 0.9998587369918823
+          },
+          {
+            "label": "3",
+            "logit": -2.118608236312866,
+            "prob": 8.390252332901582e-05
+          },
+          {
+            "label": "2",
+            "logit": -2.7741928100585938,
+            "prob": 4.355704004410654e-05
+          },
+          {
+            "label": "residual_suffix_repair_step",
+            "logit": -3.9197723865509033,
+            "prob": 1.3852864867658354e-05
+          }
+        ]
+      },
+      {
+        "cell_key": "cpp::episode_observation_diagnosis_overlay_wide_eval::KEEP_EPISODE_OBS_DIAG_OVERLAY_WIDE_EVAL",
+        "confidence": 0.9996627569198608,
+        "correct": false,
+        "entropy": 0.003033081768080592,
+        "field": "episode_step_value",
+        "high_confidence_wrong": true,
+        "margin": 0.999325551558286,
+        "pred": "1.0",
+        "pred_index": 1,
+        "row_id": "stage9508_obs_diag_wide_eval_0047",
+        "split": "eval",
+        "step": null,
+        "target": "0.0",
+        "target_index": 0,
+        "top1_label": "1.0",
+        "top1_logit": 4.039191722869873,
+        "top2_label": "0.0",
+        "top2_logit": -3.955289602279663,
+        "top_k": [
+          {
+            "label": "1.0",
+            "logit": 4.039191722869873,
+            "prob": 0.9996627569198608
+          },
+          {
+            "label": "0.0",
+            "logit": -3.955289602279663,
+            "prob": 0.00033720536157488823
+          }
+        ]
+      }
+    ]
+  },
+  "name": "stage9511_episode_obs_diag_overlay_wide_eval_probe_audit",
+  "next_best_step": "Build Stage9512 eval-error attribution and counterbalanced observation-diagnosis repair rows for the widened eval failures.",
+  "passed": false,
+  "stage": 9511,
+  "stage_name": "stage9511_episode_obs_diag_overlay_wide_eval_probe_audit"
+}
