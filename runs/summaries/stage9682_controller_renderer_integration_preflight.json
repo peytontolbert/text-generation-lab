@@ -1,0 +1,79 @@
+{
+  "artifacts": {
+    "doc": "docs/CONTROLLER_RENDERER_INTEGRATION_PREFLIGHT_STAGE9682.md",
+    "preflight": "runs/local/artifacts/stage9682_controller_renderer_integration_preflight/controller_renderer_integration_preflight.json",
+    "preview": "runs/local/artifacts/stage9682_controller_renderer_integration_preflight/controller_renderer_integration_preview.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T15:54:31Z",
+  "decision": "Controller+renderer integration preflight passed as the non-generative path for fixed residual slot templates.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "closed_paths": [
+      "decoder_generation",
+      "denoise_generation",
+      "runtime",
+      "gemma",
+      "harness",
+      "checkpoint_export",
+      "promotion"
+    ],
+    "controller_complete_merge_authorized_next": false,
+    "controller_stage": 9679,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "heldout_label_correct_rows": 6,
+    "heldout_renderer_gate_true_rows": 6,
+    "heldout_rows": 6,
+    "integration_policy": {
+      "and_label_known": true,
+      "else": "abstain_or_route_to_retrieve_more",
+      "if_confidence_at_least": 0.9,
+      "then": "render_deterministic_template"
+    },
+    "internal_token_rows": [],
+    "low_confidence_rows": [],
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "preview_rows": 6,
+    "promotion_ready": false,
+    "renderer_package_stage": 9681,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "unknown_label_rows": []
+  },
+  "name": "stage9682_controller_renderer_integration_preflight",
+  "next_best_step": "Use controller+renderer as the fixed-slot residual repair path; next return to broader denoise only for non-template residuals with a repetition guard.",
+  "passed": true,
+  "stage": 9682,
+  "stage_name": "stage9682_controller_renderer_integration_preflight"
+}
