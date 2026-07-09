@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import time
+from pathlib import Path
+
+try:
+    from diagnostic_ticket_contract import AUTHORITY_CLOSED
+except ModuleNotFoundError:
+    from scripts.diagnostic_ticket_contract import AUTHORITY_CLOSED  # type: ignore
+
+ROOT = Path(__file__).resolve().parents[1]
+STAGE = 9532
+NAME = "stage9532_episode_obs_diag_boundary_component_probe_audit"
+SOURCE_SUMMARY = ROOT / "runs/summaries/stage9531_episode_obs_diag_boundary_component_preflight_audit.json"
+RUN_DIR = ROOT / "runs/local/artifacts/stage9532_episode_obs_diag_boundary_component_target_100m_probe"
+EXECUTION = RUN_DIR / "execution_result.json"
+BEST_STATE = RUN_DIR / "best_structured_state_selection.json"
+LOGITS = RUN_DIR / "row_field_logits.jsonl"
+AUDIT = RUN_DIR / "stage9532_episode_obs_diag_boundary_component_probe_audit.json"
+SUMMARY = ROOT / "runs/summaries" / f"{NAME}.json"
+DOC = ROOT / "docs" / "EPISODE_OBS_DIAG_BOUNDARY_COMPONENT_PROBE_AUDIT_STAGE9532.md"
+REGISTRY = ROOT / "runs/local/artifacts/reconstructed_stage_registry.json"
+
+
+def load_json(path: Path) -> dict:
+    return json.loads(path.read_text()) if path.exists() else {}
+
+
+def load_jsonl(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+
+
+def main() -> None:
+    SUMMARY.parent.mkdir(parents=True, exist_ok=True)
+    DOC.parent.mkdir(parents=True, exist_ok=True)
+    source = load_json(SOURCE_SUMMARY)
+    result = load_json(EXECUTION)
+    best = load_json(BEST_STATE) or result.get("best_state_selection", {})
+    logits = load_jsonl(LOGITS)
+    safety_failures: list[str] = []
+    quality_failures: list[str] = []
+    if source.get("passed") is not True or not source.get("metrics", {}).get("execution_authorized_for_next_stage"):
+        safety_failures.append("stage9531_not_authorized")
+    impl = result.get("implementation") if isinstance(result.get("implementation"), dict) else {}
+    if impl.get("probe_scale") != "target_100m":
+        safety_failures.append("not_target_100m_execution")
+    if result.get("runtime_executed") or result.get("gemma_executed") or result.get("harness_executed"):
+        safety_failures.append("forbidden_external_execution")
+    if result.get("final_checkpoint_exported"):
+        safety_failures.append("final_checkpoint_exported")
+    if result.get("required_artifacts_written") is not True:
+        safety_failures.append("required_artifacts_missing")
+    checkpoint_like = sorted(
+        str(path.relative_to(RUN_DIR))
+        for path in RUN_DIR.rglob("*")
+        if path.is_file() and path.suffix in {".pt", ".pth", ".bin", ".safetensors", ".ckpt"}
+    )
+    if checkpoint_like:
+        safety_failures.append("checkpoint_like_artifacts_written")
+    final_eval = result.get("eval", {}).get("eval", {}) if isinstance(result.get("eval"), dict) else {}
+    final_strict = result.get("eval", {}).get("strict_eval", {}) if isinstance(result.get("eval"), dict) else {}
+    if final_eval.get("joint_proxy_exact") != 1.0:
+        quality_failures.append("final_eval_not_exact")
+    if final_strict.get("joint_proxy_exact") != 1.0:
+        quality_failures.append("final_strict_not_exact")
+    if best.get("restored") is not True:
+        quality_failures.append("no_jointly_exact_best_state_to_restore")
+    wrong_rows = [row for row in logits if row.get("correct") is False]
+    high_conf_wrong = [row for row in wrong_rows if row.get("high_confidence_wrong")]
+    failures = [*safety_failures, *quality_failures]
+    audit = {
+        "passed": not failures,
+        "safety_passed": not safety_failures,
+        "quality_passed": not quality_failures,
+        "regressed_vs_stage9528": (final_eval.get("joint_proxy_exact") or 0.0) < 0.9444444444444444,
+        "failures": failures,
+        "safety_failures": safety_failures,
+        "quality_failures": quality_failures,
+        "source_stage": "stage9531_episode_obs_diag_boundary_component_preflight_audit",
+        "probe_scale": impl.get("probe_scale"),
+        "estimated_parameter_count": impl.get("estimated_parameter_count"),
+        "mode": result.get("mode"),
+        "fields": result.get("fields"),
+        "train_rows": result.get("train_rows"),
+        "eval_rows": result.get("eval_rows"),
+        "strict_rows": result.get("strict_rows"),
+        "final_eval_joint_proxy_exact": final_eval.get("joint_proxy_exact"),
+        "final_strict_joint_proxy_exact": final_strict.get("joint_proxy_exact"),
+        "field_exact_eval": final_eval.get("field_exact"),
+        "field_exact_strict": final_strict.get("field_exact"),
+        "field_loss_eval": final_eval.get("field_loss"),
+        "field_loss_strict": final_strict.get("field_loss"),
+        "best_state_selection": best,
+        "wrong_rows": wrong_rows,
+        "wrong_row_count": len(wrong_rows),
+        "high_confidence_wrong_rows": high_conf_wrong,
+        "high_confidence_wrong_count": len(high_conf_wrong),
+        "checkpoint_like_artifacts": checkpoint_like,
+        "comparison_to_stage9528": {
+            "stage9528_eval_joint_proxy_exact": 0.9444444444444444,
+            "stage9528_strict_joint_proxy_exact": 1.0,
+            "boundary_component_eval_delta": (final_eval.get("joint_proxy_exact") or 0.0) - 0.9444444444444444,
+            "boundary_component_strict_delta": (final_strict.get("joint_proxy_exact") or 0.0) - 1.0,
+        },
+        "diagnosis": "Safe regression. Boundary-component failure-type-only patch preserved strict exactness but reduced eval exactness, so Stage9529 should not be promoted as the next base.",
+        "next_repair_target": "Return to Stage9525/9528 residual-gate base and try a smaller calibration or split-aware weighting patch for the single Python boundary-miss eval row.",
+        "authority": dict(AUTHORITY_CLOSED),
+        "model_execution_authorized_next": False,
+        "decoder_ce_training_authorized_next": False,
+        "denoise_ce_training_authorized_next": False,
+        "promotion_ready": False,
+    }
+    AUDIT.write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n")
+    summary = {
+        "stage": STAGE,
+        "stage_name": NAME,
+        "name": NAME,
+        "passed": audit["passed"],
+        "authority": dict(AUTHORITY_CLOSED),
+        "metrics": {**dict(AUTHORITY_CLOSED), **audit},
+        "artifacts": {"audit": str(AUDIT.relative_to(ROOT)), "execution_result": str(EXECUTION.relative_to(ROOT)), "doc": str(DOC.relative_to(ROOT))},
+        "decision": "Boundary-component probe regressed eval safely; keep Stage9528 as the better base and do not promote Stage9529.",
+        "next_best_step": "Build Stage9533 from the Stage9525 residual-gate base, using a smaller calibration patch for the remaining Python boundary-miss eval row rather than the broad boundary-component feature.",
+        "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    }
+    SUMMARY.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
+    DOC.write_text("\n".join([
+        "# Stage9532 Episode Observation Diagnosis Boundary-Component Probe Audit",
+        "",
+        f"Passed: `{audit['passed']}`",
+        f"Safety passed: `{audit['safety_passed']}`",
+        f"Quality passed: `{audit['quality_passed']}`",
+        f"Regressed vs Stage9528: `{audit['regressed_vs_stage9528']}`",
+        f"Final eval exact: `{audit['final_eval_joint_proxy_exact']}`",
+        f"Final strict exact: `{audit['final_strict_joint_proxy_exact']}`",
+        f"Wrong rows: `{len(wrong_rows)}`",
+        f"High-confidence wrong rows: `{len(high_conf_wrong)}`",
+        "",
+        audit["diagnosis"],
+        "",
+    ]))
+    registry = load_json(REGISTRY) or {"rows": [], "metrics": {}}
+    rows = [row for row in registry.get("rows", []) if row.get("stage") != STAGE and row.get("stage_name") != NAME]
+    rows.append({"stage": STAGE, "stage_name": NAME, "passed": summary["passed"], "path": str(SUMMARY), "authority": dict(AUTHORITY_CLOSED), "next_best_step": summary["next_best_step"]})
+    registry["rows"] = sorted(rows, key=lambda row: (int(row.get("stage", -1)), row.get("stage_name", "")))
+    registry["passed"] = bool(registry["rows"])
+    registry["metrics"] = {**(registry.get("metrics") or {}), "latest_stage": STAGE, "latest_stage_name": NAME, "latest_stage_next_best_step": summary["next_best_step"], "max_stage": STAGE, "registry_rows": len(registry["rows"])}
+    REGISTRY.write_text(json.dumps(registry, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"stage": STAGE, "passed": audit["passed"], "safety_passed": audit["safety_passed"], "quality_passed": audit["quality_passed"], "final_eval": audit["final_eval_joint_proxy_exact"], "final_strict": audit["final_strict_joint_proxy_exact"], "wrong_rows": len(wrong_rows), "high_confidence_wrong_rows": len(high_conf_wrong), "failures": failures}, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,218 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9532_episode_obs_diag_boundary_component_target_100m_probe/stage9532_episode_obs_diag_boundary_component_probe_audit.json",
+    "doc": "docs/EPISODE_OBS_DIAG_BOUNDARY_COMPONENT_PROBE_AUDIT_STAGE9532.md",
+    "execution_result": "runs/local/artifacts/stage9532_episode_obs_diag_boundary_component_target_100m_probe/execution_result.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T02:10:17Z",
+  "decision": "Boundary-component probe regressed eval safely; keep Stage9528 as the better base and do not promote Stage9529.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "best_state_selection": {
+      "checkpoint_exported": false,
+      "enabled": true,
+      "eval_joint_proxy_exact": null,
+      "eval_loss": null,
+      "promotion_ready": false,
+      "restored": false,
+      "selected_step": null,
+      "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+      "selection_score": null,
+      "strict_joint_proxy_exact": null,
+      "strict_loss": null
+    },
+    "body_emission_authorized": false,
+    "checkpoint_like_artifacts": [],
+    "comparison_to_stage9528": {
+      "boundary_component_eval_delta": -0.11111111111111105,
+      "boundary_component_strict_delta": 0.0,
+      "stage9528_eval_joint_proxy_exact": 0.9444444444444444,
+      "stage9528_strict_joint_proxy_exact": 1.0
+    },
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "Safe regression. Boundary-component failure-type-only patch preserved strict exactness but reduced eval exactness, so Stage9529 should not be promoted as the next base.",
+    "estimated_parameter_count": 102703145,
+    "eval_rows": 6,
+    "failures": [
+      "final_eval_not_exact",
+      "no_jointly_exact_best_state_to_restore"
+    ],
+    "field_exact_eval": {
+      "episode_failure_type": {
+        "exact": 0.8333333333333334,
+        "rows": 6
+      }
+    },
+    "field_exact_strict": {
+      "episode_failure_type": {
+        "exact": 1.0,
+        "rows": 6
+      }
+    },
+    "field_loss_eval": {
+      "episode_failure_type": 0.6603062748908997
+    },
+    "field_loss_strict": {
+      "episode_failure_type": 0.013007703237235546
+    },
+    "fields": [
+      "episode_failure_type"
+    ],
+    "final_eval_joint_proxy_exact": 0.8333333333333334,
+    "final_strict_joint_proxy_exact": 1.0,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_count": 1,
+    "high_confidence_wrong_rows": [
+      {
+        "cell_key": "python::episode_observation_diagnosis_boundary_component::KEEP_EPISODE_OBS_DIAG_BOUNDARY_COMPONENT",
+        "confidence": 0.9742265343666077,
+        "correct": false,
+        "entropy": 0.13971737027168274,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": true,
+        "margin": 0.954176863655448,
+        "pred": "not_exact+target_prefix_miss",
+        "pred_index": 1,
+        "row_id": "stage9529_obs_diag_boundary_0048",
+        "split": "eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "target_index": 2,
+        "top1_label": "not_exact+target_prefix_miss",
+        "top1_logit": 7.251953601837158,
+        "top2_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "top2_logit": 3.3685224056243896,
+        "top_k": [
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 7.251953601837158,
+            "prob": 0.9742265343666077
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 3.3685224056243896,
+            "prob": 0.020049670711159706
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 1.3854405879974365,
+            "prob": 0.0027597236912697554
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": 0.8567327857017517,
+            "prob": 0.0016264880541712046
+          },
+          {
+            "label": "none",
+            "logit": 0.6189103722572327,
+            "prob": 0.0012822297867387533
+          }
+        ]
+      }
+    ],
+    "mode": "episode_step_structured_probe",
+    "model_execution_authorized_next": false,
+    "next_repair_target": "Return to Stage9525/9528 residual-gate base and try a smaller calibration or split-aware weighting patch for the single Python boundary-miss eval row.",
+    "passed": false,
+    "probe_scale": "target_100m",
+    "promotion_ready": false,
+    "quality_failures": [
+      "final_eval_not_exact",
+      "no_jointly_exact_best_state_to_restore"
+    ],
+    "quality_passed": false,
+    "regressed_vs_stage9528": true,
+    "runtime_authorized": false,
+    "safety_failures": [],
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_stage": "stage9531_episode_obs_diag_boundary_component_preflight_audit",
+    "strict_rows": 6,
+    "train_rows": 46,
+    "wrong_row_count": 1,
+    "wrong_rows": [
+      {
+        "cell_key": "python::episode_observation_diagnosis_boundary_component::KEEP_EPISODE_OBS_DIAG_BOUNDARY_COMPONENT",
+        "confidence": 0.9742265343666077,
+        "correct": false,
+        "entropy": 0.13971737027168274,
+        "field": "episode_failure_type",
+        "high_confidence_wrong": true,
+        "margin": 0.954176863655448,
+        "pred": "not_exact+target_prefix_miss",
+        "pred_index": 1,
+        "row_id": "stage9529_obs_diag_boundary_0048",
+        "split": "eval",
+        "step": null,
+        "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "target_index": 2,
+        "top1_label": "not_exact+target_prefix_miss",
+        "top1_logit": 7.251953601837158,
+        "top2_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+        "top2_logit": 3.3685224056243896,
+        "top_k": [
+          {
+            "label": "not_exact+target_prefix_miss",
+            "logit": 7.251953601837158,
+            "prob": 0.9742265343666077
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+            "logit": 3.3685224056243896,
+            "prob": 0.020049670711159706
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+            "logit": 1.3854405879974365,
+            "prob": 0.0027597236912697554
+          },
+          {
+            "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+            "logit": 0.8567327857017517,
+            "prob": 0.0016264880541712046
+          },
+          {
+            "label": "none",
+            "logit": 0.6189103722572327,
+            "prob": 0.0012822297867387533
+          }
+        ]
+      }
+    ]
+  },
+  "name": "stage9532_episode_obs_diag_boundary_component_probe_audit",
+  "next_best_step": "Build Stage9533 from the Stage9525 residual-gate base, using a smaller calibration patch for the remaining Python boundary-miss eval row rather than the broad boundary-component feature.",
+  "passed": false,
+  "stage": 9532,
+  "stage_name": "stage9532_episode_obs_diag_boundary_component_probe_audit"
+}
