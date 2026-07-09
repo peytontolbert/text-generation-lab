@@ -1,0 +1,99 @@
+{
+  "artifacts": {
+    "card": "runs/local/artifacts/stage9493_per_head_verifier_curriculum_queue/per_head_verifier_curriculum_queue_card.json",
+    "doc": "docs/PER_HEAD_VERIFIER_CURRICULUM_QUEUE_STAGE9493.md",
+    "manifest": "runs/local/artifacts/stage9493_per_head_verifier_curriculum_queue/per_head_verifier_curriculum_queue.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T00:34:43Z",
+  "decision": "Queued per-head observe-phase verifier curriculum rows so each verifier head can be learned and audited before another multi-head rejoin.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "authority_row_ids": [],
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "design_note": "Per-head verifier curriculum queue after Stage9492 showed multi-head observe verifier normalization collapses toward majority/default classes.",
+    "expected_loss_counts": {
+      "episode_boundary_match_ce": 66,
+      "episode_failure_type_ce": 66,
+      "episode_repair_outcome_ce": 66,
+      "episode_step_value_mse": 66,
+      "episode_target_prefix_match_ce": 66
+    },
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "loss_counts": {
+      "episode_boundary_match_ce": 66,
+      "episode_failure_type_ce": 66,
+      "episode_repair_outcome_ce": 66,
+      "episode_step_value_mse": 66,
+      "episode_target_prefix_match_ce": 66
+    },
+    "manifest": "runs/local/artifacts/stage9493_per_head_verifier_curriculum_queue/per_head_verifier_curriculum_queue.jsonl",
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "per_head_split_counts": {
+      "eval::episode_boundary_match_ce": 6,
+      "eval::episode_failure_type_ce": 6,
+      "eval::episode_repair_outcome_ce": 6,
+      "eval::episode_step_value_mse": 6,
+      "eval::episode_target_prefix_match_ce": 6,
+      "strict_eval::episode_boundary_match_ce": 6,
+      "strict_eval::episode_failure_type_ce": 6,
+      "strict_eval::episode_repair_outcome_ce": 6,
+      "strict_eval::episode_step_value_mse": 6,
+      "strict_eval::episode_target_prefix_match_ce": 6,
+      "train::episode_boundary_match_ce": 54,
+      "train::episode_failure_type_ce": 54,
+      "train::episode_repair_outcome_ce": 54,
+      "train::episode_step_value_mse": 54,
+      "train::episode_target_prefix_match_ce": 54
+    },
+    "promotion_ready": false,
+    "rows": 330,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_manifest": "runs/local/artifacts/stage9490_phase_aware_episode_verifier_manifest/phase_aware_episode_verifier_manifest.jsonl",
+    "source_rows": 66,
+    "source_stage9492": "runs/summaries/stage9492_phase_aware_episode_verifier_probe_audit.json",
+    "split_counts": {
+      "eval": 30,
+      "strict_eval": 30,
+      "train": 270
+    }
+  },
+  "name": "stage9493_per_head_verifier_curriculum_queue",
+  "next_best_step": "Run contract-only preflight for one isolated verifier head at a time, starting with episode_boundary_match or episode_failure_type; do not rejoin all heads until isolated probes pass.",
+  "passed": true,
+  "stage": 9493,
+  "stage_name": "stage9493_per_head_verifier_curriculum_queue"
+}
