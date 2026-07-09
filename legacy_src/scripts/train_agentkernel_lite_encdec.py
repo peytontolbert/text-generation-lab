@@ -698,6 +698,7 @@ def validate_two_phase_suffix_denoise_reconnect_probe(args: argparse.Namespace, 
         denoise_weight=0.0,
         decoder_ce_weight=0.0,
         phase2_manifest=None,
+        generation_prefix_field=None,
     )
     phase1_card = validate_structured_probe(phase1_args, rows)
     if not phase1_card.get("passed"):
@@ -760,6 +761,7 @@ def validate_two_phase_suffix_denoise_reconnect_probe(args: argparse.Namespace, 
         "generation_prefix_field": getattr(args, "generation_prefix_field", None),
         "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
         "model_execution_attempted": False,
+        "contract_only": bool(getattr(args, "contract_only", False)),
         "two_phase_in_memory_required": True,
         "checkpoint_export_allowed_between_phases": False,
     }

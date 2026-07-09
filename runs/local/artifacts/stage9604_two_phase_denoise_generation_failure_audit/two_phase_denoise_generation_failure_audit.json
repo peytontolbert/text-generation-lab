@@ -1,0 +1,93 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "decision": "Do not rerun broad denoise training. Patch the residual denoise target/prefix surface so the decoder learns a bounded natural repair span instead of repeating the symbolic BOUND token.",
+  "failures": [],
+  "generated_prefixes": {
+    "REPAIR_PREFIX_ONLY": 12
+  },
+  "manifest_failure_types": {
+    "not_exact+target_prefix_miss": 24,
+    "not_exact+target_prefix_miss+boundary_next_token_miss": 17
+  },
+  "manifest_rows": 41,
+  "manifest_target_prefixes": {
+    "REPAIR_PREFIX_AND_BOUNDARY": 17,
+    "REPAIR_PREFIX_ONLY": 24
+  },
+  "model_input_has_generation_prefix": false,
+  "model_input_has_literal_prefix_redacted": true,
+  "passed": true,
+  "phase1_eval_suffix_choice_exact": 1.0,
+  "phase1_strict_suffix_choice_exact": 1.0,
+  "phase2_contentful_generation_rate": 0.0,
+  "phase2_degenerate_repetition_rate": 1.0,
+  "phase2_dir": "runs/local/artifacts/stage9603_two_phase_suffix_denoise_tiny_probe/two_phase_probe/phase2_residual_denoise_probe",
+  "phase2_generated_rows": 12,
+  "phase2_generation_prefix_field": null,
+  "phase2_generation_prefix_start_rate": 0.0,
+  "phase2_internal_leak_rows": 0,
+  "phase2_short_or_junk_rows": 0,
+  "phase2_target_prefix_match_rate": 0.0,
+  "phase2_unterminated_rate": 1.0,
+  "recommended_patch": {
+    "future_pass_gate": {
+      "phase1_eval_suffix_choice_exact": 1.0,
+      "phase1_strict_suffix_choice_exact": 1.0,
+      "phase2_contentful_generation_rate": 1.0,
+      "phase2_degenerate_repetition_rate": 0.0,
+      "phase2_internal_leak_rows": 0,
+      "phase2_target_prefix_match_rate_min": 0.95,
+      "phase2_unterminated_rate": 0.0
+    },
+    "requirements": [
+      "keep decoder_ce closed",
+      "keep runtime/Gemma/harness/export closed",
+      "keep suffix_choice sidecar as phase1 gate",
+      "add an audited generation_prefix_field or bounded active_prefix span",
+      "avoid copying full target text into model input",
+      "make BOUND a structural boundary marker, not the dominant free token in generation",
+      "rerun contract preflight before any execution"
+    ],
+    "stage9605": "build_prefix_primed_residual_denoise_manifest_or_renderer_patch"
+  },
+  "repeated_bound_rows": [
+    "stage9556_combined_residual_denoise_0000",
+    "stage9556_combined_residual_denoise_0001",
+    "stage9556_combined_residual_denoise_0002",
+    "stage9556_combined_residual_denoise_0003",
+    "stage9556_combined_residual_denoise_0004",
+    "stage9556_combined_residual_denoise_0005",
+    "stage9556_combined_residual_denoise_0008",
+    "stage9556_combined_residual_denoise_0010",
+    "stage9556_combined_residual_denoise_0011",
+    "stage9556_combined_residual_denoise_0012",
+    "stage9556_combined_residual_denoise_0013",
+    "stage9556_combined_residual_denoise_0014"
+  ],
+  "root_cause": {
+    "generated_repeats_bound_token": true,
+    "generation_prefix_field_missing": true,
+    "phase1_suffix_choice_solved": true,
+    "phase2_target_rendering_is_symbolic_label_surface": true,
+    "target_surface_is_repair_bucket_plus_failure_type": true
+  },
+  "source_manifest": "runs/local/artifacts/stage9566_residual_denoise_target_rendered_manifest/residual_denoise_target_rendered_manifest.jsonl",
+  "source_summary": "runs/summaries/stage9603_two_phase_suffix_denoise_tiny_probe.json",
+  "stage9603_quality_gate": false,
+  "target_prefixes_in_samples": {
+    "REPAIR_PREFIX_AND_BOUNDARY": 7,
+    "REPAIR_PREFIX_ONLY": 5
+  }
+}
