@@ -1,0 +1,119 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "authority_violations": [],
+  "failures": [],
+  "graph_stats": {
+    "edge_types": {
+      "candidate_call_relation": 32,
+      "candidate_import_relation": 25,
+      "candidate_test_relation": 16,
+      "contains": 139,
+      "has_query": 92
+    },
+    "node_types": {
+      "callsite_query": 36,
+      "file": 139,
+      "import_query": 24,
+      "module_candidate": 25,
+      "repo": 92,
+      "retrieval_gap_marker": 36,
+      "symbol_candidate": 48,
+      "test_candidate": 32,
+      "test_query": 32
+    }
+  },
+  "label_counts": {
+    "ABSTAIN_UNBOUND": 17,
+    "BIND_CALL_TO_SYMBOL": 16,
+    "BIND_IMPORT_TO_MODULE": 7,
+    "BIND_TEST_TO_SYMBOL": 16,
+    "RETRIEVE_MORE": 36
+  },
+  "loss_counts": {
+    "symbol_binding_ce": 92
+  },
+  "name": "stage9708_symbol_binding_visible_evidence_manifest",
+  "output_manifest": "runs/local/artifacts/stage9708_symbol_binding_visible_evidence_manifest/symbol_binding_visible_evidence.jsonl",
+  "passed": true,
+  "promotion_ready": false,
+  "quality_passed": true,
+  "query_kind_action_baseline_ceiling": 0.6,
+  "query_kind_action_baseline_exact": 0.445652,
+  "query_label_counts": {
+    "callsite": {
+      "ABSTAIN_UNBOUND": 8,
+      "BIND_CALL_TO_SYMBOL": 16,
+      "RETRIEVE_MORE": 12
+    },
+    "import": {
+      "ABSTAIN_UNBOUND": 9,
+      "BIND_IMPORT_TO_MODULE": 7,
+      "RETRIEVE_MORE": 8
+    },
+    "test": {
+      "BIND_TEST_TO_SYMBOL": 16,
+      "RETRIEVE_MORE": 16
+    }
+  },
+  "row_count": 92,
+  "single_feature_baseline_ceiling": 0.8,
+  "source_manifest": "runs/local/artifacts/stage9700_symbol_binding_repair_compiler/symbol_binding_tiny_rebalanced.jsonl",
+  "source_query_kind_action_baseline_exact": 0.640625,
+  "source_row_count": 64,
+  "source_summary": "runs/summaries/stage9707_symbol_binding_sampler_target100m_execution_audit.json",
+  "split_counts": {
+    "eval": 22,
+    "strict_eval": 22,
+    "train": 48
+  },
+  "stage": 9708,
+  "stage9707_wrong_confusions": {
+    "BIND_IMPORT_TO_MODULE->ABSTAIN_UNBOUND": 2,
+    "BIND_IMPORT_TO_MODULE->BIND_CALL_TO_SYMBOL": 2,
+    "BIND_TEST_TO_SYMBOL->ABSTAIN_UNBOUND": 3,
+    "BIND_TEST_TO_SYMBOL->BIND_CALL_TO_SYMBOL": 5,
+    "RETRIEVE_MORE->ABSTAIN_UNBOUND": 3,
+    "RETRIEVE_MORE->BIND_CALL_TO_SYMBOL": 5
+  },
+  "strongest_single_feature_baseline_exact": 0.75,
+  "synthetic_counterfactual_rows": 28,
+  "top_single_feature_baselines": {
+    "graph_edge_type_counts.candidate_call_relation": 0.652174,
+    "graph_edge_type_counts.candidate_import_relation": 0.565217,
+    "graph_edge_type_counts.candidate_test_relation": 0.565217,
+    "graph_node_type_counts.callsite_query": 0.434783,
+    "graph_node_type_counts.module_candidate": 0.565217,
+    "graph_node_type_counts.retrieval_gap_marker": 0.576087,
+    "graph_node_type_counts.symbol_candidate": 0.652174,
+    "model_input.visible_binding_evidence_v1.candidate_count_bucket": 0.75,
+    "model_input.visible_binding_evidence_v1.candidate_kind_visible.callsite": 0.434783,
+    "model_input.visible_binding_evidence_v1.candidate_kind_visible.module_candidate": 0.48913,
+    "model_input.visible_binding_evidence_v1.candidate_kind_visible.symbol_candidate": 0.565217,
+    "model_input.visible_binding_evidence_v1.candidate_rank_bucket": 0.75,
+    "model_input.visible_binding_evidence_v1.negative_evidence.multiple_candidate_conflict": 0.576087,
+    "model_input.visible_binding_evidence_v1.negative_evidence.no_resolving_candidate_in_packet": 0.576087,
+    "model_input.visible_binding_evidence_v1.negative_evidence.requires_external_lookup": 0.576087,
+    "model_input.visible_binding_evidence_v1.relation_evidence.ambiguous_candidates_visible": 0.576087,
+    "model_input.visible_binding_evidence_v1.relation_evidence.candidate_call_compatible": 0.565217,
+    "model_input.visible_binding_evidence_v1.relation_evidence.candidate_defined_outside_test": 0.565217,
+    "model_input.visible_binding_evidence_v1.relation_evidence.candidate_import_compatible": 0.467391,
+    "model_input.visible_binding_evidence_v1.relation_evidence.candidate_near_query": 0.576087,
+    "model_input.visible_binding_evidence_v1.relation_evidence.coverage_relation_visible": 0.565217,
+    "model_input.visible_binding_evidence_v1.relation_evidence.retrieval_gap_visible": 0.576087,
+    "query_features.call_shape.name_len_bucket": 0.456522,
+    "query_features.import_shape.name_len_bucket": 0.445652,
+    "query_kind": 0.445652
+  }
+}

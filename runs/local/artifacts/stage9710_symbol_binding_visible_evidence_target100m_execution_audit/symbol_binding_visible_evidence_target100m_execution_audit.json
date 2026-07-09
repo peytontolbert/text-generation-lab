@@ -1,0 +1,101 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "confusion_pairs": {
+    "ABSTAIN_UNBOUND->ABSTAIN_UNBOUND": 6,
+    "ABSTAIN_UNBOUND->BIND_IMPORT_TO_MODULE": 2,
+    "BIND_CALL_TO_SYMBOL->ABSTAIN_UNBOUND": 2,
+    "BIND_CALL_TO_SYMBOL->BIND_CALL_TO_SYMBOL": 6,
+    "BIND_IMPORT_TO_MODULE->BIND_IMPORT_TO_MODULE": 4,
+    "BIND_TEST_TO_SYMBOL->ABSTAIN_UNBOUND": 5,
+    "BIND_TEST_TO_SYMBOL->BIND_CALL_TO_SYMBOL": 3,
+    "RETRIEVE_MORE->ABSTAIN_UNBOUND": 2,
+    "RETRIEVE_MORE->BIND_CALL_TO_SYMBOL": 14
+  },
+  "failures": [],
+  "metrics": {
+    "decoder_delta_norm": 0.0,
+    "estimated_parameter_count": 102703145,
+    "eval_symbol_binding_exact": 0.4090909090909091,
+    "native_ablation_rows": 44,
+    "strict_symbol_binding_exact": 0.3181818181818182,
+    "structured_batch_sampler": "label_balanced_by_primary_field"
+  },
+  "name": "stage9710_symbol_binding_visible_evidence_target100m_execution_audit",
+  "native_ablation_summary": {
+    "avg_gold_logit_drop_by_group": {
+      "graph_evidence": 0.19806,
+      "import_dependency_evidence": 0.00358,
+      "intent_features": 0.0,
+      "query_kind": -0.000802,
+      "surface_role_features": -0.005993,
+      "verifier_feedback": -0.006256
+    },
+    "max_gold_logit_drop_by_group": {
+      "graph_evidence": 0.275275,
+      "import_dependency_evidence": 0.018724,
+      "intent_features": 0.0,
+      "query_kind": 0.013793,
+      "surface_role_features": 0.007671,
+      "verifier_feedback": 0.004346
+    },
+    "rows": 44,
+    "top_feature_group_counts": {
+      "graph_evidence": 28,
+      "intent_features": 5,
+      "query_kind": 4,
+      "surface_role_features": 3,
+      "verifier_feedback": 4
+    }
+  },
+  "next_best_step": "Build Stage9711 retrieval-gap/test-coverage symbol-binding evidence repair rows; retrieve-more and test binding remain at 0 exact, so do not reconnect decoder work.",
+  "passed": true,
+  "promotion_ready": false,
+  "quality_passed": false,
+  "row_failure_stats": {
+    "ABSTAIN_UNBOUND": {
+      "avg_confidence": 0.230904,
+      "avg_margin": 0.004705,
+      "exact": 0.75,
+      "rows": 8
+    },
+    "BIND_CALL_TO_SYMBOL": {
+      "avg_confidence": 0.236862,
+      "avg_margin": 0.008583,
+      "exact": 0.75,
+      "rows": 8
+    },
+    "BIND_IMPORT_TO_MODULE": {
+      "avg_confidence": 0.221263,
+      "avg_margin": 0.006458,
+      "exact": 1.0,
+      "rows": 4
+    },
+    "BIND_TEST_TO_SYMBOL": {
+      "avg_confidence": 0.224645,
+      "avg_margin": 0.005025,
+      "exact": 0.0,
+      "rows": 8
+    },
+    "RETRIEVE_MORE": {
+      "avg_confidence": 0.2259,
+      "avg_margin": 0.0101,
+      "exact": 0.0,
+      "rows": 16
+    }
+  },
+  "run_dir": "runs/local/artifacts/stage9710_symbol_binding_visible_evidence_target100m_execution/symbol_binding_probe",
+  "source_stage9709_summary": "runs/summaries/stage9709_symbol_binding_visible_evidence_target100m_contract_preflight_audit.json",
+  "stage": 9710
+}
