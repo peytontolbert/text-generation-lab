@@ -187,7 +187,7 @@ class FeedForward(nn.Module):
 class EncoderLayer(nn.Module):
     def __init__(self, config: AgentKernelLiteTransformerConfig) -> None:
         super().__init__()
-        self.self_attn = MultiHeadAttention(config, causal=False, use_rope=False)
+        self.self_attn = MultiHeadAttention(config, causal=False, use_rope=True)
         self.mlp = FeedForward(config)
         self.norm1 = nn.LayerNorm(config.d_model)
         self.norm2 = nn.LayerNorm(config.d_model)
