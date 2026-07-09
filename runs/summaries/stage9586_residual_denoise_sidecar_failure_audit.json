@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9586_residual_denoise_sidecar_failure_audit/residual_denoise_sidecar_failure_audit.json",
+    "doc": "docs/RESIDUAL_DENOISE_SIDECAR_FAILURE_AUDIT_STAGE9586.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T04:37:24Z",
+  "decision": "The structured suffix_choice sidecar ran safely but did not meet the 0.95 eval/strict exactness gate, so it is not ready to gate denoise rendering.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "eval_suffix_choice_exact": 0.5,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "pass_gate": false,
+    "passed": true,
+    "promotion_ready": false,
+    "quality_passed": false,
+    "recommended_patch": "add counterbalanced residual sidecar rows where the same language/route/evidence shell supports both suffix choices and audit feature baselines before rerunning",
+    "runtime_authorized": false,
+    "safe_probe": true,
+    "scoring_authorized_next": false,
+    "sidecar_not_ready_for_denoise_render_gate": true,
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9585_residual_denoise_structured_decision_sidecar_probe.json",
+    "strict_suffix_choice_exact": 0.8,
+    "widening_authorized": false
+  },
+  "name": "stage9586_residual_denoise_sidecar_failure_audit",
+  "next_best_step": "Build counterbalanced residual sidecar rows and shortcut baselines before rerunning the suffix_choice sidecar probe.",
+  "passed": true,
+  "stage": 9586,
+  "stage_name": "stage9586_residual_denoise_sidecar_failure_audit"
+}
