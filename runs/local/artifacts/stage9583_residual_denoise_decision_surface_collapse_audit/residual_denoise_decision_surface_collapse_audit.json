@@ -1,0 +1,104 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "collapse_pattern_confirmed": true,
+  "decoder_ce_training_authorized_next": false,
+  "decoder_only_decision_surface_blocked": true,
+  "denoise_ce_training_authorized_next": false,
+  "failures": [],
+  "model_execution_authorized_next": false,
+  "passed": true,
+  "promotion_ready": false,
+  "recommended_sidecar_fields": [
+    "boundary_next_token_repair_required",
+    "prefix_only_repair_required",
+    "repair_scope_family",
+    "verifier_residual_reason_class"
+  ],
+  "recommended_training_route": "structured_sidecar_then_denoise_render",
+  "runtime_authorized": false,
+  "source_metrics": {
+    "neutral_yes_no": {
+      "boundary_recall": null,
+      "class_gate_passed": false,
+      "confusion": {
+        "NO": {
+          "NO": 8
+        },
+        "YES": {
+          "NO": 8
+        }
+      },
+      "contentful_generation_rate": 0.0,
+      "next_token_match_rate": 0.5,
+      "no_recall": 1.0,
+      "pred_counts": {
+        "NO": 16
+      },
+      "prefix_recall": null,
+      "sample_balanced": true,
+      "summary": "runs/summaries/stage9582_residual_denoise_neutral_boundary_decision_capped_probe.json",
+      "target_prefix_match_rate": 0.5,
+      "yes_recall": 0.0
+    },
+    "prefix_primed_literal": {
+      "boundary_recall": 1.0,
+      "class_gate_passed": false,
+      "confusion": {
+        "BOUNDARY": {
+          "BOUNDARY": 8
+        },
+        "PREFIX": {
+          "BOUNDARY": 8
+        }
+      },
+      "contentful_generation_rate": 0.0,
+      "next_token_match_rate": 0.5,
+      "no_recall": null,
+      "pred_counts": {
+        "BOUNDARY": 16
+      },
+      "prefix_recall": 0.0,
+      "sample_balanced": true,
+      "summary": "runs/summaries/stage9579_residual_denoise_boundary_prefix_primed_capped_probe.json",
+      "target_prefix_match_rate": 0.5,
+      "yes_recall": null
+    },
+    "raw_boundary_contrast": {
+      "boundary_recall": 0.0,
+      "class_gate_passed": false,
+      "confusion": {
+        "BOUNDARY": {
+          "PREFIX": 8
+        },
+        "PREFIX": {
+          "PREFIX": 8
+        }
+      },
+      "contentful_generation_rate": 1.0,
+      "next_token_match_rate": null,
+      "no_recall": null,
+      "pred_counts": {
+        "PREFIX": 16
+      },
+      "prefix_recall": 1.0,
+      "sample_balanced": true,
+      "summary": "runs/summaries/stage9576_residual_denoise_boundary_interleaved_capped_probe.json",
+      "target_prefix_match_rate": 0.5,
+      "yes_recall": null
+    }
+  },
+  "structured_decision_sidecar_required": true,
+  "widening_authorized": false
+}

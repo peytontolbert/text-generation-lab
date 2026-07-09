@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "card": "runs/local/artifacts/stage9581_residual_denoise_neutral_boundary_decision_manifest/residual_denoise_neutral_boundary_decision_manifest_card.json",
+    "doc": "docs/RESIDUAL_DENOISE_NEUTRAL_BOUNDARY_DECISION_MANIFEST_STAGE9581.md",
+    "manifest": "runs/local/artifacts/stage9581_residual_denoise_neutral_boundary_decision_manifest/residual_denoise_neutral_boundary_decision_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T04:21:56Z",
+  "decision": "Replaced literal BOUNDARY/PREFIX target words with neutral YES/NO decision tokens under a shared REPAIR_DECISION= prefix.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "authority_rows": 0,
+    "body_emission_authorized": false,
+    "class_counts": {
+      "BOUNDARY": 24,
+      "PREFIX": 24
+    },
+    "controller_complete_merge_authorized_next": false,
+    "copied_target_rows": 0,
+    "decision_counts": {
+      "NO": 24,
+      "YES": 24
+    },
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "generation_prefix": "REPAIR_DECISION=",
+    "generation_prefix_field": "model_input.repair_decision_prefix",
+    "harness_execution_authorized_next": false,
+    "loss_counts": {
+      "denoise_ce": 48
+    },
+    "manifest": "runs/local/artifacts/stage9581_residual_denoise_neutral_boundary_decision_manifest/residual_denoise_neutral_boundary_decision_manifest.jsonl",
+    "manifest_sha256": "43c97c030ae8e6f1c5201b3de8a70a82848f4e3f12e1517acf577502d99dbe83",
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "rows": 48,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_manifest": "runs/local/artifacts/stage9578_residual_denoise_boundary_prefix_primed_manifest/residual_denoise_boundary_prefix_primed_manifest.jsonl",
+    "source_summary": "runs/summaries/stage9580_residual_denoise_prefix_primed_token_bias_audit.json",
+    "split_class_counts": {
+      "eval:BOUNDARY": 4,
+      "eval:PREFIX": 4,
+      "strict_eval:BOUNDARY": 5,
+      "strict_eval:PREFIX": 5,
+      "train:BOUNDARY": 15,
+      "train:PREFIX": 15
+    },
+    "target_prefix_rows": 48
+  },
+  "name": "stage9581_residual_denoise_neutral_boundary_decision_manifest",
+  "next_best_step": "Run a capped target_100M denoise probe with --generation-prefix-field model_input.repair_decision_prefix and audit YES/NO recall.",
+  "passed": true,
+  "stage": 9581,
+  "stage_name": "stage9581_residual_denoise_neutral_boundary_decision_manifest"
+}

@@ -1,0 +1,145 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9577_residual_denoise_boundary_discriminator_audit/residual_denoise_boundary_discriminator_audit.json",
+    "doc": "docs/RESIDUAL_DENOISE_BOUNDARY_DISCRIMINATOR_AUDIT_STAGE9577.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T04:11:35Z",
+  "decision": "Stage9576 fixed generation sample bias, but the decoder still maps all balanced boundary samples to PREFIX despite complete boundary evidence in model_input.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "boundary_miss_rows": 24,
+    "class_gate_passed": false,
+    "complete_discriminators": [
+      "obs_boundary_relation",
+      "obs_has_boundary_next_token_miss_reason"
+    ],
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "discriminating_keys": [
+      "obs_alignment_status",
+      "obs_boundary_relation",
+      "obs_boundary_rank_bucket",
+      "obs_failure_evidence_family",
+      "obs_has_boundary_next_token_miss_reason",
+      "obs_residual_reason_count"
+    ],
+    "evidence_gate_passed": true,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "key_distributions": {
+      "obs_alignment_status": {
+        "BOUNDARY": {
+          "boundary_residual_observation": 12
+        },
+        "PREFIX": {
+          "prefix_residual_observation": 16
+        }
+      },
+      "obs_boundary_rank_bucket": {
+        "BOUNDARY": {
+          "rank_2_8": 4,
+          "rank_9_plus": 8
+        },
+        "PREFIX": {
+          "rank_1": 16
+        }
+      },
+      "obs_boundary_relation": {
+        "BOUNDARY": {
+          "boundary_miss": 24
+        },
+        "PREFIX": {
+          "boundary_match": 24
+        }
+      },
+      "obs_failure_evidence_family": {
+        "BOUNDARY": {
+          "prefix_and_boundary_miss_evidence": 12
+        },
+        "PREFIX": {
+          "prefix_miss_evidence": 16
+        }
+      },
+      "obs_has_boundary_next_token_miss_reason": {
+        "BOUNDARY": {
+          "True": 24
+        },
+        "PREFIX": {
+          "False": 24
+        }
+      },
+      "obs_residual_reason_count": {
+        "BOUNDARY": {
+          "3": 12
+        },
+        "PREFIX": {
+          "2": 16
+        }
+      }
+    },
+    "learned_collapse_confirmed": true,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "prefix_boundary_match_rows": 24,
+    "promotion_ready": false,
+    "row_counts": {
+      "BOUNDARY": 24,
+      "PREFIX": 24
+    },
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "semantic_issue": true,
+    "source_emission_authorized": false,
+    "source_manifest": "runs/local/artifacts/stage9575_residual_denoise_boundary_interleaved_manifest/residual_denoise_boundary_interleaved_manifest.jsonl",
+    "source_summary": "runs/summaries/stage9576_residual_denoise_boundary_interleaved_capped_probe.json",
+    "stage9576_boundary_recall": 0.0,
+    "stage9576_confusion": {
+      "BOUNDARY": {
+        "PREFIX": 8
+      },
+      "PREFIX": {
+        "PREFIX": 8
+      }
+    },
+    "stage9576_exact_rate": 0.5,
+    "stage9576_pred_counts": {
+      "PREFIX": 16
+    },
+    "stage9576_prefix_recall": 1.0,
+    "stage9576_sample_balanced": true,
+    "widening_authorized": false
+  },
+  "name": "stage9577_residual_denoise_boundary_discriminator_audit",
+  "next_best_step": "Build a boundary-evidence amplified target-surface manifest that keeps denoise CE only, preserves closed authority, and makes the first decoded class token depend on explicit verifier observation fields.",
+  "passed": true,
+  "stage": 9577,
+  "stage_name": "stage9577_residual_denoise_boundary_discriminator_audit"
+}

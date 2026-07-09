@@ -1,0 +1,77 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9580_residual_denoise_prefix_primed_token_bias_audit/residual_denoise_prefix_primed_token_bias_audit.json",
+    "doc": "docs/RESIDUAL_DENOISE_PREFIX_PRIMED_TOKEN_BIAS_AUDIT_STAGE9580.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T04:20:42Z",
+  "decision": "The prefix-primed probe learned the literal BOUNDARY route for every row. Prefix rows still rank P second, so the next patch should use neutral YES/NO decision tokens rather than literal class names.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "boundary_literal_bias_confirmed": true,
+    "boundary_next_token_match_rate": 0.5,
+    "boundary_recall": 1.0,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "expected_probability_mean_by_token": {
+      "B": 0.999992698431015,
+      "P": 2.4800165647320682e-05
+    },
+    "expected_ranks": {
+      "B:rank_1": 8,
+      "P:rank_2": 8
+    },
+    "expected_token_counts": {
+      "B": 8,
+      "P": 8
+    },
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "generated_token_counts": {
+      "B": 16
+    },
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "prefix_recall": 0.0,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "sample_balanced": true,
+    "sample_generation_audit": "runs/local/artifacts/stage9579_residual_denoise_boundary_prefix_primed_capped_probe/denoise_repair_probe/sample_generation_audit.json",
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9579_residual_denoise_boundary_prefix_primed_capped_probe.json",
+    "widening_authorized": false
+  },
+  "name": "stage9580_residual_denoise_prefix_primed_token_bias_audit",
+  "next_best_step": "Build a neutral boundary-decision manifest with shared REPAIR_DECISION= prefix and YES/NO class tokens derived from verifier boundary-miss evidence.",
+  "passed": true,
+  "stage": 9580,
+  "stage_name": "stage9580_residual_denoise_prefix_primed_token_bias_audit"
+}
