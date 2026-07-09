@@ -1,0 +1,51 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "contract_name": "episode_obs_diag_component_overlay_v1",
+  "decoder_ce_training_authorized_next": false,
+  "denoise_ce_training_authorized_next": false,
+  "effective_authority_rule": {
+    "component_source": "episode_transition.observation_t.residual_reasons",
+    "effective_failure_type_source": "deterministic_observation_component_overlay",
+    "learned_episode_failure_type_head": "telemetry_only",
+    "none_when_no_components": true,
+    "ordered_components": [
+      "not_exact",
+      "target_prefix_miss",
+      "boundary_next_token_miss",
+      "degenerate_repetition",
+      "unterminated"
+    ]
+  },
+  "failures": [],
+  "mismatch_rows": [],
+  "model_execution_authorized_next": false,
+  "overlay_exact_rates": {
+    "eval": 1.0,
+    "strict_eval": 1.0,
+    "train": 1.0
+  },
+  "passed": true,
+  "promotion_ready": false,
+  "rows": 58,
+  "source_analysis": "runs/summaries/stage9537_episode_obs_diag_component_overlay_analysis.json",
+  "source_rows": "runs/local/artifacts/stage9537_episode_obs_diag_component_overlay_analysis/episode_obs_diag_component_overlay_rows.jsonl",
+  "training_policy": {
+    "best_probe_evidence_remains": "stage9528_episode_obs_diag_residual_gate_probe_audit",
+    "best_training_base_remains": "stage9525_episode_obs_diag_residual_gate_manifest",
+    "do_not_promote_stage9529_boundary_component_branch": true,
+    "do_not_promote_stage9533_python_boundary_upsample_branch": true,
+    "next_training_probe_required": false
+  }
+}

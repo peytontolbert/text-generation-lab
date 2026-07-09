@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "contract": "runs/local/artifacts/stage9538_episode_obs_diag_component_overlay_contract/episode_obs_diag_component_overlay_contract.json",
+    "doc": "docs/EPISODE_OBS_DIAG_COMPONENT_OVERLAY_CONTRACT_STAGE9538.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T02:27:16Z",
+  "decision": "Established deterministic observation-component overlay as effective failure_type authority and demoted learned composite failure_type to telemetry.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "contract_name": "episode_obs_diag_component_overlay_v1",
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "effective_authority_rule": {
+      "component_source": "episode_transition.observation_t.residual_reasons",
+      "effective_failure_type_source": "deterministic_observation_component_overlay",
+      "learned_episode_failure_type_head": "telemetry_only",
+      "none_when_no_components": true,
+      "ordered_components": [
+        "not_exact",
+        "target_prefix_miss",
+        "boundary_next_token_miss",
+        "degenerate_repetition",
+        "unterminated"
+      ]
+    },
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "mismatch_rows": [],
+    "model_execution_authorized_next": false,
+    "overlay_exact_rates": {
+      "eval": 1.0,
+      "strict_eval": 1.0,
+      "train": 1.0
+    },
+    "passed": true,
+    "promotion_ready": false,
+    "rows": 58,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_analysis": "runs/summaries/stage9537_episode_obs_diag_component_overlay_analysis.json",
+    "source_emission_authorized": false,
+    "source_rows": "runs/local/artifacts/stage9537_episode_obs_diag_component_overlay_analysis/episode_obs_diag_component_overlay_rows.jsonl",
+    "training_policy": {
+      "best_probe_evidence_remains": "stage9528_episode_obs_diag_residual_gate_probe_audit",
+      "best_training_base_remains": "stage9525_episode_obs_diag_residual_gate_manifest",
+      "do_not_promote_stage9529_boundary_component_branch": true,
+      "do_not_promote_stage9533_python_boundary_upsample_branch": true,
+      "next_training_probe_required": false
+    }
+  },
+  "name": "stage9538_episode_obs_diag_component_overlay_contract",
+  "next_best_step": "Update the verifier/episode diagnosis compiler to emit the Stage9538 effective_failure_type overlay contract before any future rejoin or decoder-gating probe.",
+  "passed": true,
+  "stage": 9538,
+  "stage_name": "stage9538_episode_obs_diag_component_overlay_contract"
+}
