@@ -1,0 +1,357 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "best_state_selection": {
+    "checkpoint_exported": false,
+    "enabled": true,
+    "eval_joint_proxy_exact": null,
+    "eval_loss": null,
+    "promotion_ready": false,
+    "restored": false,
+    "selected_step": null,
+    "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+    "selection_score": null,
+    "strict_joint_proxy_exact": null,
+    "strict_loss": null
+  },
+  "checkpoint_like_artifacts": [],
+  "comparison_to_stage9520": {
+    "minimal_context_eval_delta": 0.33333333333333326,
+    "minimal_context_strict_delta": 0.33333333333333337,
+    "stage9520_eval_joint_proxy_exact": 0.6111111111111112,
+    "stage9520_high_confidence_wrong_rows": 0,
+    "stage9520_strict_joint_proxy_exact": 0.5,
+    "stage9520_wrong_rows": 16
+  },
+  "decoder_ce_training_authorized_next": false,
+  "denoise_ce_training_authorized_next": false,
+  "diagnosis": "Safe quality failure with strong recovery over observation-dominant context. Minimal context restored useful controlled routing information, but strict residuals remain and no jointly exact best state was available.",
+  "estimated_parameter_count": 102703145,
+  "eval_rows": 6,
+  "failures": [
+    "final_eval_not_exact",
+    "final_strict_not_exact",
+    "no_jointly_exact_best_state_to_restore"
+  ],
+  "field_exact_eval": {
+    "episode_failure_type": {
+      "exact": 0.8333333333333334,
+      "rows": 6
+    },
+    "episode_repair_outcome": {
+      "exact": 1.0,
+      "rows": 6
+    },
+    "episode_step_value": {
+      "exact": 1.0,
+      "rows": 6
+    }
+  },
+  "field_exact_strict": {
+    "episode_failure_type": {
+      "exact": 0.8333333333333334,
+      "rows": 6
+    },
+    "episode_repair_outcome": {
+      "exact": 0.8333333333333334,
+      "rows": 6
+    },
+    "episode_step_value": {
+      "exact": 0.8333333333333334,
+      "rows": 6
+    }
+  },
+  "field_loss_eval": {
+    "episode_failure_type": 0.5482798218727112,
+    "episode_repair_outcome": 0.13375653326511383,
+    "episode_step_value": 0.12510186433792114
+  },
+  "field_loss_strict": {
+    "episode_failure_type": 0.6681711077690125,
+    "episode_repair_outcome": 0.4072507619857788,
+    "episode_step_value": 0.41451266407966614
+  },
+  "fields": [
+    "episode_failure_type",
+    "episode_repair_outcome",
+    "episode_step_value"
+  ],
+  "final_eval_joint_proxy_exact": 0.9444444444444444,
+  "final_strict_joint_proxy_exact": 0.8333333333333334,
+  "high_confidence_wrong_count": 2,
+  "high_confidence_wrong_rows": [
+    {
+      "cell_key": "rust::episode_observation_diagnosis_minimal_context::KEEP_EPISODE_OBS_DIAG_MINIMAL_CONTEXT",
+      "confidence": 0.817573606967926,
+      "correct": false,
+      "entropy": 0.477140337228775,
+      "field": "episode_repair_outcome",
+      "high_confidence_wrong": true,
+      "margin": 0.6353994607925415,
+      "pred": "successful_suffix_repair_step",
+      "pred_index": 1,
+      "row_id": "stage9521_obs_diag_minctx_0054",
+      "split": "strict_eval",
+      "step": null,
+      "target": "residual_suffix_repair_step",
+      "target_index": 0,
+      "top1_label": "successful_suffix_repair_step",
+      "top1_logit": 3.7454707622528076,
+      "top2_label": "residual_suffix_repair_step",
+      "top2_logit": 2.2440929412841797,
+      "top_k": [
+        {
+          "label": "successful_suffix_repair_step",
+          "logit": 3.7454707622528076,
+          "prob": 0.817573606967926
+        },
+        {
+          "label": "residual_suffix_repair_step",
+          "logit": 2.2440929412841797,
+          "prob": 0.18217414617538452
+        },
+        {
+          "label": "2",
+          "logit": -4.9837822914123535,
+          "prob": 0.00013226974988356233
+        },
+        {
+          "label": "3",
+          "logit": -5.081165790557861,
+          "prob": 0.00011999617709079757
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_minimal_context::KEEP_EPISODE_OBS_DIAG_MINIMAL_CONTEXT",
+      "confidence": 0.8347873091697693,
+      "correct": false,
+      "entropy": 0.44821351766586304,
+      "field": "episode_step_value",
+      "high_confidence_wrong": true,
+      "margin": 0.6695746183395386,
+      "pred": "1.0",
+      "pred_index": 1,
+      "row_id": "stage9521_obs_diag_minctx_0054",
+      "split": "strict_eval",
+      "step": null,
+      "target": "0.0",
+      "target_index": 0,
+      "top1_label": "1.0",
+      "top1_logit": 1.2293282747268677,
+      "top2_label": "0.0",
+      "top2_logit": -0.39061495661735535,
+      "top_k": [
+        {
+          "label": "1.0",
+          "logit": 1.2293282747268677,
+          "prob": 0.8347873091697693
+        },
+        {
+          "label": "0.0",
+          "logit": -0.39061495661735535,
+          "prob": 0.1652126908302307
+        }
+      ]
+    }
+  ],
+  "mode": "episode_step_structured_probe",
+  "model_execution_authorized_next": false,
+  "next_repair_target": "Mine the Stage9524 wrong rows into a strict residual counterbalance patch, focusing on the remaining failure-type and outcome/value disagreements without reopening decoder, denoise, runtime, or promotion.",
+  "passed": false,
+  "probe_scale": "target_100m",
+  "promotion_ready": false,
+  "quality_failures": [
+    "final_eval_not_exact",
+    "final_strict_not_exact",
+    "no_jointly_exact_best_state_to_restore"
+  ],
+  "quality_passed": false,
+  "safety_failures": [],
+  "safety_passed": true,
+  "source_stage": "stage9523_episode_obs_diag_minimal_context_preflight_audit",
+  "strict_rows": 6,
+  "train_rows": 46,
+  "wrong_row_count": 4,
+  "wrong_rows": [
+    {
+      "cell_key": "python::episode_observation_diagnosis_minimal_context::KEEP_EPISODE_OBS_DIAG_MINIMAL_CONTEXT",
+      "confidence": 0.43417903780937195,
+      "correct": false,
+      "entropy": 1.2131884098052979,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": false,
+      "margin": 0.03753864765167236,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9521_obs_diag_minctx_0048",
+      "split": "eval",
+      "step": null,
+      "target": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "target_index": 2,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 3.7598960399627686,
+      "top2_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "top2_logit": 3.669469118118286,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 3.7598960399627686,
+          "prob": 0.43417903780937195
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+          "logit": 3.669469118118286,
+          "prob": 0.3966403901576996
+        },
+        {
+          "label": "none",
+          "logit": 1.8923678398132324,
+          "prob": 0.06708287447690964
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+          "logit": 1.8391386270523071,
+          "prob": 0.06360547989606857
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+          "logit": 1.329155445098877,
+          "prob": 0.038195449858903885
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_minimal_context::KEEP_EPISODE_OBS_DIAG_MINIMAL_CONTEXT",
+      "confidence": 0.7774317264556885,
+      "correct": false,
+      "entropy": 0.6382975578308105,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": false,
+      "margin": 0.5842401534318924,
+      "pred": "none",
+      "pred_index": 0,
+      "row_id": "stage9521_obs_diag_minctx_0054",
+      "split": "strict_eval",
+      "step": null,
+      "target": "not_exact+target_prefix_miss",
+      "target_index": 1,
+      "top1_label": "none",
+      "top1_logit": 5.318817138671875,
+      "top2_label": "not_exact+target_prefix_miss",
+      "top2_logit": 3.9265036582946777,
+      "top_k": [
+        {
+          "label": "none",
+          "logit": 5.318817138671875,
+          "prob": 0.7774317264556885
+        },
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 3.9265036582946777,
+          "prob": 0.19319157302379608
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+          "logit": 1.7866878509521484,
+          "prob": 0.022734113037586212
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+          "logit": 0.19758014380931854,
+          "prob": 0.004640207160264254
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+          "logit": -0.8262890577316284,
+          "prob": 0.001666773110628128
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_minimal_context::KEEP_EPISODE_OBS_DIAG_MINIMAL_CONTEXT",
+      "confidence": 0.817573606967926,
+      "correct": false,
+      "entropy": 0.477140337228775,
+      "field": "episode_repair_outcome",
+      "high_confidence_wrong": true,
+      "margin": 0.6353994607925415,
+      "pred": "successful_suffix_repair_step",
+      "pred_index": 1,
+      "row_id": "stage9521_obs_diag_minctx_0054",
+      "split": "strict_eval",
+      "step": null,
+      "target": "residual_suffix_repair_step",
+      "target_index": 0,
+      "top1_label": "successful_suffix_repair_step",
+      "top1_logit": 3.7454707622528076,
+      "top2_label": "residual_suffix_repair_step",
+      "top2_logit": 2.2440929412841797,
+      "top_k": [
+        {
+          "label": "successful_suffix_repair_step",
+          "logit": 3.7454707622528076,
+          "prob": 0.817573606967926
+        },
+        {
+          "label": "residual_suffix_repair_step",
+          "logit": 2.2440929412841797,
+          "prob": 0.18217414617538452
+        },
+        {
+          "label": "2",
+          "logit": -4.9837822914123535,
+          "prob": 0.00013226974988356233
+        },
+        {
+          "label": "3",
+          "logit": -5.081165790557861,
+          "prob": 0.00011999617709079757
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_minimal_context::KEEP_EPISODE_OBS_DIAG_MINIMAL_CONTEXT",
+      "confidence": 0.8347873091697693,
+      "correct": false,
+      "entropy": 0.44821351766586304,
+      "field": "episode_step_value",
+      "high_confidence_wrong": true,
+      "margin": 0.6695746183395386,
+      "pred": "1.0",
+      "pred_index": 1,
+      "row_id": "stage9521_obs_diag_minctx_0054",
+      "split": "strict_eval",
+      "step": null,
+      "target": "0.0",
+      "target_index": 0,
+      "top1_label": "1.0",
+      "top1_logit": 1.2293282747268677,
+      "top2_label": "0.0",
+      "top2_logit": -0.39061495661735535,
+      "top_k": [
+        {
+          "label": "1.0",
+          "logit": 1.2293282747268677,
+          "prob": 0.8347873091697693
+        },
+        {
+          "label": "0.0",
+          "logit": -0.39061495661735535,
+          "prob": 0.1652126908302307
+        }
+      ]
+    }
+  ]
+}
