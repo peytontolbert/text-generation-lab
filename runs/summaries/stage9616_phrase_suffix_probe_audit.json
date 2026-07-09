@@ -1,0 +1,114 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9616_phrase_suffix_probe_audit/phrase_suffix_probe_audit.json",
+    "doc": "docs/PHRASE_SUFFIX_PROBE_AUDIT_STAGE9616.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T06:23:14Z",
+  "decision": "Phrase-level suffix support is quality-passing as a local objective. It should now be integrated with the full residual suffix-ladder rows to test transfer back to complete bounded residual repair.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decision": "Phrase-level suffix support is quality-passing as a local objective. It should now be integrated with the full residual suffix-ladder rows to test transfer back to complete bounded residual repair.",
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "exact_row_count": 10,
+    "exact_rows": [
+      "stage9613_phrase_suffix_08_67094ad391699644",
+      "stage9613_phrase_suffix_05_5f30f847ea46ac89",
+      "stage9613_phrase_suffix_08_9dac039e9538462c",
+      "stage9613_phrase_suffix_05_760f8d717a3dbe90",
+      "stage9613_phrase_suffix_08_a67b9ee8a155acca",
+      "stage9613_phrase_suffix_05_1f5d20942035b4a6",
+      "stage9613_phrase_suffix_08_9455579d02f23b29",
+      "stage9613_phrase_suffix_05_c4a92da2f04cccaa",
+      "stage9613_phrase_suffix_08_065c937ea08dc842",
+      "stage9613_phrase_suffix_08_a3f65841f79943e0"
+    ],
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "phase1_eval_suffix_choice_exact": 1.0,
+    "phase1_strict_suffix_choice_exact": 1.0,
+    "phase2_boundary_next_token_match_rate": 1.0,
+    "phase2_contentful_generation_rate": 1.0,
+    "phase2_dir": "runs/local/artifacts/stage9615_phrase_suffix_two_phase_tiny_probe/two_phase_probe/phase2_residual_denoise_probe",
+    "phase2_eval": {
+      "eval": {
+        "loss": 29.422605514526367,
+        "rows": 6,
+        "split": "eval"
+      },
+      "strict_eval": {
+        "loss": 3.3481831550598145,
+        "rows": 4,
+        "split": "strict_eval"
+      }
+    },
+    "phase2_generation_prefix_start_rate": 1.0,
+    "phase2_internal_leak_rows": 0,
+    "phase2_repetition_rate": 0.0,
+    "phase2_short_or_junk_rows": 0,
+    "phase2_target_prefix_match_rate": 0.8333333333333334,
+    "phase2_unterminated_rate": 0.0,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "sample_phrase_families": {
+      "checked_verifier_condition": 1,
+      "localized_edit_target": 1,
+      "localized_repair_step": 2,
+      "other": 5,
+      "relevant_repair_region": 1,
+      "wrapper_plan": 2
+    },
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9615_phrase_suffix_two_phase_tiny_probe.json",
+    "target_prefix_miss_rows": [
+      {
+        "generated": "that matches the repair step. Keep the response",
+        "prefix": "that matches",
+        "row_id": "stage9613_phrase_suffix_05_8da53fac8f80bdf7",
+        "target": "that matches the localized repair step. Keep the response"
+      },
+      {
+        "generated": "with the localized repair step. Keep the response",
+        "prefix": "with the",
+        "row_id": "stage9613_phrase_suffix_05_0187283975356ccc",
+        "target": "with the localized edit target. Keep the path reference"
+      }
+    ]
+  },
+  "name": "stage9616_phrase_suffix_probe_audit",
+  "next_best_step": "Build Stage9617 integrated residual-plus-phrase denoise manifest, then run contract-only preflight before another tiny execution.",
+  "passed": true,
+  "stage": 9616,
+  "stage_name": "stage9616_phrase_suffix_probe_audit"
+}

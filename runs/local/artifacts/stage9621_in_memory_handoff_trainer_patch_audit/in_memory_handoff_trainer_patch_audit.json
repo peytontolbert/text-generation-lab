@@ -1,0 +1,31 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "checks": {
+    "denoise_returns_runtime_state": true,
+    "denoise_signature_has_model_override": true,
+    "denoise_signature_has_tokenizer_override": true,
+    "denoise_uses_model_override": true,
+    "denoise_uses_tokenizer_override": true,
+    "two_phase_passes_model_override": true,
+    "two_phase_passes_tokenizer_override": true
+  },
+  "decision": "Trainer handoff now has the runtime-state plumbing needed for true in-memory denoise reuse. Prior two-phase quality probes should be treated as pre-patch evidence and rerun before using in-memory transfer claims.",
+  "failures": [],
+  "invalidated_claims": [
+    "Stage9615 and Stage9619 quality measurements remain useful as standalone local objective evidence.",
+    "Stage9615 and Stage9619 model_reused_in_memory_between_phases claims require rerun under the patched trainer before being used as evidence."
+  ],
+  "passed": true
+}

@@ -1,0 +1,68 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9621_in_memory_handoff_trainer_patch_audit/in_memory_handoff_trainer_patch_audit.json",
+    "doc": "docs/IN_MEMORY_HANDOFF_TRAINER_PATCH_AUDIT_STAGE9621.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T06:41:39Z",
+  "decision": "Trainer handoff now has the runtime-state plumbing needed for true in-memory denoise reuse. Prior two-phase quality probes should be treated as pre-patch evidence and rerun before using in-memory transfer claims.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "checks": {
+      "denoise_returns_runtime_state": true,
+      "denoise_signature_has_model_override": true,
+      "denoise_signature_has_tokenizer_override": true,
+      "denoise_uses_model_override": true,
+      "denoise_uses_tokenizer_override": true,
+      "two_phase_passes_model_override": true,
+      "two_phase_passes_tokenizer_override": true
+    },
+    "controller_complete_merge_authorized_next": false,
+    "decision": "Trainer handoff now has the runtime-state plumbing needed for true in-memory denoise reuse. Prior two-phase quality probes should be treated as pre-patch evidence and rerun before using in-memory transfer claims.",
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "invalidated_claims": [
+      "Stage9615 and Stage9619 quality measurements remain useful as standalone local objective evidence.",
+      "Stage9615 and Stage9619 model_reused_in_memory_between_phases claims require rerun under the patched trainer before being used as evidence."
+    ],
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "name": "stage9621_in_memory_handoff_trainer_patch_audit",
+  "next_best_step": "Rerun a contract-only two-phase preflight under the patched trainer, then design Stage9622 tri-phase suffix-choice -> phrase warm-up -> full residual reconnect.",
+  "passed": true,
+  "stage": 9621,
+  "stage_name": "stage9621_in_memory_handoff_trainer_patch_audit"
+}

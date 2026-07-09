@@ -1,0 +1,215 @@
+{
+  "artifact_counts": {
+    "degenerate_repetition": 11,
+    "match ins": 7,
+    "match match": 4,
+    "unterminated": 11,
+    "whitelist": 2
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "diagnosis": {
+    "evidence": [
+      "Stage9615 phrase-only probe reached contentful=1.0, prefix_start=1.0, target_prefix_match=0.8333, and zero repetition/leak/short rows.",
+      "Stage9619 integrated probe kept phase1 exact at 1.0/1.0 and prefix_start=1.0, but phase2 contentful fell to 0.0833 and target_prefix_match to 0.0.",
+      "Stage9619 samples repeat route/action fragments such as 'match ins' and 'match match', showing target-suffix continuation interference rather than a budget or authority failure."
+    ],
+    "not_root_causes": [
+      "not_decoder_ce_reopen: decoder_ce_rows stayed 0",
+      "not_phase1_sidecar_failure: eval/strict suffix choice exact stayed 1.0",
+      "not_prefix_injection_failure: generation_prefix_start_rate stayed 1.0",
+      "not_internal_token_leak: internal leak rows stayed zero or unavailable"
+    ],
+    "recommended_patch": "Replace one-pass mixed phase2 training with staged in-memory sequencing: phase1 suffix choice, phase2 phrase suffix warm-up, then phase3 full residual suffix ladder reconnect. Keep decoder CE, runtime, Gemma, harness, checkpoint export, and promotion closed.",
+    "root_cause": "one_pass_full_suffix_plus_phrase_support_curriculum_interference"
+  },
+  "failures": [],
+  "passed": true,
+  "phase2_dir": "runs/local/artifacts/stage9619_integrated_residual_phrase_tiny_probe/two_phase_probe/phase2_residual_denoise_probe",
+  "phrase_source_summary": "runs/summaries/stage9615_phrase_suffix_two_phase_tiny_probe.json",
+  "sample_failure_rows": [
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "Return the method invocation target that match match match match match match match match match match match match match match match match match match mat",
+      "generation_prefix_start_match": true,
+      "prefix": "Return the method invocation target",
+      "row_id": "stage9609_suffix_ladder_05_2db83474e0757e0e",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "that matches the localized ed match ins match ins match ins match ins match ins match ins match ins match ins match ins match",
+      "generation_prefix_start_match": true,
+      "prefix": "that matches",
+      "row_id": "stage9613_phrase_suffix_05_8da53fac8f80bdf7",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "that matches the localized repair step. Keep the response",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "Return the method invocation target that matches the local match match match match match match match match match match match match match match match match",
+      "generation_prefix_start_match": true,
+      "prefix": "Return the method invocation target that matches the",
+      "row_id": "stage9609_suffix_ladder_08_28f9d3411b08bba4",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "localized repair match match match match match match match match match match match match match match match match match match match match match mat",
+      "generation_prefix_start_match": true,
+      "prefix": "localized repair",
+      "row_id": "stage9613_phrase_suffix_08_67094ad391699644",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "localized repair step. Keep the response",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "Return the project path that match match match match match match match match match match match match match match match match match match match match mat",
+      "generation_prefix_start_match": true,
+      "prefix": "Return the project path that",
+      "row_id": "stage9609_suffix_ladder_05_d229af8688a10a8d",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "Return the project path that owns the relevant repair region. If the evidence is",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "owns the re match ins match ins match ins match ins match ins match ins match ins match ins match ins match ins match ins",
+      "generation_prefix_start_match": true,
+      "prefix": "owns the",
+      "row_id": "stage9613_phrase_suffix_05_5f30f847ea46ac89",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "owns the relevant repair region. If the evidence is",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": false,
+      "exact_match": false,
+      "generated": "Return the project path that owns the relevant repaired state. Keep the answer focused",
+      "generation_prefix_start_match": true,
+      "prefix": "Return the project path that owns the relevant",
+      "row_id": "stage9609_suffix_ladder_08_2f7dcc95d20406b1",
+      "split": "train",
+      "stopped_on_eos": true,
+      "target": "Return the project path that owns the relevant repair region. If the evidence is",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "repair region. If the whitelist. If the whitelist. If the whitelist.  match ins match ins match ins match ins match ins match ins mat",
+      "generation_prefix_start_match": true,
+      "prefix": "repair region.",
+      "row_id": "stage9613_phrase_suffix_08_9dac039e9538462c",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "repair region. If the evidence is",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "Return the constant value required by the match ins match ins match ins match ins match ins match ins match ins match ins match ins match",
+      "generation_prefix_start_match": true,
+      "prefix": "Return the constant value required",
+      "row_id": "stage9609_suffix_ladder_05_26172b8e311a13e0",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "Return the constant value required by the checked verifier condition. Do not introduce an",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "by the whitelist.   that match ins match ins match ins match ins match ins match ins match ins match ins match ins match",
+      "generation_prefix_start_match": true,
+      "prefix": "by the",
+      "row_id": "stage9613_phrase_suffix_05_760f8d717a3dbe90",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "by the checked verifier condition. Do not introduce an",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "Return the constant value required by the checked  match ins match ins match ins match ins match ins match ins match ins match ins match",
+      "generation_prefix_start_match": true,
+      "prefix": "Return the constant value required by the checked",
+      "row_id": "stage9609_suffix_ladder_08_598f44c7bf20062e",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "Return the constant value required by the checked verifier condition. Do not introduce an",
+      "target_prefix_match": false
+    },
+    {
+      "degenerate_repetition": true,
+      "exact_match": false,
+      "generated": "verifier condition.  match ins match ins match ins match ins match ins match ins match ins match ins match ins match ins",
+      "generation_prefix_start_match": true,
+      "prefix": "verifier condition.",
+      "row_id": "stage9613_phrase_suffix_08_a67b9ee8a155acca",
+      "split": "train",
+      "stopped_on_eos": false,
+      "target": "verifier condition. Do not introduce an",
+      "target_prefix_match": false
+    }
+  ],
+  "source_summary": "runs/summaries/stage9619_integrated_residual_phrase_tiny_probe.json",
+  "stage9615_contentful_rate": 1.0,
+  "stage9615_quality_gate": true,
+  "stage9615_repetition_rate": 0.0,
+  "stage9615_target_prefix_match_rate": 0.8333333333333334,
+  "stage9619_boundary_next_token_match_rate": 0.6666666666666666,
+  "stage9619_contentful_rate": 0.08333333333333333,
+  "stage9619_degenerate_repetition_rate": 0.9166666666666666,
+  "stage9619_generation_prefix_start_rate": 1.0,
+  "stage9619_internal_leak_rows": 0,
+  "stage9619_phase1_eval_suffix_choice_exact": 1.0,
+  "stage9619_phase1_strict_suffix_choice_exact": 1.0,
+  "stage9619_phase2_eval": {
+    "eval": {
+      "loss": 20.277606964111328,
+      "rows": 12,
+      "split": "eval"
+    },
+    "strict_eval": {
+      "loss": 4.626650810241699,
+      "rows": 10,
+      "split": "strict_eval"
+    }
+  },
+  "stage9619_quality_gate": false,
+  "stage9619_short_or_junk_rows": 0,
+  "stage9619_target_prefix_match_rate": 0.0,
+  "stage9619_unterminated_rate": 0.9166666666666666
+}

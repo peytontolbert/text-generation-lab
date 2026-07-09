@@ -963,6 +963,9 @@ def run_bounded_decoder_ce_probe(
     model_config: Path | None = None,
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
+    model_override: torch.nn.Module | None = None,
+    tokenizer_override: Any | None = None,
+    implementation_card_override: dict[str, Any] | None = None,
     enable_generation_audit: bool = False,
     max_generation_rows: int = 8,
     max_generation_tokens: int = 96,
@@ -1200,6 +1203,7 @@ def run_denoise_repair_probe(
     max_generation_tokens: int = 96,
     generation_prefix_field: str | None = None,
     generation_audit_splits: str = "eval,strict_eval",
+    return_runtime_state: bool = False,
 ) -> dict[str, Any]:
     """Run a tiny denoise repair probe over corrupted-output -> clean-target rows."""
     random.seed(seed)
@@ -1215,13 +1219,19 @@ def run_denoise_repair_probe(
 
     from .training_data import load_tokenizer
 
-    tokenizer = load_tokenizer(tokenizer_json, tokenizer_config)
-    model, implementation_card = _build_probe_model(
-        implementation,
-        vocab_size=tokenizer.vocab_size,
-        probe_scale=probe_scale,
-        model_config=model_config,
-    )
+    tokenizer = tokenizer_override if tokenizer_override is not None else load_tokenizer(tokenizer_json, tokenizer_config)
+    if model_override is None:
+        model, implementation_card = _build_probe_model(
+            implementation,
+            vocab_size=tokenizer.vocab_size,
+            probe_scale=probe_scale,
+            model_config=model_config,
+        )
+    else:
+        model = model_override
+        implementation_card = implementation_card_override or {"implementation": implementation, "probe_scale": probe_scale, "model_reused_in_memory": True}
+        for parameter in model.parameters():
+            parameter.requires_grad_(True)
     tokenizer_card = {
         "tokenizer_kind": getattr(tokenizer, "tokenizer_kind", "unknown"),
         "vocab_size": int(getattr(tokenizer, "vocab_size", 0)),
@@ -1380,7 +1390,7 @@ def run_denoise_repair_probe(
     _write_json(output_dir / "failure_bucket_card.json", {"mode": "denoise_repair_probe", "eval": eval_card, "token_loss_rows": len(token_records), "target_repetition_rows": target_repetition_rows, "generation_audit_enabled": bool(enable_generation_audit)})
     _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "denoise loop does not write checkpoints", "run_id": run_id})
 
-    return {
+    result = {
         "run_id": run_id,
         "mode": "denoise_repair_probe",
         "train_rows": len(train_rows),
@@ -1408,6 +1418,10 @@ def run_denoise_repair_probe(
         "generation_prefix_field": generation_prefix_field,
         "generation_prefix_start_rate": generation_card.get("generation_prefix_start_rate"),
     }
+    if return_runtime_state:
+        result["_runtime_model"] = model
+        result["_runtime_tokenizer"] = tokenizer
+    return result
 
 def run_structured_aux_probe(
     rows: list[dict[str, Any]],
@@ -1840,4 +1854,167 @@ def run_two_phase_suffix_denoise_reconnect_probe(
     }
     _write_json(output_dir / "two_phase_execution_result.json", result)
     _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "two-phase loop does not write checkpoints", "run_id": run_id})
+    return result
+
+
+
+def run_tri_phase_suffix_phrase_residual_reconnect_probe(
+    phase1_rows: list[dict[str, Any]],
+    phase2_rows: list[dict[str, Any]],
+    phase3_rows: list[dict[str, Any]],
+    *,
+    output_dir: Path,
+    run_id: str,
+    max_train_rows: int,
+    max_eval_rows: int,
+    max_strict_rows: int,
+    max_steps: int,
+    phase2_max_train_rows: int,
+    phase2_max_eval_rows: int,
+    phase2_max_strict_rows: int,
+    phase2_max_steps: int,
+    phase3_max_train_rows: int,
+    phase3_max_eval_rows: int,
+    phase3_max_strict_rows: int,
+    phase3_max_steps: int,
+    batch_size: int,
+    max_encoder_tokens: int,
+    max_decoder_tokens: int,
+    phase2_max_decoder_tokens: int,
+    phase3_max_decoder_tokens: int,
+    learning_rate: float = 5e-5,
+    seed: int = 1337,
+    implementation: str = "transformer",
+    probe_scale: str = "tiny_transformer",
+    model_config: Path | None = None,
+    tokenizer_json: Path | None = None,
+    tokenizer_config: Path | None = None,
+    eval_interval: int = 0,
+    eos_loss_weight: float = 1.0,
+    enable_generation_audit: bool = False,
+    max_generation_rows: int = 8,
+    max_generation_tokens: int = 96,
+    generation_prefix_field: str | None = None,
+    generation_audit_splits: str = "eval,strict_eval",
+) -> dict[str, Any]:
+    """Run suffix-choice, phrase warm-up, then full residual denoise on one in-memory model."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / ".agentkernel_probe_output").write_text(f"run_id={run_id}\nmode=tri_phase_suffix_phrase_residual_reconnect_probe\n", encoding="utf-8")
+    phase1_dir = output_dir / "phase1_suffix_choice_probe"
+    phase2_dir = output_dir / "phase2_phrase_suffix_warmup_probe"
+    phase3_dir = output_dir / "phase3_full_residual_denoise_probe"
+    phase1_result = run_structured_aux_probe(
+        rows=phase1_rows,
+        output_dir=phase1_dir,
+        run_id=f"{run_id}_phase1_suffix_choice",
+        mode="structured_policy_probe",
+        max_train_rows=max_train_rows,
+        max_eval_rows=max_eval_rows,
+        max_strict_rows=max_strict_rows,
+        max_steps=max_steps,
+        batch_size=batch_size,
+        max_encoder_tokens=max_encoder_tokens,
+        max_decoder_tokens=max_decoder_tokens,
+        learning_rate=learning_rate,
+        seed=seed,
+        implementation=implementation,
+        probe_scale=probe_scale,
+        model_config=model_config,
+        tokenizer_json=tokenizer_json,
+        tokenizer_config=tokenizer_config,
+        eval_interval=eval_interval,
+        restore_best_structured_state=True,
+        return_runtime_state=True,
+    )
+    model = phase1_result.pop("_runtime_model")
+    tokenizer = phase1_result.pop("_runtime_tokenizer")
+    phase2_result = run_denoise_repair_probe(
+        rows=phase2_rows,
+        output_dir=phase2_dir,
+        run_id=f"{run_id}_phase2_phrase_warmup",
+        max_train_rows=phase2_max_train_rows,
+        max_eval_rows=phase2_max_eval_rows,
+        max_strict_rows=phase2_max_strict_rows,
+        max_steps=phase2_max_steps,
+        batch_size=batch_size,
+        max_encoder_tokens=max_encoder_tokens,
+        max_decoder_tokens=phase2_max_decoder_tokens,
+        learning_rate=learning_rate,
+        seed=seed,
+        implementation=implementation,
+        probe_scale=probe_scale,
+        model_config=model_config,
+        tokenizer_json=tokenizer_json,
+        tokenizer_config=tokenizer_config,
+        model_override=model,
+        tokenizer_override=tokenizer,
+        implementation_card_override={**dict(phase1_result.get("implementation") or {}), "model_reused_in_memory_from_phase1": True},
+        eos_loss_weight=eos_loss_weight,
+        enable_generation_audit=False,
+        max_generation_rows=max_generation_rows,
+        max_generation_tokens=max_generation_tokens,
+        generation_prefix_field=generation_prefix_field,
+        generation_audit_splits=generation_audit_splits,
+        return_runtime_state=True,
+    )
+    model = phase2_result.pop("_runtime_model")
+    tokenizer = phase2_result.pop("_runtime_tokenizer")
+    phase3_result = run_denoise_repair_probe(
+        rows=phase3_rows,
+        output_dir=phase3_dir,
+        run_id=f"{run_id}_phase3_full_residual",
+        max_train_rows=phase3_max_train_rows,
+        max_eval_rows=phase3_max_eval_rows,
+        max_strict_rows=phase3_max_strict_rows,
+        max_steps=phase3_max_steps,
+        batch_size=batch_size,
+        max_encoder_tokens=max_encoder_tokens,
+        max_decoder_tokens=phase3_max_decoder_tokens,
+        learning_rate=learning_rate,
+        seed=seed,
+        implementation=implementation,
+        probe_scale=probe_scale,
+        model_config=model_config,
+        tokenizer_json=tokenizer_json,
+        tokenizer_config=tokenizer_config,
+        model_override=model,
+        tokenizer_override=tokenizer,
+        implementation_card_override={**dict(phase2_result.get("implementation") or {}), "model_reused_in_memory_from_phase2": True},
+        eos_loss_weight=eos_loss_weight,
+        enable_generation_audit=enable_generation_audit,
+        max_generation_rows=max_generation_rows,
+        max_generation_tokens=max_generation_tokens,
+        generation_prefix_field=generation_prefix_field,
+        generation_audit_splits=generation_audit_splits,
+    )
+    phase1_eval = phase1_result.get("eval") if isinstance(phase1_result.get("eval"), dict) else {}
+    phase1_eval_exact = (((phase1_eval.get("eval") or {}).get("field_exact") or {}).get("suffix_choice") or {}).get("exact")
+    phase1_strict_exact = (((phase1_eval.get("strict_eval") or {}).get("field_exact") or {}).get("suffix_choice") or {}).get("exact")
+    phase2_quality = json.loads((phase2_dir / "denoise_repair_quality_audit.json").read_text(encoding="utf-8")) if (phase2_dir / "denoise_repair_quality_audit.json").exists() else {}
+    phase3_quality = json.loads((phase3_dir / "denoise_repair_quality_audit.json").read_text(encoding="utf-8")) if (phase3_dir / "denoise_repair_quality_audit.json").exists() else {}
+    result = {
+        "run_id": run_id,
+        "mode": "tri_phase_suffix_phrase_residual_reconnect_probe",
+        "phase1_dir": str(phase1_dir),
+        "phase2_dir": str(phase2_dir),
+        "phase3_dir": str(phase3_dir),
+        "phase1": phase1_result,
+        "phase2": phase2_result,
+        "phase3": phase3_result,
+        "phase2_quality": phase2_quality,
+        "phase3_quality": phase3_quality,
+        "phase1_eval_suffix_choice_exact": phase1_eval_exact,
+        "phase1_strict_suffix_choice_exact": phase1_strict_exact,
+        "final_checkpoint_exported": False,
+        "runtime_executed": False,
+        "gemma_executed": False,
+        "harness_executed": False,
+        "decoder_ce_rows": 0,
+        "denoise_ce_rows": int(phase2_result.get("denoise_ce_rows") or 0) + int(phase3_result.get("denoise_ce_rows") or 0),
+        "model_reused_in_memory_between_phases": True,
+        "checkpoint_export_allowed_between_phases": False,
+        "required_artifacts_written": bool(phase1_result.get("required_artifacts_written")) and bool(phase2_result.get("required_artifacts_written")) and bool(phase3_result.get("required_artifacts_written")),
+    }
+    _write_json(output_dir / "tri_phase_execution_result.json", result)
+    _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "tri-phase loop does not write checkpoints", "run_id": run_id})
     return result
