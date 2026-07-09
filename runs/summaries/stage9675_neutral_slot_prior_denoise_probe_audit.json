@@ -1,0 +1,332 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9675_neutral_slot_prior_denoise_probe/stage9675_neutral_slot_prior_denoise_probe_audit.json",
+    "doc": "docs/NEUTRAL_SLOT_PRIOR_DENOISE_PROBE_AUDIT_STAGE9675.md",
+    "run_dir": "runs/local/artifacts/stage9675_neutral_slot_prior_denoise_probe"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T15:22:58Z",
+  "decision": "Stage9675 is safe and improves over the literal-prior branch, but it is still not quality-passing; continue with slot-specific micro-support rather than broad denoise.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "baseline_stage9669": {
+      "contentful_rate": 1.0,
+      "degenerate_repetition_rows": 0,
+      "target_prefix_match_rate": 0.11538461538461539
+    },
+    "baseline_stage9673": {
+      "contentful_rate": 0.6923076923076923,
+      "degenerate_repetition_rows": 8,
+      "target_prefix_match_rate": 0.0
+    },
+    "body_emission_authorized": false,
+    "by_slot": {
+      "approved_library_entry": {
+        "exact": 4,
+        "exact_rate": 1.0,
+        "repetition": 0,
+        "rows": 4,
+        "target_prefix": 4,
+        "target_prefix_rate": 1.0
+      },
+      "callable_endpoint": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "repetition": 0,
+        "rows": 4,
+        "target_prefix": 0,
+        "target_prefix_rate": 0.0
+      },
+      "concrete_value": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "repetition": 1,
+        "rows": 1,
+        "target_prefix": 0,
+        "target_prefix_rate": 0.0
+      },
+      "constant_value": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "repetition": 0,
+        "rows": 2,
+        "target_prefix": 0,
+        "target_prefix_rate": 0.0
+      },
+      "dependency_handle": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "repetition": 0,
+        "rows": 2,
+        "target_prefix": 0,
+        "target_prefix_rate": 0.0
+      },
+      "file_path": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "repetition": 0,
+        "rows": 3,
+        "target_prefix": 0,
+        "target_prefix_rate": 0.0
+      },
+      "local_name": {
+        "exact": 2,
+        "exact_rate": 1.0,
+        "repetition": 0,
+        "rows": 2,
+        "target_prefix": 2,
+        "target_prefix_rate": 1.0
+      },
+      "method_invocation_target": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "repetition": 0,
+        "rows": 5,
+        "target_prefix": 0,
+        "target_prefix_rate": 0.0
+      },
+      "project_path": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "repetition": 0,
+        "rows": 2,
+        "target_prefix": 0,
+        "target_prefix_rate": 0.0
+      },
+      "small_constant": {
+        "exact": 0,
+        "exact_rate": 0.0,
+        "repetition": 0,
+        "rows": 1,
+        "target_prefix": 0,
+        "target_prefix_rate": 0.0
+      }
+    },
+    "contentful_rate": 0.9615384615384616,
+    "contentful_rows": 25,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "decoder_delta_norm": 1.2565619770870167,
+    "degenerate_repetition_rows": 1,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "neutral_slot_prior_partially_improves_suffix_generation_but_slot_specific_spans_still_fail",
+    "eval_loss": 24.09147071838379,
+    "exact_match_rate": 0.23076923076923078,
+    "exact_match_rows": 6,
+    "failed_examples": [
+      {
+        "degenerate_repetition": false,
+        "generated": "Return the method invocation target that matches the re2 professionalduce",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0000",
+        "slot": "method_invocation_target",
+        "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Return the project path that owns the relevant. If the evidence is",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0001",
+        "slot": "project_path",
+        "target": "Return the project path that owns the relevant repair region. If the evidence is",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Return the constant value required by the checked verifier condition. verifier condition.  Monday matmoologRCEo",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0002",
+        "slot": "constant_value",
+        "target": "Return the constant value required by the checked verifier condition. Do not introduce an",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Return the project path that owns the relevant. If the evidence is",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0004",
+        "slot": "project_path",
+        "target": "Return the project path that owns the relevant repair region. If the evidence is",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Return the constant value required by the checked verifier condition. verifier condition.  Monday matmoologRCEo",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0005",
+        "slot": "constant_value",
+        "target": "Return the constant value required by the checked verifier condition. Do not introduce an",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": true,
+        "generated": "Choose the concrete value tied to the current repair invariant. Keep the current repair invariant. Keep the answer focused",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0006",
+        "slot": "concrete_value",
+        "target": "Choose the concrete value tied to the current repair invariant. Do not introduce an",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Select the file path associated with the path reference",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0007",
+        "slot": "file_path",
+        "target": "Select the file path associated with the localized edit target. Keep the path reference",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Select the file path associated with the path reference",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0008",
+        "slot": "file_path",
+        "target": "Select the file path associated with the localized edit target. Keep the path reference",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Return the method invocation target that matches the re2 professionalduce",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0009",
+        "slot": "method_invocation_target",
+        "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Return the method invocation target that matches the re2 professionalduce",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0010",
+        "slot": "method_invocation_target",
+        "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Return the method invocation target that matches the re2 professionalduce",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0011",
+        "slot": "method_invocation_target",
+        "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Select the callable endpoint that should update.  update. Keep the path reference",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0014",
+        "slot": "callable_endpoint",
+        "target": "Select the callable endpoint that the verified patch operator should update. Use the repo",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Select the callable endpoint that should update.  update. Keep the path reference",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0015",
+        "slot": "callable_endpoint",
+        "target": "Select the callable endpoint that the verified patch operator should update. Use the repo",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Emit the dependency handle that should dulo",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0016",
+        "slot": "dependency_handle",
+        "target": "Emit the dependency handle that keeps the patch inside the whitelist. Use the symbol",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Emit the dependency handle that should dulo",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0017",
+        "slot": "dependency_handle",
+        "target": "Emit the dependency handle that keeps the patch inside the whitelist. Use the symbol",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Select the small constant that shouldit target. Keep the answer focused",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0021",
+        "slot": "small_constant",
+        "target": "Select the small constant that preserves the expected assertion behavior. Keep the value small",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Select the file path associated with the path reference",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0022",
+        "slot": "file_path",
+        "target": "Select the file path associated with the localized edit target. Keep the path reference",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Select the callable endpoint that should update.  update. Keep the path reference",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0023",
+        "slot": "callable_endpoint",
+        "target": "Select the callable endpoint that the verified patch operator should update. Use the repo",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Select the callable endpoint that should update.  update. Keep the path reference",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0024",
+        "slot": "callable_endpoint",
+        "target": "Select the callable endpoint that the verified patch operator should update. Use the repo",
+        "target_prefix_match": false
+      },
+      {
+        "degenerate_repetition": false,
+        "generated": "Return the method invocation target that matches the re2 professionalduce",
+        "row_id": "stage9674_neutral_slot_prior_denoise_0025",
+        "slot": "method_invocation_target",
+        "target": "Return the method invocation target that matches the localized repair step. Keep the response",
+        "target_prefix_match": false
+      }
+    ],
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "generated_internal_token_rows": 0,
+    "generated_rows": 26,
+    "generation_prefix_start_rate": 1.0,
+    "generation_prefix_start_rows": 26,
+    "harness_execution_authorized_next": false,
+    "improved_vs_stage9673": true,
+    "manifest_rows": 26,
+    "missing_artifacts": [],
+    "model_execution_authorized_next": false,
+    "next_patch_target": "slot_specific_micro_support_for_method_project_constant_file_concrete_value_spans",
+    "passed": false,
+    "promotion_ready": false,
+    "quality_passed": false,
+    "runtime_authorized": false,
+    "safety_passed": true,
+    "scoring_authorized_next": false,
+    "short_or_junk_rows": 0,
+    "source_emission_authorized": false,
+    "strict_eval_loss": 1.1846712827682495,
+    "target_prefix_improved_vs_stage9669": true,
+    "target_prefix_match_rate": 0.23076923076923078,
+    "target_prefix_match_rows": 6
+  },
+  "name": "stage9675_neutral_slot_prior_denoise_probe_audit",
+  "next_best_step": "Build Stage9676 slot-specific micro-support manifest for failing neutral slots; do not widen denoise generation until exact/contentful/repetition gates pass.",
+  "passed": false,
+  "stage": 9675,
+  "stage_name": "stage9675_neutral_slot_prior_denoise_probe_audit"
+}
