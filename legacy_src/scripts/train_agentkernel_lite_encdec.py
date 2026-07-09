@@ -844,7 +844,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
     legacy_src = REPO_ROOT / "legacy_src"
     if str(legacy_src) not in sys.path:
         sys.path.insert(0, str(legacy_src))
-    from agentkernel_lite.training_loop import run_bounded_decoder_ce_probe, run_denoise_repair_probe, run_structured_aux_probe
+    from agentkernel_lite.training_loop import run_bounded_decoder_ce_probe, run_denoise_repair_probe, run_structured_aux_probe, run_two_phase_suffix_denoise_reconnect_probe
 
     common = dict(
         rows=rows,
@@ -864,7 +864,42 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
         tokenizer_json=args.tokenizer_json,
         tokenizer_config=args.tokenizer_config,
     )
-    if args.mode == "bounded_decoder_ce_probe":
+    if args.mode == "two_phase_suffix_denoise_reconnect_probe":
+        if args.phase2_manifest is None:
+            raise ProbeContractError("two-phase execution requires --phase2-manifest")
+        phase2_rows = load_manifest(args.phase2_manifest)
+        result = run_two_phase_suffix_denoise_reconnect_probe(
+            phase1_rows=rows,
+            phase2_rows=phase2_rows,
+            output_dir=args.output_dir,
+            run_id=args.run_id,
+            max_train_rows=args.max_train_rows,
+            max_eval_rows=args.max_eval_rows,
+            max_strict_rows=args.max_strict_rows,
+            max_steps=args.max_steps,
+            phase2_max_train_rows=args.phase2_max_train_rows,
+            phase2_max_eval_rows=args.phase2_max_eval_rows,
+            phase2_max_strict_rows=args.phase2_max_strict_rows,
+            phase2_max_steps=args.phase2_max_steps,
+            batch_size=args.batch_size,
+            max_encoder_tokens=args.max_encoder_tokens,
+            max_decoder_tokens=args.max_decoder_tokens,
+            phase2_max_decoder_tokens=args.phase2_max_decoder_tokens,
+            learning_rate=args.learning_rate,
+            implementation=args.implementation,
+            probe_scale=args.probe_scale,
+            model_config=args.model_config,
+            tokenizer_json=args.tokenizer_json,
+            tokenizer_config=args.tokenizer_config,
+            eval_interval=args.eval_interval,
+            eos_loss_weight=args.eos_loss_weight,
+            enable_generation_audit=args.enable_generation_audit,
+            max_generation_rows=args.max_generation_rows,
+            max_generation_tokens=args.max_generation_tokens,
+            generation_prefix_field=args.generation_prefix_field,
+            generation_audit_splits=args.generation_audit_splits,
+        )
+    elif args.mode == "bounded_decoder_ce_probe":
         result = run_bounded_decoder_ce_probe(
             **common,
             enable_generation_audit=args.enable_generation_audit,
