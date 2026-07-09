@@ -1000,6 +1000,30 @@ def _label_vocabs(rows: list[dict[str, Any]], fields: list[str]) -> dict[str, di
     return vocabs
 
 
+def _structured_label_balanced_batch_rows(train_rows: list[dict[str, Any]], fields: list[str], *, step: int, batch_size: int) -> list[dict[str, Any]]:
+    if not train_rows or not fields:
+        return []
+    primary = fields[0]
+    by_label: dict[str, list[dict[str, Any]]] = {}
+    for row in train_rows:
+        value = _clean_value(row, primary)
+        if value is None:
+            continue
+        by_label.setdefault(value, []).append(row)
+    labels = sorted(by_label)
+    if not labels:
+        return [train_rows[((step - 1) * batch_size + i) % len(train_rows)] for i in range(batch_size)]
+    batch: list[dict[str, Any]] = []
+    start = (step - 1) * batch_size
+    for offset in range(batch_size):
+        label_index = (start + offset) % len(labels)
+        label = labels[label_index]
+        group = by_label[label]
+        cycle = (start + offset) // len(labels)
+        batch.append(group[cycle % len(group)])
+    return batch
+
+
 def _module_delta_norms(before: dict[str, torch.Tensor], after: dict[str, torch.Tensor]) -> dict[str, float]:
     out: dict[str, float] = {}
     for name, old in before.items():
@@ -1778,7 +1802,7 @@ def run_structured_aux_probe(
         return record
 
     for step in range(1, max_steps + 1):
-        batch_rows = [train_rows[(step * batch_size + i) % len(train_rows)] for i in range(batch_size)]
+        batch_rows = _structured_label_balanced_batch_rows(train_rows, fields, step=step, batch_size=batch_size)
         optimizer.zero_grad(set_to_none=True)
         loss, field_loss, field_correct, _, activation_rows = structured_loss(batch_rows, split="train", step=step)
         loss.backward()
@@ -1948,6 +1972,7 @@ def run_structured_aux_probe(
         "structured_optimizer_frozen_parameter_count": len(frozen_for_structured_probe),
         "structured_optimizer_trainable_parameter_count": len(trainable_for_structured_probe),
         "structured_optimizer_frozen_bucket_prefixes": ["decoder", "lm_head", "embeddings"],
+        "structured_batch_sampler": "label_balanced_by_primary_field",
         "native_feature_ablation_audit_required": bool(require_native_feature_ablation_audit),
         "native_feature_ablation_rows": len(ablation_rows),
     }
