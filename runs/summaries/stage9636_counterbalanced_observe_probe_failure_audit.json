@@ -1,0 +1,83 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9636_counterbalanced_observe_probe_failure_audit/counterbalanced_observe_probe_failure_audit.json",
+    "doc": "docs/COUNTERBALANCED_OBSERVE_PROBE_FAILURE_AUDIT_STAGE9636.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T07:56:50Z",
+  "decision": "Stage9635 is safe but not quality-passing; do not use the episode-step head as a routing gate yet.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "blocked_execution_next": true,
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "counternegative_top_pred_pairs": {
+      "episode_boundary_match::false=>true": 8,
+      "episode_failure_type::boundary_next_token_miss+target_prefix_miss=>none": 8,
+      "episode_repair_outcome::repair_prefix_boundary=>verified_continue": 8,
+      "episode_step_value::0.0=>1.0": 8,
+      "episode_target_prefix_match::false=>true": 8
+    },
+    "counternegative_wrong_by_field": {
+      "episode_boundary_match": 8,
+      "episode_failure_type": 8,
+      "episode_repair_outcome": 8,
+      "episode_step_value": 8,
+      "episode_target_prefix_match": 8
+    },
+    "counternegative_wrong_rows": 40,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "The model over-accepts counternegative observe rows, predicting boundary/target true and verified/none with high confidence. The next data patch must upsample same-feature negative observations and separate boundary-token mismatch from verified target text before rerunning.",
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "high_confidence_wrong_rows": 57,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9635_counterbalanced_observe_continuation_tiny_probe.json",
+    "stage9635_quality_passed": false,
+    "stage9635_strict_joint_proxy_exact": 0.5,
+    "wrong_by_field": {
+      "episode_boundary_match": 18,
+      "episode_failure_type": 20,
+      "episode_repair_outcome": 15,
+      "episode_step_value": 8,
+      "episode_target_prefix_match": 8
+    },
+    "wrong_rows": 69
+  },
+  "name": "stage9636_counterbalanced_observe_probe_failure_audit",
+  "next_best_step": "Build Stage9637 counternegative upsample manifest with same source/guard/length buckets but different boundary/target labels; run shortcut audit before another tiny probe.",
+  "passed": true,
+  "stage": 9636,
+  "stage_name": "stage9636_counterbalanced_observe_probe_failure_audit"
+}

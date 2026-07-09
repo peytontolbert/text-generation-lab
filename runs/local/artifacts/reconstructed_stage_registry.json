@@ -13,12 +13,12 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 9633,
-    "latest_stage_name": "stage9633_non_generative_continuation_shortcut_audit",
-    "latest_stage_next_best_step": "If execution remains authorized, run a tiny episode-step structured probe only if the baseline ceiling is acceptable; otherwise build counterbalanced observe-phase rows first.",
-    "max_stage": 9633,
+    "latest_stage": 9636,
+    "latest_stage_name": "stage9636_counterbalanced_observe_probe_failure_audit",
+    "latest_stage_next_best_step": "Build Stage9637 counternegative upsample manifest with same source/guard/length buckets but different boundary/target labels; run shortcut audit before another tiny probe.",
+    "max_stage": 9636,
     "min_stage": 8530,
-    "registry_rows": 1124
+    "registry_rows": 1127
   },
   "passed": true,
   "rows": [
@@ -22501,6 +22501,66 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9633_non_generative_continuation_shortcut_audit.json",
       "stage": 9633,
       "stage_name": "stage9633_non_generative_continuation_shortcut_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "If Stage9634 passes, run a tiny episode-step structured probe; if it fails, construct more same-feature/different-label counterpositives.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9634_counterbalanced_observe_continuation_manifest.json",
+      "stage": 9634,
+      "stage_name": "stage9634_counterbalanced_observe_continuation_manifest"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "If Stage9635 passes, use the episode-step head as a routing gate before more denoise; if it fails, inspect wrong_by_field and build the next counterbalance patch.",
+      "passed": false,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9635_counterbalanced_observe_continuation_tiny_probe.json",
+      "stage": 9635,
+      "stage_name": "stage9635_counterbalanced_observe_continuation_tiny_probe"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Build Stage9637 counternegative upsample manifest with same source/guard/length buckets but different boundary/target labels; run shortcut audit before another tiny probe.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9636_counterbalanced_observe_probe_failure_audit.json",
+      "stage": 9636,
+      "stage_name": "stage9636_counterbalanced_observe_probe_failure_audit"
     }
   ]
 }

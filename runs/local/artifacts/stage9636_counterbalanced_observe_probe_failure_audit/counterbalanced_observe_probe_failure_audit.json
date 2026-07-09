@@ -1,0 +1,46 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "blocked_execution_next": true,
+  "counternegative_top_pred_pairs": {
+    "episode_boundary_match::false=>true": 8,
+    "episode_failure_type::boundary_next_token_miss+target_prefix_miss=>none": 8,
+    "episode_repair_outcome::repair_prefix_boundary=>verified_continue": 8,
+    "episode_step_value::0.0=>1.0": 8,
+    "episode_target_prefix_match::false=>true": 8
+  },
+  "counternegative_wrong_by_field": {
+    "episode_boundary_match": 8,
+    "episode_failure_type": 8,
+    "episode_repair_outcome": 8,
+    "episode_step_value": 8,
+    "episode_target_prefix_match": 8
+  },
+  "counternegative_wrong_rows": 40,
+  "diagnosis": "The model over-accepts counternegative observe rows, predicting boundary/target true and verified/none with high confidence. The next data patch must upsample same-feature negative observations and separate boundary-token mismatch from verified target text before rerunning.",
+  "failures": [],
+  "high_confidence_wrong_rows": 57,
+  "passed": true,
+  "source_summary": "runs/summaries/stage9635_counterbalanced_observe_continuation_tiny_probe.json",
+  "stage9635_quality_passed": false,
+  "stage9635_strict_joint_proxy_exact": 0.5,
+  "wrong_by_field": {
+    "episode_boundary_match": 18,
+    "episode_failure_type": 20,
+    "episode_repair_outcome": 15,
+    "episode_step_value": 8,
+    "episode_target_prefix_match": 8
+  },
+  "wrong_rows": 69
+}

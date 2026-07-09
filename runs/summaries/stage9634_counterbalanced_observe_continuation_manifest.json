@@ -1,0 +1,135 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9634_counterbalanced_observe_continuation_manifest/counterbalanced_observe_continuation_manifest_audit.json",
+    "doc": "docs/COUNTERBALANCED_OBSERVE_CONTINUATION_MANIFEST_STAGE9634.md",
+    "manifest": "runs/local/artifacts/stage9634_counterbalanced_observe_continuation_manifest/counterbalanced_observe_continuation_manifest.jsonl",
+    "run_dir": "runs/local/artifacts/stage9634_counterbalanced_observe_continuation_manifest/episode_step_contract"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T07:53:05Z",
+  "decision": "Counterbalanced observe-phase continuation manifest passed shortcut and contract preflight; no model execution occurred.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "contract_passed": true,
+    "controller_complete_merge_authorized_next": false,
+    "counternegative_rows": 12,
+    "counterpositive_rows": 12,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "forbidden_encoder_label_marker_rows": 0,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "label_counts": {
+      "boundary_match": {
+        "False": 22,
+        "True": 26
+      },
+      "failure_type": {
+        "boundary_next_token_miss+degenerate_repetition+target_prefix_miss": 1,
+        "boundary_next_token_miss+degenerate_repetition+target_prefix_miss+unterminated_generation": 4,
+        "boundary_next_token_miss+target_prefix_miss": 17,
+        "degenerate_repetition+target_prefix_miss": 3,
+        "none": 16,
+        "target_prefix_miss": 7
+      },
+      "repair_outcome": {
+        "repair_prefix_boundary": 24,
+        "repair_repetition": 8,
+        "verified_continue": 16
+      },
+      "target_prefix_match": {
+        "False": 32,
+        "True": 16
+      }
+    },
+    "loss_counts": {
+      "action_sequence_ce": 0,
+      "allowed_import_policy_ce": 0,
+      "blocked_import_policy_ce": 0,
+      "build_mode_ce": 0,
+      "decoder_ce": 0,
+      "denoise_ce": 0,
+      "edit_localization_ce": 0,
+      "episode_boundary_match_ce": 48,
+      "episode_failure_type_ce": 48,
+      "episode_repair_outcome_ce": 48,
+      "episode_step_value_mse": 48,
+      "episode_target_prefix_match_ce": 48,
+      "file_plan_ce": 0,
+      "patch_operator_ce": 0,
+      "repair_surface_ce": 0,
+      "repo_dependency_policy_ce": 0,
+      "runtime_reward": 0,
+      "suffix_choice_ce": 0,
+      "surface_role_ce": 0,
+      "symbol_binding_ce": 0,
+      "verifier_repair_ce": 0
+    },
+    "manifest": "runs/local/artifacts/stage9634_counterbalanced_observe_continuation_manifest/counterbalanced_observe_continuation_manifest.jsonl",
+    "model_execution_attempted": false,
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "rows": 48,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "single_feature_baselines": {
+      "generated_len_bucket->boundary_match": 0.6875,
+      "generated_len_bucket->failure_type": 0.5416666666666666,
+      "generated_len_bucket->repair_outcome": 0.6458333333333334,
+      "generated_len_bucket->target_prefix_match": 0.6666666666666666,
+      "guard_event_count_bucket->boundary_match": 0.5833333333333334,
+      "guard_event_count_bucket->failure_type": 0.4375,
+      "guard_event_count_bucket->repair_outcome": 0.5208333333333334,
+      "guard_event_count_bucket->target_prefix_match": 0.6666666666666666,
+      "prefix_token_count_bucket->boundary_match": 0.5416666666666666,
+      "prefix_token_count_bucket->failure_type": 0.3958333333333333,
+      "prefix_token_count_bucket->repair_outcome": 0.5,
+      "prefix_token_count_bucket->target_prefix_match": 0.6666666666666666,
+      "source_stage->boundary_match": 0.5416666666666666,
+      "source_stage->failure_type": 0.3958333333333333,
+      "source_stage->repair_outcome": 0.5,
+      "source_stage->target_prefix_match": 0.6666666666666666
+    },
+    "source_emission_authorized": false,
+    "source_summary": "runs/summaries/stage9633_non_generative_continuation_shortcut_audit.json",
+    "split_counts": {
+      "eval": 16,
+      "strict_eval": 16,
+      "train": 16
+    },
+    "strongest_single_feature_baseline": 0.6875,
+    "strongest_single_feature_baseline_key": "generated_len_bucket->boundary_match"
+  },
+  "name": "stage9634_counterbalanced_observe_continuation_manifest",
+  "next_best_step": "If Stage9634 passes, run a tiny episode-step structured probe; if it fails, construct more same-feature/different-label counterpositives.",
+  "passed": true,
+  "stage": 9634,
+  "stage_name": "stage9634_counterbalanced_observe_continuation_manifest"
+}
