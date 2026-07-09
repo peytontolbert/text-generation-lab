@@ -1,0 +1,73 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9681_slot_template_renderer_package_audit/slot_template_renderer_package_audit.json",
+    "doc": "docs/SLOT_TEMPLATE_RENDERER_PACKAGE_AUDIT_STAGE9681.md",
+    "package": "runs/local/artifacts/stage9681_slot_template_renderer_package_audit/slot_template_renderer_package_v1.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T15:53:03Z",
+  "decision": "Packaged deterministic slot-template renderer v1 as the safe reconnect path after denoise generation failed.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "fallback_policy": {
+      "confidence_threshold_recommended": 0.9,
+      "low_confidence_label": "ABSTAIN_OR_RETRIEVE_MORE",
+      "unknown_label": "ABSTAIN_TEMPLATE_NOT_FOUND"
+    },
+    "forbidden_runtime_behaviors": [
+      "decoder_generation",
+      "denoise_generation",
+      "runtime_execution",
+      "gemma_execution",
+      "harness_execution",
+      "checkpoint_export"
+    ],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "heldout_rows": 6,
+    "internal_token_rows": [],
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "rerender_exact_rows": 6,
+    "rerender_failures": [],
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "template_count": 10
+  },
+  "name": "stage9681_slot_template_renderer_package_audit",
+  "next_best_step": "Use the Stage9681 renderer package as the non-generative reconnect path; next build a controller+renderer integration preflight before any denoise generation retry.",
+  "passed": true,
+  "stage": 9681,
+  "stage_name": "stage9681_slot_template_renderer_package_audit"
+}
