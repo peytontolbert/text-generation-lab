@@ -1,0 +1,138 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "authorization_design": {
+    "allowed_future_loss": "denoise_ce_only_after_separate_execution_ticket",
+    "execution_authorized_for_next_stage": false,
+    "execution_authorized_now": false,
+    "execution_command_emitted": false,
+    "forbidden_now": [
+      "model_execution",
+      "decoder_ce_training",
+      "denoise_ce_training",
+      "runtime_verifier_execution",
+      "source_body_emission",
+      "gemma_execution",
+      "harness_execution",
+      "scoring",
+      "checkpoint_export",
+      "promotion"
+    ],
+    "future_probe_caps_recommended": {
+      "max_eval_rows": 8,
+      "max_steps": 16,
+      "max_strict_rows": 8,
+      "max_train_rows": 24,
+      "probe_scale": "target_100m"
+    },
+    "mode": "residual_denoise_probe",
+    "required_before_any_denoise_ce": [
+      "explicit_user_authorization_for_one_run_ticket",
+      "contract_only_preflight_with_manifest_hash",
+      "loss_mask_runtime_assertions",
+      "denoise_ce_only_loss_assertion",
+      "decoder_ce_zero_assertion",
+      "runtime_and_gemma_closed_assertion",
+      "safe_cleanup_marker_and_run_id",
+      "no_final_checkpoint_export",
+      "required_telemetry_artifacts_nonempty"
+    ],
+    "required_future_telemetry": [
+      "loss_by_step.jsonl",
+      "eval_loss_by_checkpoint.jsonl",
+      "row_field_logits.jsonl",
+      "row_field_losses.jsonl",
+      "row_token_loss.jsonl",
+      "eos_length_audit.json",
+      "short_output_probe.json",
+      "repetition_probe.json",
+      "internal_leak_probe.json",
+      "sample_generation_audit.json",
+      "feature_ablation_attribution.jsonl",
+      "activation_patch_recovery.jsonl",
+      "module_delta_norms.json",
+      "failure_bucket_card.json",
+      "cleanup_proof.json"
+    ],
+    "review_only": true,
+    "same_stage_denoise_ce_authorized": false,
+    "source_rows": "stage9545 real residual rows plus stage9549 design examples after Stage9551 shortcut audit"
+  },
+  "created_at_utc": "2026-07-09T03:03:10Z",
+  "decision": "No-execution residual-denoise authorization review passed. It defines prerequisites for a future one-run ticket but opens no denoise CE, runtime, model execution, or checkpoint export authority.",
+  "failures": [],
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "execution_authorized_for_next_stage": false,
+    "execution_command_emitted": false,
+    "future_review_only": true,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "required_future_telemetry_count": 15,
+    "review_failures": 0,
+    "review_items": 8,
+    "runtime_authorized": false,
+    "same_stage_denoise_ce_authorized": false,
+    "same_stage_execution_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "source_rows": 41,
+    "strongest_forbidden_single_feature_baseline": 0.6097560975609756
+  },
+  "next_best_step": "Build a contract-only residual-denoise one-run ticket/preflight only if explicit execution is still desired; otherwise continue residual repair data expansion. Do not execute from Stage9552.",
+  "passed": true,
+  "review_failures": [],
+  "review_items": [
+    {
+      "item": "stage9551_shortcut_balance_passed",
+      "passed": true
+    },
+    {
+      "item": "forbidden_shortcut_baseline_below_0_80",
+      "passed": true
+    },
+    {
+      "item": "combined_residual_rows_present",
+      "passed": true
+    },
+    {
+      "item": "all_losses_closed_in_source",
+      "passed": true
+    },
+    {
+      "item": "source_authority_closed",
+      "passed": true
+    },
+    {
+      "item": "source_label_leak_rows_empty",
+      "passed": true
+    },
+    {
+      "item": "future_telemetry_requirements_enumerated",
+      "passed": true
+    },
+    {
+      "item": "same_stage_execution_closed",
+      "passed": true
+    }
+  ],
+  "source_audit": "runs/summaries/stage9551_residual_denoise_shortcut_balance_audit.json",
+  "stage": 9552,
+  "stage_name": "stage9552_residual_denoise_no_execution_authorization_review"
+}
