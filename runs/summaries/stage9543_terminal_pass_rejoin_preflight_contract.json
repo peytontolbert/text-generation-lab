@@ -1,0 +1,110 @@
+{
+  "artifacts": {
+    "contract": "runs/local/artifacts/stage9543_terminal_pass_rejoin_preflight_contract/terminal_pass_rejoin_preflight_contract.json",
+    "doc": "docs/TERMINAL_PASS_REJOIN_PREFLIGHT_CONTRACT_STAGE9543.md",
+    "residual_rows": "runs/local/artifacts/stage9543_terminal_pass_rejoin_preflight_contract/residual_repair_route_rows.jsonl",
+    "terminal_rows": "runs/local/artifacts/stage9543_terminal_pass_rejoin_preflight_contract/terminal_pass_rejoin_candidate_rows.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T02:43:37Z",
+  "decision": "Designed a contract-only terminal-pass rejoin preflight package. It separates terminal candidates from residual repair rows and emits no execution command.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "authority_rows": [],
+    "body_emission_authorized": false,
+    "contract": {
+      "all_losses_closed_now": true,
+      "contract_only_preflight_design": true,
+      "no_execution_command": true,
+      "residual_rows_route_to_repair_data": true,
+      "terminal_candidates_separated_from_residual_repair_rows": true
+    },
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "future_probe_design": {
+      "block_if_any_loss_enabled_without_fresh_authorization": true,
+      "block_if_decoder_ce_requested": true,
+      "block_if_residual_rows_included": true,
+      "block_if_runtime_or_gemma_requested": true,
+      "design_only": true,
+      "execution_command_emitted": false,
+      "required_future_telemetry": [
+        "row_field_logits.jsonl",
+        "row_field_losses.jsonl",
+        "row_token_loss.jsonl",
+        "eos_length_audit.json",
+        "short_output_probe.json",
+        "repetition_probe.json",
+        "internal_leak_probe.json",
+        "sample_generation_audit.json",
+        "module_delta_norms.json",
+        "failure_bucket_card.json",
+        "cleanup_proof.json"
+      ],
+      "suggested_max_eval_rows": 3,
+      "suggested_max_steps": 8,
+      "suggested_max_strict_rows": 3,
+      "suggested_max_train_rows": 16,
+      "suggested_mode": "terminal_pass_rejoin_probe"
+    },
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "leakage_rows": [],
+    "model_execution_authorized_next": false,
+    "passed": true,
+    "promotion_ready": false,
+    "residual_enabled_losses": {},
+    "residual_row_count": 29,
+    "residual_rows": "runs/local/artifacts/stage9543_terminal_pass_rejoin_preflight_contract/residual_repair_route_rows.jsonl",
+    "residual_split_counts": {
+      "eval": 3,
+      "strict_eval": 3,
+      "train": 23
+    },
+    "runtime_authorized": false,
+    "runtime_authorized_next": false,
+    "scoring_authorized_next": false,
+    "source_audit": "runs/summaries/stage9542_episode_obs_diag_closed_boundary_rejoin_gate_audit.json",
+    "source_emission_authorized": false,
+    "source_manifest": "runs/local/artifacts/stage9541_episode_obs_diag_closed_boundary_rejoin_gate_manifest/episode_obs_diag_closed_boundary_rejoin_gate_manifest.jsonl",
+    "terminal_enabled_losses": {},
+    "terminal_row_count": 29,
+    "terminal_rows": "runs/local/artifacts/stage9543_terminal_pass_rejoin_preflight_contract/terminal_pass_rejoin_candidate_rows.jsonl",
+    "terminal_split_counts": {
+      "eval": 3,
+      "strict_eval": 3,
+      "train": 23
+    }
+  },
+  "name": "stage9543_terminal_pass_rejoin_preflight_contract",
+  "next_best_step": "Audit Stage9543, then decide between a separate execution-authorization review for terminal candidates or residual repair-data expansion. Do not execute from this contract directly.",
+  "passed": true,
+  "stage": 9543,
+  "stage_name": "stage9543_terminal_pass_rejoin_preflight_contract"
+}
