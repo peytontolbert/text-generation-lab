@@ -1,0 +1,839 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "best_state_selection": {
+    "checkpoint_exported": false,
+    "enabled": true,
+    "eval_joint_proxy_exact": null,
+    "eval_loss": null,
+    "promotion_ready": false,
+    "restored": false,
+    "selected_step": null,
+    "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+    "selection_score": null,
+    "strict_joint_proxy_exact": null,
+    "strict_loss": null
+  },
+  "checkpoint_like_artifacts": [],
+  "decoder_ce_training_authorized_next": false,
+  "denoise_ce_training_authorized_next": false,
+  "diagnosis": "Safe severe regression. Train-only Python boundary upsampling overcorrected the failure-type head and should not be promoted.",
+  "estimated_parameter_count": 102703145,
+  "eval_rows": 6,
+  "failures": [
+    "final_eval_not_exact",
+    "final_strict_not_exact",
+    "no_jointly_exact_best_state_to_restore"
+  ],
+  "field_exact_eval": {
+    "episode_failure_type": {
+      "exact": 0.16666666666666666,
+      "rows": 6
+    }
+  },
+  "field_exact_strict": {
+    "episode_failure_type": {
+      "exact": 0.16666666666666666,
+      "rows": 6
+    }
+  },
+  "field_loss_eval": {
+    "episode_failure_type": 3.2595856189727783
+  },
+  "field_loss_strict": {
+    "episode_failure_type": 3.266209363937378
+  },
+  "fields": [
+    "episode_failure_type"
+  ],
+  "final_eval_joint_proxy_exact": 0.16666666666666666,
+  "final_strict_joint_proxy_exact": 0.16666666666666666,
+  "high_confidence_wrong_count": 6,
+  "high_confidence_wrong_rows": [
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088729023933411,
+      "correct": false,
+      "entropy": 0.47243157029151917,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690804168581963,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0049",
+      "split": "eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657369136810303,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657369136810303,
+          "prob": 0.9088729023933411
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.039792485535144806
+        },
+        {
+          "label": "7",
+          "logit": 1.382920742034912,
+          "prob": 0.012651260942220688
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513150572776794
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207113154232502
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088730216026306,
+      "correct": false,
+      "entropy": 0.4724312126636505,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690805658698082,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0050",
+      "split": "eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657370090484619,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657370090484619,
+          "prob": 0.9088730216026306
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.03979245573282242
+        },
+        {
+          "label": "7",
+          "logit": 1.3829206228256226,
+          "prob": 0.012651249766349792
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513144984841347
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207108497619629
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088730216026306,
+      "correct": false,
+      "entropy": 0.4724312126636505,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690805658698082,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0051",
+      "split": "eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657370090484619,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657370090484619,
+          "prob": 0.9088730216026306
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.03979245573282242
+        },
+        {
+          "label": "7",
+          "logit": 1.3829206228256226,
+          "prob": 0.012651249766349792
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513144984841347
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207108497619629
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088729023933411,
+      "correct": false,
+      "entropy": 0.47243157029151917,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690804168581963,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0055",
+      "split": "strict_eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657369136810303,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657369136810303,
+          "prob": 0.9088729023933411
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.039792485535144806
+        },
+        {
+          "label": "7",
+          "logit": 1.382920742034912,
+          "prob": 0.012651260942220688
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513150572776794
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207113154232502
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088730216026306,
+      "correct": false,
+      "entropy": 0.4724312126636505,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690805658698082,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0056",
+      "split": "strict_eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657370090484619,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657370090484619,
+          "prob": 0.9088730216026306
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.03979245573282242
+        },
+        {
+          "label": "7",
+          "logit": 1.3829206228256226,
+          "prob": 0.012651249766349792
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513144984841347
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207108497619629
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088730216026306,
+      "correct": false,
+      "entropy": 0.4724312126636505,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690805658698082,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0057",
+      "split": "strict_eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657370090484619,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657370090484619,
+          "prob": 0.9088730216026306
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.03979245573282242
+        },
+        {
+          "label": "7",
+          "logit": 1.3829206228256226,
+          "prob": 0.012651249766349792
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513144984841347
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207108497619629
+        }
+      ]
+    }
+  ],
+  "mode": "episode_step_structured_probe",
+  "model_execution_authorized_next": false,
+  "next_repair_target": "Revert to Stage9525/9528 residual-gate base. Do not use Stage9529 boundary-component or Stage9533 upsample branches as bases; use calibration/threshold analysis or collect genuinely new non-duplicated Python boundary examples.",
+  "passed": false,
+  "probe_scale": "target_100m",
+  "promotion_ready": false,
+  "quality_failures": [
+    "final_eval_not_exact",
+    "final_strict_not_exact",
+    "no_jointly_exact_best_state_to_restore"
+  ],
+  "quality_passed": false,
+  "regressed_vs_stage9528": true,
+  "regressed_vs_stage9532": true,
+  "safety_failures": [],
+  "safety_passed": true,
+  "source_stage": "stage9535_episode_obs_diag_python_boundary_upsample_preflight_audit",
+  "strict_rows": 6,
+  "train_rows": 54,
+  "wrong_row_count": 10,
+  "wrong_rows": [
+    {
+      "cell_key": "cpp::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.7081745266914368,
+      "correct": false,
+      "entropy": 0.8421236872673035,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": false,
+      "margin": 0.49029557406902313,
+      "pred": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "pred_index": 2,
+      "row_id": "stage9533_obs_diag_pybound_0046",
+      "split": "eval",
+      "step": null,
+      "target": "not_exact+target_prefix_miss",
+      "target_index": 1,
+      "top1_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "top1_logit": 5.109570503234863,
+      "top2_label": "none",
+      "top2_logit": 3.930819511413574,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+          "logit": 5.109570503234863,
+          "prob": 0.7081745266914368
+        },
+        {
+          "label": "none",
+          "logit": 3.930819511413574,
+          "prob": 0.21787895262241364
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+          "logit": 2.0937018394470215,
+          "prob": 0.0347028523683548
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+          "logit": 1.9958806037902832,
+          "prob": 0.03146892786026001
+        },
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 0.5398992896080017,
+          "prob": 0.007337655872106552
+        }
+      ]
+    },
+    {
+      "cell_key": "cpp::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.7081745266914368,
+      "correct": false,
+      "entropy": 0.8421236872673035,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": false,
+      "margin": 0.49029557406902313,
+      "pred": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "pred_index": 2,
+      "row_id": "stage9533_obs_diag_pybound_0047",
+      "split": "eval",
+      "step": null,
+      "target": "not_exact+target_prefix_miss",
+      "target_index": 1,
+      "top1_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "top1_logit": 5.109570503234863,
+      "top2_label": "none",
+      "top2_logit": 3.930819511413574,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+          "logit": 5.109570503234863,
+          "prob": 0.7081745266914368
+        },
+        {
+          "label": "none",
+          "logit": 3.930819511413574,
+          "prob": 0.21787895262241364
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+          "logit": 2.0937018394470215,
+          "prob": 0.0347028523683548
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+          "logit": 1.9958806037902832,
+          "prob": 0.03146892786026001
+        },
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 0.5398992896080017,
+          "prob": 0.007337655872106552
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088729023933411,
+      "correct": false,
+      "entropy": 0.47243157029151917,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690804168581963,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0049",
+      "split": "eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657369136810303,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657369136810303,
+          "prob": 0.9088729023933411
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.039792485535144806
+        },
+        {
+          "label": "7",
+          "logit": 1.382920742034912,
+          "prob": 0.012651260942220688
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513150572776794
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207113154232502
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088730216026306,
+      "correct": false,
+      "entropy": 0.4724312126636505,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690805658698082,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0050",
+      "split": "eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657370090484619,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657370090484619,
+          "prob": 0.9088730216026306
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.03979245573282242
+        },
+        {
+          "label": "7",
+          "logit": 1.3829206228256226,
+          "prob": 0.012651249766349792
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513144984841347
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207108497619629
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088730216026306,
+      "correct": false,
+      "entropy": 0.4724312126636505,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690805658698082,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0051",
+      "split": "eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657370090484619,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657370090484619,
+          "prob": 0.9088730216026306
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.03979245573282242
+        },
+        {
+          "label": "7",
+          "logit": 1.3829206228256226,
+          "prob": 0.012651249766349792
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513144984841347
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207108497619629
+        }
+      ]
+    },
+    {
+      "cell_key": "cpp::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.7081745266914368,
+      "correct": false,
+      "entropy": 0.8421236872673035,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": false,
+      "margin": 0.49029557406902313,
+      "pred": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "pred_index": 2,
+      "row_id": "stage9533_obs_diag_pybound_0052",
+      "split": "strict_eval",
+      "step": null,
+      "target": "not_exact+target_prefix_miss",
+      "target_index": 1,
+      "top1_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "top1_logit": 5.109570503234863,
+      "top2_label": "none",
+      "top2_logit": 3.930819511413574,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+          "logit": 5.109570503234863,
+          "prob": 0.7081745266914368
+        },
+        {
+          "label": "none",
+          "logit": 3.930819511413574,
+          "prob": 0.21787895262241364
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+          "logit": 2.0937018394470215,
+          "prob": 0.0347028523683548
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+          "logit": 1.9958806037902832,
+          "prob": 0.03146892786026001
+        },
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 0.5398992896080017,
+          "prob": 0.007337655872106552
+        }
+      ]
+    },
+    {
+      "cell_key": "cpp::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.7081745266914368,
+      "correct": false,
+      "entropy": 0.8421236872673035,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": false,
+      "margin": 0.49029557406902313,
+      "pred": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "pred_index": 2,
+      "row_id": "stage9533_obs_diag_pybound_0053",
+      "split": "strict_eval",
+      "step": null,
+      "target": "not_exact+target_prefix_miss",
+      "target_index": 1,
+      "top1_label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+      "top1_logit": 5.109570503234863,
+      "top2_label": "none",
+      "top2_logit": 3.930819511413574,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss",
+          "logit": 5.109570503234863,
+          "prob": 0.7081745266914368
+        },
+        {
+          "label": "none",
+          "logit": 3.930819511413574,
+          "prob": 0.21787895262241364
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+unterminated",
+          "logit": 2.0937018394470215,
+          "prob": 0.0347028523683548
+        },
+        {
+          "label": "not_exact+target_prefix_miss+boundary_next_token_miss+degenerate_repetition+unterminated",
+          "logit": 1.9958806037902832,
+          "prob": 0.03146892786026001
+        },
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 0.5398992896080017,
+          "prob": 0.007337655872106552
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088729023933411,
+      "correct": false,
+      "entropy": 0.47243157029151917,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690804168581963,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0055",
+      "split": "strict_eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657369136810303,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657369136810303,
+          "prob": 0.9088729023933411
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.039792485535144806
+        },
+        {
+          "label": "7",
+          "logit": 1.382920742034912,
+          "prob": 0.012651260942220688
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513150572776794
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207113154232502
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088730216026306,
+      "correct": false,
+      "entropy": 0.4724312126636505,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690805658698082,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0056",
+      "split": "strict_eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657370090484619,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657370090484619,
+          "prob": 0.9088730216026306
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.03979245573282242
+        },
+        {
+          "label": "7",
+          "logit": 1.3829206228256226,
+          "prob": 0.012651249766349792
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513144984841347
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207108497619629
+        }
+      ]
+    },
+    {
+      "cell_key": "rust::episode_observation_diagnosis_python_boundary_upsample::KEEP_EPISODE_OBS_DIAG_PYTHON_BOUNDARY_UPSAMPLE",
+      "confidence": 0.9088730216026306,
+      "correct": false,
+      "entropy": 0.4724312126636505,
+      "field": "episode_failure_type",
+      "high_confidence_wrong": true,
+      "margin": 0.8690805658698082,
+      "pred": "not_exact+target_prefix_miss",
+      "pred_index": 1,
+      "row_id": "stage9533_obs_diag_pybound_0057",
+      "split": "strict_eval",
+      "step": null,
+      "target": "none",
+      "target_index": 0,
+      "top1_label": "not_exact+target_prefix_miss",
+      "top1_logit": 5.657370090484619,
+      "top2_label": "none",
+      "top2_logit": 2.528841972351074,
+      "top_k": [
+        {
+          "label": "not_exact+target_prefix_miss",
+          "logit": 5.657370090484619,
+          "prob": 0.9088730216026306
+        },
+        {
+          "label": "none",
+          "logit": 2.528841972351074,
+          "prob": 0.03979245573282242
+        },
+        {
+          "label": "7",
+          "logit": 1.3829206228256226,
+          "prob": 0.012651249766349792
+        },
+        {
+          "label": "11",
+          "logit": 0.8618188500404358,
+          "prob": 0.007513144984841347
+        },
+        {
+          "label": "5",
+          "logit": 0.6708599925041199,
+          "prob": 0.006207108497619629
+        }
+      ]
+    }
+  ]
+}
