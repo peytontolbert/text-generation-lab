@@ -1,0 +1,80 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "confusion_pairs": {
+    "ABSTAIN_UNBOUND->ABSTAIN_UNBOUND": 8,
+    "BIND_CALL_TO_SYMBOL->ABSTAIN_UNBOUND": 1,
+    "BIND_CALL_TO_SYMBOL->BIND_CALL_TO_SYMBOL": 7,
+    "BIND_IMPORT_TO_MODULE->BIND_IMPORT_TO_MODULE": 4,
+    "BIND_TEST_TO_SYMBOL->ABSTAIN_UNBOUND": 8,
+    "RETRIEVE_MORE->ABSTAIN_UNBOUND": 7,
+    "RETRIEVE_MORE->BIND_CALL_TO_SYMBOL": 9
+  },
+  "failures": [],
+  "metrics": {
+    "decoder_delta_norm": 0.0,
+    "estimated_parameter_count": 102703145,
+    "eval_symbol_binding_exact": 0.45454545454545453,
+    "native_ablation_rows": 44,
+    "strict_symbol_binding_exact": 0.4090909090909091,
+    "structured_batch_sampler": "label_balanced_by_primary_field"
+  },
+  "name": "stage9713_symbol_binding_retrieval_test_evidence_execution_audit",
+  "next_best_step": "Build Stage9714 isolated binary/ternary objectives for test coverage binding and retrieve-more gating; mixed five-way symbol binding still hides those two transitions.",
+  "passed": true,
+  "per_label": {
+    "ABSTAIN_UNBOUND": {
+      "exact": 1.0,
+      "pred_counts": {
+        "ABSTAIN_UNBOUND": 8
+      },
+      "rows": 8
+    },
+    "BIND_CALL_TO_SYMBOL": {
+      "exact": 0.875,
+      "pred_counts": {
+        "ABSTAIN_UNBOUND": 1,
+        "BIND_CALL_TO_SYMBOL": 7
+      },
+      "rows": 8
+    },
+    "BIND_IMPORT_TO_MODULE": {
+      "exact": 1.0,
+      "pred_counts": {
+        "BIND_IMPORT_TO_MODULE": 4
+      },
+      "rows": 4
+    },
+    "BIND_TEST_TO_SYMBOL": {
+      "exact": 0.0,
+      "pred_counts": {
+        "ABSTAIN_UNBOUND": 8
+      },
+      "rows": 8
+    },
+    "RETRIEVE_MORE": {
+      "exact": 0.0,
+      "pred_counts": {
+        "ABSTAIN_UNBOUND": 7,
+        "BIND_CALL_TO_SYMBOL": 9
+      },
+      "rows": 16
+    }
+  },
+  "promotion_ready": false,
+  "quality_passed": false,
+  "run_dir": "runs/local/artifacts/stage9713_symbol_binding_retrieval_test_evidence_target100m_execution/symbol_binding_probe",
+  "source_stage9712_summary": "runs/summaries/stage9712_symbol_binding_retrieval_test_evidence_contract_preflight_audit.json",
+  "stage": 9713
+}
