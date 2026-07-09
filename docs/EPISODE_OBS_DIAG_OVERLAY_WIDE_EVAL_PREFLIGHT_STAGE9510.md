@@ -1,0 +1,7 @@
+# Stage9510 Episode Observation Diagnosis Overlay Wide-Eval Preflight
+
+Passed: `True`
+Execution authorized for next stage: `True`
+Split counts: `{'eval': 6, 'other': 0, 'strict_eval': 6, 'train': 46}`
+
+Only the next tiny structured probe is authorized. Decoder CE, denoise CE, runtime, harness, Gemma, scoring, checkpoint export, and promotion remain closed.
