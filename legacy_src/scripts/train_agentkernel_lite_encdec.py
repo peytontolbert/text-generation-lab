@@ -30,6 +30,7 @@ SUPPORTED_MODES = (
     "denoise_repair_probe",
     "episode_step_denoise_contract_only",
     "episode_step_structured_probe",
+    "two_phase_suffix_denoise_reconnect_probe",
 )
 
 AUTHORITY_FLAGS = (
@@ -147,12 +148,18 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
     parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--phase2-manifest", type=Path, default=None, help="Second manifest for audited two-phase probes; currently used by suffix-choice -> residual-denoise reconnect.")
     parser.add_argument("--mode", choices=SUPPORTED_MODES, required=True)
     parser.add_argument("--max-train-rows", type=_positive_int, default=0)
     parser.add_argument("--max-eval-rows", type=_positive_int, default=0)
     parser.add_argument("--max-strict-rows", type=_positive_int, default=0)
     parser.add_argument("--max-steps", type=_positive_int, default=0)
     parser.add_argument("--max-decoder-tokens", type=_positive_int, default=768)
+    parser.add_argument("--phase2-max-train-rows", type=_positive_int, default=0)
+    parser.add_argument("--phase2-max-eval-rows", type=_positive_int, default=0)
+    parser.add_argument("--phase2-max-strict-rows", type=_positive_int, default=0)
+    parser.add_argument("--phase2-max-steps", type=_positive_int, default=0)
+    parser.add_argument("--phase2-max-decoder-tokens", type=_positive_int, default=0)
     parser.add_argument("--decoder-ce-weight", type=float, default=0.0)
     parser.add_argument("--eos-loss-weight", type=float, default=1.0, help="Optional EOS token CE multiplier for bounded decoder stabilization probes.")
     parser.add_argument("--structured-aux-weight", type=float, default=0.0)
@@ -649,6 +656,115 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "episode_step_contract_only_probe": bool(episode_step_contract_only_probe),
     }
 
+
+def _namespace_with(args: argparse.Namespace, **updates: Any) -> argparse.Namespace:
+    values = dict(vars(args))
+    values.update(updates)
+    return argparse.Namespace(**values)
+
+
+def validate_two_phase_suffix_denoise_reconnect_probe(args: argparse.Namespace, rows: list[dict[str, Any]]) -> dict[str, Any]:
+    errors: list[str] = []
+    if args.phase2_manifest is None:
+        errors.append("two-phase suffix/denoise reconnect requires --phase2-manifest")
+        phase2_rows: list[dict[str, Any]] = []
+    else:
+        try:
+            phase2_rows = load_manifest(args.phase2_manifest)
+        except Exception as exc:  # noqa: BLE001 - surface contract error in audit card.
+            errors.append(f"phase2 manifest load failed: {exc}")
+            phase2_rows = []
+
+    if args.decoder_ce_weight != 0:
+        errors.append("two-phase suffix/denoise reconnect requires --decoder-ce-weight 0")
+    if args.structured_aux_weight <= 0:
+        errors.append("two-phase suffix/denoise reconnect phase1 requires --structured-aux-weight > 0")
+    if args.denoise_weight <= 0:
+        errors.append("two-phase suffix/denoise reconnect phase2 requires --denoise-weight > 0")
+    if args.phase2_max_train_rows <= 0 or args.phase2_max_eval_rows <= 0 or args.phase2_max_strict_rows <= 0:
+        errors.append("two-phase suffix/denoise reconnect requires positive phase2 row caps")
+    if args.phase2_max_steps <= 0 and not args.contract_only:
+        errors.append("two-phase suffix/denoise reconnect execution requires --phase2-max-steps > 0")
+    if args.phase2_max_decoder_tokens <= 0:
+        errors.append("two-phase suffix/denoise reconnect requires --phase2-max-decoder-tokens > 0")
+    if not args.restore_best_structured_state:
+        errors.append("two-phase suffix/denoise reconnect requires --restore-best-structured-state for phase1")
+    if args.eval_interval <= 0:
+        errors.append("two-phase suffix/denoise reconnect requires --eval-interval > 0")
+
+    phase1_args = _namespace_with(
+        args,
+        mode="structured_policy_probe",
+        denoise_weight=0.0,
+        decoder_ce_weight=0.0,
+        phase2_manifest=None,
+    )
+    phase1_card = validate_structured_probe(phase1_args, rows)
+    if not phase1_card.get("passed"):
+        errors.append("phase1 structured contract failed")
+
+    phase2_args = _namespace_with(
+        args,
+        mode="denoise_repair_probe",
+        manifest=args.phase2_manifest if args.phase2_manifest is not None else args.manifest,
+        max_train_rows=args.phase2_max_train_rows,
+        max_eval_rows=args.phase2_max_eval_rows,
+        max_strict_rows=args.phase2_max_strict_rows,
+        max_steps=args.phase2_max_steps,
+        max_decoder_tokens=args.phase2_max_decoder_tokens,
+        structured_aux_weight=0.0,
+        decoder_ce_weight=0.0,
+    )
+    phase2_card = validate_structured_probe(phase2_args, phase2_rows) if phase2_rows else {"passed": False, "errors": ["phase2 rows unavailable"]}
+    if not phase2_card.get("passed"):
+        errors.append("phase2 denoise contract failed")
+
+    return {
+        "passed": not errors,
+        "errors": errors,
+        "mode": args.mode,
+        "manifest": str(args.manifest),
+        "manifest_sha256": _manifest_hash(args.manifest),
+        "phase2_manifest": str(args.phase2_manifest) if args.phase2_manifest else None,
+        "phase2_manifest_sha256": _manifest_hash(args.phase2_manifest) if args.phase2_manifest and args.phase2_manifest.exists() else None,
+        "rows": len(rows) + len(phase2_rows),
+        "phase1_rows": len(rows),
+        "phase2_rows": len(phase2_rows),
+        "phase1_contract": phase1_card,
+        "phase2_contract": phase2_card,
+        "weights": {
+            "decoder_ce_weight": args.decoder_ce_weight,
+            "structured_aux_weight": args.structured_aux_weight,
+            "denoise_weight": args.denoise_weight,
+            "phase1_max_steps": args.max_steps,
+            "phase2_max_steps": args.phase2_max_steps,
+            "eval_interval": args.eval_interval,
+            "restore_best_structured_state": bool(args.restore_best_structured_state),
+        },
+        "caps": {
+            "phase1_max_train_rows": args.max_train_rows,
+            "phase1_max_eval_rows": args.max_eval_rows,
+            "phase1_max_strict_rows": args.max_strict_rows,
+            "phase1_max_decoder_tokens": args.max_decoder_tokens,
+            "phase2_max_train_rows": args.phase2_max_train_rows,
+            "phase2_max_eval_rows": args.phase2_max_eval_rows,
+            "phase2_max_strict_rows": args.phase2_max_strict_rows,
+            "phase2_max_decoder_tokens": args.phase2_max_decoder_tokens,
+        },
+        "final_checkpoint_export_disabled": bool(args.no_final_checkpoint_export),
+        "final_model_save_skipped": args.skip_final_model_save == 1,
+        "cleanup_requested": bool(args.cleanup_checkpoints_after_probe),
+        "generation_audit_requested": bool(args.enable_generation_audit),
+        "max_generation_rows": int(args.max_generation_rows),
+        "max_generation_tokens": int(args.max_generation_tokens),
+        "generation_prefix_field": getattr(args, "generation_prefix_field", None),
+        "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
+        "model_execution_attempted": False,
+        "two_phase_in_memory_required": True,
+        "checkpoint_export_allowed_between_phases": False,
+    }
+
+
 def validate_contract(args: argparse.Namespace, rows: list[dict[str, Any]]) -> dict[str, Any]:
     repo = args.repo_root.resolve()
     out = args.output_dir.resolve()
@@ -656,6 +772,8 @@ def validate_contract(args: argparse.Namespace, rows: list[dict[str, Any]]) -> d
         raise ProbeContractError(f"output_dir must be under repo_root: {out} not under {repo}")
     if args.mode == "bounded_decoder_ce_probe":
         return validate_bounded_decoder_ce_probe(args, rows)
+    if args.mode == "two_phase_suffix_denoise_reconnect_probe":
+        return validate_two_phase_suffix_denoise_reconnect_probe(args, rows)
     if args.mode in STRUCTURED_MODE_ALLOWED_LOSSES:
         return validate_structured_probe(args, rows)
     raise ProbeContractError(f"mode {args.mode} is not supported by the recovered contract validator")
