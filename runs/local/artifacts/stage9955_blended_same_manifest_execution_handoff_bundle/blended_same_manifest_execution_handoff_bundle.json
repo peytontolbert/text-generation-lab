@@ -1,0 +1,150 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "failures": [],
+  "handoff_bundle": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "gemma_execution": {
+      "cell_key": "blended_target100m::edit_localization::same_manifest_gemma12b",
+      "command": [
+        "python",
+        "scripts/run_stage9748_standalone_gemma_queue_via_ollama.py",
+        "--queue",
+        "runs/local/artifacts/stage9952_blended_edit_localization_gemma_request/blended_edit_localization_gemma_queue.json",
+        "--packets",
+        "runs/local/artifacts/stage9952_blended_edit_localization_gemma_request/blended_edit_localization_gemma_packets.jsonl",
+        "--model",
+        "gemma3:12b",
+        "--cell-key",
+        "blended_target100m::edit_localization::same_manifest_gemma12b"
+      ],
+      "future_output_stub": "runs/local/artifacts/stage9953_blended_edit_localization_gemma_execution/same_prompt_surface_gemma12b_outputs.json",
+      "future_stage": 9953
+    },
+    "handoff_status": "ready_for_explicit_dual_execution_authorization",
+    "hundred_m_execution": {
+      "command": [
+        "python",
+        "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+        "--repo-root",
+        "/data/agentkernel-seq2seq-text-lab",
+        "--manifest",
+        "runs/local/artifacts/stage9947_web_targeted_blended_structured_execution_review/review_manifests/edit_localization.jsonl",
+        "--mode",
+        "edit_localization_probe",
+        "--probe-scale",
+        "target_100m",
+        "--implementation",
+        "transformer",
+        "--model-config",
+        "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "--tokenizer-json",
+        "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+        "--tokenizer-config",
+        "configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "--tokenizer-hashlock",
+        "configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "--max-train-rows",
+        "24",
+        "--max-eval-rows",
+        "24",
+        "--max-strict-rows",
+        "24",
+        "--max-steps",
+        "64",
+        "--batch-size",
+        "2",
+        "--learning-rate",
+        "5e-5",
+        "--max-encoder-tokens",
+        "512",
+        "--max-decoder-tokens",
+        "8",
+        "--decoder-ce-weight",
+        "0.0",
+        "--structured-aux-weight",
+        "1.0",
+        "--denoise-weight",
+        "0.0",
+        "--require-loss-mask-enforcement-audit",
+        "--no-final-checkpoint-export",
+        "--cleanup-checkpoints-after-probe",
+        "--skip-final-model-save",
+        "1",
+        "--output-dir",
+        "runs/local/artifacts/stage9950_edit_localization_web_targeted_blended_target100m_probe/edit_localization_probe",
+        "--run-id",
+        "stage9950_edit_localization_web_targeted_blended_target100m_probe",
+        "--execution-authorized-for-recovery-probe"
+      ],
+      "future_output_dir": "runs/local/artifacts/stage9950_edit_localization_web_targeted_blended_target100m_probe/edit_localization_probe",
+      "future_run_id": "stage9950_edit_localization_web_targeted_blended_target100m_probe",
+      "future_stage": 9950
+    },
+    "row_contract": {
+      "gemma_rows": 72,
+      "gemma_split_counts": {
+        "eval": 24,
+        "other": 0,
+        "strict_eval": 24,
+        "train": 24
+      },
+      "gemma_web_rows": 27,
+      "hundred_m_rows": 72,
+      "hundred_m_split_counts": {
+        "eval": 24,
+        "other": 0,
+        "strict_eval": 24,
+        "train": 24
+      },
+      "hundred_m_web_rows": 27,
+      "targeted_web_refresh_preserved_100m": true,
+      "targeted_web_refresh_preserved_gemma": true
+    },
+    "same_manifest_comparison_gate": {
+      "claim_permitted_only_after": [
+        "stage9950_output_acceptance_ready",
+        "stage9953_gemma_outputs_exist",
+        "same_manifest_row_contract_still_matches_72_total_27_web",
+        "no_mixed_surface_or_mixed_manifest_comparison"
+      ],
+      "gate_path": "runs/local/artifacts/stage9954_blended_edit_localization_same_manifest_comparison_gate/blended_edit_localization_same_manifest_comparison_gate.json"
+    },
+    "why_this_bundle_exists": [
+      "future_stage9950_100m_and_stage9953_gemma_must_stay_on_the_same_manifest",
+      "the blended_web_recovery_edit_localization_slice_is currently_the_narrowest_live_path_to_a_truthful_same-surface_comparison",
+      "comparison_is_not_permitted_until_stage9954_contract_conditions_are_met"
+    ]
+  },
+  "metrics": {
+    "claim_after_conditions": 4,
+    "dual_execution_ready_when_authorized": true,
+    "gemma_future_stage": 9953,
+    "hundred_m_future_stage": 9950,
+    "row_contract_ok": true
+  },
+  "passed": true
+}
