@@ -1,0 +1,310 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "metrics": {
+    "anti_cheat_tasks": 4,
+    "attach_output_tasks": 4,
+    "languages_in_priority_order": [
+      "python",
+      "c_cpp",
+      "web_js_ts_html",
+      "rust"
+    ],
+    "rubric_tasks": 4,
+    "signoff_tasks": 12,
+    "top_queue_entry": "blended_target100m::python::edit_localization::same_manifest_review::attach_same_manifest_outputs",
+    "unique_cells": 4
+  },
+  "name": "stage9970_blended_weak_language_same_manifest_signoff_workbook",
+  "passed": true,
+  "rows": [
+    {
+      "cell_key": "blended_target100m::python::edit_localization::same_manifest_review",
+      "compare_rows": 16,
+      "expected_c_cpp_rows": 30,
+      "expected_python_rows": 24,
+      "expected_web_rows": 45,
+      "future_stage9965_output_dir": "runs/local/artifacts/stage9965_edit_localization_blended_weak_language_target100m_probe/edit_localization_probe",
+      "future_stage9971_output_stub": "runs/local/artifacts/stage9971_blended_weak_language_gemma_execution/same_prompt_surface_gemma12b_outputs.json",
+      "language_family": "python",
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__python__edit_localization",
+      "queue_position": 1,
+      "required_human_action": "Attach the real Stage9965 100M outputs and Stage9971 Gemma outputs for this language to the live review packet before any signoff.",
+      "review_status": "pending_real_outputs",
+      "supporting_evidence_paths": {
+        "same_manifest_handoff_bundle": "runs/local/artifacts/stage9968_blended_weak_language_same_manifest_handoff_bundle/blended_weak_language_same_manifest_handoff_bundle.json",
+        "same_manifest_request": "runs/local/artifacts/stage9966_blended_weak_language_target100m_execution_request/surface_requests/edit_localization.json",
+        "same_manifest_review_audit": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/blended_weak_language_same_manifest_review_audit.json"
+      },
+      "target_review_files": [
+        "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__python__edit_localization/expert_maintainer_rubric_review.json",
+        "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__python__edit_localization/anti_cheat_review_card.json"
+      ],
+      "task": "attach_same_manifest_outputs"
+    },
+    {
+      "cell_key": "blended_target100m::python::edit_localization::same_manifest_review",
+      "compare_rows": 16,
+      "in_scope_subskills": [
+        "avoids_hallucinated_symbols",
+        "avoids_internal_tokens",
+        "binds_symbols_correctly",
+        "localizes_edit_scope",
+        "produces_contentful_final_answer",
+        "repairs_or_abstains_safely",
+        "retrieves_source_evidence_when_needed",
+        "understands_user_intent"
+      ],
+      "language_family": "python",
+      "machine_scope_summary": {
+        "compare_rows": 16,
+        "surface_support_rows": 24,
+        "weak_language_priority_order": 1
+      },
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__python__edit_localization",
+      "queue_position": 2,
+      "recommendation_draft": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__python__edit_localization/expert_maintainer_recommendation_draft.json",
+      "required_human_action": "After attaching real outputs, score only the 8 in-scope localization/evidence-grounding rubric lines and leave out-of-scope maintainer lines unclaimed.",
+      "review_file": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__python__edit_localization/expert_maintainer_rubric_review.json",
+      "review_status": "pending_real_outputs_and_human_review",
+      "task": "expert_maintainer_rubric_review"
+    },
+    {
+      "cell_key": "blended_target100m::python::edit_localization::same_manifest_review",
+      "compare_rows": 16,
+      "language_family": "python",
+      "machine_contract_summary": {
+        "all_gate_status_true": true,
+        "no_raw_source_included": true,
+        "no_raw_symbol_names_in_model_input": true,
+        "unique_permutation_maps": 5
+      },
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__python__edit_localization",
+      "queue_position": 3,
+      "recommendation_draft": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__python__edit_localization/anti_cheat_recommendation_draft.json",
+      "required_human_action": "After attaching real outputs, confirm that the same-manifest outputs still respect the opaque-choice and no-shortcut contract already shown by the machine-side packet.",
+      "review_file": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__python__edit_localization/anti_cheat_review_card.json",
+      "review_status": "pending_real_outputs_and_human_review",
+      "task": "cell_specific_anti_cheat_review"
+    },
+    {
+      "cell_key": "blended_target100m::c_cpp::edit_localization::same_manifest_review",
+      "compare_rows": 20,
+      "expected_c_cpp_rows": 30,
+      "expected_python_rows": 24,
+      "expected_web_rows": 45,
+      "future_stage9965_output_dir": "runs/local/artifacts/stage9965_edit_localization_blended_weak_language_target100m_probe/edit_localization_probe",
+      "future_stage9971_output_stub": "runs/local/artifacts/stage9971_blended_weak_language_gemma_execution/same_prompt_surface_gemma12b_outputs.json",
+      "language_family": "c_cpp",
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__c_cpp__edit_localization",
+      "queue_position": 4,
+      "required_human_action": "Attach the real Stage9965 100M outputs and Stage9971 Gemma outputs for this language to the live review packet before any signoff.",
+      "review_status": "pending_real_outputs",
+      "supporting_evidence_paths": {
+        "same_manifest_handoff_bundle": "runs/local/artifacts/stage9968_blended_weak_language_same_manifest_handoff_bundle/blended_weak_language_same_manifest_handoff_bundle.json",
+        "same_manifest_request": "runs/local/artifacts/stage9966_blended_weak_language_target100m_execution_request/surface_requests/edit_localization.json",
+        "same_manifest_review_audit": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/blended_weak_language_same_manifest_review_audit.json"
+      },
+      "target_review_files": [
+        "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__c_cpp__edit_localization/expert_maintainer_rubric_review.json",
+        "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__c_cpp__edit_localization/anti_cheat_review_card.json"
+      ],
+      "task": "attach_same_manifest_outputs"
+    },
+    {
+      "cell_key": "blended_target100m::c_cpp::edit_localization::same_manifest_review",
+      "compare_rows": 20,
+      "in_scope_subskills": [
+        "avoids_hallucinated_symbols",
+        "avoids_internal_tokens",
+        "binds_symbols_correctly",
+        "localizes_edit_scope",
+        "produces_contentful_final_answer",
+        "repairs_or_abstains_safely",
+        "retrieves_source_evidence_when_needed",
+        "understands_user_intent"
+      ],
+      "language_family": "c_cpp",
+      "machine_scope_summary": {
+        "compare_rows": 20,
+        "surface_support_rows": 30,
+        "weak_language_priority_order": 2
+      },
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__c_cpp__edit_localization",
+      "queue_position": 5,
+      "recommendation_draft": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__c_cpp__edit_localization/expert_maintainer_recommendation_draft.json",
+      "required_human_action": "After attaching real outputs, score only the 8 in-scope localization/evidence-grounding rubric lines and leave out-of-scope maintainer lines unclaimed.",
+      "review_file": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__c_cpp__edit_localization/expert_maintainer_rubric_review.json",
+      "review_status": "pending_real_outputs_and_human_review",
+      "task": "expert_maintainer_rubric_review"
+    },
+    {
+      "cell_key": "blended_target100m::c_cpp::edit_localization::same_manifest_review",
+      "compare_rows": 20,
+      "language_family": "c_cpp",
+      "machine_contract_summary": {
+        "all_gate_status_true": true,
+        "no_raw_source_included": true,
+        "no_raw_symbol_names_in_model_input": true,
+        "unique_permutation_maps": 5
+      },
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__c_cpp__edit_localization",
+      "queue_position": 6,
+      "recommendation_draft": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__c_cpp__edit_localization/anti_cheat_recommendation_draft.json",
+      "required_human_action": "After attaching real outputs, confirm that the same-manifest outputs still respect the opaque-choice and no-shortcut contract already shown by the machine-side packet.",
+      "review_file": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__c_cpp__edit_localization/anti_cheat_review_card.json",
+      "review_status": "pending_real_outputs_and_human_review",
+      "task": "cell_specific_anti_cheat_review"
+    },
+    {
+      "cell_key": "blended_target100m::web_js_ts_html::edit_localization::same_manifest_review",
+      "compare_rows": 30,
+      "expected_c_cpp_rows": 30,
+      "expected_python_rows": 24,
+      "expected_web_rows": 45,
+      "future_stage9965_output_dir": "runs/local/artifacts/stage9965_edit_localization_blended_weak_language_target100m_probe/edit_localization_probe",
+      "future_stage9971_output_stub": "runs/local/artifacts/stage9971_blended_weak_language_gemma_execution/same_prompt_surface_gemma12b_outputs.json",
+      "language_family": "web_js_ts_html",
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__web_js_ts_html__edit_localization",
+      "queue_position": 7,
+      "required_human_action": "Attach the real Stage9965 100M outputs and Stage9971 Gemma outputs for this language to the live review packet before any signoff.",
+      "review_status": "pending_real_outputs",
+      "supporting_evidence_paths": {
+        "same_manifest_handoff_bundle": "runs/local/artifacts/stage9968_blended_weak_language_same_manifest_handoff_bundle/blended_weak_language_same_manifest_handoff_bundle.json",
+        "same_manifest_request": "runs/local/artifacts/stage9966_blended_weak_language_target100m_execution_request/surface_requests/edit_localization.json",
+        "same_manifest_review_audit": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/blended_weak_language_same_manifest_review_audit.json"
+      },
+      "target_review_files": [
+        "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__web_js_ts_html__edit_localization/expert_maintainer_rubric_review.json",
+        "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__web_js_ts_html__edit_localization/anti_cheat_review_card.json"
+      ],
+      "task": "attach_same_manifest_outputs"
+    },
+    {
+      "cell_key": "blended_target100m::web_js_ts_html::edit_localization::same_manifest_review",
+      "compare_rows": 30,
+      "in_scope_subskills": [
+        "avoids_hallucinated_symbols",
+        "avoids_internal_tokens",
+        "binds_symbols_correctly",
+        "localizes_edit_scope",
+        "produces_contentful_final_answer",
+        "repairs_or_abstains_safely",
+        "retrieves_source_evidence_when_needed",
+        "understands_user_intent"
+      ],
+      "language_family": "web_js_ts_html",
+      "machine_scope_summary": {
+        "compare_rows": 30,
+        "surface_support_rows": 45,
+        "weak_language_priority_order": 3
+      },
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__web_js_ts_html__edit_localization",
+      "queue_position": 8,
+      "recommendation_draft": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__web_js_ts_html__edit_localization/expert_maintainer_recommendation_draft.json",
+      "required_human_action": "After attaching real outputs, score only the 8 in-scope localization/evidence-grounding rubric lines and leave out-of-scope maintainer lines unclaimed.",
+      "review_file": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__web_js_ts_html__edit_localization/expert_maintainer_rubric_review.json",
+      "review_status": "pending_real_outputs_and_human_review",
+      "task": "expert_maintainer_rubric_review"
+    },
+    {
+      "cell_key": "blended_target100m::web_js_ts_html::edit_localization::same_manifest_review",
+      "compare_rows": 30,
+      "language_family": "web_js_ts_html",
+      "machine_contract_summary": {
+        "all_gate_status_true": true,
+        "no_raw_source_included": true,
+        "no_raw_symbol_names_in_model_input": true,
+        "unique_permutation_maps": 5
+      },
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__web_js_ts_html__edit_localization",
+      "queue_position": 9,
+      "recommendation_draft": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__web_js_ts_html__edit_localization/anti_cheat_recommendation_draft.json",
+      "required_human_action": "After attaching real outputs, confirm that the same-manifest outputs still respect the opaque-choice and no-shortcut contract already shown by the machine-side packet.",
+      "review_file": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__web_js_ts_html__edit_localization/anti_cheat_review_card.json",
+      "review_status": "pending_real_outputs_and_human_review",
+      "task": "cell_specific_anti_cheat_review"
+    },
+    {
+      "cell_key": "blended_target100m::rust::edit_localization::same_manifest_review",
+      "compare_rows": 14,
+      "expected_c_cpp_rows": 30,
+      "expected_python_rows": 24,
+      "expected_web_rows": 45,
+      "future_stage9965_output_dir": "runs/local/artifacts/stage9965_edit_localization_blended_weak_language_target100m_probe/edit_localization_probe",
+      "future_stage9971_output_stub": "runs/local/artifacts/stage9971_blended_weak_language_gemma_execution/same_prompt_surface_gemma12b_outputs.json",
+      "language_family": "rust",
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__rust__edit_localization",
+      "queue_position": 10,
+      "required_human_action": "Attach the real Stage9965 100M outputs and Stage9971 Gemma outputs for this language to the live review packet before any signoff.",
+      "review_status": "pending_real_outputs",
+      "supporting_evidence_paths": {
+        "same_manifest_handoff_bundle": "runs/local/artifacts/stage9968_blended_weak_language_same_manifest_handoff_bundle/blended_weak_language_same_manifest_handoff_bundle.json",
+        "same_manifest_request": "runs/local/artifacts/stage9966_blended_weak_language_target100m_execution_request/surface_requests/edit_localization.json",
+        "same_manifest_review_audit": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/blended_weak_language_same_manifest_review_audit.json"
+      },
+      "target_review_files": [
+        "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__rust__edit_localization/expert_maintainer_rubric_review.json",
+        "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__rust__edit_localization/anti_cheat_review_card.json"
+      ],
+      "task": "attach_same_manifest_outputs"
+    },
+    {
+      "cell_key": "blended_target100m::rust::edit_localization::same_manifest_review",
+      "compare_rows": 14,
+      "in_scope_subskills": [
+        "avoids_hallucinated_symbols",
+        "avoids_internal_tokens",
+        "binds_symbols_correctly",
+        "localizes_edit_scope",
+        "produces_contentful_final_answer",
+        "repairs_or_abstains_safely",
+        "retrieves_source_evidence_when_needed",
+        "understands_user_intent"
+      ],
+      "language_family": "rust",
+      "machine_scope_summary": {
+        "compare_rows": 14,
+        "surface_support_rows": 21,
+        "weak_language_priority_order": 4
+      },
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__rust__edit_localization",
+      "queue_position": 11,
+      "recommendation_draft": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__rust__edit_localization/expert_maintainer_recommendation_draft.json",
+      "required_human_action": "After attaching real outputs, score only the 8 in-scope localization/evidence-grounding rubric lines and leave out-of-scope maintainer lines unclaimed.",
+      "review_file": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__rust__edit_localization/expert_maintainer_rubric_review.json",
+      "review_status": "pending_real_outputs_and_human_review",
+      "task": "expert_maintainer_rubric_review"
+    },
+    {
+      "cell_key": "blended_target100m::rust::edit_localization::same_manifest_review",
+      "compare_rows": 14,
+      "language_family": "rust",
+      "machine_contract_summary": {
+        "all_gate_status_true": true,
+        "no_raw_source_included": true,
+        "no_raw_symbol_names_in_model_input": true,
+        "unique_permutation_maps": 5
+      },
+      "packet_dir": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__rust__edit_localization",
+      "queue_position": 12,
+      "recommendation_draft": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__rust__edit_localization/anti_cheat_recommendation_draft.json",
+      "required_human_action": "After attaching real outputs, confirm that the same-manifest outputs still respect the opaque-choice and no-shortcut contract already shown by the machine-side packet.",
+      "review_file": "runs/local/artifacts/stage9969_blended_weak_language_same_manifest_review_packets/review_packets/blended_target100m__rust__edit_localization/anti_cheat_review_card.json",
+      "review_status": "pending_real_outputs_and_human_review",
+      "task": "cell_specific_anti_cheat_review"
+    }
+  ],
+  "stage": 9970
+}
