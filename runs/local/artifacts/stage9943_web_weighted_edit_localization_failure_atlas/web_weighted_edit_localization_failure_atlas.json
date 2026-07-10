@@ -1,0 +1,223 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "by_target_surface": {
+    "entrypoint_or_invocation_surface": {
+      "correct_100m": 0,
+      "correct_gemma": 0,
+      "rows": 3,
+      "wrong_predictions_100m": {
+        "configuration_or_settings_surface": 3
+      }
+    },
+    "implementation_file_surface": {
+      "correct_100m": 0,
+      "correct_gemma": 0,
+      "rows": 1,
+      "wrong_predictions_100m": {
+        "configuration_or_settings_surface": 1
+      }
+    },
+    "symbol_definition_or_implementation_surface": {
+      "correct_100m": 2,
+      "correct_gemma": 0,
+      "rows": 2,
+      "wrong_predictions_100m": {}
+    },
+    "test_surface": {
+      "correct_100m": 0,
+      "correct_gemma": 0,
+      "rows": 2,
+      "wrong_predictions_100m": {
+        "configuration_or_settings_surface": 1,
+        "entrypoint_or_invocation_surface": 1
+      }
+    }
+  },
+  "failures": [],
+  "metrics": {
+    "strict_exact_100m": 0.25,
+    "surface_types_with_nonzero_100m_hits": [
+      "symbol_definition_or_implementation_surface"
+    ],
+    "surface_types_with_zero_100m_hits": [
+      "entrypoint_or_invocation_surface",
+      "implementation_file_surface",
+      "test_surface"
+    ],
+    "web_accuracy_100m": 0.25,
+    "web_accuracy_gemma": 0.0,
+    "web_avg_confidence_100m": 0.2698478661477566,
+    "web_avg_margin_wrong_100m": 0.010110254089037577,
+    "web_correct_100m": 2,
+    "web_correct_gemma": 0,
+    "web_rows_total": 8
+  },
+  "passed": true,
+  "training_actions": [
+    {
+      "action": "Increase valid web-specific supervision for test-surface versus implementation-surface disambiguation.",
+      "priority": 1,
+      "why": "The current packet misses every `test_surface` row while symbol-owner rows are the only stable success case."
+    },
+    {
+      "action": "Add more web rows where entrypoint/startup evidence must beat file-level and symbol-level distractors.",
+      "priority": 2,
+      "why": "The model misses entrypoint-or-invocation rows and often drifts toward implementation or configuration alternatives with tiny margins."
+    },
+    {
+      "action": "Treat the web slice as ambiguity-sensitive rather than shortcut-driven and target sharper label separation, not more generic anti-cheat hardening.",
+      "priority": 3,
+      "why": "Wrong predictions are low-margin and near-uniform rather than high-confidence shortcut collapses."
+    }
+  ],
+  "web_rows": [
+    {
+      "confidence_100m": 0.2772642970085144,
+      "margin_100m": 0.015070796012878418,
+      "predicted_label_gemma": "edit_localization",
+      "prediction_correct_100m": false,
+      "prediction_correct_gemma": false,
+      "prediction_label_100m": "C",
+      "prediction_surface_100m": "configuration_or_settings_surface",
+      "row_id": "stage9913_edit_localization_stage9857_edit_localization_stage9693_edit_localization_stage8765_row_0fa290026eb42c17::positive_original::eval_replay",
+      "split": "eval",
+      "target_label": "A",
+      "target_surface": "test_surface",
+      "top1_label_100m": "C",
+      "top2_label_100m": "A",
+      "visible_locality_resolution": "Visible locality resolution: the failure is in the visible test expectation, not product behavior.",
+      "web_surface_disambiguator": "Web disambiguator: the implementation behavior appears valid, but a visible assertion, fixture, snapshot, or rendered expectation is stale or malformed."
+    },
+    {
+      "confidence_100m": 0.2728981077671051,
+      "margin_100m": 0.018355131149291992,
+      "predicted_label_gemma": "edit_localization",
+      "prediction_correct_100m": false,
+      "prediction_correct_gemma": false,
+      "prediction_label_100m": "D",
+      "prediction_surface_100m": "configuration_or_settings_surface",
+      "row_id": "stage9913_edit_localization_stage9857_edit_localization_stage9693_edit_localization_stage8765_row_494c615a71ece35c::positive_original::eval_replay",
+      "split": "eval",
+      "target_label": "B",
+      "target_surface": "entrypoint_or_invocation_surface",
+      "top1_label_100m": "D",
+      "top2_label_100m": "C",
+      "visible_locality_resolution": "Visible locality resolution: the failure is localized to startup or entry behavior.",
+      "web_surface_disambiguator": "Web disambiguator: the failure is exposed through route wiring, startup registration, handler invocation, or top-level page/app entry behavior."
+    },
+    {
+      "confidence_100m": 0.2694932818412781,
+      "margin_100m": 0.002487868070602417,
+      "predicted_label_gemma": "edit_localization",
+      "prediction_correct_100m": true,
+      "prediction_correct_gemma": false,
+      "prediction_label_100m": "C",
+      "prediction_surface_100m": "symbol_definition_or_implementation_surface",
+      "row_id": "stage9913_edit_localization_stage9857_edit_localization_stage9693_edit_localization_stage8765_row_5b9ce275000ec59e::positive_original::eval_replay",
+      "split": "eval",
+      "target_label": "C",
+      "target_surface": "symbol_definition_or_implementation_surface",
+      "top1_label_100m": "C",
+      "top2_label_100m": "A",
+      "visible_locality_resolution": "Visible locality resolution: behavior owner is a specific symbol or definition.",
+      "web_surface_disambiguator": "Web disambiguator: a visible component, handler, hook, export, or function ownership clue identifies the responsible symbol rather than only the file or route."
+    },
+    {
+      "confidence_100m": 0.2697790563106537,
+      "margin_100m": 0.002342700958251953,
+      "predicted_label_gemma": "edit_localization",
+      "prediction_correct_100m": false,
+      "prediction_correct_gemma": false,
+      "prediction_label_100m": "B",
+      "prediction_surface_100m": "configuration_or_settings_surface",
+      "row_id": "stage9913_edit_localization_stage9857_edit_localization_stage9693_edit_localization_stage8765_row_d9caf3836a5dcd6c::positive_original::eval_replay",
+      "split": "eval",
+      "target_label": "D",
+      "target_surface": "implementation_file_surface",
+      "top1_label_100m": "B",
+      "top2_label_100m": "C",
+      "visible_locality_resolution": "Visible locality resolution: ownership is file-level, not a specific symbol.",
+      "web_surface_disambiguator": "Web disambiguator: the visible evidence narrows the issue to one implementation file or module boundary, but not to a specific owning symbol."
+    },
+    {
+      "confidence_100m": 0.26965710520744324,
+      "margin_100m": 0.0037870407104492188,
+      "predicted_label_gemma": "edit_localization",
+      "prediction_correct_100m": false,
+      "prediction_correct_gemma": false,
+      "prediction_label_100m": "C",
+      "prediction_surface_100m": "entrypoint_or_invocation_surface",
+      "row_id": "stage9913_edit_localization_stage9857_edit_localization_stage9693_edit_localization_stage8765_row_0fa290026eb42c17::positive_original::strict_anchor",
+      "split": "strict_eval",
+      "target_label": "A",
+      "target_surface": "test_surface",
+      "top1_label_100m": "C",
+      "top2_label_100m": "A",
+      "visible_locality_resolution": "Visible locality resolution: the failure is in the visible test expectation, not product behavior.",
+      "web_surface_disambiguator": "Web disambiguator: the implementation behavior appears valid, but a visible assertion, fixture, snapshot, or rendered expectation is stale or malformed."
+    },
+    {
+      "confidence_100m": 0.267876535654068,
+      "margin_100m": 0.013987034559249878,
+      "predicted_label_gemma": "edit_localization",
+      "prediction_correct_100m": false,
+      "prediction_correct_gemma": false,
+      "prediction_label_100m": "D",
+      "prediction_surface_100m": "configuration_or_settings_surface",
+      "row_id": "stage9913_edit_localization_stage9857_edit_localization_stage9693_edit_localization_stage8765_row_494c615a71ece35c::mixed_replay",
+      "split": "strict_eval",
+      "target_label": "B",
+      "target_surface": "entrypoint_or_invocation_surface",
+      "top1_label_100m": "D",
+      "top2_label_100m": "C",
+      "visible_locality_resolution": "Visible locality resolution: the failure is localized to startup or entry behavior.",
+      "web_surface_disambiguator": "Web disambiguator: the failure is exposed through route wiring, startup registration, handler invocation, or top-level page/app entry behavior."
+    },
+    {
+      "confidence_100m": 0.2611776292324066,
+      "margin_100m": 0.000572890043258667,
+      "predicted_label_gemma": "edit_localization",
+      "prediction_correct_100m": true,
+      "prediction_correct_gemma": false,
+      "prediction_label_100m": "C",
+      "prediction_surface_100m": "symbol_definition_or_implementation_surface",
+      "row_id": "stage9913_edit_localization_stage9857_edit_localization_stage9693_edit_localization_stage8765_row_5b9ce275000ec59e::mixed_replay",
+      "split": "strict_eval",
+      "target_label": "C",
+      "target_surface": "symbol_definition_or_implementation_surface",
+      "top1_label_100m": "C",
+      "top2_label_100m": "A",
+      "visible_locality_resolution": "Visible locality resolution: behavior owner is a specific symbol or definition.",
+      "web_surface_disambiguator": "Web disambiguator: a visible component, handler, hook, export, or function ownership clue identifies the responsible symbol rather than only the file or route."
+    },
+    {
+      "confidence_100m": 0.2706369161605835,
+      "margin_100m": 0.007118821144104004,
+      "predicted_label_gemma": "edit_localization",
+      "prediction_correct_100m": false,
+      "prediction_correct_gemma": false,
+      "prediction_label_100m": "B",
+      "prediction_surface_100m": "configuration_or_settings_surface",
+      "row_id": "stage9913_edit_localization_stage9857_edit_localization_stage9693_edit_localization_stage8765_row_d9caf3836a5dcd6c::positive_original::strict_anchor",
+      "split": "strict_eval",
+      "target_label": "D",
+      "target_surface": "entrypoint_or_invocation_surface",
+      "top1_label_100m": "B",
+      "top2_label_100m": "C",
+      "visible_locality_resolution": "Visible locality resolution: ownership is file-level, not a specific symbol.",
+      "web_surface_disambiguator": "Web disambiguator: the visible evidence narrows the issue to one implementation file or module boundary, but not to a specific owning symbol."
+    }
+  ]
+}
