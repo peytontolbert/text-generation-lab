@@ -1,0 +1,117 @@
+{
+  "failures": [],
+  "findings": {
+    "label_prior_shortcut_risk": {
+      "interpretation": "Simple label-frequency guessing remains too weak to explain the stage10072 win.",
+      "supported_by_majority_baseline": false
+    },
+    "permutation_coverage_scope": {
+      "interpretation": "Only a subset of the shared rows carry explicit permutation metadata and opaque-choice anti-cheat tags, so the current packet should not be described as uniformly permutation-audited.",
+      "supported": false
+    },
+    "source_heldout_scope": {
+      "interpretation": "This canonical packet does not itself prove a source-heldout claim because source_root/source_id provenance is absent on the shared rows.",
+      "supported": false
+    }
+  },
+  "metrics": {
+    "canonical_mismatch_rows": 0,
+    "counterfactual_obligation_counts": {
+      "ANTI_CHEAT_REVIEW_REQUIRED": 18,
+      "CONTRADICTORY_EVIDENCE_OR_UNSAFE_TWIN": 37,
+      "EVIDENCE_REMOVED": 37,
+      "EXPERT_MAINTAINER_REVIEW_REQUIRED": 18,
+      "MIXED_REPLAY": 37,
+      "POSITIVE_ORIGINAL": 55,
+      "SOURCE_HELDOUT": 18
+    },
+    "gemma_macro_exact": 0.30568181818181817,
+    "gemma_minus_global_majority": -0.021590909090909105,
+    "global_majority_exact": 0.32727272727272727,
+    "global_majority_label": "A",
+    "hundred_m_macro_exact": 0.9147727272727273,
+    "hundred_m_minus_global_majority": 0.5875,
+    "hundred_m_minus_macro_language_majority": 0.5386363636363637,
+    "macro_per_language_majority_exact": 0.3761363636363636,
+    "most_common_choice_permutation_order": "E|A|D|B|C",
+    "per_language_baselines": {
+      "c_cpp": {
+        "hidden_target_counts": {
+          "TARGET_CONFIG": 4,
+          "TARGET_ENTRYPOINT": 5,
+          "TARGET_FILE": 1,
+          "TARGET_SYMBOL": 5,
+          "TARGET_TEST": 5
+        },
+        "label_counts": {
+          "A": 5,
+          "B": 5,
+          "C": 5,
+          "D": 1,
+          "E": 4
+        },
+        "majority_exact": 0.25,
+        "majority_label": "B",
+        "rows": 20
+      },
+      "python": {
+        "hidden_target_counts": {
+          "TARGET_CONFIG": 2,
+          "TARGET_SYMBOL": 4,
+          "TARGET_TEST": 5
+        },
+        "label_counts": {
+          "A": 5,
+          "C": 4,
+          "E": 2
+        },
+        "majority_exact": 0.45454545454545453,
+        "majority_label": "A",
+        "rows": 11
+      },
+      "rust": {
+        "hidden_target_counts": {
+          "TARGET_FILE": 2,
+          "TARGET_TEST": 2
+        },
+        "label_counts": {
+          "A": 2,
+          "D": 2
+        },
+        "majority_exact": 0.5,
+        "majority_label": "D",
+        "rows": 4
+      },
+      "web_js_ts_html": {
+        "hidden_target_counts": {
+          "TARGET_ENTRYPOINT": 6,
+          "TARGET_FILE": 6,
+          "TARGET_SYMBOL": 2,
+          "TARGET_TEST": 6
+        },
+        "label_counts": {
+          "A": 6,
+          "B": 6,
+          "C": 2,
+          "D": 6
+        },
+        "majority_exact": 0.3,
+        "majority_label": "A",
+        "rows": 20
+      }
+    },
+    "rows_with_choice_permutation_metadata": 37,
+    "rows_with_counterfactual_groups": 37,
+    "rows_with_locked_eval_source": 18,
+    "rows_with_opaque_choice_surface": 37,
+    "rows_with_source_backed_flag": 55,
+    "rows_with_source_id": 0,
+    "rows_with_source_root": 0,
+    "shared_rows": 55,
+    "source_heldout_claim_supported": false,
+    "unique_choice_permutation_orders": 11
+  },
+  "name": "stage10082_canonical_label_aligned_shortcut_validity_audit",
+  "passed": true,
+  "stage": 10082
+}
