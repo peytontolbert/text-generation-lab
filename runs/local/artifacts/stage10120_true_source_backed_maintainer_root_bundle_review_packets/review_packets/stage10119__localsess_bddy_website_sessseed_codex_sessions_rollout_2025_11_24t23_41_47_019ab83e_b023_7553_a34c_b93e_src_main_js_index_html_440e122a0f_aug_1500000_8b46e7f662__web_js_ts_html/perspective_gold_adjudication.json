@@ -1,6 +1,7 @@
 {
-  "bundle_gold_ready_for_eval": false,
+  "bundle_gold_ready_for_eval": true,
   "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+  "decision_rationale": "Admit. The repaired packet now exposes real local repo files, a plausible multi-file candidate set, and distinct maintenance perspectives. It remains weak on concrete verifier evidence, so verifier claims should abstain rather than force a singleton outcome.",
   "draft_recommendation_path": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662__web_js_ts_html/perspective_gold_recommendation_draft.json",
   "language_family": "web_js_ts_html",
   "perspective_gold_answers": [
@@ -14,10 +15,10 @@
         "src/wasm-loader.js",
         "src/auth.js"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "candidate_path",
+      "gold_answer_value": "src/main.js",
       "perspective": "symptom_localization",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The behavior-owning entry surface is the application bootstrap module rather than the static HTML shell or downstream effect helpers.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -38,10 +39,10 @@
         "src/wasm-loader.js",
         "src/auth.js"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "visible_evidence_key",
+      "gold_answer_value": "candidate_change_surface",
       "perspective": "evidence_citation",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The bounded packet directly exposes `src/main.js` as a changed concrete surface alongside the other alternatives.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -62,10 +63,10 @@
         "src/wasm-loader.js",
         "src/auth.js"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "freeform_explanation",
+      "gold_answer_value": "index.html is mostly page shell and metadata, while the visible behavior and linked usage context point to runtime logic in src/main.js.",
       "perspective": "alternative_hypothesis_elimination",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The main competing alternative is the HTML shell, but the bounded evidence points to runtime behavior ownership in the JS entry module.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -86,10 +87,10 @@
         "src/wasm-loader.js",
         "src/auth.js"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "candidate_path",
+      "gold_answer_value": "src/main.js",
       "perspective": "patch_impact",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "A fix in the application bootstrap layer is the most direct way to change the observed interactive behavior without reaching into unrelated visual helper files.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -110,10 +111,10 @@
         "src/wasm-loader.js",
         "src/auth.js"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "abstain",
+      "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "verifier_outcome",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "No selected tests or concrete executable verifier are attached, so naming a specific verification outcome would overclaim.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -134,10 +135,10 @@
         "src/wasm-loader.js",
         "src/auth.js"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "candidate_path",
+      "gold_answer_value": "src/main.js",
       "perspective": "minimal_fix_selection",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "It is the narrowest candidate that still owns the runtime orchestration described by the visible evidence.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -158,10 +159,10 @@
         "src/wasm-loader.js",
         "src/auth.js"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "freeform_risk",
+      "gold_answer_value": "Changes in src/main.js could regress page boot, auth/bootstrap wiring, or scene initialization across the landing experience.",
       "perspective": "regression_risk",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The bootstrap module touches multiple subsystems, so a fix there risks broad page-startup regressions.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -182,10 +183,10 @@
         "src/wasm-loader.js",
         "src/auth.js"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "abstain",
+      "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "abstention_insufficient_evidence",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "This perspective is the explicit honesty check and should stay abstaining because the packet intentionally withholds full execution proof.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -264,5 +265,6 @@
     "Use the attached machine-generated draft only to normalize answer kinds and abstention rules across bundles.",
     "Final gold answers must remain human-maintainer owned and prompt-visible."
   ],
-  "status": "pending_human_review"
+  "reviewer_id": "codex-gpt5-ai-review",
+  "status": "completed"
 }

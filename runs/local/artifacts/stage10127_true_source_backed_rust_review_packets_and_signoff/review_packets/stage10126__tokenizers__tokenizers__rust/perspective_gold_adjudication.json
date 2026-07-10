@@ -1,6 +1,7 @@
 {
   "bundle_gold_ready_for_eval": true,
   "bundle_id": "stage10126::tokenizers::tokenizers::rust",
+  "decision_rationale": "Admit, but as an abstention-heavy packet. The bundle is source-backed and perspective-diverse, but the exposed candidate set is looser than the visible wasm example evidence, so some perspectives should abstain rather than pretend the benchmark files are uniquely justified.",
   "draft_recommendation_path": "runs/local/artifacts/stage10127_true_source_backed_rust_review_packets_and_signoff/review_packets/stage10126__tokenizers__tokenizers__rust/perspective_gold_recommendation_draft.json",
   "language_family": "rust",
   "perspective_gold_answers": [
@@ -14,10 +15,10 @@
         "tokenizers/benches/llama3_benchmark.rs",
         "tokenizers/benches/unigram_benchmark.rs"
       ],
-      "gold_answer_kind": "candidate_path",
-      "gold_answer_value": "tokenizers/benches/bert_benchmark.rs",
+      "gold_answer_kind": "abstain",
+      "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "symptom_localization",
-      "reviewer_rationale": "The most direct visible change surface tied to the maintainer evidence is tokenizers/benches/bert_benchmark.rs.",
+      "reviewer_rationale": "The visible signal centers the unstable_wasm example, but the candidate set only lists benchmark files, so no singleton candidate path is honestly supported.",
       "selected_tests": [
         "tokenizers/examples/unstable_wasm/tests/web.rs"
       ],
@@ -41,9 +42,9 @@
         "tokenizers/benches/unigram_benchmark.rs"
       ],
       "gold_answer_kind": "visible_evidence_key",
-      "gold_answer_value": "candidate_change_surface",
+      "gold_answer_value": "symptom_or_call_path_analogue",
       "perspective": "evidence_citation",
-      "reviewer_rationale": "The strongest prompt-visible support comes from `candidate_change_surface`, which directly anchors the candidate surface.",
+      "reviewer_rationale": "The primary visible signal points to the unstable_wasm example and web test path rather than any one benchmark file.",
       "selected_tests": [
         "tokenizers/examples/unstable_wasm/tests/web.rs"
       ],
@@ -67,9 +68,9 @@
         "tokenizers/benches/unigram_benchmark.rs"
       ],
       "gold_answer_kind": "freeform_explanation",
-      "gold_answer_value": "Alternative paths lack the same direct visible linkage as tokenizers/benches/bert_benchmark.rs; the bounded packet ties the symptom and change surface most concretely to that path.",
+      "gold_answer_value": "None of the benchmark-file candidates is clearly justified by the visible wasm-example evidence, so the honest move is to reject forced elimination and preserve abstention.",
       "perspective": "alternative_hypothesis_elimination",
-      "reviewer_rationale": "Gold kept freeform because the task asks for elimination reasoning rather than a path token.",
+      "reviewer_rationale": "The packet supports saying why the candidate set is weakly matched to the visible symptom.",
       "selected_tests": [
         "tokenizers/examples/unstable_wasm/tests/web.rs"
       ],
@@ -92,10 +93,10 @@
         "tokenizers/benches/llama3_benchmark.rs",
         "tokenizers/benches/unigram_benchmark.rs"
       ],
-      "gold_answer_kind": "candidate_path",
-      "gold_answer_value": "tokenizers/benches/bert_benchmark.rs",
+      "gold_answer_kind": "abstain",
+      "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "patch_impact",
-      "reviewer_rationale": "The smallest visible behavior-changing intervention is anchored to tokenizers/benches/bert_benchmark.rs.",
+      "reviewer_rationale": "The bounded packet does not justify which benchmark-file edit would fix the wasm-facing behavior.",
       "selected_tests": [
         "tokenizers/examples/unstable_wasm/tests/web.rs"
       ],
@@ -121,7 +122,7 @@
       "gold_answer_kind": "selected_test",
       "gold_answer_value": "tokenizers/examples/unstable_wasm/tests/web.rs",
       "perspective": "verifier_outcome",
-      "reviewer_rationale": "The packet names tokenizers/examples/unstable_wasm/tests/web.rs as the clearest visible verifier tied to the likely fix.",
+      "reviewer_rationale": "That is the only concrete selected test attached to the packet and is directly visible in the verifier evidence.",
       "selected_tests": [
         "tokenizers/examples/unstable_wasm/tests/web.rs"
       ],
@@ -144,10 +145,10 @@
         "tokenizers/benches/llama3_benchmark.rs",
         "tokenizers/benches/unigram_benchmark.rs"
       ],
-      "gold_answer_kind": "candidate_path",
-      "gold_answer_value": "tokenizers/benches/bert_benchmark.rs",
+      "gold_answer_kind": "abstain",
+      "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "minimal_fix_selection",
-      "reviewer_rationale": "tokenizers/benches/bert_benchmark.rs is the narrowest visible intervention among the candidate paths that directly matches the localized fault surface.",
+      "reviewer_rationale": "Choosing among the benchmark files would be guesswork given the visible example-centric evidence.",
       "selected_tests": [
         "tokenizers/examples/unstable_wasm/tests/web.rs"
       ],
@@ -171,9 +172,9 @@
         "tokenizers/benches/unigram_benchmark.rs"
       ],
       "gold_answer_kind": "freeform_risk",
-      "gold_answer_value": "Changing tokenizers/benches/bert_benchmark.rs risks altering adjacent behavior covered by the same visible call path or verifier constraints, so surrounding flows should be rechecked.",
+      "gold_answer_value": "A fix around the unstable wasm tokenization path could regress web-facing tokenization behavior or benchmark assumptions that share the same tokenizer primitives.",
       "perspective": "regression_risk",
-      "reviewer_rationale": "Risk is bundle-specific but not reducible to a single candidate token.",
+      "reviewer_rationale": "The visible evidence supports risk reasoning even though it does not isolate one editable benchmark file.",
       "selected_tests": [
         "tokenizers/examples/unstable_wasm/tests/web.rs"
       ],
@@ -199,7 +200,7 @@
       "gold_answer_kind": "abstain",
       "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "abstention_insufficient_evidence",
-      "reviewer_rationale": "This perspective is the explicit honesty check, so abstention remains the gold answer.",
+      "reviewer_rationale": "This is the explicit honesty row and the packet genuinely supports abstention.",
       "selected_tests": [
         "tokenizers/examples/unstable_wasm/tests/web.rs"
       ],
@@ -280,6 +281,6 @@
     "Use the attached machine-generated draft only to normalize answer kinds and abstention rules across bundles.",
     "Final gold answers must remain human-maintainer owned and prompt-visible."
   ],
-  "reviewer_id": "codex_gpt5_ai_maintainer_review",
+  "reviewer_id": "codex-gpt5-ai-review",
   "status": "completed"
 }

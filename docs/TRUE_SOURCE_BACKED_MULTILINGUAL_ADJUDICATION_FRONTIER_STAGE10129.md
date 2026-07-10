@@ -1,8 +1,8 @@
 # Stage10129 True Source-Backed Multilingual Adjudication Frontier
 
 Passed: `True`
-Admitted bundles: `5`
-Blocked bundles: `3`
+Admitted bundles: `8`
+Blocked bundles: `0`
 
 Compiled a strict four-language adjudication frontier from the merged multilingual first wave, so admitted vs blocked status is now tracked on the exact bundle slice intended for the first honest same-surface comparison.
 

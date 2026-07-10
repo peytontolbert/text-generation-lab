@@ -1,20 +1,20 @@
 {
+  "admissible_for_same_surface_comparison": true,
   "bundle_id": "stage10126::tokenizers::tokenizers::rust",
   "challenge_families": {
-    "candidate_path_or_order_bias": false,
-    "cross_repo_analogue_leakage": false,
+    "candidate_path_or_order_bias": true,
+    "cross_repo_analogue_leakage": true,
     "hidden_reference_or_metadata_leakage": true,
     "perspective_paraphrase_collapse": true,
     "same_surface_fairness_for_future_gemma_comparison": true,
-    "template_and_surface_prior_shortcuts": false
+    "template_and_surface_prior_shortcuts": true
   },
+  "decision_rationale": "Admit with caution. The main risk is mismatch between the visible wasm-example signal and the benchmark-heavy candidate list. That risk is contained by explicitly abstaining on underdetermined localization and patch judgments instead of forcing a false singleton.",
   "language_family": "rust",
   "passed": true,
   "repo_id": "tokenizers",
   "required_human_action": "Audit whether the rust bundle's visible evidence, candidate paths, and perspective rows can be solved by real maintenance reasoning rather than priors or metadata leakage.",
-  "reviewer_notes": "Bundle admitted for same-surface comparison. Opaque-choice scoring should use the exact bounded packet, and the visible evidence is concrete enough that answers need not rely only on path-order or template priors.",
-  "status": "completed",
-  "admissible_for_same_surface_comparison": true,
-  "reviewer_id": "codex_gpt5_ai_maintainer_review",
-  "decision_rationale": "Bundle admitted for same-surface comparison. Opaque-choice scoring should use the exact bounded packet, and the visible evidence is concrete enough that answers need not rely only on path-order or template priors."
+  "reviewer_id": "codex-gpt5-ai-review",
+  "reviewer_notes": "AI maintainer adjudication performed in-repo on the bounded packet evidence, with abstention used wherever singleton localization or verifier claims were not honestly justified.",
+  "status": "completed"
 }

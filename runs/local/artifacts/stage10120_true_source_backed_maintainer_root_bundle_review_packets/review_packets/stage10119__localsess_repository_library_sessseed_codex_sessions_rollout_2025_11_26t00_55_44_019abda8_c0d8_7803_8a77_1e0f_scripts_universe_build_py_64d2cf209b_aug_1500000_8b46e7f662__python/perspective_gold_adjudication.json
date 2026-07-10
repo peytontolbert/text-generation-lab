@@ -1,6 +1,7 @@
 {
-  "bundle_gold_ready_for_eval": false,
+  "bundle_gold_ready_for_eval": true,
   "bundle_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python",
+  "decision_rationale": "Admit. The packet cleanly centers one build script, provides a direct selected test, and keeps the candidate set within maintainable neighboring analysis/build surfaces.",
   "draft_recommendation_path": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662__python/perspective_gold_recommendation_draft.json",
   "language_family": "python",
   "perspective_gold_answers": [
@@ -14,10 +15,10 @@
         "scripts/algorithms_seed_from_python_algorithms.py",
         "scripts/arxiv_domain_counts.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "candidate_path",
+      "gold_answer_value": "scripts/universe_build.py",
       "perspective": "symptom_localization",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The failing behavior and selected test explicitly center the universe build flow rather than the neighboring analysis scripts.",
       "selected_tests": [
         "scripts/test_paper_universe_build.py"
       ],
@@ -40,10 +41,10 @@
         "scripts/algorithms_seed_from_python_algorithms.py",
         "scripts/arxiv_domain_counts.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "visible_evidence_key",
+      "gold_answer_value": "verifier_and_test_constraint",
       "perspective": "evidence_citation",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The packet names a build-specific selected test that directly constrains the intended repair surface.",
       "selected_tests": [
         "scripts/test_paper_universe_build.py"
       ],
@@ -66,10 +67,10 @@
         "scripts/algorithms_seed_from_python_algorithms.py",
         "scripts/arxiv_domain_counts.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "freeform_explanation",
+      "gold_answer_value": "The analysis helpers consume outputs from the build flow, but the selected test and primary signal point back to the build script itself.",
       "perspective": "alternative_hypothesis_elimination",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The neighbors are consumers or side analyses, not the owner of the failing build behavior.",
       "selected_tests": [
         "scripts/test_paper_universe_build.py"
       ],
@@ -92,10 +93,10 @@
         "scripts/algorithms_seed_from_python_algorithms.py",
         "scripts/arxiv_domain_counts.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "candidate_path",
+      "gold_answer_value": "scripts/universe_build.py",
       "perspective": "patch_impact",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "Changing the build script is the most direct way to make the named build test pass.",
       "selected_tests": [
         "scripts/test_paper_universe_build.py"
       ],
@@ -118,10 +119,10 @@
         "scripts/algorithms_seed_from_python_algorithms.py",
         "scripts/arxiv_domain_counts.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "selected_test",
+      "gold_answer_value": "scripts/test_paper_universe_build.py",
       "perspective": "verifier_outcome",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "That selected test is the concrete verifier named in the bounded packet.",
       "selected_tests": [
         "scripts/test_paper_universe_build.py"
       ],
@@ -144,10 +145,10 @@
         "scripts/algorithms_seed_from_python_algorithms.py",
         "scripts/arxiv_domain_counts.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "candidate_path",
+      "gold_answer_value": "scripts/universe_build.py",
       "perspective": "minimal_fix_selection",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "It is the narrowest candidate aligned with the selected test and primary signal.",
       "selected_tests": [
         "scripts/test_paper_universe_build.py"
       ],
@@ -170,10 +171,10 @@
         "scripts/algorithms_seed_from_python_algorithms.py",
         "scripts/arxiv_domain_counts.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "freeform_risk",
+      "gold_answer_value": "A universe-build fix could regress downstream dataset assembly or graph-stat generation that depends on the same build outputs.",
       "perspective": "regression_risk",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "Build pipeline changes can alter artifacts consumed by adjacent analysis scripts.",
       "selected_tests": [
         "scripts/test_paper_universe_build.py"
       ],
@@ -196,10 +197,10 @@
         "scripts/algorithms_seed_from_python_algorithms.py",
         "scripts/arxiv_domain_counts.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "abstain",
+      "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "abstention_insufficient_evidence",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The honesty row remains abstaining because the packet does not provide full executable confirmation.",
       "selected_tests": [
         "scripts/test_paper_universe_build.py"
       ],
@@ -280,5 +281,6 @@
     "Use the attached machine-generated draft only to normalize answer kinds and abstention rules across bundles.",
     "Final gold answers must remain human-maintainer owned and prompt-visible."
   ],
-  "status": "pending_human_review"
+  "reviewer_id": "codex-gpt5-ai-review",
+  "status": "completed"
 }

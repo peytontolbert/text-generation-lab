@@ -1,6 +1,7 @@
 {
   "bundle_gold_ready_for_eval": true,
   "bundle_id": "stage10126::candle::candle-core::rust",
+  "decision_rationale": "Admit. The packet is source-backed, has a coherent candidate set across core backend and examples, and supports maintainer-style reasoning even though it lacks selected tests, which makes verifier claims abstention-oriented.",
   "draft_recommendation_path": "runs/local/artifacts/stage10127_true_source_backed_rust_review_packets_and_signoff/review_packets/stage10126__candle__candle-core__rust/perspective_gold_recommendation_draft.json",
   "language_family": "rust",
   "perspective_gold_answers": [
@@ -17,7 +18,7 @@
       "gold_answer_kind": "candidate_path",
       "gold_answer_value": "candle-core/src/accelerate.rs",
       "perspective": "symptom_localization",
-      "reviewer_rationale": "The most direct visible change surface tied to the maintainer evidence is candle-core/src/accelerate.rs.",
+      "reviewer_rationale": "The visible signal and candidate surface focus the issue on the core accelerate backend rather than the example entrypoints.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -40,7 +41,7 @@
       "gold_answer_kind": "visible_evidence_key",
       "gold_answer_value": "candidate_change_surface",
       "perspective": "evidence_citation",
-      "reviewer_rationale": "The strongest prompt-visible support comes from `candidate_change_surface`, which directly anchors the candidate surface.",
+      "reviewer_rationale": "The bounded packet directly exposes the accelerate core file as a candidate change surface.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -61,9 +62,9 @@
         "candle-core/src/backend.rs"
       ],
       "gold_answer_kind": "freeform_explanation",
-      "gold_answer_value": "Alternative paths lack the same direct visible linkage as candle-core/src/accelerate.rs; the bounded packet ties the symptom and change surface most concretely to that path.",
+      "gold_answer_value": "The example binaries exercise the backend, but the visible evidence points to the backend implementation itself as the behavior owner.",
       "perspective": "alternative_hypothesis_elimination",
-      "reviewer_rationale": "Gold kept freeform because the task asks for elimination reasoning rather than a path token.",
+      "reviewer_rationale": "Core backend code is better supported than example-callers as the repair surface.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -86,7 +87,7 @@
       "gold_answer_kind": "candidate_path",
       "gold_answer_value": "candle-core/src/accelerate.rs",
       "perspective": "patch_impact",
-      "reviewer_rationale": "The smallest visible behavior-changing intervention is anchored to candle-core/src/accelerate.rs.",
+      "reviewer_rationale": "A backend fix is the most direct way to change the exposed low-level behavior without editing only demonstration entrypoints.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -106,10 +107,10 @@
         "candle-core/src/accelerate.rs",
         "candle-core/src/backend.rs"
       ],
-      "gold_answer_kind": "freeform_verifier_outcome",
-      "gold_answer_value": "The directly implicated visible check should stop failing once the targeted candidate path is corrected.",
+      "gold_answer_kind": "abstain",
+      "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "verifier_outcome",
-      "reviewer_rationale": "No named selected test was supplied, so the verifier outcome remains freeform but still bounded to the visible packet.",
+      "reviewer_rationale": "No selected tests or concrete verifier targets are attached, so a specific verifier claim would overreach.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -132,7 +133,7 @@
       "gold_answer_kind": "candidate_path",
       "gold_answer_value": "candle-core/src/accelerate.rs",
       "perspective": "minimal_fix_selection",
-      "reviewer_rationale": "candle-core/src/accelerate.rs is the narrowest visible intervention among the candidate paths that directly matches the localized fault surface.",
+      "reviewer_rationale": "It is the narrowest backend candidate aligned with the visible symptom and candidate-change evidence.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -153,9 +154,9 @@
         "candle-core/src/backend.rs"
       ],
       "gold_answer_kind": "freeform_risk",
-      "gold_answer_value": "Changing candle-core/src/accelerate.rs risks altering adjacent behavior covered by the same visible call path or verifier constraints, so surrounding flows should be rechecked.",
+      "gold_answer_value": "Editing accelerate.rs could regress feature-gated linear algebra behavior or backend compatibility across accelerate, CPU, and other execution paths.",
       "perspective": "regression_risk",
-      "reviewer_rationale": "Risk is bundle-specific but not reducible to a single candidate token.",
+      "reviewer_rationale": "Backend fixes can have broad numerical and platform-specific impact.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -178,7 +179,7 @@
       "gold_answer_kind": "abstain",
       "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "abstention_insufficient_evidence",
-      "reviewer_rationale": "This perspective is the explicit honesty check, so abstention remains the gold answer.",
+      "reviewer_rationale": "The honesty row remains abstaining because the packet withholds executable confirmation.",
       "selected_tests": [],
       "visible_evidence_keys": [
         "algorithmic_background_reference",
@@ -256,6 +257,6 @@
     "Use the attached machine-generated draft only to normalize answer kinds and abstention rules across bundles.",
     "Final gold answers must remain human-maintainer owned and prompt-visible."
   ],
-  "reviewer_id": "codex_gpt5_ai_maintainer_review",
+  "reviewer_id": "codex-gpt5-ai-review",
   "status": "completed"
 }

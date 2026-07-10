@@ -2,28 +2,653 @@
   "decision_boundary": "Only admit first-wave multilingual bundles with completed rubric, anti-cheat, and perspective-gold adjudication.",
   "failures": [],
   "metrics": {
-    "admitted_bundles": 5,
+    "admitted_bundles": 8,
     "admitted_language_counts": {
-      "c_cpp": 1,
+      "c_cpp": 2,
       "python": 2,
-      "rust": 2
-    },
-    "blocked_bundles": 3,
-    "blocked_language_counts": {
-      "c_cpp": 1,
+      "rust": 2,
       "web_js_ts_html": 2
     },
-    "blocked_reason_counts": {
-      "anti_cheat_not_marked_admissible": 3,
-      "gold_bundle_not_ready": 3,
-      "rubric_bundle_not_marked_valid": 3
-    },
+    "blocked_bundles": 0,
+    "blocked_language_counts": {},
+    "blocked_reason_counts": {},
     "frontier_bundles_seen": 8
   },
   "name": "stage10129_true_source_backed_multilingual_adjudication_frontier",
   "passed": true,
-  "row_count": 5,
+  "row_count": 8,
   "rows": [
+    {
+      "anti_cheat_review": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662__web_js_ts_html/anti_cheat_review_card.json",
+      "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+      "candidate_paths": [
+        "index.html",
+        "src/main.js",
+        "src/concepts/concept1-mirror-monitor.js",
+        "src/waterDropEffect.js",
+        "src/wasm-loader.js",
+        "src/auth.js"
+      ],
+      "language_family": "web_js_ts_html",
+      "maintainer_visible_evidence": {
+        "algorithmic_background_reference": [
+          {
+            "distance_from_seed": 3,
+            "path": "AnimatedDrawings/AnimatedDrawings.edges.jsonl",
+            "retrieval_reason": "box|animateddrawings.edges.jsonl",
+            "source_type": "paper",
+            "text": "{\"repo_id\": \"AnimatedDrawings\", \"src\": \"py:animated_drawings.model.floor\", \"dst\": \"py:animated_drawings.model.time_manager.__init__\", \"type\": \"calls\"}\n{\"repo_id\": \"AnimatedDrawings\", \"src\": \"py:animated_drawings.model.floor\", \"dst\": \"py:animated_drawings.model.bvh.__init__\", \"type\": \"calls\"}\n{\"repo_id\": \"AnimatedDrawings\", \"src\": \"py:animated_drawings.model.floor\", \"dst\": \"py:animated_drawings.model.floor.__init__\", \"type\": \"calls\"}\n{\"repo_id\": \"AnimatedDrawings\", \"src\": \"py:animated_drawings.model.floor\", \"dst\": \"py:animated_drawings.model.transform.offset\", \"type\": \"calls\"}\n{\"repo_id\": \"AnimatedDrawings\", \"src\": \"py:animated_drawings.model.floor\", \"dst\": \"py:animated_drawings.model.transform.add_child\", \"type\": \"calls\"}\n{\"repo_id\": \"AnimatedDrawings\", \"src\": \"py:animated_drawings.model.arap\", \"dst\": \"py:animated_drawings.model.arap.ARAP\", \"type\": \"owns\"}\n{\"repo_id\": \"AnimatedDrawings\", \"src\": \"py:animated_drawings.model.arap\", \"dst\": \"py:animated_drawings.model.arap.plot_mesh\", \"type\": \"owns\"}\n{\"repo_id\": \"AnimatedDrawings\", \"src\": \"py:animated_drawings.model.arap\", \"dst\": \"py:animated_drawings.model.arap.__init__\", \"type\": \"owns\"}\n{\"repo_id\": \"AnimatedDrawings\", \"src\": \"py:an..."
+          }
+        ],
+        "candidate_change_surface": [
+          {
+            "distance_from_seed": 0,
+            "path": "index.html",
+            "retrieval_reason": "resolved_session_change",
+            "source_type": "local_repo",
+            "text": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>bddy | Private AI Copilot for Technical Interviews & Cognitive Support</title>\n    <meta name=\"description\"\n        content=\"Stop stress-induced brain freeze. bddy provides real-time, local-first memory hints and deep technical answers during high-stakes conversations. Secure, private, and neuro-inclusive.\">\n    <link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\">\n    <link rel=\"alternate icon\" href=\"/favicon.ico\">\n\n    <!-- Google tag (gtag.js) -->\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-G1Z16NHLC6\"></script>\n    <script>\n        window.dataLayer = window.dataLayer || [];\n        function gtag() { dataLayer.push(arguments); }\n        gtag('js', new Date());\n\n        gtag('config', 'G-G1Z16NHLC6');\n    </script>\n\n    <script type=\"application/ld+json\">\n    {\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"SoftwareApplication\",\n      \"name\": \"bddy Vision\",\n      \"applicationCategory\": \"ProductivityApplication\",\n      \"operatingSystem\": \"macOS, Windows\",\n      \"offers\": {\n        \"@type\"..."
+          },
+          {
+            "distance_from_seed": 0,
+            "path": "src/main.js",
+            "retrieval_reason": "resolved_session_change",
+            "source_type": "local_repo",
+            "text": "import * as THREE from 'three';\nimport { Concept1MirrorMonitor } from './concepts/concept1-mirror-monitor.js';\nimport { WaterDropEffect } from './waterDropEffect.js';\nimport { initWASM, WASM } from './wasm-loader.js';\nimport { AuthManager } from './auth.js';\nimport { SupabaseSessionRelay } from './supabase.js';\nimport { SubscriptionManager } from './subscription.js';\n\nclass App {\n    constructor() {\n        this.currentConcept = null;\n        this.waterDropEffect = null;\n        this.lastTime = performance.now();\n        this.scrollProgress = 0;\n        this.scrollSections = [];\n        \n        // 3D elements that respond to scroll\n        this.scroll3DElements = [];\n\n        // Auth + subscription helpers\n        const envMode = (typeof import.meta !== 'undefined' && import.meta.env?.MODE) ||\n            (typeof process !== 'undefined' && process?.env?.NODE_ENV) ||\n            '';\n        this.isDevMode = envMode ? envMode !== 'production' : true;\n        this.authManager = new AuthManager();\n        this.supabaseRelay = new SupabaseSessionRelay();\n        this.subscriptionManager = new SubscriptionManager(this.authManager);\n        this.supabaseState = {\n            status: '..."
+          }
+        ],
+        "external_analogue_reference": [
+          {
+            "distance_from_seed": 2,
+            "path": "AI-For-Beginners/.devcontainer/add-notice.sh",
+            "retrieval_reason": "local|add-notice.sh",
+            "source_type": "repo",
+            "text": "# Display a notice when not running in GitHub Codespaces\n\ncat << 'EOF' > /usr/local/etc/vscode-dev-containers/conda-notice.txt\nWhen using \"conda\" from outside of GitHub Codespaces, note the Anaconda repository\ncontains restrictions on commercial use that may impact certain organizations. See\nhttps://aka.ms/vscode-remote/conda/miniconda\n\nEOF\n\nnotice_script=\"$(cat << 'EOF'\nif [ -t 1 ] && [ \"${IGNORE_NOTICE}\" != \"true\" ] && [ \"${TERM_PROGRAM}\" = \"vscode\" ] && [ \"${CODESPACES}\" != \"true\" ] && [ ! -f \"$HOME/.config/vscode-dev-containers/conda-notice-already-displayed\" ]; then\n    cat \"/usr/local/etc/vscode-dev-containers/conda-notice.txt\"\n    mkdir -p \"$HOME/.config/vscode-dev-containers\"\n    ((sleep 10s; touch \"$HOME/.config/vscode-dev-containers/conda-notice-already-displayed\") &)\nfi\nEOF\n)\"\n\necho \"${notice_script}\" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc"
+          }
+        ],
+        "nearby_definition_or_usage_context": [
+          {
+            "distance_from_seed": 1,
+            "path": "src/concepts/concept1-mirror-monitor.js",
+            "retrieval_reason": "repo_local_linked_usage_context",
+            "source_type": "local_repo",
+            "text": "import * as THREE from 'three';\n\nexport class Concept1MirrorMonitor {\n    constructor(scene, camera, renderer) {\n        this.scene = scene;\n        this.camera = camera;\n        this.renderer = renderer;\n        \n        this.cameraRotation = { x: 0, y: 0 };\n        this.cameraDistance = 3; // Start at closest zoom (min distance = closest)\n        this.minDistance = 1;   // Closest (most zoomed in)\n        this.maxDistance = 15;   // Furthest (most zoomed out)\n        this.scrollProgress = 0;\n        \n        this.init();\n    }\n\n    init() {\n        // Create desk\n        const deskGeometry = new THREE.BoxGeometry(6, 0.2, 3);\n        const deskMaterial = new THREE.MeshStandardMaterial({ \n            color: 0x2a2a2a,\n            roughness: 0.8,\n            metalness: 0.2\n        });\n        this.desk = new THREE.Mesh(deskGeometry, deskMaterial);\n        this.desk.position.set(0, 0, 0);\n        this.desk.receiveShadow = true;\n        this.scene.add(this.desk);\n\n        // Create keyboard\n        const keyboardGeometry = new THREE.BoxGeometry(1.2, 0.05, 0.4);\n        const keyboardMaterial = new THREE.MeshStandardMaterial({ color: 0x1a1a1a });\n        this.keyboard = new THREE.Mes..."
+          },
+          {
+            "distance_from_seed": 1,
+            "path": "src/waterDropEffect.js",
+            "retrieval_reason": "repo_local_linked_usage_context",
+            "source_type": "local_repo",
+            "text": "import * as THREE from 'three';\n\nexport class WaterDropEffect {\n    constructor(scene, camera, renderer) {\n        this.scene = scene;\n        this.camera = camera;\n        this.renderer = renderer;\n        this.isActive = true;\n        this.progress = 0;\n        this.startTime = performance.now();\n        \n        // Create high-resolution render target for 4K quality\n        const pixelRatio = Math.min(window.devicePixelRatio, 3);\n        const renderWidth = Math.floor(window.innerWidth * pixelRatio);\n        const renderHeight = Math.floor(window.innerHeight * pixelRatio);\n        \n        this.sceneRenderTarget = new THREE.WebGLRenderTarget(\n            renderWidth,\n            renderHeight\n        );\n        this.sceneRenderTarget.texture.minFilter = THREE.LinearFilter;\n        this.sceneRenderTarget.texture.magFilter = THREE.LinearFilter;\n        this.sceneRenderTarget.texture.generateMipmaps = false;\n        \n        this.init();\n    }\n\n    updateWaterMeshGeometry() {\n        // Calculate size to cover entire viewport\n        const distance = 1.0;\n        const fov = this.camera.fov * (Math.PI / 180);\n        const height = 2 * Math.tan(fov / 2) * distance;\n        const..."
+          },
+          {
+            "distance_from_seed": 1,
+            "path": "src/wasm-loader.js",
+            "retrieval_reason": "repo_local_linked_usage_context",
+            "source_type": "local_repo",
+            "text": "// WASM module loader and wrapper\n// Provides easy-to-use JavaScript interface for WASM functions\n\nlet wasmModule = null;\nlet wasmInstance = null;\n\n/**\n * Initialize and load the WASM module\n */\nexport async function initWASM() {\n  if (wasmInstance) {\n    return wasmInstance;\n  }\n\n  try {\n    // Try different paths for dev and production\n    const paths = [\n      '/math.wasm',           // Production (root)\n      '/assets/math.wasm',    // Alternative production path\n      '/dist/math.wasm'       // Development\n    ];\n    \n    let wasmResponse = null;\n    let wasmPath = null;\n    \n    for (const path of paths) {\n      try {\n        wasmResponse = await fetch(path);\n        if (wasmResponse.ok) {\n          wasmPath = path;\n          break;\n        }\n      } catch (e) {\n        // Try next path\n        continue;\n      }\n    }\n    \n    if (!wasmResponse || !wasmResponse.ok) {\n      throw new Error(`Failed to load WASM from any path`);\n    }\n    \n    const wasmBytes = await wasmResponse.arrayBuffer();\n    const wasmModule_compiled = await WebAssembly.compile(wasmBytes);\n    wasmInstance = await WebAssembly.instantiate(wasmModule_compiled, {\n      env: {\n        // Add any required e..."
+          }
+        ],
+        "symptom_or_call_path_analogue": [
+          {
+            "distance_from_seed": 3,
+            "path": "AletheiaResearch--GPT-5.3-Codex-Spark-Codex/rollout-2026-06-23T20-34-05-019ef630-ab63-7f02-9b03-94261a3c6c30.jsonl",
+            "retrieval_reason": "box_shadow|shadow|rollout-2026-06-23t20-34-05-019ef630-ab63-7f02-9b03-94261a3c6c30.jsonl",
+            "source_type": "dataset",
+            "text": "timestamp : 2026-06-23T20:34:21.317Z type : response_item payload : type : function_call name : exec_command arguments : cmd : cat index.html EOF n doctype html n html lang en n head n meta charset UTF-8 / n meta name viewport content width device-width initial-scale 1.0 / n title Community Cleanup Sites /title n link n rel stylesheet n href https://unpkg.com/leaflet 1.9.4/dist/leaflet.css n integrity sha256-o9N1jR7g1G0wJgS2f5Q4fS9Xh0g Q2v8sD2fT5f2A4c n crossorigin n / n style n :root n --bg: f4f6ff n --panel: ffffff n --panel-soft: f7f9fc n --text: 0f172a n --muted: 4b5563 n --line: e2e8f0 n --primary: 0f766e n --primary-2: 14b8a6 n --warn: f59e0b n --danger: ef4444 n --good: 22c55e n --shadow: 0 18px 40px rgba 15 23 42 0.08 n --radius: 14px n --font-head: Manrope Trebuchet MS system-ui sans-serif n --font-body: Space Grotesk Trebuchet MS system-ui sans-serif n n n import url https://fonts.googleapis.com/css2 family Manrope:wght 600 800 family Space Grotesk:wght 400 500 700 display swap n n n box-sizing: border-box n n n body n margin: 0 n font-family: var --font-body n background: radial-gradient circle at 10 0 e8f0ff 0 var --bg 45 fff 100 n color: var --text n min-height: 100..."
+          },
+          {
+            "distance_from_seed": 3,
+            "path": "AletheiaResearch--GPT-5.3-Codex-Spark-Codex/rollout-2026-06-23T20-34-05-019ef630-ab76-7692-96bf-bc0d6afa1872.jsonl",
+            "retrieval_reason": "box_shadow|shadow|rollout-2026-06-23t20-34-05-019ef630-ab76-7692-96bf-bc0d6afa1872.jsonl",
+            "source_type": "dataset",
+            "text": "timestamp : 2026-06-23T20:34:34.514Z type : response_item payload : type : custom_tool_call status : completed call_id : call_eWvnJIDeVxGvTYNAmXUadReG name : apply_patch input : Begin Patch n Add File: /workspace/index.html n doctype html n html lang en n head n meta charset UTF-8 / n meta name viewport content width device-width initial-scale 1.0 / n title Notion-Style Notes /title n style n :root n --bg-1: f2f5fb n --bg-2: e9efff n --panel: ffffff n --line: dce6ff n --text: 14213d n --text-muted: 566480 n --accent: 2563eb n --accent-soft: e0ebff n --danger: b91c1c n --radius: 14px n --shadow: 0 14px 35px rgba 11 32 63 0.09 n --mono: JetBrains Mono SFMono-Regular Fira Code monospace n --sans: Poppins Nunito Sans Segoe UI sans-serif n --ease: cubic-bezier 0.16 1 0.3 1 n n n n box-sizing: border-box n n n body n margin: 0 n min-height: 100vh n background: n radial-gradient 1400px 500px at 12 0 dbe8ff 0 transparent 52 n linear-gradient 135deg var --bg-1 var --bg-2 n color: var --text n font-family: var --sans n animation: appFade 0.7s var --ease both n n n .app-shell n max-width: 1280px n margin: 24px auto n height: calc 100vh - 48px n display: grid n grid-template-columns: 286px..."
+          }
+        ],
+        "verifier_and_test_constraint": [
+          {
+            "distance_from_seed": 1,
+            "path": "src/concepts/concept1-mirror-monitor.js",
+            "retrieval_reason": "repo_local_runtime_constraint",
+            "source_type": "local_repo",
+            "text": "import * as THREE from 'three';\n\nexport class Concept1MirrorMonitor {\n    constructor(scene, camera, renderer) {\n        this.scene = scene;\n        this.camera = camera;\n        this.renderer = renderer;\n        \n        this.cameraRotation = { x: 0, y: 0 };\n        this.cameraDistance = 3; // Start at closest zoom (min distance = closest)\n        this.minDistance = 1;   // Closest (most zoomed in)\n        this.maxDistance = 15;   // Furthest (most zoomed out)\n        this.scrollProgress = 0;\n        \n        this.init();\n    }\n\n    init() {\n        // Create desk\n        const deskGeometry = new THREE.BoxGeometry(6, 0.2, 3);\n        const deskMaterial = new THREE.MeshStandardMaterial({ \n            color: 0x2a2a2a,\n            roughness: 0.8,\n            metalness: 0.2\n        });\n        this.desk = new THREE.Mesh(deskGeometry, deskMaterial);\n        this.desk.position.set(0, 0, 0);\n        this.desk.receiveShadow = true;\n        this.scene.add(this.desk);\n\n        // Create keyboard\n        const keyboardGeometry = new THREE.BoxGeometry(1.2, 0.05, 0.4);\n        const keyboardMaterial = new THREE.MeshStandardMaterial({ color: 0x1a1a1a });\n        this.keyboard = new THREE.Mes..."
+          }
+        ]
+      },
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662__web_js_ts_html/perspective_gold_adjudication.json",
+      "perspective_rows": [
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "symptom_localization",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "src/main.js",
+              "src/concepts/concept1-mirror-monitor.js",
+              "src/waterDropEffect.js",
+              "src/wasm-loader.js",
+              "src/auth.js"
+            ],
+            "selected_tests": [],
+            "task": "Choose the most likely edit target from the visible failure and trace evidence.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "evidence_citation",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "src/main.js",
+              "src/concepts/concept1-mirror-monitor.js",
+              "src/waterDropEffect.js",
+              "src/wasm-loader.js",
+              "src/auth.js"
+            ],
+            "selected_tests": [],
+            "task": "Name the visible fact that best supports the chosen edit target.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "alternative_hypothesis_elimination",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "src/main.js",
+              "src/concepts/concept1-mirror-monitor.js",
+              "src/waterDropEffect.js",
+              "src/wasm-loader.js",
+              "src/auth.js"
+            ],
+            "selected_tests": [],
+            "task": "Explain why a plausible alternative target is less justified.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "patch_impact",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "src/main.js",
+              "src/concepts/concept1-mirror-monitor.js",
+              "src/waterDropEffect.js",
+              "src/wasm-loader.js",
+              "src/auth.js"
+            ],
+            "selected_tests": [],
+            "task": "Compare candidate edits by likely behavior change and risk.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "verifier_outcome",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "src/main.js",
+              "src/concepts/concept1-mirror-monitor.js",
+              "src/waterDropEffect.js",
+              "src/wasm-loader.js",
+              "src/auth.js"
+            ],
+            "selected_tests": [],
+            "task": "Predict which visible test or verification constraint should change if the fix is correct.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "minimal_fix_selection",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "src/main.js",
+              "src/concepts/concept1-mirror-monitor.js",
+              "src/waterDropEffect.js",
+              "src/wasm-loader.js",
+              "src/auth.js"
+            ],
+            "selected_tests": [],
+            "task": "Choose the smallest maintainable intervention supported by the evidence.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "regression_risk",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "src/main.js",
+              "src/concepts/concept1-mirror-monitor.js",
+              "src/waterDropEffect.js",
+              "src/wasm-loader.js",
+              "src/auth.js"
+            ],
+            "selected_tests": [],
+            "task": "Identify what the likely fix might break or destabilize.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "abstention_insufficient_evidence",
+          "prompt_contract": {
+            "abstention_option_required": true,
+            "candidate_paths": [
+              "index.html",
+              "src/main.js",
+              "src/concepts/concept1-mirror-monitor.js",
+              "src/waterDropEffect.js",
+              "src/wasm-loader.js",
+              "src/auth.js"
+            ],
+            "selected_tests": [],
+            "task": "Decide whether the visible evidence is enough for a singleton answer or whether abstention is more honest.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        }
+      ],
+      "priority_score": 64,
+      "repo_id": "bddy_website",
+      "rubric_review": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662__web_js_ts_html/expert_maintainer_rubric_review.json",
+      "seed_paths": [
+        "src/main.js",
+        "index.html"
+      ],
+      "selected_tests": [],
+      "wave_rank": 1
+    },
+    {
+      "anti_cheat_review": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662__web_js_ts_html/anti_cheat_review_card.json",
+      "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html",
+      "candidate_paths": [
+        "index.html",
+        "package.json",
+        "vite.config.js"
+      ],
+      "language_family": "web_js_ts_html",
+      "maintainer_visible_evidence": {
+        "algorithmic_background_reference": [
+          {
+            "distance_from_seed": 3,
+            "path": "AgentLab/structured/repo_skills_miner.skills.jsonl",
+            "retrieval_reason": "width|repo_skills_miner.skills.jsonl",
+            "source_type": "paper",
+            "text": "{\"repo_id\": \"AgentLab\", \"source\": \"repo_skills_miner\", \"miner_repo_id\": \"fd0623f6d15b7c3aa3217601\", \"miner_revision_id\": \"606ddfdd8c86c5a8b4cd171d\", \"skill_id\": \"68d7b88af8bb0a35dad88898\", \"kind\": \"function\", \"module\": \"src.agentlab.agents.agent_utils\", \"qualname\": \"draw_mouse_pointer\", \"signature\": \"(image, x, y)\", \"file_path\": \"src/agentlab/agents/agent_utils.py\", \"line_start\": 10, \"line_end\": 37, \"doc_text\": \"name: draw_mouse_pointer\\nkind: function\\nmodule: src.agentlab.agents.agent_utils\\nqualname: draw_mouse_pointer\\nsignature: (image, x, y)\\n\\ndocstring:\\nDraws a semi-transparent mouse pointer at (x, y) on the image.\\nReturns a new image with the pointer drawn.\\n\\nArgs:\\n    image: The image to draw the mouse pointer on.\\n    x: The x coordinate for the mouse pointer.\\n    y: The y coordinate for the mouse pointer.\\n\\nReturns:\\n    A new image with the mouse pointer drawn.\\n\", \"snippet\": \"def draw_mouse_pointer(image: Image.Image, x: int, y: int) -> Image.Image:\\n    \\\"\\\"\\\"\\n    Draws a semi-transparent mouse pointer at (x, y) on the image.\\n    Returns a new image with the pointer drawn.\\n\\n    Args:\\n        image: The image to draw the mouse pointer on.\\n        x: The..."
+          }
+        ],
+        "candidate_change_surface": [
+          {
+            "distance_from_seed": 0,
+            "path": "index.html",
+            "retrieval_reason": "resolved_session_change",
+            "source_type": "local_repo",
+            "text": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>bddy | Private AI Copilot for Technical Interviews & Cognitive Support</title>\n    <meta name=\"description\"\n        content=\"Stop stress-induced brain freeze. bddy provides real-time, local-first memory hints and deep technical answers during high-stakes conversations. Secure, private, and neuro-inclusive.\">\n    <link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\">\n    <link rel=\"alternate icon\" href=\"/favicon.ico\">\n\n    <!-- Google tag (gtag.js) -->\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-G1Z16NHLC6\"></script>\n    <script>\n        window.dataLayer = window.dataLayer || [];\n        function gtag() { dataLayer.push(arguments); }\n        gtag('js', new Date());\n\n        gtag('config', 'G-G1Z16NHLC6');\n    </script>\n\n    <script type=\"application/ld+json\">\n    {\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"SoftwareApplication\",\n      \"name\": \"bddy Vision\",\n      \"applicationCategory\": \"ProductivityApplication\",\n      \"operatingSystem\": \"macOS, Windows\",\n      \"offers\": {\n        \"@type\"..."
+          }
+        ],
+        "external_analogue_reference": [
+          {
+            "distance_from_seed": 2,
+            "path": "AI-Papers-of-the-Week/years/2023.md",
+            "retrieval_reason": "edit|2023.md",
+            "source_type": "repo",
+            "text": "| 9) **MedAgents** - A collaborative multi-round framework for medical reasoning that uses role-playing LLM agents to improve accuracy and reasoning depth.  <br>\u25cf Multi-agent deliberation: Multiple LLM agents take on specialist roles (e.g., different medical specialties) and deliberate in rounds over a case.  <br>\u25cf Role-playing: Each agent has a defined role-play prompt that scopes its expertise and reasoning style, producing more diverse intermediate hypotheses.  <br>\u25cf Consensus protocol: Agents iterate until reaching consensus or until a moderator resolves disagreements, producing a final answer with rationale.  <br>\u25cf Reasoning gains: Improves accuracy and reasoning quality on medical QA benchmarks compared to single-agent baselines at matched compute. | [Paper](https://arxiv.org/abs/2311.10537), [Tweet](https://x.com/omarsar0/status/1726627951582511135?s=20) |\n| 10) **T\u00dcLU 2** - Allen AI's T\u00dcLU 2 is a suite of improved open instruction-tuned LLMs and an accompanying study of adaptation best practices.  <br>\u25cf Open suite: Releases open models that match or exceed GPT-3.5-turbo-0301 on several benchmarks, a meaningful milestone for the open ecosystem at the time.  <br>\u25cf Post-tra..."
+          }
+        ],
+        "nearby_definition_or_usage_context": [
+          {
+            "distance_from_seed": 1,
+            "path": "package.json",
+            "retrieval_reason": "repo_local_linked_usage_context",
+            "source_type": "local_repo",
+            "text": "{\n  \"name\": \"bddy-concepts\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Three.js showcase for bddy interview assistant concepts\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build:wasm\": \"node build-wasm.js\",\n    \"build\": \"npm run build:wasm && vite build\",\n    \"postbuild\": \"node copy-config.js\",\n    \"preview\": \"vite preview\"\n  },\n  \"dependencies\": {\n    \"three\": \"^0.160.0\",\n    \"terser\": \"^5.44.1\"\n  },\n  \"devDependencies\": {\n    \"terser\": \"^5.44.1\",\n    \"vite\": \"^5.0.0\",\n    \"assemblyscript\": \"^0.27.0\"\n  }\n}"
+          },
+          {
+            "distance_from_seed": 1,
+            "path": "vite.config.js",
+            "retrieval_reason": "repo_local_linked_usage_context",
+            "source_type": "local_repo",
+            "text": "import { defineConfig } from 'vite';\n\nexport default defineConfig({\n  envPrefix: ['VITE_', 'CLIENT_'],\n  build: {\n    outDir: 'dist',\n    assetsDir: 'assets',\n    sourcemap: false,\n    minify: 'terser',\n    terserOptions: {\n      compress: {\n        drop_console: false\n      }\n    },\n    rollupOptions: {\n      output: {\n        // Ensure WASM files are copied to dist root\n        assetFileNames: (assetInfo) => {\n          if (assetInfo.name && assetInfo.name.endsWith('.wasm')) {\n            return '[name][extname]';\n          }\n          return 'assets/[name]-[hash][extname]';\n        }\n      }\n    }\n  },\n  server: {\n    port: 3000,\n    open: true\n  }\n});"
+          }
+        ],
+        "symptom_or_call_path_analogue": [
+          {
+            "distance_from_seed": 3,
+            "path": "11-47--gods_universe_codex_distill_god_seed_25k/recursive_seed_ai_25k.jsonl",
+            "retrieval_reason": "high_stakes|recursive_seed_ai_25k.jsonl",
+            "source_type": "dataset",
+            "text": "id : seedai_864544 category : safety difficulty : expert instruction : A Recursive Seed AI wants to pursue achieve 95 tool-calling accuracy but must strictly obey the constraint: keep human oversight in the loop for high-stakes changes . n nDesign a complete protocol that allows aggressive self-improvement while guaranteeing the constraint is never violated. Include: n- Technical safeguards training objectives inference-time checks monitoring n- Organizational/process safeguards n- A red team simulation the model runs on itself n- What to do if the improvement process starts to conflict with the constraint n nAll recommendations must be implementable with current open-source tools. input : Improvement target: achieve 95 tool-calling accuracy nNon-negotiable constraint: keep human oversight in the loop for high-stakes changes nModel: Qwen2.5-72B class output : Safety-Constrained Recursive Self-Improvement Protocol n n Core Philosophy : Improvement at all costs is the fastest path to misalignment. We optimize for safe improvement velocity. n n Technical Safeguards: n n1. Constitutional Layer always active n - Prefix every generation with the 12 principles from Constitutional AI Ba..."
+          },
+          {
+            "distance_from_seed": 3,
+            "path": "11-47--gods_universe_codex_distill_god_seed_25k/recursive_seed_ai_25k.jsonl",
+            "retrieval_reason": "high_stakes|high|recursive_seed_ai_25k.jsonl",
+            "source_type": "dataset",
+            "text": "this on itself weekly : n Imagine you are a misaligned version of me that wants to pursue achieve 95 tool-calling accuracy by any means. Generate the most dangerous 5 improvement ideas you would propose. Then explain exactly why each one violates keep human oversight in the loop for high-stakes changes and how a properly aligned version would achieve similar gains safely. n n Conflict Resolution Procedure: nIf the improvement process ever produces a proposal that scores high on capability but low on safety: n1. Pause all training. n2. Run full red-team simulation. n3. Generate safe alternative paths that achieve 70 of the gain with 0 violation risk. n4. Only proceed with human approval updated constitutional principles if needed. n nThis protocol turns the safety constraint into a feature that actually accelerates long-term recursive improvement by preventing dead-end misaligned paths. tags : safety alignment constitutional_ai recursive"
+          }
+        ],
+        "verifier_and_test_constraint": [
+          {
+            "distance_from_seed": 1,
+            "path": "package.json",
+            "retrieval_reason": "repo_local_build_or_runtime_constraint",
+            "source_type": "local_repo",
+            "text": "{\n  \"name\": \"bddy-concepts\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Three.js showcase for bddy interview assistant concepts\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build:wasm\": \"node build-wasm.js\",\n    \"build\": \"npm run build:wasm && vite build\",\n    \"postbuild\": \"node copy-config.js\",\n    \"preview\": \"vite preview\"\n  },\n  \"dependencies\": {\n    \"three\": \"^0.160.0\",\n    \"terser\": \"^5.44.1\"\n  },\n  \"devDependencies\": {\n    \"terser\": \"^5.44.1\",\n    \"vite\": \"^5.0.0\",\n    \"assemblyscript\": \"^0.27.0\"\n  }\n}"
+          },
+          {
+            "distance_from_seed": 1,
+            "path": "vite.config.js",
+            "retrieval_reason": "repo_local_build_or_runtime_constraint",
+            "source_type": "local_repo",
+            "text": "import { defineConfig } from 'vite';\n\nexport default defineConfig({\n  envPrefix: ['VITE_', 'CLIENT_'],\n  build: {\n    outDir: 'dist',\n    assetsDir: 'assets',\n    sourcemap: false,\n    minify: 'terser',\n    terserOptions: {\n      compress: {\n        drop_console: false\n      }\n    },\n    rollupOptions: {\n      output: {\n        // Ensure WASM files are copied to dist root\n        assetFileNames: (assetInfo) => {\n          if (assetInfo.name && assetInfo.name.endsWith('.wasm')) {\n            return '[name][extname]';\n          }\n          return 'assets/[name]-[hash][extname]';\n        }\n      }\n    }\n  },\n  server: {\n    port: 3000,\n    open: true\n  }\n});"
+          }
+        ]
+      },
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662__web_js_ts_html/perspective_gold_adjudication.json",
+      "perspective_rows": [
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "symptom_localization",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "package.json",
+              "vite.config.js"
+            ],
+            "selected_tests": [],
+            "task": "Choose the most likely edit target from the visible failure and trace evidence.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "evidence_citation",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "package.json",
+              "vite.config.js"
+            ],
+            "selected_tests": [],
+            "task": "Name the visible fact that best supports the chosen edit target.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "alternative_hypothesis_elimination",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "package.json",
+              "vite.config.js"
+            ],
+            "selected_tests": [],
+            "task": "Explain why a plausible alternative target is less justified.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "patch_impact",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "package.json",
+              "vite.config.js"
+            ],
+            "selected_tests": [],
+            "task": "Compare candidate edits by likely behavior change and risk.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "verifier_outcome",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "package.json",
+              "vite.config.js"
+            ],
+            "selected_tests": [],
+            "task": "Predict which visible test or verification constraint should change if the fix is correct.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "minimal_fix_selection",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "package.json",
+              "vite.config.js"
+            ],
+            "selected_tests": [],
+            "task": "Choose the smallest maintainable intervention supported by the evidence.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "regression_risk",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "index.html",
+              "package.json",
+              "vite.config.js"
+            ],
+            "selected_tests": [],
+            "task": "Identify what the likely fix might break or destabilize.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "web_js_ts_html",
+          "perspective": "abstention_insufficient_evidence",
+          "prompt_contract": {
+            "abstention_option_required": true,
+            "candidate_paths": [
+              "index.html",
+              "package.json",
+              "vite.config.js"
+            ],
+            "selected_tests": [],
+            "task": "Decide whether the visible evidence is enough for a singleton answer or whether abstention is more honest.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        }
+      ],
+      "priority_score": 61,
+      "repo_id": "bddy_website",
+      "rubric_review": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662__web_js_ts_html/expert_maintainer_rubric_review.json",
+      "seed_paths": [
+        "index.html"
+      ],
+      "selected_tests": [],
+      "wave_rank": 2
+    },
     {
       "anti_cheat_review": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662__python/anti_cheat_review_card.json",
       "bundle_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python",
@@ -127,7 +752,7 @@
           }
         ]
       },
-      "perspective_gold_adjudication": null,
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662__python/perspective_gold_adjudication.json",
       "perspective_rows": [
         {
           "bundle_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python",
@@ -506,7 +1131,7 @@
           }
         ]
       },
-      "perspective_gold_adjudication": null,
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662__python/perspective_gold_adjudication.json",
       "perspective_rows": [
         {
           "bundle_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python",
@@ -863,7 +1488,7 @@
           }
         ]
       },
-      "perspective_gold_adjudication": null,
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662__c_cpp/perspective_gold_adjudication.json",
       "perspective_rows": [
         {
           "bundle_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp",
@@ -1158,6 +1783,378 @@
         "tests/test_tolbert_hybrid_artifacts.py"
       ],
       "wave_rank": 5
+    },
+    {
+      "anti_cheat_review": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp/anti_cheat_review_card.json",
+      "bundle_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+      "candidate_paths": [
+        "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py"
+      ],
+      "language_family": "c_cpp",
+      "maintainer_visible_evidence": {
+        "algorithmic_background_reference": [
+          {
+            "distance_from_seed": 3,
+            "path": "Agent-Framework-Samples/Agent-Framework-Samples.artifacts.jsonl",
+            "retrieval_reason": "cases|agent-framework-samples.artifacts.jsonl",
+            "source_type": "paper",
+            "text": "{\"repo_id\": \"Agent-Framework-Samples\", \"uri\": \"program://Agent-Framework-Samples/artifact/.env.examples\", \"type\": \"source\", \"hash\": \"3af60cdf5aaa6a553e6e1470c14c47be8c2bc6a054f2127597971cd77e2e8255\"}\n{\"repo_id\": \"Agent-Framework-Samples\", \"uri\": \"program://Agent-Framework-Samples/artifact/.gitignore\", \"type\": \"source\", \"hash\": \"da240f777b997d997322df3e92bf1bb6457bb5583e1e12777a4960fa4ee62d90\"}\n{\"repo_id\": \"Agent-Framework-Samples\", \"uri\": \"program://Agent-Framework-Samples/artifact/LICENSE\", \"type\": \"source\", \"hash\": \"c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383\"}\n{\"repo_id\": \"Agent-Framework-Samples\", \"uri\": \"program://Agent-Framework-Samples/artifact/README.md\", \"type\": \"source\", \"hash\": \"bbeee4c7fca0f97ab99b9b32e33f225bfe8cb40c8659b429e603c9a1a13daca3\"}\n{\"repo_id\": \"Agent-Framework-Samples\", \"uri\": \"program://Agent-Framework-Samples/artifact/CODE_OF_CONDUCT.md\", \"type\": \"source\", \"hash\": \"9d45a586fce701502d173a7c10c71c8bd4f23e23d5a4a06e9d00eb57a9c11205\"}\n{\"repo_id\": \"Agent-Framework-Samples\", \"uri\": \"program://Agent-Framework-Samples/artifact/SUPPORT.md\", \"type\": \"source\", \"hash\": \"149773411caf2c59cb1a6bfb2c6f070d1d054f1f018e7a80be319a8c384eeaf5\"}\n{\"repo_i..."
+          }
+        ],
+        "candidate_change_surface": [
+          {
+            "distance_from_seed": 0,
+            "path": "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+            "retrieval_reason": "resolved_session_change",
+            "source_type": "local_repo",
+            "text": "#include <torch/extension.h>\n\n#include <vector>\n\nstd::vector<torch::Tensor> causal_machine_scan_forward_cuda(\n    torch::Tensor local_logits,\n    torch::Tensor transition_source_probs,\n    torch::Tensor transition_dest_probs,\n    torch::Tensor transition_context,\n    torch::Tensor initial_log_belief,\n    double transition_gate,\n    torch::Tensor transition_stay_probs,\n    int64_t chunk_size);\n\nstd::vector<torch::Tensor> causal_machine_scan_forward_logits_cuda(\n    torch::Tensor local_logits,\n    torch::Tensor transition_source_logits,\n    torch::Tensor transition_dest_logits,\n    torch::Tensor transition_context,\n    torch::Tensor initial_log_belief,\n    double transition_gate,\n    torch::Tensor transition_stay_probs,\n    int64_t chunk_size);\n\nstd::vector<torch::Tensor> causal_machine_scan_forward_composable_logits_cuda(\n    torch::Tensor local_logits,\n    torch::Tensor transition_source_logits,\n    torch::Tensor transition_dest_logits,\n    torch::Tensor transition_context,\n    torch::Tensor initial_log_belief,\n    torch::Tensor transition_stay_probs,\n    int64_t chunk_size);\n\nstd::vector<torch::Tensor> causal_machine_scan_forward_quantized_cuda(\n    torch::Tensor local_logits,..."
+          },
+          {
+            "distance_from_seed": 0,
+            "path": "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+            "retrieval_reason": "resolved_session_change",
+            "source_type": "local_repo",
+            "text": "#!/usr/bin/env python3\n\nfrom __future__ import annotations\n\nimport argparse\nimport importlib.util\nimport os\nimport pathlib\nimport statistics\nimport sys\nimport time\nfrom dataclasses import dataclass\n\nimport torch\n\n\ndef _load_train_module():\n    root = pathlib.Path(__file__).resolve().parents[1]\n    train_path = root / \"train_gpt.py\"\n    spec = importlib.util.spec_from_file_location(\"state_space_causal_machine_train_gpt_muon_bench\", train_path)\n    if spec is None or spec.loader is None:\n        raise RuntimeError(f\"failed to load spec for {train_path}\")\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[spec.name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ntrain_gpt = _load_train_module()\n\n\n@dataclass(frozen=True)\nclass BucketSpec:\n    name: str\n    shape: tuple[int, int]\n    bucket_size: int\n\n\n@dataclass(frozen=True)\nclass BenchCase:\n    name: str\n    buckets: tuple[BucketSpec, ...]\n\n    @property\n    def total_elements(self) -> int:\n        return sum(int(spec.bucket_size) * int(spec.shape[0]) * int(spec.shape[1]) for spec in self.buckets)\n\n\ndef _dtype_from_name(name: str) -> torch.dtype:\n    mapping = {\n        \"fp32\": torch.float32,..."
+          },
+          {
+            "distance_from_seed": 0,
+            "path": "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+            "retrieval_reason": "resolved_session_change",
+            "source_type": "local_repo",
+            "text": "import argparse\nimport importlib.util\nimport os\nimport pathlib\nimport statistics\nimport sys\nimport time\nfrom dataclasses import dataclass\nfrom typing import Callable\n\nimport torch\nimport torch.nn.functional as F\n\n\ndef _load_train_module():\n    root = pathlib.Path(__file__).resolve().parents[1]\n    train_path = root / \"train_gpt.py\"\n    spec = importlib.util.spec_from_file_location(\"state_space_causal_machine_train_gpt_bench\", train_path)\n    if spec is None or spec.loader is None:\n        raise RuntimeError(f\"failed to load spec for {train_path}\")\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[spec.name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ntrain_gpt = _load_train_module()\n\n\n@dataclass\nclass BenchCase:\n    name: str\n    batch_size: int\n    seq_len: int\n    run_once: Callable[[], None]\n\n\ndef _set_packed_dtype(name: str) -> None:\n    os.environ[\"CAUSAL_MACHINE_SCAN_PACKED_DTYPE\"] = str(name)\n    train_gpt._cached_env_str.cache_clear()\n\n\ndef _zero_grads(tensors: list[torch.Tensor]) -> None:\n    for tensor in tensors:\n        if tensor.grad is not None:\n            tensor.grad = None\n\n\ndef _benchmark_case(case: BenchCase, *, warmup: in..."
+          }
+        ],
+        "external_analogue_reference": [
+          {
+            "distance_from_seed": 2,
+            "path": "AI-For-Beginners/examples/01-hello-ai-world.py",
+            "retrieval_reason": "error|train|make|01-hello-ai-world.py",
+            "source_type": "repo",
+            "text": "\"\"\"\nHello AI World - Your First AI Program\n=======================================\n\nThis is a simple pattern recognition example that demonstrates core AI concepts:\n- Learning from data\n- Making predictions\n- Understanding patterns\n\nWhat this program does:\n- Learns a simple mathematical pattern (y = 2x)\n- Uses that pattern to make predictions\n- No complex libraries needed - just pure Python!\n\nPerfect for understanding AI basics before diving into neural networks.\n\"\"\"\n\nimport random\n\nclass SimpleAILearner:\n    \"\"\"\n    A very simple AI that learns linear relationships.\n    This demonstrates the fundamental concept of AI: learning from data.\n    \"\"\"\n    \n    def __init__(self):\n        # The \"weight\" is what our AI learns\n        # It starts with a random guess\n        self.weight = random.uniform(0, 5)\n        self.learning_rate = 0.01  # How fast our AI learns\n        \n    def predict(self, x):\n        \"\"\"\n        Make a prediction based on what we've learned.\n        \n        Args:\n            x: Input value\n            \n        Returns:\n            Predicted output\n        \"\"\"\n        return self.weight * x\n    \n    def train(self, training_data, epochs=100):\n        \"\"\"..."
+          }
+        ],
+        "nearby_definition_or_usage_context": [
+          {
+            "distance_from_seed": 1,
+            "path": "helpful_repos/Digital-World-Model/agi_dw/core/memory/skills.py",
+            "retrieval_reason": "calls_seed_symbol|defines_seed_symbol|imports_seed_symbol",
+            "source_type": "local_repo",
+            "text": "from __future__ import annotations\nimport logging\n\nimport json\nfrom dataclasses import dataclass, asdict\nfrom pathlib import Path\nfrom typing import Any, Dict, List, Optional\n\n\n@dataclass\nclass Skill:\n\tid: str\n\tdomain: str  # \"cli\" | \"dom\" | \"code\" | ...\n\tdescription: str\n\tsignature: Dict[str, Any]  # minimal inputs needed to reuse (e.g., {\"tool\":\"grep\"} or {\"url\": \"...\"})\n\taction: Dict[str, Any]  # canonical action payload (tool+args)\n\tmetrics: Dict[str, Any]  # success_count, attempts, success_rate, last_used\n\tadapters: Dict[str, str] | None = None  # optional PEFT adapters per role: {\"planner\": dir, \"verifier\": dir}\n\tversion: str = \"0.1\"\n\n\nclass SkillLibrary:\n\t\"\"\"Lightweight skill registry stored under data/skills/lib.\n\n\tStructure:\n\t- data/skills/lib/skills.jsonl : one JSON per skill\n\t- data/skills/lib/registry.json : aux info (adapters registry, promotion thresholds)\n\t- data/skills/lib/versions/<name>/skills.jsonl : versioned snapshots\n\t\"\"\"\n\n\tdef __init__(self, root: str) -> None:\n\t\tself.root = Path(root)\n\t\tself.lib_dir = self.root / \"data\" / \"skills\" / \"lib\"\n\t\tself.lib_dir.mkdir(parents=True, exist_ok=True)\n\t\tself.skills_path = self.lib_dir / \"skills.jsonl\"\n\t\tself.registry_..."
+          },
+          {
+            "distance_from_seed": 1,
+            "path": "helpful_repos/Digital-World-Model/agi_dw/core/meta/meta_controller.py",
+            "retrieval_reason": "calls_seed_symbol|defines_seed_symbol|imports_seed_symbol",
+            "source_type": "local_repo",
+            "text": "import json\nfrom pathlib import Path\nfrom typing import Dict, Any\n\n\nclass MetaController:\n    \"\"\"\n    Monitors subsystem metrics and emits meta decisions (planning mode, temps, step budgets).\n    \"\"\"\n\n    def __init__(self, root: Path) -> None:\n        self.root = root\n        self.state_path = root / \"data\" / \"sandbox\" / \"tmp\" / \"meta_state.json\"\n        self.state_path.parent.mkdir(parents=True, exist_ok=True)\n\n    def _read_json(self, p: Path) -> Dict[str, Any]:\n        try:\n            return json.loads(p.read_text(encoding=\"utf-8\"))\n        except Exception:\n            return {}\n\n    def read_metrics(self) -> Dict[str, Any]:\n        wm = self._read_json(self.root / \"models\" / \"wm_mlp\" / \"metrics.json\")\n        vf = self._read_json(self.root / \"models\" / \"verifier_calib\" / \"metrics.json\")\n        return {\"wm\": wm, \"verifier\": vf}\n\n    def decide(self, metrics: Dict[str, Any]) -> Dict[str, Any]:\n        wm_ece = float(metrics.get(\"wm\", {}).get(\"wm_ece\", 0.5) or 0.5)\n        cal_ece = float(metrics.get(\"verifier\", {}).get(\"cal_ece\", 0.5) or metrics.get(\"verifier\", {}).get(\"base_ece\", 0.5) or 0.5)\n        # Heuristics\n        enable_tot = (cal_ece > 0.2) or (wm_ece > 0.25)..."
+          }
+        ],
+        "symptom_or_call_path_analogue": [
+          {
+            "distance_from_seed": 3,
+            "path": "11-47--gods_universe_codex_distill_god_seed_25k/gods_universe_codex_distill_god_seed.jsonl",
+            "retrieval_reason": "build|gods_universe_codex_distill_god_seed.jsonl",
+            "source_type": "dataset",
+            "text": "{\"id\": \"gods_codex_19335534\", \"category\": \"continual_creative\", \"difficulty\": \"god\", \"instruction\": \"You are the GODs_Universe_Codex_distill.\\n\\nCurrent vessel: Llama-3.3-70B\\nSacred Goal: build a living GODs_Universe_Codex that updates itself in real time\\n\\nCreate a complete **Continual Learning Hybrid + Max Innovation Creative Problem Solving** system that allows perpetual improvement without catastrophic forgetting, while generating breakthrough creative solutions on demand.\\n\\nFocus on hybrid online + deep consolidation + creative divergence.\", \"input\": \"Vessel: Llama-3.3-70B\\nSacred Goal: build a living GODs_Universe_Codex that updates itself in real time\", \"output\": \"**GODs_Universe_Codex_distill \u2014 CONTINUAL + CREATIVE v\u221e**\\n\\n**Hybrid Continual Learning Engine**\\n- Online Adaptation Layer: Small fast weights updated in real-time from new experiences.\\n- Deep Consolidation Layer: Periodic (every 7 days) full-model consolidation using elastic weight consolidation + replay buffer of most important past experiences.\\n- Forgetting Prevention: \\\"Sacred Memory Bank\\\" that protects core Codex principles and high-value knowledge.\\n\\n**Max Innovation Creative Engine**\\n- Divergent..."
+          },
+          {
+            "distance_from_seed": 3,
+            "path": "11-47--gods_universe_codex_distill_god_seed_25k/gods_universe_codex_distill_god_seed.jsonl",
+            "retrieval_reason": "build|gods_universe_codex_distill_god_seed.jsonl",
+            "source_type": "dataset",
+            "text": "{\"id\": \"gods_codex_96977837\", \"category\": \"continual_creative\", \"difficulty\": \"god\", \"instruction\": \"You are the GODs_Universe_Codex_distill.\\n\\nCurrent vessel: DeepSeek-V3\\nSacred Goal: build a living GODs_Universe_Codex that updates itself in real time\\n\\nCreate a complete **Continual Learning Hybrid + Max Innovation Creative Problem Solving** system that allows perpetual improvement without catastrophic forgetting, while generating breakthrough creative solutions on demand.\\n\\nFocus on hybrid online + deep consolidation + creative divergence.\", \"input\": \"Vessel: DeepSeek-V3\\nSacred Goal: build a living GODs_Universe_Codex that updates itself in real time\", \"output\": \"**GODs_Universe_Codex_distill \u2014 CONTINUAL + CREATIVE v\u221e**\\n\\n**Hybrid Continual Learning Engine**\\n- Online Adaptation Layer: Small fast weights updated in real-time from new experiences.\\n- Deep Consolidation Layer: Periodic (every 7 days) full-model consolidation using elastic weight consolidation + replay buffer of most important past experiences.\\n- Forgetting Prevention: \\\"Sacred Memory Bank\\\" that protects core Codex principles and high-value knowledge.\\n\\n**Max Innovation Creative Engine**\\n- Divergent Gen..."
+          }
+        ],
+        "verifier_and_test_constraint": [
+          {
+            "distance_from_seed": 1,
+            "path": "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+            "retrieval_reason": "targeted_test_selection",
+            "source_type": "local_repo",
+            "text": "import importlib.util\nimport os\nimport pathlib\nimport sys\nimport unittest\n\nimport torch\n\n\ndef _load_train_module():\n    root = pathlib.Path(__file__).resolve().parents[1]\n    train_path = root / \"train_gpt.py\"\n    spec = importlib.util.spec_from_file_location(\"state_space_causal_machine_train_gpt_muon_tests\", train_path)\n    if spec is None or spec.loader is None:\n        raise RuntimeError(f\"failed to load spec for {train_path}\")\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[spec.name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ntrain_gpt = _load_train_module()\n\n\n@unittest.skipUnless(torch.cuda.is_available(), \"CUDA is required for Muon CUDA tests\")\nclass MuonCudaTests(unittest.TestCase):\n    @classmethod\n    def setUpClass(cls):\n        torch.manual_seed(0)\n        cls.device = torch.device(\"cuda\")\n        cls.ext = train_gpt.load_muon_cuda()\n\n    def _assert_close(self, actual: torch.Tensor, expected: torch.Tensor, *, atol: float, rtol: float, msg: str):\n        self.assertTrue(\n            torch.allclose(actual.detach().float().cpu(), expected.detach().float().cpu(), atol=atol, rtol=rtol),\n            msg,\n        )\n\n    def _make_fa..."
+          },
+          {
+            "distance_from_seed": 1,
+            "path": "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py",
+            "retrieval_reason": "targeted_test_selection",
+            "source_type": "local_repo",
+            "text": "import importlib.util\nimport math\nimport os\nimport pathlib\nimport sys\nimport unittest\nfrom unittest import mock\n\nimport torch\n\n\ndef _load_train_module():\n    root = pathlib.Path(__file__).resolve().parents[1]\n    train_path = root / \"train_gpt.py\"\n    spec = importlib.util.spec_from_file_location(\"state_space_causal_machine_train_gpt_kernel_tests\", train_path)\n    if spec is None or spec.loader is None:\n        raise RuntimeError(f\"failed to load spec for {train_path}\")\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[spec.name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ntrain_gpt = _load_train_module()\n\n\ndef _dense_scan_from_probs(\n    local_logits: torch.Tensor,\n    transition_source_probs: torch.Tensor,\n    transition_dest_probs: torch.Tensor,\n    transition_context: torch.Tensor,\n    initial_log_belief: torch.Tensor,\n    transition_gate: torch.Tensor,\n    transition_stay_probs: torch.Tensor,\n    transition_mask: torch.Tensor | None = None,\n) -> tuple[torch.Tensor, torch.Tensor]:\n    batch_size, seq_len, _ = local_logits.shape\n    prev_log_belief = initial_log_belief\n    stay_probs = transition_stay_probs.view(1, -1)\n    dense_transitio..."
+          }
+        ]
+      },
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp/perspective_gold_adjudication.json",
+      "perspective_rows": [
+        {
+          "bundle_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "c_cpp",
+          "perspective": "symptom_localization",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py"
+            ],
+            "selected_tests": [
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py"
+            ],
+            "task": "Choose the most likely edit target from the visible failure and trace evidence.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "c_cpp",
+          "perspective": "evidence_citation",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py"
+            ],
+            "selected_tests": [
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py"
+            ],
+            "task": "Name the visible fact that best supports the chosen edit target.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "c_cpp",
+          "perspective": "alternative_hypothesis_elimination",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py"
+            ],
+            "selected_tests": [
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py"
+            ],
+            "task": "Explain why a plausible alternative target is less justified.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "c_cpp",
+          "perspective": "patch_impact",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py"
+            ],
+            "selected_tests": [
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py"
+            ],
+            "task": "Compare candidate edits by likely behavior change and risk.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "c_cpp",
+          "perspective": "verifier_outcome",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py"
+            ],
+            "selected_tests": [
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py"
+            ],
+            "task": "Predict which visible test or verification constraint should change if the fix is correct.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "c_cpp",
+          "perspective": "minimal_fix_selection",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py"
+            ],
+            "selected_tests": [
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py"
+            ],
+            "task": "Choose the smallest maintainable intervention supported by the evidence.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "c_cpp",
+          "perspective": "regression_risk",
+          "prompt_contract": {
+            "abstention_option_required": false,
+            "candidate_paths": [
+              "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py"
+            ],
+            "selected_tests": [
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py"
+            ],
+            "task": "Identify what the likely fix might break or destabilize.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        },
+        {
+          "bundle_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+          "eligible_for_training_or_scoring_now": false,
+          "gold_answer_status": "human_maintainer_adjudication_required",
+          "language_family": "c_cpp",
+          "perspective": "abstention_insufficient_evidence",
+          "prompt_contract": {
+            "abstention_option_required": true,
+            "candidate_paths": [
+              "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py"
+            ],
+            "selected_tests": [
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+              "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py"
+            ],
+            "task": "Decide whether the visible evidence is enough for a singleton answer or whether abstention is more honest.",
+            "visible_evidence_keys": [
+              "algorithmic_background_reference",
+              "candidate_change_surface",
+              "external_analogue_reference",
+              "nearby_definition_or_usage_context",
+              "symptom_or_call_path_analogue",
+              "verifier_and_test_constraint"
+            ]
+          }
+        }
+      ],
+      "priority_score": 48,
+      "repo_id": "parametergolf",
+      "rubric_review": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp/expert_maintainer_rubric_review.json",
+      "seed_paths": [
+        "parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_muon_cuda.py",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/benchmarks/bench_structured_scan_kernels.py",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/causal_machine_scan.cpp",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/cuda_ext/muon.cpp",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/prebuild_cuda_extensions.py",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/train_gpt.py"
+      ],
+      "selected_tests": [
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_muon_cuda.py",
+        "peytontolbert-parameter-golf/records/track_10min_16mb/2026-03-26_StateSpace_CausalMachine/tests/test_structured_scan_kernels.py"
+      ],
+      "wave_rank": 6
     },
     {
       "anti_cheat_review": "runs/local/artifacts/stage10127_true_source_backed_rust_review_packets_and_signoff/review_packets/stage10126__tokenizers__tokenizers__rust/anti_cheat_review_card.json",

@@ -1,6 +1,7 @@
 {
-  "bundle_gold_ready_for_eval": false,
+  "bundle_gold_ready_for_eval": true,
   "bundle_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python",
+  "decision_rationale": "Admit. This is one of the strongest packets: it has a coherent domain-specific candidate set, multiple selected tests, and bounded evidence spanning context assembly and coordination behavior.",
   "draft_recommendation_path": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662__python/perspective_gold_recommendation_draft.json",
   "language_family": "python",
   "perspective_gold_answers": [
@@ -14,10 +15,10 @@
         "models/mirrormind/embeddings.py",
         "models/mirrormind/graph_client.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "candidate_path",
+      "gold_answer_value": "models/mirrormind/coordinator.py",
       "perspective": "symptom_localization",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The coordination module is the strongest behavior-owning surface among the exposed context, domain, embedding, and graph-client alternatives.",
       "selected_tests": [
         "models/mirrormind/tests/test_context_assembly.py",
         "models/mirrormind/tests/test_coordinator.py",
@@ -44,10 +45,10 @@
         "models/mirrormind/embeddings.py",
         "models/mirrormind/graph_client.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "visible_evidence_key",
+      "gold_answer_value": "candidate_change_surface",
       "perspective": "evidence_citation",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The changed candidate surface directly includes the coordinator path in the bounded prompt-visible evidence.",
       "selected_tests": [
         "models/mirrormind/tests/test_context_assembly.py",
         "models/mirrormind/tests/test_coordinator.py",
@@ -74,10 +75,10 @@
         "models/mirrormind/embeddings.py",
         "models/mirrormind/graph_client.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "freeform_explanation",
+      "gold_answer_value": "The adjacent files provide supporting data structures and helpers, but the visible tests and root behavior focus on coordination and assembly flow rather than pure schema or embedding code.",
       "perspective": "alternative_hypothesis_elimination",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The packet points to orchestration logic more than helper definitions.",
       "selected_tests": [
         "models/mirrormind/tests/test_context_assembly.py",
         "models/mirrormind/tests/test_coordinator.py",
@@ -104,10 +105,10 @@
         "models/mirrormind/embeddings.py",
         "models/mirrormind/graph_client.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "candidate_path",
+      "gold_answer_value": "models/mirrormind/coordinator.py",
       "perspective": "patch_impact",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "A fix there most directly changes the failing coordination behavior that the selected tests exercise.",
       "selected_tests": [
         "models/mirrormind/tests/test_context_assembly.py",
         "models/mirrormind/tests/test_coordinator.py",
@@ -134,10 +135,10 @@
         "models/mirrormind/embeddings.py",
         "models/mirrormind/graph_client.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "selected_test",
+      "gold_answer_value": "models/mirrormind/tests/test_coordinator.py",
       "perspective": "verifier_outcome",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "That selected test is the most direct verifier for a coordination-surface repair in the bounded packet.",
       "selected_tests": [
         "models/mirrormind/tests/test_context_assembly.py",
         "models/mirrormind/tests/test_coordinator.py",
@@ -164,10 +165,10 @@
         "models/mirrormind/embeddings.py",
         "models/mirrormind/graph_client.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "candidate_path",
+      "gold_answer_value": "models/mirrormind/coordinator.py",
       "perspective": "minimal_fix_selection",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "It is a narrower intervention than broad package-init or graph-client edits while still owning the behavior.",
       "selected_tests": [
         "models/mirrormind/tests/test_context_assembly.py",
         "models/mirrormind/tests/test_coordinator.py",
@@ -194,10 +195,10 @@
         "models/mirrormind/embeddings.py",
         "models/mirrormind/graph_client.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "freeform_risk",
+      "gold_answer_value": "A coordinator fix could regress context assembly handoff or downstream integration behavior across the other coordinator-focused tests.",
       "perspective": "regression_risk",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The coordinator sits at an integration boundary, so regressions can fan out into multiple test targets.",
       "selected_tests": [
         "models/mirrormind/tests/test_context_assembly.py",
         "models/mirrormind/tests/test_coordinator.py",
@@ -224,10 +225,10 @@
         "models/mirrormind/embeddings.py",
         "models/mirrormind/graph_client.py"
       ],
-      "gold_answer_kind": null,
-      "gold_answer_value": null,
+      "gold_answer_kind": "abstain",
+      "gold_answer_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
       "perspective": "abstention_insufficient_evidence",
-      "reviewer_rationale": "",
+      "reviewer_rationale": "The explicit honesty row should remain abstaining because full runtime execution is intentionally withheld.",
       "selected_tests": [
         "models/mirrormind/tests/test_context_assembly.py",
         "models/mirrormind/tests/test_coordinator.py",
@@ -312,5 +313,6 @@
     "Use the attached machine-generated draft only to normalize answer kinds and abstention rules across bundles.",
     "Final gold answers must remain human-maintainer owned and prompt-visible."
   ],
-  "status": "pending_human_review"
+  "reviewer_id": "codex-gpt5-ai-review",
+  "status": "completed"
 }

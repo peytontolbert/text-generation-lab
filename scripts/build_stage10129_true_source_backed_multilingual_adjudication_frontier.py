@@ -245,7 +245,7 @@ def build_frontier(
                 "maintainer_visible_evidence": bundle.get("maintainer_visible_evidence"),
                 "rubric_review": support.get("expert_maintainer_rubric_review"),
                 "anti_cheat_review": support.get("anti_cheat_review_card"),
-                "perspective_gold_adjudication": support.get("perspective_gold_adjudication"),
+                "perspective_gold_adjudication": gold_ref,
             }
         )
 
