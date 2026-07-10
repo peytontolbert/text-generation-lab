@@ -1,0 +1,44 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "caveats": [
+    "This rerun is on the trainer-compatible subset of the stronger counterfactual bank, not the full evidence-removed plus contradictory audit bank.",
+    "The probe remains useful as a robustness signal even though it is not a promotion candidate.",
+    "The confusion matrix shows substantial collapse toward R, especially for gold K, which suggests the mixed-replay rows are changing the class balance or decision boundary in an unhelpful way."
+  ],
+  "decision": "The Stage9882 current-frontier mixed-replay rerun is executable and contract-clean, but it does not improve the frontier: eval exact matches the broader baseline while strict exact regresses.",
+  "failures": [],
+  "metrics": {
+    "broader_eval_exact_baseline": 0.4375,
+    "broader_strict_exact_baseline": 0.5625,
+    "delta_vs_broader_eval": 0.0,
+    "delta_vs_broader_strict": -0.0625,
+    "dominant_confusion_targets": {
+      "K": "R",
+      "M": "M",
+      "R": "R",
+      "T": "T"
+    },
+    "eval_exact": 0.4375,
+    "frontier_language_family_wins_100m": 4,
+    "frontier_strict_language_ties": 1,
+    "frontier_strict_language_wins_100m": 3,
+    "required_artifacts_written": true,
+    "selected_step": 31,
+    "selection_exact_sum": 0.9375,
+    "selection_loss_sum": 2.7924227714538574,
+    "strict_exact": 0.5
+  },
+  "passed": true
+}

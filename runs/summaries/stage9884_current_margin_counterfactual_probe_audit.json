@@ -1,0 +1,59 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9884_current_margin_counterfactual_probe_audit/current_margin_counterfactual_probe_audit.json",
+    "doc": "docs/CURRENT_MARGIN_COUNTERFACTUAL_PROBE_AUDIT_STAGE9884.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T05:22:34Z",
+  "decision": "The Stage9882 current-frontier mixed-replay rerun is executable and contract-clean, but it does not improve the frontier: eval exact matches the broader baseline while strict exact regresses.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "broader_eval_exact_baseline": 0.4375,
+    "broader_strict_exact_baseline": 0.5625,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "delta_vs_broader_eval": 0.0,
+    "delta_vs_broader_strict": -0.0625,
+    "denoise_ce_training_authorized_next": false,
+    "dominant_confusion_targets": {
+      "K": "R",
+      "M": "M",
+      "R": "R",
+      "T": "T"
+    },
+    "eval_exact": 0.4375,
+    "failures": [],
+    "frontier_language_family_wins_100m": 4,
+    "frontier_strict_language_ties": 1,
+    "frontier_strict_language_wins_100m": 3,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "required_artifacts_written": true,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "selected_step": 31,
+    "selection_exact_sum": 0.9375,
+    "selection_loss_sum": 2.7924227714538574,
+    "source_emission_authorized": false,
+    "strict_exact": 0.5
+  },
+  "name": "stage9884_current_margin_counterfactual_probe_audit",
+  "next_best_step": "Do not promote the Stage9882 mixed-replay path directly. Either rebalance the strict mixed-replay labels or keep Stage9881 as a frozen audit bank while optimizing the main Stage9867/9878 training path separately.",
+  "passed": true,
+  "stage": 9884,
+  "stage_name": "stage9884_current_margin_counterfactual_probe_audit"
+}
