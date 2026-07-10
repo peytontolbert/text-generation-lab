@@ -1,0 +1,54 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "caveats": [
+    "Removing position skew is still valuable for anti-cheat hygiene, even when it does not improve the current 100M model.",
+    "Because K remains fully collapsed to R after debiasing, the dominant failure is not explained by option position alone.",
+    "The next intervention should modify evidence or objective structure upstream of the opaque token head, not just packet serialization."
+  ],
+  "decision": "The Stage9889 position-debiased rerun is useful as an eval-validity audit, but not as a frontier improvement. Eval exact stays flat, strict exact regresses, and the K-to-R collapse survives unchanged while web weakens.",
+  "failures": [],
+  "metrics": {
+    "broader_eval_exact_baseline": 0.4375,
+    "broader_strict_exact_baseline": 0.5625,
+    "confusion_identical_to_stage9886": false,
+    "delta_vs_broader_eval": 0.0,
+    "delta_vs_broader_strict": -0.125,
+    "delta_vs_prior_eval": 0.0,
+    "delta_vs_prior_selection_loss": 0.0007511377334594727,
+    "delta_vs_prior_strict": -0.0625,
+    "dominant_confusion_targets": {
+      "K": "R",
+      "M": "M",
+      "R": "R",
+      "T": "T"
+    },
+    "eval_exact": 0.4375,
+    "per_cell_delta_vs_stage9886": {
+      "c_cpp::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "python::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "rust::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "web_js_ts_html::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": -0.125
+    },
+    "prior_eval_exact": 0.4375,
+    "prior_selection_loss_sum": 2.7907450199127197,
+    "prior_strict_exact": 0.5,
+    "required_artifacts_written": true,
+    "selected_step": 31,
+    "selection_exact_sum": 0.875,
+    "selection_loss_sum": 2.791496157646179,
+    "strict_exact": 0.4375
+  },
+  "passed": true
+}
