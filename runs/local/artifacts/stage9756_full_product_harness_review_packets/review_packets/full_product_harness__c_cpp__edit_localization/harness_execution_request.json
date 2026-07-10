@@ -1,0 +1,108 @@
+{
+  "anti_cheat_requirements": [
+    "hidden_reference_never_train_eligible",
+    "target_text_absent_from_model_input",
+    "label_coded_ids_rejected",
+    "surface_marker_shortcut_baseline_below_ceiling",
+    "requested_output_type_shortcut_baseline_below_ceiling",
+    "metadata_only_baseline_below_ceiling",
+    "graph_degree_baseline_below_ceiling",
+    "query_node_id_baseline_below_ceiling",
+    "split_semantic_overlap_zero_or_quarantined",
+    "duplicate_semantic_key_zero_or_quarantined",
+    "internal_token_leak_zero",
+    "short_junk_zero",
+    "repetition_guard_passed",
+    "long_target_budget_gate_enforced",
+    "runtime_and_gemma_outputs_not_ground_truth_without_authority",
+    "same_harness_prompt_surface_for_100m_and_gemma"
+  ],
+  "artifact_paths": {
+    "anti_cheat_cards": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__c_cpp__edit_localization/anti_cheat_review_card.json",
+    "expert_maintainer_rubric_scores": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__c_cpp__edit_localization/expert_maintainer_rubric_review.json",
+    "harness_run_id": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__c_cpp__edit_localization/harness_run_id.txt",
+    "packet_dir": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__c_cpp__edit_localization",
+    "patch_minimality_or_abstain_scores": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__c_cpp__edit_localization/patch_minimality_or_abstain_scores.json",
+    "same_task_pack_as_gemma12b": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__c_cpp__edit_localization/same_task_pack_as_gemma12b.json",
+    "tool_trace_spans": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__c_cpp__edit_localization/tool_trace_spans.jsonl",
+    "verifier_results": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__c_cpp__edit_localization/verifier_results.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "backend_requirements": [
+    "load_locked_task_pack_without_training_contamination",
+    "execute_same_task_pack_for_100m_and_gemma12b_against_canonical_stage10072_proxy_frontier",
+    "capture_tool_trace_spans",
+    "score_verifier_results",
+    "score_patch_minimality_or_abstain",
+    "write_only_to_reserved_packet_artifact_paths"
+  ],
+  "cell_key": "full_product_harness::c_cpp::edit_localization",
+  "language_family": "c_cpp",
+  "lineage_hash": "b47d243f95b5661a4c7a2414ce0b03dea02932f0e775a2fa45f5ede9d65b8692",
+  "mode": "full_product_harness",
+  "request_status": "awaiting_real_harness_backend_adapter",
+  "required_evidence": [
+    "harness_run_id",
+    "same_task_pack_as_gemma12b",
+    "tool_trace_spans",
+    "verifier_results",
+    "patch_minimality_or_abstain_scores",
+    "expert_maintainer_rubric_scores",
+    "anti_cheat_cards"
+  ],
+  "skill_area": "edit_localization",
+  "slice_tags": [
+    "v27",
+    "expert_maintainer",
+    "full_product_harness",
+    "c_cpp",
+    "edit_localization"
+  ],
+  "source_id": "locked_eval_source::d0d28b04245b417e39d0",
+  "standalone_proxy_frontier": {
+    "claim_readiness_stage": 10075,
+    "completion_boundary_stage": 10078,
+    "rows": 20,
+    "same_surface_comparison_stage": 10072,
+    "same_surface_shortcut_audit_stage": 10068,
+    "strict_exact_100m": 0.75,
+    "strict_exact_gemma": 0.15,
+    "strict_verdict": "100m_better"
+  },
+  "support_modules": {
+    "golden_locked_eval_suite": {
+      "path": "scripts/golden_locked_eval_suite.py",
+      "present": true
+    },
+    "patch_minimality_complexity_meter": {
+      "path": "scripts/patch_minimality_complexity_meter.py",
+      "present": true
+    },
+    "semantic_equivalence_metamorphic_verifier": {
+      "path": "scripts/semantic_equivalence_metamorphic_verifier.py",
+      "present": true
+    },
+    "traced_eval_observability": {
+      "path": "scripts/traced_eval_observability.py",
+      "present": true
+    }
+  },
+  "task_pack_id": "stage9685_v27_locked_d0d28b04245b417e39d0",
+  "thresholds": {
+    "anti_cheat_must_pass": true,
+    "expert_rubric_must_pass": true,
+    "must_beat_gemma12b_same_surface": true
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "artifact_paths": {
+    "anti_cheat_cards": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__rust__edit_localization/anti_cheat_review_card.json",
+    "expert_maintainer_rubric_scores": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__rust__edit_localization/expert_maintainer_rubric_review.json",
+    "harness_run_id": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__rust__edit_localization/harness_run_id.txt",
+    "packet_dir": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__rust__edit_localization",
+    "patch_minimality_or_abstain_scores": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__rust__edit_localization/patch_minimality_or_abstain_scores.json",
+    "same_task_pack_as_gemma12b": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__rust__edit_localization/same_task_pack_as_gemma12b.json",
+    "tool_trace_spans": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__rust__edit_localization/tool_trace_spans.jsonl",
+    "verifier_results": "runs/local/artifacts/stage9756_full_product_harness_review_packets/review_packets/full_product_harness__rust__edit_localization/verifier_results.json"
+  },
+  "cell_key": "full_product_harness::rust::edit_localization",
+  "existing_stub_status": {
+    "anti_cheat_cards": true,
+    "expert_maintainer_rubric_scores": true,
+    "harness_run_id": true,
+    "patch_minimality_or_abstain_scores": true,
+    "same_task_pack_as_gemma12b": true,
+    "tool_trace_spans": true,
+    "verifier_results": true
+  },
+  "language_family": "rust",
+  "proxy_standalone_cell_key": "standalone_100m_weights::rust::edit_localization",
+  "remaining_human_gates": [
+    "expert_maintainer_rubric_scores",
+    "anti_cheat_cards"
+  ],
+  "remaining_machine_gap": "real_full_product_harness_runtime_integration_and_capture",
+  "required_artifacts": [
+    "harness_run_id",
+    "same_task_pack_as_gemma12b",
+    "tool_trace_spans",
+    "verifier_results",
+    "patch_minimality_or_abstain_scores",
+    "expert_maintainer_rubric_scores",
+    "anti_cheat_cards"
+  ],
+  "runner_steps": [
+    "load_canonical_harness_proxy_packet",
+    "verify_stage10072_same_manifest_win_and_stage10078_completion_boundary",
+    "record_real_harness_run_id_only_after_execution",
+    "capture_same_task_pack_artifacts_for_100m_and_gemma_on_identical_task_pack",
+    "collect_tool_trace_spans_from_full_product_run",
+    "collect_verifier_results_and_patch_minimality_or_abstain_scores",
+    "attach_human_rubric_and_cell_specific_anti_cheat_after_machine_artifacts_are_real"
+  ],
+  "runner_surface_status": "dry_run_contract_ready_real_harness_runtime_still_missing",
+  "skill_area": "edit_localization",
+  "standalone_proxy_frontier": {
+    "claim_readiness_stage": 10075,
+    "completion_boundary_stage": 10078,
+    "rows": 4,
+    "same_surface_comparison_stage": 10072,
+    "same_surface_shortcut_audit_stage": 10068,
+    "strict_exact_100m": 1.0,
+    "strict_exact_gemma": 0.5,
+    "strict_verdict": "100m_better"
+  },
+  "standalone_signoff_state": {
+    "anti_cheat_card_attached": true,
+    "expert_review_attached": true,
+    "human_signoff_completed": false,
+    "standalone_human_signoff_tasks_remaining": 2,
+    "standalone_same_surface_win": true
+  },
+  "support_modules": {
+    "golden_locked_eval_suite": {
+      "path": "scripts/golden_locked_eval_suite.py",
+      "present": true
+    },
+    "patch_minimality_complexity_meter": {
+      "path": "scripts/patch_minimality_complexity_meter.py",
+      "present": true
+    },
+    "semantic_equivalence_metamorphic_verifier": {
+      "path": "scripts/semantic_equivalence_metamorphic_verifier.py",
+      "present": true
+    },
+    "traced_eval_observability": {
+      "path": "scripts/traced_eval_observability.py",
+      "present": true
+    }
+  }
+}
