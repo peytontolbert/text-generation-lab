@@ -1,0 +1,213 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "failures": [],
+  "name": "stage9863_validity_weighted_multilingual_surface_truthfulness_audit",
+  "next_best_step": "Run Stage9864 edit-localization target-100M structured tiny probe under trellis, then compare its multilingual exact rates to the existing Gemma same-surface packets before reopening any broad beat-Gemma claim.",
+  "next_execution_candidate": "runs/local/artifacts/stage9863_validity_weighted_multilingual_surface_truthfulness_audit/stage9864_edit_localization_target_100m_structured_tiny_probe_candidate.json",
+  "passed": true,
+  "source_summaries": {
+    "stage9857": "runs/summaries/stage9857_v27_validity_weighted_multisurface_compiler_refresh.json",
+    "stage9859": "runs/summaries/stage9859_validity_weighted_structured_tiny_execution_review.json",
+    "stage9862": "runs/summaries/stage9862_symbol_binding_target_100m_structured_tiny_probe_audit.json"
+  },
+  "stage": 9863,
+  "stage9862_scope": {
+    "claim_guardrail": "Do not use Stage9862 as cross-language evidence; this execution path currently supports only Python symbol binding in the v2.7 tiny package.",
+    "eval_symbol_binding_exact": 0.3125,
+    "inferred_language_counts": {
+      "python": 64
+    },
+    "multilingual_claim_supported": false,
+    "strict_symbol_binding_exact": 0.3125,
+    "surface": "symbol_binding",
+    "top_level_language_counts": {
+      "unknown": 64
+    }
+  },
+  "surface_cards": {
+    "edit_localization": {
+      "expected_loss": "edit_localization_ce",
+      "inferred_language_counts": {
+        "c_cpp": 13,
+        "python": 13,
+        "rust": 13,
+        "web_js_ts_html": 13
+      },
+      "manifest": "runs/local/artifacts/stage9859_validity_weighted_structured_tiny_execution_review/tiny_structured_manifests/edit_localization_tiny.jsonl",
+      "missing_required_languages": [],
+      "mode": "edit_localization_probe",
+      "multilingual_ready": true,
+      "rows": 52,
+      "split_language_counts": {
+        "eval": {
+          "c_cpp": 4,
+          "python": 4,
+          "rust": 4,
+          "web_js_ts_html": 4
+        },
+        "strict_eval": {
+          "c_cpp": 4,
+          "python": 4,
+          "rust": 4,
+          "web_js_ts_html": 4
+        },
+        "train": {
+          "c_cpp": 5,
+          "python": 5,
+          "rust": 5,
+          "web_js_ts_html": 5
+        }
+      },
+      "split_multilingual_ready": {
+        "eval": true,
+        "strict_eval": true,
+        "train": true
+      },
+      "top_level_language_counts": {
+        "c_cpp": 13,
+        "python": 13,
+        "rust": 13,
+        "web_js_ts_html": 13
+      }
+    },
+    "patch_operator_selection": {
+      "expected_loss": "patch_operator_ce",
+      "inferred_language_counts": {
+        "c_cpp": 16,
+        "python": 16,
+        "rust": 16,
+        "web_js_ts_html": 16
+      },
+      "manifest": "runs/local/artifacts/stage9859_validity_weighted_structured_tiny_execution_review/tiny_structured_manifests/patch_operator_selection_tiny.jsonl",
+      "missing_required_languages": [],
+      "mode": "patch_operator_probe",
+      "multilingual_ready": true,
+      "rows": 64,
+      "split_language_counts": {
+        "eval": {
+          "c_cpp": 4,
+          "python": 4,
+          "rust": 4,
+          "web_js_ts_html": 4
+        },
+        "strict_eval": {
+          "c_cpp": 4,
+          "python": 4,
+          "rust": 4,
+          "web_js_ts_html": 4
+        },
+        "train": {
+          "c_cpp": 8,
+          "python": 8,
+          "rust": 8,
+          "web_js_ts_html": 8
+        }
+      },
+      "split_multilingual_ready": {
+        "eval": true,
+        "strict_eval": true,
+        "train": true
+      },
+      "top_level_language_counts": {
+        "c_cpp": 16,
+        "python": 16,
+        "rust": 16,
+        "web_js_ts_html": 16
+      }
+    },
+    "symbol_binding": {
+      "expected_loss": "symbol_binding_ce",
+      "inferred_language_counts": {
+        "python": 64
+      },
+      "manifest": "runs/local/artifacts/stage9859_validity_weighted_structured_tiny_execution_review/tiny_structured_manifests/symbol_binding_tiny.jsonl",
+      "missing_required_languages": [
+        "rust",
+        "c_cpp",
+        "web_js_ts_html"
+      ],
+      "mode": "symbol_binding_probe",
+      "multilingual_ready": false,
+      "rows": 64,
+      "split_language_counts": {
+        "eval": {
+          "python": 16
+        },
+        "strict_eval": {
+          "python": 16
+        },
+        "train": {
+          "python": 32
+        }
+      },
+      "split_multilingual_ready": {
+        "eval": false,
+        "strict_eval": false,
+        "train": false
+      },
+      "top_level_language_counts": {
+        "unknown": 64
+      }
+    },
+    "verifier_failure_repair_or_abstain": {
+      "expected_loss": "verifier_repair_ce",
+      "inferred_language_counts": {
+        "c_cpp": 16,
+        "python": 16,
+        "rust": 16,
+        "web_js_ts_html": 16
+      },
+      "manifest": "runs/local/artifacts/stage9859_validity_weighted_structured_tiny_execution_review/tiny_structured_manifests/verifier_failure_repair_or_abstain_tiny.jsonl",
+      "missing_required_languages": [],
+      "mode": "verifier_repair_probe",
+      "multilingual_ready": true,
+      "rows": 64,
+      "split_language_counts": {
+        "eval": {
+          "c_cpp": 4,
+          "python": 4,
+          "rust": 4,
+          "web_js_ts_html": 4
+        },
+        "strict_eval": {
+          "c_cpp": 4,
+          "python": 4,
+          "rust": 4,
+          "web_js_ts_html": 4
+        },
+        "train": {
+          "c_cpp": 8,
+          "python": 8,
+          "rust": 8,
+          "web_js_ts_html": 8
+        }
+      },
+      "split_multilingual_ready": {
+        "eval": true,
+        "strict_eval": true,
+        "train": true
+      },
+      "top_level_language_counts": {
+        "c_cpp": 16,
+        "python": 16,
+        "rust": 16,
+        "web_js_ts_html": 16
+      }
+    }
+  },
+  "warnings": [
+    "symbol_binding_v27_path_is_python_only"
+  ]
+}
