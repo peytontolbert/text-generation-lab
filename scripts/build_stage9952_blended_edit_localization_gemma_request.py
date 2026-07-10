@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import importlib.util
 import json
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -33,6 +35,19 @@ FUTURE_STAGE_PREFIX = "stage9953_"
 
 def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+def _load_symbol(module_name: str, path: Path, symbol: str):
+    spec = importlib.util.spec_from_file_location(module_name, path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+    return getattr(module, symbol)
+
+
+load_jsonl = _load_symbol("stage9952_runner_load_jsonl", RUNNER, "load_jsonl")
+prompt_surface_hash = _load_symbol("stage9952_runner_prompt_surface_hash", RUNNER, "prompt_surface_hash")
 
 
 def display(path: Path) -> str:
@@ -70,12 +85,23 @@ def _future_output_stub() -> str:
     return f"runs/local/artifacts/{FUTURE_STAGE_PREFIX}blended_edit_localization_gemma_execution/same_prompt_surface_gemma12b_outputs.json"
 
 
+def selected_manifest_rows(manifest_path: Path) -> list[dict[str, Any]]:
+    rows = load_jsonl(manifest_path)
+    selected = [row for row in rows if str(row.get("split") or "") in {"eval", "strict_eval"}]
+    selected.sort(key=lambda row: str(row.get("row_id") or ""))
+    return selected
+
+
 def build_queue() -> dict[str, Any]:
     request = load_json(REQUEST)
     candidate = load_json(CANDIDATE)
     acceptance = load_json(ACCEPTANCE)
     ollama = load_json(OLLAMA_SURFACE)
     failures: list[str] = []
+    manifest_path = ROOT / str(request.get("manifest") or "")
+    same_manifest_rows = selected_manifest_rows(manifest_path) if manifest_path.exists() else []
+    same_manifest_row_ids = [str(row.get("row_id") or "") for row in same_manifest_rows]
+    same_manifest_surface_hash = prompt_surface_hash(same_manifest_rows) if same_manifest_rows else None
 
     if request.get("surface") != "edit_localization":
         failures.append("stage9948_request_not_edit_localization")
@@ -85,6 +111,8 @@ def build_queue() -> dict[str, Any]:
         failures.append("stage9951_acceptance_not_edit_localization")
     if ollama.get("passed") is not True:
         failures.append("stage9768_ollama_surface_not_passed")
+    if not same_manifest_rows:
+        failures.append("same_manifest_eval_and_strict_rows_missing")
 
     packet = {
         "cell_key": CELL_KEY,
@@ -92,8 +120,8 @@ def build_queue() -> dict[str, Any]:
         "skill_area": "edit_localization",
         "same_surface_packet": {
             "source_manifest": request.get("manifest"),
-            "surface_hash": "stage9950_request_manifest_hash_deferred_to_runner",
-            "row_ids": [],
+            "surface_hash": same_manifest_surface_hash,
+            "row_ids": same_manifest_row_ids,
             "split_counts": dict(request.get("split_counts") or {}),
             "row_count": request.get("rows"),
             "expected_web_rows": (request.get("language_counts") or {}).get("web_js_ts_html"),
@@ -145,6 +173,7 @@ def build_queue() -> dict[str, Any]:
         "queue_entries": 1,
         "edit_localization_rows": packet["same_surface_packet"]["row_count"],
         "edit_localization_web_rows": packet["same_surface_packet"]["expected_web_rows"],
+        "same_manifest_compare_rows": len(same_manifest_row_ids),
         "local_gemma3_12b_present": bool((ollama.get("ollama_runtime") or {}).get("local_gemma_model_id") == "gemma3:12b"),
         "runner_script_exists": RUNNER.exists(),
     }
@@ -152,6 +181,8 @@ def build_queue() -> dict[str, Any]:
         failures.append("edit_localization_rows_not_72")
     if metrics["edit_localization_web_rows"] != 27:
         failures.append("edit_localization_web_rows_not_27")
+    if metrics["same_manifest_compare_rows"] != 48:
+        failures.append("same_manifest_compare_rows_not_48")
     if metrics["local_gemma3_12b_present"] is not True:
         failures.append("local_gemma3_12b_not_present")
     if metrics["runner_script_exists"] is not True:
@@ -194,31 +225,42 @@ def main() -> None:
         "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     SUMMARY.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    DOC.write_text("\n".join([
-        "# Stage9952 Blended Edit Localization Gemma Request",
-        "",
-        f"Passed: `{summary['passed']}`",
-        f"Queue entries: `{built['metrics']['queue_entries']}`",
-        f"Edit-localization rows: `{built['metrics']['edit_localization_rows']}`",
-        f"Web rows: `{built['metrics']['edit_localization_web_rows']}`",
-        f"Local gemma3:12b present: `{built['metrics']['local_gemma3_12b_present']}`",
-        "",
-        summary["decision"],
-        "",
-        "This stage only materializes the Gemma request packet and runner command. It does not authorize or execute Gemma.",
-        "",
-        f"Next: {next_step}",
-        "",
-    ]), encoding="utf-8")
+    DOC.write_text(
+        "\n".join(
+            [
+                "# Stage9952 Blended Edit Localization Gemma Request",
+                "",
+                f"Passed: `{summary['passed']}`",
+                f"Queue entries: `{built['metrics']['queue_entries']}`",
+                f"Edit-localization rows: `{built['metrics']['edit_localization_rows']}`",
+                f"Web rows: `{built['metrics']['edit_localization_web_rows']}`",
+                f"Local gemma3:12b present: `{built['metrics']['local_gemma3_12b_present']}`",
+                "",
+                summary["decision"],
+                "",
+                "This stage only materializes the Gemma request packet and runner command. It does not authorize or execute Gemma.",
+                "",
+                f"Next: {next_step}",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
     if summary["passed"]:
         update_registry(summary)
-    print(json.dumps({
-        "stage": STAGE,
-        "passed": summary["passed"],
-        "metrics": built["metrics"],
-        "failures": built["failures"],
-        "next_best_step": next_step,
-    }, indent=2, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                "stage": STAGE,
+                "passed": summary["passed"],
+                "metrics": built["metrics"],
+                "failures": built["failures"],
+                "next_best_step": next_step,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
     if built["failures"]:
         raise SystemExit(1)
 

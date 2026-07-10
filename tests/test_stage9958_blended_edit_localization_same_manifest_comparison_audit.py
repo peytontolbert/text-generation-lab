@@ -16,14 +16,14 @@ def _load():
     return module
 
 
-def test_build_audit_stays_pending_before_real_outputs_exist():
+def test_language_from_rows_uses_prompt_and_cell_key_fallbacks():
     mod = _load()
-    audit, rows = mod.build_audit()
-    assert audit["passed"] is True
-    assert audit["metrics"]["comparison_ready_now"] is False
-    assert "stage9950_row_field_logits_missing" in audit["pending_conditions"]
-    assert "stage9953_gemma_rows_missing" in audit["pending_conditions"]
-    assert rows == []
+    inferred_from_prompt = mod.language_from_rows({}, {"prompt": "Structured input surface:\nlanguage=rust | route=KEEP_STRUCTURED"})
+    inferred_from_cell = mod.language_from_rows({"cell_key": "python::structured_state::KEEP_STRUCTURED"}, {})
+    inferred_web = mod.language_from_rows({}, {"prompt": "language=web_js_ts_html | state.file_extension=ts"})
+    assert inferred_from_prompt == "rust"
+    assert inferred_from_cell == "python"
+    assert inferred_web == "web_js_ts_html"
 
 
 def test_bucket_metrics_compares_100m_and_gemma_by_split():

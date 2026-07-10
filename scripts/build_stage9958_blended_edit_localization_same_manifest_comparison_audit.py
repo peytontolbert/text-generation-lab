@@ -86,21 +86,29 @@ def future_paths() -> tuple[Path, Path]:
     return future_100m_dir / "row_field_logits.jsonl", gemma_rows
 
 
-def language_from_row_id(row_id: str) -> str:
-    text = str(row_id or "")
+def language_from_text(text: str) -> str:
+    lowered = str(text or "").lower()
     for lang in LANGS:
-        if f"language={lang}" in text:
+        if f"language={lang}" in lowered or lang in lowered:
             return lang
-    # fall back to path-like hints embedded in row ids
-    lowered = text.lower()
-    if "python" in lowered:
-        return "python"
-    if "rust" in lowered:
-        return "rust"
-    if "c_cpp" in lowered or "::c_" in lowered or "::cpp" in lowered:
-        return "c_cpp"
-    if "web_js_ts_html" in lowered or "javascript" in lowered or "typescript" in lowered or "html" in lowered:
+    if "javascript" in lowered or "typescript" in lowered or "html" in lowered or "web" in lowered:
         return "web_js_ts_html"
+    if "c_cpp" in lowered or "::c_" in lowered or "::cpp" in lowered or "c++" in lowered:
+        return "c_cpp"
+    return "unknown"
+
+
+def language_from_rows(row_100m: dict[str, Any], gemma_row: dict[str, Any]) -> str:
+    candidates = [
+        gemma_row.get("language"),
+        gemma_row.get("prompt"),
+        row_100m.get("cell_key"),
+        row_100m.get("row_id"),
+    ]
+    for value in candidates:
+        inferred = language_from_text(str(value or ""))
+        if inferred in LANGS:
+            return inferred
     return "unknown"
 
 
@@ -113,7 +121,7 @@ def build_comparison_rows(rows_100m: list[dict[str, Any]], gemma_rows: list[dict
         split = str(row.get("split") or gemma.get("split") or "")
         combined.append({
             "row_id": row_id,
-            "language_family": str(gemma.get("language") or language_from_row_id(row_id)),
+            "language_family": language_from_rows(row, gemma),
             "split": split,
             "expected_label": str(gemma.get("expected_label") or row.get("target") or ""),
             "hundred_m_pred": str(row.get("pred") or ""),

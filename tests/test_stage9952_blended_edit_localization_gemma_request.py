@@ -23,7 +23,11 @@ def test_build_queue_preserves_blended_row_counts_and_local_gemma_ready():
     assert built["metrics"]["queue_entries"] == 1
     assert built["metrics"]["edit_localization_rows"] == 72
     assert built["metrics"]["edit_localization_web_rows"] == 27
+    assert built["metrics"]["same_manifest_compare_rows"] == 48
     assert built["metrics"]["local_gemma3_12b_present"] is True
+    packet = built["packets"][0]
+    assert len(packet["same_surface_packet"]["row_ids"]) == 48
+    assert packet["same_surface_packet"]["surface_hash"]
 
 
 def test_runner_command_uses_custom_queue_and_packets():

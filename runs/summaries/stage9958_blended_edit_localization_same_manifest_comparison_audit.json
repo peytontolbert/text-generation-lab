@@ -17,12 +17,12 @@
     "scoring_authorized_next": false,
     "source_emission_authorized": false
   },
-  "created_at_utc": "2026-07-10T08:59:06Z",
+  "created_at_utc": "2026-07-10T09:15:50Z",
   "decision": "Materialized the actual same-manifest blended comparison audit. It stays pending until both future row-output artifacts exist, but it can score the narrow blended 100M-vs-Gemma slice immediately once they do.",
   "metrics": {
     "body_emission_authorized": false,
-    "comparison_cells": 0,
-    "comparison_ready_now": false,
+    "comparison_cells": 8,
+    "comparison_ready_now": true,
     "controller_complete_merge_authorized_next": false,
     "decoder_ce_training_authorized_next": false,
     "denoise_ce_training_authorized_next": false,
@@ -30,19 +30,16 @@
     "gemma_execution_authorized_next": false,
     "harness_execution_authorized_next": false,
     "model_execution_authorized_next": false,
-    "pending_conditions": [
-      "stage9950_row_field_logits_missing",
-      "stage9953_gemma_rows_missing"
-    ],
+    "pending_conditions": [],
     "promotion_ready": false,
-    "rows_100m_present": 0,
-    "rows_gemma_present": 0,
+    "rows_100m_present": 48,
+    "rows_gemma_present": 48,
     "runtime_authorized": false,
     "scoring_authorized_next": false,
     "source_emission_authorized": false,
-    "ties": 0,
-    "wins_100m": 0,
-    "wins_gemma": 0
+    "ties": 2,
+    "wins_100m": 3,
+    "wins_gemma": 3
   },
   "name": "stage9958_blended_edit_localization_same_manifest_comparison_audit",
   "next_best_step": "Rerun this audit after stage9950 and the matching Gemma execution write real row outputs; only then can the blended same-manifest 100M-vs-Gemma comparison be scored.",

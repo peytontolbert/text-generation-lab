@@ -1,9 +1,9 @@
 # Stage9958 Blended Edit Localization Same-Manifest Comparison Audit
 
 Passed: `True`
-Comparison ready now: `False`
-100M rows present: `0`
-Gemma rows present: `0`
+Comparison ready now: `True`
+100M rows present: `48`
+Gemma rows present: `48`
 
 Materialized the actual same-manifest blended comparison audit. It stays pending until both future row-output artifacts exist, but it can score the narrow blended 100M-vs-Gemma slice immediately once they do.
 
