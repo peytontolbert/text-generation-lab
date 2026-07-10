@@ -7,6 +7,7 @@ Start here:
 - [Recovery rebuild plan](docs/RECOVERY_REBUILD_PLAN.md)
 - [Current reconstructed research spine](docs/CURRENT_RESEARCH_SPINE_RECONSTRUCTED.md)
 - [Recovery checklist](docs/RECOVERY_CHECKLIST.md)
+- [100M software maintainer model card](docs/MODEL_CARD.md)
 - [No destructive commands policy](docs/NO_DESTRUCTIVE_COMMANDS_POLICY.md)
 - [Stage8587 reconstructed incident audit](runs/summaries/stage8587_reconstructed_workspace_loss_incident_audit.json)
 - [Archived session recovery](docs/ARCHIVED_SESSION_RECOVERY.md)
