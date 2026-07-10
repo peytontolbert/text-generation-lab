@@ -1,0 +1,49 @@
+{
+  "artifacts": {
+    "doc": "docs/BLENDED_EDIT_LOCALIZATION_SAME_MANIFEST_COMPARISON_GATE_STAGE9954.md",
+    "gate": "runs/local/artifacts/stage9954_blended_edit_localization_same_manifest_comparison_gate/blended_edit_localization_same_manifest_comparison_gate.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T08:44:40Z",
+  "decision": "Materialized the same-manifest comparison gate for the first blended edit-localization slice so future 100M and Gemma outputs are compared only if they preserve the shared 72-row / 27-web-row contract and remain on the exact same manifest.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "comparison_ready_now": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "future_gemma_queue_entries": 1,
+    "future_stage_100m": 9950,
+    "gemma_execution_authorized_next": false,
+    "gemma_expected_rows": 72,
+    "gemma_expected_web_rows": 27,
+    "harness_execution_authorized_next": false,
+    "hundred_m_expected_rows": 72,
+    "hundred_m_expected_web_rows": 27,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runner_surface_ready": true,
+    "runtime_authorized": false,
+    "same_manifest_row_contract_ok": true,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "name": "stage9954_blended_edit_localization_same_manifest_comparison_gate",
+  "next_best_step": "After Stage9950 and the matching Gemma execution both exist, compare only those same-manifest outputs and keep the claim scoped to this blended edit-localization surface unless broader multilingual evidence is regenerated on the same package.",
+  "passed": true,
+  "stage": 9954,
+  "stage_name": "stage9954_blended_edit_localization_same_manifest_comparison_gate"
+}
