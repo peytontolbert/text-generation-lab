@@ -1,0 +1,60 @@
+{
+  "artifacts": {
+    "anchor_rows": "runs/local/artifacts/stage10050_balanced_multilingual_successor_packet/balanced_multilingual_successor_rows.jsonl",
+    "doc": "docs/BALANCED_MULTILINGUAL_SUCCESSOR_PACKET_STAGE10050.md",
+    "manifest": "runs/local/artifacts/stage10050_balanced_multilingual_successor_packet/balanced_multilingual_successor_manifest.jsonl",
+    "packet": "runs/local/artifacts/stage10050_balanced_multilingual_successor_packet/balanced_multilingual_successor_packet.json"
+  },
+  "created_at_utc": "2026-07-10T14:12:49Z",
+  "decision": "Materialized a balanced multilingual successor packet that keeps the stage10047 Python intervention while adding only the exact non-Python canonical train anchors needed to restore labels lost in stage10049.",
+  "metrics": {
+    "anchor_label_counts": {
+      "c_cpp:A": 1,
+      "c_cpp:B": 3,
+      "c_cpp:C": 1,
+      "c_cpp:E": 2,
+      "python:C": 2,
+      "rust:C": 2,
+      "web_js_ts_html:A": 6,
+      "web_js_ts_html:C": 1
+    },
+    "anchor_language_counts": {
+      "c_cpp": 7,
+      "python": 2,
+      "rust": 2,
+      "web_js_ts_html": 7
+    },
+    "anchor_rows": 18,
+    "base_rows": 103,
+    "failures": [],
+    "language_counts": {
+      "c_cpp": 37,
+      "python": 29,
+      "rust": 13,
+      "web_js_ts_html": 42
+    },
+    "readiness_failed_buckets": [],
+    "readiness_passed": true,
+    "regression_counts": {
+      "c_cpp:A": 1,
+      "c_cpp:B": 3,
+      "c_cpp:C": 1,
+      "c_cpp:E": 2,
+      "python:C": 2,
+      "rust:C": 2,
+      "web_js_ts_html:A": 6,
+      "web_js_ts_html:C": 1
+    },
+    "split_counts": {
+      "eval": 38,
+      "strict_eval": 17,
+      "train": 66
+    },
+    "successor_rows": 121
+  },
+  "name": "stage10050_balanced_multilingual_successor_packet",
+  "next_best_step": "Run one capped target-100m probe on this balanced multilingual successor manifest to test whether the Python gain can be retained without giving back c_cpp, rust, and web heldout accuracy.",
+  "passed": true,
+  "stage": 10050,
+  "stage_name": "stage10050_balanced_multilingual_successor_packet"
+}
