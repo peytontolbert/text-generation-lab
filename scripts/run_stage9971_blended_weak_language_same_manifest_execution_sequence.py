@@ -3,13 +3,22 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNBOOK = ROOT / "runs/local/artifacts/stage9971_blended_weak_language_same_manifest_execution_runbook/blended_weak_language_same_manifest_execution_runbook.json"
 EXECUTABLE_STEP_KINDS = {"model_execution", "gemma_execution"}
+TOKENIZER_JSON = ROOT / "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+FALLBACK_PYTHONS = [
+    Path("/home/peyton/miniconda3/envs/code_assist_runtime/bin/python"),
+    Path("/home/peyton/miniconda3/envs/ai/bin/python"),
+    Path("/home/peyton/miniconda3/envs/hunyuan_part/bin/python"),
+    Path("/home/peyton/miniconda3/envs/trellis/bin/python"),
+]
 
 
 def load_json(path: Path) -> Any:
@@ -49,8 +58,48 @@ def command_for_step(runbook: dict[str, Any], step_id: str) -> list[str]:
     return [str(item) for item in command]
 
 
+def _python_runtime_ok(python_exe: str) -> bool:
+    probe = (
+        "import torch; import torch.nn; "
+        "from tokenizers import Tokenizer; "
+        f"Tokenizer.from_file({str(TOKENIZER_JSON)!r}); "
+        "print('ok')"
+    )
+    completed = subprocess.run(
+        [python_exe, "-c", probe],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    return completed.returncode == 0
+
+
+def resolve_command_for_execution(command: list[str], step_id: str) -> list[str]:
+    if step_id != "run_stage9965_hundred_m":
+        return command
+    env_override = os.environ.get("AGENTKERNEL_STAGE9965_PYTHON")
+    candidates: list[Path] = []
+    if env_override:
+        candidates.append(Path(env_override))
+    candidates.append(Path(command[0]))
+    candidates.append(Path(sys.executable))
+    candidates.extend(FALLBACK_PYTHONS)
+    seen: set[str] = set()
+    for candidate in candidates:
+        text = str(candidate)
+        if text in seen or not candidate.exists():
+            continue
+        seen.add(text)
+        if _python_runtime_ok(text):
+            resolved = list(command)
+            resolved[0] = text
+            return resolved
+    raise RuntimeError("no working python runtime found for stage9965 model execution")
+
+
 def execute_step(runbook: dict[str, Any], step_id: str) -> subprocess.CompletedProcess[str]:
-    command = command_for_step(runbook, step_id)
+    command = resolve_command_for_execution(command_for_step(runbook, step_id), step_id)
     return subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
 
 
@@ -78,9 +127,12 @@ def main() -> None:
         return
 
     if args.step_id and args.print_command:
+        raw = command_for_step(runbook, args.step_id)
+        resolved = resolve_command_for_execution(raw, args.step_id) if args.step_id == "run_stage9965_hundred_m" else raw
         print(json.dumps({
             "step_id": args.step_id,
-            "command": command_for_step(runbook, args.step_id),
+            "command": raw,
+            "resolved_command": resolved,
         }, indent=2, sort_keys=True))
         return
 

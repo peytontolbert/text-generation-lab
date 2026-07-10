@@ -18,7 +18,7 @@
     "latest_stage_next_best_step": "If execution is explicitly authorized, follow this runbook in order: run stage9965, audit stage9965 outputs, run the matching Gemma queue, then compare only those outputs on the exact same 120-row manifest.",
     "max_stage": 9971,
     "min_stage": 8530,
-    "registry_rows": 1432
+    "registry_rows": 1434
   },
   "passed": true,
   "rows": [
@@ -28661,6 +28661,46 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9972_blended_weak_language_output_acceptance_audit.json",
       "stage": 9972,
       "stage_name": "stage9972_blended_weak_language_output_acceptance_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Use this real same-manifest weak-language comparison to decide whether the stage9965 recovery path should replace the current frontier, then attach these verdicts back into the stage9969-stage9970 review packets and workbook.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9973_blended_weak_language_same_manifest_comparison_audit.json",
+      "stage": 9973,
+      "stage_name": "stage9973_blended_weak_language_same_manifest_comparison_audit"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Blend this real post-Gemma loss packet into the next edit-localization cycle, with priority on python and the c_cpp strict rows that still lose after the weak-language recovery mix.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage9974_real_same_manifest_loss_recovery_packet.json",
+      "stage": 9974,
+      "stage_name": "stage9974_real_same_manifest_loss_recovery_packet"
     }
   ]
 }
