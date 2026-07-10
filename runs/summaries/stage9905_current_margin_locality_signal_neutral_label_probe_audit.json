@@ -1,0 +1,80 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9905_current_margin_locality_signal_neutral_label_probe_audit/current_margin_locality_signal_neutral_label_probe_audit.json",
+    "doc": "docs/CURRENT_MARGIN_LOCALITY_SIGNAL_NEUTRAL_LABEL_PROBE_AUDIT_STAGE9905.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T06:20:50Z",
+  "decision": "The Stage9904 neutral-label control does not materially beat the stage9894 remap control, which points away from simple label-identity effects and back toward deeper head/objective limitations.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "delta_vs_stage9892_eval": 0.0,
+    "delta_vs_stage9892_strict": 0.0,
+    "delta_vs_stage9894_eval": 0.0,
+    "delta_vs_stage9894_strict": 0.0,
+    "denoise_ce_training_authorized_next": false,
+    "eval_exact": 0.4375,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "per_cell_delta_vs_stage9892": {
+      "c_cpp::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "python::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "rust::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "web_js_ts_html::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0
+    },
+    "per_cell_delta_vs_stage9894": {
+      "c_cpp::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "python::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "rust::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": -0.125,
+      "web_js_ts_html::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.125
+    },
+    "pred_counts": {
+      "A": 20,
+      "B": 12
+    },
+    "prior_eval_exact": 0.4375,
+    "prior_pred_counts": {
+      "K": 20,
+      "M": 12
+    },
+    "prior_strict_exact": 0.5,
+    "promotion_ready": false,
+    "remap_eval_exact": 0.4375,
+    "remap_pred_counts": {
+      "R": 12,
+      "T": 8,
+      "Z": 12
+    },
+    "remap_strict_exact": 0.5,
+    "required_artifacts_written": true,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "selected_step": 15,
+    "selection_exact_sum": 0.9375,
+    "selection_loss_sum": 2.830642819404602,
+    "source_emission_authorized": false,
+    "strict_exact": 0.5,
+    "uses_all_neutral_labels": false
+  },
+  "name": "stage9905_current_margin_locality_signal_neutral_label_probe_audit",
+  "next_best_step": "If the neutral-label control is better than stages 9892 and 9894, run the same neutral vocabulary through a same-surface Gemma comparison; otherwise keep the packet fixed and change the head/objective rather than the labels.",
+  "passed": true,
+  "stage": 9905,
+  "stage_name": "stage9905_current_margin_locality_signal_neutral_label_probe_audit"
+}
