@@ -1,0 +1,158 @@
+{
+  "best_state_selection": {
+    "checkpoint_exported": false,
+    "enabled": false,
+    "eval_joint_proxy_exact": null,
+    "eval_loss": null,
+    "promotion_ready": false,
+    "restored": false,
+    "selected_step": null,
+    "selection_exact_sum": null,
+    "selection_loss_sum": null,
+    "selection_rule": "max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss",
+    "selection_score": null,
+    "strict_joint_proxy_exact": null,
+    "strict_loss": null
+  },
+  "eval": {
+    "eval": {
+      "field_exact": {
+        "edit_localization": {
+          "exact": 0.3684210526315789,
+          "rows": 38
+        }
+      },
+      "field_loss": {
+        "edit_localization": 1.6356897354125977
+      },
+      "joint_proxy_exact": 0.3684210526315789,
+      "loss": 1.6356897354125977,
+      "rows": 38,
+      "split": "eval"
+    },
+    "strict_eval": {
+      "field_exact": {
+        "edit_localization": {
+          "exact": 0.5294117647058824,
+          "rows": 17
+        }
+      },
+      "field_loss": {
+        "edit_localization": 1.5734845399856567
+      },
+      "joint_proxy_exact": 0.5294117647058824,
+      "loss": 1.5734845399856567,
+      "rows": 17,
+      "split": "strict_eval"
+    }
+  },
+  "eval_rows": 38,
+  "fields": [
+    "edit_localization"
+  ],
+  "final_checkpoint_exported": false,
+  "gemma_executed": false,
+  "harness_executed": false,
+  "implementation": {
+    "d_ff": 2048,
+    "d_model": 640,
+    "estimated_parameter_count": 102717225,
+    "full_100m_target_execution_authorized": true,
+    "implementation": "transformer",
+    "model_class": "AgentKernelLiteTransformerSeq2Seq",
+    "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "n_heads": 10,
+    "n_layers": 6,
+    "probe_scale": "target_100m",
+    "vocab_size": 1506
+  },
+  "mode": "edit_localization_probe",
+  "native_feature_ablation_audit_required": false,
+  "native_feature_ablation_rows": 55,
+  "required_artifacts_written": true,
+  "run_id": "stage10066_cpp_rust_regression_counterbalance_target100m_probe",
+  "runtime_artifact_status": {
+    "activation_patch_recovery.jsonl": {
+      "bytes": 702,
+      "exists": true
+    },
+    "activation_summary.jsonl": {
+      "bytes": 89549,
+      "exists": true
+    },
+    "cleanup_proof.json": {
+      "bytes": 176,
+      "exists": true
+    },
+    "eval_loss_by_checkpoint.jsonl": {
+      "bytes": 481,
+      "exists": true
+    },
+    "failure_bucket_card.json": {
+      "bytes": 876,
+      "exists": true
+    },
+    "feature_ablation_attribution.jsonl": {
+      "bytes": 109362,
+      "exists": true
+    },
+    "field_exact_by_cell.json": {
+      "bytes": 807,
+      "exists": true
+    },
+    "field_label_vocabs.json": {
+      "bytes": 92,
+      "exists": true
+    },
+    "loss_by_step.jsonl": {
+      "bytes": 11005,
+      "exists": true
+    },
+    "module_delta_norms.json": {
+      "bytes": 13790,
+      "exists": true
+    },
+    "row_dynamics_history.jsonl": {
+      "bytes": 17617,
+      "exists": true
+    },
+    "row_field_logits.jsonl": {
+      "bytes": 52244,
+      "exists": true
+    },
+    "row_field_losses.jsonl": {
+      "bytes": 241,
+      "exists": true
+    },
+    "row_gradient_norms.jsonl": {
+      "bytes": 92462,
+      "exists": true
+    },
+    "structured_confusion_matrix.json": {
+      "bytes": 272,
+      "exists": true
+    }
+  },
+  "runtime_executed": true,
+  "strict_rows": 17,
+  "structured_batch_sampler": "label_balanced_by_primary_field",
+  "structured_optimizer_frozen_bucket_prefixes": [
+    "decoder",
+    "decoder_attention",
+    "decoder_mlp",
+    "embeddings"
+  ],
+  "structured_optimizer_frozen_parameter_count": 122,
+  "structured_optimizer_isolated": true,
+  "structured_optimizer_trainable_bucket_prefixes": [
+    "encoder",
+    "encoder_attention",
+    "encoder_mlp",
+    "other",
+    "policy_retrieval_heads",
+    "structured_heads"
+  ],
+  "structured_optimizer_trainable_parameter_count": 151,
+  "structured_trainable_profile": "full_non_decoder",
+  "train_rows": 96
+}

@@ -1,0 +1,67 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage10067_cpp_rust_regression_counterbalance_same_manifest_comparison_audit/cpp_rust_regression_counterbalance_same_manifest_comparison_audit.json",
+    "doc": "docs/CPP_RUST_REGRESSION_COUNTERBALANCE_SAME_MANIFEST_COMPARISON_AUDIT_STAGE10067.md",
+    "rows": "runs/local/artifacts/stage10067_cpp_rust_regression_counterbalance_same_manifest_comparison_audit/cpp_rust_regression_counterbalance_same_manifest_comparison_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T15:23:17Z",
+  "decision": "Materialized the same-manifest comparison audit for the c_cpp/rust counter-balance successor run so the resulting 100M outputs can be judged directly against stage10040 and the fixed Gemma comparator.",
+  "metrics": {
+    "comparison_rows": 55,
+    "failures": [],
+    "macro_delta_successor_minus_baseline": -0.03522727272727272,
+    "macro_delta_successor_minus_gemma": 0.24431818181818185,
+    "macro_exact_baseline_100m": 0.48295454545454547,
+    "macro_exact_gemma": 0.2034090909090909,
+    "macro_exact_successor_100m": 0.44772727272727275,
+    "per_language": {
+      "c_cpp": {
+        "baseline_hundred_m_exact": 0.35,
+        "gemma_exact": 0.15,
+        "rows": 20,
+        "successor_delta_vs_baseline": -0.24999999999999997,
+        "successor_delta_vs_gemma": -0.04999999999999999,
+        "successor_hundred_m_exact": 0.1,
+        "verdict": "gemma_better"
+      },
+      "python": {
+        "baseline_hundred_m_exact": 0.18181818181818182,
+        "gemma_exact": 0.36363636363636365,
+        "rows": 11,
+        "successor_delta_vs_baseline": -0.09090909090909091,
+        "successor_delta_vs_gemma": -0.2727272727272727,
+        "successor_hundred_m_exact": 0.09090909090909091,
+        "verdict": "gemma_better"
+      },
+      "rust": {
+        "baseline_hundred_m_exact": 0.75,
+        "gemma_exact": 0.0,
+        "rows": 4,
+        "successor_delta_vs_baseline": 0.0,
+        "successor_delta_vs_gemma": 0.75,
+        "successor_hundred_m_exact": 0.75,
+        "verdict": "100m_better"
+      },
+      "web_js_ts_html": {
+        "baseline_hundred_m_exact": 0.65,
+        "gemma_exact": 0.3,
+        "rows": 20,
+        "successor_delta_vs_baseline": 0.19999999999999996,
+        "successor_delta_vs_gemma": 0.55,
+        "successor_hundred_m_exact": 0.85,
+        "verdict": "100m_better"
+      }
+    },
+    "rows_gemma_present": 55,
+    "rows_successor_present": 55,
+    "shared_rows": 55,
+    "ties": 0,
+    "wins_100m": 2,
+    "wins_gemma": 2
+  },
+  "name": "stage10067_cpp_rust_regression_counterbalance_same_manifest_comparison_audit",
+  "next_best_step": "Use this audit to decide whether the c_cpp/rust counter-balance packet keeps the stage10064 4-language Gemma win while narrowing or eliminating the remaining baseline gap.",
+  "passed": true,
+  "stage": 10067,
+  "stage_name": "stage10067_cpp_rust_regression_counterbalance_same_manifest_comparison_audit"
+}
