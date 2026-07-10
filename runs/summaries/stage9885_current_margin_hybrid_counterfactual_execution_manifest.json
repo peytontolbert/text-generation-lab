@@ -1,0 +1,59 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9885_current_margin_hybrid_counterfactual_execution_manifest/current_margin_hybrid_counterfactual_execution_manifest_audit.json",
+    "doc": "docs/CURRENT_MARGIN_HYBRID_COUNTERFACTUAL_EXECUTION_MANIFEST_STAGE9885.md",
+    "manifest": "runs/local/artifacts/stage9885_current_margin_hybrid_counterfactual_execution_manifest/current_margin_hybrid_counterfactual_execution_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T05:26:46Z",
+  "decision": "Built a hybrid current-frontier execution manifest that keeps positive-original strict anchors for the fragile K and T labels while preserving mixed-replay pressure on M and R.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "kept_obligations": {
+      "MIXED_REPLAY": 8,
+      "POSITIVE_ORIGINAL": 16,
+      "POSITIVE_ORIGINAL_EVAL_REPLAY": 16,
+      "POSITIVE_ORIGINAL_STRICT_ANCHOR": 8
+    },
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "rows": 48,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_counts": {
+      "eval": 16,
+      "strict_eval": 16,
+      "train": 16
+    },
+    "strict_label_balance": {
+      "K": 4,
+      "M": 4,
+      "R": 4,
+      "T": 4
+    }
+  },
+  "name": "stage9885_current_margin_hybrid_counterfactual_execution_manifest",
+  "next_best_step": "Run one target-100M probe on this hybrid manifest to test whether clean strict anchors for K and T preserve frontier strict exact while still exposing mixed-replay pressure on M and R.",
+  "passed": true,
+  "stage": 9885,
+  "stage_name": "stage9885_current_margin_hybrid_counterfactual_execution_manifest"
+}
