@@ -233,7 +233,14 @@ def _pack_training_row(pack_row: dict[str, Any], ordered_chunk_rows: list[dict[s
                 'query_index': index,
                 'example_id': str(example.get('example_id') or ''),
                 'program_id': str(example.get('program_id') or ''),
+                'query_text': str(query.get('text') or ''),
+                'seed_paths': list(query.get('seed_paths') or []),
+                'selected_tests': list(query.get('selected_tests') or []),
+                'seed_symbols': list(query.get('seed_symbols') or []),
+                'execution_route': str(query.get('execution_route') or ''),
+                'test_selection_route': str(query.get('test_selection_route') or ''),
                 'final_answer': targets.get('final_answer'),
+                'final_state': dict(targets.get('final_state') or {}),
                 'final_state_json': str(targets.get('final_state_json') or json.dumps(dict(targets.get('final_state') or {}), sort_keys=True)),
             }
         )

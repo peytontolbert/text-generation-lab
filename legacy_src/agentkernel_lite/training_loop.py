@@ -943,7 +943,7 @@ def _write_jsonl_rows(path: Path, rows: list[dict[str, Any]]) -> None:
 
 def _target_text(row: dict[str, Any]) -> str:
     target = row.get("target") if isinstance(row.get("target"), dict) else {}
-    return str(target.get("decoder_text") or row.get("decoder_text") or target.get("target_ref") or row.get("target_ref") or "")
+    return str(target.get("decoder_text") or row.get("decoder_text") or row.get("target_text") or target.get("target_ref") or row.get("target_ref") or "")
 
 
 def _episode_step_value(row: dict[str, Any], field: str) -> str | None:

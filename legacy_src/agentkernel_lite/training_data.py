@@ -118,10 +118,24 @@ def _row_text(row: dict[str, Any]) -> str:
         parts.append(f"objective={row.get('objective_family')}")
     if row.get("surface"):
         parts.append(f"surface={row.get('surface')}")
+    if row.get("task_type"):
+        parts.append(f"task_type={row.get('task_type')}")
+    if isinstance(row.get("prompt_text"), str) and row.get("prompt_text"):
+        parts.append(f"prompt_text={row.get('prompt_text')}")
+    if isinstance(row.get("query_text"), str) and row.get("query_text"):
+        parts.append(f"query_text={row.get('query_text')}")
+    if isinstance(row.get("input_text"), str) and row.get("input_text"):
+        parts.append(f"input_text={row.get('input_text')}")
     if isinstance(row.get("corrupted_output"), str):
         parts.append(f"corrupted_output={row.get('corrupted_output')}")
     if isinstance(row.get("verifier_failure"), str):
         parts.append(f"verifier_failure={row.get('verifier_failure')}")
+    positive_chunk_ids = row.get("positive_chunk_ids")
+    if isinstance(positive_chunk_ids, list) and positive_chunk_ids:
+        parts.append(f"positive_chunk_ids.count={len(positive_chunk_ids)}")
+        for chunk_id in positive_chunk_ids[:12]:
+            if isinstance(chunk_id, (str, int, float, bool)):
+                parts.append(f"positive_chunk_ids.item={chunk_id}")
     _append_structured(parts, "state", state)
     transition = row.get("episode_transition") if isinstance(row.get("episode_transition"), dict) else {}
     # Episode-step rows expose only pre-action state/action context to the encoder.
@@ -175,6 +189,8 @@ def _target_text(row: dict[str, Any]) -> str:
         return target["decoder_text"]
     if isinstance(row.get("decoder_text"), str):
         return row["decoder_text"]
+    if isinstance(row.get("target_text"), str):
+        return row["target_text"]
     return str(target.get("target_ref") or row.get("target_ref") or target.get("label") or "")
 
 

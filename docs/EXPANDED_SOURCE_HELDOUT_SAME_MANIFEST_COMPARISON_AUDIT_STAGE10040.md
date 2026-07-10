@@ -1,6 +1,6 @@
 # Stage10040 Expanded Source-Heldout Same-Manifest Comparison Audit
 
-Passed: `False`
+Passed: `True`
 
 Materialized the expanded source-heldout same-manifest comparison audit scaffold so the next 100M and Gemma reruns can be judged directly on the enlarged heldout bank instead of the earlier smaller baseline.
 

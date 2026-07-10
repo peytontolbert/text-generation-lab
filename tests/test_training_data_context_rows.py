@@ -92,3 +92,54 @@ def test_build_batch_accepts_context_rows() -> None:
     assert batch.input_ids.shape[0] == 1
     assert batch.loss_mask["structured_aux"].tolist() == [True]
     assert batch.row_ids == ["r1"]
+
+
+def test_build_batch_accepts_long_context_compiled_rows() -> None:
+    batch = build_batch(
+        [
+            {
+                "row_id": "full::pack1",
+                "task_type": "full_context_state_reconstruction",
+                "prompt_text": "PACK_QUERIES: [1] recover alpha_state",
+                "context_rows": [
+                    {"role": "repo_evidence", "source_type": "repo", "path": "src/a.py", "text": "alpha_state=True"}
+                ],
+                "target_text": '{"final_state": {"alpha_state": true}, "state_variable": "alpha_state"}',
+            },
+            {
+                "row_id": "retrieval::pack1::1",
+                "task_type": "retrieval_supervision",
+                "query_text": "What is the final value of alpha_state?",
+                "positive_chunk_ids": ["c1", "c2"],
+                "target_text": '{"final_state": {"alpha_state": true}, "state_variable": "alpha_state"}',
+            },
+            {
+                "row_id": "memory::pack1",
+                "task_type": "state_summary_compression",
+                "input_text": "Summarize persistent working memory.",
+                "target_text": '{"state_variables": ["alpha_state"]}',
+            },
+        ],
+        max_encoder_tokens=160,
+        max_decoder_tokens=64,
+    )
+
+    assert batch.input_ids.shape[0] == 3
+    assert batch.decoder_input_ids.shape[0] == 3
+    assert batch.row_ids == ["full::pack1", "retrieval::pack1::1", "memory::pack1"]
+
+
+def test_row_text_includes_long_context_prompt_and_retrieval_fields() -> None:
+    rendered = _row_text(
+        {
+            "row_id": "retrieval::pack1::1",
+            "task_type": "retrieval_supervision",
+            "query_text": "What is the final value of alpha_state?",
+            "positive_chunk_ids": ["c1", "c2"],
+        }
+    )
+
+    assert "task_type=retrieval_supervision" in rendered
+    assert "query_text=What is the final value of alpha_state?" in rendered
+    assert "positive_chunk_ids.count=2" in rendered
+    assert "positive_chunk_ids.item=c1" in rendered

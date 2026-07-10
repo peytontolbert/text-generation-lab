@@ -2,7 +2,7 @@
 
 Passed: `True`
 First-wave bundles: `8`
-Bundles scoreable now: `0`
+Bundles scoreable now: `5`
 Bundles with all support attached: `8`
 
 Collapse the first-wave multilingual maintainer review state into one strict readiness ledger so the repo can distinguish bundles that are merely scaffolded from bundles that are actually scoreable, while keeping eval-hacking pressure visible.

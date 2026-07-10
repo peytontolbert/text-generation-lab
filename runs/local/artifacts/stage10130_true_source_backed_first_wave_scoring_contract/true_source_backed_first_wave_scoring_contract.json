@@ -4,23 +4,44 @@
     "blocked_manifest": "runs/local/artifacts/stage10129_true_source_backed_multilingual_adjudication_frontier/true_source_backed_multilingual_adjudication_blocked_manifest.json"
   },
   "claim_boundary": {
-    "no_model_comparison_is_honest_without_admitted_bundles": false,
+    "no_model_comparison_is_honest_without_admitted_bundles": true,
     "row_level_accuracy_is_secondary_to_root_level_coherence": true,
-    "scoreable_now": false
+    "scoreable_now": true
   },
   "decision": "Flatten the admitted first-wave multilingual root bundles into perspective-scoring rows only after completed rubric, anti-cheat, and gold adjudication, while preserving root-level solved semantics as the primary maintainer-grade metric.",
   "failures": [],
-  "generated_at_utc": "2026-07-10T19:47:42Z",
+  "generated_at_utc": "2026-07-10T20:23:59Z",
   "metrics": {
-    "abstention_required_rows": 0,
-    "admitted_bundle_count": 0,
-    "blocked_bundle_count": 8,
-    "gold_answer_kind_counts": {},
-    "language_row_counts": {},
-    "perspective_row_counts": {},
+    "abstention_required_rows": 5,
+    "admitted_bundle_count": 5,
+    "blocked_bundle_count": 3,
+    "gold_answer_kind_counts": {
+      "abstain": 5,
+      "candidate_path": 15,
+      "freeform_explanation": 5,
+      "freeform_risk": 5,
+      "freeform_verifier_outcome": 1,
+      "selected_test": 4,
+      "visible_evidence_key": 5
+    },
+    "language_row_counts": {
+      "c_cpp": 8,
+      "python": 16,
+      "rust": 16
+    },
+    "perspective_row_counts": {
+      "abstention_insufficient_evidence": 5,
+      "alternative_hypothesis_elimination": 5,
+      "evidence_citation": 5,
+      "minimal_fix_selection": 5,
+      "patch_impact": 5,
+      "regression_risk": 5,
+      "symptom_localization": 5,
+      "verifier_outcome": 5
+    },
     "required_perspective_count": 8,
-    "score_row_count": 0,
-    "scoreable_now": false
+    "score_row_count": 40,
+    "scoreable_now": true
   },
   "name": "stage10130_true_source_backed_first_wave_scoring_contract",
   "next_best_step": "Complete the Stage10128 first-wave rubric, anti-cheat, and perspective-gold tasks, rerun Stage10129 to admit bundles, then use these flattened scoring rows for one bounded 100M-versus-Gemma first-wave maintainer comparison.",
@@ -59,7 +80,15 @@
       "patch_impact_correctness",
       "verifier_outcome_correctness"
     ],
-    "supported_gold_answer_kinds": [],
+    "supported_gold_answer_kinds": [
+      "abstain",
+      "candidate_path",
+      "freeform_explanation",
+      "freeform_risk",
+      "freeform_verifier_outcome",
+      "selected_test",
+      "visible_evidence_key"
+    ],
     "unit_of_independence": "root_bundle"
   },
   "stage": 10130

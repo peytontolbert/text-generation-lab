@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from collections import Counter
 from pathlib import Path
@@ -33,6 +34,7 @@ PERSPECTIVES = [
 LANGUAGE_QUOTAS = {"python": 3, "c_cpp": 3, "web_js_ts_html": 2}
 MAX_SNIPPET_CHARS = 1200
 MAX_CANDIDATE_PATHS = 6
+MAX_WEB_LINKED_PATHS = 6
 
 
 def load_json(path: Path) -> Any:
@@ -113,6 +115,14 @@ def _source_route(example: dict[str, Any]) -> str:
     return ""
 
 
+def _local_repo_root(example: dict[str, Any]) -> Path | None:
+    metadata = example.get("metadata")
+    if not isinstance(metadata, dict):
+        return None
+    root = str(metadata.get("local_repo_root") or "").strip()
+    return Path(root) if root else None
+
+
 def _truncate(text: str, limit: int = MAX_SNIPPET_CHARS) -> str:
     normalized = str(text or "").strip()
     if len(normalized) <= limit:
@@ -184,6 +194,142 @@ def _candidate_paths(example: dict[str, Any]) -> list[str]:
     return list(dict.fromkeys(paths))[:MAX_CANDIDATE_PATHS]
 
 
+def _role_count(example: dict[str, Any], role: str) -> int:
+    return sum(1 for row in _context_rows(example) if str(row.get("role") or "") == role)
+
+
+def _quality_score(example: dict[str, Any], *, language_family: str) -> tuple[int, int, int, int, int]:
+    selected_tests = [str(item).strip() for item in (_query(example).get("selected_tests") or []) if str(item).strip()]
+    candidate_paths = _candidate_paths(example)
+    verifier_constraints = _role_count(example, "verification_constraint")
+    repo_neighbors = _role_count(example, "repo_graph_neighbor")
+    seed_changes = _role_count(example, "seed_change")
+    score = (
+        len(selected_tests) * 100
+        + verifier_constraints * 25
+        + repo_neighbors * 8
+        + len(candidate_paths) * 6
+        + seed_changes * 2
+    )
+    if language_family == "web_js_ts_html":
+        score += _role_count(example, "trace_analogue")
+    if language_family == "c_cpp":
+        score += 12 if any(path.endswith((".cpp", ".cc", ".cxx", ".cu", ".hpp", ".hh", ".hxx", ".h")) for path in _paths_for_example(example)) else 0
+    return score, len(selected_tests), verifier_constraints, repo_neighbors, len(candidate_paths)
+
+
+def _read_local_repo_text(repo_root: Path | None, relative_path: str, *, limit: int = MAX_SNIPPET_CHARS) -> str:
+    if repo_root is None:
+        return ""
+    normalized = relative_path.strip().lstrip("/")
+    if not normalized:
+        return ""
+    path = repo_root / normalized
+    if not path.exists() or not path.is_file():
+        return ""
+    return _truncate(path.read_text(encoding="utf-8", errors="ignore"), limit=limit)
+
+
+def _evidence_item_from_repo(repo_root: Path | None, relative_path: str, retrieval_reason: str) -> dict[str, Any] | None:
+    text = _read_local_repo_text(repo_root, relative_path)
+    if not text:
+        return None
+    return {
+        "path": relative_path,
+        "source_type": "local_repo",
+        "retrieval_reason": retrieval_reason,
+        "distance_from_seed": 1,
+        "text": text,
+    }
+
+
+def _resolve_repo_relative_path(base_path: str, candidate: str) -> str:
+    cleaned = candidate.strip().strip("\"'").split("?", 1)[0].split("#", 1)[0]
+    if not cleaned:
+        return ""
+    if cleaned.startswith(("http://", "https://", "data:")):
+        return ""
+    if cleaned.startswith("/"):
+        return cleaned.lstrip("/")
+    return str((Path(base_path).parent / cleaned).as_posix())
+
+
+def _is_maintainer_candidate_path(relative_path: str) -> bool:
+    suffix = Path(relative_path).suffix.lower()
+    return suffix in {".js", ".jsx", ".ts", ".tsx", ".html", ".css", ".scss", ".json"} or relative_path in {"package.json", "vite.config.js"}
+
+
+def _linked_repo_paths(example: dict[str, Any]) -> list[str]:
+    repo_root = _local_repo_root(example)
+    if repo_root is None:
+        return []
+    linked: list[str] = []
+    patterns = [
+        re.compile(r"""from\s+['"]([^'"]+)['"]"""),
+        re.compile(r"""import\s+['"]([^'"]+)['"]"""),
+        re.compile(r"""src=['"]([^'"]+)['"]"""),
+        re.compile(r"""href=['"]([^'"]+)['"]"""),
+    ]
+    for row in _context_rows(example):
+        if str(row.get("role") or "") != "seed_change":
+            continue
+        base_path = str(row.get("path") or "").strip()
+        full_text = _read_local_repo_text(repo_root, base_path, limit=20000)
+        if not base_path or not full_text:
+            continue
+        for pattern in patterns:
+            for match in pattern.findall(full_text):
+                relative_path = _resolve_repo_relative_path(base_path, str(match))
+                if not relative_path or not _is_maintainer_candidate_path(relative_path):
+                    continue
+                path = repo_root / relative_path
+                if path.exists() and path.is_file() and relative_path not in linked:
+                    linked.append(relative_path)
+                if len(linked) >= MAX_WEB_LINKED_PATHS:
+                    return linked
+    for fallback in ("package.json", "vite.config.js"):
+        path = repo_root / fallback
+        if path.exists() and path.is_file() and fallback not in linked:
+            linked.append(fallback)
+        if len(linked) >= MAX_WEB_LINKED_PATHS:
+            break
+    return linked
+
+
+def _enrich_web_bundle(example: dict[str, Any], evidence: dict[str, list[dict[str, Any]]], candidate_paths: list[str]) -> tuple[dict[str, list[dict[str, Any]]], list[str]]:
+    repo_root = _local_repo_root(example)
+    linked_paths = _linked_repo_paths(example)
+    if not linked_paths:
+        return evidence, candidate_paths
+
+    enriched_candidates = list(candidate_paths)
+    for relative_path in linked_paths:
+        if relative_path not in enriched_candidates:
+            enriched_candidates.append(relative_path)
+        if len(enriched_candidates) >= MAX_CANDIDATE_PATHS:
+            break
+
+    if not evidence.get("nearby_definition_or_usage_context"):
+        for relative_path in linked_paths[:3]:
+            item = _evidence_item_from_repo(repo_root, relative_path, "repo_local_linked_usage_context")
+            if item:
+                evidence["nearby_definition_or_usage_context"].append(item)
+
+    if not evidence.get("verifier_and_test_constraint"):
+        for relative_path in linked_paths:
+            if relative_path in {"package.json", "vite.config.js"}:
+                item = _evidence_item_from_repo(repo_root, relative_path, "repo_local_build_or_runtime_constraint")
+                if item:
+                    evidence["verifier_and_test_constraint"].append(item)
+        if not evidence["verifier_and_test_constraint"]:
+            for relative_path in linked_paths[:1]:
+                item = _evidence_item_from_repo(repo_root, relative_path, "repo_local_runtime_constraint")
+                if item:
+                    evidence["verifier_and_test_constraint"].append(item)
+
+    return evidence, enriched_candidates[:MAX_CANDIDATE_PATHS]
+
+
 def _perspective_row(bundle_id: str, language_family: str, perspective: str, evidence: dict[str, list[dict[str, Any]]], candidate_paths: list[str], selected_tests: list[str]) -> dict[str, Any]:
     requirement_notes = {
         "symptom_localization": "Choose the most likely edit target from the visible failure and trace evidence.",
@@ -224,6 +370,8 @@ def _bundle_from_example(example: dict[str, Any], *, language_family: str) -> di
     }
     bundle_id = f"stage10119::{example.get('example_id')}::{language_family}"
     candidate_paths = _candidate_paths(example)
+    if language_family == "web_js_ts_html":
+        evidence, candidate_paths = _enrich_web_bundle(example, evidence, candidate_paths)
     return {
         "bundle_id": bundle_id,
         "root_example_id": example.get("example_id"),
@@ -255,22 +403,31 @@ def build() -> dict[str, Any]:
 
     selected: list[dict[str, Any]] = []
     counts = Counter()
+    used_example_ids: set[str] = set()
     for example in examples:
         primary = _primary_language(example)
         if primary == "python" and counts["python"] < LANGUAGE_QUOTAS["python"]:
             selected.append(_bundle_from_example(example, language_family="python"))
             counts["python"] += 1
+            used_example_ids.add(str(example.get("example_id") or ""))
             continue
         if primary == "web_js_ts_html" and counts["web_js_ts_html"] < LANGUAGE_QUOTAS["web_js_ts_html"]:
             selected.append(_bundle_from_example(example, language_family="web_js_ts_html"))
             counts["web_js_ts_html"] += 1
+            used_example_ids.add(str(example.get("example_id") or ""))
             continue
-        if _has_cpp_signal(example) and counts["c_cpp"] < LANGUAGE_QUOTAS["c_cpp"]:
-            selected.append(_bundle_from_example(example, language_family="c_cpp"))
-            counts["c_cpp"] += 1
-            continue
-        if sum(counts.values()) >= sum(LANGUAGE_QUOTAS.values()):
+        if sum(counts.values()) >= (LANGUAGE_QUOTAS["python"] + LANGUAGE_QUOTAS["web_js_ts_html"]):
             break
+
+    cpp_candidates = [
+        example
+        for example in examples
+        if _has_cpp_signal(example) and str(example.get("example_id") or "") not in used_example_ids
+    ]
+    cpp_candidates.sort(key=lambda example: _quality_score(example, language_family="c_cpp"), reverse=True)
+    for example in cpp_candidates[: LANGUAGE_QUOTAS["c_cpp"]]:
+        selected.append(_bundle_from_example(example, language_family="c_cpp"))
+        counts["c_cpp"] += 1
 
     metrics = {
         "preview_root_bundles": len(selected),

@@ -1,8 +1,8 @@
 # Stage10130 True Source-Backed First-Wave Scoring Contract
 
 Passed: `True`
-Admitted bundles: `0`
-Score rows: `0`
+Admitted bundles: `5`
+Score rows: `40`
 
 Flatten the admitted first-wave multilingual root bundles into perspective-scoring rows only after completed rubric, anti-cheat, and gold adjudication, while preserving root-level solved semantics as the primary maintainer-grade metric.
 

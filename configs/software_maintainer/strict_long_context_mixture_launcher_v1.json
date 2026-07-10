@@ -1,0 +1,25 @@
+{
+  "schema_version": "strict_long_context_mixture_launcher_v1",
+  "purpose": "Canonical mixture launcher for strict long-context training surfaces sourced from one dataset card.",
+  "launcher_defaults": {
+    "output_dir": "../../runs/local/artifacts/strict_long_context_mixture_v1",
+    "storage_format": "parquet",
+    "surfaces": [
+      {
+        "name": "full_context_rows",
+        "task_family": "full_context_state_reconstruction",
+        "weight": 1.0
+      },
+      {
+        "name": "retrieval_rows",
+        "task_family": "retrieval_supervision",
+        "weight": 1.0
+      },
+      {
+        "name": "memory_rows",
+        "task_family": "state_summary_compression",
+        "weight": 0.5
+      }
+    ]
+  }
+}

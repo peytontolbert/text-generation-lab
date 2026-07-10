@@ -1,0 +1,54 @@
+{
+  "artifacts": {
+    "doc": "docs/CURRENT_PYTHON_A_WITH_C_ANCHOR_SUCCESSOR_REQUEST_STAGE10026.md",
+    "manifest": "runs/local/artifacts/stage10026_current_python_a_with_c_anchor_successor_request/edit_localization_manifest.jsonl",
+    "request": "runs/local/artifacts/stage10026_current_python_a_with_c_anchor_successor_request/current_python_a_with_c_anchor_successor_request.json"
+  },
+  "created_at_utc": "2026-07-10T20:51:53Z",
+  "decision": "Materialized an A-with-C-anchor Python successor manifest that keeps the proven A-replay intervention while adding explicit C anchors to preserve the only Python target the prior frontier already solved.",
+  "metrics": {
+    "c_anchor_rows": 3,
+    "failures": [],
+    "gap_replay_reason_counts": {
+      "python_both_wrong_current": 2,
+      "python_c_anchor_preserve_current_correct_target": 3,
+      "python_gemma_advantage_current": 1
+    },
+    "gap_replay_rows": 3,
+    "language_counts": {
+      "c_cpp": 27,
+      "python": 25,
+      "rust": 21,
+      "web_js_ts_html": 45
+    },
+    "python_a_losses_current": 3,
+    "python_train_label_count": 5,
+    "python_train_label_counts": {
+      "A": 5,
+      "B": 1,
+      "C": 5,
+      "D": 2,
+      "E": 1
+    },
+    "python_train_labels": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "python_train_rows": 14,
+    "python_train_signature_count": 5,
+    "rows": 118,
+    "split_counts": {
+      "eval": 37,
+      "strict_eval": 35,
+      "train": 46
+    }
+  },
+  "name": "stage10026_current_python_a_with_c_anchor_successor_request",
+  "next_best_step": "Run the next direct 100M probe on this 118-row manifest; it pairs the A-case replay that fixed blocked Python A rows with balanced C anchors so the model can keep the previously-correct Python C target instead of abandoning it.",
+  "passed": true,
+  "stage": 10026,
+  "stage_name": "stage10026_current_python_a_with_c_anchor_successor_request"
+}

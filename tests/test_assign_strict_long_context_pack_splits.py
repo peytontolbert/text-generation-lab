@@ -1,0 +1,76 @@
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'scripts'))
+
+from assign_strict_long_context_pack_splits import assign_strict_long_context_pack_splits  # noqa: E402
+
+
+def _rows_for_pack(pack_id: str, retrieval_count: int, token_count: int) -> list[dict]:
+    rows = [
+        {
+            'mixture_row_id': f'full_context_rows::full::{pack_id}',
+            'mixture_surface': 'full_context_rows',
+            'pack_id': pack_id,
+            'metadata': json.dumps({'pack_token_count': token_count}, sort_keys=True),
+        },
+        {
+            'mixture_row_id': f'memory_rows::memory::{pack_id}',
+            'mixture_surface': 'memory_rows',
+            'pack_id': pack_id,
+            'metadata': json.dumps({'pack_token_count': token_count}, sort_keys=True),
+        },
+    ]
+    for i in range(retrieval_count):
+        rows.append(
+            {
+                'mixture_row_id': f'retrieval_rows::retrieval::{pack_id}::{i}',
+                'mixture_surface': 'retrieval_rows',
+                'pack_id': pack_id,
+                'metadata': json.dumps({'pack_token_count': token_count}, sort_keys=True),
+            }
+        )
+    return rows
+
+
+def test_assign_strict_long_context_pack_splits_creates_heldout_packs(tmp_path: Path) -> None:
+    rows = []
+    for idx, retrieval_count in enumerate([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]):
+        rows.extend(_rows_for_pack(f'pack_{idx}', retrieval_count, token_count=1000 - idx))
+    rows_path = tmp_path / 'rows.jsonl'
+    rows_path.write_text('\n'.join(json.dumps(row, sort_keys=True) for row in rows) + '\n', encoding='utf-8')
+
+    result = assign_strict_long_context_pack_splits(
+        rows_path=rows_path,
+        output_dir=tmp_path / 'out',
+    )
+    split_rows = [json.loads(line) for line in Path(result['rows_path']).read_text(encoding='utf-8').splitlines() if line.strip()]
+    split_by_pack = {}
+    for row in split_rows:
+        split_by_pack.setdefault(row['pack_id'], row['effective_split'])
+        assert split_by_pack[row['pack_id']] == row['effective_split']
+    assert set(split_by_pack.values()) == {'train', 'eval', 'strict_eval'}
+    assert result['split_cards']['eval']['packs'] == 1
+    assert result['split_cards']['strict_eval']['packs'] == 1
+
+
+def test_assign_strict_long_context_pack_splits_preserves_row_count(tmp_path: Path) -> None:
+    rows = []
+    for idx, retrieval_count in enumerate([6, 6, 6, 6, 6]):
+        rows.extend(_rows_for_pack(f'pack_{idx}', retrieval_count, token_count=1000 - idx))
+    rows_path = tmp_path / 'rows.jsonl'
+    rows_path.write_text('\n'.join(json.dumps(row, sort_keys=True) for row in rows) + '\n', encoding='utf-8')
+
+    result = assign_strict_long_context_pack_splits(
+        rows_path=rows_path,
+        output_dir=tmp_path / 'out',
+        eval_ratio=0.2,
+        strict_ratio=0.2,
+    )
+    split_rows = [json.loads(line) for line in Path(result['rows_path']).read_text(encoding='utf-8').splitlines() if line.strip()]
+    assert len(split_rows) == len(rows)
+    assert sum(card['rows'] for card in result['split_cards'].values()) == len(rows)
