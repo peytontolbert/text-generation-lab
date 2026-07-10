@@ -1,0 +1,78 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "failures": [],
+  "metrics": {
+    "compiler_gate_rejected_rows": 0,
+    "compiler_locked_source_exclusion_rows": 0,
+    "compiler_loss_counts": {
+      "action_sequence_ce": 0,
+      "allowed_import_policy_ce": 0,
+      "blocked_import_policy_ce": 0,
+      "build_mode_ce": 0,
+      "decoder_ce": 0,
+      "denoise_ce": 0,
+      "edit_localization_ce": 48,
+      "episode_boundary_match_ce": 0,
+      "episode_failure_type_ce": 0,
+      "episode_repair_outcome_ce": 0,
+      "episode_step_value_mse": 0,
+      "episode_target_prefix_match_ce": 0,
+      "file_plan_ce": 0,
+      "patch_operator_ce": 0,
+      "repair_surface_ce": 0,
+      "repo_dependency_policy_ce": 0,
+      "runtime_reward": 0,
+      "suffix_choice_ce": 0,
+      "surface_role_ce": 0,
+      "symbol_binding_ce": 0,
+      "verifier_repair_ce": 0
+    },
+    "language_root_counts": {
+      "c_cpp": 5,
+      "python": 3,
+      "rust": 2,
+      "web_js_ts_html": 6
+    },
+    "language_row_counts": {
+      "c_cpp": 15,
+      "python": 9,
+      "rust": 6,
+      "web_js_ts_html": 18
+    },
+    "reason_counts": {
+      "gemma_advantage_recovery": 15,
+      "hundred_m_miss_recovery": 27,
+      "rust_anchor_preserve_winning_pattern": 6
+    },
+    "rows": 48,
+    "split_counts": {
+      "eval": 16,
+      "strict_eval": 16,
+      "train": 16
+    },
+    "weight_sum": 147
+  },
+  "passed": true,
+  "training_recommendation": {
+    "anchor_language": "rust",
+    "focus_languages": [
+      "python",
+      "c_cpp",
+      "web_js_ts_html"
+    ],
+    "mix_strategy": "blend this packet into the next 100M edit-localization cycle so weak-language root families are replayed with higher priority while rust winning patterns stay anchored.",
+    "why": "the current blended same-manifest run still loses on python and c_cpp overall and only partially recovers web_js_ts_html."
+  }
+}
