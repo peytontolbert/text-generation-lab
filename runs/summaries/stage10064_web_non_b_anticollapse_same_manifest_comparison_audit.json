@@ -1,0 +1,67 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage10064_web_non_b_anticollapse_same_manifest_comparison_audit/web_non_b_anticollapse_same_manifest_comparison_audit.json",
+    "doc": "docs/WEB_NON_B_ANTICOLLAPSE_SAME_MANIFEST_COMPARISON_AUDIT_STAGE10064.md",
+    "rows": "runs/local/artifacts/stage10064_web_non_b_anticollapse_same_manifest_comparison_audit/web_non_b_anticollapse_same_manifest_comparison_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T15:08:30Z",
+  "decision": "Materialized the same-manifest comparison audit for the web non-B anti-collapse successor run so the resulting 100M outputs can be judged directly against stage10040 and the fixed Gemma comparator.",
+  "metrics": {
+    "comparison_rows": 55,
+    "failures": [],
+    "macro_delta_successor_minus_baseline": -0.05909090909090908,
+    "macro_delta_successor_minus_gemma": 0.2204545454545454,
+    "macro_exact_baseline_100m": 0.4829545454545454,
+    "macro_exact_gemma": 0.20340909090909093,
+    "macro_exact_successor_100m": 0.42386363636363633,
+    "per_language": {
+      "c_cpp": {
+        "baseline_hundred_m_exact": 0.35,
+        "gemma_exact": 0.15,
+        "rows": 20,
+        "successor_delta_vs_baseline": -0.14999999999999997,
+        "successor_delta_vs_gemma": 0.05000000000000002,
+        "successor_hundred_m_exact": 0.2,
+        "verdict": "100m_better"
+      },
+      "python": {
+        "baseline_hundred_m_exact": 0.18181818181818182,
+        "gemma_exact": 0.36363636363636365,
+        "rows": 11,
+        "successor_delta_vs_baseline": 0.3636363636363636,
+        "successor_delta_vs_gemma": 0.18181818181818177,
+        "successor_hundred_m_exact": 0.5454545454545454,
+        "verdict": "100m_better"
+      },
+      "rust": {
+        "baseline_hundred_m_exact": 0.75,
+        "gemma_exact": 0.0,
+        "rows": 4,
+        "successor_delta_vs_baseline": -0.5,
+        "successor_delta_vs_gemma": 0.25,
+        "successor_hundred_m_exact": 0.25,
+        "verdict": "100m_better"
+      },
+      "web_js_ts_html": {
+        "baseline_hundred_m_exact": 0.65,
+        "gemma_exact": 0.3,
+        "rows": 20,
+        "successor_delta_vs_baseline": 0.04999999999999993,
+        "successor_delta_vs_gemma": 0.39999999999999997,
+        "successor_hundred_m_exact": 0.7,
+        "verdict": "100m_better"
+      }
+    },
+    "rows_gemma_present": 55,
+    "rows_successor_present": 55,
+    "shared_rows": 55,
+    "ties": 0,
+    "wins_100m": 4,
+    "wins_gemma": 0
+  },
+  "name": "stage10064_web_non_b_anticollapse_same_manifest_comparison_audit",
+  "next_best_step": "Use this audit to decide whether the web non-B anti-collapse packet finally turns the stage10058 3-win/1-tie frontier into a clean 4-language win over Gemma.",
+  "passed": true,
+  "stage": 10064,
+  "stage_name": "stage10064_web_non_b_anticollapse_same_manifest_comparison_audit"
+}
