@@ -1,0 +1,274 @@
+{
+  "checkpoint_export_allowed_between_phases": false,
+  "final_checkpoint_exported": false,
+  "gemma_executed": false,
+  "harness_executed": false,
+  "mode": "two_phase_structured_reconnect_probe",
+  "model_reused_in_memory_between_phases": true,
+  "phase1": {
+    "best_state_selection": {
+      "checkpoint_exported": false,
+      "enabled": true,
+      "eval_joint_proxy_exact": 0.25,
+      "eval_loss": 1.5841368436813354,
+      "promotion_ready": false,
+      "restored": true,
+      "selected_step": 7,
+      "selection_exact_sum": 0.5,
+      "selection_loss_sum": 3.1695849895477295,
+      "selection_rule": "max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss",
+      "selection_score": 3.1695849895477295,
+      "strict_joint_proxy_exact": 0.25,
+      "strict_loss": 1.585448145866394
+    },
+    "eval": {
+      "eval": {
+        "field_exact": {
+          "edit_localization": {
+            "exact": 0.25,
+            "rows": 16
+          }
+        },
+        "field_loss": {
+          "edit_localization": 1.5841368436813354
+        },
+        "joint_proxy_exact": 0.25,
+        "loss": 1.5841368436813354,
+        "rows": 16,
+        "split": "eval"
+      },
+      "strict_eval": {
+        "field_exact": {
+          "edit_localization": {
+            "exact": 0.25,
+            "rows": 16
+          }
+        },
+        "field_loss": {
+          "edit_localization": 1.585448145866394
+        },
+        "joint_proxy_exact": 0.25,
+        "loss": 1.585448145866394,
+        "rows": 16,
+        "split": "strict_eval"
+      }
+    },
+    "eval_rows": 16,
+    "fields": [
+      "edit_localization"
+    ],
+    "final_checkpoint_exported": false,
+    "gemma_executed": false,
+    "harness_executed": false,
+    "implementation": {
+      "d_ff": 2048,
+      "d_model": 640,
+      "estimated_parameter_count": 102703145,
+      "full_100m_target_execution_authorized": true,
+      "implementation": "transformer",
+      "model_class": "AgentKernelLiteTransformerSeq2Seq",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "n_heads": 10,
+      "n_layers": 6,
+      "probe_scale": "target_100m",
+      "vocab_size": 1506
+    },
+    "mode": "edit_localization_probe",
+    "native_feature_ablation_audit_required": false,
+    "native_feature_ablation_rows": 32,
+    "required_artifacts_written": true,
+    "run_id": "stage9869b_edit_localization_two_phase_reconnect_best_state_target_100m_probe_phase1_structured",
+    "runtime_executed": true,
+    "strict_rows": 16,
+    "structured_batch_sampler": "label_balanced_by_primary_field",
+    "structured_optimizer_frozen_bucket_prefixes": [
+      "decoder",
+      "decoder_attention",
+      "decoder_mlp",
+      "embeddings",
+      "encoder",
+      "encoder_attention",
+      "encoder_mlp",
+      "other",
+      "policy_retrieval_heads"
+    ],
+    "structured_optimizer_frozen_parameter_count": 207,
+    "structured_optimizer_isolated": true,
+    "structured_optimizer_trainable_bucket_prefixes": [
+      "structured_heads"
+    ],
+    "structured_optimizer_trainable_parameter_count": 44,
+    "structured_trainable_profile": "structured_heads_only",
+    "train_rows": 20
+  },
+  "phase1_dir": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9869b_edit_localization_two_phase_reconnect_best_state_target_100m_probe/edit_localization_probe/phase1_structured_probe",
+  "phase1_eval_joint_proxy_exact": 0.25,
+  "phase1_mode": "edit_localization_probe",
+  "phase1_strict_joint_proxy_exact": 0.25,
+  "phase2": {
+    "best_state_selection": {
+      "checkpoint_exported": false,
+      "enabled": false,
+      "eval_joint_proxy_exact": null,
+      "eval_loss": null,
+      "promotion_ready": false,
+      "restored": false,
+      "selected_step": null,
+      "selection_exact_sum": null,
+      "selection_loss_sum": null,
+      "selection_rule": "max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss",
+      "selection_score": null,
+      "strict_joint_proxy_exact": null,
+      "strict_loss": null
+    },
+    "eval": {
+      "eval": {
+        "field_exact": {
+          "edit_localization": {
+            "exact": 0.25,
+            "rows": 16
+          }
+        },
+        "field_loss": {
+          "edit_localization": 1.5669728517532349
+        },
+        "joint_proxy_exact": 0.25,
+        "loss": 1.5669728517532349,
+        "rows": 16,
+        "split": "eval"
+      },
+      "strict_eval": {
+        "field_exact": {
+          "edit_localization": {
+            "exact": 0.25,
+            "rows": 16
+          }
+        },
+        "field_loss": {
+          "edit_localization": 1.5677845478057861
+        },
+        "joint_proxy_exact": 0.25,
+        "loss": 1.5677845478057861,
+        "rows": 16,
+        "split": "strict_eval"
+      }
+    },
+    "eval_rows": 16,
+    "fields": [
+      "edit_localization"
+    ],
+    "final_checkpoint_exported": false,
+    "gemma_executed": false,
+    "harness_executed": false,
+    "implementation": {
+      "d_ff": 2048,
+      "d_model": 640,
+      "estimated_parameter_count": 102703145,
+      "full_100m_target_execution_authorized": true,
+      "implementation": "transformer",
+      "model_class": "AgentKernelLiteTransformerSeq2Seq",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "model_reused_in_memory_from_phase1": true,
+      "n_heads": 10,
+      "n_layers": 6,
+      "probe_scale": "target_100m",
+      "vocab_size": 1506
+    },
+    "mode": "edit_localization_probe",
+    "native_feature_ablation_audit_required": false,
+    "native_feature_ablation_rows": 32,
+    "required_artifacts_written": true,
+    "run_id": "stage9869b_edit_localization_two_phase_reconnect_best_state_target_100m_probe_phase2_structured",
+    "runtime_executed": true,
+    "strict_rows": 16,
+    "structured_batch_sampler": "label_balanced_by_primary_field",
+    "structured_optimizer_frozen_bucket_prefixes": [
+      "decoder",
+      "decoder_attention",
+      "decoder_mlp",
+      "embeddings"
+    ],
+    "structured_optimizer_frozen_parameter_count": 122,
+    "structured_optimizer_isolated": true,
+    "structured_optimizer_trainable_bucket_prefixes": [
+      "encoder",
+      "encoder_attention",
+      "encoder_mlp",
+      "other",
+      "policy_retrieval_heads",
+      "structured_heads"
+    ],
+    "structured_optimizer_trainable_parameter_count": 129,
+    "structured_trainable_profile": "full_non_decoder",
+    "train_rows": 20
+  },
+  "phase2_dir": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage9869b_edit_localization_two_phase_reconnect_best_state_target_100m_probe/edit_localization_probe/phase2_structured_probe",
+  "phase2_eval_joint_proxy_exact": 0.25,
+  "phase2_mode": "edit_localization_probe",
+  "phase2_strict_joint_proxy_exact": 0.25,
+  "required_artifacts_written": false,
+  "run_id": "stage9869b_edit_localization_two_phase_reconnect_best_state_target_100m_probe",
+  "runtime_artifact_status": {
+    "activation_patch_recovery.jsonl": {
+      "bytes": 0,
+      "exists": false
+    },
+    "activation_summary.jsonl": {
+      "bytes": 0,
+      "exists": false
+    },
+    "cleanup_proof.json": {
+      "bytes": 201,
+      "exists": true
+    },
+    "eval_loss_by_checkpoint.jsonl": {
+      "bytes": 0,
+      "exists": false
+    },
+    "failure_bucket_card.json": {
+      "bytes": 0,
+      "exists": false
+    },
+    "feature_ablation_attribution.jsonl": {
+      "bytes": 0,
+      "exists": false
+    },
+    "field_exact_by_cell.json": {
+      "bytes": 0,
+      "exists": false
+    },
+    "field_label_vocabs.json": {
+      "bytes": 0,
+      "exists": false
+    },
+    "loss_by_step.jsonl": {
+      "bytes": 0,
+      "exists": false
+    },
+    "module_delta_norms.json": {
+      "bytes": 0,
+      "exists": false
+    },
+    "row_dynamics_history.jsonl": {
+      "bytes": 0,
+      "exists": false
+    },
+    "row_field_logits.jsonl": {
+      "bytes": 0,
+      "exists": false
+    },
+    "row_field_losses.jsonl": {
+      "bytes": 0,
+      "exists": false
+    },
+    "row_gradient_norms.jsonl": {
+      "bytes": 0,
+      "exists": false
+    },
+    "structured_confusion_matrix.json": {
+      "bytes": 0,
+      "exists": false
+    }
+  },
+  "runtime_executed": true
+}

@@ -166,6 +166,22 @@ def _module_bucket(parameter_name: str) -> str:
     return "other"
 
 
+STRUCTURED_TRAINABLE_PROFILES = {
+    "full_non_decoder": {"structured_heads", "policy_retrieval_heads", "encoder", "encoder_attention", "encoder_mlp", "other"},
+    "structured_heads_only": {"structured_heads"},
+    "structured_heads_plus_policy": {"structured_heads", "policy_retrieval_heads"},
+}
+
+
+def _structured_bucket_trainable(bucket: str, profile: str) -> bool:
+    allowed = STRUCTURED_TRAINABLE_PROFILES.get(profile)
+    if allowed is None:
+        raise ValueError(f"unknown structured trainable profile: {profile}")
+    if bucket.startswith("decoder") or bucket in {"lm_head", "embeddings"}:
+        return False
+    return bucket in allowed
+
+
 def _module_delta_norm_card(before: dict[str, torch.Tensor], after: dict[str, torch.Tensor]) -> dict[str, Any]:
     by_parameter = _module_delta_norms(before, after)
     by_bucket_sq: dict[str, float] = {}
@@ -289,7 +305,7 @@ def _activation_summary(row_ids: list[str], out: dict[str, Any], *, split: str, 
 
 
 def _field_telemetry_record(*, row_id: str, split: str, field: str, target: str, logits: torch.Tensor, inverse: dict[int, str], confidence_threshold: float = 0.8) -> dict[str, Any]:
-    logits_cpu = logits.detach().float().cpu()
+    logits_cpu = logits.detach().float().cpu()[: len(inverse)]
     probs = torch.softmax(logits_cpu, dim=-1)
     order = torch.argsort(probs, descending=True)
     pred_idx = int(order[0].item()) if order.numel() else -1
@@ -1024,6 +1040,14 @@ def _structured_label_balanced_batch_rows(train_rows: list[dict[str, Any]], fiel
     return batch
 
 
+def _structured_best_state_metrics(eval_record: dict[str, Any], strict_record: dict[str, Any]) -> tuple[float, float]:
+    eval_exact = float(eval_record.get("joint_proxy_exact", 0.0) or 0.0)
+    strict_exact = float(strict_record.get("joint_proxy_exact", 0.0) or 0.0)
+    eval_loss = float(eval_record.get("loss", 0.0) or 0.0)
+    strict_loss = float(strict_record.get("loss", 0.0) or 0.0)
+    return eval_exact + strict_exact, eval_loss + strict_loss
+
+
 def _module_delta_norms(before: dict[str, torch.Tensor], after: dict[str, torch.Tensor]) -> dict[str, float]:
     out: dict[str, float] = {}
     for name, old in before.items():
@@ -1334,7 +1358,7 @@ def run_bounded_decoder_ce_probe(
         "tokenizer": tokenizer_card,
         "eval": eval_card,
         "final_checkpoint_exported": False,
-        "runtime_executed": False,
+        "runtime_executed": True,
         "gemma_executed": False,
         "harness_executed": False,
         "required_artifacts_written": all((output_dir / name).exists() and (not name.endswith(".jsonl") or (output_dir / name).stat().st_size > 0) for name in REQUIRED_RUNTIME_ARTIFACTS),
@@ -1364,6 +1388,7 @@ def run_denoise_repair_probe(
     learning_rate: float = 5e-5,
     seed: int = 1337,
     implementation: str = "transformer",
+    structured_trainable_profile: str = "full_non_decoder",
     probe_scale: str = "tiny_transformer",
     model_config: Path | None = None,
     tokenizer_json: Path | None = None,
@@ -1550,7 +1575,7 @@ def run_denoise_repair_probe(
         "target_internal_token_rows": target_internal_token_rows,
         "target_repetition_rows": target_repetition_rows,
         "decoder_ce_rows": 0,
-        "runtime_executed": False,
+        "runtime_executed": True,
         "gemma_executed": False,
         "harness_executed": False,
         "generation_audit_enabled": bool(enable_generation_audit),
@@ -1584,7 +1609,7 @@ def run_denoise_repair_probe(
         "tokenizer": tokenizer_card,
         "eval": eval_card,
         "final_checkpoint_exported": False,
-        "runtime_executed": False,
+        "runtime_executed": True,
         "gemma_executed": False,
         "harness_executed": False,
         "decoder_ce_rows": 0,
@@ -1625,10 +1650,14 @@ def run_structured_aux_probe(
     learning_rate: float = 5e-5,
     seed: int = 1337,
     implementation: str = "transformer",
+    structured_trainable_profile: str = "full_non_decoder",
     probe_scale: str = "tiny_transformer",
     model_config: Path | None = None,
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
+    model_override: torch.nn.Module | None = None,
+    tokenizer_override: Any | None = None,
+    implementation_card_override: dict[str, Any] | None = None,
     eval_interval: int = 0,
     restore_best_structured_state: bool = False,
     require_native_feature_ablation_audit: bool = False,
@@ -1654,13 +1683,23 @@ def run_structured_aux_probe(
 
     from .training_data import load_tokenizer
 
-    tokenizer = load_tokenizer(tokenizer_json, tokenizer_config)
-    model, implementation_card = _build_probe_model(
-        implementation,
-        vocab_size=tokenizer.vocab_size,
-        probe_scale=probe_scale,
-        model_config=model_config,
-    )
+    tokenizer = tokenizer_override if tokenizer_override is not None else load_tokenizer(tokenizer_json, tokenizer_config)
+    if model_override is not None:
+        model = model_override
+        implementation_card = dict(implementation_card_override or {})
+        if not implementation_card:
+            implementation_card = {
+                "implementation": implementation,
+                "probe_scale": probe_scale,
+                "model_reused_in_memory": True,
+            }
+    else:
+        model, implementation_card = _build_probe_model(
+            implementation,
+            vocab_size=tokenizer.vocab_size,
+            probe_scale=probe_scale,
+            model_config=model_config,
+        )
     structured_heads = getattr(model, "structured_heads", None)
     for field, vocab in vocabs.items():
         head = structured_heads[field] if structured_heads is not None and field in structured_heads else None
@@ -1671,14 +1710,18 @@ def run_structured_aux_probe(
 
     frozen_for_structured_probe: list[str] = []
     trainable_for_structured_probe: list[str] = []
+    frozen_bucket_prefixes: set[str] = set()
+    trainable_bucket_prefixes: set[str] = set()
     for name, parameter in model.named_parameters():
         bucket = _module_bucket(name)
-        if bucket.startswith("decoder") or bucket in {"lm_head", "embeddings"}:
-            parameter.requires_grad_(False)
-            frozen_for_structured_probe.append(name)
-        else:
+        if _structured_bucket_trainable(bucket, structured_trainable_profile):
             parameter.requires_grad_(True)
             trainable_for_structured_probe.append(name)
+            trainable_bucket_prefixes.add(bucket)
+        else:
+            parameter.requires_grad_(False)
+            frozen_for_structured_probe.append(name)
+            frozen_bucket_prefixes.add(bucket)
     if not trainable_for_structured_probe:
         raise ValueError("structured aux probe found no trainable non-decoder parameters")
 
@@ -1697,7 +1740,9 @@ def run_structured_aux_probe(
         "eval_loss": None,
         "strict_loss": None,
         "selection_score": None,
-        "selection_rule": "min_eval_plus_strict_loss_among_eval_and_strict_joint_exact_1",
+        "selection_exact_sum": None,
+        "selection_loss_sum": None,
+        "selection_rule": "max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss",
         "checkpoint_exported": False,
         "promotion_ready": False,
     }
@@ -1706,11 +1751,12 @@ def run_structured_aux_probe(
         nonlocal best_structured_state
         if not restore_best_structured_state:
             return
-        if eval_record.get("joint_proxy_exact") != 1.0 or strict_record.get("joint_proxy_exact") != 1.0:
+        exact_sum, loss_sum = _structured_best_state_metrics(eval_record, strict_record)
+        previous_exact = best_state_selection.get("selection_exact_sum")
+        previous_loss = best_state_selection.get("selection_loss_sum")
+        if previous_exact is not None and exact_sum < float(previous_exact):
             return
-        score = float(eval_record.get("loss", 0.0)) + float(strict_record.get("loss", 0.0))
-        previous = best_state_selection.get("selection_score")
-        if previous is not None and score >= float(previous):
+        if previous_exact is not None and exact_sum == float(previous_exact) and previous_loss is not None and loss_sum >= float(previous_loss):
             return
         best_structured_state = {name: value.detach().cpu().clone() for name, value in model.state_dict().items()}
         best_state_selection.update(
@@ -1720,7 +1766,9 @@ def run_structured_aux_probe(
                 "strict_joint_proxy_exact": float(strict_record.get("joint_proxy_exact")),
                 "eval_loss": float(eval_record.get("loss", 0.0)),
                 "strict_loss": float(strict_record.get("loss", 0.0)),
-                "selection_score": score,
+                "selection_score": loss_sum,
+                "selection_exact_sum": exact_sum,
+                "selection_loss_sum": loss_sum,
             }
         )
 
@@ -1747,6 +1795,7 @@ def run_structured_aux_probe(
             if not active:
                 continue
             logits = logits_by_field[field][torch.tensor(active, dtype=torch.long)]
+            logits = logits[:, : len(vocab)]
             target_tensor = torch.tensor(targets, dtype=torch.long, device=logits.device)
             loss = torch.nn.functional.cross_entropy(logits, target_tensor)
             losses.append(loss)
@@ -1964,14 +2013,16 @@ def run_structured_aux_probe(
         "eval": eval_card,
         "best_state_selection": best_state_selection,
         "final_checkpoint_exported": False,
-        "runtime_executed": False,
+        "runtime_executed": True,
         "gemma_executed": False,
         "harness_executed": False,
         "required_artifacts_written": all((output_dir / name).exists() and (not name.endswith(".jsonl") or (output_dir / name).stat().st_size > 0) for name in REQUIRED_STRUCTURED_ARTIFACTS),
         "structured_optimizer_isolated": True,
         "structured_optimizer_frozen_parameter_count": len(frozen_for_structured_probe),
         "structured_optimizer_trainable_parameter_count": len(trainable_for_structured_probe),
-        "structured_optimizer_frozen_bucket_prefixes": ["decoder", "lm_head", "embeddings"],
+        "structured_optimizer_frozen_bucket_prefixes": sorted(frozen_bucket_prefixes),
+        "structured_optimizer_trainable_bucket_prefixes": sorted(trainable_bucket_prefixes),
+        "structured_trainable_profile": structured_trainable_profile,
         "structured_batch_sampler": "label_balanced_by_primary_field",
         "native_feature_ablation_audit_required": bool(require_native_feature_ablation_audit),
         "native_feature_ablation_rows": len(ablation_rows),
@@ -1980,6 +2031,123 @@ def run_structured_aux_probe(
         result["_runtime_model"] = model
         result["_runtime_tokenizer"] = tokenizer
     return result
+
+def run_two_phase_structured_reconnect_probe(
+    phase1_rows: list[dict[str, Any]],
+    phase2_rows: list[dict[str, Any]],
+    *,
+    phase1_mode: str,
+    phase2_mode: str,
+    output_dir: Path,
+    run_id: str,
+    max_train_rows: int,
+    max_eval_rows: int,
+    max_strict_rows: int,
+    max_steps: int,
+    phase2_max_train_rows: int,
+    phase2_max_eval_rows: int,
+    phase2_max_strict_rows: int,
+    phase2_max_steps: int,
+    batch_size: int,
+    max_encoder_tokens: int,
+    max_decoder_tokens: int,
+    phase2_max_decoder_tokens: int,
+    learning_rate: float = 5e-5,
+    phase2_learning_rate: float | None = None,
+    seed: int = 1337,
+    implementation: str = "transformer",
+    structured_trainable_profile: str = "full_non_decoder",
+    phase2_structured_trainable_profile: str | None = None,
+    probe_scale: str = "tiny_transformer",
+    model_config: Path | None = None,
+    tokenizer_json: Path | None = None,
+    tokenizer_config: Path | None = None,
+    eval_interval: int = 0,
+) -> dict[str, Any]:
+    """Run phase1 structured training then continue phase2 structured training on one in-memory model."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / ".agentkernel_probe_output").write_text(f"run_id={run_id}\nmode=two_phase_structured_reconnect_probe\n", encoding="utf-8")
+    phase1_dir = output_dir / "phase1_structured_probe"
+    phase2_dir = output_dir / "phase2_structured_probe"
+    phase1_result = run_structured_aux_probe(
+        rows=phase1_rows,
+        output_dir=phase1_dir,
+        run_id=f"{run_id}_phase1_structured",
+        mode=phase1_mode,
+        max_train_rows=max_train_rows,
+        max_eval_rows=max_eval_rows,
+        max_strict_rows=max_strict_rows,
+        max_steps=max_steps,
+        batch_size=batch_size,
+        max_encoder_tokens=max_encoder_tokens,
+        max_decoder_tokens=max_decoder_tokens,
+        learning_rate=learning_rate,
+        seed=seed,
+        implementation=implementation,
+        structured_trainable_profile=structured_trainable_profile,
+        probe_scale=probe_scale,
+        model_config=model_config,
+        tokenizer_json=tokenizer_json,
+        tokenizer_config=tokenizer_config,
+        eval_interval=eval_interval,
+        restore_best_structured_state=True,
+        return_runtime_state=True,
+    )
+    model = phase1_result.pop("_runtime_model")
+    tokenizer = phase1_result.pop("_runtime_tokenizer")
+    phase2_result = run_structured_aux_probe(
+        rows=phase2_rows,
+        output_dir=phase2_dir,
+        run_id=f"{run_id}_phase2_structured",
+        mode=phase2_mode,
+        max_train_rows=phase2_max_train_rows,
+        max_eval_rows=phase2_max_eval_rows,
+        max_strict_rows=phase2_max_strict_rows,
+        max_steps=phase2_max_steps,
+        batch_size=batch_size,
+        max_encoder_tokens=max_encoder_tokens,
+        max_decoder_tokens=phase2_max_decoder_tokens,
+        learning_rate=phase2_learning_rate if phase2_learning_rate is not None else learning_rate,
+        seed=seed,
+        implementation=implementation,
+        structured_trainable_profile=phase2_structured_trainable_profile or structured_trainable_profile,
+        probe_scale=probe_scale,
+        model_config=model_config,
+        tokenizer_json=tokenizer_json,
+        tokenizer_config=tokenizer_config,
+        model_override=model,
+        tokenizer_override=tokenizer,
+        implementation_card_override={**dict(phase1_result.get("implementation") or {}), "model_reused_in_memory_from_phase1": True},
+        eval_interval=0,
+        restore_best_structured_state=False,
+    )
+    phase1_eval = phase1_result.get("eval") if isinstance(phase1_result.get("eval"), dict) else {}
+    phase2_eval = phase2_result.get("eval") if isinstance(phase2_result.get("eval"), dict) else {}
+    result = {
+        "run_id": run_id,
+        "mode": "two_phase_structured_reconnect_probe",
+        "phase1_mode": phase1_mode,
+        "phase2_mode": phase2_mode,
+        "phase1_dir": str(phase1_dir),
+        "phase2_dir": str(phase2_dir),
+        "phase1": phase1_result,
+        "phase2": phase2_result,
+        "phase1_eval_joint_proxy_exact": ((phase1_eval.get("eval") or {}).get("joint_proxy_exact")),
+        "phase1_strict_joint_proxy_exact": ((phase1_eval.get("strict_eval") or {}).get("joint_proxy_exact")),
+        "phase2_eval_joint_proxy_exact": ((phase2_eval.get("eval") or {}).get("joint_proxy_exact")),
+        "phase2_strict_joint_proxy_exact": ((phase2_eval.get("strict_eval") or {}).get("joint_proxy_exact")),
+        "final_checkpoint_exported": False,
+        "runtime_executed": True,
+        "gemma_executed": False,
+        "harness_executed": False,
+        "model_reused_in_memory_between_phases": True,
+        "checkpoint_export_allowed_between_phases": False,
+        "required_artifacts_written": bool(phase1_result.get("required_artifacts_written")) and bool(phase2_result.get("required_artifacts_written")),
+    }
+    _write_json(output_dir / "two_phase_execution_result.json", result)
+    _write_json(output_dir / "cleanup_proof.json", {"cleanup_executed": False, "cleanup_reason": "two-phase structured loop does not write checkpoints", "run_id": run_id})
+    return result
+
 
 def run_two_phase_suffix_denoise_reconnect_probe(
     phase1_rows: list[dict[str, Any]],
@@ -2091,7 +2259,7 @@ def run_two_phase_suffix_denoise_reconnect_probe(
         "phase1_eval_suffix_choice_exact": phase1_eval_exact,
         "phase1_strict_suffix_choice_exact": phase1_strict_exact,
         "final_checkpoint_exported": False,
-        "runtime_executed": False,
+        "runtime_executed": True,
         "gemma_executed": False,
         "harness_executed": False,
         "decoder_ce_rows": 0,
@@ -2262,7 +2430,7 @@ def run_tri_phase_suffix_phrase_residual_reconnect_probe(
         "phase1_eval_suffix_choice_exact": phase1_eval_exact,
         "phase1_strict_suffix_choice_exact": phase1_strict_exact,
         "final_checkpoint_exported": False,
-        "runtime_executed": False,
+        "runtime_executed": True,
         "gemma_executed": False,
         "harness_executed": False,
         "decoder_ce_rows": 0,
