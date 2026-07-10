@@ -1,0 +1,158 @@
+{
+  "best_state_selection": {
+    "checkpoint_exported": false,
+    "enabled": false,
+    "eval_joint_proxy_exact": null,
+    "eval_loss": null,
+    "promotion_ready": false,
+    "restored": false,
+    "selected_step": null,
+    "selection_exact_sum": null,
+    "selection_loss_sum": null,
+    "selection_rule": "max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss",
+    "selection_score": null,
+    "strict_joint_proxy_exact": null,
+    "strict_loss": null
+  },
+  "eval": {
+    "eval": {
+      "field_exact": {
+        "edit_localization": {
+          "exact": 0.2894736842105263,
+          "rows": 38
+        }
+      },
+      "field_loss": {
+        "edit_localization": 1.6125463247299194
+      },
+      "joint_proxy_exact": 0.2894736842105263,
+      "loss": 1.6125463247299194,
+      "rows": 38,
+      "split": "eval"
+    },
+    "strict_eval": {
+      "field_exact": {
+        "edit_localization": {
+          "exact": 0.47058823529411764,
+          "rows": 17
+        }
+      },
+      "field_loss": {
+        "edit_localization": 1.6147054433822632
+      },
+      "joint_proxy_exact": 0.47058823529411764,
+      "loss": 1.6147054433822632,
+      "rows": 17,
+      "split": "strict_eval"
+    }
+  },
+  "eval_rows": 38,
+  "fields": [
+    "edit_localization"
+  ],
+  "final_checkpoint_exported": false,
+  "gemma_executed": false,
+  "harness_executed": false,
+  "implementation": {
+    "d_ff": 2048,
+    "d_model": 640,
+    "estimated_parameter_count": 102717225,
+    "full_100m_target_execution_authorized": true,
+    "implementation": "transformer",
+    "model_class": "AgentKernelLiteTransformerSeq2Seq",
+    "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "n_heads": 10,
+    "n_layers": 6,
+    "probe_scale": "target_100m",
+    "vocab_size": 1506
+  },
+  "mode": "edit_localization_probe",
+  "native_feature_ablation_audit_required": false,
+  "native_feature_ablation_rows": 55,
+  "required_artifacts_written": true,
+  "run_id": "stage10054_mixed_fresh_source_multilingual_target100m_probe",
+  "runtime_artifact_status": {
+    "activation_patch_recovery.jsonl": {
+      "bytes": 703,
+      "exists": true
+    },
+    "activation_summary.jsonl": {
+      "bytes": 90822,
+      "exists": true
+    },
+    "cleanup_proof.json": {
+      "bytes": 173,
+      "exists": true
+    },
+    "eval_loss_by_checkpoint.jsonl": {
+      "bytes": 483,
+      "exists": true
+    },
+    "failure_bucket_card.json": {
+      "bytes": 878,
+      "exists": true
+    },
+    "feature_ablation_attribution.jsonl": {
+      "bytes": 109452,
+      "exists": true
+    },
+    "field_exact_by_cell.json": {
+      "bytes": 805,
+      "exists": true
+    },
+    "field_label_vocabs.json": {
+      "bytes": 92,
+      "exists": true
+    },
+    "loss_by_step.jsonl": {
+      "bytes": 11030,
+      "exists": true
+    },
+    "module_delta_norms.json": {
+      "bytes": 13787,
+      "exists": true
+    },
+    "row_dynamics_history.jsonl": {
+      "bytes": 17619,
+      "exists": true
+    },
+    "row_field_logits.jsonl": {
+      "bytes": 52302,
+      "exists": true
+    },
+    "row_field_losses.jsonl": {
+      "bytes": 242,
+      "exists": true
+    },
+    "row_gradient_norms.jsonl": {
+      "bytes": 96112,
+      "exists": true
+    },
+    "structured_confusion_matrix.json": {
+      "bytes": 314,
+      "exists": true
+    }
+  },
+  "runtime_executed": true,
+  "strict_rows": 17,
+  "structured_batch_sampler": "label_balanced_by_primary_field",
+  "structured_optimizer_frozen_bucket_prefixes": [
+    "decoder",
+    "decoder_attention",
+    "decoder_mlp",
+    "embeddings"
+  ],
+  "structured_optimizer_frozen_parameter_count": 122,
+  "structured_optimizer_isolated": true,
+  "structured_optimizer_trainable_bucket_prefixes": [
+    "encoder",
+    "encoder_attention",
+    "encoder_mlp",
+    "other",
+    "policy_retrieval_heads",
+    "structured_heads"
+  ],
+  "structured_optimizer_trainable_parameter_count": 151,
+  "structured_trainable_profile": "full_non_decoder",
+  "train_rows": 64
+}

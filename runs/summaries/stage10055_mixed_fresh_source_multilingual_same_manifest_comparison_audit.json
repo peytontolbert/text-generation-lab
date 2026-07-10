@@ -1,0 +1,67 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage10055_mixed_fresh_source_multilingual_same_manifest_comparison_audit/mixed_fresh_source_multilingual_same_manifest_comparison_audit.json",
+    "doc": "docs/MIXED_FRESH_SOURCE_MULTILINGUAL_SAME_MANIFEST_COMPARISON_AUDIT_STAGE10055.md",
+    "rows": "runs/local/artifacts/stage10055_mixed_fresh_source_multilingual_same_manifest_comparison_audit/mixed_fresh_source_multilingual_same_manifest_comparison_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T14:41:30Z",
+  "decision": "Materialized the same-manifest comparison audit for the mixed fresh-source multilingual successor run so the resulting 100M outputs can be judged directly against stage10040 and the fixed Gemma comparator.",
+  "metrics": {
+    "comparison_rows": 55,
+    "failures": [],
+    "macro_delta_successor_minus_baseline": -0.19431818181818178,
+    "macro_delta_successor_minus_gemma": 0.08522727272727271,
+    "macro_exact_baseline_100m": 0.4829545454545454,
+    "macro_exact_gemma": 0.20340909090909093,
+    "macro_exact_successor_100m": 0.28863636363636364,
+    "per_language": {
+      "c_cpp": {
+        "baseline_hundred_m_exact": 0.35,
+        "gemma_exact": 0.15,
+        "rows": 20,
+        "successor_delta_vs_baseline": -0.09999999999999998,
+        "successor_delta_vs_gemma": 0.1,
+        "successor_hundred_m_exact": 0.25,
+        "verdict": "100m_better"
+      },
+      "python": {
+        "baseline_hundred_m_exact": 0.18181818181818182,
+        "gemma_exact": 0.36363636363636365,
+        "rows": 11,
+        "successor_delta_vs_baseline": 0.2727272727272727,
+        "successor_delta_vs_gemma": 0.09090909090909088,
+        "successor_hundred_m_exact": 0.45454545454545453,
+        "verdict": "100m_better"
+      },
+      "rust": {
+        "baseline_hundred_m_exact": 0.75,
+        "gemma_exact": 0.0,
+        "rows": 4,
+        "successor_delta_vs_baseline": -0.75,
+        "successor_delta_vs_gemma": 0.0,
+        "successor_hundred_m_exact": 0.0,
+        "verdict": "tie"
+      },
+      "web_js_ts_html": {
+        "baseline_hundred_m_exact": 0.65,
+        "gemma_exact": 0.3,
+        "rows": 20,
+        "successor_delta_vs_baseline": -0.2,
+        "successor_delta_vs_gemma": 0.15000000000000002,
+        "successor_hundred_m_exact": 0.45,
+        "verdict": "100m_better"
+      }
+    },
+    "rows_gemma_present": 55,
+    "rows_successor_present": 55,
+    "shared_rows": 55,
+    "ties": 1,
+    "wins_100m": 3,
+    "wins_gemma": 0
+  },
+  "name": "stage10055_mixed_fresh_source_multilingual_same_manifest_comparison_audit",
+  "next_best_step": "Use this audit to decide whether the mixed fresh-source multilingual successor restores the honest macro frontier while preserving the stage10047 Python gain against Gemma.",
+  "passed": true,
+  "stage": 10055,
+  "stage_name": "stage10055_mixed_fresh_source_multilingual_same_manifest_comparison_audit"
+}
