@@ -1,0 +1,85 @@
+{
+  "failures": [],
+  "inputs": {
+    "base_manifest": "runs/local/artifacts/stage10036_real_fresh_heldout_merge_validator/expanded_source_heldout_manifest.jsonl",
+    "collision_audit": "runs/local/artifacts/stage10068_multilingual_label_semantics_collision_audit/multilingual_label_semantics_collision_audit.json"
+  },
+  "metrics": {
+    "canonical_label_map": {
+      "TARGET_CONFIG": "E",
+      "TARGET_ENTRYPOINT": "B",
+      "TARGET_FILE": "D",
+      "TARGET_SYMBOL": "C",
+      "TARGET_TEST": "A"
+    },
+    "heldout_per_language_label_map": {
+      "c_cpp": {
+        "A": "TARGET_TEST",
+        "B": "TARGET_ENTRYPOINT",
+        "C": "TARGET_SYMBOL",
+        "D": "TARGET_FILE",
+        "E": "TARGET_CONFIG"
+      },
+      "python": {
+        "A": "TARGET_TEST",
+        "C": "TARGET_SYMBOL",
+        "E": "TARGET_CONFIG"
+      },
+      "rust": {
+        "A": "TARGET_TEST",
+        "D": "TARGET_FILE"
+      },
+      "web_js_ts_html": {
+        "A": "TARGET_TEST",
+        "B": "TARGET_ENTRYPOINT",
+        "C": "TARGET_SYMBOL",
+        "D": "TARGET_FILE"
+      }
+    },
+    "heldout_rows": 55,
+    "heldout_rows_with_choice_permutation_metadata": 37,
+    "heldout_rows_with_locked_eval_source": 18,
+    "heldout_rows_with_opaque_choice_surface": 37,
+    "language_counts": {
+      "c_cpp": 30,
+      "python": 19,
+      "rust": 11,
+      "web_js_ts_html": 35
+    },
+    "remap_counts": {
+      "c_cpp:A": 7,
+      "c_cpp:B": 7,
+      "c_cpp:C": 7,
+      "c_cpp:D": 3,
+      "c_cpp:E": 6,
+      "python:A": 7,
+      "python:B": 1,
+      "python:C": 6,
+      "python:D": 1,
+      "python:E": 4,
+      "rust:A": 4,
+      "rust:B": 1,
+      "rust:C": 1,
+      "rust:D": 4,
+      "rust:E": 1,
+      "web_js_ts_html:A": 10,
+      "web_js_ts_html:B": 10,
+      "web_js_ts_html:C": 4,
+      "web_js_ts_html:D": 10,
+      "web_js_ts_html:E": 1
+    },
+    "rows": 95,
+    "split_counts": {
+      "eval": 38,
+      "strict_eval": 17,
+      "train": 40
+    }
+  },
+  "passed": true,
+  "policy": {
+    "canonicalize_label_semantics_only": true,
+    "next_required_rerun_is_same_manifest_for_100m_and_gemma": true,
+    "preserve_existing_anti_cheat_and_provenance_fields": true,
+    "preserve_stage10036_source_heldout_row_composition": true
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "artifacts": {
+    "doc": "docs/CANONICAL_LABEL_ALIGNED_SOURCE_HELDOUT_SUCCESSOR_PACKET_STAGE10083.md",
+    "manifest": "runs/local/artifacts/stage10083_canonical_label_aligned_source_heldout_successor_packet/canonical_label_aligned_source_heldout_manifest.jsonl",
+    "packet": "runs/local/artifacts/stage10083_canonical_label_aligned_source_heldout_successor_packet/canonical_label_aligned_source_heldout_successor_packet.json",
+    "rows": "runs/local/artifacts/stage10083_canonical_label_aligned_source_heldout_successor_packet/canonical_label_aligned_source_heldout_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T16:09:32Z",
+  "decision": "Materialized a canonical-label source-heldout successor packet by remapping the stage10036 expanded heldout manifest so every hidden edit-target family uses the same opaque label across languages while preserving the existing provenance and anti-cheat fields.",
+  "metrics": {
+    "canonical_label_map": {
+      "TARGET_CONFIG": "E",
+      "TARGET_ENTRYPOINT": "B",
+      "TARGET_FILE": "D",
+      "TARGET_SYMBOL": "C",
+      "TARGET_TEST": "A"
+    },
+    "failures": [],
+    "heldout_per_language_label_map": {
+      "c_cpp": {
+        "A": "TARGET_TEST",
+        "B": "TARGET_ENTRYPOINT",
+        "C": "TARGET_SYMBOL",
+        "D": "TARGET_FILE",
+        "E": "TARGET_CONFIG"
+      },
+      "python": {
+        "A": "TARGET_TEST",
+        "C": "TARGET_SYMBOL",
+        "E": "TARGET_CONFIG"
+      },
+      "rust": {
+        "A": "TARGET_TEST",
+        "D": "TARGET_FILE"
+      },
+      "web_js_ts_html": {
+        "A": "TARGET_TEST",
+        "B": "TARGET_ENTRYPOINT",
+        "C": "TARGET_SYMBOL",
+        "D": "TARGET_FILE"
+      }
+    },
+    "heldout_rows": 55,
+    "heldout_rows_with_choice_permutation_metadata": 37,
+    "heldout_rows_with_locked_eval_source": 18,
+    "heldout_rows_with_opaque_choice_surface": 37,
+    "language_counts": {
+      "c_cpp": 30,
+      "python": 19,
+      "rust": 11,
+      "web_js_ts_html": 35
+    },
+    "remap_counts": {
+      "c_cpp:A": 7,
+      "c_cpp:B": 7,
+      "c_cpp:C": 7,
+      "c_cpp:D": 3,
+      "c_cpp:E": 6,
+      "python:A": 7,
+      "python:B": 1,
+      "python:C": 6,
+      "python:D": 1,
+      "python:E": 4,
+      "rust:A": 4,
+      "rust:B": 1,
+      "rust:C": 1,
+      "rust:D": 4,
+      "rust:E": 1,
+      "web_js_ts_html:A": 10,
+      "web_js_ts_html:B": 10,
+      "web_js_ts_html:C": 4,
+      "web_js_ts_html:D": 10,
+      "web_js_ts_html:E": 1
+    },
+    "rows": 95,
+    "split_counts": {
+      "eval": 38,
+      "strict_eval": 17,
+      "train": 40
+    }
+  },
+  "name": "stage10083_canonical_label_aligned_source_heldout_successor_packet",
+  "next_best_step": "Run the target-100m probe and local Gemma queue on this canonical source-heldout manifest so the next comparison measures the label-semantic fix on the honest 55-row heldout bank.",
+  "passed": true,
+  "stage": 10083,
+  "stage_name": "stage10083_canonical_label_aligned_source_heldout_successor_packet"
+}
