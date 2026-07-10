@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "lineage_registry": "runs/local/artifacts/stage8663_source_inventory_lineage_registry/source_lineage_registry.jsonl",
+    "request_rows": "runs/local/artifacts/stage10093_canonical_source_heldout_realistic_source_backed_successor_request/canonical_source_heldout_realistic_source_backed_successor_rows.jsonl"
+  },
+  "claim_boundary": {
+    "full_55_row_source_backed_materialization_ready_now": false,
+    "locked_subset_materialization_candidate": true,
+    "reason": "Only 18 rows are already locked_eval_source and the shared repo-graph payloads resolve to external /arxiv files rather than local materialized evidence."
+  },
+  "failures": [],
+  "findings": [
+    "Only a minority of the 55 realistic successor request rows are already marked locked_eval_source, so the current comparison bank is not yet a uniformly source-heldout maintainer packet.",
+    "The shared graph node and span lineage IDs resolve to external /arxiv/TOLBERT_BRAIN repo-graph files rather than a local materialized cache in this workspace.",
+    "The request rows collapse from 55 wrapper row IDs to 32 underlying stage8765 roots, which means real source-backed evidence construction must either recover those primitive roots or deliberately rebuild a fresh locked-source successor."
+  ],
+  "generated_at_utc": "2026-07-10T17:05:46Z",
+  "metrics": {
+    "compare_subset_split_counts": {
+      "eval": 38,
+      "strict_eval": 17
+    },
+    "graph_nodes_source_ids": [
+      "src_33319ee4c96f80c2"
+    ],
+    "graph_nodes_source_paths": {
+      "src_33319ee4c96f80c2": "/arxiv/TOLBERT_BRAIN/data/repos/nodes_repos.jsonl"
+    },
+    "graph_sources_resolve_to_external_arxiv": true,
+    "graph_spans_source_ids": [
+      "src_ddf39d418db81fdd"
+    ],
+    "graph_spans_source_paths": {
+      "src_ddf39d418db81fdd": "/arxiv/TOLBERT_BRAIN/data/repos/spans_repos.jsonl"
+    },
+    "locked_eval_source_languages": {
+      "c_cpp": 12,
+      "python": 6
+    },
+    "locked_eval_source_rows": 18,
+    "non_locked_rows": 37,
+    "request_rows": 55,
+    "unique_normalized_stage8765_roots": 32,
+    "unique_request_source_row_ids": 55
+  },
+  "name": "stage10094_realistic_source_materialization_recoverability_audit",
+  "next_best_step": "Build a source-materialization gate that either resolves the external repo-graph files into local evidence for the 32 underlying roots, or narrows the next maintainer-grade successor to the 18 already-locked heldout rows.",
+  "passed": true,
+  "stage": 10094
+}
