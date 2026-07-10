@@ -1,0 +1,8 @@
+# Stage9900 Geometry-Aware V2.7 Execution Delta Audit
+
+Passed: `True`
+Surface delta: `{'edit_localization': {'eval_exact_current': 0.25, 'eval_exact_baseline': 0.0, 'delta_eval_exact': 0.25, 'strict_exact_current': 0.25, 'strict_exact_baseline': 0.0, 'delta_strict_exact': 0.25, 'rows_current': 48, 'rows_baseline': 52}, 'patch_operator_selection': {'eval_exact_current': 1.0, 'eval_exact_baseline': 1.0, 'delta_eval_exact': 0.0, 'strict_exact_current': 1.0, 'strict_exact_baseline': 1.0, 'delta_strict_exact': 0.0, 'rows_current': 64, 'rows_baseline': 144}, 'symbol_binding': {'eval_exact_current': 0.3125, 'eval_exact_baseline': 0.22727272727272727, 'delta_eval_exact': 0.08522727272727273, 'strict_exact_current': 0.3125, 'strict_exact_baseline': 0.23076923076923078, 'delta_strict_exact': 0.08173076923076922, 'rows_current': 64, 'rows_baseline': 80}, 'verifier_failure_repair_or_abstain': {'eval_exact_current': 1.0, 'eval_exact_baseline': 1.0, 'delta_eval_exact': 0.0, 'strict_exact_current': 1.0, 'strict_exact_baseline': 1.0, 'delta_strict_exact': 0.0, 'rows_current': 64, 'rows_baseline': 108}}`
+
+The geometry-aware v2.7 package improves the actual multisurface execution path on the two software-maintenance-relevant weak surfaces: symbol binding rises from 0.2273/0.2308 to 0.3125/0.3125, and edit localization rises from 0.0/0.0 to 0.25/0.25, while patch and verifier guardrails stay saturated.
+
+Next: Promote Stage9896 as the default v2.7 package for future training and comparison runs, then rebuild the same-surface multilingual Gemma comparison on that refreshed edit-localization packet.
