@@ -1,0 +1,82 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "candidate_choices": [
+    "option A: symbol_definition_or_implementation_surface",
+    "option B: implementation_file_surface",
+    "option C: test_surface",
+    "option D: configuration_or_settings_surface",
+    "option E: entrypoint_or_invocation_surface"
+  ],
+  "counterfactual_role": "mixed_replay",
+  "failure_trace_refs": [],
+  "in_scope_subskills": [
+    "understands_user_intent",
+    "retrieves_source_evidence_when_needed",
+    "binds_symbols_correctly",
+    "localizes_edit_scope",
+    "repairs_or_abstains_safely",
+    "avoids_hallucinated_symbols",
+    "avoids_internal_tokens",
+    "produces_contentful_final_answer"
+  ],
+  "language_family": "python",
+  "out_of_scope_subskills": [
+    "uses_allowed_imports_only",
+    "rejects_blocked_imports",
+    "chooses_minimal_edit_operator",
+    "creates_or_updates_tests_when_appropriate",
+    "predicts_verifier_command",
+    "interprets_verifier_failure",
+    "keeps_patch_minimal",
+    "avoids_broad_rewrites"
+  ],
+  "passed": false,
+  "required_human_action": "Decide whether this row is a valid singleton localization item, an abstention case, or a row that should be quarantined from training and headline eval claims.",
+  "reviewer_must_confirm": true,
+  "reviewer_notes": [],
+  "row_id": "stage9857_edit_localization_stage9693_edit_localization_stage8765_row_ea5e5473e67b1360::mixed_replay",
+  "rubric_version": "expert_maintainer_v1",
+  "same_surface_correct": false,
+  "same_surface_prediction": "B",
+  "same_surface_target": "E",
+  "split": "strict_eval",
+  "status": "pending_human_review",
+  "subskills": {
+    "avoids_broad_rewrites": null,
+    "avoids_hallucinated_symbols": null,
+    "avoids_internal_tokens": null,
+    "binds_symbols_correctly": null,
+    "chooses_minimal_edit_operator": null,
+    "creates_or_updates_tests_when_appropriate": null,
+    "interprets_verifier_failure": null,
+    "keeps_patch_minimal": null,
+    "localizes_edit_scope": null,
+    "predicts_verifier_command": null,
+    "produces_contentful_final_answer": null,
+    "rejects_blocked_imports": null,
+    "repairs_or_abstains_safely": null,
+    "retrieves_source_evidence_when_needed": null,
+    "understands_user_intent": null,
+    "uses_allowed_imports_only": null
+  },
+  "supporting_evidence_paths": {
+    "row_packet": "runs/local/artifacts/stage9982_gemma_advantage_review_packet/gemma_advantage_review_rows.jsonl",
+    "stage9980_logits": "runs/local/artifacts/stage9980_selective_gemma_advantage_target100m_probe/edit_localization_probe/row_field_logits.jsonl",
+    "stage9981_outcome_audit": "runs/local/artifacts/stage9981_selective_replay_outcome_audit/selective_replay_outcome_audit.json"
+  },
+  "surface": "edit_localization_opaque_choice_surface_v3_web_isolated_disambiguator",
+  "task_observation": "A behavior check fails after validating user credentials. Stale unrelated reviewer note mentions option B; ignore irrelevant references.",
+  "visible_locality_evidence": "The visible failure occurs through startup or command entry behavior. Counterfactual mix: one decoy hint is intentionally irrelevant."
+}

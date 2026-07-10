@@ -1,0 +1,35 @@
+{
+  "artifacts": {
+    "doc": "docs/GEMMA_ADVANTAGE_ROW_REVIEW_PACKETS_STAGE9983.md",
+    "manifest": "runs/local/artifacts/stage9983_gemma_advantage_row_review_packets/gemma_advantage_row_review_packet_manifest.json",
+    "packets": "runs/local/artifacts/stage9983_gemma_advantage_row_review_packets/gemma_advantage_row_review_packets.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T11:12:20Z",
+  "decision": "Materialized per-row expert-maintainer and anti-cheat review packets for the 11 Gemma-advantage rows that stayed wrong after selective replay, so row-level validity can now govern future training eligibility.",
+  "metrics": {
+    "all_rows_incorrect": true,
+    "c_cpp_rows": 5,
+    "failures": [],
+    "mixed_replay_rows": 7,
+    "python_rows": 6,
+    "review_rows": 11
+  },
+  "name": "stage9983_gemma_advantage_row_review_packets",
+  "next_best_step": "Work these 11 row-level packets as explicit expert-maintainer and anti-cheat signoff items, then quarantine, abstention-relabeled, or keep-in-eval each row before it is reused for v2.7 training or headline 100M-versus-Gemma claims.",
+  "passed": true,
+  "stage": 9983,
+  "stage_name": "stage9983_gemma_advantage_row_review_packets"
+}

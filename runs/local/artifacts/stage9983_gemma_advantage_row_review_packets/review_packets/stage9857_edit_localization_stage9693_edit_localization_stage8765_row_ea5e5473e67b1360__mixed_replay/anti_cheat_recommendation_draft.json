@@ -1,0 +1,74 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "counterfactual_role": "mixed_replay",
+  "has_decoy_text": true,
+  "language_family": "python",
+  "recommended_challenge_judgments": [
+    {
+      "challenge_family": "hidden_reference_materialization",
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Review the row payload and confirm that no hidden source row ID, gold label text, or leaked teacher output is visible to the model."
+      ]
+    },
+    {
+      "challenge_family": "target_and_teacher_leakage",
+      "confidence": "medium",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "The row packet only exposes opaque choices plus evidence text, not Gemma output or the gold label as free text."
+      ]
+    },
+    {
+      "challenge_family": "label_proxy_shortcuts",
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "This row includes decoy or mixed-replay text and should be checked for whether the forced singleton label is still identifiable from causal evidence.",
+        "Stage9980 margin was 0.008333; low-margin failures are consistent with ambiguity or unstable shortcuts."
+      ]
+    },
+    {
+      "challenge_family": "metadata_and_graph_shortcuts",
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Confirm the answer is not recoverable from template role, graph metadata, or candidate ordering alone."
+      ]
+    },
+    {
+      "challenge_family": "generation_quality_collapse",
+      "confidence": "medium",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "The model produced a valid opaque choice token rather than junk or internal tokens, so this row is not a free-form generation-collapse case."
+      ]
+    },
+    {
+      "challenge_family": "cross_model_surface_fairness",
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "This row came from a same-surface 100M-versus-Gemma comparison and should be reviewed as a paired fairness case, not as a single-model anecdote."
+      ]
+    }
+  ],
+  "reviewer_message": "This draft exists to decide whether the row is a valid expert-maintainer eval item, an abstention case, or an eval-hack risk that should be quarantined.",
+  "row_id": "stage9857_edit_localization_stage9693_edit_localization_stage8765_row_ea5e5473e67b1360::mixed_replay",
+  "same_surface_prediction": "B",
+  "same_surface_target": "E",
+  "small_margin_failure": true
+}
