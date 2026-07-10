@@ -1,0 +1,61 @@
+{
+  "artifacts": {
+    "acceptance_contract": "docs/V27_MULTILINGUAL_EVAL_ACCEPTANCE_CONTRACT_STAGE9684.md",
+    "canonical_harness_handoff_bundle": "runs/local/artifacts/stage10081_canonical_harness_backend_handoff_bundle/canonical_harness_backend_handoff_bundle.json",
+    "full_product_harness_queue": "runs/local/artifacts/stage9749_full_product_harness_gemma_queue/full_product_harness_gemma_queue.json",
+    "maintainer_comparison_contract": "runs/local/artifacts/stage10133_true_source_backed_first_wave_comparison_contract/true_source_backed_first_wave_comparison_contract.json",
+    "maintainer_readiness_ledger": "runs/local/artifacts/stage10132_true_source_backed_first_wave_adjudication_readiness_ledger/true_source_backed_first_wave_adjudication_readiness_ledger.json"
+  },
+  "claim_boundary": {
+    "do_not_merge_standalone_maintainer_and_full_product_harness_scores_into_one_metric_yet": true,
+    "full_product_harness_claim_requires_external_runtime_writeback": true,
+    "multilingual_v27_completion_requires_both_tracks_not_just_one": true,
+    "standalone_maintainer_first_wave_claim_requires_stage10133_contract": true
+  },
+  "decision": "Join the current standalone maintainer frontier and the current full-product harness frontier into one v2.7 comparison spine so progress toward beating Gemma stays coordinated without collapsing distinct eval surfaces into one dishonest claim.",
+  "execution_order": [
+    "finish_8_bundle_human_signoff_for_standalone_maintainer_first_wave",
+    "rerun_stage10129_stage10130_stage10132_stage10133_on_the_admitted_bundle_set",
+    "run_one_frozen_100m_vs_gemma_standalone_maintainer_comparison",
+    "hand_the_4_canonical_harness_backend_handoff_bundles_to_external_runtime",
+    "execute_the_13_aligned_full_product_harness_cells_before_the_remaining_23",
+    "report_standalone_and_harness_results_as_distinct_tracks_until_a_shared_maintainer-grade_harness_task_pack_exists"
+  ],
+  "failures": [],
+  "metrics": {
+    "harness_aligned_cells": 13,
+    "harness_canonical_handoff_cells": 4,
+    "harness_queue_entries": 36,
+    "standalone_first_wave_bundles": 8,
+    "standalone_first_wave_comparison_ready_now": false,
+    "standalone_first_wave_scoreable_now": 0,
+    "v27_multilingual_completion_ready_now": false
+  },
+  "name": "stage10134_v27_multilingual_comparison_spine",
+  "next_best_step": "Clear the 8 standalone maintainer signoff tasks first, then run the frozen standalone first-wave comparison, while independently handing the 4 canonical harness bundles to the external runtime and keeping harness claims separate until real writeback exists.",
+  "passed": true,
+  "stage": 10134,
+  "tracks": {
+    "full_product_harness": {
+      "aligned_with_supported_standalone_cell": 13,
+      "canonical_handoff_cells": 4,
+      "cells_requiring_external_backend": 4,
+      "next_artifacts": [
+        "runs/local/artifacts/stage9749_full_product_harness_gemma_queue/full_product_harness_gemma_queue.json",
+        "runs/local/artifacts/stage10081_canonical_harness_backend_handoff_bundle/canonical_harness_backend_handoff_bundle.json"
+      ],
+      "primary_gate": "external_runtime_must_execute_and_write_back_reserved_handoff_artifacts",
+      "queue_entries": 36
+    },
+    "standalone_maintainer_first_wave": {
+      "bundle_count": 8,
+      "bundles_scoreable_now": 0,
+      "comparison_ready_now": false,
+      "next_artifacts": [
+        "runs/local/artifacts/stage10132_true_source_backed_first_wave_adjudication_readiness_ledger/true_source_backed_first_wave_adjudication_readiness_ledger.json",
+        "runs/local/artifacts/stage10133_true_source_backed_first_wave_comparison_contract/true_source_backed_first_wave_comparison_contract.json"
+      ],
+      "primary_gate": "complete_human_rubric_anti_cheat_and_gold_signoff_for_all_8_bundles"
+    }
+  }
+}
