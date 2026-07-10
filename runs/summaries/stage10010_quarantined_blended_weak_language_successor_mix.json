@@ -1,0 +1,83 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage10010_quarantined_blended_weak_language_successor_mix/quarantined_blended_weak_language_successor_mix_audit.json",
+    "blend": "runs/local/artifacts/stage10010_quarantined_blended_weak_language_successor_mix/quarantined_blended_weak_language_successor_structured_state.jsonl",
+    "doc": "docs/QUARANTINED_BLENDED_WEAK_LANGUAGE_SUCCESSOR_MIX_STAGE10010.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T12:15:09Z",
+  "decision": "Built a quarantined weak-language successor mix that appends the stage9961 recovery rows to the stage10009 filtered v2.7 blend, preserving multilingual weak-root coverage while keeping unresolved Gemma-advantage eval rows out of the active path.",
+  "metrics": {
+    "base_gate_rejected_rows": 0,
+    "base_rows_removed_from_stale_blend": 8,
+    "base_structured_rows": 396,
+    "blended_structured_rows": 444,
+    "body_emission_authorized": false,
+    "c_cpp_edit_rows_after": 27,
+    "c_cpp_edit_rows_before": 12,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "edit_localization_rows_after": 112,
+    "edit_localization_rows_before": 64,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "language_counts": {
+      "c_cpp": 90,
+      "python": 82,
+      "rust": 84,
+      "unknown": 80,
+      "web_js_ts_html": 108
+    },
+    "loss_counts": {
+      "edit_localization_ce": 112,
+      "patch_operator_ce": 144,
+      "symbol_binding_ce": 80,
+      "verifier_repair_ce": 108
+    },
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "python_edit_rows_after": 19,
+    "python_edit_rows_before": 10,
+    "recovery_gate_rejected_rows": 0,
+    "recovery_rows_added": 48,
+    "recovery_rows_present": 48,
+    "recovery_weight_sum": 147,
+    "runtime_authorized": false,
+    "rust_edit_rows_after": 21,
+    "rust_edit_rows_before": 15,
+    "scoring_authorized_next": false,
+    "skill_counts": {
+      "edit_localization": 112,
+      "patch_operator_selection": 144,
+      "symbol_binding": 80,
+      "verifier_failure_repair_or_abstain": 108
+    },
+    "source_emission_authorized": false,
+    "split_counts": {
+      "eval": 143,
+      "strict_eval": 145,
+      "train": 156
+    },
+    "web_edit_rows_after": 45,
+    "web_edit_rows_before": 27
+  },
+  "name": "stage10010_quarantined_blended_weak_language_successor_mix",
+  "next_best_step": "Use this quarantined successor blended structured-state mix as the next 100M edit-localization training input so python, c_cpp, and web_js_ts_html weak roots are replayed together without reintroducing unresolved Gemma-advantage rows.",
+  "passed": true,
+  "stage": 10010,
+  "stage_name": "stage10010_quarantined_blended_weak_language_successor_mix"
+}
