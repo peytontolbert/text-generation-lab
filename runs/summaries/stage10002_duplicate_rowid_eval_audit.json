@@ -1,0 +1,22 @@
+{
+  "artifacts": {
+    "doc": "docs/DUPLICATE_ROWID_EVAL_AUDIT_STAGE10002.md",
+    "rows": "runs/local/artifacts/stage10002_duplicate_rowid_eval_audit/duplicate_eval_row_ids.jsonl"
+  },
+  "created_at_utc": "2026-07-10T11:51:25Z",
+  "decision": "Audited the source-heldout manifest for duplicate heldout row IDs and found an exact c_cpp duplicate that should be removed from future reruns.",
+  "failures": [],
+  "metrics": {
+    "duplicate_row_id_count": 1,
+    "duplicate_row_ids": [
+      "stage9961_stage9857_edit_localization_stage9693_edit_localization_stage8765_row_a06c49be63eba522::positive_original::eval_replay"
+    ],
+    "heldout_rows": 38,
+    "unique_heldout_row_ids": 37
+  },
+  "name": "stage10002_duplicate_rowid_eval_audit",
+  "next_best_step": "Deduplicate the source-heldout manifest by row_id before future training or comparison reruns so heldout row counts and shared-row counts match exactly.",
+  "passed": true,
+  "stage": 10002,
+  "stage_name": "stage10002_duplicate_rowid_eval_audit"
+}
