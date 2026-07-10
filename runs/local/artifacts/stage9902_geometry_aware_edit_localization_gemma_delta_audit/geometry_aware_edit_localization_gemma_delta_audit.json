@@ -1,0 +1,102 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "caveats": [
+    "This audit compares against the earlier deterministic strict comparison, which treated the same 0.2 score as the best truthful multilingual packet at that time.",
+    "The refreshed packet uses a different output vocabulary and stronger visible evidence, so the comparison is a packet-to-packet frontier update rather than proof of general model superiority.",
+    "A broader claim still requires rebuilding the multilingual comparison bank on the refreshed package and then improving the head/objective enough to convert ties into wins in python, rust, and c_cpp."
+  ],
+  "decision": "The refreshed geometry-aware same-surface comparison improves the truthful 100M-vs-Gemma story from a full tie to a narrow edge: one 100M win, seven ties, and zero Gemma wins. The win is limited to web_js_ts_html eval, so this is still not a broad multilingual victory.",
+  "failures": [],
+  "metrics": {
+    "comparison_delta": {
+      "c_cpp:eval": {
+        "baseline_gemma_exact": 0.2,
+        "baseline_model_exact_assumed": 0.2,
+        "current_gemma_exact": 0.25,
+        "current_model_exact": 0.25,
+        "current_verdict": "tie",
+        "delta_gemma_exact": 0.04999999999999999,
+        "delta_model_exact": 0.04999999999999999
+      },
+      "c_cpp:strict_eval": {
+        "baseline_gemma_exact": 0.2,
+        "baseline_model_exact_assumed": 0.2,
+        "current_gemma_exact": 0.25,
+        "current_model_exact": 0.25,
+        "current_verdict": "tie",
+        "delta_gemma_exact": 0.04999999999999999,
+        "delta_model_exact": 0.04999999999999999
+      },
+      "python:eval": {
+        "baseline_gemma_exact": 0.2,
+        "baseline_model_exact_assumed": 0.2,
+        "current_gemma_exact": 0.25,
+        "current_model_exact": 0.25,
+        "current_verdict": "tie",
+        "delta_gemma_exact": 0.04999999999999999,
+        "delta_model_exact": 0.04999999999999999
+      },
+      "python:strict_eval": {
+        "baseline_gemma_exact": 0.2,
+        "baseline_model_exact_assumed": 0.2,
+        "current_gemma_exact": 0.25,
+        "current_model_exact": 0.25,
+        "current_verdict": "tie",
+        "delta_gemma_exact": 0.04999999999999999,
+        "delta_model_exact": 0.04999999999999999
+      },
+      "rust:eval": {
+        "baseline_gemma_exact": 0.2,
+        "baseline_model_exact_assumed": 0.2,
+        "current_gemma_exact": 0.25,
+        "current_model_exact": 0.25,
+        "current_verdict": "tie",
+        "delta_gemma_exact": 0.04999999999999999,
+        "delta_model_exact": 0.04999999999999999
+      },
+      "rust:strict_eval": {
+        "baseline_gemma_exact": 0.2,
+        "baseline_model_exact_assumed": 0.2,
+        "current_gemma_exact": 0.25,
+        "current_model_exact": 0.25,
+        "current_verdict": "tie",
+        "delta_gemma_exact": 0.04999999999999999,
+        "delta_model_exact": 0.04999999999999999
+      },
+      "web_js_ts_html:eval": {
+        "baseline_gemma_exact": 0.2,
+        "baseline_model_exact_assumed": 0.2,
+        "current_gemma_exact": 0.0,
+        "current_model_exact": 0.25,
+        "current_verdict": "100m_better",
+        "delta_gemma_exact": -0.2,
+        "delta_model_exact": 0.04999999999999999
+      },
+      "web_js_ts_html:strict_eval": {
+        "baseline_gemma_exact": 0.2,
+        "baseline_model_exact_assumed": 0.2,
+        "current_gemma_exact": 0.25,
+        "current_model_exact": 0.25,
+        "current_verdict": "tie",
+        "delta_gemma_exact": 0.04999999999999999,
+        "delta_model_exact": 0.04999999999999999
+      }
+    },
+    "ties": 7,
+    "wins_100m": 1,
+    "wins_gemma": 0
+  },
+  "passed": true
+}
