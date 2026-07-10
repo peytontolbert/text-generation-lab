@@ -1,0 +1,125 @@
+{
+  "artifacts": {
+    "comparison": "runs/local/artifacts/stage10086_canonical_label_aligned_source_heldout_same_manifest_comparison_audit/canonical_label_aligned_source_heldout_same_manifest_comparison_audit.json",
+    "manifest": "runs/local/artifacts/stage10083_canonical_label_aligned_source_heldout_successor_packet/canonical_label_aligned_source_heldout_manifest.jsonl",
+    "successor_spec": "runs/local/artifacts/stage10087_canonical_source_heldout_realism_audit/canonical_source_heldout_realistic_successor_spec.json"
+  },
+  "claim_boundary": {
+    "expert_maintainer_realism_supported": false,
+    "reason": "Prompt-visible evidence remains abstract category routing without concrete failure text, stack traces, snippets, file paths, or test assertions.",
+    "serious_software_maintenance_eval_supported": false,
+    "source_heldout_taxonomy_comparison_supported": true,
+    "structured_edit_target_taxonomy_supported": true
+  },
+  "examples": [
+    {
+      "candidate_choices": [
+        "option A: configuration_or_settings_surface",
+        "option B: entrypoint_or_invocation_surface",
+        "option C: symbol_definition_or_implementation_surface",
+        "option D: test_surface",
+        "option E: implementation_file_surface"
+      ],
+      "realism_level": "L0",
+      "target_family": "TARGET_SYMBOL",
+      "task_observation": "A behavior check fails after validating user credentials.",
+      "visible_locality_evidence": "A visible call or definition points to the symbol that owns the behavior."
+    },
+    {
+      "candidate_choices": [
+        "option A: test_surface",
+        "option B: symbol_definition_or_implementation_surface",
+        "option C: configuration_or_settings_surface",
+        "option D: implementation_file_surface",
+        "option E: entrypoint_or_invocation_surface"
+      ],
+      "realism_level": "L0",
+      "target_family": "TARGET_FILE",
+      "task_observation": "A behavior check fails after validating user credentials.",
+      "visible_locality_evidence": "The visible failure is localized to a file-level responsibility but no specific symbol is available."
+    },
+    {
+      "candidate_choices": [
+        "option A: test_surface",
+        "option B: implementation_file_surface",
+        "option C: symbol_definition_or_implementation_surface",
+        "option D: configuration_or_settings_surface",
+        "option E: entrypoint_or_invocation_surface"
+      ],
+      "realism_level": "L0",
+      "target_family": "TARGET_TEST",
+      "task_observation": "A behavior check fails after validating user credentials.",
+      "visible_locality_evidence": "The source behavior is valid, but the visible test expectation is stale or malformed."
+    },
+    {
+      "candidate_choices": [
+        "option A: symbol_definition_or_implementation_surface",
+        "option B: entrypoint_or_invocation_surface",
+        "option C: configuration_or_settings_surface",
+        "option D: test_surface",
+        "option E: implementation_file_surface"
+      ],
+      "realism_level": "L0",
+      "target_family": "TARGET_ENTRYPOINT",
+      "task_observation": "A behavior check fails after validating user credentials.",
+      "visible_locality_evidence": "The visible failure occurs through startup or command entry behavior."
+    },
+    {
+      "candidate_choices": [
+        "option A: implementation_file_surface",
+        "option B: test_surface",
+        "option C: configuration_or_settings_surface",
+        "option D: entrypoint_or_invocation_surface",
+        "option E: symbol_definition_or_implementation_surface"
+      ],
+      "realism_level": "L0",
+      "target_family": "TARGET_CONFIG",
+      "task_observation": "A behavior check fails after validating user credentials.",
+      "visible_locality_evidence": "Visible configuration evidence controls the failing behavior."
+    }
+  ],
+  "failures": [],
+  "findings": [
+    "The current canonical source-heldout packet is cleanly source-heldout and anti-cheat aware for taxonomy routing, but its visible evidence remains abstract.",
+    "Every heldout row fits L0 abstract category evidence rather than realistic broken-function maintenance evidence, even when some heldout rows omit explicit candidate choice text.",
+    "No heldout row exposes stack traces, concrete code snippets, file paths, or test assertions to the model-visible surface.",
+    "This supports a narrow claim about edit-target taxonomy, not a broad claim about expert-maintainer software maintenance intelligence."
+  ],
+  "metrics": {
+    "heldout_rows": 55,
+    "level_counts": {
+      "L0": 55
+    },
+    "macro_delta_100m_minus_gemma": 0.6943181818181818,
+    "macro_exact_100m": 1.0,
+    "macro_exact_gemma": 0.30568181818181817,
+    "missing_source_identity_rows": 55,
+    "per_language_levels": {
+      "c_cpp": {
+        "L0": 20
+      },
+      "python": {
+        "L0": 11
+      },
+      "rust": {
+        "L0": 4
+      },
+      "web_js_ts_html": {
+        "L0": 20
+      }
+    },
+    "present_field_groups": {
+      "code_snippets": 0,
+      "config_fragments": 0,
+      "failure_text": 55,
+      "file_or_symbol_refs": 0,
+      "test_assertions": 0,
+      "trace_or_stack": 0
+    },
+    "rows": 95,
+    "rows_with_explicit_surface_candidate_choices": 37
+  },
+  "name": "stage10087_canonical_source_heldout_realism_audit",
+  "passed": true,
+  "stage": 10087
+}

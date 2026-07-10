@@ -1,0 +1,74 @@
+{
+  "minimum_expert_maintainer_packet": {
+    "answer_requires": [
+      "connect failure to trace",
+      "reason over code behavior",
+      "distinguish symptom from cause"
+    ],
+    "candidate_descriptions": [
+      "A. tests/test_login.py",
+      "B. app.py entrypoint",
+      "C. auth/validators.py::normalize_email",
+      "D. auth/routes.py::login",
+      "E. config/auth.yaml"
+    ],
+    "failure_text": "Expected 400, got 200 for login request with empty email.",
+    "relevant_snippets": [
+      "def normalize_email(email): return email.strip().lower()",
+      "def login(req): email = normalize_email(req.email); create_session(email)",
+      "assert response.status_code == 400"
+    ],
+    "trace_excerpt": [
+      "auth/routes.py: login()",
+      "auth/validators.py: normalize_email()"
+    ]
+  },
+  "next_stage_intent": "reuse stage10083 row shell but replace abstract task_observation and visible_locality_evidence with source-backed failure text, snippets, traces, and candidate paths",
+  "preserve_from_stage10083": {
+    "anti_cheat_requirements": [
+      "opaque_candidate_tokens",
+      "candidate_permutation",
+      "no_target_literals_in_prompt_surface",
+      "counterfactual_audit",
+      "expert_maintainer_review"
+    ],
+    "canonical_label_map": {
+      "TARGET_CONFIG": "E",
+      "TARGET_ENTRYPOINT": "B",
+      "TARGET_FILE": "D",
+      "TARGET_SYMBOL": "C",
+      "TARGET_TEST": "A"
+    },
+    "heldout_split_integrity": true,
+    "source_overlap_policy": "no_train_source_overlap_in_eval_or_strict_eval"
+  },
+  "required_visible_fields_by_level": {
+    "L1": [
+      "failure_text",
+      "candidate_descriptions",
+      "language_family",
+      "file_extension"
+    ],
+    "L2": [
+      "failure_text",
+      "trace_excerpt",
+      "relevant_snippets",
+      "test_assertion",
+      "candidate_descriptions"
+    ],
+    "L3": [
+      "failure_text",
+      "trace_excerpt",
+      "multi_file_snippets",
+      "candidate_paths",
+      "causal_distractors"
+    ],
+    "L4": [
+      "failure_text",
+      "conflicting_evidence",
+      "abstain_label",
+      "request_more_evidence_options"
+    ]
+  },
+  "successor_name": "canonical_source_heldout_realistic_maintenance_successor"
+}
