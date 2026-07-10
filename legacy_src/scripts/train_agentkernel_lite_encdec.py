@@ -486,7 +486,25 @@ def assess_multilingual_surface_readiness(mode: str, rows: list[dict[str, Any]])
                     if "TARGET_" in text:
                         target_literal_rows.append(str(row.get("row_id") or ""))
                         target_literal_count += 1
-            surface_separates_labels = bool(labels) and len(safe_signatures) == len(labels)
+            signature_to_labels: dict[tuple[Any, ...], set[str]] = {}
+            for row in bucket:
+                clean_state = row.get("clean_state") if isinstance(row.get("clean_state"), dict) else {}
+                label = str(clean_state.get(label_key) or "")
+                if not label:
+                    continue
+                if mode == "edit_localization_probe":
+                    signature = _edit_localization_safe_signature(row)
+                elif mode == "patch_operator_probe":
+                    signature = _patch_operator_safe_signature(row)
+                else:
+                    signature = _verifier_repair_safe_signature(row)
+                signature_to_labels.setdefault(signature, set()).add(label)
+            colliding_signatures = {
+                signature: sorted(bound_labels)
+                for signature, bound_labels in signature_to_labels.items()
+                if len(bound_labels) > 1
+            }
+            surface_separates_labels = bool(labels) and not colliding_signatures and len(safe_signatures) >= len(labels)
             optional_empty_train_bucket = split == "train" and not bucket
             if (not surface_separates_labels or target_literal_count) and not optional_empty_train_bucket:
                 failed_buckets.append(f"{lang}:{split}")
@@ -495,6 +513,11 @@ def assess_multilingual_surface_readiness(mode: str, rows: list[dict[str, Any]])
                 "label_count": len(labels),
                 "safe_signature_unique_count": len(safe_signatures),
                 "surface_separates_labels": surface_separates_labels,
+                "signature_collision_count": len(colliding_signatures),
+                "colliding_signatures": {
+                    json.dumps(list(signature), sort_keys=True): bound_labels
+                    for signature, bound_labels in colliding_signatures.items()
+                },
                 "target_label_literal_rows": target_literal_count,
                 "optional_empty_train_bucket": optional_empty_train_bucket,
             }

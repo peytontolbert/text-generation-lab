@@ -4,28 +4,50 @@
     "doc": "docs/EXPANDED_SOURCE_HELDOUT_SAME_MANIFEST_COMPARISON_AUDIT_STAGE10040.md",
     "rows": "runs/local/artifacts/stage10040_expanded_source_heldout_same_manifest_comparison_audit/expanded_source_heldout_same_manifest_comparison_rows.jsonl"
   },
-  "created_at_utc": "2026-07-10T13:31:50Z",
+  "created_at_utc": "2026-07-10T13:50:33Z",
   "decision": "Materialized the expanded source-heldout same-manifest comparison audit scaffold so the next 100M and Gemma reruns can be judged directly on the enlarged heldout bank instead of the earlier smaller baseline.",
   "metrics": {
-    "comparison_rows": 0,
-    "failures": [
-      "shared_ids_not_equal_to_55",
-      "per_language_not_4"
-    ],
-    "macro_delta_100m_minus_gemma": 0.0,
-    "macro_exact_100m": 0.0,
-    "macro_exact_gemma": 0.0,
-    "per_language": {},
-    "rows_100m_present": 0,
-    "rows_gemma_present": 0,
-    "shared_rows": 0,
+    "comparison_rows": 55,
+    "failures": [],
+    "macro_delta_100m_minus_gemma": 0.2795454545454545,
+    "macro_exact_100m": 0.4829545454545454,
+    "macro_exact_gemma": 0.20340909090909093,
+    "per_language": {
+      "c_cpp": {
+        "gemma_exact": 0.15,
+        "hundred_m_exact": 0.35,
+        "rows": 20,
+        "verdict": "100m_better"
+      },
+      "python": {
+        "gemma_exact": 0.36363636363636365,
+        "hundred_m_exact": 0.18181818181818182,
+        "rows": 11,
+        "verdict": "gemma_better"
+      },
+      "rust": {
+        "gemma_exact": 0.0,
+        "hundred_m_exact": 0.75,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "web_js_ts_html": {
+        "gemma_exact": 0.3,
+        "hundred_m_exact": 0.65,
+        "rows": 20,
+        "verdict": "100m_better"
+      }
+    },
+    "rows_100m_present": 55,
+    "rows_gemma_present": 55,
+    "shared_rows": 55,
     "ties": 0,
-    "wins_100m": 0,
-    "wins_gemma": 0
+    "wins_100m": 3,
+    "wins_gemma": 1
   },
   "name": "stage10040_expanded_source_heldout_same_manifest_comparison_audit",
   "next_best_step": "After the stage10040 100M rerun and stage10041 Gemma queue both exist, use this audit to answer whether the 100M still beats Gemma on the expanded 55-row heldout compare subset of the 95-row manifest.",
-  "passed": false,
+  "passed": true,
   "stage": 10040,
   "stage_name": "stage10040_expanded_source_heldout_same_manifest_comparison_audit"
 }
