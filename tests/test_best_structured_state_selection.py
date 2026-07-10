@@ -1,14 +1,24 @@
 from __future__ import annotations
 
-import importlib
+import importlib.util
 import sys
 from pathlib import Path
+
+import pytest
+
+pytest.importorskip('torch.nn.functional')
 
 
 def _load():
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root / 'legacy_src'))
-    return importlib.import_module('agentkernel_lite.training_loop')
+    path = root / 'legacy_src/agentkernel_lite/training_loop.py'
+    spec = importlib.util.spec_from_file_location('stage_best_structured_state_training_loop', path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    sys.modules['stage_best_structured_state_training_loop'] = module
+    spec.loader.exec_module(module)
+    return module
 
 
 def test_structured_best_state_metrics_returns_exact_and_loss_sums():

@@ -1,0 +1,75 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9876_margin_objective_structured_tiny_execution_review/margin_objective_structured_tiny_execution_review_audit.json",
+    "doc": "docs/MARGIN_OBJECTIVE_STRUCTURED_TINY_EXECUTION_REVIEW_STAGE9876.md",
+    "run_dir": "runs/local/artifacts/stage9876_margin_objective_structured_tiny_execution_review/surface_runs"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T04:42:33Z",
+  "decision": "Executed a capped target-100M structured tiny review on the refreshed Stage9874 margin-objective v2.7 surfaces to verify the broader non-decoder path after the isolated edit-localization win.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "surface_results": [
+      {
+        "eval_exact": 0.22727272727272727,
+        "passed": true,
+        "rows": 80,
+        "strict_eval_exact": 0.23076923076923078,
+        "surface": "symbol_binding",
+        "trainer_returncode": 0
+      },
+      {
+        "eval_exact": 0.0,
+        "passed": true,
+        "rows": 52,
+        "strict_eval_exact": 0.0,
+        "surface": "edit_localization",
+        "trainer_returncode": 0
+      },
+      {
+        "eval_exact": 1.0,
+        "passed": true,
+        "rows": 144,
+        "strict_eval_exact": 1.0,
+        "surface": "patch_operator_selection",
+        "trainer_returncode": 0
+      },
+      {
+        "eval_exact": 1.0,
+        "passed": true,
+        "rows": 108,
+        "strict_eval_exact": 1.0,
+        "surface": "verifier_failure_repair_or_abstain",
+        "trainer_returncode": 0
+      }
+    ]
+  },
+  "name": "stage9876_margin_objective_structured_tiny_execution_review",
+  "next_best_step": "Use the refreshed Stage9874/9875/9876 chain to decide which surfaces are ready for a broader standalone Gemma rerun and which still need objective-specific work.",
+  "passed": true,
+  "stage": 9876,
+  "stage_name": "stage9876_margin_objective_structured_tiny_execution_review"
+}

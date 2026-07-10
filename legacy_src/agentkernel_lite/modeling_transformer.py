@@ -258,6 +258,12 @@ class AgentKernelLiteTransformerSeq2Seq(nn.Module):
         self.agent_intent_head = nn.Linear(cfg.d_model, cfg.agent_intent_labels) if cfg.agent_intent_labels > 0 else None
         self.agent_controller = nn.Linear(cfg.d_model, cfg.agent_controller_dim) if cfg.agent_controller_dim > 0 else None
         self.scalar_invariant = nn.Linear(cfg.d_model, cfg.scalar_invariant_rank, bias=False) if cfg.scalar_invariant_rank > 0 else None
+        self.structured_field_queries = nn.ParameterDict({
+            name: nn.Parameter(torch.empty(cfg.d_model))
+            for name in cfg.structured_head_dims
+        })
+        for query in self.structured_field_queries.values():
+            nn.init.normal_(query, mean=0.0, std=0.02)
         self.structured_heads = nn.ModuleDict({name: nn.Linear(cfg.d_model, dim) for name, dim in cfg.structured_head_dims.items()})
 
     def encode(self, input_ids: torch.Tensor, attention_mask: torch.Tensor | None = None) -> torch.Tensor:
@@ -303,7 +309,10 @@ class AgentKernelLiteTransformerSeq2Seq(nn.Module):
         memory = self.encode(input_ids, attention_mask)
         dec_hidden = self.decode(decoder_input_ids, memory, attention_mask)
         pooled = self._pool_memory(memory, attention_mask, input_ids)
-        structured_logits = {name: head(pooled) for name, head in self.structured_heads.items()}
+        structured_logits = {
+            name: head(self._structured_field_representation(memory, pooled, attention_mask, input_ids, self.structured_field_queries[name]))
+            for name, head in self.structured_heads.items()
+        }
         policy_logits = {name: head(pooled).squeeze(-1).float() for name, head in self.agent_policy_heads.items()}
         if self.agent_intent_head is not None:
             structured_logits["agent_intent"] = self.agent_intent_head(pooled)
@@ -317,6 +326,21 @@ class AgentKernelLiteTransformerSeq2Seq(nn.Module):
     def _pool_memory(self, memory: torch.Tensor, attention_mask: torch.Tensor | None, input_ids: torch.Tensor) -> torch.Tensor:
         mask = (attention_mask if attention_mask is not None else input_ids.ne(self.config.pad_token_id)).to(memory.dtype).unsqueeze(-1)
         return (memory * mask).sum(dim=1) / mask.sum(dim=1).clamp_min(1.0)
+
+    def _structured_field_representation(
+        self,
+        memory: torch.Tensor,
+        pooled: torch.Tensor,
+        attention_mask: torch.Tensor | None,
+        input_ids: torch.Tensor,
+        query: torch.Tensor,
+    ) -> torch.Tensor:
+        mask = attention_mask if attention_mask is not None else input_ids.ne(self.config.pad_token_id)
+        scores = torch.matmul(memory, query.to(device=memory.device, dtype=memory.dtype)) / math.sqrt(self.config.d_model)
+        scores = scores.masked_fill(~mask, torch.finfo(scores.dtype).min)
+        weights = torch.softmax(scores, dim=1).unsqueeze(-1)
+        attended = (memory * weights).sum(dim=1)
+        return 0.5 * (pooled + attended)
 
     def decoder_ce_loss(self, logits: torch.Tensor, labels: torch.Tensor, row_mask: torch.Tensor | None = None) -> torch.Tensor:
         token_loss = F.cross_entropy(logits.reshape(-1, logits.size(-1)), labels.reshape(-1), ignore_index=0, reduction="none").reshape(labels.shape)
@@ -343,4 +367,5 @@ def estimate_transformer_parameter_count(config: AgentKernelLiteTransformerConfi
     controller = (cfg.d_model + 1) * cfg.agent_controller_dim if cfg.agent_controller_dim > 0 else 0
     scalar = cfg.d_model * cfg.scalar_invariant_rank if cfg.scalar_invariant_rank > 0 else 0
     structured = sum((cfg.d_model + 1) * dim for dim in cfg.structured_head_dims.values())
-    return int(embed + tied_lm_head + cfg.n_layers * (encoder_layer + decoder_layer) + norms + retrieval + policy + intent + controller + scalar + structured)
+    structured_queries = len(cfg.structured_head_dims) * cfg.d_model
+    return int(embed + tied_lm_head + cfg.n_layers * (encoder_layer + decoder_layer) + norms + retrieval + policy + intent + controller + scalar + structured + structured_queries)

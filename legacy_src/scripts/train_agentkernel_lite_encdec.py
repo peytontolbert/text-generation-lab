@@ -30,6 +30,7 @@ SUPPORTED_MODES = (
     "denoise_repair_probe",
     "episode_step_denoise_contract_only",
     "episode_step_structured_probe",
+    "two_phase_structured_reconnect_probe",
     "two_phase_suffix_denoise_reconnect_probe",
     "tri_phase_suffix_phrase_residual_reconnect_probe",
 )
@@ -128,6 +129,41 @@ STRUCTURED_MODE_ALLOWED_LOSSES = {
     },
 }
 
+MULTILINGUAL_MAINTENANCE_LANGS = ("python", "rust", "c_cpp", "web_js_ts_html")
+MULTILINGUAL_MAINTENANCE_SPLITS = ("train", "eval", "strict_eval")
+MULTILINGUAL_READINESS_LABEL_KEYS = {
+    "edit_localization_probe": "edit_localization_target",
+    "patch_operator_probe": "patch_operator",
+    "verifier_repair_probe": "verifier_repair_action",
+}
+
+
+STRUCTURED_SINGLE_LOSS_MODE_BY_KEY = {
+    "symbol_binding_ce": "symbol_binding_probe",
+    "edit_localization_ce": "edit_localization_probe",
+    "patch_operator_ce": "patch_operator_probe",
+    "verifier_repair_ce": "verifier_repair_probe",
+}
+
+
+def infer_structured_probe_mode(rows: list[dict[str, Any]]) -> tuple[str | None, list[str]]:
+    inferred: set[str] = set()
+    errors: list[str] = []
+    for index, row in enumerate(rows):
+        row_id = str(row.get("row_id") or f"row_{index}")
+        enabled = [
+            key for key, value in normalize_loss_mask(row).items()
+            if value and key in STRUCTURED_SINGLE_LOSS_MODE_BY_KEY
+        ]
+        unique_enabled = sorted(set(enabled))
+        if len(unique_enabled) != 1:
+            errors.append(f"row {row_id} does not expose exactly one structured task loss")
+            continue
+        inferred.add(STRUCTURED_SINGLE_LOSS_MODE_BY_KEY[unique_enabled[0]])
+    if len(inferred) > 1:
+        errors.append(f"mixed structured task modes present: {sorted(inferred)}")
+    return (next(iter(inferred)) if len(inferred) == 1 else None, errors)
+
 
 class ProbeContractError(ValueError):
     pass
@@ -182,6 +218,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-size", type=_positive_int, default=2)
     parser.add_argument("--max-encoder-tokens", type=_positive_int, default=2048)
     parser.add_argument("--learning-rate", type=float, default=5e-5)
+    parser.add_argument("--phase2-learning-rate", type=float, default=None)
+    parser.add_argument("--structured-trainable-profile", choices=("full_non_decoder", "structured_heads_only", "structured_heads_plus_policy"), default="full_non_decoder")
+    parser.add_argument("--phase2-structured-trainable-profile", choices=("full_non_decoder", "structured_heads_only", "structured_heads_plus_policy"), default=None)
     parser.add_argument("--eval-interval", type=_positive_int, default=0, help="Optional structured-probe eval interval for checkpoint-selection telemetry; 0 disables interval eval.")
     parser.add_argument(
         "--restore-best-structured-state",
@@ -369,6 +408,109 @@ def load_manifest(path: Path) -> list[dict[str, Any]]:
     if not path.is_file():
         raise ProbeContractError(f"manifest does not exist: {path}")
     return read_jsonl(path)
+
+
+def _edit_localization_safe_signature(row: dict[str, Any]) -> tuple[Any, ...]:
+    state = row.get("input_state") if isinstance(row.get("input_state"), dict) else {}
+    return (
+        state.get("task_observation"),
+        state.get("visible_locality_evidence"),
+        state.get("file_extension"),
+        state.get("context_config_visible"),
+        state.get("context_entrypoint_visible"),
+        state.get("context_symbol_names_visible"),
+        state.get("context_tests_visible"),
+    )
+
+
+def _patch_operator_safe_signature(row: dict[str, Any]) -> tuple[Any, ...]:
+    corrupted = row.get("corrupted_state") if isinstance(row.get("corrupted_state"), dict) else {}
+    scope = corrupted.get("target_scope_features") if isinstance(corrupted.get("target_scope_features"), dict) else {}
+    return (
+        corrupted.get("localized_edit_need"),
+        corrupted.get("file_extension"),
+        scope.get("bounded_patch_required"),
+        scope.get("has_visible_config"),
+        scope.get("has_visible_import_policy"),
+        scope.get("has_visible_test"),
+    )
+
+
+def _verifier_repair_safe_signature(row: dict[str, Any]) -> tuple[Any, ...]:
+    query = row.get("query") if isinstance(row.get("query"), dict) else {}
+    return (query.get("query_kind"),)
+
+
+def assess_multilingual_surface_readiness(mode: str, rows: list[dict[str, Any]]) -> dict[str, Any] | None:
+    label_key = MULTILINGUAL_READINESS_LABEL_KEYS.get(mode)
+    if label_key is None:
+        return None
+    langs = {str(row.get("language_family") or "") for row in rows}
+    splits = {_row_split(row) for row in rows}
+    if not all(lang in langs for lang in MULTILINGUAL_MAINTENANCE_LANGS):
+        return None
+    if not all(split in splits for split in MULTILINGUAL_MAINTENANCE_SPLITS):
+        return None
+
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for row in rows:
+        lang = str(row.get("language_family") or "")
+        split = _row_split(row)
+        if lang not in MULTILINGUAL_MAINTENANCE_LANGS or split not in MULTILINGUAL_MAINTENANCE_SPLITS:
+            continue
+        grouped.setdefault((lang, split), []).append(row)
+
+    bucket_cards: dict[str, Any] = {}
+    failed_buckets: list[str] = []
+    target_literal_rows: list[str] = []
+    for lang in MULTILINGUAL_MAINTENANCE_LANGS:
+        for split in MULTILINGUAL_MAINTENANCE_SPLITS:
+            bucket = grouped.get((lang, split), [])
+            labels = sorted(
+                {
+                    str((row.get("clean_state") or {}).get(label_key) or "")
+                    for row in bucket
+                    if isinstance(row.get("clean_state"), dict) and str((row.get("clean_state") or {}).get(label_key) or "")
+                }
+            )
+            if mode == "edit_localization_probe":
+                safe_signatures = {_edit_localization_safe_signature(row) for row in bucket}
+            elif mode == "patch_operator_probe":
+                safe_signatures = {_patch_operator_safe_signature(row) for row in bucket}
+            else:
+                safe_signatures = {_verifier_repair_safe_signature(row) for row in bucket}
+            target_literal_count = 0
+            if mode == "edit_localization_probe":
+                for row in bucket:
+                    text = json.dumps(row.get("input_state") if isinstance(row.get("input_state"), dict) else {}, sort_keys=True)
+                    if "TARGET_" in text:
+                        target_literal_rows.append(str(row.get("row_id") or ""))
+                        target_literal_count += 1
+            surface_separates_labels = bool(labels) and len(safe_signatures) == len(labels)
+            optional_empty_train_bucket = split == "train" and not bucket
+            if (not surface_separates_labels or target_literal_count) and not optional_empty_train_bucket:
+                failed_buckets.append(f"{lang}:{split}")
+            bucket_cards[f"{lang}:{split}"] = {
+                "rows": len(bucket),
+                "label_count": len(labels),
+                "safe_signature_unique_count": len(safe_signatures),
+                "surface_separates_labels": surface_separates_labels,
+                "target_label_literal_rows": target_literal_count,
+                "optional_empty_train_bucket": optional_empty_train_bucket,
+            }
+
+    passed = not failed_buckets and not target_literal_rows
+    return {
+        "applied": True,
+        "mode": mode,
+        "passed": passed,
+        "failed_bucket_count": len(failed_buckets),
+        "failed_buckets": failed_buckets,
+        "target_label_literal_row_count": len(target_literal_rows),
+        "target_label_literal_row_ids": target_literal_rows[:50],
+        "buckets": bucket_cards,
+        "rule": "Every multilingual maintenance language/split bucket must expose encoder-visible, non-label evidence that separates the target labels before training is considered win-ready.",
+    }
 
 
 def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -615,6 +757,12 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         if not counterfactual_card.get("counterfactual_obligations_complete"):
             errors.append("counterfactual obligations are incomplete")
 
+    multilingual_surface_readiness = assess_multilingual_surface_readiness(args.mode, rows)
+    if multilingual_surface_readiness is not None and not multilingual_surface_readiness.get("passed"):
+        errors.append(
+            "multilingual surface readiness failed: encoder-visible evidence does not separate labels in every language/split bucket"
+        )
+
     return {
         "passed": not errors,
         "errors": errors,
@@ -632,6 +780,7 @@ def validate_structured_probe(args: argparse.Namespace, rows: list[dict[str, Any
         "unsafe_loss_row_examples": unsafe_loss_rows[:50],
         "counterfactual_obligation_audit_required": bool(args.require_counterfactual_obligation_audit),
         "counterfactual_obligation_card": counterfactual_card,
+        "multilingual_surface_readiness": multilingual_surface_readiness,
         "native_feature_ablation_audit_required": bool(args.require_native_feature_ablation_audit),
         "native_feature_ablation_artifact": "feature_ablation_attribution.jsonl",
         "weights": {
@@ -832,6 +981,124 @@ def validate_tri_phase_suffix_phrase_residual_reconnect_probe(args: argparse.Nam
         "contract_only": bool(args.contract_only),
     }
 
+def validate_two_phase_structured_reconnect_probe(args: argparse.Namespace, rows: list[dict[str, Any]]) -> dict[str, Any]:
+    errors: list[str] = []
+    if args.phase2_manifest is None:
+        errors.append("two-phase structured reconnect requires --phase2-manifest")
+        phase2_rows: list[dict[str, Any]] = []
+    else:
+        try:
+            phase2_rows = load_manifest(args.phase2_manifest)
+        except Exception as exc:  # noqa: BLE001 - surface contract error in audit card.
+            errors.append(f"phase2 manifest load failed: {exc}")
+            phase2_rows = []
+
+    if args.decoder_ce_weight != 0:
+        errors.append("two-phase structured reconnect requires --decoder-ce-weight 0")
+    if args.structured_aux_weight <= 0:
+        errors.append("two-phase structured reconnect requires --structured-aux-weight > 0")
+    if args.denoise_weight != 0:
+        errors.append("two-phase structured reconnect requires --denoise-weight 0")
+    if args.phase2_max_train_rows <= 0 or args.phase2_max_eval_rows <= 0 or args.phase2_max_strict_rows <= 0:
+        errors.append("two-phase structured reconnect requires positive phase2 row caps")
+    if args.phase2_max_steps <= 0 and not args.contract_only:
+        errors.append("two-phase structured reconnect execution requires --phase2-max-steps > 0")
+    if args.phase2_max_decoder_tokens <= 0:
+        errors.append("two-phase structured reconnect requires --phase2-max-decoder-tokens > 0")
+    if not args.restore_best_structured_state:
+        errors.append("two-phase structured reconnect requires --restore-best-structured-state for phase1")
+    if args.eval_interval <= 0:
+        errors.append("two-phase structured reconnect requires --eval-interval > 0")
+
+    phase1_mode, phase1_mode_errors = infer_structured_probe_mode(rows)
+    phase2_mode, phase2_mode_errors = infer_structured_probe_mode(phase2_rows) if phase2_rows else (None, ["phase2 rows unavailable"])
+    errors.extend(phase1_mode_errors)
+    errors.extend(phase2_mode_errors)
+    if phase1_mode and phase2_mode and phase1_mode != phase2_mode:
+        errors.append(f"phase1/phase2 structured modes differ: {phase1_mode} vs {phase2_mode}")
+
+    phase1_args = _namespace_with(
+        args,
+        mode=phase1_mode or "edit_localization_probe",
+        denoise_weight=0.0,
+        decoder_ce_weight=0.0,
+        phase2_manifest=None,
+        generation_prefix_field=None,
+    )
+    phase1_card = validate_structured_probe(phase1_args, rows)
+    if not phase1_card.get("passed"):
+        errors.append("phase1 structured contract failed")
+
+    phase2_args = _namespace_with(
+        args,
+        mode=phase2_mode or phase1_mode or "edit_localization_probe",
+        manifest=args.phase2_manifest if args.phase2_manifest is not None else args.manifest,
+        max_train_rows=args.phase2_max_train_rows,
+        max_eval_rows=args.phase2_max_eval_rows,
+        max_strict_rows=args.phase2_max_strict_rows,
+        max_steps=args.phase2_max_steps,
+        max_decoder_tokens=args.phase2_max_decoder_tokens,
+        denoise_weight=0.0,
+        decoder_ce_weight=0.0,
+    )
+    phase2_card = validate_structured_probe(phase2_args, phase2_rows) if phase2_rows else {"passed": False, "errors": ["phase2 rows unavailable"]}
+    if not phase2_card.get("passed"):
+        errors.append("phase2 structured contract failed")
+
+    return {
+        "passed": not errors,
+        "errors": errors,
+        "mode": args.mode,
+        "manifest": str(args.manifest),
+        "manifest_sha256": _manifest_hash(args.manifest),
+        "phase2_manifest": str(args.phase2_manifest) if args.phase2_manifest else None,
+        "phase2_manifest_sha256": _manifest_hash(args.phase2_manifest) if args.phase2_manifest and args.phase2_manifest.exists() else None,
+        "rows": len(rows) + len(phase2_rows),
+        "phase1_rows": len(rows),
+        "phase2_rows": len(phase2_rows),
+        "phase1_mode": phase1_mode,
+        "phase2_mode": phase2_mode,
+        "phase1_contract": phase1_card,
+        "phase2_contract": phase2_card,
+        "weights": {
+            "decoder_ce_weight": args.decoder_ce_weight,
+            "structured_aux_weight": args.structured_aux_weight,
+            "denoise_weight": args.denoise_weight,
+            "phase1_max_steps": args.max_steps,
+            "phase2_max_steps": args.phase2_max_steps,
+            "phase2_learning_rate": args.phase2_learning_rate if args.phase2_learning_rate is not None else args.learning_rate,
+            "eval_interval": args.eval_interval,
+            "restore_best_structured_state": bool(args.restore_best_structured_state),
+            "structured_trainable_profile": args.structured_trainable_profile,
+            "phase2_structured_trainable_profile": args.phase2_structured_trainable_profile or args.structured_trainable_profile,
+        },
+        "caps": {
+            "phase1_max_train_rows": args.max_train_rows,
+            "phase1_max_eval_rows": args.max_eval_rows,
+            "phase1_max_strict_rows": args.max_strict_rows,
+            "phase1_max_decoder_tokens": args.max_decoder_tokens,
+            "phase2_max_train_rows": args.phase2_max_train_rows,
+            "phase2_max_eval_rows": args.phase2_max_eval_rows,
+            "phase2_max_strict_rows": args.phase2_max_strict_rows,
+            "phase2_max_decoder_tokens": args.phase2_max_decoder_tokens,
+        },
+        "final_checkpoint_export_disabled": bool(args.no_final_checkpoint_export),
+        "final_model_save_skipped": args.skip_final_model_save == 1,
+        "cleanup_requested": bool(args.cleanup_checkpoints_after_probe),
+        "generation_audit_requested": bool(args.enable_generation_audit),
+        "max_generation_rows": int(args.max_generation_rows),
+        "max_generation_tokens": int(args.max_generation_tokens),
+        "generation_prefix_field": getattr(args, "generation_prefix_field", None),
+        "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
+        "generation_repetition_guard": bool(getattr(args, "generation_repetition_guard", False)),
+        "generation_repetition_guard_top_k": int(getattr(args, "generation_repetition_guard_top_k", 16)),
+        "model_execution_attempted": False,
+        "contract_only": bool(getattr(args, "contract_only", False)),
+        "two_phase_in_memory_required": True,
+        "checkpoint_export_allowed_between_phases": False,
+    }
+
+
 def validate_two_phase_suffix_denoise_reconnect_probe(args: argparse.Namespace, rows: list[dict[str, Any]]) -> dict[str, Any]:
     errors: list[str] = []
     if args.phase2_manifest is None:
@@ -949,6 +1216,8 @@ def validate_contract(args: argparse.Namespace, rows: list[dict[str, Any]]) -> d
         return validate_bounded_decoder_ce_probe(args, rows)
     if args.mode == "tri_phase_suffix_phrase_residual_reconnect_probe":
         return validate_tri_phase_suffix_phrase_residual_reconnect_probe(args, rows)
+    if args.mode == "two_phase_structured_reconnect_probe":
+        return validate_two_phase_structured_reconnect_probe(args, rows)
     if args.mode == "two_phase_suffix_denoise_reconnect_probe":
         return validate_two_phase_suffix_denoise_reconnect_probe(args, rows)
     if args.mode in STRUCTURED_MODE_ALLOWED_LOSSES:
@@ -965,8 +1234,10 @@ def emit_contract_artifacts(args: argparse.Namespace, card: dict[str, Any]) -> N
     out = args.output_dir
     out.mkdir(parents=True, exist_ok=True)
     marker = out / ".agentkernel_probe_output"
-    marker.write_text(f"run_id={args.run_id}\nmode={args.mode}\ncontract_only=true\n", encoding="utf-8")
+    marker.write_text(f"run_id={args.run_id}\nmode={args.mode}\ncontract_only={str(bool(args.contract_only)).lower()}\n", encoding="utf-8")
     _write_json(out / "probe_contract_audit.json", card)
+    if not args.contract_only:
+        return
     _write_json(
         out / "cleanup_proof.json",
         {
@@ -1008,6 +1279,50 @@ def emit_contract_artifacts(args: argparse.Namespace, card: dict[str, Any]) -> N
                 dry_run=True,
             )
         except UnsafePathError as exc:
+            cleanup = {
+                "cleanup_requested": True,
+                "cleanup_executed": False,
+                "cleanup_reason": f"unsafe_path:{exc}",
+                "run_id": args.run_id,
+                "output_dir": str(out),
+            }
+        _write_json(out / "cleanup_dry_run.json", cleanup)
+
+def persist_execution_telemetry(args: argparse.Namespace, card: dict[str, Any], result: dict[str, Any]) -> None:
+    out = args.output_dir.resolve()
+    repo_root = args.repo_root.resolve()
+    executed_card = dict(card)
+    executed_card["model_execution_attempted"] = True
+    executed_card["contract_only"] = False
+    executed_card["runtime_executed"] = bool(result.get("runtime_executed"))
+    executed_card["gemma_executed"] = bool(result.get("gemma_executed"))
+    executed_card["harness_executed"] = bool(result.get("harness_executed"))
+    executed_card["final_checkpoint_exported"] = bool(result.get("final_checkpoint_exported"))
+    executed_card["execution_result_path"] = str((out / "execution_result.json").relative_to(repo_root))
+    _write_json(out / "probe_contract_audit.json", executed_card)
+    marker = out / ".agentkernel_probe_output"
+    marker.write_text(f"run_id={args.run_id}\nmode={args.mode}\ncontract_only=false\n", encoding="utf-8")
+
+
+    _write_json(
+        out / "cleanup_proof.json",
+        {
+            "cleanup_requested": bool(args.cleanup_checkpoints_after_probe),
+            "cleanup_executed": False,
+            "cleanup_reason": "contract-only trainer scaffold does not create checkpoints",
+            "run_id": args.run_id,
+            "output_dir": str(out.resolve()),
+        },
+    )
+    if args.cleanup_checkpoints_after_probe:
+        try:
+            cleanup = safe_cleanup_checkpoints(
+                repo_root=args.repo_root,
+                output_dir=args.output_dir,
+                run_id=args.run_id,
+                dry_run=True,
+            )
+        except UnsafePathError as exc:
             raise ProbeContractError(f"safe cleanup dry-run refused: {exc}") from exc
         _write_json(out / "cleanup_dry_run.json", cleanup)
 
@@ -1021,7 +1336,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
     legacy_src = REPO_ROOT / "legacy_src"
     if str(legacy_src) not in sys.path:
         sys.path.insert(0, str(legacy_src))
-    from agentkernel_lite.training_loop import run_bounded_decoder_ce_probe, run_denoise_repair_probe, run_structured_aux_probe, run_tri_phase_suffix_phrase_residual_reconnect_probe, run_two_phase_suffix_denoise_reconnect_probe
+    from agentkernel_lite.training_loop import run_bounded_decoder_ce_probe, run_denoise_repair_probe, run_structured_aux_probe, run_tri_phase_suffix_phrase_residual_reconnect_probe, run_two_phase_structured_reconnect_probe, run_two_phase_suffix_denoise_reconnect_probe
 
     common = dict(
         rows=rows,
@@ -1084,6 +1399,46 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             generation_audit_splits=args.generation_audit_splits,
             generation_repetition_guard=args.generation_repetition_guard,
             generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
+        )
+    elif args.mode == "two_phase_structured_reconnect_probe":
+        if args.phase2_manifest is None:
+            raise ProbeContractError("two-phase structured execution requires --phase2-manifest")
+        phase2_rows = load_manifest(args.phase2_manifest)
+        phase1_mode, phase1_mode_errors = infer_structured_probe_mode(rows)
+        phase2_mode, phase2_mode_errors = infer_structured_probe_mode(phase2_rows)
+        if phase1_mode_errors or phase2_mode_errors or phase1_mode != phase2_mode or phase1_mode is None:
+            raise ProbeContractError(
+                "two-phase structured execution requires one shared structured task mode across both manifests"
+            )
+        result = run_two_phase_structured_reconnect_probe(
+            phase1_rows=rows,
+            phase2_rows=phase2_rows,
+            phase1_mode=phase1_mode,
+            phase2_mode=phase2_mode,
+            output_dir=args.output_dir,
+            run_id=args.run_id,
+            max_train_rows=args.max_train_rows,
+            max_eval_rows=args.max_eval_rows,
+            max_strict_rows=args.max_strict_rows,
+            max_steps=args.max_steps,
+            phase2_max_train_rows=args.phase2_max_train_rows,
+            phase2_max_eval_rows=args.phase2_max_eval_rows,
+            phase2_max_strict_rows=args.phase2_max_strict_rows,
+            phase2_max_steps=args.phase2_max_steps,
+            batch_size=args.batch_size,
+            max_encoder_tokens=args.max_encoder_tokens,
+            max_decoder_tokens=args.max_decoder_tokens,
+            phase2_max_decoder_tokens=args.phase2_max_decoder_tokens,
+            learning_rate=args.learning_rate,
+            phase2_learning_rate=args.phase2_learning_rate,
+            implementation=args.implementation,
+            structured_trainable_profile=args.structured_trainable_profile,
+            phase2_structured_trainable_profile=args.phase2_structured_trainable_profile,
+            probe_scale=args.probe_scale,
+            model_config=args.model_config,
+            tokenizer_json=args.tokenizer_json,
+            tokenizer_config=args.tokenizer_config,
+            eval_interval=args.eval_interval,
         )
     elif args.mode == "two_phase_suffix_denoise_reconnect_probe":
         if args.phase2_manifest is None:
@@ -1152,15 +1507,49 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             eval_interval=args.eval_interval,
             restore_best_structured_state=args.restore_best_structured_state,
             require_native_feature_ablation_audit=args.require_native_feature_ablation_audit,
+            structured_trainable_profile=args.structured_trainable_profile,
             **common,
         )
     else:
         raise ProbeContractError(f"execution is not restored for mode: {args.mode}")
+    if args.mode == "bounded_decoder_ce_probe":
+        required_artifacts = REQUIRED_BOUNDED_ARTIFACTS
+    elif args.mode == "denoise_repair_probe":
+        required_artifacts = REQUIRED_DENOISE_ARTIFACTS
+    else:
+        required_artifacts = REQUIRED_STRUCTURED_ARTIFACTS
+    runtime_artifact_status = {}
+    for name in required_artifacts:
+        path = args.output_dir / name
+        exists = path.exists()
+        bytes_written = path.stat().st_size if exists else 0
+        runtime_artifact_status[name] = {"exists": exists, "bytes": bytes_written}
+    result["runtime_artifact_status"] = runtime_artifact_status
+    result["required_artifacts_written"] = all(
+        status["exists"] and (not name.endswith(".jsonl") or status["bytes"] > 0)
+        for name, status in runtime_artifact_status.items()
+    )
     _write_json(args.output_dir / "execution_result.json", result)
     return result
 
 def main() -> None:
     args = parse_args()
+    args.repo_root = args.repo_root.resolve()
+    args.output_dir = args.output_dir.resolve()
+    if getattr(args, "manifest", None) is not None and not args.manifest.is_absolute():
+        args.manifest = (args.repo_root / args.manifest).resolve()
+    if getattr(args, "phase2_manifest", None) is not None and args.phase2_manifest is not None and not args.phase2_manifest.is_absolute():
+        args.phase2_manifest = (args.repo_root / args.phase2_manifest).resolve()
+    if getattr(args, "phase3_manifest", None) is not None and args.phase3_manifest is not None and not args.phase3_manifest.is_absolute():
+        args.phase3_manifest = (args.repo_root / args.phase3_manifest).resolve()
+    if getattr(args, "model_config", None) is not None and args.model_config is not None and not args.model_config.is_absolute():
+        args.model_config = (args.repo_root / args.model_config).resolve()
+    if getattr(args, "tokenizer_json", None) is not None and args.tokenizer_json is not None and not args.tokenizer_json.is_absolute():
+        args.tokenizer_json = (args.repo_root / args.tokenizer_json).resolve()
+    if getattr(args, "tokenizer_config", None) is not None and args.tokenizer_config is not None and not args.tokenizer_config.is_absolute():
+        args.tokenizer_config = (args.repo_root / args.tokenizer_config).resolve()
+    if getattr(args, "tokenizer_hashlock", None) is not None and args.tokenizer_hashlock is not None and not args.tokenizer_hashlock.is_absolute():
+        args.tokenizer_hashlock = (args.repo_root / args.tokenizer_hashlock).resolve()
     rows = load_manifest(args.manifest)
     card = validate_contract(args, rows)
     emit_contract_artifacts(args, card)
@@ -1174,6 +1563,7 @@ def main() -> None:
             "contract validated, but model execution is disabled unless --execution-authorized-for-recovery-probe is present"
         )
     result = run_authorized_recovery_probe(args, rows, card)
+    persist_execution_telemetry(args, card, result)
     print(json.dumps({"execution_result": result}, indent=2, sort_keys=True))
 
 

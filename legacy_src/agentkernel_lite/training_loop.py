@@ -1048,6 +1048,23 @@ def _structured_best_state_metrics(eval_record: dict[str, Any], strict_record: d
     return eval_exact + strict_exact, eval_loss + strict_loss
 
 
+def _structured_margin_loss(logits: torch.Tensor, targets: torch.Tensor, *, margin: float = 0.05) -> torch.Tensor:
+    if logits.numel() == 0:
+        return logits.sum() * 0.0
+    target_logits = logits.gather(1, targets.unsqueeze(1)).squeeze(1)
+    mask = torch.nn.functional.one_hot(targets, num_classes=logits.size(1)).bool()
+    other_logits = logits.masked_fill(mask, float('-inf'))
+    hardest_negative = other_logits.max(dim=1).values
+    if not torch.isfinite(hardest_negative).all():
+        hardest_negative = torch.where(torch.isfinite(hardest_negative), hardest_negative, target_logits.detach())
+    return torch.relu(hardest_negative - target_logits + margin).mean()
+
+
+def _structured_field_loss(logits: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
+    ce = torch.nn.functional.cross_entropy(logits, targets)
+    return ce + (0.5 * _structured_margin_loss(logits, targets))
+
+
 def _module_delta_norms(before: dict[str, torch.Tensor], after: dict[str, torch.Tensor]) -> dict[str, float]:
     out: dict[str, float] = {}
     for name, old in before.items():
@@ -1797,7 +1814,7 @@ def run_structured_aux_probe(
             logits = logits_by_field[field][torch.tensor(active, dtype=torch.long)]
             logits = logits[:, : len(vocab)]
             target_tensor = torch.tensor(targets, dtype=torch.long, device=logits.device)
-            loss = torch.nn.functional.cross_entropy(logits, target_tensor)
+            loss = _structured_field_loss(logits, target_tensor)
             losses.append(loss)
             inverse = {idx: label for label, idx in vocab.items()}
             records = []

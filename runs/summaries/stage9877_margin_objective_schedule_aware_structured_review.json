@@ -1,0 +1,155 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9877_margin_objective_schedule_aware_structured_review/margin_objective_schedule_aware_structured_review_audit.json",
+    "doc": "docs/MARGIN_OBJECTIVE_SCHEDULE_AWARE_STRUCTURED_REVIEW_STAGE9877.md",
+    "run_dir": "runs/local/artifacts/stage9877_margin_objective_schedule_aware_structured_review/surface_runs"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T04:49:00Z",
+  "decision": "Executed a schedule-aware target-100M structured review on the refreshed Stage9874 mix, giving edit localization the longer best-state schedule from the winning Stage9872 path while keeping the guardrail surfaces on short probes.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "surface_results": [
+      {
+        "best_state_selection": {
+          "checkpoint_exported": false,
+          "enabled": false,
+          "eval_joint_proxy_exact": null,
+          "eval_loss": null,
+          "promotion_ready": false,
+          "restored": false,
+          "selected_step": null,
+          "selection_exact_sum": null,
+          "selection_loss_sum": null,
+          "selection_rule": "max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss",
+          "selection_score": null,
+          "strict_joint_proxy_exact": null,
+          "strict_loss": null
+        },
+        "eval_exact": 0.22727272727272727,
+        "passed": true,
+        "rows": 80,
+        "schedule": {
+          "eval_interval": 0,
+          "max_steps": 8,
+          "restore_best": false
+        },
+        "strict_eval_exact": 0.23076923076923078,
+        "surface": "symbol_binding",
+        "trainer_returncode": 0
+      },
+      {
+        "best_state_selection": {
+          "checkpoint_exported": false,
+          "enabled": true,
+          "eval_joint_proxy_exact": 0.4375,
+          "eval_loss": 1.6595196723937988,
+          "promotion_ready": false,
+          "restored": true,
+          "selected_step": 24,
+          "selection_exact_sum": 1.0,
+          "selection_loss_sum": 3.3115121126174927,
+          "selection_rule": "max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss",
+          "selection_score": 3.3115121126174927,
+          "strict_joint_proxy_exact": 0.5625,
+          "strict_loss": 1.6519924402236938
+        },
+        "eval_exact": 0.4375,
+        "passed": true,
+        "rows": 52,
+        "schedule": {
+          "eval_interval": 1,
+          "max_steps": 32,
+          "restore_best": true
+        },
+        "strict_eval_exact": 0.5625,
+        "surface": "edit_localization",
+        "trainer_returncode": 0
+      },
+      {
+        "best_state_selection": {
+          "checkpoint_exported": false,
+          "enabled": false,
+          "eval_joint_proxy_exact": null,
+          "eval_loss": null,
+          "promotion_ready": false,
+          "restored": false,
+          "selected_step": null,
+          "selection_exact_sum": null,
+          "selection_loss_sum": null,
+          "selection_rule": "max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss",
+          "selection_score": null,
+          "strict_joint_proxy_exact": null,
+          "strict_loss": null
+        },
+        "eval_exact": 1.0,
+        "passed": true,
+        "rows": 144,
+        "schedule": {
+          "eval_interval": 0,
+          "max_steps": 8,
+          "restore_best": false
+        },
+        "strict_eval_exact": 1.0,
+        "surface": "patch_operator_selection",
+        "trainer_returncode": 0
+      },
+      {
+        "best_state_selection": {
+          "checkpoint_exported": false,
+          "enabled": false,
+          "eval_joint_proxy_exact": null,
+          "eval_loss": null,
+          "promotion_ready": false,
+          "restored": false,
+          "selected_step": null,
+          "selection_exact_sum": null,
+          "selection_loss_sum": null,
+          "selection_rule": "max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss",
+          "selection_score": null,
+          "strict_joint_proxy_exact": null,
+          "strict_loss": null
+        },
+        "eval_exact": 1.0,
+        "passed": true,
+        "rows": 108,
+        "schedule": {
+          "eval_interval": 0,
+          "max_steps": 8,
+          "restore_best": false
+        },
+        "strict_eval_exact": 1.0,
+        "surface": "verifier_failure_repair_or_abstain",
+        "trainer_returncode": 0
+      }
+    ]
+  },
+  "name": "stage9877_margin_objective_schedule_aware_structured_review",
+  "next_best_step": "Use this schedule-aware broader review to decide whether edit localization is now strong enough to rerun the broader standalone Gemma ledger, and whether symbol binding needs its own objective upgrade.",
+  "passed": true,
+  "stage": 9877,
+  "stage_name": "stage9877_margin_objective_schedule_aware_structured_review"
+}
