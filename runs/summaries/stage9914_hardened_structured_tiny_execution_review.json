@@ -1,0 +1,76 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9914_hardened_structured_tiny_execution_review/hardened_structured_tiny_execution_review_audit.json",
+    "doc": "docs/HARDENED_STRUCTURED_TINY_EXECUTION_REVIEW_STAGE9914.md",
+    "run_dir": "runs/local/artifacts/stage9914_hardened_structured_tiny_execution_review/surface_runs",
+    "tiny_manifest_dir": "runs/local/artifacts/stage9914_hardened_structured_tiny_execution_review/tiny_structured_manifests"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T06:46:50Z",
+  "decision": "Executed a capped target-100M structured tiny review on the Stage9913 hardened v2.7 surfaces to verify whether the no-label-list opaque-choice edit-localization source carries through the actual multisurface execution path.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "surface_results": [
+      {
+        "eval_exact": 0.3125,
+        "passed": true,
+        "rows": 64,
+        "strict_eval_exact": 0.3125,
+        "surface": "symbol_binding",
+        "trainer_returncode": 0
+      },
+      {
+        "eval_exact": 0.25,
+        "passed": true,
+        "rows": 48,
+        "strict_eval_exact": 0.25,
+        "surface": "edit_localization",
+        "trainer_returncode": 0
+      },
+      {
+        "eval_exact": 1.0,
+        "passed": true,
+        "rows": 64,
+        "strict_eval_exact": 1.0,
+        "surface": "patch_operator_selection",
+        "trainer_returncode": 0
+      },
+      {
+        "eval_exact": 1.0,
+        "passed": true,
+        "rows": 64,
+        "strict_eval_exact": 1.0,
+        "surface": "verifier_failure_repair_or_abstain",
+        "trainer_returncode": 0
+      }
+    ]
+  },
+  "name": "stage9914_hardened_structured_tiny_execution_review",
+  "next_best_step": "Use this hardened structured review to decide whether the full v2.7 package should now treat the opaque-choice edit-localization source as the default training/eval packet rather than the older geometry-aware remap.",
+  "passed": true,
+  "stage": 9914,
+  "stage_name": "stage9914_hardened_structured_tiny_execution_review"
+}

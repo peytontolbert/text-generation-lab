@@ -1,0 +1,8 @@
+# Stage9915 Hardened V2.7 Execution Delta Audit
+
+Passed: `True`
+Surface delta: `{'edit_localization': {'eval_exact_current': 0.25, 'eval_exact_baseline': 0.25, 'delta_eval_exact': 0.0, 'strict_exact_current': 0.25, 'strict_exact_baseline': 0.25, 'delta_strict_exact': 0.0, 'rows_current': 48, 'rows_baseline': 48}, 'patch_operator_selection': {'eval_exact_current': 1.0, 'eval_exact_baseline': 1.0, 'delta_eval_exact': 0.0, 'strict_exact_current': 1.0, 'strict_exact_baseline': 1.0, 'delta_strict_exact': 0.0, 'rows_current': 64, 'rows_baseline': 64}, 'symbol_binding': {'eval_exact_current': 0.3125, 'eval_exact_baseline': 0.3125, 'delta_eval_exact': 0.0, 'strict_exact_current': 0.3125, 'strict_exact_baseline': 0.3125, 'delta_strict_exact': 0.0, 'rows_current': 64, 'rows_baseline': 64}, 'verifier_failure_repair_or_abstain': {'eval_exact_current': 1.0, 'eval_exact_baseline': 1.0, 'delta_eval_exact': 0.0, 'strict_exact_current': 1.0, 'strict_exact_baseline': 1.0, 'delta_strict_exact': 0.0, 'rows_current': 64, 'rows_baseline': 64}}`
+
+The hardened v2.7 package preserves the integrated multisurface tiny-review behavior of the prior geometry-aware package: symbol binding stays at 0.3125/0.3125, edit localization stays at 0.25/0.25, and the abstention guardrails remain saturated. That means the hardened packet fixes comparison validity without yet lifting integrated edit-localization exactness inside the broader mix.
+
+Next: Keep Stage9913 as the default hardened v2.7 package, then pursue objective or curriculum changes that can raise integrated edit-localization exactness without reopening label-proxy leakage.
