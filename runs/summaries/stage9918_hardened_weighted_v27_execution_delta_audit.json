@@ -1,0 +1,114 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9918_hardened_weighted_v27_execution_delta_audit/hardened_weighted_v27_execution_delta_audit.json",
+    "doc": "docs/HARDENED_WEIGHTED_V27_EXECUTION_DELTA_AUDIT_STAGE9918.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T06:59:23Z",
+  "decision": "This audit measures whether train-only weighting plus the longer edit-localization schedule produces an integrated gain over the hardened baseline without regressing the abstention guardrails.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "improved_surfaces_eval": [
+      "edit_localization"
+    ],
+    "improved_surfaces_strict": [
+      "edit_localization"
+    ],
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "regressed_surfaces_eval": [],
+    "regressed_surfaces_strict": [],
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "surface_delta": {
+      "edit_localization": {
+        "delta_eval_exact": 0.375,
+        "delta_strict_exact": 0.25,
+        "eval_exact_baseline": 0.25,
+        "eval_exact_current": 0.625,
+        "rows_baseline": 48,
+        "rows_current": 64,
+        "schedule_baseline": null,
+        "schedule_current": {
+          "eval_interval": 1,
+          "max_steps": 32,
+          "restore_best": true
+        },
+        "strict_exact_baseline": 0.25,
+        "strict_exact_current": 0.5
+      },
+      "patch_operator_selection": {
+        "delta_eval_exact": 0.0,
+        "delta_strict_exact": 0.0,
+        "eval_exact_baseline": 1.0,
+        "eval_exact_current": 1.0,
+        "rows_baseline": 64,
+        "rows_current": 64,
+        "schedule_baseline": null,
+        "schedule_current": {
+          "eval_interval": 0,
+          "max_steps": 8,
+          "restore_best": false
+        },
+        "strict_exact_baseline": 1.0,
+        "strict_exact_current": 1.0
+      },
+      "symbol_binding": {
+        "delta_eval_exact": 0.0,
+        "delta_strict_exact": 0.0,
+        "eval_exact_baseline": 0.3125,
+        "eval_exact_current": 0.3125,
+        "rows_baseline": 64,
+        "rows_current": 64,
+        "schedule_baseline": null,
+        "schedule_current": {
+          "eval_interval": 0,
+          "max_steps": 8,
+          "restore_best": false
+        },
+        "strict_exact_baseline": 0.3125,
+        "strict_exact_current": 0.3125
+      },
+      "verifier_failure_repair_or_abstain": {
+        "delta_eval_exact": 0.0,
+        "delta_strict_exact": 0.0,
+        "eval_exact_baseline": 1.0,
+        "eval_exact_current": 1.0,
+        "rows_baseline": 64,
+        "rows_current": 64,
+        "schedule_baseline": null,
+        "schedule_current": {
+          "eval_interval": 0,
+          "max_steps": 8,
+          "restore_best": false
+        },
+        "strict_exact_baseline": 1.0,
+        "strict_exact_current": 1.0
+      }
+    }
+  },
+  "name": "stage9918_hardened_weighted_v27_execution_delta_audit",
+  "next_best_step": "If edit localization improves here without collateral regression, promote this weighted hardened package into the next fuller target-100M review and then rerun the multilingual Gemma comparison on the same hardened surface.",
+  "passed": true,
+  "stage": 9918,
+  "stage_name": "stage9918_hardened_weighted_v27_execution_delta_audit"
+}

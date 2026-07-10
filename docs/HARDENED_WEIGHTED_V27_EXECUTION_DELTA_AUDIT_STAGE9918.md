@@ -1,0 +1,9 @@
+# Stage9918 Hardened Weighted V2.7 Execution Delta Audit
+
+Passed: `True`
+Surface delta: `{'edit_localization': {'eval_exact_current': 0.625, 'eval_exact_baseline': 0.25, 'delta_eval_exact': 0.375, 'strict_exact_current': 0.5, 'strict_exact_baseline': 0.25, 'delta_strict_exact': 0.25, 'rows_current': 64, 'rows_baseline': 48, 'schedule_current': {'eval_interval': 1, 'max_steps': 32, 'restore_best': True}, 'schedule_baseline': None}, 'patch_operator_selection': {'eval_exact_current': 1.0, 'eval_exact_baseline': 1.0, 'delta_eval_exact': 0.0, 'strict_exact_current': 1.0, 'strict_exact_baseline': 1.0, 'delta_strict_exact': 0.0, 'rows_current': 64, 'rows_baseline': 64, 'schedule_current': {'eval_interval': 0, 'max_steps': 8, 'restore_best': False}, 'schedule_baseline': None}, 'symbol_binding': {'eval_exact_current': 0.3125, 'eval_exact_baseline': 0.3125, 'delta_eval_exact': 0.0, 'strict_exact_current': 0.3125, 'strict_exact_baseline': 0.3125, 'delta_strict_exact': 0.0, 'rows_current': 64, 'rows_baseline': 64, 'schedule_current': {'eval_interval': 0, 'max_steps': 8, 'restore_best': False}, 'schedule_baseline': None}, 'verifier_failure_repair_or_abstain': {'eval_exact_current': 1.0, 'eval_exact_baseline': 1.0, 'delta_eval_exact': 0.0, 'strict_exact_current': 1.0, 'strict_exact_baseline': 1.0, 'delta_strict_exact': 0.0, 'rows_current': 64, 'rows_baseline': 64, 'schedule_current': {'eval_interval': 0, 'max_steps': 8, 'restore_best': False}, 'schedule_baseline': None}}`
+
+This audit measures whether train-only weighting plus the longer edit-localization schedule produces an integrated gain over the hardened baseline without regressing the abstention guardrails.
+
+Next: If edit localization improves here without collateral regression, promote this weighted hardened package into the next fuller target-100M review and then rerun the multilingual Gemma comparison on the same hardened surface.
+
