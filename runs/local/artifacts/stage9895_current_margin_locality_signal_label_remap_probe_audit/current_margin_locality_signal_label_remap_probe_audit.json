@@ -1,0 +1,52 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "caveats": [
+    "Because the remap changes the output token inventory, this is a diagnostic control rather than a same-surface leaderboard result.",
+    "The absence of a single-label collapse after removing K suggests the locality evidence is usable, but the current label geometry still distorts how that evidence is mapped to outputs.",
+    "The next model-side step should test a neutral label inventory or head/objective redesign on the main packet rather than more packet-order changes."
+  ],
+  "decision": "The Stage9894 remap control does not improve headline exact over the locality-lift baseline, but it removes the single-label K collapse. That is strong evidence that class-token geometry, not just packet semantics, still limits the current 100M edit-localization head.",
+  "failures": [],
+  "metrics": {
+    "delta_vs_prior_eval": 0.0,
+    "delta_vs_prior_selection_loss": -0.0374445915222168,
+    "delta_vs_prior_strict": 0.0,
+    "eval_exact": 0.4375,
+    "per_cell_delta_vs_stage9892": {
+      "c_cpp::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "python::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.0,
+      "rust::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": 0.125,
+      "web_js_ts_html::current_margin_edit_localization_counterfactual_guard::KEEP_STRUCTURED": -0.125
+    },
+    "pred_counts": {
+      "R": 12,
+      "T": 8,
+      "Z": 12
+    },
+    "prior_eval_exact": 0.4375,
+    "prior_pred_counts": {
+      "K": 20,
+      "M": 12
+    },
+    "prior_strict_exact": 0.5,
+    "removed_single_label_collapse": true,
+    "required_artifacts_written": true,
+    "selected_step": 30,
+    "selection_exact_sum": 0.9375,
+    "selection_loss_sum": 2.793099880218506,
+    "strict_exact": 0.5
+  },
+  "passed": true
+}

@@ -1,0 +1,61 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9893_current_margin_locality_signal_label_remap_manifest/current_margin_locality_signal_label_remap_manifest_audit.json",
+    "doc": "docs/CURRENT_MARGIN_LOCALITY_SIGNAL_LABEL_REMAP_MANIFEST_STAGE9893.md",
+    "manifest": "runs/local/artifacts/stage9893_current_margin_locality_signal_label_remap_manifest/current_margin_locality_signal_label_remap_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T05:49:20Z",
+  "decision": "Built a current-frontier control manifest that keeps the locality-signal lift and all row semantics intact while removing K from the target vocabulary, to test whether the remaining failure is dominated by class-token geometry.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "choice_prefixes": [
+      "option M",
+      "option R",
+      "option T",
+      "option Z"
+    ],
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "label_map": {
+      "K": "M",
+      "M": "R",
+      "R": "T",
+      "T": "Z"
+    },
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "removed_k_from_target_vocab": true,
+    "rows": 48,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "target_labels": [
+      "M",
+      "R",
+      "T",
+      "Z"
+    ]
+  },
+  "name": "stage9893_current_margin_locality_signal_label_remap_manifest",
+  "next_best_step": "Run Stage9894 on the locality-lifted remapped packet and check whether the improved K semantics survive once K is removed from the target vocabulary.",
+  "passed": true,
+  "stage": 9893,
+  "stage_name": "stage9893_current_margin_locality_signal_label_remap_manifest"
+}
