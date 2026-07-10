@@ -1,0 +1,44 @@
+{
+  "artifacts": {
+    "atlas": "runs/local/artifacts/stage10107_real_session_review_priority_shortcut_atlas/real_session_review_priority_shortcut_atlas.json",
+    "doc": "docs/REAL_SESSION_REVIEW_PRIORITY_SHORTCUT_ATLAS_STAGE10107.md",
+    "queue": "runs/local/artifacts/stage10107_real_session_review_priority_shortcut_atlas/real_session_review_priority_queue.jsonl"
+  },
+  "created_at_utc": "2026-07-10T17:58:14Z",
+  "decision": "Prioritized real-session review toward rows whose visible prompt shape is most likely to support shortcut behavior, so expert maintainer and anti-cheat review starts with the highest-risk packet slices instead of treating all 33 blocked rows as equally trustworthy.",
+  "metrics": {
+    "blocked_rows": 33,
+    "failures": [],
+    "high_risk_rows": 30,
+    "language_counts": {
+      "c_cpp": 3,
+      "python": 30
+    },
+    "low_risk_rows": 3,
+    "medium_risk_rows": 0,
+    "packet_rows": 33,
+    "repo_counts": {
+      "agentkernel": 23,
+      "code_assist": 2,
+      "parametergolf": 5,
+      "repository_library": 3
+    },
+    "risk_reason_counts": {
+      "binary_choice_surface": 33,
+      "scarce_language_slice": 3,
+      "short_vs_long_candidate_asymmetry": 20,
+      "snippet_length_asymmetry_ge_3x": 30,
+      "test_surface_family_visible": 30,
+      "verification_target_phrase_visible": 30
+    },
+    "surface_pair_counts": {
+      "IMPLEMENTATION__vs__IMPLEMENTATION": 3,
+      "IMPLEMENTATION__vs__TEST": 30
+    }
+  },
+  "name": "stage10107_real_session_review_priority_shortcut_atlas",
+  "next_best_step": "Use the priority queue to review the highest-risk rows first, beginning with the implementation-vs-test slices whose visible prompt shape may proxy the answer before maintainer reasoning.",
+  "passed": true,
+  "stage": 10107,
+  "stage_name": "stage10107_real_session_review_priority_shortcut_atlas"
+}
