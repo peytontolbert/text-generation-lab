@@ -1,0 +1,82 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9906_geometry_aware_edit_localization_shortcut_audit/geometry_aware_edit_localization_shortcut_audit.json",
+    "doc": "docs/GEOMETRY_AWARE_EDIT_LOCALIZATION_SHORTCUT_AUDIT_STAGE9906.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T06:26:54Z",
+  "decision": "Audited the current geometry-aware edit-localization comparison surface and found that the prompt still exposes the full label vocabulary on every bucket. Candidate positions are no longer fully fixed, but the current same-surface margin is still not hardened against label-proxy shortcuts.",
+  "metrics": {
+    "all_rows_use_fixed_label_order": false,
+    "body_emission_authorized": false,
+    "buckets_with_clean_opaque_ids": 8,
+    "buckets_with_encoder_label_mentions": 8,
+    "buckets_with_prompt_label_vocab_exposed": 8,
+    "comparison_ties": 7,
+    "comparison_wins_100m": 1,
+    "comparison_wins_gemma": 0,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "labels": [
+      "M",
+      "R",
+      "T",
+      "Z"
+    ],
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "target_position_counts": {
+      "M": {
+        "0": 1,
+        "1": 3,
+        "2": 4,
+        "3": 3,
+        "4": 1
+      },
+      "R": {
+        "0": 2,
+        "1": 2,
+        "2": 3,
+        "3": 2,
+        "4": 3
+      },
+      "T": {
+        "0": 3,
+        "1": 3,
+        "2": 1,
+        "3": 4,
+        "4": 1
+      },
+      "Z": {
+        "1": 3,
+        "3": 2,
+        "4": 7
+      }
+    },
+    "target_position_is_singleton_for_every_label": false,
+    "validated_buckets": 8
+  },
+  "name": "stage9906_geometry_aware_edit_localization_shortcut_audit",
+  "next_best_step": "Do not upgrade Stage9901 into a robust multilingual win claim. Rebuild the current geometry-aware comparison surface so prompts do not reveal the valid label list and candidate IDs are row-randomized or hidden behind constrained opaque outputs, then rerun the same-surface Gemma comparison.",
+  "passed": true,
+  "stage": 9906,
+  "stage_name": "stage9906_geometry_aware_edit_localization_shortcut_audit"
+}
