@@ -1,0 +1,52 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9991_filtered_same_manifest_comparison_audit/filtered_same_manifest_comparison_audit.json",
+    "doc": "docs/FILTERED_SAME_MANIFEST_COMPARISON_AUDIT_STAGE9991.md",
+    "rows": "runs/local/artifacts/stage9991_filtered_same_manifest_comparison_audit/filtered_same_manifest_comparison_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T11:28:52Z",
+  "decision": "Materialized the actual filtered same-manifest 100M-versus-Gemma comparison on the stage9986 successor manifest so the stage9987 frontier can be judged fairly rather than inferred from baseline deltas.",
+  "metrics": {
+    "comparison_rows": 73,
+    "failures": [],
+    "macro_exact_100m": 0.39929971988795515,
+    "macro_exact_gemma": 0.20441176470588235,
+    "per_language": {
+      "c_cpp": {
+        "gemma_exact": 0.11764705882352941,
+        "hundred_m_exact": 0.23529411764705882,
+        "rows": 17,
+        "verdict": "100m_better"
+      },
+      "python": {
+        "gemma_exact": 0.5,
+        "hundred_m_exact": 0.3333333333333333,
+        "rows": 12,
+        "verdict": "gemma_better"
+      },
+      "rust": {
+        "gemma_exact": 0.0,
+        "hundred_m_exact": 0.42857142857142855,
+        "rows": 14,
+        "verdict": "100m_better"
+      },
+      "web_js_ts_html": {
+        "gemma_exact": 0.2,
+        "hundred_m_exact": 0.6,
+        "rows": 30,
+        "verdict": "100m_better"
+      }
+    },
+    "rows_100m_present": 73,
+    "rows_gemma_present": 113,
+    "shared_rows": 73,
+    "ties": 0,
+    "wins_100m": 3,
+    "wins_gemma": 1
+  },
+  "name": "stage9991_filtered_same_manifest_comparison_audit",
+  "next_best_step": "Use this filtered same-manifest comparison to decide whether the stage9987 frontier is now a truthful 100M-over-Gemma multilingual winner or whether remaining Gemma advantages still block that claim.",
+  "passed": true,
+  "stage": 9991,
+  "stage_name": "stage9991_filtered_same_manifest_comparison_audit"
+}
