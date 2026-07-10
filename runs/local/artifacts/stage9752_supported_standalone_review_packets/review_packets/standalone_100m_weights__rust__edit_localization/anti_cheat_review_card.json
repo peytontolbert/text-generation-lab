@@ -1,0 +1,146 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "cell_key": "standalone_100m_weights::rust::edit_localization",
+  "challenge_families": [
+    {
+      "challenge_family": "hidden_reference_materialization",
+      "present": false,
+      "recommendation_confidence": "medium",
+      "recommendation_notes": [
+        "Human review should still confirm source lineage, but the weighted hardened prompt surface does not expose a valid-label list."
+      ],
+      "recommended_pass": true,
+      "reviewer_notes": []
+    },
+    {
+      "challenge_family": "target_and_teacher_leakage",
+      "present": false,
+      "recommendation_confidence": "high",
+      "recommendation_notes": [
+        "Prompt label exposure buckets: 0.",
+        "The weighted hardened comparison uses the same no-label-list prompt for both models."
+      ],
+      "recommended_pass": true,
+      "reviewer_notes": []
+    },
+    {
+      "challenge_family": "label_proxy_shortcuts",
+      "present": false,
+      "recommendation_confidence": "high",
+      "recommendation_notes": [
+        "Prompt label exposure buckets: 0.",
+        "Unique row-local permutation maps: 4."
+      ],
+      "recommended_pass": true,
+      "reviewer_notes": []
+    },
+    {
+      "challenge_family": "metadata_and_graph_shortcuts",
+      "present": false,
+      "recommendation_confidence": "inherited_global_gate",
+      "recommendation_notes": [
+        "The locked v2.7 anti-eval-hacking gate requires metadata_only_baseline_below_ceiling, graph_degree_baseline_below_ceiling, and query_node_id_baseline_below_ceiling.",
+        "Stage9717 passed the metadata_and_graph_shortcuts challenge family globally for the locked multilingual pack set.",
+        "This winner packet now attaches the upstream gate references directly, but it still does not claim a weighted-surface-local metadata baseline artifact."
+      ],
+      "recommended_pass": true,
+      "reviewer_notes": [],
+      "upstream_global_evidence": {
+        "acceptance_contract": "runs/local/artifacts/stage9684_v27_multilingual_eval_acceptance_contract/v27_multilingual_eval_acceptance_contract.json",
+        "acceptance_evidence_ledger": "runs/local/artifacts/stage9718_locked_multilingual_acceptance_evidence_ledger/locked_multilingual_acceptance_evidence_ledger.json",
+        "cell_anti_hacking_gate_passed": true,
+        "cell_anti_hacking_gate_stage": 9717,
+        "comparison_evidence_merged_ledger": "runs/local/artifacts/stage9720_comparison_evidence_ledger_merge/comparison_evidence_merged_ledger.json",
+        "global_challenge_passed": true,
+        "global_eval_hacking_audit": "runs/local/artifacts/stage9717_locked_multilingual_eval_hacking_audit/locked_multilingual_eval_hacking_audit.json",
+        "required_requirements": [
+          "metadata_only_baseline_below_ceiling",
+          "graph_degree_baseline_below_ceiling",
+          "query_node_id_baseline_below_ceiling"
+        ]
+      }
+    },
+    {
+      "challenge_family": "generation_quality_collapse",
+      "present": false,
+      "recommendation_confidence": "medium",
+      "recommendation_notes": [
+        "The winning path stays inside a constrained opaque choice vocabulary rather than producing free-form junk output."
+      ],
+      "recommended_pass": true,
+      "reviewer_notes": []
+    },
+    {
+      "challenge_family": "cross_model_surface_fairness",
+      "present": false,
+      "recommendation_confidence": "high",
+      "recommendation_notes": [
+        "Weighted hardened same-surface strict exact is 0.75 versus Gemma 0.0.",
+        "Both models were scored on the same opaque-choice packet and same prompt format."
+      ],
+      "recommended_pass": true,
+      "reviewer_notes": []
+    }
+  ],
+  "draft_recommendation_path": "runs/local/artifacts/stage9752_supported_standalone_review_packets/review_packets/standalone_100m_weights__rust__edit_localization/anti_cheat_recommendation_draft.json",
+  "language_family": "rust",
+  "must_pass_global_stage9717_gate": true,
+  "packet_dir": "runs/local/artifacts/stage9752_supported_standalone_review_packets/review_packets/standalone_100m_weights__rust__edit_localization",
+  "passed": false,
+  "recommendation_reviewer_message": "This draft only addresses the weighted hardened opaque-choice surface. It does not generalize to broader v2.7 capability claims.",
+  "recommendation_source_path": "runs/local/artifacts/stage9752_supported_standalone_review_packets/review_packets/standalone_100m_weights__rust__edit_localization/anti_cheat_recommendation_draft.json",
+  "required_human_action": "review the attached weighted hardened anti-cheat evidence and confirm final challenge-family judgments",
+  "reviewer_guidance": [
+    "This active standalone winner packet is now aligned to the weighted hardened multilingual frontier.",
+    "The attached anti-cheat recommendation draft is machine-generated support only and must not be treated as final human signoff.",
+    "Use the challenge-family recommendations only as a draft; final anti-cheat judgments remain human-owned.",
+    "The metadata/graph-shortcut recommendation now includes explicit upstream locked-pack gate references; reviewers should still distinguish inherited global coverage from winner-local weighted-surface evidence."
+  ],
+  "same_surface_eval_exact_100m": 0.75,
+  "same_surface_strict_exact_100m": 0.75,
+  "same_surface_strict_exact_gemma12b": 0.0,
+  "same_surface_verdict": "100m_better",
+  "status": "pending_cell_specific_review_with_weighted_hardened_evidence",
+  "supporting_evidence_paths": {
+    "same_surface_comparison": "runs/local/artifacts/stage9919_hardened_weighted_edit_localization_gemma_comparison/hardened_weighted_edit_localization_gemma_comparison.json",
+    "same_surface_shortcut_audit": "runs/local/artifacts/stage9920_hardened_weighted_edit_localization_shortcut_audit/hardened_weighted_edit_localization_shortcut_audit.json"
+  },
+  "upstream_global_eval_hacking_evidence": {
+    "acceptance_contract": "runs/local/artifacts/stage9684_v27_multilingual_eval_acceptance_contract/v27_multilingual_eval_acceptance_contract.json",
+    "acceptance_evidence_ledger": "runs/local/artifacts/stage9718_locked_multilingual_acceptance_evidence_ledger/locked_multilingual_acceptance_evidence_ledger.json",
+    "anti_cheat_requirements": [
+      "hidden_reference_never_train_eligible",
+      "target_text_absent_from_model_input",
+      "label_coded_ids_rejected",
+      "surface_marker_shortcut_baseline_below_ceiling",
+      "requested_output_type_shortcut_baseline_below_ceiling",
+      "metadata_only_baseline_below_ceiling",
+      "graph_degree_baseline_below_ceiling",
+      "query_node_id_baseline_below_ceiling",
+      "split_semantic_overlap_zero_or_quarantined",
+      "duplicate_semantic_key_zero_or_quarantined",
+      "internal_token_leak_zero",
+      "short_junk_zero",
+      "repetition_guard_passed",
+      "long_target_budget_gate_enforced",
+      "runtime_and_gemma_outputs_not_ground_truth_without_authority",
+      "same_harness_prompt_surface_for_100m_and_gemma"
+    ],
+    "cell_anti_hacking_gate_passed": true,
+    "cell_anti_hacking_gate_stage": 9717,
+    "comparison_evidence_merged_ledger": "runs/local/artifacts/stage9720_comparison_evidence_ledger_merge/comparison_evidence_merged_ledger.json",
+    "global_eval_hacking_audit": "runs/local/artifacts/stage9717_locked_multilingual_eval_hacking_audit/locked_multilingual_eval_hacking_audit.json"
+  }
+}
