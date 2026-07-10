@@ -1,0 +1,47 @@
+{
+  "artifacts": {
+    "doc": "docs/PYTHON_SYMBOL_TEST_SOURCE_BACKED_SUCCESSOR_PACKET_STAGE10047.md",
+    "heldout_candidates": "runs/local/artifacts/stage10047_python_symbol_test_source_backed_successor_packet/python_symbol_test_successor_heldout_candidates.jsonl",
+    "packet": "runs/local/artifacts/stage10047_python_symbol_test_source_backed_successor_packet/python_symbol_test_source_backed_successor_packet.json",
+    "rows": "runs/local/artifacts/stage10047_python_symbol_test_source_backed_successor_packet/python_symbol_test_source_backed_successor_rows.jsonl",
+    "successor_train_manifest": "runs/local/artifacts/stage10047_python_symbol_test_source_backed_successor_packet/python_symbol_test_successor_train_manifest.jsonl"
+  },
+  "created_at_utc": "2026-07-10T14:02:43Z",
+  "decision": "Materialized a fresh source-backed Python successor packet that targets the audited symbol-vs-test gap with new train roots and separate heldout review candidates instead of replaying the current evaluation rows.",
+  "metrics": {
+    "current_manifest_rows": 95,
+    "failures": [],
+    "heldout_candidate_rows": 8,
+    "heldout_target_counts": {
+      "TARGET_CONFIG": 2,
+      "TARGET_SYMBOL": 3,
+      "TARGET_TEST": 3
+    },
+    "python_gap_delta_hundred_m_minus_gemma": -0.18181818181818182,
+    "python_gap_mode_label": "C",
+    "readiness_failed_buckets": [],
+    "readiness_passed": true,
+    "selected_rows": 16,
+    "selection_counts": {
+      "TARGET_CONFIG:heldout_eval": 2,
+      "TARGET_CONFIG:train": 2,
+      "TARGET_SYMBOL:heldout_eval": 3,
+      "TARGET_SYMBOL:train": 3,
+      "TARGET_TEST:heldout_eval": 3,
+      "TARGET_TEST:train": 3
+    },
+    "successor_python_train_signature_count": 13,
+    "successor_train_manifest_rows": 103,
+    "train_rows": 8,
+    "train_target_counts": {
+      "TARGET_CONFIG": 2,
+      "TARGET_SYMBOL": 3,
+      "TARGET_TEST": 3
+    }
+  },
+  "name": "stage10047_python_symbol_test_source_backed_successor_packet",
+  "next_best_step": "Run one capped target-100m probe on the successor train manifest, while separately reviewing the heldout candidates before any same-manifest Python expansion or promotion.",
+  "passed": true,
+  "stage": 10047,
+  "stage_name": "stage10047_python_symbol_test_source_backed_successor_packet"
+}
