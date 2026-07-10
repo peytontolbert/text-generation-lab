@@ -1,0 +1,57 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage10072_canonical_label_aligned_same_manifest_comparison_audit/canonical_label_aligned_same_manifest_comparison_audit.json",
+    "doc": "docs/CANONICAL_LABEL_ALIGNED_SAME_MANIFEST_COMPARISON_AUDIT_STAGE10072.md",
+    "rows": "runs/local/artifacts/stage10072_canonical_label_aligned_same_manifest_comparison_audit/canonical_label_aligned_same_manifest_comparison_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T15:35:04Z",
+  "decision": "Materialized the same-manifest audit for the canonical-label multilingual 100M and Gemma runs so the effect of label-semantic alignment can be measured directly on the heldout rows.",
+  "metrics": {
+    "comparison_rows": 55,
+    "failures": [],
+    "macro_delta_hundred_m_minus_gemma": 0.6090909090909091,
+    "macro_exact_gemma": 0.30568181818181817,
+    "macro_exact_hundred_m": 0.9147727272727273,
+    "per_language": {
+      "c_cpp": {
+        "delta_hundred_m_minus_gemma": 0.6,
+        "gemma_exact": 0.15,
+        "hundred_m_exact": 0.75,
+        "rows": 20,
+        "verdict": "100m_better"
+      },
+      "python": {
+        "delta_hundred_m_minus_gemma": 0.6363636363636364,
+        "gemma_exact": 0.2727272727272727,
+        "hundred_m_exact": 0.9090909090909091,
+        "rows": 11,
+        "verdict": "100m_better"
+      },
+      "rust": {
+        "delta_hundred_m_minus_gemma": 0.5,
+        "gemma_exact": 0.5,
+        "hundred_m_exact": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "web_js_ts_html": {
+        "delta_hundred_m_minus_gemma": 0.7,
+        "gemma_exact": 0.3,
+        "hundred_m_exact": 1.0,
+        "rows": 20,
+        "verdict": "100m_better"
+      }
+    },
+    "rows_gemma_present": 55,
+    "rows_hundred_m_present": 55,
+    "shared_rows": 55,
+    "ties": 0,
+    "wins_100m": 4,
+    "wins_gemma": 0
+  },
+  "name": "stage10072_canonical_label_aligned_same_manifest_comparison_audit",
+  "next_best_step": "Use this canonical-label same-manifest audit to decide whether label-semantic alignment repairs the multilingual gap against Gemma before attempting any broader v2.7 training or harness work.",
+  "passed": true,
+  "stage": 10072,
+  "stage_name": "stage10072_canonical_label_aligned_same_manifest_comparison_audit"
+}
