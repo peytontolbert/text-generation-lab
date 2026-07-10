@@ -1,0 +1,166 @@
+{
+  "claim_rule": {
+    "claim_permitted_only_after": [
+      "stage10040_output_acceptance_ready",
+      "stage10041_gemma_outputs_exist",
+      "same_manifest_row_contract_still_matches_95_total_19_python_30_c_cpp_11_rust_35_web",
+      "same_manifest_compare_rows_still_match_55_eval_plus_strict_rows",
+      "no_mixed_surface_or_mixed_manifest_comparison"
+    ],
+    "heldout_rows_only": true,
+    "same_manifest_only": true
+  },
+  "failures": [],
+  "metrics": {
+    "gemma_future_stage": 10041,
+    "hundred_m_future_stage": 10040,
+    "row_contract_ok": true,
+    "runbook_steps": 6,
+    "same_manifest_compare_rows": 55
+  },
+  "passed": true,
+  "steps": [
+    {
+      "artifacts": [
+        "runs/local/artifacts/stage10038_expanded_source_heldout_same_manifest_handoff_bundle/expanded_source_heldout_same_manifest_handoff_bundle.json",
+        "runs/local/artifacts/stage10043_expanded_source_heldout_signoff_workbook/expanded_source_heldout_signoff_workbook.json"
+      ],
+      "kind": "precheck",
+      "requires": [
+        "explicit_stage10040_100m_execution_authorization",
+        "explicit_stage10041_gemma_execution_authorization",
+        "repo_disk_and_tmp_disk_sufficient"
+      ],
+      "step_id": "precheck_authorization_and_disk"
+    },
+    {
+      "command": [
+        "python",
+        "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+        "--repo-root",
+        "/data/agentkernel-seq2seq-text-lab",
+        "--manifest",
+        "runs/local/artifacts/stage10036_real_fresh_heldout_merge_validator/expanded_source_heldout_manifest.jsonl",
+        "--mode",
+        "edit_localization_probe",
+        "--probe-scale",
+        "target_100m",
+        "--implementation",
+        "transformer",
+        "--model-config",
+        "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "--tokenizer-json",
+        "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+        "--tokenizer-config",
+        "configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "--tokenizer-hashlock",
+        "configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "--max-train-rows",
+        "40",
+        "--max-eval-rows",
+        "38",
+        "--max-strict-rows",
+        "17",
+        "--max-steps",
+        "64",
+        "--batch-size",
+        "2",
+        "--learning-rate",
+        "5e-5",
+        "--max-encoder-tokens",
+        "512",
+        "--max-decoder-tokens",
+        "8",
+        "--decoder-ce-weight",
+        "0.0",
+        "--structured-aux-weight",
+        "1.0",
+        "--denoise-weight",
+        "0.0",
+        "--require-loss-mask-enforcement-audit",
+        "--no-final-checkpoint-export",
+        "--cleanup-checkpoints-after-probe",
+        "--skip-final-model-save",
+        "1",
+        "--output-dir",
+        "runs/local/artifacts/stage10040_expanded_source_heldout_target100m_probe/edit_localization_probe",
+        "--run-id",
+        "stage10040_expanded_source_heldout_target100m_probe",
+        "--execution-authorized-for-recovery-probe"
+      ],
+      "expected_output_dir": "runs/local/artifacts/stage10040_expanded_source_heldout_target100m_probe/edit_localization_probe",
+      "expected_run_id": "stage10040_expanded_source_heldout_target100m_probe",
+      "kind": "model_execution",
+      "step_id": "run_stage10040_hundred_m"
+    },
+    {
+      "artifact": "runs/local/artifacts/stage10040_expanded_source_heldout_target100m_probe/edit_localization_probe/probe_contract_audit.json",
+      "kind": "postcheck",
+      "requires": [
+        "stage10040_output_acceptance_ready"
+      ],
+      "step_id": "audit_stage10040_outputs"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/run_stage9748_standalone_gemma_queue_via_ollama.py",
+        "--queue",
+        "runs/local/artifacts/stage10038_expanded_source_heldout_same_manifest_handoff_bundle/expanded_source_heldout_gemma_queue.json",
+        "--packets",
+        "runs/local/artifacts/stage10038_expanded_source_heldout_same_manifest_handoff_bundle/expanded_source_heldout_gemma_packets.jsonl",
+        "--model",
+        "gemma3:12b",
+        "--cell-key",
+        "expanded_source_heldout_target100m::edit_localization::same_manifest_gemma12b"
+      ],
+      "expected_output_stub": "runs/local/artifacts/stage10041_expanded_source_heldout_gemma_execution/same_prompt_surface_gemma12b_outputs.json",
+      "kind": "gemma_execution",
+      "step_id": "run_stage10041_gemma"
+    },
+    {
+      "kind": "comparison_gate",
+      "requires": [
+        "stage10040_output_acceptance_ready",
+        "stage10041_gemma_outputs_exist",
+        "same_manifest_row_contract_still_matches_95_total_19_python_30_c_cpp_11_rust_35_web",
+        "same_manifest_compare_rows_still_match_55_eval_plus_strict_rows",
+        "no_mixed_surface_or_mixed_manifest_comparison"
+      ],
+      "row_contract": {
+        "gemma_c_cpp_rows": 30,
+        "gemma_python_rows": 19,
+        "gemma_rows": 95,
+        "gemma_rust_rows": 11,
+        "gemma_split_counts": {
+          "eval": 38,
+          "strict_eval": 17,
+          "train": 40
+        },
+        "gemma_web_rows": 35,
+        "hundred_m_c_cpp_rows": 30,
+        "hundred_m_python_rows": 19,
+        "hundred_m_rows": 95,
+        "hundred_m_rust_rows": 11,
+        "hundred_m_split_counts": {
+          "eval": 38,
+          "strict_eval": 17,
+          "train": 40
+        },
+        "hundred_m_web_rows": 35,
+        "same_manifest_compare_rows": 55,
+        "surface_hash": "cecdf6f674c3d4e94781459f56d127fd07bda625a997a0c00fdefde2e7ca8fd4"
+      },
+      "step_id": "compare_same_manifest_only"
+    },
+    {
+      "artifact": "runs/local/artifacts/stage10043_expanded_source_heldout_signoff_workbook/expanded_source_heldout_signoff_workbook.json",
+      "kind": "review_gate",
+      "requires": [
+        "expanded_source_heldout_expert_review_complete",
+        "expanded_source_heldout_anti_cheat_review_complete"
+      ],
+      "step_id": "human_signoff"
+    }
+  ]
+}
