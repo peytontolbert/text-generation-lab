@@ -94,6 +94,19 @@
       "reviewer_notes": []
     }
   ],
+  "current_frontier_evidence": {
+    "current_frontier_type": "source_heldout_same_manifest",
+    "deduped_successor_manifest_path": "runs/local/artifacts/stage10003_deduped_source_heldout_successor_request/edit_localization_manifest.jsonl",
+    "duplicate_rowid_audit_path": "runs/local/artifacts/stage10002_duplicate_rowid_eval_audit/duplicate_eval_row_ids.jsonl",
+    "same_surface_comparison_path": "runs/local/artifacts/stage10001_source_heldout_same_manifest_comparison_audit/source_heldout_same_manifest_comparison_audit.json",
+    "same_surface_exact_100m": 0.65,
+    "same_surface_exact_gemma": 0.25,
+    "same_surface_rows": 20,
+    "same_surface_rows_100m": "runs/local/artifacts/stage9998_source_heldout_target100m_probe/edit_localization_probe/row_field_logits.jsonl",
+    "same_surface_rows_gemma12b": "runs/local/artifacts/stage10000_source_heldout_same_manifest_gemma_execution/same_prompt_surface_gemma12b_outputs_rows.jsonl",
+    "same_surface_verdict": "100m_better",
+    "source_overlap_audit_path": "runs/local/artifacts/stage9995_source_overlap_eval_hacking_audit/source_overlap_eval_rows.jsonl"
+  },
   "draft_recommendation_path": "runs/local/artifacts/stage9752_supported_standalone_review_packets/review_packets/standalone_100m_weights__web_js_ts_html__edit_localization/anti_cheat_recommendation_draft.json",
   "language_family": "web_js_ts_html",
   "must_pass_global_stage9717_gate": true,
@@ -102,11 +115,14 @@
   "recommendation_reviewer_message": "This draft only addresses the weighted hardened opaque-choice surface. It does not generalize to broader v2.7 capability claims.",
   "recommendation_source_path": "runs/local/artifacts/stage9752_supported_standalone_review_packets/review_packets/standalone_100m_weights__web_js_ts_html__edit_localization/anti_cheat_recommendation_draft.json",
   "required_human_action": "review the attached weighted hardened anti-cheat evidence and confirm final challenge-family judgments",
+  "review_status": "pending_cell_specific_review_with_source_heldout_evidence",
   "reviewer_guidance": [
     "This active standalone winner packet is now aligned to the weighted hardened multilingual frontier.",
     "The attached anti-cheat recommendation draft is machine-generated support only and must not be treated as final human signoff.",
     "Use the challenge-family recommendations only as a draft; final anti-cheat judgments remain human-owned.",
-    "The metadata/graph-shortcut recommendation now includes explicit upstream locked-pack gate references; reviewers should still distinguish inherited global coverage from winner-local weighted-surface evidence."
+    "The metadata/graph-shortcut recommendation now includes explicit upstream locked-pack gate references; reviewers should still distinguish inherited global coverage from winner-local weighted-surface evidence.",
+    "This card is now aligned to the source-heldout same-manifest frontier rather than the earlier weighted-hardened comparison.",
+    "Use the attached overlap and duplicate-row audits to confirm the current eval surface is cheat-resistant before final anti-cheat signoff."
   ],
   "same_surface_eval_exact_100m": 0.25,
   "same_surface_strict_exact_100m": 0.25,
