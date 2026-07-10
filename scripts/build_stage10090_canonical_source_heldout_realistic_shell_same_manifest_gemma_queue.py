@@ -1,0 +1,137 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import importlib.util
+import json
+import time
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+STAGE = 10090
+NAME = "stage10090_canonical_source_heldout_realistic_shell_same_manifest_gemma_queue"
+OUT_DIR = ROOT / "runs/local/artifacts" / NAME
+QUEUE = OUT_DIR / "canonical_source_heldout_realistic_shell_same_manifest_gemma_queue.json"
+PACKETS = OUT_DIR / "canonical_source_heldout_realistic_shell_same_manifest_gemma_packets.jsonl"
+SUMMARY = ROOT / "runs/summaries" / f"{NAME}.json"
+DOC = ROOT / "docs" / "CANONICAL_SOURCE_HELDOUT_REALISTIC_SHELL_SAME_MANIFEST_GEMMA_QUEUE_STAGE10090.md"
+REGISTRY = ROOT / "runs/local/artifacts/reconstructed_stage_registry.json"
+MANIFEST = ROOT / "runs/local/artifacts/stage10088_canonical_source_heldout_realistic_maintenance_shell/canonical_source_heldout_realistic_maintenance_shell_manifest.jsonl"
+OUTPUT = ROOT / "runs/local/artifacts/stage10090_canonical_source_heldout_realistic_shell_gemma_execution/same_prompt_surface_gemma12b_outputs.json"
+
+
+def _load_symbol(module_name: str, path: Path, symbol: str):
+    spec = importlib.util.spec_from_file_location(module_name, path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    spec.loader.exec_module(module)
+    return getattr(module, symbol)
+
+
+prompt_surface_hash = _load_symbol("stage10090_runner", ROOT / "scripts/run_stage9748_standalone_gemma_queue_via_ollama.py", "prompt_surface_hash")
+
+
+def load_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("".join(json.dumps(row, sort_keys=True) + "\n" for row in rows), encoding="utf-8")
+
+
+def display(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
+def update_registry(summary: dict[str, Any]) -> None:
+    registry = load_json(REGISTRY) or {"rows": [], "metrics": {}}
+    rows = [row for row in registry.get("rows", []) if row.get("stage") != STAGE and row.get("stage_name") != NAME]
+    rows.append({"stage": STAGE, "stage_name": NAME, "passed": summary["passed"], "path": str(SUMMARY), "next_best_step": summary["next_best_step"]})
+    registry["rows"] = sorted(rows, key=lambda row: (int(row.get("stage", -1)), row.get("stage_name", "")))
+    registry["passed"] = bool(registry["rows"])
+    registry["metrics"] = {**(registry.get("metrics") or {}), "latest_stage": STAGE, "latest_stage_name": NAME, "latest_stage_next_best_step": summary["next_best_step"], "max_stage": STAGE, "registry_rows": len(registry["rows"])}
+    REGISTRY.write_text(json.dumps(registry, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def build_queue() -> dict[str, Any]:
+    all_rows = load_jsonl(MANIFEST)
+    rows = [row for row in all_rows if str(row.get("split") or "") in {"eval", "strict_eval"}]
+    failures: list[str] = []
+    language_counts: dict[str, int] = {}
+    split_counts: dict[str, int] = {}
+    for row in rows:
+        language = str(row.get("language_family") or "")
+        split = str(row.get("split") or "")
+        language_counts[language] = language_counts.get(language, 0) + 1
+        split_counts[split] = split_counts.get(split, 0) + 1
+    row_ids = [str(row.get("row_id") or "") for row in rows]
+    l2_rows = sum(1 for row in rows if str(((row.get("input_state") if isinstance(row.get("input_state"), dict) else {}).get("realism_level") or "")) == "L2")
+    if len(rows) != 55:
+        failures.append("rows_not_55")
+    if split_counts.get("eval") != 38:
+        failures.append("eval_rows_not_38")
+    if split_counts.get("strict_eval") != 17:
+        failures.append("strict_rows_not_17")
+    if l2_rows != 55:
+        failures.append("l2_rows_not_55")
+    packet = {
+        "cell_key": "canonical_source_heldout_realistic_shell_target100m::edit_localization::same_manifest_gemma12b",
+        "language_family": "multilingual",
+        "skill_area": "edit_localization",
+        "review_packet_paths": {
+            "same_prompt_surface_gemma12b_outputs": display(OUTPUT),
+            "realism_audit": "runs/local/artifacts/stage10087_canonical_source_heldout_realism_audit/canonical_source_heldout_realism_audit.json",
+        },
+        "same_surface_packet": {
+            "row_count": len(rows),
+            "row_ids": row_ids,
+            "source_manifest": display(MANIFEST),
+            "expected_python_rows": language_counts.get("python", 0),
+            "expected_c_cpp_rows": language_counts.get("c_cpp", 0),
+            "expected_rust_rows": language_counts.get("rust", 0),
+            "expected_web_rows": language_counts.get("web_js_ts_html", 0),
+            "split_counts": split_counts,
+            "heldout_compare_rows": len(rows),
+            "l2_shell_rows": l2_rows,
+            "surface_hash": prompt_surface_hash(rows),
+        },
+    }
+    queue = {"queue_entries": [{"cell_key": packet["cell_key"], "language_family": "multilingual", "priority_rank": 1, "priority_reason": "same-manifest Gemma comparison for the stage10088 realistic-maintenance shell", "ready_for_gemma_when_authorized": True, "gemma_execution_authorized_now": False, "harness_execution_authorized_now": False, "remaining_blockers": ["explicit_gemma_execution_authorization"], "required_missing_evidence": [], "review_packet_paths": packet["review_packet_paths"], "same_surface_packet": packet["same_surface_packet"]}]}
+    return {"passed": not failures, "failures": failures, "metrics": {"rows": len(rows), "language_counts": dict(sorted(language_counts.items())), "split_counts": dict(sorted(split_counts.items())), "heldout_compare_rows": len(rows), "l2_shell_rows": l2_rows}, "queue": queue, "packet": packet}
+
+
+def main() -> None:
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    SUMMARY.parent.mkdir(parents=True, exist_ok=True)
+    DOC.parent.mkdir(parents=True, exist_ok=True)
+    built = build_queue()
+    write_json(QUEUE, built["queue"])
+    write_jsonl(PACKETS, [built["packet"]])
+    next_step = "Run the local Ollama Gemma comparator on the stage10088 realistic-maintenance shell, then compare it directly against the matching 100M probe on the same 55 heldout rows."
+    summary = {"stage": STAGE, "stage_name": NAME, "name": NAME, "passed": built["passed"], "metrics": {**built["metrics"], "failures": built["failures"]}, "artifacts": {"queue": display(QUEUE), "packets": display(PACKETS), "doc": display(DOC)}, "decision": "Materialized a same-manifest Gemma queue for the stage10088 realistic-maintenance shell so Gemma can be compared fairly on the richer L2-style heldout bank.", "next_best_step": next_step, "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+    SUMMARY.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    DOC.write_text("\n".join(["# Stage10090 Canonical Source-Heldout Realistic Shell Same Manifest Gemma Queue", "", f"Passed: `{summary['passed']}`", f"Heldout rows: `{built['metrics']['rows']}`", "", summary["decision"], "", f"Next: {next_step}", ""]), encoding="utf-8")
+    if summary["passed"]:
+        update_registry(summary)
+    print(json.dumps({"stage": STAGE, "passed": summary["passed"], "failures": built["failures"]}, indent=2, sort_keys=True))
+    if built["failures"]:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()
