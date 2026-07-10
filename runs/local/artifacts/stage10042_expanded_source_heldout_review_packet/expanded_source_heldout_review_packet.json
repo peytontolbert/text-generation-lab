@@ -1,0 +1,29 @@
+{
+  "failures": [],
+  "metrics": {
+    "label_counts": {
+      "c_cpp:A": 3,
+      "c_cpp:B": 3,
+      "c_cpp:D": 3,
+      "c_cpp:E": 3,
+      "python:A": 3,
+      "python:D": 3
+    },
+    "language_counts": {
+      "c_cpp": 12,
+      "python": 6
+    },
+    "required_checks_per_row": 4,
+    "rows": 18,
+    "split_counts": {
+      "eval": 18
+    }
+  },
+  "passed": true,
+  "review_focus": [
+    "Verify that each fresh heldout row has exactly one justified edit-localization answer from visible evidence.",
+    "Check whether any field ordering, choice wording, or row metadata leaks the answer label despite source-heldout isolation.",
+    "Confirm these fresh rows remain heldout-only and should not be replayed into train before the next same-manifest comparison.",
+    "Mark rows that should be converted to abstain, rebuilt, or excluded if expert maintainers judge them underdetermined."
+  ]
+}
