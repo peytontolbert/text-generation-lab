@@ -1,0 +1,69 @@
+{
+  "failures": [],
+  "findings": [
+    "Python is the only expanded same-manifest language where Gemma beats the 100M on the current 55-row heldout comparison subset.",
+    "The 100M predicts label C on 9 of 11 Python rows even though the gold distribution is A=4, D=5, C=2, indicating a real label-collapse pattern rather than a narrow single-row miss.",
+    "The new fresh-heldout Python failures are concentrated in TARGET_SYMBOL versus TARGET_TEST disambiguation; Gemma recovers two TARGET_SYMBOL rows that the 100M misses.",
+    "Current anti-cheat fields do not show prompt-surface label literals or raw-source leakage on these Python rows, so the immediate frontier is evidence grounding and expert identifiability, not obvious literal leakage."
+  ],
+  "metrics": {
+    "any_prompt_label_literal_risk": false,
+    "any_raw_source_in_prompt": false,
+    "delta_hundred_m_minus_gemma": -0.18181818181818182,
+    "explicit_opaque_choice_true_rows": 5,
+    "gemma_exact": 0.36363636363636365,
+    "gemma_pred_counts": {
+      "A": 4,
+      "B": 2,
+      "C": 5
+    },
+    "hundred_m_exact": 0.18181818181818182,
+    "hundred_m_label_collapse_detected": true,
+    "hundred_m_mode_label": "C",
+    "hundred_m_mode_share": 0.8181818181818182,
+    "hundred_m_pred_counts": {
+      "A": 1,
+      "C": 9,
+      "E": 1
+    },
+    "opaque_choice_flag_missing_rows": 6,
+    "python_fresh_rows": 6,
+    "python_rows": 11,
+    "review_outcome_counts": {
+      "both_correct": 2,
+      "both_wrong": 7,
+      "gemma_only": 2
+    },
+    "target_counts": {
+      "A": 4,
+      "C": 2,
+      "D": 5
+    },
+    "target_family_accuracy": {
+      "TARGET_CONFIG": {
+        "gemma_exact": 1.0,
+        "hundred_m_exact": 1.0,
+        "rows": 2
+      },
+      "TARGET_SYMBOL": {
+        "gemma_exact": 0.5,
+        "hundred_m_exact": 0.0,
+        "rows": 4
+      },
+      "TARGET_TEST": {
+        "gemma_exact": 0.0,
+        "hundred_m_exact": 0.0,
+        "rows": 5
+      }
+    }
+  },
+  "next_training_rule": "Do not replay these heldout Python rows into train. Target successor data at valid symbol-vs-test disambiguation roots with fresh heldout review, and treat the current rows as review-first diagnostics.",
+  "passed": true,
+  "review_checks": [
+    "Can an expert maintainer distinguish TARGET_SYMBOL versus TARGET_TEST from only the visible evidence?",
+    "Does the row require abstain or more evidence rather than a forced singleton label?",
+    "Do option semantics, field ordering, or stable prompt fragments leak the answer despite opaque labels?",
+    "Is this row appropriate for future heldout-only expert review rather than replay-driven training?",
+    "If the row is valid, should successor training target symbol-vs-test disambiguation instead of generic replay?"
+  ]
+}

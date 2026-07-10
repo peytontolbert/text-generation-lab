@@ -1,0 +1,66 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage10046_expanded_python_gap_collapse_audit/expanded_python_gap_collapse_audit.json",
+    "doc": "docs/EXPANDED_PYTHON_GAP_COLLAPSE_AUDIT_STAGE10046.md",
+    "rows": "runs/local/artifacts/stage10046_expanded_python_gap_collapse_audit/expanded_python_gap_review_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T13:58:14Z",
+  "decision": "Materialized the expanded Python gap collapse audit from the real same-manifest 100M and Gemma outputs so the next v2.7 move can target the actual heldout failure pattern instead of replaying evaluation rows.",
+  "metrics": {
+    "any_prompt_label_literal_risk": false,
+    "any_raw_source_in_prompt": false,
+    "delta_hundred_m_minus_gemma": -0.18181818181818182,
+    "explicit_opaque_choice_true_rows": 5,
+    "failures": [],
+    "gemma_exact": 0.36363636363636365,
+    "gemma_pred_counts": {
+      "A": 4,
+      "B": 2,
+      "C": 5
+    },
+    "hundred_m_exact": 0.18181818181818182,
+    "hundred_m_label_collapse_detected": true,
+    "hundred_m_mode_label": "C",
+    "hundred_m_mode_share": 0.8181818181818182,
+    "hundred_m_pred_counts": {
+      "A": 1,
+      "C": 9,
+      "E": 1
+    },
+    "opaque_choice_flag_missing_rows": 6,
+    "python_fresh_rows": 6,
+    "python_rows": 11,
+    "review_outcome_counts": {
+      "both_correct": 2,
+      "both_wrong": 7,
+      "gemma_only": 2
+    },
+    "target_counts": {
+      "A": 4,
+      "C": 2,
+      "D": 5
+    },
+    "target_family_accuracy": {
+      "TARGET_CONFIG": {
+        "gemma_exact": 1.0,
+        "hundred_m_exact": 1.0,
+        "rows": 2
+      },
+      "TARGET_SYMBOL": {
+        "gemma_exact": 0.5,
+        "hundred_m_exact": 0.0,
+        "rows": 4
+      },
+      "TARGET_TEST": {
+        "gemma_exact": 0.0,
+        "hundred_m_exact": 0.0,
+        "rows": 5
+      }
+    }
+  },
+  "name": "stage10046_expanded_python_gap_collapse_audit",
+  "next_best_step": "Use this Python-specific audit to drive expert-maintainer review and successor-root construction for symbol-vs-test disambiguation before any further multilingual training changes.",
+  "passed": true,
+  "stage": 10046,
+  "stage_name": "stage10046_expanded_python_gap_collapse_audit"
+}
