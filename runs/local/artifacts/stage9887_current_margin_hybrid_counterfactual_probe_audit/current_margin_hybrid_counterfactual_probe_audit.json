@@ -1,0 +1,49 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "caveats": [
+    "This remains a robustness probe on the current counterfactual guard surface, not a promotion candidate for broad multilingual maintainer superiority.",
+    "The only observed movement versus Stage9883 is a tiny selection-loss improvement with no exact-match gain, which is not enough to support a stronger Gemma margin claim.",
+    "Because the confusion matrix is identical to Stage9883, the K collapse appears to be upstream of the strict split assignment rather than caused by the strict-anchor construction itself."
+  ],
+  "decision": "The Stage9885 hybrid strict-anchor rerun is executable and contract-clean, but it is behaviorally identical to Stage9883 on exact accuracy, per-language cell exact, and confusion structure. The K-to-R collapse persists, so the strict-anchor swap does not improve the multilingual frontier.",
+  "failures": [],
+  "metrics": {
+    "broader_eval_exact_baseline": 0.4375,
+    "broader_strict_exact_baseline": 0.5625,
+    "confusion_identical_to_stage9883": true,
+    "delta_vs_broader_eval": 0.0,
+    "delta_vs_broader_strict": -0.0625,
+    "delta_vs_prior_eval": 0.0,
+    "delta_vs_prior_selection_loss": -0.0016777515411376953,
+    "delta_vs_prior_strict": 0.0,
+    "dominant_confusion_targets": {
+      "K": "R",
+      "M": "M",
+      "R": "R",
+      "T": "T"
+    },
+    "eval_exact": 0.4375,
+    "per_cell_exact_identical_to_stage9883": true,
+    "prior_eval_exact": 0.4375,
+    "prior_selection_loss_sum": 2.7924227714538574,
+    "prior_strict_exact": 0.5,
+    "required_artifacts_written": true,
+    "selected_step": 31,
+    "selection_exact_sum": 0.9375,
+    "selection_loss_sum": 2.7907450199127197,
+    "strict_exact": 0.5
+  },
+  "passed": true
+}
