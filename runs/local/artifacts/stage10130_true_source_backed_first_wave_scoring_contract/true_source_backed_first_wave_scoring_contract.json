@@ -1,0 +1,66 @@
+{
+  "artifacts": {
+    "admitted_manifest": "runs/local/artifacts/stage10129_true_source_backed_multilingual_adjudication_frontier/true_source_backed_multilingual_adjudication_admitted_manifest.json",
+    "blocked_manifest": "runs/local/artifacts/stage10129_true_source_backed_multilingual_adjudication_frontier/true_source_backed_multilingual_adjudication_blocked_manifest.json"
+  },
+  "claim_boundary": {
+    "no_model_comparison_is_honest_without_admitted_bundles": false,
+    "row_level_accuracy_is_secondary_to_root_level_coherence": true,
+    "scoreable_now": false
+  },
+  "decision": "Flatten the admitted first-wave multilingual root bundles into perspective-scoring rows only after completed rubric, anti-cheat, and gold adjudication, while preserving root-level solved semantics as the primary maintainer-grade metric.",
+  "failures": [],
+  "generated_at_utc": "2026-07-10T19:47:42Z",
+  "metrics": {
+    "abstention_required_rows": 0,
+    "admitted_bundle_count": 0,
+    "blocked_bundle_count": 8,
+    "gold_answer_kind_counts": {},
+    "language_row_counts": {},
+    "perspective_row_counts": {},
+    "required_perspective_count": 8,
+    "score_row_count": 0,
+    "scoreable_now": false
+  },
+  "name": "stage10130_true_source_backed_first_wave_scoring_contract",
+  "next_best_step": "Complete the Stage10128 first-wave rubric, anti-cheat, and perspective-gold tasks, rerun Stage10129 to admit bundles, then use these flattened scoring rows for one bounded 100M-versus-Gemma first-wave maintainer comparison.",
+  "passed": true,
+  "scoring_contract": {
+    "bundle_consistency_requirement": "Localization, evidence, alternative elimination, patch impact, verifier outcome, minimal fix, regression risk, and abstention must all remain mutually consistent for the same root case.",
+    "model_prediction_schema": {
+      "bundle_id": "string",
+      "language_family": "string",
+      "perspective_predictions": [
+        {
+          "answer_kind": "must_match_gold_answer_kind_or_valid_normalized_equivalent",
+          "answer_value": "string_or_structured_value_matching_gold_answer",
+          "perspective": "one_of_required_perspectives"
+        }
+      ]
+    },
+    "primary_metric": "root_solved_rate",
+    "required_perspectives": [
+      "symptom_localization",
+      "evidence_citation",
+      "alternative_hypothesis_elimination",
+      "patch_impact",
+      "verifier_outcome",
+      "minimal_fix_selection",
+      "regression_risk",
+      "abstention_insufficient_evidence"
+    ],
+    "root_solved_definition": "A bundle is solved only if every admitted perspective row in the bundle is correct under exact adjudicated gold-answer matching, including abstention rows when insufficient evidence is the honest answer.",
+    "secondary_metrics": [
+      "per_perspective_accuracy",
+      "per_language_root_solved_rate",
+      "per_language_per_perspective_accuracy",
+      "abstention_correctness",
+      "evidence_citation_correctness",
+      "patch_impact_correctness",
+      "verifier_outcome_correctness"
+    ],
+    "supported_gold_answer_kinds": [],
+    "unit_of_independence": "root_bundle"
+  },
+  "stage": 10130
+}
