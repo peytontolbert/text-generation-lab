@@ -1,0 +1,112 @@
+{
+  "artifacts": {
+    "admitted_manifest": "runs/local/artifacts/stage10129_true_source_backed_multilingual_adjudication_frontier/true_source_backed_multilingual_adjudication_admitted_manifest.json",
+    "blocked_manifest": "runs/local/artifacts/stage10129_true_source_backed_multilingual_adjudication_frontier/true_source_backed_multilingual_adjudication_blocked_manifest.json",
+    "gold_support": "runs/local/artifacts/stage10131_true_source_backed_first_wave_gold_adjudication_support/true_source_backed_first_wave_gold_adjudication_support.json",
+    "readiness_ledger": "runs/local/artifacts/stage10132_true_source_backed_first_wave_adjudication_readiness_ledger/true_source_backed_first_wave_adjudication_readiness_ledger.json",
+    "scoring_contract": "runs/local/artifacts/stage10130_true_source_backed_first_wave_scoring_contract/true_source_backed_first_wave_scoring_contract.json",
+    "scoring_rows": "runs/local/artifacts/stage10130_true_source_backed_first_wave_scoring_contract/true_source_backed_first_wave_scoring_rows.jsonl"
+  },
+  "claim_boundary": {
+    "comparison_disallows_prompt_or_parser_retargeting_after_gold_signoff": true,
+    "comparison_requires_all_eight_bundles_admitted": true,
+    "comparison_requires_root_level_scoring_not_row_only": true,
+    "comparison_requires_same_bundle_set_for_both_models": true
+  },
+  "comparison_ready_now": false,
+  "decision": "Freeze the future 100M-versus-Gemma maintainer comparison contract now, before any bundle is admitted, so later scoring is not distorted by output-format drift, answer-kind mismatch, or inconsistent normalization.",
+  "execution_sequence": [
+    "rerun_stage10129_after_human_signoff_to_refresh_admitted_bundle_manifest",
+    "rerun_stage10130_to_refresh_score_rows_from_the_admitted_manifest",
+    "freeze_exact_admitted_bundle_ids_and_score_row_ids_before_any_model_run",
+    "run_target_100m_once_on_that_frozen_bundle_set",
+    "run_gemma_once_on_that_same_frozen_bundle_set",
+    "normalize_predictions_only_by_this_contract",
+    "score_root_level_and_per_perspective_metrics_without_prompt retuning"
+  ],
+  "failures": [],
+  "metrics": {
+    "admitted_bundle_count": 0,
+    "blocked_bundle_count": 8,
+    "bundles_scoreable_now": 0,
+    "comparison_ready_now": false,
+    "score_row_count": 0
+  },
+  "metrics_contract": {
+    "bundle_count_required_for_first_honest_comparison": 8,
+    "primary_metric": "root_solved_rate",
+    "root_solved_definition": "A root bundle is solved only if every perspective prediction for that bundle matches its adjudicated gold answer after the allowed normalization for that answer kind.",
+    "score_row_count_required_for_first_honest_comparison": 64,
+    "secondary_metrics": [
+      "per_perspective_accuracy",
+      "per_language_root_solved_rate",
+      "per_language_per_perspective_accuracy",
+      "abstention_correctness",
+      "evidence_citation_correctness",
+      "patch_impact_correctness",
+      "verifier_outcome_correctness"
+    ]
+  },
+  "name": "stage10133_true_source_backed_first_wave_comparison_contract",
+  "next_best_step": "Complete human signoff on the eight first-wave bundles, rerun Stage10129 and Stage10130, then use this frozen comparison contract for one same-bundle 100M-versus-Gemma maintainer comparison without prompt or parser drift.",
+  "normalization_rules": {
+    "abstain": [
+      "canonicalize_any_of:ABSTAIN|ABSTAIN_INSUFFICIENT_EVIDENCE|INSUFFICIENT_EVIDENCE_TO_DECIDE",
+      "normalized_value_is_ABSTAIN_INSUFFICIENT_EVIDENCE"
+    ],
+    "candidate_path": [
+      "trim_whitespace",
+      "normalize_path_separators_to_forward_slash",
+      "remove_leading_dot_slash",
+      "case_sensitive_exact_match_after_path_normalization"
+    ],
+    "freeform_explanation": [
+      "strip_outer_whitespace",
+      "collapse_internal_whitespace",
+      "exact_match_required_after_normalization_until_human-approved semantic scorer exists"
+    ],
+    "freeform_risk": [
+      "strip_outer_whitespace",
+      "collapse_internal_whitespace",
+      "exact_match_required_after_normalization_until_human-approved semantic scorer exists"
+    ],
+    "freeform_verifier_outcome": [
+      "strip_outer_whitespace",
+      "collapse_internal_whitespace",
+      "exact_match_required_after_normalization_until_human-approved semantic scorer exists"
+    ],
+    "freeform_visible_fact": [
+      "strip_outer_whitespace",
+      "collapse_internal_whitespace",
+      "exact_match_required_after_normalization_until_human-approved semantic scorer exists"
+    ],
+    "global": [
+      "strip_outer_whitespace",
+      "collapse_internal_whitespace_to_single_spaces_for_freeform_kinds",
+      "preserve_bundle_and_perspective_identity_exactly"
+    ],
+    "selected_test": [
+      "trim_whitespace",
+      "normalize_path_separators_to_forward_slash",
+      "remove_leading_dot_slash",
+      "case_sensitive_exact_match_after_test_id_normalization"
+    ],
+    "visible_evidence_key": [
+      "trim_whitespace",
+      "case_sensitive_exact_match_to_prompt_visible_evidence_key"
+    ]
+  },
+  "passed": true,
+  "prediction_schema": {
+    "bundle_id": "string_matching_admitted_bundle_id",
+    "language_family": "string_matching_bundle_language_family",
+    "perspective_predictions": [
+      {
+        "answer_kind": "one_of_candidate_path|visible_evidence_key|freeform_visible_fact|selected_test|freeform_verifier_outcome|freeform_explanation|freeform_risk|abstain",
+        "answer_value": "string",
+        "perspective": "required_exact_bundle_perspective_name"
+      }
+    ]
+  },
+  "stage": 10133
+}
