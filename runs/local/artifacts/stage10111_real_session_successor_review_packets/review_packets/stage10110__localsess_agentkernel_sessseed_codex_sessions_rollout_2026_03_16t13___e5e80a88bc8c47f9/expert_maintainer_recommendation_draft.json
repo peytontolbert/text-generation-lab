@@ -1,0 +1,47 @@
+{
+  "language_family": "python",
+  "recommended_rubric_lines": {
+    "abstention_would_be_more_honest_if_evidence_is_insufficient": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "If reviewers cannot justify exactly one candidate from prompt-visible evidence, abstention is more honest than a forced singleton label.",
+        "Mixed surface-family rows are explicit abstention watchlist candidates when the visible evidence only names a coarse maintenance surface."
+      ]
+    },
+    "candidate_set_is_maintainer_plausible": {
+      "confidence": "medium",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "This row presents 2 maintainer-visible candidates on a CONFIG__vs__IMPLEMENTATION surface; check plausibility rather than assuming the machine ranking is correct."
+      ]
+    },
+    "raw_changed_path_list_not_exposed": {
+      "confidence": "high",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "Raw changed-path lists are withheld from the prompt surface, so this line should pass unless a reviewer finds an indirect path leak."
+      ]
+    },
+    "visible_evidence_supports_one_candidate": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "This line should remain human-owned; the first-wave ranking highlights claim pressure, not proof that the row is uniquely identifiable."
+      ]
+    },
+    "visible_snippets_are_sufficient_for_local_reasoning": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "The row exposes 5 visible evidence snippets; reviewers should decide whether those snippets support local reasoning without hidden repository context.",
+        "Because this slice is template-sensitive, snippet sufficiency should be judged strictly rather than inferred from surface names."
+      ]
+    }
+  },
+  "reviewer_message": "Use this draft only to focus review on identifiability, snippet sufficiency, and abstention honesty. Final rubric judgments remain human-owned.",
+  "row_id": "stage10110::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_16t13_03_37_019cf6be_af85_7232_b4ec_c255_agent_kernel_config_py_agent_kernel_improvement_py_agent_kernel_llm_py_870343b23e_aug_1500000_8b46e7f662::python_implementation_vs_config",
+  "status": "recommendation_draft_ready_for_human_rubric_review",
+  "successor_template": "python_implementation_vs_config",
+  "wave_rank": 14
+}

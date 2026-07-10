@@ -6,6 +6,7 @@
     "review_scope_matches_prompt_visible_evidence_only": null,
     "template_specific_surface_prior": null
   },
+  "draft_recommendation_path": "runs/local/artifacts/stage10111_real_session_successor_review_packets/review_packets/stage10110__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t1__167ec662afcae151/anti_cheat_recommendation_draft.json",
   "language_family": "c_cpp",
   "machine_context": {
     "candidate_count": 2,
@@ -18,7 +19,48 @@
     "successor_template": "cpp_implementation_vs_implementation"
   },
   "passed": false,
+  "recommendation_reviewer_message": "Use this draft only to focus anti-cheat review on shortcut risk, repo-analogue leakage, and prompt-visible scope. Final anti-cheat judgments remain human-owned.",
+  "recommended_challenge_lines": {
+    "candidate_position_or_id_bias": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Candidate order and candidate IDs are still possible shortcut channels on a binary-choice surface and must be checked directly by reviewers."
+      ]
+    },
+    "changed_path_signature_leakage": {
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Changed-path lists are withheld from the prompt surface; reviewers only need to check for path hints leaking through snippets or row IDs."
+      ]
+    },
+    "cross_repo_analogue_surface_leakage": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Check whether repeated repo-local analogues make the answer guessable from familiar snippet archetypes rather than row-local evidence."
+      ]
+    },
+    "review_scope_matches_prompt_visible_evidence_only": {
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "The packet contract requires review to stay inside prompt-visible evidence only; reviewers should not fill gaps from repo familiarity."
+      ]
+    },
+    "template_specific_surface_prior": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Review whether the template alone suggests the answer without genuine maintenance reasoning."
+      ]
+    }
+  },
   "required_human_action": "Check whether the visible prompt still proxies the answer via template priors, snippet asymmetry, candidate order, or cross-repo analogue cues rather than real maintenance reasoning.",
+  "reviewer_guidance": [
+    "The attached anti-cheat recommendation draft is machine-generated support only and must not be treated as final human signoff."
+  ],
   "reviewer_notes": "",
   "row_id": "stage10110::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_47_44_019d3558_2dc3_7623_907f_4531_peytontolbert_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_caus_05246ee2ea_aug_1500000_8b46e7f662::cpp_implementation_vs_implementation",
   "status": "pending_human_review",

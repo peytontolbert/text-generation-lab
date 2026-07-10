@@ -1,0 +1,49 @@
+{
+  "language_family": "python",
+  "recommended_challenge_lines": {
+    "candidate_position_or_id_bias": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Candidate order and candidate IDs are still possible shortcut channels on a binary-choice surface and must be checked directly by reviewers.",
+        "Mixed surface-family pairs deserve stricter scrutiny for candidate-order priors."
+      ]
+    },
+    "changed_path_signature_leakage": {
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Changed-path lists are withheld from the prompt surface; reviewers only need to check for path hints leaking through snippets or row IDs."
+      ]
+    },
+    "cross_repo_analogue_surface_leakage": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Check whether repeated repo-local analogues make the answer guessable from familiar snippet archetypes rather than row-local evidence.",
+        "Dominant repo clusters should be treated as higher analogue-leakage risk."
+      ]
+    },
+    "review_scope_matches_prompt_visible_evidence_only": {
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "The packet contract requires review to stay inside prompt-visible evidence only; reviewers should not fill gaps from repo familiarity.",
+        "Selected test metadata exists in hidden machine context (5 tests) and must not be treated as visible evidence."
+      ]
+    },
+    "template_specific_surface_prior": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Review whether the template alone suggests the answer without genuine maintenance reasoning.",
+        "Python config rows are the main template-prior audit slice in this packet."
+      ]
+    }
+  },
+  "reviewer_message": "Use this draft only to focus anti-cheat review on shortcut risk, repo-analogue leakage, and prompt-visible scope. Final anti-cheat judgments remain human-owned.",
+  "row_id": "stage10110::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_18t05_41_04_019cff76_3d2e_7f50_a1be_1fd1_agent_kernel_config_py_agent_kernel_cycle_runner_py_agent_kernel_improvement_py__036a6e02ad_aug_1500000_8b46e7f662::python_implementation_vs_config",
+  "status": "recommendation_draft_ready_for_human_anti_cheat_review",
+  "successor_template": "python_implementation_vs_config",
+  "wave_rank": 15
+}
