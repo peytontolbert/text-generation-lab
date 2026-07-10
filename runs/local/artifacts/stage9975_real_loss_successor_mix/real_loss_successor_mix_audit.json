@@ -1,0 +1,69 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "failures": [],
+  "metrics": {
+    "base_gate_rejected_rows": 0,
+    "base_structured_rows": 452,
+    "blended_structured_rows": 484,
+    "c_cpp_edit_rows_after": 46,
+    "c_cpp_edit_rows_before": 30,
+    "edit_localization_rows_after": 152,
+    "edit_localization_rows_before": 120,
+    "language_counts": {
+      "c_cpp": 109,
+      "python": 103,
+      "rust": 84,
+      "unknown": 80,
+      "web_js_ts_html": 108
+    },
+    "loss_counts": {
+      "edit_localization_ce": 152,
+      "patch_operator_ce": 144,
+      "symbol_binding_ce": 80,
+      "verifier_repair_ce": 108
+    },
+    "loss_packet_rows": 32,
+    "loss_reason_counts": {
+      "gemma_advantage_recovery": 11,
+      "hundred_m_general_miss_recovery": 21
+    },
+    "loss_rows_added": 32,
+    "loss_rows_present": 32,
+    "python_edit_rows_after": 40,
+    "python_edit_rows_before": 24,
+    "rust_edit_rows_after": 21,
+    "rust_edit_rows_before": 21,
+    "skill_counts": {
+      "edit_localization": 152,
+      "patch_operator_selection": 144,
+      "symbol_binding": 80,
+      "verifier_failure_repair_or_abstain": 108
+    },
+    "split_counts": {
+      "eval": 160,
+      "strict_eval": 168,
+      "train": 156
+    },
+    "web_edit_rows_after": 45,
+    "web_edit_rows_before": 45
+  },
+  "passed": true,
+  "training_recommendation": {
+    "blend_strategy": "append the real stage9974 post-Gemma loss packet to the stage9962 successor mix and preserve the existing weak-language/web anchors",
+    "expected_edit_localization_row_delta": 32,
+    "next_cycle_input": "runs/local/artifacts/stage9975_real_loss_successor_mix/real_loss_successor_structured_state.jsonl",
+    "why": "this focuses the next cycle on the actual observed losing python rows and the c_cpp strict regression while retaining the existing rust/web wins."
+  }
+}
