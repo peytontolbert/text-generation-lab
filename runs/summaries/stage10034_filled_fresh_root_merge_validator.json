@@ -1,0 +1,29 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage10034_filled_fresh_root_merge_validator/filled_fresh_root_merge_validator.json",
+    "doc": "docs/FILLED_FRESH_ROOT_MERGE_VALIDATOR_STAGE10034.md",
+    "merged_manifest": "runs/local/artifacts/stage10034_filled_fresh_root_merge_validator/candidate_expanded_source_heldout_manifest.jsonl"
+  },
+  "created_at_utc": "2026-07-10T13:19:00Z",
+  "decision": "Materialized a strict validation-and-merge gate for filled fresh-root scaffold rows so future heldout expansion can only proceed after placeholders are removed, source independence is maintained, and anti-cheat requirements remain intact.",
+  "metrics": {
+    "base_rows": 77,
+    "candidate_language_counts": {
+      "c_cpp": 4,
+      "python": 2
+    },
+    "candidate_rows": 6,
+    "failing_candidate_rows": 6,
+    "failures": [
+      "candidate_rows_still_fail_validation"
+    ],
+    "merged_rows": 77,
+    "valid_candidate_language_counts": {},
+    "valid_candidate_rows": 0
+  },
+  "name": "stage10034_filled_fresh_root_merge_validator",
+  "next_best_step": "Fill the stage10033 scaffold rows with real fresh independent heldout roots until this validator reports zero placeholders and zero source collisions, then use the merged manifest for the next honest comparison rerun.",
+  "passed": false,
+  "stage": 10034,
+  "stage_name": "stage10034_filled_fresh_root_merge_validator"
+}

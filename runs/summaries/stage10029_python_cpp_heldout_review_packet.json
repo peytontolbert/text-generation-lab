@@ -1,0 +1,40 @@
+{
+  "artifacts": {
+    "doc": "docs/PYTHON_CPP_HELDOUT_REVIEW_PACKET_STAGE10029.md",
+    "packet": "runs/local/artifacts/stage10029_python_cpp_heldout_review_packet/python_cpp_heldout_review_packet.json",
+    "rows": "runs/local/artifacts/stage10029_python_cpp_heldout_review_packet/python_cpp_heldout_review_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T13:18:59Z",
+  "decision": "Materialized the deduped source-heldout Python and c_cpp review packet so the tied or weakly-supported heldout cells can go through expert review and fresh-root replenishment instead of replay-based training fixes.",
+  "metrics": {
+    "by_language_outcome": {
+      "c_cpp": {
+        "100m_only_correct": 2,
+        "both_wrong": 5,
+        "gemma_only_correct": 1
+      },
+      "python": {
+        "100m_only_correct": 1,
+        "both_correct": 1,
+        "both_wrong": 3
+      }
+    },
+    "failures": [],
+    "language_counts": {
+      "c_cpp": 8,
+      "python": 5
+    },
+    "outcome_counts": {
+      "100m_only_correct": 3,
+      "both_correct": 1,
+      "both_wrong": 8,
+      "gemma_only_correct": 1
+    },
+    "rows": 13
+  },
+  "name": "stage10029_python_cpp_heldout_review_packet",
+  "next_best_step": "Run expert review on these Python and c_cpp heldout rows, then build fresh independent roots for the unresolved patterns rather than replaying them into train.",
+  "passed": true,
+  "stage": 10029,
+  "stage_name": "stage10029_python_cpp_heldout_review_packet"
+}
