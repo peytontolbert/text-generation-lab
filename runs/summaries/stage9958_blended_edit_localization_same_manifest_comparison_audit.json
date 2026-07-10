@@ -1,0 +1,52 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9958_blended_edit_localization_same_manifest_comparison_audit/blended_edit_localization_same_manifest_comparison_audit.json",
+    "doc": "docs/BLENDED_EDIT_LOCALIZATION_SAME_MANIFEST_COMPARISON_AUDIT_STAGE9958.md",
+    "rows": "runs/local/artifacts/stage9958_blended_edit_localization_same_manifest_comparison_audit/blended_edit_localization_same_manifest_comparison_rows.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T08:59:06Z",
+  "decision": "Materialized the actual same-manifest blended comparison audit. It stays pending until both future row-output artifacts exist, but it can score the narrow blended 100M-vs-Gemma slice immediately once they do.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "comparison_cells": 0,
+    "comparison_ready_now": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "pending_conditions": [
+      "stage9950_row_field_logits_missing",
+      "stage9953_gemma_rows_missing"
+    ],
+    "promotion_ready": false,
+    "rows_100m_present": 0,
+    "rows_gemma_present": 0,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "ties": 0,
+    "wins_100m": 0,
+    "wins_gemma": 0
+  },
+  "name": "stage9958_blended_edit_localization_same_manifest_comparison_audit",
+  "next_best_step": "Rerun this audit after stage9950 and the matching Gemma execution write real row outputs; only then can the blended same-manifest 100M-vs-Gemma comparison be scored.",
+  "passed": true,
+  "stage": 9958,
+  "stage_name": "stage9958_blended_edit_localization_same_manifest_comparison_audit"
+}
