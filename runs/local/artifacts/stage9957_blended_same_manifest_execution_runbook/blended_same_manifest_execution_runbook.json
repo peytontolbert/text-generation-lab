@@ -1,0 +1,143 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "claim_rule": "Do not claim the 100M beats Gemma on the blended path until both real outputs exist and the stage9954 same-manifest gate conditions are satisfied.",
+  "failures": [],
+  "metrics": {
+    "claim_rule_present": true,
+    "gemma_future_stage": 9953,
+    "hundred_m_future_stage": 9950,
+    "row_contract_ok": true,
+    "runbook_steps": 5
+  },
+  "passed": true,
+  "steps": [
+    {
+      "artifacts": [
+        "runs/local/artifacts/stage9955_blended_same_manifest_execution_handoff_bundle/blended_same_manifest_execution_handoff_bundle.json",
+        "runs/local/artifacts/stage9956_v27_current_blocker_ledger/v27_current_blocker_ledger.json"
+      ],
+      "kind": "precheck",
+      "requires": [
+        "explicit_stage9950_100m_execution_authorization",
+        "explicit_stage9953_gemma_execution_authorization",
+        "repo_disk_and_tmp_disk_sufficient"
+      ],
+      "step_id": "precheck_authorization_and_disk"
+    },
+    {
+      "command": [
+        "python",
+        "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+        "--repo-root",
+        "/data/agentkernel-seq2seq-text-lab",
+        "--manifest",
+        "runs/local/artifacts/stage9947_web_targeted_blended_structured_execution_review/review_manifests/edit_localization.jsonl",
+        "--mode",
+        "edit_localization_probe",
+        "--probe-scale",
+        "target_100m",
+        "--implementation",
+        "transformer",
+        "--model-config",
+        "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "--tokenizer-json",
+        "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+        "--tokenizer-config",
+        "configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "--tokenizer-hashlock",
+        "configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "--max-train-rows",
+        "24",
+        "--max-eval-rows",
+        "24",
+        "--max-strict-rows",
+        "24",
+        "--max-steps",
+        "64",
+        "--batch-size",
+        "2",
+        "--learning-rate",
+        "5e-5",
+        "--max-encoder-tokens",
+        "512",
+        "--max-decoder-tokens",
+        "8",
+        "--decoder-ce-weight",
+        "0.0",
+        "--structured-aux-weight",
+        "1.0",
+        "--denoise-weight",
+        "0.0",
+        "--require-loss-mask-enforcement-audit",
+        "--no-final-checkpoint-export",
+        "--cleanup-checkpoints-after-probe",
+        "--skip-final-model-save",
+        "1",
+        "--output-dir",
+        "runs/local/artifacts/stage9950_edit_localization_web_targeted_blended_target100m_probe/edit_localization_probe",
+        "--run-id",
+        "stage9950_edit_localization_web_targeted_blended_target100m_probe",
+        "--execution-authorized-for-recovery-probe"
+      ],
+      "expected_output_dir": "runs/local/artifacts/stage9950_edit_localization_web_targeted_blended_target100m_probe/edit_localization_probe",
+      "expected_run_id": "stage9950_edit_localization_web_targeted_blended_target100m_probe",
+      "kind": "model_execution",
+      "step_id": "run_stage9950_hundred_m"
+    },
+    {
+      "artifact": "runs/local/artifacts/stage9951_blended_edit_localization_output_acceptance_audit/blended_edit_localization_output_acceptance_audit.json",
+      "kind": "postcheck",
+      "requires": [
+        "stage9950_output_acceptance_ready"
+      ],
+      "step_id": "audit_stage9950_outputs"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/run_stage9748_standalone_gemma_queue_via_ollama.py",
+        "--queue",
+        "runs/local/artifacts/stage9952_blended_edit_localization_gemma_request/blended_edit_localization_gemma_queue.json",
+        "--packets",
+        "runs/local/artifacts/stage9952_blended_edit_localization_gemma_request/blended_edit_localization_gemma_packets.jsonl",
+        "--model",
+        "gemma3:12b",
+        "--cell-key",
+        "blended_target100m::edit_localization::same_manifest_gemma12b"
+      ],
+      "expected_output_stub": "runs/local/artifacts/stage9953_blended_edit_localization_gemma_execution/same_prompt_surface_gemma12b_outputs.json",
+      "kind": "gemma_execution",
+      "step_id": "run_stage9953_gemma"
+    },
+    {
+      "artifact": "runs/local/artifacts/stage9954_blended_edit_localization_same_manifest_comparison_gate/blended_edit_localization_same_manifest_comparison_gate.json",
+      "kind": "comparison_gate",
+      "requires": [
+        "stage9950_output_acceptance_ready",
+        "stage9953_gemma_outputs_exist",
+        "same_manifest_row_contract_still_matches_72_total_27_web",
+        "no_mixed_surface_or_mixed_manifest_comparison"
+      ],
+      "step_id": "compare_same_manifest_only"
+    }
+  ],
+  "still_requires_real_execution_or_external_input": [
+    "8_human_signoff_tasks",
+    "4_full_product_harness_backend_executions",
+    "stage9950_100m_execution",
+    "matching_stage9953_gemma_execution",
+    "same_manifest_comparison_after_real_outputs"
+  ]
+}

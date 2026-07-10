@@ -1,0 +1,45 @@
+{
+  "artifacts": {
+    "doc": "docs/BLENDED_SAME_MANIFEST_EXECUTION_RUNBOOK_STAGE9957.md",
+    "runbook": "runs/local/artifacts/stage9957_blended_same_manifest_execution_runbook/blended_same_manifest_execution_runbook.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T08:53:44Z",
+  "decision": "Materialized an ordered execution runbook for the narrow blended same-manifest path so the first authorized 100M-vs-Gemma comparison can be run and audited in a fixed sequence.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "claim_rule_present": true,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "gemma_future_stage": 9953,
+    "harness_execution_authorized_next": false,
+    "hundred_m_future_stage": 9950,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "row_contract_ok": true,
+    "runbook_steps": 5,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "name": "stage9957_blended_same_manifest_execution_runbook",
+  "next_best_step": "If execution is explicitly authorized, follow this runbook in order: run stage9950, audit stage9950 outputs, run the matching Gemma queue, then apply the stage9954 same-manifest comparison gate before making any narrow blended claim.",
+  "passed": true,
+  "stage": 9957,
+  "stage_name": "stage9957_blended_same_manifest_execution_runbook"
+}
