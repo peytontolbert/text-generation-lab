@@ -1,0 +1,86 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9988_filtered_replay_outcome_audit/filtered_replay_outcome_audit.json",
+    "doc": "docs/FILTERED_REPLAY_OUTCOME_AUDIT_STAGE9988.md"
+  },
+  "created_at_utc": "2026-07-10T11:21:36Z",
+  "decision": "Filtering out the quarantined mixed-replay Gemma-advantage rows preserved rust and web, improved python and c_cpp above the original stage9965 baseline, and lifted strict exact above both stage9965 and stage9980, while the four remaining positive replay Gemma-advantage rows still stayed 0/4 correct.",
+  "metrics": {
+    "aggregate": {
+      "stage9965": {
+        "eval_exact": 0.4,
+        "eval_rows": 40,
+        "strict_exact": 0.4,
+        "strict_rows": 40
+      },
+      "stage9980": {
+        "eval_exact": 0.36363636363636365,
+        "eval_rows": 44,
+        "strict_exact": 0.3404255319148936,
+        "strict_rows": 47
+      },
+      "stage9987": {
+        "eval_exact": 0.36363636363636365,
+        "eval_rows": 44,
+        "strict_exact": 0.48484848484848486,
+        "strict_rows": 33
+      },
+      "stage9987_minus_stage9965": {
+        "eval_exact": -0.036363636363636376,
+        "strict_exact": 0.08484848484848484
+      },
+      "stage9987_minus_stage9980": {
+        "eval_exact": 0.0,
+        "strict_exact": 0.14442295293359125
+      }
+    },
+    "failures": [],
+    "per_language": {
+      "c_cpp": {
+        "delta_vs_stage9965": 0.010526315789473661,
+        "delta_vs_stage9980": 0.05052631578947367,
+        "stage9965_exact": 0.2,
+        "stage9980_exact": 0.16,
+        "stage9987_exact": 0.21052631578947367
+      },
+      "python": {
+        "delta_vs_stage9965": 0.0357142857142857,
+        "delta_vs_stage9980": 0.10389610389610388,
+        "stage9965_exact": 0.25,
+        "stage9980_exact": 0.18181818181818182,
+        "stage9987_exact": 0.2857142857142857
+      },
+      "rust": {
+        "delta_vs_stage9965": 0.0,
+        "delta_vs_stage9980": 0.0,
+        "stage9965_exact": 0.42857142857142855,
+        "stage9980_exact": 0.42857142857142855,
+        "stage9987_exact": 0.42857142857142855
+      },
+      "web_js_ts_html": {
+        "delta_vs_stage9965": 0.0,
+        "delta_vs_stage9980": 0.0,
+        "stage9965_exact": 0.6,
+        "stage9980_exact": 0.6,
+        "stage9987_exact": 0.6
+      }
+    },
+    "remaining_positive_gemma_advantage_rows": {
+      "c_cpp|eval": {
+        "correct": 0,
+        "exact": 0.0,
+        "rows": 4
+      },
+      "python|eval": {
+        "correct": 0,
+        "exact": 0.0,
+        "rows": 4
+      }
+    }
+  },
+  "name": "stage9988_filtered_replay_outcome_audit",
+  "next_best_step": "Keep the seven mixed-replay rows quarantined, hold the remaining four Gemma-advantage positive replay rows out of training until human review resolves them, and use the stage9987 filtered frontier as the next truthful multilingual 100M baseline.",
+  "passed": true,
+  "stage": 9988,
+  "stage_name": "stage9988_filtered_replay_outcome_audit"
+}
