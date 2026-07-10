@@ -1,0 +1,52 @@
+{
+  "bundle_id": "stage10126::candle::candle-examples::rust",
+  "language_family": "rust",
+  "recommended_challenge_families": {
+    "candidate_path_or_order_bias": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Candidate path count: 6. Review whether ordering or naming trivially reveals the answer."
+      ]
+    },
+    "cross_repo_analogue_leakage": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Ensure analogue/context spans do not directly leak the intended target."
+      ]
+    },
+    "hidden_reference_or_metadata_leakage": {
+      "confidence": "medium",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "The packet exposes bounded maintainer-visible fields and withholds hidden gold answers."
+      ]
+    },
+    "perspective_paraphrase_collapse": {
+      "confidence": "medium",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "The perspective set is intended to probe distinct maintenance judgments, not rephrase one question."
+      ]
+    },
+    "same_surface_fairness_for_future_gemma_comparison": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "If these rust bundles become a 100M-vs-Gemma eval, both models must see the exact same perspective rows and bounded evidence."
+      ]
+    },
+    "template_and_surface_prior_shortcuts": {
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "Check whether the rust bundle can be solved from broad file-class priors alone instead of the bounded span evidence.",
+        "Visible evidence keys: algorithmic_background_reference, candidate_change_surface, external_analogue_reference, nearby_definition_or_usage_context, symptom_or_call_path_analogue, verifier_and_test_constraint."
+      ]
+    }
+  },
+  "repo_id": "candle",
+  "reviewer_message": "Use this draft to focus anti-cheat review on path bias, analogue leakage, and whether the rust bundle really measures maintenance reasoning. Final judgments remain human-owned.",
+  "status": "recommendation_draft_ready_for_human_anti_cheat_review"
+}
