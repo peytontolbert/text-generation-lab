@@ -1,0 +1,75 @@
+{
+  "artifacts": {
+    "doc": "docs/MIXED_FRESH_SOURCE_MULTILINGUAL_SUCCESSOR_PACKET_STAGE10053.md",
+    "manifest": "runs/local/artifacts/stage10053_mixed_fresh_source_multilingual_successor_packet/mixed_fresh_source_multilingual_successor_manifest.jsonl",
+    "packet": "runs/local/artifacts/stage10053_mixed_fresh_source_multilingual_successor_packet/mixed_fresh_source_multilingual_successor_packet.json",
+    "rows": "runs/local/artifacts/stage10053_mixed_fresh_source_multilingual_successor_packet/mixed_fresh_source_multilingual_successor_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T14:38:00Z",
+  "decision": "Materialized a mixed multilingual successor packet that keeps the fresh-source Python fix from stage10047 and restores the measured c_cpp, rust, and web losses with new source-backed train roots instead of canonical duplication.",
+  "metrics": {
+    "availability_counts": {
+      "c_cpp:A": 6,
+      "c_cpp:B": 6,
+      "c_cpp:C": 6,
+      "c_cpp:D": 6,
+      "c_cpp:E": 6,
+      "rust:A": 6,
+      "rust:B": 6,
+      "rust:C": 6,
+      "rust:D": 6,
+      "rust:E": 6,
+      "web_js_ts_html:A": 6,
+      "web_js_ts_html:B": 6,
+      "web_js_ts_html:C": 6,
+      "web_js_ts_html:D": 6,
+      "web_js_ts_html:E": 6
+    },
+    "base_rows": 103,
+    "failures": [],
+    "fresh_source_language_counts": {
+      "c_cpp": 7,
+      "rust": 2,
+      "web_js_ts_html": 7
+    },
+    "fresh_source_rows": 16,
+    "language_counts": {
+      "c_cpp": 37,
+      "python": 27,
+      "rust": 13,
+      "web_js_ts_html": 42
+    },
+    "readiness_failed_buckets": [],
+    "readiness_passed": true,
+    "regression_counts": {
+      "c_cpp:A": 1,
+      "c_cpp:B": 3,
+      "c_cpp:C": 1,
+      "c_cpp:E": 2,
+      "python:C": 2,
+      "rust:C": 2,
+      "web_js_ts_html:A": 6,
+      "web_js_ts_html:C": 1
+    },
+    "selected_counts": {
+      "c_cpp:A": 1,
+      "c_cpp:B": 3,
+      "c_cpp:C": 1,
+      "c_cpp:E": 2,
+      "rust:C": 2,
+      "web_js_ts_html:A": 6,
+      "web_js_ts_html:C": 1
+    },
+    "split_counts": {
+      "eval": 38,
+      "strict_eval": 17,
+      "train": 64
+    },
+    "successor_rows": 119
+  },
+  "name": "stage10053_mixed_fresh_source_multilingual_successor_packet",
+  "next_best_step": "Run one capped target-100m probe on this mixed fresh-source successor manifest, then compare it on the same 55 heldout rows to see whether c_cpp, rust, and web recover without giving back the stage10047 Python gain.",
+  "passed": true,
+  "stage": 10053,
+  "stage_name": "stage10053_mixed_fresh_source_multilingual_successor_packet"
+}

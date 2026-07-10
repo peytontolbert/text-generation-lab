@@ -13,12 +13,12 @@
       "scoring_authorized_next": 0,
       "source_emission_authorized": 0
     },
-    "latest_stage": 10045,
-    "latest_stage_name": "stage10045_expanded_source_heldout_review_packets",
-    "latest_stage_next_best_step": "Use these reviewer-facing expanded same-manifest packets to attach real stage10040 and stage10041 outputs, then complete maintainer and anti-cheat signoff before promoting any stronger heldout multilingual claim.",
-    "max_stage": 10045,
+    "latest_stage": 10054,
+    "latest_stage_name": "stage10054_mixed_fresh_source_multilingual_target100m_execution_request",
+    "latest_stage_next_best_step": "Use this request to run one target-100M edit-localization probe on the mixed fresh-source successor manifest, then audit the same 55 heldout rows against the existing stage10040 baseline and Gemma outputs.",
+    "max_stage": 10054,
     "min_stage": 8530,
-    "registry_rows": 1489
+    "registry_rows": 1499
   },
   "passed": true,
   "rows": [
@@ -29281,6 +29281,13 @@
       "stage_name": "stage10039_expanded_source_heldout_same_manifest_gemma_queue"
     },
     {
+      "next_best_step": "After the stage10040 100M rerun and stage10041 Gemma queue both exist, use this audit to answer whether the 100M still beats Gemma on the expanded 55-row heldout compare subset of the 95-row manifest.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10040_expanded_source_heldout_same_manifest_comparison_audit.json",
+      "stage": 10040,
+      "stage_name": "stage10040_expanded_source_heldout_same_manifest_comparison_audit"
+    },
+    {
       "next_best_step": "Use this packet during expert-maintainer and anti-cheat review of the 18 fresh heldout Python/C++ rows before promoting any expanded same-manifest comparison result.",
       "passed": true,
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10042_expanded_source_heldout_review_packet.json",
@@ -29307,6 +29314,108 @@
       "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10045_expanded_source_heldout_review_packets.json",
       "stage": 10045,
       "stage_name": "stage10045_expanded_source_heldout_review_packets"
+    },
+    {
+      "next_best_step": "Use this Python-specific audit to drive expert-maintainer review and successor-root construction for symbol-vs-test disambiguation before any further multilingual training changes.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10046_expanded_python_gap_collapse_audit.json",
+      "stage": 10046,
+      "stage_name": "stage10046_expanded_python_gap_collapse_audit"
+    },
+    {
+      "next_best_step": "Run one capped target-100m probe on the successor train manifest, while separately reviewing the heldout candidates before any same-manifest Python expansion or promotion.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10047_python_symbol_test_source_backed_successor_packet.json",
+      "stage": 10047,
+      "stage_name": "stage10047_python_symbol_test_source_backed_successor_packet"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Use this request to run one target-100M edit-localization probe on the stage10047 Python successor manifest, then compare the resulting heldout rows directly against the existing same-manifest Gemma outputs.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10048_python_symbol_test_target100m_execution_request.json",
+      "stage": 10048,
+      "stage_name": "stage10048_python_symbol_test_target100m_execution_request"
+    },
+    {
+      "next_best_step": "Use this audit to decide whether the stage10047 fresh source-backed Python intervention actually improves Python without giving back the honest multilingual heldout lead.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10049_python_symbol_test_same_manifest_comparison_audit.json",
+      "stage": 10049,
+      "stage_name": "stage10049_python_symbol_test_same_manifest_comparison_audit"
+    },
+    {
+      "next_best_step": "Run one capped target-100m probe on this balanced multilingual successor manifest to test whether the Python gain can be retained without giving back c_cpp, rust, and web heldout accuracy.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10050_balanced_multilingual_successor_packet.json",
+      "stage": 10050,
+      "stage_name": "stage10050_balanced_multilingual_successor_packet"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Use this request to run one target-100m edit-localization probe on the balanced multilingual successor manifest, then compare the heldout rows directly against Gemma and the stage10048 successor run.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10051_balanced_multilingual_target100m_execution_request.json",
+      "stage": 10051,
+      "stage_name": "stage10051_balanced_multilingual_target100m_execution_request"
+    },
+    {
+      "next_best_step": "Use this audit to decide whether the balanced multilingual packet restores the honest macro frontier while preserving the Python win over Gemma.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10052_balanced_multilingual_same_manifest_comparison_audit.json",
+      "stage": 10052,
+      "stage_name": "stage10052_balanced_multilingual_same_manifest_comparison_audit"
+    },
+    {
+      "next_best_step": "Run one capped target-100m probe on this mixed fresh-source successor manifest, then compare it on the same 55 heldout rows to see whether c_cpp, rust, and web recover without giving back the stage10047 Python gain.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10053_mixed_fresh_source_multilingual_successor_packet.json",
+      "stage": 10053,
+      "stage_name": "stage10053_mixed_fresh_source_multilingual_successor_packet"
+    },
+    {
+      "authority": {
+        "body_emission_authorized": false,
+        "controller_complete_merge_authorized_next": false,
+        "decoder_ce_training_authorized_next": false,
+        "denoise_ce_training_authorized_next": false,
+        "gemma_execution_authorized_next": false,
+        "harness_execution_authorized_next": false,
+        "model_execution_authorized_next": false,
+        "promotion_ready": false,
+        "runtime_authorized": false,
+        "scoring_authorized_next": false,
+        "source_emission_authorized": false
+      },
+      "next_best_step": "Use this request to run one target-100M edit-localization probe on the mixed fresh-source successor manifest, then audit the same 55 heldout rows against the existing stage10040 baseline and Gemma outputs.",
+      "passed": true,
+      "path": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage10054_mixed_fresh_source_multilingual_target100m_execution_request.json",
+      "stage": 10054,
+      "stage_name": "stage10054_mixed_fresh_source_multilingual_target100m_execution_request"
     }
   ]
 }
