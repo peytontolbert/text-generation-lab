@@ -1,0 +1,106 @@
+{
+  "artifacts": {
+    "carryforward_rows": "runs/local/artifacts/stage10108_real_session_shortcut_safe_successor_request/real_session_low_risk_carryforward_rows.jsonl",
+    "quarantined_rows": "runs/local/artifacts/stage10108_real_session_shortcut_safe_successor_request/real_session_quarantined_shortcut_rows.jsonl",
+    "stage10103_packet": "runs/local/artifacts/stage10103_real_session_candidate_competition_bootstrap_packet/real_session_candidate_competition_bootstrap_packet.jsonl",
+    "stage10107_atlas": "runs/local/artifacts/stage10107_real_session_review_priority_shortcut_atlas/real_session_review_priority_shortcut_atlas.json",
+    "stage10107_queue": "runs/local/artifacts/stage10107_real_session_review_priority_shortcut_atlas/real_session_review_priority_queue.jsonl"
+  },
+  "claim_boundary": {
+    "only_low_risk_native_rows_can_be_carried_forward_now": true,
+    "python_real_session_slice_must_be_rebuilt": true,
+    "rust_replenishment_required": true,
+    "supports_training_or_scoring_now": false,
+    "web_replenishment_required": true
+  },
+  "failures": [],
+  "generated_at_utc": "2026-07-10T18:01:18Z",
+  "intent": "Quarantine the shortcut-prone real-session slice and issue a successor request that replenishes multilingual maintainer-grade competition rows with safer candidate geometry.",
+  "metrics": {
+    "carryforward_language_counts": {
+      "c_cpp": 3
+    },
+    "carryforward_rows": 3,
+    "high_risk_rows_from_stage10107": 30,
+    "packet_rows": 33,
+    "quarantined_language_counts": {
+      "python": 30
+    },
+    "quarantined_rows": 30
+  },
+  "name": "stage10108_real_session_shortcut_safe_successor_request",
+  "next_best_step": "Use this successor request to rebuild shortcut-safe Python/Web/Rust/C++ real-session competition rows, then rerun the shortcut atlas before any adjudication, training, or Gemma comparison.",
+  "passed": true,
+  "replacement_request": {
+    "c_cpp": {
+      "replacement_rows_required": 9,
+      "required_candidate_geometries": [
+        "implementation_vs_implementation",
+        "symbol_vs_symbol"
+      ],
+      "rulebook": [
+        "Do not expose raw changed-path lists in the model-visible prompt.",
+        "Do not include literal `Verification target:` or equivalent direct test-target phrasing.",
+        "Require at least one concrete failure/assertion/trace cue plus at least one code or config snippet.",
+        "Use opaque candidate IDs and support candidate-order permutation.",
+        "Require anti-cheat review against length asymmetry, candidate-role priors, and path-signature leakage.",
+        "Expand beyond the three low-risk native rows so the maintainer packet is not dominated by Python."
+      ],
+      "why": "The three surviving native rows are low risk but too few to anchor a serious multilingual maintainer evaluation."
+    },
+    "python": {
+      "replacement_rows_required": 30,
+      "required_candidate_geometries": [
+        "implementation_vs_implementation",
+        "implementation_vs_entrypoint",
+        "implementation_vs_config",
+        "symbol_vs_symbol"
+      ],
+      "rulebook": [
+        "Do not expose raw changed-path lists in the model-visible prompt.",
+        "Do not include literal `Verification target:` or equivalent direct test-target phrasing.",
+        "Require at least one concrete failure/assertion/trace cue plus at least one code or config snippet.",
+        "Use opaque candidate IDs and support candidate-order permutation.",
+        "Require anti-cheat review against length asymmetry, candidate-role priors, and path-signature leakage.",
+        "Replace implementation-vs-test binary rows with competition among at least two maintainer-plausible non-test surfaces whenever possible.",
+        "If a test candidate is unavoidable, pair it with another candidate whose prompt-visible evidence is equally concrete and equally short/long."
+      ],
+      "why": "The current Python real-session slice is dominated by implementation-vs-test rows with direct visible verification-target cues and strong snippet-length asymmetry."
+    },
+    "rust": {
+      "replacement_rows_required": 12,
+      "required_candidate_geometries": [
+        "implementation_vs_implementation",
+        "symbol_vs_symbol",
+        "implementation_vs_config"
+      ],
+      "rulebook": [
+        "Do not expose raw changed-path lists in the model-visible prompt.",
+        "Do not include literal `Verification target:` or equivalent direct test-target phrasing.",
+        "Require at least one concrete failure/assertion/trace cue plus at least one code or config snippet.",
+        "Use opaque candidate IDs and support candidate-order permutation.",
+        "Require anti-cheat review against length asymmetry, candidate-role priors, and path-signature leakage.",
+        "Replenish fresh source-backed Rust roots because no credible real-session competition rows currently survive."
+      ],
+      "why": "No credible source-backed Rust competition rows currently survive the bootstrap path, so multilingual maintainer claims remain unsupported."
+    },
+    "web_js_ts_html": {
+      "replacement_rows_required": 5,
+      "required_candidate_geometries": [
+        "entrypoint_vs_implementation",
+        "implementation_vs_config"
+      ],
+      "rulebook": [
+        "Do not expose raw changed-path lists in the model-visible prompt.",
+        "Do not include literal `Verification target:` or equivalent direct test-target phrasing.",
+        "Require at least one concrete failure/assertion/trace cue plus at least one code or config snippet.",
+        "Use opaque candidate IDs and support candidate-order permutation.",
+        "Require anti-cheat review against length asymmetry, candidate-role priors, and path-signature leakage.",
+        "Rebuild the dropped web rows with real entrypoint-vs-implementation evidence only if both sides have balanced snippet materialization.",
+        "Avoid entrypoint naming cues that directly reveal the answer without failure reasoning."
+      ],
+      "why": "The original real-session web candidates dropped during materialization and need balanced snippet evidence before they can support a maintainer-grade comparison."
+    }
+  },
+  "stage": 10108
+}
