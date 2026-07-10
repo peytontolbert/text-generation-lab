@@ -15,7 +15,7 @@ def norm_path(path: str) -> str:
 def is_test_path(path: str) -> bool:
     p = norm_path(path)
     name = p.rsplit("/", 1)[-1]
-    return p.startswith("tests/") or "/tests/" in p or name.startswith("test_") or name.endswith("_test.py")
+    return p.startswith("tests/") or p.startswith("test/") or "/tests/" in p or "/test/" in p or name.startswith("test_") or name.endswith("_test.py")
 
 
 def basename_stem(path: str) -> str:

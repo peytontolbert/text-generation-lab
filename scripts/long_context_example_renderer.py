@@ -19,6 +19,7 @@ def render_examples(
     rng = random.Random(seed)
     chunk_by_id = {str(chunk["chunk_id"]): chunk for chunk in chunks}
     rows: list[dict[str, Any]] = []
+    used_distractor_ids: set[str] = set()
     for index, program in enumerate(programs, start=1):
         relevant = [chunk_by_id[chunk_id] for chunk_id in program.get("supporting_chunk_ids", []) if chunk_id in chunk_by_id]
         if len(relevant) < 2:
@@ -29,10 +30,11 @@ def render_examples(
         distractor_budget = max(0, int(target_context_tokens * noise_ratio) - relevant_token_total)
         distractors = choose_distractors(
             chunks,
-            exclude_ids={str(chunk["chunk_id"]) for chunk in relevant},
+            exclude_ids={str(chunk["chunk_id"]) for chunk in relevant} | used_distractor_ids,
             target_tokens=distractor_budget,
             rng=rng,
         )
+        used_distractor_ids.update(str(chunk.get("chunk_id") or "") for chunk in distractors if str(chunk.get("chunk_id") or ""))
         rng.shuffle(distractors)
         rendered_ids: list[str] = []
         insert_every = max(1, len(distractors) // len(relevant))

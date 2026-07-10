@@ -1,0 +1,42 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9777_verifier_repair_evidence_sufficiency_audit/verifier_repair_evidence_sufficiency_audit.json",
+    "doc": "docs/VERIFIER_REPAIR_EVIDENCE_SUFFICIENCY_STAGE9777.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T21:44:54Z",
+  "decision": "Audited the current multilingual verifier-repair surface and found that safe observable evidence does not separate the labels. The current package is structurally underspecified unless label-shaped fields are exposed.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "bucket_count": 12,
+    "collapsed_safe_bucket_count": 12,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "separable_only_with_leaky_fields_bucket_count": 12,
+    "source_emission_authorized": false
+  },
+  "name": "stage9777_verifier_repair_evidence_sufficiency_audit",
+  "next_best_step": "Rebuild verifier-repair rows with non-label observable verifier evidence instead of action-plan aliases, then rerun target-100M and deterministic Gemma comparison on that repaired surface.",
+  "passed": true,
+  "stage": 9777,
+  "stage_name": "stage9777_verifier_repair_evidence_sufficiency_audit"
+}

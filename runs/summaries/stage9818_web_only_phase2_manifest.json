@@ -1,0 +1,49 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9818_web_only_phase2_manifest/web_only_phase2_manifest_audit.json",
+    "doc": "docs/WEB_ONLY_PHASE2_MANIFEST_STAGE9818.md",
+    "manifest": "runs/local/artifacts/stage9818_web_only_phase2_manifest/web_only_phase2_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T00:30:17Z",
+  "decision": "Materialized a phase2 manifest that trains only on web rows while evaluating on the full multilingual isolated-field surface.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "rows": 45,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_counts": {
+      "eval": 20,
+      "strict_eval": 20,
+      "train": 5
+    },
+    "train_language_counts": {
+      "web_js_ts_html": 5
+    }
+  },
+  "name": "stage9818_web_only_phase2_manifest",
+  "next_best_step": "Run a two-phase structured continuation: Stage9790 baseline phase1, then Stage9818 web-only phase2 on the same in-memory model, and compare the final multilingual strict-eval slices against Stage9794 and Gemma.",
+  "passed": true,
+  "stage": 9818,
+  "stage_name": "stage9818_web_only_phase2_manifest"
+}

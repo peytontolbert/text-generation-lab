@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9760_checkpoint_readiness_truthfulness_audit/checkpoint_readiness_truthfulness_audit.json",
+    "doc": "docs/CHECKPOINT_READINESS_TRUTHFULNESS_AUDIT_STAGE9760.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T20:31:40Z",
+  "decision": "Audited the standalone checkpoint-hash tasks against source execution artifacts and reclassified them from falsely ready-now to artifact-blocked because the underlying structured runs did not export checkpoints.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "checkpoint_tasks_inspected": 13,
+    "checkpoint_tasks_marked_ready_in_stage9759": 13,
+    "checkpoint_tasks_reclassified_blocked": 13,
+    "checkpoint_tasks_truthfully_ready_now": 0,
+    "controller_complete_merge_authorized_next": false,
+    "corrected_cross_front_ready_now_tasks": 98,
+    "corrected_standalone_ready_now_tasks": 26,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "new_nonrunner_artifact_blocked_tasks": 13,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "name": "stage9760_checkpoint_readiness_truthfulness_audit",
+  "next_best_step": "Remove the 13 falsely ready checkpoint-hash tasks from the immediate queue, treat them as blocked on a future frozen export artifact, and focus the actual ready-now work on rubric and anti-cheat review until runner recovery or export-capable execution exists.",
+  "passed": true,
+  "stage": 9760,
+  "stage_name": "stage9760_checkpoint_readiness_truthfulness_audit"
+}

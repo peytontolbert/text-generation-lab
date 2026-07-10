@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import subprocess
 import sys
@@ -172,6 +173,114 @@ def base_cmd(tmp_path: Path, manifest: Path) -> list[str]:
     ]
 
 
+
+def structured_cmd(tmp_path: Path, manifest: Path, *, mode: str) -> list[str]:
+    probe_repo = tmp_path / "repo"
+    probe_repo.mkdir(exist_ok=True)
+    return [
+        sys.executable,
+        str(TRAINER),
+        "--repo-root",
+        str(probe_repo),
+        "--manifest",
+        str(manifest),
+        "--mode",
+        mode,
+        "--max-train-rows",
+        "100",
+        "--max-eval-rows",
+        "100",
+        "--max-strict-rows",
+        "100",
+        "--max-steps",
+        "16",
+        "--decoder-ce-weight",
+        "0.0",
+        "--structured-aux-weight",
+        "1.0",
+        "--denoise-weight",
+        "0.0",
+        "--require-loss-mask-enforcement-audit",
+        "--no-final-checkpoint-export",
+        "--cleanup-checkpoints-after-probe",
+        "--skip-final-model-save",
+        "1",
+        "--output-dir",
+        str(probe_repo / "runs" / "local" / "probes" / f"{mode}_contract"),
+        "--run-id",
+        f"{mode}_contract",
+    ]
+
+
+def two_phase_structured_cmd(tmp_path: Path, manifest: Path, phase2_manifest: Path) -> list[str]:
+    probe_repo = tmp_path / "repo"
+    probe_repo.mkdir(exist_ok=True)
+    return [
+        sys.executable,
+        str(TRAINER),
+        "--repo-root",
+        str(probe_repo),
+        "--manifest",
+        str(manifest),
+        "--phase2-manifest",
+        str(phase2_manifest),
+        "--mode",
+        "two_phase_structured_reconnect_probe",
+        "--max-train-rows",
+        "20",
+        "--max-eval-rows",
+        "20",
+        "--max-strict-rows",
+        "20",
+        "--max-steps",
+        "16",
+        "--phase2-max-train-rows",
+        "20",
+        "--phase2-max-eval-rows",
+        "20",
+        "--phase2-max-strict-rows",
+        "20",
+        "--phase2-max-steps",
+        "4",
+        "--max-decoder-tokens",
+        "4",
+        "--phase2-max-decoder-tokens",
+        "4",
+        "--decoder-ce-weight",
+        "0.0",
+        "--structured-aux-weight",
+        "1.0",
+        "--denoise-weight",
+        "0.0",
+        "--require-loss-mask-enforcement-audit",
+        "--restore-best-structured-state",
+        "--eval-interval",
+        "4",
+        "--no-final-checkpoint-export",
+        "--cleanup-checkpoints-after-probe",
+        "--skip-final-model-save",
+        "1",
+        "--output-dir",
+        str(probe_repo / "runs" / "local" / "probes" / "two_phase_structured_contract"),
+        "--run-id",
+        "two_phase_structured_contract",
+    ]
+
+
+
+def write_clean_visible_evidence_manifest(path: Path) -> None:
+    builder = ROOT / "scripts" / "build_stage9771_edit_localization_visible_evidence_lift_package.py"
+    sys.path.insert(0, str(ROOT))
+    sys.path.insert(0, str(ROOT / "scripts"))
+    spec = importlib.util.spec_from_file_location("stage9771_test_builder", builder)
+    module = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    spec.loader.exec_module(module)
+    rows = module.load_jsonl(module.SOURCE)
+    lifted = module.lift_rows(rows)
+    path.write_text("".join(json.dumps(row, sort_keys=True) + "\n" for row in lifted), encoding="utf-8")
+
+
 def test_recovered_trainer_help_exposes_stage8580_flags() -> None:
     result = subprocess.run([sys.executable, str(TRAINER), "--help"], check=True, text=True, capture_output=True)
     for flag in [
@@ -225,6 +334,10 @@ def test_trainer_refuses_execution_without_contract_only(tmp_path: Path) -> None
     result = subprocess.run(base_cmd(tmp_path, manifest), text=True, capture_output=True)
     assert result.returncode != 0
     assert "model execution is disabled unless --execution-authorized-for-recovery-probe is present" in result.stderr
+    out = tmp_path / "repo" / "runs" / "local" / "probes" / "stage8584"
+    assert (out / "probe_contract_audit.json").is_file()
+    assert not (out / "loss_by_step.jsonl").exists()
+    assert not (out / "cleanup_dry_run.json").exists()
 
 
 def test_contract_fails_on_unsafe_loss_mask(tmp_path: Path) -> None:
@@ -592,3 +705,61 @@ def test_episode_step_contract_only_accepts_closed_loss_rows(tmp_path: Path) -> 
     assert card["episode_step_contract_only_probe"] is True
     assert card["unsafe_loss_rows"] == 0
     assert all(value == 0 for value in card["loss_counts"].values())
+
+
+def test_structured_contract_blocks_target_only_edit_localization_manifest(tmp_path: Path) -> None:
+    manifest = ROOT / "runs" / "local" / "artifacts" / "stage9743_multilingual_edit_localization_target_only_package" / "multilingual_edit_localization_target_only.jsonl"
+    result = subprocess.run(structured_cmd(tmp_path, manifest, mode="edit_localization_probe") + ["--contract-only"], text=True, capture_output=True)
+    assert result.returncode == 1
+    card = json.loads(result.stdout)
+    assert card["passed"] is False
+    assert "multilingual surface readiness failed" in card["errors"][-1]
+    readiness = card["multilingual_surface_readiness"]
+    assert readiness["passed"] is False
+    assert readiness["failed_bucket_count"] == 12
+
+
+def test_structured_contract_allows_visible_evidence_edit_localization_manifest(tmp_path: Path) -> None:
+    manifest = tmp_path / "visible_evidence_manifest.jsonl"
+    write_clean_visible_evidence_manifest(manifest)
+    result = subprocess.run(structured_cmd(tmp_path, manifest, mode="edit_localization_probe") + ["--contract-only"], check=True, text=True, capture_output=True)
+    card = json.loads(result.stdout)
+    assert card["passed"] is True
+    readiness = card["multilingual_surface_readiness"]
+    assert readiness["passed"] is True
+    assert readiness["failed_bucket_count"] == 0
+
+
+def test_two_phase_structured_contract_allows_same_task_multilingual_then_web_manifest_pair(tmp_path: Path) -> None:
+    manifest = ROOT / "runs" / "local" / "artifacts" / "stage9790_edit_localization_opaque_choice_surface" / "edit_localization_opaque_choice_surface.jsonl"
+    phase2_manifest = ROOT / "runs" / "local" / "artifacts" / "stage9813_web_isolated_disambiguator_surface" / "web_isolated_disambiguator_surface.jsonl"
+    result = subprocess.run(two_phase_structured_cmd(tmp_path, manifest, phase2_manifest) + ["--contract-only"], check=True, text=True, capture_output=True)
+    card = json.loads(result.stdout)
+    assert card["passed"] is True
+    assert card["phase1_mode"] == "edit_localization_probe"
+    assert card["phase2_mode"] == "edit_localization_probe"
+    assert card["two_phase_in_memory_required"] is True
+    assert card["checkpoint_export_allowed_between_phases"] is False
+
+
+def test_structured_contract_blocks_patch_operator_manifest_without_encoder_visible_evidence(tmp_path: Path) -> None:
+    manifest = ROOT / "runs" / "local" / "artifacts" / "stage9735_multilingual_patch_operator_label_aligned_package" / "multilingual_patch_operator_label_aligned.jsonl"
+    result = subprocess.run(structured_cmd(tmp_path, manifest, mode="patch_operator_probe") + ["--contract-only"], text=True, capture_output=True)
+    assert result.returncode == 1
+    card = json.loads(result.stdout)
+    assert card["passed"] is False
+    readiness = card["multilingual_surface_readiness"]
+    assert readiness["passed"] is False
+    assert readiness["failed_bucket_count"] == 12
+
+
+def test_structured_contract_blocks_verifier_repair_manifest_without_encoder_visible_evidence(tmp_path: Path) -> None:
+    manifest = ROOT / "runs" / "local" / "artifacts" / "stage9738_multilingual_verifier_repair_label_aligned_package" / "multilingual_verifier_repair_label_aligned.jsonl"
+    result = subprocess.run(structured_cmd(tmp_path, manifest, mode="verifier_repair_probe") + ["--contract-only"], text=True, capture_output=True)
+    assert result.returncode == 1
+    card = json.loads(result.stdout)
+    assert card["passed"] is False
+    readiness = card["multilingual_surface_readiness"]
+    assert readiness["passed"] is False
+    assert readiness["failed_bucket_count"] == 12
+

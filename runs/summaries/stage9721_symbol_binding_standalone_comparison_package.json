@@ -1,0 +1,68 @@
+{
+  "artifacts": {
+    "bundles": "runs/local/artifacts/stage9721_symbol_binding_standalone_comparison_package/symbol_binding_standalone_prefilled_comparison_bundles.jsonl",
+    "doc": "docs/SYMBOL_BINDING_STANDALONE_COMPARISON_PACKAGE_STAGE9721.md",
+    "surface_packets": "runs/local/artifacts/stage9721_symbol_binding_standalone_comparison_package/symbol_binding_standalone_surface_packets.json"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T19:00:50Z",
+  "decision": "Packaged the four standalone symbol-binding language slices with current 100M-side surface hashes and slice scores, making clear that only Python currently has executed comparison-ready 100M evidence.",
+  "metrics": {
+    "available_100m_side_languages": [
+      "python"
+    ],
+    "body_emission_authorized": false,
+    "bundles": 4,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "language_logit_rows": {
+      "c_cpp": 0,
+      "python": 32,
+      "rust": 0,
+      "web_js_ts_html": 0
+    },
+    "language_rows": {
+      "c_cpp": 0,
+      "python": 64,
+      "rust": 0,
+      "web_js_ts_html": 0
+    },
+    "language_slice_exact": {
+      "c_cpp": null,
+      "python": 0.3125,
+      "rust": null,
+      "web_js_ts_html": null
+    },
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "unavailable_100m_side_languages": [
+      "c_cpp",
+      "rust",
+      "web_js_ts_html"
+    ]
+  },
+  "name": "stage9721_symbol_binding_standalone_comparison_package",
+  "next_best_step": "Run Gemma-12B on the four Stage9721 standalone symbol-binding surface packets, attach same-surface Gemma outputs and expert-rubric results into the prefilled bundles, then rerun Stage9720.",
+  "passed": true,
+  "stage": 9721,
+  "stage_name": "stage9721_symbol_binding_standalone_comparison_package"
+}

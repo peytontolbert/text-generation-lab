@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 import random
 import re
 from collections import Counter
@@ -62,14 +63,16 @@ def approx_token_count(text: str) -> int:
 
 
 def iter_text_files(root: Path) -> Iterator[Path]:
-    for path in sorted(root.rglob("*")):
-        if not path.is_file():
-            continue
-        if any(part.startswith(".git") for part in path.parts):
-            continue
-        suffix = path.suffix.lower()
-        if suffix in {".py", ".md", ".txt", ".rst", ".json", ".jsonl", ".yaml", ".yml", ".toml", ".cfg", ".ini", ".ts", ".tsx", ".js", ".jsx", ".java", ".go", ".rs", ".c", ".cc", ".cpp", ".h", ".hpp", ".sh"}:
-            yield path
+    allowed_suffixes = {".py", ".md", ".txt", ".rst", ".json", ".jsonl", ".yaml", ".yml", ".toml", ".cfg", ".ini", ".ts", ".tsx", ".js", ".jsx", ".java", ".go", ".rs", ".c", ".cc", ".cpp", ".h", ".hpp", ".sh"}
+    for current_root, dirnames, filenames in os.walk(root):
+        dirnames[:] = sorted(dirname for dirname in dirnames if not dirname.startswith('.git'))
+        for filename in sorted(filenames):
+            path = Path(current_root) / filename
+            if any(part.startswith('.git') for part in path.parts):
+                continue
+            suffix = path.suffix.lower()
+            if suffix in allowed_suffixes:
+                yield path
 
 
 def safe_read_text(path: Path, max_chars: int | None = None) -> str:
@@ -82,7 +85,9 @@ def safe_read_text(path: Path, max_chars: int | None = None) -> str:
     return text
 
 
-def source_type_from_path(path: Path, *, source_root: Path) -> str:
+def source_type_from_path(path: Path, *, source_root: Path, declared_type: str | None = None) -> str:
+    if declared_type in {"paper", "repo", "dataset"}:
+        return declared_type
     if source_root.name == "repositories":
         return "repo"
     if source_root.name == "datasets":
@@ -229,24 +234,90 @@ def lexical_overlap_score(a: str, b: str) -> float:
     return len(ta & tb) / max(1, len(ta | tb))
 
 
+def _normalized_path(path: str) -> str:
+    return str(path or '').replace('\\', '/').lstrip('./').lower()
+
+def _path_suffix_candidates(path: str) -> set[str]:
+    parts = [part for part in _normalized_path(path).split('/') if part]
+    out: set[str] = set()
+    if len(parts) >= 1:
+        out.add(parts[-1])
+    if len(parts) >= 2:
+        out.add('/'.join(parts[-2:]))
+    if len(parts) >= 3:
+        out.add('/'.join(parts[-3:]))
+    return out
+
+def _chunk_path(chunk: Mapping[str, Any]) -> str:
+    metadata_json = chunk.get('metadata_json')
+    metadata = {}
+    if isinstance(metadata_json, str) and metadata_json.strip():
+        try:
+            metadata = json.loads(metadata_json)
+        except json.JSONDecodeError:
+            metadata = {}
+    return str(chunk.get('path') or metadata.get('path') or '')
+
+def _chunk_filter_terms(chunk: Mapping[str, Any]) -> tuple[set[str], set[str], str]:
+    source_type = str(chunk.get('source_type') or '') or None
+    modality = str(chunk.get('modality') or '') or None
+    path_value = _chunk_path(chunk)
+    text_value = str(chunk.get('text') or '')
+    sample = f"{path_value}\n{text_value[:4000]}"
+    terms = set(extract_terms(sample, max_terms=128, source_type=source_type, modality=modality))
+    compounds = set(extract_compound_terms(sample, max_terms=64, source_type=source_type, modality=modality))
+    return terms, compounds, path_value
+
 def choose_distractors(
     chunks: list[dict[str, Any]],
     *,
     exclude_ids: set[str],
     target_tokens: int,
     rng: random.Random,
+    forbidden_terms: set[str] | None = None,
+    forbidden_compounds: set[str] | None = None,
+    forbidden_exact_paths: set[str] | None = None,
+    forbidden_path_suffixes: set[str] | None = None,
+    forbidden_repo_source_ids: set[str] | None = None,
+    anchor_text: str = '',
+    max_anchor_overlap: float = 0.02,
 ) -> list[dict[str, Any]]:
-    pool = [chunk for chunk in chunks if chunk["chunk_id"] not in exclude_ids]
+    forbidden_terms = {str(term).lower() for term in (forbidden_terms or set()) if str(term).strip()}
+    forbidden_compounds = {str(term).lower() for term in (forbidden_compounds or set()) if str(term).strip()}
+    forbidden_exact_paths = {_normalized_path(path_value) for path_value in (forbidden_exact_paths or set()) if str(path_value).strip()}
+    forbidden_path_suffixes = {str(item).lower() for item in (forbidden_path_suffixes or set()) if str(item).strip()}
+    forbidden_repo_source_ids = {str(item) for item in (forbidden_repo_source_ids or set()) if str(item).strip()}
+
+    pool = [chunk for chunk in chunks if str(chunk.get('chunk_id') or '') not in exclude_ids]
     rng.shuffle(pool)
     total = 0
     out: list[dict[str, Any]] = []
     for chunk in pool:
+        source_type = str(chunk.get('source_type') or '')
+        source_id = str(chunk.get('source_id') or '')
+        if source_type == 'repo' and source_id and source_id in forbidden_repo_source_ids:
+            continue
+        terms, compounds, raw_path = _chunk_filter_terms(chunk)
+        norm_path = _normalized_path(raw_path)
+        if norm_path and norm_path in forbidden_exact_paths:
+            continue
+        if forbidden_path_suffixes and _path_suffix_candidates(norm_path) & forbidden_path_suffixes:
+            continue
+        if forbidden_terms and terms & forbidden_terms:
+            continue
+        if forbidden_compounds and compounds & forbidden_compounds:
+            continue
+        if anchor_text:
+            overlap = lexical_overlap_score(anchor_text, f"{raw_path}\n{str(chunk.get('text') or '')[:4000]}")
+            if overlap > max_anchor_overlap:
+                continue
         out.append(chunk)
-        total += int(chunk.get("token_count", 0))
+        total += int(chunk.get('token_count') or 0)
         if total >= target_tokens:
             break
+    if total < target_tokens:
+        raise ValueError(f'insufficient_clean_distractors:{total}:{target_tokens}')
     return out
-
 
 def infer_entity_type(name: str, source_types: Iterable[str]) -> str:
     joined = " ".join(source_types)

@@ -54,3 +54,8 @@ def test_manifest_counts_routes() -> None:
     ])
     assert card["metrics"]["pass_rows"] == 1
     assert card["metrics"]["coverage_gap_rows"] == 1
+
+
+
+def test_is_test_path_recognizes_singular_test_directory() -> None:
+    assert is_test_path("agentless/test/run_tests.py") is True

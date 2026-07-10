@@ -1,0 +1,121 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9803_opaque_choice_option_token_probe/opaque_choice_option_token_probe_audit.json",
+    "doc": "docs/OPAQUE_CHOICE_OPTION_TOKEN_PROBE_AUDIT_STAGE9804.md",
+    "run_dir": "runs/local/artifacts/stage9803_opaque_choice_option_token_probe"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T23:51:25Z",
+  "decision": "Audited the Stage9803 revised decoder-target probe and compared it against both the prior Stage9799 decoder run and the structured Stage9794 standalone baseline.",
+  "metrics": {
+    "authority": {
+      "body_emission_authorized": false,
+      "controller_complete_merge_authorized_next": false,
+      "decoder_ce_training_authorized_next": false,
+      "denoise_ce_training_authorized_next": false,
+      "gemma_execution_authorized_next": false,
+      "harness_execution_authorized_next": false,
+      "model_execution_authorized_next": false,
+      "promotion_ready": false,
+      "runtime_authorized": false,
+      "scoring_authorized_next": false,
+      "source_emission_authorized": false
+    },
+    "body_emission_authorized": false,
+    "collapsed_single_label": true,
+    "contentful_rate": 1.0,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "diagnosis": "The revised `option X` decoder target format fixed the Stage9799 junk-output failure and enabled both eval and strict-eval generation, but it still collapsed to a single dominant class and did not beat the structured Stage9794 path.",
+    "dominant_label": "option A",
+    "dominant_label_rate": 1.0,
+    "dominant_label_rows": 40,
+    "exact_match_rate": 0.2,
+    "exact_match_rows": 8,
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "generated_rows": 40,
+    "generated_split_set": [
+      "eval",
+      "strict_eval"
+    ],
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "next_patch_target": "opaque_choice_decoder_objective_or_sampling_revision",
+    "passed": false,
+    "predicted_label_counts": {
+      "option A": 40
+    },
+    "prior_decoder_collapse": {
+      "dominant_label": "C",
+      "dominant_label_rate": 1.0,
+      "exact_match_rate": 0.2
+    },
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "short_or_junk_rate": 0.0,
+    "source_emission_authorized": false,
+    "structured_baseline_summary": {
+      "per_language": [
+        {
+          "gemma_strict_exact": 0.2,
+          "label_vocab_scope": "full_packet",
+          "language": "python",
+          "model_correct_100m": 2,
+          "model_strict_exact_100m": 0.4,
+          "rows": 5,
+          "verdict": "100m_better"
+        },
+        {
+          "gemma_strict_exact": 0.2,
+          "label_vocab_scope": "full_packet",
+          "language": "rust",
+          "model_correct_100m": 4,
+          "model_strict_exact_100m": 0.8,
+          "rows": 5,
+          "verdict": "100m_better"
+        },
+        {
+          "gemma_strict_exact": 0.2,
+          "label_vocab_scope": "full_packet",
+          "language": "c_cpp",
+          "model_correct_100m": 3,
+          "model_strict_exact_100m": 0.6,
+          "rows": 5,
+          "verdict": "100m_better"
+        },
+        {
+          "gemma_strict_exact": 0.2,
+          "label_vocab_scope": "full_packet",
+          "language": "web_js_ts_html",
+          "model_correct_100m": 1,
+          "model_strict_exact_100m": 0.2,
+          "rows": 5,
+          "verdict": "tie"
+        }
+      ],
+      "ties": 1,
+      "wins_100m": 3,
+      "wins_gemma": 0
+    }
+  },
+  "name": "stage9804_opaque_choice_option_token_probe_audit",
+  "next_best_step": "Keep the structured Stage9794 path as the truthful standalone comparator. If decoder-side work continues, revise the objective again rather than repeating the same collapsed class-token training pattern.",
+  "passed": false,
+  "stage": 9804,
+  "stage_name": "stage9804_opaque_choice_option_token_probe_audit"
+}

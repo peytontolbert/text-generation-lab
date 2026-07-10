@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9789_winning_edit_localization_shortcut_surface_audit/winning_edit_localization_shortcut_surface_audit.json",
+    "doc": "docs/WINNING_EDIT_LOCALIZATION_SHORTCUT_SURFACE_AUDIT_STAGE9789.md"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T23:01:58Z",
+  "decision": "Audited the winning visible-evidence edit-localization prompt surface and found that while opaque identifiers stay clean, the prompt explicitly exposes the full valid label vocabulary on every strict-eval row, so the packet is not opaque-label clean and should not pass the label-proxy anti-cheat gate.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "cells_with_clean_opaque_ids": 4,
+    "cells_with_encoder_label_mentions": 0,
+    "cells_with_prompt_label_vocab_exposed": 4,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "validated_cells": 4
+  },
+  "name": "stage9789_winning_edit_localization_shortcut_surface_audit",
+  "next_best_step": "Treat the current visible-evidence winning packet as not opaque-label clean: rebuild the comparison surface so the model cannot rely on the explicit valid-label list, then rerun the anti-shortcut audit before upgrading the win claim.",
+  "passed": true,
+  "stage": 9789,
+  "stage_name": "stage9789_winning_edit_localization_shortcut_surface_audit"
+}

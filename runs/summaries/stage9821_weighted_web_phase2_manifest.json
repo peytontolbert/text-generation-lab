@@ -1,0 +1,52 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9821_weighted_web_phase2_manifest/weighted_web_phase2_manifest_audit.json",
+    "doc": "docs/WEIGHTED_WEB_PHASE2_MANIFEST_STAGE9821.md",
+    "manifest": "runs/local/artifacts/stage9821_weighted_web_phase2_manifest/weighted_web_phase2_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T00:37:38Z",
+  "decision": "Materialized a phase2 manifest that preserves all multilingual train rows while duplicating the web train rows to bias continuation toward the web gap.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "rows": 65,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_counts": {
+      "eval": 20,
+      "strict_eval": 20,
+      "train": 25
+    },
+    "train_language_counts": {
+      "c_cpp": 5,
+      "python": 5,
+      "rust": 5,
+      "web_js_ts_html": 10
+    }
+  },
+  "name": "stage9821_weighted_web_phase2_manifest",
+  "next_best_step": "Run a two-phase structured continuation from the Stage9790 baseline with the Stage9821 weighted-web phase2 manifest, then compare multilingual strict-eval slices against Stage9794 and Gemma.",
+  "passed": true,
+  "stage": 9821,
+  "stage_name": "stage9821_weighted_web_phase2_manifest"
+}

@@ -1,0 +1,56 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9829_current_winner_counterfactual_execution_manifest/current_winner_counterfactual_execution_manifest_audit.json",
+    "doc": "docs/CURRENT_WINNER_COUNTERFACTUAL_EXECUTION_MANIFEST_STAGE9829.md",
+    "manifest": "runs/local/artifacts/stage9829_current_winner_counterfactual_execution_manifest/current_winner_counterfactual_execution_manifest.jsonl"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-10T01:25:28Z",
+  "decision": "Converted the stronger counterfactual bank into a trainer-compatible execution manifest by using the fully separable positive-original surface for train and eval, keeping mixed-replay rows in strict_eval, and leaving evidence-removed plus contradictory siblings in the external Stage9828 audit bank because they intentionally break separability.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "dropped_obligations": {
+      "CONTRADICTORY_EVIDENCE_OR_UNSAFE_TWIN": 20,
+      "EVIDENCE_REMOVED": 20
+    },
+    "failures": [],
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "kept_obligations": {
+      "MIXED_REPLAY": 20,
+      "POSITIVE_ORIGINAL": 20,
+      "POSITIVE_ORIGINAL_EVAL_REPLAY": 20
+    },
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "rows": 60,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false,
+    "split_counts": {
+      "eval": 20,
+      "strict_eval": 20,
+      "train": 20
+    }
+  },
+  "name": "stage9829_current_winner_counterfactual_execution_manifest",
+  "next_best_step": "Run a real target-100M structured probe on the stage9829 execution manifest, then replay the full stage9828 evidence-removed and contradictory counterfactual bank as a frozen-model audit instead of trying to train through a non-separable surface.",
+  "passed": true,
+  "stage": 9829,
+  "stage_name": "stage9829_current_winner_counterfactual_execution_manifest"
+}

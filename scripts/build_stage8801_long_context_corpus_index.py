@@ -108,8 +108,29 @@ def _read_parquet_rows(directory: Path) -> list[dict[str, Any]]:
     return rows
 
 
-def _chunk_row(*, source_root: Path, path: Path, chunk_index: int, text: str) -> dict[str, Any]:
-    source_type = source_type_from_path(path, source_root=source_root)
+def _chunk_row(*, source_root: Path, declared_type: str, path: Path, chunk_index: int, text: str) -> dict[str, Any]:
+    return _chunk_row_with_metadata(
+        source_root=source_root,
+        declared_type=declared_type,
+        path=path,
+        chunk_index=chunk_index,
+        text=text,
+        metadata_extra=None,
+        doc_id_override=None,
+    )
+
+
+def _chunk_row_with_metadata(
+    *,
+    source_root: Path,
+    declared_type: str,
+    path: Path,
+    chunk_index: int,
+    text: str,
+    metadata_extra: dict[str, Any] | None,
+    doc_id_override: str | None,
+) -> dict[str, Any]:
+    source_type = source_type_from_path(path, source_root=source_root, declared_type=declared_type)
     source_id = source_id_from_path(path, source_root=source_root)
     rel = str(path.relative_to(source_root))
     modality = modality_from_suffix(path)
@@ -127,11 +148,13 @@ def _chunk_row(*, source_root: Path, path: Path, chunk_index: int, text: str) ->
         'benchmark_terms': [],
         'error_terms': [term for term in base_terms if 'error' in term or 'fail' in term],
     }
+    if metadata_extra:
+        metadata.update(metadata_extra)
     return {
-        'chunk_id': stable_id(source_type, source_id, rel, str(chunk_index)),
+        'chunk_id': stable_id(source_type, source_id, doc_id_override or rel, str(chunk_index)),
         'source_type': source_type,
         'source_id': source_id,
-        'doc_id': rel,
+        'doc_id': doc_id_override or rel,
         'chunk_index': chunk_index,
         'modality': modality,
         'token_count': approx_token_count(text),
@@ -218,6 +241,19 @@ def _iter_repo_candidate_files(repo_root: Path) -> Iterator[Path]:
 
 
 def _iter_root_files(root: Path, declared_type: str, max_files_per_root: int | None) -> Iterator[Path]:
+    if declared_type == 'dataset':
+        emitted = 0
+        for path in sorted(root.rglob('*.parquet')):
+            if max_files_per_root is not None and emitted >= max_files_per_root:
+                return
+            yield path
+            emitted += 1
+        for index, path in enumerate(iter_text_files(root), start=emitted):
+            if max_files_per_root is not None and index >= max_files_per_root:
+                break
+            yield path
+        return
+
     if declared_type != 'repo' or max_files_per_root is None:
         for index, path in enumerate(iter_text_files(root)):
             if max_files_per_root is not None and index >= max_files_per_root:
@@ -245,6 +281,74 @@ def _iter_root_files(root: Path, declared_type: str, max_files_per_root: int | N
         iterators = next_iterators
 
 
+def _dataset_parquet_text_columns(table: Any, *, path: Path) -> list[str]:
+    import pyarrow.types as pat
+
+    columns: list[str] = []
+    for field in table.schema:
+        if pat.is_string(field.type) or pat.is_large_string(field.type):
+            columns.append(str(field.name))
+    if not columns:
+        raise ValueError(f'dataset_parquet_missing_text_columns:{path}')
+    return columns
+
+
+def _dataset_parquet_row_texts(
+    *,
+    source_root: Path,
+    path: Path,
+    trace_chunk_tokens: int,
+    max_rows_per_parquet_file: int,
+    max_chars_per_field: int,
+) -> list[dict[str, Any]]:
+    import pyarrow.parquet as pq
+
+    table = pq.read_table(path)
+    text_columns = _dataset_parquet_text_columns(table, path=path)
+    rel = str(path.relative_to(source_root))
+    rows: list[dict[str, Any]] = []
+    py_rows = table.select(text_columns).to_pylist()
+    for row_index, row in enumerate(py_rows):
+        if row_index >= max_rows_per_parquet_file:
+            break
+        sections: list[str] = []
+        used_columns: list[str] = []
+        for column in text_columns:
+            value = row.get(column)
+            if value is None:
+                continue
+            text = str(value).strip()
+            if not text:
+                continue
+            if len(text) > max_chars_per_field:
+                text = text[:max_chars_per_field]
+            sections.append(f'[{column}] {text}')
+            used_columns.append(column)
+        if not sections:
+            continue
+        doc_id = f'{rel}#row={row_index}'
+        merged_text = '\n'.join(sections)
+        for local_chunk_index, chunk_text_value in enumerate(chunk_text(merged_text, max_tokens=trace_chunk_tokens), start=1):
+            rows.append(
+                _chunk_row_with_metadata(
+                    source_root=source_root,
+                    declared_type='dataset',
+                    path=path,
+                    chunk_index=local_chunk_index,
+                    text=chunk_text_value,
+                    doc_id_override=doc_id,
+                    metadata_extra={
+                        'dataset_row_index': row_index,
+                        'dataset_text_fields': used_columns,
+                        'dataset_format': 'parquet',
+                    },
+                )
+            )
+    if not rows:
+        raise ValueError(f'dataset_parquet_no_text_rows:{path}')
+    return rows
+
+
 def build_chunk_and_mention_shards(
     *,
     paper_roots: list[Path],
@@ -256,6 +360,8 @@ def build_chunk_and_mention_shards(
     trace_chunk_tokens: int = 384,
     max_files_per_root: int | None = None,
     max_chars_per_file: int = 120_000,
+    max_rows_per_parquet_file: int = 256,
+    max_chars_per_parquet_field: int = 4_000,
     rows_per_shard: int = 5000,
 ) -> dict[str, Any]:
     chunks_dir = output_dir / 'chunks'
@@ -282,12 +388,33 @@ def build_chunk_and_mention_shards(
                 continue
             scanned += 1
             file_count += 1
+            if declared_type == 'dataset' and path.suffix.lower() == '.parquet':
+                parquet_chunks = _dataset_parquet_row_texts(
+                    source_root=root,
+                    path=path,
+                    trace_chunk_tokens=trace_chunk_tokens,
+                    max_rows_per_parquet_file=max_rows_per_parquet_file,
+                    max_chars_per_field=max_chars_per_parquet_field,
+                )
+                for row in parquet_chunks:
+                    chunk_buffer.append(row)
+                    source_counts[row['source_type']] += 1
+                    mention_buffer.extend(_mention_rows(row))
+                    if len(chunk_buffer) >= rows_per_shard:
+                        write_parquet_shard(shard_path(chunks_dir, 'chunks', chunk_shard), chunk_buffer)
+                        chunk_shard += 1
+                        chunk_buffer = []
+                    if len(mention_buffer) >= rows_per_shard:
+                        write_parquet_shard(shard_path(mentions_dir, 'chunk_mentions', mention_shard), mention_buffer)
+                        mention_shard += 1
+                        mention_buffer = []
+                continue
             raw = safe_read_text(path, max_chars=max_chars_per_file)
             if not raw.strip():
                 continue
             budget = paper_chunk_tokens if declared_type == 'paper' else repo_chunk_tokens if declared_type == 'repo' else trace_chunk_tokens
             for local_chunk_index, text in enumerate(chunk_text(raw, max_tokens=budget), start=1):
-                row = _chunk_row(source_root=root, path=path, chunk_index=local_chunk_index, text=text)
+                row = _chunk_row(source_root=root, declared_type=declared_type, path=path, chunk_index=local_chunk_index, text=text)
                 chunk_buffer.append(row)
                 source_counts[row['source_type']] += 1
                 mention_buffer.extend(_mention_rows(row))
@@ -455,6 +582,8 @@ def main() -> None:
     parser.add_argument('--trace-chunk-tokens', type=int, default=384)
     parser.add_argument('--max-files-per-root', type=int)
     parser.add_argument('--max-chars-per-file', type=int, default=120000)
+    parser.add_argument('--max-rows-per-parquet-file', type=int, default=256)
+    parser.add_argument('--max-chars-per-parquet-field', type=int, default=4000)
     parser.add_argument('--rows-per-shard', type=int, default=5000)
     parser.add_argument('--min-mention-count', type=int, default=2)
     parser.add_argument('--max-chunk-frequency-ratio', type=float, default=0.05)
@@ -489,6 +618,8 @@ def main() -> None:
         trace_chunk_tokens=args.trace_chunk_tokens,
         max_files_per_root=args.max_files_per_root,
         max_chars_per_file=args.max_chars_per_file,
+        max_rows_per_parquet_file=args.max_rows_per_parquet_file,
+        max_chars_per_parquet_field=args.max_chars_per_parquet_field,
         rows_per_shard=args.rows_per_shard,
     )
     entity_summary = build_entities_with_pyarrow(output_dir=out, min_mention_count=args.min_mention_count, max_chunk_frequency_ratio=args.max_chunk_frequency_ratio)

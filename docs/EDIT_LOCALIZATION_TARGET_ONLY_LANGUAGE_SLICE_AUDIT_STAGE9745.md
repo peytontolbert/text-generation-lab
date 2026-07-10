@@ -1,0 +1,9 @@
+# Stage9745 Edit Localization Target-Only Language Slice Audit
+
+Passed: `True`
+Uniform improvement over Stage9734: `True`
+Language slices: `{'python': {'eval': {'rows': 5, 'correct': 1, 'exact': 0.2, 'baseline_exact': 0.14285714285714285, 'improved_over_stage9734': True, 'pred_counts': {'TARGET_CONFIG': 5}}, 'strict_eval': {'rows': 5, 'correct': 1, 'exact': 0.2, 'baseline_exact': 0.14285714285714285, 'improved_over_stage9734': True, 'pred_counts': {'TARGET_CONFIG': 5}}}, 'rust': {'eval': {'rows': 5, 'correct': 1, 'exact': 0.2, 'baseline_exact': 0.14285714285714285, 'improved_over_stage9734': True, 'pred_counts': {'TARGET_FILE': 5}}, 'strict_eval': {'rows': 5, 'correct': 1, 'exact': 0.2, 'baseline_exact': 0.14285714285714285, 'improved_over_stage9734': True, 'pred_counts': {'TARGET_FILE': 5}}}, 'c_cpp': {'eval': {'rows': 5, 'correct': 1, 'exact': 0.2, 'baseline_exact': 0.14285714285714285, 'improved_over_stage9734': True, 'pred_counts': {'TARGET_CONFIG': 5}}, 'strict_eval': {'rows': 5, 'correct': 1, 'exact': 0.2, 'baseline_exact': 0.14285714285714285, 'improved_over_stage9734': True, 'pred_counts': {'TARGET_CONFIG': 5}}}, 'web_js_ts_html': {'eval': {'rows': 5, 'correct': 1, 'exact': 0.2, 'baseline_exact': 0.14285714285714285, 'improved_over_stage9734': True, 'pred_counts': {'TARGET_FILE': 5}}, 'strict_eval': {'rows': 5, 'correct': 1, 'exact': 0.2, 'baseline_exact': 0.14285714285714285, 'improved_over_stage9734': True, 'pred_counts': {'TARGET_FILE': 5}}}}`
+
+This stage confirms that the target-only edit-localization improvement is multilingual and beats the prior full-label per-language baseline in every language family.
+
+Next: Use the target-only edit-localization result as the current strongest standalone multilingual 100M surface, or port the same target-space simplification idea to other structured surfaces.

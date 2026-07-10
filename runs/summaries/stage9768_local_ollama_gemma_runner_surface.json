@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "audit": "runs/local/artifacts/stage9768_local_ollama_gemma_runner_surface/local_ollama_gemma_runner_surface.json",
+    "doc": "docs/LOCAL_OLLAMA_GEMMA_RUNNER_SURFACE_STAGE9768.md",
+    "runner_script": "scripts/run_stage9748_standalone_gemma_queue_via_ollama.py"
+  },
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "created_at_utc": "2026-07-09T21:09:46Z",
+  "decision": "Corrected the local runtime picture: this machine already has Ollama plus gemma3:12b, and the repo now exposes a concrete standalone Gemma runner surface that reuses the recovered 100M encoder serialization.",
+  "metrics": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "local_gemma3_12b_present": true,
+    "model_execution_authorized_next": false,
+    "ollama_installed": true,
+    "promotion_ready": false,
+    "runner_script_exists": true,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "name": "stage9768_local_ollama_gemma_runner_surface",
+  "next_best_step": "Use the local Ollama Gemma runner surface in dry-run mode first, then execute a bounded standalone comparison slice against the Stage9748 queue starting with python symbol-binding once Gemma execution is explicitly authorized for local use.",
+  "passed": true,
+  "stage": 9768,
+  "stage_name": "stage9768_local_ollama_gemma_runner_surface"
+}
