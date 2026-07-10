@@ -140,7 +140,7 @@ def build_requests() -> dict[str, Any]:
             "request_status": "awaiting_real_harness_backend_adapter",
             "backend_requirements": [
                 "load_locked_task_pack_without_training_contamination",
-                "execute_same_task_pack_for_100m_and_gemma12b_against_canonical_stage10072_proxy_frontier",
+                "execute_same_task_pack_for_100m_and_gemma12b_against_canonical_stage10086_proxy_frontier",
                 "capture_tool_trace_spans",
                 "score_verifier_results",
                 "score_patch_minimality_or_abstain",
@@ -179,7 +179,7 @@ def main() -> None:
     built = build_requests()
     REQUESTS.write_text(json.dumps(built, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     next_step = (
-        "Point the external full-product backend at the four canonical harness_execution_request.json files so it can populate the reserved artifact slots on the same locked task packs that stage10072 already won in standalone form."
+        "Point the external full-product backend at the four canonical harness_execution_request.json files so it can populate the reserved artifact slots on the same locked task packs that stage10086 already won in standalone form."
     )
     summary = {
         "stage": STAGE,
@@ -189,7 +189,7 @@ def main() -> None:
         "authority": dict(AUTHORITY_CLOSED),
         "metrics": {**dict(AUTHORITY_CLOSED), **built["metrics"]},
         "artifacts": {"requests": display(REQUESTS), "doc": display(DOC)},
-        "decision": "Materialized per-cell canonical harness execution requests that bind the external backend to the stage10072 standalone winner and the existing reserved full-product artifact paths.",
+        "decision": "Materialized per-cell canonical harness execution requests that bind the external backend to the stage10086 standalone winner and the existing reserved full-product artifact paths.",
         "next_best_step": next_step,
         "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }

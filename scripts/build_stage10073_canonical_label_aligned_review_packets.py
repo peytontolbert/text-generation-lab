@@ -18,14 +18,14 @@ SUMMARY = ROOT / "runs/summaries" / f"{NAME}.json"
 DOC = ROOT / "docs" / "CANONICAL_LABEL_ALIGNED_REVIEW_PACKETS_STAGE10073.md"
 REGISTRY = ROOT / "runs/local/artifacts/reconstructed_stage_registry.json"
 
-REQUEST = ROOT / "runs/local/artifacts/stage10070_canonical_label_aligned_target100m_execution_request/surface_requests/edit_localization.json"
-QUEUE = ROOT / "runs/local/artifacts/stage10071_canonical_label_aligned_same_manifest_gemma_queue/canonical_label_aligned_same_manifest_gemma_queue.json"
-COMPARISON = ROOT / "runs/local/artifacts/stage10072_canonical_label_aligned_same_manifest_comparison_audit/canonical_label_aligned_same_manifest_comparison_audit.json"
-COMPARISON_ROWS = ROOT / "runs/local/artifacts/stage10072_canonical_label_aligned_same_manifest_comparison_audit/canonical_label_aligned_same_manifest_comparison_rows.jsonl"
+REQUEST = ROOT / "runs/local/artifacts/stage10084_canonical_label_aligned_source_heldout_target100m_execution_request/surface_requests/edit_localization.json"
+QUEUE = ROOT / "runs/local/artifacts/stage10085_canonical_label_aligned_source_heldout_same_manifest_gemma_queue/canonical_label_aligned_source_heldout_same_manifest_gemma_queue.json"
+COMPARISON = ROOT / "runs/local/artifacts/stage10086_canonical_label_aligned_source_heldout_same_manifest_comparison_audit/canonical_label_aligned_source_heldout_same_manifest_comparison_audit.json"
+COMPARISON_ROWS = ROOT / "runs/local/artifacts/stage10086_canonical_label_aligned_source_heldout_same_manifest_comparison_audit/canonical_label_aligned_source_heldout_same_manifest_comparison_rows.jsonl"
 COLLISION_AUDIT = ROOT / "runs/local/artifacts/stage10068_multilingual_label_semantics_collision_audit/multilingual_label_semantics_collision_audit.json"
-PROBE_RESULT = ROOT / "runs/local/artifacts/stage10070_canonical_label_aligned_target100m_probe/edit_localization_probe/execution_result.json"
-GEMMA_RESULT = ROOT / "runs/local/artifacts/stage10071_canonical_label_aligned_gemma_execution/same_prompt_surface_gemma12b_outputs.json"
-MANIFEST_PATH = ROOT / "runs/local/artifacts/stage10069_canonical_label_aligned_multilingual_successor_packet/canonical_label_aligned_multilingual_manifest.jsonl"
+PROBE_RESULT = ROOT / "runs/local/artifacts/stage10084_canonical_label_aligned_source_heldout_target100m_probe/edit_localization_probe/execution_result.json"
+GEMMA_RESULT = ROOT / "runs/local/artifacts/stage10085_canonical_label_aligned_source_heldout_gemma_execution/same_prompt_surface_gemma12b_outputs.json"
+MANIFEST_PATH = ROOT / "runs/local/artifacts/stage10083_canonical_label_aligned_source_heldout_successor_packet/canonical_label_aligned_source_heldout_manifest.jsonl"
 
 LANGS = ["python", "rust", "c_cpp", "web_js_ts_html"]
 CHALLENGE_FAMILIES = [
@@ -109,7 +109,7 @@ def build_packets() -> dict[str, Any]:
     if request.get("surface") != "edit_localization":
         failures.append("stage10070_request_not_edit_localization")
     if comparison.get("passed") is not True:
-        failures.append("stage10072_not_passed")
+        failures.append("stage10086_not_passed")
     if collision.get("passed") is not True:
         failures.append("stage10068_not_passed")
     if probe.get("runtime_executed") is not True:
@@ -174,9 +174,9 @@ def build_packets() -> dict[str, Any]:
             "supporting_evidence_paths": {
                 "label_collision_audit": display(COLLISION_AUDIT),
                 "canonical_manifest": display(MANIFEST_PATH),
-                "same_manifest_gemma_queue": display(ROOT / "runs/local/artifacts/stage10071_canonical_label_aligned_same_manifest_gemma_queue/canonical_label_aligned_same_manifest_gemma_queue.json"),
-                "gemma_execution_rows": display(ROOT / "runs/local/artifacts/stage10071_canonical_label_aligned_gemma_execution/same_prompt_surface_gemma12b_outputs_rows.jsonl"),
-                "target100m_logits": display(ROOT / "runs/local/artifacts/stage10070_canonical_label_aligned_target100m_probe/edit_localization_probe/row_field_logits.jsonl"),
+                "same_manifest_gemma_queue": display(ROOT / "runs/local/artifacts/stage10085_canonical_label_aligned_source_heldout_same_manifest_gemma_queue/canonical_label_aligned_source_heldout_same_manifest_gemma_queue.json"),
+                "gemma_execution_rows": display(ROOT / "runs/local/artifacts/stage10085_canonical_label_aligned_source_heldout_gemma_execution/same_prompt_surface_gemma12b_outputs_rows.jsonl"),
+                "target100m_logits": display(ROOT / "runs/local/artifacts/stage10084_canonical_label_aligned_source_heldout_target100m_probe/edit_localization_probe/row_field_logits.jsonl"),
             },
         }
         write_json(base / "expert_maintainer_rubric_review.json", rubric)
@@ -230,7 +230,7 @@ def main() -> None:
     DOC.parent.mkdir(parents=True, exist_ok=True)
     built = build_packets()
     write_json(AUDIT, {"stage": STAGE, "name": NAME, "passed": built["passed"], "metrics": built["metrics"], "failures": built["failures"]})
-    next_step = "Work these canonical-label review packets language by language to complete expert-maintainer rubric and anti-cheat signoff on the actual stage10072 winning surface."
+    next_step = "Work these canonical-label review packets language by language to complete expert-maintainer rubric and anti-cheat signoff on the actual stage10086 source-heldout winning surface."
     summary = {
         "stage": STAGE,
         "stage_name": NAME,
@@ -238,7 +238,7 @@ def main() -> None:
         "passed": built["passed"],
         "metrics": {**built["metrics"], "failures": built["failures"]},
         "artifacts": {"packets": display(PACKETS), "manifest": display(MANIFEST), "audit": display(AUDIT), "doc": display(DOC)},
-        "decision": "Materialized reviewer-facing canonical-label same-manifest packets with the real stage10070 100M outputs, stage10071 Gemma outputs, and the stage10068 label-collision audit attached to each winning language cell.",
+        "decision": "Materialized reviewer-facing canonical-label source-heldout packets with the real stage10084 100M outputs, stage10085 Gemma outputs, and the stage10068 label-collision audit attached to each winning language cell.",
         "next_best_step": next_step,
         "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }

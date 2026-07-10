@@ -26,7 +26,7 @@ def test_build_plan_materializes_four_canonical_harness_cells():
     assert built["metrics"]["cells_with_canonical_100m_better_proxy"] == 4
     for row in built["cell_plans"]:
         assert row["runner_surface_status"] == "dry_run_contract_ready_real_harness_runtime_still_missing"
-        assert row["standalone_proxy_frontier"]["same_surface_comparison_stage"] == 10072
+        assert row["standalone_proxy_frontier"]["same_surface_comparison_stage"] == 10086
         assert row["standalone_proxy_frontier"]["completion_boundary_stage"] == 10078
 
 

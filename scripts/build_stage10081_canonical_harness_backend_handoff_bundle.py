@@ -178,7 +178,7 @@ def main() -> None:
         "authority": dict(AUTHORITY_CLOSED),
         "metrics": {**dict(AUTHORITY_CLOSED), **built["metrics"]},
         "artifacts": {"bundle": display(BUNDLE), "doc": display(DOC)},
-        "decision": "Materialized canonical backend handoff bundles proving the remaining full-product gap is external runtime execution while keeping the handoff aligned with the stage10072 standalone multilingual win.",
+        "decision": "Materialized canonical backend handoff bundles proving the remaining full-product gap is external runtime execution while keeping the handoff aligned with the stage10086 standalone multilingual win.",
         "next_best_step": next_step,
         "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }

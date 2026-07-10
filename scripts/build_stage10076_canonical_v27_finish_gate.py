@@ -20,7 +20,7 @@ SUMMARY = ROOT / "runs/summaries" / f"{NAME}.json"
 DOC = ROOT / "docs" / "CANONICAL_V27_FINISH_GATE_STAGE10076.md"
 REGISTRY = ROOT / "runs/local/artifacts/reconstructed_stage_registry.json"
 
-FRONTIER = ROOT / "runs/local/artifacts/stage10072_canonical_label_aligned_same_manifest_comparison_audit/canonical_label_aligned_same_manifest_comparison_audit.json"
+FRONTIER = ROOT / "runs/local/artifacts/stage10086_canonical_label_aligned_source_heldout_same_manifest_comparison_audit/canonical_label_aligned_source_heldout_same_manifest_comparison_audit.json"
 SIGNOFF = ROOT / "runs/local/artifacts/stage10074_canonical_label_aligned_signoff_workbook/canonical_label_aligned_signoff_workbook.json"
 HANDOFF = ROOT / "runs/local/artifacts/stage9931_weighted_harness_backend_handoff_bundle/weighted_harness_backend_handoff_bundle.json"
 LANGS = ["python", "rust", "c_cpp", "web_js_ts_html"]
@@ -105,7 +105,7 @@ def build_gate() -> dict[str, Any]:
         "metrics": metrics,
         "language_rows": gate_rows,
         "completion_rule": {
-            "standalone_requirement": "all 4 language families retain 100m_better same-manifest verdict and receive human rubric plus anti-cheat signoff",
+            "standalone_requirement": "all 4 language families retain 100m_better source-heldout same-manifest verdict and receive human rubric plus anti-cheat signoff",
             "harness_requirement": "all 4 language families execute through external full-product backend and write back required artifacts",
             "anti_cheat_requirement": "no anti-cheat failure in any signed winner cell",
         },

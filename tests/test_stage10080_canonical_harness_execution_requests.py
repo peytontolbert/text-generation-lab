@@ -26,7 +26,7 @@ def test_build_requests_materializes_four_canonical_backend_requests():
     assert built["metrics"]["cells_ready_for_backend_adapter"] == 4
     for row in built["requests"]:
         assert row["request_status"] == "awaiting_real_harness_backend_adapter"
-        assert row["standalone_proxy_frontier"]["same_surface_comparison_stage"] == 10072
+        assert row["standalone_proxy_frontier"]["same_surface_comparison_stage"] == 10086
 
 
 def test_main_writes_summary_and_requests(tmp_path, monkeypatch):

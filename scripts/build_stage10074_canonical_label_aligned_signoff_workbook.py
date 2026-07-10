@@ -16,9 +16,9 @@ DOC = ROOT / "docs" / "CANONICAL_LABEL_ALIGNED_SIGNOFF_WORKBOOK_STAGE10074.md"
 REGISTRY = ROOT / "runs/local/artifacts/reconstructed_stage_registry.json"
 
 REVIEW = ROOT / "runs/summaries/stage10073_canonical_label_aligned_review_packets.json"
-REQUEST = ROOT / "runs/summaries/stage10070_canonical_label_aligned_target100m_execution_request.json"
-QUEUE = ROOT / "runs/summaries/stage10071_canonical_label_aligned_same_manifest_gemma_queue.json"
-COMPARISON = ROOT / "runs/summaries/stage10072_canonical_label_aligned_same_manifest_comparison_audit.json"
+REQUEST = ROOT / "runs/summaries/stage10084_canonical_label_aligned_source_heldout_target100m_execution_request.json"
+QUEUE = ROOT / "runs/summaries/stage10085_canonical_label_aligned_source_heldout_same_manifest_gemma_queue.json"
+COMPARISON = ROOT / "runs/summaries/stage10086_canonical_label_aligned_source_heldout_same_manifest_comparison_audit.json"
 LANGS = ["python", "c_cpp", "rust", "web_js_ts_html"]
 
 
@@ -53,11 +53,11 @@ def build_workbook() -> dict[str, Any]:
     if review.get("passed") is not True:
         failures.append("stage10073_not_passed")
     if request.get("passed") is not True:
-        failures.append("stage10070_not_passed")
+        failures.append("stage10084_not_passed")
     if queue.get("passed") is not True:
-        failures.append("stage10071_not_passed")
+        failures.append("stage10085_not_passed")
     if comparison.get("passed") is not True:
-        failures.append("stage10072_not_passed")
+        failures.append("stage10086_not_passed")
 
     rows: list[dict[str, Any]] = []
     queue_position = 1
@@ -69,11 +69,11 @@ def build_workbook() -> dict[str, Any]:
                 "language_family": language,
                 "task": "expert_maintainer_rubric_review",
                 "review_status": "pending_human_signoff",
-                "required_human_action": "Review the attached canonical-label same-manifest outputs and decide whether visible evidence supports one maintainer-appropriate answer for this language slice.",
+                "required_human_action": "Review the attached canonical-label source-heldout same-manifest outputs and decide whether visible evidence supports one maintainer-appropriate answer for this language slice.",
                 "supporting_evidence_paths": {
                     "review_packets": display(ROOT / "runs/local/artifacts/stage10073_canonical_label_aligned_review_packets/canonical_label_aligned_review_packets.jsonl"),
-                    "same_manifest_comparison": display(ROOT / "runs/local/artifacts/stage10072_canonical_label_aligned_same_manifest_comparison_audit/canonical_label_aligned_same_manifest_comparison_audit.json"),
-                    "target100m_request": display(ROOT / "runs/local/artifacts/stage10070_canonical_label_aligned_target100m_execution_request/canonical_label_aligned_target100m_execution_request.json"),
+                    "same_manifest_comparison": display(ROOT / "runs/local/artifacts/stage10086_canonical_label_aligned_source_heldout_same_manifest_comparison_audit/canonical_label_aligned_source_heldout_same_manifest_comparison_audit.json"),
+                    "target100m_request": display(ROOT / "runs/local/artifacts/stage10084_canonical_label_aligned_source_heldout_target100m_execution_request/canonical_label_aligned_source_heldout_target100m_execution_request.json"),
                 },
             }
         )
@@ -89,7 +89,7 @@ def build_workbook() -> dict[str, Any]:
                 "supporting_evidence_paths": {
                     "review_packets": display(ROOT / "runs/local/artifacts/stage10073_canonical_label_aligned_review_packets/canonical_label_aligned_review_packets.jsonl"),
                     "label_collision_audit": display(ROOT / "runs/local/artifacts/stage10068_multilingual_label_semantics_collision_audit/multilingual_label_semantics_collision_audit.json"),
-                    "gemma_queue": display(ROOT / "runs/local/artifacts/stage10071_canonical_label_aligned_same_manifest_gemma_queue/canonical_label_aligned_same_manifest_gemma_queue.json"),
+                    "gemma_queue": display(ROOT / "runs/local/artifacts/stage10085_canonical_label_aligned_source_heldout_same_manifest_gemma_queue/canonical_label_aligned_source_heldout_same_manifest_gemma_queue.json"),
                 },
             }
         )
@@ -120,7 +120,7 @@ def main() -> None:
     DOC.parent.mkdir(parents=True, exist_ok=True)
     built = build_workbook()
     WORKBOOK.write_text(json.dumps(built, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    next_step = "Work the 8 canonical-label signoff tasks to turn the current machine-complete 4-language win into human-reviewed same-surface evidence for the standalone v2.7 acceptance cells."
+    next_step = "Work the 8 canonical-label signoff tasks to turn the current machine-complete source-heldout 4-language win into human-reviewed same-surface evidence for the standalone v2.7 acceptance cells."
     summary = {
         "stage": STAGE,
         "stage_name": NAME,
@@ -128,7 +128,7 @@ def main() -> None:
         "passed": built["passed"],
         "metrics": {**built["metrics"], "failures": built["failures"]},
         "artifacts": {"workbook": display(WORKBOOK), "doc": display(DOC)},
-        "decision": "Materialized the canonical-label signoff workbook so expert-maintainer and anti-cheat review can proceed directly on the stage10072 four-language same-manifest win.",
+        "decision": "Materialized the canonical-label signoff workbook so expert-maintainer and anti-cheat review can proceed directly on the stage10086 four-language source-heldout same-manifest win.",
         "next_best_step": next_step,
         "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }

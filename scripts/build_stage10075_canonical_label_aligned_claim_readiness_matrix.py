@@ -16,7 +16,7 @@ DOC = ROOT / "docs" / "CANONICAL_LABEL_ALIGNED_CLAIM_READINESS_MATRIX_STAGE10075
 REGISTRY = ROOT / "runs/local/artifacts/reconstructed_stage_registry.json"
 
 ACCEPT = ROOT / "docs/V27_MULTILINGUAL_EVAL_ACCEPTANCE_CONTRACT_STAGE9684.md"
-COMPARISON = ROOT / "runs/local/artifacts/stage10072_canonical_label_aligned_same_manifest_comparison_audit/canonical_label_aligned_same_manifest_comparison_audit.json"
+COMPARISON = ROOT / "runs/local/artifacts/stage10086_canonical_label_aligned_source_heldout_same_manifest_comparison_audit/canonical_label_aligned_source_heldout_same_manifest_comparison_audit.json"
 REVIEW = ROOT / "runs/local/artifacts/stage10073_canonical_label_aligned_review_packets/canonical_label_aligned_review_audit.json"
 WORKBOOK = ROOT / "runs/local/artifacts/stage10074_canonical_label_aligned_signoff_workbook/canonical_label_aligned_signoff_workbook.json"
 
@@ -48,7 +48,7 @@ def build_matrix() -> dict[str, Any]:
     workbook = load_json(WORKBOOK)
     failures: list[str] = []
     if comparison.get("passed") is not True:
-        failures.append("stage10072_not_passed")
+        failures.append("stage10086_not_passed")
     if review.get("passed") is not True:
         failures.append("stage10073_not_passed")
     if workbook.get("passed") is not True:
@@ -62,6 +62,7 @@ def build_matrix() -> dict[str, Any]:
             {
                 "language_family": language,
                 "standalone_edit_localization_same_surface_evidence": verdict == "100m_better",
+                "standalone_edit_localization_source_heldout_evidence": verdict == "100m_better",
                 "expert_review_attached": True,
                 "anti_cheat_card_attached": True,
                 "human_signoff_completed": False,
@@ -91,7 +92,7 @@ def main() -> None:
     DOC.parent.mkdir(parents=True, exist_ok=True)
     built = build_matrix()
     MATRIX.write_text(json.dumps(built, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    next_step = "Complete the 8 human standalone signoff tasks, then shift effort to the still-missing full-product harness cells required by the v2.7 acceptance contract."
+    next_step = "Complete the 8 human standalone signoff tasks on the source-heldout winner, then shift effort to the still-missing full-product harness cells required by the v2.7 acceptance contract."
     summary = {
         "stage": STAGE,
         "stage_name": NAME,
@@ -99,7 +100,7 @@ def main() -> None:
         "passed": built["passed"],
         "metrics": {**built["metrics"], "failures": built["failures"]},
         "artifacts": {"matrix": display(MATRIX), "acceptance_contract": display(ACCEPT), "doc": display(DOC)},
-        "decision": "Refreshed claim readiness after the canonical-label frontier: the standalone edit-localization cell is now machine-complete across four languages, but human signoff and all full-product harness cells remain open against the stage9684 acceptance contract.",
+        "decision": "Refreshed claim readiness after the canonical source-heldout frontier: the standalone edit-localization cell is now machine-complete across four languages, but human signoff and all full-product harness cells remain open against the stage9684 acceptance contract.",
         "next_best_step": next_step,
         "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }

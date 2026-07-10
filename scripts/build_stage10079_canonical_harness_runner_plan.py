@@ -21,7 +21,7 @@ DOC = ROOT / "docs" / "CANONICAL_HARNESS_RUNNER_PLAN_STAGE10079.md"
 REGISTRY = ROOT / "runs/local/artifacts/reconstructed_stage_registry.json"
 
 SOURCE_PACKETS = ROOT / "runs/local/artifacts/stage9756_full_product_harness_review_packets/full_product_harness_review_packets.jsonl"
-COMPARISON = ROOT / "runs/local/artifacts/stage10072_canonical_label_aligned_same_manifest_comparison_audit/canonical_label_aligned_same_manifest_comparison_audit.json"
+COMPARISON = ROOT / "runs/local/artifacts/stage10086_canonical_label_aligned_source_heldout_same_manifest_comparison_audit/canonical_label_aligned_source_heldout_same_manifest_comparison_audit.json"
 READINESS = ROOT / "runs/local/artifacts/stage10075_canonical_label_aligned_claim_readiness_matrix/canonical_label_aligned_claim_readiness_matrix.json"
 BOUNDARY = ROOT / "runs/local/artifacts/stage10078_canonical_v27_completion_boundary/canonical_v27_completion_boundary.json"
 
@@ -92,7 +92,7 @@ def support_module_status() -> dict[str, dict[str, Any]]:
 def _runner_steps() -> list[str]:
     return [
         "load_canonical_harness_proxy_packet",
-        "verify_stage10072_same_manifest_win_and_stage10078_completion_boundary",
+        "verify_stage10086_source_heldout_same_manifest_win_and_stage10078_completion_boundary",
         "record_real_harness_run_id_only_after_execution",
         "capture_same_task_pack_artifacts_for_100m_and_gemma_on_identical_task_pack",
         "collect_tool_trace_spans_from_full_product_run",
@@ -156,7 +156,7 @@ def build_plan() -> dict[str, Any]:
     }
 
     if comparison.get("passed") is not True:
-        failures.append("stage10072_not_passed")
+        failures.append("stage10086_not_passed")
     if readiness.get("passed") is not True:
         failures.append("stage10075_not_passed")
     if boundary.get("passed") is not True:
@@ -216,7 +216,7 @@ def build_plan() -> dict[str, Any]:
                 "strict_exact_gemma": compare.get("gemma_exact"),
                 "strict_verdict": compare.get("verdict"),
                 "rows": compare.get("rows"),
-                "same_surface_comparison_stage": 10072,
+                "same_surface_comparison_stage": 10086,
                 "same_surface_shortcut_audit_stage": 10068,
                 "claim_readiness_stage": 10075,
                 "completion_boundary_stage": 10078,
@@ -275,7 +275,7 @@ def main() -> None:
     built = build_plan()
     PLAN.write_text(json.dumps(built, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     next_step = (
-        "Use the four canonical harness_runner_plan.json files to drive the external full-product backend on the same locked task packs, because the proxy frontier is now aligned to stage10072 and the remaining gap is only real runtime execution."
+        "Use the four canonical harness_runner_plan.json files to drive the external full-product backend on the same locked task packs, because the proxy frontier is now aligned to stage10086 and the remaining gap is only real runtime execution."
     )
     summary = {
         "stage": STAGE,
@@ -285,7 +285,7 @@ def main() -> None:
         "authority": dict(AUTHORITY_CLOSED),
         "metrics": {**dict(AUTHORITY_CLOSED), **built["metrics"]},
         "artifacts": {"plan": display(PLAN), "doc": display(DOC)},
-        "decision": "Refreshed the four full-product harness runtime contracts so they now proxy to the canonical stage10072 same-manifest winner instead of the stale weighted frontier while preserving the same reserved artifact slots for external execution.",
+        "decision": "Refreshed the four full-product harness runtime contracts so they now proxy to the canonical stage10086 source-heldout same-manifest winner instead of the stale weighted frontier while preserving the same reserved artifact slots for external execution.",
         "next_best_step": next_step,
         "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }

@@ -26,7 +26,7 @@ def test_build_bundle_materializes_four_canonical_backend_handoffs():
     assert built["metrics"]["cells_with_canonical_100m_better_proxy"] == 4
     for row in built["handoff_cells"]:
         assert row["handoff_status"] == "ready_for_external_backend_adapter"
-        assert row["runtime_contract"]["standalone_proxy_frontier"]["same_surface_comparison_stage"] == 10072
+        assert row["runtime_contract"]["standalone_proxy_frontier"]["same_surface_comparison_stage"] == 10086
 
 
 def test_main_writes_summary_and_bundle(tmp_path, monkeypatch):
