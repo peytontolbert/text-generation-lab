@@ -1,0 +1,53 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "eval": {
+    "eval": {
+      "field_exact": {
+        "edit_localization": {
+          "exact": 0.625,
+          "rows": 16
+        }
+      },
+      "field_loss": {
+        "edit_localization": 1.3572676181793213
+      },
+      "joint_proxy_exact": 0.625,
+      "loss": 1.3572676181793213,
+      "rows": 16,
+      "split": "eval"
+    },
+    "strict_eval": {
+      "field_exact": {
+        "edit_localization": {
+          "exact": 0.5625,
+          "rows": 16
+        }
+      },
+      "field_loss": {
+        "edit_localization": 1.3630791902542114
+      },
+      "joint_proxy_exact": 0.5625,
+      "loss": 1.3630791902542114,
+      "rows": 16,
+      "split": "strict_eval"
+    }
+  },
+  "passed": true,
+  "required_row_artifacts_present": true,
+  "runtime_executed": true,
+  "stderr_tail": "",
+  "stdout_tail": "{\n  \"best_state_selection\": {\n    \"checkpoint_exported\": false,\n    \"enabled\": true,\n    \"eval_joint_proxy_exact\": 0.625,\n    \"eval_loss\": 1.3572676181793213,\n    \"promotion_ready\": false,\n    \"restored\": true,\n    \"selected_step\": 31,\n    \"selection_exact_sum\": 1.1875,\n    \"selection_loss_sum\": 2.7203468084335327,\n    \"selection_rule\": \"max_eval_plus_strict_joint_exact_then_min_eval_plus_strict_loss\",\n    \"selection_score\": 2.7203468084335327,\n    \"strict_joint_proxy_exact\": 0.5625,\n    \"strict_loss\": 1.3630791902542114\n  },\n  \"eval\": {\n    \"eval\": {\n      \"field_exact\": {\n        \"edit_localization\": {\n          \"exact\": 0.625,\n          \"rows\": 16\n        }\n      },\n      \"field_loss\": {\n        \"edit_localization\": 1.3572676181793213\n      },\n      \"joint_proxy_exact\": 0.625,\n      \"loss\": 1.3572676181793213,\n      \"rows\": 16,\n      \"split\": \"eval\"\n    },\n    \"strict_eval\": {\n      \"field_exact\": {\n        \"edit_localization\": {\n          \"exact\": 0.5625,\n          \"rows\": 16\n        }\n      },\n      \"field_loss\": {\n        \"edit_localization\": 1.3630791902542114\n      },\n      \"joint_proxy_exact\": 0.5625,\n      \"loss\": 1.3630791902542114,\n      \"rows\": 16,\n      \"split\": \"strict_eval\"\n    }\n  },\n  \"eval_rows\": 16,\n  \"fields\": [\n    \"edit_localization\"\n  ],\n  \"final_checkpoint_exported\": false,\n  \"gemma_executed\": false,\n  \"harness_executed\": false,\n  \"implementation\": {\n    \"d_ff\": 2048,\n    \"d_model\": 640,\n    \"estimated_parameter_count\": 102717225,\n    \"full_100m_target_execution_authorized\": true,\n    \"implementation\": \"transformer\",\n    \"model_class\": \"AgentKernelLiteTransformerSeq2Seq\",\n    \"model_config\": \"/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json\",\n    \"n_heads\": 10,\n    \"n_layers\": 6,\n    \"probe_scale\": \"target_100m\",\n    \"vocab_size\": 1506\n  },\n  \"mode\": \"edit_localization_probe\",\n  \"native_feature_ablation_audit_required\": false,\n  \"native_feature_ablation_rows\": 32,\n  \"required_artifacts_written\": true,\n  \"run_id\": \"stage9908_direct_geometry_aware_opaque_choice_exec\",\n  \"runtime_executed\": true,\n  \"strict_rows\": 16,\n  \"structured_batch_sampler\": \"label_balanced_by_primary_field\",\n  \"structured_optimizer_frozen_bucket_prefixes\": [\n    \"decoder\",\n    \"decoder_attention\",\n    \"decoder_mlp\",\n    \"embeddings\"\n  ],\n  \"structured_optimizer_frozen_parameter_count\": 122,\n  \"structured_optimizer_isolated\": true,\n  \"structured_optimizer_trainable_bucket_prefixes\": [\n    \"encoder\",\n    \"encoder_attention\",\n    \"encoder_mlp\",\n    \"other\",\n    \"policy_retrieval_heads\",\n    \"structured_heads\"\n  ],\n  \"structured_optimizer_trainable_parameter_count\": 151,\n  \"structured_trainable_profile\": \"full_non_decoder\",\n  \"train_rows\": 16\n}",
+  "trainer_returncode": 0
+}
