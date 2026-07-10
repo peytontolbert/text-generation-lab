@@ -1,0 +1,58 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "failures": [],
+  "metrics": {
+    "base_gate_rejected_rows": 0,
+    "base_structured_rows": 392,
+    "blended_structured_rows": 404,
+    "language_counts": {
+      "c_cpp": 78,
+      "python": 78,
+      "rust": 78,
+      "unknown": 80,
+      "web_js_ts_html": 90
+    },
+    "loss_counts": {
+      "edit_localization_ce": 72,
+      "patch_operator_ce": 144,
+      "symbol_binding_ce": 80,
+      "verifier_repair_ce": 108
+    },
+    "skill_counts": {
+      "edit_localization": 72,
+      "patch_operator_selection": 144,
+      "symbol_binding": 80,
+      "verifier_failure_repair_or_abstain": 108
+    },
+    "split_counts": {
+      "eval": 130,
+      "strict_eval": 134,
+      "train": 140
+    },
+    "targeted_web_rows_added": 12,
+    "targeted_web_rows_present": 12,
+    "targeted_web_weight_sum": 30,
+    "web_edit_rows_after": 27,
+    "web_edit_rows_before": 15,
+    "web_packet_gate_rejected_rows": 0
+  },
+  "passed": true,
+  "training_recommendation": {
+    "blend_strategy": "append the targeted web packet to the current structured-state mix and preserve curriculum_priority_weight during sampling",
+    "expected_web_edit_row_delta": 12,
+    "next_cycle_input": "runs/local/artifacts/stage9945_web_targeted_blended_structured_mix/web_targeted_blended_structured_state.jsonl",
+    "why": "this raises web edit-localization coverage from 15 to 27 rows while preserving the current multilingual structured mix"
+  }
+}
