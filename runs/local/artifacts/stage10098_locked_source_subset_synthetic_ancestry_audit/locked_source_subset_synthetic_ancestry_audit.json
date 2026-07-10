@@ -1,0 +1,42 @@
+{
+  "artifacts": {
+    "locked_rows": "runs/local/artifacts/stage10095_locked_source_realistic_successor_request/locked_source_realistic_successor_rows.jsonl",
+    "stage8636_manifest": "runs/local/artifacts/stage8636_edit_localization_neutral_manifest/edit_localization_neutral_manifest.jsonl",
+    "stage8765_manifest": "runs/local/artifacts/stage8765_source_backed_edit_localization_candidate_manifest/source_backed_edit_localization_candidate_manifest.jsonl"
+  },
+  "claim_boundary": {
+    "locked_subset_is_true_maintainer_eval": false,
+    "reason": "The locked subset inherits from the synthetic stage8636 neutral manifest through stage8765, so its visible task/evidence content is not genuine repository maintenance evidence.",
+    "replacement_builder_required": true
+  },
+  "failures": [],
+  "findings": [
+    "Every row in the locked-source bootstrap subset traces back to the stage8765 candidate manifest.",
+    "Stage8765 itself was built directly from the stage8636 neutral manifest, which is synthetic and uses a small fixed task/evidence template family.",
+    "That means the locked-source subset is honest about heldout wrappers and lineage bookkeeping, but it is not an expert-maintainer packet and cannot be promoted by graph materialization alone."
+  ],
+  "generated_at_utc": "2026-07-10T17:13:07Z",
+  "metrics": {
+    "all_locked_rows_trace_to_stage8636_neutral_manifest": true,
+    "locked_rows": 18,
+    "stage8636_rows": 504,
+    "stage8765_ancestry_matches": 18,
+    "synthetic_task_observations": [
+      "A behavior check fails after validating user credentials.",
+      "A runtime path uses the wrong timeout behavior.",
+      "An assertion expects a stable report field."
+    ],
+    "synthetic_visible_evidence_strings": [
+      "A visible call or definition points to the symbol that owns the behavior.",
+      "The source behavior is valid, but the visible test expectation is stale or malformed.",
+      "The visible failure occurs through startup or command entry behavior.",
+      "Visible configuration evidence controls the failing behavior."
+    ],
+    "unique_synthetic_task_observations_in_locked_subset": 3,
+    "unique_synthetic_visible_evidence_strings_in_locked_subset": 4
+  },
+  "name": "stage10098_locked_source_subset_synthetic_ancestry_audit",
+  "next_best_step": "Build a truly source-backed edit-localization candidate builder from external repo/session evidence instead of continuing to adapt the synthetic stage8636 -> stage8765 lineage.",
+  "passed": true,
+  "stage": 10098
+}
