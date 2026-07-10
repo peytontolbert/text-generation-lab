@@ -1,0 +1,40 @@
+{
+  "artifacts": {
+    "doc": "docs/SOURCE_HELDOUT_SUCCESSOR_REQUEST_STAGE9997.md",
+    "manifest": "runs/local/artifacts/stage9997_source_heldout_successor_request/edit_localization_manifest.jsonl",
+    "request": "runs/local/artifacts/stage9997_source_heldout_successor_request/source_heldout_successor_request.json"
+  },
+  "created_at_utc": "2026-07-10T11:42:57Z",
+  "decision": "Materialized a source-heldout successor manifest that removes eval rows whose source roots already appear in train.",
+  "failures": [],
+  "metrics": {
+    "language_counts": {
+      "c_cpp": 19,
+      "python": 13,
+      "rust": 11,
+      "web_js_ts_html": 35
+    },
+    "removed_eval_by_language": {
+      "c_cpp": 10,
+      "python": 9,
+      "rust": 10,
+      "web_js_ts_html": 10
+    },
+    "removed_eval_by_role": {
+      "mixed_replay": 16,
+      "positive_original_eval_replay": 23
+    },
+    "removed_eval_rows": 39,
+    "rows": 78,
+    "split_counts": {
+      "eval": 21,
+      "strict_eval": 17,
+      "train": 40
+    }
+  },
+  "name": "stage9997_source_heldout_successor_request",
+  "next_best_step": "Use this successor manifest for the next honest 100M and Gemma reruns, then replenish Python and c_cpp heldout eval roots with fresh independent sources instead of replay copies.",
+  "passed": true,
+  "stage": 9997,
+  "stage_name": "stage9997_source_heldout_successor_request"
+}

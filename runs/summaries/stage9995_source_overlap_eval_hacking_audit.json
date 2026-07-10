@@ -1,0 +1,45 @@
+{
+  "artifacts": {
+    "doc": "docs/SOURCE_OVERLAP_EVAL_HACKING_AUDIT_STAGE9995.md",
+    "rows": "runs/local/artifacts/stage9995_source_overlap_eval_hacking_audit/source_overlap_eval_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T11:42:46Z",
+  "decision": "Audited the filtered frontier for eval hacking risk by checking train-versus-eval overlap on source roots and semantic keys.",
+  "failures": [],
+  "metrics": {
+    "eval_rows": 44,
+    "heldout_eval_by_language": {
+      "c_cpp": 9,
+      "python": 5,
+      "rust": 4,
+      "web_js_ts_html": 20
+    },
+    "heldout_eval_rows_after_source_filter": 38,
+    "manifest_rows": 117,
+    "semantic_overlap_eval_by_language": {
+      "c_cpp": 19,
+      "python": 14,
+      "rust": 14,
+      "web_js_ts_html": 30
+    },
+    "semantic_overlap_eval_rows": 77,
+    "source_overlap_eval_by_language": {
+      "c_cpp": 10,
+      "python": 9,
+      "rust": 10,
+      "web_js_ts_html": 10
+    },
+    "source_overlap_eval_by_role": {
+      "mixed_replay": 16,
+      "positive_original_eval_replay": 23
+    },
+    "source_overlap_eval_rows": 39,
+    "strict_eval_rows": 33,
+    "train_rows": 40
+  },
+  "name": "stage9995_source_overlap_eval_hacking_audit",
+  "next_best_step": "Use the source-heldout subset, not the raw filtered frontier, for any honest 100M-versus-Gemma comparison and rebuild future eval manifests to avoid train-overlapping roots.",
+  "passed": true,
+  "stage": 9995,
+  "stage_name": "stage9995_source_overlap_eval_hacking_audit"
+}

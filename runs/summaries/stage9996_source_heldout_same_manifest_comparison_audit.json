@@ -1,0 +1,66 @@
+{
+  "artifacts": {
+    "doc": "docs/SOURCE_HELDOUT_SAME_MANIFEST_COMPARISON_AUDIT_STAGE9996.md",
+    "rows": "runs/local/artifacts/stage9996_source_heldout_same_manifest_comparison_audit/source_heldout_comparison_rows.jsonl"
+  },
+  "created_at_utc": "2026-07-10T11:42:47Z",
+  "decision": "Recomputed the 100M-versus-Gemma comparison on the source-heldout subset that excludes eval rows whose source roots also appear in train.",
+  "failures": [],
+  "metrics": {
+    "comparison_rows": 38,
+    "languages_compared": 4,
+    "macro_delta_100m_minus_gemma": 0.3125,
+    "macro_exact_100m": 0.5055555555555555,
+    "macro_exact_gemma": 0.19305555555555556,
+    "micro_exact_100m": 0.5263157894736842,
+    "micro_exact_gemma": 0.18421052631578946,
+    "per_language": {
+      "c_cpp": {
+        "delta_100m_minus_gemma": 0.0,
+        "exact_100m": 0.2222222222222222,
+        "exact_gemma": 0.2222222222222222,
+        "rows": 9,
+        "verdict": "tie"
+      },
+      "python": {
+        "delta_100m_minus_gemma": 0.0,
+        "exact_100m": 0.4,
+        "exact_gemma": 0.4,
+        "rows": 5,
+        "verdict": "tie"
+      },
+      "rust": {
+        "delta_100m_minus_gemma": 0.75,
+        "exact_100m": 0.75,
+        "exact_gemma": 0.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "web_js_ts_html": {
+        "delta_100m_minus_gemma": 0.5,
+        "exact_100m": 0.65,
+        "exact_gemma": 0.15,
+        "rows": 20,
+        "verdict": "100m_better"
+      }
+    },
+    "rows_by_language": {
+      "c_cpp": 9,
+      "python": 5,
+      "rust": 4,
+      "web_js_ts_html": 20
+    },
+    "rows_by_split": {
+      "eval": 21,
+      "strict_eval": 17
+    },
+    "ties": 2,
+    "wins_100m": 2,
+    "wins_gemma": 0
+  },
+  "name": "stage9996_source_heldout_same_manifest_comparison_audit",
+  "next_best_step": "Treat this source-heldout comparison as the honest current baseline, then rebuild future eval manifests so Python and c_cpp have more independent heldout roots.",
+  "passed": true,
+  "stage": 9996,
+  "stage_name": "stage9996_source_heldout_same_manifest_comparison_audit"
+}
