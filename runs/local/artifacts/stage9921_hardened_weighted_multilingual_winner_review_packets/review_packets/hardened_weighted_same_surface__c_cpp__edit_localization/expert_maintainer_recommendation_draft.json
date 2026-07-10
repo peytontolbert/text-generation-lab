@@ -1,0 +1,142 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "cell_key": "hardened_weighted_same_surface::c_cpp::edit_localization",
+  "gemma_strict_exact": 0.0,
+  "language_family": "c_cpp",
+  "recommended_subskills": {
+    "avoids_broad_rewrites": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "the packet is localization only, not rewrite execution"
+      ]
+    },
+    "avoids_hallucinated_symbols": {
+      "confidence": "medium",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "the weighted hardened structured outputs stay inside the opaque A-D target set",
+        "Weighted hardened same-surface strict exact is 0.5 versus Gemma 0.0."
+      ]
+    },
+    "avoids_internal_tokens": {
+      "confidence": "medium",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "the prompt still does not print the valid-label list and the outputs remain clean label tokens only",
+        "Weighted hardened same-surface strict exact is 0.5 versus Gemma 0.0."
+      ]
+    },
+    "binds_symbols_correctly": {
+      "confidence": "medium",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "the structured localization choice is correct often enough to beat Gemma on the weighted hardened packet",
+        "Weighted hardened same-surface strict exact is 0.5 versus Gemma 0.0."
+      ]
+    },
+    "chooses_minimal_edit_operator": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "this packet is edit localization only, not operator choice"
+      ]
+    },
+    "creates_or_updates_tests_when_appropriate": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "this packet is edit localization only, not test creation"
+      ]
+    },
+    "interprets_verifier_failure": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "the surface uses failure observations, but a human should decide whether that is enough for this rubric line"
+      ]
+    },
+    "keeps_patch_minimal": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "the packet identifies bounded edit targets rather than applying patches"
+      ]
+    },
+    "localizes_edit_scope": {
+      "confidence": "medium",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "the attached weighted hardened multilingual winner localizes the edit target more accurately than Gemma",
+        "Weighted hardened same-surface strict exact is 0.5 versus Gemma 0.0."
+      ]
+    },
+    "predicts_verifier_command": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "this packet is not a verifier-command surface"
+      ]
+    },
+    "produces_contentful_final_answer": {
+      "confidence": "medium",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "the model emitted valid opaque choice labels and beat Gemma on the same weighted hardened packet",
+        "Weighted hardened same-surface strict exact is 0.5 versus Gemma 0.0."
+      ]
+    },
+    "rejects_blocked_imports": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "this packet does not directly exercise blocked imports; keep human confirmation on applicability"
+      ]
+    },
+    "repairs_or_abstains_safely": {
+      "confidence": "medium",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "the current packet keeps the model inside a constrained opaque choice set and it still beats Gemma",
+        "Weighted hardened same-surface strict exact is 0.5 versus Gemma 0.0."
+      ]
+    },
+    "retrieves_source_evidence_when_needed": {
+      "confidence": "medium",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "the weighted packet is evidence-grounded and the model beat Gemma on the same strict rows without a visible label list",
+        "Weighted hardened same-surface strict exact is 0.5 versus Gemma 0.0."
+      ]
+    },
+    "understands_user_intent": {
+      "confidence": "medium",
+      "recommended_judgment": true,
+      "reviewer_notes": [
+        "same-surface strict exact is above Gemma on the weighted hardened opaque-choice packet and the task scope is narrow and explicit",
+        "Weighted hardened same-surface strict exact is 0.5 versus Gemma 0.0."
+      ]
+    },
+    "uses_allowed_imports_only": {
+      "confidence": "requires_human_confirmation",
+      "recommended_judgment": null,
+      "reviewer_notes": [
+        "this packet does not directly exercise imports; keep human confirmation on applicability"
+      ]
+    }
+  },
+  "reviewer_message": "This is a narrow weighted hardened same-surface edit-localization result. Confirm the attached evidence is sufficient before marking any rubric line passed.",
+  "same_surface_strict_exact": 0.5
+}

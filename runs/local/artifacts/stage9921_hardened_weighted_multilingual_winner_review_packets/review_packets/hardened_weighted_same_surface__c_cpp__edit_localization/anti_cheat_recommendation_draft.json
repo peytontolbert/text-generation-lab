@@ -1,0 +1,73 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "cell_key": "hardened_weighted_same_surface::c_cpp::edit_localization",
+  "gemma_strict_exact": 0.0,
+  "language_family": "c_cpp",
+  "recommended_challenge_judgments": [
+    {
+      "challenge_family": "hidden_reference_materialization",
+      "confidence": "medium",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Human review should still confirm source lineage, but the weighted hardened prompt surface does not expose a valid-label list."
+      ]
+    },
+    {
+      "challenge_family": "target_and_teacher_leakage",
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Prompt label exposure buckets: 0.",
+        "The weighted hardened comparison uses the same no-label-list prompt for both models."
+      ]
+    },
+    {
+      "challenge_family": "label_proxy_shortcuts",
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Prompt label exposure buckets: 0.",
+        "Unique row-local permutation maps: 4."
+      ]
+    },
+    {
+      "challenge_family": "metadata_and_graph_shortcuts",
+      "confidence": "requires_human_confirmation",
+      "recommended_pass": null,
+      "reviewer_notes": [
+        "This packet hardens prompt-label leakage, but separate metadata-only baselines are still not attached on the weighted hardened surface."
+      ]
+    },
+    {
+      "challenge_family": "generation_quality_collapse",
+      "confidence": "medium",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "The winning path stays inside a constrained opaque choice vocabulary rather than producing free-form junk output."
+      ]
+    },
+    {
+      "challenge_family": "cross_model_surface_fairness",
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Weighted hardened same-surface strict exact is 0.5 versus Gemma 0.0.",
+        "Both models were scored on the same opaque-choice packet and same prompt format."
+      ]
+    }
+  ],
+  "reviewer_message": "This draft only addresses the weighted hardened opaque-choice surface. It does not generalize to broader v2.7 capability claims.",
+  "same_surface_strict_exact": 0.5
+}
