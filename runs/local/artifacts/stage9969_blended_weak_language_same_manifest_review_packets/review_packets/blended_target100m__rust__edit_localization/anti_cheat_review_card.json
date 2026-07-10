@@ -1,0 +1,102 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "denoise_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "cell_key": "blended_target100m::rust::edit_localization::same_manifest_review",
+  "challenge_families": [
+    {
+      "challenge_family": "target_and_teacher_leakage",
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Row ids do not embed the target label.",
+        "The row anti-cheat contract records that target-label literals are not exposed in the prompt surface."
+      ]
+    },
+    {
+      "challenge_family": "label_proxy_shortcuts",
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Unique row-local permutation maps for `rust`: `5`.",
+        "The packet stays inside an opaque A-to-E choice protocol rather than a fixed visible label list."
+      ]
+    },
+    {
+      "challenge_family": "raw_source_or_symbol_leakage",
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "The row anti-cheat contract marks raw source and raw symbol names as absent from model input."
+      ]
+    },
+    {
+      "challenge_family": "source_lineage_and_gate_integrity",
+      "confidence": "high",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Every row remains source-backed and carries a fully true gate-status bundle before use in this packet."
+      ]
+    },
+    {
+      "challenge_family": "same_manifest_cross_model_fairness",
+      "confidence": "medium",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Stage9968 binds the future 100M and Gemma runs to the same manifest and same compare-row ids.",
+        "Final fairness still requires the real Stage9965 and Stage9971 outputs to land on that exact manifest."
+      ]
+    },
+    {
+      "challenge_family": "evaluation_replay_scope_discipline",
+      "confidence": "medium",
+      "recommended_pass": true,
+      "reviewer_notes": [
+        "Compare rows for `rust`: `14`; eval-replay tagged rows: `7`.",
+        "The packet distinguishes execution compare rows from train-only replay and keeps harder counterfactual siblings outside the claim surface."
+      ]
+    }
+  ],
+  "language_family": "rust",
+  "machine_supporting_metrics": {
+    "all_gate_status_true": true,
+    "all_source_backed": true,
+    "all_source_row_id_hidden": true,
+    "compare_rows": 14,
+    "eval_replay_rows": 7,
+    "no_raw_source_included": true,
+    "no_raw_symbol_names_in_model_input": true,
+    "no_target_label_in_id": true,
+    "no_target_literals_in_prompt_surface": true,
+    "no_target_path_in_model_input": true,
+    "opaque_choice_surface": true,
+    "rows": 21,
+    "split_counts": {
+      "eval": 7,
+      "strict_eval": 7,
+      "train": 7
+    },
+    "unique_compare_semantic_keys": 5,
+    "unique_counterfactual_groups": 5,
+    "unique_permutation_maps": 5
+  },
+  "must_pass_global_stage9717_gate": true,
+  "passed": false,
+  "required_human_action": "Confirm the machine-supported anti-cheat signals on the exact same-manifest packet, then recheck them against real Stage9965 and Stage9971 outputs.",
+  "same_manifest_compare_rows": 14,
+  "status": "pending_real_outputs_and_human_review",
+  "supporting_evidence_paths": {
+    "same_manifest_handoff_bundle": "runs/local/artifacts/stage9968_blended_weak_language_same_manifest_handoff_bundle/blended_weak_language_same_manifest_handoff_bundle.json",
+    "same_manifest_request": "runs/local/artifacts/stage9966_blended_weak_language_target100m_execution_request/surface_requests/edit_localization.json"
+  }
+}
