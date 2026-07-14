@@ -1,0 +1,120 @@
+{
+  "claim_scope": [
+    "Add disjoint train-only evidence-citation analogues that preserve the candidate_change_surface vs verifier_and_test_constraint competition while strengthening visible verifier-ledger wording.",
+    "Keep the cleaned 23-row overlay and the explicit-ledger 3-row successor slice unchanged for evaluation."
+  ],
+  "created_at_utc": "2026-07-12T20:28:59Z",
+  "decision": "scorer_margin_support_package_ready",
+  "interpretation": [
+    "The prior explicit-ledger repair fixed evidence visibility but left a stable scorer prior favoring candidate_change_surface by roughly 0.056 to 0.058.",
+    "This package attacks that measured margin directly with train-only analogue rows instead of replaying the fresh 3-row heldout candidate slice into train.",
+    "Python positives come from code_assist verifier-ledger rows, C/C++ controls come from cccl, onnxruntime, and parametergolf candidate-surface rows, and Rust adds one verifier-ledger positive control."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "c_cpp": 16,
+      "python": 8,
+      "rust": 4
+    },
+    "added_by_repo_family": {
+      "candle": 4,
+      "cccl": 4,
+      "code_assist": 8,
+      "onnxruntime": 4,
+      "parametergolf": 8
+    },
+    "added_by_target_value": {
+      "candidate_change_surface": 16,
+      "verifier_and_test_constraint": 12
+    },
+    "added_rows": 28,
+    "base_metrics_snapshot": {
+      "added_by_language": {
+        "c_cpp": 8,
+        "python": 4
+      },
+      "added_by_target_label": {
+        "A": 3,
+        "C": 4,
+        "D": 2,
+        "E": 2,
+        "F": 1
+      },
+      "added_by_variant": {
+        "ledger_contrast_candidate_first": 3,
+        "ledger_contrast_verifier_first": 3,
+        "ledger_full_candidate_first": 3,
+        "ledger_full_verifier_first": 3
+      },
+      "base_metrics_snapshot": {
+        "added_repaired_rows": 6,
+        "repaired_duplicate_visible_evidence_groups": 0,
+        "stress_rows_unchanged": 7,
+        "strict_rows_unchanged": 23,
+        "train_rows_after": 193,
+        "train_rows_before": 187,
+        "validation_rows_unchanged": 23
+      },
+      "explicit_rows_added": 12,
+      "queue_ids": [
+        "python_repository_library_evidence_b_vs_f_replenishment",
+        "cpp_parametergolf_evidence_b_vs_f_replenishment",
+        "cpp_agentkernel_counterfamily_evidence_replenishment"
+      ],
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_by_language": {
+        "c_cpp": 117,
+        "python": 54,
+        "rust": 34
+      },
+      "train_rows_after": 205,
+      "train_rows_before": 193,
+      "validation_rows_unchanged": 23
+    },
+    "source_rows_by_gold_value": {
+      "candidate_change_surface": 4,
+      "verifier_and_test_constraint": 3
+    },
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_rows_after": 233,
+    "train_rows_before": 205,
+    "validation_rows_unchanged": 23
+  },
+  "next_best_step": "Run a scorer-focused probe from the stage10936 runtime with lower preservation KL, then audit both the unchanged overlay and the explicit-ledger 3-row candidate slice for true movement.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage10941_scorer_margin_support_package/added_scorer_margin_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage10941_scorer_margin_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage10941_scorer_margin_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage10941_scorer_margin_support_package/scorer_margin_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage10941_scorer_margin_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage10941_scorer_margin_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "All added rows remain train_support_only and strict_eval_eligible=false.",
+    "No stage10938 candidate rows are copied into train.",
+    "Validation and strict rows are copied unchanged from stage10934.",
+    "This package is diagnostic-only and not a promotable new eval surface."
+  ],
+  "source_artifacts": {
+    "base_stress": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "base_strict": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "base_summary": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/explicit_verifier_ledger_support_package.json",
+    "base_train": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/agentkernel_lite_encdec_train.jsonl",
+    "base_validation": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/agentkernel_lite_encdec_validation.jsonl",
+    "source_row_ids": [
+      "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+      "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+      "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact",
+      "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact",
+      "stage10733::onnxruntime::q13::evidence_citation::reviewed_v27_compact",
+      "stage10733::parametergolf::q2::evidence_citation::reviewed_v27_compact",
+      "stage10733::parametergolf::q4::evidence_citation::reviewed_v27_compact"
+    ],
+    "source_rows_jsonl": "runs/local/artifacts/stage10828_evidence_role_probe_request/evidence_role_probe_manifest.jsonl"
+  },
+  "stage": 10941,
+  "stage_name": "stage10941_scorer_margin_support_package"
+}

@@ -1,0 +1,67 @@
+{
+  "claim_boundary": [
+    "This package combines repaired long-context successor heads into one multilingual training/eval artifact.",
+    "Only decisive_evidence_option rows are currently promotable strict candidates.",
+    "verifier_outcome_option is repaired and nonconstant but has no strict heldout rows yet.",
+    "retrieve_answer_abstain_option is repaired structurally but remains single-class support-only."
+  ],
+  "created_at_utc": "2026-07-12T05:31:59Z",
+  "inputs": {
+    "compiled_roots": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_root_records.jsonl",
+    "decision_rows": "runs/local/artifacts/stage10630_long_context_decision_head_successors/long_context_decision_head_successor_rows.jsonl",
+    "decision_strict_rows": "runs/local/artifacts/stage10630_long_context_decision_head_successors/long_context_decision_head_successor_strict_rows.jsonl",
+    "decisive_rows": "runs/local/artifacts/stage10629_long_context_decisive_evidence_successor/long_context_decisive_evidence_successor_rows.jsonl",
+    "decisive_strict_rows": "runs/local/artifacts/stage10629_long_context_decisive_evidence_successor/long_context_decisive_evidence_successor_strict_rows.jsonl"
+  },
+  "metrics": {
+    "combined_rows": 2242,
+    "promotable_strict_rows": 18,
+    "rows_by_language": {
+      "c_cpp": 191,
+      "python": 2008,
+      "rust": 18,
+      "web_js_ts_html": 25
+    },
+    "rows_by_lineage_role": {
+      "repaired_long_context_decisive_evidence": 729,
+      "repaired_long_context_retrieve_support": 729,
+      "repaired_long_context_verifier_support": 784
+    },
+    "rows_by_package_role": {
+      "strict_eval_candidate": 18,
+      "train_support_only": 2224
+    },
+    "rows_by_subtype": {
+      "decisive_evidence_option": 729,
+      "retrieve_answer_abstain_option": 729,
+      "verifier_outcome_option": 784
+    },
+    "strict_rows_by_language": {
+      "c_cpp": 4,
+      "python": 6,
+      "rust": 4,
+      "web_js_ts_html": 4
+    },
+    "train_support_rows": 2224
+  },
+  "next_best_step": "Use this package for the next long-context 100M support cycle, but only score strict claims on decisive_evidence_option. Replenish fresh verifier-outcome and retrieve/answer/abstain heldout roots before broadening the promotable path.",
+  "outputs": {
+    "all_rows": "runs/local/artifacts/stage10631_repaired_long_context_successor_package/repaired_long_context_successor_rows.jsonl",
+    "strict_rows": "runs/local/artifacts/stage10631_repaired_long_context_successor_package/repaired_long_context_successor_strict_rows.jsonl",
+    "train_rows": "runs/local/artifacts/stage10631_repaired_long_context_successor_package/repaired_long_context_successor_train_rows.jsonl"
+  },
+  "passed": true,
+  "promotion_boundary": {
+    "promotable_strict_target_subtypes": [
+      "decisive_evidence_option"
+    ],
+    "retrieve_answer_abstain_constant": true,
+    "support_only_target_subtypes": [
+      "verifier_outcome_option",
+      "retrieve_answer_abstain_option"
+    ],
+    "verifier_outcome_strict_rows_present": false
+  },
+  "stage": 10631,
+  "stage_name": "stage10631_repaired_long_context_successor_package"
+}

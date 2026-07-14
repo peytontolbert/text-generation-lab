@@ -1,0 +1,71 @@
+{
+  "admitted_by_repo_family": {
+    "LLaMA-Adapter": 1,
+    "agent_kernel_lite_core": 1,
+    "agent_kernel_rust_wasm": 1,
+    "candle": 3,
+    "codex-rs": 9,
+    "git": 3,
+    "scangithub_mcp_details": 1
+  },
+  "admitted_by_semantic_target_value": {
+    "DECISIVE_SELECTED_TEST_CONSTRAINT": 9,
+    "DECISIVE_VERIFIER_TEST_CONSTRAINT": 10,
+    "DISTRACTOR_BACKGROUND_CONTEXT": 3,
+    "OBSERVED_VERIFIER_FAILURE_LOG": 4,
+    "OBSERVED_VERIFIER_LOG": 9,
+    "OBSERVED_VERIFIER_PASS_LOG": 6,
+    "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 19
+  },
+  "blocker_counts": {
+    "missing_actual_verifier_log": 1,
+    "missing_verifier_log_role": 1
+  },
+  "counts": {
+    "admitted_repo_families": 7,
+    "admitted_selected_test_train_roots": 19,
+    "diagnostic_build_verifier_only_roots": 3,
+    "minimum_train_roots_required": 10,
+    "rows_examined": 105,
+    "unique_roots_examined": 23
+  },
+  "created_at_utc": "2026-07-13T16:50:28Z",
+  "decision": "rust_materialized_support_ready_for_training_package",
+  "diagnostic_by_repo_family": {
+    "perftree": 3
+  },
+  "lane_counts": {
+    "blocked_or_diagnostic": 1,
+    "build_verifier_only_diagnostic_support": 3,
+    "selected_test_verifier_grounded_train_support": 19
+  },
+  "outputs": {
+    "root_audit": "runs/local/artifacts/stage11453_rust_materialized_support_readiness_audit_v3/rust_materialized_support_root_audit.jsonl",
+    "row_audit": "runs/local/artifacts/stage11453_rust_materialized_support_readiness_audit_v3/rust_materialized_support_row_audit.jsonl",
+    "summary": "runs/local/artifacts/stage11453_rust_materialized_support_readiness_audit_v3/rust_materialized_support_readiness_audit_v3.json"
+  },
+  "passed": true,
+  "policy": {
+    "build_verifier_only_rows_are_diagnostic": true,
+    "do_not_train_now": false,
+    "selected_test_or_equivalent_verifier_transition_required_for_promotable_rust_support": true
+  },
+  "quality_gate": {
+    "minimum_repo_breadth_met": true,
+    "minimum_selected_test_roots_met": true,
+    "ready_for_training_package": true
+  },
+  "recommended_next_action": "Do not run a Rust support probe unless admitted_selected_test_train_roots reaches at least 10 across 3+ repo families. Build-verifier-only roots can remain diagnostic support, but they should not be used as the primary Rust verifier/evidence capability expansion.",
+  "source_counts": {
+    "runs/local/artifacts/stage11407_partial_candle_rust_train_support_rows/partial_candle_rust_train_support_rows.jsonl": 12,
+    "runs/local/artifacts/stage11410_rust_verifier_log_backed_partial_support/rust_verifier_log_backed_partial_support_rows.jsonl": 9,
+    "runs/local/artifacts/stage11413_non_candle_rust_verifier_log_backed_support/non_candle_rust_verifier_log_backed_support_rows.jsonl": 9,
+    "runs/local/artifacts/stage11417_third_family_rust_verifier_log_backed_support/third_family_rust_verifier_log_backed_support_rows.jsonl": 3,
+    "runs/local/artifacts/stage11420_perftree_rust_build_verifier_backed_support/perftree_rust_build_verifier_backed_support_rows.jsonl": 9,
+    "runs/local/artifacts/stage11428_codex_rs_selected_test_support_rows/codex_rs_selected_test_support_rows.jsonl": 27,
+    "runs/local/artifacts/stage11429_selected_test_rust_support_package/added_selected_test_rust_support_rows.jsonl": 27,
+    "runs/local/artifacts/stage11452_non_codex_rust_selected_verifier_support_rows/non_codex_rust_selected_verifier_support_rows.jsonl": 9
+  },
+  "stage": 11453,
+  "stage_name": "stage11453_rust_materialized_support_readiness_audit_v3"
+}

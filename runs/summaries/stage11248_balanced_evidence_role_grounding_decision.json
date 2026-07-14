@@ -1,0 +1,103 @@
+{
+  "created_at_utc": "2026-07-13T09:31:44Z",
+  "decision": "reject_stage11246_branch_keep_stage11200_frontier",
+  "interpretation": {
+    "current_frontier_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "probable_failure_mode": "The product scorer is dominated by role-value retrieval priors and is not learning evidence-role selection from prompt-level balanced projections. The branch preserved the residual bank but did not improve verifier/test-constraint or symptom roles. The next useful path is scorer-objective alignment: train/evaluate a fact-text or evidence-ledger head as product candidate, or change rows so the product option values include concrete evidence facts rather than bare role aliases.",
+    "stage11246_runtime_status": "diagnostic_negative_do_not_promote"
+  },
+  "key_metrics": {
+    "gates": {
+      "product_balanced_strict_improved_vs_baseline": false,
+      "product_balanced_validation_improved_vs_baseline": false,
+      "product_clean_strict_22_of_22": true,
+      "product_clean_validation_at_least_20_of_23": true,
+      "product_residual_above_5_of_10": false,
+      "product_verifier_residual_nonzero": false
+    },
+    "stage11244_product_baseline": {
+      "balanced_strict": {
+        "correct": 11,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 33,
+        "scored_rows": 33
+      },
+      "balanced_validation": {
+        "correct": 9,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 27,
+        "scored_rows": 27
+      },
+      "residual": {
+        "correct": 5,
+        "exact_accuracy": 0.5,
+        "rows": 10,
+        "scored_rows": 10
+      }
+    },
+    "stage11247_product_postrun": {
+      "balanced_strict": {
+        "correct": 11,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 33,
+        "scored_rows": 33
+      },
+      "balanced_validation": {
+        "correct": 9,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 27,
+        "scored_rows": 27
+      },
+      "clean_strict": {
+        "correct": 22,
+        "exact_accuracy": 1.0,
+        "rows": 22,
+        "scored_rows": 22
+      },
+      "clean_validation": {
+        "correct": 21,
+        "exact_accuracy": 0.9130434782608695,
+        "rows": 23,
+        "scored_rows": 23
+      },
+      "residual": {
+        "correct": 5,
+        "exact_accuracy": 0.5,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "residual_by_gold": {
+        "candidate_change_surface": 4,
+        "symptom_or_call_path_analogue": 0,
+        "unknown": 1,
+        "verifier_and_test_constraint": 0
+      }
+    }
+  },
+  "next_required_work": [
+    "Do not run more product-scorer probes using Stage11243 as-is.",
+    "Build a product-compatible evidence-fact option package where option values include role plus concrete fact text, then compare against role-value-only residual scoring.",
+    "Alternatively train a new evidence-fact scorer head and require it to preserve clean strict while beating 5/10 residual and improving verifier/test-constraint above 0/3.",
+    "Recover C/C++ source supply instead of relying on old parametergolf/cuembed residuals.",
+    "Keep Stage11200 as the current frontier runtime."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11248_balanced_evidence_role_grounding_decision/balanced_evidence_role_grounding_decision.json"
+  },
+  "passed": true,
+  "reason": [
+    "Balanced role supervision preserved clean strict but did not improve product-scorer heldouts.",
+    "Clean residual stayed flat at 5/10 under the product scorer.",
+    "Verifier/test-constraint residual remained 0/3.",
+    "Balanced validation and strict stayed flat versus Stage11244 baseline at 9/27 and 11/33 respectively.",
+    "The branch proves simple role-balanced prompt support is insufficient for the current product scorer."
+  ],
+  "source_artifacts": {
+    "stage11243_package": "runs/local/artifacts/stage11243_balanced_evidence_role_grounding_package/balanced_evidence_role_grounding_package.json",
+    "stage11245_request": "runs/local/artifacts/stage11245_balanced_evidence_role_grounding_probe_request/balanced_evidence_role_grounding_probe_request.json",
+    "stage11246_runtime": "runs/local/artifacts/stage11246_balanced_evidence_role_grounding_probe/runtime_model/runtime_model_bundle.json",
+    "stage11247_audit": "runs/local/artifacts/stage11247_balanced_evidence_role_grounding_postrun_audit/balanced_evidence_role_grounding_postrun_audit.json"
+  },
+  "stage": 11248,
+  "stage_name": "stage11248_balanced_evidence_role_grounding_decision"
+}

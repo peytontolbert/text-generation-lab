@@ -1,0 +1,178 @@
+{
+  "bootstrap_manifest_snapshot": {
+    "rows_by_language": {
+      "c_cpp": 219,
+      "python": 2165,
+      "rust": 51,
+      "unknown": 6,
+      "web_js_ts_html": 47
+    },
+    "rows_by_split_component": {
+      "diagnostic_bounded": 25,
+      "reference_bounded_eval": 32,
+      "train_bootstrap_bounded": 8,
+      "train_bootstrap_geometry": 8,
+      "train_bootstrap_long_context": 220,
+      "train_teacher_long_context": 2187,
+      "validation_bootstrap_bounded": 8
+    },
+    "unique_train_roots": 786
+  },
+  "claim_scope": [
+    "Bootstrap training request for the first root-based seq2seq maintainer curriculum run.",
+    "Not a promotable leaderboard claim by itself.",
+    "Strict rows remain canary/reference slices only and must be interpreted as regression protection, not a fresh heldout frontier."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10518_root_based_multitarget_bootstrap_probe_request/root_based_multitarget_bootstrap_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "2423",
+    "--max-eval-rows",
+    "8",
+    "--max-strict-rows",
+    "32",
+    "--max-steps",
+    "256",
+    "--batch-size",
+    "2",
+    "--learning-rate",
+    "2e-5",
+    "--max-encoder-tokens",
+    "1024",
+    "--max-decoder-tokens",
+    "256",
+    "--decoder-ce-weight",
+    "1.0",
+    "--bounded-choice-aux-weight",
+    "0.0",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "2.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "24",
+    "--max-generation-tokens",
+    "128",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10518_root_based_multitarget_bootstrap_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "1.0",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10518_root_based_multitarget_bootstrap_probe/bounded_decoder_probe",
+    "--run-id",
+    "stage10518_root_based_multitarget_bootstrap_probe"
+  ],
+  "created_at_utc": "2026-07-11T23:15:56Z",
+  "curriculum_intent": {
+    "strict_reference_role": "canary regression check only",
+    "train_bootstrap_bounded_role": "preserve current multilingual maintainer-choice strengths",
+    "train_teacher_long_context_role": "broaden seq2seq maintainer state prediction beyond bounded labels",
+    "validation_role": "light rust bounded validation seed only"
+  },
+  "decision": "root_based_multitarget_bootstrap_probe_ready",
+  "known_limits": [
+    "Python has no fresh heldout rows in this bootstrap probe; it is train-heavy and benchmark-light.",
+    "Rust and web training supply remain thinner than Python.",
+    "This request uses bounded_decoder_ce_probe because the current runtime does not yet expose a dedicated root-based multi-target mode."
+  ],
+  "language_counts_by_split": {
+    "eval": {
+      "rust": 8
+    },
+    "strict_eval": {
+      "c_cpp": 13,
+      "web_js_ts_html": 19
+    },
+    "train": {
+      "c_cpp": 206,
+      "python": 2165,
+      "rust": 18,
+      "unknown": 6,
+      "web_js_ts_html": 28
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10518_root_based_multitarget_bootstrap_probe_request/root_based_multitarget_bootstrap_probe_manifest.jsonl",
+  "next_best_step": "Run this bootstrap probe, inspect generation and regression audits, then replenish fresh heldout Rust and web roots before treating any gains as multilingual benchmark progress over Gemma-12B.",
+  "output_dir": "runs/local/artifacts/stage10518_root_based_multitarget_bootstrap_probe/bounded_decoder_probe",
+  "passed": true,
+  "required_honesty_gates": [
+    "stage10517 split-aware bootstrap manifest root audit remains zero-violation",
+    "reference_bounded_eval rows remain out of train",
+    "diagnostic rows remain excluded from the probe manifest",
+    "post-run claims must separate bootstrap curriculum progress from multilingual heldout benchmark wins"
+  ],
+  "required_runtime_artifacts": [
+    "execution_result.json",
+    "sample_generation_audit.json",
+    "short_output_probe.json",
+    "failure_bucket_card.json",
+    "cleanup_proof.json",
+    "loss_by_step.jsonl",
+    "eval_loss_by_checkpoint.jsonl"
+  ],
+  "rows": 2463,
+  "run_id": "stage10518_root_based_multitarget_bootstrap_probe",
+  "runtime_model_dir": "runs/local/artifacts/stage10518_root_based_multitarget_bootstrap_probe/runtime_model",
+  "source_package": "runs/local/artifacts/stage10517_split_aware_multitarget_bootstrap_manifest/split_aware_multitarget_bootstrap_manifest.json",
+  "split_counts": {
+    "eval": 8,
+    "strict_eval": 32,
+    "train": 2423
+  },
+  "stage": 10518,
+  "stage_name": "stage10518_root_based_multitarget_bootstrap_probe_request",
+  "target_family_counts_by_split": {
+    "eval": {
+      "bounded_decision": 6,
+      "short_structured_text": 2
+    },
+    "strict_eval": {
+      "bounded_decision": 32
+    },
+    "train": {
+      "bounded_decision": 2254,
+      "constrained_generation": 55,
+      "short_structured_text": 114
+    }
+  }
+}

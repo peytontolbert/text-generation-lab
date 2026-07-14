@@ -1,0 +1,299 @@
+{
+  "command": [
+    "env",
+    "CUDA_VISIBLE_DEVICES=2",
+    "PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11307_clean_per_option_semantic_candidate_probe_request/clean_per_option_semantic_candidate_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "550",
+    "--max-eval-rows",
+    "23",
+    "--max-strict-rows",
+    "22",
+    "--max-steps",
+    "192",
+    "--batch-size",
+    "4",
+    "--learning-rate",
+    "8e-6",
+    "--max-encoder-tokens",
+    "768",
+    "--max-decoder-tokens",
+    "16",
+    "--decoder-ce-weight",
+    "0.1",
+    "--bounded-choice-aux-weight",
+    "2.0",
+    "--bounded-choice-aux-source",
+    "encoder_option_retrieval_semantic_candidate_head",
+    "--bounded-decoder-train-sampler",
+    "residual_family_balanced",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "4.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "12",
+    "--max-generation-tokens",
+    "16",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11308_clean_per_option_semantic_candidate_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "--bounded-choice-contrast-weight",
+    "1.0",
+    "--bounded-choice-contrast-margin",
+    "0.10",
+    "--preservation-kl-weight",
+    "0.35",
+    "--no-final-checkpoint-export",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11308_clean_per_option_semantic_candidate_probe/bounded_decoder_probe"
+  ],
+  "created_at_utc": "2026-07-13T11:21:24Z",
+  "decision": "clean_per_option_semantic_candidate_probe_requested",
+  "metrics": {
+    "base_strict_rows": 22,
+    "base_train_rows": 550,
+    "base_validation_rows": 23,
+    "judgment_audit": {
+      "all_train_rows_have_per_option_metadata": true,
+      "blocked_non_admitted_train_rows": 257,
+      "blocked_train_examples": [
+        "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::A",
+        "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::B",
+        "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::C",
+        "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::D",
+        "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::E",
+        "stage10674::linux::rust::evidence_citation::reviewed_v27_compact::candidate::A",
+        "stage10674::linux::rust::evidence_citation::reviewed_v27_compact::candidate::B",
+        "stage10674::linux::rust::evidence_citation::reviewed_v27_compact::candidate::C",
+        "stage10674::linux::rust::evidence_citation::reviewed_v27_compact::candidate::D",
+        "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact::candidate::A",
+        "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact::candidate::B",
+        "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact::candidate::C",
+        "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact::candidate::D",
+        "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::A",
+        "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::B",
+        "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::C",
+        "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::D",
+        "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::E",
+        "stage10733::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::A",
+        "stage10733::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::B"
+      ],
+      "clean_train_rows": 550,
+      "excluded_overlap_train_rows": 31,
+      "input_train_rows": 838,
+      "overlap_train_examples": [
+        "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::symptom_localization::reviewed_v27_compact",
+        "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+        "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::patch_impact::reviewed_v27_compact",
+        "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact",
+        "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::minimal_fix_selection::reviewed_v27_compact",
+        "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+        "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::symptom_localization::reviewed_v27_compact",
+        "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+        "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::patch_impact::reviewed_v27_compact",
+        "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::minimal_fix_selection::reviewed_v27_compact",
+        "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+        "stage10934::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::ledger_full_verifier_first",
+        "stage10934::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::ledger_full_candidate_first",
+        "stage10934::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::ledger_contrast_verifier_first",
+        "stage10934::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::ledger_contrast_candidate_first",
+        "stage10934::rust_reviewed::stage10126__candle__candle-core__rust::evidence_citation::ledger_full_verifier_first",
+        "stage10934::rust_reviewed::stage10126__candle__candle-core__rust::evidence_citation::ledger_full_candidate_first",
+        "stage10934::rust_reviewed::stage10126__candle__candle-core__rust::evidence_citation::ledger_contrast_verifier_first",
+        "stage10934::rust_reviewed::stage10126__candle__candle-core__rust::evidence_citation::ledger_contrast_candidate_first",
+        "stage10934::reviewed_next::stage10119__localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662__python::evidence_citation::ledger_full_verifier_first"
+      ],
+      "protected_root_overlap_count": 0,
+      "protected_root_overlaps": []
+    },
+    "judgment_package_counts": {
+      "judgment_strict": {
+        "by_language": {
+          "c_cpp": 12,
+          "python": 14,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "by_task": {
+          "evidence_citation": 30
+        },
+        "roots": 15,
+        "rows": 30
+      },
+      "judgment_validation": {
+        "by_language": {
+          "c_cpp": 12,
+          "python": 14,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "by_task": {
+          "evidence_citation": 30
+        },
+        "roots": 15,
+        "rows": 30
+      },
+      "residual": {
+        "by_language": {
+          "c_cpp": 4,
+          "python": 3,
+          "rust": 3
+        },
+        "by_task": {
+          "evidence_citation": 9,
+          "verifier_outcome_semantic_transition": 1
+        },
+        "roots": 9,
+        "rows": 10
+      },
+      "strict": {
+        "by_language": {
+          "c_cpp": 6,
+          "python": 6,
+          "rust": 4,
+          "web_js_ts_html": 6
+        },
+        "by_task": {
+          "abstention_insufficient_evidence": 4,
+          "evidence_citation": 3,
+          "minimal_fix_selection": 4,
+          "patch_impact": 4,
+          "symptom_localization": 4,
+          "verifier_outcome": 2,
+          "verifier_outcome_semantic_transition": 1
+        },
+        "roots": 5,
+        "rows": 22
+      },
+      "train": {
+        "by_language": {
+          "c_cpp": 146,
+          "python": 216,
+          "rust": 96,
+          "web_js_ts_html": 92
+        },
+        "by_task": {
+          "abstention_insufficient_evidence": 16,
+          "alternative_hypothesis_elimination": 1,
+          "cpp_implementation_vs_implementation": 1,
+          "evidence_citation": 466,
+          "minimal_fix_selection": 15,
+          "patch_impact": 16,
+          "python_implementation_vs_implementation": 2,
+          "regression_risk": 1,
+          "symptom_localization": 16,
+          "verifier_outcome": 16
+        },
+        "roots": 132,
+        "rows": 550
+      },
+      "validation": {
+        "by_language": {
+          "c_cpp": 6,
+          "python": 6,
+          "rust": 5,
+          "web_js_ts_html": 6
+        },
+        "by_task": {
+          "abstention_insufficient_evidence": 4,
+          "evidence_citation": 3,
+          "minimal_fix_selection": 4,
+          "patch_impact": 4,
+          "symptom_localization": 4,
+          "verifier_outcome": 4
+        },
+        "roots": 4,
+        "rows": 23
+      }
+    },
+    "judgment_strict_rows_for_postrun": 30,
+    "judgment_train_by_language": {
+      "c_cpp": 146,
+      "python": 216,
+      "rust": 96,
+      "web_js_ts_html": 92
+    },
+    "judgment_train_by_target": {
+      "candidate_change_surface": 65,
+      "unknown": 420,
+      "verifier_and_test_constraint": 65
+    },
+    "judgment_train_rows": 550,
+    "judgment_validation_rows_for_postrun": 30,
+    "protected_root_overlaps": [],
+    "residual_rows_for_postrun": 10,
+    "train_rows": 550,
+    "train_source_note": "base_train is the cleaned Stage11306 train set; judgment_train is the same path and is not double-added"
+  },
+  "outputs": {
+    "command_json": "runs/local/artifacts/stage11307_clean_per_option_semantic_candidate_probe_request/clean_per_option_semantic_candidate_probe_command.json",
+    "manifest_jsonl": "runs/local/artifacts/stage11307_clean_per_option_semantic_candidate_probe_request/clean_per_option_semantic_candidate_probe_manifest.jsonl",
+    "probe_output_dir": "runs/local/artifacts/stage11308_clean_per_option_semantic_candidate_probe/bounded_decoder_probe",
+    "runtime_model_dir": "runs/local/artifacts/stage11308_clean_per_option_semantic_candidate_probe/runtime_model",
+    "summary_json": "runs/local/artifacts/stage11307_clean_per_option_semantic_candidate_probe_request/clean_per_option_semantic_candidate_probe_request.json"
+  },
+  "passed": true,
+  "promotion_gate_for_postrun": {
+    "clean_residual_must_improve_for_frontier_claim": ">5/10",
+    "clean_strict_must_remain": "22/22",
+    "clean_validation_should_not_regress": ">=20/23",
+    "fact_rich_validation_or_strict_should_score_above_majority_baseline": true,
+    "verifier_and_test_constraint_residual_must_improve": ">0/3"
+  },
+  "rationale": [
+    "Stage11306 supplies root-disjoint cleaned rows with per-option semantic_candidate metadata; this request tests whether the semantic candidate head can consume that schema.",
+    "The new scorer uses explicit state-option semantic metadata buckets for task type, evidence role, and verifier transition while preserving base option-retrieval logits.",
+    "This is diagnostic and not promotable unless it improves clean residuals beyond 5/10 and verifier_and_test_constraint residuals above 0/3 without clean strict regression."
+  ],
+  "source_artifacts": {
+    "base_strict": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_strict_rows.jsonl",
+    "base_train": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_train_rows.jsonl",
+    "base_validation": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_validation_rows.jsonl",
+    "initialize_from_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "judgment_audit": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_package.json",
+    "judgment_package": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_package.json",
+    "judgment_strict": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_judgment_strict_rows.jsonl",
+    "judgment_train": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_train_rows.jsonl",
+    "judgment_validation": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_judgment_validation_rows.jsonl",
+    "residual_bank": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_residual_rows.jsonl"
+  },
+  "stage": 11307,
+  "stage_name": "stage11307_clean_per_option_semantic_candidate_probe_request"
+}

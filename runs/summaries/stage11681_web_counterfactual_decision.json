@@ -1,0 +1,47 @@
+{
+  "created_at_utc": "2026-07-14T04:30:06Z",
+  "decision": "stage11679_rejected_counterfactual_rows_overpush_and_underfit",
+  "gates": {
+    "canonical_regressed_vs_stage11673": true,
+    "counterfactual_train_fit_weak": true,
+    "original_web_not_frontier": true,
+    "protected_gates_preserved": true,
+    "sealed_miss_moved": true
+  },
+  "interpretation": [
+    "Stage11679 preserved protected gates but is not a frontier candidate.",
+    "The added same-role counterfactual rows underfit badly on their own train slice.",
+    "The run moved one sealed remaining miss but regressed canonical heldout from 51/66 to 43/66.",
+    "Do not promote this runtime. Keep Stage11507/Stage11673 as the relevant selected baselines."
+  ],
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11681_web_counterfactual_decision",
+    "summary": "runs/local/artifacts/stage11681_web_counterfactual_decision/web_counterfactual_decision.json"
+  },
+  "recommended_next": {
+    "focus": [
+      "verify target remapping after label shuffle",
+      "inspect prompt label order and canonical_candidate_object candidate_id consistency",
+      "separate candidate_change_surface identity rows from verifier transition rows",
+      "avoid another training run until counterfactual train fit is plausible"
+    ],
+    "stage": "stage11682_same_role_counterfactual_quality_audit",
+    "target": "audit why Stage11678 counterfactual train rows score only 23/92 before any further training"
+  },
+  "scores": {
+    "canonical_heldout": "43/66",
+    "filtered_strict": "22/22",
+    "filtered_validation": "20/22",
+    "old_canary_strict": "23/23",
+    "old_canary_validation": "21/23",
+    "original_web_heldout": "28/66",
+    "residual_bank": "7/10",
+    "same_role_counterfactual_train": "23/92",
+    "sealed_remaining_miss_diagnostics": "1/15"
+  },
+  "source_artifacts": {
+    "audit": "runs/local/artifacts/stage11680_web_same_role_counterfactual_postrun_audit/web_same_role_counterfactual_postrun_audit.json"
+  },
+  "stage": 11681,
+  "stage_name": "stage11681_web_counterfactual_decision"
+}

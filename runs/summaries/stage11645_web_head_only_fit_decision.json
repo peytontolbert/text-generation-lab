@@ -1,0 +1,37 @@
+{
+  "claim_boundary": [
+    "Stage11643 proves representability on normalized support rows only.",
+    "It does not improve the selected product frontier.",
+    "Stage11507 remains the selected compact frontier; Stage11634 routed policy remains better than this head-only Web runtime on heldout."
+  ],
+  "created_at_utc": "2026-07-14T00:51:20Z",
+  "decision": "reject_head_only_web_task_head_as_product_runtime",
+  "key_results": {
+    "filtered_strict": "1/22",
+    "filtered_validation": "3/22",
+    "normalized_web_train_support": "206/206",
+    "old_canary_strict": "2/23",
+    "old_canary_validation": "4/23",
+    "residual_bank": "0/10",
+    "web_heldout": "15/66",
+    "web_successor_strict": "35/36"
+  },
+  "mechanism_read": {
+    "head_capacity_for_normalized_support": true,
+    "interpretation": "The web task candidate head can memorize or fit the normalized OpenHands/Llama support geometry, but the learned boundary does not transfer to the 66-row web heldout and is incompatible with the protected compact maintainer scorer. The bottleneck is heldout geometry/objective routing, not raw support-row capacity.",
+    "protected_behavior_destroyed": true,
+    "successor_geometry_fit": true,
+    "web_heldout_transfer_failed": true
+  },
+  "next_experiment_constraints": [
+    "Do not promote Stage11643 or route it in product scoring.",
+    "Do not run another full-model generic web support probe from the same rows.",
+    "Compare support/successor/heldout geometry before training again.",
+    "Mine hard negatives from Gemma-correct/routed-wrong heldout rows, not from already-fit support rows.",
+    "If training resumes, use task-specific or repo-family-specific scorer heads with protected replay gates attached during training selection."
+  ],
+  "source_audit": "runs/local/artifacts/stage11644_normalized_web_head_only_fit_audit/normalized_web_head_only_fit_audit.json",
+  "stage": 11645,
+  "stage_name": "stage11645_web_head_only_fit_decision",
+  "training_note": "The Prime-RL style description is useful conceptually: meaningful progress comes from many graded complete attempts per update, not from counting optimizer steps. For this lab, the analogous next scale-up is grouped root-local candidate rollouts with verifier-graded outcomes and listwise/pairwise updates, while keeping GPU2-only execution and protected gates."
+}

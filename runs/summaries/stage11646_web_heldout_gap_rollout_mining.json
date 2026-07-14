@@ -1,0 +1,109 @@
+{
+  "claim_boundary": [
+    "These are mining/materialization instructions, not train rows.",
+    "The 66 Web heldout rows remain sealed evaluation rows.",
+    "A future run is promotable only if it beats routed 38/66 Web heldout while preserving Stage11507 protected gates."
+  ],
+  "created_at_utc": "2026-07-14T00:55:02Z",
+  "decision": "web_heldout_gap_rollout_groups_ready",
+  "gap_by_repo": {
+    "@modelcontextprotocol/client": 1,
+    "@modelcontextprotocol/core": 3,
+    "@modelcontextprotocol/server": 4,
+    "llama_stack_ui": 4,
+    "openhands_openhands_frontend": 10,
+    "sep_automation": 4
+  },
+  "gap_by_routed_predicted_label": {
+    "A": 7,
+    "B": 6,
+    "C": 5,
+    "D": 6,
+    "E": 2
+  },
+  "gap_by_target_semantic_value": {
+    "ANSWER_WITH_VISIBLE_EVIDENCE": 4,
+    "PASS_TARGETED_TEST_SELECTION": 1,
+    "adjust PR/MR URL regex extraction and de-duplication in src/utils/parse-pr-url.ts without changing socket or email utilities": 1,
+    "adjust URL host/prefix/protocol construction in src/utils/websocket-url.ts without changing PR parsing or email validation utilities": 1,
+    "adjust email regex/list validation or duplicate normalization in src/utils/input-validation.ts without changing socket or PR URL utilities": 1,
+    "edit_format_message_content_extraction_logic": 1,
+    "lib/format-message-content.ts::extractTextFromContentPart/extractDisplayableText": 1,
+    "pass_targeted_test_selection": 7,
+    "src/utils/parse-pr-url.ts::extractPRUrls": 1,
+    "verifier_and_test_constraint": 8
+  },
+  "gap_by_task": {
+    "abstention_insufficient_evidence": 4,
+    "evidence_citation": 8,
+    "minimal_fix_selection": 4,
+    "symptom_localization": 2,
+    "verifier_outcome": 8
+  },
+  "inputs": {
+    "gemma_rows": "runs/local/artifacts/stage11549_web_root_heldout_same_manifest_gemma_comparison/web_root_heldout_gemma_rows.jsonl",
+    "heldout_rows": "runs/local/artifacts/stage11548_web_root_heldout_stage11507_score_audit/web_root_heldout_rows.jsonl",
+    "normalized_support_rows": "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_admitted_train_rows.jsonl",
+    "routed_audit": "runs/local/artifacts/stage11631_web_head_only_transfer_audit/bounded_choice_eval_audit_web_heldout.json",
+    "stage11645_decision": "runs/local/artifacts/stage11645_web_head_only_fit_decision/web_head_only_fit_decision.json"
+  },
+  "metrics": {
+    "both_wrong_rows": 2,
+    "complete_six_task_support_roots": 0,
+    "gap_root_groups": 11,
+    "gemma_correct_routed_wrong_rows": 26,
+    "heldout_rows": 66,
+    "routed_correct_gemma_wrong_rows": 12,
+    "support_roots": 32,
+    "support_rows": 206,
+    "work_items": 26
+  },
+  "next_training_design": {
+    "do_not_run_next": [
+      "head_only support fit against the same 206 rows",
+      "full-model generic Web support probe without grouped heldout analogues",
+      "training directly on the 66 heldout rows"
+    ],
+    "rl_scale_translation": {
+      "first_batch_nominal_rollouts": 1664,
+      "first_batch_target_roots": 104,
+      "meaningful_step": "one update over grouped root-local candidate rollouts with verifier grades",
+      "note": "This mirrors the useful part of RL-style coding training: many graded attempts per root before one update, not merely more optimizer steps.",
+      "suggested_group_size": 16
+    },
+    "run_next": [
+      "materialize disjoint analogue roots for these exact gap groups",
+      "train with grouped/root-local listwise or pairwise candidate ranking",
+      "use protected Stage11507 replay gates during model selection, not only after training",
+      "evaluate against Web heldout 66, Web successor 36, compact canary, residual, and same-manifest Gemma"
+    ]
+  },
+  "outputs": {
+    "groups": "runs/local/artifacts/stage11646_web_heldout_gap_rollout_mining/web_heldout_gap_rollout_groups.jsonl",
+    "summary": "runs/local/artifacts/stage11646_web_heldout_gap_rollout_mining/web_heldout_gap_rollout_mining.json",
+    "work_items": "runs/local/artifacts/stage11646_web_heldout_gap_rollout_mining/web_heldout_gap_materialization_work_items.jsonl"
+  },
+  "routed_recovered_by_repo": {
+    "@modelcontextprotocol/client": 3,
+    "@modelcontextprotocol/core": 2,
+    "@modelcontextprotocol/server": 4,
+    "sep_automation": 3
+  },
+  "routed_recovered_by_task": {
+    "abstention_insufficient_evidence": 2,
+    "minimal_fix_selection": 4,
+    "patch_impact": 2,
+    "symptom_localization": 4
+  },
+  "stage": 11646,
+  "stage11645_read": {
+    "decision": "reject_head_only_web_task_head_as_product_runtime",
+    "normalized_web_train_support": "206/206",
+    "protected_strict": {
+      "filtered_strict": "1/22",
+      "old_canary_strict": "2/23"
+    },
+    "web_heldout": "15/66"
+  },
+  "stage_name": "stage11646_web_heldout_gap_rollout_mining"
+}

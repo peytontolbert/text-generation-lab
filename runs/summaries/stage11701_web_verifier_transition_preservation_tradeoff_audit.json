@@ -1,0 +1,53 @@
+{
+  "created_at_utc": "2026-07-14T05:44:18Z",
+  "decision": "stage11699_preservation_pass_no_net_gain",
+  "gates": {
+    "has_regains_from_stage11695": false,
+    "identity_rows_40": true,
+    "no_regressions_from_stage11695": true,
+    "stage11699_at_least_stage11695": true,
+    "stage11699_beats_stage11695": false
+  },
+  "metrics": {
+    "identity_rows": 40,
+    "regains_from_stage11695": [],
+    "regressions_from_stage11695": [],
+    "stage11685_correct": 27,
+    "stage11695_correct": 27,
+    "stage11699_correct": 27,
+    "stage11699_vs_11685_status_counts": {
+      "correct_to_wrong": 3,
+      "stayed_correct": 24,
+      "stayed_wrong": 10,
+      "wrong_to_correct": 3
+    },
+    "stage11699_vs_11695_status_counts": {
+      "preserved_correct": 27,
+      "preserved_wrong": 13
+    }
+  },
+  "outputs": {
+    "row_cards": "runs/local/artifacts/stage11701_web_verifier_transition_preservation_tradeoff_audit/web_verifier_transition_preservation_tradeoff_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11701_web_verifier_transition_preservation_tradeoff_audit/web_verifier_transition_preservation_tradeoff_audit.json"
+  },
+  "recommended_next": [
+    "If no net gain, stop scalar replay tuning and use a task/repo-conditional verifier-transition head or explicit transition-value scorer.",
+    "Treat OpenHands PASS_TARGETED_TEST_SELECTION and MCP pass_targeted_test_selection as separate normalization families until a canonical transition-value encoder is implemented."
+  ],
+  "runtime": {
+    "stage11685": {
+      "runtime": "runs/local/artifacts/stage11685_counterfactual_identity_semantic_head_fixed_probe/runtime_model/runtime_model_bundle.json",
+      "weights_sha256": "75b6582ad102efc8ce61c1f30978a32d5648056014bd852d6c4a17afcc7fe31e"
+    },
+    "stage11695": {
+      "runtime": "runs/local/artifacts/stage11695_web_identity_gap_topup_probe/runtime_model/runtime_model_bundle.json",
+      "weights_sha256": "e8bfe2887b64f7f97d9613c3af30e5b5a68dd11c0662980277d676fc124f6b10"
+    },
+    "stage11699": {
+      "runtime": "runs/local/artifacts/stage11699_web_verifier_transition_preservation_probe/runtime_model/runtime_model_bundle.json",
+      "weights_sha256": "098cb7471dd7f6fac2b7a7055e9608b61a95b8ebfc5d651f6edb45f4fe00d65a"
+    }
+  },
+  "stage": 11701,
+  "stage_name": "stage11701_web_verifier_transition_preservation_tradeoff_audit"
+}

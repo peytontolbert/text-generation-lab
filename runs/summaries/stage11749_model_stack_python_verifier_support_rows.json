@@ -1,0 +1,62 @@
+{
+  "anti_leak_status": {
+    "selected_test_path_only_inside_candidate_options": true,
+    "strict_smoke_root_replay": false,
+    "tokenizers_overlap": false,
+    "train_support_only": true
+  },
+  "created_at_utc": "2026-07-14T08:29:50Z",
+  "decision": "second_python_verifier_support_root_materialized",
+  "feasibility_result": {
+    "admit_policy": "candidate_for_row_materialization",
+    "admit_recommendation": "candidate_for_row_materialization",
+    "blocker": null,
+    "command": [
+      "conda",
+      "run",
+      "-n",
+      "trellis",
+      "pytest",
+      "-q",
+      "-o",
+      "addopts=",
+      "tensor/tests/test_activation_runtime_path.py"
+    ],
+    "finished_at_utc": "2026-07-14T08:28:06Z",
+    "passed": true,
+    "reason": "The broader Stage11747 two-file run had one failing attention test; this focused activation verifier passes.",
+    "repo_family": "model-stack",
+    "repo_path": "/data/parametergolf/helpful_repos/model-stack",
+    "returncode": 0,
+    "selected_tests": [
+      "tensor/tests/test_activation_runtime_path.py"
+    ],
+    "started_at_utc": "2026-07-14T08:27:57Z",
+    "stderr_log": "runs/local/artifacts/stage11748_python_repaired_verifier_feasibility/logs/model-stack.stderr.log",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_tail": "",
+    "stdout_log": "runs/local/artifacts/stage11748_python_repaired_verifier_feasibility/logs/model-stack.stdout.log",
+    "stdout_sha256": "962ffcda271f13bf2b65416285947814e0b0e7d70cf2dea3b5252afd529f18c2",
+    "stdout_tail": "...........                                                              [100%]\n11 passed in 3.00s\n\n",
+    "support_lane": "python_verifier_outcome_selected_test_support",
+    "timed_out": false
+  },
+  "interpretation": [
+    "This adds a second disjoint executable Python support root for the verifier_outcome selected-test lane.",
+    "Rows are train-support-only and must not be used as strict evaluation rows.",
+    "The Stage11742 Python lane still needs substantially more independent support roots before a training probe is justified."
+  ],
+  "outputs": {
+    "rows": "runs/local/artifacts/stage11749_model_stack_python_verifier_support_rows/model_stack_python_verifier_support_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11749_model_stack_python_verifier_support_rows/model_stack_python_verifier_support_rows.json"
+  },
+  "passed": true,
+  "repo_family": "model-stack",
+  "root_count": 1,
+  "row_count": 4,
+  "source_artifacts": {
+    "feasibility": "runs/local/artifacts/stage11748_python_repaired_verifier_feasibility/python_repaired_verifier_feasibility_results.jsonl"
+  },
+  "stage": 11749,
+  "stage_name": "stage11749_model_stack_python_verifier_support_rows"
+}

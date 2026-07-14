@@ -1,0 +1,46 @@
+{
+  "audits": [
+    {
+      "attached_heads": [],
+      "base_strict_error": null,
+      "base_strict_load_passed": true,
+      "bundle": "runs/local/artifacts/stage11116_trainable_evidence_support_probe/runtime_model/runtime_model_bundle.json",
+      "exists": true,
+      "metadata_aux_source": "encoder_option_retrieval",
+      "repaired_strict_error": null,
+      "repaired_strict_load_passed": true,
+      "scorer_state_keys": []
+    },
+    {
+      "attached_heads": [
+        "bounded_choice_pair_head"
+      ],
+      "base_strict_error": [
+        "Error(s) in loading state_dict for AgentKernelLiteTransformerSeq2Seq:",
+        "\tUnexpected key(s) in state_dict: \"bounded_choice_pair_head.0.weight\", \"bounded_choice_pair_head.0.bias\", \"bounded_choice_pair_head.2.weight\", \"bounded_choice_pair_head.2.bias\". "
+      ],
+      "base_strict_load_passed": false,
+      "bundle": "runs/local/artifacts/stage11089_pairwise_semantic_evidence_probe/runtime_model/runtime_model_bundle.json",
+      "exists": true,
+      "metadata_aux_source": "encoder_option_retrieval_pairwise",
+      "repaired_strict_error": null,
+      "repaired_strict_load_passed": true,
+      "scorer_state_keys": [
+        "bounded_choice_pair_head.0.bias",
+        "bounded_choice_pair_head.0.weight",
+        "bounded_choice_pair_head.2.bias",
+        "bounded_choice_pair_head.2.weight"
+      ]
+    }
+  ],
+  "claim_scope": [
+    "Prove whether saved dynamic bounded-choice scorer heads can be made strictly reloadable by attaching modules from state_dict key shapes before load."
+  ],
+  "decision": "patch_training_loop_loader_to_attach_saved_bounded_choice_heads_before_strict_load",
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11119_runtime_scorer_head_compatibility_audit/runtime_scorer_head_compatibility_audit.json"
+  },
+  "passed": true,
+  "stage": 11119,
+  "stage_name": "stage11119_runtime_scorer_head_compatibility_audit"
+}

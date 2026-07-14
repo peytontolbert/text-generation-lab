@@ -1,0 +1,112 @@
+{
+  "claim_scope": [
+    "Audits the semantic-output successor package to confirm decoder CE no longer targets bare option labels while bounded-choice supervision is preserved separately.",
+    "Measures visibility and token-length properties of the new decoder targets so the next probe can choose a sane max-decoder-tokens cap.",
+    "This is an interface audit, not a model-result claim."
+  ],
+  "created_at_utc": "2026-07-12T04:17:52Z",
+  "inputs": {
+    "package_json": "runs/local/artifacts/stage10602_fresh_python_cpp_mixed_contract_semantic_output_package/fresh_python_cpp_mixed_contract_semantic_output_package.json",
+    "strict_eval_rows": "runs/local/artifacts/stage10602_fresh_python_cpp_mixed_contract_semantic_output_package/strict_eval_rows.jsonl",
+    "support_rows": "runs/local/artifacts/stage10602_fresh_python_cpp_mixed_contract_semantic_output_package/support_rows.jsonl",
+    "tokenizer_config": "configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "tokenizer_json": "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+  },
+  "outputs": {
+    "audit_json": "runs/local/artifacts/stage10603_fresh_python_cpp_mixed_contract_semantic_output_audit/fresh_python_cpp_mixed_contract_semantic_output_audit.json"
+  },
+  "passed": true,
+  "stage": 10603,
+  "stage_name": "stage10603_fresh_python_cpp_mixed_contract_semantic_output_audit",
+  "strict_eval": {
+    "decoder_equals_label_rate": 0.0,
+    "decoder_equals_label_rows": 0,
+    "max_decoder_token_length": 26,
+    "mean_decoder_token_length": 14.666666666666666,
+    "per_subtype": {
+      "decisive_evidence_top1": {
+        "dominant_decoder_target": "E06",
+        "dominant_decoder_target_fraction": 0.25396825396825395,
+        "max_decoder_token_length": 3,
+        "mean_decoder_token_length": 3,
+        "rows": 63,
+        "unique_bounded_choice_labels": 6,
+        "unique_decoder_targets": 6
+      },
+      "retrieve_answer_abstain": {
+        "dominant_decoder_target": "ANSWER_WITH_RETRIEVED_EVIDENCE",
+        "dominant_decoder_target_fraction": 0.7777777777777778,
+        "max_decoder_token_length": 26,
+        "mean_decoder_token_length": 22.666666666666668,
+        "rows": 63,
+        "unique_bounded_choice_labels": 3,
+        "unique_decoder_targets": 3
+      },
+      "verifier_outcome_masked": {
+        "dominant_decoder_target": "PASS_TARGETED_TEST_SELECTION",
+        "dominant_decoder_target_fraction": 0.7777777777777778,
+        "max_decoder_token_length": 21,
+        "mean_decoder_token_length": 18.333333333333332,
+        "rows": 63,
+        "unique_bounded_choice_labels": 3,
+        "unique_decoder_targets": 3
+      }
+    },
+    "prompt_visible_decoder_target_rate": 1.0,
+    "prompt_visible_decoder_targets": 189,
+    "rows": 189,
+    "unique_bounded_choice_labels": 6,
+    "unique_decoder_targets": 12
+  },
+  "support": {
+    "decoder_equals_label_rate": 0.0,
+    "decoder_equals_label_rows": 0,
+    "max_decoder_token_length": 26,
+    "mean_decoder_token_length": 13.62037037037037,
+    "per_subtype": {
+      "decisive_evidence_top1": {
+        "dominant_decoder_target": "E05",
+        "dominant_decoder_target_fraction": 0.2777777777777778,
+        "max_decoder_token_length": 3,
+        "mean_decoder_token_length": 3,
+        "rows": 36,
+        "unique_bounded_choice_labels": 6,
+        "unique_decoder_targets": 6
+      },
+      "retrieve_answer_abstain": {
+        "dominant_decoder_target": "ANSWER_WITH_RETRIEVED_EVIDENCE",
+        "dominant_decoder_target_fraction": 0.5277777777777778,
+        "max_decoder_token_length": 26,
+        "mean_decoder_token_length": 18.444444444444443,
+        "rows": 36,
+        "unique_bounded_choice_labels": 2,
+        "unique_decoder_targets": 2
+      },
+      "verifier_outcome_masked": {
+        "dominant_decoder_target": "PASS_TARGETED_TEST_SELECTION",
+        "dominant_decoder_target_fraction": 0.5277777777777778,
+        "max_decoder_token_length": 21,
+        "mean_decoder_token_length": 19.416666666666668,
+        "rows": 36,
+        "unique_bounded_choice_labels": 2,
+        "unique_decoder_targets": 2
+      }
+    },
+    "prompt_visible_decoder_target_rate": 1.0,
+    "prompt_visible_decoder_targets": 108,
+    "rows": 108,
+    "unique_bounded_choice_labels": 6,
+    "unique_decoder_targets": 10
+  },
+  "truthful_read": [
+    "If decoder_equals_label_rows is zero, the semantic-output rebuild successfully decoupled decoder CE from label-token targets.",
+    "Prompt-visible decoder targets are expected here because the goal is to make the answerable output handle explicit in the visible contract rather than hidden behind A/B/C labels.",
+    "The decisive-evidence rows still use short ledger handles, while retrieve/verifier rows use semantic action strings; token lengths determine whether the next probe should keep 8 tokens or raise the cap.",
+    [
+      "The underlying fresh-root package is unchanged from stage10591; only the decoder contract is changed.",
+      "Decisive evidence rows now decode visible ledger handles like E01/E02 instead of A-F labels.",
+      "Retrieve/verifier rows now decode visible action values like ANSWER_WITH_RETRIEVED_EVIDENCE or NEEDS_VERIFIER instead of A-D labels.",
+      "Bounded-choice supervision remains available through bounded_choice_target_label, so constrained scoring and decoder CE can now be trained against different targets."
+    ]
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "admitted_by_repo_family": {},
+  "admitted_by_semantic_target_value": {},
+  "counts": {
+    "admitted_train_support_candidates": 0,
+    "admitted_unique_repo_families": 0,
+    "admitted_unique_roots": 0,
+    "minimum_roots_required_before_package": 10,
+    "rejected_or_diagnostic": 43,
+    "rust_rows_examined": 43
+  },
+  "created_at_utc": "2026-07-13T14:57:33Z",
+  "decision": "rust_disjoint_train_support_supply_insufficient",
+  "interpretation": "Existing local Rust inventories do not yet satisfy the Stage11344 requirement for at least 10 clean, disjoint, Rust-source-backed train-support roots. Most available rows are strict/reserved, diagnostic, missing verifier anchors, sourced from weak/quarantined families, or Rust-tagged rows with non-Rust evidence.",
+  "outputs": {
+    "admitted_candidates": "runs/local/artifacts/stage11404_rust_disjoint_train_support_inventory_audit/rust_disjoint_train_support_candidates.jsonl",
+    "rejected_or_diagnostic": "runs/local/artifacts/stage11404_rust_disjoint_train_support_inventory_audit/rust_disjoint_train_support_rejected_or_diagnostic.jsonl",
+    "summary": "runs/local/artifacts/stage11404_rust_disjoint_train_support_inventory_audit/rust_disjoint_train_support_inventory_audit.json"
+  },
+  "passed": true,
+  "quality_gate": {
+    "minimum_disjoint_roots_met": false,
+    "minimum_repo_breadth_met": false,
+    "ready_for_training_package": false,
+    "required_role_mix_present": false
+  },
+  "recommended_next_action": "Mine or materialize new Rust train-support roots before probing again. Do not train on the three reserved replacement rows. Prioritize non-tokenizers/non-reserved repo families with real .rs/Cargo evidence, selected tests or verifier anchors, and distinct evidence roles.",
+  "rejected_reason_counts": {
+    "anti_cheat_contract_incomplete_or_absent": 37,
+    "known_weak_or_quarantined_repo_family": 1,
+    "missing_selected_test_or_verifier_anchor": 34,
+    "no_visible_rust_source_path_or_cargo_marker": 35,
+    "not_declared_train_support": 34,
+    "strict_eval_or_reserved_intent": 5
+  },
+  "reserved_exclusions": {
+    "known_weak_repo_families_flagged": [
+      "tokenizers"
+    ],
+    "reserved_repo_families_excluded": [
+      "prusti-dev",
+      "rust",
+      "rust-analyzer"
+    ],
+    "reserved_rows": 6
+  },
+  "source_counts": {
+    "runs/local/artifacts/stage10452_rust_evidence_citation_candidate_atlas/rust_evidence_citation_candidate_rows.jsonl": 25,
+    "runs/local/artifacts/stage10476_rust_citation_materialized_root_bundle_builder/rust_citation_materialized_bounded_rows.jsonl": 5,
+    "runs/local/artifacts/stage10513_rust_citation_ef_frontier_materializer/rust_citation_ef_diagnostic_seed_rows.jsonl": 25,
+    "runs/local/artifacts/stage10972_rust_reviewed_evidence_bundle/strict_candidate_rows.jsonl": 3,
+    "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_strict_rows.jsonl": 86,
+    "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_train_rows.jsonl": 410,
+    "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/rust_web_blocked_source_queue.jsonl": 65
+  },
+  "stage": 11404,
+  "stage_name": "stage11404_rust_disjoint_train_support_inventory_audit"
+}

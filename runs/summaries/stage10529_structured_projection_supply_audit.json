@@ -1,0 +1,91 @@
+{
+  "candidacy_by_subtype": {
+    "next_action": {
+      "language_counts": {
+        "c_cpp": 5,
+        "python": 49,
+        "web_js_ts_html": 1
+      },
+      "prompt_target_leak_rate": 0.0,
+      "prompt_target_leak_rows": 0,
+      "reason": "train_only_structured_projection",
+      "recommendation": "support_only",
+      "rows": 55,
+      "split_counts": {
+        "train_bootstrap_long_context": 55
+      }
+    },
+    "patch_sketch": {
+      "language_counts": {
+        "c_cpp": 5,
+        "python": 49,
+        "web_js_ts_html": 1
+      },
+      "prompt_target_leak_rate": 0.0,
+      "prompt_target_leak_rows": 0,
+      "reason": "cleaner_surface_but_current_supply_is_train_only",
+      "recommendation": "support_only_until_heldout_roots_exist",
+      "rows": 55,
+      "split_counts": {
+        "train_bootstrap_long_context": 55
+      }
+    },
+    "repair_intent": {
+      "language_counts": {
+        "c_cpp": 5,
+        "python": 49,
+        "web_js_ts_html": 1
+      },
+      "prompt_target_leak_rate": 0.0,
+      "prompt_target_leak_rows": 0,
+      "reason": "long_text_target_repeats_changed_files_and_verification_targets",
+      "recommendation": "support_only_until_target_abstraction_is_hardened",
+      "rows": 55,
+      "split_counts": {
+        "train_bootstrap_long_context": 55
+      }
+    },
+    "verifier_outcome": {
+      "language_counts": {
+        "c_cpp": 67,
+        "python": 702,
+        "rust": 6,
+        "web_js_ts_html": 9
+      },
+      "prompt_target_leak_rate": 0.9566326530612245,
+      "prompt_target_leak_rows": 750,
+      "reason": "prompt_target_leak_dominates_current_surface",
+      "recommendation": "reject_for_promotable_use",
+      "rows": 784,
+      "split_counts": {
+        "audited_train": 729,
+        "train_bootstrap_long_context": 55
+      }
+    }
+  },
+  "claim_scope": [
+    "Audit and metadata backfill for long-context structured projection rows emitted by stage10516.",
+    "This does not promote these rows into heldout scoring by itself.",
+    "It identifies which structured target families are salvageable for future support or heldout expansion."
+  ],
+  "created_at_utc": "2026-07-11T23:55:17Z",
+  "global_findings": {
+    "language_backfill_succeeded_rows": 949,
+    "repo_backfill_succeeded_rows": 949,
+    "root_records_available": 784,
+    "structured_rows_total": 949
+  },
+  "next_best_step": "Do not use current verifier_outcome rows for promotable heldout scoring. Use the enriched patch_sketch/repair_intent/next_action rows as support-only structured curriculum, and build fresh non-leaky heldout roots for verifier_outcome and patch_sketch.",
+  "outputs": {
+    "enriched_rows": "runs/local/artifacts/stage10529_structured_projection_supply_audit/enriched_structured_projection_rows.jsonl"
+  },
+  "passed": true,
+  "stage": 10529,
+  "stage_name": "stage10529_structured_projection_supply_audit",
+  "structured_target_subtypes": {
+    "next_action": 55,
+    "patch_sketch": 55,
+    "repair_intent": 55,
+    "verifier_outcome": 784
+  }
+}

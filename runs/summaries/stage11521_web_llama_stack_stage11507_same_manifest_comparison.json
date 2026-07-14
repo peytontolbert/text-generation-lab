@@ -1,0 +1,528 @@
+{
+  "anti_cheat": {
+    "all_true": true,
+    "rows": 6,
+    "true_counts": {
+      "deterministic_option_shuffle": 6,
+      "diagnostic_heldout_not_train": 6,
+      "executed_verifier_output_attached": 6,
+      "gold_value_not_used_as_label": 6,
+      "root_not_used_in_stage11347_or_stage11354_training": 6,
+      "source_and_verifier_snippets_visible": 6,
+      "target_label_not_visible_before_options": 6
+    }
+  },
+  "claim_boundary": [
+    "This is a Web/JS/TS/HTML-only executed-heldout standalone smoke comparison.",
+    "Gemma outputs are reused from Stage11363; this script does not start Ollama.",
+    "This does not establish the multilingual source-heldout smoke gate, because Python, C/C++, and Rust rows remain unavailable or blocked.",
+    "This is compact bounded-choice maintainer scoring, not broad freeform repair or executable patch synthesis."
+  ],
+  "comparison": {
+    "delta_accuracy": -0.8333333333333334,
+    "gemma12b_accuracy": 0.8333333333333334,
+    "gemma12b_correct": 5,
+    "gemma12b_rows": 6,
+    "hundred_m_accuracy": 0.0,
+    "hundred_m_correct": 0,
+    "hundred_m_rows": 6
+  },
+  "created_at_utc": "2026-07-13T19:22:25Z",
+  "decision": "web_source_heldout_standalone_smoke_incomplete_or_failed",
+  "eval_device": "cuda",
+  "gates": {
+    "all_rows_web_language_family": true,
+    "anti_cheat_all_expected_flags_true": true,
+    "hundred_m_beats_gemma": false,
+    "hundred_m_full_coverage": true,
+    "same_manifest_rows": true
+  },
+  "gemma12b_existing_artifact": {
+    "accuracy": 0.8333333333333334,
+    "by_task_type": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 1
+      },
+      "alternative_hypothesis_elimination": {
+        "accuracy": 1.0,
+        "correct": 1,
+        "rows": 1
+      },
+      "evidence_citation": {
+        "accuracy": 1.0,
+        "correct": 1,
+        "rows": 1
+      },
+      "minimal_fix_selection": {
+        "accuracy": 1.0,
+        "correct": 1,
+        "rows": 1
+      },
+      "symptom_localization": {
+        "accuracy": 1.0,
+        "correct": 1,
+        "rows": 1
+      },
+      "verifier_outcome": {
+        "accuracy": 1.0,
+        "correct": 1,
+        "rows": 1
+      }
+    },
+    "correct": 5,
+    "misses": [
+      {
+        "predicted": "A",
+        "raw_output": "A",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+        "target": "B",
+        "task_type": "abstention_insufficient_evidence"
+      }
+    ],
+    "rows": 6
+  },
+  "hundred_m": {
+    "accuracy": 0.0,
+    "by_task_type": {
+      "unknown": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 6
+      }
+    },
+    "correct": 0,
+    "coverage": 1.0,
+    "coverage_corrected_accuracy": 0.0,
+    "misses": [
+      {
+        "correct": false,
+        "full_vocab_top1_text": "E",
+        "language_family": null,
+        "predicted": "B",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+        "target": "D",
+        "target_rank_full_vocab": 6,
+        "task_type": null
+      },
+      {
+        "correct": false,
+        "full_vocab_top1_text": "E",
+        "language_family": null,
+        "predicted": "C",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+        "target": "D",
+        "target_rank_full_vocab": 6,
+        "task_type": null
+      },
+      {
+        "correct": false,
+        "full_vocab_top1_text": "E",
+        "language_family": null,
+        "predicted": "A",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+        "target": "C",
+        "target_rank_full_vocab": 3,
+        "task_type": null
+      },
+      {
+        "correct": false,
+        "full_vocab_top1_text": "E",
+        "language_family": null,
+        "predicted": "C",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+        "target": "D",
+        "target_rank_full_vocab": 6,
+        "task_type": null
+      },
+      {
+        "correct": false,
+        "full_vocab_top1_text": "E",
+        "language_family": null,
+        "predicted": "A",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+        "target": "B",
+        "target_rank_full_vocab": 3,
+        "task_type": null
+      },
+      {
+        "correct": false,
+        "full_vocab_top1_text": "E",
+        "language_family": null,
+        "predicted": "A",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+        "target": "B",
+        "target_rank_full_vocab": 3,
+        "task_type": null
+      }
+    ],
+    "rows": 6,
+    "scored_rows": 6,
+    "unscored_rows": 0
+  },
+  "outputs": {
+    "bounded_choice_eval_audit_dir": "runs/local/artifacts/stage11521_web_llama_stack_stage11507_same_manifest_comparison",
+    "summary": "runs/local/artifacts/stage11521_web_llama_stack_stage11507_same_manifest_comparison/web_llama_stack_stage11507_same_manifest_comparison.json"
+  },
+  "passed": false,
+  "product_scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "runtime_initialization": {
+    "attached_bounded_choice_heads": [
+      "bounded_choice_evidence_judgment_head",
+      "bounded_choice_semantic_candidate_head"
+    ],
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval_evidence_judgment_head",
+      "bounded_choice_contrast_margin": 0.05,
+      "bounded_choice_contrast_weight": 0.0,
+      "bounded_decoder_train_sampler": "cyclic",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "bounded_decoder_ce_probe_contract",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 280,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/model_state.pt",
+    "weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37"
+  },
+  "runtime_weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37",
+  "same_manifest": {
+    "extra_in_gemma": [],
+    "gemma_rows": 6,
+    "missing_from_gemma": [],
+    "same_row_ids_in_order": true,
+    "web_rows": 6
+  },
+  "scorer_results": {
+    "decoder_first_step": {
+      "accuracy": 0.0,
+      "by_task_type": {
+        "unknown": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "rows": 6
+        }
+      },
+      "correct": 0,
+      "coverage": 1.0,
+      "coverage_corrected_accuracy": 0.0,
+      "misses": [
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "E",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "E",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "B",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+          "target": "C",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "E",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "C",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+          "target": "B",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "C",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+          "target": "B",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        }
+      ],
+      "rows": 6,
+      "scored_rows": 6,
+      "unscored_rows": 0
+    },
+    "encoder_option_retrieval": {
+      "accuracy": 0.0,
+      "by_task_type": {
+        "unknown": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "rows": 6
+        }
+      },
+      "correct": 0,
+      "coverage": 1.0,
+      "coverage_corrected_accuracy": 0.0,
+      "misses": [
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "B",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "C",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "A",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+          "target": "C",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "C",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "A",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+          "target": "B",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "A",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+          "target": "B",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        }
+      ],
+      "rows": 6,
+      "scored_rows": 6,
+      "unscored_rows": 0
+    },
+    "encoder_option_retrieval_evidence_judgment_head": {
+      "accuracy": 0.0,
+      "by_task_type": {
+        "unknown": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "rows": 6
+        }
+      },
+      "correct": 0,
+      "coverage": 1.0,
+      "coverage_corrected_accuracy": 0.0,
+      "misses": [
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "B",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "C",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "A",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+          "target": "C",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "C",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "A",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+          "target": "B",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "A",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+          "target": "B",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        }
+      ],
+      "rows": 6,
+      "scored_rows": 6,
+      "unscored_rows": 0
+    },
+    "encoder_option_retrieval_semantic_candidate_head": {
+      "accuracy": 0.0,
+      "by_task_type": {
+        "unknown": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "rows": 6
+        }
+      },
+      "correct": 0,
+      "coverage": 1.0,
+      "coverage_corrected_accuracy": 0.0,
+      "misses": [
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "B",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "C",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "A",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+          "target": "C",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "C",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+          "target": "D",
+          "target_rank_full_vocab": 6,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "A",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+          "target": "B",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        },
+        {
+          "correct": false,
+          "full_vocab_top1_text": "E",
+          "language_family": null,
+          "predicted": "A",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+          "target": "B",
+          "target_rank_full_vocab": 3,
+          "task_type": null
+        }
+      ],
+      "rows": 6,
+      "scored_rows": 6,
+      "unscored_rows": 0
+    }
+  },
+  "source_artifacts": {
+    "gemma_rows": "runs/local/artifacts/stage11363_web_llama_stack_same_manifest_gemma_comparison/web_llama_stack_gemma_rows.jsonl",
+    "runtime_bundle": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "stage11520": "runs/summaries/stage11520_provenance_aware_smoke_admission_audit.json",
+    "web_rows": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/web_llama_stack_executed_heldout_rows.jsonl"
+  },
+  "stage": 11521,
+  "stage11520_context": "provenance_aware_smoke_has_pending_web_only_not_multilingual_ready",
+  "stage_name": "stage11521_web_llama_stack_stage11507_same_manifest_comparison"
+}

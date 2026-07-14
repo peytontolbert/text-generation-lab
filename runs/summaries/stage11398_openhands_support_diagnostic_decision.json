@@ -1,0 +1,53 @@
+{
+  "base_stage11200_heldout": {
+    "correct": 4,
+    "exact_accuracy": 0.2222222222222222,
+    "full_vocab_top1_accuracy": 0.16666666666666666,
+    "rows": 18,
+    "rows_with_target_rank_1": 3,
+    "scored_rows": 18
+  },
+  "candidate_runtime": "stage11396_openhands_support_diagnostic_probe",
+  "candidate_stage11396_heldout": {
+    "correct": 9,
+    "exact_accuracy": 0.5,
+    "full_vocab_top1_accuracy": 0.2222222222222222,
+    "rows": 18,
+    "rows_with_target_rank_1": 4,
+    "scored_rows": 18
+  },
+  "claim_scope": "OpenHands Web verifier smoke slice only; same broad project family support and heldout, not a broad Web or multilingual claim",
+  "created_at_utc": "2026-07-13T14:36:19Z",
+  "decision": "do_not_promote_stage11396_frontier",
+  "delta_stage11396_minus_gemma12b": -0.5,
+  "diagnostic_decision": "stage11396_is_useful_web_support_direction",
+  "frontier_runtime_remains": "stage11200_role_focused_residual_probe",
+  "gemma12b_same_manifest": {
+    "correct": 18,
+    "exact_accuracy": 1.0,
+    "rows": 18,
+    "scored_rows": 18
+  },
+  "heldout_delta_stage11396_minus_stage11200": 0.2777777777777778,
+  "interpretation": "Stage11396 more than doubles the 100M score on the sealed OpenHands slice from 4/18 to 9/18 without canary regression, but Gemma remains 18/18. Treat this as evidence that targeted Web verifier support is the right direction, not as a frontier or public Web win.",
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11398_openhands_support_diagnostic_decision/openhands_support_diagnostic_decision.json"
+  },
+  "passed": true,
+  "promotion_gate": {
+    "beats_gemma_same_manifest": false,
+    "heldout_improved": true,
+    "promote_frontier": false,
+    "strict_canary_preserved": true,
+    "validation_canary_preserved_or_improved": true
+  },
+  "recommended_next_action": "Materialize broader disjoint Web verifier roots outside the current OpenHands/MCP/Sourcebot families, then rerun the same same-manifest 100M-vs-Gemma comparison.",
+  "source_artifacts": {
+    "gemma_comparison": "runs/local/artifacts/stage11392_openhands_web_same_manifest_gemma_comparison/openhands_web_same_manifest_gemma_comparison.json",
+    "postrun_audit": "runs/local/artifacts/stage11397_openhands_support_postrun_audit/openhands_support_postrun_audit.json"
+  },
+  "stage": 11398,
+  "stage_name": "stage11398_openhands_support_diagnostic_decision",
+  "strict_canary_preserved": true,
+  "validation_canary_preserved_or_improved": true
+}

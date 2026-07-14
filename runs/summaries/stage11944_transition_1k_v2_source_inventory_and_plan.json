@@ -1,0 +1,696 @@
+{
+  "candidate_source_files_with_rows": 103,
+  "created_at_utc": "2026-07-14T16:51:43Z",
+  "decision": "transition_1k_v2_source_inventory_ready",
+  "promotion_gate_for_future_probe": {
+    "must_improve_source_heldout_smoke": ">6/12",
+    "must_preserve_filtered_strict": "22/22",
+    "must_preserve_old_strict": "23/23",
+    "must_preserve_residual_bank": ">=7/10",
+    "must_report_breakdown": [
+      "language",
+      "task_type",
+      "verifier_status",
+      "continue_or_stop_label"
+    ],
+    "transition_projection_same_manifest_gemma_reference": "386/640"
+  },
+  "requirements_for_stage11945_compiler": [
+    "Input: multiple support row JSONL files, not only stage11884.",
+    "Admission: require opaque_options, root_id/root_lineage_key, language_family, task_type, non-empty target label.",
+    "Verifier priority: selected_test_anchor, selected_verifier_path, verifier_evidence, verifier_transition, or explicit abstain/verifier-removed row.",
+    "Projection: emit verified_transition_record_v1 and then four transition rows per admitted record.",
+    "Balance target: 1000-2000 projection rows, 100+ roots if available, with explicit per-language/task/status caps.",
+    "Hard constraint: root-disjoint heldout split before projection; no training on same-manifest Stage11926 comparison rows for promotion.",
+    "Primary quota: C/C++ transition_next_action, verifier_transition, and continue_or_stop analogues because Stage11943 shows Gemma-only wins concentrate there.",
+    "Secondary quota: Python/Rust candidate_selection and next_action analogues for transfer preservation.",
+    "Keep abstraction_boundary_selection/dependency_contract_reasoning as a separate projection family with its own manifest and gates."
+  ],
+  "source_files_scanned": 103,
+  "stage": 11944,
+  "stage_name": "stage11944_transition_1k_v2_source_inventory_and_plan",
+  "top_candidate_source_summary": {
+    "approx_unique_roots_sum": 555,
+    "language_counts": {
+      "c_cpp": 356,
+      "python": 464,
+      "rust": 396,
+      "web_js_ts_html": 1018
+    },
+    "rows": 2234,
+    "task_counts_top20": {
+      "abstention_insufficient_evidence": 304,
+      "alternative_hypothesis_elimination": 64,
+      "evidence_citation": 432,
+      "minimal_fix_selection": 242,
+      "patch_impact": 336,
+      "symptom_localization": 458,
+      "verifier_outcome": 398
+    },
+    "verifier_or_selected_test_rows": 2144
+  },
+  "top_candidate_sources": [
+    {
+      "language_counts": {
+        "web_js_ts_html": 240
+      },
+      "opaque_option_rows": 192,
+      "path": "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_rows.jsonl",
+      "rows": 240,
+      "task_counts": {
+        "abstention_insufficient_evidence": 40,
+        "alternative_hypothesis_elimination": 32,
+        "evidence_citation": 40,
+        "minimal_fix_selection": 40,
+        "patch_impact": 8,
+        "symptom_localization": 40,
+        "verifier_outcome": 40
+      },
+      "unique_roots": 32,
+      "verifier_or_selected_test_rows": 240
+    },
+    {
+      "language_counts": {
+        "web_js_ts_html": 206
+      },
+      "opaque_option_rows": 206,
+      "path": "runs/local/artifacts/stage11639_normalized_web_support_guarded_probe_request/normalized_web_support_train_rows.jsonl",
+      "rows": 206,
+      "task_counts": {
+        "abstention_insufficient_evidence": 38,
+        "evidence_citation": 40,
+        "minimal_fix_selection": 40,
+        "patch_impact": 8,
+        "symptom_localization": 40,
+        "verifier_outcome": 40
+      },
+      "unique_roots": 32,
+      "verifier_or_selected_test_rows": 206
+    },
+    {
+      "language_counts": {
+        "web_js_ts_html": 206
+      },
+      "opaque_option_rows": 160,
+      "path": "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_admitted_train_rows.jsonl",
+      "rows": 206,
+      "task_counts": {
+        "abstention_insufficient_evidence": 38,
+        "evidence_citation": 40,
+        "minimal_fix_selection": 40,
+        "patch_impact": 8,
+        "symptom_localization": 40,
+        "verifier_outcome": 40
+      },
+      "unique_roots": 32,
+      "verifier_or_selected_test_rows": 206
+    },
+    {
+      "language_counts": {
+        "c_cpp": 64,
+        "python": 48,
+        "rust": 48
+      },
+      "opaque_option_rows": 160,
+      "path": "runs/local/artifacts/stage11880_source_heldout_support_guarded_probe_package/source_heldout_support_added_train_rows.jsonl",
+      "rows": 160,
+      "task_counts": {
+        "abstention_insufficient_evidence": 32,
+        "evidence_citation": 40,
+        "patch_impact": 40,
+        "symptom_localization": 24,
+        "verifier_outcome": 24
+      },
+      "unique_roots": 40,
+      "verifier_or_selected_test_rows": 160
+    },
+    {
+      "language_counts": {
+        "c_cpp": 64,
+        "python": 48,
+        "rust": 48
+      },
+      "opaque_option_rows": 160,
+      "path": "runs/local/artifacts/stage11884_rendered_source_heldout_support_probe_package/rendered_source_heldout_support_added_train_rows.jsonl",
+      "rows": 160,
+      "task_counts": {
+        "abstention_insufficient_evidence": 32,
+        "evidence_citation": 40,
+        "patch_impact": 40,
+        "symptom_localization": 24,
+        "verifier_outcome": 24
+      },
+      "unique_roots": 40,
+      "verifier_or_selected_test_rows": 160
+    },
+    {
+      "language_counts": {
+        "web_js_ts_html": 163
+      },
+      "opaque_option_rows": 163,
+      "path": "runs/local/artifacts/stage11693_web_gap_targeted_support_inventory/web_gap_targeted_support_rows.jsonl",
+      "rows": 163,
+      "task_counts": {
+        "minimal_fix_selection": 54,
+        "symptom_localization": 54,
+        "verifier_outcome": 55
+      },
+      "unique_roots": 65,
+      "verifier_or_selected_test_rows": 118
+    },
+    {
+      "language_counts": {
+        "web_js_ts_html": 121
+      },
+      "opaque_option_rows": 121,
+      "path": "runs/local/artifacts/stage11704_web_remaining_nonverifier_support_package/web_remaining_nonverifier_support_rows.jsonl",
+      "rows": 121,
+      "task_counts": {
+        "minimal_fix_selection": 60,
+        "symptom_localization": 61
+      },
+      "unique_roots": 50,
+      "verifier_or_selected_test_rows": 76
+    },
+    {
+      "language_counts": {
+        "c_cpp": 64
+      },
+      "opaque_option_rows": 64,
+      "path": "runs/local/artifacts/stage11878_cpp_abstain_support_combined_audit_v9/cpp_abstain_support_rows_v9.jsonl",
+      "rows": 64,
+      "task_counts": {
+        "abstention_insufficient_evidence": 32,
+        "evidence_citation": 16,
+        "patch_impact": 16
+      },
+      "unique_roots": 16,
+      "verifier_or_selected_test_rows": 64
+    },
+    {
+      "language_counts": {
+        "rust": 48
+      },
+      "opaque_option_rows": 48,
+      "path": "runs/local/artifacts/stage11854_rust_verifier_support_combined_audit_v11/rust_verifier_support_rows_v11.jsonl",
+      "rows": 48,
+      "task_counts": {
+        "evidence_citation": 12,
+        "patch_impact": 12,
+        "symptom_localization": 12,
+        "verifier_outcome": 12
+      },
+      "unique_roots": 12,
+      "verifier_or_selected_test_rows": 48
+    },
+    {
+      "language_counts": {
+        "python": 48
+      },
+      "opaque_option_rows": 48,
+      "path": "runs/local/artifacts/stage11870_python_verifier_support_combined_audit_v13/python_verifier_support_combined_rows_v13.jsonl",
+      "rows": 48,
+      "task_counts": {
+        "evidence_citation": 12,
+        "patch_impact": 12,
+        "symptom_localization": 12,
+        "verifier_outcome": 12
+      },
+      "unique_roots": 12,
+      "verifier_or_selected_test_rows": 48
+    },
+    {
+      "language_counts": {
+        "web_js_ts_html": 48
+      },
+      "opaque_option_rows": 0,
+      "path": "runs/local/artifacts/stage11614_web_mutation_fail_to_pass_rows/web_mutation_fail_to_pass_train_support_rows.jsonl",
+      "rows": 48,
+      "task_counts": {
+        "abstention_insufficient_evidence": 8,
+        "evidence_citation": 8,
+        "minimal_fix_selection": 8,
+        "patch_impact": 8,
+        "symptom_localization": 8,
+        "verifier_outcome": 8
+      },
+      "unique_roots": 8,
+      "verifier_or_selected_test_rows": 48
+    },
+    {
+      "language_counts": {
+        "rust": 44
+      },
+      "opaque_option_rows": 44,
+      "path": "runs/local/artifacts/stage11850_rust_verifier_support_combined_audit_v10/rust_verifier_support_rows_v10.jsonl",
+      "rows": 44,
+      "task_counts": {
+        "evidence_citation": 11,
+        "patch_impact": 11,
+        "symptom_localization": 11,
+        "verifier_outcome": 11
+      },
+      "unique_roots": 11,
+      "verifier_or_selected_test_rows": 44
+    },
+    {
+      "language_counts": {
+        "python": 44
+      },
+      "opaque_option_rows": 44,
+      "path": "runs/local/artifacts/stage11866_python_verifier_support_combined_audit_v12/python_verifier_support_combined_rows_v12.jsonl",
+      "rows": 44,
+      "task_counts": {
+        "evidence_citation": 11,
+        "patch_impact": 11,
+        "symptom_localization": 11,
+        "verifier_outcome": 11
+      },
+      "unique_roots": 11,
+      "verifier_or_selected_test_rows": 44
+    },
+    {
+      "language_counts": {
+        "rust": 40
+      },
+      "opaque_option_rows": 40,
+      "path": "runs/local/artifacts/stage11846_rust_verifier_support_combined_audit_v9/rust_verifier_support_rows_v9.jsonl",
+      "rows": 40,
+      "task_counts": {
+        "evidence_citation": 10,
+        "patch_impact": 10,
+        "symptom_localization": 10,
+        "verifier_outcome": 10
+      },
+      "unique_roots": 10,
+      "verifier_or_selected_test_rows": 40
+    },
+    {
+      "language_counts": {
+        "python": 40
+      },
+      "opaque_option_rows": 40,
+      "path": "runs/local/artifacts/stage11862_python_verifier_support_combined_audit_v11/python_verifier_support_combined_rows_v11.jsonl",
+      "rows": 40,
+      "task_counts": {
+        "evidence_citation": 10,
+        "patch_impact": 10,
+        "symptom_localization": 10,
+        "verifier_outcome": 10
+      },
+      "unique_roots": 10,
+      "verifier_or_selected_test_rows": 40
+    },
+    {
+      "language_counts": {
+        "rust": 36
+      },
+      "opaque_option_rows": 36,
+      "path": "runs/local/artifacts/stage11842_rust_verifier_support_combined_audit_v8/rust_verifier_support_rows_v8.jsonl",
+      "rows": 36,
+      "task_counts": {
+        "evidence_citation": 9,
+        "patch_impact": 9,
+        "symptom_localization": 9,
+        "verifier_outcome": 9
+      },
+      "unique_roots": 9,
+      "verifier_or_selected_test_rows": 36
+    },
+    {
+      "language_counts": {
+        "python": 36
+      },
+      "opaque_option_rows": 36,
+      "path": "runs/local/artifacts/stage11858_python_verifier_support_combined_audit_v10/python_verifier_support_combined_rows_v10.jsonl",
+      "rows": 36,
+      "task_counts": {
+        "evidence_citation": 9,
+        "patch_impact": 9,
+        "symptom_localization": 9,
+        "verifier_outcome": 9
+      },
+      "unique_roots": 9,
+      "verifier_or_selected_test_rows": 36
+    },
+    {
+      "language_counts": {
+        "web_js_ts_html": 34
+      },
+      "opaque_option_rows": 32,
+      "path": "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_rejected_rows.jsonl",
+      "rows": 34,
+      "task_counts": {
+        "abstention_insufficient_evidence": 2,
+        "alternative_hypothesis_elimination": 32
+      },
+      "unique_roots": 32,
+      "verifier_or_selected_test_rows": 34
+    },
+    {
+      "language_counts": {
+        "python": 32
+      },
+      "opaque_option_rows": 32,
+      "path": "runs/local/artifacts/stage11812_python_verifier_support_combined_audit_v7/python_verifier_support_combined_rows_v7.jsonl",
+      "rows": 32,
+      "task_counts": {
+        "evidence_citation": 8,
+        "patch_impact": 8,
+        "symptom_localization": 8,
+        "verifier_outcome": 8
+      },
+      "unique_roots": 8,
+      "verifier_or_selected_test_rows": 32
+    },
+    {
+      "language_counts": {
+        "python": 32
+      },
+      "opaque_option_rows": 32,
+      "path": "runs/local/artifacts/stage11818_python_verifier_support_combined_audit_v9/python_verifier_support_combined_rows_v9.jsonl",
+      "rows": 32,
+      "task_counts": {
+        "evidence_citation": 8,
+        "patch_impact": 8,
+        "symptom_localization": 8,
+        "verifier_outcome": 8
+      },
+      "unique_roots": 8,
+      "verifier_or_selected_test_rows": 32
+    },
+    {
+      "language_counts": {
+        "rust": 32
+      },
+      "opaque_option_rows": 32,
+      "path": "runs/local/artifacts/stage11838_rust_verifier_support_combined_audit_v7/rust_verifier_support_rows_v7.jsonl",
+      "rows": 32,
+      "task_counts": {
+        "evidence_citation": 8,
+        "patch_impact": 8,
+        "symptom_localization": 8,
+        "verifier_outcome": 8
+      },
+      "unique_roots": 8,
+      "verifier_or_selected_test_rows": 32
+    },
+    {
+      "language_counts": {
+        "c_cpp": 32
+      },
+      "opaque_option_rows": 32,
+      "path": "runs/local/artifacts/stage11874_cpp_abstain_support_combined_audit_v8/cpp_abstain_support_rows_v8.jsonl",
+      "rows": 32,
+      "task_counts": {
+        "abstention_insufficient_evidence": 16,
+        "evidence_citation": 8,
+        "patch_impact": 8
+      },
+      "unique_roots": 8,
+      "verifier_or_selected_test_rows": 32
+    },
+    {
+      "language_counts": {
+        "c_cpp": 32
+      },
+      "opaque_option_rows": 32,
+      "path": "runs/local/artifacts/stage11877_cpp_benchmark_extra_abstain_support_rows/cpp_benchmark_extra_abstain_support_rows.jsonl",
+      "rows": 32,
+      "task_counts": {
+        "abstention_insufficient_evidence": 16,
+        "evidence_citation": 8,
+        "patch_impact": 8
+      },
+      "unique_roots": 8,
+      "verifier_or_selected_test_rows": 32
+    },
+    {
+      "language_counts": {
+        "python": 28
+      },
+      "opaque_option_rows": 28,
+      "path": "runs/local/artifacts/stage11796_python_verifier_support_combined_audit_v6/python_verifier_support_combined_rows_v6.jsonl",
+      "rows": 28,
+      "task_counts": {
+        "evidence_citation": 7,
+        "patch_impact": 7,
+        "symptom_localization": 7,
+        "verifier_outcome": 7
+      },
+      "unique_roots": 7,
+      "verifier_or_selected_test_rows": 28
+    },
+    {
+      "language_counts": {
+        "python": 28
+      },
+      "opaque_option_rows": 28,
+      "path": "runs/local/artifacts/stage11814_python_verifier_support_combined_audit_v8_duplicate_guard/python_verifier_support_combined_rows_v8.jsonl",
+      "rows": 28,
+      "task_counts": {
+        "evidence_citation": 7,
+        "patch_impact": 7,
+        "symptom_localization": 7,
+        "verifier_outcome": 7
+      },
+      "unique_roots": 7,
+      "verifier_or_selected_test_rows": 28
+    },
+    {
+      "language_counts": {
+        "c_cpp": 28
+      },
+      "opaque_option_rows": 28,
+      "path": "runs/local/artifacts/stage11826_cpp_abstain_support_combined_audit_v7/cpp_abstain_support_rows_v7.jsonl",
+      "rows": 28,
+      "task_counts": {
+        "abstention_insufficient_evidence": 14,
+        "evidence_citation": 7,
+        "patch_impact": 7
+      },
+      "unique_roots": 7,
+      "verifier_or_selected_test_rows": 28
+    },
+    {
+      "language_counts": {
+        "rust": 28
+      },
+      "opaque_option_rows": 28,
+      "path": "runs/local/artifacts/stage11834_rust_verifier_support_combined_audit_v6/rust_verifier_support_rows_v6.jsonl",
+      "rows": 28,
+      "task_counts": {
+        "evidence_citation": 7,
+        "patch_impact": 7,
+        "symptom_localization": 7,
+        "verifier_outcome": 7
+      },
+      "unique_roots": 7,
+      "verifier_or_selected_test_rows": 28
+    },
+    {
+      "language_counts": {
+        "python": 24
+      },
+      "opaque_option_rows": 24,
+      "path": "runs/local/artifacts/stage11792_python_verifier_support_combined_audit_v5/python_verifier_support_combined_rows_v5.jsonl",
+      "rows": 24,
+      "task_counts": {
+        "evidence_citation": 6,
+        "patch_impact": 6,
+        "symptom_localization": 6,
+        "verifier_outcome": 6
+      },
+      "unique_roots": 6,
+      "verifier_or_selected_test_rows": 24
+    },
+    {
+      "language_counts": {
+        "c_cpp": 24
+      },
+      "opaque_option_rows": 24,
+      "path": "runs/local/artifacts/stage11808_cpp_abstain_support_combined_audit_v6/cpp_abstain_support_rows_v6.jsonl",
+      "rows": 24,
+      "task_counts": {
+        "abstention_insufficient_evidence": 12,
+        "evidence_citation": 6,
+        "patch_impact": 6
+      },
+      "unique_roots": 6,
+      "verifier_or_selected_test_rows": 24
+    },
+    {
+      "language_counts": {
+        "rust": 24
+      },
+      "opaque_option_rows": 24,
+      "path": "runs/local/artifacts/stage11830_rust_verifier_support_combined_audit_v5/rust_verifier_support_rows_v5.jsonl",
+      "rows": 24,
+      "task_counts": {
+        "evidence_citation": 6,
+        "patch_impact": 6,
+        "symptom_localization": 6,
+        "verifier_outcome": 6
+      },
+      "unique_roots": 6,
+      "verifier_or_selected_test_rows": 24
+    },
+    {
+      "language_counts": {
+        "python": 20
+      },
+      "opaque_option_rows": 20,
+      "path": "runs/local/artifacts/stage11776_python_verifier_support_combined_audit_v4/python_verifier_support_combined_rows_v4.jsonl",
+      "rows": 20,
+      "task_counts": {
+        "evidence_citation": 5,
+        "patch_impact": 5,
+        "symptom_localization": 5,
+        "verifier_outcome": 5
+      },
+      "unique_roots": 5,
+      "verifier_or_selected_test_rows": 20
+    },
+    {
+      "language_counts": {
+        "c_cpp": 20
+      },
+      "opaque_option_rows": 20,
+      "path": "runs/local/artifacts/stage11804_cpp_abstain_support_combined_audit_v5/cpp_abstain_support_rows_v5.jsonl",
+      "rows": 20,
+      "task_counts": {
+        "abstention_insufficient_evidence": 10,
+        "evidence_citation": 5,
+        "patch_impact": 5
+      },
+      "unique_roots": 5,
+      "verifier_or_selected_test_rows": 20
+    },
+    {
+      "language_counts": {
+        "rust": 20
+      },
+      "opaque_option_rows": 20,
+      "path": "runs/local/artifacts/stage11822_rust_verifier_support_combined_audit_v4/rust_verifier_support_rows_v4.jsonl",
+      "rows": 20,
+      "task_counts": {
+        "evidence_citation": 5,
+        "patch_impact": 5,
+        "symptom_localization": 5,
+        "verifier_outcome": 5
+      },
+      "unique_roots": 5,
+      "verifier_or_selected_test_rows": 20
+    },
+    {
+      "language_counts": {
+        "python": 16
+      },
+      "opaque_option_rows": 16,
+      "path": "runs/local/artifacts/stage11772_python_verifier_support_combined_audit_v3/python_verifier_support_combined_rows_v3.jsonl",
+      "rows": 16,
+      "task_counts": {
+        "evidence_citation": 4,
+        "patch_impact": 4,
+        "symptom_localization": 4,
+        "verifier_outcome": 4
+      },
+      "unique_roots": 4,
+      "verifier_or_selected_test_rows": 16
+    },
+    {
+      "language_counts": {
+        "c_cpp": 16
+      },
+      "opaque_option_rows": 16,
+      "path": "runs/local/artifacts/stage11788_cpp_abstain_support_combined_audit_v4/cpp_abstain_support_rows_v4.jsonl",
+      "rows": 16,
+      "task_counts": {
+        "abstention_insufficient_evidence": 8,
+        "evidence_citation": 4,
+        "patch_impact": 4
+      },
+      "unique_roots": 4,
+      "verifier_or_selected_test_rows": 16
+    },
+    {
+      "language_counts": {
+        "rust": 16
+      },
+      "opaque_option_rows": 16,
+      "path": "runs/local/artifacts/stage11800_rust_verifier_support_combined_audit_v3/rust_verifier_support_rows_v3.jsonl",
+      "rows": 16,
+      "task_counts": {
+        "evidence_citation": 4,
+        "patch_impact": 4,
+        "symptom_localization": 4,
+        "verifier_outcome": 4
+      },
+      "unique_roots": 4,
+      "verifier_or_selected_test_rows": 16
+    },
+    {
+      "language_counts": {
+        "python": 12
+      },
+      "opaque_option_rows": 12,
+      "path": "runs/local/artifacts/stage11764_python_verifier_support_combined_audit_v2/python_verifier_support_combined_rows_v2.jsonl",
+      "rows": 12,
+      "task_counts": {
+        "evidence_citation": 3,
+        "patch_impact": 3,
+        "symptom_localization": 3,
+        "verifier_outcome": 3
+      },
+      "unique_roots": 3,
+      "verifier_or_selected_test_rows": 12
+    },
+    {
+      "language_counts": {
+        "rust": 12
+      },
+      "opaque_option_rows": 12,
+      "path": "runs/local/artifacts/stage11780_rust_verifier_support_combined_audit_v2/rust_verifier_support_rows_v2.jsonl",
+      "rows": 12,
+      "task_counts": {
+        "evidence_citation": 3,
+        "patch_impact": 3,
+        "symptom_localization": 3,
+        "verifier_outcome": 3
+      },
+      "unique_roots": 3,
+      "verifier_or_selected_test_rows": 12
+    },
+    {
+      "language_counts": {
+        "c_cpp": 12
+      },
+      "opaque_option_rows": 12,
+      "path": "runs/local/artifacts/stage11784_cpp_abstain_support_combined_audit_v3/cpp_abstain_support_rows_v3.jsonl",
+      "rows": 12,
+      "task_counts": {
+        "abstention_insufficient_evidence": 6,
+        "evidence_citation": 3,
+        "patch_impact": 3
+      },
+      "unique_roots": 3,
+      "verifier_or_selected_test_rows": 12
+    },
+    {
+      "language_counts": {
+        "python": 8
+      },
+      "opaque_option_rows": 8,
+      "path": "runs/local/artifacts/stage11750_python_verifier_support_combined_audit/python_verifier_support_combined_rows.jsonl",
+      "rows": 8,
+      "task_counts": {
+        "evidence_citation": 2,
+        "patch_impact": 2,
+        "symptom_localization": 2,
+        "verifier_outcome": 2
+      },
+      "unique_roots": 2,
+      "verifier_or_selected_test_rows": 8
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "strict_long_context_training_entrypoint_plus_audit_v1",
+  "purpose": "Manifest-first long-context training dataset preparation that expands the accepted set with direct-audited shard families while keeping strict compile and audit gates.",
+  "dataset_defaults": {
+    "strict_shard_manifest": "strict_long_context_trainable_shards_with_audit_only_v1.json",
+    "include_audit_only_direct": true,
+    "output_dir": "../../runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1",
+    "export_parquet": true,
+    "parquet_output_dir": "../../runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/parquet",
+    "max_positive_chunks": 8,
+    "rows_per_shard": 10000,
+    "compression": "zstd",
+    "prepare_split_pipeline": true,
+    "mixture_output_dir": "../../runs/local/artifacts/strict_long_context_mixture_plus_audit_v1",
+    "mixture_rows_output_dir": "../../runs/local/artifacts/strict_long_context_mixture_rows_plus_audit_v1",
+    "split_output_dir": "../../runs/local/artifacts/strict_long_context_split_rows_plus_audit_groupaware_v1",
+    "sampled_output_dir": "../../runs/local/artifacts/strict_long_context_sampled_manifest_split_plus_audit_groupaware_v1",
+    "split_audit_output_path": "../../runs/local/artifacts/strict_long_context_sampled_manifest_split_plus_audit_groupaware_v1/strict_long_context_split_quality_audit.json",
+    "min_state_delta_ready_fraction": 0.8,
+    "min_evidence_anchor_ready_fraction": 0.8
+  }
+}

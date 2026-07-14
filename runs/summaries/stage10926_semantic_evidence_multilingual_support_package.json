@@ -1,0 +1,99 @@
+{
+  "claim_scope": [
+    "Add support-only semantic evidence-role supervision on top of the anti-cheat-clean stage10883 multilingual package.",
+    "Keep the cleaned 23-row validation and 23-row strict overlays unchanged so any movement can be attributed to train geometry rather than eval drift."
+  ],
+  "created_at_utc": "2026-07-12T19:45:53Z",
+  "decision": "semantic_evidence_multilingual_support_package_ready",
+  "interpretation": [
+    "This is the first multilingual support increment that directly targets evidence-role discrimination with semantic targets rather than opaque labels.",
+    "It preserves the current bounded canary/eval contract, so a later probe can be judged by unchanged 23-row heldout behavior plus fresh evidence successor slices.",
+    "The web lane is present only as train-support stress overlap via code_assist; it does not upgrade pure-web heldout realism claims."
+  ],
+  "metrics": {
+    "base_metrics_snapshot": {
+      "added_repaired_rows": 6,
+      "repaired_duplicate_visible_evidence_groups": 0,
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_rows_after": 193,
+      "train_rows_before": 187,
+      "validation_rows_unchanged": 23
+    },
+    "semantic_metrics_snapshot": {
+      "row_count": 12,
+      "rows_by_language": {
+        "c_cpp": 4,
+        "python": 4,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "rows_by_target": {
+        "candidate_change_surface": 4,
+        "symptom_or_call_path_analogue": 2,
+        "verifier_and_test_constraint": 6
+      }
+    },
+    "semantic_row_types_added": {
+      "pairwise_contrast": 6,
+      "semantic_role_full": 6
+    },
+    "semantic_rows_added": 12,
+    "semantic_targets_added": {
+      "candidate_change_surface": 4,
+      "symptom_or_call_path_analogue": 2,
+      "verifier_and_test_constraint": 6
+    },
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_by_language": {
+      "c_cpp": 113,
+      "python": 54,
+      "rust": 36,
+      "web_js_ts_html": 2
+    },
+    "train_by_task": {
+      "abstention_insufficient_evidence": 18,
+      "alternative_hypothesis_elimination": 1,
+      "cpp_implementation_vs_implementation": 1,
+      "evidence_citation": 30,
+      "evidence_role_classification": 76,
+      "minimal_fix_selection": 17,
+      "patch_impact": 18,
+      "python_implementation_vs_implementation": 2,
+      "regression_risk": 1,
+      "symptom_localization": 18,
+      "verifier_outcome": 23
+    },
+    "train_rows_after": 205,
+    "train_rows_before": 193,
+    "validation_rows_unchanged": 23
+  },
+  "next_best_step": "Run a multilingual support probe from the current alias-safe runtime with these added semantic evidence rows, then re-evaluate the unchanged 23-row overlay and the 3-row fresh evidence successor slice.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/added_semantic_support_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/semantic_evidence_multilingual_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "All semantic evidence rows remain train_support_only and strict_eval_eligible=false.",
+    "Validation and strict rows are copied unchanged from stage10883.",
+    "Stress rows remain excluded from promotion claims and unchanged from stage10883.",
+    "Known alias-risk tokenizers evidence remains excluded from the semantic support package."
+  ],
+  "source_artifacts": {
+    "base_stress": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "base_strict": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "base_summary": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_successor_package.json",
+    "base_train": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_train.jsonl",
+    "base_validation": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_validation.jsonl",
+    "semantic_rows": "runs/local/artifacts/stage10925_reviewed_evidence_role_semantic_support_package/support_rows.jsonl",
+    "semantic_summary": "runs/local/artifacts/stage10925_reviewed_evidence_role_semantic_support_package/reviewed_evidence_role_semantic_support_package.json"
+  },
+  "stage": 10926,
+  "stage_name": "stage10926_semantic_evidence_multilingual_support_package"
+}

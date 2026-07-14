@@ -29,7 +29,8 @@ def _load_training_rows_from_shard_manifest(
     included_shards: list[str] = []
     excluded_shards: list[dict[str, str]] = []
     duplicate_pack_ids = 0
-    seen_pack_ids: set[str] = set()
+    duplicate_pack_ids_replaced = 0
+    rows_by_pack_id: dict[str, dict[str, Any]] = {}
 
     for shard in selected:
         acceptance_mode = str(shard.get("acceptance_mode") or "")
@@ -48,12 +49,16 @@ def _load_training_rows_from_shard_manifest(
             pack_id = str(row.get("pack_id") or "")
             if not pack_id:
                 raise ValueError(f"missing_pack_id:{training_rows_path}")
-            if pack_id in seen_pack_ids:
+            if pack_id in rows_by_pack_id:
                 duplicate_pack_ids += 1
+                chosen = _choose_better_duplicate_row(rows_by_pack_id[pack_id], row)
+                if chosen is not rows_by_pack_id[pack_id] and chosen != rows_by_pack_id[pack_id]:
+                    duplicate_pack_ids_replaced += 1
+                rows_by_pack_id[pack_id] = chosen
                 continue
-            seen_pack_ids.add(pack_id)
-            loaded_rows.append(row)
+            rows_by_pack_id[pack_id] = dict(row)
 
+    loaded_rows = [rows_by_pack_id[pack_id] for pack_id in sorted(rows_by_pack_id)]
     if not loaded_rows:
         raise ValueError("no_training_rows_loaded_from_strict_shard_manifest")
 
@@ -65,6 +70,7 @@ def _load_training_rows_from_shard_manifest(
         "excluded_shards": excluded_shards,
         "loaded_pack_count": len(loaded_rows),
         "duplicate_pack_ids_dropped": duplicate_pack_ids,
+        "duplicate_pack_ids_replaced": duplicate_pack_ids_replaced,
     }
     return loaded_rows, source_summary
 
@@ -91,6 +97,30 @@ def _load_trainer_rows(
         include_audit_only_direct=include_audit_only_direct,
     )
 
+
+
+
+def _target_row_signal_score(row: dict[str, Any]) -> tuple[int, int, int, int]:
+    target_rows = list(row.get('target_rows') or [])
+    nonempty_query_count = 0
+    final_state_signal = 0
+    for target in target_rows:
+        normalized = _normalize_target_row(dict(target))
+        if str(normalized.get('query_text') or '').strip():
+            nonempty_query_count += 1
+        final_state_signal += len(dict(normalized.get('final_state') or {}))
+    return (
+        len(target_rows),
+        nonempty_query_count,
+        final_state_signal,
+        int(row.get('pack_token_count') or 0),
+    )
+
+
+def _choose_better_duplicate_row(current: dict[str, Any], candidate: dict[str, Any]) -> dict[str, Any]:
+    current_key = _target_row_signal_score(current)
+    candidate_key = _target_row_signal_score(candidate)
+    return dict(candidate) if candidate_key > current_key else dict(current)
 
 def _parse_json_dict(value: Any) -> dict[str, Any]:
     if isinstance(value, dict):
@@ -390,7 +420,286 @@ def _join_type(scored_rows: list[dict[str, Any]]) -> str:
     return "single_source"
 
 
+def _is_test_path(path_text: str) -> bool:
+    lowered = str(path_text or '').lower()
+    name = Path(lowered).name
+    return lowered.startswith('tests/') or '/tests/' in lowered or name.startswith('test_') or '_test.' in name
+
+
+def _retrieval_join_labels(*, positives: list[dict[str, Any]], context_row_count: int) -> dict[str, Any]:
+    if not positives:
+        return {
+            'span_ratio': 0.0,
+            'source_type_count': 0,
+            'requires_test_join': False,
+            'requires_session_join': False,
+            'requires_external_concept_join': False,
+            'locality_risk': False,
+            'long_join_positive': False,
+        }
+    ordinals = sorted(int(row.get('ordinal') or 0) for row in positives)
+    span_ratio = 0.0
+    if context_row_count > 1:
+        span_ratio = (ordinals[-1] - ordinals[0]) / max(1, context_row_count - 1)
+    source_types = {str(row.get('source_type') or '') for row in positives if str(row.get('source_type') or '')}
+    paths = [str(row.get('path') or '') for row in positives]
+    has_test = any(_is_test_path(path_text) for path_text in paths)
+    has_non_test = any(not _is_test_path(path_text) for path_text in paths)
+    requires_session_join = any(source in {'session', 'trace', 'transcript'} for source in source_types)
+    requires_external_concept_join = any(source in {'paper', 'dataset'} for source in source_types)
+    locality_risk = span_ratio <= 0.02
+    long_join_positive = len(source_types) >= 2 and span_ratio >= 0.30
+    return {
+        'span_ratio': round(span_ratio, 6),
+        'source_type_count': len(source_types),
+        'requires_test_join': bool(has_test and has_non_test),
+        'requires_session_join': bool(requires_session_join),
+        'requires_external_concept_join': bool(requires_external_concept_join),
+        'locality_risk': bool(locality_risk),
+        'long_join_positive': bool(long_join_positive),
+    }
+
+
+def _grounded_role_groups(target_row: dict[str, Any]) -> tuple[set[str], set[str], str]:
+    normalized = _normalize_target_row(target_row)
+    final_state = dict(normalized.get("final_state") or {})
+    state_variable = str(normalized.get("state_variable") or "")
+    route = _clean_scalar_text(normalized.get("test_selection_route") or final_state.get("test_selection_route"))
+    trace_routed = "TRACE" in route or "VERIFICATION_DISCOVERY" in route
+
+    if state_variable == "verification_targets":
+        positive_roles = {"verification_constraint", "seed_change"}
+        if trace_routed:
+            positive_roles.add("trace_analogue")
+        negative_roles = {"distractor_context", "adjacent_context", "supporting_paper", "paper_support"}
+        return positive_roles, negative_roles, "grounded_verifier_route"
+    if state_variable == "expected_changed_files":
+        return {"seed_change", "repo_graph_neighbor", "test_neighbor"}, {"distractor_context", "adjacent_context", "supporting_paper", "paper_support"}, "grounded_change_roles"
+    if state_variable in {"execution_route", "test_selection_route"}:
+        positive_roles = {"verification_constraint", "seed_change"}
+        if trace_routed:
+            positive_roles.add("trace_analogue")
+        return positive_roles, {"distractor_context", "adjacent_context", "supporting_paper", "paper_support"}, "grounded_route_roles"
+    if state_variable == "key_symbols":
+        return {
+            "seed_change",
+            "repo_graph_neighbor",
+            "entity_mention_support",
+            "repo_support",
+            "paper_support",
+            "algorithm_grounding",
+            "cross_repo_analogue",
+        }, {"distractor_context", "adjacent_context", "supporting_paper", "paper_support"}, "grounded_symbol_roles"
+    return set(), set(), ""
+
+
+def _path_matches_any(path_text: str, candidates: list[str]) -> bool:
+    lowered = str(path_text or '').lower()
+    if not lowered:
+        return False
+    for candidate in candidates:
+        norm = _clean_scalar_text(candidate).lower()
+        if not norm:
+            continue
+        if lowered == norm or lowered.endswith(norm) or norm in lowered:
+            return True
+    return False
+
+
+def _take_interleaved(candidate_groups: list[list[dict[str, Any]]], *, limit: int) -> list[dict[str, Any]]:
+    selected: list[dict[str, Any]] = []
+    seen_ids: set[str] = set()
+    index = 0
+    while len(selected) < limit:
+        progressed = False
+        for group in candidate_groups:
+            if index >= len(group):
+                continue
+            row = group[index]
+            chunk_id = str(row.get('chunk_id') or '')
+            if chunk_id and chunk_id not in seen_ids:
+                selected.append(row)
+                seen_ids.add(chunk_id)
+                progressed = True
+                if len(selected) >= limit:
+                    break
+        if not progressed:
+            break
+        index += 1
+    return selected
+
+
+def _clone_support_row(row: dict[str, Any], *, reason: str, score_bias: int = 0) -> dict[str, Any]:
+    return {
+        'chunk_id': row['chunk_id'],
+        'score': int(row.get('score') or 0) + score_bias,
+        'path_hits': int(row.get('path_hits') or 0),
+        'lexical_hits': int(row.get('lexical_hits') or 0),
+        'role_bonus': int(row.get('role_bonus') or 0),
+        'source_type': row.get('source_type') or '',
+        'source_id': row.get('source_id') or '',
+        'role': row.get('role') or '',
+        'path': row.get('path') or '',
+        'ordinal': int(row.get('ordinal') or 0),
+        'support_reasons': [reason],
+    }
+
+
+def _pick_best_join_extension(
+    candidates: list[dict[str, Any]],
+    *,
+    selected: list[dict[str, Any]],
+    context_row_count: int,
+) -> dict[str, Any] | None:
+    if not candidates:
+        return None
+    selected_ids = {str(row.get('chunk_id') or '') for row in selected}
+    best_row: dict[str, Any] | None = None
+    best_key: tuple[float, int, int, int, str] | None = None
+    base_ordinals = [int(row.get('ordinal') or 0) for row in selected]
+    base_sources = {str(row.get('source_type') or '') for row in selected if str(row.get('source_type') or '')}
+    for row in candidates:
+        chunk_id = str(row.get('chunk_id') or '')
+        if not chunk_id or chunk_id in selected_ids:
+            continue
+        ordinals = sorted(base_ordinals + [int(row.get('ordinal') or 0)])
+        span_ratio = 0.0
+        if context_row_count > 1 and ordinals:
+            span_ratio = (ordinals[-1] - ordinals[0]) / max(1, context_row_count - 1)
+        new_source = int(str(row.get('source_type') or '') not in base_sources and str(row.get('source_type') or '') != '')
+        is_external = int(str(row.get('source_type') or '') in {'paper', 'dataset', 'session', 'trace', 'transcript'})
+        key = (new_source, is_external, span_ratio, int(row.get('score') or 0), chunk_id)
+        if best_key is None or key > best_key:
+            best_key = key
+            best_row = row
+    return best_row
+
+
+def _grounded_support_payload(
+    target_row: dict[str, Any],
+    prepared_rows: list[dict[str, Any]],
+    *,
+    max_positive_chunks: int,
+) -> dict[str, Any] | None:
+    positive_roles, negative_roles, label_source = _grounded_role_groups(target_row)
+    if not positive_roles:
+        return None
+
+    normalized = _normalize_target_row(target_row)
+    final_state = dict(normalized.get('final_state') or {})
+    state_variable = str(normalized.get('state_variable') or '')
+    route = _clean_scalar_text(normalized.get('test_selection_route') or final_state.get('test_selection_route'))
+    trace_routed = 'TRACE' in route or 'VERIFICATION_DISCOVERY' in route
+    verifier_paths = _clean_string_list(final_state.get('verification_targets') or normalized.get('selected_tests'))
+    changed_paths = _clean_string_list(final_state.get('expected_changed_files') or normalized.get('seed_paths'))
+    scored_rows = _scored_support_rows(target_row, prepared_rows)
+
+    verification_matches = [
+        _clone_support_row(row, reason='grounded_verifier_path_match', score_bias=200)
+        for row in scored_rows
+        if str(row.get('role') or '') == 'verification_constraint'
+        and _path_matches_any(str(row.get('path') or ''), verifier_paths)
+    ]
+    change_matches = [
+        _clone_support_row(row, reason='grounded_change_path_match', score_bias=150)
+        for row in scored_rows
+        if str(row.get('role') or '') in {'seed_change', 'repo_graph_neighbor', 'test_neighbor'}
+        and _path_matches_any(str(row.get('path') or ''), changed_paths)
+    ]
+    trace_matches = [
+        _clone_support_row(row, reason='grounded_trace_route_match', score_bias=125)
+        for row in scored_rows
+        if trace_routed and str(row.get('role') or '') == 'trace_analogue'
+    ]
+    generic_role_matches = [
+        _clone_support_row(row, reason='grounded_role_match', score_bias=100)
+        for row in scored_rows
+        if str(row.get('role') or '') in positive_roles
+    ]
+    join_extension_candidates = [
+        _clone_support_row(row, reason='grounded_long_join_extension', score_bias=75)
+        for row in scored_rows
+        if str(row.get('role') or '') in {'trace_analogue', 'algorithm_grounding', 'cross_repo_analogue', 'paper_support', 'entity_mention_support', 'repo_graph_neighbor'}
+        or str(row.get('source_type') or '') in {'paper', 'dataset', 'session', 'trace', 'transcript'}
+    ]
+
+    if state_variable == 'verification_targets':
+        positives = _take_interleaved([verification_matches, change_matches, trace_matches], limit=max_positive_chunks)
+    elif state_variable == 'expected_changed_files':
+        positives = _take_interleaved([change_matches, verification_matches, trace_matches], limit=max_positive_chunks)
+    elif state_variable in {'execution_route', 'test_selection_route'}:
+        positives = _take_interleaved([verification_matches, change_matches, trace_matches], limit=max_positive_chunks)
+    else:
+        positives = generic_role_matches[:max_positive_chunks]
+
+    if not positives:
+        return None
+
+    chosen_label_source = label_source
+    join_labels = _retrieval_join_labels(positives=positives, context_row_count=len(prepared_rows))
+    if not join_labels['long_join_positive'] and not join_labels['requires_external_concept_join']:
+        extension = _pick_best_join_extension(join_extension_candidates, selected=positives, context_row_count=len(prepared_rows))
+        if extension is not None:
+            if len(positives) < max_positive_chunks:
+                positives.append(extension)
+                chosen_label_source = f'mixed_{label_source}_long_join'
+                join_labels = _retrieval_join_labels(positives=positives, context_row_count=len(prepared_rows))
+            elif max_positive_chunks >= 3:
+                candidate_positives = list(positives[: max_positive_chunks - 1]) + [extension]
+                candidate_join_labels = _retrieval_join_labels(positives=candidate_positives, context_row_count=len(prepared_rows))
+                if candidate_join_labels['long_join_positive'] or candidate_join_labels['requires_external_concept_join']:
+                    positives = candidate_positives
+                    chosen_label_source = f'mixed_{label_source}_long_join'
+                    join_labels = candidate_join_labels
+
+    if len(positives) < max_positive_chunks:
+        filler_rows = [
+            _clone_support_row(row, reason='grounded_scored_fill')
+            for row in scored_rows
+            if str(row.get('role') or '') not in negative_roles
+        ]
+        positives = _take_interleaved([positives, generic_role_matches, filler_rows], limit=max_positive_chunks)
+        join_labels = _retrieval_join_labels(positives=positives, context_row_count=len(prepared_rows))
+
+    negative_candidates = [
+        _clone_support_row(row, reason='grounded_negative_role')
+        for row in scored_rows
+        if str(row.get('role') or '') in negative_roles
+    ]
+    hard_negatives = negative_candidates[:max_positive_chunks]
+    support_scores = []
+    for row in positives + hard_negatives:
+        support_scores.append(
+            {
+                'chunk_id': row['chunk_id'],
+                'score': row['score'],
+                'path_hits': row['path_hits'],
+                'lexical_hits': row['lexical_hits'],
+                'role_bonus': row['role_bonus'],
+                'source_type': row['source_type'],
+                'source_id': row['source_id'],
+                'role': row['role'],
+                'path': row['path'],
+                'ordinal': row['ordinal'],
+                'support_reasons': row['support_reasons'],
+            }
+        )
+    return {
+        'positive_chunk_ids': [row['chunk_id'] for row in positives],
+        'hard_negative_chunk_ids': [row['chunk_id'] for row in hard_negatives],
+        'support_scores': support_scores,
+        'join_type': _join_type(positives),
+        'label_source': chosen_label_source,
+        'label_leakage_risk': 'low',
+        'grounded_positive_count': len(positives),
+        'grounded_negative_count': len(hard_negatives),
+        **join_labels,
+    }
+
 def _retrieval_supervision_payload(target_row: dict[str, Any], prepared_rows: list[dict[str, Any]], *, max_positive_chunks: int) -> dict[str, Any]:
+    grounded_payload = _grounded_support_payload(target_row, prepared_rows, max_positive_chunks=max_positive_chunks)
+    if grounded_payload is not None:
+        return grounded_payload
     scored_rows = _scored_support_rows(target_row, prepared_rows)
     positives = scored_rows[:max_positive_chunks]
     positive_ids = [row["chunk_id"] for row in positives]
@@ -416,19 +725,80 @@ def _retrieval_supervision_payload(target_row: dict[str, Any], prepared_rows: li
                 "lexical_hits": row["lexical_hits"],
                 "role_bonus": row["role_bonus"],
                 "source_type": row["source_type"],
+                "source_id": row["source_id"],
                 "role": row["role"],
+                "path": row["path"],
+                "ordinal": row["ordinal"],
                 "support_reasons": row["support_reasons"],
             }
         )
+    join_labels = _retrieval_join_labels(positives=positives, context_row_count=len(prepared_rows))
     return {
         "positive_chunk_ids": positive_ids,
         "hard_negative_chunk_ids": [row["chunk_id"] for row in hard_negatives],
         "support_scores": support_scores,
         "join_type": _join_type(positives),
+        "label_source": "heuristic_target_overlap",
+        "label_leakage_risk": "high",
+        "grounded_positive_count": 0,
+        "grounded_negative_count": 0,
+        **join_labels,
     }
 
 
-def _memory_target(row: dict[str, Any], target_rows: list[dict[str, Any]], context_rows: list[dict[str, Any]]) -> dict[str, Any]:
+def _memory_transition_entry(target_row: dict[str, Any], prepared_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    normalized = _normalize_target_row(target_row)
+    final_state = dict(normalized.get("final_state") or {})
+    retrieval_payload = _retrieval_supervision_payload(normalized, prepared_rows, max_positive_chunks=4)
+    support_by_chunk = {
+        str(item.get("chunk_id") or ""): item
+        for item in list(retrieval_payload.get("support_scores") or [])
+        if str(item.get("chunk_id") or "")
+    }
+    positive_chunk_ids = list(retrieval_payload.get("positive_chunk_ids") or [])[:2]
+    positive_support_rows = [
+        support_by_chunk[chunk_id]
+        for chunk_id in positive_chunk_ids
+        if chunk_id in support_by_chunk
+    ]
+    retained_constraints = {
+        "seed_paths": list(normalized.get("seed_paths") or []),
+        "selected_tests": list(normalized.get("selected_tests") or []),
+        "seed_symbols": list(normalized.get("seed_symbols") or []),
+        "execution_route": str(normalized.get("execution_route") or ""),
+        "test_selection_route": str(normalized.get("test_selection_route") or ""),
+    }
+    state_delta = {
+        "asserted_updates": final_state,
+        "introduced_keys": sorted(str(key) for key in final_state.keys()),
+        "supporting_chunk_ids": positive_chunk_ids,
+        "supporting_paths": [str(item.get("path") or "") for item in positive_support_rows if str(item.get("path") or "")],
+        "join_type": str(retrieval_payload.get("join_type") or ""),
+    }
+    return {
+        "canonical_name": str(normalized.get("canonical_name") or ""),
+        "state_variable": str(normalized.get("state_variable") or ""),
+        "query_index": int(normalized.get("query_index") or 0),
+        "state_delta": state_delta,
+        "retained_constraints": retained_constraints,
+        "evidence_anchors": [
+            {
+                "chunk_id": str(item.get("chunk_id") or ""),
+                "path": str(item.get("path") or ""),
+                "role": str(item.get("role") or ""),
+                "source_type": str(item.get("source_type") or ""),
+                "support_reasons": list(item.get("support_reasons") or []),
+            }
+            for item in positive_support_rows
+        ],
+        "unresolved_prior_state": {
+            "state_variable": str(normalized.get("state_variable") or ""),
+            "reason": "prior_state_not_encoded_in_pack_row",
+        },
+    }
+
+
+def _memory_target(row: dict[str, Any], target_rows: list[dict[str, Any]], context_rows: list[dict[str, Any]], prepared_rows: list[dict[str, Any]]) -> dict[str, Any]:
     normalized_targets = [_normalize_target_row(item) for item in target_rows]
     state_variables = [str(item.get("state_variable") or "") for item in normalized_targets]
     canonical_names = [str(item.get("canonical_name") or "") for item in normalized_targets]
@@ -436,6 +806,7 @@ def _memory_target(row: dict[str, Any], target_rows: list[dict[str, Any]], conte
         raise ValueError(f"blank_memory_state_variable:{row.get('pack_id')}")
     if any(not value for value in canonical_names):
         raise ValueError(f"blank_memory_canonical_name:{row.get('pack_id')}")
+    transitions = [_memory_transition_entry(item, prepared_rows) for item in normalized_targets]
     return {
         "pack_id": str(row.get("pack_id") or ""),
         "trainer_policy_mode": str(row.get("trainer_policy_mode") or ""),
@@ -445,6 +816,7 @@ def _memory_target(row: dict[str, Any], target_rows: list[dict[str, Any]], conte
         "state_variables": state_variables,
         "canonical_names": canonical_names,
         "source_types": sorted({str(item.get("source_type") or "") for item in context_rows if str(item.get("source_type") or "")}),
+        "transitions": transitions,
     }
 
 
@@ -519,6 +891,13 @@ def compile_long_context_pack_trainer_rows(
                     "hard_negative_chunk_ids": retrieval_payload["hard_negative_chunk_ids"],
                     "support_scores": retrieval_payload["support_scores"],
                     "join_type": retrieval_payload["join_type"],
+                    "span_ratio": retrieval_payload["span_ratio"],
+                    "source_type_count": retrieval_payload["source_type_count"],
+                    "requires_test_join": retrieval_payload["requires_test_join"],
+                    "requires_session_join": retrieval_payload["requires_session_join"],
+                    "requires_external_concept_join": retrieval_payload["requires_external_concept_join"],
+                    "locality_risk": retrieval_payload["locality_risk"],
+                    "long_join_positive": retrieval_payload["long_join_positive"],
                     "target_text": json.dumps(
                         {
                             "canonical_name": target_row.get("canonical_name") or "",
@@ -530,6 +909,10 @@ def compile_long_context_pack_trainer_rows(
                     "metadata": {
                         "canonical_name": str(target_row.get("canonical_name") or ""),
                         "query_index": int(target_row.get("query_index") or 0),
+                        "label_source": retrieval_payload["label_source"],
+                        "label_leakage_risk": retrieval_payload["label_leakage_risk"],
+                        "grounded_positive_count": int(retrieval_payload.get("grounded_positive_count") or 0),
+                        "grounded_negative_count": int(retrieval_payload.get("grounded_negative_count") or 0),
                     },
                 }
             )
@@ -543,7 +926,7 @@ def compile_long_context_pack_trainer_rows(
                 "trainer_policy_mode": trainer_policy_mode,
                 "overlap_family_id": str(row.get("overlap_family_id") or ""),
                 "input_text": f"Summarize the persistent working memory for pack {pack_id}.",
-                "target_text": json.dumps(_memory_target(row, target_rows, context_rows), sort_keys=True),
+                "target_text": json.dumps(_memory_target(row, target_rows, context_rows, prepared_context_rows), sort_keys=True),
                 "metadata": {
                     "candidate_count": int(row.get("candidate_count") or 0),
                     "chunk_count": int(row.get("chunk_count") or 0),

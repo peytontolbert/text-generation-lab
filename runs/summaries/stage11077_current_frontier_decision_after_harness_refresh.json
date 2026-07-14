@@ -1,0 +1,58 @@
+{
+  "claim_scope": [
+    "Update the current frontier status after refreshing reviewed-v28 harness machine artifact writeback.",
+    "Keep the standalone, evidence-lane, and harness claim boundaries explicit."
+  ],
+  "created_at_utc": "2026-07-13T02:38:47Z",
+  "decision": "current_frontier_updated_after_reviewed_v28_harness_machine_writeback",
+  "delta_vs_previous_frontier": {
+    "change": "reviewed_v28 harness machine artifacts are now written to reserved multilingual packet paths for all four maintainer-choice cells.",
+    "current_harness_status": "machine_writeback_ready_but_human_review_still_required",
+    "previous_harness_status": "not_claim_ready"
+  },
+  "evidence_lane": {
+    "decision": "keep_base_scorer_and_use_priority_evidence_rows_as_support",
+    "reason": "Narrow evidence scorer gains still do not survive clean strict promotion as a safe global replacement.",
+    "status": "still_blocked_from_global_promotion"
+  },
+  "full_product_harness": {
+    "cells_attempted": 4,
+    "cells_completed": 4,
+    "cells_failed": 0,
+    "machine_artifacts_written": true,
+    "remaining_gap": [
+      "expert_maintainer_rubric_scores",
+      "anti_cheat_cards",
+      "claim-specific review and merge discipline"
+    ],
+    "status": "machine_writeback_ready_but_human_review_still_required"
+  },
+  "headline_findings": [
+    "Standalone remains the strongest promotable path today: 100M reaches 22/22 policy-assisted on the cleaned same-manifest canary while Gemma stays at 5/22.",
+    "The evidence-role scorer path is still blocked from global promotion and should not be upgraded by inference routing alone.",
+    "The reviewed-v28 full-product harness path is no longer blocked on local runtime capture: machine artifacts now exist for Python, C/C++, Rust, and Web maintainer-choice cells.",
+    "The remaining harness gap is review quality, not runtime absence."
+  ],
+  "next_best_step": [
+    "Use the standalone policy-assisted result as the current honest multilingual standalone headline.",
+    "Treat reviewed-v28 harness machine execution as complete enough for packet review, then finish expert-maintainer and anti-cheat attachments before any full-product claim.",
+    "Keep evidence-lane work focused on fresh roots or scorer-head training rather than another global scorer swap attempt."
+  ],
+  "passed": true,
+  "source_artifacts": {
+    "evidence_policy": "runs/local/artifacts/stage11050_priority_evidence_policy_decision/priority_evidence_policy_decision.json",
+    "harness_refresh": "runs/local/artifacts/stage11076_reviewed_v28_harness_writeback_refresh/reviewed_v28_harness_writeback_refresh.json",
+    "previous_frontier_decision": "runs/local/artifacts/stage11075_current_frontier_decision/current_frontier_decision.json",
+    "standalone_frontier": "runs/local/artifacts/stage11074_cleaned_v27_scored_interface_comparison_audit/cleaned_v27_scored_interface_comparison_audit.json"
+  },
+  "stage": 11077,
+  "stage_name": "stage11077_current_frontier_decision_after_harness_refresh",
+  "standalone_frontier": {
+    "language_wins_100m_under_policy": 4,
+    "policy_cleaned_strict_exact_100m": 1.0,
+    "raw_cleaned_strict_exact_100m": 0.9545454545454546,
+    "rows": 22,
+    "status": "promotable_with_explicit_policy_boundary",
+    "strict_exact_gemma12b": 0.22727272727272727
+  }
+}

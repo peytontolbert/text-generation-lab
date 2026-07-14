@@ -1,0 +1,122 @@
+{
+  "claim_scope": [
+    "Execution-ready queue for the fresh-source multilingual root mining stage.",
+    "Provides concrete command templates and output locations for Python/C++, Rust, and web source mining/materialization.",
+    "This is a mining execution plan artifact, not a model-quality result."
+  ],
+  "completion_gates": [
+    "no reuse of consumed web examples or consumed web repo families from stage10262",
+    "rust tokenizers same-surface rows remain diagnostic-only",
+    "selected tests or equivalent verifier anchors present where patch/action targets are claimed",
+    "fresh roots are materialized before any new training request"
+  ],
+  "created_at_utc": "2026-07-12T00:55:05Z",
+  "minimum_outputs": [
+    "at least 8 fresh rust structured roots from non-tokenizers families with maintainer-visible evidence",
+    "at least 4 fresh web roots from at least 2 new repo families",
+    "at least 2 heldout patch_sketch or next_action roots per language",
+    "root/repo/time lineage fields sufficient for leak and split audits"
+  ],
+  "next_best_step": "Use the queued miners/builders to materialize fresh multilingual roots immediately after the stage10532 comparison lands, then compile the post-stage10531 expansion manifest.",
+  "passed": true,
+  "queue": [
+    {
+      "command_template": [
+        "python",
+        "scripts/mine_local_root_session_episodes.py",
+        "--repo-root",
+        "<LOCAL_REPO_ROOT>",
+        "--output-dir",
+        "runs/local/artifacts/stage10540_python_cpp_local_session_mining"
+      ],
+      "expected_outputs": [
+        "episode rows with selected tests",
+        "verification-backed task summaries",
+        "fresh Python/C++ root candidates"
+      ],
+      "goal": "Mine fresh local session episodes with selected tests and verification targets for Python and C/C++ patch/action heldout growth.",
+      "name": "python_cpp_local_session_episode_mining",
+      "priority": 1
+    },
+    {
+      "command_template": [
+        "python",
+        "scripts/build_session_episode_seed_candidates.py",
+        "--normalized-events",
+        "<NORMALIZED_EVENTS_JSONL>",
+        "--execution-traces",
+        "<EXECUTION_TRACES_JSONL>",
+        "--require-execution-traces",
+        "--output-dir",
+        "runs/local/artifacts/stage10540_session_seed_candidates"
+      ],
+      "expected_outputs": [
+        "session_episode_seed_candidates.jsonl",
+        "session_episode_seed_summary.json"
+      ],
+      "goal": "Build verification-backed session seed candidates from normalized event traces for local/session source lanes.",
+      "name": "session_seed_candidate_build",
+      "priority": 2
+    },
+    {
+      "gates": [
+        "tokenizers same-surface rows remain diagnostic-only",
+        "at least 4 non-tokenizers fresh roots",
+        "selected tests or equivalent verifier anchors present"
+      ],
+      "goal": "Convert the stage10125 Rust discovery manifest into fresh maintainer-visible root bundles, emphasizing non-tokenizers families.",
+      "name": "rust_true_source_bundle_conversion",
+      "priority": 3,
+      "recommended_candidates": [
+        "candle::candle-core",
+        "candle::candle-nn",
+        "candle::candle-examples",
+        "git::contrib/libgit-rs",
+        "git::contrib/libgit-sys",
+        "LLaMA-Adapter::gorilla"
+      ],
+      "source_artifact": "runs/local/artifacts/stage10125_true_source_backed_rust_root_discovery_manifest/true_source_backed_rust_root_discovery_manifest.json"
+    },
+    {
+      "command_template": [
+        "python",
+        "scripts/mine_external_repo_commit_episode_seeds.py",
+        "--repo-root",
+        "<EXTERNAL_REPO_ROOT>",
+        "--output",
+        "runs/local/artifacts/stage10540_external_repo_commit_seeds/external_repo_commit_episode_seeds.jsonl",
+        "--summary-output",
+        "runs/local/artifacts/stage10540_external_repo_commit_seeds/external_repo_commit_episode_seed_summary.json",
+        "--max-repos",
+        "64",
+        "--max-commits-per-repo",
+        "3",
+        "--max-files-per-commit",
+        "6"
+      ],
+      "expected_outputs": [
+        "fresh web repo seeds from new repo families",
+        "additional Rust repo seeds beyond the current discovery manifest"
+      ],
+      "goal": "Mine fresh external repo commit seeds for new web repos and additional Rust repos when current session inventory is exhausted.",
+      "name": "external_repo_seed_mining_for_web_and_rust",
+      "priority": 4
+    },
+    {
+      "command_template": [
+        "python",
+        "scripts/build_stage10262_fresh_web_root_candidate_atlas.py"
+      ],
+      "expected_outputs": [
+        "nonzero fresh web candidates from at least 2 new repo families"
+      ],
+      "goal": "Rerun the web candidate atlas only after new source/session inventories arrive.",
+      "name": "fresh_web_candidate_atlas_rerun",
+      "priority": 5,
+      "source_constraint": "Current default atlas is exhausted; do not rerun on the same inventory."
+    }
+  ],
+  "source_request": "runs/local/artifacts/stage10540_fresh_source_multilingual_root_mining_request/fresh_source_multilingual_root_mining_request.json",
+  "stage": 10542,
+  "stage_name": "stage10542_fresh_source_mining_execution_queue"
+}

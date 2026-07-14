@@ -1,0 +1,64 @@
+{
+  "breakdown_summary": {
+    "stage11924": {
+      "c_cpp": 83,
+      "candidate_selection": 89,
+      "continue_or_stop": 128,
+      "next_action": 51,
+      "python": 141,
+      "rust": 140,
+      "verifier_transition": 96
+    },
+    "stage11940": {
+      "c_cpp": 74,
+      "candidate_selection": 94,
+      "continue_or_stop": 128,
+      "next_action": 41,
+      "python": 144,
+      "rust": 141,
+      "verifier_transition": 96
+    }
+  },
+  "created_at_utc": "2026-07-14T16:48:36Z",
+  "decision": "reject_stage11940_joint_candidate_heads_as_frontier",
+  "gemma_reference_score": {
+    "accuracy": 0.603125,
+    "correct": 386,
+    "rows": 640
+  },
+  "interpretation": [
+    "Joint semantic+transition head training preserved compact gates but did not beat Stage11924.",
+    "It improved candidate_selection from 89/160 to 94/160 and Python/Rust by small amounts, but degraded next_action from 51/160 to 41/160 and C/C++ from 83/256 to 74/256.",
+    "The failure is now more clearly data/objective geometry for C/C++ next-action and transition status, not lack of an additive metadata head."
+  ],
+  "joint_candidate_heads_score": {
+    "accuracy": 0.5609375,
+    "correct": 359,
+    "coverage": 1.0,
+    "miss_count": 281,
+    "rows": 640
+  },
+  "next_recommended_experiment": [
+    "Build a transition gap atlas keyed by rows where Gemma is correct and Stage11924 is wrong.",
+    "Target C/C++ next_action and verifier/continue-stop analogues with balanced labels, rather than adding new head variants.",
+    "Add abstraction-boundary/dependency-contract projection as a separate maintainer-policy lane, not mixed into transition scorer recovery."
+  ],
+  "protected_gates_preserved": {
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "residual_preserved": true,
+    "smoke_preserved": true
+  },
+  "selected_transition_frontier": "stage11924_transition_listwise_head_only_probe + encoder_option_retrieval_semantic_candidate_head",
+  "selected_transition_score": {
+    "accuracy": 0.56875,
+    "correct": 364,
+    "coverage": 1.0,
+    "miss_count": 276,
+    "rows": 640
+  },
+  "stage": 11942,
+  "stage_name": "stage11942_transition_joint_candidate_heads_decision"
+}

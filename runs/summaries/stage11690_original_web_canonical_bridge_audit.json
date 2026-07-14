@@ -1,0 +1,102 @@
+{
+  "canonical_diff_counts": {},
+  "counts": {
+    "bridged_rows": 66,
+    "canonical_reference_rows": 66,
+    "option_role_histogram": {
+      "abstain_insufficient_evidence": 54,
+      "candidate_change_surface": 33,
+      "retrieve_or_external_reference": 19,
+      "symptom_or_call_path_analogue": 31,
+      "verifier_and_test_constraint": 172
+    },
+    "original_rows": 66,
+    "prompt_label_leak_rows": 0,
+    "rejected": {},
+    "roots": 11,
+    "same_role_candidate_rows": 66,
+    "singleton_rows": 0
+  },
+  "created_at_utc": "2026-07-14T05:04:41Z",
+  "decision": "original_web_canonical_bridge_validated_interface_mismatch",
+  "gates": {
+    "beats_original_web_stage11688_28": true,
+    "bridge_matches_canonical_row_count": true,
+    "bridged_all_66_original_rows": true,
+    "no_prompt_label_leaks": true,
+    "no_singleton_rows": true,
+    "no_transform_rejections": true,
+    "route_now_has_identity_rows": true,
+    "routed_score_matches_stage11688_canonical_53": true,
+    "same_roots_as_original": true
+  },
+  "interpretation": [
+    "The exact original Web heldout rows can be re-rendered into the canonical role-typed candidate interface without changing roots or target labels.",
+    "The route predicate does not fire on raw original Web rows because role metadata is absent; it fires after canonical bridging.",
+    "If the bridged routed score matches canonical heldout, the Web gap is partly an interface/schema mismatch rather than only missing model capacity.",
+    "This bridge is an eval/audit artifact, not a new training run and not proof of executable Web repair."
+  ],
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit",
+    "bridged_rows": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit/original_web_canonical_bridged_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit/original_web_canonical_bridge_audit.json"
+  },
+  "recommended_next": {
+    "promotion_gate": [
+      "100M bridged original Web > Gemma same-manifest",
+      "no label leaks",
+      "no singleton rows",
+      "same original heldout roots",
+      "protected gates still preserved by selected product route"
+    ],
+    "stage": "stage11691_original_web_canonical_bridge_gemma_and_anticheat",
+    "target": "run Gemma and anticheat comparison on the same canonical-bridged original Web rows, then decide whether canonical renderer becomes the product Web evaluation interface"
+  },
+  "route_counts": {
+    "after_bridged": {
+      "identity": 40,
+      "web": 26
+    },
+    "before_original": {
+      "web": 66
+    }
+  },
+  "scores": {
+    "stage11688_canonical_heldout": {
+      "accuracy": 0.803030303030303,
+      "correct": 53,
+      "rows": 66
+    },
+    "stage11688_original_web": {
+      "accuracy": 0.42424242424242425,
+      "correct": 28,
+      "rows": 66
+    },
+    "stage11690_bridged_original_web": {
+      "accuracy": 0.803030303030303,
+      "correct": 53,
+      "parts": {
+        "identity": {
+          "accuracy": 0.675,
+          "correct": 27,
+          "misses": [],
+          "rows": 40
+        },
+        "web": {
+          "accuracy": 1.0,
+          "correct": 26,
+          "misses": [],
+          "rows": 26
+        }
+      },
+      "rows": 66
+    }
+  },
+  "source_artifacts": {
+    "canonical_reference": "runs/local/artifacts/stage11663_web_canonical_renderer_package/web_canonical_heldout.jsonl",
+    "original_web": "runs/local/artifacts/stage11548_web_root_heldout_stage11507_score_audit/web_root_heldout_rows.jsonl",
+    "routed_audit": "runs/local/artifacts/stage11688_routed_web_identity_scorer_audit/routed_web_identity_scorer_audit.json"
+  },
+  "stage": 11690,
+  "stage_name": "stage11690_original_web_canonical_bridge_audit"
+}

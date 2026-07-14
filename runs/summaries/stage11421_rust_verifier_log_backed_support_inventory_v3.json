@@ -1,0 +1,61 @@
+{
+  "by_anchor_type": {
+    "build_verifier_only": 9,
+    "selected_or_inline_test_anchor": 21
+  },
+  "by_repo_family": {
+    "LLaMA-Adapter": 3,
+    "candle": 9,
+    "git": 9,
+    "perftree": 9
+  },
+  "by_target": {
+    "DECISIVE_BUILD_VERIFIER_CONSTRAINT": 3,
+    "DECISIVE_VERIFIER_TEST_CONSTRAINT": 7,
+    "OBSERVED_VERIFIER_FAILURE_LOG": 3,
+    "OBSERVED_VERIFIER_PASS_LOG": 7,
+    "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 10
+  },
+  "counts": {
+    "minimum_repo_families_required_before_probe": 3,
+    "minimum_roots_required_before_probe": 10,
+    "train_support_rows": 30,
+    "unique_repo_families": 4,
+    "unique_roots": 10
+  },
+  "created_at_utc": "2026-07-13T15:30:15Z",
+  "decision": "rust_verifier_log_backed_support_inventory_probe_ready",
+  "limitations": [
+    "The root-count and repo-family support gate is met only after adding three Perftree build-verifier-only roots.",
+    "Perftree rows have exact Cargo verifier commands and logs but no selected-test source anchors.",
+    "This inventory can support a diagnostic Rust support package, but selected-test Rust verifier-transition replenishment remains incomplete."
+  ],
+  "outputs": {
+    "rows": "runs/local/artifacts/stage11421_rust_verifier_log_backed_support_inventory_v3/rust_verifier_log_backed_support_inventory_v3_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11421_rust_verifier_log_backed_support_inventory_v3/rust_verifier_log_backed_support_inventory_v3.json"
+  },
+  "passed": true,
+  "quality_gate": {
+    "actual_verifier_logs_attached": true,
+    "anti_cheat_passed": true,
+    "build_verifier_only_root_count": 3,
+    "minimum_repo_breadth_met": true,
+    "minimum_roots_met": true,
+    "probe_ready": true,
+    "selected_or_inline_test_root_count": 7
+  },
+  "recommended_next_action": "If a diagnostic Rust support probe is needed, use this inventory with build_verifier_only stratification and keep selected-test claims separate. For promotable Rust verifier-transition claims, acquire more selected-test anchored Rust roots.",
+  "remaining_gap": {
+    "additional_repo_families_needed": 0,
+    "additional_roots_needed": 0,
+    "selected_test_rust_replenishment_still_needed": true
+  },
+  "source_counts": {
+    "runs/local/artifacts/stage11410_rust_verifier_log_backed_partial_support/rust_verifier_log_backed_partial_support_rows.jsonl": 9,
+    "runs/local/artifacts/stage11413_non_candle_rust_verifier_log_backed_support/non_candle_rust_verifier_log_backed_support_rows.jsonl": 9,
+    "runs/local/artifacts/stage11417_third_family_rust_verifier_log_backed_support/third_family_rust_verifier_log_backed_support_rows.jsonl": 3,
+    "runs/local/artifacts/stage11420_perftree_rust_build_verifier_backed_support/perftree_rust_build_verifier_backed_support_rows.jsonl": 9
+  },
+  "stage": 11421,
+  "stage_name": "stage11421_rust_verifier_log_backed_support_inventory_v3"
+}

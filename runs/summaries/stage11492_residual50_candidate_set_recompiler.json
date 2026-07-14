@@ -1,0 +1,78 @@
+{
+  "caveats": [
+    "This repairs training geometry by dropping contradictory sibling labels; it is a support package, not promotable heldout evidence.",
+    "The selected candidate_set rows are still compact bounded-choice rows; they do not prove freeform repair capability."
+  ],
+  "created_at_utc": "2026-07-13T18:11:52Z",
+  "decision": "residual50_candidate_sets_ready_for_listwise_probe",
+  "metrics": {
+    "candidate_set_rows": 62,
+    "has_core_roles": true,
+    "input_rows": 78,
+    "input_state_groups": 62,
+    "language_ok": true,
+    "minimum_groups_ok": true,
+    "no_protected_overlap": true,
+    "option_role_coverage_counts": {
+      "algorithmic_background_reference": 1,
+      "candidate_change_surface": 62,
+      "insufficient_or_background_context": 8,
+      "nearby_definition_or_usage_context": 54,
+      "symptom_or_call_path_analogue": 62,
+      "verifier_and_test_constraint": 62
+    },
+    "quarantine_reasons": {
+      "contradictory_sibling_quarantined_by_role_priority": 16
+    },
+    "quarantined_rows": 16,
+    "selected_language_counts": {
+      "c_cpp": 16,
+      "python": 26,
+      "rust": 20
+    },
+    "selected_target_role_counts": {
+      "candidate_change_surface": 14,
+      "symptom_or_call_path_analogue": 10,
+      "verifier_and_test_constraint": 38
+    }
+  },
+  "next_stage_contract": {
+    "goal": "train one controlled probe on the repaired candidate-set rows with Stage11444 initialization and selected product scorer",
+    "if_probe_fails": "Stop Residual-50 training probes and implement a new scorer head/objective consumed directly at evaluation.",
+    "promotion_requires": [
+      "old canary strict 23/23",
+      "filtered strict 22/22",
+      "filtered validation >=20/22",
+      "old validation >=21/23",
+      "residual bank >=6/10",
+      "full bounded-choice coverage"
+    ],
+    "recommended_stage": "stage11493_residual50_candidate_set_listwise_probe_request"
+  },
+  "outputs": {
+    "candidate_set_groups": "runs/local/artifacts/stage11492_residual50_candidate_set_recompiler/residual50_candidate_set_groups.jsonl",
+    "candidate_set_rows": "runs/local/artifacts/stage11492_residual50_candidate_set_recompiler/residual50_candidate_set_rows.jsonl",
+    "quarantine_rows": "runs/local/artifacts/stage11492_residual50_candidate_set_recompiler/residual50_candidate_set_quarantine_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11492_residual50_candidate_set_recompiler/residual50_candidate_set_recompiler.json"
+  },
+  "passed": true,
+  "recompile_policy": [
+    "Group rows by root_id plus visible evidence-state hash.",
+    "For conflicting groups, keep one representative row using priority: verifier_and_test_constraint, symptom_or_call_path_analogue, candidate_change_surface, then context.",
+    "Keep hard negatives inside the selected row's opaque_options; quarantine contradictory sibling labels.",
+    "Attach candidate_set_id/listwise_group_id to selected rows and source metadata."
+  ],
+  "source_artifacts": {
+    "filtered_strict": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "filtered_validation": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_validation.jsonl",
+    "residual50_rows": "runs/local/artifacts/stage11481_residual50_ready_package_with_rust_counters/residual50_ready_rows.jsonl",
+    "residual_bank": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/semantic_candidate_residual_bank.jsonl",
+    "stage11491": "runs/local/artifacts/stage11491_residual50_listwise_group_compiler/residual50_listwise_group_compiler.json"
+  },
+  "stage": 11492,
+  "stage11491_reference": {
+    "decision": "listwise_group_compiler_blocks_training",
+    "training_admissible": false
+  },
+  "stage_name": "stage11492_residual50_candidate_set_recompiler"
+}

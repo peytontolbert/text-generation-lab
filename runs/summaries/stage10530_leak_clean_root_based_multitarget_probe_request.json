@@ -1,0 +1,234 @@
+{
+  "claim_scope": [
+    "Leak-clean successor request for the root-based multitarget bootstrap curriculum.",
+    "Drops train rows with prompt-target leakage and excludes current verifier_outcome rows from training.",
+    "Post-run strict scoring still speaks only to the 36 bootstrap-heldout multilingual rows."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe_request/leak_clean_root_based_multitarget_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "1593",
+    "--max-eval-rows",
+    "8",
+    "--max-strict-rows",
+    "36",
+    "--max-steps",
+    "256",
+    "--batch-size",
+    "2",
+    "--learning-rate",
+    "2e-5",
+    "--max-encoder-tokens",
+    "1024",
+    "--max-decoder-tokens",
+    "256",
+    "--decoder-ce-weight",
+    "1.0",
+    "--bounded-choice-aux-weight",
+    "0.0",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "2.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "24",
+    "--max-generation-tokens",
+    "128",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "1.0",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe/bounded_decoder_probe",
+    "--run-id",
+    "stage10530_leak_clean_root_based_multitarget_probe"
+  ],
+  "created_at_utc": "2026-07-11T23:58:23Z",
+  "decision": "leak_clean_root_based_multitarget_probe_ready",
+  "known_limits": [
+    "This still does not create heldout verifier_outcome or patch_sketch scoring; those need fresh non-leaky roots.",
+    "Rust and web heldout depth remain modest.",
+    "Patch_sketch, repair_intent, and next_action are support-only structured curriculum from current artifacts."
+  ],
+  "language_counts_by_split": {
+    "eval": {
+      "rust": 8
+    },
+    "strict_eval": {
+      "c_cpp": 8,
+      "python": 12,
+      "rust": 8,
+      "web_js_ts_html": 8
+    },
+    "train": {
+      "c_cpp": 131,
+      "python": 1443,
+      "rust": 4,
+      "unknown": 4,
+      "web_js_ts_html": 11
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe_request/leak_clean_root_based_multitarget_probe_manifest.jsonl",
+  "manifest_snapshot": {
+    "strict_rows_by_language": {
+      "c_cpp": 8,
+      "python": 12,
+      "rust": 8,
+      "web_js_ts_html": 8
+    },
+    "strict_rows_by_target_subtype": {
+      "decisive_evidence": 18,
+      "retrieve_answer_abstain": 18
+    }
+  },
+  "next_best_step": "Run this leak-clean successor instead of promoting stage10523. Then compare the resulting runtime against Gemma on the same 36 strict heldout rows and check the 24-row repaired-v2.7 canary for regression.",
+  "output_dir": "runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe/bounded_decoder_probe",
+  "passed": true,
+  "required_honesty_gates": [
+    "stage10528 cleaned anti-cheat successor remains the source package",
+    "train rows with anti_cheat.prompt_target_leak=true are excluded",
+    "all verifier_outcome rows are excluded from train until a fresh non-leaky builder exists",
+    "strict rows remain limited to decisive_evidence and retrieve_answer_abstain",
+    "post-run Gemma comparison must use the same 36 strict rows"
+  ],
+  "rows": 1637,
+  "run_id": "stage10530_leak_clean_root_based_multitarget_probe",
+  "runtime_model_dir": "runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe/runtime_model",
+  "source_package": "runs/local/artifacts/stage10528_cleaned_heldout_anticheat_successor/cleaned_heldout_anticheat_successor.json",
+  "split_counts": {
+    "eval": 8,
+    "strict_eval": 36,
+    "train": 1593
+  },
+  "stage": 10530,
+  "stage_name": "stage10530_leak_clean_root_based_multitarget_probe_request",
+  "strict_target_subtypes": {
+    "decisive_evidence": 18,
+    "retrieve_answer_abstain": 18
+  },
+  "structured_audit": "runs/local/artifacts/stage10529_structured_projection_supply_audit/structured_projection_supply_audit.json",
+  "structured_projection_guidance": {
+    "next_action": {
+      "language_counts": {
+        "c_cpp": 5,
+        "python": 49,
+        "web_js_ts_html": 1
+      },
+      "prompt_target_leak_rate": 0.0,
+      "prompt_target_leak_rows": 0,
+      "reason": "train_only_structured_projection",
+      "recommendation": "support_only",
+      "rows": 55,
+      "split_counts": {
+        "train_bootstrap_long_context": 55
+      }
+    },
+    "patch_sketch": {
+      "language_counts": {
+        "c_cpp": 5,
+        "python": 49,
+        "web_js_ts_html": 1
+      },
+      "prompt_target_leak_rate": 0.0,
+      "prompt_target_leak_rows": 0,
+      "reason": "cleaner_surface_but_current_supply_is_train_only",
+      "recommendation": "support_only_until_heldout_roots_exist",
+      "rows": 55,
+      "split_counts": {
+        "train_bootstrap_long_context": 55
+      }
+    },
+    "repair_intent": {
+      "language_counts": {
+        "c_cpp": 5,
+        "python": 49,
+        "web_js_ts_html": 1
+      },
+      "prompt_target_leak_rate": 0.0,
+      "prompt_target_leak_rows": 0,
+      "reason": "long_text_target_repeats_changed_files_and_verification_targets",
+      "recommendation": "support_only_until_target_abstraction_is_hardened",
+      "rows": 55,
+      "split_counts": {
+        "train_bootstrap_long_context": 55
+      }
+    },
+    "verifier_outcome": {
+      "language_counts": {
+        "c_cpp": 67,
+        "python": 702,
+        "rust": 6,
+        "web_js_ts_html": 9
+      },
+      "prompt_target_leak_rate": 0.9566326530612245,
+      "prompt_target_leak_rows": 750,
+      "reason": "prompt_target_leak_dominates_current_surface",
+      "recommendation": "reject_for_promotable_use",
+      "rows": 784,
+      "split_counts": {
+        "audited_train": 729,
+        "train_bootstrap_long_context": 55
+      }
+    }
+  },
+  "train_cleanup": {
+    "dropped_by_target_subtype": {
+      "candidate_path": 6,
+      "selected_test": 2,
+      "verifier_outcome": 766,
+      "visible_evidence_key": 2
+    },
+    "dropped_train_rows": 776,
+    "kept_by_target_subtype": {
+      "abstain": 2,
+      "decisive_evidence": 711,
+      "evidence_chain": 2,
+      "next_action": 55,
+      "patch_sketch": 55,
+      "repair_intent": 57,
+      "retrieve_answer_abstain": 711
+    },
+    "kept_train_rows": 1593,
+    "raw_train_rows": 2369
+  }
+}

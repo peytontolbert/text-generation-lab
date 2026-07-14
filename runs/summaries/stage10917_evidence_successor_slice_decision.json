@@ -1,0 +1,44 @@
+{
+  "claim_scope": [
+    "Interpret only the fresh 3-row Python/C++ evidence successor candidate slice.",
+    "Do not promote any new evidence scorer from this artifact; it is a decision summary for the next dataset move."
+  ],
+  "created_at_utc": "2026-07-12T19:09:47Z",
+  "decision": "fresh_evidence_successors_confirm_multilingual_b_vs_f_gap",
+  "findings": [
+    "The fresh Python/C++ successor slice preserves the same semantic split as the cleaned reviewed-v2.7 evidence lane: the 100M model keeps the candidate_change_surface positive control but misses both fresh verifier_and_test_constraint rows.",
+    "Because the fresh failures survive option-order changes and reviewed packet rematerialization, the B-vs-F issue is not just stale row contamination.",
+    "Gemma remains weaker overall at 0/3, but the 100M evidence lane is still not good enough to justify a new scorer policy or a broad evidence-citation breakthrough claim.",
+    "no_honest_multilingual_evidence_policy_candidate_yet"
+  ],
+  "headline": {
+    "fresh_b_control_rows": {
+      "gemma12b_correct": 0,
+      "hundred_m_correct": 1,
+      "rows": 1
+    },
+    "fresh_f_rows": {
+      "gemma12b_correct": 0,
+      "hundred_m_correct": 0,
+      "hundred_m_predictions": [
+        "A",
+        "A"
+      ],
+      "rows": 2,
+      "target_labels": [
+        "B",
+        "B"
+      ]
+    },
+    "gemma12b_accuracy": 0.0,
+    "hundred_m_accuracy": 0.3333333333333333
+  },
+  "next_best_step": "Build at least one fresh pure-web positive-control evidence root and additional Python/C++ F-target successors, then revisit scorer changes only if a policy candidate preserves B controls while lifting all F rows.",
+  "passed": true,
+  "source_artifacts": {
+    "current_policy_decision": "runs/local/artifacts/stage10912_current_evidence_policy_decision/current_evidence_policy_decision.json",
+    "slice_comparison": "runs/local/artifacts/stage10916_evidence_successor_candidate_slice_comparison/evidence_successor_candidate_slice_comparison.json"
+  },
+  "stage": 10917,
+  "stage_name": "stage10917_evidence_successor_slice_decision"
+}

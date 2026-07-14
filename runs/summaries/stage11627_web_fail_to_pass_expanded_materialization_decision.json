@@ -1,0 +1,81 @@
+{
+  "claim_boundary": [
+    "This stage reports expanded controlled train-support readiness only.",
+    "No frontier model is promoted.",
+    "Controlled mutation rows remain non-headline, train-support-only material."
+  ],
+  "created_at_utc": "2026-07-13T23:54:36Z",
+  "decision": "expanded_web_fail_to_pass_support_ready_for_guarded_package_builder",
+  "expanded_support_status": {
+    "admitted_roots": 8,
+    "admitted_rows": 48,
+    "complete_six_task_roots": 8,
+    "rejected_roots": 1,
+    "rejection_blockers": {
+      "mutant_did_not_fail": 1
+    },
+    "target_role_counts": {
+      "answer_with_visible_evidence": 8,
+      "candidate_change_surface": 24,
+      "verifier_and_test_constraint": 16
+    },
+    "task_counts": {
+      "abstention_insufficient_evidence": 8,
+      "evidence_citation": 8,
+      "minimal_fix_selection": 8,
+      "patch_impact": 8,
+      "symptom_localization": 8,
+      "verifier_outcome": 8
+    },
+    "train_rows": 48
+  },
+  "gates": {
+    "admitted_roots_at_least_8": true,
+    "anti_cheat_admitted_all_rows": true,
+    "has_llama_admitted_roots": true,
+    "repair_admitted": true,
+    "repaired_rows_measurable": true
+  },
+  "next_actions": [
+    "Build a guarded package from the 48 repaired rows plus protected canaries and Web heldout, not a same-row overfit.",
+    "Use stronger but conservative Web-head optimization with preservation KL; do not reuse the 1024-step overfit settings directly.",
+    "Promotion still requires residual >=7/10, filtered strict 22/22, old strict 23/23, and Web heldout >35/66.",
+    "Continue materializing more Llama/OpenHands roots if the guarded package does not move heldout."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11627_web_fail_to_pass_expanded_materialization_decision/web_fail_to_pass_expanded_materialization_decision.json"
+  },
+  "scorer_geometry_on_repaired_rows": {
+    "interpretation": "Rows are measurable after repair, but selected product scorer remains weak on them; a guarded training package is required before any frontier claim.",
+    "stage11507_selected": {
+      "decoder_first_step": 19,
+      "encoder_option_retrieval": 6,
+      "encoder_option_retrieval_evidence_judgment_head": 6,
+      "encoder_option_retrieval_semantic_candidate_head": 3,
+      "encoder_option_retrieval_verifier_conditioned": 6,
+      "encoder_option_retrieval_web_task_candidate_head": 0
+    },
+    "stage11617_rejected": {
+      "decoder_first_step": 19,
+      "encoder_option_retrieval": 6,
+      "encoder_option_retrieval_evidence_judgment_head": 6,
+      "encoder_option_retrieval_semantic_candidate_head": 3,
+      "encoder_option_retrieval_verifier_conditioned": 6,
+      "encoder_option_retrieval_web_task_candidate_head": 12
+    }
+  },
+  "selected_frontier_remains": {
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head"
+  },
+  "source_artifacts": {
+    "anti_cheat": "runs/local/artifacts/stage11615_web_mutation_rows_anticheat_audit/web_mutation_rows_anticheat_audit.json",
+    "executor": "runs/local/artifacts/stage11613_web_fail_to_pass_mutation_executor/web_fail_to_pass_mutation_executor.json",
+    "geometry": "runs/local/artifacts/stage11622_web_fail_to_pass_repaired_geometry_audit/web_fail_to_pass_repaired_geometry_audit.json",
+    "repair": "runs/local/artifacts/stage11621_web_fail_to_pass_row_geometry_repair/web_fail_to_pass_row_geometry_repair.json",
+    "rows": "runs/local/artifacts/stage11614_web_mutation_fail_to_pass_rows/web_mutation_fail_to_pass_rows.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11627,
+  "stage_name": "stage11627_web_fail_to_pass_expanded_materialization_decision"
+}

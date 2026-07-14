@@ -1,0 +1,189 @@
+{
+  "audit": {
+    "duplicate_row_ids": 0,
+    "internal_support_reason_leak_rows": 0,
+    "role_alias_leak_rows": 0,
+    "root_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    },
+    "target_label_leak_rows": 0
+  },
+  "counts": {
+    "blocked_roots": 445,
+    "by_split_candidate_kind": {
+      "strict_eval": {
+        "changed": 43,
+        "verifier": 43
+      },
+      "train": {
+        "changed": 198,
+        "distractor": 14,
+        "verifier": 198
+      },
+      "validation": {
+        "changed": 43,
+        "verifier": 43
+      }
+    },
+    "by_split_language": {
+      "strict_eval": {
+        "c_cpp": 14,
+        "python": 68,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "train": {
+        "c_cpp": 76,
+        "python": 318,
+        "rust": 4,
+        "web_js_ts_html": 12
+      },
+      "validation": {
+        "c_cpp": 14,
+        "python": 68,
+        "rust": 2,
+        "web_js_ts_html": 2
+      }
+    },
+    "by_split_target": {
+      "strict_eval": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 43,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 43
+      },
+      "train": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 198,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 14,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 198
+      },
+      "validation": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 43,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 43
+      }
+    },
+    "materialized_roots": 284,
+    "materialized_roots_by_language": {
+      "c_cpp": 47,
+      "python": 225,
+      "rust": 4,
+      "web_js_ts_html": 8
+    },
+    "materialized_roots_by_repo_top20": [
+      [
+        "agentkernel",
+        191
+      ],
+      [
+        "peytontolbert-parameter-golf",
+        20
+      ],
+      [
+        "parametergolf",
+        17
+      ],
+      [
+        "agentkernel-seq2seq-text-lab",
+        16
+      ],
+      [
+        "repository_library",
+        4
+      ],
+      [
+        "tilus",
+        2
+      ],
+      [
+        "cuEmbed",
+        2
+      ],
+      [
+        "tiktoken",
+        2
+      ],
+      [
+        "SWE-bench",
+        2
+      ],
+      [
+        "mctx",
+        2
+      ],
+      [
+        "falco",
+        2
+      ],
+      [
+        "rembg",
+        2
+      ],
+      [
+        "llama-models",
+        2
+      ],
+      [
+        "faiss",
+        2
+      ],
+      [
+        "chroma",
+        2
+      ],
+      [
+        "optimum",
+        2
+      ],
+      [
+        "BrowserGym",
+        2
+      ],
+      [
+        "pypiserver",
+        2
+      ],
+      [
+        "xformers",
+        2
+      ],
+      [
+        "openevolve",
+        2
+      ]
+    ],
+    "source_retrieval_rows": 729,
+    "strict_rows": 86,
+    "train_rows": 410,
+    "validation_rows": 86
+  },
+  "created_at_utc": "2026-07-13T10:34:56Z",
+  "decision": "direct_retrieval_multilingual_evidence_materialization_ready",
+  "interpretation": {
+    "claim_limit": "Diagnostic source-supply package; it provides verifier-vs-changed evidence rows, not full maintainer-bundle perspective coverage.",
+    "why_this_differs_from_stage11237": "This mines retrieval rows directly for local-repo verifier/change support instead of requiring Stage11237's stricter candidate inventory fields."
+  },
+  "outputs": {
+    "blocked_jsonl": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_blocked_roots.jsonl",
+    "root_splits_jsonl": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_root_splits.jsonl",
+    "strict_jsonl": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_strict_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_materialization.json",
+    "train_jsonl": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_train_rows.jsonl",
+    "validation_jsonl": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_validation_rows.jsonl"
+  },
+  "passed": true,
+  "quality_gates": {
+    "has_c_cpp_rust_web_supply": true,
+    "internal_support_reasons_not_visible": true,
+    "role_alias_not_visible_before_options": true,
+    "root_split_disjoint": true,
+    "target_label_not_visible_before_options": true,
+    "unique_row_ids": true,
+    "uses_materialized_chunk_text": true
+  },
+  "source_artifacts": {
+    "full_context_rows": "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/full_context_rows.jsonl",
+    "retrieval_rows": "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/retrieval_rows.jsonl"
+  },
+  "stage": 11275,
+  "stage_name": "stage11275_direct_retrieval_multilingual_evidence_materialization"
+}

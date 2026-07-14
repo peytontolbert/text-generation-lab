@@ -1,0 +1,58 @@
+{
+  "admitted_new_roots": [
+    {
+      "repo_family": "openclaw_clawhub",
+      "role": "train_support",
+      "root_id": "stage11535::openclaw_clawhub::convex::skills_versions_public_sanitization_train_support",
+      "rows": 6,
+      "source": "runs/summaries/stage11535_openclaw_web_gold_adjudicated_support_rows.json"
+    }
+  ],
+  "counts": {
+    "added_openclaw_train_roots": 1,
+    "base_executed_train_roots": 12,
+    "remaining_heldout_root_shortfall": 6,
+    "remaining_train_root_shortfall": 7,
+    "required_executed_train_roots": 20,
+    "required_heldout_roots": 10,
+    "updated_executed_train_roots": 13,
+    "updated_heldout_roots": 4
+  },
+  "created_at_utc": "2026-07-13T20:02:33Z",
+  "decision": "web_supply_improved_but_stage11527_gate_still_unmet",
+  "gates": {
+    "do_not_count_ai_town_without_real_test": true,
+    "do_not_count_dspy_without_gold": true,
+    "minimum_heldout_roots_met": false,
+    "minimum_train_roots_met": false,
+    "openclaw_train_support_admitted": true
+  },
+  "next_actions": [
+    "Materialize at least 7 more executed Web train-support roots if using the updated 13/20 accounting.",
+    "Materialize at least 6 more sealed Web heldout roots; OpenClaw Stage11535 does not help heldout.",
+    "Prioritize new repo families and avoid training on existing Llama Stack/OpenHands heldout roots."
+  ],
+  "not_admitted": [
+    {
+      "reason": "verifier failed before assertions; requires adjudication as dependency/test-environment routing or quarantine",
+      "repo_family": "dspy",
+      "source": "runs/summaries/stage11534_web_execution_admission_decision.json"
+    },
+    {
+      "reason": "selected verifier is helper-like testing.ts, not a focused test/spec",
+      "repo_family": "ai_town",
+      "source": "runs/summaries/stage11534_web_execution_admission_decision.json"
+    }
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11536_web_supply_after_openclaw_admission/web_supply_after_openclaw_admission.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "stage11528": "runs/summaries/stage11528_web_verifier_root_supply_audit.json",
+    "stage11534": "runs/summaries/stage11534_web_execution_admission_decision.json",
+    "stage11535": "runs/summaries/stage11535_openclaw_web_gold_adjudicated_support_rows.json"
+  },
+  "stage": 11536,
+  "stage_name": "stage11536_web_supply_after_openclaw_admission"
+}

@@ -1,0 +1,99 @@
+{
+  "created_at_utc": "2026-07-13T17:42:09Z",
+  "decision": "residual50_still_missing_8_rust_symptom_call_path_roots",
+  "family_status": [
+    {
+      "counter_roots": 10,
+      "family_id": "python_evidence_verifier_constraint_vs_candidate_surface",
+      "language_family": "python",
+      "missing_counter_roots": 0,
+      "missing_positive_roots": 0,
+      "positive_roots": 24,
+      "residual50_ready": true,
+      "roots_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 24
+      },
+      "rows_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 24
+      }
+    },
+    {
+      "counter_roots": 10,
+      "family_id": "c_cpp_evidence_verifier_constraint_vs_candidate_surface",
+      "language_family": "c_cpp",
+      "missing_counter_roots": 0,
+      "missing_positive_roots": 0,
+      "positive_roots": 14,
+      "residual50_ready": true,
+      "roots_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 14
+      },
+      "rows_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 14
+      }
+    },
+    {
+      "admitted_repos": {
+        "candle": 1,
+        "linux": 1
+      },
+      "counter_roots": 19,
+      "family_id": "rust_symptom_call_path_vs_candidate_surface",
+      "language_family": "rust",
+      "missing_counter_roots": 0,
+      "missing_positive_roots": 8,
+      "positive_roots": 2,
+      "residual50_ready": false
+    }
+  ],
+  "outputs": {
+    "ready_partial_rows": "runs/local/artifacts/stage11477_residual50_readiness_after_rust_symptom_admission/residual50_ready_partial_rows.jsonl",
+    "remaining_work_items": "runs/local/artifacts/stage11477_residual50_readiness_after_rust_symptom_admission/residual50_remaining_rust_work_items.jsonl",
+    "summary": "runs/local/artifacts/stage11477_residual50_readiness_after_rust_symptom_admission/residual50_readiness_after_rust_symptom_admission.json"
+  },
+  "passed": true,
+  "readiness": {
+    "can_run_full_residual50_promotable_probe": false,
+    "can_run_python_cpp_controlled_diagnostic": true,
+    "can_run_rust_partial_diagnostic": true,
+    "families_ready": 2,
+    "families_total": 3
+  },
+  "rust_blocker_counts": {
+    "candidate_and_symptom_evidence_not_distinct": 66,
+    "duplicate_root": 68,
+    "forbidden_weak_or_quarantined_repo_family": 18,
+    "missing_required_competing_roles": 16,
+    "reserved_or_eval_row": 2
+  },
+  "source_artifacts": {
+    "python_cpp_ready": "runs/local/artifacts/stage11475_residual50_readiness_after_counterfamily_topup/residual50_ready_python_cpp_rows.jsonl",
+    "rust_admitted": "runs/local/artifacts/stage11476_rust_symptom_call_path_residual50_admission/admitted_rust_symptom_call_path_rows.jsonl",
+    "rust_blocked": "runs/local/artifacts/stage11476_rust_symptom_call_path_residual50_admission/blocked_rust_symptom_call_path_rows.jsonl",
+    "rust_source_pool": "runs/local/artifacts/stage11453_rust_materialized_support_readiness_audit_v3/rust_materialized_support_root_audit.jsonl"
+  },
+  "stage": 11477,
+  "stage_name": "stage11477_residual50_readiness_after_rust_symptom_admission",
+  "work_items": [
+    {
+      "acceptance": [
+        "language_family == rust",
+        "gold evidence role == symptom_or_call_path_analogue",
+        "candidate_change_surface present as hard negative",
+        "candidate and symptom/call-path evidence text are not aliases",
+        "selected-test or verifier anchor present",
+        "repo/root lineage disjoint from stage11193 reserved replacements",
+        "do not use tokenizers or duplicate candle/linux variants to fill quota"
+      ],
+      "action": "build_new_disjoint_rust_symptom_call_path_roots",
+      "family_id": "rust_symptom_call_path_vs_candidate_surface",
+      "needed_roots": 8,
+      "priority": "P0",
+      "source_pool": "runs/local/artifacts/stage11453_rust_materialized_support_readiness_audit_v3/rust_materialized_support_root_audit.jsonl"
+    }
+  ]
+}

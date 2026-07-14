@@ -1,0 +1,60 @@
+{
+  "admissibility": {
+    "reason": "Rust replacements are admitted but explicitly not train support; Web ready candidates still need materialized alias-free verifier/change rows before training.",
+    "rust_rows_scoreable_as_reserved_strict_replacements": true,
+    "rust_rows_trainable_now": false,
+    "web_rows_trainable_now": false
+  },
+  "blocked_reasons": {
+    "rust_replacement_blocked": [],
+    "stage11275_blocked": [
+      [
+        [
+          "missing_local_repo_verifier_or_changed_pair"
+        ],
+        65
+      ]
+    ]
+  },
+  "counts": {
+    "admitted_rust_strict_replacement_rows": 3,
+    "blocked_rust_replacement_rows": 0,
+    "rust_ready_not_already_materialized": 2,
+    "stage11237_ready_by_language": {
+      "rust": 2,
+      "web_js_ts_html": 7
+    },
+    "stage11237_ready_rust_web_candidates": 9,
+    "stage11275_already_materialized_rust_web_roots": 12,
+    "stage11275_blocked_by_language": {
+      "rust": 29,
+      "web_js_ts_html": 36
+    },
+    "stage11275_blocked_rust_web_roots": 65,
+    "stage11275_materialized_by_language": {
+      "rust": 4,
+      "web_js_ts_html": 8
+    },
+    "web_ready_candidates": 7,
+    "web_ready_not_already_materialized": 7
+  },
+  "created_at_utc": "2026-07-13T12:07:41Z",
+  "decision": "rust_web_gap_recovery_manifest_ready",
+  "outputs": {
+    "admitted_rust_strict_replacement_rows": "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/admitted_rust_strict_replacement_rows.jsonl",
+    "rust_web_blocked_source_queue": "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/rust_web_blocked_source_queue.jsonl",
+    "summary": "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/rust_web_gap_recovery_manifest.json",
+    "web_ready_candidate_queue": "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/web_ready_candidate_queue.jsonl"
+  },
+  "passed": true,
+  "recommended_next_action": "materialize alias-free Web evidence rows from web_ready_candidate_queue; keep admitted Rust rows as reserved strict replacements, not train support, unless separately duplicated from disjoint Rust roots.",
+  "source_artifacts": {
+    "rust_admitted": "runs/local/artifacts/stage11194_rust_replacement_admission_audit/admitted_rust_replacement_rows.jsonl",
+    "rust_blocked": "runs/local/artifacts/stage11194_rust_replacement_admission_audit/blocked_rust_replacement_rows.jsonl",
+    "stage11237_ready": "runs/local/artifacts/stage11237_multilingual_verifier_constraint_source_inventory/verifier_constraint_source_candidates.jsonl",
+    "stage11275_blocked": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_blocked_roots.jsonl",
+    "stage11275_roots": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_root_splits.jsonl"
+  },
+  "stage": 11331,
+  "stage_name": "stage11331_rust_web_gap_recovery_manifest"
+}

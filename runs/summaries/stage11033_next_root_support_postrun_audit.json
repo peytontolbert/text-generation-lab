@@ -1,0 +1,127 @@
+{
+  "claim_scope": [
+    "Audit the stage11032 runtime against the unchanged overlay and the enlarged 9-row reserved next-root candidate slice.",
+    "Separate overlay preservation from candidate-slice movement so the next-root support package can be judged honestly."
+  ],
+  "created_at_utc": "2026-07-13T00:09:55Z",
+  "headline": {
+    "overlay_eval_accuracy": 0.8695652173913043,
+    "overlay_strict_accuracy": 0.9565217391304348,
+    "reserved_candidate_accuracy": 0.4444444444444444
+  },
+  "outputs": {
+    "reserved_audit_json": "runs/local/artifacts/stage11033_next_root_support_postrun_audit/reserved_candidate_bounded_choice_eval.json",
+    "reserved_rows_jsonl": "runs/local/artifacts/stage11033_next_root_support_postrun_audit/reserved_candidate_rows_scored.jsonl",
+    "summary_json": "runs/local/artifacts/stage11033_next_root_support_postrun_audit/next_root_support_postrun_audit.json"
+  },
+  "overlay_result": {
+    "eval_accuracy": 0.8695652173913043,
+    "eval_miss_rows": [
+      "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+      "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::verifier_outcome::reviewed_v27_compact",
+      "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact"
+    ],
+    "strict_accuracy": 0.9565217391304348,
+    "strict_miss_rows": [
+      "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact"
+    ]
+  },
+  "passed": true,
+  "reserved_candidate_result": {
+    "by_language": {
+      "unknown": {
+        "correct": 4,
+        "exact_accuracy": 0.4444444444444444,
+        "rows": 9,
+        "scored_rows": 9
+      }
+    },
+    "by_repo_family": {
+      "unknown": {
+        "correct": 4,
+        "exact_accuracy": 0.4444444444444444,
+        "rows": 9,
+        "scored_rows": 9
+      }
+    },
+    "mismatches": [
+      {
+        "constrained_choice_top1_label": "A",
+        "full_vocab_top1_text": "C",
+        "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 5,
+        "target_text": "F"
+      },
+      {
+        "constrained_choice_top1_label": "A",
+        "full_vocab_top1_text": "C",
+        "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 1,
+        "target_text": "C"
+      },
+      {
+        "constrained_choice_top1_label": "C",
+        "full_vocab_top1_text": "E",
+        "row_id": "stage10938::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 9,
+        "target_text": "A"
+      },
+      {
+        "constrained_choice_top1_label": "D",
+        "full_vocab_top1_text": "E",
+        "row_id": "stage10938::rust_reviewed::stage10413__candle__candle-flash-attn__rust::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 2,
+        "target_text": "A"
+      },
+      {
+        "constrained_choice_top1_label": "D",
+        "full_vocab_top1_text": "C",
+        "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 4,
+        "target_text": "F"
+      }
+    ],
+    "overall": {
+      "correct": 4,
+      "exact_accuracy": 0.4444444444444444,
+      "rows": 9,
+      "scored_rows": 9
+    },
+    "rows_with_target_rank_1": 1
+  },
+  "runtime_bundle": {
+    "runtime_initialization": {
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11032_next_root_support_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval",
+        "bounded_choice_contrast_margin": 0.05,
+        "bounded_choice_contrast_weight": 0.0,
+        "bounded_decoder_train_sampler": "cyclic",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11032_next_root_support_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 274,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11032_next_root_support_probe/runtime_model/model_state.pt",
+      "weights_sha256": "8cce856ddeb24d131dc497857bec123df9a840136c7a0e6e2dd65a7fa0c18de4"
+    },
+    "weights_sha256": null
+  },
+  "source_artifacts": {
+    "execution_result": "runs/local/artifacts/stage11032_next_root_support_probe/bounded_decoder_probe/execution_result.json",
+    "overlay_eval": "runs/local/artifacts/stage11032_next_root_support_probe/bounded_decoder_probe/bounded_choice_eval_audit_eval.json",
+    "overlay_strict": "runs/local/artifacts/stage11032_next_root_support_probe/bounded_decoder_probe/bounded_choice_eval_audit_strict_eval.json",
+    "reserved_rows": "runs/local/artifacts/stage11030_next_root_support_package/reserved_next_root_candidates.jsonl",
+    "runtime_bundle": "runs/local/artifacts/stage11032_next_root_support_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11033,
+  "stage_name": "stage11033_next_root_support_postrun_audit"
+}

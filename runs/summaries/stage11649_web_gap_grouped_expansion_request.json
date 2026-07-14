@@ -1,0 +1,68 @@
+{
+  "claim_boundary": [
+    "This is a data expansion request, not a training request.",
+    "Do not lower the Stage11648 admitted-root gate to run on llama_stack_ui-only analogues.",
+    "The next trainable package must include OpenHands and other heldout-gap repo families, root-disjoint from the 66 Web heldout rows."
+  ],
+  "created_at_utc": "2026-07-14T01:08:30Z",
+  "decision": "web_gap_grouped_expansion_request_ready",
+  "expansion_by_repo": {
+    "@modelcontextprotocol/client": 1,
+    "@modelcontextprotocol/core": 2,
+    "@modelcontextprotocol/server": 2,
+    "openhands_openhands_frontend": 4,
+    "sep_automation": 2
+  },
+  "expansion_by_task": {
+    "abstention_insufficient_evidence": 1,
+    "evidence_citation": 4,
+    "minimal_fix_selection": 1,
+    "symptom_localization": 1,
+    "verifier_outcome": 4
+  },
+  "mandatory_next_gate": "rerun stage11648 after materialization; do not run stage11649 grouped training until stage11648 emits a non-null command",
+  "metrics": {
+    "current_admitted_roots": 11,
+    "current_admitted_rows": 88,
+    "expansion_work_items": 11,
+    "nominal_rollouts_at_group16": 704,
+    "requested_new_disjoint_roots": 44,
+    "roots_needed_to_reach_stage11646_first_batch_target": 93,
+    "roots_needed_to_unblock_min_probe": 9
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11649_web_gap_grouped_expansion_request/web_gap_grouped_expansion_request.json",
+    "work_items": "runs/local/artifacts/stage11649_web_gap_grouped_expansion_request/web_gap_grouped_expansion_work_items.jsonl"
+  },
+  "reason": "Stage11648 admitted enough rows but only 11 roots, all from llama_stack_ui; grouped probe requires broader root/repo coverage.",
+  "source_artifacts": {
+    "stage11646_work_items": "runs/local/artifacts/stage11646_web_heldout_gap_rollout_mining/web_heldout_gap_materialization_work_items.jsonl",
+    "stage11648_admitted": "runs/local/artifacts/stage11648_web_gap_grouped_admission_compiler/web_gap_grouped_admitted_rows.jsonl",
+    "stage11648_summary": "runs/local/artifacts/stage11648_web_gap_grouped_admission_compiler/web_gap_grouped_admission_compiler.json"
+  },
+  "stage": 11649,
+  "stage11648_status": {
+    "decision": "blocked_waiting_for_new_grouped_analogue_rows",
+    "gates": {
+      "admitted_roots_at_least_20": false,
+      "admitted_rows_at_least_60": true,
+      "complete_or_multi_task_roots_at_least_8": true,
+      "covers_openhands_or_llama_gap": true,
+      "has_stage11646_work_items": true,
+      "no_already_fit_stage11638_rows": true,
+      "no_direct_heldout_roots": true,
+      "stage11647_ready": true
+    },
+    "metrics": {
+      "admitted_roots": 11,
+      "admitted_rows": 88,
+      "candidate_rows_seen": 770,
+      "gap_groups": 11,
+      "multi_task_roots_ge_4_tasks": 11,
+      "rejected_rows": 682,
+      "requested_disjoint_roots": 104,
+      "work_items": 26
+    }
+  },
+  "stage_name": "stage11649_web_gap_grouped_expansion_request"
+}

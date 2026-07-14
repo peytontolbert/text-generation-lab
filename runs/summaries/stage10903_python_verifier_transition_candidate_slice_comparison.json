@@ -1,0 +1,120 @@
+{
+  "artifacts": {
+    "combined_rows": "runs/local/artifacts/stage10903_python_verifier_transition_candidate_slice_comparison/combined_rows.jsonl",
+    "gemma_rows": "runs/local/artifacts/stage10903_python_verifier_transition_candidate_slice_comparison/gemma_rows.jsonl",
+    "hundred_rows": "runs/local/artifacts/stage10903_python_verifier_transition_candidate_slice_comparison/hundred_m_rows.jsonl",
+    "strict_rows": "runs/local/artifacts/stage10902_python_verifier_transition_candidate_slice/strict_candidate_rows.jsonl"
+  },
+  "claim_scope": [
+    "Diagnostic scoring only on the 2-row fresh Python verifier-transition candidate slice.",
+    "This slice is non-promotable and exists to test whether the verifier-transition miss repeats across a second reviewed root."
+  ],
+  "created_at_utc": "2026-07-12T18:27:58Z",
+  "gemma12b": {
+    "by_repo": {
+      "code_assist": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      }
+    },
+    "model_id": "gemma3:12b",
+    "overall": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 2,
+      "scored_rows": 2
+    }
+  },
+  "hundred_m": {
+    "by_repo": {
+      "code_assist": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      }
+    },
+    "overall": {
+      "correct": 1,
+      "exact_accuracy": 0.5,
+      "rows": 2,
+      "scored_rows": 2
+    }
+  },
+  "passed": true,
+  "rows": [
+    {
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "C",
+      "full_vocab_top1_match": true,
+      "full_vocab_top1_text": "A",
+      "full_vocab_top1_token_id": 182,
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "The most relevant verification target is **B. T2 | FAIL_TO_PASS | compiled pack carries incident artifact details into the task context**.\n\nHere's why:\n\n* **Evidence Alignment:** The evidence (E1.1, E1.2, E1.3) heavily focuses on the structure of the `failure_bundle` and its inclusion within the compiled pack.  The code snippets show how `failure_bundle` is being extracted and incorporated into the pack's contents.  The failure likely stems from incorrect handling or omission of this bundle.\n* **Direct Impact of Repair:** A repair targeting the compiler's handling of `failure_bundle` is *most likely* to directly cause a flip from FAIL to PASS on this specific target.  If the compiler is correctly including the incident details, the verification should pass.\n* **Other Targets Less Likely:**\n    * **T1 (repository domain-knowledge):** While related, the evidence doesn't explicitly point to a problem with repository domain knowledge.\n    * **T3 (user task-message content):**  The evidence doesn't mention user task messages.\n    * **T4 (log references):**  The evidence doesn't focus on log references outside the artifacts directory.\n\n\n\nTherefore, target T2 represents the most direct and probable outcome of a successful compiler repair based on the provided evidence.",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "repo_id": "code_assist",
+      "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "split": "strict_candidate_slice",
+      "target_rank_full_vocab": 1,
+      "target_text": "A",
+      "target_token_id": 182,
+      "task_type": "verifier_outcome_semantic_transition"
+    },
+    {
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": true,
+      "constrained_choice_top1_label": "A",
+      "full_vocab_top1_match": true,
+      "full_vocab_top1_text": "A",
+      "full_vocab_top1_token_id": 182,
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "The most relevant verification target is **U2 | FAIL_TO_PASS | hf_temperature overrides generic temperature when both are present**.\n\nHere's why:\n\n*   **Evidence Alignment:** The provided evidence (E4.1 and E4.2) explicitly mentions that `hf_local` should prefer `hf_temperature` over the generic `temperature` parameter provided by the orchestrator. This directly relates to the verification target U2. The tests are designed to confirm this behavior.\n*   **Direct Impact of Repair:** If the repair focuses on ensuring that `hf_local` correctly prioritizes `hf_temperature`, the verification target U2 is the most likely to flip from FAIL to PASS.\n*   **Other Options:**\n    *   U1: While related to `hf_local`, the evidence doesn't directly address CUDA configuration.\n    *   U3: This is a more specific edge case and less likely to be the primary focus of a general repair.\n    *   U4: This target is about runner path configuration, which isn't mentioned in the provided evidence.\n\nTherefore, U2 is the most directly connected to the described behavior and the expected outcome of the repair.",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "repo_id": "code_assist",
+      "row_id": "stage10900::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "split": "strict_candidate_slice",
+      "target_rank_full_vocab": 1,
+      "target_text": "A",
+      "target_token_id": 182,
+      "task_type": "verifier_outcome_semantic_transition"
+    }
+  ],
+  "runtime_bundle": "runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+  "runtime_initialization": {
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "stage10890_flash_attn_alias_safe_multilingual_support_probe",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 274,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/model_state.pt",
+    "weights_sha256": "e11a15de598547b3683d867c0181095192b8a6f0578ad6d427d4c1c9b056b8c1"
+  },
+  "stage": 10903,
+  "stage_name": "stage10903_python_verifier_transition_candidate_slice_comparison"
+}

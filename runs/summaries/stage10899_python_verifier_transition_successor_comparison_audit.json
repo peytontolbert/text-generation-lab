@@ -1,0 +1,76 @@
+{
+  "claim_boundary": [
+    "This comparison changes the Python strict verifier interface and must be reported as a new successor baseline.",
+    "The row count remains 23, but row identity changed, so the result is not directly the old 22/23 headline.",
+    "The new Python verifier row uses opaque verifier IDs plus transition semantics and therefore is a stronger anti-cheat surface than the replaced MirrorMind path-letter row.",
+    "The current bounded-choice scoring policy still fails on the successor row even though the full-vocab top-1 token is already correct."
+  ],
+  "claim_scope": [
+    "Audit the first fresh Python verifier-transition successor comparison built from the stage10896 strict slice.",
+    "Make the claim boundary explicit relative to the old 22/23 quarantined baseline."
+  ],
+  "created_at_utc": "2026-07-12T18:22:33Z",
+  "decision": "python_verifier_transition_successor_comparison_audited",
+  "eval_integrity": {
+    "explicit_transition_semantics": true,
+    "single_strict_row_replacement": true,
+    "stress_rows_unchanged": true,
+    "successor_row_unscored_under_constrained_policy": false,
+    "target_path_hidden_pre_options": true,
+    "train_rows_unchanged": true,
+    "validation_rows_unchanged": true
+  },
+  "headline_status": {
+    "clean_promotable_headline_ready": true,
+    "continuation_of_old_headline": false,
+    "new_heldout_baseline_required": true,
+    "new_successor_strict_exact_100m_promotable": 0.9565217391304348,
+    "new_successor_strict_exact_100m_scored_only": 0.9565217391304348,
+    "new_successor_strict_exact_gemma": 0.2608695652173913,
+    "new_successor_strict_scored_rows_100m": 23,
+    "new_successor_strict_total_rows_100m": 23,
+    "new_successor_strict_unscored_rows_100m": 0,
+    "old_quarantined_baseline_strict_exact_100m": 0.9565217391304348,
+    "old_quarantined_baseline_strict_exact_gemma": 0.2608695652173913
+  },
+  "next_best_step": "If the successor row behaves well, build at least one second opaque verifier-transition heldout row before promoting a broader Python verifier baseline; if it fails, use the row-local miss for targeted verifier-support design rather than replaying the old MirrorMind row.",
+  "passed": true,
+  "source_artifacts": {
+    "combined_rows": "runs/local/artifacts/stage10898_python_verifier_transition_successor_same_manifest_comparison/combined_strict_rows.jsonl",
+    "comparison": "runs/local/artifacts/stage10898_python_verifier_transition_successor_same_manifest_comparison/python_verifier_transition_successor_same_manifest_comparison.json",
+    "old_baseline_audit": "runs/local/artifacts/stage10882_quarantined_v27_comparison_successor_audit/quarantined_v27_comparison_successor_audit.json",
+    "successor_audit": "runs/local/artifacts/stage10897_python_verifier_transition_strict_successor_audit/python_verifier_transition_strict_successor_audit.json"
+  },
+  "stage": 10899,
+  "stage_name": "stage10899_python_verifier_transition_successor_comparison_audit",
+  "successor_row_result": {
+    "abstention_heavy": false,
+    "bounded_choice_target_label": "A",
+    "constrained_choice_match": false,
+    "constrained_choice_top1_label": "C",
+    "full_vocab_top1_match": true,
+    "full_vocab_top1_text": "A",
+    "full_vocab_top1_token_id": 182,
+    "gemma12b_correct": false,
+    "gemma12b_predicted_label": "B",
+    "gemma12b_raw_output": "The most relevant verification target is **B. T2 | FAIL_TO_PASS | compiled pack carries incident artifact details into the task context**.\n\nHere's why:\n\n* **Evidence Alignment:** The evidence (E1.1, E1.2, E1.3) heavily focuses on the structure of the `failure_bundle` and its inclusion within the compiled pack.  The code explicitly mentions `failure_bundle` and its contents being incorporated into the pack.  This directly relates to the target of carrying incident artifact details.\n* **Direct Impact of Repair:** A repair aimed at improving the compiler's handling of failure bundles (e.g., ensuring correct serialization, filtering, or inclusion) would most directly influence whether this target flips from FAIL to PASS.\n* **Other Targets Less Likely:**\n    * **T1 (Repository Domain-Knowledge):** While related to the pack's contents, the evidence doesn't strongly suggest a problem with *domain knowledge* specifically.\n    * **T3 (User Task-Message Content):** The evidence doesn't mention user task messages or chat history.\n    * **T4 (Ignoring Log References):**  The evidence doesn't focus on log references or their handling.\n\n\n\nTherefore, target T2 is the most directly and logically connected to the visible code and the provided evidence.",
+    "language_family": "python",
+    "option_labels": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "repo_family": "code_assist",
+    "repo_id": "code_assist",
+    "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+    "selected_test_anchor": true,
+    "source_bundle_id": "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python",
+    "split": "strict_eval_successor",
+    "target_rank_full_vocab": 1,
+    "target_text": "A",
+    "target_token_id": 182,
+    "task_type": "verifier_outcome_semantic_transition",
+    "verifier_anchor": true
+  }
+}

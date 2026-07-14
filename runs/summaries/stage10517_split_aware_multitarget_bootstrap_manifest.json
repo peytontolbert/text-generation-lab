@@ -1,0 +1,75 @@
+{
+  "claim_boundary": [
+    "This is a training/bootstrap manifest, not a promotable evaluation artifact.",
+    "The repaired v2.7 bounded frontier remains a canary and reference slice, not a direct training target.",
+    "Legacy reviewed eval references are carried as reference-only rows and must not silently enter train.",
+    "Long-context raw pack roots are bootstrap-only; audited retrieval teacher states remain train teacher supervision, not heldout claims."
+  ],
+  "created_at_utc": "2026-07-11T23:10:56Z",
+  "inputs": {
+    "stage10514_bootstrap_rows": "runs/local/artifacts/stage10514_multilingual_maintainer_frontier_v1_package/multilingual_maintainer_frontier_v1_rows.jsonl",
+    "stage10516_compiled_roots": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_root_records.jsonl",
+    "stage10516_compiled_rows": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_multitarget_rows.jsonl"
+  },
+  "metrics": {
+    "all_rows": 2488,
+    "diagnostic_rows": 25,
+    "reference_rows": 32,
+    "rows_by_language": {
+      "c_cpp": 219,
+      "python": 2165,
+      "rust": 51,
+      "unknown": 6,
+      "web_js_ts_html": 47
+    },
+    "rows_by_source_stage": {
+      "10514": 81,
+      "10516": 2407
+    },
+    "rows_by_split_component": {
+      "diagnostic_bounded": 25,
+      "reference_bounded_eval": 32,
+      "train_bootstrap_bounded": 8,
+      "train_bootstrap_geometry": 8,
+      "train_bootstrap_long_context": 220,
+      "train_teacher_long_context": 2187,
+      "validation_bootstrap_bounded": 8
+    },
+    "rows_by_target_family": {
+      "bounded_decision": 2317,
+      "constrained_generation": 55,
+      "short_structured_text": 116
+    },
+    "train_rows": 2423,
+    "train_rows_by_language": {
+      "c_cpp": 206,
+      "python": 2165,
+      "rust": 18,
+      "unknown": 6,
+      "web_js_ts_html": 28
+    },
+    "train_rows_by_target_family": {
+      "bounded_decision": 2254,
+      "constrained_generation": 55,
+      "short_structured_text": 114
+    },
+    "unique_train_roots": 786,
+    "validation_rows": 8
+  },
+  "next_best_step": "Use the train and validation slices here to launch the first root-based seq2seq curriculum run, while keeping reference and diagnostic slices out of promotion claims. Then add fresh Rust and web heldout roots so multilingual training supply matches the target headline languages.",
+  "outputs": {
+    "all_rows": "runs/local/artifacts/stage10517_split_aware_multitarget_bootstrap_manifest/multitarget_bootstrap_rows.jsonl",
+    "diagnostic_rows": "runs/local/artifacts/stage10517_split_aware_multitarget_bootstrap_manifest/multitarget_bootstrap_diagnostic_rows.jsonl",
+    "reference_rows": "runs/local/artifacts/stage10517_split_aware_multitarget_bootstrap_manifest/multitarget_bootstrap_reference_rows.jsonl",
+    "train_rows": "runs/local/artifacts/stage10517_split_aware_multitarget_bootstrap_manifest/multitarget_bootstrap_train_rows.jsonl",
+    "validation_rows": "runs/local/artifacts/stage10517_split_aware_multitarget_bootstrap_manifest/multitarget_bootstrap_validation_rows.jsonl"
+  },
+  "passed": true,
+  "root_split_audit": {
+    "rule": "same root_id must not appear across train/validation/eval claim paths",
+    "violation_count": 0,
+    "violations": {}
+  },
+  "stage": 10517,
+  "stage_name": "stage10517_split_aware_multitarget_bootstrap_manifest"
+}

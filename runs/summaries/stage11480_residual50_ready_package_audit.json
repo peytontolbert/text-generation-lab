@@ -1,0 +1,99 @@
+{
+  "created_at_utc": "2026-07-13T17:46:54Z",
+  "decision": "residual50_ready_package_blocked",
+  "family_status": [
+    {
+      "counter_role": "candidate_change_surface",
+      "counter_roots": 10,
+      "family_id": "python_evidence_verifier_constraint_vs_candidate_surface",
+      "language_family": "python",
+      "missing_counter_roots": 0,
+      "missing_positive_roots": 0,
+      "positive_role": "verifier_and_test_constraint",
+      "positive_roots": 24,
+      "residual50_ready": true,
+      "roots_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 24
+      },
+      "rows_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 24
+      }
+    },
+    {
+      "counter_role": "candidate_change_surface",
+      "counter_roots": 10,
+      "family_id": "c_cpp_evidence_verifier_constraint_vs_candidate_surface",
+      "language_family": "c_cpp",
+      "missing_counter_roots": 0,
+      "missing_positive_roots": 0,
+      "positive_role": "verifier_and_test_constraint",
+      "positive_roots": 14,
+      "residual50_ready": true,
+      "roots_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 14
+      },
+      "rows_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 14
+      }
+    },
+    {
+      "counter_role": "candidate_change_surface",
+      "counter_roots": 0,
+      "family_id": "rust_symptom_call_path_vs_candidate_surface",
+      "language_family": "rust",
+      "missing_counter_roots": 10,
+      "missing_positive_roots": 0,
+      "positive_role": "symptom_or_call_path_analogue",
+      "positive_roots": 10,
+      "residual50_ready": false,
+      "roots_by_role": {
+        "symptom_or_call_path_analogue": 10
+      },
+      "rows_by_role": {
+        "symptom_or_call_path_analogue": 10
+      }
+    }
+  ],
+  "metrics": {
+    "duplicate_roots": 16,
+    "rows": 68,
+    "rows_by_language": {
+      "c_cpp": 24,
+      "python": 34,
+      "rust": 10
+    },
+    "rows_missing_options": 0,
+    "rows_without_train_support": 0,
+    "unique_roots": 52
+  },
+  "outputs": {
+    "ready_rows": "runs/local/artifacts/stage11480_residual50_ready_package_audit/residual50_ready_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11480_residual50_ready_package_audit/residual50_ready_package_audit.json"
+  },
+  "passed": false,
+  "probe_contract": {
+    "allowed_next_probe": "controlled diagnostic or promotable residual probe using this package as train-support analogues",
+    "baseline": "stage11444 + encoder_option_retrieval",
+    "do_not_train_on": "frozen residual miss rows",
+    "promotion_requires": [
+      "old canary strict 23/23",
+      "filtered strict 22/22",
+      "filtered validation >=20/22",
+      "old validation >=21/23",
+      "frozen residual bank >=6/10",
+      "full bounded-choice coverage",
+      "selected product scorer encoder_option_retrieval"
+    ]
+  },
+  "source_artifacts": {
+    "python_cpp_ready": "runs/local/artifacts/stage11475_residual50_readiness_after_counterfamily_topup/residual50_ready_python_cpp_rows.jsonl",
+    "rust_new": "runs/local/artifacts/stage11479_materialized_rust_symptom_call_path_rows/admitted_materialized_rust_symptom_call_path_rows.jsonl",
+    "rust_previous": "runs/local/artifacts/stage11476_rust_symptom_call_path_residual50_admission/admitted_rust_symptom_call_path_rows.jsonl"
+  },
+  "stage": 11480,
+  "stage_name": "stage11480_residual50_ready_package_audit"
+}

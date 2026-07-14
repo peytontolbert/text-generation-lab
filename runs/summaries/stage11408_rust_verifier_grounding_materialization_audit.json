@@ -1,0 +1,48 @@
+{
+  "blocker_counts": {
+    "missing_actual_verifier_log_or_selected_test_execution_record": 51,
+    "missing_exact_rs_source_snippet_path": 32,
+    "missing_exact_test_or_verifier_path": 45,
+    "missing_exact_verifier_command": 29,
+    "missing_local_or_fetchable_repo_snapshot": 29,
+    "missing_selected_test_anchor": 17,
+    "weak_or_quarantined_repo_family": 4
+  },
+  "by_repo_family": {
+    "LLaMA-Adapter": 1,
+    "candle": 11,
+    "git": 3,
+    "perftree": 3,
+    "tokenizers": 4,
+    "unknown": 29
+  },
+  "counts": {
+    "blocked_source_rows_carried_forward": 29,
+    "can_materialize_after_verifier_log": 3,
+    "local_roots_examined": 22,
+    "minimum_clean_roots_required_before_probe": 10,
+    "queue_items": 51,
+    "train_support_allowed_now": 0
+  },
+  "created_at_utc": "2026-07-13T15:06:37Z",
+  "decision": "rust_verifier_grounding_audit_ready_no_train_rows",
+  "interpretation": "Local Rust source roots are useful candidates, but none currently has a stored actual verifier log or selected-test execution record. They remain materialization queue items, not usable train supply.",
+  "outputs": {
+    "queue": "runs/local/artifacts/stage11408_rust_verifier_grounding_materialization_audit/rust_verifier_grounding_materialization_queue.jsonl",
+    "summary": "runs/local/artifacts/stage11408_rust_verifier_grounding_materialization_audit/rust_verifier_grounding_materialization_audit.json"
+  },
+  "passed": true,
+  "quality_gate": {
+    "actual_verifier_logs_present": false,
+    "probe_ready": false,
+    "stage11404_retry_warranted": false,
+    "train_rows_emitted": false
+  },
+  "recommended_next_action": "Run or recover verifier logs for the candidates marked can_materialize_after_verifier_log, then build role-distinct candidate_change_surface, symptom_or_call_path, and verifier_and_test_constraint rows. Re-run the admission gate before training.",
+  "source_artifacts": {
+    "stage11405_requests": "runs/local/artifacts/stage11405_rust_train_support_materialization_request/rust_train_support_materialization_requests.jsonl",
+    "stage11406_roots": "runs/local/artifacts/stage11406_local_rust_source_acquisition_atlas/local_rust_source_roots.jsonl"
+  },
+  "stage": 11408,
+  "stage_name": "stage11408_rust_verifier_grounding_materialization_audit"
+}

@@ -1,0 +1,108 @@
+{
+  "claim_boundary": [
+    "This is an inference audit for answerable-row option geometry only; no training was performed.",
+    "Removing abstain from non-abstention rows is valid only for rows whose visible verifier/source evidence makes a non-abstain choice answerable."
+  ],
+  "created_at_utc": "2026-07-13T22:47:02Z",
+  "decision": "answerable_no_abstain_geometry_train_probe_candidate",
+  "device": "cuda:0",
+  "metrics": {
+    "option_count_by_task": {
+      "abstention_insufficient_evidence": {
+        "2": 32
+      },
+      "alternative_hypothesis_elimination": {
+        "3": 32
+      },
+      "evidence_citation": {
+        "3": 32
+      },
+      "minimal_fix_selection": {
+        "3": 32
+      },
+      "symptom_localization": {
+        "3": 32
+      },
+      "verifier_outcome": {
+        "3": 32
+      }
+    },
+    "rows": 192,
+    "strict_rows": 36,
+    "train_rows": 156
+  },
+  "outputs": {
+    "rows": "runs/local/artifacts/stage11597_web_answerable_no_abstain_geometry_audit/web_answerable_no_abstain_rows.jsonl",
+    "strict_rows": "runs/local/artifacts/stage11597_web_answerable_no_abstain_geometry_audit/web_answerable_no_abstain_successor_strict_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11597_web_answerable_no_abstain_geometry_audit/web_answerable_no_abstain_geometry_audit.json",
+    "train_rows": "runs/local/artifacts/stage11597_web_answerable_no_abstain_geometry_audit/web_answerable_no_abstain_train_rows.jsonl"
+  },
+  "results": {
+    "successor_strict": {
+      "accuracy": 0.05555555555555555,
+      "correct": 2,
+      "coverage": 1.0,
+      "prediction_counts": {
+        "A": 10,
+        "B": 15,
+        "C": 11
+      },
+      "rows": 36,
+      "target_counts": {
+        "A": 12,
+        "B": 12,
+        "C": 12
+      }
+    },
+    "train": {
+      "accuracy": 0.0641025641025641,
+      "correct": 10,
+      "coverage": 1.0,
+      "prediction_counts": {
+        "A": 61,
+        "B": 53,
+        "C": 42
+      },
+      "rows": 156,
+      "target_counts": {
+        "A": 52,
+        "B": 63,
+        "C": 41
+      }
+    }
+  },
+  "runtime_initialization": {
+    "attached_bounded_choice_heads": [
+      "bounded_choice_evidence_judgment_head",
+      "bounded_choice_semantic_candidate_head"
+    ],
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval_evidence_judgment_head",
+      "bounded_choice_contrast_margin": 0.05,
+      "bounded_choice_contrast_weight": 0.0,
+      "bounded_decoder_train_sampler": "cyclic",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "bounded_decoder_ce_probe_contract",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 280,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/model_state.pt",
+    "weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37"
+  },
+  "scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "source_artifacts": {
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "source_rows": "runs/local/artifacts/stage11594_web_verifier_attached_repaired_geometry_package/web_verifier_attached_repaired_rows.jsonl"
+  },
+  "stage": 11597,
+  "stage_name": "stage11597_web_answerable_no_abstain_geometry_audit"
+}

@@ -1,0 +1,52 @@
+{
+  "claim_scope": [
+    "Post-run failure audit for the stage10556 preservation-aware successor probe.",
+    "Summarizes what improved, what stayed intact, and why the strict successor slice is still not a promotable multilingual win surface.",
+    "This is an audit artifact, not a new benchmark claim."
+  ],
+  "created_at_utc": "2026-07-12T02:10:29Z",
+  "key_findings": [
+    "Adding reviewed v2.7 bounded-choice preservation support kept the repaired maintainer canary at 22/24 bounded accuracy.",
+    "The same preservation support did not make the stage10555 strict successor generation slice scoreable as a multilingual win: both 100M and Gemma remained at 0/54 exact and 0/54 semantic.",
+    "The strict successor slice is still generation-only and stores no candidate-option contract, so bounded semantic scoring cannot be used there honestly.",
+    "The 100M runtime no longer emits a single-token 'A' everywhere, but it still collapses toward a generic ANSWER_* prefix rather than exact source-backed targets."
+  ],
+  "known_non_moves": [
+    "Do not run more identical stage10555/10556-style preservation sweeps on the current strict surface",
+    "Do not reinterpret the 54-row strict slice as a bounded-choice benchmark until candidate-option contracts are actually stored",
+    "Do not upgrade the multilingual claim based on stage10557, because it is a 0/54 tie"
+  ],
+  "next_best_step": {
+    "decision": "rebuild_strict_successor_targets_into_short_canonical_exact_outputs",
+    "requirements": [
+      "Keep the same root/repo heldout hygiene as stage10555",
+      "Replace long opaque target strings with short canonical exact outputs that are still reversibly mapped to source-backed evidence/verifier outcomes",
+      "Preserve anti-cheat checks so the canonical target code is not revealed in the visible prompt",
+      "Attach a parallel semantic mapping card so exact and semantic scoring can both be reported honestly",
+      "Only compare 100M and Gemma again after the rebuilt strict surface supports exact generation without hidden option contracts"
+    ]
+  },
+  "observed_outcome": {
+    "canary_bounded_accuracy": 0.9166666666666666,
+    "canary_greedy_exact_accuracy": 0.0,
+    "gemma_strict_successor_exact": 0.0,
+    "strict_contract_block_reason": "strict_successor_rows_do_not_store_candidate_option_sets",
+    "strict_contract_blocked_for_bounded_choice": true,
+    "strict_successor_exact": 0.0,
+    "strict_successor_semantic": 0.0
+  },
+  "passed": true,
+  "promotion_decision": {
+    "promotable": false,
+    "reason": "strict_successor_surface_remains_interface_invalid_for_exact_generation_headline"
+  },
+  "runtime_weights_sha256": "bcb62f54c6fedda6b3a74a9df033236a6767fdd7a04118219eb0ace089b30050",
+  "source_artifacts": {
+    "stage10554_bounded_strict_contract_audit": "runs/local/artifacts/stage10554_cuda_masked_projection_successor_bounded_strict_audit/cuda_masked_projection_successor_bounded_strict_audit.json",
+    "stage10556_execution_result": "runs/local/artifacts/stage10556_masked_projection_successor_with_v27_preservation_probe/bounded_decoder_probe/execution_result.json",
+    "stage10557_same_manifest_comparison": "runs/local/artifacts/stage10557_masked_projection_successor_with_v27_preservation_same_manifest_comparison/masked_projection_successor_with_v27_preservation_same_manifest_comparison.json",
+    "stage10558_canary_audit": "runs/local/artifacts/stage10558_masked_projection_successor_with_v27_preservation_canary_audit/masked_projection_successor_with_v27_preservation_canary_audit.json"
+  },
+  "stage": 10559,
+  "stage_name": "stage10559_preservation_successor_failure_audit"
+}

@@ -1,0 +1,128 @@
+{
+  "created_at_utc": "2026-07-14T05:35:54Z",
+  "decision": "stage11695_identity_gain_offset_by_regressions",
+  "gates": {
+    "gap_gains_3": true,
+    "identity_rows_40": true,
+    "net_identity_gain_positive": false,
+    "no_non_gap_regressions": false
+  },
+  "metrics": {
+    "all_regressions": 3,
+    "baseline_correct": 27,
+    "by_task_status": {
+      "minimal_fix_selection": {
+        "stayed_correct": 9,
+        "stayed_wrong": 2
+      },
+      "patch_impact": {
+        "stayed_correct": 7
+      },
+      "symptom_localization": {
+        "stayed_correct": 7,
+        "stayed_wrong": 4
+      },
+      "verifier_outcome": {
+        "correct_to_wrong": 3,
+        "stayed_correct": 1,
+        "stayed_wrong": 4,
+        "wrong_to_correct": 3
+      }
+    },
+    "gain_rows": [
+      {
+        "baseline_predicted_label": "B",
+        "probe_predicted_label": "A",
+        "repo_id": "openhands_openhands",
+        "row_id": "stage11390::openhands_websocket_url::verifier_outcome::stage11690_original_web_canonical_bridge",
+        "target_label": "A",
+        "target_margin_delta": 4.139830946922302,
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      },
+      {
+        "baseline_predicted_label": "B",
+        "probe_predicted_label": "A",
+        "repo_id": "openhands_openhands",
+        "row_id": "stage11390::openhands_parse_pr_url::verifier_outcome::stage11690_original_web_canonical_bridge",
+        "target_label": "A",
+        "target_margin_delta": 3.7458783090114594,
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      },
+      {
+        "baseline_predicted_label": "B",
+        "probe_predicted_label": "A",
+        "repo_id": "openhands_openhands",
+        "row_id": "stage11390::openhands_input_validation::verifier_outcome::stage11690_original_web_canonical_bridge",
+        "target_label": "A",
+        "target_margin_delta": 4.123630344867706,
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      }
+    ],
+    "gap_gains": 3,
+    "identity_rows": 40,
+    "non_gap_regressions": 3,
+    "probe_correct": 27,
+    "regression_rows": [
+      {
+        "baseline_predicted_label": "C",
+        "probe_predicted_label": "A",
+        "repo_id": null,
+        "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::verifier_outcome::heldout_v1::stage11690_original_web_canonical_bridge",
+        "target_label": "C",
+        "target_margin_delta": -0.3561934232711792,
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      },
+      {
+        "baseline_predicted_label": "C",
+        "probe_predicted_label": "B",
+        "repo_id": null,
+        "row_id": "stage11540::mcp_typescript_sdk::server_streamable_http_transport::verifier_outcome::heldout_v1::stage11690_original_web_canonical_bridge",
+        "target_label": "C",
+        "target_margin_delta": -0.24304699897766113,
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      },
+      {
+        "baseline_predicted_label": "C",
+        "probe_predicted_label": "A",
+        "repo_id": null,
+        "row_id": "stage11540::mcp_typescript_sdk::core_protocol_state_machine::verifier_outcome::heldout_v1::stage11690_original_web_canonical_bridge",
+        "target_label": "C",
+        "target_margin_delta": -0.3629406690597534,
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      }
+    ],
+    "status_counts": {
+      "correct_to_wrong": 3,
+      "stayed_correct": 24,
+      "stayed_wrong": 10,
+      "wrong_to_correct": 3
+    }
+  },
+  "outputs": {
+    "row_cards": "runs/local/artifacts/stage11698_web_identity_tradeoff_audit/web_identity_tradeoff_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11698_web_identity_tradeoff_audit/web_identity_tradeoff_audit.json"
+  },
+  "recommended_next": [
+    "Preserve the Stage11695 verifier_outcome gain, but prevent regressions on already-correct same-role identity rows.",
+    "Next probe should add preservation/listwise replay specifically for the correct_to_wrong rows, not more generic source/fix support.",
+    "Use row-level status_change as promotion criterion: require gap gains with zero non-gap regressions."
+  ],
+  "runtime": {
+    "baseline_runtime": "runs/local/artifacts/stage11685_counterfactual_identity_semantic_head_fixed_probe/runtime_model/runtime_model_bundle.json",
+    "baseline_weights_sha256": "75b6582ad102efc8ce61c1f30978a32d5648056014bd852d6c4a17afcc7fe31e",
+    "probe_runtime": "runs/local/artifacts/stage11695_web_identity_gap_topup_probe/runtime_model/runtime_model_bundle.json",
+    "probe_weights_sha256": "e8bfe2887b64f7f97d9613c3af30e5b5a68dd11c0662980277d676fc124f6b10"
+  },
+  "source_artifacts": {
+    "bridged_rows": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit/original_web_canonical_bridged_rows.jsonl",
+    "gap_rows": "runs/local/artifacts/stage11692_web_bridged_miss_family_audit/web_bridged_gemma_margin_rows.jsonl"
+  },
+  "stage": 11698,
+  "stage_name": "stage11698_web_identity_tradeoff_audit"
+}

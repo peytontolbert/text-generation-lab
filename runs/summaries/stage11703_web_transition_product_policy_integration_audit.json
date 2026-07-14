@@ -1,0 +1,172 @@
+{
+  "anti_cheat": {
+    "prompt_label_leak_row_ids": [],
+    "prompt_label_leaks": 0,
+    "prompt_target_value_leak_row_ids": [],
+    "prompt_target_value_leaks": 0,
+    "rows": 66,
+    "singleton_row_ids": [],
+    "singleton_rows": 0
+  },
+  "baselines": {
+    "stage11690_bridged_100m": {
+      "accuracy": 0.803030303030303,
+      "correct": 53,
+      "parts": {
+        "identity": {
+          "accuracy": 0.675,
+          "correct": 27,
+          "misses": [],
+          "rows": 40
+        },
+        "web": {
+          "accuracy": 1.0,
+          "correct": 26,
+          "misses": [],
+          "rows": 26
+        }
+      },
+      "rows": 66
+    },
+    "stage11691_gemma": {
+      "accuracy": 0.8484848484848485,
+      "correct": 56,
+      "rows": 66
+    }
+  },
+  "claim_boundary": [
+    "This integrates an inference-time verifier-transition policy with the routed compact Web scorer.",
+    "It is not a weight update and not proof of executable Web repair.",
+    "Remaining Web failures are non-verifier symptom/localization and minimal-fix rows."
+  ],
+  "created_at_utc": "2026-07-14T06:03:28Z",
+  "decision": "product_policy_promotable_for_bridged_web_compact_surface",
+  "gates": {
+    "no_prompt_label_leaks": true,
+    "no_prompt_target_value_leaks": true,
+    "no_singletons": true,
+    "product_beats_gemma_56_of_66": true,
+    "product_beats_stage11690_53_of_66": true,
+    "protected_filtered_strict": true,
+    "protected_old_canary_strict": true,
+    "protected_residual": true
+  },
+  "metrics": {
+    "accuracy": 0.9090909090909091,
+    "by_repo": {
+      "None": {
+        "accuracy": 1.0,
+        "correct": 42,
+        "rows": 42
+      },
+      "llama_stack": {
+        "accuracy": 0.6666666666666666,
+        "correct": 4,
+        "rows": 6
+      },
+      "openhands_openhands": {
+        "accuracy": 0.7777777777777778,
+        "correct": 14,
+        "rows": 18
+      }
+    },
+    "by_route": {
+      "identity": {
+        "accuracy": 0.85,
+        "correct": 34,
+        "rows": 40
+      },
+      "web": {
+        "accuracy": 1.0,
+        "correct": 26,
+        "rows": 26
+      }
+    },
+    "by_task": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "alternative_hypothesis_elimination": {
+        "accuracy": 1.0,
+        "correct": 4,
+        "rows": 4
+      },
+      "evidence_citation": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "minimal_fix_selection": {
+        "accuracy": 0.8181818181818182,
+        "correct": 9,
+        "rows": 11
+      },
+      "patch_impact": {
+        "accuracy": 1.0,
+        "correct": 7,
+        "rows": 7
+      },
+      "symptom_localization": {
+        "accuracy": 0.6363636363636364,
+        "correct": 7,
+        "rows": 11
+      },
+      "verifier_outcome": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      }
+    },
+    "correct": 60,
+    "reason_counts": {
+      "fallback_non_verifier": 29,
+      "stage11690_fixed_web_route_correct": 26,
+      "visible_pass_only::pass_targeted_test_selection": 11
+    },
+    "rows": 66
+  },
+  "outputs": {
+    "remaining_misses": "runs/local/artifacts/stage11703_web_transition_product_policy_integration_audit/web_transition_product_policy_remaining_misses.jsonl",
+    "row_cards": "runs/local/artifacts/stage11703_web_transition_product_policy_integration_audit/web_transition_product_policy_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11703_web_transition_product_policy_integration_audit/web_transition_product_policy_integration_audit.json"
+  },
+  "protected_gates": {
+    "filtered_strict_22_of_22": true,
+    "old_canary_strict_23_of_23": true,
+    "residual_at_least_7_of_10": true,
+    "source": "runs/local/artifacts/stage11686_counterfactual_identity_semantic_head_fixed_postrun_audit/counterfactual_identity_semantic_head_fixed_postrun_audit.json"
+  },
+  "recommended_next": [
+    "Freeze this routed scorer policy as the current compact Web scorer candidate.",
+    "Build disjoint analogue support for the remaining symptom_localization and minimal_fix_selection misses.",
+    "Do not run more verifier_outcome support probes until a trainable transition head replaces or validates this policy."
+  ],
+  "remaining_misses": {
+    "by_repo": {
+      "llama_stack": 2,
+      "openhands_openhands": 4
+    },
+    "by_task": {
+      "minimal_fix_selection": 2,
+      "symptom_localization": 4
+    },
+    "row_ids": [
+      "stage11361::llama_stack_ui_format_message_content::symptom_localization::stage11690_original_web_canonical_bridge",
+      "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection::stage11690_original_web_canonical_bridge",
+      "stage11390::openhands_websocket_url::symptom_localization::stage11690_original_web_canonical_bridge",
+      "stage11390::openhands_parse_pr_url::symptom_localization::stage11690_original_web_canonical_bridge",
+      "stage11390::openhands_parse_pr_url::minimal_fix_selection::stage11690_original_web_canonical_bridge",
+      "stage11390::openhands_input_validation::symptom_localization::stage11690_original_web_canonical_bridge"
+    ],
+    "rows": 6
+  },
+  "runtime": {
+    "identity_runtime": "runs/local/artifacts/stage11685_counterfactual_identity_semantic_head_fixed_probe/runtime_model/runtime_model_bundle.json",
+    "identity_weights_sha256": "75b6582ad102efc8ce61c1f30978a32d5648056014bd852d6c4a17afcc7fe31e",
+    "web_route_source": "stage11690 fixed web route 26/26"
+  },
+  "stage": 11703,
+  "stage_name": "stage11703_web_transition_product_policy_integration_audit"
+}

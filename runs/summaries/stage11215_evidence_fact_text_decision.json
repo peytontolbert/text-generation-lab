@@ -1,0 +1,297 @@
+{
+  "blocked_claims": [
+    "Do not promote encoder_option_retrieval_evidence_fact_text as a product scorer.",
+    "Do not claim verifier_and_test_constraint is repaired; Stage11214 remains 0/3 on that gold role in the residual bank.",
+    "Do not run more same-manifest support sweeps without changing row admission or the candidate scoring objective."
+  ],
+  "created_at_utc": "2026-07-13T08:28:19Z",
+  "decision": "reject_evidence_fact_text_branch_for_promotion",
+  "interpretation": "Row-local evidence text is a useful schema correction but not sufficient as a generic option-retrieval objective. As inference-only it is strict-safe after raw fallback but remains 5/10 on the residual bank. After training with Stage11205 support and KL preservation it keeps strict at 22/22 but drops the residual bank to 4/10.",
+  "next_required_work": [
+    {
+      "priority": 1,
+      "reason": "Text substitution and generic retrieval training both fail to separate verifier_and_test_constraint from candidate_change_surface.",
+      "work": "Create an explicit pairwise semantic candidate objective with role, evidence text, and candidate-control labels supervised directly."
+    },
+    {
+      "priority": 2,
+      "reason": "Current residual-bank verifier/test rows remain 0/3 and the support signal is not stable under strict preservation.",
+      "work": "Admit more root-disjoint verifier_and_test_constraint rows with true candidate_change_surface controls and selected-test anchors."
+    },
+    {
+      "priority": 3,
+      "reason": "Recent probes can improve one metric only by damaging another, so both gates are necessary.",
+      "work": "Keep the clean strict 22/22 canary and clean residual bank as gates for every next scorer/objective experiment."
+    }
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11215_evidence_fact_text_decision/evidence_fact_text_decision.json"
+  },
+  "passed": true,
+  "prior_tradeoff_stage11211_decision": "reject_current_fresh_verifier_constraint_branch",
+  "scorer_only_stage11212": {
+    "decision": "diagnostic_only",
+    "fact_text": {
+      "residual": {
+        "correct": 5,
+        "exact_accuracy": 0.5,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "residual_by_gold": {
+        "candidate_change_surface": {
+          "correct": 2,
+          "exact_accuracy": 0.5,
+          "rows": 4,
+          "scored_rows": 4
+        },
+        "symptom_or_call_path_analogue": {
+          "correct": 2,
+          "exact_accuracy": 1.0,
+          "rows": 2,
+          "scored_rows": 2
+        },
+        "unknown": {
+          "correct": 1,
+          "exact_accuracy": 1.0,
+          "rows": 1,
+          "scored_rows": 1
+        },
+        "verifier_and_test_constraint": {
+          "correct": 0,
+          "exact_accuracy": 0.0,
+          "rows": 3,
+          "scored_rows": 3
+        }
+      },
+      "strict": {
+        "correct": 22,
+        "exact_accuracy": 1.0,
+        "rows": 22,
+        "scored_rows": 22
+      },
+      "validation": {
+        "correct": 20,
+        "exact_accuracy": 0.8695652173913043,
+        "rows": 23,
+        "scored_rows": 23
+      }
+    },
+    "productized_reference": {
+      "residual": {
+        "correct": 5,
+        "exact_accuracy": 0.5,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "strict": {
+        "correct": 22,
+        "exact_accuracy": 1.0,
+        "rows": 22,
+        "scored_rows": 22
+      },
+      "validation": {
+        "correct": 20,
+        "exact_accuracy": 0.8695652173913043,
+        "rows": 23,
+        "scored_rows": 23
+      }
+    }
+  },
+  "source_artifacts": {
+    "previous_tradeoff_decision": "runs/local/artifacts/stage11211_fresh_verifier_constraint_tradeoff_decision/fresh_verifier_constraint_tradeoff_decision.json",
+    "scorer_only_audit": "runs/local/artifacts/stage11212_evidence_fact_text_scorer_audit/evidence_fact_text_scorer_audit.json",
+    "trained_postrun_audit": "runs/local/artifacts/stage11214_evidence_fact_text_postrun_audit/evidence_fact_text_postrun_audit.json"
+  },
+  "stage": 11215,
+  "stage_name": "stage11215_evidence_fact_text_decision",
+  "trained_stage11214": {
+    "decision": "diagnostic_negative_no_residual_gain",
+    "promotion_gate": {
+      "beats_gemma_on_clean_residual_successor": false,
+      "promotable": false,
+      "residual_improved_vs_stage11196": false,
+      "strict_preserved_22_of_22": true
+    },
+    "residual": {
+      "correct": 4,
+      "exact_accuracy": 0.4,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold": {
+      "candidate_change_surface": {
+        "correct": 2,
+        "exact_accuracy": 0.5,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    },
+    "residual_cluster": {
+      "cluster_cards": [
+        {
+          "root_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::10",
+          "rows": 1,
+          "scored_rows": 1,
+          "solved": false
+        },
+        {
+          "root_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::13",
+          "rows": 1,
+          "scored_rows": 1,
+          "solved": false
+        },
+        {
+          "root_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::62",
+          "rows": 1,
+          "scored_rows": 1,
+          "solved": true
+        },
+        {
+          "root_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+          "rows": 2,
+          "scored_rows": 2,
+          "solved": false
+        },
+        {
+          "root_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python",
+          "rows": 1,
+          "scored_rows": 1,
+          "solved": false
+        },
+        {
+          "root_id": "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python",
+          "rows": 1,
+          "scored_rows": 1,
+          "solved": true
+        },
+        {
+          "root_id": "stage11192::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue",
+          "rows": 1,
+          "scored_rows": 1,
+          "solved": true
+        },
+        {
+          "root_id": "stage11192::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+          "rows": 1,
+          "scored_rows": 1,
+          "solved": false
+        },
+        {
+          "root_id": "stage11192::rust::rust_replacement_slot_3::candidate_change_surface",
+          "rows": 1,
+          "scored_rows": 1,
+          "solved": true
+        }
+      ],
+      "cluster_exact_accuracy": 0.4444444444444444,
+      "clusters": 9,
+      "scored_clusters": 9,
+      "solved_clusters": 4
+    },
+    "residual_misses": [
+      {
+        "full_vocab_top1_text": "C",
+        "gold_value": "verifier_and_test_constraint",
+        "language_family": "python",
+        "predicted": "A",
+        "repo_family": "repository_library",
+        "root_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python",
+        "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 6,
+        "target_text": "F",
+        "task_type": "evidence_citation"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "gold_value": "verifier_and_test_constraint",
+        "language_family": "c_cpp",
+        "predicted": "A",
+        "repo_family": "parametergolf",
+        "root_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+        "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 1,
+        "target_text": "C",
+        "task_type": "evidence_citation"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "gold_value": "verifier_and_test_constraint",
+        "language_family": "c_cpp",
+        "predicted": "D",
+        "repo_family": "parametergolf",
+        "root_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+        "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 6,
+        "target_text": "F",
+        "task_type": "evidence_citation"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "gold_value": "candidate_change_surface",
+        "language_family": "c_cpp",
+        "predicted": "C",
+        "repo_family": "cuembed",
+        "root_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::13",
+        "row_id": "stage11190::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::13::replacement_slot_1::candidate_change_surface",
+        "target_rank_full_vocab": 2,
+        "target_text": "B",
+        "task_type": "evidence_citation"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "gold_value": "symptom_or_call_path_analogue",
+        "language_family": "rust",
+        "predicted": "D",
+        "repo_family": "rust-analyzer",
+        "root_id": "stage11192::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+        "row_id": "stage11193::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+        "target_rank_full_vocab": 2,
+        "target_text": "B",
+        "task_type": "evidence_citation"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "gold_value": "candidate_change_surface",
+        "language_family": "c_cpp",
+        "predicted": "A",
+        "repo_family": "cuembed",
+        "root_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::10",
+        "row_id": "stage11190::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::10::replacement_slot_3::candidate_change_surface",
+        "target_rank_full_vocab": 1,
+        "target_text": "C",
+        "task_type": "evidence_citation"
+      }
+    ],
+    "strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    }
+  }
+}

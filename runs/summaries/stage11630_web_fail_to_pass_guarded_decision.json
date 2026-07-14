@@ -1,0 +1,65 @@
+{
+  "claim_boundary": [
+    "Stage11628 is rejected diagnostic/probe output.",
+    "Controlled mutation rows remain train-support only.",
+    "No Web or broad maintainer claim is upgraded."
+  ],
+  "created_at_utc": "2026-07-14T00:02:03Z",
+  "decision": "reject_stage11628_keep_stage11507",
+  "interpretation": [
+    "The repaired controlled FAIL_TO_PASS rows are partially learned: controlled support reaches 18/48.",
+    "The learning does not transfer to Web heldout: 32/66 is below the selected Stage11507 baseline of 35/66.",
+    "The run preserves canary strict/validation gates but regresses residual from 7/10 to 6/10.",
+    "This means the current shared Web task-candidate head/full-model objective is not a promotable Web path yet."
+  ],
+  "next_actions": [
+    "Do not rerun the same full-model Web task-head recipe on this package.",
+    "Try staged/frozen training: first fit the Web head on repaired support, then freeze encoder and audit heldout, or add task-specific heads.",
+    "Add more Llama/OpenHands controlled roots before attempting another promotable Web heldout run.",
+    "Keep Stage11507 selected until residual stays >=7/10 and Web heldout exceeds 35/66."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11630_web_fail_to_pass_guarded_decision/web_fail_to_pass_guarded_decision.json"
+  },
+  "selected_frontier_remains": {
+    "reason": "Stage11628 did not improve Web heldout and regressed residual below 7/10.",
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head"
+  },
+  "source_artifacts": {
+    "audit": "runs/local/artifacts/stage11629_web_fail_to_pass_guarded_postrun_audit/web_fail_to_pass_guarded_postrun_audit.json",
+    "request": "runs/local/artifacts/stage11628_web_fail_to_pass_guarded_probe_request/web_fail_to_pass_guarded_probe_request.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11630,
+  "stage11628_result": {
+    "compact": {
+      "controlled_fail_to_pass_support": "18/48",
+      "filtered_strict": "22/22",
+      "filtered_validation": "20/22",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": "21/23",
+      "residual_bank": "6/10",
+      "web_heldout": "32/66",
+      "web_successor_strict": "2/36"
+    },
+    "failed_gates": [
+      "residual_at_least_7_of_10",
+      "web_heldout_beats_stage11507_35_of_66"
+    ],
+    "objective_settings": {
+      "batch_size": 6,
+      "bounded_choice_aux_source": "encoder_option_retrieval_web_task_candidate_head",
+      "bounded_choice_contrast_margin": 0.08,
+      "bounded_choice_contrast_weight": 0.5,
+      "bounded_decoder_train_sampler": "web_task_family_balanced",
+      "head_only": false,
+      "learning_rate": "3e-7",
+      "max_steps": 256,
+      "preservation_kl_weight": 10.0
+    },
+    "runtime": "runs/local/artifacts/stage11628_web_fail_to_pass_guarded_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_web_task_candidate_head"
+  },
+  "stage_name": "stage11630_web_fail_to_pass_guarded_decision"
+}

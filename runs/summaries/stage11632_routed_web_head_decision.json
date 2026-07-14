@@ -1,0 +1,47 @@
+{
+  "claim_boundary": [
+    "No single standalone model frontier is promoted by this decision.",
+    "A routed product scorer may be useful for harness/product scoring, but must be audited separately."
+  ],
+  "created_at_utc": "2026-07-14T00:05:04Z",
+  "decision": "build_routed_product_scorer_audit_next",
+  "gates": {
+    "global_web_head_not_safe": true,
+    "web_head_beats_stage11507_web_heldout": true,
+    "web_head_fits_controlled_support": true,
+    "web_head_improves_successor": true
+  },
+  "interpretation": [
+    "The Stage11625 Web head is useful for Web rows: Web heldout improves from Stage11507 35/66 to 38/66.",
+    "The same head is unsafe globally: residual drops to 1/10 and protected strict drops to 7/22.",
+    "The next valid experiment is a routed scorer/product policy: use Stage11507 selected scorer for existing compact maintainer canaries and the Web task-candidate head only for Web FAIL_TO_PASS/Web heldout routing.",
+    "This is a system-composition path, not a single-weight promotion yet."
+  ],
+  "next_actions": [
+    "Build Stage11633 routed scorer audit with explicit routing rules and no retraining.",
+    "Require the routed audit to report protected Stage11507 gates plus Web-head heldout gains in one machine-readable card.",
+    "If routed audit passes, decide whether to productize multi-scorer runtime or train a single model to distill the routed behavior."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11632_routed_web_head_decision/routed_web_head_decision.json"
+  },
+  "routed_candidate": {
+    "controlled_fail_to_pass_support": "48/48",
+    "protected_sets_use_stage11507_selected": {
+      "filtered_strict": "22/22",
+      "filtered_validation": "20/22",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": "21/23",
+      "residual_bank": "7/10"
+    },
+    "web_heldout": "38/66",
+    "web_successor_strict": "30/36"
+  },
+  "source_artifacts": {
+    "head_audit": "runs/local/artifacts/stage11631_web_head_only_transfer_audit/web_head_only_transfer_audit.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "web_head_runtime": "runs/local/artifacts/stage11625_web_fail_to_pass_stronger_head_overfit/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11632,
+  "stage_name": "stage11632_routed_web_head_decision"
+}

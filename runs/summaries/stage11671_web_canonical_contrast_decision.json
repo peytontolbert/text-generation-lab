@@ -1,0 +1,159 @@
+{
+  "cards": {
+    "stage11665_no_active_contrast": {
+      "artifact": "runs/local/artifacts/stage11665_web_canonical_head_only_postrun_audit/web_canonical_head_only_postrun_audit.json",
+      "canonical_heldout": "50/66",
+      "canonical_train_support": "319/334",
+      "contrast": {
+        "contrast_applicable_rows_total": 0,
+        "contrast_inactive": true,
+        "contrast_skipped_rows_total": 12288,
+        "latest_step": 1536,
+        "steps": 1536,
+        "steps_with_contrast_applicable": 0,
+        "train_log_exists": true
+      },
+      "decision": "web_canonical_head_only_improves_canonical_heldout_only",
+      "filtered_strict": "22/22",
+      "filtered_validation": "20/22",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": "21/23",
+      "original_web_heldout": "28/66",
+      "residual_bank": "7/10",
+      "runtime": "runs/local/artifacts/stage11664_web_canonical_head_only_probe/runtime_model/runtime_model_bundle.json",
+      "weights_sha256": "eae6373906a8e69b4cc9e48020c91ad9f11cb61ca20ed0724acdb0969bb371e7"
+    },
+    "stage11667_role_contrast": {
+      "artifact": "runs/local/artifacts/stage11667_web_canonical_active_contrast_postrun_audit/web_canonical_active_contrast_postrun_audit.json",
+      "canonical_heldout": "50/66",
+      "canonical_train_support": "319/334",
+      "contrast": {
+        "contrast_applicable_rows_total": 8793,
+        "contrast_inactive": false,
+        "contrast_skipped_rows_total": 3495,
+        "latest_step": 1536,
+        "steps": 1536,
+        "steps_with_contrast_applicable": 1248,
+        "train_log_exists": true
+      },
+      "decision": "web_canonical_active_contrast_improves_canonical_heldout_only",
+      "filtered_strict": "22/22",
+      "filtered_validation": "20/22",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": "21/23",
+      "original_web_heldout": "27/66",
+      "residual_bank": "7/10",
+      "runtime": "runs/local/artifacts/stage11666_web_canonical_active_contrast_probe/runtime_model/runtime_model_bundle.json",
+      "weights_sha256": "fff1cdc7a50646a9e856457401cdfbf48adc94f4259974380c7c1bfc5775d24d"
+    },
+    "stage11670_verifier_value_contrast": {
+      "artifact": "runs/local/artifacts/stage11670_web_canonical_verifier_value_contrast_postrun_audit/web_canonical_verifier_value_contrast_postrun_audit.json",
+      "canonical_heldout": "50/66",
+      "canonical_train_support": "319/334",
+      "contrast": {
+        "contrast_applicable_rows_total": 9216,
+        "contrast_inactive": false,
+        "contrast_skipped_rows_total": 3072,
+        "latest_step": 1536,
+        "steps": 1536,
+        "steps_with_contrast_applicable": 1248,
+        "train_log_exists": true
+      },
+      "decision": "web_canonical_verifier_value_contrast_improves_canonical_heldout_only",
+      "filtered_strict": "22/22",
+      "filtered_validation": "20/22",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": "21/23",
+      "original_web_heldout": "27/66",
+      "residual_bank": "7/10",
+      "runtime": "runs/local/artifacts/stage11669_web_canonical_verifier_value_contrast_probe/runtime_model/runtime_model_bundle.json",
+      "weights_sha256": "7e3bce8e1a670b574acf85acb7db416b37190c01a67c5793b26a0cfe4939d1af"
+    }
+  },
+  "created_at_utc": "2026-07-14T03:41:36Z",
+  "decision": "reject_canonical_contrast_reruns_as_frontier_path",
+  "gates": {
+    "canonical_heldout_above_routed_frontier": true,
+    "contrast_value_patch_did_not_improve_score": true,
+    "original_web_heldout_below_routed_frontier": true,
+    "protected_gates_preserved_in_latest": true
+  },
+  "interpretation": [
+    "The canonical renderer is learnable and source-clean: canonical heldout is 50/66 with protected gates preserved.",
+    "Active role contrast and same-role verifier-transition contrast both failed to improve canonical heldout beyond 50/66.",
+    "Original Web heldout remains below the selected routed frontier, so this is not product Web progress.",
+    "Remaining canonical misses are mostly candidate identity selection inside verifier/test constraints, not broad role discrimination."
+  ],
+  "miss_geometry": {
+    "artifact": "runs/local/artifacts/stage11668_web_canonical_miss_geometry_audit/web_canonical_miss_geometry_audit.json",
+    "dominant_miss_families": [
+      {
+        "family": "verifier_outcome::verifier_and_test_constraint",
+        "misses": 8
+      },
+      {
+        "family": "minimal_fix_selection::candidate_change_surface",
+        "misses": 3
+      },
+      {
+        "family": "symptom_localization::verifier_and_test_constraint",
+        "misses": 3
+      }
+    ],
+    "miss_summary": {
+      "by_family": {
+        "llama_stack": 3,
+        "mcp_typescript_sdk": 6,
+        "openhands": 5,
+        "sep_automation": 2
+      },
+      "by_predicted_role": {
+        "candidate_change_surface": 7,
+        "verifier_and_test_constraint": 9
+      },
+      "by_target_role": {
+        "candidate_change_surface": 4,
+        "verifier_and_test_constraint": 12
+      },
+      "by_task": {
+        "minimal_fix_selection": 3,
+        "patch_impact": 1,
+        "symptom_localization": 4,
+        "verifier_outcome": 8
+      },
+      "by_task_prediction": {
+        "minimal_fix_selection::candidate_change_surface-> candidate_change_surface": 3,
+        "patch_impact::verifier_and_test_constraint-> verifier_and_test_constraint": 1,
+        "symptom_localization::candidate_change_surface-> candidate_change_surface": 1,
+        "symptom_localization::verifier_and_test_constraint-> candidate_change_surface": 3,
+        "verifier_outcome::verifier_and_test_constraint-> verifier_and_test_constraint": 8
+      },
+      "by_task_target_role": {
+        "minimal_fix_selection::candidate_change_surface": 3,
+        "patch_impact::verifier_and_test_constraint": 1,
+        "symptom_localization::candidate_change_surface": 1,
+        "symptom_localization::verifier_and_test_constraint": 3,
+        "verifier_outcome::verifier_and_test_constraint": 8
+      }
+    }
+  },
+  "next_required_intervention": {
+    "do_not_repeat": [
+      "do not rerun the same 334-row canonical package with only contrast-weight tweaks",
+      "do not promote Stage11664/11666/11669 as selected frontier"
+    ],
+    "minimum_next_experiment": [
+      "same canonical renderer",
+      "head-only or scorer-head-only",
+      "explicit candidate-value/listwise loss over PASS/FAIL/NOT_EXERCISED verifier options",
+      "promotion requires canonical heldout >52/66 or original Web heldout >38/66 with protected gates preserved"
+    ],
+    "primary": "build verifier-candidate identity features or a listwise same-role verifier candidate objective"
+  },
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11671_web_canonical_contrast_decision",
+    "summary": "runs/local/artifacts/stage11671_web_canonical_contrast_decision/web_canonical_contrast_decision.json"
+  },
+  "stage": 11671,
+  "stage_name": "stage11671_web_canonical_contrast_decision"
+}

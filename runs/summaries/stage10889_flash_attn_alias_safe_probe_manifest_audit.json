@@ -1,0 +1,36 @@
+{
+  "claim_scope": [
+    "Verify that the stage10888 probe manifest is a faithful probe projection of the stage10883 alias-safe successor package.",
+    "Prove that only stress rows are excluded and that train, validation, and strict row identities are preserved exactly."
+  ],
+  "created_at_utc": "2026-07-12T17:52:00Z",
+  "decision": "flash_attn_alias_safe_probe_manifest_audited",
+  "interpretation": [
+    "The probe manifest carries forward the anti-cheat-clean 23-row heldout surface exactly.",
+    "The new request changes training support only through the already-audited stage10883 flash-attn repair.",
+    "Any post-run score movement must therefore be interpreted as a training-time effect on the unchanged heldout surface, not as an eval reshaping artifact."
+  ],
+  "metrics": {
+    "package_stress_rows": 7,
+    "package_strict_rows": 23,
+    "package_train_rows": 193,
+    "package_validation_rows": 23,
+    "request_eval_rows": 23,
+    "request_manifest_rows": 239,
+    "request_strict_rows": 23,
+    "request_train_rows": 193,
+    "stress_rows_excluded": true,
+    "strict_row_ids_preserved": true,
+    "train_row_ids_preserved": true,
+    "validation_row_ids_preserved": true
+  },
+  "passed": true,
+  "request_run_id": "stage10890_flash_attn_alias_safe_multilingual_support_probe",
+  "source_artifacts": {
+    "probe_manifest": "runs/local/artifacts/stage10888_flash_attn_alias_safe_probe_request/flash_attn_alias_safe_probe_manifest.jsonl",
+    "probe_request": "runs/local/artifacts/stage10888_flash_attn_alias_safe_probe_request/flash_attn_alias_safe_probe_request.json",
+    "successor_package": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_successor_package.json"
+  },
+  "stage": 10889,
+  "stage_name": "stage10889_flash_attn_alias_safe_probe_manifest_audit"
+}

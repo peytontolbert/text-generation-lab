@@ -1,0 +1,46 @@
+{
+  "added_train_row_ids": [
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::A",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::B",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::C",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::D",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::E"
+  ],
+  "claim_scope": [
+    "Verify that the stage10883 Rust flash-attn repair only changes train-support rows.",
+    "Prove that validation, strict, and stress splits remain byte-for-byte row-id identical to the anti-cheat quarantine baseline."
+  ],
+  "created_at_utc": "2026-07-12T17:39:35Z",
+  "decision": "flash_attn_alias_safe_successor_audited",
+  "interpretation": [
+    "The Rust flash-attn alias-safe successor is a train-support-only repair.",
+    "The heldout multilingual baseline remains the quarantined 23-row package, so no new heldout win is being claimed.",
+    "This preserves evaluation honesty while improving the Rust evidence-family training geometry."
+  ],
+  "metrics": {
+    "added_train_rows": 6,
+    "base_train_rows": 187,
+    "repaired_rows_emitted": 6,
+    "stress_rows_unchanged": true,
+    "strict_rows_unchanged": true,
+    "successor_train_rows": 193,
+    "validation_rows_unchanged": true
+  },
+  "passed": true,
+  "repaired_row_ids": [
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::A",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::B",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::C",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::D",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::E"
+  ],
+  "source_artifacts": {
+    "baseline_package": "runs/local/artifacts/stage10881_evidence_alias_quarantine_successor/evidence_alias_quarantine_successor.json",
+    "successor_package": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_successor_package.json",
+    "successor_rows": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_repaired_rows.jsonl"
+  },
+  "stage": 10884,
+  "stage_name": "stage10884_flash_attn_alias_safe_successor_audit"
+}

@@ -1,0 +1,39 @@
+{
+  "created_at_utc": "2026-07-13T08:52:55Z",
+  "decision": "reject_balanced_candidate_validity_branch_for_promotion",
+  "gates": {
+    "binary_both_classes_nonzero_correct": false,
+    "binary_positive_recall_improved": true,
+    "clean_residual_at_least_5_of_10": true,
+    "clean_strict_22_of_22": true
+  },
+  "interpretation": [
+    "Class-balanced binary support fixed the prior all-negative collapse but overcorrected into all-positive collapse.",
+    "The clean strict canary stayed 22/22 and residual bank stayed 5/10, so the run is safe diagnostically but not a frontier improvement.",
+    "Binary evidence-validity is still a useful target, but it needs pairwise/root-level ranking or calibrated positive-vs-negative scoring, not simple binary CE over independently projected candidates."
+  ],
+  "key_result": {
+    "baseline_binary_positive_decisive_accuracy": 0.0,
+    "binary_accuracy": 0.21428571428571427,
+    "binary_negative_distractor_accuracy": 0.0,
+    "binary_positive_decisive_accuracy": 1.0,
+    "residual_accuracy": 0.5,
+    "strict_accuracy": 1.0,
+    "validation_accuracy": 0.8695652173913043
+  },
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11229_balanced_candidate_validity_decision/balanced_candidate_validity_decision.json"
+  },
+  "passed": true,
+  "recommended_next_work": [
+    "Replace independent binary rows with paired candidate sets where one source row is scored as a group and exactly one candidate must outrank hard negatives.",
+    "Use positive recall, negative specificity, and source-row solved rate as gates.",
+    "Keep current clean strict/residual metrics as regression gates and do not promote Stage11227 runtime.",
+    "Scale only after the paired objective solves both positive and negative classes on the diagnostic slice."
+  ],
+  "source_artifacts": {
+    "postrun_audit": "runs/local/artifacts/stage11228_balanced_candidate_validity_postrun_audit/balanced_candidate_validity_postrun_audit.json"
+  },
+  "stage": 11229,
+  "stage_name": "stage11229_balanced_candidate_validity_decision"
+}

@@ -1,0 +1,207 @@
+{
+  "base_runtime_weights_sha256": "e11a15de598547b3683d867c0181095192b8a6f0578ad6d427d4c1c9b056b8c1",
+  "claim_scope": [
+    "Run the next multilingual standalone support probe from the anti-cheat-clean alias-safe runtime while adding semantic evidence-role support rows into train only.",
+    "Keep the cleaned 23-row validation and strict overlays fixed so any changes can be judged against the same honest heldout surface."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10927_semantic_evidence_multilingual_probe_request/semantic_evidence_multilingual_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "205",
+    "--max-eval-rows",
+    "23",
+    "--max-strict-rows",
+    "23",
+    "--max-steps",
+    "64",
+    "--batch-size",
+    "2",
+    "--learning-rate",
+    "5e-6",
+    "--max-encoder-tokens",
+    "768",
+    "--max-decoder-tokens",
+    "8",
+    "--decoder-ce-weight",
+    "0.2",
+    "--bounded-choice-aux-weight",
+    "1.0",
+    "--bounded-choice-aux-source",
+    "encoder_option_retrieval",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "4.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "12",
+    "--max-generation-tokens",
+    "8",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10928_semantic_evidence_multilingual_support_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "1.0",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10928_semantic_evidence_multilingual_support_probe/bounded_decoder_probe",
+    "--run-id",
+    "stage10928_semantic_evidence_multilingual_support_probe"
+  ],
+  "created_at_utc": "2026-07-12T19:45:57Z",
+  "decision": "semantic_evidence_multilingual_support_probe_ready",
+  "diagnostic_intent": {
+    "added_semantic_support_rows": true,
+    "focus": [
+      "semantic_evidence_role_train_geometry",
+      "heldout_surface_preservation"
+    ],
+    "heldout_claim_changed": false,
+    "preservation_reference_runtime": "runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "initialize_from_runtime_model": "runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+  "lane_state_notes": {
+    "c_cpp": "adds reviewed semantic evidence-role support while keeping the cleaned heldout rows unchanged",
+    "python": "adds reviewed semantic evidence-role support while keeping the cleaned heldout rows unchanged",
+    "rust": "keeps alias-safe flash-attn support and adds semantic support from flash-attn; tokenizers alias-risk remains excluded",
+    "web": "adds code_assist semantic evidence support as stress-overlap train material only; pure-web heldout remains unresolved"
+  },
+  "language_counts_by_split": {
+    "eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "strict_eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "train": {
+      "c_cpp": 113,
+      "python": 54,
+      "rust": 36,
+      "web_js_ts_html": 2
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10927_semantic_evidence_multilingual_probe_request/semantic_evidence_multilingual_probe_manifest.jsonl",
+  "next_best_step": "Run the probe, then score the saved runtime on the unchanged 23-row overlay and the stage10916 fresh evidence successor slice before considering any standalone scoring-policy change.",
+  "output_dir": "runs/local/artifacts/stage10928_semantic_evidence_multilingual_support_probe/bounded_decoder_probe",
+  "package_metrics_snapshot": {
+    "base_metrics_snapshot": {
+      "added_repaired_rows": 6,
+      "repaired_duplicate_visible_evidence_groups": 0,
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_rows_after": 193,
+      "train_rows_before": 187,
+      "validation_rows_unchanged": 23
+    },
+    "semantic_metrics_snapshot": {
+      "row_count": 12,
+      "rows_by_language": {
+        "c_cpp": 4,
+        "python": 4,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "rows_by_target": {
+        "candidate_change_surface": 4,
+        "symptom_or_call_path_analogue": 2,
+        "verifier_and_test_constraint": 6
+      }
+    },
+    "semantic_row_types_added": {
+      "pairwise_contrast": 6,
+      "semantic_role_full": 6
+    },
+    "semantic_rows_added": 12,
+    "semantic_targets_added": {
+      "candidate_change_surface": 4,
+      "symptom_or_call_path_analogue": 2,
+      "verifier_and_test_constraint": 6
+    },
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_by_language": {
+      "c_cpp": 113,
+      "python": 54,
+      "rust": 36,
+      "web_js_ts_html": 2
+    },
+    "train_by_task": {
+      "abstention_insufficient_evidence": 18,
+      "alternative_hypothesis_elimination": 1,
+      "cpp_implementation_vs_implementation": 1,
+      "evidence_citation": 30,
+      "evidence_role_classification": 76,
+      "minimal_fix_selection": 17,
+      "patch_impact": 18,
+      "python_implementation_vs_implementation": 2,
+      "regression_risk": 1,
+      "symptom_localization": 18,
+      "verifier_outcome": 23
+    },
+    "train_rows_after": 205,
+    "train_rows_before": 193,
+    "validation_rows_unchanged": 23
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "Validation and strict rows remain unchanged from stage10926 and therefore unchanged from stage10883.",
+    "All semantic evidence rows remain train_support_only and never enter eval or strict.",
+    "Stress rows remain excluded from the probe manifest.",
+    "Any post-run evidence improvement must still be reported both on the unchanged 23-row overlay and on the fresh 3-row evidence successor slice."
+  ],
+  "rows": 251,
+  "run_id": "stage10928_semantic_evidence_multilingual_support_probe",
+  "runtime_model_save_dir": "runs/local/artifacts/stage10928_semantic_evidence_multilingual_support_probe/runtime_model",
+  "source_package": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/semantic_evidence_multilingual_support_package.json",
+  "split_counts": {
+    "eval": 23,
+    "strict_eval": 23,
+    "train": 205
+  },
+  "stage": 10927,
+  "stage_name": "stage10927_semantic_evidence_multilingual_probe_request",
+  "stress_rows_excluded_from_manifest": 7
+}

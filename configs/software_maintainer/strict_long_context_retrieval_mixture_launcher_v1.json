@@ -1,0 +1,134 @@
+{
+  "schema_version": "strict_long_context_retrieval_mixture_launcher_v1",
+  "purpose": "Canonical retrieval-side mixture launcher for strict long-context retriever and reranker datasets.",
+  "launcher_defaults": {
+    "output_dir": "../../runs/local/artifacts/strict_long_context_retrieval_mixture_v1",
+    "profile": "pure_grounded",
+    "default_train_profiles": [
+      "pure_grounded",
+      "mixed_grounded_long_join"
+    ],
+    "opt_in_profiles": [
+      "heuristic_residual"
+    ]
+  },
+  "profiles": [
+    {
+      "name": "conservative_retriever",
+      "description": "Favor retrieval rows and curriculum slices that preserve stronger long-join pressure with conservative weighting.",
+      "surfaces": [
+        {
+          "name": "retriever_rows",
+          "task_family": "retriever_supervision",
+          "weight": 1.0
+        },
+        {
+          "name": "retriever_curriculum_rows",
+          "task_family": "retriever_curriculum",
+          "weight": 0.75,
+          "filter_expr": "long_join_positive==1"
+        }
+      ]
+    },
+    {
+      "name": "locality_stress",
+      "description": "Emphasize locality-risk and anti-shortcut retrieval pressure for curriculum-driven sampling.",
+      "surfaces": [
+        {
+          "name": "retriever_rows",
+          "task_family": "retriever_supervision",
+          "weight": 0.5,
+          "filter_expr": "locality_risk==1"
+        },
+        {
+          "name": "retriever_curriculum_rows",
+          "task_family": "retriever_curriculum",
+          "weight": 1.25,
+          "filter_expr": "curriculum_slice contains locality_risk::1"
+        }
+      ]
+    },
+    {
+      "name": "reranker_balanced",
+      "description": "Blend pairwise and listwise reranker objectives while retaining some curriculum retrieval pressure.",
+      "surfaces": [
+        {
+          "name": "reranker_pairwise_rows",
+          "task_family": "reranker_pairwise",
+          "weight": 1.0
+        },
+        {
+          "name": "reranker_listwise_rows",
+          "task_family": "reranker_listwise",
+          "weight": 0.75
+        },
+        {
+          "name": "retriever_curriculum_rows",
+          "task_family": "retriever_curriculum",
+          "weight": 0.35,
+          "filter_expr": "long_join_positive==1 or locality_risk==1"
+        }
+      ]
+    },
+    {
+      "name": "pure_grounded",
+      "description": "Only low-leakage grounded retriever supervision and curriculum slices for highest-trust retriever training.",
+      "surfaces": [
+        {
+          "name": "retriever_rows",
+          "task_family": "retriever_supervision",
+          "weight": 1.0,
+          "filter_expr": "metadata contains grounded_verifier_route"
+        },
+        {
+          "name": "retriever_curriculum_rows",
+          "task_family": "retriever_curriculum",
+          "weight": 0.4,
+          "filter_expr": "long_join_positive==1"
+        }
+      ]
+    },
+    {
+      "name": "mixed_grounded_long_join",
+      "description": "Favor grounded rows that explicitly preserve long-join pressure via mixed grounded extensions.",
+      "surfaces": [
+        {
+          "name": "retriever_rows",
+          "task_family": "retriever_supervision",
+          "weight": 1.0,
+          "filter_expr": "metadata contains mixed_grounded_verifier_route_long_join"
+        },
+        {
+          "name": "retriever_curriculum_rows",
+          "task_family": "retriever_curriculum",
+          "weight": 0.75,
+          "filter_expr": "long_join_positive==1"
+        },
+        {
+          "name": "reranker_listwise_rows",
+          "task_family": "reranker_listwise",
+          "weight": 0.35,
+          "filter_expr": "join_type==multi_repo or join_type==repo+paper"
+        }
+      ]
+    },
+    {
+      "name": "heuristic_residual",
+      "description": "Residual high-leakage heuristic rows isolated for controlled ablations or low-trust auxiliary sampling.",
+      "surfaces": [
+        {
+          "name": "retriever_rows",
+          "task_family": "retriever_supervision",
+          "weight": 0.5,
+          "filter_expr": "metadata contains heuristic_target_overlap"
+        },
+        {
+          "name": "retriever_curriculum_rows",
+          "task_family": "retriever_curriculum",
+          "weight": 0.25,
+          "filter_expr": "locality_risk==1"
+        }
+      ]
+    }
+  ]
+}

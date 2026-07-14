@@ -1,0 +1,612 @@
+{
+  "claim_boundary": [
+    "This is a fresh-root creation request, not an admission or model scoring stage.",
+    "Local source availability does not prove source-heldout status; final rows need a no-train overlap audit after materialization.",
+    "No broad C/C++ or Rust source-heldout claim should be made until at least one root per language passes admission and same-manifest 100M/Gemma scoring."
+  ],
+  "created_at_utc": "2026-07-14T06:55:40.900421+00:00",
+  "decision": "fresh_cpp_rust_root_creation_requests_ready",
+  "local_repo_inventory": {
+    "cpp_candidate_repos": [
+      "sentencepiece",
+      "bitsandbytes",
+      "mamba",
+      "statespace_101",
+      "model-stack",
+      "pytorch"
+    ],
+    "repo_count_with_cpp_or_rust": 9,
+    "rust_candidate_repos": [
+      "tokenizers"
+    ]
+  },
+  "next_stage_acceptance": [
+    "materialize at least one C/C++ and one Rust root from these requests",
+    "attach root_lineage_key/source snapshot and no train/support overlap proof",
+    "attach verifier/test anchor or explicit abstain reason",
+    "emit Stage11714-style preflight with no standalone blockers"
+  ],
+  "outputs": {
+    "artifact": "runs/local/artifacts/stage11717_fresh_cpp_rust_source_heldout_root_creation_request/fresh_cpp_rust_source_heldout_root_creation_request.json",
+    "repo_inventory_jsonl": "runs/local/artifacts/stage11717_fresh_cpp_rust_source_heldout_root_creation_request/local_cpp_rust_repo_inventory.jsonl",
+    "requests_jsonl": "runs/local/artifacts/stage11717_fresh_cpp_rust_source_heldout_root_creation_request/fresh_cpp_rust_source_heldout_root_creation_requests.jsonl",
+    "summary": "runs/summaries/stage11717_fresh_cpp_rust_source_heldout_root_creation_request.json"
+  },
+  "passed": true,
+  "prior_artifact_context": {
+    "cpp_queue": {
+      "anti_cheat_contract": [
+        "Do not upgrade any queue entry to strict eval without bundle review, anti-cheat signoff, and explicit source-heldout admission.",
+        "Bootstrap candidates must be materialized into maintainer-visible packets before any train/eval use beyond inventory accounting.",
+        "Keep repo-family caps visible during expansion so repeated parametergolf roots do not masquerade as breadth.",
+        "Preserve root-lineage disjointness between reviewed roots, bootstrap candidates, and any future strict-heldout C/C++ packets."
+      ],
+      "claim_scope": [
+        "Unify the current C/C++ reviewed train-support roots and the clean bootstrap materialization candidates into one concrete expansion queue.",
+        "Make the next C/C++ scaling sprint executable from a single artifact instead of splitting context across stage10731, stage10734, and stage10739.",
+        "Keep strict-claim boundaries explicit: this queue is for reviewed train-support and bundle materialization, not new strict headline rows."
+      ],
+      "created_at_utc": "2026-07-12T10:57:57Z",
+      "decision": "cpp_bulk_materialization_queue_ready",
+      "headline_findings": [
+        "C/C++ now has 6 admitted reviewed train-support roots plus 5 clean bootstrap roots ready for materialization.",
+        "The next honest C/C++ scale move is not another probe; it is turning the 5 clean bootstrap roots into stage10733-style reviewed packets.",
+        "This queue keeps repo-family diversity explicit so expansion does not collapse into parametergolf-only faux scale."
+      ],
+      "lane_context": {
+        "lane_blocker": "bundle materialization from bootstrap roots not yet done",
+        "phase_1_gap": 493,
+        "ready_for_large_scale_train_current": 5,
+        "reviewed_bundle_roots_current": 8,
+        "strict_accuracy": 1.0
+      },
+      "next_best_steps": [
+        "Materialize the 5 clean bootstrap C/C++ roots into stage10733-style review packets.",
+        "Admit those new packets through the same AI-adjudicated bundle-admission path used in stage10734.",
+        "Only after that, merge them into the reviewed train-support package and rerun a same-manifest probe."
+      ],
+      "outputs": {
+        "bootstrap_roots_jsonl": "runs/local/artifacts/stage10740_cpp_bulk_materialization_queue/cpp_clean_bootstrap_candidates.jsonl",
+        "queue_jsonl": "runs/local/artifacts/stage10740_cpp_bulk_materialization_queue/cpp_bulk_materialization_queue.jsonl",
+        "reviewed_roots_jsonl": "runs/local/artifacts/stage10740_cpp_bulk_materialization_queue/cpp_reviewed_train_support_roots.jsonl",
+        "summary_json": "runs/local/artifacts/stage10740_cpp_bulk_materialization_queue/cpp_bulk_materialization_queue.json"
+      },
+      "passed": true,
+      "queue_metrics": {
+        "all_bootstrap_candidates_leak_clean": true,
+        "bootstrap_target_richness_scores": [
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "clean_bootstrap_materialization_roots": 5,
+        "per_role_repo_family_counts": {
+          "clean_bootstrap_materialization_candidate": {
+            "cccl": 1,
+            "onnxruntime": 1,
+            "parametergolf": 3
+          },
+          "reviewed_train_support_root": {
+            "cccl": 1,
+            "onnxruntime": 1,
+            "parametergolf": 4
+          }
+        },
+        "repo_family_counts": {
+          "cccl": 2,
+          "onnxruntime": 2,
+          "parametergolf": 7
+        },
+        "reviewed_train_support_roots": 6,
+        "role_counts": {
+          "clean_bootstrap_materialization_candidate": 5,
+          "reviewed_train_support_root": 6
+        },
+        "total_queue_roots": 11
+      },
+      "source_artifacts": {
+        "cpp_ai_adjudicated_root_manifest": "runs/local/artifacts/stage10734_cpp_ai_adjudicated_admission/cpp_ai_adjudicated_root_manifest.jsonl",
+        "cpp_materialization_candidate_packet": "runs/local/artifacts/stage10731_cpp_materialization_candidate_packet/cpp_materialization_candidate_packet.json",
+        "cpp_materialization_selected_roots": "runs/local/artifacts/stage10731_cpp_materialization_candidate_packet/cpp_materialization_selected_roots.jsonl",
+        "scale_package_v2": "runs/local/artifacts/stage10739_multilingual_root_scale_package_v2/multilingual_root_scale_package_v2.json"
+      },
+      "stage": 10740,
+      "stage_name": "stage10740_cpp_bulk_materialization_queue"
+    },
+    "rust_atlas": {
+      "claim_boundary": [
+        "This atlas ranks fresh Rust roots beyond the two admitted and two invalid reviewed bundles; it does not itself create a new maintainer bundle.",
+        "Freshness alone is not enough. Candidates without tests or verifier anchors still need stronger evidence materialization before they should enter scoring."
+      ],
+      "created_at_utc": "2026-07-11T17:36:22.211942Z",
+      "metrics": {
+        "already_reviewed_root_count": 4,
+        "candidate_root_count": 24,
+        "fresh_review_ready_count": 7,
+        "fresh_root_count": 20,
+        "fresh_with_implementation_vs_test_geometry": 1,
+        "fresh_with_test_files": 1,
+        "recommendation_counts": {
+          "fresh_bundle_candidate": 1,
+          "fresh_candidate_but_needs_stronger_verifier_anchor": 19
+        }
+      },
+      "next_best_step": "Build the next Rust maintainer preview from the top fresh candidate with the strongest verifier-anchor story, then adjudicate it before any broader Rust-vs-Gemma claim.",
+      "recommended_first_builder_targets": [
+        "tokenizers::bindings/node",
+        "candle::candle-flash-attn",
+        "git::contrib/libgit-rs"
+      ],
+      "source_artifact": "runs/local/artifacts/stage10125_true_source_backed_rust_root_discovery_manifest/true_source_backed_rust_root_candidates.jsonl",
+      "stage": 10411,
+      "stage_name": "stage10411_fresh_rust_disjoint_root_candidate_atlas",
+      "top_fresh_candidates": [
+        {
+          "already_reviewed": false,
+          "build_file_count": 1,
+          "candidate_paths_preview": [
+            "candle-flash-attn/build.rs",
+            "candle-flash-attn/src/ffi.rs",
+            "candle-flash-attn/src/lib.rs",
+            "candle-flash-attn/tests/flash_attn_tests.rs"
+          ],
+          "candidate_root_id": "candle::candle-flash-attn",
+          "competition_geometries": [
+            "implementation_vs_build",
+            "implementation_vs_implementation",
+            "implementation_vs_test",
+            "symbol_vs_symbol"
+          ],
+          "implementation_file_count": 2,
+          "package_root": "candle-flash-attn",
+          "priority_score": 26,
+          "recommendation": "fresh_bundle_candidate",
+          "repo_id": "candle",
+          "review_ready_for_bundle_construction": true,
+          "review_status": null,
+          "richness_score": 13,
+          "rust_file_count": 4,
+          "sample_span_ids": [
+            "candle:candle-flash-attn/build.rs",
+            "candle:candle-flash-attn/tests/flash_attn_tests.rs",
+            "candle:candle-flash-attn/src/ffi.rs"
+          ],
+          "support_file_count": 0,
+          "test_file_count": 1
+        },
+        {
+          "already_reviewed": false,
+          "build_file_count": 0,
+          "candidate_paths_preview": [
+            "rust/bindings/lib.rs",
+            "rust/build_error.rs",
+            "rust/compiler_builtins.rs",
+            "rust/ffi.rs",
+            "rust/kernel/acpi.rs",
+            "rust/kernel/alloc.rs",
+            "rust/kernel/alloc/allocator.rs",
+            "rust/kernel/alloc/allocator/iter.rs",
+            "rust/kernel/alloc/kbox.rs",
+            "rust/kernel/alloc/kvec.rs",
+            "rust/kernel/alloc/kvec/errors.rs",
+            "rust/kernel/alloc/layout.rs"
+          ],
+          "candidate_root_id": "linux::rust",
+          "competition_geometries": [
+            "implementation_vs_implementation",
+            "symbol_vs_symbol"
+          ],
+          "implementation_file_count": 13,
+          "package_root": "rust",
+          "priority_score": 20,
+          "recommendation": "fresh_candidate_but_needs_stronger_verifier_anchor",
+          "repo_id": "linux",
+          "review_ready_for_bundle_construction": false,
+          "review_status": null,
+          "richness_score": 15,
+          "rust_file_count": 159,
+          "sample_span_ids": [
+            "linux:rust/build_error.rs",
+            "linux:rust/ffi.rs",
+            "linux:rust/compiler_builtins.rs"
+          ],
+          "support_file_count": 146,
+          "test_file_count": 0
+        },
+        {
+          "already_reviewed": false,
+          "build_file_count": 0,
+          "candidate_paths_preview": [
+            "candle-datasets/src/batcher.rs",
+            "candle-datasets/src/lib.rs",
+            "candle-datasets/src/nlp/mod.rs",
+            "candle-datasets/src/nlp/tinystories.rs",
+            "candle-datasets/src/vision/cifar.rs",
+            "candle-datasets/src/vision/mnist.rs",
+            "candle-datasets/src/vision/mod.rs"
+          ],
+          "candidate_root_id": "candle::candle-datasets",
+          "competition_geometries": [
+            "implementation_vs_implementation",
+            "symbol_vs_symbol"
+          ],
+          "implementation_file_count": 7,
+          "package_root": "candle-datasets",
+          "priority_score": 19,
+          "recommendation": "fresh_candidate_but_needs_stronger_verifier_anchor",
+          "repo_id": "candle",
+          "review_ready_for_bundle_construction": false,
+          "review_status": null,
+          "richness_score": 13,
+          "rust_file_count": 7,
+          "sample_span_ids": [
+            "candle:candle-datasets/src/batcher.rs",
+            "candle:candle-datasets/src/lib.rs",
+            "candle:candle-datasets/src/nlp/tinystories.rs"
+          ],
+          "support_file_count": 0,
+          "test_file_count": 0
+        },
+        {
+          "already_reviewed": false,
+          "build_file_count": 0,
+          "candidate_paths_preview": [
+            "candle-transformers/src/generation/mod.rs",
+            "candle-transformers/src/lib.rs",
+            "candle-transformers/src/models/mod.rs",
+            "candle-transformers/src/pipelines/mod.rs",
+            "candle-transformers/src/pipelines/text_generation.rs"
+          ],
+          "candidate_root_id": "candle::candle-transformers",
+          "competition_geometries": [
+            "implementation_vs_implementation",
+            "symbol_vs_symbol"
+          ],
+          "implementation_file_count": 5,
+          "package_root": "candle-transformers",
+          "priority_score": 19,
+          "recommendation": "fresh_candidate_but_needs_stronger_verifier_anchor",
+          "repo_id": "candle",
+          "review_ready_for_bundle_construction": false,
+          "review_status": null,
+          "richness_score": 13,
+          "rust_file_count": 5,
+          "sample_span_ids": [
+            "candle:candle-transformers/src/lib.rs",
+            "candle:candle-transformers/src/models/mod.rs",
+            "candle:candle-transformers/src/generation/mod.rs"
+          ],
+          "support_file_count": 0,
+          "test_file_count": 0
+        },
+        {
+          "already_reviewed": false,
+          "build_file_count": 0,
+          "candidate_paths_preview": [
+            "candle-wasm-examples/llama2-c/src/app.rs",
+            "candle-wasm-examples/llama2-c/src/bin/app.rs",
+            "candle-wasm-examples/llama2-c/src/bin/worker.rs",
+            "candle-wasm-examples/llama2-c/src/lib.rs",
+            "candle-wasm-examples/llama2-c/src/model.rs",
+            "candle-wasm-examples/llama2-c/src/worker.rs",
+            "candle-wasm-examples/whisper/src/app.rs",
+            "candle-wasm-examples/whisper/src/audio.rs",
+            "candle-wasm-examples/whisper/src/bin/app.rs",
+            "candle-wasm-examples/whisper/src/bin/worker.rs",
+            "candle-wasm-examples/whisper/src/lib.rs",
+            "candle-wasm-examples/whisper/src/model.rs"
+          ],
+          "candidate_root_id": "candle::candle-wasm-examples",
+          "competition_geometries": [
+            "implementation_vs_implementation",
+            "symbol_vs_symbol"
+          ],
+          "implementation_file_count": 13,
+          "package_root": "candle-wasm-examples",
+          "priority_score": 19,
+          "recommendation": "fresh_candidate_but_needs_stronger_verifier_anchor",
+          "repo_id": "candle",
+          "review_ready_for_bundle_construction": false,
+          "review_status": null,
+          "richness_score": 13,
+          "rust_file_count": 13,
+          "sample_span_ids": [
+            "candle:candle-wasm-examples/whisper/src/audio.rs",
+            "candle:candle-wasm-examples/whisper/src/app.rs",
+            "candle:candle-wasm-examples/whisper/src/worker.rs"
+          ],
+          "support_file_count": 0,
+          "test_file_count": 0
+        },
+        {
+          "already_reviewed": false,
+          "build_file_count": 1,
+          "candidate_paths_preview": [
+            "bindings/node/build.rs",
+            "bindings/node/src/arc_rwlock_serde.rs",
+            "bindings/node/src/decoders.rs",
+            "bindings/node/src/encoding.rs",
+            "bindings/node/src/lib.rs",
+            "bindings/node/src/models.rs",
+            "bindings/node/src/normalizers.rs",
+            "bindings/node/src/pre_tokenizers.rs",
+            "bindings/node/src/processors.rs",
+            "bindings/node/src/tasks/mod.rs",
+            "bindings/node/src/tasks/models.rs",
+            "bindings/node/src/tasks/tokenizer.rs"
+          ],
+          "candidate_root_id": "tokenizers::bindings/node",
+          "competition_geometries": [
+            "implementation_vs_build",
+            "implementation_vs_implementation",
+            "symbol_vs_symbol"
+          ],
+          "implementation_file_count": 14,
+          "package_root": "bindings/node",
+          "priority_score": 19,
+          "recommendation": "fresh_candidate_but_needs_stronger_verifier_anchor",
+          "repo_id": "tokenizers",
+          "review_ready_for_bundle_construction": true,
+          "review_status": null,
+          "richness_score": 15,
+          "rust_file_count": 15,
+          "sample_span_ids": [
+            "tokenizers:bindings/node/build.rs",
+            "tokenizers:bindings/node/src/tokenizer.rs",
+            "tokenizers:bindings/node/src/trainers.rs"
+          ],
+          "support_file_count": 0,
+          "test_file_count": 0
+        },
+        {
+          "already_reviewed": false,
+          "build_file_count": 0,
+          "candidate_paths_preview": [
+            "bindings/python/src/decoders.rs",
+            "bindings/python/src/encoding.rs",
+            "bindings/python/src/error.rs",
+            "bindings/python/src/lib.rs",
+            "bindings/python/src/models.rs",
+            "bindings/python/src/normalizers.rs",
+            "bindings/python/src/pre_tokenizers.rs",
+            "bindings/python/src/processors.rs",
+            "bindings/python/src/token.rs",
+            "bindings/python/src/tokenizer.rs",
+            "bindings/python/src/trainers.rs",
+            "bindings/python/src/utils/iterators.rs"
+          ],
+          "candidate_root_id": "tokenizers::bindings/python",
+          "competition_geometries": [
+            "implementation_vs_implementation",
+            "symbol_vs_symbol"
+          ],
+          "implementation_file_count": 17,
+          "package_root": "bindings/python",
+          "priority_score": 19,
+          "recommendation": "fresh_candidate_but_needs_stronger_verifier_anchor",
+          "repo_id": "tokenizers",
+          "review_ready_for_bundle_construction": false,
+          "review_status": null,
+          "richness_score": 13,
+          "rust_file_count": 17,
+          "sample_span_ids": [
+            "tokenizers:bindings/python/src/tokenizer.rs",
+            "tokenizers:bindings/python/src/token.rs",
+            "tokenizers:bindings/python/src/trainers.rs"
+          ],
+          "support_file_count": 0,
+          "test_file_count": 0
+        },
+        {
+          "already_reviewed": false,
+          "build_file_count": 1,
+          "candidate_paths_preview": [
+            "contrib/libgit-rs/build.rs",
+            "contrib/libgit-rs/src/config.rs",
+            "contrib/libgit-rs/src/lib.rs"
+          ],
+          "candidate_root_id": "git::contrib/libgit-rs",
+          "competition_geometries": [
+            "implementation_vs_build",
+            "implementation_vs_implementation",
+            "symbol_vs_symbol"
+          ],
+          "implementation_file_count": 2,
+          "package_root": "contrib/libgit-rs",
+          "priority_score": 10,
+          "recommendation": "fresh_candidate_but_needs_stronger_verifier_anchor",
+          "repo_id": "git",
+          "review_ready_for_bundle_construction": true,
+          "review_status": null,
+          "richness_score": 8,
+          "rust_file_count": 3,
+          "sample_span_ids": [
+            "git:contrib/libgit-rs/build.rs",
+            "git:contrib/libgit-rs/src/config.rs",
+            "git:contrib/libgit-rs/src/lib.rs"
+          ],
+          "support_file_count": 0,
+          "test_file_count": 0
+        }
+      ]
+    },
+    "rust_inventory": {
+      "claim_boundary": [
+        "Rust no longer has only candle-core executable support; flash-attn is now an executable reviewed support root as well.",
+        "This is still not the final promotable Rust residual fix path because flash-attn is abstention-heavy and not the exact non-abstention E-vs-F contrast target.",
+        "The remaining high-value Rust work is builder-target construction, not proving that no executable reviewed support exists."
+      ],
+      "decision": "rust_materialization_inventory_refreshed_with_flash_attn_support",
+      "metrics": {
+        "flash_attn_support_row_count": 20,
+        "flash_attn_task_type_counts": {
+          "abstention_insufficient_evidence": 4,
+          "evidence_citation": 4,
+          "minimal_fix_selection": 4,
+          "patch_impact": 4,
+          "symptom_localization": 4
+        },
+        "fresh_builder_target_count_remaining": 3,
+        "previous_executable_root_count": 1,
+        "refreshed_executable_support_root_count": 2,
+        "reviewed_pending_root_count_after_refresh": 0
+      },
+      "next_best_steps": [
+        "Include flash-attn in the next multilingual Rust support package.",
+        "Prioritize linux::rust, candle-datasets, and candle-transformers for explicit evidence-citation contrast materialization.",
+        "Audit any future Rust package for option-role leakage and root-disjointness before promotion."
+      ],
+      "passed": true,
+      "refreshed_state": {
+        "executable_support_roots_now": [
+          "stage10126::candle::candle-core::rust",
+          "stage10413::candle::candle-flash-attn::rust"
+        ],
+        "flash_attn_support_contract": {
+          "all_rows_anti_cheat_review_passed": true,
+          "all_rows_expert_rubric_passed": true,
+          "all_rows_fresh_source_backed_root": true,
+          "all_rows_same_surface_eval_admissible_false": true,
+          "all_rows_train_support_only": true,
+          "bundle_gold_ready_for_eval": true,
+          "bundle_valid_for_eval": true,
+          "same_surface_eval_admissible": true
+        },
+        "remaining_builder_targets": [
+          "linux::rust",
+          "candle::candle-datasets",
+          "candle::candle-transformers"
+        ]
+      },
+      "sources": {
+        "flash_attn_executable_support_audit": "runs/local/artifacts/stage10663_rust_flash_attn_executable_support_audit/rust_flash_attn_executable_support_audit.json",
+        "source_supply_upgrade_atlas": "runs/local/artifacts/stage10662_reviewed_source_supply_upgrade_atlas/reviewed_source_supply_upgrade_atlas.json",
+        "stale_rust_inventory": "runs/local/artifacts/stage10476_rust_citation_materialized_root_bundle_builder/rust_citation_materialized_root_bundle_builder.json"
+      },
+      "stage": 10664,
+      "stage_name": "stage10664_rust_materialization_inventory_refresh"
+    }
+  },
+  "request_counts": {
+    "c_cpp": 6,
+    "rust": 1
+  },
+  "selected_requests_preview": [
+    {
+      "language_family": "c_cpp",
+      "repo_family": "sentencepiece",
+      "sample_source_paths": [
+        "src/bpe_model.cc",
+        "src/bpe_model_test.cc",
+        "src/bpe_model_trainer.cc",
+        "src/bpe_model_trainer_test.cc",
+        "src/builder.cc"
+      ],
+      "source_file_count": 182
+    },
+    {
+      "language_family": "c_cpp",
+      "repo_family": "bitsandbytes",
+      "sample_source_paths": [
+        "csrc/common.cpp",
+        "csrc/cpu_ops.cpp",
+        "csrc/pythonInterface.cpp",
+        "csrc/xpu_kernels.cpp",
+        "csrc/xpu_ops.cpp"
+      ],
+      "source_file_count": 21
+    },
+    {
+      "language_family": "c_cpp",
+      "repo_family": "mamba",
+      "sample_source_paths": [
+        "csrc/selective_scan/selective_scan.cpp",
+        "csrc/selective_scan/selective_scan.h",
+        "csrc/selective_scan/selective_scan_common.h",
+        "csrc/selective_scan/static_switch.h",
+        "csrc/selective_scan/selective_scan_bwd_bf16_complex.cu"
+      ],
+      "source_file_count": 13
+    },
+    {
+      "language_family": "c_cpp",
+      "repo_family": "statespace_101",
+      "sample_source_paths": [
+        "src/interpreter.cc",
+        "src/ir.cc",
+        "src/llvm.cc",
+        "src/main.cc",
+        "src/passes.cc"
+      ],
+      "source_file_count": 9
+    },
+    {
+      "language_family": "c_cpp",
+      "repo_family": "model-stack",
+      "sample_source_paths": [
+        "runtime/csrc/model_stack_native.cpp",
+        "runtime/csrc/reference/aten_reference.cpp",
+        "runtime/csrc/backend/bitnet/bitnet_formats.h",
+        "runtime/csrc/descriptors/attention_desc.h",
+        "runtime/csrc/policy/attention_policy.h"
+      ],
+      "source_file_count": 38
+    },
+    {
+      "language_family": "c_cpp",
+      "repo_family": "pytorch",
+      "sample_source_paths": [
+        ".ci/pytorch/test_example_code/check-torch-cuda.cpp",
+        ".ci/pytorch/test_example_code/check-torch-mkl.cpp",
+        ".ci/pytorch/test_example_code/check-torch-xnnpack.cpp",
+        ".ci/pytorch/test_example_code/simple-torch-test.cpp",
+        "android/pytorch_android/generate_test_asset.cpp"
+      ],
+      "source_file_count": 5042
+    },
+    {
+      "language_family": "rust",
+      "repo_family": "tokenizers",
+      "sample_source_paths": [
+        "bindings/node/build.rs",
+        "bindings/node/src/arc_rwlock_serde.rs",
+        "bindings/node/src/decoders.rs",
+        "bindings/node/src/encoding.rs",
+        "bindings/node/src/lib.rs"
+      ],
+      "source_file_count": 124
+    }
+  ],
+  "source_artifacts": {
+    "helpful_repos": "/data/parametergolf/helpful_repos",
+    "stage11716": "runs/local/artifacts/stage11716_train_excluded_source_heldout_smoke_miner/train_excluded_source_heldout_smoke_miner.json"
+  },
+  "stage": 11717,
+  "stage11716_context": {
+    "decision": "train_excluded_source_heldout_candidates_insufficient",
+    "mine_summary": {
+      "candidate_roots_after_exclusion": {
+        "c_cpp": 0,
+        "python": 31,
+        "rust": 0
+      },
+      "rejected": {
+        "basic_quality": 14108,
+        "train_overlap": 765
+      }
+    },
+    "selected_root_counts": {
+      "c_cpp": 0,
+      "python": 12,
+      "rust": 0
+    }
+  },
+  "stage_name": "fresh_cpp_rust_source_heldout_root_creation_request",
+  "why_needed": [
+    "Stage11716 found zero C/C++ and zero Rust source-heldout smoke candidates after train/source-file exclusion.",
+    "Existing C/C++ and Rust artifact lanes are mostly train-support/materialization queues, not strict source-heldout smoke rows.",
+    "Fresh roots must carry source-heldout lineage, verifier/test anchors, and anti-cheat fields at creation time."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "claim_scope": [
+    "Convert the stage11059 ready-lane packet into per-root fresh row-construction work items for Python, Rust, and C/C++.",
+    "Make anti-cheat and eval-hacking requirements explicit at the row-construction step instead of relying on post hoc cleanup."
+  ],
+  "created_at_utc": "2026-07-13T01:39:44.770132Z",
+  "decision": "ready_lane_row_construction_work_items_prepared",
+  "headline_findings": [
+    "Every ready compiled root now has a direct row-construction task rather than remaining implicit in the packet.",
+    "Python and Rust are assigned explicit-ledger evidence construction; C/C++ parametergolf is assigned verifier-transition construction.",
+    "The anti-cheat contract is now attached at creation time: option-order control, no singleton verifier rows, visible verifier anchors, and prompt-target leak checks are mandatory before admission."
+  ],
+  "metrics": {
+    "by_language": {
+      "c_cpp": 3,
+      "python": 2,
+      "rust": 6
+    },
+    "by_workstream": {
+      "explicit_ledger_evidence_row_construction": 8,
+      "verifier_transition_row_construction": 3
+    },
+    "roots_covered": 11,
+    "work_item_count": 11
+  },
+  "next_best_step": [
+    "Use these work items to build the fresh multilingual row package for the next v2.7 support/eval expansion.",
+    "Keep code_assist and agentkernel off the promotable path until their discovery debt is cleared with more independent roots."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11060_ready_lane_row_construction_manifest/ready_lane_row_construction_manifest.json",
+    "work_items_jsonl": "runs/local/artifacts/stage11060_ready_lane_row_construction_manifest/row_construction_work_items.jsonl"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "lane_cards": "runs/local/artifacts/stage11059_ready_lane_materialization_packet/ready_lane_cards.jsonl",
+    "root_cards": "runs/local/artifacts/stage11059_ready_lane_materialization_packet/ready_root_cards.jsonl"
+  },
+  "stage": 11060,
+  "stage_name": "stage11060_ready_lane_row_construction_manifest"
+}

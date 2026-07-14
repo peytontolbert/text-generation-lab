@@ -1,0 +1,331 @@
+{
+  "claim_boundary": [
+    "This is not a training package and must not be used as train support directly.",
+    "The current selected frontier remains stage11507/stage11509.",
+    "Progress on Web now requires fresh root materialization and admission, not another probe over existing miss rows."
+  ],
+  "created_at_utc": "2026-07-13T21:44:59Z",
+  "decision": "fresh_web_gap_materialization_requested_no_training",
+  "metrics": {
+    "gemma_correct_on_100m_misses": 24,
+    "requested_minimum_heldout_roots": 8,
+    "requested_minimum_train_roots": 25,
+    "source_remaining_misses": 24,
+    "work_items": 3
+  },
+  "next_stage_recommendation": "stage11575_web_remaining_gap_fresh_root_materializer",
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11574_web_remaining_gap_materialization_request/web_remaining_gap_materialization_request.json",
+    "work_items": "runs/local/artifacts/stage11574_web_remaining_gap_materialization_request/web_remaining_gap_work_items.jsonl"
+  },
+  "passed": true,
+  "promotion_blockers": [
+    "stage11571 Web remains 42/66 while Gemma is 52/66",
+    "all 24 remaining 100M misses are Gemma-correct on the same manifest",
+    "prior support probes did not transfer to Llama Stack or OpenHands non-evidence tasks",
+    "remaining MCP/SEP evidence misses need evidence-item judgment rows, not global scorer reroutes"
+  ],
+  "source_artifacts": {
+    "stage11573_cards": "runs/local/artifacts/stage11573_web_remaining_miss_materialization_audit/remaining_web_miss_cards.jsonl",
+    "stage11573_queue": "runs/local/artifacts/stage11573_web_remaining_miss_materialization_audit/web_materialization_queue.jsonl",
+    "stage11573_summary": "runs/summaries/stage11573_web_remaining_miss_materialization_audit.json"
+  },
+  "stage": 11574,
+  "stage_name": "stage11574_web_remaining_gap_materialization_request",
+  "work_items": [
+    {
+      "action": "materialize_diverse_openhands_transition_roots_with_test_ids_and_fail_pass_labels",
+      "admission_gates": {
+        "deterministic_option_shuffle_required": true,
+        "gold_value_visible_before_options_allowed": false,
+        "minimum_heldout_roots": 3,
+        "minimum_options": 4,
+        "minimum_repo_families": 2,
+        "minimum_train_roots": 10,
+        "must_include_task_types": [
+          "symptom_localization",
+          "verifier_outcome",
+          "minimal_fix_selection",
+          "alternative_hypothesis_elimination",
+          "abstention_insufficient_evidence"
+        ],
+        "opaque_labels_required": true,
+        "same_root_as_current_heldout_allowed": false,
+        "singleton_options_allowed": false,
+        "train_on_source_miss_rows": false
+      },
+      "example_target_confusions": [
+        {
+          "predicted_value": "unrelated_frontend_utility_surface",
+          "row_id": "stage11390::openhands_websocket_url::symptom_localization",
+          "target_value": "src/utils/websocket-url.ts::buildWebSocketUrl",
+          "task_type": "symptom_localization"
+        },
+        {
+          "predicted_value": "INSUFFICIENT_EVIDENCE",
+          "row_id": "stage11390::openhands_websocket_url::verifier_outcome",
+          "target_value": "PASS_TARGETED_TEST_SELECTION",
+          "task_type": "verifier_outcome"
+        },
+        {
+          "predicted_value": "change_unrelated_utility",
+          "row_id": "stage11390::openhands_websocket_url::minimal_fix_selection",
+          "target_value": "adjust URL host/prefix/protocol construction in src/utils/websocket-url.ts without changing PR parsing or email validation utilities",
+          "task_type": "minimal_fix_selection"
+        },
+        {
+          "predicted_value": "browser_runtime_blocks_unit_verifier",
+          "row_id": "stage11390::openhands_websocket_url::alternative_hypothesis_elimination",
+          "target_value": "selected_verifier_exercises_implementation_not_distractor",
+          "task_type": "alternative_hypothesis_elimination"
+        },
+        {
+          "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "row_id": "stage11390::openhands_websocket_url::abstention_insufficient_evidence",
+          "target_value": "ANSWER_WITH_VISIBLE_EVIDENCE",
+          "task_type": "abstention_insufficient_evidence"
+        }
+      ],
+      "minimum_next_supply": {
+        "heldout_roots": 3,
+        "repo_families": 2,
+        "train_roots": 10
+      },
+      "negative_result_context": [
+        "stage11550_web_support_probe_did_not_improve_web_heldout",
+        "stage11563_conservative_openhands_probe_preserved_strict_but_only_reached_42_of_66_web",
+        "stage11567_balanced_non_evidence_support_preserved_no_frontier_gain",
+        "stage11570_semantic_candidate_metadata_support_preserved_no_frontier_gain"
+      ],
+      "next_allowed_step": "materialize_and_audit_fresh_roots_only",
+      "priority": 1,
+      "required_artifacts": [
+        "root_record_with_repo_snapshot_commit_and_lineage_key",
+        "task_observation_and_acceptance_condition",
+        "visible_source_snippet_for_each_candidate_surface",
+        "deterministically_shuffled_opaque_options",
+        "prompt_target_leak_audit",
+        "root_split_overlap_audit",
+        "anti_cheat_review_card",
+        "selected_test_or_verifier_command",
+        "verifier_transition_label_fail_to_pass_pass_to_pass_not_exercised_or_insufficient",
+        "test_id_and_changed_path_candidate_pairs",
+        "non_evidence_perspective_gold_answers"
+      ],
+      "source_miss_count": 15,
+      "source_miss_rows": [
+        "stage11390::openhands_websocket_url::symptom_localization",
+        "stage11390::openhands_websocket_url::verifier_outcome",
+        "stage11390::openhands_websocket_url::minimal_fix_selection",
+        "stage11390::openhands_websocket_url::alternative_hypothesis_elimination",
+        "stage11390::openhands_websocket_url::abstention_insufficient_evidence",
+        "stage11390::openhands_parse_pr_url::symptom_localization",
+        "stage11390::openhands_parse_pr_url::verifier_outcome",
+        "stage11390::openhands_parse_pr_url::minimal_fix_selection",
+        "stage11390::openhands_parse_pr_url::alternative_hypothesis_elimination",
+        "stage11390::openhands_parse_pr_url::abstention_insufficient_evidence",
+        "stage11390::openhands_input_validation::symptom_localization",
+        "stage11390::openhands_input_validation::verifier_outcome",
+        "stage11390::openhands_input_validation::minimal_fix_selection",
+        "stage11390::openhands_input_validation::alternative_hypothesis_elimination",
+        "stage11390::openhands_input_validation::abstention_insufficient_evidence"
+      ],
+      "source_repo_buckets": {
+        "openhands": 15
+      },
+      "source_task_types": {
+        "abstention_insufficient_evidence": 3,
+        "alternative_hypothesis_elimination": 3,
+        "minimal_fix_selection": 3,
+        "symptom_localization": 3,
+        "verifier_outcome": 3
+      },
+      "status": "requested_not_materialized"
+    },
+    {
+      "action": "materialize_llama_stack_train_analogues_with_selected_tests_and_root_disjoint_options",
+      "admission_gates": {
+        "deterministic_option_shuffle_required": true,
+        "gold_value_visible_before_options_allowed": false,
+        "minimum_heldout_roots": 3,
+        "minimum_options": 4,
+        "minimum_repo_families": 1,
+        "minimum_train_roots": 10,
+        "must_include_task_types": [
+          "symptom_localization",
+          "evidence_citation",
+          "verifier_outcome",
+          "minimal_fix_selection",
+          "alternative_hypothesis_elimination",
+          "abstention_insufficient_evidence"
+        ],
+        "opaque_labels_required": true,
+        "same_root_as_current_heldout_allowed": false,
+        "singleton_options_allowed": false,
+        "train_on_source_miss_rows": false
+      },
+      "example_target_confusions": [
+        {
+          "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+          "target_value": "lib/format-message-content.ts::extractTextFromContentPart/extractDisplayableText",
+          "task_type": "symptom_localization"
+        },
+        {
+          "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+          "target_value": "verifier_and_test_constraint",
+          "task_type": "evidence_citation"
+        },
+        {
+          "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+          "target_value": "PASS_TARGETED_TEST_SELECTION",
+          "task_type": "verifier_outcome"
+        },
+        {
+          "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+          "target_value": "edit_format_message_content_extraction_logic",
+          "task_type": "minimal_fix_selection"
+        },
+        {
+          "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+          "target_value": "logs_table_not_imported_by_targeted_unit_test",
+          "task_type": "alternative_hypothesis_elimination"
+        }
+      ],
+      "minimum_next_supply": {
+        "heldout_roots": 3,
+        "repo_families": 1,
+        "train_roots": 10
+      },
+      "negative_result_context": [
+        "stage11550_web_support_probe_did_not_improve_web_heldout",
+        "stage11563_conservative_openhands_probe_preserved_strict_but_only_reached_42_of_66_web",
+        "stage11567_balanced_non_evidence_support_preserved_no_frontier_gain",
+        "stage11570_semantic_candidate_metadata_support_preserved_no_frontier_gain"
+      ],
+      "next_allowed_step": "materialize_and_audit_fresh_roots_only",
+      "priority": 2,
+      "required_artifacts": [
+        "root_record_with_repo_snapshot_commit_and_lineage_key",
+        "task_observation_and_acceptance_condition",
+        "visible_source_snippet_for_each_candidate_surface",
+        "deterministically_shuffled_opaque_options",
+        "prompt_target_leak_audit",
+        "root_split_overlap_audit",
+        "anti_cheat_review_card",
+        "selected_test_or_verifier_command",
+        "verifier_transition_label_fail_to_pass_pass_to_pass_not_exercised_or_insufficient",
+        "test_id_and_changed_path_candidate_pairs",
+        "non_evidence_perspective_gold_answers"
+      ],
+      "source_miss_count": 6,
+      "source_miss_rows": [
+        "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+        "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+        "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+        "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+        "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+        "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence"
+      ],
+      "source_repo_buckets": {
+        "llama_stack": 6
+      },
+      "source_task_types": {
+        "abstention_insufficient_evidence": 1,
+        "alternative_hypothesis_elimination": 1,
+        "evidence_citation": 1,
+        "minimal_fix_selection": 1,
+        "symptom_localization": 1,
+        "verifier_outcome": 1
+      },
+      "status": "requested_not_materialized"
+    },
+    {
+      "action": "build_all_supported_evidence_item_judgment_rows_with_decisive_vs_distractor_labels",
+      "admission_gates": {
+        "deterministic_option_shuffle_required": true,
+        "gold_value_visible_before_options_allowed": false,
+        "minimum_heldout_roots": 2,
+        "minimum_options": 4,
+        "minimum_repo_families": 1,
+        "minimum_train_roots": 5,
+        "must_balance_roles": [
+          "candidate_change_surface",
+          "verifier_and_test_constraint",
+          "symptom_or_call_path_analogue",
+          "insufficient_evidence"
+        ],
+        "must_include_task_types": [
+          "evidence_citation"
+        ],
+        "opaque_labels_required": true,
+        "same_root_as_current_heldout_allowed": false,
+        "singleton_options_allowed": false,
+        "train_on_source_miss_rows": false
+      },
+      "example_target_confusions": [
+        {
+          "predicted_value": "candidate_change_surface",
+          "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::evidence_citation::heldout_v1",
+          "target_value": "verifier_and_test_constraint",
+          "task_type": "evidence_citation"
+        },
+        {
+          "predicted_value": "candidate_change_surface",
+          "row_id": "stage11540::mcp_typescript_sdk::core_protocol_state_machine::evidence_citation::heldout_v1",
+          "target_value": "verifier_and_test_constraint",
+          "task_type": "evidence_citation"
+        },
+        {
+          "predicted_value": "candidate_change_surface",
+          "row_id": "stage11543::sep_automation::hook_registry_dispatch_resilience::evidence_citation::heldout_v1",
+          "target_value": "verifier_and_test_constraint",
+          "task_type": "evidence_citation"
+        }
+      ],
+      "minimum_next_supply": {
+        "heldout_roots": 2,
+        "repo_families": 1,
+        "train_roots": 5
+      },
+      "negative_result_context": [
+        "stage11550_web_support_probe_did_not_improve_web_heldout",
+        "stage11563_conservative_openhands_probe_preserved_strict_but_only_reached_42_of_66_web",
+        "stage11567_balanced_non_evidence_support_preserved_no_frontier_gain",
+        "stage11570_semantic_candidate_metadata_support_preserved_no_frontier_gain"
+      ],
+      "next_allowed_step": "materialize_and_audit_fresh_roots_only",
+      "priority": 3,
+      "required_artifacts": [
+        "root_record_with_repo_snapshot_commit_and_lineage_key",
+        "task_observation_and_acceptance_condition",
+        "visible_source_snippet_for_each_candidate_surface",
+        "deterministically_shuffled_opaque_options",
+        "prompt_target_leak_audit",
+        "root_split_overlap_audit",
+        "anti_cheat_review_card",
+        "evidence_ledger_with_decisive_supporting_distractor_and_contradictory_roles",
+        "candidate_change_surface_vs_verifier_constraint_hard_negatives",
+        "evidence_item_gold_role_answer"
+      ],
+      "source_miss_count": 3,
+      "source_miss_rows": [
+        "stage11540::mcp_typescript_sdk::server_protocol_registration::evidence_citation::heldout_v1",
+        "stage11540::mcp_typescript_sdk::core_protocol_state_machine::evidence_citation::heldout_v1",
+        "stage11543::sep_automation::hook_registry_dispatch_resilience::evidence_citation::heldout_v1"
+      ],
+      "source_repo_buckets": {
+        "mcp_typescript_sdk": 2,
+        "sep_automation": 1
+      },
+      "source_task_types": {
+        "evidence_citation": 3
+      },
+      "status": "requested_not_materialized"
+    }
+  ]
+}

@@ -1,0 +1,417 @@
+{
+  "claim_boundary": [
+    "This is a queue for Web root materialization, not a training package.",
+    "Stage11527 minimum gate is still unmet until enough queued roots are materialized and audited.",
+    "Existing OpenHands-only support probes regressed canaries, so the next package must be multi-family."
+  ],
+  "created_at_utc": "2026-07-13T19:43:47Z",
+  "decision": "web_materialization_queue_ready_supply_gap_remains",
+  "metrics": {
+    "preferred_new_family_items": 3,
+    "protected_existing_heldout_family_items": 2,
+    "qa_dependency_blocked_items": 1,
+    "queue_items": 9,
+    "stage11528_heldout_roots_available": 4,
+    "stage11528_heldout_roots_required": 10,
+    "stage11528_train_roots_available": 12,
+    "stage11528_train_roots_required": 20
+  },
+  "outputs": {
+    "queue": "runs/local/artifacts/stage11529_web_materialization_queue/web_materialization_work_items.jsonl",
+    "summary": "runs/local/artifacts/stage11529_web_materialization_queue/web_materialization_queue.json"
+  },
+  "passed": true,
+  "recommended_order": [
+    "Materialize openclaw_clawhub, dspy, and ai_town first because they add new repo families.",
+    "Use at least some of those new families as sealed heldout to close the heldout-root shortfall.",
+    "Repair qa_lab dependency setup only after the new-family queue is underway.",
+    "Do not train on existing Llama Stack or OpenHands heldout roots."
+  ],
+  "source_artifacts": {
+    "stage11346_queue": "runs/local/artifacts/stage11346_web_source_verifier_review_queue/web_source_verifier_first_wave_review_queue.jsonl",
+    "stage11353_execution": "runs/local/artifacts/stage11353_web_verifier_execution_evidence/web_verifier_execution_evidence.json",
+    "stage11528_supply_audit": "runs/summaries/stage11528_web_verifier_root_supply_audit.json"
+  },
+  "stage": 11529,
+  "stage_name": "stage11529_web_materialization_queue",
+  "work_items": [
+    {
+      "candidate_change_surface_paths": [
+        "http.ts",
+        "auth.config.js",
+        "agent.ts",
+        "music.ts",
+        "schema.ts"
+      ],
+      "git_head": "60433ec3b8dc25bd4469e9f387670c37409f801e",
+      "git_repo_family": "ai_town",
+      "materialization_blockers": [
+        "anti_cheat_decision",
+        "gold_perspective_answers",
+        "observed_verifier_transition",
+        "root_split_assignment",
+        "root_task_or_bug_description",
+        "selected_changed_path",
+        "selected_symptom_or_call_path_evidence",
+        "selected_verifier_path"
+      ],
+      "priority": 1,
+      "recommended_split": "preferred_new_heldout_or_train_family",
+      "repo_family": "convex",
+      "repo_path": "/data/repositories/ai-town/convex",
+      "required_actions": [
+        "select maintainer-grade root task/bug description",
+        "choose one changed/source path and one selected verifier/test path",
+        "execute or recover focused verifier output",
+        "fill gold perspective answers for six maintainer perspectives",
+        "emit deterministic shuffled opaque options",
+        "run prompt-target leak and root-overlap audit"
+      ],
+      "review_item_id": "stage11346::web_review::09::convex",
+      "source_candidate_id": "stage11345::web_js_ts_html::convex::7eed43436e",
+      "strict_eval_eligible_current": false,
+      "verifier_and_test_constraint_paths": [
+        "testing.ts"
+      ]
+    },
+    {
+      "candidate_change_surface_paths": [
+        "public/index.html",
+        "src/App.js",
+        "src/reportWebVitals.js",
+        "src/App.css",
+        "src/index.css"
+      ],
+      "git_head": "7dfbea37e583df3e3aa90d9e403877a608610a95",
+      "git_repo_family": "dspy",
+      "materialization_blockers": [
+        "anti_cheat_decision",
+        "gold_perspective_answers",
+        "observed_verifier_transition",
+        "root_split_assignment",
+        "root_task_or_bug_description",
+        "selected_changed_path",
+        "selected_symptom_or_call_path_evidence",
+        "selected_verifier_path"
+      ],
+      "priority": 1,
+      "recommended_split": "preferred_new_heldout_or_train_family",
+      "repo_family": "react_app",
+      "repo_path": "/data/repositories/dspy/inspect-app/react-app",
+      "required_actions": [
+        "select maintainer-grade root task/bug description",
+        "choose one changed/source path and one selected verifier/test path",
+        "execute or recover focused verifier output",
+        "fill gold perspective answers for six maintainer perspectives",
+        "emit deterministic shuffled opaque options",
+        "run prompt-target leak and root-overlap audit"
+      ],
+      "review_item_id": "stage11346::web_review::08::react_app",
+      "source_candidate_id": "stage11345::web_js_ts_html::react_app::5c466ee971",
+      "strict_eval_eligible_current": false,
+      "verifier_and_test_constraint_paths": [
+        "src/App.test.js",
+        "src/setupTests.js"
+      ]
+    },
+    {
+      "candidate_change_surface_paths": [
+        "http.ts",
+        "users.ts",
+        "seed.ts",
+        "tokens.ts",
+        "githubSoulBackupsNode.ts"
+      ],
+      "git_head": "8bbc66868d63c22ee905b327214982f60da4ac0a",
+      "git_repo_family": "openclaw_clawhub",
+      "materialization_blockers": [
+        "anti_cheat_decision",
+        "gold_perspective_answers",
+        "observed_verifier_transition",
+        "root_split_assignment",
+        "root_task_or_bug_description",
+        "selected_changed_path",
+        "selected_symptom_or_call_path_evidence",
+        "selected_verifier_path"
+      ],
+      "priority": 1,
+      "recommended_split": "preferred_new_heldout_or_train_family",
+      "repo_family": "convex",
+      "repo_path": "/data/repositories/openclaw__clawhub/convex",
+      "required_actions": [
+        "select maintainer-grade root task/bug description",
+        "choose one changed/source path and one selected verifier/test path",
+        "execute or recover focused verifier output",
+        "fill gold perspective answers for six maintainer perspectives",
+        "emit deterministic shuffled opaque options",
+        "run prompt-target leak and root-overlap audit"
+      ],
+      "review_item_id": "stage11346::web_review::02::convex",
+      "source_candidate_id": "stage11345::web_js_ts_html::convex::3781266a0d",
+      "strict_eval_eligible_current": false,
+      "verifier_and_test_constraint_paths": [
+        "skills.versions.public.test.ts",
+        "tokens.touch.test.ts",
+        "maintenance.test.ts",
+        "skills.countPublicSkills.test.ts",
+        "skills.publicModeration.test.ts"
+      ]
+    },
+    {
+      "candidate_change_surface_paths": [
+        "bus-api.ts",
+        "model-selection.ts",
+        "api.ts",
+        "index.ts",
+        "cli.ts"
+      ],
+      "git_head": "d77c4bbb2d2b216b1fe9bb0676983aba147cf15d",
+      "git_repo_family": "openclaw_openclaw",
+      "materialization_blockers": [
+        "anti_cheat_decision",
+        "gold_perspective_answers",
+        "observed_verifier_transition",
+        "qa_lab_dependency_setup_blocked",
+        "root_split_assignment",
+        "root_task_or_bug_description",
+        "selected_changed_path",
+        "selected_symptom_or_call_path_evidence",
+        "selected_verifier_path"
+      ],
+      "priority": 2,
+      "recommended_split": "train_support_after_dependency_repair",
+      "repo_family": "qa_lab",
+      "repo_path": "/data/repositories/openclaw__openclaw/extensions/qa-lab",
+      "required_actions": [
+        "select maintainer-grade root task/bug description",
+        "choose one changed/source path and one selected verifier/test path",
+        "execute or recover focused verifier output",
+        "fill gold perspective answers for six maintainer perspectives",
+        "emit deterministic shuffled opaque options",
+        "run prompt-target leak and root-overlap audit"
+      ],
+      "review_item_id": "stage11346::web_review::01::qa_lab",
+      "source_candidate_id": "stage11345::web_js_ts_html::qa_lab::1f35227368",
+      "strict_eval_eligible_current": false,
+      "verifier_and_test_constraint_paths": [
+        "src/model-switch-eval.test.ts",
+        "src/lab-server-ui.test.ts",
+        "src/qa-gateway-config.test.ts",
+        "src/scenario-runtime-api.test.ts",
+        "src/suite-runtime-flow.test.ts"
+      ]
+    },
+    {
+      "candidate_change_surface_paths": [
+        "src/processor.ts",
+        "src/config.ts",
+        "src/rules.ts",
+        "src/index.ts",
+        "src/types.ts"
+      ],
+      "git_head": "e085d3523d9280cf082a60383693a5f3d7e5f672",
+      "git_repo_family": "modelcontextprotocol_modelcontextprotocol",
+      "materialization_blockers": [
+        "anti_cheat_decision",
+        "gold_perspective_answers",
+        "observed_verifier_transition",
+        "root_split_assignment",
+        "root_task_or_bug_description",
+        "selected_changed_path",
+        "selected_symptom_or_call_path_evidence",
+        "selected_verifier_path"
+      ],
+      "priority": 4,
+      "recommended_split": "train_support_or_additional_diagnostic",
+      "repo_family": "sep_automation",
+      "repo_path": "/data/repositories/modelcontextprotocol__modelcontextprotocol/tools/sep-automation",
+      "required_actions": [
+        "select maintainer-grade root task/bug description",
+        "choose one changed/source path and one selected verifier/test path",
+        "execute or recover focused verifier output",
+        "fill gold perspective answers for six maintainer perspectives",
+        "emit deterministic shuffled opaque options",
+        "run prompt-target leak and root-overlap audit"
+      ],
+      "review_item_id": "stage11346::web_review::04::sep_automation",
+      "source_candidate_id": "stage11345::web_js_ts_html::sep_automation::d7924bd9d6",
+      "strict_eval_eligible_current": false,
+      "verifier_and_test_constraint_paths": [
+        "vitest.config.ts",
+        "test/mocks.ts",
+        "test/unit/hooks.test.ts",
+        "test/unit/transition.test.ts",
+        "test/unit/ping.test.ts"
+      ]
+    },
+    {
+      "candidate_change_surface_paths": [
+        "tsdown.config.ts",
+        "src/stdio.ts",
+        "src/fromJsonSchema.ts",
+        "src/shimsWorkerd.ts",
+        "src/index.ts"
+      ],
+      "git_head": "22595b96855b34f00adcc6c1e7932ad68ea5139d",
+      "git_repo_family": "modelcontextprotocol_typescript_sdk",
+      "materialization_blockers": [
+        "anti_cheat_decision",
+        "gold_perspective_answers",
+        "observed_verifier_transition",
+        "root_split_assignment",
+        "root_task_or_bug_description",
+        "selected_changed_path",
+        "selected_symptom_or_call_path_evidence",
+        "selected_verifier_path"
+      ],
+      "priority": 4,
+      "recommended_split": "train_support_or_additional_diagnostic",
+      "repo_family": "server",
+      "repo_path": "/data/repositories/modelcontextprotocol__typescript-sdk/packages/server",
+      "required_actions": [
+        "select maintainer-grade root task/bug description",
+        "choose one changed/source path and one selected verifier/test path",
+        "execute or recover focused verifier output",
+        "fill gold perspective answers for six maintainer perspectives",
+        "emit deterministic shuffled opaque options",
+        "run prompt-target leak and root-overlap audit"
+      ],
+      "review_item_id": "stage11346::web_review::03::server",
+      "source_candidate_id": "stage11345::web_js_ts_html::server::4287310997",
+      "strict_eval_eligible_current": false,
+      "verifier_and_test_constraint_paths": [
+        "vitest.config.js",
+        "test/server/barrelClean.test.ts",
+        "test/server/stdio.test.ts",
+        "test/server/streamableHttp.test.ts",
+        "test/server/server.test.ts"
+      ]
+    },
+    {
+      "candidate_change_surface_paths": [
+        "src/instrument.ts",
+        "src/git.ts",
+        "src/connectionManager.ts",
+        "src/constants.ts",
+        "src/repoManager.ts"
+      ],
+      "git_head": "a698afdf131d0ab132c23e7936ad3ae05ab45896",
+      "git_repo_family": "sourcebot",
+      "materialization_blockers": [
+        "anti_cheat_decision",
+        "gold_perspective_answers",
+        "observed_verifier_transition",
+        "root_split_assignment",
+        "root_task_or_bug_description",
+        "selected_changed_path",
+        "selected_symptom_or_call_path_evidence",
+        "selected_verifier_path"
+      ],
+      "priority": 4,
+      "recommended_split": "train_support_or_additional_diagnostic",
+      "repo_family": "backend",
+      "repo_path": "/data/repositories/sourcebot/packages/backend",
+      "required_actions": [
+        "select maintainer-grade root task/bug description",
+        "choose one changed/source path and one selected verifier/test path",
+        "execute or recover focused verifier output",
+        "fill gold perspective answers for six maintainer perspectives",
+        "emit deterministic shuffled opaque options",
+        "run prompt-target leak and root-overlap audit"
+      ],
+      "review_item_id": "stage11346::web_review::06::backend",
+      "source_candidate_id": "stage11345::web_js_ts_html::backend::bef35baff6",
+      "strict_eval_eligible_current": false,
+      "verifier_and_test_constraint_paths": [
+        "vitest.config.ts",
+        "src/github.test.ts",
+        "src/utils.test.ts",
+        "src/gitlab.test.ts"
+      ]
+    },
+    {
+      "candidate_change_surface_paths": [
+        "playwright.config.ts",
+        "next.config.ts",
+        "jest.config.ts",
+        "instrumentation.ts",
+        "jest.setup.ts"
+      ],
+      "git_head": "8f4c431370fdd566dd7a04910b737ced7e6d5ffe",
+      "git_repo_family": "llama_stack",
+      "materialization_blockers": [
+        "anti_cheat_decision",
+        "gold_perspective_answers",
+        "observed_verifier_transition",
+        "root_split_assignment",
+        "root_task_or_bug_description",
+        "selected_changed_path",
+        "selected_symptom_or_call_path_evidence",
+        "selected_verifier_path"
+      ],
+      "priority": 5,
+      "recommended_split": "sealed_heldout_only",
+      "repo_family": "llama_stack_ui",
+      "repo_path": "/data/repositories/llama-stack/src/llama_stack_ui",
+      "required_actions": [
+        "select maintainer-grade root task/bug description",
+        "choose one changed/source path and one selected verifier/test path",
+        "execute or recover focused verifier output",
+        "fill gold perspective answers for six maintainer perspectives",
+        "emit deterministic shuffled opaque options",
+        "run prompt-target leak and root-overlap audit"
+      ],
+      "review_item_id": "stage11346::web_review::05::llama_stack_ui",
+      "source_candidate_id": "stage11345::web_js_ts_html::llama_stack_ui::6de65ce0c5",
+      "strict_eval_eligible_current": false,
+      "verifier_and_test_constraint_paths": [
+        "e2e/logs-table-scroll.spec.ts",
+        "lib/format-message-content.test.ts",
+        "components/logs/logs-table.test.tsx",
+        "components/logs/logs-table-scroll.test.tsx"
+      ]
+    },
+    {
+      "candidate_change_surface_paths": [
+        "playwright.config.ts",
+        "vite-env.d.ts",
+        "global.d.ts",
+        "vite.config.ts",
+        "tailwind.config.js"
+      ],
+      "git_head": "e3d9abfd014ffd4283d03071fdb88c1c8edc77f6",
+      "git_repo_family": "openhands_openhands",
+      "materialization_blockers": [
+        "anti_cheat_decision",
+        "gold_perspective_answers",
+        "observed_verifier_transition",
+        "root_split_assignment",
+        "root_task_or_bug_description",
+        "selected_changed_path",
+        "selected_symptom_or_call_path_evidence",
+        "selected_verifier_path"
+      ],
+      "priority": 5,
+      "recommended_split": "sealed_heldout_only",
+      "repo_family": "frontend",
+      "repo_path": "/data/repositories/OpenHands__OpenHands/frontend",
+      "required_actions": [
+        "select maintainer-grade root task/bug description",
+        "choose one changed/source path and one selected verifier/test path",
+        "execute or recover focused verifier output",
+        "fill gold perspective answers for six maintainer perspectives",
+        "emit deterministic shuffled opaque options",
+        "run prompt-target leak and root-overlap audit"
+      ],
+      "review_item_id": "stage11346::web_review::07::frontend",
+      "source_candidate_id": "stage11345::web_js_ts_html::frontend::0df212d15e",
+      "strict_eval_eligible_current": false,
+      "verifier_and_test_constraint_paths": [
+        "vitest.setup.ts",
+        "test-utils.tsx",
+        "tests/placeholder.spec.ts",
+        "tests/avatar-menu.spec.ts"
+      ]
+    }
+  ]
+}

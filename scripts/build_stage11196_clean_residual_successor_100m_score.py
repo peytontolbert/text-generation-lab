@@ -1,0 +1,197 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import os
+import sys
+import time
+from collections import Counter, defaultdict
+from pathlib import Path
+from typing import Any
+
+import torch
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from legacy_src.agentkernel_lite.modeling_transformer import AgentKernelLiteTransformerConfig, AgentKernelLiteTransformerSeq2Seq
+from legacy_src.agentkernel_lite.training_data import AgentKernelBPETokenizer
+from legacy_src.agentkernel_lite.training_loop import _load_runtime_model_bundle, _write_bounded_choice_eval_audit
+
+ARTIFACTS = ROOT / "runs/local/artifacts"
+STAGE = 11196
+NAME = "stage11196_clean_residual_successor_100m_score"
+OUT_DIR = ARTIFACTS / NAME
+SUMMARY_JSON = OUT_DIR / "clean_residual_successor_100m_score.json"
+
+RUNTIME_BUNDLE = ARTIFACTS / "stage11186_contract_evidence_ledger_head_probe/runtime_model/runtime_model_bundle.json"
+BANK_ROWS = ARTIFACTS / "stage11195_clean_residual_successor_bank/clean_residual_successor_bank.jsonl"
+BANK_SUMMARY = ARTIFACTS / "stage11195_clean_residual_successor_bank/clean_residual_successor_bank.json"
+
+TORCH_THREADS = max(1, int(os.environ.get("AGENTKERNEL_EVAL_THREADS", "8")))
+torch.set_num_threads(TORCH_THREADS)
+torch.set_num_interop_threads(max(1, min(4, TORCH_THREADS)))
+EVAL_DEVICE = torch.device(os.environ.get("AGENTKERNEL_EVAL_DEVICE", "cuda" if torch.cuda.is_available() else "cpu"))
+
+
+def load_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()] if path.exists() else []
+
+
+def write_json(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT))
+
+
+def now_utc() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+
+def load_runtime() -> tuple[AgentKernelLiteTransformerSeq2Seq, AgentKernelBPETokenizer, dict[str, Any]]:
+    bundle = load_json(RUNTIME_BUNDLE)
+    metadata = bundle["metadata"]
+    config = AgentKernelLiteTransformerConfig.from_recovered_target_json(load_json(Path(str(metadata["model_config"]))))
+    model = AgentKernelLiteTransformerSeq2Seq(config)
+    init_card = _load_runtime_model_bundle(RUNTIME_BUNDLE, model=model)
+    model.to(EVAL_DEVICE)
+    model.eval()
+    tokenizer = AgentKernelBPETokenizer(Path(str(metadata["tokenizer_json"])), Path(str(metadata["tokenizer_config"])))
+    return model, tokenizer, init_card
+
+
+def enrich(card: dict[str, Any], source_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_id = {str(row.get("row_id") or ""): row for row in source_rows}
+    out = []
+    for row in card.get("row_cards") or []:
+        source = by_id.get(str(row.get("row_id") or ""), {})
+        merged = dict(row)
+        for key in ["language_family", "repo_family", "task_type", "root_id", "source_root_id", "residual_successor_source", "replacement_for_blocked_row_id", "replaces_quarantined_row_id"]:
+            merged[key] = source.get(key)
+        merged["gold_value"] = (source.get("standalone_projection_source") or {}).get("gold_value")
+        out.append(merged)
+    return out
+
+
+def metric(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    scored = [row for row in rows if isinstance(row.get("constrained_choice_match"), bool)]
+    correct = sum(1 for row in scored if row.get("constrained_choice_match") is True)
+    return {"rows": len(rows), "scored_rows": len(scored), "correct": correct, "exact_accuracy": correct / len(scored) if scored else None}
+
+
+def group(rows: list[dict[str, Any]], field: str) -> dict[str, Any]:
+    buckets: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        buckets[str(row.get(field) or "unknown")].append(row)
+    return {key: metric(value) for key, value in sorted(buckets.items())}
+
+
+def root_id(row: dict[str, Any]) -> str:
+    return str(row.get("root_id") or row.get("source_root_id") or row.get("row_id") or "missing")
+
+
+def cluster_metric(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    clusters: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        clusters[root_id(row)].append(row)
+    solved = 0
+    scored_clusters = 0
+    cards = []
+    for rid, cluster_rows in sorted(clusters.items()):
+        scored = [row for row in cluster_rows if isinstance(row.get("constrained_choice_match"), bool)]
+        if not scored:
+            cards.append({"root_id": rid, "rows": len(cluster_rows), "scored_rows": 0, "solved": None})
+            continue
+        scored_clusters += 1
+        ok = all(row.get("constrained_choice_match") is True for row in scored)
+        solved += 1 if ok else 0
+        cards.append({"root_id": rid, "rows": len(cluster_rows), "scored_rows": len(scored), "solved": ok})
+    return {"clusters": len(clusters), "scored_clusters": scored_clusters, "solved_clusters": solved, "cluster_exact_accuracy": solved / scored_clusters if scored_clusters else None, "cluster_cards": cards}
+
+
+def misses(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [
+        {
+            "row_id": row.get("row_id"),
+            "root_id": root_id(row),
+            "language_family": row.get("language_family"),
+            "repo_family": row.get("repo_family"),
+            "task_type": row.get("task_type"),
+            "gold_value": row.get("gold_value"),
+            "target_text": row.get("target_text"),
+            "predicted": row.get("constrained_choice_top1_label"),
+            "full_vocab_top1_text": row.get("full_vocab_top1_text"),
+            "target_rank_full_vocab": row.get("target_rank_full_vocab"),
+        }
+        for row in rows
+        if row.get("constrained_choice_match") is False
+    ]
+
+
+def main() -> None:
+    bank_rows = load_jsonl(BANK_ROWS)
+    bank_summary = load_json(BANK_SUMMARY)
+    model, tokenizer, init_card = load_runtime()
+    sources = ["encoder_option_retrieval", "encoder_option_retrieval_verifier_conditioned"]
+    results = {}
+    for source in sources:
+        card = _write_bounded_choice_eval_audit(
+            OUT_DIR,
+            model=model,
+            rows=bank_rows,
+            tokenizer=tokenizer,
+            max_encoder_tokens=768,
+            max_decoder_tokens=8,
+            split_name=f"clean_residual_successor_{source}",
+            bounded_choice_aux_source=source,
+            eval_batch_size=8,
+        )
+        enriched = enrich(card, bank_rows)
+        results[source] = {
+            "row_metric": metric(enriched),
+            "cluster_metric": cluster_metric(enriched),
+            "by_language": group(enriched, "language_family"),
+            "by_task": group(enriched, "task_type"),
+            "by_gold_value": group(enriched, "gold_value"),
+            "by_source": group(enriched, "residual_successor_source"),
+            "misses": misses(enriched),
+        }
+    product_source = "encoder_option_retrieval_verifier_conditioned"
+    product = results[product_source]
+    summary = {
+        "stage": STAGE,
+        "stage_name": NAME,
+        "created_at_utc": now_utc(),
+        "passed": True,
+        "decision": "clean_residual_successor_100m_scored",
+        "source_artifacts": {
+            "runtime_bundle": rel(RUNTIME_BUNDLE),
+            "bank_rows": rel(BANK_ROWS),
+            "bank_summary": rel(BANK_SUMMARY),
+        },
+        "bank_gate": {
+            "bank_passed": bank_summary.get("passed"),
+            "promotion_eligible": bank_summary.get("promotion_eligible"),
+            "score_reporting_requirement": bank_summary.get("score_reporting_requirement"),
+            "bank_counts": bank_summary.get("counts"),
+        },
+        "productized_scorer": product_source,
+        "productized_result": product,
+        "all_scorer_results": results,
+        "runtime_initialization": init_card,
+        "outputs": {"summary_json": rel(SUMMARY_JSON)},
+    }
+    write_json(SUMMARY_JSON, summary)
+    print(json.dumps(summary, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

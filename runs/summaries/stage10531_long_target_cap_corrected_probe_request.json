@@ -1,0 +1,154 @@
+{
+  "claim_scope": [
+    "Length-cap-corrected successor to the leak-clean stage10530 request.",
+    "Raises decoder and generation token caps so strict decisive_evidence targets are actually reachable by exact generation.",
+    "Keeps the same leak-clean manifest and heldout slice."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe_request/leak_clean_root_based_multitarget_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "1593",
+    "--max-eval-rows",
+    "8",
+    "--max-strict-rows",
+    "36",
+    "--max-steps",
+    "256",
+    "--batch-size",
+    "1",
+    "--learning-rate",
+    "2e-5",
+    "--max-encoder-tokens",
+    "1024",
+    "--max-decoder-tokens",
+    "1024",
+    "--decoder-ce-weight",
+    "1.0",
+    "--bounded-choice-aux-weight",
+    "0.0",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "2.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "24",
+    "--max-generation-tokens",
+    "1024",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10531_long_target_cap_corrected_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "1.0",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10531_long_target_cap_corrected_probe/bounded_decoder_probe",
+    "--run-id",
+    "stage10531_long_target_cap_corrected_probe"
+  ],
+  "created_at_utc": "2026-07-12T00:07:01Z",
+  "decision": "long_target_cap_corrected_probe_ready",
+  "known_limits": [
+    "This still does not create heldout verifier_outcome or patch_sketch scoring; those need fresh non-leaky roots.",
+    "Rust and web heldout depth remain modest.",
+    "Patch_sketch, repair_intent, and next_action are support-only structured curriculum from current artifacts.",
+    "This corrects target-length reachability but does not by itself deepen heldout verifier_outcome or patch_sketch coverage."
+  ],
+  "language_counts_by_split": {
+    "eval": {
+      "rust": 8
+    },
+    "strict_eval": {
+      "c_cpp": 8,
+      "python": 12,
+      "rust": 8,
+      "web_js_ts_html": 8
+    },
+    "train": {
+      "c_cpp": 131,
+      "python": 1443,
+      "rust": 4,
+      "unknown": 4,
+      "web_js_ts_html": 11
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe_request/leak_clean_root_based_multitarget_probe_manifest.jsonl",
+  "next_best_step": "Launch this corrected successor instead of stage10530, then compare the resulting runtime against Gemma on the same 36 strict heldout rows and check the 24-row repaired-v2.7 canary for regression.",
+  "output_dir": "runs/local/artifacts/stage10531_long_target_cap_corrected_probe/bounded_decoder_probe",
+  "passed": true,
+  "required_honesty_gates": [
+    "stage10528 cleaned anti-cheat successor remains the source package",
+    "train rows with anti_cheat.prompt_target_leak=true are excluded",
+    "all verifier_outcome rows are excluded from train until a fresh non-leaky builder exists",
+    "strict rows remain limited to decisive_evidence and retrieve_answer_abstain",
+    "post-run Gemma comparison must use the same 36 strict rows",
+    "strict decisive_evidence targets must be reachable within the decoder cap"
+  ],
+  "rows": 1637,
+  "run_id": "stage10531_long_target_cap_corrected_probe",
+  "runtime_changes": {
+    "batch_size": {
+      "from": "2",
+      "to": "1"
+    },
+    "max_decoder_tokens": {
+      "from": "256",
+      "to": "1024"
+    },
+    "max_generation_tokens": {
+      "from": "128",
+      "to": "1024"
+    }
+  },
+  "runtime_model_dir": "runs/local/artifacts/stage10531_long_target_cap_corrected_probe/runtime_model",
+  "source_manifest": "runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe_request/leak_clean_root_based_multitarget_probe_manifest.jsonl",
+  "source_request": "runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe_request/leak_clean_root_based_multitarget_probe_request.json",
+  "split_counts": {
+    "eval": 8,
+    "strict_eval": 36,
+    "train": 1593
+  },
+  "stage": 10531,
+  "stage_name": "stage10531_long_target_cap_corrected_probe_request",
+  "strict_target_subtypes": {
+    "decisive_evidence": 18,
+    "retrieve_answer_abstain": 18
+  }
+}

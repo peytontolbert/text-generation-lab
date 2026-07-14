@@ -1,0 +1,56 @@
+{
+  "anti_cheat_refresh": {
+    "refreshed_field": "anti_cheat.prompt_target_leak",
+    "stage10527_actual_prompt_target_leak_true_count": 0,
+    "strict_rows_after_false": 36,
+    "strict_rows_after_true": 0,
+    "strict_rows_before_true": 36
+  },
+  "claim_boundary": [
+    "This successor preserves the stage10521 bootstrap-heldout data and split structure.",
+    "It only refreshes anti_cheat metadata so prompt_target_leak reflects the visible surface rather than stale inherited flags.",
+    "Comparison and review should prefer this successor over stage10521 when interpreting anti-cheat metadata."
+  ],
+  "created_at_utc": "2026-07-11T23:51:17Z",
+  "inputs": {
+    "source_audit": "runs/local/artifacts/stage10527_bootstrap_heldout_expert_eval_appropriateness_audit/bootstrap_heldout_expert_eval_appropriateness_audit.json",
+    "source_manifest": "runs/local/artifacts/stage10521_split_aware_multitarget_bootstrap_manifest_with_heldout/split_aware_multitarget_bootstrap_manifest_with_heldout.json"
+  },
+  "metrics": {
+    "all_rows": 2470,
+    "diagnostic_rows": 25,
+    "reference_rows": 32,
+    "strict_eval_rows": 36,
+    "strict_prompt_target_leak_false": 36,
+    "strict_prompt_target_leak_true": 0,
+    "strict_rows_by_language": {
+      "c_cpp": 8,
+      "python": 12,
+      "rust": 8,
+      "web_js_ts_html": 8
+    },
+    "strict_rows_by_target_subtype": {
+      "decisive_evidence": 18,
+      "retrieve_answer_abstain": 18
+    },
+    "train_rows": 2369,
+    "validation_rows": 8
+  },
+  "next_best_step": "Use this cleaned successor for post-run comparison and future review packets so anti-cheat metadata matches the actual visible surface. Then expand heldout verifier_outcome and patch-sketch rows rather than over-reading the current decisive_evidence/retrieve_answer_abstain slice.",
+  "outputs": {
+    "all_rows": "runs/local/artifacts/stage10528_cleaned_heldout_anticheat_successor/cleaned_multitarget_bootstrap_with_heldout_rows.jsonl",
+    "diagnostic_rows": "runs/local/artifacts/stage10528_cleaned_heldout_anticheat_successor/diagnostic_rows.jsonl",
+    "reference_rows": "runs/local/artifacts/stage10528_cleaned_heldout_anticheat_successor/reference_rows.jsonl",
+    "strict_rows": "runs/local/artifacts/stage10528_cleaned_heldout_anticheat_successor/strict_eval_rows.jsonl",
+    "train_rows": "runs/local/artifacts/stage10528_cleaned_heldout_anticheat_successor/train_rows.jsonl",
+    "validation_rows": "runs/local/artifacts/stage10528_cleaned_heldout_anticheat_successor/validation_rows.jsonl"
+  },
+  "passed": true,
+  "root_split_audit": {
+    "rule": "same root_id must not appear across train/validation/eval claim paths",
+    "violation_count": 0,
+    "violations": {}
+  },
+  "stage": 10528,
+  "stage_name": "stage10528_cleaned_heldout_anticheat_successor"
+}

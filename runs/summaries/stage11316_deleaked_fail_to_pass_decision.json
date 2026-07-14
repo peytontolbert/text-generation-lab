@@ -1,0 +1,110 @@
+{
+  "created_at_utc": "2026-07-13T11:37:23Z",
+  "dataset_result": {
+    "stage11311_decision": "partial_clean_support_built_but_not_probe_worthy",
+    "stage11312_added_counts": {
+      "by_language": {
+        "python": 5
+      },
+      "by_target_label": {
+        "A": 2,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      },
+      "by_target_value": {
+        "FAIL_TO_PASS": 5
+      },
+      "by_task": {
+        "verifier_outcome_semantic_transition": 5
+      },
+      "roots": 5,
+      "rows": 5
+    },
+    "stage11312_added_rows": 5,
+    "stage11312_blocked_rows": 0,
+    "stage11312_decision": "deleaked_fail_to_pass_transition_support_ready"
+  },
+  "decision": "reject_stage11314_keep_stage11200_frontier",
+  "frontier_kept": {
+    "runtime_bundle": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "runtime_bundle_sha256": "b84dbba9ed525d0139ab867ffbc52d7ce2df702402542e54a1247d8f5dea3eca",
+    "stage": "stage11200_role_focused_residual_probe"
+  },
+  "gates": {
+    "product_clean_strict_22_of_22": true,
+    "product_clean_validation_at_least_20_of_23": true,
+    "product_judgment_strict_above_majority": true,
+    "product_judgment_validation_above_majority": true,
+    "product_residual_above_5_of_10": false,
+    "product_verifier_residual_nonzero": false
+  },
+  "interpretation": [
+    "De-leaked Python FAIL_TO_PASS transition support is now packaged cleanly and can remain as train-support material.",
+    "The run did not affect heldout residual evidence failures; remaining residual misses are evidence role/scorer geometry and Rust symptom/call-path evidence, not Python FAIL_TO_PASS scarcity alone.",
+    "Do not promote Stage11314. The next useful work is fresh non-overlapping Rust evidence anchors and a direct evidence-role scorer objective, not another small verifier support probe."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11316_deleaked_fail_to_pass_decision/deleaked_fail_to_pass_decision.json"
+  },
+  "reason": "Stage11314 preserved clean strict/validation but did not improve residual bank or verifier_and_test_constraint residuals.",
+  "rejected_runtime": {
+    "runtime_bundle": "runs/local/artifacts/stage11314_deleaked_fail_to_pass_probe/runtime_model/runtime_model_bundle.json",
+    "runtime_bundle_sha256": "573829089cdc16722226c372e2d179e61023ae853ec3f7c5c6f48246ba56aa4d",
+    "stage": "stage11314_deleaked_fail_to_pass_probe",
+    "weights_sha256": "3e74e4277a83cf76fcb47449853a8352796d15a1a44f008a35592b88ecb71969"
+  },
+  "scores": {
+    "clean_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "residual": {
+      "correct": 5,
+      "exact_accuracy": 0.5,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold": {
+      "candidate_change_surface": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    }
+  },
+  "source_artifacts": {
+    "stage11312_package": "runs/local/artifacts/stage11312_deleaked_fail_to_pass_transition_package/deleaked_fail_to_pass_transition_package.json",
+    "stage11313_request": "runs/local/artifacts/stage11313_deleaked_fail_to_pass_probe_request/deleaked_fail_to_pass_probe_request.json",
+    "stage11315_audit": "runs/local/artifacts/stage11315_deleaked_fail_to_pass_postrun_audit/deleaked_fail_to_pass_postrun_audit.json"
+  },
+  "stage": 11316,
+  "stage_name": "stage11316_deleaked_fail_to_pass_decision"
+}

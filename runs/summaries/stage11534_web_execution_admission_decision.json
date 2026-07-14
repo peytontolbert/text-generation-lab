@@ -1,0 +1,58 @@
+{
+  "counts": {
+    "new_strict_ready_roots": 0,
+    "new_train_ready_roots": 0,
+    "stage11530_root_packets": 3,
+    "stage11531_execution_ready_before_attempt": 0,
+    "verifier_executed_failed_new_families": 1,
+    "verifier_executed_passed_new_families": 1
+  },
+  "created_at_utc": "2026-07-13T19:57:25Z",
+  "decision": "web_execution_evidence_improved_but_no_new_train_or_strict_admission",
+  "lanes": [
+    {
+      "admit_to_strict_now": false,
+      "admit_to_train_now": false,
+      "evidence": "runs/summaries/stage11533_openclaw_web_verifier_execution_artifact.json",
+      "family": "openclaw_clawhub",
+      "recommended_next_action": "Use as the first priority for Stage11535 gold adjudication or controlled bug-injection root framing.",
+      "status": "verifier_executed_passed_pending_gold",
+      "why": "Focused verifier passed, but no task/failure contract, gold perspective answers, split assignment, or anti-cheat signoff exists yet."
+    },
+    {
+      "admit_to_strict_now": false,
+      "admit_to_train_now": false,
+      "evidence": "runs/summaries/stage11532_dspy_web_verifier_execution_artifact.json",
+      "family": "dspy",
+      "recommended_next_action": "Adjudicate as dependency/test-environment routing root or quarantine as environment-only.",
+      "status": "verifier_executed_failed_before_assertions_pending_adjudication",
+      "why": "Focused test produced real failure evidence, but it appears to be Jest/axios ESM environment routing rather than a product-behavior verifier. Needs maintainer adjudication."
+    },
+    {
+      "admit_to_strict_now": false,
+      "admit_to_train_now": false,
+      "evidence": "runs/summaries/stage11531_web_new_family_verifier_feasibility_audit.json",
+      "family": "ai_town",
+      "recommended_next_action": "Replace with a real selected test or keep source-only diagnostic.",
+      "status": "blocked_weak_selected_verifier",
+      "why": "Selected verifier is convex/testing.ts helper material, not a focused test/spec. No dependency hydration or verifier execution evidence."
+    }
+  ],
+  "next_required_stage": {
+    "do_not_do": "Do not run training from Stage11530/11532/11533 row shells directly.",
+    "name": "stage11535_web_verifier_gold_adjudication_or_bug_injection",
+    "purpose": "Turn executed Web verifier evidence into scoreable maintainer roots by adding task/failure framing, gold perspective answers, split assignment, and anti-cheat signoff."
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11534_web_execution_admission_decision/web_execution_admission_decision.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "stage11530": "runs/summaries/stage11530_web_new_family_materialization_packets.json",
+    "stage11531": "runs/summaries/stage11531_web_new_family_verifier_feasibility_audit.json",
+    "stage11532": "runs/summaries/stage11532_dspy_web_verifier_execution_artifact.json",
+    "stage11533": "runs/summaries/stage11533_openclaw_web_verifier_execution_artifact.json"
+  },
+  "stage": 11534,
+  "stage_name": "stage11534_web_execution_admission_decision"
+}

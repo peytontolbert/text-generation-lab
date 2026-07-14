@@ -1,0 +1,62 @@
+{
+  "claim_boundary": [
+    "This stage authorizes a guarded probe, not promotion.",
+    "Controlled mutation rows are useful for training verifier-transition behavior but cannot by themselves prove organic maintainer superiority."
+  ],
+  "created_at_utc": "2026-07-13T23:23:58Z",
+  "decision": "build_guarded_training_request_with_controlled_web_fail_to_pass_support",
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11616_web_fail_to_pass_support_decision/web_fail_to_pass_support_decision.json"
+  },
+  "recommended_probe_shape": {
+    "init_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "preservation_kl_weight": "high enough to keep residual >=7/10",
+    "promotion_gates": {
+      "filtered_strict": "22/22",
+      "filtered_validation": ">=20/22",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": ">=21/23",
+      "residual_bank": ">=7/10",
+      "web_heldout": ">35/66 first, then >42/66",
+      "web_successor_or_controlled_mutation_probe": "improves without becoming headline eval"
+    },
+    "sampler": "web_task_family_balanced",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head or web_task_candidate_head_ablation",
+    "train_support_rows": "runs/local/artifacts/stage11615_web_mutation_rows_anticheat_audit/web_mutation_rows_admitted_train_support.jsonl"
+  },
+  "selected_frontier": {
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head",
+    "weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37"
+  },
+  "source_artifacts": {
+    "audit": "runs/summaries/stage11615_web_mutation_rows_anticheat_audit.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11616,
+  "stage_name": "stage11616_web_fail_to_pass_support_decision",
+  "support_status": {
+    "admitted_by_target_role": {
+      "candidate_change_surface": 18,
+      "verifier_and_test_constraint": 18
+    },
+    "admitted_by_task": {
+      "abstention_insufficient_evidence": 6,
+      "evidence_citation": 6,
+      "minimal_fix_selection": 6,
+      "patch_impact": 6,
+      "symptom_localization": 6,
+      "verifier_outcome": 6
+    },
+    "admitted_rows": 36,
+    "complete_six_task_roots": 6,
+    "source_kind": "controlled_bug_injection_fail_to_pass",
+    "strict_eval_eligible": 0
+  },
+  "training_policy": [
+    "Use these rows only as train-support, never as strict eval or headline web heldout.",
+    "Initialize from Stage11507 and preserve canary/residual gates.",
+    "Evaluate against existing Web heldout and no-abstain successor; promotion requires web heldout improvement plus preservation.",
+    "If training improves successor but not heldout, treat as overfit and continue materializing more diverse roots."
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "claim_boundary": [
+    "Stage11634 is a frozen routed product-scorer policy, not a single standalone model-weight checkpoint.",
+    "The routed policy improves Web heldout over Stage11507 but does not beat the existing same-manifest Gemma-12B Web result.",
+    "The compact protected canary remains strong under the Stage11507 route; Web remains the active product gap.",
+    "This is bounded-choice maintainer scoring, not freeform repair or executable patch synthesis."
+  ],
+  "created_at_utc": "2026-07-14T00:12:50Z",
+  "decision": "routed_product_improves_web_but_does_not_beat_gemma",
+  "gates": {
+    "routed_internal_gates_passed": true,
+    "routed_policy_frozen": true,
+    "routed_web_beats_gemma": false,
+    "routed_web_beats_stage11507": true,
+    "routing_anticheat_passed": true,
+    "same_row_gemma_web_available": true
+  },
+  "next_actions": [
+    "Do not claim broad Web superiority from the routed policy.",
+    "Use Stage11634 as a product harness candidate only if the comparison statement includes the Web Gemma loss.",
+    "To close the Web gap, add root-heldout OpenHands/Llama-style verifier-backed roots or train a single-weight distilled Web scorer that preserves protected gates.",
+    "For RL-style scaling, count complete scored agent attempts per update, not raw optimizer steps; the current Web rowsets are too small for that regime."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11635_routed_product_gemma_comparison_audit/routed_product_gemma_comparison_audit.json"
+  },
+  "protected_routed_results": {
+    "protected_filtered_strict": {
+      "correct": 22,
+      "rows": 22,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "protected_filtered_validation": {
+      "correct": 20,
+      "rows": 22,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "protected_old_canary_strict": {
+      "correct": 23,
+      "rows": 23,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "protected_old_canary_validation": {
+      "correct": 21,
+      "rows": 23,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "protected_residual_bank": {
+      "correct": 7,
+      "rows": 10,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    }
+  },
+  "routed_policy_route_counts": {
+    "stage11507_selected": 100,
+    "stage11625_web_head": 150
+  },
+  "source_artifacts": {
+    "routed_audit": "runs/local/artifacts/stage11633_routed_product_scorer_audit/routed_product_scorer_audit.json",
+    "routed_policy_freeze": "runs/local/artifacts/stage11634_routed_policy_freeze_and_anticheat/routed_policy_freeze_and_anticheat.json",
+    "web_gemma_rows": "runs/local/artifacts/stage11549_web_root_heldout_same_manifest_gemma_comparison/web_root_heldout_gemma_rows.jsonl",
+    "web_gemma_summary": "runs/local/artifacts/stage11549_web_root_heldout_same_manifest_gemma_comparison/web_root_heldout_same_manifest_gemma_comparison.json",
+    "web_rows": "runs/local/artifacts/stage11548_web_root_heldout_stage11507_score_audit/web_root_heldout_rows.jsonl"
+  },
+  "stage": 11635,
+  "stage_name": "stage11635_routed_product_gemma_comparison_audit",
+  "web_same_manifest_comparison": {
+    "delta_routed_100m_minus_gemma": -0.21212121212121204,
+    "delta_routed_100m_minus_stage11507": 0.045454545454545525,
+    "gemma12b_accuracy": 0.7878787878787878,
+    "gemma12b_correct": 52,
+    "gemma12b_rows": 66,
+    "routed_100m_accuracy": 0.5757575757575758,
+    "routed_100m_correct": 38,
+    "routed_100m_rows": 66,
+    "rowset": "web_root_heldout_66",
+    "stage11507_100m_accuracy": 0.5303030303030303,
+    "stage11507_100m_correct": 35,
+    "stage11507_100m_rows": 66
+  }
+}

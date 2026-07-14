@@ -1,0 +1,51 @@
+{
+  "admitted_rows": 12,
+  "claim_boundary": "Rows are train-support only. No model promotion follows from this artifact.",
+  "decision": "admit_positive_buildrun_expansion_train_support",
+  "language_counts": {
+    "c_cpp": 3,
+    "python": 3,
+    "rust": 4,
+    "web_js_ts_html": 2
+  },
+  "next_stage_recommendation": {
+    "action": "Merge positive/build-run rows and report remaining Transition-Root-250 floors.",
+    "stage": "stage12030_transition_support_rollup_v22"
+  },
+  "rejected_probe_count": 3,
+  "rejected_probes": [
+    {
+      "command": "pytest tests/utils/test_resource_utils.py",
+      "reason": "missing mcp dependency during collection",
+      "repo_family": "lastmile-ai__mcp-agent",
+      "returncode": 2
+    },
+    {
+      "command": "cargo test models::wordpiece::tests::test_wordpiece",
+      "reason": "filter matched zero tests, excluded from PASS_TO_PASS",
+      "repo_family": "tokenizers",
+      "returncode": 0
+    },
+    {
+      "command": "cargo test normalizers::bert::tests::test_bert_normalizer",
+      "reason": "filter matched zero tests, excluded from PASS_TO_PASS",
+      "repo_family": "tokenizers",
+      "returncode": 0
+    }
+  ],
+  "repo_family_counts": {
+    "benchmark": 3,
+    "einops": 2,
+    "lastmile-ai__mcp-agent": 1,
+    "modelcontextprotocol__typescript-sdk": 1,
+    "openclaw__clawhub": 1,
+    "tokenizers": 4
+  },
+  "rows_path": "runs/local/artifacts/stage12029_positive_buildrun_expansion_rows/positive_buildrun_expansion_rows.jsonl",
+  "stage": "stage12029_positive_buildrun_expansion_rows",
+  "status_counts": {
+    "PASS_CURRENT_BUILD_AND_RUN": 1,
+    "PASS_TO_PASS": 11
+  },
+  "unique_roots": 12
+}

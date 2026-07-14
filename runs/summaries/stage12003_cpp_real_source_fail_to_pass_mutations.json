@@ -1,0 +1,354 @@
+{
+  "admitted_rows": 3,
+  "claim_boundary": "Real local benchmark source mutation with baseline/mutant/restored build+CTest evidence; train-support only, one repo family.",
+  "created_at_utc": "2026-07-14T20:31:52Z",
+  "decision": "admit_cpp_real_source_fail_to_pass_train_support",
+  "language_counts": {
+    "c_cpp": 3
+  },
+  "next_stage_recommendation": {
+    "action": "Merge C++ FAIL_TO_PASS rows and report remaining floors.",
+    "stage": "stage12004_transition_support_rollup_v9"
+  },
+  "probe_cards": [
+    {
+      "admitted": true,
+      "baseline": {
+        "build": {
+          "command": [
+            "cmake",
+            "--build",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "--target",
+            "diagnostics_test",
+            "-j2"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 0.172,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_check_cc_diagnostics_compile_guard_baseline_build.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "[ 90%] Built target benchmark\n[100%] Built target diagnostics_test\n",
+          "timed_out": false
+        },
+        "execute": {
+          "command": [
+            "ctest",
+            "--test-dir",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "-R",
+            "^(diagnostics_test)$",
+            "--output-on-failure"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 0.059,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_check_cc_diagnostics_compile_guard_baseline_ctest.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "Internal ctest changing into directory: /data/tmp/stage11876_benchmark_extra_build\nTest project /data/tmp/stage11876_benchmark_extra_build\n    Start 47: diagnostics_test\n1/1 Test #47: diagnostics_test .................   Passed    0.04 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   0.04 sec\n",
+          "timed_out": false
+        }
+      },
+      "baseline_pass": true,
+      "mutant": {
+        "build": {
+          "command": [
+            "cmake",
+            "--build",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "--target",
+            "diagnostics_test",
+            "-j2"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 0.565,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_check_cc_diagnostics_compile_guard_mutant_build.json",
+          "returncode": 2,
+          "stderr_tail": "/data/repositories/benchmark/src/check.cc:16:41: error: expected primary-expression at end of input\n   16 | int __stage12003_forced_compile_error( {\n      |                                         ^\n/data/repositories/benchmark/src/check.cc:16:41: error: expected \u2018}\u2019 at end of input\n   16 | int __stage12003_forced_compile_error( {\n      |                                        ~^\n/data/repositories/benchmark/src/check.cc:16:41: error: expected \u2018)\u2019 at end of input\n   16 | int __stage12003_forced_compile_error( {\n      |                                      ~  ^\n      |                                         )\ngmake[3]: *** [src/CMakeFiles/benchmark.dir/build.make:146: src/CMakeFiles/benchmark.dir/check.cc.o] Error 1\ngmake[2]: *** [CMakeFiles/Makefile2:190: src/CMakeFiles/benchmark.dir/all] Error 2\ngmake[1]: *** [CMakeFiles/Makefile2:564: test/CMakeFiles/diagnostics_test.dir/rule] Error 2\ngmake: *** [Makefile:316: diagnostics_test] Error 2\n",
+          "stdout_tail": "[  4%] Building CXX object src/CMakeFiles/benchmark.dir/check.cc.o\n",
+          "timed_out": false
+        },
+        "execute": null
+      },
+      "mutant_failed": true,
+      "mutation_applied": true,
+      "restored": {
+        "build": {
+          "command": [
+            "cmake",
+            "--build",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "--target",
+            "diagnostics_test",
+            "-j2"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 1.022,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_check_cc_diagnostics_compile_guard_restored_build.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "[  4%] Building CXX object src/CMakeFiles/benchmark.dir/check.cc.o\n[  9%] Linking CXX static library libbenchmark.a\n[ 90%] Built target benchmark\n[ 95%] Linking CXX executable diagnostics_test\n[100%] Built target diagnostics_test\n",
+          "timed_out": false
+        },
+        "execute": {
+          "command": [
+            "ctest",
+            "--test-dir",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "-R",
+            "^(diagnostics_test)$",
+            "--output-on-failure"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 0.066,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_check_cc_diagnostics_compile_guard_restored_ctest.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "Internal ctest changing into directory: /data/tmp/stage11876_benchmark_extra_build\nTest project /data/tmp/stage11876_benchmark_extra_build\n    Start 47: diagnostics_test\n1/1 Test #47: diagnostics_test .................   Passed    0.05 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   0.05 sec\n",
+          "timed_out": false
+        }
+      },
+      "restored_matches_original": true,
+      "restored_pass": true,
+      "spec": {
+        "build_dir": "/data/tmp/stage11876_benchmark_extra_build",
+        "ctest_regex": "^(diagnostics_test)$",
+        "id": "benchmark_check_cc_diagnostics_compile_guard",
+        "selected_verifier_path": "diagnostics_test via cmake --build + ctest",
+        "source_file": "src/check.cc",
+        "targets": [
+          "diagnostics_test"
+        ]
+      }
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "build": {
+          "command": [
+            "cmake",
+            "--build",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "--target",
+            "benchmark_min_time_flag_time_test",
+            "-j2"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 0.305,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_commandlineflags_min_time_compile_guard_baseline_build.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "[ 90%] Built target benchmark\n[ 95%] Linking CXX executable benchmark_min_time_flag_time_test\n[100%] Built target benchmark_min_time_flag_time_test\n",
+          "timed_out": false
+        },
+        "execute": {
+          "command": [
+            "ctest",
+            "--test-dir",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "-R",
+            "^(min_time_flag_time)$",
+            "--output-on-failure"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 0.026,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_commandlineflags_min_time_compile_guard_baseline_ctest.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "Internal ctest changing into directory: /data/tmp/stage11876_benchmark_extra_build\nTest project /data/tmp/stage11876_benchmark_extra_build\n    Start 6: min_time_flag_time\n1/1 Test #6: min_time_flag_time ...............   Passed    0.01 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   0.01 sec\n",
+          "timed_out": false
+        }
+      },
+      "baseline_pass": true,
+      "mutant": {
+        "build": {
+          "command": [
+            "cmake",
+            "--build",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "--target",
+            "benchmark_min_time_flag_time_test",
+            "-j2"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 1.058,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_commandlineflags_min_time_compile_guard_mutant_build.json",
+          "returncode": 2,
+          "stderr_tail": "/data/repositories/benchmark/src/commandlineflags.cc:323:41: error: expected primary-expression at end of input\n  323 | int __stage12003_forced_compile_error( {\n      |                                         ^\n/data/repositories/benchmark/src/commandlineflags.cc:323:41: error: expected \u2018}\u2019 at end of input\n  323 | int __stage12003_forced_compile_error( {\n      |                                        ~^\n/data/repositories/benchmark/src/commandlineflags.cc:323:41: error: expected \u2018)\u2019 at end of input\n  323 | int __stage12003_forced_compile_error( {\n      |                                      ~  ^\n      |                                         )\ngmake[3]: *** [src/CMakeFiles/benchmark.dir/build.make:174: src/CMakeFiles/benchmark.dir/commandlineflags.cc.o] Error 1\ngmake[2]: *** [CMakeFiles/Makefile2:190: src/CMakeFiles/benchmark.dir/all] Error 2\ngmake[1]: *** [CMakeFiles/Makefile2:432: test/CMakeFiles/benchmark_min_time_flag_time_test.dir/rule] Error 2\ngmake: *** [Makefile:251: benchmark_min_time_flag_time_test] Error 2\n",
+          "stdout_tail": "[  4%] Building CXX object src/CMakeFiles/benchmark.dir/commandlineflags.cc.o\n",
+          "timed_out": false
+        },
+        "execute": null
+      },
+      "mutant_failed": true,
+      "mutation_applied": true,
+      "restored": {
+        "build": {
+          "command": [
+            "cmake",
+            "--build",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "--target",
+            "benchmark_min_time_flag_time_test",
+            "-j2"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 1.9,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_commandlineflags_min_time_compile_guard_restored_build.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "[  4%] Building CXX object src/CMakeFiles/benchmark.dir/commandlineflags.cc.o\n[  9%] Linking CXX static library libbenchmark.a\n[ 90%] Built target benchmark\n[ 95%] Linking CXX executable benchmark_min_time_flag_time_test\n[100%] Built target benchmark_min_time_flag_time_test\n",
+          "timed_out": false
+        },
+        "execute": {
+          "command": [
+            "ctest",
+            "--test-dir",
+            "/data/tmp/stage11876_benchmark_extra_build",
+            "-R",
+            "^(min_time_flag_time)$",
+            "--output-on-failure"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 0.024,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_commandlineflags_min_time_compile_guard_restored_ctest.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "Internal ctest changing into directory: /data/tmp/stage11876_benchmark_extra_build\nTest project /data/tmp/stage11876_benchmark_extra_build\n    Start 6: min_time_flag_time\n1/1 Test #6: min_time_flag_time ...............   Passed    0.01 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   0.01 sec\n",
+          "timed_out": false
+        }
+      },
+      "restored_matches_original": true,
+      "restored_pass": true,
+      "spec": {
+        "build_dir": "/data/tmp/stage11876_benchmark_extra_build",
+        "ctest_regex": "^(min_time_flag_time)$",
+        "id": "benchmark_commandlineflags_min_time_compile_guard",
+        "selected_verifier_path": "min_time_flag_time via cmake --build + ctest",
+        "source_file": "src/commandlineflags.cc",
+        "targets": [
+          "benchmark_min_time_flag_time_test"
+        ]
+      }
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "build": {
+          "command": [
+            "cmake",
+            "--build",
+            "/data/tmp/stage11872_benchmark_build",
+            "--target",
+            "filter_test",
+            "-j2"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 1.974,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_register_filter_compile_guard_baseline_build.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "[  4%] Building CXX object src/CMakeFiles/benchmark.dir/check.cc.o\n[  9%] Building CXX object src/CMakeFiles/benchmark.dir/commandlineflags.cc.o\n[ 13%] Linking CXX static library libbenchmark.a\n[ 90%] Built target benchmark\n[ 95%] Linking CXX executable filter_test\n[100%] Built target filter_test\n",
+          "timed_out": false
+        },
+        "execute": {
+          "command": [
+            "ctest",
+            "--test-dir",
+            "/data/tmp/stage11872_benchmark_build",
+            "-R",
+            "^(filter_simple|filter_regex_all)$",
+            "--output-on-failure"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 0.032,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_register_filter_compile_guard_baseline_ctest.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "Internal ctest changing into directory: /data/tmp/stage11872_benchmark_build\nTest project /data/tmp/stage11872_benchmark_build\n    Start  8: filter_simple\n1/2 Test  #8: filter_simple ....................   Passed    0.01 sec\n    Start 16: filter_regex_all\n2/2 Test #16: filter_regex_all .................   Passed    0.01 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.02 sec\n",
+          "timed_out": false
+        }
+      },
+      "baseline_pass": true,
+      "mutant": {
+        "build": {
+          "command": [
+            "cmake",
+            "--build",
+            "/data/tmp/stage11872_benchmark_build",
+            "--target",
+            "filter_test",
+            "-j2"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 1.855,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_register_filter_compile_guard_mutant_build.json",
+          "returncode": 2,
+          "stderr_tail": "/data/repositories/benchmark/src/benchmark_register.cc:546:41: error: expected primary-expression at end of input\n  546 | int __stage12003_forced_compile_error( {\n      |                                         ^\n/data/repositories/benchmark/src/benchmark_register.cc:546:41: error: expected \u2018}\u2019 at end of input\n  546 | int __stage12003_forced_compile_error( {\n      |                                        ~^\n/data/repositories/benchmark/src/benchmark_register.cc:546:41: error: expected \u2018)\u2019 at end of input\n  546 | int __stage12003_forced_compile_error( {\n      |                                      ~  ^\n      |                                         )\ngmake[3]: *** [src/CMakeFiles/benchmark.dir/build.make:118: src/CMakeFiles/benchmark.dir/benchmark_register.cc.o] Error 1\ngmake[2]: *** [CMakeFiles/Makefile2:190: src/CMakeFiles/benchmark.dir/all] Error 2\ngmake[1]: *** [CMakeFiles/Makefile2:406: test/CMakeFiles/filter_test.dir/rule] Error 2\ngmake: *** [Makefile:238: filter_test] Error 2\n",
+          "stdout_tail": "[  4%] Building CXX object src/CMakeFiles/benchmark.dir/benchmark_register.cc.o\n",
+          "timed_out": false
+        },
+        "execute": null
+      },
+      "mutant_failed": true,
+      "mutation_applied": true,
+      "restored": {
+        "build": {
+          "command": [
+            "cmake",
+            "--build",
+            "/data/tmp/stage11872_benchmark_build",
+            "--target",
+            "filter_test",
+            "-j2"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 6.59,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_register_filter_compile_guard_restored_build.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "[  4%] Building CXX object src/CMakeFiles/benchmark.dir/benchmark_register.cc.o\n[  9%] Linking CXX static library libbenchmark.a\n[ 90%] Built target benchmark\n[ 95%] Linking CXX executable filter_test\n[100%] Built target filter_test\n",
+          "timed_out": false
+        },
+        "execute": {
+          "command": [
+            "ctest",
+            "--test-dir",
+            "/data/tmp/stage11872_benchmark_build",
+            "-R",
+            "^(filter_simple|filter_regex_all)$",
+            "--output-on-failure"
+          ],
+          "cwd": "/data/repositories/benchmark",
+          "duration_sec": 0.032,
+          "log_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/logs/benchmark_register_filter_compile_guard_restored_ctest.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "Internal ctest changing into directory: /data/tmp/stage11872_benchmark_build\nTest project /data/tmp/stage11872_benchmark_build\n    Start  8: filter_simple\n1/2 Test  #8: filter_simple ....................   Passed    0.01 sec\n    Start 16: filter_regex_all\n2/2 Test #16: filter_regex_all .................   Passed    0.01 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.02 sec\n",
+          "timed_out": false
+        }
+      },
+      "restored_matches_original": true,
+      "restored_pass": true,
+      "spec": {
+        "build_dir": "/data/tmp/stage11872_benchmark_build",
+        "ctest_regex": "^(filter_simple|filter_regex_all)$",
+        "id": "benchmark_register_filter_compile_guard",
+        "selected_verifier_path": "filter_simple/filter_regex_all via cmake --build + ctest",
+        "source_file": "src/benchmark_register.cc",
+        "targets": [
+          "filter_test"
+        ]
+      }
+    }
+  ],
+  "repo_family_counts": {
+    "benchmark": 3
+  },
+  "rows_attempted": 3,
+  "rows_path": "runs/local/artifacts/stage12003_cpp_real_source_fail_to_pass_mutations/cpp_real_source_fail_to_pass_rows.jsonl",
+  "stage": "stage12003_cpp_real_source_fail_to_pass_mutations",
+  "status_counts": {
+    "FAIL_TO_PASS": 3
+  }
+}

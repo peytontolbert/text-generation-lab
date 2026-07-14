@@ -1,0 +1,88 @@
+{
+  "claim_boundary": [
+    "This is support inventory only. It does not train or improve the model by itself.",
+    "Rows are selected from existing canonical train-support roots and exclude bridged heldout roots."
+  ],
+  "created_at_utc": "2026-07-14T05:14:54Z",
+  "decision": "targeted_web_gap_support_inventory_insufficient",
+  "gap_characterization": {
+    "gap_need_counts": {
+      "adjacent_support": 6,
+      "verifier_transition_same_role": 7
+    },
+    "gap_roots": 8,
+    "gap_rows": 13,
+    "gap_target_role_counts": {
+      "candidate_change_surface": 3,
+      "verifier_and_test_constraint": 10
+    },
+    "gap_task_counts": {
+      "minimal_fix_selection": 2,
+      "symptom_localization": 4,
+      "verifier_outcome": 7
+    }
+  },
+  "gates": {
+    "has_same_role_source_fix_support": false,
+    "has_symptom_verifier_surface_support": false,
+    "has_verifier_transition_support": true,
+    "no_heldout_root_overlap": true,
+    "support_roots_at_least_10": true,
+    "support_rows_at_least_40": true
+  },
+  "outputs": {
+    "blocked_rows": "runs/local/artifacts/stage11693_web_gap_targeted_support_inventory/web_gap_targeted_blocked_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11693_web_gap_targeted_support_inventory/web_gap_targeted_support_inventory.json",
+    "support_rows": "runs/local/artifacts/stage11693_web_gap_targeted_support_inventory/web_gap_targeted_support_rows.jsonl"
+  },
+  "recommended_next": [
+    "If ready, run a guarded head-only probe using these support rows plus protected replay; promotion requires Web bridged >56/66 and protected gates preserved.",
+    "If insufficient, materialize fresh disjoint Web roots specifically for verifier_transition_same_role and same_role_source_or_fix_discrimination.",
+    "Do not train on the 66 bridged heldout rows or the 13 Gemma-margin rows."
+  ],
+  "source_artifacts": {
+    "gap": "runs/local/artifacts/stage11692_web_bridged_miss_family_audit/web_bridged_gemma_margin_rows.jsonl",
+    "heldout": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit/original_web_canonical_bridged_rows.jsonl",
+    "train": "runs/local/artifacts/stage11663_web_canonical_renderer_package/web_canonical_train_support.jsonl"
+  },
+  "stage": 11693,
+  "stage_name": "stage11693_web_gap_targeted_support_inventory",
+  "support_inventory": {
+    "admitted_by_need": {
+      "adjacent_support": 96,
+      "same_role_source_or_fix_discrimination": 4,
+      "symptom_verifier_vs_candidate_surface": 8,
+      "verifier_transition_same_role": 55
+    },
+    "admitted_by_repo": {
+      "@modelcontextprotocol/client": 1,
+      "@modelcontextprotocol/core": 2,
+      "@modelcontextprotocol/server": 2,
+      "bddy_website": 12,
+      "convex": 9,
+      "frontend": 54,
+      "llama_stack_ui": 42,
+      "modelcontextprotocol_typescript_sdk": 5,
+      "openclaw_clawhub": 15,
+      "openhands_openhands": 4,
+      "openhands_openhands_frontend": 8,
+      "sourcebot": 9
+    },
+    "admitted_by_target_role": {
+      "candidate_change_surface": 88,
+      "nearby_definition_or_usage_context": 3,
+      "symptom_or_call_path_analogue": 2,
+      "verifier_and_test_constraint": 70
+    },
+    "admitted_by_task": {
+      "minimal_fix_selection": 54,
+      "symptom_localization": 54,
+      "verifier_outcome": 55
+    },
+    "admitted_roots": 65,
+    "admitted_rows": 163,
+    "blocked_reasons": {},
+    "blocked_rows": 0,
+    "candidate_train_rows_scanned": 334
+  }
+}

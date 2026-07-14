@@ -1,0 +1,65 @@
+{
+  "candidate_policy": "all-supported text-rich evidence gate over evidence_candidate_judgment head",
+  "candidate_runtime": "runs/local/artifacts/stage11558_expanded_text_rich_web_evidence_bridge_probe/runtime_model/runtime_model_bundle.json",
+  "created_at_utc": "2026-07-13T21:15:48Z",
+  "decision": "do_not_promote_stage11558_runtime_or_bridge_policy",
+  "interpretation": {
+    "negative_result": "Expanding bridge train rows from 11 to 21 did not improve Web beyond Stage11556 and did not preserve Stage11507 residual 7/10.",
+    "promotion_blockers": [
+      "residual 6/10 is below selected Stage11507 residual 7/10",
+      "Web 45/66 remains below Gemma 52/66"
+    ],
+    "recommended_next_step": "Stop bridge-only training at this size. Build broader Web root supply covering non-evidence perspectives, especially OpenHands/Llama symptom/verifier/minimal/abstention rows, or change the scorer/objective for non-evidence Web tasks.",
+    "useful_result": "The safe text-rich evidence gate remains useful and raises Web heldout from 35/66 to 45/66 under the bridge-trained runtime."
+  },
+  "passed": false,
+  "promotion_gates": {
+    "filtered_strict_preserves_stage11507": true,
+    "full_coverage_preserved": true,
+    "old_canary_strict_preserves_stage11507": true,
+    "residual_preserves_stage11507": false,
+    "web_beats_same_manifest_gemma": false,
+    "web_improves_stage11507_base": true
+  },
+  "scoreboard": {
+    "gemma12b_web_root_heldout_same_manifest": {
+      "accuracy": 0.7878787878787878,
+      "correct": 52,
+      "rows": 66
+    },
+    "stage11507_base_web": {
+      "accuracy": 0.5303030303030303,
+      "correct": 35,
+      "rows": 66
+    },
+    "stage11554_stage11507_inference_only_gated_web": {
+      "accuracy": 0.6363636363636364,
+      "correct": 42,
+      "rows": 66
+    },
+    "stage11556_stage11555_runtime_gated_web": {
+      "accuracy": 0.6818181818181818,
+      "correct": 45,
+      "rows": 66
+    },
+    "stage11559_stage11558_runtime_gated_residual": {
+      "accuracy": 0.6,
+      "correct": 6,
+      "coverage": 1.0,
+      "rows": 10
+    },
+    "stage11559_stage11558_runtime_gated_web": {
+      "accuracy": 0.6818181818181818,
+      "correct": 45,
+      "coverage": 1.0,
+      "rows": 66
+    }
+  },
+  "selected_frontier_remains": "stage11507 + encoder_option_retrieval_evidence_judgment_head",
+  "source_artifacts": {
+    "stage11549": "runs/summaries/stage11549_web_root_heldout_same_manifest_gemma_comparison.json",
+    "stage11559": "runs/summaries/stage11559_expanded_text_rich_bridge_postrun_gate_audit.json"
+  },
+  "stage": 11560,
+  "stage_name": "expanded_text_rich_bridge_promotion_decision"
+}

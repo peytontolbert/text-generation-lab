@@ -1,0 +1,72 @@
+{
+  "stage": 10265,
+  "stage_name": "stage10265_code_assist_web_commit_ai_adjudication",
+  "created_at_utc": "2026-07-11T00:00:00Z",
+  "passed": true,
+  "inputs": {
+    "bundle_candidates": "runs/local/artifacts/stage10264_code_assist_web_commit_bundle_candidates/code_assist_web_commit_bundle_candidates.json",
+    "commit_manifest": "runs/local/artifacts/stage10263_code_assist_web_git_history_candidate_manifest/code_assist_web_git_history_candidate_manifest.json",
+    "dashboard_verifier_anchor": "/data/code_assist/tests/integration/test_dashboard_api.py"
+  },
+  "review_scope": "AI maintainer adjudication for two code_assist commit-level web bundle candidates. This review decides train-support and repo-overlap stress-eval admissibility only, not source-heldout headline admissibility.",
+  "bundle_reviews": [
+    {
+      "bundle_id": "stage10264::code_assist_git_commit::a305b18b7f85::web_js_ts_html",
+      "commit": "a305b18b7f855b45324e9fceda995e87a3536ef6",
+      "subject": "ui: expose latest verdict endpoint in dashboard",
+      "maintainer_rubric_passed": true,
+      "anti_cheat_passed_with_caution": true,
+      "admissible_for_train_support_now": true,
+      "admissible_for_repo_overlap_stress_eval_now": true,
+      "admissible_for_source_heldout_headline_claim": false,
+      "gold_primary_target": "src/code_assist/ui/fastapi_dashboard.py",
+      "rationale": [
+        "The diff adds a new backend API route and the dashboard JS/UI reads from it, so the behavior-owning surface is the FastAPI backend even though multiple asset files change.",
+        "The selected verifier anchor is relevant: the dashboard API integration tests are maintainer-meaningful and provide a visible verification surface.",
+        "The candidate set is competitive enough to avoid trivial one-token routing, but same-repo overlap means this should not be treated as heldout headline evidence."
+      ],
+      "shortcut_risks": [
+        "FastAPI route additions may bias the model toward backend ownership without proving it read the verifier/test evidence.",
+        "The commit subject names 'endpoint', which correlates with backend ownership and should not be shown verbatim in prompt-visible evidence."
+      ],
+      "recommended_use": [
+        "Allow as standalone train-support web bundle after prompt-visible evidence strips commit subject leakage.",
+        "Allow as harness or standalone repo-overlap stress-eval bundle.",
+        "Do not use for source-heldout headline web claims."
+      ]
+    },
+    {
+      "bundle_id": "stage10264::code_assist_git_commit::b94562d7b708::web_js_ts_html",
+      "commit": "b94562d7b7088a75277790b983f2eae74e381897",
+      "subject": "updates",
+      "maintainer_rubric_passed": true,
+      "anti_cheat_passed_with_caution": true,
+      "admissible_for_train_support_now": true,
+      "admissible_for_repo_overlap_stress_eval_now": true,
+      "admissible_for_source_heldout_headline_claim": false,
+      "gold_primary_target": "src/code_assist/ui/fastapi_dashboard.py",
+      "rationale": [
+        "This commit changes JS, HTML, and backend route handling together. The backend remains the most plausible behavior owner when judged against the dashboard API verifier anchor.",
+        "The competing frontend surfaces remain plausible enough to make localization nontrivial, which is useful for train-support and stress evaluation.",
+        "The lack of a descriptive commit subject reduces one shortcut channel relative to the later verdict commit."
+      ],
+      "shortcut_risks": [
+        "Because the verifier anchor is integration-heavy, the model may still learn a backend-prior from test style rather than from the specific changed behavior.",
+        "Same-repo overlap remains the main claim boundary; this is not a heldout repo-family win."
+      ],
+      "recommended_use": [
+        "Allow as standalone train-support web bundle after commit metadata stays hidden from prompts.",
+        "Allow as repo-overlap stress-eval bundle to test whether the 100M still generalizes across distinct UI commit roots in the same repo.",
+        "Do not use for source-heldout headline web claims."
+      ]
+    }
+  ],
+  "global_decision": {
+    "bundles_reviewed": 2,
+    "train_support_admitted": 2,
+    "repo_overlap_stress_eval_admitted": 2,
+    "source_heldout_headline_admitted": 0,
+    "needs_fresh_non_overlapping_repo_family_for_headline_web_claim": true
+  },
+  "next_best_step": "Project these two adjudicated code_assist commit-level bundles into compact standalone rows and harness stress-eval rows, while keeping source-heldout headline web claims frozen until a non-overlapping repo family exists."
+}

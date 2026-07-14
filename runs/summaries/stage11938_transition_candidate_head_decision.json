@@ -1,0 +1,58 @@
+{
+  "created_at_utc": "2026-07-14T16:32:09Z",
+  "decision": "reject_stage11935_transition_candidate_head_and_composite_route",
+  "gemma_reference_score": {
+    "accuracy": 0.603125,
+    "correct": 386,
+    "rows": 640
+  },
+  "interpretation": [
+    "A transition-specific metadata head trained from Stage11924 did not improve transfer; it regressed transition projection from 364/640 to 336/640.",
+    "Composing semantic and transition heads recovered only 340/640, so the new head is not useful as an inference residual.",
+    "Protected compact gates stayed preserved, so this is a clean negative result rather than a catastrophic interference failure."
+  ],
+  "next_recommended_experiment": [
+    "Do not run more same-head transition metadata probes.",
+    "Target the remaining Gemma gap with verifier-transition/continue-stop label balancing and C/C++ transition analogues, or implement a true multi-head/listwise objective trained jointly rather than an additive residual head."
+  ],
+  "protected_gates_preserved_in_candidate_head": {
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "residual_preserved": true,
+    "smoke_preserved": true
+  },
+  "protected_gates_preserved_in_composite": {
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "residual_preserved": true,
+    "smoke_preserved": true
+  },
+  "rejected_candidate_head_score": {
+    "accuracy": 0.525,
+    "correct": 336,
+    "coverage": 1.0,
+    "miss_count": 304,
+    "rows": 640
+  },
+  "rejected_composite_score": {
+    "accuracy": 0.53125,
+    "correct": 340,
+    "coverage": 1.0,
+    "miss_count": 300,
+    "rows": 640
+  },
+  "selected_transition_frontier": "stage11924_transition_listwise_head_only_probe + encoder_option_retrieval_semantic_candidate_head",
+  "selected_transition_score": {
+    "accuracy": 0.56875,
+    "correct": 364,
+    "coverage": 1.0,
+    "miss_count": 276,
+    "rows": 640
+  },
+  "stage": 11938,
+  "stage_name": "stage11938_transition_candidate_head_decision"
+}

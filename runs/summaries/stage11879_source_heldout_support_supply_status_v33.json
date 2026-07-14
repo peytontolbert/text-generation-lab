@@ -1,0 +1,81 @@
+{
+  "claim_boundary": [
+    "No model frontier score changed in this stage.",
+    "No training, Gemma comparison, or full-product claim is implied.",
+    "C/C++ quota closure includes multiple google_benchmark same-repo-family support roots."
+  ],
+  "created_at_utc": "2026-07-14T12:59:08Z",
+  "decision": "support_supply_ready_for_guarded_training_probe_request",
+  "next_actions": [
+    "Build a guarded training probe request only if accepting same-repo-family C/C++ support is appropriate for this diagnostic.",
+    "Keep source-heldout breadth claims separate from this support quota closure.",
+    "Preserve Python and Rust completed quotas."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11879_source_heldout_support_supply_status_v33/source_heldout_support_supply_status_v33.json"
+  },
+  "passed": true,
+  "quota_satisfied": {
+    "cpp_abstain_attractor_support": true,
+    "python_verifier_support": true,
+    "rust_verifier_support": true
+  },
+  "source_artifacts": {
+    "cpp_support": "runs/local/artifacts/stage11878_cpp_abstain_support_combined_audit_v9/cpp_abstain_support_combined_audit_v9.json",
+    "python_support": "runs/local/artifacts/stage11870_python_verifier_support_combined_audit_v13/python_verifier_support_combined_audit_v13.json",
+    "rust_evidence_support": "runs/local/artifacts/stage11751_rust_existing_evidence_support_audit/rust_existing_evidence_support_audit.json",
+    "rust_support": "runs/local/artifacts/stage11854_rust_verifier_support_combined_audit_v11/rust_verifier_support_combined_audit_v11.json"
+  },
+  "stage": 11879,
+  "stage_name": "stage11879_source_heldout_support_supply_status_v33",
+  "support_status": {
+    "cpp_abstain_attractor_support": {
+      "materialized_rows": "runs/local/artifacts/stage11878_cpp_abstain_support_combined_audit_v9/cpp_abstain_support_rows_v9.jsonl",
+      "ready_roots": 16,
+      "ready_rows": 64,
+      "remaining_support_roots": 0,
+      "repo_families_ready": [
+        "bitsandbytes",
+        "faiss",
+        "google_benchmark",
+        "pytorch",
+        "whisper_cpp"
+      ],
+      "required_support_roots": 16,
+      "same_repo_family_warning": "google_benchmark contributes multiple train-support roots; use for quota closure/probe support, not source-heldout breadth claims."
+    },
+    "python_verifier_support": {
+      "materialized_rows": "runs/local/artifacts/stage11870_python_verifier_support_combined_audit_v13/python_verifier_support_combined_rows_v13.jsonl",
+      "ready_roots": 12,
+      "ready_rows": 48,
+      "remaining_support_roots": 0,
+      "required_support_roots": 12
+    },
+    "rust_evidence_support_only": {
+      "claim_boundary": "Not counted toward Rust verifier_outcome quota.",
+      "ready_roots": 3,
+      "ready_rows": 9
+    },
+    "rust_verifier_support": {
+      "materialized_rows": "runs/local/artifacts/stage11854_rust_verifier_support_combined_audit_v11/rust_verifier_support_rows_v11.jsonl",
+      "ready_roots": 12,
+      "ready_rows": 48,
+      "remaining_support_roots": 0,
+      "repo_families_ready": [
+        "agent_kernel_lite_core",
+        "agent_kernel_rust_wasm",
+        "codex_agent_identity",
+        "codex_apply_patch",
+        "codex_config",
+        "codex_protocol",
+        "codex_rmcp_client",
+        "codex_tools",
+        "codex_utils_path",
+        "codex_utils_string",
+        "model_stack_bitnet_wasm"
+      ],
+      "required_support_roots": 12
+    }
+  },
+  "training_probe_ready": true
+}

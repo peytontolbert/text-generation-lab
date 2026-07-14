@@ -1,0 +1,250 @@
+{
+  "base_runtime_weights_sha256": "e11a15de598547b3683d867c0181095192b8a6f0578ad6d427d4c1c9b056b8c1",
+  "claim_scope": [
+    "Run a Python-only verifier-transition diagnostic probe from the current alias-safe runtime.",
+    "Use the quarantined 23-row reviewed-v2.7 canary only as a regression check while the fresh 2-row Python slice measures whether the remaining verifier-transition boundary actually moves."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10905_python_verifier_transition_probe_request/python_verifier_transition_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "90",
+    "--max-eval-rows",
+    "23",
+    "--max-strict-rows",
+    "2",
+    "--max-steps",
+    "96",
+    "--batch-size",
+    "2",
+    "--learning-rate",
+    "8e-6",
+    "--max-encoder-tokens",
+    "768",
+    "--max-decoder-tokens",
+    "8",
+    "--decoder-ce-weight",
+    "0.2",
+    "--bounded-choice-aux-weight",
+    "1.0",
+    "--bounded-choice-aux-source",
+    "encoder_option_retrieval",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "4.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "12",
+    "--max-generation-tokens",
+    "8",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10906_python_verifier_transition_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "0.1",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10906_python_verifier_transition_probe/bounded_decoder_probe",
+    "--run-id",
+    "stage10906_python_verifier_transition_probe"
+  ],
+  "created_at_utc": "2026-07-12T18:35:24Z",
+  "decision": "python_verifier_transition_probe_ready",
+  "diagnostic_intent": {
+    "focus": [
+      "python_verifier_outcome",
+      "verifier_candidate_semantics"
+    ],
+    "fresh_strict_row_ids": [
+      "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "stage10900::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1"
+    ],
+    "quarantined_canary_eval_rows": 23,
+    "reduced_preservation_kl": true
+  },
+  "initialize_from_runtime_model": "runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+  "language_counts_by_split": {
+    "eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "strict_eval": {
+      "python": 2
+    },
+    "train": {
+      "python": 90
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10905_python_verifier_transition_probe_request/python_verifier_transition_probe_manifest.jsonl",
+  "next_best_step": "Run the probe, then compare the saved runtime on the 2-row Python verifier slice and the quarantined 23-row canary before deciding whether the verifier-transition boundary actually moved.",
+  "output_dir": "runs/local/artifacts/stage10906_python_verifier_transition_probe/bounded_decoder_probe",
+  "package_metrics_snapshot": {
+    "base_metrics_snapshot": {
+      "evidence_citation_target_distribution": {
+        "A": 2,
+        "B": 11,
+        "C": 2,
+        "D": 6,
+        "E": 2
+      },
+      "new_row_language_counts": {
+        "python": 8
+      },
+      "new_row_task_counts": {
+        "abstention_insufficient_evidence": 1,
+        "alternative_hypothesis_elimination": 1,
+        "evidence_citation": 1,
+        "minimal_fix_selection": 1,
+        "patch_impact": 1,
+        "regression_risk": 1,
+        "symptom_localization": 1,
+        "verifier_outcome": 1
+      },
+      "stress_rows": 7,
+      "strict_rows": 24,
+      "train_by_language": {
+        "c_cpp": 109,
+        "python": 50,
+        "rust": 34
+      },
+      "train_by_task": {
+        "abstention_insufficient_evidence": 18,
+        "alternative_hypothesis_elimination": 1,
+        "cpp_implementation_vs_implementation": 1,
+        "evidence_citation": 23,
+        "evidence_role_classification": 71,
+        "minimal_fix_selection": 17,
+        "patch_impact": 18,
+        "python_implementation_vs_implementation": 2,
+        "regression_risk": 1,
+        "symptom_localization": 18,
+        "verifier_outcome": 23
+      },
+      "train_rows": 193,
+      "validation_rows": 24,
+      "verifier_outcome_target_distribution": {
+        "A": 11,
+        "B": 1,
+        "C": 1,
+        "D": 2,
+        "E": 2,
+        "H": 1,
+        "J": 1,
+        "V1": 4
+      }
+    },
+    "base_python_rows": 50,
+    "derived_candidate_rows": 40,
+    "stress_rows": 23,
+    "strict_rows": 2,
+    "train_by_target": {
+      "A": 27,
+      "B": 26,
+      "C": 9,
+      "D": 16,
+      "E": 6,
+      "F": 1,
+      "J": 1,
+      "V1": 4
+    },
+    "train_by_task": {
+      "abstention_insufficient_evidence": 5,
+      "alternative_hypothesis_elimination": 1,
+      "evidence_citation": 5,
+      "evidence_role_classification": 8,
+      "minimal_fix_selection": 4,
+      "patch_impact": 5,
+      "python_implementation_vs_implementation": 2,
+      "regression_risk": 1,
+      "symptom_localization": 5,
+      "verifier_candidate_role_classification": 40,
+      "verifier_outcome": 14
+    },
+    "train_roots": 10,
+    "train_rows": 90,
+    "validation_rows": 23
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "The 2-row Python verifier-transition slice remains diagnostic-only and cannot be promoted as a headline benchmark.",
+    "The 23-row canary remains unchanged and must be reported separately from the fresh slice.",
+    "Any apparent improvement is only meaningful if the stronger stage10894 row flips without canary regressions."
+  ],
+  "rows": 115,
+  "run_id": "stage10906_python_verifier_transition_probe",
+  "runtime_model_save_dir": "runs/local/artifacts/stage10906_python_verifier_transition_probe/runtime_model",
+  "source_package": "runs/local/artifacts/stage10904_python_verifier_transition_support_package/python_verifier_transition_support_package.json",
+  "split_counts": {
+    "eval": 23,
+    "strict_eval": 2,
+    "train": 90
+  },
+  "stage": 10905,
+  "stage_name": "stage10905_python_verifier_transition_probe_request",
+  "stress_rows_excluded_from_manifest": 23,
+  "task_counts_by_split": {
+    "eval": {
+      "abstention_insufficient_evidence": 4,
+      "evidence_citation": 3,
+      "minimal_fix_selection": 4,
+      "patch_impact": 4,
+      "symptom_localization": 4,
+      "verifier_outcome": 4
+    },
+    "strict_eval": {
+      "verifier_outcome_semantic_transition": 2
+    },
+    "train": {
+      "abstention_insufficient_evidence": 5,
+      "alternative_hypothesis_elimination": 1,
+      "evidence_citation": 5,
+      "evidence_role_classification": 8,
+      "minimal_fix_selection": 4,
+      "patch_impact": 5,
+      "python_implementation_vs_implementation": 2,
+      "regression_risk": 1,
+      "symptom_localization": 5,
+      "verifier_candidate_role_classification": 40,
+      "verifier_outcome": 14
+    }
+  }
+}

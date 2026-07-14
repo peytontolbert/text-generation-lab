@@ -13,7 +13,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    rows: list[dict[str, Any]] = []
+    with path.open('r', encoding='utf-8') as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            rows.append(json.loads(line))
+    return rows
 
 
 def _maybe_json(value: Any) -> Any:

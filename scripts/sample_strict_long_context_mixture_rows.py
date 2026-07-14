@@ -12,6 +12,7 @@ from long_context_common import write_json, write_jsonl
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG_PATH = ROOT / "configs" / "software_maintainer" / "strict_long_context_sampler_v1.json"
+COMPARISON_OPERATORS = ('>=', '<=', '!=', '==', '>', '<')
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -19,7 +20,13 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    rows: list[dict[str, Any]] = []
+    with path.open('r', encoding='utf-8') as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            rows.append(json.loads(line))
+    return rows
 
 
 def _resolve_path(base_dir: Path, value: str | None) -> Path | None:
@@ -32,6 +39,86 @@ def _resolve_path(base_dir: Path, value: str | None) -> Path | None:
     if candidate.is_absolute():
         return candidate
     return (base_dir / candidate).resolve()
+
+
+def _coerce_value(value: Any) -> Any:
+    if isinstance(value, str):
+        text = value.strip()
+        lowered = text.lower()
+        if lowered in {'true', 'false'}:
+            return lowered == 'true'
+        try:
+            if '.' in text:
+                return float(text)
+            return int(text)
+        except ValueError:
+            return text
+    return value
+
+
+def _numeric_value(value: Any) -> float:
+    coerced = _coerce_value(value)
+    if isinstance(coerced, bool):
+        return 1.0 if coerced else 0.0
+    if isinstance(coerced, (int, float)):
+        return float(coerced)
+    raise ValueError(f'non_numeric_filter_value:{value}')
+
+
+def _row_value(row: dict[str, Any], key: str) -> Any:
+    if key in row:
+        return row.get(key)
+    prefixed_key = f'mixture_{key}'
+    if prefixed_key in row:
+        return row.get(prefixed_key)
+    return None
+
+
+def _matches_clause(row: dict[str, Any], clause: str) -> bool:
+    clause = clause.strip()
+    if not clause:
+        return True
+    if ' contains ' in clause:
+        key, expected = clause.split(' contains ', 1)
+        actual = str(_row_value(row, key.strip()) or '')
+        return expected.strip() in actual
+    for operator in COMPARISON_OPERATORS:
+        if operator not in clause:
+            continue
+        key, expected = clause.split(operator, 1)
+        actual = _row_value(row, key.strip())
+        expected_value = _coerce_value(expected.strip())
+        actual_value = _coerce_value(actual)
+        if operator == '==':
+            return actual_value == expected_value
+        if operator == '!=':
+            return actual_value != expected_value
+        if actual is None:
+            return False
+        actual_numeric = _numeric_value(actual_value)
+        expected_numeric = _numeric_value(expected_value)
+        if operator == '>=':
+            return actual_numeric >= expected_numeric
+        if operator == '<=':
+            return actual_numeric <= expected_numeric
+        if operator == '>':
+            return actual_numeric > expected_numeric
+        if operator == '<':
+            return actual_numeric < expected_numeric
+    raise ValueError(f'unsupported_filter_clause:{clause}')
+
+
+def _matches_filter(row: dict[str, Any], filter_expr: str | None) -> bool:
+    if not filter_expr:
+        return True
+    or_groups = [part.strip() for part in str(filter_expr).split(' or ') if part.strip()]
+    if not or_groups:
+        return True
+    for group in or_groups:
+        and_clauses = [part.strip() for part in group.split(' and ') if part.strip()]
+        if and_clauses and all(_matches_clause(row, clause) for clause in and_clauses):
+            return True
+    return False
 
 
 def _normalized_split(row: dict[str, Any]) -> str:
@@ -64,6 +151,23 @@ def _weighted_sample(rows: list[dict[str, Any]], *, count: int, rng: random.Rand
     return selected
 
 
+def _passes_quality_thresholds(
+    row: dict[str, Any],
+    *,
+    min_state_delta_ready_fraction: float | None,
+    min_evidence_anchor_ready_fraction: float | None,
+) -> bool:
+    if min_state_delta_ready_fraction is not None:
+        value = _row_value(row, 'min_state_delta_ready_fraction')
+        if value is None or float(value) < float(min_state_delta_ready_fraction):
+            return False
+    if min_evidence_anchor_ready_fraction is not None:
+        value = _row_value(row, 'min_evidence_anchor_ready_fraction')
+        if value is None or float(value) < float(min_evidence_anchor_ready_fraction):
+            return False
+    return True
+
+
 def sample_strict_long_context_mixture_rows(
     *,
     rows_path: Path,
@@ -73,6 +177,9 @@ def sample_strict_long_context_mixture_rows(
     max_train_rows: int | None = None,
     max_eval_rows: int | None = None,
     max_strict_rows: int | None = None,
+    min_state_delta_ready_fraction: float | None = None,
+    min_evidence_anchor_ready_fraction: float | None = None,
+    filter_expr: str | None = None,
 ) -> dict[str, Any]:
     config_path = config_path.resolve()
     config = _read_json(config_path)
@@ -81,13 +188,32 @@ def sample_strict_long_context_mixture_rows(
     resolved_max_train = defaults.get('max_train_rows') if max_train_rows is None else max_train_rows
     resolved_max_eval = defaults.get('max_eval_rows') if max_eval_rows is None else max_eval_rows
     resolved_max_strict = defaults.get('max_strict_rows') if max_strict_rows is None else max_strict_rows
+    resolved_min_state_delta = defaults.get('min_state_delta_ready_fraction') if min_state_delta_ready_fraction is None else min_state_delta_ready_fraction
+    resolved_min_evidence_anchor = defaults.get('min_evidence_anchor_ready_fraction') if min_evidence_anchor_ready_fraction is None else min_evidence_anchor_ready_fraction
+    resolved_filter_expr = str(defaults.get('filter_expr') or '').strip() if filter_expr is None else str(filter_expr).strip()
+    if resolved_filter_expr == '':
+        resolved_filter_expr = None
 
     rows = _read_jsonl(rows_path)
     if not rows:
         raise ValueError('empty_mixture_rows')
 
-    by_split: dict[str, list[dict[str, Any]]] = {'train': [], 'eval': [], 'strict_eval': []}
+    filtered_rows: list[dict[str, Any]] = []
     for row in rows:
+        if not _passes_quality_thresholds(
+            row,
+            min_state_delta_ready_fraction=None if resolved_min_state_delta is None else float(resolved_min_state_delta),
+            min_evidence_anchor_ready_fraction=None if resolved_min_evidence_anchor is None else float(resolved_min_evidence_anchor),
+        ):
+            continue
+        if not _matches_filter(row, resolved_filter_expr):
+            continue
+        filtered_rows.append(row)
+    if not filtered_rows:
+        raise ValueError('empty_filtered_mixture_rows')
+
+    by_split: dict[str, list[dict[str, Any]]] = {'train': [], 'eval': [], 'strict_eval': []}
+    for row in filtered_rows:
         split = _normalized_split(row)
         row_copy = dict(row)
         row_copy['split'] = split
@@ -127,7 +253,11 @@ def sample_strict_long_context_mixture_rows(
         'output_dir': str(output_dir),
         'seed': resolved_seed,
         'caps': caps,
+        'filter_expr': resolved_filter_expr,
+        'min_state_delta_ready_fraction': resolved_min_state_delta,
+        'min_evidence_anchor_ready_fraction': resolved_min_evidence_anchor,
         'row_count': len(sampled),
+        'filtered_row_count': len(filtered_rows),
         'split_cards': split_cards,
     }
     write_json(card_path, card)
@@ -135,6 +265,7 @@ def sample_strict_long_context_mixture_rows(
         'manifest_path': str(manifest_path),
         'card_path': str(card_path),
         'row_count': len(sampled),
+        'filtered_row_count': len(filtered_rows),
         'split_cards': split_cards,
     }
 
@@ -148,6 +279,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument('--max-train-rows', type=int)
     parser.add_argument('--max-eval-rows', type=int)
     parser.add_argument('--max-strict-rows', type=int)
+    parser.add_argument('--min-state-delta-ready-fraction', type=float)
+    parser.add_argument('--min-evidence-anchor-ready-fraction', type=float)
+    parser.add_argument('--filter-expr')
     return parser.parse_args()
 
 
@@ -161,6 +295,9 @@ def main() -> None:
         max_train_rows=args.max_train_rows,
         max_eval_rows=args.max_eval_rows,
         max_strict_rows=args.max_strict_rows,
+        min_state_delta_ready_fraction=args.min_state_delta_ready_fraction,
+        min_evidence_anchor_ready_fraction=args.min_evidence_anchor_ready_fraction,
+        filter_expr=args.filter_expr,
     )
 
 

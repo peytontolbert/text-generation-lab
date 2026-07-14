@@ -1,0 +1,101 @@
+{
+  "anti_cheat_contract": [
+    "All derived verifier candidate rows are train-support only and remain non-promotable.",
+    "Target labels describe verifier-candidate semantics, not the original opaque answer letter.",
+    "Rows reuse only currently visible maintainer evidence and candidate options; no hidden post-fix target text is introduced."
+  ],
+  "claim_scope": [
+    "Augment the current residual-family support package with candidate-wise verifier semantics rather than only opaque verifier answer letters.",
+    "Teach the model to separate the direct verifier target from sibling test distractors and abstain alternatives using the same visible evidence surface."
+  ],
+  "created_at_utc": "2026-07-12T17:02:21Z",
+  "decision": "verifier_candidate_semantic_support_package_ready",
+  "metrics": {
+    "added_rows": 72,
+    "base_metrics_snapshot": {
+      "evidence_citation_target_distribution": {
+        "A": 2,
+        "B": 11,
+        "C": 2,
+        "D": 6,
+        "E": 2
+      },
+      "new_row_language_counts": {
+        "python": 8
+      },
+      "new_row_task_counts": {
+        "abstention_insufficient_evidence": 1,
+        "alternative_hypothesis_elimination": 1,
+        "evidence_citation": 1,
+        "minimal_fix_selection": 1,
+        "patch_impact": 1,
+        "regression_risk": 1,
+        "symptom_localization": 1,
+        "verifier_outcome": 1
+      },
+      "stress_rows": 7,
+      "strict_rows": 24,
+      "train_by_language": {
+        "c_cpp": 109,
+        "python": 50,
+        "rust": 34
+      },
+      "train_by_task": {
+        "abstention_insufficient_evidence": 18,
+        "alternative_hypothesis_elimination": 1,
+        "cpp_implementation_vs_implementation": 1,
+        "evidence_citation": 23,
+        "evidence_role_classification": 71,
+        "minimal_fix_selection": 17,
+        "patch_impact": 18,
+        "python_implementation_vs_implementation": 2,
+        "regression_risk": 1,
+        "symptom_localization": 18,
+        "verifier_outcome": 23
+      },
+      "train_rows": 193,
+      "validation_rows": 24,
+      "verifier_outcome_target_distribution": {
+        "A": 11,
+        "B": 1,
+        "C": 1,
+        "D": 2,
+        "E": 2,
+        "H": 1,
+        "J": 1,
+        "V1": 4
+      }
+    },
+    "base_multi_option_verifier_rows": 23,
+    "base_train_rows": 193,
+    "base_verifier_rows": 23,
+    "merged_train_rows": 265,
+    "rows_by_language": {
+      "c_cpp": 24,
+      "python": 40,
+      "rust": 8
+    },
+    "rows_by_role_label": {
+      "A": 18,
+      "B": 39,
+      "D": 15
+    }
+  },
+  "next_best_steps": [
+    "Run a diagnostic probe initialized from the saved stage10870 runtime so only the support geometry changes.",
+    "Track Python verifier_outcome and Rust evidence_citation deltas separately from headline strict accuracy.",
+    "If this improves the Python residual without regressions, rebuild fresh heldout verifier-transition roots with the same semantic candidate interface."
+  ],
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage10871_verifier_candidate_semantic_support_package/added_verifier_candidate_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage10871_verifier_candidate_semantic_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage10871_verifier_candidate_semantic_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage10871_verifier_candidate_semantic_support_package/verifier_candidate_semantic_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage10871_verifier_candidate_semantic_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage10871_verifier_candidate_semantic_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "source_package": "runs/local/artifacts/stage10864_residual_family_support_package_plus_second_python_materialized/residual_family_support_package_plus_second_python_materialized.json",
+  "stage": 10871,
+  "stage_name": "stage10871_verifier_candidate_semantic_support_package"
+}

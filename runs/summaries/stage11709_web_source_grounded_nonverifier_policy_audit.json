@@ -1,0 +1,114 @@
+{
+  "anti_cheat": {
+    "prompt_label_leak_row_ids": [],
+    "prompt_label_leaks": 0,
+    "prompt_target_value_leak_row_ids": [],
+    "prompt_target_value_leaks": 0,
+    "rows": 66,
+    "singleton_row_ids": [],
+    "singleton_rows": 0
+  },
+  "baselines": {
+    "gemma": {
+      "accuracy": 0.8484848484848485,
+      "correct": 56,
+      "rows": 66
+    },
+    "stage11703": {
+      "accuracy": 0.9090909090909091,
+      "correct": 60,
+      "rows": 66
+    }
+  },
+  "claim_boundary": [
+    "This is an inference-time source-grounded policy audit; no weights changed.",
+    "It uses visible SOURCE_EVIDENCE before the candidate list to rerank symptom/minimal-fix identity rows.",
+    "If accepted, this should become a product scorer route only after permutation and anti-cheat follow-up."
+  ],
+  "created_at_utc": "2026-07-14T06:21:08Z",
+  "decision": "source_grounded_policy_candidate",
+  "gates": {
+    "beats_gemma_56_of_66": true,
+    "beats_stage11703_60_of_66": true,
+    "no_prompt_label_leaks": true,
+    "no_prompt_target_value_leaks": true,
+    "no_singletons": true,
+    "protected_filtered_strict": true,
+    "protected_old_canary_strict": true,
+    "protected_residual": true
+  },
+  "metrics": {
+    "accuracy": 1.0,
+    "by_task": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "alternative_hypothesis_elimination": {
+        "accuracy": 1.0,
+        "correct": 4,
+        "rows": 4
+      },
+      "evidence_citation": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "minimal_fix_selection": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "patch_impact": {
+        "accuracy": 1.0,
+        "correct": 7,
+        "rows": 7
+      },
+      "symptom_localization": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "verifier_outcome": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      }
+    },
+    "correct": 66,
+    "reason_counts": {
+      "fallback_non_verifier": 7,
+      "stage11690_fixed_web_route_correct": 26,
+      "visible_pass_only::pass_targeted_test_selection": 11,
+      "visible_source_grounding": 22
+    },
+    "rows": 66
+  },
+  "outputs": {
+    "miss_rows": "runs/local/artifacts/stage11709_web_source_grounded_nonverifier_policy_audit/web_source_grounded_nonverifier_policy_misses.jsonl",
+    "row_cards": "runs/local/artifacts/stage11709_web_source_grounded_nonverifier_policy_audit/web_source_grounded_nonverifier_policy_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11709_web_source_grounded_nonverifier_policy_audit/web_source_grounded_nonverifier_policy_audit.json"
+  },
+  "protected_gates": {
+    "filtered_strict_22_of_22": true,
+    "old_canary_strict_23_of_23": true,
+    "residual_at_least_7_of_10": true,
+    "source": "runs/local/artifacts/stage11686_counterfactual_identity_semantic_head_fixed_postrun_audit/counterfactual_identity_semantic_head_fixed_postrun_audit.json"
+  },
+  "recommended_next": [
+    "Run option-permutation stability for the source-grounded policy.",
+    "If stable, freeze as a Web compact scorer candidate and build trainable source-grounded head."
+  ],
+  "remaining_misses": {
+    "by_task": {},
+    "row_ids": [],
+    "rows": 0
+  },
+  "runtime": {
+    "identity_runtime": "runs/local/artifacts/stage11685_counterfactual_identity_semantic_head_fixed_probe/runtime_model/runtime_model_bundle.json",
+    "identity_weights_sha256": "75b6582ad102efc8ce61c1f30978a32d5648056014bd852d6c4a17afcc7fe31e"
+  },
+  "stage": 11709,
+  "stage_name": "stage11709_web_source_grounded_nonverifier_policy_audit"
+}

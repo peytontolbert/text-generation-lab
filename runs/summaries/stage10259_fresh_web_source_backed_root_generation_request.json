@@ -1,0 +1,87 @@
+{
+  "stage": 10259,
+  "stage_name": "stage10259_fresh_web_source_backed_root_generation_request",
+  "created_at_utc": "2026-07-11T00:00:00Z",
+  "passed": true,
+  "decision": "Request a replacement web-root builder because the reviewed web lineage is exhausted and the last bounded replay path regressed. The next useful multilingual improvement step is fresh source-backed web root generation, not more replay on the old frontier.",
+  "inputs": {
+    "web_inventory_exhaustion_audit": "runs/summaries/stage10258_web_root_inventory_exhaustion_audit.json",
+    "negative_replay_audit": "runs/summaries/stage10257_prioritized_weakness_probe_audit.json",
+    "bundle_runtime_payload_contract": "runs/summaries/stage10139_first_wave_bundle_runtime_payload.json",
+    "harness_payload_contract": "runs/summaries/stage10244_compact_bounded_saved_runtime_harness_payload_successor.json"
+  },
+  "why_now": [
+    "All reviewed web bundles in the surviving Stage10111/10119/10176 lineage already overlap the current miss frontier.",
+    "Stage10256 showed that prioritized compact-bounded replay does not repair the multilingual weakness package and can make it worse.",
+    "Web remains the only language family with no safe reviewed replenishment source for compact-bounded support."
+  ],
+  "required_root_properties": {
+    "freshness": [
+      "Must come from source/session lineage not present in the current miss frontier.",
+      "Must not reuse the bddy 440e122a0f lineage.",
+      "Must not reuse the bddy f0be60dc44 lineage.",
+      "Must not reuse the code_assist 3a0f6d8311 lineage."
+    ],
+    "source_backing": [
+      "Must include stable source/session identity fields sufficient to prove root-level independence.",
+      "Must preserve repo_id, source/session identifiers, candidate paths, and any selected_tests or verifier anchors that exist.",
+      "Must retain enough raw evidence to reconstruct maintainer-visible prompts without template-only shells."
+    ],
+    "maintainer_grade_evidence": [
+      "Visible evidence must include concrete file or symbol references, not only abstract category descriptions.",
+      "At least one of failure text, selected test/assertion, trace/call-path evidence, or candidate-path-local snippet evidence must be present.",
+      "Abstention must remain available whenever visible evidence does not justify a singleton answer."
+    ],
+    "anti_cheat": [
+      "Reject roots that are solvable primarily from changed-path signatures, candidate-order priors, or obvious surface-family aliases.",
+      "Prefer roots with selected_tests or verifier constraints because the existing reviewed web bundles without tests were shortcut-prone.",
+      "Require explicit leakage scan against current eval roots before training or comparison use."
+    ]
+  },
+  "minimum_output": {
+    "target_language_family": "web_js_ts_html",
+    "requested_new_roots": 2,
+    "minimum_distinct_repos": 2,
+    "per_root_required_fields": [
+      "bundle_id",
+      "repo_id",
+      "root_example_id",
+      "source/session provenance fields",
+      "candidate_paths",
+      "selected_tests or explicit no-tests rationale",
+      "perspective rows",
+      "anti_cheat draft",
+      "rubric draft"
+    ],
+    "preferred_perspectives": [
+      "symptom_localization",
+      "evidence_citation",
+      "alternative_hypothesis_elimination",
+      "patch_impact",
+      "verifier_outcome",
+      "minimal_fix_selection",
+      "regression_risk",
+      "abstention_insufficient_evidence"
+    ]
+  },
+  "admission_policy": {
+    "standalone_train_support": [
+      "Fresh web roots may be used for train support only after root-level leakage scan confirms disjointness from the live eval frontier.",
+      "If evidence is underconstrained, restrict use to abstention-only honesty rows rather than singleton scoring rows."
+    ],
+    "standalone_scoring": [
+      "Do not score new web roots until expert/rubric and anti-cheat reviews are complete.",
+      "Score by root bundle coherence first, perspective rows second."
+    ],
+    "harness_scoring": [
+      "Only promote fresh web roots into the locked task-pack/harness track once the same root bundle has a stable machine-readable prompt contract and writeback mapping.",
+      "Harness rows must preserve same-task-pack identity across 100M and Gemma."
+    ]
+  },
+  "success_criteria": [
+    "At least two new web root bundles exist and are provably disjoint from the current miss frontier.",
+    "Each new root has non-template maintainer-visible evidence and explicit anti-cheat review inputs.",
+    "Each new root can be compiled into standalone prompt rows and into the reserved harness writeback shape without changing evaluation semantics."
+  ],
+  "next_best_step": "Materialize fresh web roots from unused source/session evidence under this contract, then build a small admitted web replacement packet before any further multilingual weakness replay."
+}

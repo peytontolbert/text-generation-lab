@@ -1,0 +1,117 @@
+{
+  "best_scorer": {
+    "metric": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "predicted_labels": {
+        "E": 4
+      },
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "name": "decoder_first_step"
+  },
+  "created_at_utc": "2026-07-14T07:18:22Z",
+  "decision": "sentencepiece_cpp_smoke_all_scorers_fail_abstain_attractor",
+  "diagnosis": [
+    "The selected product scorer is not uniquely broken if all scorer variants predict abstain.",
+    "The Stage11720 smoke row geometry includes an abstain option while verifier evidence is static selected-test anchoring rather than executed verifier output.",
+    "Do not use this packet as a positive source-heldout win unless a later model/scorer beats the abstain attractor or the row is rebuilt with executable verifier evidence."
+  ],
+  "metrics_by_scorer": {
+    "decoder_first_step": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "predicted_labels": {
+        "E": 4
+      },
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "encoder_option_retrieval": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "predicted_labels": {
+        "E": 4
+      },
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "encoder_option_retrieval_evidence_judgment_head": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "predicted_labels": {
+        "E": 4
+      },
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "encoder_option_retrieval_verifier_conditioned": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "predicted_labels": {
+        "E": 4
+      },
+      "rows": 4,
+      "scored_rows": 4
+    }
+  },
+  "outputs": {
+    "row_cards": "runs/local/artifacts/stage11723_sentencepiece_cpp_source_heldout_scorer_diagnostic/sentencepiece_cpp_source_heldout_scorer_diagnostic_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11723_sentencepiece_cpp_source_heldout_scorer_diagnostic/sentencepiece_cpp_source_heldout_scorer_diagnostic.json"
+  },
+  "passed": true,
+  "prompt_leak_audit": {
+    "prompt_target_label_leak_row_ids": [],
+    "prompt_target_label_leaks": 0,
+    "prompt_target_value_leak_row_ids": [],
+    "prompt_target_value_leaks": 0,
+    "rows": 4
+  },
+  "recommended_next": [
+    "Run same-manifest Gemma only through a GPU2-safe path or defer until an isolated GPU2 Ollama/vLLM backend is available.",
+    "Materialize executable verifier output for sentencepiece or rebuild the smoke task as explicit selected-test-anchor classification without an abstain option.",
+    "Use this as a source-heldout failure case for future training only if it remains leak-clean and root-heldout."
+  ],
+  "runtime": {
+    "init_card": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_evidence_judgment_head",
+        "bounded_choice_contrast_margin": 0.05,
+        "bounded_choice_contrast_weight": 0.0,
+        "bounded_decoder_train_sampler": "cyclic",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 280,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/model_state.pt",
+      "weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37"
+    },
+    "runtime_bundle": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "source_artifacts": {
+    "stage11720_rows": "runs/local/artifacts/stage11720_sentencepiece_cpp_admitted_smoke_packet/sentencepiece_cpp_admitted_smoke_rows.jsonl",
+    "stage11722_score": "runs/local/artifacts/stage11722_sentencepiece_cpp_source_heldout_100m_score/sentencepiece_cpp_source_heldout_100m_score.json"
+  },
+  "stage": 11723,
+  "stage_name": "stage11723_sentencepiece_cpp_source_heldout_scorer_diagnostic"
+}

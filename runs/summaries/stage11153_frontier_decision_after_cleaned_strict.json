@@ -1,0 +1,136 @@
+{
+  "claim_scope": [
+    "Cleaned strict standalone comparison currently favors 100M over Gemma3 12B on all represented language slices.",
+    "This is still a compact reviewed bounded-choice maintainer eval, not a broad freeform software-maintenance or full-product harness result.",
+    "The remaining 100M miss is the Python code_assist verifier_outcome_semantic_transition row, where Gemma is correct.",
+    "No new root-disjoint explicit verifier-transition supply is currently admitted for training."
+  ],
+  "created_at_utc": "2026-07-13T05:49:28.976336+00:00",
+  "current_cleaned_strict_frontier": {
+    "by_language": {
+      "c_cpp": {
+        "delta": 0.8333333333333334,
+        "gemma12b_accuracy": 0.16666666666666666,
+        "gemma12b_correct": 1,
+        "hundred_m_accuracy": 1.0,
+        "hundred_m_correct": 6,
+        "rows": 6
+      },
+      "python": {
+        "delta": 0.5,
+        "gemma12b_accuracy": 0.3333333333333333,
+        "gemma12b_correct": 2,
+        "hundred_m_accuracy": 0.8333333333333334,
+        "hundred_m_correct": 5,
+        "rows": 6
+      },
+      "rust": {
+        "delta": 0.5,
+        "gemma12b_accuracy": 0.5,
+        "gemma12b_correct": 2,
+        "hundred_m_accuracy": 1.0,
+        "hundred_m_correct": 4,
+        "rows": 4
+      },
+      "web_js_ts_html": {
+        "delta": 0.8333333333333334,
+        "gemma12b_accuracy": 0.16666666666666666,
+        "gemma12b_correct": 1,
+        "hundred_m_accuracy": 1.0,
+        "hundred_m_correct": 6,
+        "rows": 6
+      }
+    },
+    "coverage": {
+      "gemma_rows": 22,
+      "hundred_m_rows": 22,
+      "matched_rows": 22,
+      "missing_gemma_rows": [],
+      "missing_hundred_m_rows": []
+    },
+    "delta": 0.6818181818181818,
+    "gemma12b_accuracy": 0.2727272727272727,
+    "gemma12b_correct": 6,
+    "hundred_m_accuracy": 0.9545454545454546,
+    "hundred_m_correct": 21,
+    "hundred_m_mismatches": [
+      {
+        "gemma12b_correct": true,
+        "gemma12b_model": "gemma3:12b",
+        "gemma12b_predicted_label": "A",
+        "hundred_m_correct": false,
+        "hundred_m_full_vocab_correct": true,
+        "hundred_m_full_vocab_top1": "A",
+        "hundred_m_predicted_label": "B",
+        "language_family": "python",
+        "repo_family": "code_assist",
+        "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+        "target_text": "A",
+        "task_type": "verifier_outcome_semantic_transition"
+      }
+    ],
+    "rows": 22
+  },
+  "data_readiness": {
+    "explicit_transition_supply_accepted": 0,
+    "explicit_transition_supply_rejected_reasons": {
+      "insufficient_options": 25,
+      "missing_root_key": 8,
+      "missing_selected_test_anchor": 23,
+      "missing_transition_marker": 26,
+      "missing_verifier_target_ledger": 178,
+      "root_already_in_current_package": 210,
+      "row_already_in_current_package": 194
+    },
+    "python_verifier_candidates_admitted": 0,
+    "residual_packets_admitted_now": 0,
+    "residual_packets_repairable_after_review": 0
+  },
+  "decision": "do_not_train_until_new_residual_rows_are_admitted",
+  "eval_hygiene": {
+    "quarantined_rows": [
+      {
+        "language_family": "rust",
+        "opaque_options": [
+          {
+            "label": "A",
+            "value": "tokenizers/examples/unstable_wasm/tests/web.rs"
+          }
+        ],
+        "option_count": 1,
+        "repo_family": "tokenizers",
+        "repo_id": "tokenizers",
+        "row_id": "stage10126::tokenizers::tokenizers::rust::verifier_outcome::reviewed_v27_compact",
+        "source_root_id": "stage10126::tokenizers::tokenizers::rust",
+        "target_text": "A",
+        "task_type": "verifier_outcome"
+      }
+    ],
+    "singleton_strict_rows_quarantined": 1,
+    "strict_language_counts_after": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 4,
+      "web_js_ts_html": 6
+    },
+    "strict_rows_after_quarantine": 22
+  },
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11153_frontier_decision_after_cleaned_strict/frontier_decision_after_cleaned_strict.json"
+  },
+  "required_next_materialization": [
+    "Build fresh Python verifier-transition roots with real verifier target ledgers and no target-only leakage.",
+    "Materialize Rust selected-test/verifier anchors before using Rust repair packets.",
+    "Replace or replenish the quarantined Rust singleton verifier row with a multi-option verifier row.",
+    "Do not run another support probe from stage11145 or stage11152 because both are non-admitted."
+  ],
+  "source_artifacts": {
+    "cleaned_strict_comparison": "runs/local/artifacts/stage11150_cleaned_strict_100m_vs_gemma_comparison/cleaned_strict_100m_vs_gemma_comparison.json",
+    "explicit_verifier_supply_audit": "runs/local/artifacts/stage11152_explicit_verifier_transition_supply_audit/explicit_verifier_transition_supply_audit.json",
+    "python_verifier_ledger_audit": "runs/local/artifacts/stage11151_python_verifier_candidate_ledger_audit/python_verifier_candidate_ledger_audit.json",
+    "residual_packet_repair_audit": "runs/local/artifacts/stage11143_residual_packet_repair_audit/residual_packet_repair_audit.json",
+    "singleton_quarantine": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/singleton_strict_quarantine_successor.json"
+  },
+  "stage": 11153,
+  "stage_name": "frontier_decision_after_cleaned_strict"
+}

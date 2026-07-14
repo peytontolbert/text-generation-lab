@@ -1,0 +1,63 @@
+{
+  "classification": "controlled_negative_result_stop_current_residual50_head_variants",
+  "comparison_to_stage11494": {
+    "stage11494_filtered_strict": 18,
+    "stage11494_old_canary_strict": 19,
+    "stage11494_residual_bank": 5,
+    "stage11498_bridge_train_rows": 9,
+    "stage11498_filtered_strict": 19,
+    "stage11498_old_canary_strict": 20,
+    "stage11498_residual_bank": 5
+  },
+  "created_at_utc": "2026-07-13T18:25:43Z",
+  "decision": "reject_stage11498_do_not_promote",
+  "falsified_or_supported_findings": [
+    "Candidate-set repair fixed an unsafe data geometry flaw, but Stage11494 showed it did not solve the residual plateau.",
+    "Existing evidence_judgment_head training on bridged candidate-set rows does not solve the plateau either.",
+    "Stage11498 residual remains 5/10 and protected strict/canary still regress.",
+    "Bridge train rows are only 9/61 under the judgment-head product scorer, so the head is not even fitting the repaired support surface reliably.",
+    "Current Residual-50 CE/support/sampler/candidate-set/evidence-head variants should stop until the objective is changed more substantially."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11500_evidence_judgment_head_probe_decision/evidence_judgment_head_probe_decision.json"
+  },
+  "passed": true,
+  "promotion_gates": {
+    "coverage_full_for_product_residual": true,
+    "product_filtered_strict_22_of_22": false,
+    "product_filtered_validation_at_least_20_of_22": true,
+    "product_old_canary_strict_23_of_23": false,
+    "product_old_canary_validation_at_least_21_of_23": true,
+    "product_residual_at_least_6_of_10": false
+  },
+  "recommended_next_hypothesis": {
+    "description": "Train and evaluate a true listwise product scorer over same-root candidates, with one normalized candidate set per state and no letter-token CE as the primary evidence objective.",
+    "id": "H_same_root_listwise_product_scorer_required",
+    "requirements": [
+      "Use Stage11492-style candidate-set rows, but optimize a listwise loss over all options in the same candidate set.",
+      "Train candidate scoring directly on candidate role, evidence text, verifier/test anchors, and state text.",
+      "Keep Stage11444 replay as preservation, not as the primary loss.",
+      "Promote only if old canary strict 23/23, filtered strict 22/22, validation preserved, and residual bank >=6/10."
+    ]
+  },
+  "selected_frontier_after_decision": {
+    "reason": "Stage11498 failed protected promotion gates; selected frontier remains Stage11444.",
+    "runtime_stage": 11444,
+    "scorer": "encoder_option_retrieval"
+  },
+  "source_artifacts": {
+    "postrun_audit": "runs/local/artifacts/stage11499_candidate_set_evidence_judgment_head_postrun_audit/candidate_set_evidence_judgment_head_postrun_audit.json",
+    "prior_candidate_set_decision": "runs/local/artifacts/stage11496_residual50_candidate_set_probe_decision/residual50_candidate_set_probe_decision.json"
+  },
+  "stage": 11500,
+  "stage11498_product_metrics": {
+    "bridge_train_rows": "9/61",
+    "filtered_strict": "19/22",
+    "filtered_validation": "21/22",
+    "old_canary_strict": "20/23",
+    "old_canary_validation": "22/23",
+    "residual_bank": "5/10"
+  },
+  "stage_name": "stage11500_evidence_judgment_head_probe_decision",
+  "stop_condition": "Do not run more Residual-50 support-only, sampler-only, candidate-set-only, or existing-head-only probes before implementing a true listwise/product-scored objective."
+}

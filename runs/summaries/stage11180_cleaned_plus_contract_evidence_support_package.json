@@ -1,0 +1,107 @@
+{
+  "admission_snapshot": {
+    "admitted_rows": 69,
+    "gold_value_counts": {
+      "candidate_change_surface": 23,
+      "symptom_or_call_path_analogue": 23,
+      "verifier_and_test_constraint": 23
+    },
+    "language_counts": {
+      "c_cpp": 3,
+      "python": 27,
+      "rust": 18,
+      "web_js_ts_html": 21
+    },
+    "train_admission_passed": true
+  },
+  "base_snapshot": {
+    "added_by_repo": {
+      "ASAC": 1,
+      "BrowserGym": 1,
+      "HiLAM": 1,
+      "PoPE-pytorch": 1,
+      "bitsandbytes": 1
+    },
+    "added_by_target_label": {
+      "A": 2,
+      "B": 2,
+      "D": 1
+    },
+    "added_unique_roots": 5,
+    "blocked_rows": 0,
+    "rows_added": 5,
+    "stress_rows": 7,
+    "strict_rows": 22,
+    "train_rows_after": 432,
+    "train_rows_before": 427,
+    "validation_rows": 23
+  },
+  "claim_scope": [
+    "Add stage11179 contract-aware evidence-role rows as train-support-only supervision.",
+    "Keep cleaned validation, strict, and stress surfaces unchanged from stage11168.",
+    "Do not treat added rows as heldout or promotable evaluation evidence."
+  ],
+  "created_at_utc": "2026-07-13T06:58:54Z",
+  "decision": "support_package_ready_for_diagnostic_probe",
+  "limits": [
+    "C/C++ evidence support remains thin despite all three roles being represented.",
+    "This package tests whether cleaner root-disjoint evidence-role geometry moves the reserved evidence bank; it is not a benchmark expansion."
+  ],
+  "metrics": {
+    "added_by_gold_value": {
+      "candidate_change_surface": 23,
+      "symptom_or_call_path_analogue": 23,
+      "verifier_and_test_constraint": 23
+    },
+    "added_by_language": {
+      "c_cpp": 3,
+      "python": 27,
+      "rust": 18,
+      "web_js_ts_html": 21
+    },
+    "added_by_repo_family": {
+      "ASAC": 3,
+      "BrowserGym": 3,
+      "CREMA": 3,
+      "DeepSpeed": 3,
+      "EfficientDynamic3DGaussian": 3,
+      "HiLAM": 3,
+      "IP-Adapter": 3,
+      "NousResearch__hermes-agent-self-evolution": 3,
+      "NousResearch__hermes-example-plugins": 3,
+      "chroma": 6,
+      "dbt-core": 6,
+      "falco": 3,
+      "mem0": 21,
+      "tiktoken": 6
+    },
+    "added_by_task": {
+      "evidence_citation": 69
+    },
+    "added_unique_roots": 23,
+    "root_overlap_with_eval_or_stress": [],
+    "rows_added": 69,
+    "stress_rows": 7,
+    "strict_rows": 22,
+    "train_rows_after": 501,
+    "train_rows_before": 432,
+    "validation_rows": 23
+  },
+  "next_best_step": "Run exactly one diagnostic probe from this package, then audit clean strict, clean validation, reserved residual, and evidence-residual movement.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage11180_cleaned_plus_contract_evidence_support_package/added_contract_aware_evidence_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage11180_cleaned_plus_contract_evidence_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11180_cleaned_plus_contract_evidence_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11180_cleaned_plus_contract_evidence_support_package/cleaned_plus_contract_evidence_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11180_cleaned_plus_contract_evidence_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11180_cleaned_plus_contract_evidence_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "admission_audit": "runs/local/artifacts/stage11179_contract_aware_evidence_admission_audit/contract_aware_evidence_admission_audit.json",
+    "admitted_rows": "runs/local/artifacts/stage11178_contract_aware_evidence_rows/contract_aware_evidence_rows.jsonl",
+    "base_package": "runs/local/artifacts/stage11168_cleaned_plus_external_fail_to_pass_support_package/cleaned_plus_external_fail_to_pass_support_package.json"
+  },
+  "stage": 11180,
+  "stage_name": "stage11180_cleaned_plus_contract_evidence_support_package"
+}

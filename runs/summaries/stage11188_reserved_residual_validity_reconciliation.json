@@ -1,0 +1,49 @@
+{
+  "counts": {
+    "clean_reserved_evidence_rows": 3,
+    "clean_reserved_rows": 4,
+    "quarantined_reserved_evidence_rows": 6,
+    "quarantined_reserved_rows": 6,
+    "reserved_evidence_rows_total": 9,
+    "reserved_rows_total": 10
+  },
+  "created_at_utc": "2026-07-13T07:12:48Z",
+  "decision": "reserved_bank_needs_replacement_before_more_training",
+  "latest_reserved_scores_are_not_promotable": {
+    "latest_reserved_evidence_accuracy": 0.4444444444444444,
+    "latest_reserved_residual_accuracy": 0.5,
+    "reason": "The evidence residual denominator includes rows quarantined by the stage11174 quality audit."
+  },
+  "next_required_work": [
+    "Retire quarantined evidence rows from the residual promotion gate.",
+    "Materialize replacement rows from fresh root-disjoint evidence sources before any new evidence-training claim.",
+    "Keep clean strict 22/22 as the standalone canary, but do not use the old reserved evidence 4/9 as a capability target without this quarantine note."
+  ],
+  "outputs": {
+    "clean_rows": "runs/local/artifacts/stage11188_reserved_residual_validity_reconciliation/clean_reserved_residual_rows.jsonl",
+    "quarantined_rows": "runs/local/artifacts/stage11188_reserved_residual_validity_reconciliation/quarantined_reserved_residual_rows.jsonl",
+    "replacement_queue": "runs/local/artifacts/stage11188_reserved_residual_validity_reconciliation/reserved_residual_replacement_requirements.jsonl",
+    "summary_json": "runs/local/artifacts/stage11188_reserved_residual_validity_reconciliation/reserved_residual_validity_reconciliation.json"
+  },
+  "quarantined_by_gold_value": {
+    "candidate_change_surface": 4,
+    "symptom_or_call_path_analogue": 2
+  },
+  "quarantined_by_language": {
+    "c_cpp": 2,
+    "python": 1,
+    "rust": 3
+  },
+  "quarantined_by_repo": {
+    "agentkernel": 2,
+    "candle": 2,
+    "repository_library": 1,
+    "tokenizers": 1
+  },
+  "source_artifacts": {
+    "latest_postrun": "runs/local/artifacts/stage11187_contract_evidence_ledger_head_postrun_audit/contract_evidence_ledger_head_postrun_audit.json",
+    "quality_cards": "runs/local/artifacts/stage11174_evidence_gate_and_quality_audit/evidence_quality_row_cards.jsonl",
+    "reserved_rows": "runs/local/artifacts/stage11051_successor_residual_support_plus_priority_evidence/reserved_residual_candidates.jsonl"
+  },
+  "stage": 11188
+}

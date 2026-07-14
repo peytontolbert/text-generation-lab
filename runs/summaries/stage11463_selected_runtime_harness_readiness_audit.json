@@ -1,0 +1,165 @@
+{
+  "claim_scope": [
+    "Audit whether the selected Stage11444 standalone frontier has a matching full-product harness packet/writeback.",
+    "Separate standalone bounded-choice readiness from full-product harness execution readiness."
+  ],
+  "created_at_utc": "2026-07-13T17:06:43Z",
+  "decision": "standalone_frontier_ready_but_full_product_harness_not_current_runtime_complete",
+  "findings": [
+    "runs/summaries is current through Stage11462 in this workspace; the earlier Stage10868 issue was summary backfill drift, not current state.",
+    "Stage11444 remains the selected standalone frontier after rejecting Stage11457 and Stage11460 Rust breadth probes.",
+    "Older reviewed-v28 harness packets have the required machine artifact fields, but those writebacks do not reference the Stage11444 weights/runtime.",
+    "Do not claim the full-product harness is recovered for the current selected runtime until the Stage11444 task pack execution writes harness_run_id, same_task_pack_as_gemma12b, tool_trace_spans, verifier_results, and patch_minimality_or_abstain_scores."
+  ],
+  "harness_status": {
+    "current_runtime_references_in_known_harness_files": [],
+    "full_product_harness_complete_for_selected_runtime": false,
+    "handoff_cells": 4,
+    "older_harness_packet_writeback_mechanism_exists": true,
+    "older_repaired_headline_harness_metrics": {
+      "cells": 4,
+      "delta": 0.7083333333333333,
+      "gemma_accuracy": 0.20833333333333334,
+      "hundred_m_accuracy": 0.9166666666666666,
+      "total_rows": 24,
+      "writeback_repaired_cells": 4
+    },
+    "required_machine_fields": [
+      "harness_run_id",
+      "same_task_pack_as_gemma12b",
+      "tool_trace_spans",
+      "verifier_results",
+      "patch_minimality_or_abstain_scores"
+    ],
+    "reviewed_v28_packet_status": {
+      "packet_completeness_metrics": {
+        "cells_total": 4,
+        "cells_with_ai_review": 4,
+        "cells_with_machine_writeback": 4,
+        "packet_complete_cells": 4,
+        "promotion_ready_cells": 0
+      },
+      "writeback_required_field_status": {
+        "cells_total": 4,
+        "cells_with_required_machine_fields": 4
+      }
+    },
+    "selected_runtime_harness_writeback_found": false
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11463_selected_runtime_harness_readiness_audit/selected_runtime_harness_readiness_audit.json"
+  },
+  "passed": true,
+  "recommended_next_action": "Build a Stage11444-specific harness runtime payload from the current matched strict rows or the intended full-product task pack, run both 100M and Gemma through the same adapter, then refresh the writeback/completeness audit.",
+  "selected_frontier": {
+    "runtime_bundle": "runs/local/artifacts/stage11444_targeted_residual_role_support_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval",
+    "standalone_same_manifest_metrics": {
+      "by_language": {
+        "c_cpp": {
+          "gemma_accuracy": 0.16666666666666666,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 6,
+          "rows": 6
+        },
+        "python": {
+          "gemma_accuracy": 0.3333333333333333,
+          "gemma_correct": 2,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 6,
+          "rows": 6
+        },
+        "rust": {
+          "gemma_accuracy": 0.6,
+          "gemma_correct": 3,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 5,
+          "rows": 5
+        },
+        "web_js_ts_html": {
+          "gemma_accuracy": 0.16666666666666666,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 6,
+          "rows": 6
+        }
+      },
+      "by_task_type": {
+        "abstention_insufficient_evidence": {
+          "gemma_accuracy": 0.0,
+          "gemma_correct": 0,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 4,
+          "rows": 4
+        },
+        "evidence_citation": {
+          "gemma_accuracy": 1.0,
+          "gemma_correct": 3,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 3,
+          "rows": 3
+        },
+        "minimal_fix_selection": {
+          "gemma_accuracy": 0.25,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 4,
+          "rows": 4
+        },
+        "patch_impact": {
+          "gemma_accuracy": 0.25,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 4,
+          "rows": 4
+        },
+        "symptom_localization": {
+          "gemma_accuracy": 0.0,
+          "gemma_correct": 0,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 4,
+          "rows": 4
+        },
+        "verifier_outcome": {
+          "gemma_accuracy": 0.3333333333333333,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 3,
+          "rows": 3
+        },
+        "verifier_outcome_semantic_transition": {
+          "gemma_accuracy": 1.0,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 1,
+          "rows": 1
+        }
+      },
+      "delta_accuracy": 0.6956521739130435,
+      "gemma_accuracy": 0.30434782608695654,
+      "gemma_correct": 7,
+      "hundred_m_accuracy": 1.0,
+      "hundred_m_correct": 23,
+      "hundred_m_rows": 23,
+      "matched_rows": 23,
+      "missing_gemma_rows": []
+    },
+    "weights_sha256": "094b2da23adeb46ae8c8be5244902c746962dda96019d1c64c3676b16b77e162"
+  },
+  "source_artifacts": {
+    "repaired_headline_harness_audit": "runs/local/artifacts/stage10659_repaired_headline_harness_result_audit/repaired_headline_harness_result_audit.json",
+    "reviewed_v28_completeness_audit": "runs/local/artifacts/stage11079_reviewed_v28_harness_packet_completeness_audit/reviewed_v28_harness_packet_completeness_audit.json",
+    "reviewed_v28_handoff": "runs/local/artifacts/stage10648_reviewed_v28_harness_handoff_bundle/reviewed_v28_harness_handoff_bundle.json",
+    "reviewed_v28_writeback_refresh": "runs/local/artifacts/stage11076_reviewed_v28_harness_writeback_refresh/reviewed_v28_harness_writeback_refresh.json",
+    "runtime_bundle": "runs/local/artifacts/stage11444_targeted_residual_role_support_probe/runtime_model/runtime_model_bundle.json",
+    "same_manifest_comparison": "runs/local/artifacts/stage11447_selected_runtime_same_manifest_gemma_comparison/stage11447_selected_runtime_same_manifest_gemma_comparison.json",
+    "selected_frontier_decision": "runs/local/artifacts/stage11462_post_rust_breadth_frontier_decision/post_rust_breadth_frontier_decision.json"
+  },
+  "stage": 11463,
+  "stage_name": "stage11463_selected_runtime_harness_readiness_audit",
+  "standalone_status": {
+    "current_truthful_claim": "same-manifest matched old-canary strict bounded-choice comparison only; residual bank and full-product harness are not solved",
+    "ready_for_bounded_choice_claim": true
+  }
+}

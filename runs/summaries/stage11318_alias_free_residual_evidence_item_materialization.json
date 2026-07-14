@@ -1,0 +1,111 @@
+{
+  "audit": {
+    "all_rows_have_multiple_options": true,
+    "all_targets_in_options": true,
+    "blocked": [
+      {
+        "blockers": [
+          "gold_role_match_count_0"
+        ],
+        "gold_value": "symptom_or_call_path_analogue",
+        "parsed_items": [
+          {
+            "content": "Modified implementation surface in `source_analyzer.rs` from repo `rust-analyzer`. Snippet lines 1-14: //! Lookup hir elements using positions in the source code. This is a lossy //! transformation: in general, a single source might correspond to several //! modules, functions, etc, due to macros, cfgs and `#[path=]` attributes on //! modules. //! //! So, this modules should not be used during hir construction, it exists //! purely for \"IDE needs\". use std::{ cell::OnceCell, iter::{self, once}, }; use either:",
+            "path": "source_analyzer.rs",
+            "role": "candidate_change_surface"
+          },
+          {
+            "content": "Concrete Rust test/verification file `tests.rs` is available for checking behavior. Snippet lines 1-21: use expect_test::{Expect, expect}; use hir::{FilePosition, FileRange}; use ide_db::{ EditionedFileId, FxHashSet, LocalRoots, base_db::{SourceDatabase, salsa::Setter}, }; use test_utils::RangeOrOffset; use crate::{MatchFinder, SsrRule}; fn parse_error_text(query: &str) -> String { format!(\"{}\", query.parse::<SsrRule>().unwrap_err()) } #[test] fn parser_empty_query() { assert_eq!(parse_error_text(\"\")",
+            "path": "tests.rs",
+            "role": "verifier_and_test_constraint"
+          },
+          {
+            "content": "Related runtime/API path `display.rs` gives independent behavior context distinct from the modified surface. Snippet lines 1-12: //! HirDisplay implementations for various hir types. use either::Either; use hir_def::{ AdtId, BuiltinDeriveImplId, DefWithBodyId, ExpressionStoreOwnerId, FunctionId, GenericDefId, ImplId, ItemContainerId, builtin_derive::BuiltinDeriveImplMethod, expr_store::{Body, ExpressionStore}, hir::generics::{GenericParams, TypeOrConstParamData, TypeParamProvenance, WherePredicate}, item_tree::FieldsSh",
+            "path": "display.rs",
+            "role": "nearby_definition_or_usage_context"
+          },
+          {
+            "content": "General neighboring repository context exists, but no separate snippet is stronger than E01-E03 for this row.",
+            "path": "evidence_04",
+            "role": "background_context"
+          }
+        ],
+        "root_id": "stage11192::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+        "row_id": "stage11193::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue"
+      },
+      {
+        "blockers": [
+          "gold_role_match_count_0"
+        ],
+        "gold_value": "symptom_or_call_path_analogue",
+        "parsed_items": [
+          {
+            "content": "Modified implementation surface in `lib.rs` from repo `prusti-dev`. Snippet lines 1-16: // \u00a9 2019, ETH Zurich // // This Source Code Form is subject to the terms of the Mozilla Public // License, v. 2.0. If a copy of the MPL was not distributed with this // file, You can obtain one at http://mozilla.org/MPL/2.0/. #![deny(unused_must_use)] #![warn(clippy::disallowed_types)] #[rustfmt::skip] #[path = \"../gen/mod.rs\"] pub mod wrappers; use jni::{errors::Result, objects::JObject, JNIEnv}; pub fn get_sys",
+            "path": "lib.rs",
+            "role": "candidate_change_surface"
+          },
+          {
+            "content": "Concrete Rust test/verification file `verify_empty_program.rs` is available for checking behavior. Snippet lines 1-16: use jni::{objects::JObject, InitArgsBuilder, JNIVersion, JavaVM}; use log::debug; use std::{env, fs}; use viper_sys::{get_system_out, wrappers::*}; #[test] fn verify_empty_program() { env_logger::init(); let viper_home = env::var(\"VIPER_HOME\").expect(\"failed to get VIPER_HOME\"); debug!(\"Using Viper home: '{}'\", &viper_home); let z3_path = env::var(\"Z3_EXE\").expect(\"failed to get Z3_EXE\"); debug",
+            "path": "verify_empty_program.rs",
+            "role": "verifier_and_test_constraint"
+          },
+          {
+            "content": "Related runtime/API path `user_provided_type_params.rs` gives independent behavior context distinct from the modified surface. Snippet lines 1-16: use crate::common::HasGenerics; use proc_macro2::TokenStream; use quote::ToTokens; use syn::{spanned::Spanned, TypeParam}; #[derive(Debug)] pub(crate) enum UserAnnotatedTypeParam { /// Something concrete, i.e. `i32` ConcreteType(syn::TypeParam), /// Something non-concrete, i.e. `T` GenericType(syn::TypeParam), } impl UserAnnotatedTypeParam { pub fn try_parse(from: &syn::TypeParam) -> ParserResul",
+            "path": "user_provided_type_params.rs",
+            "role": "nearby_definition_or_usage_context"
+          },
+          {
+            "content": "General neighboring repository context exists, but no separate snippet is stronger than E01-E03 for this row.",
+            "path": "evidence_04",
+            "role": "background_context"
+          }
+        ],
+        "root_id": "stage11192::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue",
+        "row_id": "stage11193::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue"
+      }
+    ],
+    "role_alias_visible_rows": 0
+  },
+  "counts": {
+    "blocked_rows": 2,
+    "by_gold": {
+      "candidate_change_surface": 4,
+      "verifier_and_test_constraint": 3
+    },
+    "by_language": {
+      "c_cpp": 4,
+      "python": 2,
+      "rust": 1
+    },
+    "by_target_label": {
+      "A": 1,
+      "B": 1,
+      "C": 1,
+      "D": 2,
+      "E": 2
+    },
+    "materialized_rows": 7,
+    "queue_rows": 9,
+    "source_rows": 9
+  },
+  "created_at_utc": "2026-07-13T11:47:16Z",
+  "decision": "alias_free_residual_evidence_item_rows_blocked_or_partial",
+  "interpretation": [
+    "This replaces alias-labeled evidence-role residual prompts with evidence-item selection prompts.",
+    "Semantic roles remain only in hidden metadata for analysis; the prompt and option values expose opaque evidence IDs and snippets, not role aliases.",
+    "These rows are replacement evaluation candidates, not train rows, until scored and reviewed against canary behavior."
+  ],
+  "next_action": "stage11319_score_alias_free_residual_evidence_items_with_current_frontier",
+  "outputs": {
+    "blocked_jsonl": "runs/local/artifacts/stage11318_alias_free_residual_evidence_item_materialization/alias_free_residual_evidence_item_blocked.jsonl",
+    "rows_jsonl": "runs/local/artifacts/stage11318_alias_free_residual_evidence_item_materialization/alias_free_residual_evidence_item_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11318_alias_free_residual_evidence_item_materialization/alias_free_residual_evidence_item_materialization.json"
+  },
+  "passed": false,
+  "source_artifacts": {
+    "queue": "runs/local/artifacts/stage11317_residual_evidence_alias_audit/residual_evidence_replacement_queue.jsonl",
+    "source_residual": "runs/local/artifacts/stage11312_deleaked_fail_to_pass_transition_package/deleaked_fail_to_pass_residual_rows.jsonl"
+  },
+  "stage": 11318,
+  "stage_name": "stage11318_alias_free_residual_evidence_item_materialization"
+}

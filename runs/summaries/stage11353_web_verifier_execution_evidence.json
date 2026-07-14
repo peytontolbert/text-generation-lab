@@ -1,0 +1,84 @@
+{
+  "admissibility_upgrade": {
+    "mcp_stdio_transport_lifecycle": "can_upgrade_from_static_support_to_executed_verifier_support",
+    "qa_model_switch_continuity": "remain_static_support_until_dependency_setup_blocker_resolved",
+    "sep_transition_validation": "can_upgrade_from_static_support_to_executed_verifier_support"
+  },
+  "by_root": {
+    "mcp_stdio_transport_lifecycle": {
+      "attempt": {
+        "cmd": [
+          "pnpm",
+          "--dir",
+          "packages/server",
+          "test",
+          "test/server/stdio.test.ts"
+        ],
+        "cwd": "/data/tmp/stage11353_mcp_typescript_sdk",
+        "log": "runs/local/artifacts/stage11353_web_verifier_execution_evidence/logs/mcp_stdio_transport_test.log",
+        "name": "mcp_stdio_transport_test",
+        "returncode": 0,
+        "status": "passed",
+        "stderr_tail": "",
+        "stdout_tail": "\n> @modelcontextprotocol/server@2.0.0-alpha.2 test /data/tmp/stage11353_mcp_typescript_sdk/packages/server\n> vitest run test/server/stdio.test.ts\n\n\n RUN  v4.1.2 /data/tmp/stage11353_mcp_typescript_sdk/packages/server\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  12:50:16\n   Duration  753ms (transform 373ms, setup 0ms, import 601ms, tests 15ms, environment 0ms)\n\n"
+      },
+      "execution_status": "verifier_executed_passed",
+      "test_result": "8 passed / 1 test file"
+    },
+    "qa_model_switch_continuity": {
+      "attempt": {
+        "cmd": [
+          "pnpm",
+          "install",
+          "--frozen-lockfile"
+        ],
+        "cwd": "/data/tmp/stage11353_openclaw",
+        "log": "runs/local/artifacts/stage11353_web_verifier_execution_evidence/logs/qa_lab_openclaw_pnpm_install.log",
+        "name": "qa_lab_openclaw_pnpm_install",
+        "returncode": 1,
+        "status": "failed",
+        "stderr_tail": "node:internal/modules/esm/utils:266\n  throw new ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING();\n        ^\n\nTypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.\n    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:266:9)\n    at Object.<anonymous> (/home/peyton/.cache/node/corepack/v1/pnpm/11.1.0/bin/pnpm.cjs:3:1)\n    at Module2._compile (/home/peyton/.nvm/versions/node/v20.19.1/lib/node_modules/corepack/dist/lib/corepack.cjs:16947:34)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)\n    at Module.load (node:internal/modules/cjs/loader:1275:32)\n    at Module._load (node:internal/modules/cjs/loader:1096:12)\n    at executeUserEntryPoint (node:internal/modules/run_main:164:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:81:21) {\n  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'\n}\n\nNode.js v20.19.1\n",
+        "stdout_tail": ""
+      },
+      "blocker": "OpenClaw workspace pnpm install fails under current Node/Corepack with ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING",
+      "execution_status": "blocked_dependency_setup"
+    },
+    "sep_transition_validation": {
+      "attempt": {
+        "cmd": [
+          "npm",
+          "test",
+          "--",
+          "test/unit/transition.test.ts"
+        ],
+        "cwd": "/data/tmp/stage11353_sep_automation",
+        "log": "runs/local/artifacts/stage11353_web_verifier_execution_evidence/logs/sep_transition_validation_test.log",
+        "name": "sep_transition_validation_test",
+        "returncode": 0,
+        "status": "passed",
+        "stderr_tail": "",
+        "stdout_tail": "\n> @modelcontextprotocol/sep-automation@1.0.0 test\n> vitest run test/unit/transition.test.ts\n\n\n RUN  v4.0.17 /data/tmp/stage11353_sep_automation\n\n \u2713 test/unit/transition.test.ts (6 tests) 9ms\n\n Test Files  1 passed (1)\n      Tests  6 passed (6)\n   Start at  12:50:14\n   Duration  277ms (transform 102ms, setup 0ms, import 127ms, tests 9ms, environment 0ms)\n\n"
+      },
+      "execution_status": "verifier_executed_passed",
+      "test_result": "6 passed / 1 test file"
+    }
+  },
+  "counts": {
+    "blocked_roots": 1,
+    "stage11347_bundles": 3,
+    "verifier_passed_roots": 2
+  },
+  "created_at_utc": "2026-07-13T12:50:17Z",
+  "decision": "web_verifier_execution_evidence_attached_partial",
+  "outputs": {
+    "logs": "runs/local/artifacts/stage11353_web_verifier_execution_evidence/logs",
+    "summary": "runs/local/artifacts/stage11353_web_verifier_execution_evidence/web_verifier_execution_evidence.json"
+  },
+  "passed": true,
+  "recommended_next_action": "Project executed-verifier variants for the two passed Web roots, keep QA-lab static-only, then build a disjoint Web heldout candidate from remaining Stage11346 queue items.",
+  "source_artifacts": {
+    "stage11347_bundles": "runs/local/artifacts/stage11347_web_static_verifier_maintainer_rows/web_static_verifier_root_bundles.jsonl"
+  },
+  "stage": 11353,
+  "stage_name": "stage11353_web_verifier_execution_evidence"
+}

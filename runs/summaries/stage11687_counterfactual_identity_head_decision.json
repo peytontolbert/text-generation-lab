@@ -1,0 +1,57 @@
+{
+  "created_at_utc": "2026-07-14T04:57:40Z",
+  "decision": "identity_head_validated_as_fit_path_not_promoted",
+  "gates": {
+    "bug_found_nested_options_stale": true,
+    "fixed_head_fits_counterfactual_train": true,
+    "fixed_head_moves_sealed_diagnostics": true,
+    "not_canonical_frontier": true,
+    "not_web_frontier": true,
+    "protected_gates_preserved": true
+  },
+  "interpretation": [
+    "The Stage11678 underfit was caused by stale nested standalone_projection_source.opaque_options, not by impossible counterfactual geometry.",
+    "After synchronizing nested and row-level options, the semantic candidate head fits the 92-row same-role identity slice exactly.",
+    "The fitted identity head moves sealed canonical misses from 1/15 to 5/15 but does not transfer broadly: canonical heldout is 27/66 and original Web is 9/66 under that scorer.",
+    "Do not promote Stage11685. Use the finding to build a routed identity scorer for same-role candidate rows, then test with preservation gates."
+  ],
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11687_counterfactual_identity_head_decision",
+    "summary": "runs/local/artifacts/stage11687_counterfactual_identity_head_decision/counterfactual_identity_head_decision.json"
+  },
+  "recommended_next": {
+    "promotion_gate": [
+      "canonical heldout > 51/66",
+      "original Web heldout > 38/66 for Web frontier progress",
+      "filtered strict 22/22",
+      "old canary strict 23/23",
+      "residual bank >= 7/10"
+    ],
+    "stage": "stage11688_routed_web_identity_scorer_audit_or_probe",
+    "target": "route same-role candidate identity rows to the semantic identity head while keeping normal Web rows on the current Web task head"
+  },
+  "scores": {
+    "buggy_stage11684": {
+      "canonical_heldout": "4/66",
+      "original_web_heldout": "19/66",
+      "same_role_counterfactual_train": "31/92",
+      "sealed_remaining_miss_diagnostics": "1/15"
+    },
+    "fixed_stage11686": {
+      "canonical_heldout": "27/66",
+      "filtered_strict": "22/22",
+      "old_canary_strict": "23/23",
+      "original_web_heldout": "9/66",
+      "residual_bank": "7/10",
+      "same_role_counterfactual_train": "92/92",
+      "sealed_remaining_miss_diagnostics": "5/15"
+    }
+  },
+  "source_artifacts": {
+    "buggy": "runs/local/artifacts/stage11684_counterfactual_identity_semantic_head_postrun_audit/counterfactual_identity_semantic_head_postrun_audit.json",
+    "fixed": "runs/local/artifacts/stage11686_counterfactual_identity_semantic_head_fixed_postrun_audit/counterfactual_identity_semantic_head_fixed_postrun_audit.json",
+    "quality": "runs/local/artifacts/stage11682_same_role_counterfactual_quality_audit/same_role_counterfactual_quality_audit.json"
+  },
+  "stage": 11687,
+  "stage_name": "stage11687_counterfactual_identity_head_decision"
+}

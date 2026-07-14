@@ -1,0 +1,46 @@
+{
+  "admission": {
+    "strict_eval_eligible_now": false,
+    "trainable_now": false,
+    "why": "The focused verifier was executed and failed before assertions, but gold maintainer perspective answers and anti-cheat signoff are not complete."
+  },
+  "counts": {
+    "root_packets": 1,
+    "row_shells": 6,
+    "strict_eval_ready_rows": 0,
+    "train_ready_rows": 0
+  },
+  "created_at_utc": "2026-07-13T19:52:10Z",
+  "decision": "dspy_web_verifier_execution_materialized_pending_gold",
+  "next_actions": [
+    "Adjudicate whether this root should be a verifier-failure routing row, dependency/test-environment row, or be excluded as environment-only.",
+    "If admitted, assign gold answers for all six perspective shells and run prompt-target leak audit.",
+    "Do not use this row as evidence of product-behavior localization until maintainer adjudication confirms answerability."
+  ],
+  "outputs": {
+    "packet": "runs/local/artifacts/stage11532_dspy_web_verifier_execution_artifact/dspy_web_verifier_execution_packet.json",
+    "row_shells": "runs/local/artifacts/stage11532_dspy_web_verifier_execution_artifact/dspy_web_verifier_execution_row_shells.jsonl",
+    "summary": "runs/local/artifacts/stage11532_dspy_web_verifier_execution_artifact/dspy_web_verifier_execution_artifact.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "app_test_log": "runs/local/artifacts/stage11532_dspy_web_verifier_execution/logs/app_test.log",
+    "npm_ci_log": "runs/local/artifacts/stage11532_dspy_web_verifier_execution/logs/npm_ci.log",
+    "stage11530_packets": "runs/local/artifacts/stage11530_web_new_family_materialization_packets/web_new_family_root_packets.jsonl"
+  },
+  "stage": 11532,
+  "stage_name": "stage11532_dspy_web_verifier_execution_artifact",
+  "verifier_execution": {
+    "dependency_hydration_command": "npm ci --cache /data/tmp/npm-cache-stage11532 --prefer-offline --no-audit --no-fund",
+    "dependency_hydration_exit_code": 0,
+    "failure_signature": "Jest cannot parse axios/index.js ESM import: Cannot use import statement outside a module.",
+    "focused_verifier_command": "CI=true npm test -- --watchAll=false src/App.test.js",
+    "focused_verifier_exit_code": 1,
+    "log_artifacts": {
+      "focused_test": "runs/local/artifacts/stage11532_dspy_web_verifier_execution/logs/app_test.log",
+      "npm_ci": "runs/local/artifacts/stage11532_dspy_web_verifier_execution/logs/npm_ci.log"
+    },
+    "observed_transition": "TEST_SUITE_FAILED_BEFORE_ASSERTIONS",
+    "raw_log_excerpt": "\n> dsp-app@0.1.0 test\n> react-scripts test --watchAll=false src/App.test.js\n\nFAIL src/App.test.js\n  \u25cf Test suite failed to run\n\n    Jest encountered an unexpected token\n\n    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.\n\n    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.\n\n    By default \"node_modules\" folder is ignored by transformers.\n\n    Here's what you can do:\n     \u2022 If you are trying to use ECMAScript Modules, see https://jestjs.io/docs/ecmascript-modules for how to enable it.\n     \u2022 If you are trying to use TypeScript, see https://jestjs.io/docs/getting-started#using-typescript\n     \u2022 To have some of your \"node_modules\" files transformed, you can specify a custom \"transformIgnorePatterns\" in your config.\n     \u2022 If you need a custom transformation specify a \"transform\" option in your config.\n     \u2022 If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the \"moduleNameMapper\" config option.\n\n    You'll find more details and examples of these config options in the docs:\n    https://jestjs.io/docs/configuration\n    For information about custom transformations, see:\n    https://jestjs.io/docs/code-transformation\n\n    Details:\n\n    /data/repositories/dspy/inspect-app/react-app/node_modules/axios/index.js:1\n    ({\"Object.<anonymous>\":function(module,exports,require,__dirname,__filename,jest){import axios from './lib/axios.js';\n                                                                                      ^^^^^^\n\n    SyntaxError: Cannot use import statement outside a module\n\n      1 | import React, { useState, useEffect } from 'react';\n    > 2 | import axios from \"axios\";\n        | ^\n      3 | import styles from './display.module.css';\n      4 | import { Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';\n      5 | import ExpandMoreIcon from '@mui/icons-material/ExpandMore';\n\n      at Runtime.createScriptFromCode (node_modules/jest-runtime/build/index.js:1728:14)\n      at Object.<anonymous> (src/components/display/display.js:2:1)\n      at Object.<anonymous> (src/App.js:2:1)\n      at Object.<anonymous> (src/App.test.js:2:1)\n      at TestScheduler.scheduleTests (node_modules/@jest/core/build/TestScheduler.js:333:13)\n      at runJest (node_modules/@jest/core/build/runJest.js:404:19)\n      at _run10000 (node_modules/@jest/core/build/cli/index.js:320:7)\n      at runCLI (node_modules/@jest/core/build/cli/index.js:173:3)\n\nTest Suites: 1 failed, 1 total\nTests:       0 total\nSnapshots:   0 total\nTime:        1.063 s\nRan all test suites matching /src\\/App.test.js/i.\n"
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "baseline": {
+    "current_residual_score": {
+      "correct": 5,
+      "rows": 10
+    },
+    "current_status": "preservation_and_harness_win_only",
+    "scoreboard": "runs/local/artifacts/stage11471_frontier_progress_scoreboard/frontier_progress_scoreboard.json",
+    "selected_frontier": "stage11444 + encoder_option_retrieval"
+  },
+  "created_at_utc": "2026-07-13T17:28:48Z",
+  "decision": "controlled_residual_lab_required_before_more_training",
+  "experiment_matrix": [
+    {
+      "changes": [
+        "disjoint residual analogues"
+      ],
+      "experiment_id": "A_data_only_current_loss",
+      "frozen_components": [
+        "selected scorer",
+        "loss",
+        "runtime architecture"
+      ],
+      "tests_hypothesis": "H_data_geometry"
+    },
+    {
+      "changes": [
+        "disjoint residual analogues",
+        "pairwise margin loss"
+      ],
+      "experiment_id": "B_data_pairwise_margin",
+      "frozen_components": [
+        "selected scorer",
+        "candidate schema"
+      ],
+      "tests_hypothesis": "H_pairwise_margin"
+    },
+    {
+      "changes": [
+        "disjoint residual analogues",
+        "listwise same-root candidate loss"
+      ],
+      "experiment_id": "C_data_listwise_same_root",
+      "frozen_components": [
+        "selected scorer",
+        "candidate schema"
+      ],
+      "tests_hypothesis": "H_listwise_same_root"
+    },
+    {
+      "changes": [
+        "pairwise/listwise objective",
+        "explicit old-canary replay preservation"
+      ],
+      "experiment_id": "D_margin_with_replay_preservation",
+      "frozen_components": [
+        "selected scorer"
+      ],
+      "tests_hypothesis": "H_pairwise_margin"
+    },
+    {
+      "changes": [
+        "freeze encoder",
+        "train scorer head only"
+      ],
+      "experiment_id": "E_scorer_head_only",
+      "frozen_components": [
+        "encoder",
+        "selected product scorer interface"
+      ],
+      "tests_hypothesis": "H_scorer_capacity"
+    },
+    {
+      "changes": [
+        "low-LR encoder"
+      ],
+      "entry_condition": "E_scorer_head_only improves heldout residual margins",
+      "experiment_id": "F_low_lr_encoder_after_head_signal",
+      "tests_hypothesis": "H_scorer_capacity"
+    }
+  ],
+  "hypotheses": [
+    {
+      "allowed_change": "Add disjoint roots with verifier/test/source-backed candidate sets; keep selected scorer and loss unchanged.",
+      "failure_mechanism": "Residual misses persist because disjoint analogues do not expose enough role-balanced hard negatives.",
+      "hypothesis_id": "H_data_geometry",
+      "intervention_variable": "data supply only",
+      "success_signal": "sealed residual analogues improve while Stage11471 preservation gates remain true."
+    },
+    {
+      "allowed_change": "Add pairwise margin loss score(correct) > score(hardest_wrong_same_root).",
+      "failure_mechanism": "Generic row CE does not separate correct role from hardest wrong same-root candidate.",
+      "hypothesis_id": "H_pairwise_margin",
+      "intervention_variable": "objective",
+      "success_signal": "correct-vs-candidate_change_surface and correct-vs-verifier_constraint margins increase on heldout analogues."
+    },
+    {
+      "allowed_change": "Add listwise softmax over root-local candidates.",
+      "failure_mechanism": "Candidate scores are calibrated poorly across options within the same root.",
+      "hypothesis_id": "H_listwise_same_root",
+      "intervention_variable": "objective",
+      "success_signal": "top-1 and margins improve on sealed same-root candidate sets without strict regression."
+    },
+    {
+      "allowed_change": "Freeze encoder and train scorer head only; then try low-LR encoder only if scorer-head margins move.",
+      "failure_mechanism": "The base scorer head cannot represent evidence-role distinctions without targeted adaptation.",
+      "hypothesis_id": "H_scorer_capacity",
+      "intervention_variable": "trainable parameters",
+      "success_signal": "scorer-head-only moves sealed residual margins before any full-model update."
+    }
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11472_controlled_residual_lab_contract/controlled_residual_lab_contract.json"
+  },
+  "passed": true,
+  "pre_training_run_template": {
+    "forbidden": [
+      "generic support package without named residual family",
+      "mixed intervention that changes data, objective, scorer, and context at once",
+      "promotion on same residual rows used for training"
+    ],
+    "required_fields": [
+      "failure_family",
+      "failure_mechanism",
+      "single_changed_variable",
+      "frozen_controls",
+      "train_roots",
+      "sealed_eval_roots",
+      "promotion_metric",
+      "regression_gates"
+    ]
+  },
+  "promotion_requirements": {
+    "decoder_first_step_luck_allowed": false,
+    "filtered_strict": "22/22",
+    "filtered_validation": ">=20/22",
+    "frozen_residual_bank": ">=6/10",
+    "full_scored_coverage": true,
+    "old_canary_strict": "23/23",
+    "old_canary_validation": ">=21/23",
+    "product_scorer": "encoder_option_retrieval",
+    "root_overlap": "none",
+    "sealed_residual_analogue": "above Stage11444 baseline"
+  },
+  "required_residual_50_shape": {
+    "candidate_set_rule": "each root must include the same semantic candidate roles and hard negatives",
+    "families": "all residual families listed in this contract",
+    "fresh_roots_per_family": 10,
+    "frozen_miss_usage": "eval only; do not train directly on frozen misses",
+    "required_evidence": [
+      "source snippet",
+      "selected test or verifier anchor",
+      "role-distinct evidence ledger",
+      "counterfactual or insufficiency variant where applicable"
+    ],
+    "rows_per_family": "20-50 disjoint analogue rows",
+    "split_rule": "root/repo/family separated before row projection",
+    "total_fresh_roots": 30
+  },
+  "residual_families": [
+    {
+      "candidate_roles_required": [
+        "candidate_change_surface",
+        "verifier_and_test_constraint",
+        "symptom_or_call_path_analogue",
+        "insufficient_evidence"
+      ],
+      "family_id": "cpp_evidence_verifier_constraint_vs_candidate_surface",
+      "frozen_miss_count": 2,
+      "frozen_miss_rows": [
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+          "target": "C",
+          "target_rank_full_vocab": 1
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "D",
+          "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1",
+          "target": "F",
+          "target_rank_full_vocab": 2
+        }
+      ],
+      "required_disjoint_analogue_roots": 10,
+      "target_train_analogue_rows": "20-50"
+    },
+    {
+      "candidate_roles_required": [
+        "candidate_change_surface",
+        "verifier_and_test_constraint",
+        "symptom_or_call_path_analogue",
+        "insufficient_evidence"
+      ],
+      "family_id": "python_evidence_verifier_constraint_vs_candidate_surface",
+      "frozen_miss_count": 1,
+      "frozen_miss_rows": [
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+          "target": "F",
+          "target_rank_full_vocab": 4
+        }
+      ],
+      "required_disjoint_analogue_roots": 10,
+      "target_train_analogue_rows": "20-50"
+    },
+    {
+      "candidate_roles_required": [
+        "candidate_change_surface",
+        "verifier_and_test_constraint",
+        "symptom_or_call_path_analogue",
+        "insufficient_evidence"
+      ],
+      "family_id": "rust_symptom_call_path_vs_candidate_surface",
+      "frozen_miss_count": 2,
+      "frozen_miss_rows": [
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage11193::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+          "target": "B",
+          "target_rank_full_vocab": 5
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "C",
+          "row_id": "stage11193::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue",
+          "target": "D",
+          "target_rank_full_vocab": 4
+        }
+      ],
+      "required_disjoint_analogue_roots": 10,
+      "target_train_analogue_rows": "20-50"
+    }
+  ],
+  "stage": 11472,
+  "stage_name": "stage11472_controlled_residual_lab_contract",
+  "stop_conditions": [
+    "canary improves but frozen residual remains flat for two controlled probes",
+    "frozen residual improves but filtered strict or old canary strict regresses twice",
+    "sealed analogue improves but frozen residual does not move",
+    "semantic head wins but base product scorer fails",
+    "the same pattern needs more than three special-case scorer patches"
+  ]
+}

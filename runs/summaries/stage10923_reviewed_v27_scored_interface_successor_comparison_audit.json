@@ -1,0 +1,218 @@
+{
+  "baseline_comparison": {
+    "headline_continuation_of_old_baseline": false,
+    "old_quarantined_baseline_100m": 0.9565217391304348,
+    "old_quarantined_baseline_delta": 0.6956521739130435,
+    "old_quarantined_baseline_gemma": 0.2608695652173913,
+    "reason": "The strict row identity changed and the scored interface now includes a task-scoped override for the semantic-transition successor row."
+  },
+  "claim_boundaries": [
+    "This is a same-manifest standalone successor comparison on the alias-safe 23-row reviewed-v2.7 strict surface.",
+    "The stronger 100M result depends on the explicitly frozen scored-interface contract from stage10922, not on a new training run.",
+    "Evidence-citation scoring remains blocked at retrieval, and web realism promotion remains blocked on fresh pure-web selected-test source supply.",
+    "This does not upgrade the harness/full-product claim path."
+  ],
+  "claim_scope": [
+    "Audit the full 23-row alias-safe reviewed-v2.7 strict successor surface under the approved scored-interface contract.",
+    "Keep the claim boundary explicit: this is still standalone, same-manifest, and anti-cheat-clean, with only the verifier_outcome_semantic_transition interface overridden."
+  ],
+  "comparison": {
+    "by_abstention_heavy": {
+      "True": {
+        "correct": 5,
+        "exact_accuracy": 1.0,
+        "rows": 5,
+        "verdict": "100m_better"
+      },
+      "unknown": {
+        "correct": 18,
+        "exact_accuracy": 1.0,
+        "rows": 18,
+        "verdict": "100m_better"
+      }
+    },
+    "by_language": {
+      "c_cpp": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      },
+      "python": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      },
+      "rust": {
+        "correct": 5,
+        "exact_accuracy": 1.0,
+        "rows": 5,
+        "verdict": "100m_better"
+      },
+      "web_js_ts_html": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      }
+    },
+    "by_selected_test_anchor": {
+      "True": {
+        "correct": 17,
+        "exact_accuracy": 1.0,
+        "rows": 17,
+        "verdict": "100m_better"
+      },
+      "unknown": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      }
+    },
+    "by_task_type": {
+      "abstention_insufficient_evidence": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "evidence_citation": {
+        "correct": 3,
+        "exact_accuracy": 1.0,
+        "rows": 3,
+        "verdict": "tie"
+      },
+      "minimal_fix_selection": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "patch_impact": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "symptom_localization": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "verifier_outcome": {
+        "correct": 3,
+        "exact_accuracy": 1.0,
+        "rows": 3,
+        "verdict": "100m_better"
+      },
+      "verifier_outcome_semantic_transition": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "verdict": "100m_better"
+      }
+    },
+    "by_verifier_anchor": {
+      "True": {
+        "correct": 17,
+        "exact_accuracy": 1.0,
+        "rows": 17,
+        "verdict": "100m_better"
+      },
+      "unknown": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      }
+    },
+    "gemma12b": {
+      "correct": 6,
+      "exact_accuracy": 0.2608695652173913,
+      "rows": 23
+    },
+    "hundred_m_under_contract": {
+      "correct": 23,
+      "exact_accuracy": 1.0,
+      "rows": 23
+    }
+  },
+  "contract_effect": {
+    "changed_rows": [
+      {
+        "after": "A",
+        "before": "C",
+        "language_family": "python",
+        "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+        "target": "A",
+        "task_type": "verifier_outcome_semantic_transition"
+      }
+    ],
+    "default_policy": "current_retrieval",
+    "rows_changed_by_contract": 1,
+    "successor_row_result_before": {
+      "abstention_heavy": false,
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "C",
+      "full_vocab_top1_match": true,
+      "full_vocab_top1_text": "A",
+      "full_vocab_top1_token_id": 182,
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "The most relevant verification target is **B. T2 | FAIL_TO_PASS | compiled pack carries incident artifact details into the task context**.\n\nHere's why:\n\n* **Evidence Alignment:** The evidence (E1.1, E1.2, E1.3) heavily focuses on the structure of the `failure_bundle` and its inclusion within the compiled pack.  The code explicitly mentions `failure_bundle` and its contents being incorporated into the pack.  This directly relates to the target of carrying incident artifact details.\n* **Direct Impact of Repair:** A repair aimed at improving the compiler's handling of failure bundles (e.g., ensuring correct serialization, filtering, or inclusion) would most directly influence whether this target flips from FAIL to PASS.\n* **Other Targets Less Likely:**\n    * **T1 (Repository Domain-Knowledge):** While related to the pack's contents, the evidence doesn't strongly suggest a problem with *domain knowledge* specifically.\n    * **T3 (User Task-Message Content):** The evidence doesn't mention user task messages or chat history.\n    * **T4 (Ignoring Log References):**  The evidence doesn't focus on log references or their handling.\n\n\n\nTherefore, target T2 is the most directly and logically connected to the visible code and the provided evidence.",
+      "language_family": "python",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "repo_family": "code_assist",
+      "repo_id": "code_assist",
+      "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "selected_test_anchor": true,
+      "source_bundle_id": "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python",
+      "split": "strict_eval_successor",
+      "target_rank_full_vocab": 1,
+      "target_text": "A",
+      "target_token_id": 182,
+      "task_type": "verifier_outcome_semantic_transition",
+      "verifier_anchor": true
+    },
+    "task_policy_overrides": {
+      "verifier_outcome_semantic_transition": "decoder_on_transition_only"
+    }
+  },
+  "created_at_utc": "2026-07-12T19:32:53Z",
+  "decision": "reviewed_v27_scored_interface_successor_audited",
+  "eval_honesty": {
+    "alias_safe_baseline": true,
+    "fresh_pure_web_selected_test_rows": 0,
+    "verifier_transition_override_only": true,
+    "web_multilingual_promotion_blocked": true
+  },
+  "headline": {
+    "language_ties": 0,
+    "language_wins_100m": 4,
+    "language_wins_gemma": 0,
+    "rows": 23,
+    "strict_delta_100m_minus_gemma": 0.7391304347826086,
+    "strict_exact_100m_under_contract": 1.0,
+    "strict_exact_gemma": 0.2608695652173913
+  },
+  "next_best_step": "Use this contract-applied successor as the current honest standalone comparison baseline, then focus new data work on fresh Python/C++ evidence successors and new pure-web selected-test source acquisition rather than more scorer churn.",
+  "passed": true,
+  "source_artifacts": {
+    "quarantined_baseline": "runs/local/artifacts/stage10882_quarantined_v27_comparison_successor_audit/quarantined_v27_comparison_successor_audit.json",
+    "scoring_contract": "runs/local/artifacts/stage10922_reviewed_v27_scored_interface_contract/reviewed_v27_scored_interface_contract.json",
+    "successor_audit": "runs/local/artifacts/stage10899_python_verifier_transition_successor_comparison_audit/python_verifier_transition_successor_comparison_audit.json",
+    "successor_rows": "runs/local/artifacts/stage10898_python_verifier_transition_successor_same_manifest_comparison/combined_strict_rows.jsonl",
+    "web_blocker": "runs/local/artifacts/stage10921_broad_pure_web_source_acquisition_atlas/broad_pure_web_source_acquisition_atlas.json"
+  },
+  "stage": 10923,
+  "stage_name": "stage10923_reviewed_v27_scored_interface_successor_comparison_audit"
+}

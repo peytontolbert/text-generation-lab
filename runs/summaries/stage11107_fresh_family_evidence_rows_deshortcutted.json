@@ -1,0 +1,23 @@
+{
+  "claim_scope": [
+    "Rewrite the stage11097 fresh-family evidence candidate rows to remove direct semantic role-name leakage from the visible evidence ledger."
+  ],
+  "findings": [
+    "The rewritten rows preserve the same opaque options and targets, but the visible evidence ledger no longer repeats the semantic option values verbatim.",
+    "These rows are still heuristic and still require review before training, but they are no longer trivially shortcut-prone in the same way as stage11097."
+  ],
+  "metrics": {
+    "row_count": 36
+  },
+  "next_best_step": "Run a second admission audit on the deshortcutted rows, then decide which subset is safe enough for train-support use.",
+  "outputs": {
+    "rows_jsonl": "runs/local/artifacts/stage11107_fresh_family_evidence_rows_deshortcutted/evidence_candidate_rows_deshortcutted.jsonl",
+    "summary_json": "runs/local/artifacts/stage11107_fresh_family_evidence_rows_deshortcutted/fresh_family_evidence_rows_deshortcutted.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "source_rows": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/evidence_candidate_rows.jsonl"
+  },
+  "stage": 11107,
+  "stage_name": "stage11107_fresh_family_evidence_rows_deshortcutted"
+}

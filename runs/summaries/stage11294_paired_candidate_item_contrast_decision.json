@@ -1,0 +1,185 @@
+{
+  "base_scorer_metrics": {
+    "clean_strict": {
+      "correct": 21,
+      "exact_accuracy": 0.9545454545454546,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.9130434782608695,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "paired_strict": {
+      "correct": 3,
+      "exact_accuracy": 0.5,
+      "rows": 6,
+      "scored_rows": 6
+    },
+    "paired_validation": {
+      "correct": 7,
+      "exact_accuracy": 0.7,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual": {
+      "correct": 5,
+      "exact_accuracy": 0.5,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    }
+  },
+  "created_at_utc": "2026-07-13T10:53:16Z",
+  "decision": "reject_stage11292_keep_stage11200_frontier",
+  "frontier_runtime_kept": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+  "frontier_runtime_kept_sha256": "b84dbba9ed525d0139ab867ffbc52d7ce2df702402542e54a1247d8f5dea3eca",
+  "interpretation": [
+    "Stage11285 candidate-only geometry improved residual to 6/10 but kept verifier_and_test_constraint at 0/3.",
+    "Stage11290 paired contrast shifted the model toward candidate_change_surface: paired changed rows reached 5/5 validation and 3/3 strict, but paired verifier rows fell to 2/5 validation and 0/3 strict.",
+    "The remaining blocker is not just more candidate-surface contrast; it requires source material where verifier/test evidence is visibly decisive and not merely a role option."
+  ],
+  "next_action": {
+    "recommended_stage": "stage11295_verifier_positive_fact_rich_materialization",
+    "requirements": [
+      "Mine or materialize verifier-positive rows whose candidate evidence includes concrete test/assertion/command-result text, not only a test path/import excerpt.",
+      "Keep matched changed-source negatives from the same root, but do not train a global changed-source bias.",
+      "Require paired verifier strict >0 and clean residual verifier_and_test_constraint >0/3 before any promotion.",
+      "If source supply cannot provide concrete verifier facts, move to scorer architecture that consumes explicit evidence role metadata under anti-cheat gating rather than inferring roles from weak snippets."
+    ]
+  },
+  "passed": false,
+  "product_metrics": {
+    "clean_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.9130434782608695,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "paired_strict": {
+      "correct": 3,
+      "exact_accuracy": 0.5,
+      "rows": 6,
+      "scored_rows": 6
+    },
+    "paired_strict_by_kind": {
+      "changed": {
+        "correct": 3,
+        "exact_accuracy": 1.0,
+        "rows": 3,
+        "scored_rows": 3
+      },
+      "verifier": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    },
+    "paired_validation": {
+      "correct": 7,
+      "exact_accuracy": 0.7,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "paired_validation_by_kind": {
+      "changed": {
+        "correct": 5,
+        "exact_accuracy": 1.0,
+        "rows": 5,
+        "scored_rows": 5
+      },
+      "verifier": {
+        "correct": 2,
+        "exact_accuracy": 0.4,
+        "rows": 5,
+        "scored_rows": 5
+      }
+    },
+    "residual": {
+      "correct": 5,
+      "exact_accuracy": 0.5,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    }
+  },
+  "product_scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "promotion_gates": {
+    "product_clean_strict_22_of_22": true,
+    "product_clean_validation_at_least_20_of_23": true,
+    "product_judgment_strict_above_majority": true,
+    "product_judgment_validation_above_majority": true,
+    "product_residual_above_5_of_10": false,
+    "product_verifier_residual_nonzero": false
+  },
+  "reason": "Stage11292 proves paired contrast can push changed-source positives, but it overcorrects: paired strict verifier rows are 0/3 and the clean residual verifier_and_test_constraint class remains 0/3. Residual returns to 5/10, so this is not promotable.",
+  "rejected_runtime": "runs/local/artifacts/stage11292_paired_candidate_item_contrast_probe/runtime_model/runtime_model_bundle.json",
+  "rejected_runtime_sha256": "0de27949782e37fdb24a63e0a0723aa37998e1beab0aba2dbd16970b3119321d",
+  "source_artifacts": {
+    "paired_package": "runs/local/artifacts/stage11290_paired_candidate_item_contrast_package/paired_candidate_item_contrast_package.json",
+    "postrun_audit": "runs/local/artifacts/stage11293_paired_candidate_item_contrast_postrun_audit/paired_candidate_item_contrast_postrun_audit.json",
+    "previous_candidate_only_decision": "runs/local/artifacts/stage11289_candidate_only_evidence_decision/candidate_only_evidence_decision.json",
+    "request": "runs/local/artifacts/stage11291_paired_candidate_item_contrast_probe_request/paired_candidate_item_contrast_probe_request.json"
+  },
+  "stage": 11294,
+  "stage_name": "stage11294_paired_candidate_item_contrast_decision"
+}

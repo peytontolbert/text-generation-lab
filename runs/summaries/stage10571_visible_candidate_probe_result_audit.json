@@ -1,0 +1,56 @@
+{
+  "baseline_state": {
+    "stage10558_canary_bounded_accuracy": 0.9166666666666666,
+    "stage10562_gemma_exact": 0.07407407407407407,
+    "stage10562_hundred_m_decisive_exact": 0.0,
+    "stage10562_hundred_m_exact": 0.0,
+    "stage10563_decisive_decoder_accuracy": 0.1111111111111111,
+    "stage10563_decoder_first_step_strict_accuracy": 0.6666666666666666
+  },
+  "created_at_utc": "2026-07-12T02:57:06Z",
+  "current_state": {
+    "stage10565_support_rows": 236,
+    "stage10567_strict_bounded_accuracy": 0.12962962962962962,
+    "stage10567_strict_rows_with_target_rank_1": 7,
+    "stage10569_canary_bounded_accuracy": 0.9166666666666666,
+    "stage10569_canary_greedy_exact_accuracy": 0.125,
+    "stage10570_gemma_decisive_exact": 0.2222222222222222,
+    "stage10570_gemma_exact": 0.07407407407407407,
+    "stage10570_hundred_m_decisive_exact": 0.3333333333333333,
+    "stage10570_hundred_m_exact": 0.1111111111111111
+  },
+  "deltas": {
+    "canary_bounded_delta": 0.0,
+    "decisive_exact_delta_vs_stage10562": 0.3333333333333333,
+    "greedy_exact_delta_vs_stage10562": 0.1111111111111111,
+    "same_manifest_delta_vs_gemma": 0.037037037037037035,
+    "strict_bounded_delta_vs_stage10563": -0.537037037037037
+  },
+  "inputs": {
+    "stage10558_canary_baseline": "runs/local/artifacts/stage10558_masked_projection_successor_with_v27_preservation_canary_audit/masked_projection_successor_with_v27_preservation_canary_audit.json",
+    "stage10562_generation_baseline": "runs/local/artifacts/stage10562_visible_candidate_successor_same_manifest_comparison/visible_candidate_successor_same_manifest_comparison.json",
+    "stage10563_transition_baseline": "runs/local/artifacts/stage10563_visible_candidate_transition_bounded_audit/visible_candidate_transition_bounded_audit.json",
+    "stage10565_support_package": "runs/local/artifacts/stage10565_visible_candidate_decisive_evidence_support_package/visible_candidate_decisive_evidence_support_package.json",
+    "stage10567_execution_result": "runs/local/artifacts/stage10567_visible_candidate_decisive_evidence_probe/bounded_decoder_probe/execution_result.json",
+    "stage10569_canary_audit": "runs/local/artifacts/stage10569_visible_candidate_decisive_evidence_canary_audit/visible_candidate_decisive_evidence_canary_audit.json",
+    "stage10570_same_manifest_comparison": "runs/local/artifacts/stage10570_visible_candidate_successor_same_manifest_comparison/visible_candidate_successor_same_manifest_comparison.json"
+  },
+  "next_actions": [
+    "Do not promote stage10567 as the new standalone frontier.",
+    "Keep stage10569 canary and stage10570 same-manifest comparison as the honest result package for this probe.",
+    "Next support package should mix decisive_evidence with a small verifier/retrieve preservation subset from the rebuilt visible-candidate contract rather than training decisive_evidence only.",
+    "Rust and web root supply remain too thin for a strong multilingual repair claim; compile fresh disjoint roots before expecting broad language wins on the rebuilt successor surface."
+  ],
+  "outputs": {
+    "audit_json": "runs/local/artifacts/stage10571_visible_candidate_probe_result_audit/visible_candidate_probe_result_audit.json"
+  },
+  "passed": true,
+  "stage": 10571,
+  "stage_name": "stage10571_visible_candidate_probe_result_audit",
+  "truthful_read": [
+    "The stage10565 support package did not regress the repaired v2.7 canary: stage10569 remains 22/24 bounded, matching stage10558.",
+    "On the rebuilt 54-row strict visible-candidate slice, stage10567 improved greedy exact generation over stage10562 from 0/54 to 6/54 and now edges Gemma overall 6/54 vs 4/54.",
+    "However, the bounded strict accuracy recorded inside stage10567 is only 7/54, far below the stage10563 saved-runtime baseline of 36/54. The decisive-evidence-only support helped raw label generation somewhat but damaged broader rebuilt-slice bounded behavior.",
+    "This means stage10567 is diagnostic progress, not a promotable frontier upgrade."
+  ]
+}

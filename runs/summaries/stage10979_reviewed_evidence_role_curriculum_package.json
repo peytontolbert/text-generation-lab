@@ -1,0 +1,106 @@
+{
+  "claim_scope": [
+    "Combine the clean reviewed evidence-role support sources into one curriculum inventory instead of another tiny scorer-tuning probe.",
+    "Separate reusable clean train-support rows from overlap/stress-only rows so later probes can preserve honesty while still exploiting known stress material deliberately."
+  ],
+  "created_at_utc": "2026-07-12T22:08:03Z",
+  "decision": "reviewed_evidence_role_curriculum_packaged_with_clean_vs_overlap_split",
+  "headline_findings": [
+    "The current evidence lane no longer needs another micro-tuning branch to identify data supply; the reviewed semantic and explicit-ledger branches can be merged into one curriculum source now.",
+    "This package isolates overlap/stress rows so they can remain diagnostic rather than silently entering a promotable train-support path.",
+    "Web remains present only through overlap/stress semantic support because there is still no pure-web selected-test heldout replenishment family."
+  ],
+  "metrics": {
+    "all_rows": 36,
+    "all_rows_by_language": {
+      "c_cpp": 12,
+      "python": 8,
+      "rust": 14,
+      "web_js_ts_html": 2
+    },
+    "all_rows_by_objective": {
+      "bounded_decoder_ce": 24,
+      "semantic_evidence_role_generation": 6,
+      "semantic_evidence_role_pairwise_contrast": 6
+    },
+    "all_rows_by_target": {
+      "candidate_change_surface": 12,
+      "symptom_or_call_path_analogue": 10,
+      "verifier_and_test_constraint": 14
+    },
+    "clean_rows_by_language": {
+      "rust": 6
+    },
+    "clean_rows_by_objective": {
+      "bounded_decoder_ce": 4,
+      "semantic_evidence_role_generation": 1,
+      "semantic_evidence_role_pairwise_contrast": 1
+    },
+    "clean_rows_with_selected_test_anchor": 6,
+    "clean_train_support_rows": 6,
+    "overlap_or_stress_rows": 30,
+    "overlap_rows_by_language": {
+      "c_cpp": 12,
+      "python": 8,
+      "rust": 8,
+      "web_js_ts_html": 2
+    },
+    "overlap_rows_with_selected_test_anchor": 26,
+    "replenishment_snapshot": {
+      "all_rows": 30,
+      "candidate_by_language": {
+        "c_cpp": 2,
+        "python": 1,
+        "rust": 3
+      },
+      "candidate_rows": 6,
+      "gold_values_candidate_rows": {
+        "candidate_change_surface": 2,
+        "symptom_or_call_path_analogue": 2,
+        "verifier_and_test_constraint": 2
+      },
+      "support_by_language": {
+        "c_cpp": 8,
+        "python": 4,
+        "rust": 12
+      },
+      "support_rows": 24
+    },
+    "rows_by_source_stage": {
+      "stage10925_semantic": 12,
+      "stage10974_replenishment": 24
+    },
+    "semantic_snapshot": {
+      "c_cpp": 4,
+      "python": 4,
+      "rust": 2,
+      "web_js_ts_html": 2
+    },
+    "unique_source_roots_all": 8,
+    "unique_source_roots_clean": 1
+  },
+  "next_best_step": "Use support_rows_clean.jsonl as the honest larger evidence-role train-support source for the next package stage, and keep support_rows_overlap_or_stress.jsonl gated for diagnostic or explicit stress use only.",
+  "outputs": {
+    "all_rows_jsonl": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/support_rows_all.jsonl",
+    "clean_rows_jsonl": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/support_rows_clean.jsonl",
+    "inventory_jsonl": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/curriculum_inventory.jsonl",
+    "overlap_rows_jsonl": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/support_rows_overlap_or_stress.jsonl",
+    "summary_json": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/reviewed_evidence_role_curriculum_package.json"
+  },
+  "passed": true,
+  "remaining_blockers": [
+    "This stage expands reviewed support geometry, not heldout size; it does not create new promotable strict rows by itself.",
+    "Web still lacks a pure-web selected-test or verifier-anchored replenishment family, so its rows stay overlap/stress only here.",
+    "Rust still needs fresh non-aliased heldout replenishment beyond the support-only reviewed bundles already included."
+  ],
+  "source_artifacts": {
+    "overlay_strict_rows": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "overlay_validation_rows": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_validation.jsonl",
+    "reviewed_replenishment_rows": "runs/local/artifacts/stage10974_multilingual_reviewed_replenishment_package/train_support_rows.jsonl",
+    "reviewed_replenishment_summary": "runs/local/artifacts/stage10974_multilingual_reviewed_replenishment_package/multilingual_reviewed_replenishment_package.json",
+    "semantic_support_rows": "runs/local/artifacts/stage10925_reviewed_evidence_role_semantic_support_package/support_rows.jsonl",
+    "semantic_support_summary": "runs/local/artifacts/stage10925_reviewed_evidence_role_semantic_support_package/reviewed_evidence_role_semantic_support_package.json"
+  },
+  "stage": 10979,
+  "stage_name": "stage10979_reviewed_evidence_role_curriculum_package"
+}

@@ -1,0 +1,74 @@
+{
+  "claim_scope": [
+    "Build a broader diagnostic branch by adding semantic evidence-role supervision on top of the 217-row reviewed replenishment base.",
+    "Keep the frozen overlay unchanged and preserve the 6-row reviewed replenishment candidate slice for postrun scoring.",
+    "Measure whether semantic evidence-role supervision can move the candidate_change_surface prior without changing the heldout overlay contract."
+  ],
+  "created_at_utc": "2026-07-12T22:56:32Z",
+  "decision": "semantic_evidence_bridge_branch_ready",
+  "findings": [
+    "This branch adds the only genuinely new cross-language evidence-role supervision currently available beyond the 217-row replenishment base.",
+    "All added rows are train-support only and remain non-promotable because they overlap existing reviewed roots.",
+    "The branch is still not a scale solution, but it is the cleanest available test of whether semantic evidence-role targets help the evidence scorer boundary."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "c_cpp": 4,
+      "python": 4,
+      "rust": 2,
+      "web_js_ts_html": 2
+    },
+    "added_by_objective": {
+      "semantic_evidence_role_generation": 6,
+      "semantic_evidence_role_pairwise_contrast": 6
+    },
+    "added_by_repo_family": {
+      "agentkernel": 2,
+      "candle": 2,
+      "code_assist": 2,
+      "parametergolf": 2,
+      "repository_library": 4
+    },
+    "added_by_target": {
+      "candidate_change_surface": 4,
+      "symptom_or_call_path_analogue": 2,
+      "verifier_and_test_constraint": 6
+    },
+    "added_semantic_rows": 12,
+    "candidate_by_language": {
+      "c_cpp": 2,
+      "python": 1,
+      "rust": 3
+    },
+    "candidate_by_repo_family": {
+      "agentkernel": 1,
+      "candle": 2,
+      "parametergolf": 1,
+      "repository_library": 1,
+      "tokenizers": 1
+    },
+    "candidate_rows_reserved": 6,
+    "overlay_strict_rows_unchanged": 23,
+    "overlay_validation_rows_unchanged": 23,
+    "stress_rows_unchanged": 7,
+    "train_rows_after": 229,
+    "train_rows_before": 217
+  },
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage11003_semantic_evidence_bridge_package/added_semantic_bridge_rows.jsonl",
+    "reserved_candidate_rows_jsonl": "runs/local/artifacts/stage11003_semantic_evidence_bridge_package/reviewed_replenishment_candidates.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage11003_semantic_evidence_bridge_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11003_semantic_evidence_bridge_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11003_semantic_evidence_bridge_package/semantic_evidence_bridge_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11003_semantic_evidence_bridge_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11003_semantic_evidence_bridge_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "base_support_package": "runs/local/artifacts/stage10975_multilingual_reviewed_replenishment_support_package/multilingual_reviewed_replenishment_support_package.json",
+    "reviewed_replenishment_candidates": "runs/local/artifacts/stage10974_multilingual_reviewed_replenishment_package/strict_candidate_rows.jsonl",
+    "semantic_curriculum_package": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/reviewed_evidence_role_curriculum_package.json"
+  },
+  "stage": 11003,
+  "stage_name": "stage11003_semantic_evidence_bridge_package"
+}

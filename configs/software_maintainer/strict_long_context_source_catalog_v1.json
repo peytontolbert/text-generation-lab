@@ -1,0 +1,105 @@
+{
+  "purpose": "Curated external source allowlist for strict long-context augmentation. External papers and datasets must be explicitly admitted; uncataloged repos remain allowed by default.",
+  "schema_version": "strict_long_context_source_catalog_v1",
+  "source_type_defaults": {
+    "dataset": {
+      "allow_uncataloged": false,
+      "provenance_tier": "curated_dataset_only",
+      "quality_tier": "curated_only"
+    },
+    "paper": {
+      "allow_uncataloged": false,
+      "provenance_tier": "curated_paper_only",
+      "quality_tier": "curated_only"
+    },
+    "repo": {
+      "allow_uncataloged": true,
+      "provenance_tier": "external_repo_analogue",
+      "quality_tier": "mixed_repo_analogue"
+    }
+  },
+  "sources": [
+    {
+      "allow_augmentation": true,
+      "name": "papers_2m_support",
+      "provenance_tier": "pure_grounded_paper_support",
+      "quality_tier": "high",
+      "role_override": "algorithm_grounding",
+      "source_type": "paper"
+    },
+    {
+      "allow_augmentation": true,
+      "name": "papers_2m_support_dataset_export",
+      "provenance_tier": "pure_grounded_paper_support",
+      "quality_tier": "high",
+      "role_override": "algorithm_grounding",
+      "source_id_equals": [
+        "PeytonT--2m_papers_text"
+      ],
+      "source_type": "dataset"
+    },
+    {
+      "allow_augmentation": true,
+      "name": "open_swe_traces",
+      "provenance_tier": "execution_grounded_trace_support",
+      "quality_tier": "high",
+      "role_override": "trace_analogue",
+      "source_id_equals": [
+        "nvidia--Open-SWE-Traces"
+      ],
+      "source_type": "dataset"
+    },
+    {
+      "allow_augmentation": true,
+      "name": "fable5_traces",
+      "provenance_tier": "execution_grounded_trace_support",
+      "quality_tier": "medium",
+      "role_override": "trace_analogue",
+      "source_id_equals": [
+        "Crownelius--Complete-FABLE.5-traces-2M"
+      ],
+      "source_type": "dataset"
+    },
+    {
+      "allow_augmentation": true,
+      "name": "cuda_engineer_archive",
+      "provenance_tier": "specialized_runtime_support",
+      "quality_tier": "medium",
+      "role_override": "trace_analogue",
+      "source_id_equals": [
+        "SakanaAI--AI-CUDA-Engineer-Archive"
+      ],
+      "source_type": "dataset"
+    },
+    {
+      "allow_augmentation": false,
+      "name": "swe_atlas_qna_eval_only",
+      "provenance_tier": "heldout_eval_only",
+      "quality_tier": "heldout_only",
+      "source_id_equals": [
+        "ScaleAI--SWE-Atlas-QnA"
+      ],
+      "source_type": "dataset"
+    },
+    {
+      "allow_augmentation": false,
+      "name": "codexglue_code_search_aux_only",
+      "provenance_tier": "retrieval_aux_only",
+      "quality_tier": "auxiliary_only",
+      "source_id_equals": [
+        "google--code_x_glue_tc_nl_code_search_adv"
+      ],
+      "source_type": "dataset"
+    },
+    {
+      "allow_augmentation": false,
+      "name": "codexglue_code_refinement_aux_only",
+      "provenance_tier": "short_context_aux_only",
+      "quality_tier": "auxiliary_only",
+      "source_id_equals": [
+        "google--code_x_glue_cc_code_refinement"
+      ],
+      "source_type": "dataset"
+    }
+  ]
+}

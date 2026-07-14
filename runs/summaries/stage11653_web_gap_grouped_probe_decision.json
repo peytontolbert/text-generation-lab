@@ -1,0 +1,43 @@
+{
+  "created_at_utc": "2026-07-14T02:24:51Z",
+  "decision": "reject_stage11651b_full_model_grouped_web_gap_probe",
+  "do_not_repeat": [
+    "Do not promote Stage11651b runtime.",
+    "Do not rerun the same full-model grouped Web-gap setup with identical objective; it failed both support fit and protected gates.",
+    "Do not interpret Stage11651b as evidence against the verifier-backed root-group data itself; it is evidence against this full-model/shared-head objective configuration."
+  ],
+  "key_scores": {
+    "filtered_strict": "16/22",
+    "filtered_validation": "14/22",
+    "grouped_train_support": "41/113",
+    "old_canary_strict": "17/23",
+    "old_canary_validation": "15/23",
+    "residual_bank": "3/10",
+    "web_heldout": "3/66",
+    "web_successor_strict": "12/36"
+  },
+  "next_hypotheses": [
+    "Train only the web_task_candidate_head with encoder frozen, then audit as a routed non-product diagnostic; this tests whether the new rows are learnable without damaging shared representations.",
+    "Use lower LR and/or stronger preservation plus explicit protected replay if full-model training is retried, but only after head-only representation fit is proven on the 113 grouped rows.",
+    "Improve root-group batching so groups contain multiple rows from the same root together; current root_group_sizes are often 1, limiting true listwise group pressure.",
+    "Separate abstention/verifier/non-evidence Web objectives; the full-model run regressed abstention and Rust/canary rows heavily."
+  ],
+  "reason": "Stage11651b regressed protected canaries/residual and collapsed Web heldout under the product scorer.",
+  "selected_frontier_unchanged": {
+    "protected_scores": {
+      "filtered_strict": "22/22",
+      "filtered_validation": "20/22",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": "21/23",
+      "residual_bank": "7/10"
+    },
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head"
+  },
+  "source_artifacts": {
+    "postrun_audit": "runs/local/artifacts/stage11652_web_gap_grouped_probe_postrun_audit/web_gap_grouped_probe_postrun_audit.json",
+    "runtime_rejected": "runs/local/artifacts/stage11651b_web_gap_grouped_probe_rerun/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11653,
+  "stage_name": "stage11653_web_gap_grouped_probe_decision"
+}

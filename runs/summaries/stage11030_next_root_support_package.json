@@ -1,0 +1,49 @@
+{
+  "claim_scope": [
+    "Add the stage11029 reviewed next-root support rows on top of the strongest current evidence base.",
+    "Keep the frozen 23-row overlay unchanged and reserve the next-root candidate rows outside train for postrun scoring."
+  ],
+  "created_at_utc": "2026-07-13T00:05:20Z",
+  "decision": "next_root_support_package_ready",
+  "findings": [
+    "This package keeps the semantic evidence bridge base intact while adding fresh reviewed Python/C++ next-root support.",
+    "The overlay contract stays fixed; any future movement can be attributed to train-support changes rather than eval drift.",
+    "The web lane remains absent from added train rows because the reviewed code_assist web control root is still unresolved in the current source-row corpus."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "c_cpp": 8,
+      "python": 4
+    },
+    "added_next_root_rows": 12,
+    "candidate_by_language": {
+      "c_cpp": 4,
+      "python": 2,
+      "rust": 3
+    },
+    "reserved_candidates_after": 9,
+    "reserved_candidates_before": 6,
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_rows_after": 241,
+    "train_rows_before": 229,
+    "validation_rows_unchanged": 23
+  },
+  "next_best_step": "Run one bounded probe from this package and score both the frozen overlay and the enlarged reserved candidate slice separately.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage11030_next_root_support_package/added_next_root_rows.jsonl",
+    "reserved_candidates_jsonl": "runs/local/artifacts/stage11030_next_root_support_package/reserved_next_root_candidates.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage11030_next_root_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11030_next_root_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11030_next_root_support_package/next_root_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11030_next_root_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11030_next_root_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "base_support_package": "runs/local/artifacts/stage11003_semantic_evidence_bridge_package/semantic_evidence_bridge_package.json",
+    "next_root_bundle": "runs/local/artifacts/stage11029_reviewed_multilingual_next_root_bundle_resolved/reviewed_multilingual_next_root_bundle_resolved.json"
+  },
+  "stage": 11030,
+  "stage_name": "stage11030_next_root_support_package"
+}

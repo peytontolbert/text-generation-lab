@@ -1,0 +1,85 @@
+{
+  "classification": "controlled_negative_result",
+  "created_at_utc": "2026-07-13T18:02:12Z",
+  "decision": "reject_stage11487_do_not_promote",
+  "experiment_control": {
+    "held_constant": [
+      "Stage11481 Residual-50 data package",
+      "Stage11444 initialization",
+      "product scorer encoder_option_retrieval",
+      "decoder CE weight",
+      "bounded-choice aux weight",
+      "contrast weight and margin",
+      "preservation KL weight",
+      "protected validation/strict/residual splits"
+    ],
+    "single_changed_variable": "bounded decoder train sampler: residual_family_balanced -> cyclic",
+    "stage11483_previous_decision": "reject_stage11483_do_not_promote"
+  },
+  "next_experiment_contract": {
+    "hypothesis_id": "H_listwise_same_root_candidate_objective_needed",
+    "implementation_targets": [
+      "compile same-root candidate groups from rows with opaque_options",
+      "optimize listwise softmax or pairwise margin within each candidate set",
+      "record margins against candidate_change_surface, verifier_and_test_constraint, and symptom_or_call_path_analogue",
+      "preserve old/filtered canary rows with explicit replay or KL"
+    ],
+    "must_hold_constant": [
+      "Stage11481 Residual-50 data package for the first architecture test",
+      "Stage11444 initialization",
+      "protected validation/strict/residual splits",
+      "promotion scorer contract until a new scorer is explicitly productized"
+    ],
+    "promotion_requires": [
+      "old canary strict 23/23",
+      "filtered strict 22/22",
+      "filtered validation >=20/22",
+      "old validation >=21/23",
+      "residual bank >=6/10",
+      "full bounded-choice coverage"
+    ],
+    "rationale": "Both Residual-50 data-only/contrast training and sampler-only ablation failed. The next useful variable is the candidate objective itself: train scores over same-root candidate sets directly instead of relying on row-wise decoder CE plus generic option retrieval.",
+    "single_changed_variable": "objective/scorer architecture: add same-root listwise candidate scoring for bounded-choice rows",
+    "stop_condition": "Do not run another support/sampler probe on Stage11481 before implementing a direct listwise or same-root candidate objective."
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11489_residual50_sampler_ablation_decision/residual50_sampler_ablation_decision.json"
+  },
+  "passed": true,
+  "selected_frontier_unchanged": {
+    "product_scorer": "encoder_option_retrieval",
+    "reason": "Stage11487 regressed protected strict surfaces and reduced residual-bank accuracy.",
+    "runtime": "runs/local/artifacts/stage11444_targeted_residual_role_support_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "source_artifacts": {
+    "postrun": "runs/local/artifacts/stage11488_residual50_sampler_ablation_postrun_audit/residual50_sampler_ablation_postrun_audit.json",
+    "previous_decision": "runs/local/artifacts/stage11485_residual50_controlled_probe_decision/residual50_controlled_probe_decision.json",
+    "request": "runs/local/artifacts/stage11486_residual50_sampler_ablation_probe_request/residual50_sampler_ablation_probe_request.json"
+  },
+  "stage": 11489,
+  "stage_name": "stage11489_residual50_sampler_ablation_decision",
+  "what_was_falsified": [
+    "Changing only the sampler from residual_family_balanced to cyclic does not repair the Stage11483 protected strict regression.",
+    "Cyclic sampling on the same Residual-50 package worsens residual-bank accuracy from 5/10 to 2/10.",
+    "The residual problem is not explained solely by residual-family oversampling; current CE+aux+contrast objective geometry is insufficient."
+  ],
+  "why_not_progress": {
+    "failed_gates": [
+      "product_filtered_strict_22_of_22",
+      "product_old_canary_strict_23_of_23",
+      "product_residual_above_base_5_of_10"
+    ],
+    "filtered_strict": {
+      "actual": "18/22",
+      "required": "22/22"
+    },
+    "old_canary_strict": {
+      "actual": "19/23",
+      "required": "23/23"
+    },
+    "residual_bank": {
+      "actual": "2/10",
+      "required": ">5/10"
+    }
+  }
+}

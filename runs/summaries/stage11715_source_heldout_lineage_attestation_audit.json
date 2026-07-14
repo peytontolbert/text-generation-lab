@@ -1,0 +1,49 @@
+{
+  "attestation_candidate_counts_by_language": {
+    "c_cpp": 0,
+    "python": 0,
+    "rust": 0
+  },
+  "candidate_files_from_rg": 2121,
+  "claim_boundary": [
+    "A no-train-overlap scan is not itself source-heldout admission.",
+    "Roots with train/support hits should be rejected for strict smoke admission unless the hit is manually proven unrelated.",
+    "Roots without train/support hits still require explicit source-heldout attestation and verifier-transition payloads before admission."
+  ],
+  "created_at_utc": "2026-07-14T06:46:37.999324+00:00",
+  "decision": "lineage_scan_complete_attestation_still_required",
+  "files_scanned": 2121,
+  "minimal_multilingual_attestation_candidate_ready": false,
+  "next_repairs": [
+    "For roots marked no_train_overlap_found, attach source-heldout attestation and root_lineage_key.",
+    "For roots marked reject_train_or_support_overlap_found, replace with fresh roots or manually adjudicate false-positive hits.",
+    "After attestation, rerun Stage11714-style row preflight for verifier-transition and option-shuffle blockers."
+  ],
+  "outputs": {
+    "artifact": "runs/local/artifacts/stage11715_source_heldout_lineage_attestation_audit/source_heldout_lineage_attestation_audit.json",
+    "root_cards": "runs/local/artifacts/stage11715_source_heldout_lineage_attestation_audit/source_heldout_lineage_root_cards.jsonl",
+    "summary": "runs/summaries/stage11715_source_heldout_lineage_attestation_audit.json"
+  },
+  "passed": true,
+  "root_count": 12,
+  "rows_scanned": 403661,
+  "source_artifacts": {
+    "cards": "runs/local/artifacts/stage11714_source_heldout_smoke_admission_preflight/source_heldout_smoke_preflight_row_cards.jsonl"
+  },
+  "stage": 11715,
+  "stage_name": "source_heldout_lineage_attestation_audit",
+  "status_by_language": {
+    "c_cpp": {
+      "reject_train_or_support_overlap_found": 4
+    },
+    "python": {
+      "reject_train_or_support_overlap_found": 4
+    },
+    "rust": {
+      "reject_train_or_support_overlap_found": 4
+    }
+  },
+  "status_counts": {
+    "reject_train_or_support_overlap_found": 12
+  }
+}

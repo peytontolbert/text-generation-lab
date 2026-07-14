@@ -1,0 +1,78 @@
+{
+  "blocking_issues": {
+    "candidate_rows_in_train": [],
+    "missing_shuffle_rows": [],
+    "non_opaque_evidence_rows": [],
+    "singleton_verifier_rows": []
+  },
+  "claim_scope": [
+    "Audit the stage11097 fresh-family materialized rows for option-order hygiene, candidate-vs-support separation, and heuristic evidence skew visibility."
+  ],
+  "findings": [
+    "Evidence rows are intentionally separated from train support until their heuristic gold values receive stricter review.",
+    "Verifier support rows should be immediately usable if they preserve opaque options and multi-option competition.",
+    "The current package is useful only if candidate rows stay out of train and all bounded rows retain deterministic shuffle metadata."
+  ],
+  "metrics": {
+    "evidence_by_language": {
+      "c_cpp": 16,
+      "python": 16,
+      "web_js_ts_html": 4
+    },
+    "evidence_candidate_rows": 36,
+    "evidence_gold_sources": {
+      "multi_verification_targets": 28,
+      "single_target_cpp_family": 8
+    },
+    "evidence_gold_values": {
+      "candidate_change_surface": 8,
+      "verifier_and_test_constraint": 28
+    },
+    "scoreable_support_rows": 36,
+    "verifier_by_language": {
+      "c_cpp": 8,
+      "python": 8,
+      "web_js_ts_html": 2
+    },
+    "verifier_support_rows": 18
+  },
+  "next_best_step": "Merge only the support-eligible rows into the next train package and keep the evidence candidates in a review lane until explicit anti-cheat adjudication passes.",
+  "passed": true,
+  "row_snapshot": {
+    "all_rows": 90,
+    "all_rows_by_language": {
+      "c_cpp": 40,
+      "python": 40,
+      "web_js_ts_html": 10
+    },
+    "all_rows_by_repo_family": {
+      "cccl": 10,
+      "cuEmbed": 10,
+      "diffusers": 10,
+      "django": 10,
+      "faiss": 10,
+      "falco": 10,
+      "mem0": 10,
+      "onnxruntime": 10,
+      "openai-agents-python": 10
+    },
+    "all_rows_by_task": {
+      "evidence_citation": 36,
+      "retrieve_answer_abstain": 18,
+      "verifier_outcome": 18,
+      "verifier_outcome_semantic_transition": 18
+    },
+    "evidence_candidate_rows": 36,
+    "heuristic_evidence_rows": 36,
+    "scoreable_support_rows": 36,
+    "verifier_support_rows": 18
+  },
+  "source_artifacts": {
+    "evidence_rows": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/evidence_candidate_rows.jsonl",
+    "rows_summary": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/fresh_family_materialized_rows.json",
+    "scoreable_rows": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/scoreable_support_rows.jsonl",
+    "verifier_rows": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/verifier_support_rows.jsonl"
+  },
+  "stage": 11098,
+  "stage_name": "stage11098_fresh_family_materialized_rows_audit"
+}

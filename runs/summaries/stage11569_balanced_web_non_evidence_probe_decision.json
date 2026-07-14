@@ -1,0 +1,63 @@
+{
+  "candidate_package": "runs/summaries/stage11567_balanced_web_non_evidence_support_package.json",
+  "candidate_runtime": "runs/local/artifacts/stage11567_balanced_web_non_evidence_support_probe/runtime_model/runtime_model_bundle.json",
+  "created_at_utc": "2026-07-13T21:32:38Z",
+  "decision": "do_not_promote_balanced_web_non_evidence_runtime",
+  "interpretation": {
+    "negative_result": "A broader 101-row Web non-evidence support package did not improve Web transfer and regressed residual from the selected Stage11507 frontier 7/10 to 6/10.",
+    "recommended_next_step": "Do not run more same-objective Web support probes. Build a task-specific non-evidence scorer/objective or source-heldout Web roots with stronger verifier/transition supervision, then test on the same 66-row Web heldout.",
+    "useful_result": "Stage11566/11567 established that there is substantial Web support supply, but current CE+retrieval objective does not convert that supply into heldout gains."
+  },
+  "passed": false,
+  "promotion_gates": {
+    "filtered_strict_preserves_stage11507": true,
+    "full_coverage_preserved": true,
+    "old_canary_strict_preserves_stage11507": true,
+    "residual_preserves_stage11507": false,
+    "web_beats_same_manifest_gemma": false,
+    "web_improves_stage11554_inference_gate": false,
+    "web_improves_stage11556_or_11559_bridge": false
+  },
+  "scoreboard": {
+    "best_bridge_gated_web_stage11556_or_11559": {
+      "accuracy": 0.6818181818181818,
+      "correct": 45,
+      "rows": 66
+    },
+    "gemma12b_web_root_heldout_same_manifest": {
+      "accuracy": 0.7878787878787878,
+      "correct": 52,
+      "rows": 66
+    },
+    "stage11507_base_web": {
+      "accuracy": 0.5303030303030303,
+      "correct": 35,
+      "rows": 66
+    },
+    "stage11554_stage11507_inference_only_gated_web": {
+      "accuracy": 0.6363636363636364,
+      "correct": 42,
+      "rows": 66
+    },
+    "stage11568_balanced_web_non_evidence_gated_web": {
+      "accuracy": 0.6363636363636364,
+      "correct": 42,
+      "coverage": 1.0,
+      "rows": 66
+    },
+    "stage11568_balanced_web_non_evidence_residual": {
+      "accuracy": 0.6,
+      "correct": 6,
+      "coverage": 1.0,
+      "rows": 10
+    }
+  },
+  "selected_frontier_remains": "stage11507 + encoder_option_retrieval_evidence_judgment_head",
+  "source_artifacts": {
+    "stage11549": "runs/summaries/stage11549_web_root_heldout_same_manifest_gemma_comparison.json",
+    "stage11567": "runs/summaries/stage11567_balanced_web_non_evidence_support_package.json",
+    "stage11568": "runs/summaries/stage11568_balanced_web_non_evidence_postrun_gate_audit.json"
+  },
+  "stage": 11569,
+  "stage_name": "balanced_web_non_evidence_probe_decision"
+}

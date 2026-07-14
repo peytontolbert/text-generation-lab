@@ -1,0 +1,246 @@
+{
+  "blocked_roots": [
+    {
+      "reason": "trivial_placeholder_verifier",
+      "root_id": "openhands_frontend_placeholder"
+    },
+    {
+      "reason": "environment_transform_failure_before_maintainer_assertion",
+      "root_id": "dspy_react_app_transform_blocker"
+    }
+  ],
+  "by_root": {
+    "dspy_react_app_transform_blocker": {
+      "admissibility": "diagnostic_heldout_only",
+      "attempts": {
+        "react_app_test": {
+          "cmd": [
+            "npm",
+            "test",
+            "--",
+            "--watchAll=false",
+            "src/App.test.js"
+          ],
+          "cwd": "/data/tmp/stage11360_dspy_react_app",
+          "log": "runs/local/artifacts/stage11360_web_disjoint_heldout_verifier_evidence/logs/dspy_react_app_app_test.log",
+          "name": "dspy_react_app_app_test",
+          "returncode": 1,
+          "status": "failed",
+          "stderr_tail": "using-typescript\n     \u2022 To have some of your \"node_modules\" files transformed, you can specify a custom \"transformIgnorePatterns\" in your config.\n     \u2022 If you need a custom transformation specify a \"transform\" option in your config.\n     \u2022 If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the \"moduleNameMapper\" config option.\n\n    You'll find more details and examples of these config options in the docs:\n    https://jestjs.io/docs/configuration\n    For information about custom transformations, see:\n    https://jestjs.io/docs/code-transformation\n\n    Details:\n\n    /data/tmp/stage11360_dspy_react_app/node_modules/axios/index.js:1\n    ({\"Object.<anonymous>\":function(module,exports,require,__dirname,__filename,jest){import axios from './lib/axios.js';\n                                                                                      ^^^^^^\n\n    SyntaxError: Cannot use import statement outside a module\n\n      1 | import React, { useState, useEffect } from 'react';\n    > 2 | import axios from \"axios\";\n        | ^\n      3 | import styles from './display.module.css';\n      4 | import { Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';\n      5 | import ExpandMoreIcon from '@mui/icons-material/ExpandMore';\n\n      at Runtime.createScriptFromCode (node_modules/jest-runtime/build/index.js:1728:14)\n      at Object.<anonymous> (src/components/display/display.js:2:1)\n\nTest Suites: 1 failed, 1 total\nTests:       0 total\nSnapshots:   0 total\nTime:        0.735 s\nRan all test suites matching /src\\/App.test.js/i.\n",
+          "stdout_tail": "\n> dsp-app@0.1.0 test\n> react-scripts test --watchAll=false src/App.test.js\n\n"
+        }
+      },
+      "execution_status": "verifier_executed_failed_environment_or_transform",
+      "git_repo_family": "dspy",
+      "repo_family": "react_app",
+      "source_candidate": {
+        "admission_status": "needs_maintainer_gold_and_verifier_transition",
+        "anti_cheat_precheck": {
+          "candidate_has_locked_commit": true,
+          "candidate_has_source_path": true,
+          "candidate_has_verifier_or_test_path": true,
+          "no_gold_label_present": true,
+          "protected_overlap": {}
+        },
+        "candidate_change_surface_paths": [
+          "public/index.html",
+          "src/App.js",
+          "src/reportWebVitals.js",
+          "src/App.css",
+          "src/index.css"
+        ],
+        "git_head": "7dfbea37e583df3e3aa90d9e403877a608610a95",
+        "git_repo_family": "dspy",
+        "git_repo_root": "/data/repositories/dspy",
+        "language_family": "web_js_ts_html",
+        "recommended_materialization": {
+          "minimum_before_train": [
+            "human_or_ai_maintainer_gold",
+            "executed_or_recovered_verifier_output",
+            "distinct symptom/call-path evidence",
+            "root-disjoint split assignment",
+            "prompt-target leak audit"
+          ],
+          "perspectives": [
+            "symptom_localization",
+            "evidence_citation",
+            "verifier_outcome",
+            "patch_impact",
+            "minimal_fix_selection",
+            "abstention_insufficient_evidence"
+          ]
+        },
+        "repo_family": "react_app",
+        "repo_path": "/data/repositories/dspy/inspect-app/react-app",
+        "review_item_id": "stage11346::web_review::08::react_app",
+        "review_required_fields": {
+          "anti_cheat_decision": null,
+          "gold_perspective_answers": null,
+          "observed_verifier_transition": null,
+          "root_split_assignment": null,
+          "root_task_or_bug_description": null,
+          "selected_changed_path": null,
+          "selected_symptom_or_call_path_evidence": null,
+          "selected_verifier_path": null
+        },
+        "source_candidate_id": "stage11345::web_js_ts_html::react_app::5c466ee971",
+        "source_snippet_preview": {
+          "line_end": 42,
+          "line_start": 25,
+          "path": "/data/repositories/dspy/inspect-app/react-app/public/index.html",
+          "sha256": "227693f519d606b4c3c5321428cc3ca80396692c65e53978501a80d8bb77d069",
+          "text": "      Learn how to configure a non-root public URL by running `npm run build`.\n    -->\n    <title>DSP Function Inspect App</title>\n  </head>\n  <body>\n    <noscript>You need to enable JavaScript to run this app.</noscript>\n    <div id=\"root\"></div>\n    <!--\n      This HTML file is a template.\n      If you open it directly in the browser, you will see an empty page.\n\n      You can add webfonts, meta tags, or analytics to this file.\n      The build step will place the bundled scripts into the <body> tag.\n\n      To begin the development, run `npm start` or `yarn start`.\n      To create a production bundle, use `npm run build` or `yarn build`.\n    -->\n  </body>"
+        },
+        "strict_eval_eligible": false,
+        "train_rows_emitted": 0,
+        "verifier_and_test_constraint_paths": [
+          "src/App.test.js",
+          "src/setupTests.js"
+        ],
+        "verifier_snippet_preview": {
+          "line_end": 8,
+          "line_start": 1,
+          "path": "/data/repositories/dspy/inspect-app/react-app/src/App.test.js",
+          "sha256": "7a20ca16913807fed37a08b48abe456f7a90ae7cf83fa3e669e45201e391d821",
+          "text": "import { render, screen } from '@testing-library/react';\nimport App from './App';\n\ntest('renders learn react link', () => {\n  render(<App />);\n  const linkElement = screen.getByText(/learn react/i);\n  expect(linkElement).toBeInTheDocument();\n});"
+        }
+      },
+      "why_not_promotable": "The test fails before the expected assertion because axios ESM is not transformed by the current Jest setup."
+    },
+    "openhands_frontend_placeholder": {
+      "admissibility": "diagnostic_heldout_only",
+      "attempts": {
+        "playwright_e2e": {
+          "cmd": [
+            "npm",
+            "run",
+            "test:e2e",
+            "--",
+            "tests/placeholder.spec.ts"
+          ],
+          "cwd": "/data/tmp/stage11360_openhands_frontend",
+          "log": "runs/local/artifacts/stage11360_web_disjoint_heldout_verifier_evidence/logs/openhands_frontend_placeholder_playwright.log",
+          "name": "openhands_frontend_placeholder_playwright",
+          "returncode": 0,
+          "status": "passed",
+          "stderr_tail": "\u001b[1A\u001b[2K\u001b[2m[WebServer] \u001b[22m(node:2658332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n\u001b[2m[WebServer] \u001b[22m(Use `node --trace-warnings ...` to show where the warning was created)\n",
+          "stdout_tail": "\n> openhands-frontend@1.7.0 test:e2e\n> playwright test tests/placeholder.spec.ts\n\n\n\nRunning 3 tests using 3 workers\n\n\u001b[1A\u001b[2K[1/3] [webkit] \u203a tests/placeholder.spec.ts:4:1 \u203a placeholder\n\u001b[1A\u001b[2K[2/3] [firefox] \u203a tests/placeholder.spec.ts:4:1 \u203a placeholder\n\u001b[1A\u001b[2K[3/3] [chromium] \u203a tests/placeholder.spec.ts:4:1 \u203a placeholder\n\u001b[1A\u001b[2K  3 passed (12.1s)\n"
+        },
+        "vitest_unit_route": {
+          "cmd": [
+            "npm",
+            "run",
+            "test",
+            "--",
+            "tests/placeholder.spec.ts"
+          ],
+          "cwd": "/data/tmp/stage11360_openhands_frontend",
+          "log": "runs/local/artifacts/stage11360_web_disjoint_heldout_verifier_evidence/logs/openhands_frontend_placeholder_vitest.log",
+          "name": "openhands_frontend_placeholder_vitest",
+          "returncode": 1,
+          "status": "failed",
+          "stderr_tail": "No test files found, exiting with code 1\n\nfilter: tests/placeholder.spec.ts\ninclude: **/*.{test,spec}.?(c|m)[jt]s?(x)\nexclude:  **/node_modules/**, **/.git/**, tests\n\n",
+          "stdout_tail": "\n> openhands-frontend@1.7.0 test\n> vitest run tests/placeholder.spec.ts\n\n\n RUN  v4.0.18 /data/tmp/stage11360_openhands_frontend\n\n"
+        }
+      },
+      "execution_status": "verifier_executed_passed_trivial",
+      "git_repo_family": "OpenHands__OpenHands",
+      "repo_family": "frontend",
+      "source_candidate": {
+        "admission_status": "needs_maintainer_gold_and_verifier_transition",
+        "anti_cheat_precheck": {
+          "candidate_has_locked_commit": true,
+          "candidate_has_source_path": true,
+          "candidate_has_verifier_or_test_path": true,
+          "no_gold_label_present": true,
+          "protected_overlap": {}
+        },
+        "candidate_change_surface_paths": [
+          "playwright.config.ts",
+          "vite-env.d.ts",
+          "global.d.ts",
+          "vite.config.ts",
+          "tailwind.config.js"
+        ],
+        "git_head": "e3d9abfd014ffd4283d03071fdb88c1c8edc77f6",
+        "git_repo_family": "openhands_openhands",
+        "git_repo_root": "/data/repositories/OpenHands__OpenHands",
+        "language_family": "web_js_ts_html",
+        "recommended_materialization": {
+          "minimum_before_train": [
+            "human_or_ai_maintainer_gold",
+            "executed_or_recovered_verifier_output",
+            "distinct symptom/call-path evidence",
+            "root-disjoint split assignment",
+            "prompt-target leak audit"
+          ],
+          "perspectives": [
+            "symptom_localization",
+            "evidence_citation",
+            "verifier_outcome",
+            "patch_impact",
+            "minimal_fix_selection",
+            "abstention_insufficient_evidence"
+          ]
+        },
+        "repo_family": "frontend",
+        "repo_path": "/data/repositories/OpenHands__OpenHands/frontend",
+        "review_item_id": "stage11346::web_review::07::frontend",
+        "review_required_fields": {
+          "anti_cheat_decision": null,
+          "gold_perspective_answers": null,
+          "observed_verifier_transition": null,
+          "root_split_assignment": null,
+          "root_task_or_bug_description": null,
+          "selected_changed_path": null,
+          "selected_symptom_or_call_path_evidence": null,
+          "selected_verifier_path": null
+        },
+        "source_candidate_id": "stage11345::web_js_ts_html::frontend::0df212d15e",
+        "source_snippet_preview": {
+          "line_end": 18,
+          "line_start": 1,
+          "path": "/data/repositories/OpenHands__OpenHands/frontend/playwright.config.ts",
+          "sha256": "1c992cd0e67f7a9bfbae9b32900c86179bf7f7923f86974c39d892e606273f68",
+          "text": "import { defineConfig, devices } from \"@playwright/test\";\n\n/**\n * Read environment variables from file.\n * https://github.com/motdotla/dotenv\n */\n// import dotenv from 'dotenv';\n// import path from 'path';\n// dotenv.config({ path: path.resolve(__dirname, '.env') });\n\n/**\n * See https://playwright.dev/docs/test-configuration.\n */\nexport default defineConfig({\n  testDir: \"./tests\",\n  /* Run tests in files in parallel */\n  fullyParallel: true,\n  /* Fail the build on CI if you accidentally left test.only in the source code. */"
+        },
+        "strict_eval_eligible": false,
+        "train_rows_emitted": 0,
+        "verifier_and_test_constraint_paths": [
+          "vitest.setup.ts",
+          "test-utils.tsx",
+          "tests/placeholder.spec.ts",
+          "tests/avatar-menu.spec.ts"
+        ],
+        "verifier_snippet_preview": {
+          "line_end": 18,
+          "line_start": 1,
+          "path": "/data/repositories/OpenHands__OpenHands/frontend/vitest.setup.ts",
+          "sha256": "7a3a6ba4e035368c4c3689dafd4481c604180122ef8694806e958bfb1aa4eb3f",
+          "text": "import { afterAll, afterEach, beforeAll, vi } from \"vitest\";\nimport { cleanup } from \"@testing-library/react\";\nimport { server } from \"#/mocks/node\";\nimport \"@testing-library/jest-dom/vitest\";\n\nHTMLCanvasElement.prototype.getContext = vi.fn();\nHTMLElement.prototype.scrollTo = vi.fn();\nwindow.scrollTo = vi.fn();\n\n// Mock ResizeObserver for test environment\nclass MockResizeObserver {\n  observe = vi.fn();\n\n  unobserve = vi.fn();\n\n  disconnect = vi.fn();\n}\n"
+        }
+      },
+      "why_not_promotable": "The only executed verifier is a placeholder Playwright test; it proves environment executability but not maintainer-grade behavior."
+    }
+  },
+  "counts": {
+    "blocked_roots": 2,
+    "candidate_roots_attempted": 2,
+    "queue_items_read": 9,
+    "scoreable_roots": 0
+  },
+  "created_at_utc": "2026-07-13T13:01:14Z",
+  "decision": "disjoint_web_verifier_evidence_packaged_no_promotable_rows",
+  "outputs": {
+    "logs": "runs/local/artifacts/stage11360_web_disjoint_heldout_verifier_evidence/logs",
+    "summary": "runs/local/artifacts/stage11360_web_disjoint_heldout_verifier_evidence/web_disjoint_heldout_verifier_evidence.json"
+  },
+  "passed": true,
+  "recommended_next_action": "Do not train or promote from these roots. Continue source acquisition for non-trivial pure-Web verifier roots, or repair a queue item with a real selected test and maintainer assertion.",
+  "scoreable_roots": [],
+  "source_artifacts": {
+    "stage11346_review_queue": "runs/local/artifacts/stage11346_web_source_verifier_review_queue/web_source_verifier_first_wave_review_queue.jsonl"
+  },
+  "stage": 11360,
+  "stage_name": "stage11360_web_disjoint_heldout_verifier_evidence"
+}

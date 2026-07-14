@@ -1,0 +1,225 @@
+{
+  "claim_scope": [
+    "Inventory of compiled but currently unused root/state rows that could satisfy the next multilingual bootstrap expansion request.",
+    "Compares the existing stage10516 compiled supply against the current stage10530 manifest usage.",
+    "This is a source-supply planning artifact, not a model-quality result."
+  ],
+  "compiled_supply": {
+    "all_roots": 784,
+    "all_rows": {
+      "language_counts": {
+        "unknown": 2407
+      },
+      "repos": 1,
+      "roots": 784,
+      "rows": 2407,
+      "target_subtype_counts": {
+        "decisive_evidence": 729,
+        "next_action": 55,
+        "patch_sketch": 55,
+        "repair_intent": 55,
+        "retrieve_answer_abstain": 729,
+        "verifier_outcome": 784
+      }
+    },
+    "sample_unused_roots": [],
+    "unused_roots": 0,
+    "unused_rows": {
+      "language_counts": {},
+      "repos": 0,
+      "roots": 0,
+      "rows": 0,
+      "target_subtype_counts": {}
+    }
+  },
+  "created_at_utc": "2026-07-12T00:32:22Z",
+  "current_manifest_usage": {
+    "language_counts": {
+      "c_cpp": 139,
+      "python": 1455,
+      "rust": 20,
+      "unknown": 4,
+      "web_js_ts_html": 19
+    },
+    "repos": 162,
+    "roots": 787,
+    "rows": 1637,
+    "target_subtype_counts": {
+      "abstain": 6,
+      "decisive_evidence": 729,
+      "evidence_chain": 3,
+      "next_action": 55,
+      "patch_sketch": 55,
+      "repair_intent": 58,
+      "retrieve_answer_abstain": 729,
+      "selected_test": 1,
+      "visible_evidence_key": 1
+    }
+  },
+  "next_best_step": "Use this inventory to decide whether stage10538 can be satisfied from existing compiled roots. If Rust/Web or heldout patch/action supply is absent here, mine fresh source roots rather than over-reusing the current compiler output.",
+  "passed": true,
+  "priority_inventory": [
+    {
+      "available_unused_inventory": {
+        "rust": {
+          "candidate_repos": 0,
+          "candidate_roots": 0,
+          "candidate_rows": 0,
+          "sample_roots": [],
+          "target_subtype_counts": {
+            "next_action": 0,
+            "patch_sketch": 0,
+            "repair_intent": 0,
+            "selected_test": 0,
+            "visible_evidence_key": 0
+          }
+        }
+      },
+      "name": "rust_structured_support_replenishment",
+      "priority": 1,
+      "requested_languages": [
+        "rust"
+      ],
+      "requested_target_subtypes": [
+        "next_action",
+        "patch_sketch",
+        "repair_intent",
+        "selected_test",
+        "visible_evidence_key"
+      ],
+      "why": "Rust train has only 20 rows total and is missing next_action, patch_sketch, repair_intent, selected_test, and visible_evidence_key support."
+    },
+    {
+      "available_unused_inventory": {
+        "web_js_ts_html": {
+          "candidate_repos": 0,
+          "candidate_roots": 0,
+          "candidate_rows": 0,
+          "sample_roots": [],
+          "target_subtype_counts": {
+            "decisive_evidence": 0,
+            "retrieve_answer_abstain": 0
+          }
+        }
+      },
+      "name": "web_repo_diverse_strict_heldout",
+      "priority": 2,
+      "requested_languages": [
+        "web_js_ts_html"
+      ],
+      "requested_target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain"
+      ],
+      "why": "Web strict is currently four roots from one repo, which is too weak for a multilingual maintainer claim."
+    },
+    {
+      "available_unused_inventory": {
+        "c_cpp": {
+          "candidate_repos": 0,
+          "candidate_roots": 0,
+          "candidate_rows": 0,
+          "sample_roots": [],
+          "target_subtype_counts": {
+            "next_action": 0,
+            "patch_sketch": 0
+          }
+        },
+        "python": {
+          "candidate_repos": 0,
+          "candidate_roots": 0,
+          "candidate_rows": 0,
+          "sample_roots": [],
+          "target_subtype_counts": {
+            "next_action": 0,
+            "patch_sketch": 0
+          }
+        },
+        "rust": {
+          "candidate_repos": 0,
+          "candidate_roots": 0,
+          "candidate_rows": 0,
+          "sample_roots": [],
+          "target_subtype_counts": {
+            "next_action": 0,
+            "patch_sketch": 0
+          }
+        },
+        "web_js_ts_html": {
+          "candidate_repos": 0,
+          "candidate_roots": 0,
+          "candidate_rows": 0,
+          "sample_roots": [],
+          "target_subtype_counts": {
+            "next_action": 0,
+            "patch_sketch": 0
+          }
+        }
+      },
+      "name": "heldout_patch_and_action_targets",
+      "priority": 3,
+      "requested_languages": [
+        "python",
+        "c_cpp",
+        "rust",
+        "web_js_ts_html"
+      ],
+      "requested_target_subtypes": [
+        "patch_sketch",
+        "next_action"
+      ],
+      "why": "The current strict slice cannot say anything about patch_sketch, next_action, or verifier-like behavior."
+    },
+    {
+      "available_unused_inventory": {
+        "c_cpp": {
+          "candidate_repos": 0,
+          "candidate_roots": 0,
+          "candidate_rows": 0,
+          "sample_roots": [],
+          "target_subtype_counts": {
+            "selected_test": 0,
+            "visible_evidence_key": 0
+          }
+        },
+        "python": {
+          "candidate_repos": 0,
+          "candidate_roots": 0,
+          "candidate_rows": 0,
+          "sample_roots": [],
+          "target_subtype_counts": {
+            "selected_test": 0,
+            "visible_evidence_key": 0
+          }
+        }
+      },
+      "name": "python_c_cpp_selected_test_and_evidence_keys",
+      "priority": 4,
+      "requested_languages": [
+        "python",
+        "c_cpp"
+      ],
+      "requested_target_subtypes": [
+        "selected_test",
+        "visible_evidence_key"
+      ],
+      "why": "Python and C/C++ train support are missing selected_test and visible_evidence_key projections needed for richer verifier-conditioned supervision."
+    },
+    {
+      "available_unused_inventory": {},
+      "name": "repair_intent_cap_safe_rewrite",
+      "priority": 5,
+      "requested_languages": [],
+      "requested_target_subtypes": [],
+      "why": "17 repair_intent train rows remain over the current 1024-token cap, weakening the seq2seq curriculum even though heldout is reachable."
+    }
+  ],
+  "source_artifacts": {
+    "compiled_roots": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_root_records.jsonl",
+    "compiled_rows": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_multitarget_rows.jsonl",
+    "current_manifest": "runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe_request/leak_clean_root_based_multitarget_probe_manifest.jsonl",
+    "expansion_request": "runs/local/artifacts/stage10537_multilingual_bootstrap_expansion_request/multilingual_bootstrap_expansion_request.json"
+  },
+  "stage": 10538,
+  "stage_name": "stage10538_compiled_root_expansion_inventory"
+}

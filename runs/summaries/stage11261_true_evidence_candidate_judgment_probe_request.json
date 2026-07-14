@@ -1,0 +1,323 @@
+{
+  "command": [
+    "env",
+    "CUDA_VISIBLE_DEVICES=2",
+    "PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11261_true_evidence_candidate_judgment_probe_request/true_evidence_candidate_judgment_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "1600",
+    "--max-eval-rows",
+    "23",
+    "--max-strict-rows",
+    "22",
+    "--max-steps",
+    "256",
+    "--batch-size",
+    "4",
+    "--learning-rate",
+    "8e-6",
+    "--max-encoder-tokens",
+    "768",
+    "--max-decoder-tokens",
+    "16",
+    "--decoder-ce-weight",
+    "0.1",
+    "--bounded-choice-aux-weight",
+    "1.5",
+    "--bounded-choice-aux-source",
+    "encoder_option_retrieval_verifier_conditioned",
+    "--bounded-decoder-train-sampler",
+    "residual_family_balanced",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "4.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "12",
+    "--max-generation-tokens",
+    "16",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11262_true_evidence_candidate_judgment_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "0.5",
+    "--no-final-checkpoint",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11262_true_evidence_candidate_judgment_probe/bounded_decoder_probe"
+  ],
+  "created_at_utc": "2026-07-13T09:56:55Z",
+  "decision": "true_evidence_candidate_judgment_probe_requested",
+  "metrics": {
+    "base_strict_rows": 22,
+    "base_train_rows": 708,
+    "base_validation_rows": 23,
+    "judgment_audit_counts": {
+      "all": {
+        "by_language": {
+          "python": 1084,
+          "rust": 8,
+          "web_js_ts_html": 28
+        },
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 280,
+          "DISTRACTOR_BACKGROUND_CONTEXT": 280,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 280,
+          "SUPPORTING_SYMPTOM_OR_CALL_PATH": 280
+        },
+        "by_target_label": {
+          "A": 285,
+          "B": 290,
+          "C": 250,
+          "D": 295
+        },
+        "contract_failed_rows": 0,
+        "contract_passed_rows": 1120,
+        "role_alias_leak_rows": 0,
+        "rows": 1120,
+        "target_label_leak_rows": 0,
+        "target_specific_cue_rows": 1120,
+        "target_value_leak_rows": 0
+      },
+      "by_split": {
+        "strict_eval": {
+          "by_language": {
+            "python": 108,
+            "rust": 4,
+            "web_js_ts_html": 4
+          },
+          "by_target": {
+            "DECISIVE_VERIFIER_TEST_CONSTRAINT": 29,
+            "DISTRACTOR_BACKGROUND_CONTEXT": 29,
+            "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 29,
+            "SUPPORTING_SYMPTOM_OR_CALL_PATH": 29
+          },
+          "by_target_label": {
+            "A": 28,
+            "B": 39,
+            "C": 24,
+            "D": 25
+          },
+          "contract_failed_rows": 0,
+          "contract_passed_rows": 116,
+          "role_alias_leak_rows": 0,
+          "rows": 116,
+          "target_label_leak_rows": 0,
+          "target_specific_cue_rows": 116,
+          "target_value_leak_rows": 0
+        },
+        "train": {
+          "by_language": {
+            "python": 868,
+            "rust": 4,
+            "web_js_ts_html": 20
+          },
+          "by_target": {
+            "DECISIVE_VERIFIER_TEST_CONSTRAINT": 223,
+            "DISTRACTOR_BACKGROUND_CONTEXT": 223,
+            "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 223,
+            "SUPPORTING_SYMPTOM_OR_CALL_PATH": 223
+          },
+          "by_target_label": {
+            "A": 227,
+            "B": 220,
+            "C": 205,
+            "D": 240
+          },
+          "contract_failed_rows": 0,
+          "contract_passed_rows": 892,
+          "role_alias_leak_rows": 0,
+          "rows": 892,
+          "target_label_leak_rows": 0,
+          "target_specific_cue_rows": 892,
+          "target_value_leak_rows": 0
+        },
+        "validation": {
+          "by_language": {
+            "python": 108,
+            "web_js_ts_html": 4
+          },
+          "by_target": {
+            "DECISIVE_VERIFIER_TEST_CONSTRAINT": 28,
+            "DISTRACTOR_BACKGROUND_CONTEXT": 28,
+            "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 28,
+            "SUPPORTING_SYMPTOM_OR_CALL_PATH": 28
+          },
+          "by_target_label": {
+            "A": 30,
+            "B": 31,
+            "C": 21,
+            "D": 30
+          },
+          "contract_failed_rows": 0,
+          "contract_passed_rows": 112,
+          "role_alias_leak_rows": 0,
+          "rows": 112,
+          "target_label_leak_rows": 0,
+          "target_specific_cue_rows": 112,
+          "target_value_leak_rows": 0
+        }
+      },
+      "root_overlap": {
+        "train_strict": [],
+        "train_validation": [],
+        "validation_strict": []
+      },
+      "row_level_failures": 0,
+      "source_row_overlap": {
+        "train_strict": [],
+        "train_validation": [],
+        "validation_strict": []
+      },
+      "target_specific_cue_rows": 1120,
+      "unique_roots_by_split": {
+        "strict_eval": 29,
+        "train": 223,
+        "validation": 28
+      }
+    },
+    "judgment_package_counts": {
+      "blocked_roots": 0,
+      "by_split_language": {
+        "strict_eval": {
+          "python": 108,
+          "rust": 4,
+          "web_js_ts_html": 4
+        },
+        "train": {
+          "python": 868,
+          "rust": 4,
+          "web_js_ts_html": 20
+        },
+        "validation": {
+          "python": 108,
+          "web_js_ts_html": 4
+        }
+      },
+      "by_split_target": {
+        "strict_eval": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 29,
+          "DISTRACTOR_BACKGROUND_CONTEXT": 29,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 29,
+          "SUPPORTING_SYMPTOM_OR_CALL_PATH": 29
+        },
+        "train": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 223,
+          "DISTRACTOR_BACKGROUND_CONTEXT": 223,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 223,
+          "SUPPORTING_SYMPTOM_OR_CALL_PATH": 223
+        },
+        "validation": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 28,
+          "DISTRACTOR_BACKGROUND_CONTEXT": 28,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 28,
+          "SUPPORTING_SYMPTOM_OR_CALL_PATH": 28
+        }
+      },
+      "c_cpp_gap": {
+        "ready_c_cpp_roots": 0,
+        "reason": "stage11237 found no clean C/C++ verifier-constraint source candidates under current filters",
+        "stage11237_ready_c_cpp_candidates": 0
+      },
+      "duplicate_row_ids": 0,
+      "filtered_roots": 280,
+      "root_overlap": {
+        "train_strict": [],
+        "train_validation": [],
+        "validation_strict": []
+      },
+      "source_ready_candidates": 280,
+      "strict_roots": 29,
+      "strict_rows": 116,
+      "train_roots": 223,
+      "train_rows": 892,
+      "validation_roots": 28,
+      "validation_rows": 112
+    },
+    "judgment_strict_rows_for_postrun": 116,
+    "judgment_train_by_language": {
+      "python": 868,
+      "rust": 4,
+      "web_js_ts_html": 20
+    },
+    "judgment_train_by_target": {
+      "DECISIVE_VERIFIER_TEST_CONSTRAINT": 223,
+      "DISTRACTOR_BACKGROUND_CONTEXT": 223,
+      "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 223,
+      "SUPPORTING_SYMPTOM_OR_CALL_PATH": 223
+    },
+    "judgment_train_rows": 892,
+    "judgment_validation_rows_for_postrun": 112,
+    "protected_root_overlaps": [],
+    "residual_rows_for_postrun": 10,
+    "train_rows": 1600
+  },
+  "outputs": {
+    "command_json": "runs/local/artifacts/stage11261_true_evidence_candidate_judgment_probe_request/true_evidence_candidate_judgment_probe_command.json",
+    "manifest_jsonl": "runs/local/artifacts/stage11261_true_evidence_candidate_judgment_probe_request/true_evidence_candidate_judgment_probe_manifest.jsonl",
+    "probe_output_dir": "runs/local/artifacts/stage11262_true_evidence_candidate_judgment_probe/bounded_decoder_probe",
+    "runtime_model_dir": "runs/local/artifacts/stage11262_true_evidence_candidate_judgment_probe/runtime_model",
+    "summary_json": "runs/local/artifacts/stage11261_true_evidence_candidate_judgment_probe_request/true_evidence_candidate_judgment_probe_request.json"
+  },
+  "passed": true,
+  "promotion_gate_for_postrun": {
+    "clean_residual_must_improve_for_frontier_claim": ">5/10",
+    "clean_strict_must_remain": "22/22",
+    "clean_validation_should_not_regress": ">=20/23",
+    "judgment_validation_or_strict_should_score_above_majority_baseline": true,
+    "verifier_and_test_constraint_residual_must_improve": ">0/3"
+  },
+  "rationale": [
+    "Stage11259 changes the supervision geometry to one candidate evidence item per row instead of multiple gold roles over the same prompt.",
+    "Stage11260 found no target-label, target-value, role-alias, root-overlap, or source-row-overlap blockers.",
+    "This is diagnostic: C/C++ supply is absent and Rust/Web supply is small, so success can indicate scorer-objective movement but not final multilingual promotion readiness."
+  ],
+  "source_artifacts": {
+    "base_strict": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "base_train": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_train.jsonl",
+    "base_validation": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_validation.jsonl",
+    "initialize_from_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "judgment_audit": "runs/local/artifacts/stage11260_true_evidence_candidate_judgment_audit/true_evidence_candidate_judgment_audit.json",
+    "judgment_package": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_package.json",
+    "judgment_strict": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_strict_rows.jsonl",
+    "judgment_train": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_train_rows.jsonl",
+    "judgment_validation": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_validation_rows.jsonl",
+    "residual_bank": "runs/local/artifacts/stage11195_clean_residual_successor_bank/clean_residual_successor_bank.jsonl"
+  },
+  "stage": 11261,
+  "stage_name": "stage11261_true_evidence_candidate_judgment_probe_request"
+}

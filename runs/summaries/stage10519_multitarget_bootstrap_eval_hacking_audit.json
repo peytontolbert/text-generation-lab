@@ -1,0 +1,80 @@
+{
+  "claim_boundary": [
+    "This audit distinguishes training-safe bootstrap supervision from honest multilingual benchmark evidence.",
+    "Verbatim target presence in train rows is not automatically invalid when the rows are explicitly training-only long-context teacher states.",
+    "Reference and validation slices remain the only rows that can speak to headline evaluation claims."
+  ],
+  "created_at_utc": "2026-07-11T23:15:52Z",
+  "eval_readiness": {
+    "headline_blockers": [
+      "No Python heldout rows in the current bootstrap eval path.",
+      "Rust appears only in validation seed rows, not a real strict heldout path.",
+      "Web strict reference exists only through legacy reviewed carryover, not fresh long-context heldout roots.",
+      "Reference rows are canary/reference only and cannot alone justify a fresh 100M-over-Gemma multilingual claim."
+    ],
+    "reference_languages": {
+      "c_cpp": 13,
+      "web_js_ts_html": 19
+    },
+    "train_languages": {
+      "c_cpp": 206,
+      "python": 2165,
+      "rust": 18,
+      "unknown": 6,
+      "web_js_ts_html": 28
+    },
+    "validation_languages": {
+      "rust": 8
+    }
+  },
+  "expert_maintainer_eval_read": {
+    "appropriate_now_for": [
+      "training bootstrap supervision",
+      "regression/canary protection",
+      "teacher-state seq2seq curriculum scaling"
+    ],
+    "not_appropriate_yet_for": [
+      "fresh multilingual heldout benchmark headline",
+      "expert-maintainer evaluation claim across python/rust/c_cpp/web on disjoint roots",
+      "anti-cheat-clean source-heldout same-surface Gemma-12B replacement claim"
+    ]
+  },
+  "failures": [
+    "multilingual_heldout_coverage_incomplete"
+  ],
+  "global_findings": {
+    "multilingual_headline_ready": false,
+    "reference_rows_total": 32,
+    "root_split_violation_count": 0,
+    "training_rows_total": 2423,
+    "validation_rows_total": 8,
+    "verbatim_target_visible_rows_total": 762
+  },
+  "leakage_profile": {
+    "by_language": {
+      "c_cpp": 60,
+      "python": 684,
+      "rust": 8,
+      "unknown": 2,
+      "web_js_ts_html": 8
+    },
+    "by_split_component": {
+      "train_bootstrap_bounded": 5,
+      "train_bootstrap_geometry": 5,
+      "train_bootstrap_long_context": 55,
+      "train_teacher_long_context": 695,
+      "validation_bootstrap_bounded": 2
+    },
+    "by_target_family": {
+      "bounded_decision": 762
+    },
+    "interpretation": [
+      "High verbatim-target visibility is concentrated in long-context training rows, where final repair intent and patch sketch targets are teacher-forced outputs.",
+      "Those rows are acceptable for training but must not be repurposed as evaluation rows without rebuilding the prompt/target boundary."
+    ]
+  },
+  "next_best_step": "Use stage10518 only as a bootstrap training run. For honest multilingual claims, replenish fresh heldout Python, Rust, and web roots, then rerun the anti-cheat audit with evaluation-only rows that do not expose target text or final repair intents verbatim.",
+  "passed": false,
+  "stage": 10519,
+  "stage_name": "stage10519_multitarget_bootstrap_eval_hacking_audit"
+}

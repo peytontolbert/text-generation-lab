@@ -1,0 +1,38 @@
+{
+  "created_at_utc": "2026-07-13T08:58:30Z",
+  "decision": "reject_verifier_constraint_contrast_branch_for_promotion",
+  "gates": {
+    "clean_residual_above_5_of_10": false,
+    "clean_strict_22_of_22": true,
+    "verifier_constraint_above_0_of_3": false
+  },
+  "interpretation": [
+    "The existing candidate-vs-verifier contrastive margin loss preserved the clean strict canary but did not move the residual bank.",
+    "Validation improved from 20/23 to 21/23, but the promotable residual gates stayed flat: 5/10 overall and 0/3 verifier_and_test_constraint.",
+    "The remaining evidence failure is not fixed by more support rows, independent binary CE, class balancing, or the existing pairwise contrast loss."
+  ],
+  "key_result": {
+    "baseline_residual_accuracy": 0.5,
+    "gemma_residual_accuracy": 0.7,
+    "residual_accuracy": 0.5,
+    "residual_cluster_accuracy": 0.5555555555555556,
+    "strict_accuracy": 1.0,
+    "validation_accuracy": 0.9130434782608695,
+    "verifier_and_test_constraint_accuracy": 0.0
+  },
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11232_verifier_constraint_contrast_decision/verifier_constraint_contrast_decision.json"
+  },
+  "passed": true,
+  "recommended_next_work": [
+    "Stop probing current scorer variants on this residual bank unless a new architecture or materially new root-disjoint evidence supply is introduced.",
+    "Build a source-row grouped evidence scorer where all evidence candidates for one maintainer decision are scored jointly with exactly-one or set-valued targets.",
+    "Add fresh root-disjoint verifier/test-constraint heldout rows, especially Rust/Web selected-test anchored roots, before the next promotion claim.",
+    "Keep Stage11200/clean strict 22/22 as the canary; reject Stage11227 and Stage11230 runtimes for promotion."
+  ],
+  "source_artifacts": {
+    "postrun_audit": "runs/local/artifacts/stage11231_verifier_constraint_contrast_postrun_audit/verifier_constraint_contrast_postrun_audit.json"
+  },
+  "stage": 11232,
+  "stage_name": "stage11232_verifier_constraint_contrast_decision"
+}

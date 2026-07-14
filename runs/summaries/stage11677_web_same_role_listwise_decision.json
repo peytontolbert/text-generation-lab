@@ -1,0 +1,233 @@
+{
+  "baseline": {
+    "canonical_heldout": "51/66",
+    "filtered_strict": "22/22",
+    "filtered_validation": "20/22",
+    "label": "stage11673_verifier_value_listwise",
+    "old_canary_strict": "23/23",
+    "old_canary_validation": "21/23",
+    "original_web_heldout": "27/66",
+    "residual_bank": "7/10",
+    "web_successor_strict": "6/36"
+  },
+  "created_at_utc": "2026-07-14T04:14:15Z",
+  "decision": "same_role_listwise_rejected_no_frontier_gain",
+  "fixed_canonical_misses": [],
+  "gates": {
+    "canonical_heldout_improved_over_stage11673": false,
+    "no_new_canonical_misses": true,
+    "original_web_improved_over_stage11673": true,
+    "protected_gates_preserved": true,
+    "same_role_objective_was_active": true
+  },
+  "interpretation": [
+    "The generic same-role listwise objective was active and preserved all protected gates.",
+    "It did not improve canonical heldout beyond Stage11673.",
+    "It recovered original Web heldout from Stage11673's 27/66 to 28/66, but this only matches an earlier baseline and remains below the >38/66 Web frontier gate.",
+    "Do not promote Stage11675/11676 over Stage11673 or the selected Stage11507 frontier.",
+    "The next useful intervention should change the data geometry or scorer architecture, not repeat same-package listwise tuning."
+  ],
+  "new_canonical_misses": [],
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11677_web_same_role_listwise_decision",
+    "summary": "runs/local/artifacts/stage11677_web_same_role_listwise_decision/web_same_role_listwise_decision.json"
+  },
+  "recommended_next": {
+    "minimum_gate": [
+      "canonical heldout > 51/66",
+      "original Web heldout > 38/66 for Web frontier progress",
+      "filtered strict 22/22",
+      "old canary strict 23/23",
+      "residual bank >= 7/10"
+    ],
+    "stage": "stage11678_web_remaining_miss_counterfactual_builder",
+    "target": "materialize counterfactual same-role candidate identity rows for the remaining canonical misses, with heldout roots separated before training"
+  },
+  "remaining_canonical_misses": [
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization::stage11663_canonical",
+      "target": "D",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection::stage11663_canonical",
+      "target": "D",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "C",
+      "row_id": "stage11390::openhands_websocket_url::symptom_localization::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11390::openhands_websocket_url::minimal_fix_selection::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "C",
+      "predicted": "C",
+      "row_id": "stage11390::openhands_parse_pr_url::symptom_localization::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 5
+    },
+    {
+      "full_vocab_top1_text": "C",
+      "predicted": "A",
+      "row_id": "stage11390::openhands_parse_pr_url::minimal_fix_selection::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 5
+    },
+    {
+      "full_vocab_top1_text": "C",
+      "predicted": "C",
+      "row_id": "stage11390::openhands_input_validation::symptom_localization::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 5
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 3
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "C",
+      "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::patch_impact::heldout_v1::stage11663_canonical",
+      "target": "D",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "B",
+      "row_id": "stage11540::mcp_typescript_sdk::server_streamable_http_transport::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 2
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11540::mcp_typescript_sdk::client_stdio_transport::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 2
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11540::mcp_typescript_sdk::core_protocol_state_machine::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 3
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "B",
+      "row_id": "stage11540::mcp_typescript_sdk::core_tool_name_validation::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 2
+    },
+    {
+      "full_vocab_top1_text": "C",
+      "predicted": "D",
+      "row_id": "stage11543::sep_automation::transition_handler_state_rules::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 1
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11543::sep_automation::hook_registry_dispatch_resilience::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 3
+    }
+  ],
+  "same_role": {
+    "canonical_heldout": "51/66",
+    "filtered_strict": "22/22",
+    "filtered_validation": "20/22",
+    "label": "stage11676_same_role_listwise",
+    "old_canary_strict": "23/23",
+    "old_canary_validation": "21/23",
+    "original_web_heldout": "28/66",
+    "residual_bank": "7/10",
+    "web_successor_strict": "6/36"
+  },
+  "source_artifacts": {
+    "baseline": "runs/local/artifacts/stage11673_web_canonical_verifier_value_listwise_postrun_audit/web_canonical_verifier_value_listwise_postrun_audit.json",
+    "same_role": "runs/local/artifacts/stage11676_web_canonical_same_role_listwise_postrun_audit/web_canonical_same_role_listwise_postrun_audit.json"
+  },
+  "stage": 11677,
+  "stage_name": "stage11677_web_same_role_listwise_decision",
+  "training_objective_summary": {
+    "contrast": {
+      "applicable_rows_total": 9216,
+      "inactive": false,
+      "skipped_rows_total": 3072,
+      "steps_with_applicable": 1248
+    },
+    "latest_step": 1536,
+    "same_role_listwise": {
+      "applicable_rows_total": 2714,
+      "candidate_set_sizes": {
+        "2": 602,
+        "3": 1997,
+        "4": 115
+      },
+      "families": {
+        "abstention_insufficient_evidence:verifier_and_test_constraint": 256,
+        "alternative_hypothesis_elimination:verifier_and_test_constraint": 537,
+        "minimal_fix_selection:candidate_change_surface": 115,
+        "minimal_fix_selection:nearby_definition_or_usage_context": 38,
+        "minimal_fix_selection:verifier_and_test_constraint": 269,
+        "patch_impact:candidate_change_surface": 38,
+        "patch_impact:verifier_and_test_constraint": 269,
+        "symptom_localization:candidate_change_surface": 39,
+        "symptom_localization:verifier_and_test_constraint": 308,
+        "verifier_outcome:verifier_and_test_constraint": 845
+      },
+      "skipped_rows_total": 9574,
+      "steps_with_applicable": 432,
+      "target_rank1_rate": 0.9141488577745026,
+      "target_rank1_rows_total": 2481,
+      "target_values": {
+        "answer_with_visible_evidence": 256,
+        "candidate_change_surface": 922,
+        "edit_backend_utils_arrays_or_path_logic": 38,
+        "edit_github_should_exclude_repo_filter_logic": 38,
+        "edit_gitlab_should_exclude_project_filter_logic": 39,
+        "github_filter_not_imported_by_gitlab_verifier": 38,
+        "gitlab_filter_not_imported_by_github_verifier": 39,
+        "packages/core/src/shared/transport.ts::createfetchwithinit": 39,
+        "pass_targeted_test_selection": 845,
+        "repo_manager_not_imported_by_focused_test": 38,
+        "selected_verifier_exercises_implementation_not_distractor": 422
+      }
+    },
+    "steps": 1536,
+    "train_log_exists": true,
+    "verifier_value_listwise": {
+      "applicable_rows_total": 845,
+      "candidate_set_sizes": {
+        "3": 730,
+        "4": 115
+      },
+      "families": {},
+      "skipped_rows_total": 11443,
+      "steps_with_applicable": 432,
+      "target_rank1_rate": 0.9408284023668639,
+      "target_rank1_rows_total": 795,
+      "target_values": {
+        "pass_targeted_test_selection": 845
+      }
+    }
+  }
+}

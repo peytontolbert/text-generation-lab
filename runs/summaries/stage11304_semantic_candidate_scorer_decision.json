@@ -1,0 +1,161 @@
+{
+  "created_at_utc": "2026-07-13T11:15:00Z",
+  "decision": "reject_stage11302_keep_stage11200_frontier",
+  "frontier_runtime_kept": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+  "frontier_runtime_kept_sha256": "b84dbba9ed525d0139ab867ffbc52d7ce2df702402542e54a1247d8f5dea3eca",
+  "interpretation": [
+    "The new scorer-source plumbing works: the runtime saved and reloaded with bounded_choice_semantic_candidate_head, increasing state_dict_keys to 282.",
+    "The additive semantic metadata head does not solve the residual bank; it behaves like the existing fact-rich verifier probes and remains 0/3 on verifier_and_test_constraint residuals.",
+    "Because the same fact-rich heldout slice remains high while residuals stay flat, the next move should not be another small scorer wrapper over the same rows.",
+    "The remaining path is to either admit true residual verifier-transition rows with completed gold/anti-cheat/selected-test anchors, or train a structurally different candidate scorer with explicit pair labels and per-option metadata in the row schema."
+  ],
+  "legacy_judgment_head_metrics_on_same_runtime": {
+    "clean_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.9130434782608695,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "judgment_strict": {
+      "correct": 28,
+      "exact_accuracy": 0.9333333333333333,
+      "rows": 30,
+      "scored_rows": 30
+    },
+    "judgment_validation": {
+      "correct": 26,
+      "exact_accuracy": 0.8666666666666667,
+      "rows": 30,
+      "scored_rows": 30
+    },
+    "residual": {
+      "correct": 4,
+      "exact_accuracy": 0.4,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 3,
+        "exact_accuracy": 0.75,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    }
+  },
+  "next_action": {
+    "recommended_stage": "stage11305_residual_admissible_data_or_per_option_semantic_schema",
+    "requirements": [
+      "Keep Stage11200 as the frontier runtime.",
+      "Do not rerun Stage11296 fact-rich support with another additive option-retrieval wrapper unless the row schema changes.",
+      "Complete Stage11143-style blockers for Python verifier-transition and Rust selected-test/verifier anchors before another promotion probe.",
+      "Normalize bounded rows to carry per-option semantic metadata, not only option value strings, before building a stronger scorer objective.",
+      "Promotion gates remain clean strict 22/22, clean validation >=20/23, residual >5/10, and verifier_and_test_constraint residual >0/3."
+    ]
+  },
+  "passed": false,
+  "product_metrics": {
+    "clean_strict": {
+      "correct": 21,
+      "exact_accuracy": 0.9545454545454546,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "judgment_strict": {
+      "correct": 28,
+      "exact_accuracy": 0.9333333333333333,
+      "rows": 30,
+      "scored_rows": 30
+    },
+    "judgment_validation": {
+      "correct": 26,
+      "exact_accuracy": 0.8666666666666667,
+      "rows": 30,
+      "scored_rows": 30
+    },
+    "residual": {
+      "correct": 4,
+      "exact_accuracy": 0.4,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 3,
+        "exact_accuracy": 0.75,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    }
+  },
+  "product_scorer": "encoder_option_retrieval_semantic_candidate_head",
+  "promotion_gates": {
+    "product_clean_strict_22_of_22": false,
+    "product_clean_validation_at_least_20_of_23": true,
+    "product_judgment_strict_above_majority": true,
+    "product_judgment_validation_above_majority": true,
+    "product_residual_above_5_of_10": false,
+    "product_verifier_residual_nonzero": false
+  },
+  "reason": "The new semantic candidate scorer head is loadable and trainable, but it does not improve the residual frontier. Product clean strict regresses to 21/22, residual remains 4/10, and verifier_and_test_constraint residual remains 0/3.",
+  "rejected_runtime": "runs/local/artifacts/stage11302_semantic_candidate_scorer_probe/runtime_model/runtime_model_bundle.json",
+  "rejected_runtime_bundle_sha256": "2fdf58933ec5e2eba2baad961473bec6f5ccbb65e5e3d2639f7008bdd6c7d59c",
+  "rejected_runtime_weights_sha256": "008dbf96be715fb05199659804847b07cbf5fe9b5c4085bb89a4865a9d9994a1",
+  "source_artifacts": {
+    "cli_patch": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "postrun_audit": "runs/local/artifacts/stage11303_semantic_candidate_scorer_postrun_audit/semantic_candidate_scorer_postrun_audit.json",
+    "previous_decision": "runs/local/artifacts/stage11300_fact_rich_verifier_decision/fact_rich_verifier_decision.json",
+    "request": "runs/local/artifacts/stage11301_semantic_candidate_scorer_probe_request/semantic_candidate_scorer_probe_request.json",
+    "trainer_patch": "legacy_src/agentkernel_lite/training_loop.py"
+  },
+  "stage": 11304,
+  "stage_name": "stage11304_semantic_candidate_scorer_decision"
+}

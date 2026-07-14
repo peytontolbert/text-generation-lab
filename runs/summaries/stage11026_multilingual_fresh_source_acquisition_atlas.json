@@ -1,0 +1,107 @@
+{
+  "stage": 11026,
+  "stage_name": "multilingual_fresh_source_acquisition_atlas",
+  "claim_scope": [
+    "Identify concrete next Python/C++/web source families for fresh evidence-root expansion.",
+    "Separate already reviewed bundle roots from long-context seed families that still need selected-test and maintainer-grade materialization.",
+    "Provide a direct bridge from the current narrow evidence queue to larger honest multilingual root supply."
+  ],
+  "source_artifacts": {
+    "reviewed_scaling_atlas": "runs/local/artifacts/stage10417_multilingual_reviewed_scaling_atlas/multilingual_reviewed_scaling_atlas.json",
+    "true_source_preview": "runs/local/artifacts/stage10119_true_source_backed_maintainer_root_bundle_preview/true_source_backed_maintainer_root_bundle_preview.jsonl",
+    "rust_preview": "runs/local/artifacts/stage10126_true_source_backed_rust_root_bundle_preview/true_source_backed_rust_root_bundle_preview.jsonl",
+    "long_context_root_records": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_root_records.jsonl",
+    "expansion_queue": "runs/local/artifacts/stage11025_fresh_evidence_root_expansion_queue/fresh_evidence_root_expansion_queue.json"
+  },
+  "metrics": {
+    "current_queue_summary": {
+      "queued_roots": 6,
+      "queued_by_language": {
+        "c_cpp": 2,
+        "python": 1,
+        "rust": 3
+      },
+      "candidate_rows_by_language": {
+        "c_cpp": 2,
+        "python": 1,
+        "rust": 3
+      },
+      "geometry_rows_by_language": {
+        "c_cpp": 16,
+        "python": 8,
+        "rust": 0
+      },
+      "support_rows_by_language": {
+        "c_cpp": 10,
+        "python": 5,
+        "rust": 15
+      },
+      "base_evidence_train_rows": 130,
+      "fresh_candidate_bank_rows": 6,
+      "distinct_root_signatures": 27
+    },
+    "ready_bundle_rows": 7,
+    "ready_bundle_by_language": {
+      "c_cpp": 2,
+      "web_js_ts_html": 3,
+      "python": 2
+    },
+    "preview_rows": 8,
+    "preview_by_language": {
+      "web_js_ts_html": 2,
+      "python": 3,
+      "c_cpp": 3
+    },
+    "long_context_seed_families_total": 154,
+    "long_context_seed_top_by_language": {
+      "python": 8,
+      "c_cpp": 6,
+      "web_js_ts_html": 2
+    }
+  },
+  "findings": [
+    "There are already reviewed Python/C++ bundle roots with selected tests beyond the immediate evidence queue, especially the Python MirrorMind family and the admitted C/C++ bundles.",
+    "Web has reviewed bundles, but the cleanest current non-overlap reviewed web bundles still lack selected tests; code_assist has selected tests but remains overlap-sensitive.",
+    "The compiled long-context root inventory exposes many additional Python and C/C++ repo families that can feed the next scale stage once selected-test and anti-cheat materialization is added."
+  ],
+  "next_best_step": [
+    {
+      "priority": 1,
+      "language_family": "python",
+      "action": "materialize_new_fresh_evidence_roots",
+      "targets": [
+        "stage10119::localsess_repository_library...::python (MirrorMind verifier/test family)",
+        "new long-context seed families with selected-test mining from faiss, diffusers, django, openai-agents-python"
+      ],
+      "why": "Python still has only one fresh evidence candidate root in the current candidate bank and one remaining strict verifier miss."
+    },
+    {
+      "priority": 2,
+      "language_family": "c_cpp",
+      "action": "materialize_new_fresh_evidence_roots",
+      "targets": [
+        "stage10119::localsess_agentkernel...::c_cpp",
+        "stage10119::localsess_parametergolf...::c_cpp",
+        "new long-context seed families from onnxruntime and cccl"
+      ],
+      "why": "C/C++ fresh evidence currently relies on two roots plus same-root geometry variants."
+    },
+    {
+      "priority": 3,
+      "language_family": "web_js_ts_html",
+      "action": "acquire_pure_web_selected_test_family",
+      "targets": [
+        "promote a non-overlap web bundle with selected tests beyond code_assist",
+        "mine mem0 and bddy_website source families for selected-test anchors"
+      ],
+      "why": "Web still has no promotable fresh evidence root with a clean selected-test anchor."
+    }
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11026_multilingual_fresh_source_acquisition_atlas/multilingual_fresh_source_acquisition_atlas.json",
+    "ready_bundle_rows_jsonl": "runs/local/artifacts/stage11026_multilingual_fresh_source_acquisition_atlas/ready_bundle_rows.jsonl",
+    "preview_rows_jsonl": "runs/local/artifacts/stage11026_multilingual_fresh_source_acquisition_atlas/preview_rows.jsonl",
+    "top_seed_rows_jsonl": "runs/local/artifacts/stage11026_multilingual_fresh_source_acquisition_atlas/top_seed_rows.jsonl"
+  },
+  "passed": true
+}

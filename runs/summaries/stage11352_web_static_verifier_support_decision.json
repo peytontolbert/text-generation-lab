@@ -1,0 +1,58 @@
+{
+  "created_at_utc": "2026-07-13T12:45:42Z",
+  "decision": "accept_stage11350_as_diagnostic_support_runtime_keep_stage11200_frontier",
+  "diagnostic_support_runtime": "runs/local/artifacts/stage11350_web_static_verifier_support_probe/runtime_model/runtime_model_bundle.json",
+  "frontier_runtime_kept": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+  "gate": {
+    "canary_preserved": true,
+    "heldout_promotion_allowed": false,
+    "old_web_source_snippet_still_flat": true,
+    "support_slice_improved": true
+  },
+  "metrics": {
+    "baseline_web_static_verifier": {
+      "correct": 8,
+      "exact_accuracy": 0.4444444444444444,
+      "rows": 18,
+      "scored_rows": 18
+    },
+    "stage11350_canary_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "stage11350_canary_validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "stage11350_web_source_snippet_support": {
+      "correct": 7,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 21,
+      "scored_rows": 21
+    },
+    "stage11350_web_static_verifier": {
+      "correct": 12,
+      "exact_accuracy": 0.6666666666666666,
+      "rows": 18,
+      "scored_rows": 18
+    }
+  },
+  "passed": true,
+  "promotion_status": {
+    "standalone_frontier_replaced": false,
+    "why": "Stage11350 improves only train-support Web static-verifier rows. It has no fresh heldout Web strict improvement and older Web source-snippet support remains 7/21."
+  },
+  "recommended_next_action": "Execute or recover verifier outputs for Stage11347 roots, then create a disjoint Web heldout slice. Do not promote Stage11350 as the frontier without heldout movement.",
+  "source_artifacts": {
+    "baseline": "runs/local/artifacts/stage11348_web_static_verifier_current_runtime_score/web_static_verifier_current_runtime_score.json",
+    "postrun_audit": "runs/local/artifacts/stage11351_web_static_verifier_support_postrun_audit/web_static_verifier_support_postrun_audit.json",
+    "stage11200_frontier_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "stage11350_runtime": "runs/local/artifacts/stage11350_web_static_verifier_support_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11352,
+  "stage_name": "stage11352_web_static_verifier_support_decision"
+}

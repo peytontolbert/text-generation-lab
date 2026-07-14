@@ -1,0 +1,152 @@
+{
+  "c_cpp_build": {
+    "build": {
+      "command": [
+        "cmake",
+        "--build",
+        "/data/tmp/sentencepiece_stage11737_build",
+        "--target",
+        "spm_test",
+        "-j2"
+      ],
+      "cwd": "/data/agentkernel-seq2seq-text-lab",
+      "finished_at_utc": "2026-07-14T07:57:33Z",
+      "language": "c_cpp_build",
+      "passed": true,
+      "returncode": 0,
+      "started_at_utc": "2026-07-14T07:57:33Z",
+      "stderr_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/c_cpp_build.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_tail": "",
+      "stdout_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/c_cpp_build.stdout.log",
+      "stdout_sha256": "f4dfad81ac357a207b72b7f014287c27bb22737cf03c0a6bdf41e5c523d5cfc1",
+      "stdout_tail": "[ 14%] Built target sentencepiece_train-static\n[ 69%] Built target sentencepiece-static\n[100%] Built target spm_test\n"
+    },
+    "build_dir": "/data/tmp/sentencepiece_stage11737_build",
+    "configure": {
+      "command": [
+        "cmake",
+        "-S",
+        "/data/parametergolf/helpful_repos/sentencepiece",
+        "-B",
+        "/data/tmp/sentencepiece_stage11737_build",
+        "-DSPM_ENABLE_SHARED=OFF",
+        "-DSPM_BUILD_TEST=ON"
+      ],
+      "cwd": "/data/agentkernel-seq2seq-text-lab",
+      "finished_at_utc": "2026-07-14T07:57:33Z",
+      "language": "c_cpp_configure",
+      "passed": true,
+      "returncode": 0,
+      "started_at_utc": "2026-07-14T07:57:32Z",
+      "stderr_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/c_cpp_configure.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_tail": "",
+      "stdout_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/c_cpp_configure.stdout.log",
+      "stdout_sha256": "8adfd946e92705937375ca606558451bea84c6559e65f964b5b79067ede1b837",
+      "stdout_tail": "-- VERSION: 0.2.2\n-- Not Found TCMalloc: TCMALLOC_LIB-NOTFOUND\n-- Configuring done (0.0s)\n-- Generating done (0.0s)\n-- Build files have been written to: /data/tmp/sentencepiece_stage11737_build\n"
+    }
+  },
+  "claim_boundary": [
+    "This improves full-product evidence readiness but does not by itself make the 100M source-heldout smoke all-correct.",
+    "Patch minimality, tool trace spans, harness_run_id, and Gemma same-manifest outputs are still separate missing artifacts."
+  ],
+  "created_at_utc": "2026-07-14T07:57:54Z",
+  "decision": "source_heldout_smoke_verifier_execution_attached",
+  "interpretation": [
+    "The previous smoke packets used static verifier anchors; this stage attaches actual local verifier execution results.",
+    "These are current-state pass observations, not fail-to-pass repair demonstrations.",
+    "The C++ test harness exposes one aggregate spm_test binary, so the verifier run is whole-binary but includes BPEModelTest cases at the beginning of the log.",
+    "Python requires the trellis environment and a pytest addopts override because the repo references pytest-cov but the env lacks that plugin."
+  ],
+  "outputs": {
+    "logs_dir": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs",
+    "summary": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/source_heldout_verifier_execution.json"
+  },
+  "passed": true,
+  "stage": 11737,
+  "stage_name": "stage11737_source_heldout_verifier_execution",
+  "verifier_runs": {
+    "c_cpp": {
+      "command": [
+        "/data/tmp/sentencepiece_stage11737_build/src/spm_test",
+        "--test_srcdir=/data/parametergolf/helpful_repos/sentencepiece/data",
+        "--test_tmpdir=/data/tmp/sentencepiece_stage11737_test_tmp"
+      ],
+      "cwd": "/data/tmp/sentencepiece_stage11737_build",
+      "finished_at_utc": "2026-07-14T07:57:54Z",
+      "language": "c_cpp",
+      "passed": true,
+      "returncode": 0,
+      "started_at_utc": "2026-07-14T07:57:40Z",
+      "stderr_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/c_cpp.stderr.log",
+      "stderr_sha256": "f16c01d3a49d07344bfffd2222a58f25554e2118d28507e8e09e7d469aea5b24",
+      "stderr_tail": "UtilTest.InputOutputBufferInvalidFileTest\n[       OK ] UtilTest.InputOutputBufferInvalidFileTest\n[ RUN      ] UtilTest.STLDeleteELementsTest\n[       OK ] UtilTest.STLDeleteELementsTest\n[ RUN      ] UtilTest.StatusTest\n[       OK ] UtilTest.StatusTest\n[ RUN      ] UtilTest.JoinPathTest\n[       OK ] UtilTest.JoinPathTest\n[ RUN      ] UtilTest.ReservoirSamplerTest\n[       OK ] UtilTest.ReservoirSamplerTest\n[ RUN      ] UtilTest.StrSplitAsCSVTest\n[       OK ] UtilTest.StrSplitAsCSVTest\n[ RUN      ] SentencePieceTrainerTest.DataDirTest\n[       OK ] SentencePieceTrainerTest.DataDirTest\n[ RUN      ] WordModelTest.EncodeTest\n[       OK ] WordModelTest.EncodeTest\n[ RUN      ] WordModelTest.NotSupportedTest\nmodel_interface.h(87) LOG(ERROR) Not implemented.\nmodel_interface.h(93) LOG(ERROR) Not implemented.\n[       OK ] WordModelTest.NotSupportedTest\n[ RUN      ] TrainerTest.BasicTest\ntrainer_interface.cc(355) LOG(INFO) SentenceIterator is not specified. Using MultiFileSentenceIterator.\ntrainer_interface.cc(186) LOG(INFO) Loading corpus: /data/tmp/sentencepiece_stage11737_test_tmp/input\ntrainer_interface.cc(411) LOG(INFO) Loaded all 3 sentences\ntrainer_interface.cc(427) LOG(INFO) Adding meta_piece: <unk>\ntrainer_interface.cc(427) LOG(INFO) Adding meta_piece: <s>\ntrainer_interface.cc(427) LOG(INFO) Adding meta_piece: </s>\ntrainer_interface.cc(432) LOG(INFO) Normalizing sentences...\ntrainer_interface.cc(541) LOG(INFO) all chars count=39\ntrainer_interface.cc(562) LOG(INFO) Alphabet size=9\ntrainer_interface.cc(563) LOG(INFO) Final character coverage=1\ntrainer_interface.cc(594) LOG(INFO) Done! preprocessed 3 sentences.\ntrainer_interface.cc(689) LOG(INFO) Saving model: /data/tmp/sentencepiece_stage11737_test_tmp/model.model\ntrainer_interface.cc(701) LOG(INFO) Saving vocabs: /data/tmp/sentencepiece_stage11737_test_tmp/model.vocab\n[       OK ] TrainerTest.BasicTest\n[ RUN      ] PretokenizerForTrainingTest.BaseTest\n[       OK ] PretokenizerForTrainingTest.BaseTest\n==== PASSED 135 tests\n",
+      "stdout_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/c_cpp.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_tail": ""
+    },
+    "python": {
+      "command": [
+        "conda",
+        "run",
+        "-n",
+        "trellis",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts=",
+        "tests/test_model.py"
+      ],
+      "cwd": "/data/parametergolf/helpful_repos/bigram_language_model",
+      "finished_at_utc": "2026-07-14T07:57:40Z",
+      "language": "python",
+      "passed": true,
+      "returncode": 0,
+      "started_at_utc": "2026-07-14T07:57:33Z",
+      "stderr_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/python.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_tail": "",
+      "stdout_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/python.stdout.log",
+      "stdout_sha256": "aafe19dd1372fc7a098752ee3de857c1ce54e70a83d8148af3666493555bd590",
+      "stdout_tail": ".....                                                                    [100%]\n5 passed in 0.13s\n\n"
+    },
+    "rust": {
+      "command": [
+        "cargo",
+        "test",
+        "pre_tokenizers::whitespace::tests::basic",
+        "--lib"
+      ],
+      "cwd": "/data/parametergolf/helpful_repos/tokenizers/tokenizers",
+      "finished_at_utc": "2026-07-14T07:57:40Z",
+      "language": "rust",
+      "passed": true,
+      "returncode": 0,
+      "started_at_utc": "2026-07-14T07:57:40Z",
+      "stderr_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/rust.stderr.log",
+      "stderr_sha256": "4ebd5fcf20315ede53c54fb2bb77489d394a810194c92c4d71f3fad261de075f",
+      "stderr_tail": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.16s\n     Running unittests src/lib.rs (/data/tmp/tokenizers_stage11737_target/debug/deps/tokenizers-8f177c78276ba6ae)\n",
+      "stdout_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/rust.stdout.log",
+      "stdout_sha256": "bd17e5ede9c7f2e2bc2acc853b7ddd7d4c3a412e83f9b2db6a8fc234617ff51f",
+      "stdout_tail": "\nrunning 1 test\ntest pre_tokenizers::whitespace::tests::basic ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 191 filtered out; finished in 0.02s\n\n"
+    }
+  },
+  "verifier_transitions": {
+    "c_cpp": {
+      "observed_transition": "PASS_CURRENT_STATE",
+      "result": "spm_test passed 135 tests including BPEModelTest cases",
+      "selected_verifier": "src/bpe_model_test.cc inside spm_test"
+    },
+    "python": {
+      "observed_transition": "PASS_CURRENT_STATE",
+      "result": "5 passed",
+      "selected_verifier": "tests/test_model.py"
+    },
+    "rust": {
+      "observed_transition": "PASS_CURRENT_STATE",
+      "result": "1 passed",
+      "selected_verifier": "src/pre_tokenizers/whitespace.rs::tests::basic"
+    }
+  }
+}

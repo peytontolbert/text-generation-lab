@@ -1,0 +1,39 @@
+{
+  "by_target": {
+    "DECISIVE_VERIFIER_TEST_CONSTRAINT": 3,
+    "OBSERVED_VERIFIER_FAILURE_LOG": 3,
+    "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 3
+  },
+  "counts": {
+    "minimum_roots_required_before_probe": 10,
+    "train_support_rows": 9,
+    "unique_repo_families": 1,
+    "unique_roots": 3
+  },
+  "created_at_utc": "2026-07-13T15:11:14Z",
+  "decision": "verifier_log_backed_partial_rust_support_materialized_not_probe_ready",
+  "limitations": [
+    "All materialized roots are Candle-family roots.",
+    "Verifier logs are build/dependency failures, not clean product fail-to-pass outcomes.",
+    "This is support inventory only and must not be used as a Rust headline eval slice."
+  ],
+  "outputs": {
+    "audit": "runs/local/artifacts/stage11410_rust_verifier_log_backed_partial_support/rust_verifier_log_backed_partial_support_audit.json",
+    "rows": "runs/local/artifacts/stage11410_rust_verifier_log_backed_partial_support/rust_verifier_log_backed_partial_support_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11410_rust_verifier_log_backed_partial_support/rust_verifier_log_backed_partial_support.json"
+  },
+  "passed": true,
+  "quality_gate": {
+    "actual_verifier_logs_attached": true,
+    "anti_cheat_passed": true,
+    "enough_repo_breadth_for_probe": false,
+    "enough_roots_for_probe": false,
+    "probe_ready": false
+  },
+  "recommended_next_action": "Keep these rows as verifier-log-backed partial support. Acquire or hydrate more non-candle Rust roots and prefer clean selected-test product verifier logs before building a Rust support probe.",
+  "source_artifacts": {
+    "stage11409_capture": "runs/local/artifacts/stage11409_rust_candle_verifier_log_capture/rust_candle_verifier_log_capture.json"
+  },
+  "stage": 11410,
+  "stage_name": "stage11410_rust_verifier_log_backed_partial_support"
+}

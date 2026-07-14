@@ -1,0 +1,40 @@
+{
+  "admission": {
+    "do_not_train": true,
+    "strict_eval_eligible_now": false,
+    "trainable_now": false,
+    "why": "Real source/test snippets and opaque options are materialized, but focused verifier outputs, gold perspective answers, anti-cheat signoff, and split assignment are still missing."
+  },
+  "counts": {
+    "file_materialized_packets": 3,
+    "priority_queue_items_selected": 3,
+    "root_packets": 3,
+    "row_shells": 18,
+    "strict_eval_ready_packets": 0,
+    "train_ready_packets": 0
+  },
+  "created_at_utc": "2026-07-13T19:47:40Z",
+  "decision": "new_web_family_packets_materialized_but_not_trainable",
+  "families": [
+    "ai_town",
+    "dspy",
+    "openclaw_clawhub"
+  ],
+  "next_actions": [
+    "Run or recover focused verifier output for one selected test per packet.",
+    "Fill gold answers for the six perspective row shells.",
+    "Assign at least some new-family roots to sealed heldout, not only train.",
+    "Run prompt-target leak and root-overlap audits before adding any row to train/eval."
+  ],
+  "outputs": {
+    "packets": "runs/local/artifacts/stage11530_web_new_family_materialization_packets/web_new_family_root_packets.jsonl",
+    "row_shells": "runs/local/artifacts/stage11530_web_new_family_materialization_packets/web_new_family_perspective_row_shells.jsonl",
+    "summary": "runs/local/artifacts/stage11530_web_new_family_materialization_packets/web_new_family_materialization_packets.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "stage11529_queue": "runs/local/artifacts/stage11529_web_materialization_queue/web_materialization_work_items.jsonl"
+  },
+  "stage": 11530,
+  "stage_name": "stage11530_web_new_family_materialization_packets"
+}

@@ -1,0 +1,75 @@
+{
+  "admissible_by_language": {
+    "c_cpp": 0,
+    "python": 0,
+    "rust": 0
+  },
+  "blockers": {
+    "deterministic_option_shuffle_not_true": 8,
+    "full_product_missing_patch_or_abstain_row": 23,
+    "heuristic_gold_value_requires_review": 15,
+    "missing_explicit_has_verifier_row_or_transition_true": 23,
+    "requires_review_before_training": 15,
+    "source_heldout_admissible_not_true": 23,
+    "train_split_marker_present": 2,
+    "train_support_only_true": 2
+  },
+  "blockers_by_language": {
+    "c_cpp": {
+      "deterministic_option_shuffle_not_true": 2,
+      "full_product_missing_patch_or_abstain_row": 8,
+      "heuristic_gold_value_requires_review": 6,
+      "missing_explicit_has_verifier_row_or_transition_true": 8,
+      "requires_review_before_training": 6,
+      "source_heldout_admissible_not_true": 8
+    },
+    "python": {
+      "deterministic_option_shuffle_not_true": 1,
+      "full_product_missing_patch_or_abstain_row": 10,
+      "heuristic_gold_value_requires_review": 9,
+      "missing_explicit_has_verifier_row_or_transition_true": 10,
+      "requires_review_before_training": 9,
+      "source_heldout_admissible_not_true": 10
+    },
+    "rust": {
+      "deterministic_option_shuffle_not_true": 5,
+      "full_product_missing_patch_or_abstain_row": 5,
+      "missing_explicit_has_verifier_row_or_transition_true": 5,
+      "source_heldout_admissible_not_true": 5,
+      "train_split_marker_present": 2,
+      "train_support_only_true": 2
+    }
+  },
+  "claim_boundary": [
+    "This is an admission preflight, not a model run and not an admission stage.",
+    "No source-heldout smoke row is admitted unless standalone_blockers is empty.",
+    "Full-product harness readiness additionally requires patch/abstain and writeback fields."
+  ],
+  "created_at_utc": "2026-07-14T06:40:23.517655+00:00",
+  "decision": "no_source_heldout_smoke_rows_admitted",
+  "minimal_multilingual_smoke_ready": false,
+  "next_repairs": [
+    "Provide explicit source-heldout/no-train attestation for selected roots or reject them.",
+    "Promote root_lineage_key/source_root_id into every candidate row.",
+    "Set deterministic_option_shuffle=true only after persisted option permutation is verified.",
+    "Attach explicit has_verifier_row_or_transition=true payload, not just selected_test_anchor/verifier_anchor booleans.",
+    "For full-product harness claims, attach patch_or_abstain rows plus harness writeback fields."
+  ],
+  "outputs": {
+    "artifact": "runs/local/artifacts/stage11714_source_heldout_smoke_admission_preflight/source_heldout_smoke_admission_preflight.json",
+    "row_cards": "runs/local/artifacts/stage11714_source_heldout_smoke_admission_preflight/source_heldout_smoke_preflight_row_cards.jsonl",
+    "summary": "runs/summaries/stage11714_source_heldout_smoke_admission_preflight.json"
+  },
+  "passed": true,
+  "request_count": 12,
+  "seed_row_count": 23,
+  "seed_rows_found": 23,
+  "source_artifacts": {
+    "requests": "runs/local/artifacts/stage11713_source_heldout_smoke_materialization_request/source_heldout_smoke_materialization_requests.jsonl"
+  },
+  "stage": 11714,
+  "stage_name": "source_heldout_smoke_admission_preflight",
+  "status_counts": {
+    "blocked": 23
+  }
+}

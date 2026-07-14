@@ -1,0 +1,363 @@
+{
+  "claim_boundary": [
+    "This stage emits materialization/admission requests only; it does not admit rows.",
+    "Seed rows remain non-promotable until source-heldout attestation, deterministic option shuffle, verifier/test anchors, and anti-cheat checks are repaired.",
+    "Rows derived from prior compact/canary surfaces must not be used for broad source-heldout claims unless no-train/no-support lineage is proven."
+  ],
+  "created_at_utc": "2026-07-14T06:37:32.587903+00:00",
+  "decision": "source_heldout_smoke_materialization_requests_ready",
+  "next_stage_acceptance": [
+    "at least one admitted source-heldout smoke root for python, c_cpp, and rust",
+    "no prompt target-value or target-label leaks",
+    "deterministic option shuffle declared for every admitted row",
+    "selected_test_anchor or verifier_anchor present",
+    "root_lineage_key present and no train/support overlap"
+  ],
+  "optional_request_count": 2,
+  "optional_web_roots": [
+    {
+      "repo_family": "code_assist",
+      "root_id": "stage10176::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t13_13_10_019bff96_2dc5_7162_88f8_83eb_src_code_assist_orchestrator_cognitive_perfection_py_src_code_assist_orchestrato_3a0f6d8311_aug_1500000_8b46e7f662::web_js_ts_html",
+      "seed_rows": 4
+    },
+    {
+      "repo_family": "mem0",
+      "root_id": "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q43",
+      "seed_rows": 4
+    }
+  ],
+  "outputs": {
+    "artifact": "runs/local/artifacts/stage11713_source_heldout_smoke_materialization_request/source_heldout_smoke_materialization_request.json",
+    "optional_web_requests_jsonl": "runs/local/artifacts/stage11713_source_heldout_smoke_materialization_request/optional_web_source_heldout_requests.jsonl",
+    "requests_jsonl": "runs/local/artifacts/stage11713_source_heldout_smoke_materialization_request/source_heldout_smoke_materialization_requests.jsonl",
+    "summary": "runs/summaries/stage11713_source_heldout_smoke_materialization_request.json"
+  },
+  "passed": true,
+  "pool_summary": {
+    "blockers_by_language": {
+      "c_cpp": {
+        "missing_patch_or_abstain_signal": 1724,
+        "missing_verifier_or_selected_test_anchor": 45,
+        "option_shuffle_not_declared": 4302,
+        "source_heldout_not_attested": 6071
+      },
+      "python": {
+        "missing_patch_or_abstain_signal": 3927,
+        "missing_verifier_or_selected_test_anchor": 47,
+        "option_shuffle_not_declared": 3132,
+        "source_heldout_not_attested": 7106
+      },
+      "rust": {
+        "missing_patch_or_abstain_signal": 108,
+        "missing_verifier_or_selected_test_anchor": 48,
+        "option_shuffle_not_declared": 1614,
+        "source_heldout_not_attested": 1758
+      },
+      "web_js_ts_html": {
+        "missing_patch_or_abstain_signal": 422,
+        "missing_verifier_or_selected_test_anchor": 81,
+        "option_shuffle_not_declared": 152,
+        "source_heldout_not_attested": 655
+      }
+    },
+    "by_language": {
+      "c_cpp": 6071,
+      "python": 7106,
+      "rust": 1764,
+      "web_js_ts_html": 655
+    },
+    "rows": 15596,
+    "top_repos_by_language": {
+      "c_cpp": {
+        "agentkernel": 492,
+        "cccl": 1090,
+        "cuEmbed": 470,
+        "falco": 428,
+        "onnxruntime": 1086,
+        "parametergolf": 2460,
+        "unknown": 45
+      },
+      "python": {
+        "agentkernel": 564,
+        "agentkernel-seq2seq-text-lab": 2050,
+        "code_assist": 759,
+        "diffusers": 466,
+        "django": 446,
+        "faiss": 446,
+        "openai-agents-python": 446,
+        "repository_library": 972
+      },
+      "rust": {
+        "candle": 763,
+        "chroma": 43,
+        "dbt-core": 36,
+        "linux": 356,
+        "tiktoken": 36,
+        "tokenizers": 488,
+        "unknown": 42
+      },
+      "web_js_ts_html": {
+        "backend": 23,
+        "code_assist": 152,
+        "mem0": 422,
+        "modelcontextprotocol_typescript_sdk": 3,
+        "openhands_openhands_frontend": 11,
+        "sep_automation": 4,
+        "server": 4,
+        "unknown": 33
+      }
+    },
+    "top_tasks_by_language": {
+      "c_cpp": {
+        "abstention_insufficient_evidence": 2194,
+        "evidence_citation": 1180,
+        "patch_impact": 2153,
+        "verifier_outcome_semantic_transition": 544
+      },
+      "python": {
+        "abstention_insufficient_evidence": 1603,
+        "evidence_citation": 1212,
+        "patch_impact": 1576,
+        "verifier_outcome": 242,
+        "verifier_outcome_semantic_transition": 2473
+      },
+      "rust": {
+        "abstention_insufficient_evidence": 845,
+        "evidence_citation": 108,
+        "patch_impact": 811
+      },
+      "web_js_ts_html": {
+        "abstention_insufficient_evidence": 140,
+        "evidence_citation": 292,
+        "patch_impact": 93,
+        "verifier_outcome_semantic_transition": 130
+      }
+    }
+  },
+  "request_count": 12,
+  "selected_root_counts": {
+    "c_cpp": 4,
+    "python": 4,
+    "rust": 4
+  },
+  "selected_roots_by_language": {
+    "c_cpp": [
+      {
+        "blockers": [
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "agentkernel",
+        "root_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp",
+        "seed_rows": 4,
+        "task_types": [
+          "patch_impact"
+        ]
+      },
+      {
+        "blockers": [
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "parametergolf",
+        "root_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+        "seed_rows": 4,
+        "task_types": [
+          "patch_impact"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "onnxruntime",
+        "root_id": "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q12",
+        "seed_rows": 4,
+        "task_types": [
+          "evidence_citation"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "falco",
+        "root_id": "audited::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::q30",
+        "seed_rows": 4,
+        "task_types": [
+          "evidence_citation"
+        ]
+      }
+    ],
+    "python": [
+      {
+        "blockers": [
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "repository_library",
+        "root_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python",
+        "seed_rows": 4,
+        "task_types": [
+          "patch_impact"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "openai-agents-python",
+        "root_id": "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q10",
+        "seed_rows": 4,
+        "task_types": [
+          "evidence_citation"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "faiss",
+        "root_id": "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q27",
+        "seed_rows": 4,
+        "task_types": [
+          "evidence_citation"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "django",
+        "root_id": "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q13",
+        "seed_rows": 4,
+        "task_types": [
+          "evidence_citation"
+        ]
+      }
+    ],
+    "rust": [
+      {
+        "blockers": [
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "tokenizers",
+        "root_id": "stage10126::tokenizers::tokenizers::rust",
+        "seed_rows": 4,
+        "task_types": [
+          "patch_impact"
+        ]
+      },
+      {
+        "blockers": [
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "candle",
+        "root_id": "stage10413::candle::candle-flash-attn::rust",
+        "seed_rows": 4,
+        "task_types": [
+          "abstention_insufficient_evidence",
+          "patch_impact"
+        ]
+      },
+      {
+        "blockers": [
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "linux",
+        "root_id": "stage10674::linux::rust",
+        "seed_rows": 4,
+        "task_types": [
+          "patch_impact"
+        ]
+      },
+      {
+        "blockers": [
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "chroma",
+        "root_id": "stage10798::strict_session_plus_strict_commit_ranked_v4_plus_v5_plus_broadexp_v3_plus_current_recent96_strict_packs_8m_hardened_v2::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::q53",
+        "seed_rows": 4,
+        "task_types": [
+          "abstention_insufficient_evidence"
+        ]
+      }
+    ]
+  },
+  "source_artifacts": {
+    "near_repairable": "runs/local/artifacts/stage11519_source_heldout_smoke_candidate_miner/near_repairable_smoke_candidates.jsonl",
+    "stage11712": "runs/local/artifacts/stage11712_v27_completion_gap_and_next_worklist/v27_completion_gap_and_next_worklist.json"
+  },
+  "stage": 11713,
+  "stage11712_context": {
+    "completion_status": "incomplete",
+    "source_heldout_status": {
+      "admitted_by_language": {
+        "c_cpp": 0,
+        "python": 0,
+        "rust": 0,
+        "web_js_ts_html": 6
+      },
+      "admitted_rows_by_language": {
+        "c_cpp": 0,
+        "python": 0,
+        "rust": 0,
+        "web_js_ts_html": 6
+      },
+      "blocked_rows": 93,
+      "blocked_rows_by_language": {
+        "c_cpp": 34,
+        "python": 33,
+        "rust": 18,
+        "web_js_ts_html": 8
+      },
+      "blockers": {
+        "by_language": {
+          "c_cpp": {
+            "deterministic_option_shuffle_missing": 2,
+            "heldout_provenance_not_admitted": 34
+          },
+          "python": {
+            "deterministic_option_shuffle_missing": 1,
+            "heldout_provenance_not_admitted": 33
+          },
+          "rust": {
+            "deterministic_option_shuffle_missing": 18,
+            "heldout_provenance_not_admitted": 3,
+            "missing_verifier_or_selected_test_evidence": 15
+          },
+          "web_js_ts_html": {
+            "heldout_provenance_not_admitted": 8
+          }
+        },
+        "total": {
+          "deterministic_option_shuffle_missing": 21,
+          "heldout_provenance_not_admitted": 78,
+          "missing_verifier_or_selected_test_evidence": 15
+        }
+      },
+      "minimal_multilingual_ready": false,
+      "pending_rows_by_language": {
+        "c_cpp": 0,
+        "python": 0,
+        "rust": 0,
+        "web_js_ts_html": 18
+      },
+      "stage11517_work_item_count": 16
+    }
+  },
+  "stage_name": "source_heldout_smoke_materialization_request",
+  "target": {
+    "from_stage11712_work_item": "source_heldout_python_cpp_rust_smoke",
+    "minimum": "one admitted source-heldout smoke root for python, c_cpp, and rust"
+  }
+}

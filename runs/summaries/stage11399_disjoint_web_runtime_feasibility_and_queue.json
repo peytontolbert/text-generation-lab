@@ -1,0 +1,192 @@
+{
+  "admissibility": {
+    "scoreable_now": false,
+    "trainable_now": false,
+    "why": "The best disjoint Web candidates have source and verifier paths, but local JS runtime/dependency state does not yet execute focused verifiers. No rows are emitted until raw verifier output exists."
+  },
+  "counts": {
+    "blocking_attempts": 4,
+    "execution_attempts": 4,
+    "fresh_disjoint_queue_items": 4,
+    "priority_openclaw_items": 2,
+    "recovery_queue_items": 2,
+    "stage11346_queue_items": 9
+  },
+  "created_at_utc": "2026-07-13T14:42:22Z",
+  "decision": "disjoint_web_runtime_recovery_required_before_materialization",
+  "execution_results": [
+    {
+      "attempt_id": "openclaw_qa_lab_pnpm_version",
+      "cmd": [
+        "pnpm",
+        "--version"
+      ],
+      "cwd": "/data/repositories/openclaw__openclaw",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_qa_lab_pnpm_version.log",
+      "returncode": 1,
+      "status": "failed",
+      "stderr_tail": "node:internal/modules/esm/utils:266\n  throw new ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING();\n        ^\n\nTypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.\n    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:266:9)\n    at Object.<anonymous> (/home/peyton/.cache/node/corepack/v1/pnpm/11.1.0/bin/pnpm.cjs:3:1)\n    at Module2._compile (/home/peyton/.nvm/versions/node/v20.19.1/lib/node_modules/corepack/dist/lib/corepack.cjs:16947:34)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)\n    at Module.load (node:internal/modules/cjs/loader:1275:32)\n    at Module._load (node:internal/modules/cjs/loader:1096:12)\n    at executeUserEntryPoint (node:internal/modules/run_main:164:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:81:21) {\n  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'\n}\n\nNode.js v20.19.1\n",
+      "stdout_tail": ""
+    },
+    {
+      "attempt_id": "openclaw_qa_lab_vitest_focused",
+      "cmd": [
+        "npm",
+        "exec",
+        "--",
+        "vitest",
+        "run",
+        "src/model-switch-eval.test.ts"
+      ],
+      "cwd": "/data/repositories/openclaw__openclaw/extensions/qa-lab",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_qa_lab_vitest_focused.log",
+      "returncode": 1,
+      "status": "failed",
+      "stderr_tail": "npm warn exec The following package was not found and will be installed: vitest@4.1.10\n../../test/vitest/vitest.config.ts (1:358) \u001b[33m[UNRESOLVED_IMPORT] \u001b[0mCould not resolve 'vitest/config' in ../../test/vitest/vitest.config.ts\n - Module not found, treating it as an external dependency in ../../test/vitest/vitest.config.ts at 358..373\n\nfailed to load config from /data/repositories/openclaw__openclaw/vitest.config.ts\n\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af Startup Error \u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'vitest' imported from /data/repositories/openclaw__openclaw/vitest.config.ts.timestamp-1783953740212-ea87580fab171.mjs\n    at packageResolve (node:internal/modules/esm/resolve:873:9)\n    at moduleResolve (node:internal/modules/esm/resolve:946:18)\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:642:12)\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:591:25)\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:574:38)\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:236:38)\n    at ModuleJob._link (node:internal/modules/esm/module_job:130:49) {\n  code: 'ERR_MODULE_NOT_FOUND'\n}\n\n\n\n",
+      "stdout_tail": ""
+    },
+    {
+      "attempt_id": "openclaw_clawhub_bun_version",
+      "cmd": [
+        "bun",
+        "--version"
+      ],
+      "cwd": "/data/repositories/openclaw__clawhub",
+      "error": "[Errno 2] No such file or directory: 'bun'",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_clawhub_bun_version.log",
+      "returncode": null,
+      "status": "blocked_missing_executable"
+    },
+    {
+      "attempt_id": "openclaw_clawhub_vitest_focused",
+      "cmd": [
+        "npm",
+        "exec",
+        "--",
+        "vitest",
+        "run",
+        "convex/skills.versions.public.test.ts"
+      ],
+      "cwd": "/data/repositories/openclaw__clawhub",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_clawhub_vitest_focused.log",
+      "returncode": 1,
+      "status": "failed",
+      "stderr_tail": "2 \u2502\u001b[0m \u001b[38;5;249mi\u001b[0m\u001b[38;5;249mm\u001b[0m\u001b[38;5;249mp\u001b[0m\u001b[38;5;249mo\u001b[0m\u001b[38;5;249mr\u001b[0m\u001b[38;5;249mt\u001b[0m\u001b[38;5;249m \u001b[0m\u001b[38;5;249m{\u001b[0m\u001b[38;5;249m \u001b[0m\u001b[38;5;249md\u001b[0m\u001b[38;5;249me\u001b[0m\u001b[38;5;249mf\u001b[0m\u001b[38;5;249mi\u001b[0m\u001b[38;5;249mn\u001b[0m\u001b[38;5;249me\u001b[0m\u001b[38;5;249mC\u001b[0m\u001b[38;5;249mo\u001b[0m\u001b[38;5;249mn\u001b[0m\u001b[38;5;249mf\u001b[0m\u001b[38;5;249mi\u001b[0m\u001b[38;5;249mg\u001b[0m\u001b[38;5;249m \u001b[0m\u001b[38;5;249m}\u001b[0m\u001b[38;5;249m \u001b[0m\u001b[38;5;249mf\u001b[0m\u001b[38;5;249mr\u001b[0m\u001b[38;5;249mo\u001b[0m\u001b[38;5;249mm\u001b[0m\u001b[38;5;249m \u001b[0m\"vitest/config\"\u001b[38;5;249m;\u001b[0m\n \u001b[38;5;240m  \u2502\u001b[0m                              \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500  \n \u001b[38;5;240m  \u2502\u001b[0m                                     \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Module not found, treating it as an external dependency\n\u001b[38;5;246m\u2500\u2500\u2500\u256f\u001b[0m\n\nfailed to load config from /data/repositories/openclaw__clawhub/vitest.config.ts\n\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af Startup Error \u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'vitest' imported from /data/repositories/openclaw__clawhub/vitest.config.ts.timestamp-1783953742054-3a2fa0c7ea806.mjs\n    at packageResolve (node:internal/modules/esm/resolve:873:9)\n    at moduleResolve (node:internal/modules/esm/resolve:946:18)\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:642:12)\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:591:25)\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:574:38)\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:236:38)\n    at ModuleJob._link (node:internal/modules/esm/module_job:130:49) {\n  code: 'ERR_MODULE_NOT_FOUND'\n}\n\n\n\n",
+      "stdout_tail": ""
+    }
+  ],
+  "outputs": {
+    "logs": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs",
+    "recovery_queue": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/disjoint_web_runtime_recovery_queue.jsonl",
+    "summary": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/disjoint_web_runtime_feasibility_and_queue.json"
+  },
+  "passed": true,
+  "recommended_next_action": "Repair JS package runtime for openclaw_openclaw and openclaw_clawhub, then rerun focused Vitest/Bun commands and project only roots with passed verifier logs.",
+  "recovery_queue": [
+    {
+      "git_head": "d77c4bbb2d2b216b1fe9bb0676983aba147cf15d",
+      "git_repo_family": "openclaw_openclaw",
+      "repo_family": "qa_lab",
+      "repo_path": "/data/repositories/openclaw__openclaw/extensions/qa-lab",
+      "required_before_rows": [
+        "hydrate package dependencies or repair package manager for this repo family",
+        "execute one focused verifier command and store raw log",
+        "select one changed/source path and one verifier/test path with non-aliased visible evidence",
+        "fill maintainer gold for six perspectives",
+        "run prompt-target leak and root-overlap audits"
+      ],
+      "review_item_id": "stage11346::web_review::01::qa_lab",
+      "runtime_recovery_required": true,
+      "selected_candidate_source_paths": [
+        "bus-api.ts",
+        "model-selection.ts",
+        "api.ts",
+        "index.ts",
+        "cli.ts"
+      ],
+      "selected_verifier_paths": [
+        "src/model-switch-eval.test.ts",
+        "src/lab-server-ui.test.ts",
+        "src/qa-gateway-config.test.ts",
+        "src/scenario-runtime-api.test.ts",
+        "src/suite-runtime-flow.test.ts"
+      ]
+    },
+    {
+      "git_head": "8bbc66868d63c22ee905b327214982f60da4ac0a",
+      "git_repo_family": "openclaw_clawhub",
+      "repo_family": "convex",
+      "repo_path": "/data/repositories/openclaw__clawhub/convex",
+      "required_before_rows": [
+        "hydrate package dependencies or repair package manager for this repo family",
+        "execute one focused verifier command and store raw log",
+        "select one changed/source path and one verifier/test path with non-aliased visible evidence",
+        "fill maintainer gold for six perspectives",
+        "run prompt-target leak and root-overlap audits"
+      ],
+      "review_item_id": "stage11346::web_review::02::convex",
+      "runtime_recovery_required": true,
+      "selected_candidate_source_paths": [
+        "http.ts",
+        "users.ts",
+        "seed.ts",
+        "tokens.ts",
+        "githubSoulBackupsNode.ts"
+      ],
+      "selected_verifier_paths": [
+        "skills.versions.public.test.ts",
+        "tokens.touch.test.ts",
+        "maintenance.test.ts",
+        "skills.countPublicSkills.test.ts",
+        "skills.publicModeration.test.ts"
+      ]
+    }
+  ],
+  "runtime_blockers": [
+    {
+      "attempt_id": "openclaw_qa_lab_pnpm_version",
+      "blocker": "pnpm_corepack_dynamic_import_failure",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_qa_lab_pnpm_version.log",
+      "repo_family": "openclaw_openclaw",
+      "returncode": 1,
+      "status": "failed"
+    },
+    {
+      "attempt_id": "openclaw_qa_lab_vitest_focused",
+      "blocker": "repo_dependencies_not_installed",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_qa_lab_vitest_focused.log",
+      "repo_family": "openclaw_openclaw",
+      "returncode": 1,
+      "status": "failed"
+    },
+    {
+      "attempt_id": "openclaw_clawhub_bun_version",
+      "blocker": "missing_executable",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_clawhub_bun_version.log",
+      "repo_family": "openclaw_clawhub",
+      "returncode": null,
+      "status": "blocked_missing_executable"
+    },
+    {
+      "attempt_id": "openclaw_clawhub_vitest_focused",
+      "blocker": "repo_dependencies_not_installed",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_clawhub_vitest_focused.log",
+      "repo_family": "openclaw_clawhub",
+      "returncode": 1,
+      "status": "failed"
+    }
+  ],
+  "source_artifacts": {
+    "stage11346_review_queue": "runs/local/artifacts/stage11346_web_source_verifier_review_queue/web_source_verifier_first_wave_review_queue.jsonl"
+  },
+  "stage": 11399,
+  "stage_name": "stage11399_disjoint_web_runtime_feasibility_and_queue",
+  "used_web_families_excluded": [
+    "OpenHands__OpenHands",
+    "llama_stack",
+    "modelcontextprotocol_modelcontextprotocol",
+    "modelcontextprotocol_typescript_sdk",
+    "openhands_openhands",
+    "sourcebot"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "created_at_utc": "2026-07-13T09:41:07Z",
+  "decision": "reject_stage11252_branch_keep_stage11200_frontier",
+  "interpretation": {
+    "current_frontier_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "probable_failure_mode": "The model/runtime remains strong on the clean canary, but the product scorer still maps evidence-role cases toward candidate_change_surface. Role aliases, balanced role rows, all-positive verifier rows, and fact-rich option suffixes have all failed to move the heldout residual bank. The next useful path is a direct semantic evidence scorer objective or stronger root-admissible evidence/verifier materialization, not another prompt-support sweep.",
+    "stage11252_runtime_status": "diagnostic_negative_do_not_promote"
+  },
+  "key_metrics": {
+    "gates": {
+      "product_clean_strict_22_of_22": true,
+      "product_clean_validation_at_least_20_of_23": true,
+      "product_fact_rich_strict_improved_vs_baseline": false,
+      "product_fact_rich_validation_improved_vs_baseline": false,
+      "product_residual_above_5_of_10": false,
+      "product_verifier_residual_nonzero": false
+    },
+    "stage11250_product_baseline": {
+      "residual": {
+        "correct": 5,
+        "exact_accuracy": 0.5,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "strict": {
+        "correct": 11,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 33,
+        "scored_rows": 33
+      },
+      "validation": {
+        "correct": 9,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 27,
+        "scored_rows": 27
+      }
+    },
+    "stage11253_product_postrun": {
+      "clean_strict": {
+        "correct": 22,
+        "exact_accuracy": 1.0,
+        "rows": 22,
+        "scored_rows": 22
+      },
+      "clean_validation": {
+        "correct": 20,
+        "exact_accuracy": 0.8695652173913043,
+        "rows": 23,
+        "scored_rows": 23
+      },
+      "fact_rich_strict": {
+        "correct": 11,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 33,
+        "scored_rows": 33
+      },
+      "fact_rich_validation": {
+        "correct": 9,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 27,
+        "scored_rows": 27
+      },
+      "residual": {
+        "correct": 5,
+        "exact_accuracy": 0.5,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "residual_by_gold": {
+        "candidate_change_surface": 4,
+        "symptom_or_call_path_analogue": 0,
+        "unknown": 1,
+        "verifier_and_test_constraint": 0
+      }
+    }
+  },
+  "next_required_work": [
+    "Do not run another Stage11249-style fact-rich support probe with the same product scorer.",
+    "Build a direct evidence-candidate scoring objective that scores (state, evidence_candidate, role_metadata, verifier/test facts) rather than relying on generic option retrieval.",
+    "Normalize bounded rows so every row has opaque option label, semantic option value, role metadata, fact text, and deterministic shuffled candidate order.",
+    "Recover genuinely fresh C/C++ and Rust source-root evidence supply with selected-test/verifier anchors before attempting a promotable multilingual claim.",
+    "Keep Stage11200 as the current frontier runtime until a branch improves residual above 5/10 and verifier/test-constraint residual above 0/3 without regressing clean strict."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11254_fact_rich_evidence_option_decision/fact_rich_evidence_option_decision.json"
+  },
+  "passed": true,
+  "reason": [
+    "Fact-rich evidence option training preserved clean strict but did not improve the product-scorer residual bank.",
+    "Clean residual stayed flat at 5/10 under encoder_option_retrieval_verifier_conditioned.",
+    "Verifier/test-constraint residual remained 0/3.",
+    "Fact-rich validation and strict stayed flat versus Stage11250 baseline at 9/27 and 11/33.",
+    "The branch shows concrete fact suffixes in option text are not enough to overcome the current scorer/objective geometry."
+  ],
+  "source_artifacts": {
+    "stage11249_package": "runs/local/artifacts/stage11249_fact_rich_evidence_option_package/fact_rich_evidence_option_package.json",
+    "stage11251_request": "runs/local/artifacts/stage11251_fact_rich_evidence_option_probe_request/fact_rich_evidence_option_probe_request.json",
+    "stage11252_runtime": "runs/local/artifacts/stage11252_fact_rich_evidence_option_probe/runtime_model/runtime_model_bundle.json",
+    "stage11253_audit": "runs/local/artifacts/stage11253_fact_rich_evidence_option_postrun_audit/fact_rich_evidence_option_postrun_audit.json"
+  },
+  "stage": 11254,
+  "stage_name": "stage11254_fact_rich_evidence_option_decision"
+}

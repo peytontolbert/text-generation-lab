@@ -1,0 +1,225 @@
+{
+  "blacklist_summary": {
+    "blacklisted_roots": 2445,
+    "top_blacklist_sources": {
+      "runs/local/artifacts/stage10517_split_aware_multitarget_bootstrap_manifest/multitarget_bootstrap_train_rows.jsonl": 2423,
+      "runs/local/artifacts/stage10518_root_based_multitarget_bootstrap_probe_request/root_based_multitarget_bootstrap_probe_manifest.jsonl": 2423,
+      "runs/local/artifacts/stage10521_split_aware_multitarget_bootstrap_manifest_with_heldout/train_rows.jsonl": 2369,
+      "runs/local/artifacts/stage10523_root_based_multitarget_bootstrap_probe_request_with_heldout/root_based_multitarget_bootstrap_probe_with_heldout_manifest.jsonl": 2369,
+      "runs/local/artifacts/stage10528_cleaned_heldout_anticheat_successor/train_rows.jsonl": 2369,
+      "runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe_request/leak_clean_root_based_multitarget_probe_manifest.jsonl": 1593,
+      "runs/local/artifacts/stage10543_masked_projection_successor_package/train_rows.jsonl": 2247,
+      "runs/local/artifacts/stage10555_masked_projection_successor_with_v27_preservation_package/train_rows.jsonl": 2280,
+      "runs/local/artifacts/stage10561_visible_candidate_successor_package/train_rows.jsonl": 2280,
+      "runs/local/artifacts/stage10630_long_context_decision_head_successors/long_context_decision_head_successor_train_rows.jsonl": 1495,
+      "runs/local/artifacts/stage10631_repaired_long_context_successor_package/repaired_long_context_successor_train_rows.jsonl": 2224,
+      "runs/local/artifacts/stage10635_repaired_long_context_successor_package_permuted/repaired_long_context_successor_package_permuted_train_rows.jsonl": 2224,
+      "runs/local/artifacts/stage11261_true_evidence_candidate_judgment_probe_request/true_evidence_candidate_judgment_probe_manifest.jsonl": 1600,
+      "runs/local/artifacts/stage11265_evidence_candidate_judgment_head_probe_request/evidence_candidate_judgment_head_probe_manifest.jsonl": 1600,
+      "runs/local/artifacts/stage11326_alias_free_evidence_item_selection_scale_package/alias_free_evidence_item_selection_scale_train_rows.jsonl": 1250,
+      "runs/local/artifacts/stage11442_targeted_residual_role_support_package/targeted_residual_role_candidate_audit.jsonl": 1407,
+      "runs/local/artifacts/stage11442_targeted_residual_role_support_package/targeted_residual_role_quarantine.jsonl": 1622,
+      "runs/local/artifacts/stage11566_web_non_evidence_support_supply_inventory/web_non_evidence_support_rejections.jsonl": 2000,
+      "runs/local/artifacts/stage11639_normalized_web_support_guarded_probe/bounded_decoder_probe/activation_summary.jsonl": 2048,
+      "runs/local/artifacts/stage11639_normalized_web_support_guarded_probe/bounded_decoder_probe/row_gradient_norms.jsonl": 2048
+    },
+    "trainish_files_scanned": 1654,
+    "trainish_rows_scanned": 233687
+  },
+  "claim_boundary": [
+    "This stage mines candidates that do not hit the current train/support root blacklist; it does not admit them.",
+    "No-train blacklist absence is weaker than explicit source-heldout attestation and must be followed by admission preflight.",
+    "Selected roots still need verifier-transition payloads, deterministic option shuffle repair, and full-product patch/abstain extensions before broad claims."
+  ],
+  "created_at_utc": "2026-07-14T06:52:49.392021+00:00",
+  "decision": "train_excluded_source_heldout_candidates_insufficient",
+  "mine_summary": {
+    "candidate_roots_after_exclusion": {
+      "c_cpp": 0,
+      "python": 31,
+      "rust": 0
+    },
+    "rejected": {
+      "basic_quality": 14108,
+      "train_overlap": 765
+    }
+  },
+  "next_stage_acceptance": [
+    "run Stage11714-style preflight on these replacement roots",
+    "admit at least one python, c_cpp, and rust source-heldout smoke root",
+    "attach same-manifest 100M and Gemma scoring only after admission"
+  ],
+  "outputs": {
+    "artifact": "runs/local/artifacts/stage11716_train_excluded_source_heldout_smoke_miner/train_excluded_source_heldout_smoke_miner.json",
+    "requests_jsonl": "runs/local/artifacts/stage11716_train_excluded_source_heldout_smoke_miner/train_excluded_source_heldout_smoke_requests.jsonl",
+    "summary": "runs/summaries/stage11716_train_excluded_source_heldout_smoke_miner.json"
+  },
+  "passed": false,
+  "request_count": 12,
+  "selected_root_counts": {
+    "c_cpp": 0,
+    "python": 12,
+    "rust": 0
+  },
+  "selected_roots_by_language": {
+    "c_cpp": [],
+    "python": [
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "NeMo",
+        "root_id": "stage10776::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q20",
+        "seed_rows": 4,
+        "task_types": [
+          "abstention_insufficient_evidence",
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "Model-Optimizer",
+        "root_id": "stage10776::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q35",
+        "seed_rows": 4,
+        "task_types": [
+          "abstention_insufficient_evidence",
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "option_shuffle_not_declared",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "Megatron-LM",
+        "root_id": "stage10776::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q29",
+        "seed_rows": 4,
+        "task_types": [
+          "abstention_insufficient_evidence",
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "torchtune",
+        "root_id": "stage10789::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q31",
+        "seed_rows": 2,
+        "task_types": [
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "ray",
+        "root_id": "stage10789::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q62",
+        "seed_rows": 2,
+        "task_types": [
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "pytorch3d",
+        "root_id": "stage10789::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q50",
+        "seed_rows": 2,
+        "task_types": [
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "openai-agents-python",
+        "root_id": "stage10789::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q15",
+        "seed_rows": 2,
+        "task_types": [
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "nvmath-python",
+        "root_id": "stage10789::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q57",
+        "seed_rows": 2,
+        "task_types": [
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "nni",
+        "root_id": "stage10789::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q48",
+        "seed_rows": 2,
+        "task_types": [
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "llama-stack",
+        "root_id": "stage10776::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q60",
+        "seed_rows": 2,
+        "task_types": [
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "jax",
+        "root_id": "stage10789::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q7",
+        "seed_rows": 2,
+        "task_types": [
+          "verifier_outcome"
+        ]
+      },
+      {
+        "blockers": [
+          "missing_patch_or_abstain_signal",
+          "source_heldout_not_attested"
+        ],
+        "repo_family": "google-research",
+        "root_id": "stage10776::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q37",
+        "seed_rows": 2,
+        "task_types": [
+          "verifier_outcome"
+        ]
+      }
+    ],
+    "rust": []
+  },
+  "source_artifacts": {
+    "near_repairable": "runs/local/artifacts/stage11519_source_heldout_smoke_candidate_miner/near_repairable_smoke_candidates.jsonl"
+  },
+  "stage": 11716,
+  "stage_name": "train_excluded_source_heldout_smoke_miner"
+}

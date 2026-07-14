@@ -1,0 +1,47 @@
+{
+  "claim_boundary": [
+    "These are review/adjudication shells, not training rows.",
+    "Static source/test snippets can support review, but verifier_outcome remains blocked until execution evidence exists.",
+    "No model training or GPU execution is performed."
+  ],
+  "created_at_utc": "2026-07-13T22:08:54Z",
+  "decision": "static_review_packets_materialized_verifier_transition_still_required",
+  "metrics": {
+    "packets": 34,
+    "packets_by_lane": {
+      "build_all_supported_evidence_item_judgment_rows_with_decisive_vs_distractor_labels": 2,
+      "materialize_diverse_openhands_transition_roots_with_test_ids_and_fail_pass_labels": 18,
+      "materialize_llama_stack_train_analogues_with_selected_tests_and_root_disjoint_options": 14
+    },
+    "packets_by_split_component": {
+      "heldout_candidate": 6,
+      "train_candidate": 28
+    },
+    "row_shells": 204,
+    "rows_by_gold_status": {
+      "requires_observed_verifier_transition": 34,
+      "static_abstain_option_present_but_final_answer_requires_verifier_review": 34,
+      "static_candidate_change_surface": 68,
+      "static_selected_verifier_rules_out_neighbor": 34,
+      "static_verifier_and_test_constraint": 34
+    },
+    "strict_eval_eligible_rows_now": 0,
+    "trainable_rows_now": 0
+  },
+  "next_required_actions": [
+    "Run or recover focused verifier transitions for selected test paths.",
+    "Finalize gold adjudication for verifier_outcome rows after transition evidence exists.",
+    "Run Stage11578 admission audit; only rows with observed verifier transitions and final gold may become trainable."
+  ],
+  "outputs": {
+    "packets": "runs/local/artifacts/stage11577_web_candidate_review_packet_materializer/web_candidate_review_packets.jsonl",
+    "row_shells": "runs/local/artifacts/stage11577_web_candidate_review_packet_materializer/web_candidate_review_row_shells.jsonl",
+    "summary": "runs/local/artifacts/stage11577_web_candidate_review_packet_materializer/web_candidate_review_packet_materializer.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "stage11576_candidates": "runs/local/artifacts/stage11576_web_fresh_source_candidate_atlas/web_fresh_source_candidate_roots.jsonl"
+  },
+  "stage": 11577,
+  "stage_name": "stage11577_web_candidate_review_packet_materializer"
+}

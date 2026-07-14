@@ -1,0 +1,219 @@
+{
+  "created_at_utc": "2026-07-11T19:15:56Z",
+  "outputs": {
+    "repair_targets": "runs/local/artifacts/stage10434_reviewed_v27_strict_leak_repair_request/reviewed_v27_strict_leak_repair_targets.jsonl",
+    "request_json": "runs/local/artifacts/stage10434_reviewed_v27_strict_leak_repair_request/reviewed_v27_strict_leak_repair_request.json"
+  },
+  "passed": true,
+  "post_repair_reference_artifacts": [
+    "runs/local/artifacts/stage10429_reviewed_v27_eval_hacking_audit/reviewed_v27_eval_hacking_audit.json",
+    "runs/local/artifacts/stage10431_reviewed_v27_saved_runtime_margin_audit/reviewed_v27_saved_runtime_margin_audit.json"
+  ],
+  "post_repair_required_revalidation": [
+    "rebuild the strict packaged rows",
+    "rerun stage10429-style eval-hacking audit and confirm strict leak rows drop to zero",
+    "rerun stage10431-style saved-runtime margin audit and confirm no new semantic collapse is introduced",
+    "keep stress rows excluded and keep root splits unchanged"
+  ],
+  "request_scope": [
+    "Repair the 4 leaked strict evidence-citation rows in the reviewed v2.7 package.",
+    "Preserve root identity, gold answer, and strict split status.",
+    "Eliminate prompt-visible target leakage before the options block."
+  ],
+  "source_artifacts": {
+    "leak_cleanup_queue": "runs/local/artifacts/stage10432_reviewed_v27_strict_leak_cleanup_queue/reviewed_v27_strict_leak_cleanup_rows.jsonl",
+    "reviewed_scaling_atlas": "runs/local/artifacts/stage10417_multilingual_reviewed_scaling_atlas/multilingual_reviewed_scaling_atlas.json",
+    "strict_manifest": "runs/local/artifacts/stage10420_reviewed_multilingual_v27_manifest_package/agentkernel_lite_encdec_strict_eval.jsonl"
+  },
+  "stage": 10434,
+  "stage_name": "stage10434_reviewed_v27_strict_leak_repair_request",
+  "success_condition": {
+    "gold_answers_changed": 0,
+    "strict_leak_rows_after_repair": 0,
+    "strict_split_membership_changed": 0
+  },
+  "targets": [
+    {
+      "allowed_repair_mechanisms": [
+        "replace value-bearing evidence line with a causal paraphrase",
+        "swap in a different visible support fact from the same reviewed packet",
+        "compress or summarize the evidence without naming the gold semantic target"
+      ],
+      "bundle_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp",
+      "disallowed_repair_mechanisms": [
+        "change the split assignment",
+        "change the gold answer",
+        "replace the row with a different root",
+        "mask the answer with placeholders that make the row unanswerable"
+      ],
+      "language_family": "c_cpp",
+      "margin_top1_minus_top2": 0.0023332834243774414,
+      "must_preserve": [
+        "same source bundle and reviewed packet lineage",
+        "same task type and language family",
+        "same strict_eval status",
+        "same root-level claim boundary"
+      ],
+      "packet_dir": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662__c_cpp",
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662__c_cpp/perspective_gold_adjudication.json",
+      "predicted_label": "B",
+      "predicted_semantic_value": "candidate_change_surface",
+      "repair_instruction": "Rewrite the visible evidence so the gold semantic target is no longer stated verbatim before options, while preserving the same gold answer and maintainer answerability.",
+      "repo_family": "agentkernel",
+      "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+      "selected_tests": [
+        "tests/test_improvement.py",
+        "tests/test_improvement_catalog.py",
+        "tests/test_improvement_cycle_observation.py",
+        "tests/test_qwen_adapter_artifacts.py",
+        "tests/test_tolbert_hybrid_artifacts.py"
+      ],
+      "standalone_projection_mode": "reviewed_v27_compact_bounded_choice",
+      "target_label": "B",
+      "target_semantic_value": "candidate_change_surface",
+      "task_type": "evidence_citation",
+      "visible_evidence_keys": [
+        "algorithmic_background_reference",
+        "candidate_change_surface",
+        "external_analogue_reference",
+        "nearby_definition_or_usage_context",
+        "symptom_or_call_path_analogue",
+        "verifier_and_test_constraint"
+      ]
+    },
+    {
+      "allowed_repair_mechanisms": [
+        "replace value-bearing evidence line with a causal paraphrase",
+        "swap in a different visible support fact from the same reviewed packet",
+        "compress or summarize the evidence without naming the gold semantic target"
+      ],
+      "bundle_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python",
+      "disallowed_repair_mechanisms": [
+        "change the split assignment",
+        "change the gold answer",
+        "replace the row with a different root",
+        "mask the answer with placeholders that make the row unanswerable"
+      ],
+      "language_family": "python",
+      "margin_top1_minus_top2": 0.0001087188720703125,
+      "must_preserve": [
+        "same source bundle and reviewed packet lineage",
+        "same task type and language family",
+        "same strict_eval status",
+        "same root-level claim boundary"
+      ],
+      "packet_dir": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662__python",
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662__python/perspective_gold_adjudication.json",
+      "predicted_label": "B",
+      "predicted_semantic_value": "candidate_change_surface",
+      "repair_instruction": "Rewrite the visible evidence so the gold semantic target is no longer stated verbatim before options, while preserving the same gold answer and maintainer answerability.",
+      "repo_family": "repository_library",
+      "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+      "selected_tests": [
+        "models/mirrormind/tests/test_context_assembly.py",
+        "models/mirrormind/tests/test_coordinator.py",
+        "models/mirrormind/tests/test_coordinator_piano_integration.py",
+        "models/mirrormind/tests/test_domain_graph.py",
+        "models/mirrormind/tests/test_memory_index.py"
+      ],
+      "standalone_projection_mode": "reviewed_v27_compact_bounded_choice",
+      "target_label": "B",
+      "target_semantic_value": "candidate_change_surface",
+      "task_type": "evidence_citation",
+      "visible_evidence_keys": [
+        "algorithmic_background_reference",
+        "candidate_change_surface",
+        "external_analogue_reference",
+        "nearby_definition_or_usage_context",
+        "symptom_or_call_path_analogue",
+        "verifier_and_test_constraint"
+      ]
+    },
+    {
+      "allowed_repair_mechanisms": [
+        "replace value-bearing evidence line with a causal paraphrase",
+        "swap in a different visible support fact from the same reviewed packet",
+        "compress or summarize the evidence without naming the gold semantic target"
+      ],
+      "bundle_id": "stage10126::tokenizers::tokenizers::rust",
+      "disallowed_repair_mechanisms": [
+        "change the split assignment",
+        "change the gold answer",
+        "replace the row with a different root",
+        "mask the answer with placeholders that make the row unanswerable"
+      ],
+      "language_family": "rust",
+      "margin_top1_minus_top2": 0.002192944288253784,
+      "must_preserve": [
+        "same source bundle and reviewed packet lineage",
+        "same task type and language family",
+        "same strict_eval status",
+        "same root-level claim boundary"
+      ],
+      "packet_dir": "runs/local/artifacts/stage10127_true_source_backed_rust_review_packets_and_signoff/review_packets/stage10126__tokenizers__tokenizers__rust",
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10127_true_source_backed_rust_review_packets_and_signoff/review_packets/stage10126__tokenizers__tokenizers__rust/perspective_gold_adjudication.json",
+      "predicted_label": "F",
+      "predicted_semantic_value": "verifier_and_test_constraint",
+      "repair_instruction": "Rewrite the visible evidence so the gold semantic target is no longer stated verbatim before options, while preserving the same gold answer and maintainer answerability.",
+      "repo_family": "tokenizers",
+      "row_id": "stage10126::tokenizers::tokenizers::rust::evidence_citation::reviewed_v27_compact",
+      "selected_tests": [
+        "tokenizers/examples/unstable_wasm/tests/web.rs"
+      ],
+      "standalone_projection_mode": "reviewed_v27_compact_bounded_choice",
+      "target_label": "E",
+      "target_semantic_value": "symptom_or_call_path_analogue",
+      "task_type": "evidence_citation",
+      "visible_evidence_keys": [
+        "algorithmic_background_reference",
+        "candidate_change_surface",
+        "external_analogue_reference",
+        "nearby_definition_or_usage_context",
+        "symptom_or_call_path_analogue",
+        "verifier_and_test_constraint"
+      ]
+    },
+    {
+      "allowed_repair_mechanisms": [
+        "replace value-bearing evidence line with a causal paraphrase",
+        "swap in a different visible support fact from the same reviewed packet",
+        "compress or summarize the evidence without naming the gold semantic target"
+      ],
+      "bundle_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html",
+      "disallowed_repair_mechanisms": [
+        "change the split assignment",
+        "change the gold answer",
+        "replace the row with a different root",
+        "mask the answer with placeholders that make the row unanswerable"
+      ],
+      "language_family": "web_js_ts_html",
+      "margin_top1_minus_top2": 0.0007461011409759521,
+      "must_preserve": [
+        "same source bundle and reviewed packet lineage",
+        "same task type and language family",
+        "same strict_eval status",
+        "same root-level claim boundary"
+      ],
+      "packet_dir": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662__web_js_ts_html",
+      "perspective_gold_adjudication": "runs/local/artifacts/stage10120_true_source_backed_maintainer_root_bundle_review_packets/review_packets/stage10119__localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662__web_js_ts_html/perspective_gold_adjudication.json",
+      "predicted_label": "B",
+      "predicted_semantic_value": "candidate_change_surface",
+      "repair_instruction": "Rewrite the visible evidence so the gold semantic target is no longer stated verbatim before options, while preserving the same gold answer and maintainer answerability.",
+      "repo_family": "bddy_website",
+      "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+      "selected_tests": [],
+      "standalone_projection_mode": "reviewed_v27_compact_bounded_choice",
+      "target_label": "B",
+      "target_semantic_value": "candidate_change_surface",
+      "task_type": "evidence_citation",
+      "visible_evidence_keys": [
+        "algorithmic_background_reference",
+        "candidate_change_surface",
+        "external_analogue_reference",
+        "nearby_definition_or_usage_context",
+        "symptom_or_call_path_analogue",
+        "verifier_and_test_constraint"
+      ]
+    }
+  ]
+}

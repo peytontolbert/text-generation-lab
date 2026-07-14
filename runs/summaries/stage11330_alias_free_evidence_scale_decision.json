@@ -1,0 +1,159 @@
+{
+  "created_at_utc": "2026-07-13T12:05:15Z",
+  "decision": "reject_stage11328_keep_stage11200_frontier",
+  "gates": {
+    "alias_scale_diagnostic_above_5_of_7": false,
+    "alias_scale_strict_at_least_70pct": false,
+    "alias_scale_validation_at_least_70pct": false,
+    "canary_residual_above_5_of_10": false,
+    "canary_strict_22_of_22": false,
+    "canary_validation_at_least_20_of_23": false
+  },
+  "kept_frontier": {
+    "runtime_model": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "stage": "stage11200_role_focused_residual_probe",
+    "weights_sha256": "1367d9c50d1e0defb9e19afb20e06b1f15e20e43d412310c0f62e31ac241ec7f"
+  },
+  "next_action": "Do not run more Python-heavy alias-free probes. Mine/admit Rust and pure-Web verifier/change roots, and fix alias-free scorer/objective using balanced heldout before another training run.",
+  "product_metrics": {
+    "alias_scale_diagnostic": {
+      "by_gold": {
+        "unknown": {
+          "accuracy": 0.5714285714285714,
+          "correct": 4,
+          "rows": 7
+        }
+      },
+      "by_language": {
+        "unknown": {
+          "accuracy": 0.5714285714285714,
+          "correct": 4,
+          "rows": 7
+        }
+      },
+      "correct": 4,
+      "exact_accuracy": 0.5714285714285714,
+      "rows": 7,
+      "scored_rows": 7
+    },
+    "alias_scale_strict": {
+      "by_gold": {
+        "unknown": {
+          "accuracy": 0.47058823529411764,
+          "correct": 80,
+          "rows": 170
+        }
+      },
+      "by_language": {
+        "unknown": {
+          "accuracy": 0.47058823529411764,
+          "correct": 80,
+          "rows": 170
+        }
+      },
+      "correct": 80,
+      "exact_accuracy": 0.47058823529411764,
+      "rows": 170,
+      "scored_rows": 170
+    },
+    "alias_scale_validation": {
+      "by_gold": {
+        "unknown": {
+          "accuracy": 0.53,
+          "correct": 53,
+          "rows": 100
+        }
+      },
+      "by_language": {
+        "unknown": {
+          "accuracy": 0.53,
+          "correct": 53,
+          "rows": 100
+        }
+      },
+      "correct": 53,
+      "exact_accuracy": 0.53,
+      "rows": 100,
+      "scored_rows": 100
+    },
+    "canary_residual": {
+      "by_gold": {
+        "unknown": {
+          "accuracy": 0.3,
+          "correct": 3,
+          "rows": 10
+        }
+      },
+      "by_language": {
+        "unknown": {
+          "accuracy": 0.3,
+          "correct": 3,
+          "rows": 10
+        }
+      },
+      "correct": 3,
+      "exact_accuracy": 0.3,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "canary_strict": {
+      "by_gold": {
+        "unknown": {
+          "accuracy": 0.9090909090909091,
+          "correct": 20,
+          "rows": 22
+        }
+      },
+      "by_language": {
+        "unknown": {
+          "accuracy": 0.9090909090909091,
+          "correct": 20,
+          "rows": 22
+        }
+      },
+      "correct": 20,
+      "exact_accuracy": 0.9090909090909091,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "canary_validation": {
+      "by_gold": {
+        "unknown": {
+          "accuracy": 0.8260869565217391,
+          "correct": 19,
+          "rows": 23
+        }
+      },
+      "by_language": {
+        "unknown": {
+          "accuracy": 0.8260869565217391,
+          "correct": 19,
+          "rows": 23
+        }
+      },
+      "correct": 19,
+      "exact_accuracy": 0.8260869565217391,
+      "rows": 23,
+      "scored_rows": 23
+    }
+  },
+  "rationale": [
+    "Stage11328 was diagnostic-only because Stage11326 is Python-heavy and under-supplied for Rust/Web.",
+    "Alias-free heldout performance is below gate: validation 53/100 and strict 80/170.",
+    "Old canary regressed: strict 20/22, validation 19/23, residual 3/10.",
+    "Alias diagnostic is 4/7, below the required >5/7 and below Stage11322 diagnostic 5/7."
+  ],
+  "rejected_runtime": {
+    "runtime_model": "runs/local/artifacts/stage11328_alias_free_evidence_scale_probe/runtime_model/runtime_model_bundle.json",
+    "stage": "stage11328_alias_free_evidence_scale_probe",
+    "weights_sha256": "786b3917de78bcb85bb63aa8e8ff5326f771fc4a82c5d6c4f49968f568c3af83"
+  },
+  "source_artifacts": {
+    "audit": "runs/local/artifacts/stage11329_alias_free_evidence_scale_postrun_audit/alias_free_evidence_scale_postrun_audit.json",
+    "inventory": "runs/local/artifacts/stage11325_alias_free_evidence_scale_inventory/alias_free_evidence_scale_inventory.json",
+    "package": "runs/local/artifacts/stage11326_alias_free_evidence_item_selection_scale_package/alias_free_evidence_item_selection_scale_package.json",
+    "request": "runs/local/artifacts/stage11327_alias_free_evidence_scale_probe_request/alias_free_evidence_scale_probe_request.json"
+  },
+  "stage": 11330,
+  "stage_name": "stage11330_alias_free_evidence_scale_decision"
+}

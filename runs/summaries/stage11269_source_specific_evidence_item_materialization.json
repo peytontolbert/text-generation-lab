@@ -1,0 +1,89 @@
+{
+  "audit": {
+    "duplicate_row_ids": 0,
+    "internal_support_reason_leak_rows": 0,
+    "role_alias_leak_rows": 0,
+    "root_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    },
+    "target_label_leak_rows": 0
+  },
+  "counts": {
+    "blocked_roots": 232,
+    "by_split_language": {
+      "strict_eval": {
+        "python": 104
+      },
+      "train": {
+        "python": 52
+      },
+      "validation": {
+        "python": 36
+      }
+    },
+    "by_split_target": {
+      "strict_eval": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 26,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 26,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 26,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 26
+      },
+      "train": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 13,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 13,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 13,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 13
+      },
+      "validation": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 9,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 9,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 9,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 9
+      }
+    },
+    "c_cpp_gap": {
+      "ready_c_cpp_roots": 0,
+      "reason": "stage11237 found no clean C/C++ verifier-constraint source candidates under current filters"
+    },
+    "materialized_roots": 48,
+    "retrieval_rows_indexed": 729,
+    "source_chunks_indexed": 34229,
+    "source_ready_candidates": 280,
+    "strict_rows": 104,
+    "train_rows": 52,
+    "validation_rows": 36
+  },
+  "created_at_utc": "2026-07-13T10:16:26Z",
+  "decision": "source_specific_evidence_item_materialization_ready",
+  "interpretation": {
+    "claim_limit": "Still diagnostic: C/C++ source supply is absent and Rust/Web supply remains small.",
+    "why_this_differs_from_stage11259": "Rows use actual source chunk excerpts resolved from full_context_rows instead of generic path-list templates."
+  },
+  "outputs": {
+    "blocked_jsonl": "runs/local/artifacts/stage11269_source_specific_evidence_item_materialization/source_specific_evidence_item_blocked_roots.jsonl",
+    "root_splits_jsonl": "runs/local/artifacts/stage11269_source_specific_evidence_item_materialization/source_specific_evidence_item_root_splits.jsonl",
+    "strict_jsonl": "runs/local/artifacts/stage11269_source_specific_evidence_item_materialization/source_specific_evidence_item_strict_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11269_source_specific_evidence_item_materialization/source_specific_evidence_item_materialization.json",
+    "train_jsonl": "runs/local/artifacts/stage11269_source_specific_evidence_item_materialization/source_specific_evidence_item_train_rows.jsonl",
+    "validation_jsonl": "runs/local/artifacts/stage11269_source_specific_evidence_item_materialization/source_specific_evidence_item_validation_rows.jsonl"
+  },
+  "passed": true,
+  "quality_gates": {
+    "has_validation_and_strict": true,
+    "internal_support_reasons_not_visible": true,
+    "role_alias_not_visible_before_options": true,
+    "root_split_disjoint": true,
+    "target_label_not_visible_before_options": true,
+    "unique_row_ids": true,
+    "uses_materialized_chunk_text": true
+  },
+  "source_artifacts": {
+    "full_context_rows": "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/full_context_rows.jsonl",
+    "retrieval_rows": "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/retrieval_rows.jsonl",
+    "stage11237_candidates": "runs/local/artifacts/stage11237_multilingual_verifier_constraint_source_inventory/verifier_constraint_source_candidates.jsonl"
+  },
+  "stage": 11269,
+  "stage_name": "stage11269_source_specific_evidence_item_materialization"
+}

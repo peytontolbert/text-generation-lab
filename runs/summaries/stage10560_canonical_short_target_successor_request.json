@@ -1,0 +1,40 @@
+{
+  "claim_scope": [
+    "Request artifact for the next strict successor rebuild after stage10557/10558 showed that preservation support alone is not enough.",
+    "The target of the rebuild is the strict 54-row multilingual successor slice, not the repaired 24-row canary.",
+    "This is a dataset/eval interface request, not a training result."
+  ],
+  "created_at_utc": "2026-07-12T02:10:28Z",
+  "decision": "strict_successor_target_interface_rebuild_required",
+  "non_goals": [
+    "This request does not broaden the benchmark beyond the existing strict successor roots",
+    "This request does not replace the maintainer-grade reviewed v2.7 eval",
+    "This request does not claim harness-level completion"
+  ],
+  "passed": true,
+  "problem_statement": {
+    "current_canary_status": "The old reviewed v2.7 bounded-choice canary remains 22/24 and is still useful as a regression gate.",
+    "current_strict_surface_failure": "Both 100M and Gemma score 0/54 exact and semantic on the current generation-only strict successor surface.",
+    "root_cause": "The strict successor rows use long source-backed opaque target strings with no candidate-option contract, making exact generation a poor interface and bounded semantic scoring unavailable."
+  },
+  "promotion_gate_for_next_run": [
+    "No regression on the repaired 24-row v2.7 canary",
+    "Improvement over 0/54 on the rebuilt strict successor slice",
+    "Same-manifest Gemma comparison on the rebuilt strict successor slice",
+    "Leak audit clean for canonical target codes"
+  ],
+  "requested_rebuild": {
+    "requirements": [
+      "Reuse the stage10555 strict rows and root-heldout split discipline",
+      "Map each strict target to a short canonical exact output such as a reversible code or compact canonical token sequence",
+      "Store a reversible target-map artifact that links canonical outputs back to the source-backed target text",
+      "Ensure the visible prompt does not contain the canonical output code directly",
+      "Preserve target-subtype coverage across decisive_evidence_top1, retrieve_answer_abstain, and verifier_outcome_masked",
+      "Emit an anti-cheat audit specifically for prompt-to-canonical-target leakage",
+      "Emit both exact scoring on canonical outputs and semantic scoring on the reconstructed source-backed values"
+    ],
+    "surface_name": "canonical_short_target_successor_v1"
+  },
+  "stage": 10560,
+  "stage_name": "stage10560_canonical_short_target_successor_request"
+}

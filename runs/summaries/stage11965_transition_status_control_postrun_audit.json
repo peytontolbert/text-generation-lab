@@ -1,0 +1,1030 @@
+{
+  "claim_boundary": [
+    "Stage11964 is diagnostic unless it improves old transition and status/control heldout while preserving compact gates.",
+    "Counterfactual rows remain train-support only and do not add independent source-heldout roots.",
+    "Milestone-decomposition policy should be a separate projection lane after this audit, not mixed into this scorer decision."
+  ],
+  "created_at_utc": "2026-07-14T18:34:33Z",
+  "decision": "reject_transition_status_control_candidate",
+  "device": "cuda:0",
+  "gates": {
+    "aug_strict_improves_stage11924": false,
+    "aug_validation_improves_stage11924": false,
+    "filtered_strict_22": true,
+    "filtered_validation_at_least_20": true,
+    "old_canary_strict_23": true,
+    "old_canary_validation_at_least_21": true,
+    "old_transition_at_least_stage11924_364": false,
+    "old_transition_beats_gemma_386": false,
+    "residual_at_least_7": true,
+    "source_heldout_smoke_at_least_6": true,
+    "status_strict_improves_stage11924": false,
+    "status_validation_improves_stage11924": false
+  },
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11965_transition_status_control_postrun_audit",
+    "summary": "runs/local/artifacts/stage11965_transition_status_control_postrun_audit/transition_status_control_postrun_audit.json"
+  },
+  "results": {
+    "stage11924_selected_transition": {
+      "aug_strict_eval": {
+        "by_language_family": {
+          "rust": {
+            "accuracy": 0.3333333333333333,
+            "correct": 4,
+            "rows": 12
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.34593023255813954,
+            "correct": 119,
+            "rows": 344
+          }
+        },
+        "by_task_type": {
+          "transition_candidate_selection": {
+            "accuracy": 0.3146067415730337,
+            "correct": 28,
+            "rows": 89
+          },
+          "transition_continue_or_stop": {
+            "accuracy": 0.8876404494382022,
+            "correct": 79,
+            "rows": 89
+          },
+          "transition_next_action": {
+            "accuracy": 0.1797752808988764,
+            "correct": 16,
+            "rows": 89
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "rows": 89
+          }
+        },
+        "metric": {
+          "accuracy": 0.3455056179775281,
+          "correct": 123,
+          "coverage": 1.0,
+          "miss_count": 233,
+          "rows": 356
+        }
+      },
+      "aug_train": {
+        "by_language_family": {
+          "c_cpp": {
+            "accuracy": 0.09975961538461539,
+            "correct": 83,
+            "rows": 832
+          },
+          "python": {
+            "accuracy": 0.17279411764705882,
+            "correct": 141,
+            "rows": 816
+          },
+          "rust": {
+            "accuracy": 0.20614035087719298,
+            "correct": 188,
+            "rows": 912
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.14220183486238533,
+            "correct": 372,
+            "rows": 2616
+          }
+        },
+        "by_task_type": {
+          "transition_candidate_selection": {
+            "accuracy": 0.15301391035548687,
+            "correct": 198,
+            "rows": 1294
+          },
+          "transition_continue_or_stop": {
+            "accuracy": 0.3029366306027821,
+            "correct": 392,
+            "rows": 1294
+          },
+          "transition_next_action": {
+            "accuracy": 0.07109737248840804,
+            "correct": 92,
+            "rows": 1294
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.07882534775888717,
+            "correct": 102,
+            "rows": 1294
+          }
+        },
+        "metric": {
+          "accuracy": 0.15146831530139104,
+          "correct": 784,
+          "coverage": 1.0,
+          "miss_count": 4392,
+          "rows": 5176
+        }
+      },
+      "aug_validation": {
+        "by_language_family": {
+          "python": {
+            "accuracy": 0.75,
+            "correct": 12,
+            "rows": 16
+          },
+          "rust": {
+            "accuracy": 0.3333333333333333,
+            "correct": 8,
+            "rows": 24
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.34134615384615385,
+            "correct": 71,
+            "rows": 208
+          }
+        },
+        "by_task_type": {
+          "transition_candidate_selection": {
+            "accuracy": 0.3064516129032258,
+            "correct": 19,
+            "rows": 62
+          },
+          "transition_continue_or_stop": {
+            "accuracy": 0.9193548387096774,
+            "correct": 57,
+            "rows": 62
+          },
+          "transition_next_action": {
+            "accuracy": 0.12903225806451613,
+            "correct": 8,
+            "rows": 62
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.11290322580645161,
+            "correct": 7,
+            "rows": 62
+          }
+        },
+        "metric": {
+          "accuracy": 0.36693548387096775,
+          "correct": 91,
+          "coverage": 1.0,
+          "miss_count": 157,
+          "rows": 248
+        }
+      },
+      "old_transition_640": {
+        "by_language_family": {
+          "c_cpp": {
+            "accuracy": 0.32421875,
+            "correct": 83,
+            "rows": 256
+          },
+          "python": {
+            "accuracy": 0.734375,
+            "correct": 141,
+            "rows": 192
+          },
+          "rust": {
+            "accuracy": 0.7291666666666666,
+            "correct": 140,
+            "rows": 192
+          }
+        },
+        "by_task_type": {
+          "transition_candidate_selection": {
+            "accuracy": 0.55625,
+            "correct": 89,
+            "rows": 160
+          },
+          "transition_continue_or_stop": {
+            "accuracy": 0.8,
+            "correct": 128,
+            "rows": 160
+          },
+          "transition_next_action": {
+            "accuracy": 0.31875,
+            "correct": 51,
+            "rows": 160
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.6,
+            "correct": 96,
+            "rows": 160
+          }
+        },
+        "metric": {
+          "accuracy": 0.56875,
+          "correct": 364,
+          "coverage": 1.0,
+          "miss_count": 276,
+          "rows": 640
+        }
+      },
+      "protected_filtered_strict": {
+        "metric": {
+          "accuracy": 1.0,
+          "correct": 22,
+          "coverage": 1.0,
+          "miss_count": 0,
+          "rows": 22
+        }
+      },
+      "protected_filtered_validation": {
+        "metric": {
+          "accuracy": 0.9090909090909091,
+          "correct": 20,
+          "coverage": 1.0,
+          "miss_count": 2,
+          "rows": 22
+        }
+      },
+      "protected_old_canary_strict": {
+        "metric": {
+          "accuracy": 1.0,
+          "correct": 23,
+          "coverage": 1.0,
+          "miss_count": 0,
+          "rows": 23
+        }
+      },
+      "protected_old_canary_validation": {
+        "metric": {
+          "accuracy": 0.9130434782608695,
+          "correct": 21,
+          "coverage": 1.0,
+          "miss_count": 2,
+          "rows": 23
+        }
+      },
+      "protected_residual_bank": {
+        "metric": {
+          "accuracy": 0.7,
+          "correct": 7,
+          "coverage": 1.0,
+          "miss_count": 3,
+          "rows": 10
+        }
+      },
+      "protected_verifier_grounded_source_heldout_smoke": {
+        "metric": {
+          "accuracy": 0.5,
+          "correct": 6,
+          "coverage": 1.0,
+          "miss_count": 6,
+          "rows": 12
+        }
+      },
+      "status_strict_eval": {
+        "by_language_family": {
+          "rust": {
+            "accuracy": 0.5,
+            "correct": 3,
+            "rows": 6
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.4418604651162791,
+            "correct": 76,
+            "rows": 172
+          }
+        },
+        "by_task_type": {
+          "transition_continue_or_stop": {
+            "accuracy": 0.8876404494382022,
+            "correct": 79,
+            "rows": 89
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "rows": 89
+          }
+        },
+        "metric": {
+          "accuracy": 0.4438202247191011,
+          "correct": 79,
+          "coverage": 1.0,
+          "miss_count": 99,
+          "rows": 178
+        }
+      },
+      "status_train": {
+        "by_language_family": {
+          "c_cpp": {
+            "accuracy": 0.07692307692307693,
+            "correct": 32,
+            "rows": 416
+          },
+          "python": {
+            "accuracy": 0.23529411764705882,
+            "correct": 96,
+            "rows": 408
+          },
+          "rust": {
+            "accuracy": 0.2894736842105263,
+            "correct": 132,
+            "rows": 456
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.17889908256880735,
+            "correct": 234,
+            "rows": 1308
+          }
+        },
+        "by_task_type": {
+          "transition_continue_or_stop": {
+            "accuracy": 0.3029366306027821,
+            "correct": 392,
+            "rows": 1294
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.07882534775888717,
+            "correct": 102,
+            "rows": 1294
+          }
+        },
+        "metric": {
+          "accuracy": 0.19088098918083463,
+          "correct": 494,
+          "coverage": 1.0,
+          "miss_count": 2094,
+          "rows": 2588
+        }
+      },
+      "status_validation": {
+        "by_language_family": {
+          "python": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "rows": 8
+          },
+          "rust": {
+            "accuracy": 0.5,
+            "correct": 6,
+            "rows": 12
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.4807692307692308,
+            "correct": 50,
+            "rows": 104
+          }
+        },
+        "by_task_type": {
+          "transition_continue_or_stop": {
+            "accuracy": 0.9193548387096774,
+            "correct": 57,
+            "rows": 62
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.11290322580645161,
+            "correct": 7,
+            "rows": 62
+          }
+        },
+        "metric": {
+          "accuracy": 0.5161290322580645,
+          "correct": 64,
+          "coverage": 1.0,
+          "miss_count": 60,
+          "rows": 124
+        }
+      },
+      "transition_scorer": "encoder_option_retrieval_semantic_candidate_head"
+    },
+    "stage11964_status_control": {
+      "aug_strict_eval": {
+        "by_language_family": {
+          "rust": {
+            "accuracy": 0.08333333333333333,
+            "correct": 1,
+            "rows": 12
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.16279069767441862,
+            "correct": 56,
+            "rows": 344
+          }
+        },
+        "by_task_type": {
+          "transition_candidate_selection": {
+            "accuracy": 0.3146067415730337,
+            "correct": 28,
+            "rows": 89
+          },
+          "transition_continue_or_stop": {
+            "accuracy": 0.11235955056179775,
+            "correct": 10,
+            "rows": 89
+          },
+          "transition_next_action": {
+            "accuracy": 0.1797752808988764,
+            "correct": 16,
+            "rows": 89
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.033707865168539325,
+            "correct": 3,
+            "rows": 89
+          }
+        },
+        "metric": {
+          "accuracy": 0.1601123595505618,
+          "correct": 57,
+          "coverage": 1.0,
+          "miss_count": 299,
+          "rows": 356
+        }
+      },
+      "aug_train": {
+        "by_language_family": {
+          "c_cpp": {
+            "accuracy": 0.34975961538461536,
+            "correct": 291,
+            "rows": 832
+          },
+          "python": {
+            "accuracy": 0.31004901960784315,
+            "correct": 253,
+            "rows": 816
+          },
+          "rust": {
+            "accuracy": 0.2719298245614035,
+            "correct": 248,
+            "rows": 912
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.36926605504587157,
+            "correct": 966,
+            "rows": 2616
+          }
+        },
+        "by_task_type": {
+          "transition_candidate_selection": {
+            "accuracy": 0.15301391035548687,
+            "correct": 198,
+            "rows": 1294
+          },
+          "transition_continue_or_stop": {
+            "accuracy": 0.6970633693972179,
+            "correct": 902,
+            "rows": 1294
+          },
+          "transition_next_action": {
+            "accuracy": 0.07109737248840804,
+            "correct": 92,
+            "rows": 1294
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.437403400309119,
+            "correct": 566,
+            "rows": 1294
+          }
+        },
+        "metric": {
+          "accuracy": 0.33964451313755795,
+          "correct": 1758,
+          "coverage": 1.0,
+          "miss_count": 3418,
+          "rows": 5176
+        }
+      },
+      "aug_validation": {
+        "by_language_family": {
+          "python": {
+            "accuracy": 0.25,
+            "correct": 4,
+            "rows": 16
+          },
+          "rust": {
+            "accuracy": 0.08333333333333333,
+            "correct": 2,
+            "rows": 24
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.12980769230769232,
+            "correct": 27,
+            "rows": 208
+          }
+        },
+        "by_task_type": {
+          "transition_candidate_selection": {
+            "accuracy": 0.3064516129032258,
+            "correct": 19,
+            "rows": 62
+          },
+          "transition_continue_or_stop": {
+            "accuracy": 0.08064516129032258,
+            "correct": 5,
+            "rows": 62
+          },
+          "transition_next_action": {
+            "accuracy": 0.12903225806451613,
+            "correct": 8,
+            "rows": 62
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.016129032258064516,
+            "correct": 1,
+            "rows": 62
+          }
+        },
+        "metric": {
+          "accuracy": 0.13306451612903225,
+          "correct": 33,
+          "coverage": 1.0,
+          "miss_count": 215,
+          "rows": 248
+        }
+      },
+      "old_transition_640": {
+        "by_language_family": {
+          "c_cpp": {
+            "accuracy": 0.38671875,
+            "correct": 99,
+            "rows": 256
+          },
+          "python": {
+            "accuracy": 0.234375,
+            "correct": 45,
+            "rows": 192
+          },
+          "rust": {
+            "accuracy": 0.22916666666666666,
+            "correct": 44,
+            "rows": 192
+          }
+        },
+        "by_task_type": {
+          "transition_candidate_selection": {
+            "accuracy": 0.55625,
+            "correct": 89,
+            "rows": 160
+          },
+          "transition_continue_or_stop": {
+            "accuracy": 0.2,
+            "correct": 32,
+            "rows": 160
+          },
+          "transition_next_action": {
+            "accuracy": 0.31875,
+            "correct": 51,
+            "rows": 160
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.1,
+            "correct": 16,
+            "rows": 160
+          }
+        },
+        "metric": {
+          "accuracy": 0.29375,
+          "correct": 188,
+          "coverage": 1.0,
+          "miss_count": 452,
+          "rows": 640
+        }
+      },
+      "protected_filtered_strict": {
+        "metric": {
+          "accuracy": 1.0,
+          "correct": 22,
+          "coverage": 1.0,
+          "miss_count": 0,
+          "rows": 22
+        }
+      },
+      "protected_filtered_validation": {
+        "metric": {
+          "accuracy": 0.9090909090909091,
+          "correct": 20,
+          "coverage": 1.0,
+          "miss_count": 2,
+          "rows": 22
+        }
+      },
+      "protected_old_canary_strict": {
+        "metric": {
+          "accuracy": 1.0,
+          "correct": 23,
+          "coverage": 1.0,
+          "miss_count": 0,
+          "rows": 23
+        }
+      },
+      "protected_old_canary_validation": {
+        "metric": {
+          "accuracy": 0.9130434782608695,
+          "correct": 21,
+          "coverage": 1.0,
+          "miss_count": 2,
+          "rows": 23
+        }
+      },
+      "protected_residual_bank": {
+        "metric": {
+          "accuracy": 0.7,
+          "correct": 7,
+          "coverage": 1.0,
+          "miss_count": 3,
+          "rows": 10
+        }
+      },
+      "protected_verifier_grounded_source_heldout_smoke": {
+        "metric": {
+          "accuracy": 0.5,
+          "correct": 6,
+          "coverage": 1.0,
+          "miss_count": 6,
+          "rows": 12
+        }
+      },
+      "status_strict_eval": {
+        "by_language_family": {
+          "rust": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "rows": 6
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.0755813953488372,
+            "correct": 13,
+            "rows": 172
+          }
+        },
+        "by_task_type": {
+          "transition_continue_or_stop": {
+            "accuracy": 0.11235955056179775,
+            "correct": 10,
+            "rows": 89
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.033707865168539325,
+            "correct": 3,
+            "rows": 89
+          }
+        },
+        "metric": {
+          "accuracy": 0.07303370786516854,
+          "correct": 13,
+          "coverage": 1.0,
+          "miss_count": 165,
+          "rows": 178
+        }
+      },
+      "status_train": {
+        "by_language_family": {
+          "c_cpp": {
+            "accuracy": 0.5769230769230769,
+            "correct": 240,
+            "rows": 416
+          },
+          "python": {
+            "accuracy": 0.5098039215686274,
+            "correct": 208,
+            "rows": 408
+          },
+          "rust": {
+            "accuracy": 0.42105263157894735,
+            "correct": 192,
+            "rows": 456
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.6330275229357798,
+            "correct": 828,
+            "rows": 1308
+          }
+        },
+        "by_task_type": {
+          "transition_continue_or_stop": {
+            "accuracy": 0.6970633693972179,
+            "correct": 902,
+            "rows": 1294
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.437403400309119,
+            "correct": 566,
+            "rows": 1294
+          }
+        },
+        "metric": {
+          "accuracy": 0.5672333848531684,
+          "correct": 1468,
+          "coverage": 1.0,
+          "miss_count": 1120,
+          "rows": 2588
+        }
+      },
+      "status_validation": {
+        "by_language_family": {
+          "python": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "rows": 8
+          },
+          "rust": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "rows": 12
+          },
+          "web_js_ts_html": {
+            "accuracy": 0.057692307692307696,
+            "correct": 6,
+            "rows": 104
+          }
+        },
+        "by_task_type": {
+          "transition_continue_or_stop": {
+            "accuracy": 0.08064516129032258,
+            "correct": 5,
+            "rows": 62
+          },
+          "transition_verifier_transition": {
+            "accuracy": 0.016129032258064516,
+            "correct": 1,
+            "rows": 62
+          }
+        },
+        "metric": {
+          "accuracy": 0.04838709677419355,
+          "correct": 6,
+          "coverage": 1.0,
+          "miss_count": 118,
+          "rows": 124
+        }
+      },
+      "transition_scorer": "encoder_option_retrieval_semantic_plus_transition_status_head"
+    }
+  },
+  "runtime_initialization": {
+    "stage11924_selected_transition": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_semantic_candidate_head",
+        "bounded_choice_contrast_margin": 0.08,
+        "bounded_choice_contrast_weight": 0.3,
+        "bounded_choice_root_group_aux_weight": 0.0,
+        "bounded_choice_same_role_listwise_weight": 0.5,
+        "bounded_choice_train_head_only": true,
+        "bounded_choice_verifier_value_listwise_weight": 0.7,
+        "bounded_decoder_train_sampler": "task_balanced",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 280,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/model_state.pt",
+      "weights_sha256": "13bd2cf952d86261593c5044d59018084bdb1675feed57d72b7300fe5d256c88"
+    },
+    "stage11964_status_control": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head",
+        "bounded_choice_transition_status_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11964_transition_status_control_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_transition_status_head",
+        "bounded_choice_contrast_margin": 0.08,
+        "bounded_choice_contrast_weight": 0.0,
+        "bounded_choice_root_group_aux_weight": 0.0,
+        "bounded_choice_same_role_listwise_weight": 0.4,
+        "bounded_choice_train_head_only": true,
+        "bounded_choice_verifier_value_listwise_weight": 1.2,
+        "bounded_decoder_train_sampler": "task_balanced",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11964_transition_status_control_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 284,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11964_transition_status_control_probe/runtime_model/model_state.pt",
+      "weights_sha256": "70e8efb78d70ddf7fcce3b646f766df3535ba3b310967ced0341b40761feaddf"
+    }
+  },
+  "scoreboard": {
+    "stage11924_selected_transition": {
+      "aug_strict_eval": {
+        "accuracy": 0.3455056179775281,
+        "correct": 123,
+        "coverage": 1.0,
+        "miss_count": 233,
+        "rows": 356
+      },
+      "aug_train": {
+        "accuracy": 0.15146831530139104,
+        "correct": 784,
+        "coverage": 1.0,
+        "miss_count": 4392,
+        "rows": 5176
+      },
+      "aug_validation": {
+        "accuracy": 0.36693548387096775,
+        "correct": 91,
+        "coverage": 1.0,
+        "miss_count": 157,
+        "rows": 248
+      },
+      "filtered_strict": {
+        "accuracy": 1.0,
+        "correct": 22,
+        "coverage": 1.0,
+        "miss_count": 0,
+        "rows": 22
+      },
+      "filtered_validation": {
+        "accuracy": 0.9090909090909091,
+        "correct": 20,
+        "coverage": 1.0,
+        "miss_count": 2,
+        "rows": 22
+      },
+      "old_canary_strict": {
+        "accuracy": 1.0,
+        "correct": 23,
+        "coverage": 1.0,
+        "miss_count": 0,
+        "rows": 23
+      },
+      "old_canary_validation": {
+        "accuracy": 0.9130434782608695,
+        "correct": 21,
+        "coverage": 1.0,
+        "miss_count": 2,
+        "rows": 23
+      },
+      "old_transition_640": {
+        "accuracy": 0.56875,
+        "correct": 364,
+        "coverage": 1.0,
+        "miss_count": 276,
+        "rows": 640
+      },
+      "residual_bank": {
+        "accuracy": 0.7,
+        "correct": 7,
+        "coverage": 1.0,
+        "miss_count": 3,
+        "rows": 10
+      },
+      "source_heldout_smoke": {
+        "accuracy": 0.5,
+        "correct": 6,
+        "coverage": 1.0,
+        "miss_count": 6,
+        "rows": 12
+      },
+      "status_strict_eval": {
+        "accuracy": 0.4438202247191011,
+        "correct": 79,
+        "coverage": 1.0,
+        "miss_count": 99,
+        "rows": 178
+      },
+      "status_train": {
+        "accuracy": 0.19088098918083463,
+        "correct": 494,
+        "coverage": 1.0,
+        "miss_count": 2094,
+        "rows": 2588
+      },
+      "status_validation": {
+        "accuracy": 0.5161290322580645,
+        "correct": 64,
+        "coverage": 1.0,
+        "miss_count": 60,
+        "rows": 124
+      },
+      "transition_scorer": "encoder_option_retrieval_semantic_candidate_head"
+    },
+    "stage11964_status_control": {
+      "aug_strict_eval": {
+        "accuracy": 0.1601123595505618,
+        "correct": 57,
+        "coverage": 1.0,
+        "miss_count": 299,
+        "rows": 356
+      },
+      "aug_train": {
+        "accuracy": 0.33964451313755795,
+        "correct": 1758,
+        "coverage": 1.0,
+        "miss_count": 3418,
+        "rows": 5176
+      },
+      "aug_validation": {
+        "accuracy": 0.13306451612903225,
+        "correct": 33,
+        "coverage": 1.0,
+        "miss_count": 215,
+        "rows": 248
+      },
+      "filtered_strict": {
+        "accuracy": 1.0,
+        "correct": 22,
+        "coverage": 1.0,
+        "miss_count": 0,
+        "rows": 22
+      },
+      "filtered_validation": {
+        "accuracy": 0.9090909090909091,
+        "correct": 20,
+        "coverage": 1.0,
+        "miss_count": 2,
+        "rows": 22
+      },
+      "old_canary_strict": {
+        "accuracy": 1.0,
+        "correct": 23,
+        "coverage": 1.0,
+        "miss_count": 0,
+        "rows": 23
+      },
+      "old_canary_validation": {
+        "accuracy": 0.9130434782608695,
+        "correct": 21,
+        "coverage": 1.0,
+        "miss_count": 2,
+        "rows": 23
+      },
+      "old_transition_640": {
+        "accuracy": 0.29375,
+        "correct": 188,
+        "coverage": 1.0,
+        "miss_count": 452,
+        "rows": 640
+      },
+      "residual_bank": {
+        "accuracy": 0.7,
+        "correct": 7,
+        "coverage": 1.0,
+        "miss_count": 3,
+        "rows": 10
+      },
+      "source_heldout_smoke": {
+        "accuracy": 0.5,
+        "correct": 6,
+        "coverage": 1.0,
+        "miss_count": 6,
+        "rows": 12
+      },
+      "status_strict_eval": {
+        "accuracy": 0.07303370786516854,
+        "correct": 13,
+        "coverage": 1.0,
+        "miss_count": 165,
+        "rows": 178
+      },
+      "status_train": {
+        "accuracy": 0.5672333848531684,
+        "correct": 1468,
+        "coverage": 1.0,
+        "miss_count": 1120,
+        "rows": 2588
+      },
+      "status_validation": {
+        "accuracy": 0.04838709677419355,
+        "correct": 6,
+        "coverage": 1.0,
+        "miss_count": 118,
+        "rows": 124
+      },
+      "transition_scorer": "encoder_option_retrieval_semantic_plus_transition_status_head"
+    }
+  },
+  "source_artifacts": {
+    "augmented_rows": "runs/local/artifacts/stage11958_transition_5k_v1_augmented_package/transition_projection_rows_5k_v1_augmented.jsonl",
+    "old_rows": "runs/local/artifacts/stage11897_transition_record_projection_rows/transition_projection_rows.jsonl",
+    "protected_rowsets": {
+      "filtered_strict": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+      "filtered_validation": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_validation.jsonl",
+      "old_canary_strict": "runs/local/artifacts/stage11429_selected_test_rust_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+      "old_canary_validation": "runs/local/artifacts/stage11429_selected_test_rust_support_package/agentkernel_lite_encdec_validation.jsonl",
+      "residual_bank": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/semantic_candidate_residual_bank.jsonl",
+      "verifier_grounded_source_heldout_smoke": "runs/local/artifacts/stage11740_verifier_grounded_source_heldout_successor_score/verifier_grounded_successor_rows.jsonl"
+    },
+    "runtimes": {
+      "stage11924_selected_transition": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+      "stage11964_status_control": "runs/local/artifacts/stage11964_transition_status_control_probe/runtime_model/runtime_model_bundle.json"
+    },
+    "status_manifest": "runs/local/artifacts/stage11963_transition_status_control_probe_request/transition_status_control_manifest.jsonl"
+  },
+  "stage": 11965,
+  "stage_name": "stage11965_transition_status_control_postrun_audit"
+}

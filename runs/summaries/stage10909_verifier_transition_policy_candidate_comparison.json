@@ -1,0 +1,60 @@
+{
+  "claim_scope": [
+    "Compare the current retrieval policy against the decoder-on-transition-only interface candidate on the fresh Python verifier-transition slice, with Gemma held fixed.",
+    "Confirm that the interface candidate does not alter the existing cleaned multilingual canary surface because that surface contains no verifier_outcome_semantic_transition rows."
+  ],
+  "created_at_utc": "2026-07-12T18:48:24Z",
+  "findings": [
+    "The decoder-on-transition-only interface candidate improves the fresh Python verifier-transition slice from 1/2 to 2/2 for the 100M model while Gemma remains 0/2.",
+    "The candidate policy leaves the regression-check eval surface unchanged because it only affects verifier_outcome_semantic_transition rows and none are present in the cleaned canary strict pack.",
+    "This is a narrow scoring-interface candidate, not a broad standalone victory upgrade; evidence_citation remains the main multilingual weak family."
+  ],
+  "headline": {
+    "cleaned_canary_regression_check": {
+      "candidate_eval_accuracy_on_canary_check_surface": 0.9130434782608695,
+      "current_eval_accuracy_on_canary_check_surface": 0.9130434782608695,
+      "semantic_transition_rows_present": 0,
+      "surface_rows": 23
+    },
+    "fresh_python_verifier_slice": {
+      "gemma12b_accuracy": 0.0,
+      "gemma12b_correct": 0,
+      "hundred_m_after_accuracy": 1.0,
+      "hundred_m_after_correct": 2,
+      "hundred_m_before_accuracy": 0.5,
+      "hundred_m_before_correct": 1,
+      "rows": 2
+    }
+  },
+  "next_best_step": "Adopt decoder-on-transition-only as an explicit scored-interface candidate for verifier_outcome_semantic_transition rows, then run the same-policy boundary wherever Gemma is compared on fresh verifier-transition successors.",
+  "passed": true,
+  "slice_rows": [
+    {
+      "gemma12b": "B",
+      "gemma12b_correct": false,
+      "hundred_m_after": "A",
+      "hundred_m_after_correct": true,
+      "hundred_m_before": "C",
+      "hundred_m_before_correct": false,
+      "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "target": "A"
+    },
+    {
+      "gemma12b": "B",
+      "gemma12b_correct": false,
+      "hundred_m_after": "A",
+      "hundred_m_after_correct": true,
+      "hundred_m_before": "A",
+      "hundred_m_before_correct": true,
+      "row_id": "stage10900::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "target": "A"
+    }
+  ],
+  "source_artifacts": {
+    "canary_strict_rows": "runs/local/artifacts/stage10881_evidence_alias_quarantine_successor/agentkernel_lite_encdec_strict_eval.jsonl",
+    "policy_audit": "runs/local/artifacts/stage10908_verifier_transition_policy_audit/verifier_transition_policy_audit.json",
+    "slice_comparison": "runs/local/artifacts/stage10903_python_verifier_transition_candidate_slice_comparison/python_verifier_transition_candidate_slice_comparison.json"
+  },
+  "stage": 10909,
+  "stage_name": "stage10909_verifier_transition_policy_candidate_comparison"
+}

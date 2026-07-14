@@ -1,0 +1,46 @@
+{
+  "claim_boundary": [
+    "Current selected compact product policy remains Stage11507 plus Stage11709.",
+    "Stage11724 does not change the selected frontier.",
+    "This stage narrows the source-heldout status: C++ smoke admission exists, but current 100M does not solve it."
+  ],
+  "created_at_utc": "2026-07-14T07:19:19Z",
+  "decision": "admitted_source_heldout_smoke_failed_by_current_100m_preserve_as_failure_canary",
+  "gates": {
+    "all_diagnostic_scorers_abstain": true,
+    "compact_smoke_admitted": true,
+    "gemma_same_manifest_attached": false,
+    "stage11507_all_correct": false,
+    "stage11507_scored_full_coverage": true
+  },
+  "interpretation": [
+    "The new sentencepiece root is useful because it is exact new-root/source-snapshot attested and leak-clean after rendering.",
+    "It is not evidence of source-heldout 100M superiority: Stage11507 scores 0/4 and every tested scorer chooses abstain.",
+    "The failure is likely a mix of true source-heldout weakness and row geometry: every row offers abstain while verifier evidence is static selected-test anchoring, not executed verifier output.",
+    "Do not train on this strict smoke root unless it is explicitly demoted to support after a split/claim decision."
+  ],
+  "next_actions": [
+    "Materialize executable sentencepiece verifier output or rebuild the packet as explicit selected-test-anchor classification without an abstain option.",
+    "Run Gemma same-manifest only through a GPU2-safe backend; avoid using the existing GPU1 Ollama service for this run.",
+    "Create at least one Python and one Rust source-heldout smoke root before any multilingual source-heldout claim.",
+    "Use this C++ root as a source-heldout failure canary for future model/scorer improvements."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11724_sentencepiece_cpp_source_heldout_decision/sentencepiece_cpp_source_heldout_decision.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "hundred_m_score": "runs/local/artifacts/stage11722_sentencepiece_cpp_source_heldout_100m_score/sentencepiece_cpp_source_heldout_100m_score.json",
+    "preflight": "runs/local/artifacts/stage11721_sentencepiece_cpp_source_heldout_smoke_preflight/sentencepiece_cpp_source_heldout_smoke_preflight.json",
+    "scorer_diagnostic": "runs/local/artifacts/stage11723_sentencepiece_cpp_source_heldout_scorer_diagnostic/sentencepiece_cpp_source_heldout_scorer_diagnostic.json"
+  },
+  "stage": 11724,
+  "stage_name": "stage11724_sentencepiece_cpp_source_heldout_decision",
+  "status": {
+    "compact_admission": "admitted",
+    "diagnostic_scorer_pattern": "all_tested_scorers_predict_abstain",
+    "full_product": "not_ready",
+    "gemma_same_manifest": "not_run_gpu2_safe_backend_required",
+    "hundred_m_source_heldout_smoke": "0/4"
+  }
+}

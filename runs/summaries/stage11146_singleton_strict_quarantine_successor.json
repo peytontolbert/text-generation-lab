@@ -1,0 +1,63 @@
+{
+  "claim_scope": "This successor only fixes strict denominator hygiene. It is not a new model-capability result until the current 100M and Gemma are rerun or rescored on the cleaned strict split.",
+  "created_at_utc": "2026-07-13T05:38:34.826739+00:00",
+  "decision": "strict_successor_ready_for_discrimination_eval",
+  "metrics": {
+    "quarantined_by_language": {
+      "rust": 1
+    },
+    "quarantined_by_task": {
+      "verifier_outcome": 1
+    },
+    "stress_rows": 7,
+    "strict_by_language_after": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 4,
+      "web_js_ts_html": 6
+    },
+    "strict_by_language_before": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "strict_rows_after": 22,
+    "strict_rows_before": 23,
+    "strict_singleton_quarantined": 1,
+    "train_rows": 376,
+    "validation_rows": 23
+  },
+  "outputs": {
+    "quarantined_jsonl": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/quarantined_singleton_strict_rows.jsonl",
+    "stress_jsonl": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_jsonl": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/singleton_strict_quarantine_successor.json",
+    "train_jsonl": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_train.jsonl",
+    "validation_jsonl": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "quarantined_rows": [
+    {
+      "language_family": "rust",
+      "opaque_options": [
+        {
+          "label": "A",
+          "value": "tokenizers/examples/unstable_wasm/tests/web.rs"
+        }
+      ],
+      "option_count": 1,
+      "repo_family": "tokenizers",
+      "repo_id": "tokenizers",
+      "row_id": "stage10126::tokenizers::tokenizers::rust::verifier_outcome::reviewed_v27_compact",
+      "source_root_id": "stage10126::tokenizers::tokenizers::rust",
+      "target_text": "A",
+      "task_type": "verifier_outcome"
+    }
+  ],
+  "source_artifacts": {
+    "base_package_dir": "runs/local/artifacts/stage11131_evidence_item_support_package",
+    "base_summary": "runs/local/artifacts/stage11131_evidence_item_support_package/evidence_item_support_package.json"
+  },
+  "stage": 11146,
+  "stage_name": "singleton_strict_quarantine_successor"
+}

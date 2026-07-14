@@ -1,0 +1,75 @@
+{
+  "base_policy_summary": {
+    "clean_strict_exact": 0.9545454545454546,
+    "clean_validation_exact": 0.8636363636363636,
+    "reserved_residual_exact": 0.5
+  },
+  "blocking_findings": [
+    {
+      "evidence": {
+        "base_clean_strict_exact": 0.9545454545454546,
+        "composite_clean_strict_exact": 0.8636363636363636,
+        "dynamic_clean_strict_exact": 0.8181818181818182
+      },
+      "finding": "Dynamic productized retrieval is not safe as a global evidence-citation scorer."
+    },
+    {
+      "evidence": {
+        "base_clean_strict_miss_rows": [
+          "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1"
+        ],
+        "composite_clean_strict_miss_rows": [
+          "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+          "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+          "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact"
+        ]
+      },
+      "finding": "The composite policy preserves the verifier-transition override but still regresses the cleaned strict surface."
+    },
+    {
+      "evidence": {
+        "base_reserved_exact": 0.5,
+        "composite_reserved_exact": 0.5
+      },
+      "finding": "The reserved residual evidence bank does not improve under the composite policy."
+    }
+  ],
+  "claim_scope": [
+    "Freeze the outcome of the stage11080 inference-side scorer audit.",
+    "Decide whether dynamic productized retrieval is promotable on the current standalone frontier."
+  ],
+  "composite_policy_summary": {
+    "clean_strict_exact": 0.8636363636363636,
+    "clean_validation_exact": 0.9090909090909091,
+    "definition": [
+      "verifier_outcome_semantic_transition -> decoder full-vocab top1",
+      "evidence_citation -> encoder_option_retrieval_dynamic_productized",
+      "all other task types -> encoder_option_retrieval"
+    ],
+    "reserved_residual_exact": 0.5
+  },
+  "created_at_utc": "2026-07-13T02:50:23.575526+00:00",
+  "decision": {
+    "current_contract_reference": [
+      "runs/local/artifacts/stage11073_cleaned_v27_scored_interface_contract_refresh/cleaned_v27_scored_interface_contract_refresh.json",
+      "runs/local/artifacts/stage11074_cleaned_v27_scored_interface_comparison_audit/cleaned_v27_scored_interface_comparison_audit.json"
+    ],
+    "keep_current_scored_interface_contract": true,
+    "promote_dynamic_productized_policy": false,
+    "reason": "Dynamic productized retrieval improves some evidence rows but regresses the cleaned strict canary, and the composite policy does not improve the reserved residual bank."
+  },
+  "dynamic_productized_summary": {
+    "clean_strict_exact": 0.8181818181818182,
+    "clean_validation_exact": 0.9090909090909091,
+    "reserved_residual_exact": 0.5
+  },
+  "input_audit": "runs/local/artifacts/stage11080_dynamic_productized_policy_audit/dynamic_productized_policy_audit.json",
+  "next_best_moves": [
+    "Keep the current verifier-only scored-interface boundary as the standalone promoted contract.",
+    "Pursue semantic evidence-candidate scoring or evidence-role-specific scorer heads instead of more inference routing tweaks.",
+    "Continue replenishing fresh non-aliased evidence roots before attempting another scorer promotion."
+  ],
+  "passed": true,
+  "stage": 11081,
+  "stage_name": "stage11081_dynamic_productized_policy_decision"
+}

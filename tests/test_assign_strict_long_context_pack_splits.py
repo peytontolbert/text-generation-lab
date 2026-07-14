@@ -10,12 +10,21 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 from assign_strict_long_context_pack_splits import assign_strict_long_context_pack_splits  # noqa: E402
 
 
-def _rows_for_pack(pack_id: str, retrieval_count: int, token_count: int) -> list[dict]:
+def _rows_for_pack(pack_id: str, retrieval_count: int, token_count: int, *, source_id: str = 'repo_a', source_type: str = 'local_repo') -> list[dict]:
+    context_rows = [
+        {
+            'chunk_id': f'{pack_id}_chunk_0',
+            'source_id': source_id,
+            'source_type': source_type,
+            'role': 'verification_constraint',
+        }
+    ]
     rows = [
         {
             'mixture_row_id': f'full_context_rows::full::{pack_id}',
             'mixture_surface': 'full_context_rows',
             'pack_id': pack_id,
+            'context_rows': context_rows,
             'metadata': json.dumps({'pack_token_count': token_count}, sort_keys=True),
         },
         {
@@ -40,7 +49,7 @@ def _rows_for_pack(pack_id: str, retrieval_count: int, token_count: int) -> list
 def test_assign_strict_long_context_pack_splits_creates_heldout_packs(tmp_path: Path) -> None:
     rows = []
     for idx, retrieval_count in enumerate([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]):
-        rows.extend(_rows_for_pack(f'pack_{idx}', retrieval_count, token_count=1000 - idx))
+        rows.extend(_rows_for_pack(f'pack_{idx}', retrieval_count, token_count=1000 - idx, source_id=f'repo_{idx}'))
     rows_path = tmp_path / 'rows.jsonl'
     rows_path.write_text('\n'.join(json.dumps(row, sort_keys=True) for row in rows) + '\n', encoding='utf-8')
 
@@ -53,15 +62,16 @@ def test_assign_strict_long_context_pack_splits_creates_heldout_packs(tmp_path: 
     for row in split_rows:
         split_by_pack.setdefault(row['pack_id'], row['effective_split'])
         assert split_by_pack[row['pack_id']] == row['effective_split']
+        assert row['pack_group_key']
     assert set(split_by_pack.values()) == {'train', 'eval', 'strict_eval'}
-    assert result['split_cards']['eval']['packs'] == 1
-    assert result['split_cards']['strict_eval']['packs'] == 1
+    assert result['split_cards']['eval']['packs'] >= 1
+    assert result['split_cards']['strict_eval']['packs'] >= 1
 
 
 def test_assign_strict_long_context_pack_splits_preserves_row_count(tmp_path: Path) -> None:
     rows = []
     for idx, retrieval_count in enumerate([6, 6, 6, 6, 6]):
-        rows.extend(_rows_for_pack(f'pack_{idx}', retrieval_count, token_count=1000 - idx))
+        rows.extend(_rows_for_pack(f'pack_{idx}', retrieval_count, token_count=1000 - idx, source_id=f'repo_{idx}'))
     rows_path = tmp_path / 'rows.jsonl'
     rows_path.write_text('\n'.join(json.dumps(row, sort_keys=True) for row in rows) + '\n', encoding='utf-8')
 
@@ -74,3 +84,28 @@ def test_assign_strict_long_context_pack_splits_preserves_row_count(tmp_path: Pa
     split_rows = [json.loads(line) for line in Path(result['rows_path']).read_text(encoding='utf-8').splitlines() if line.strip()]
     assert len(split_rows) == len(rows)
     assert sum(card['rows'] for card in result['split_cards'].values()) == len(rows)
+
+
+def test_assign_strict_long_context_pack_splits_keeps_same_family_together(tmp_path: Path) -> None:
+    rows = []
+    rows.extend(_rows_for_pack('lcp_pack_1_5000000_session_family_alpha_deadbeef01', 5, 5000, source_id='repo_shared'))
+    rows.extend(_rows_for_pack('lcp_pack_1_5500000_session_family_alpha_deadbeef02', 4, 4900, source_id='repo_shared'))
+    rows.extend(_rows_for_pack('lcp_pack_1_5000000_session_family_beta_deadbeef03', 4, 4800, source_id='repo_beta'))
+    rows.extend(_rows_for_pack('lcp_pack_1_5000000_session_family_gamma_deadbeef04', 4, 4700, source_id='repo_gamma'))
+    rows_path = tmp_path / 'rows.jsonl'
+    rows_path.write_text('\n'.join(json.dumps(row, sort_keys=True) for row in rows) + '\n', encoding='utf-8')
+
+    result = assign_strict_long_context_pack_splits(
+        rows_path=rows_path,
+        output_dir=tmp_path / 'out',
+        eval_ratio=0.25,
+        strict_ratio=0.25,
+    )
+    split_rows = [json.loads(line) for line in Path(result['rows_path']).read_text(encoding='utf-8').splitlines() if line.strip()]
+    split_by_pack = {}
+    group_by_pack = {}
+    for row in split_rows:
+        split_by_pack.setdefault(row['pack_id'], row['effective_split'])
+        group_by_pack.setdefault(row['pack_id'], row['pack_group_key'])
+    assert split_by_pack['lcp_pack_1_5000000_session_family_alpha_deadbeef01'] == split_by_pack['lcp_pack_1_5500000_session_family_alpha_deadbeef02']
+    assert group_by_pack['lcp_pack_1_5000000_session_family_alpha_deadbeef01'] == group_by_pack['lcp_pack_1_5500000_session_family_alpha_deadbeef02']

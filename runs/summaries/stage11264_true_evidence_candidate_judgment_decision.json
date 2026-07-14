@@ -1,0 +1,98 @@
+{
+  "created_at_utc": "2026-07-13T10:01:11Z",
+  "decision": "reject_stage11262_branch_keep_stage11200_frontier",
+  "interpretation": {
+    "current_frontier_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "probable_failure_mode": "The current generic option-retrieval scorer is not a suitable semantic evidence-candidate classifier. Even with root-disjoint single-candidate rows, it collapses to a class prior. The next aligned step is to add a trainable semantic classifier/ranking head for judgment labels or convert these rows into pairwise positive-vs-negative evidence comparisons with explicit binary targets, while continuing to recover C/C++ and stronger Rust/Web source supply.",
+    "stage11262_runtime_status": "diagnostic_negative_do_not_promote"
+  },
+  "key_metrics": {
+    "candidate_runtime_weights_sha256": "d89d70ab22c68fcfb6457f0e0a82ac3c3e0910431043b47602aa010b18298aff",
+    "gates": {
+      "product_clean_strict_22_of_22": true,
+      "product_clean_validation_at_least_20_of_23": true,
+      "product_judgment_strict_above_majority": false,
+      "product_judgment_validation_above_majority": false,
+      "product_residual_above_5_of_10": false,
+      "product_verifier_residual_nonzero": false
+    },
+    "product_scorer": "encoder_option_retrieval_verifier_conditioned",
+    "stage11263_product_postrun": {
+      "clean_strict": {
+        "correct": 22,
+        "exact_accuracy": 1.0,
+        "rows": 22,
+        "scored_rows": 22
+      },
+      "clean_validation": {
+        "correct": 20,
+        "exact_accuracy": 0.8695652173913043,
+        "rows": 23,
+        "scored_rows": 23
+      },
+      "judgment_strict": {
+        "correct": 29,
+        "exact_accuracy": 0.25,
+        "rows": 116,
+        "scored_rows": 116
+      },
+      "judgment_strict_by_gold": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 29,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 0,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 0,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 0
+      },
+      "judgment_validation": {
+        "correct": 28,
+        "exact_accuracy": 0.25,
+        "rows": 112,
+        "scored_rows": 112
+      },
+      "judgment_validation_by_gold": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 28,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 0,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 0,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 0
+      },
+      "residual": {
+        "correct": 5,
+        "exact_accuracy": 0.5,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "residual_by_gold": {
+        "candidate_change_surface": 3,
+        "symptom_or_call_path_analogue": 1,
+        "unknown": 1,
+        "verifier_and_test_constraint": 0
+      }
+    }
+  },
+  "next_required_work": [
+    "Keep Stage11200 as the current frontier runtime.",
+    "Do not promote Stage11262 or use it for headline comparison.",
+    "If probing this package again, change the objective/scorer rather than adding more rows: use a dedicated pooled classification head or pairwise binary candidate-validity scoring instead of generic option-text retrieval over class names.",
+    "Recover fresh C/C++ verifier/evidence source candidates because Stage11237/11259 still have zero clean C/C++ roots.",
+    "Treat Stage11259 as a useful audited dataset substrate, not as solved model progress."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11264_true_evidence_candidate_judgment_decision/true_evidence_candidate_judgment_decision.json"
+  },
+  "passed": true,
+  "reason": [
+    "Stage11259/11260 produced a cleaner candidate-evidence judgment package with no role-alias or target leaks, but Stage11262 did not improve the model frontier.",
+    "Clean strict remained 22/22 and clean validation remained 20/23, so preservation succeeded.",
+    "Residual stayed flat at 5/10 and verifier/test-constraint residual stayed 0/3, so the actual plateau did not move.",
+    "On Stage11259 validation/strict, the product scorer scored exactly 25% by predicting the decisive verifier/test class for every row; this is a new class-prior collapse, not evidence understanding.",
+    "Decoder-first-step did not rescue the branch and regressed clean canary scoring, so it is diagnostic only."
+  ],
+  "source_artifacts": {
+    "stage11259_package": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_package.json",
+    "stage11260_audit": "runs/local/artifacts/stage11260_true_evidence_candidate_judgment_audit/true_evidence_candidate_judgment_audit.json",
+    "stage11261_request": "runs/local/artifacts/stage11261_true_evidence_candidate_judgment_probe_request/true_evidence_candidate_judgment_probe_request.json",
+    "stage11262_runtime": "runs/local/artifacts/stage11262_true_evidence_candidate_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "stage11263_audit": "runs/local/artifacts/stage11263_true_evidence_candidate_judgment_postrun_audit/true_evidence_candidate_judgment_postrun_audit.json"
+  },
+  "stage": 11264,
+  "stage_name": "stage11264_true_evidence_candidate_judgment_decision"
+}

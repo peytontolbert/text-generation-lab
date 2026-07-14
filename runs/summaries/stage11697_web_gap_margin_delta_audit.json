@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-07-14T05:34:08Z",
+  "decision": "stage11695_moved_web_gap_predictions",
+  "gates": {
+    "all_13_rows_scored": true,
+    "any_correct_flip": true,
+    "any_prediction_changed": true,
+    "at_least_half_rows_margin_improved": false,
+    "mean_margin_improved": true
+  },
+  "metrics": {
+    "baseline_correct": 0,
+    "by_task": {
+      "minimal_fix_selection": 2,
+      "symptom_localization": 4,
+      "verifier_outcome": 7
+    },
+    "correct_flips": 3,
+    "margin_improved_rows": 6,
+    "margin_worsened_rows": 7,
+    "mean_target_margin_delta": 0.6748982965946198,
+    "prediction_changed_rows": 3,
+    "probe_correct": 3,
+    "rows": 13,
+    "wrong_flips": 0
+  },
+  "outputs": {
+    "row_cards": "runs/local/artifacts/stage11697_web_gap_margin_delta_audit/web_gap_margin_delta_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11697_web_gap_margin_delta_audit/web_gap_margin_delta_audit.json"
+  },
+  "recommended_next": [
+    "If margins did not move, stop adding same objective support rows; implement a verifier-transition/value-specific scorer head or listwise loss.",
+    "If margins moved but top-1 did not flip, lower learning rate is not the issue; train a calibrated head against hard heldout-style analogues and track target-vs-top-wrong margin.",
+    "Do not train on the 13 heldout margin rows."
+  ],
+  "runtime": {
+    "baseline_runtime": "runs/local/artifacts/stage11685_counterfactual_identity_semantic_head_fixed_probe/runtime_model/runtime_model_bundle.json",
+    "baseline_weights_sha256": "75b6582ad102efc8ce61c1f30978a32d5648056014bd852d6c4a17afcc7fe31e",
+    "probe_runtime": "runs/local/artifacts/stage11695_web_identity_gap_topup_probe/runtime_model/runtime_model_bundle.json",
+    "probe_weights_sha256": "e8bfe2887b64f7f97d9613c3af30e5b5a68dd11c0662980277d676fc124f6b10"
+  },
+  "source_artifacts": {
+    "bridged_rows": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit/original_web_canonical_bridged_rows.jsonl",
+    "gap_rows": "runs/local/artifacts/stage11692_web_bridged_miss_family_audit/web_bridged_gemma_margin_rows.jsonl"
+  },
+  "stage": 11697,
+  "stage_name": "stage11697_web_gap_margin_delta_audit"
+}

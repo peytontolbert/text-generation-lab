@@ -1,0 +1,56 @@
+{
+  "claim_scope": [
+    "Diagnostic package only: oversamples root-disjoint train-support evidence rows for roles where the clean residual bank loses to Gemma.",
+    "Does not train on clean residual successor bank rows.",
+    "Must be judged on clean strict preservation and same-manifest residual successor scoring after training."
+  ],
+  "created_at_utc": "2026-07-13T07:44:21Z",
+  "decision": "role_focused_support_package_ready",
+  "limits": [
+    "Replay duplicates make this diagnostic, not promotable training evidence by itself.",
+    "If this fails to move verifier/symptom roles, the next step is a scorer/objective change rather than more row duplication."
+  ],
+  "metrics": {
+    "added_by_gold_value": {
+      "candidate_change_surface": 23,
+      "symptom_or_call_path_analogue": 92,
+      "verifier_and_test_constraint": 92
+    },
+    "added_by_language": {
+      "c_cpp": 9,
+      "python": 81,
+      "rust": 54,
+      "web_js_ts_html": 63
+    },
+    "added_by_replay_kind": {
+      "candidate_control": 23,
+      "focus_role": 184
+    },
+    "added_rows": 207,
+    "added_unique_roots": 23,
+    "added_unique_source_rows": 69,
+    "base_train_rows": 501,
+    "control_source_rows": 23,
+    "eligible_support_rows": 69,
+    "focus_source_rows": 46,
+    "root_overlap_with_eval_or_residual": [],
+    "support_rows_total": 69,
+    "train_rows_after": 708
+  },
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage11198_role_focused_residual_support_package/added_role_focused_support_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11198_role_focused_residual_support_package/role_focused_residual_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "base_train": "runs/local/artifacts/stage11180_cleaned_plus_contract_evidence_support_package/agentkernel_lite_encdec_train.jsonl",
+    "residual_bank": "runs/local/artifacts/stage11195_clean_residual_successor_bank/clean_residual_successor_bank.jsonl",
+    "support_rows": "runs/local/artifacts/stage11178_contract_aware_evidence_rows/contract_aware_evidence_rows.jsonl"
+  },
+  "stage": 11198,
+  "stage_name": "stage11198_role_focused_residual_support_package"
+}

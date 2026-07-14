@@ -1,0 +1,72 @@
+{
+  "audits": {
+    "duplicate_row_id_count": 0,
+    "duplicate_row_ids": [],
+    "pre_options_target_value_leak_count": 0,
+    "pre_options_target_value_leaks": [],
+    "projection_failure_count": 0,
+    "projection_failures": []
+  },
+  "claim_boundary": [
+    "These rows are counterfactual train-support only.",
+    "They do not add independent roots and must not be counted as source-heldout promotion evidence.",
+    "They are valid for verifier-status, abstain, and continue/stop supervision because the prompt explicitly withholds or marks verifier evidence as non-exercising."
+  ],
+  "counts": {
+    "counterfactual_records": 830,
+    "expected_projected_rows": 3320,
+    "language_record_counts": {
+      "c_cpp": 144,
+      "python": 156,
+      "rust": 144,
+      "web_js_ts_html": 386
+    },
+    "language_status_counts": {
+      "c_cpp": {
+        "INSUFFICIENT_EVIDENCE": 48,
+        "NOT_EXERCISED": 48,
+        "VERIFIER_REMOVED": 48
+      },
+      "python": {
+        "INSUFFICIENT_EVIDENCE": 52,
+        "NOT_EXERCISED": 52,
+        "VERIFIER_REMOVED": 52
+      },
+      "rust": {
+        "INSUFFICIENT_EVIDENCE": 48,
+        "NOT_EXERCISED": 48,
+        "VERIFIER_REMOVED": 48
+      },
+      "web_js_ts_html": {
+        "VERIFIER_REMOVED": 386
+      }
+    },
+    "projected_rows": 3320,
+    "source_records": 615,
+    "transition_task_row_counts": {
+      "transition_candidate_selection": 830,
+      "transition_continue_or_stop": 830,
+      "transition_next_action": 830,
+      "transition_verifier_transition": 830
+    },
+    "unique_counterfactual_roots": 167,
+    "verifier_status_counts": {
+      "INSUFFICIENT_EVIDENCE": 148,
+      "NOT_EXERCISED": 148,
+      "VERIFIER_REMOVED": 534
+    }
+  },
+  "created_at_utc": "2026-07-14T17:44:27Z",
+  "decision": "counterfactual_status_augmentation_ready_for_train_support",
+  "outputs": {
+    "records": "runs/local/artifacts/stage11957_transition_counterfactual_status_augmentation/counterfactual_transition_records.jsonl",
+    "rows": "runs/local/artifacts/stage11957_transition_counterfactual_status_augmentation/counterfactual_transition_projection_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11957_transition_counterfactual_status_augmentation/transition_counterfactual_status_augmentation.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "source_records": "runs/local/artifacts/stage11955_transition_5k_v1_multisource_package/verified_transition_records_5k_v1.jsonl"
+  },
+  "stage": 11957,
+  "stage_name": "stage11957_transition_counterfactual_status_augmentation"
+}

@@ -1,0 +1,541 @@
+{
+  "base_scorer_metrics": {
+    "clean_strict": {
+      "correct": 21,
+      "exact_accuracy": 0.9545454545454546,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.9130434782608695,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "judgment_strict": {
+      "correct": 10,
+      "exact_accuracy": 0.5,
+      "rows": 20,
+      "scored_rows": 20
+    },
+    "judgment_validation": {
+      "correct": 11,
+      "exact_accuracy": 0.5,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "residual": {
+      "correct": 5,
+      "exact_accuracy": 0.5,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 3,
+        "exact_accuracy": 0.75,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    }
+  },
+  "created_at_utc": "2026-07-13T10:39:45.784851+00:00",
+  "decision": "reject_stage11281_keep_stage11200_frontier",
+  "frontier_runtime_kept": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+  "frontier_runtime_kept_sha256": "b84dbba9ed525d0139ab867ffbc52d7ce2df702402542e54a1247d8f5dea3eca",
+  "interpretation": [
+    "The Stage11275/11276 source-backed evidence-candidate pipeline is valid and scoreable after adding standalone_projection_source.opaque_options.",
+    "The judgment heldout rows score 10/20 strict and 11/22 validation, which is above the trivial 0.5 target balance only by matching balance, not a capability gain.",
+    "The hard residual gate remains unchanged at 5/10; verifier_and_test_constraint remains 0 correct, so this does not solve the evidence/verifier boundary.",
+    "Stage11281 should remain diagnostic; Stage11200 remains the current frontier runtime."
+  ],
+  "next_action": {
+    "do_not_train_more_on_same_package": true,
+    "recommended_stage": "stage11284_verifier_constraint_source_supply_expansion_or_candidate_scorer_objective_rebuild",
+    "requirements": [
+      "Add more true verifier_and_test_constraint positives from source-backed local_repo evidence, not just changed-vs-verifier paired rows.",
+      "Include hard counterexamples where candidate_change_surface is correct so the scorer cannot learn a global verifier bias.",
+      "Keep Stage11276 as a diagnostic data source, not a promotion benchmark.",
+      "Consider a directly trained semantic candidate/value scorer if source-supply expansion remains flat."
+    ]
+  },
+  "package_audit": {
+    "all_source_text_materialized": true,
+    "duplicate_row_ids": 0,
+    "root_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    }
+  },
+  "package_counts": {
+    "strict_eval": {
+      "by_language": {
+        "c_cpp": 2,
+        "python": 14,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "by_repo_top20": [
+        [
+          "agentkernel",
+          6
+        ],
+        [
+          "SWE-bench",
+          4
+        ],
+        [
+          "BrowserGym",
+          4
+        ],
+        [
+          "cuEmbed",
+          2
+        ],
+        [
+          "chroma",
+          2
+        ],
+        [
+          "agentkernel-seq2seq-text-lab",
+          2
+        ]
+      ],
+      "by_target": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 10,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 10
+      },
+      "roots": 10,
+      "rows": 20
+    },
+    "train": {
+      "by_language": {
+        "c_cpp": 36,
+        "python": 76,
+        "rust": 4,
+        "web_js_ts_html": 12
+      },
+      "by_repo_top20": [
+        [
+          "peytontolbert-parameter-golf",
+          20
+        ],
+        [
+          "agentkernel-seq2seq-text-lab",
+          16
+        ],
+        [
+          "parametergolf",
+          16
+        ],
+        [
+          "agentkernel",
+          16
+        ],
+        [
+          "repository_library",
+          8
+        ],
+        [
+          "tilus",
+          4
+        ],
+        [
+          "tiktoken",
+          4
+        ],
+        [
+          "mctx",
+          4
+        ],
+        [
+          "rembg",
+          4
+        ],
+        [
+          "llama-models",
+          4
+        ],
+        [
+          "faiss",
+          4
+        ],
+        [
+          "optimum",
+          4
+        ],
+        [
+          "pypiserver",
+          4
+        ],
+        [
+          "xformers",
+          4
+        ],
+        [
+          "openevolve",
+          4
+        ],
+        [
+          "metacontroller",
+          4
+        ],
+        [
+          "x-transformers",
+          4
+        ],
+        [
+          "hyper-connections",
+          4
+        ]
+      ],
+      "by_target": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 62,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 4,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 62
+      },
+      "roots": 62,
+      "rows": 128
+    },
+    "validation": {
+      "by_language": {
+        "c_cpp": 12,
+        "python": 6,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "by_repo_top20": [
+        [
+          "parametergolf",
+          6
+        ],
+        [
+          "agentkernel",
+          6
+        ],
+        [
+          "falco",
+          4
+        ],
+        [
+          "agentkernel-seq2seq-text-lab",
+          2
+        ],
+        [
+          "cuEmbed",
+          2
+        ],
+        [
+          "chroma",
+          2
+        ]
+      ],
+      "by_target": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 11,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 11
+      },
+      "roots": 11,
+      "rows": 22
+    }
+  },
+  "passed": false,
+  "product_metrics": {
+    "clean_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.9130434782608695,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "judgment_strict": {
+      "correct": 10,
+      "exact_accuracy": 0.5,
+      "rows": 20,
+      "scored_rows": 20
+    },
+    "judgment_validation": {
+      "correct": 11,
+      "exact_accuracy": 0.5,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "residual": {
+      "correct": 5,
+      "exact_accuracy": 0.5,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 3,
+        "exact_accuracy": 0.75,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    }
+  },
+  "product_scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "promotion_gates": {
+    "product_clean_strict_22_of_22": true,
+    "product_clean_validation_at_least_20_of_23": true,
+    "product_judgment_strict_above_majority": true,
+    "product_judgment_validation_above_majority": true,
+    "product_residual_above_5_of_10": false,
+    "product_verifier_residual_nonzero": false
+  },
+  "reason": "Stage11281 fixed the Stage11276 option-schema scoring issue and preserved clean canary strict under the evidence judgment head, but it did not improve the clean residual successor bank beyond 5/10 and kept verifier_and_test_constraint residual at 0/3.",
+  "rejected_runtime": "runs/local/artifacts/stage11281_capped_direct_retrieval_evidence_probe_fixed_options/runtime_model/runtime_model_bundle.json",
+  "rejected_runtime_sha256": "13de7faf851b20dea151f98511390addd36e3994772907d270e19f4afbe8fd99",
+  "request_metrics": {
+    "base_strict_rows": 22,
+    "base_train_rows": 708,
+    "base_validation_rows": 23,
+    "judgment_audit": {
+      "all_source_text_materialized": true,
+      "duplicate_row_ids": 0,
+      "root_overlap": {
+        "train_strict": [],
+        "train_validation": [],
+        "validation_strict": []
+      }
+    },
+    "judgment_package_counts": {
+      "strict_eval": {
+        "by_language": {
+          "c_cpp": 2,
+          "python": 14,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "by_repo_top20": [
+          [
+            "agentkernel",
+            6
+          ],
+          [
+            "SWE-bench",
+            4
+          ],
+          [
+            "BrowserGym",
+            4
+          ],
+          [
+            "cuEmbed",
+            2
+          ],
+          [
+            "chroma",
+            2
+          ],
+          [
+            "agentkernel-seq2seq-text-lab",
+            2
+          ]
+        ],
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 10,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 10
+        },
+        "roots": 10,
+        "rows": 20
+      },
+      "train": {
+        "by_language": {
+          "c_cpp": 36,
+          "python": 76,
+          "rust": 4,
+          "web_js_ts_html": 12
+        },
+        "by_repo_top20": [
+          [
+            "peytontolbert-parameter-golf",
+            20
+          ],
+          [
+            "agentkernel-seq2seq-text-lab",
+            16
+          ],
+          [
+            "parametergolf",
+            16
+          ],
+          [
+            "agentkernel",
+            16
+          ],
+          [
+            "repository_library",
+            8
+          ],
+          [
+            "tilus",
+            4
+          ],
+          [
+            "tiktoken",
+            4
+          ],
+          [
+            "mctx",
+            4
+          ],
+          [
+            "rembg",
+            4
+          ],
+          [
+            "llama-models",
+            4
+          ],
+          [
+            "faiss",
+            4
+          ],
+          [
+            "optimum",
+            4
+          ],
+          [
+            "pypiserver",
+            4
+          ],
+          [
+            "xformers",
+            4
+          ],
+          [
+            "openevolve",
+            4
+          ],
+          [
+            "metacontroller",
+            4
+          ],
+          [
+            "x-transformers",
+            4
+          ],
+          [
+            "hyper-connections",
+            4
+          ]
+        ],
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 62,
+          "DISTRACTOR_BACKGROUND_CONTEXT": 4,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 62
+        },
+        "roots": 62,
+        "rows": 128
+      },
+      "validation": {
+        "by_language": {
+          "c_cpp": 12,
+          "python": 6,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "by_repo_top20": [
+          [
+            "parametergolf",
+            6
+          ],
+          [
+            "agentkernel",
+            6
+          ],
+          [
+            "falco",
+            4
+          ],
+          [
+            "agentkernel-seq2seq-text-lab",
+            2
+          ],
+          [
+            "cuEmbed",
+            2
+          ],
+          [
+            "chroma",
+            2
+          ]
+        ],
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 11,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 11
+        },
+        "roots": 11,
+        "rows": 22
+      }
+    },
+    "judgment_strict_rows_for_postrun": 20,
+    "judgment_train_by_language": {
+      "c_cpp": 36,
+      "python": 76,
+      "rust": 4,
+      "web_js_ts_html": 12
+    },
+    "judgment_train_by_target": {
+      "DECISIVE_VERIFIER_TEST_CONSTRAINT": 62,
+      "DISTRACTOR_BACKGROUND_CONTEXT": 4,
+      "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 62
+    },
+    "judgment_train_rows": 128,
+    "judgment_validation_rows_for_postrun": 22,
+    "protected_root_overlaps": [],
+    "residual_rows_for_postrun": 10,
+    "train_rows": 836
+  },
+  "source_artifacts": {
+    "capped_package": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_package.json",
+    "direct_retrieval_materialization": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_materialization.json",
+    "postrun_audit": "runs/local/artifacts/stage11282_capped_direct_retrieval_evidence_postrun_audit_fixed_options/capped_direct_retrieval_evidence_postrun_audit_fixed_options.json",
+    "request": "runs/local/artifacts/stage11280_capped_direct_retrieval_evidence_probe_request_fixed_options/capped_direct_retrieval_evidence_probe_request_fixed_options.json"
+  },
+  "stage": 11283,
+  "stage_name": "stage11283_capped_direct_retrieval_evidence_decision_fixed_options"
+}

@@ -1,0 +1,91 @@
+{
+  "created_at_utc": "2026-07-13T23:00:06Z",
+  "decision": "reject_stage11602_keep_stage11507_selected_frontier",
+  "next_recommended_work": [
+    "Keep Stage11507 + encoder_option_retrieval_evidence_judgment_head as selected frontier.",
+    "Stop reusing generic evidence/semantic heads for Web; the successor rows need a real Web/task-specific candidate scorer or staged frozen-head training.",
+    "If continuing Web, train a separate task-family scorer over (state, option, task_family, semantic_role, verifier metadata) and audit against the same gates before touching selected frontier.",
+    "Do not claim web improvement from Stage11602; it is a controlled negative result."
+  ],
+  "postrun_compact_results": {
+    "filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "filtered_validation": {
+      "accuracy": 0.9090909090909091,
+      "correct": 20,
+      "rows": 22
+    },
+    "old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23
+    },
+    "old_canary_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.6,
+      "correct": 6,
+      "rows": 10
+    },
+    "web_heldout": {
+      "accuracy": 0.5303030303030303,
+      "correct": 35,
+      "rows": 66
+    },
+    "web_successor_strict": {
+      "accuracy": 0.027777777777777776,
+      "correct": 1,
+      "rows": 36
+    }
+  },
+  "postrun_gates": {
+    "filtered_strict_22_of_22": true,
+    "filtered_validation_at_least_20_of_22": true,
+    "old_canary_strict_23_of_23": true,
+    "old_canary_validation_at_least_21_of_23": true,
+    "residual_at_least_7_of_10": false,
+    "web_heldout_beats_stage11571_42_of_66": false,
+    "web_successor_strict_full_coverage": true
+  },
+  "rejected_runtime": {
+    "runtime": "runs/local/artifacts/stage11602_web_semantic_candidate_head_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_semantic_candidate_head",
+    "stage": "stage11602_web_semantic_candidate_head_probe",
+    "weights_sha256": "c904e6f358e1ed5f919c8e824622c693679223697ef22b22de9668aaa1ff3045"
+  },
+  "request_objective": {
+    "bounded_choice_contrast_margin": 0.08,
+    "bounded_choice_contrast_weight": 0.5,
+    "bounded_decoder_train_sampler": "web_task_family_balanced",
+    "learning_rate": "2e-7",
+    "max_steps": 96,
+    "preservation_kl_weight": 6.0
+  },
+  "selected_frontier": {
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head",
+    "stage": "stage11507_preservation_strengthened_evidence_judgment_probe",
+    "weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37"
+  },
+  "source_artifacts": {
+    "postrun": "runs/summaries/stage11603_web_semantic_candidate_head_postrun_audit.json",
+    "rejected_runtime": "runs/local/artifacts/stage11602_web_semantic_candidate_head_probe/runtime_model/runtime_model_bundle.json",
+    "request": "runs/summaries/stage11602_web_semantic_candidate_head_probe_request.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11604,
+  "stage_name": "stage11604_web_semantic_candidate_head_decision",
+  "why_rejected": [
+    "Stage11602 preserved filtered strict, old strict, filtered validation, and old validation under the semantic-candidate-head scorer.",
+    "Residual regressed from the selected frontier gate of 7/10 to 6/10.",
+    "Web heldout stayed 35/66, below the required >42/66 and below Gemma's 52/66 same-manifest reference.",
+    "No-abstain web successor strict remained essentially unsolved at 1/36, only below the prior 2/36 no-abstain probe.",
+    "Therefore the semantic-candidate-head reuse does not solve the Web scorer geometry problem and should remain diagnostic-only."
+  ]
+}

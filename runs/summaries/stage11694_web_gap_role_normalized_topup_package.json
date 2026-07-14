@@ -1,0 +1,62 @@
+{
+  "claim_boundary": [
+    "This package derives train-support-only same-role source/fix rows from existing disjoint canonical train roots.",
+    "It normalizes source-like candidate roles for training geometry; it is not a new heldout benchmark."
+  ],
+  "counts": {
+    "admitted_by_repo": {
+      "bddy_website": 12,
+      "frontend": 36,
+      "llama_stack_ui": 28,
+      "modelcontextprotocol_typescript_sdk": 1,
+      "openclaw_clawhub": 2,
+      "openhands_openhands_frontend": 8,
+      "sourcebot": 6
+    },
+    "admitted_by_task": {
+      "minimal_fix_selection": 47,
+      "symptom_localization": 46
+    },
+    "admitted_roots": 47,
+    "admitted_rows": 93,
+    "admitted_target_labels": {
+      "A": 35,
+      "B": 17,
+      "C": 20,
+      "D": 20,
+      "E": 1
+    },
+    "input_support_rows": 163,
+    "reject_reasons": {
+      "not_target_task": 55,
+      "target_not_source_like": 15
+    },
+    "rejected_rows": 70
+  },
+  "created_at_utc": "2026-07-14T05:17:47Z",
+  "decision": "role_normalized_web_gap_topup_ready",
+  "gates": {
+    "all_train_support_only": true,
+    "no_gap_root_overlap": true,
+    "no_heldout_root_overlap": true,
+    "topup_roots_at_least_10": true,
+    "topup_rows_at_least_20": true
+  },
+  "outputs": {
+    "rejected_rows": "runs/local/artifacts/stage11694_web_gap_role_normalized_topup_package/web_gap_role_normalized_rejected_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11694_web_gap_role_normalized_topup_package/web_gap_role_normalized_topup_package.json",
+    "topup_rows": "runs/local/artifacts/stage11694_web_gap_role_normalized_topup_package/web_gap_role_normalized_topup_rows.jsonl"
+  },
+  "recommended_next": [
+    "Merge these top-up rows with Stage11693 targeted support rows, then run a guarded head-only probe only if protected replay is included.",
+    "Promotion requires canonical-bridged Web >56/66, filtered strict 22/22, old strict 23/23, residual >=7/10.",
+    "Do not use bridged heldout rows or Gemma-margin rows as training support."
+  ],
+  "source_artifacts": {
+    "gap": "runs/local/artifacts/stage11692_web_bridged_miss_family_audit/web_bridged_gemma_margin_rows.jsonl",
+    "heldout": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit/original_web_canonical_bridged_rows.jsonl",
+    "support": "runs/local/artifacts/stage11693_web_gap_targeted_support_inventory/web_gap_targeted_support_rows.jsonl"
+  },
+  "stage": 11694,
+  "stage_name": "stage11694_web_gap_role_normalized_topup_package"
+}

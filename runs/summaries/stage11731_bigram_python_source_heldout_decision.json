@@ -1,0 +1,50 @@
+{
+  "claim_boundary": [
+    "Current selected compact frontier remains Stage11507 plus Stage11709.",
+    "Python source-heldout compact smoke is partially solved but not a clean language win.",
+    "This is bounded-choice source-heldout smoke, not full-product executable repair."
+  ],
+  "created_at_utc": "2026-07-14T07:33:52Z",
+  "decision": "python_source_heldout_smoke_partial_pass_verifier_outcome_canary",
+  "gates": {
+    "admitted_source_heldout_smoke": true,
+    "existing_scorers_do_not_recover_four_of_four": true,
+    "full_product_ready": false,
+    "gemma_same_manifest_attached": false,
+    "stage11507_full_coverage": true,
+    "stage11507_three_of_four": true
+  },
+  "interpretation": [
+    "The bigram_language_model Python root is exact new-root/source-snapshot attested and leak-clean after rendering.",
+    "Stage11507 solves symptom_localization, evidence_citation, and patch_impact on this smoke packet.",
+    "The remaining failure is verifier_outcome: the product scorer selects implementation_only_no_verifier instead of the selected test anchor.",
+    "This matches the broader verifier-transition weakness; do not claim a clean Python source-heldout win from this packet yet."
+  ],
+  "next_actions": [
+    "Attach executable pytest output for tests/test_model.py and distractor tests to ground verifier_outcome.",
+    "Run Gemma same-manifest only through a GPU2-safe backend.",
+    "Build the missing Rust source-heldout smoke root before any multilingual source-heldout claim.",
+    "Use this row as a Python verifier-outcome failure canary for future scorer/model improvements."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11731_bigram_python_source_heldout_decision/bigram_python_source_heldout_decision.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "admission": "runs/local/artifacts/stage11728_bigram_python_no_train_overlap_and_admission/bigram_python_no_train_overlap_and_admission.json",
+    "hundred_m_score": "runs/local/artifacts/stage11729_bigram_python_source_heldout_100m_score/bigram_python_source_heldout_100m_score.json",
+    "scorer_diagnostic": "runs/local/artifacts/stage11730_bigram_python_scorer_diagnostic/bigram_python_scorer_diagnostic.json"
+  },
+  "stage": 11731,
+  "stage_name": "stage11731_bigram_python_source_heldout_decision",
+  "status": {
+    "compact_admission": "admitted",
+    "full_product": "not_ready",
+    "gemma_same_manifest": "not_run_gpu2_safe_backend_required",
+    "hundred_m_source_heldout_smoke": "3/4",
+    "miss_tasks": [
+      "verifier_outcome"
+    ],
+    "scorer_diagnostic": "bigram_python_verifier_miss_persists_across_existing_scorers"
+  }
+}

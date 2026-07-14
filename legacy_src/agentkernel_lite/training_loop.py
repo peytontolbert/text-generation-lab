@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import json
+import os
 import random
 from copy import deepcopy
+from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
 import torch
+from torch import nn
 import torch.nn.functional as F
 from torch.optim import AdamW
 
@@ -100,6 +103,160 @@ def _append_jsonl(path: Path, value: Any) -> None:
         handle.write(json.dumps(value, sort_keys=True) + "\n")
 
 
+def _sha256_file(path: Path) -> str:
+    digest = sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _save_runtime_model_bundle(
+    save_dir: Path,
+    *,
+    model: torch.nn.Module,
+    metadata: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    save_dir.mkdir(parents=True, exist_ok=True)
+    weights_path = save_dir / "model_state.pt"
+    cpu_state = {name: value.detach().cpu() for name, value in model.state_dict().items()}
+    torch.save({"model_state_dict": cpu_state}, weights_path)
+    card = {
+        "weights_path": str(weights_path),
+        "weights_sha256": _sha256_file(weights_path),
+        "state_dict_keys": len(cpu_state),
+        "metadata": dict(metadata or {}),
+    }
+    _write_json(save_dir / "runtime_model_bundle.json", card)
+    return card
+
+
+def _ensure_saved_bounded_choice_heads(model: torch.nn.Module, state_dict: dict[str, Any]) -> list[str]:
+    attached: list[str] = []
+    config = getattr(model, "config", None)
+    hidden_dim = int(getattr(config, "d_model", 0) or 0)
+    if "bounded_choice_probe_head.weight" in state_dict and not hasattr(model, "bounded_choice_probe_head"):
+        weight = state_dict["bounded_choice_probe_head.weight"]
+        model.bounded_choice_probe_head = nn.Linear(hidden_dim or int(weight.shape[1]), int(weight.shape[0]), bias=False)
+        attached.append("bounded_choice_probe_head")
+    if "bounded_choice_role_head.weight" in state_dict and not hasattr(model, "bounded_choice_role_head"):
+        weight = state_dict["bounded_choice_role_head.weight"]
+        model.bounded_choice_role_head = nn.Linear(hidden_dim or int(weight.shape[1]), int(weight.shape[0]), bias=True)
+        attached.append("bounded_choice_role_head")
+    if "bounded_choice_pair_head.0.weight" in state_dict and not hasattr(model, "bounded_choice_pair_head"):
+        first = state_dict["bounded_choice_pair_head.0.weight"]
+        last = state_dict.get("bounded_choice_pair_head.2.weight")
+        output_dim = int(last.shape[0]) if last is not None else 1
+        model.bounded_choice_pair_head = nn.Sequential(
+            nn.Linear(int(first.shape[1]), int(first.shape[0]), bias=True),
+            nn.SiLU(),
+            nn.Linear(int(first.shape[0]), output_dim, bias=True),
+        )
+        attached.append("bounded_choice_pair_head")
+    if "bounded_choice_evidence_ledger_head.0.weight" in state_dict and not hasattr(model, "bounded_choice_evidence_ledger_head"):
+        first = state_dict["bounded_choice_evidence_ledger_head.0.weight"]
+        last = state_dict.get("bounded_choice_evidence_ledger_head.2.weight")
+        output_dim = int(last.shape[0]) if last is not None else 1
+        model.bounded_choice_evidence_ledger_head = nn.Sequential(
+            nn.Linear(int(first.shape[1]), int(first.shape[0]), bias=True),
+            nn.SiLU(),
+            nn.Linear(int(first.shape[0]), output_dim, bias=True),
+        )
+        attached.append("bounded_choice_evidence_ledger_head")
+    if "bounded_choice_evidence_role_head.weight" in state_dict and not hasattr(model, "bounded_choice_evidence_role_head"):
+        weight = state_dict["bounded_choice_evidence_role_head.weight"]
+        model.bounded_choice_evidence_role_head = nn.Linear(hidden_dim or int(weight.shape[1]), int(weight.shape[0]), bias=True)
+        attached.append("bounded_choice_evidence_role_head")
+    if "bounded_choice_evidence_judgment_head.weight" in state_dict and not hasattr(model, "bounded_choice_evidence_judgment_head"):
+        weight = state_dict["bounded_choice_evidence_judgment_head.weight"]
+        model.bounded_choice_evidence_judgment_head = nn.Linear(hidden_dim or int(weight.shape[1]), int(weight.shape[0]), bias=True)
+        attached.append("bounded_choice_evidence_judgment_head")
+    if "bounded_choice_evidence_fact_pair_head.0.weight" in state_dict and not hasattr(model, "bounded_choice_evidence_fact_pair_head"):
+        first = state_dict["bounded_choice_evidence_fact_pair_head.0.weight"]
+        last = state_dict.get("bounded_choice_evidence_fact_pair_head.2.weight")
+        output_dim = int(last.shape[0]) if last is not None else 1
+        model.bounded_choice_evidence_fact_pair_head = nn.Sequential(
+            nn.Linear(int(first.shape[1]), int(first.shape[0]), bias=True),
+            nn.SiLU(),
+            nn.Linear(int(first.shape[0]), output_dim, bias=True),
+        )
+        attached.append("bounded_choice_evidence_fact_pair_head")
+    if "bounded_choice_semantic_candidate_head.0.weight" in state_dict and not hasattr(model, "bounded_choice_semantic_candidate_head"):
+        first = state_dict["bounded_choice_semantic_candidate_head.0.weight"]
+        last = state_dict.get("bounded_choice_semantic_candidate_head.2.weight")
+        output_dim = int(last.shape[0]) if last is not None else 1
+        model.bounded_choice_semantic_candidate_head = nn.Sequential(
+            nn.Linear(int(first.shape[1]), int(first.shape[0]), bias=True),
+            nn.SiLU(),
+            nn.Linear(int(first.shape[0]), output_dim, bias=True),
+        )
+        attached.append("bounded_choice_semantic_candidate_head")
+    if "bounded_choice_web_task_candidate_head.0.weight" in state_dict and not hasattr(model, "bounded_choice_web_task_candidate_head"):
+        first = state_dict["bounded_choice_web_task_candidate_head.0.weight"]
+        last = state_dict.get("bounded_choice_web_task_candidate_head.2.weight")
+        output_dim = int(last.shape[0]) if last is not None else 1
+        model.bounded_choice_web_task_candidate_head = nn.Sequential(
+            nn.Linear(int(first.shape[1]), int(first.shape[0]), bias=True),
+            nn.SiLU(),
+            nn.Linear(int(first.shape[0]), output_dim, bias=True),
+        )
+        attached.append("bounded_choice_web_task_candidate_head")
+    if "bounded_choice_transition_candidate_head.0.weight" in state_dict and not hasattr(model, "bounded_choice_transition_candidate_head"):
+        first = state_dict["bounded_choice_transition_candidate_head.0.weight"]
+        last = state_dict.get("bounded_choice_transition_candidate_head.2.weight")
+        output_dim = int(last.shape[0]) if last is not None else 1
+        model.bounded_choice_transition_candidate_head = nn.Sequential(
+            nn.Linear(int(first.shape[1]), int(first.shape[0]), bias=True),
+            nn.SiLU(),
+            nn.Linear(int(first.shape[0]), output_dim, bias=True),
+        )
+        attached.append("bounded_choice_transition_candidate_head")
+    if "bounded_choice_transition_status_head.0.weight" in state_dict and not hasattr(model, "bounded_choice_transition_status_head"):
+        first = state_dict["bounded_choice_transition_status_head.0.weight"]
+        last = state_dict.get("bounded_choice_transition_status_head.2.weight")
+        output_dim = int(last.shape[0]) if last is not None else 1
+        model.bounded_choice_transition_status_head = nn.Sequential(
+            nn.Linear(int(first.shape[1]), int(first.shape[0]), bias=True),
+            nn.SiLU(),
+            nn.Linear(int(first.shape[0]), output_dim, bias=True),
+        )
+        attached.append("bounded_choice_transition_status_head")
+    return attached
+
+
+def _load_runtime_model_bundle(init_path: Path, *, model: torch.nn.Module) -> dict[str, Any]:
+    candidate = init_path
+    if candidate.is_dir():
+        bundle_path = candidate / "runtime_model_bundle.json"
+    elif candidate.name == "runtime_model_bundle.json":
+        bundle_path = candidate
+    else:
+        bundle_path = None
+    bundle: dict[str, Any] | None = None
+    weights_path = candidate
+    if bundle_path is not None:
+        bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+        raw_weights = Path(str(bundle.get("weights_path") or ""))
+        weights_path = raw_weights if raw_weights.is_absolute() else (bundle_path.parent / raw_weights).resolve()
+    payload = torch.load(weights_path, map_location="cpu")
+    state_dict = payload.get("model_state_dict") if isinstance(payload, dict) and isinstance(payload.get("model_state_dict"), dict) else payload
+    if not isinstance(state_dict, dict):
+        raise ValueError(f"runtime model payload does not contain a state dict: {weights_path}")
+    attached_heads = _ensure_saved_bounded_choice_heads(model, state_dict)
+    load_result = model.load_state_dict(state_dict, strict=True)
+    return {
+        "source_path": str(candidate),
+        "bundle_path": str(bundle_path) if bundle_path is not None else None,
+        "weights_path": str(weights_path),
+        "weights_sha256": _sha256_file(weights_path),
+        "state_dict_keys": len(state_dict),
+        "attached_bounded_choice_heads": attached_heads,
+        "missing_keys": list(getattr(load_result, "missing_keys", [])),
+        "unexpected_keys": list(getattr(load_result, "unexpected_keys", [])),
+        "metadata": dict(bundle.get("metadata") or {}) if isinstance(bundle, dict) else {},
+    }
+
+
 def _split_rows(rows: list[dict[str, Any]], split: str, cap: int) -> list[dict[str, Any]]:
     def normalized(row: dict[str, Any]) -> str:
         value = str(row.get("split") or row.get("package_split") or "train")
@@ -164,6 +321,18 @@ def _module_bucket(parameter_name: str) -> str:
     if parameter_name.startswith(("retrieval_", "agent_policy", "agent_intent", "agent_controller", "scalar_invariant")):
         return "policy_retrieval_heads"
     return "other"
+
+
+def _preferred_execution_device() -> torch.device:
+    return torch.device(os.environ.get("AGENTKERNEL_TRAIN_DEVICE", "cuda" if torch.cuda.is_available() else "cpu"))
+
+
+def _move_manifest_batch(batch: Any, device: torch.device) -> Any:
+    batch.input_ids = batch.input_ids.to(device)
+    batch.decoder_input_ids = batch.decoder_input_ids.to(device)
+    batch.labels = batch.labels.to(device)
+    batch.loss_mask = {key: value.to(device) for key, value in batch.loss_mask.items()}
+    return batch
 
 
 STRUCTURED_TRAINABLE_PROFILES = {
@@ -257,6 +426,1439 @@ def _decoder_ce_loss(
     return row_loss.mean()
 
 
+def _preservation_kl_loss(
+    current_logits: torch.Tensor,
+    reference_logits: torch.Tensor,
+    labels: torch.Tensor,
+    row_mask: torch.Tensor | None,
+    *,
+    exempt_rows: torch.Tensor | None = None,
+) -> torch.Tensor | None:
+    token_mask = labels.ne(0).float()
+    row_active = torch.ones(labels.size(0), device=labels.device, dtype=token_mask.dtype)
+    if row_mask is not None:
+        row_active = row_active * row_mask.to(device=labels.device, dtype=token_mask.dtype)
+    if exempt_rows is not None:
+        row_active = row_active * (~exempt_rows.to(device=labels.device)).to(dtype=token_mask.dtype)
+    if float(row_active.sum().item()) <= 0.0:
+        return None
+    current_log_probs = F.log_softmax(current_logits, dim=-1)
+    reference_probs = F.softmax(reference_logits, dim=-1)
+    token_kl = F.kl_div(current_log_probs, reference_probs, reduction="none").sum(dim=-1)
+    row_denom = token_mask.sum(dim=1).clamp_min(1.0)
+    row_loss = (token_kl * token_mask).sum(dim=1) / row_denom
+    return (row_loss * row_active).sum() / row_active.sum().clamp_min(1.0)
+
+
+def _encode_option_text_pool(
+    *,
+    model: Any,
+    tokenizer: Any,
+    texts: list[str],
+    device: torch.device,
+    max_option_tokens: int = 96,
+) -> torch.Tensor | None:
+    if not texts or not hasattr(model, "encode_pooled"):
+        return None
+    pad_id = int(getattr(tokenizer, "pad_id", 0))
+    encoded_rows: list[list[int]] = []
+    for text in texts:
+        token_ids = tokenizer.encode(str(text), max_length=max_option_tokens)
+        token_ids = [int(idx) for idx in token_ids[:max_option_tokens]]
+        if not token_ids:
+            token_ids = [pad_id]
+        encoded_rows.append(token_ids)
+    width = max(len(ids) for ids in encoded_rows)
+    input_ids = torch.full((len(encoded_rows), width), pad_id, dtype=torch.long, device=device)
+    attention_mask = torch.zeros((len(encoded_rows), width), dtype=torch.bool, device=device)
+    for row_idx, token_ids in enumerate(encoded_rows):
+        input_ids[row_idx, : len(token_ids)] = torch.tensor(token_ids, dtype=torch.long, device=device)
+        attention_mask[row_idx, : len(token_ids)] = True
+    return model.encode_pooled(input_ids, attention_mask)
+
+
+def _conditioned_option_texts(row: dict[str, Any], option_values: list[str]) -> list[str]:
+    prompt = str(row.get("prompt_text") or row.get("input_text") or "")
+    marker = "\nOptions:\n"
+    if marker in prompt:
+        prompt = prompt.split(marker, 1)[0].rstrip()
+    else:
+        prompt = prompt.strip()
+    texts: list[str] = []
+    for value in option_values:
+        candidate = str(value).strip()
+        if prompt:
+            texts.append(f"{prompt}\nCandidate under review: {candidate}")
+        else:
+            texts.append(f"Candidate under review: {candidate}")
+    return texts
+
+
+_EVIDENCE_ROLE_MAP = {
+    "algorithmic_background_reference": "background algorithm reference",
+    "candidate_change_surface": "current proposed edit surface",
+    "external_analogue_reference": "external analogue reference",
+    "nearby_definition_or_usage_context": "nearby definition or usage context",
+    "symptom_or_call_path_analogue": "symptom or call path analogue",
+    "verifier_and_test_constraint": "failing verifier or test constraint",
+}
+
+_EVIDENCE_ROLE_BIAS_BUCKETS = {
+    "candidate_change_surface": 0,
+    "verifier_and_test_constraint": 1,
+}
+
+
+def _prompt_perspective(row: dict[str, Any]) -> str:
+    prompt = str(row.get("prompt_text") or row.get("input_text") or "")
+    for line in prompt.splitlines():
+        if line.startswith("Perspective: "):
+            return line.split(": ", 1)[1].strip()
+    return ""
+
+
+def _language_family(row: dict[str, Any]) -> str:
+    return str(row.get("language_family") or "unknown")
+
+
+def _bounded_choice_role_key(value: str) -> str:
+    text = str(value).strip()
+    if "|" in text:
+        text = text.split("|", 1)[0].strip()
+    return text
+
+
+def _bounded_choice_role_bucket(value: str) -> int:
+    return int(_EVIDENCE_ROLE_BIAS_BUCKETS.get(_bounded_choice_role_key(value), 2))
+
+
+_EVIDENCE_LEDGER_ROLE_BUCKETS = {
+    "candidate_change_surface": 0,
+    "verifier_and_test_constraint": 1,
+    "symptom_or_call_path_analogue": 2,
+    "nearby_definition_or_usage_context": 3,
+    "external_analogue_reference": 4,
+    "algorithmic_background_reference": 5,
+}
+_EVIDENCE_LEDGER_ROLE_COUNT = 7
+
+_EVIDENCE_JUDGMENT_BUCKETS = {
+    "DECISIVE_VERIFIER_TEST_CONSTRAINT": 0,
+    "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 1,
+    "SUPPORTING_SYMPTOM_OR_CALL_PATH": 2,
+    "DISTRACTOR_BACKGROUND_CONTEXT": 3,
+}
+_EVIDENCE_JUDGMENT_COUNT = 4
+
+_SEMANTIC_CANDIDATE_TASK_BUCKETS = {
+    "evidence_citation": 0,
+    "verifier_outcome": 1,
+    "verifier_outcome_semantic_transition": 1,
+    "minimal_fix_selection": 2,
+    "patch_impact": 3,
+    "symptom_localization": 4,
+    "abstention_insufficient_evidence": 5,
+    "alternative_hypothesis_elimination": 6,
+}
+_SEMANTIC_CANDIDATE_TASK_COUNT = 7
+
+_SEMANTIC_CANDIDATE_TRANSITION_BUCKETS = {
+    "FAIL_TO_PASS": 0,
+    "PASS_TO_PASS": 1,
+    "FAIL_TO_FAIL": 2,
+    "NOT_EXERCISED": 3,
+    "INSUFFICIENT_EVIDENCE": 4,
+    "NEEDS_VERIFIER": 5,
+}
+_SEMANTIC_CANDIDATE_TRANSITION_COUNT = 7
+
+
+def _bounded_choice_evidence_judgment_bucket(value: str) -> int:
+    return int(_EVIDENCE_JUDGMENT_BUCKETS.get(str(value).strip(), -1))
+
+
+def _bounded_choice_evidence_ledger_role_bucket(value: str) -> int:
+    return int(_EVIDENCE_LEDGER_ROLE_BUCKETS.get(_bounded_choice_role_key(value), _EVIDENCE_LEDGER_ROLE_COUNT - 1))
+
+
+def _bounded_choice_semantic_task_bucket(row: dict[str, Any]) -> int:
+    task = str(row.get("task_type") or _prompt_perspective(row)).strip()
+    return int(_SEMANTIC_CANDIDATE_TASK_BUCKETS.get(task, _SEMANTIC_CANDIDATE_TASK_COUNT - 1))
+
+
+def _bounded_choice_semantic_transition_bucket(value: str, option: dict[str, Any] | None = None) -> int:
+    metadata = option.get("semantic_candidate") if isinstance(option, dict) and isinstance(option.get("semantic_candidate"), dict) else {}
+    explicit = str(metadata.get("verifier_transition") or metadata.get("transition") or "").upper()
+    text = explicit or str(value).upper()
+    for key, bucket in _SEMANTIC_CANDIDATE_TRANSITION_BUCKETS.items():
+        if key in text:
+            return int(bucket)
+    return _SEMANTIC_CANDIDATE_TRANSITION_COUNT - 1
+
+
+def _bounded_choice_pairwise_feature_dim(model: Any) -> int:
+    config = getattr(model, "config", None)
+    retrieval_dim = int(getattr(config, "retrieval_head_dim", 0) or 0)
+    if retrieval_dim <= 0:
+        retrieval_dim = int(getattr(config, "d_model", 0) or 0)
+    return (retrieval_dim * 4) + 3 if retrieval_dim > 0 else 0
+
+
+def _bounded_choice_pairwise_features(query: torch.Tensor, option_vectors: torch.Tensor, option_values: list[str]) -> torch.Tensor:
+    query_vec = query.squeeze(0) if query.dim() == 2 else query
+    query_expand = query_vec.unsqueeze(0).expand(option_vectors.shape[0], -1)
+    role_bucket_ids = torch.tensor(
+        [_bounded_choice_role_bucket(value) for value in option_values],
+        dtype=torch.long,
+        device=option_vectors.device,
+    )
+    role_one_hot = F.one_hot(role_bucket_ids, num_classes=3).to(dtype=option_vectors.dtype)
+    return torch.cat(
+        [
+            query_expand,
+            option_vectors,
+            query_expand * option_vectors,
+            torch.abs(query_expand - option_vectors),
+            role_one_hot,
+        ],
+        dim=-1,
+    )
+
+
+def _bounded_choice_evidence_ledger_feature_dim(model: Any) -> int:
+    config = getattr(model, "config", None)
+    retrieval_dim = int(getattr(config, "retrieval_head_dim", 0) or 0)
+    if retrieval_dim <= 0:
+        retrieval_dim = int(getattr(config, "d_model", 0) or 0)
+    return (retrieval_dim * 4) + _EVIDENCE_LEDGER_ROLE_COUNT if retrieval_dim > 0 else 0
+
+
+def _bounded_choice_semantic_candidate_feature_dim(model: Any) -> int:
+    config = getattr(model, "config", None)
+    retrieval_dim = int(getattr(config, "retrieval_head_dim", 0) or 0)
+    if retrieval_dim <= 0:
+        retrieval_dim = int(getattr(config, "d_model", 0) or 0)
+    metadata_dim = _EVIDENCE_LEDGER_ROLE_COUNT + _SEMANTIC_CANDIDATE_TASK_COUNT + _SEMANTIC_CANDIDATE_TRANSITION_COUNT
+    return (retrieval_dim * 4) + metadata_dim if retrieval_dim > 0 else 0
+
+
+_TRANSITION_CANDIDATE_TASK_BUCKETS = {
+    "transition_candidate_selection": 0,
+    "transition_next_action": 1,
+    "transition_verifier_transition": 2,
+    "transition_continue_or_stop": 3,
+}
+_TRANSITION_CANDIDATE_TASK_COUNT = 5
+
+_TRANSITION_CANDIDATE_STATUS_BUCKETS = {
+    "PASS_CURRENT_STATE": 0,
+    "PASS_CURRENT_BUILD": 1,
+    "PASS_CURRENT_BUILD_AND_RUN": 2,
+    "FAIL_TO_PASS": 3,
+    "FAIL_TO_FAIL": 4,
+    "PASS_TO_PASS": 5,
+    "NOT_EXERCISED": 6,
+    "INSUFFICIENT_EVIDENCE": 7,
+    "VERIFIER_REMOVED": 8,
+}
+_TRANSITION_CANDIDATE_STATUS_COUNT = 10
+
+_TRANSITION_CANDIDATE_LANGUAGE_BUCKETS = {
+    "python": 0,
+    "rust": 1,
+    "c_cpp": 2,
+    "web_js_ts_html": 3,
+}
+_TRANSITION_CANDIDATE_LANGUAGE_COUNT = 5
+
+_TRANSITION_CANDIDATE_ARTIFACT_BUCKETS = {
+    "action": 0,
+    "verifier_status": 1,
+    "control_decision": 2,
+    "source_or_evidence_candidate": 3,
+}
+_TRANSITION_CANDIDATE_ARTIFACT_COUNT = 5
+
+
+def _bounded_choice_transition_candidate_task_bucket(row: dict[str, Any]) -> int:
+    task = str(row.get("task_type") or _prompt_perspective(row)).strip()
+    return int(_TRANSITION_CANDIDATE_TASK_BUCKETS.get(task, _TRANSITION_CANDIDATE_TASK_COUNT - 1))
+
+
+def _bounded_choice_transition_candidate_status_bucket(value: str, option: dict[str, Any] | None = None) -> int:
+    metadata = option.get("semantic_candidate") if isinstance(option, dict) and isinstance(option.get("semantic_candidate"), dict) else {}
+    text = str(metadata.get("verifier_transition") or metadata.get("transition") or value or "").upper()
+    for key, bucket in _TRANSITION_CANDIDATE_STATUS_BUCKETS.items():
+        if key in text:
+            return int(bucket)
+    return _TRANSITION_CANDIDATE_STATUS_COUNT - 1
+
+
+def _bounded_choice_transition_candidate_artifact_bucket(option: dict[str, Any] | None = None) -> int:
+    artifact = str(option.get("artifact_type") if isinstance(option, dict) else "").strip()
+    if not artifact and isinstance(option, dict):
+        semantic_candidate = option.get("semantic_candidate") if isinstance(option.get("semantic_candidate"), dict) else {}
+        artifact = str(semantic_candidate.get("artifact_type") or "").strip()
+    return int(_TRANSITION_CANDIDATE_ARTIFACT_BUCKETS.get(artifact, _TRANSITION_CANDIDATE_ARTIFACT_COUNT - 1))
+
+
+def _bounded_choice_transition_candidate_feature_dim(model: Any) -> int:
+    config = getattr(model, "config", None)
+    retrieval_dim = int(getattr(config, "retrieval_head_dim", 0) or 0)
+    if retrieval_dim <= 0:
+        retrieval_dim = int(getattr(config, "d_model", 0) or 0)
+    metadata_dim = (
+        _EVIDENCE_LEDGER_ROLE_COUNT
+        + _TRANSITION_CANDIDATE_TASK_COUNT
+        + _TRANSITION_CANDIDATE_STATUS_COUNT
+        + _TRANSITION_CANDIDATE_LANGUAGE_COUNT
+        + _TRANSITION_CANDIDATE_ARTIFACT_COUNT
+    )
+    return (retrieval_dim * 4) + metadata_dim if retrieval_dim > 0 else 0
+
+
+def _transition_status_control_task(row: dict[str, Any]) -> bool:
+    task = str(row.get("task_type") or _prompt_perspective(row)).strip()
+    return task in {"transition_verifier_transition", "transition_continue_or_stop"}
+
+
+def _bounded_choice_transition_candidate_features(
+    row: dict[str, Any],
+    query: torch.Tensor,
+    option_vectors: torch.Tensor,
+    option_values: list[str],
+    option_records: list[dict[str, Any]] | None = None,
+) -> torch.Tensor:
+    query_vec = query.squeeze(0) if query.dim() == 2 else query
+    query_expand = query_vec.unsqueeze(0).expand(option_vectors.shape[0], -1)
+    records = option_records or [{} for _ in option_values]
+    role_bucket_ids = torch.tensor(
+        [
+            _bounded_choice_evidence_ledger_role_bucket(
+                str(
+                    (record.get("semantic_role") if isinstance(record, dict) else "")
+                    or (record.get("role") if isinstance(record, dict) else "")
+                    or ((record.get("semantic_candidate") or {}).get("evidence_role") if isinstance(record, dict) else "")
+                    or value
+                )
+            )
+            for value, record in zip(option_values, records)
+        ],
+        dtype=torch.long,
+        device=option_vectors.device,
+    )
+    task_bucket_ids = torch.full(
+        (option_vectors.shape[0],),
+        _bounded_choice_transition_candidate_task_bucket(row),
+        dtype=torch.long,
+        device=option_vectors.device,
+    )
+    status_bucket_ids = torch.tensor(
+        [_bounded_choice_transition_candidate_status_bucket(value, record if isinstance(record, dict) else None) for value, record in zip(option_values, records)],
+        dtype=torch.long,
+        device=option_vectors.device,
+    )
+    language_bucket_ids = torch.full(
+        (option_vectors.shape[0],),
+        int(_TRANSITION_CANDIDATE_LANGUAGE_BUCKETS.get(_language_family(row), _TRANSITION_CANDIDATE_LANGUAGE_COUNT - 1)),
+        dtype=torch.long,
+        device=option_vectors.device,
+    )
+    artifact_bucket_ids = torch.tensor(
+        [_bounded_choice_transition_candidate_artifact_bucket(record if isinstance(record, dict) else None) for record in records],
+        dtype=torch.long,
+        device=option_vectors.device,
+    )
+    metadata = torch.cat(
+        [
+            F.one_hot(role_bucket_ids, num_classes=_EVIDENCE_LEDGER_ROLE_COUNT),
+            F.one_hot(task_bucket_ids, num_classes=_TRANSITION_CANDIDATE_TASK_COUNT),
+            F.one_hot(status_bucket_ids, num_classes=_TRANSITION_CANDIDATE_STATUS_COUNT),
+            F.one_hot(language_bucket_ids, num_classes=_TRANSITION_CANDIDATE_LANGUAGE_COUNT),
+            F.one_hot(artifact_bucket_ids, num_classes=_TRANSITION_CANDIDATE_ARTIFACT_COUNT),
+        ],
+        dim=-1,
+    ).to(dtype=option_vectors.dtype)
+    return torch.cat(
+        [
+            query_expand,
+            option_vectors,
+            query_expand * option_vectors,
+            torch.abs(query_expand - option_vectors),
+            metadata,
+        ],
+        dim=-1,
+    )
+
+
+def _bounded_choice_evidence_ledger_features(query: torch.Tensor, option_vectors: torch.Tensor, option_values: list[str]) -> torch.Tensor:
+    query_vec = query.squeeze(0) if query.dim() == 2 else query
+    query_expand = query_vec.unsqueeze(0).expand(option_vectors.shape[0], -1)
+    role_bucket_ids = torch.tensor(
+        [_bounded_choice_evidence_ledger_role_bucket(value) for value in option_values],
+        dtype=torch.long,
+        device=option_vectors.device,
+    )
+    role_one_hot = F.one_hot(role_bucket_ids, num_classes=_EVIDENCE_LEDGER_ROLE_COUNT).to(dtype=option_vectors.dtype)
+    return torch.cat(
+        [
+            query_expand,
+            option_vectors,
+            query_expand * option_vectors,
+            torch.abs(query_expand - option_vectors),
+            role_one_hot,
+        ],
+        dim=-1,
+    )
+
+
+def _bounded_choice_semantic_candidate_features(
+    row: dict[str, Any],
+    query: torch.Tensor,
+    option_vectors: torch.Tensor,
+    option_values: list[str],
+    option_records: list[dict[str, Any]] | None = None,
+) -> torch.Tensor:
+    query_vec = query.squeeze(0) if query.dim() == 2 else query
+    query_expand = query_vec.unsqueeze(0).expand(option_vectors.shape[0], -1)
+    records = option_records or [{} for _ in option_values]
+    role_bucket_ids = torch.tensor(
+        [
+            _bounded_choice_evidence_ledger_role_bucket(
+                str(
+                    (record.get("semantic_role") if isinstance(record, dict) else "")
+                    or ((record.get("semantic_candidate") or {}).get("evidence_role") if isinstance(record, dict) else "")
+                    or value
+                )
+            )
+            for value, record in zip(option_values, records)
+        ],
+        dtype=torch.long,
+        device=option_vectors.device,
+    )
+    task_bucket_id = _bounded_choice_semantic_task_bucket(row)
+    task_bucket_ids = torch.full((option_vectors.shape[0],), task_bucket_id, dtype=torch.long, device=option_vectors.device)
+    transition_bucket_ids = torch.tensor(
+        [_bounded_choice_semantic_transition_bucket(value, record if isinstance(record, dict) else None) for value, record in zip(option_values, records)],
+        dtype=torch.long,
+        device=option_vectors.device,
+    )
+    metadata = torch.cat(
+        [
+            F.one_hot(role_bucket_ids, num_classes=_EVIDENCE_LEDGER_ROLE_COUNT),
+            F.one_hot(task_bucket_ids, num_classes=_SEMANTIC_CANDIDATE_TASK_COUNT),
+            F.one_hot(transition_bucket_ids, num_classes=_SEMANTIC_CANDIDATE_TRANSITION_COUNT),
+        ],
+        dim=-1,
+    ).to(dtype=option_vectors.dtype)
+    return torch.cat(
+        [
+            query_expand,
+            option_vectors,
+            query_expand * option_vectors,
+            torch.abs(query_expand - option_vectors),
+            metadata,
+        ],
+        dim=-1,
+    )
+
+
+def _option_text_variant(row: dict[str, Any], source: str) -> str:
+    if source == "encoder_option_retrieval":
+        return "raw_value"
+    if source == "encoder_option_retrieval_conditioned":
+        return "conditioned"
+    if source == "encoder_option_retrieval_verifier_conditioned":
+        if str(row.get("task_type") or _prompt_perspective(row)) == "verifier_outcome_semantic_transition":
+            return "conditioned"
+        return "raw_value"
+    if source == "encoder_option_retrieval_evidence_role_map":
+        return "evidence_citation_role_map_templated"
+    if source == "encoder_option_retrieval_dynamic_productized":
+        current_perspective = _prompt_perspective(row)
+        current_language = _language_family(row)
+        if current_perspective == "evidence_citation":
+            return "evidence_citation_role_map_templated"
+        if current_language == "rust":
+            return "task_role_templated"
+        return "raw_value"
+    if source == "encoder_option_retrieval_evidence_conditioned_gated":
+        if str(row.get("task_type") or _prompt_perspective(row)) == "evidence_citation":
+            return "conditioned"
+        return "raw_value"
+    return "raw_value"
+
+
+def _option_texts_for_source(row: dict[str, Any], option_values: list[str], source: str) -> list[str]:
+    if source in {"encoder_option_retrieval_evidence_fact_text", "encoder_option_retrieval_evidence_fact_pairwise"}:
+        return _evidence_fact_option_texts(row, option_values)
+    variant = _option_text_variant(row, source)
+    if variant == "raw_value":
+        return option_values
+    if variant == "conditioned":
+        return _conditioned_option_texts(row, option_values)
+    perspective = _prompt_perspective(row)
+    texts: list[str] = []
+    for value in option_values:
+        candidate = str(value).strip()
+        if variant == "task_role_templated":
+            if perspective == "evidence_citation":
+                texts.append(f"Visible fact role under review: {candidate}")
+            elif perspective == "verifier_outcome":
+                texts.append(f"Verifier or test target under review: {candidate}")
+            elif perspective == "abstention_insufficient_evidence":
+                texts.append(f"Candidate answer under review: {candidate}")
+            else:
+                texts.append(f"Candidate under review: {candidate}")
+            continue
+        if variant == "evidence_citation_role_map_templated":
+            texts.append(f"Visible fact role under review: {_EVIDENCE_ROLE_MAP.get(candidate, candidate)}")
+            continue
+        texts.append(candidate)
+    return texts
+
+
+def _evidence_fact_option_texts(row: dict[str, Any], option_values: list[str]) -> list[str]:
+    if str(row.get("task_type") or _prompt_perspective(row)) != "evidence_citation":
+        return _option_texts_for_source(row, option_values, "encoder_option_retrieval_verifier_conditioned")
+    projection = row.get("standalone_projection_source") or {}
+    evidence_facts = projection.get("evidence_facts") or {}
+    visible_lines = projection.get("visible_evidence_lines") or []
+    line_by_role: dict[str, str] = {}
+    if isinstance(visible_lines, list):
+        for line in visible_lines:
+            text = str(line).strip()
+            if not text:
+                continue
+            role = text.split("[", 1)[0].split(":", 1)[0].strip()
+            if role:
+                line_by_role.setdefault(role, text)
+    texts: list[str] = []
+    for value in option_values:
+        raw_value = str(value).strip()
+        role = _bounded_choice_role_key(raw_value)
+        embedded_fact = raw_value.split("|", 1)[1].strip() if "|" in raw_value else ""
+        fact = ""
+        if isinstance(evidence_facts, dict):
+            fact = str(evidence_facts.get(role) or "").strip()
+        if not fact:
+            fact = line_by_role.get(role, "")
+        if not fact:
+            fact = embedded_fact
+        role_desc = _EVIDENCE_ROLE_MAP.get(role, role)
+        if fact:
+            texts.append(f"Evidence role: {role_desc}\nVisible evidence item: {fact}")
+        else:
+            texts.append(role)
+    return texts
+
+
+def _bounded_choice_option_logits(
+    *,
+    row: dict[str, Any],
+    tokenizer: Any,
+    source: str,
+    first_step_logits_row: torch.Tensor | None,
+    pooled_row: torch.Tensor | None,
+    model: Any | None,
+    untied_head: torch.nn.Module | None,
+) -> tuple[torch.Tensor | None, list[tuple[str, int]], str | None]:
+    pad_id = int(getattr(tokenizer, "pad_id", 0))
+    bos_id = int(getattr(tokenizer, "bos_id", 1))
+    eos_id = int(getattr(tokenizer, "eos_id", 2))
+    options = (((row.get("standalone_projection_source") or {}).get("opaque_options")) or [])
+    option_pairs: list[tuple[str, int]] = []
+    option_values: list[str] = []
+    option_records: list[dict[str, Any]] = []
+    for option in options:
+        if not isinstance(option, dict):
+            continue
+        label = str(option.get("label") or "").strip()
+        value = str(option.get("value") or "").strip()
+        if not label:
+            continue
+        label_ids = [idx for idx in tokenizer.encode(label, max_length=4) if idx not in {pad_id, bos_id, eos_id}]
+        if len(label_ids) != 1:
+            continue
+        option_pairs.append((label, int(label_ids[0])))
+        option_values.append(value or label)
+        option_records.append(option)
+    if not option_pairs:
+        return None, [], "no_option_pairs"
+    if source == "decoder_first_step":
+        if first_step_logits_row is None:
+            return None, option_pairs, "missing_first_step_logits"
+        option_token_ids = [token_id for _, token_id in option_pairs]
+        return first_step_logits_row[option_token_ids], option_pairs, None
+    if source == "encoder_pooled":
+        if pooled_row is None or model is None or not hasattr(model, "lm_head"):
+            return None, option_pairs, "missing_encoder_pooled_state"
+        option_token_ids = [token_id for _, token_id in option_pairs]
+        return model.lm_head(pooled_row.unsqueeze(0)).squeeze(0)[option_token_ids], option_pairs, None
+    if source == "encoder_pooled_untied_head":
+        if pooled_row is None or untied_head is None:
+            return None, option_pairs, "missing_untied_head_state"
+        option_token_ids = [token_id for _, token_id in option_pairs]
+        return untied_head(pooled_row.unsqueeze(0)).squeeze(0)[option_token_ids], option_pairs, None
+    if source in {
+        "encoder_option_retrieval",
+        "encoder_option_retrieval_conditioned",
+        "encoder_option_retrieval_verifier_conditioned",
+        "encoder_option_retrieval_evidence_role_map",
+        "encoder_option_retrieval_dynamic_productized",
+        "encoder_option_retrieval_role_bias",
+        "encoder_option_retrieval_pairwise",
+        "encoder_option_retrieval_evidence_pairwise_gated",
+        "encoder_option_retrieval_evidence_ledger_head",
+        "encoder_option_retrieval_evidence_role_head",
+        "encoder_option_retrieval_evidence_judgment_head",
+        "encoder_option_retrieval_evidence_conditioned_gated",
+        "encoder_option_retrieval_evidence_fact_text",
+        "encoder_option_retrieval_evidence_fact_pairwise",
+        "encoder_option_retrieval_semantic_candidate_head",
+        "encoder_option_retrieval_web_task_candidate_head",
+        "encoder_option_retrieval_transition_candidate_head",
+        "encoder_option_retrieval_transition_status_head",
+        "encoder_option_retrieval_semantic_plus_transition_status_head",
+        "encoder_option_retrieval_semantic_plus_transition_candidate_head",
+    }:
+        if source == "encoder_option_retrieval_evidence_judgment_head":
+            task = str(row.get("task_type") or _prompt_perspective(row))
+            if task == "evidence_candidate_judgment":
+                if pooled_row is None or model is None:
+                    return None, option_pairs, "missing_judgment_head_state"
+                judgment_head = getattr(model, "bounded_choice_evidence_judgment_head", None)
+                if judgment_head is None:
+                    return None, option_pairs, "missing_evidence_judgment_head"
+                role_logits = judgment_head(pooled_row.unsqueeze(0).float()).squeeze(0)
+                bucket_ids = [_bounded_choice_evidence_judgment_bucket(value) for value in option_values]
+                if any(idx < 0 for idx in bucket_ids):
+                    return None, option_pairs, "unsupported_evidence_judgment_option_value"
+                return role_logits[torch.tensor(bucket_ids, dtype=torch.long, device=role_logits.device)], option_pairs, None
+            return _bounded_choice_option_logits(
+                row=row,
+                tokenizer=tokenizer,
+                source="encoder_option_retrieval_verifier_conditioned",
+                first_step_logits_row=first_step_logits_row,
+                pooled_row=pooled_row,
+                model=model,
+                untied_head=untied_head,
+            )
+        if pooled_row is None or model is None or not hasattr(model, "encode_pooled"):
+            return None, option_pairs, "missing_option_retrieval_state"
+        option_texts = _option_texts_for_source(row, option_values, source)
+        option_vectors = _encode_option_text_pool(
+            model=model,
+            tokenizer=tokenizer,
+            texts=option_texts,
+            device=pooled_row.device,
+        )
+        if option_vectors is None:
+            return None, option_pairs, "missing_option_vectors"
+        query = pooled_row.unsqueeze(0)
+        retrieval_query_head = getattr(model, "retrieval_query_head", None)
+        retrieval_doc_head = getattr(model, "retrieval_doc_head", None)
+        if retrieval_query_head is not None:
+            query = retrieval_query_head(query)
+        if retrieval_doc_head is not None:
+            option_vectors = retrieval_doc_head(option_vectors)
+        query = F.normalize(query.float(), dim=-1)
+        option_vectors = F.normalize(option_vectors.float(), dim=-1)
+        logits = torch.matmul(query, option_vectors.transpose(0, 1)).squeeze(0)
+        use_pairwise_head = source == "encoder_option_retrieval_pairwise" or (
+            source == "encoder_option_retrieval_evidence_pairwise_gated"
+            and str(row.get("task_type") or _prompt_perspective(row)) == "evidence_citation"
+        )
+        use_evidence_fact_pair_head = (
+            source == "encoder_option_retrieval_evidence_fact_pairwise"
+            and str(row.get("task_type") or _prompt_perspective(row)) == "evidence_citation"
+        )
+        if use_pairwise_head:
+            pair_head = getattr(model, "bounded_choice_pair_head", None)
+            if pair_head is None:
+                return None, option_pairs, "missing_pairwise_head"
+            pair_features = _bounded_choice_pairwise_features(query, option_vectors, option_values)
+            logits = logits + pair_head(pair_features).squeeze(-1)
+        if use_evidence_fact_pair_head:
+            fact_pair_head = getattr(model, "bounded_choice_evidence_fact_pair_head", None)
+            if fact_pair_head is None:
+                return None, option_pairs, "missing_evidence_fact_pair_head"
+            fact_pair_features = _bounded_choice_evidence_ledger_features(query, option_vectors, option_values)
+            logits = logits + fact_pair_head(fact_pair_features).squeeze(-1)
+        if source in {"encoder_option_retrieval_semantic_candidate_head", "encoder_option_retrieval_semantic_plus_transition_candidate_head"}:
+            semantic_head = getattr(model, "bounded_choice_semantic_candidate_head", None)
+            if semantic_head is None:
+                return None, option_pairs, "missing_semantic_candidate_head"
+            semantic_features = _bounded_choice_semantic_candidate_features(row, query, option_vectors, option_values, option_records)
+            logits = logits + semantic_head(semantic_features).squeeze(-1)
+        if source == "encoder_option_retrieval_web_task_candidate_head":
+            web_head = getattr(model, "bounded_choice_web_task_candidate_head", None)
+            if web_head is None:
+                return None, option_pairs, "missing_web_task_candidate_head"
+            web_features = _bounded_choice_semantic_candidate_features(row, query, option_vectors, option_values, option_records)
+            logits = logits + web_head(web_features).squeeze(-1)
+        if source in {"encoder_option_retrieval_transition_status_head", "encoder_option_retrieval_semantic_plus_transition_status_head"} and _transition_status_control_task(row):
+            status_head = getattr(model, "bounded_choice_transition_status_head", None)
+            if status_head is None:
+                return None, option_pairs, "missing_transition_status_head"
+            status_features = _bounded_choice_transition_candidate_features(row, query, option_vectors, option_values, option_records)
+            logits = logits + status_head(status_features).squeeze(-1)
+        if source == "encoder_option_retrieval_semantic_plus_transition_status_head" and not _transition_status_control_task(row):
+            semantic_head = getattr(model, "bounded_choice_semantic_candidate_head", None)
+            if semantic_head is None:
+                return None, option_pairs, "missing_semantic_candidate_head"
+            semantic_features = _bounded_choice_semantic_candidate_features(row, query, option_vectors, option_values, option_records)
+            logits = logits + semantic_head(semantic_features).squeeze(-1)
+        if source in {"encoder_option_retrieval_transition_candidate_head", "encoder_option_retrieval_semantic_plus_transition_candidate_head"}:
+            transition_head = getattr(model, "bounded_choice_transition_candidate_head", None)
+            if transition_head is None:
+                return None, option_pairs, "missing_transition_candidate_head"
+            transition_features = _bounded_choice_transition_candidate_features(row, query, option_vectors, option_values, option_records)
+            logits = logits + transition_head(transition_features).squeeze(-1)
+        if source == "encoder_option_retrieval_evidence_ledger_head" and str(row.get("task_type") or _prompt_perspective(row)) == "evidence_citation":
+            evidence_head = getattr(model, "bounded_choice_evidence_ledger_head", None)
+            if evidence_head is None:
+                return None, option_pairs, "missing_evidence_ledger_head"
+            evidence_features = _bounded_choice_evidence_ledger_features(query, option_vectors, option_values)
+            logits = logits + evidence_head(evidence_features).squeeze(-1)
+        if source == "encoder_option_retrieval_evidence_role_head" and str(row.get("task_type") or _prompt_perspective(row)) == "evidence_citation":
+            role_head = getattr(model, "bounded_choice_evidence_role_head", None)
+            if role_head is None:
+                return None, option_pairs, "missing_evidence_role_head"
+            role_logits = role_head(pooled_row.unsqueeze(0).float()).squeeze(0)
+            role_bucket_ids = torch.tensor(
+                [_bounded_choice_evidence_ledger_role_bucket(value) for value in option_values],
+                dtype=torch.long,
+                device=role_logits.device,
+            )
+            logits = role_logits[role_bucket_ids]
+        if source == "encoder_option_retrieval_role_bias":
+            role_head = getattr(model, "bounded_choice_role_head", None)
+            if role_head is None:
+                return None, option_pairs, "missing_role_bias_head"
+            role_logits = role_head(pooled_row.unsqueeze(0).float()).squeeze(0)
+            role_bucket_ids = torch.tensor(
+                [_bounded_choice_role_bucket(value) for value in option_values],
+                dtype=torch.long,
+                device=role_logits.device,
+            )
+            logits = logits + role_logits[role_bucket_ids]
+        return logits, option_pairs, None
+    return None, option_pairs, f"unsupported_source::{source}"
+
+
+def _bounded_choice_aux_loss(
+    *,
+    first_step_logits: torch.Tensor | None,
+    pooled: torch.Tensor | None,
+    rows: list[dict[str, Any]],
+    tokenizer: Any,
+    source: str = "decoder_first_step",
+    model: Any | None = None,
+    untied_head: torch.nn.Module | None = None,
+) -> tuple[torch.Tensor | None, dict[str, Any]]:
+    losses: list[torch.Tensor] = []
+    applicable_rows = 0
+    skipped_rows = 0
+    target_rank_1_rows = 0
+    for row_idx, row in enumerate(rows):
+        target_text = _bounded_choice_target_label(row).strip()
+        option_logits, option_pairs, skip_reason = _bounded_choice_option_logits(
+            row=row,
+            tokenizer=tokenizer,
+            source=source,
+            first_step_logits_row=(first_step_logits[row_idx] if first_step_logits is not None else None),
+            pooled_row=(pooled[row_idx] if pooled is not None else None),
+            model=model,
+            untied_head=untied_head,
+        )
+        if option_logits is None:
+            skipped_rows += 1
+            continue
+        target_index = next((idx for idx, (label, _) in enumerate(option_pairs) if label == target_text), None)
+        if target_index is None:
+            skipped_rows += 1
+            continue
+        applicable_rows += 1
+        target_tensor = torch.tensor([target_index], dtype=torch.long, device=option_logits.device)
+        losses.append(F.cross_entropy(option_logits.unsqueeze(0), target_tensor, reduction="mean"))
+        if int(torch.argmax(option_logits).item()) == target_index:
+            target_rank_1_rows += 1
+    if not losses:
+        return None, {
+            "applicable_rows": 0,
+            "skipped_rows": skipped_rows,
+            "source": source,
+            "target_rank_1_rows": 0,
+            "target_rank_1_rate": None,
+        }
+    loss = torch.stack(losses).mean()
+    return loss, {
+        "applicable_rows": applicable_rows,
+        "skipped_rows": skipped_rows,
+        "source": source,
+        "target_rank_1_rows": target_rank_1_rows,
+        "target_rank_1_rate": (target_rank_1_rows / applicable_rows) if applicable_rows else None,
+    }
+
+
+def _bounded_choice_root_group_key(row: dict[str, Any]) -> str:
+    for key in ("rollout_group_id", "root_group_id", "root_id", "root_lineage_key"):
+        value = str(row.get(key) or "").strip()
+        if value:
+            return value
+    return str(row.get("row_id") or "unknown")
+
+
+def _bounded_choice_root_group_aux_loss(
+    *,
+    first_step_logits: torch.Tensor | None,
+    pooled: torch.Tensor | None,
+    rows: list[dict[str, Any]],
+    tokenizer: Any,
+    source: str = "decoder_first_step",
+    model: Any | None = None,
+    untied_head: torch.nn.Module | None = None,
+) -> tuple[torch.Tensor | None, dict[str, Any]]:
+    """Bounded-choice CE averaged by root/group before averaging across groups.
+
+    This prevents one materialized root with many perspective projections from
+    dominating a batch. It is intentionally opt-in so older row-wise probes keep
+    their exact behavior.
+    """
+    grouped_losses: dict[str, list[torch.Tensor]] = {}
+    grouped_counts: dict[str, int] = {}
+    grouped_rank1: dict[str, int] = {}
+    skipped_rows = 0
+    applicable_rows = 0
+    target_rank_1_rows = 0
+    for row_idx, row in enumerate(rows):
+        target_text = _bounded_choice_target_label(row).strip()
+        option_logits, option_pairs, skip_reason = _bounded_choice_option_logits(
+            row=row,
+            tokenizer=tokenizer,
+            source=source,
+            first_step_logits_row=(first_step_logits[row_idx] if first_step_logits is not None else None),
+            pooled_row=(pooled[row_idx] if pooled is not None else None),
+            model=model,
+            untied_head=untied_head,
+        )
+        if option_logits is None:
+            skipped_rows += 1
+            continue
+        target_index = next((idx for idx, (label, _) in enumerate(option_pairs) if label == target_text), None)
+        if target_index is None:
+            skipped_rows += 1
+            continue
+        group_key = _bounded_choice_root_group_key(row)
+        target_tensor = torch.tensor([target_index], dtype=torch.long, device=option_logits.device)
+        grouped_losses.setdefault(group_key, []).append(F.cross_entropy(option_logits.unsqueeze(0), target_tensor, reduction="mean"))
+        grouped_counts[group_key] = grouped_counts.get(group_key, 0) + 1
+        applicable_rows += 1
+        if int(torch.argmax(option_logits).item()) == target_index:
+            grouped_rank1[group_key] = grouped_rank1.get(group_key, 0) + 1
+            target_rank_1_rows += 1
+    if not grouped_losses:
+        return None, {
+            "applicable_rows": 0,
+            "skipped_rows": skipped_rows,
+            "source": source,
+            "root_group_count": 0,
+            "target_rank_1_rows": 0,
+            "target_rank_1_rate": None,
+            "root_group_sizes": {},
+        }
+    group_mean_losses = [torch.stack(losses).mean() for losses in grouped_losses.values()]
+    loss = torch.stack(group_mean_losses).mean()
+    return loss, {
+        "applicable_rows": applicable_rows,
+        "skipped_rows": skipped_rows,
+        "source": source,
+        "root_group_count": len(grouped_losses),
+        "target_rank_1_rows": target_rank_1_rows,
+        "target_rank_1_rate": (target_rank_1_rows / applicable_rows) if applicable_rows else None,
+        "root_group_sizes": grouped_counts,
+        "root_group_rank1": grouped_rank1,
+    }
+
+
+def _bounded_choice_option_role(option: dict[str, Any], value: str) -> str:
+    for key in ("semantic_role", "role", "evidence_role"):
+        role = str(option.get(key) or "").strip()
+        if role:
+            return role
+    semantic_candidate = option.get("semantic_candidate")
+    if isinstance(semantic_candidate, dict):
+        for key in ("role", "evidence_role"):
+            role = str(semantic_candidate.get(key) or "").strip()
+            if role:
+                return role
+    candidate_object = option.get("canonical_candidate_object")
+    if isinstance(candidate_object, dict):
+        role = str(candidate_object.get("role") or "").strip()
+        if role:
+            return role
+    if value.startswith("role="):
+        role = value.split(";", 1)[0].split("=", 1)[-1].strip()
+        if role:
+            return role
+    return ""
+
+
+def _bounded_choice_option_canonical_value(option: dict[str, Any], value: str) -> str:
+    semantic_candidate = option.get("semantic_candidate")
+    if isinstance(semantic_candidate, dict):
+        for key in ("canonical_value", "option_value", "verifier_transition"):
+            candidate_value = str(semantic_candidate.get(key) or "").strip()
+            if candidate_value:
+                return candidate_value
+    candidate_object = option.get("canonical_candidate_object")
+    if isinstance(candidate_object, dict):
+        candidate_value = str(candidate_object.get("value") or "").strip()
+        if candidate_value:
+            return candidate_value
+    if " value=" in f" {value}":
+        for part in value.split(";"):
+            part = part.strip()
+            if part.startswith("value="):
+                candidate_value = part.split("=", 1)[-1].strip()
+                if candidate_value:
+                    return candidate_value
+    return value
+
+
+def _bounded_choice_option_entries(row: dict[str, Any]) -> list[dict[str, str]]:
+    options = (((row.get("standalone_projection_source") or {}).get("opaque_options")) or [])
+    out: list[dict[str, str]] = []
+    for option in options:
+        if not isinstance(option, dict):
+            continue
+        label = str(option.get("label") or "").strip()
+        value = str(option.get("value") or "").strip()
+        semantic_role = _bounded_choice_option_role(option, value)
+        canonical_value = _bounded_choice_option_canonical_value(option, value)
+        text = str(option.get("text") or "").strip()
+        if label:
+            out.append({"label": label, "value": value, "canonical_value": canonical_value, "semantic_role": semantic_role, "text": text})
+    return out
+
+
+def _bounded_choice_entry_role(entry: dict[str, str]) -> str:
+    role = str(entry.get("semantic_role") or "").strip()
+    if role:
+        return role
+    value = str(entry.get("value") or "").strip()
+    if value == "ABSTAIN_INSUFFICIENT_EVIDENCE":
+        return "abstain_insufficient_evidence"
+    return value
+
+
+def _bounded_choice_contrast_spec(row: dict[str, Any]) -> dict[str, str] | None:
+    entries = _bounded_choice_option_entries(row)
+    if not entries:
+        return None
+    target_label = _bounded_choice_target_label(row).strip()
+    if not target_label:
+        return None
+
+    role_to_label: dict[str, str] = {}
+    label_to_role: dict[str, str] = {}
+    label_to_value: dict[str, str] = {}
+    value_to_label: dict[str, str] = {}
+    for entry in entries:
+        label = str(entry.get("label") or "").strip()
+        role = _bounded_choice_entry_role(entry)
+        canonical_value = str(entry.get("canonical_value") or entry.get("value") or "").strip()
+        if not label or not role:
+            continue
+        role_to_label.setdefault(role, label)
+        label_to_role[label] = role
+        if canonical_value:
+            normalized_value = canonical_value.lower()
+            label_to_value[label] = normalized_value
+            value_to_label.setdefault(normalized_value, label)
+
+    target_role = label_to_role.get(target_label)
+    if not target_role:
+        return None
+
+    task = str(row.get("task_type") or _prompt_perspective(row)).strip()
+    target_value = label_to_value.get(target_label, "")
+    transition_value_priorities: dict[str, dict[str, list[str]]] = {
+        "transition_next_action": {
+            "localize_failure": ["retrieve_evidence", "bind_symbol", "select_test", "plan_patch"],
+            "retrieve_evidence": ["plan_patch", "select_test", "localize_failure", "verify_result"],
+            "select_test": ["verify_result", "retrieve_evidence", "plan_patch", "localize_failure"],
+            "plan_patch": ["apply_patch_abstract", "verify_result", "retrieve_evidence", "select_test"],
+            "abstain_or_rollback": ["plan_patch", "apply_patch_abstract", "verify_result", "retrieve_evidence"],
+        },
+        "transition_verifier_transition": {
+            "pass_current_state": ["pass_to_pass", "fail_to_pass", "not_exercised", "insufficient_evidence"],
+            "pass_current_build_and_run": ["pass_current_build", "pass_current_state", "fail_to_pass", "insufficient_evidence"],
+            "pass_current_build": ["pass_current_build_and_run", "pass_current_state", "fail_to_pass", "insufficient_evidence"],
+            "verifier_removed": ["pass_current_state", "insufficient_evidence", "not_exercised", "fail_to_pass"],
+            "fail_to_pass": ["pass_current_state", "pass_to_pass", "fail_to_fail", "not_exercised"],
+            "fail_to_fail": ["fail_to_pass", "pass_current_state", "not_exercised", "insufficient_evidence"],
+            "not_exercised": ["pass_current_state", "fail_to_pass", "pass_to_pass", "insufficient_evidence"],
+            "insufficient_evidence": ["pass_current_state", "not_exercised", "fail_to_pass", "pass_to_pass"],
+        },
+        "transition_continue_or_stop": {
+            "continue": ["finish", "abstain", "retrieve_more"],
+            "abstain": ["continue", "finish", "retrieve_more"],
+            "retrieve_more": ["continue", "finish", "abstain"],
+            "finish": ["continue", "retrieve_more", "abstain"],
+        },
+    }
+    if task in transition_value_priorities:
+        for contrast_value in transition_value_priorities[task].get(target_value, []):
+            contrast_label = value_to_label.get(contrast_value)
+            if not contrast_label or contrast_label == target_label:
+                continue
+            return {
+                "family": f"{task}:{target_value}_vs_{contrast_value}",
+                "target_label": target_label,
+                "contrast_label": contrast_label,
+                "target_value": target_value,
+                "contrast_value": contrast_value,
+            }
+
+    verifier_value_priorities: dict[str, list[str]] = {
+        "pass_targeted_test_selection": [
+            "fail_targeted_test_selection",
+            "fails_before_assertion",
+            "fails_before_assertions",
+            "fail_before_assertions",
+            "fail_before_assertion",
+            "not_exercised_by_selected_test",
+            "abstain_insufficient_evidence",
+        ],
+        "fail_targeted_test_selection": [
+            "pass_targeted_test_selection",
+            "not_exercised_by_selected_test",
+            "fails_before_assertion",
+            "fails_before_assertions",
+            "fail_before_assertions",
+            "fail_before_assertion",
+            "abstain_insufficient_evidence",
+        ],
+        "not_exercised_by_selected_test": [
+            "pass_targeted_test_selection",
+            "fail_targeted_test_selection",
+            "fails_before_assertion",
+            "fails_before_assertions",
+            "fail_before_assertions",
+            "fail_before_assertion",
+            "abstain_insufficient_evidence",
+        ],
+    }
+    if task in {"verifier_outcome", "verifier_outcome_semantic_transition"} and target_role == "verifier_and_test_constraint":
+        for contrast_value in verifier_value_priorities.get(target_value, []):
+            contrast_label = value_to_label.get(contrast_value)
+            if not contrast_label or contrast_label == target_label:
+                continue
+            return {
+                "family": f"{task}:{target_value}_vs_{contrast_value}",
+                "target_label": target_label,
+                "contrast_label": contrast_label,
+                "target_value": target_value,
+                "contrast_value": contrast_value,
+            }
+
+    hard_negative_priorities: dict[str, list[str]] = {
+        "evidence_citation": [
+            "candidate_change_surface",
+            "verifier_and_test_constraint",
+            "symptom_or_call_path_analogue",
+            "abstain_insufficient_evidence",
+        ],
+        "symptom_localization": [
+            "symptom_or_call_path_analogue",
+            "candidate_change_surface",
+            "verifier_and_test_constraint",
+            "abstain_insufficient_evidence",
+        ],
+        "minimal_fix_selection": [
+            "candidate_change_surface",
+            "symptom_or_call_path_analogue",
+            "verifier_and_test_constraint",
+            "abstain_insufficient_evidence",
+        ],
+        "patch_impact": [
+            "candidate_change_surface",
+            "verifier_and_test_constraint",
+            "symptom_or_call_path_analogue",
+            "abstain_insufficient_evidence",
+        ],
+        "verifier_outcome": [
+            "verifier_and_test_constraint",
+            "candidate_change_surface",
+            "symptom_or_call_path_analogue",
+            "abstain_insufficient_evidence",
+        ],
+        "verifier_outcome_semantic_transition": [
+            "verifier_and_test_constraint",
+            "candidate_change_surface",
+            "symptom_or_call_path_analogue",
+            "abstain_insufficient_evidence",
+        ],
+        "alternative_hypothesis_elimination": [
+            "verifier_and_test_constraint",
+            "symptom_or_call_path_analogue",
+            "candidate_change_surface",
+            "abstain_insufficient_evidence",
+        ],
+        "abstention_insufficient_evidence": [
+            "abstain_insufficient_evidence",
+            "verifier_and_test_constraint",
+            "candidate_change_surface",
+            "symptom_or_call_path_analogue",
+        ],
+        "transition_candidate_selection": [
+            "verifier_and_test_constraint",
+            "verifier_and_build_constraint",
+            "selected_test_anchor",
+            "selected_inline_test_anchor",
+            "selected_function_test_anchor",
+            "candidate_change_surface",
+            "implementation_only_no_verifier",
+            "abstain_insufficient_evidence",
+        ],
+    }
+    priorities = hard_negative_priorities.get(task)
+    if not priorities:
+        return None
+    for contrast_role in priorities:
+        if contrast_role == target_role:
+            continue
+        contrast_label = role_to_label.get(contrast_role)
+        if not contrast_label or contrast_label == target_label:
+            continue
+        return {
+            "family": f"{task}:{target_role}_vs_{contrast_role}",
+            "target_label": target_label,
+            "contrast_label": contrast_label,
+            "target_value": target_role,
+            "contrast_value": contrast_role,
+        }
+    return None
+
+
+def _bounded_choice_contrastive_margin_loss(
+    *,
+    first_step_logits: torch.Tensor | None,
+    pooled: torch.Tensor | None,
+    rows: list[dict[str, Any]],
+    tokenizer: Any,
+    source: str = "decoder_first_step",
+    model: Any | None = None,
+    untied_head: torch.nn.Module | None = None,
+    margin: float = 0.05,
+) -> tuple[torch.Tensor | None, dict[str, Any]]:
+    losses: list[torch.Tensor] = []
+    applicable_rows = 0
+    skipped_rows = 0
+    satisfied_rows = 0
+    families: dict[str, int] = {}
+    for row_idx, row in enumerate(rows):
+        contrast = _bounded_choice_contrast_spec(row)
+        if contrast is None:
+            skipped_rows += 1
+            continue
+        option_logits, option_pairs, _ = _bounded_choice_option_logits(
+            row=row,
+            tokenizer=tokenizer,
+            source=source,
+            first_step_logits_row=(first_step_logits[row_idx] if first_step_logits is not None else None),
+            pooled_row=(pooled[row_idx] if pooled is not None else None),
+            model=model,
+            untied_head=untied_head,
+        )
+        if option_logits is None:
+            skipped_rows += 1
+            continue
+        label_to_index = {label: idx for idx, (label, _) in enumerate(option_pairs)}
+        target_index = label_to_index.get(contrast["target_label"])
+        contrast_index = label_to_index.get(contrast["contrast_label"])
+        if target_index is None or contrast_index is None:
+            skipped_rows += 1
+            continue
+        applicable_rows += 1
+        families[contrast["family"]] = families.get(contrast["family"], 0) + 1
+        target_logit = option_logits[target_index]
+        contrast_logit = option_logits[contrast_index]
+        if float((target_logit - contrast_logit).detach().item()) >= float(margin):
+            satisfied_rows += 1
+        losses.append(torch.relu(contrast_logit - target_logit + float(margin)))
+    if not losses:
+        return None, {
+            "applicable_rows": 0,
+            "skipped_rows": skipped_rows,
+            "source": source,
+            "margin": float(margin),
+            "margin_satisfied_rows": 0,
+            "margin_satisfied_rate": None,
+            "contrast_families": families,
+        }
+    loss = torch.stack(losses).mean()
+    return loss, {
+        "applicable_rows": applicable_rows,
+        "skipped_rows": skipped_rows,
+        "source": source,
+        "margin": float(margin),
+        "margin_satisfied_rows": satisfied_rows,
+        "margin_satisfied_rate": (satisfied_rows / applicable_rows) if applicable_rows else None,
+        "contrast_families": families,
+    }
+
+
+def _bounded_choice_same_role_listwise_loss(
+    *,
+    first_step_logits: torch.Tensor | None,
+    pooled: torch.Tensor | None,
+    rows: list[dict[str, Any]],
+    tokenizer: Any,
+    source: str = "decoder_first_step",
+    model: Any | None = None,
+    untied_head: torch.nn.Module | None = None,
+) -> tuple[torch.Tensor | None, dict[str, Any]]:
+    losses: list[torch.Tensor] = []
+    applicable_rows = 0
+    skipped_rows = 0
+    target_rank1_rows = 0
+    families: dict[str, int] = {}
+    target_values: dict[str, int] = {}
+    candidate_set_sizes: dict[str, int] = {}
+    for row_idx, row in enumerate(rows):
+        task = str(row.get("task_type") or _prompt_perspective(row)).strip()
+        entries = _bounded_choice_option_entries(row)
+        target_label = _bounded_choice_target_label(row).strip()
+        if not entries or not target_label:
+            skipped_rows += 1
+            continue
+        label_to_entry = {str(entry.get("label") or "").strip(): entry for entry in entries}
+        target_entry = label_to_entry.get(target_label)
+        if target_entry is None:
+            skipped_rows += 1
+            continue
+        target_role = _bounded_choice_entry_role(target_entry)
+        if not target_role:
+            skipped_rows += 1
+            continue
+        same_role_labels = [
+            str(entry.get("label") or "").strip()
+            for entry in entries
+            if _bounded_choice_entry_role(entry) == target_role
+        ]
+        same_role_labels = [label for label in same_role_labels if label]
+        if target_label not in same_role_labels or len(same_role_labels) < 2:
+            skipped_rows += 1
+            continue
+        option_logits, option_pairs, _ = _bounded_choice_option_logits(
+            row=row,
+            tokenizer=tokenizer,
+            source=source,
+            first_step_logits_row=(first_step_logits[row_idx] if first_step_logits is not None else None),
+            pooled_row=(pooled[row_idx] if pooled is not None else None),
+            model=model,
+            untied_head=untied_head,
+        )
+        if option_logits is None:
+            skipped_rows += 1
+            continue
+        label_to_index = {label: idx for idx, (label, _) in enumerate(option_pairs)}
+        same_role_indices = [label_to_index[label] for label in same_role_labels if label in label_to_index]
+        target_index = label_to_index.get(target_label)
+        if target_index is None or target_index not in same_role_indices or len(same_role_indices) < 2:
+            skipped_rows += 1
+            continue
+        local_target_index = same_role_indices.index(target_index)
+        local_logits = option_logits[same_role_indices].unsqueeze(0)
+        target_tensor = torch.tensor([local_target_index], dtype=torch.long, device=local_logits.device)
+        losses.append(F.cross_entropy(local_logits.float(), target_tensor))
+        applicable_rows += 1
+        if int(torch.argmax(local_logits.detach(), dim=-1).item()) == local_target_index:
+            target_rank1_rows += 1
+        family = f"{task}:{target_role}"
+        families[family] = families.get(family, 0) + 1
+        candidate_set_sizes[str(len(same_role_indices))] = candidate_set_sizes.get(str(len(same_role_indices)), 0) + 1
+        value = str(target_entry.get("canonical_value") or target_entry.get("value") or "unknown").lower()
+        target_values[value] = target_values.get(value, 0) + 1
+    if not losses:
+        return None, {
+            "applicable_rows": 0,
+            "skipped_rows": skipped_rows,
+            "source": source,
+            "target_rank1_rows": 0,
+            "target_rank1_rate": None,
+            "families": families,
+            "target_values": target_values,
+            "candidate_set_sizes": candidate_set_sizes,
+        }
+    loss = torch.stack(losses).mean()
+    return loss, {
+        "applicable_rows": applicable_rows,
+        "skipped_rows": skipped_rows,
+        "source": source,
+        "target_rank1_rows": target_rank1_rows,
+        "target_rank1_rate": (target_rank1_rows / applicable_rows) if applicable_rows else None,
+        "families": families,
+        "target_values": target_values,
+        "candidate_set_sizes": candidate_set_sizes,
+    }
+
+
+def _bounded_choice_verifier_value_listwise_loss(
+    *,
+    first_step_logits: torch.Tensor | None,
+    pooled: torch.Tensor | None,
+    rows: list[dict[str, Any]],
+    tokenizer: Any,
+    source: str = "decoder_first_step",
+    model: Any | None = None,
+    untied_head: torch.nn.Module | None = None,
+) -> tuple[torch.Tensor | None, dict[str, Any]]:
+    losses: list[torch.Tensor] = []
+    applicable_rows = 0
+    skipped_rows = 0
+    target_rank1_rows = 0
+    target_values: dict[str, int] = {}
+    candidate_set_sizes: dict[str, int] = {}
+    for row_idx, row in enumerate(rows):
+        task = str(row.get("task_type") or _prompt_perspective(row)).strip()
+        verifier_role = "verifier_transition_status" if task == "transition_verifier_transition" else "verifier_and_test_constraint"
+        if task not in {"verifier_outcome", "verifier_outcome_semantic_transition", "transition_verifier_transition"}:
+            skipped_rows += 1
+            continue
+        entries = _bounded_choice_option_entries(row)
+        target_label = _bounded_choice_target_label(row).strip()
+        if not entries or not target_label:
+            skipped_rows += 1
+            continue
+        verifier_labels = [
+            str(entry.get("label") or "").strip()
+            for entry in entries
+            if _bounded_choice_entry_role(entry) == verifier_role
+        ]
+        verifier_labels = [label for label in verifier_labels if label]
+        if target_label not in verifier_labels or len(verifier_labels) < 2:
+            skipped_rows += 1
+            continue
+        option_logits, option_pairs, _ = _bounded_choice_option_logits(
+            row=row,
+            tokenizer=tokenizer,
+            source=source,
+            first_step_logits_row=(first_step_logits[row_idx] if first_step_logits is not None else None),
+            pooled_row=(pooled[row_idx] if pooled is not None else None),
+            model=model,
+            untied_head=untied_head,
+        )
+        if option_logits is None:
+            skipped_rows += 1
+            continue
+        label_to_index = {label: idx for idx, (label, _) in enumerate(option_pairs)}
+        verifier_indices = [label_to_index[label] for label in verifier_labels if label in label_to_index]
+        target_index = label_to_index.get(target_label)
+        if target_index is None or target_index not in verifier_indices or len(verifier_indices) < 2:
+            skipped_rows += 1
+            continue
+        local_target_index = verifier_indices.index(target_index)
+        local_logits = option_logits[verifier_indices].unsqueeze(0)
+        target_tensor = torch.tensor([local_target_index], dtype=torch.long, device=local_logits.device)
+        losses.append(F.cross_entropy(local_logits.float(), target_tensor))
+        applicable_rows += 1
+        if int(torch.argmax(local_logits.detach(), dim=-1).item()) == local_target_index:
+            target_rank1_rows += 1
+        candidate_set_sizes[str(len(verifier_indices))] = candidate_set_sizes.get(str(len(verifier_indices)), 0) + 1
+        for entry in entries:
+            if str(entry.get("label") or "").strip() == target_label:
+                value = str(entry.get("canonical_value") or entry.get("value") or "unknown").lower()
+                target_values[value] = target_values.get(value, 0) + 1
+                break
+    if not losses:
+        return None, {
+            "applicable_rows": 0,
+            "skipped_rows": skipped_rows,
+            "source": source,
+            "target_rank1_rows": 0,
+            "target_rank1_rate": None,
+            "target_values": target_values,
+            "candidate_set_sizes": candidate_set_sizes,
+        }
+    loss = torch.stack(losses).mean()
+    return loss, {
+        "applicable_rows": applicable_rows,
+        "skipped_rows": skipped_rows,
+        "source": source,
+        "target_rank1_rows": target_rank1_rows,
+        "target_rank1_rate": (target_rank1_rows / applicable_rows) if applicable_rows else None,
+        "target_values": target_values,
+        "candidate_set_sizes": candidate_set_sizes,
+    }
+
+
+def _bounded_choice_preservation_loss(
+    *,
+    current_first_step_logits: torch.Tensor | None,
+    current_pooled: torch.Tensor | None,
+    reference_first_step_logits: torch.Tensor | None,
+    reference_pooled: torch.Tensor | None,
+    rows: list[dict[str, Any]],
+    tokenizer: Any,
+    source: str,
+    current_model: Any | None,
+    reference_model: Any | None,
+    current_untied_head: torch.nn.Module | None = None,
+    reference_untied_head: torch.nn.Module | None = None,
+    exempt_rows: torch.Tensor | None = None,
+) -> tuple[torch.Tensor | None, dict[str, Any]]:
+    losses: list[torch.Tensor] = []
+    applicable_rows = 0
+    exempt_count = 0
+    skipped_rows = 0
+    for row_idx, row in enumerate(rows):
+        if exempt_rows is not None and bool(exempt_rows[row_idx].item()):
+            exempt_count += 1
+            continue
+        current_option_logits, option_pairs, _ = _bounded_choice_option_logits(
+            row=row,
+            tokenizer=tokenizer,
+            source=source,
+            first_step_logits_row=(current_first_step_logits[row_idx] if current_first_step_logits is not None else None),
+            pooled_row=(current_pooled[row_idx] if current_pooled is not None else None),
+            model=current_model,
+            untied_head=current_untied_head,
+        )
+        reference_option_logits, _, _ = _bounded_choice_option_logits(
+            row=row,
+            tokenizer=tokenizer,
+            source=source,
+            first_step_logits_row=(reference_first_step_logits[row_idx] if reference_first_step_logits is not None else None),
+            pooled_row=(reference_pooled[row_idx] if reference_pooled is not None else None),
+            model=reference_model,
+            untied_head=reference_untied_head,
+        )
+        if current_option_logits is None or reference_option_logits is None or not option_pairs:
+            skipped_rows += 1
+            continue
+        applicable_rows += 1
+        current_log_probs = F.log_softmax(current_option_logits.unsqueeze(0), dim=-1)
+        reference_probs = F.softmax(reference_option_logits.unsqueeze(0), dim=-1)
+        losses.append(F.kl_div(current_log_probs, reference_probs, reduction="batchmean"))
+    if not losses:
+        return None, {
+            "applicable_rows": 0,
+            "skipped_rows": skipped_rows,
+            "exempt_rows": exempt_count,
+            "source": source,
+        }
+    return torch.stack(losses).mean(), {
+        "applicable_rows": applicable_rows,
+        "skipped_rows": skipped_rows,
+        "exempt_rows": exempt_count,
+        "source": source,
+    }
+
+
 def _post_prefix_loss_mask(labels: torch.Tensor, rows: list[dict[str, Any]], *, tokenizer: Any, generation_prefix_field: str | None) -> torch.Tensor | None:
     if not generation_prefix_field:
         return None
@@ -341,8 +1943,19 @@ def _field_telemetry_record(*, row_id: str, split: str, field: str, target: str,
     }
 
 
-def _is_short_or_junk(text: str) -> bool:
+def _looks_like_compact_choice_label(text: str) -> bool:
     stripped = text.strip()
+    if not (1 <= len(stripped) <= 2):
+        return False
+    return all(ch.isalpha() and ch.isupper() for ch in stripped)
+
+
+def _is_short_or_junk(text: str, *, target_text: str = "") -> bool:
+    stripped = text.strip()
+    target = target_text.strip()
+    # Opaque bounded-choice probes legitimately expect one-token labels.
+    if _looks_like_compact_choice_label(stripped) and _looks_like_compact_choice_label(target):
+        return False
     if len(stripped) < 8:
         return True
     alnum = {ch.lower() for ch in stripped if ch.isalnum()}
@@ -442,8 +2055,13 @@ def _generate_greedy_text(
     generation_prefix_field: str | None = None,
     generation_repetition_guard: bool = False,
     generation_repetition_guard_top_k: int = 16,
+    decoder_ce_weight: float = 1.0,
+    bounded_choice_aux_weight: float = 0.0,
+    bounded_choice_aux_source: str = "decoder_first_step",
 ) -> dict[str, Any]:
     batch = build_batch([row], max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=2, tokenizer=tokenizer)
+    model_device = next(model.parameters()).device
+    batch = _move_manifest_batch(batch, model_device)
     bos_id = int(getattr(tokenizer, "bos_id", 1))
     eos_id = int(getattr(tokenizer, "eos_id", 2))
     pad_id = int(getattr(tokenizer, "pad_id", 0))
@@ -558,12 +2176,237 @@ def _generate_greedy_text(
         "eos_position": eos_position,
         "stopped_on_eos": eos_position is not None,
         "empty_output": not stripped,
-        "short_or_junk": _is_short_or_junk(text),
+        "short_or_junk": _is_short_or_junk(text, target_text=target),
+        "compact_choice_contract": _looks_like_compact_choice_label(target),
         "internal_token_leak": _has_internal_token(text) or _looks_internal_token_text(text),
         "degenerate_repetition": _has_degenerate_repetition(clean_ids, text),
         "target_prefix_match": bool(stripped and target.startswith(stripped)),
         "exact_match": stripped == target.strip(),
     }
+
+
+def _iter_row_batches(rows: list[dict[str, Any]], batch_size: int) -> list[list[dict[str, Any]]]:
+    if batch_size <= 0:
+        raise ValueError('batch_size must be positive')
+    return [rows[start:start + batch_size] for start in range(0, len(rows), batch_size)]
+
+
+
+def _bounded_decoder_train_batch_rows(
+    train_rows: list[dict[str, Any]],
+    *,
+    step: int,
+    batch_size: int,
+    sampler: str = "cyclic",
+) -> list[dict[str, Any]]:
+    if batch_size <= 0:
+        raise ValueError("batch_size must be positive")
+    if not train_rows:
+        raise ValueError("bounded decoder sampler requires train rows")
+    if sampler == "cyclic":
+        return [train_rows[((step - 1) * batch_size + i) % len(train_rows)] for i in range(batch_size)]
+    if sampler == "web_gap_root_balanced":
+        grouped: dict[str, list[dict[str, Any]]] = {}
+        for row in train_rows:
+            grouped.setdefault(_bounded_choice_root_group_key(row), []).append(row)
+        group_keys = sorted(grouped)
+        if not group_keys:
+            return [train_rows[((step - 1) * batch_size + i) % len(train_rows)] for i in range(batch_size)]
+        start = (step - 1) * batch_size
+        batch_rows: list[dict[str, Any]] = []
+        for offset in range(batch_size):
+            absolute_index = start + offset
+            group_key = group_keys[absolute_index % len(group_keys)]
+            bucket = grouped[group_key]
+            bucket_index = absolute_index // len(group_keys)
+            batch_rows.append(bucket[bucket_index % len(bucket)])
+        return batch_rows
+    if sampler == "web_gap_same_root_grouped":
+        grouped: dict[str, list[dict[str, Any]]] = {}
+        for row in train_rows:
+            grouped.setdefault(_bounded_choice_root_group_key(row), []).append(row)
+        multi_group_keys = [key for key in sorted(grouped) if len(grouped[key]) > 1]
+        group_keys = multi_group_keys or sorted(grouped)
+        if not group_keys:
+            return [train_rows[((step - 1) * batch_size + i) % len(train_rows)] for i in range(batch_size)]
+        chunk_size = min(batch_size, max(2, batch_size // 2))
+        groups_per_batch = max(1, (batch_size + chunk_size - 1) // chunk_size)
+        start_group = (step - 1) * groups_per_batch
+        batch_rows: list[dict[str, Any]] = []
+        while len(batch_rows) < batch_size:
+            group_offset = len(batch_rows) // chunk_size
+            group_key = group_keys[(start_group + group_offset) % len(group_keys)]
+            bucket = grouped[group_key]
+            bucket_start = ((step - 1) * chunk_size) + group_offset
+            within_group_offset = len(batch_rows) % chunk_size
+            batch_rows.append(bucket[(bucket_start + within_group_offset) % len(bucket)])
+        return batch_rows
+
+    buckets: dict[str, list[dict[str, Any]]] = {}
+    for row in train_rows:
+        task = str(row.get("task_type") or "unknown")
+        buckets.setdefault(task, []).append(row)
+    if not buckets:
+        return [train_rows[((step - 1) * batch_size + i) % len(train_rows)] for i in range(batch_size)]
+
+    if sampler == "task_balanced":
+        schedule = sorted(buckets)
+    elif sampler == "residual_family_balanced":
+        preferred = [
+            "evidence_citation",
+            "verifier_outcome",
+            "evidence_citation",
+            "verifier_outcome",
+            "evidence_role_classification",
+            "verifier_candidate_role_classification",
+        ]
+        schedule = [task for task in preferred if task in buckets]
+        schedule.extend(task for task in sorted(buckets) if task not in schedule)
+    elif sampler == "web_task_family_balanced":
+        preferred = [
+            "symptom_localization",
+            "evidence_citation",
+            "verifier_outcome",
+            "minimal_fix_selection",
+            "alternative_hypothesis_elimination",
+            "abstention_insufficient_evidence",
+        ]
+        schedule = [task for task in preferred if task in buckets]
+        schedule.extend(task for task in sorted(buckets) if task not in schedule)
+    else:
+        raise ValueError(f"unknown bounded decoder train sampler: {sampler}")
+
+    if not schedule:
+        return [train_rows[((step - 1) * batch_size + i) % len(train_rows)] for i in range(batch_size)]
+
+    start = (step - 1) * batch_size
+    batch_rows: list[dict[str, Any]] = []
+    schedule_counts = {task: schedule.count(task) for task in set(schedule)}
+    for offset in range(batch_size):
+        absolute_index = start + offset
+        schedule_index = absolute_index % len(schedule)
+        task = schedule[schedule_index]
+        bucket = buckets.get(task) or train_rows
+        if bucket:
+            full_cycles = absolute_index // len(schedule)
+            prior_in_cycle = sum(1 for previous_task in schedule[:schedule_index] if previous_task == task)
+            index = (full_cycles * schedule_counts.get(task, 1)) + prior_in_cycle
+            batch_rows.append(bucket[index % len(bucket)])
+        else:
+            batch_rows.append(train_rows[(start + offset) % len(train_rows)])
+    return batch_rows
+
+
+def _write_bounded_choice_eval_audit(
+    output_dir: Path,
+    *,
+    model: torch.nn.Module,
+    rows: list[dict[str, Any]],
+    tokenizer: Any,
+    max_encoder_tokens: int,
+    max_decoder_tokens: int,
+    split_name: str,
+    bounded_choice_aux_source: str = "decoder_first_step",
+    eval_batch_size: int = 8,
+) -> dict[str, Any]:
+    if not rows:
+        card = {
+            "split": split_name,
+            "rows": 0,
+            "full_vocab_top1_accuracy": None,
+            "constrained_choice_rows": 0,
+            "constrained_choice_unscored_rows": 0,
+            "constrained_choice_coverage": None,
+            "constrained_choice_correct": 0,
+            "constrained_choice_top1_accuracy": None,
+            "constrained_choice_coverage_corrected_top1_accuracy": None,
+        }
+        _write_json(output_dir / f"bounded_choice_eval_audit_{split_name}.json", card)
+        return card
+
+    model.eval()
+    row_cards: list[dict[str, Any]] = []
+    pad_id = int(getattr(tokenizer, 'pad_id', 0))
+    bos_id = int(getattr(tokenizer, 'bos_id', 1))
+    eos_id = int(getattr(tokenizer, 'eos_id', 2))
+
+    full_hits = 0
+    constrained_hits = 0
+    constrained_rows = 0
+    model_device = next(model.parameters()).device
+    for row_batch in _iter_row_batches(rows, eval_batch_size):
+        batch = build_batch(row_batch, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
+        batch = _move_manifest_batch(batch, model_device)
+        with torch.no_grad():
+            out = model(batch.input_ids, batch.decoder_input_ids)
+            first_step_logits = out["decoder_logits"][:, 0, :].detach()
+            pooled = out.get("pooled")
+        for row_idx, row in enumerate(row_batch):
+            row_id = str(row.get('row_id') or row_idx)
+            logits = first_step_logits[row_idx].float().cpu()
+            target_text = _target_text(row).strip()
+            bounded_choice_target = _bounded_choice_target_label(row).strip()
+            target_ids = [idx for idx in tokenizer.encode(target_text, max_length=max_decoder_tokens) if idx not in {pad_id, bos_id, eos_id}]
+            target_token_id = int(target_ids[0]) if target_ids else None
+            full_top1_id = int(torch.argmax(logits).item())
+            full_top1_text = tokenizer.decode([full_top1_id]).strip()
+            full_match = bool(target_token_id is not None and full_top1_id == target_token_id)
+            if full_match:
+                full_hits += 1
+
+            option_logits, option_pairs, _ = _bounded_choice_option_logits(
+                row=row,
+                tokenizer=tokenizer,
+                source=bounded_choice_aux_source,
+                first_step_logits_row=first_step_logits[row_idx],
+                pooled_row=(pooled[row_idx] if isinstance(pooled, torch.Tensor) else None),
+                model=model,
+                untied_head=getattr(model, "bounded_choice_probe_head", None),
+            )
+            constrained_top1_label = None
+            constrained_match = None
+            if option_pairs and option_logits is not None and bounded_choice_target:
+                constrained_rows += 1
+                best_idx = int(torch.argmax(option_logits).item())
+                best_label, _best_id = option_pairs[best_idx]
+                constrained_top1_label = best_label
+                constrained_match = bool(best_label == bounded_choice_target)
+                if constrained_match:
+                    constrained_hits += 1
+
+            target_rank = None
+            if target_token_id is not None:
+                target_rank = int((logits > logits[target_token_id]).sum().item()) + 1
+            row_cards.append({
+                'row_id': row_id,
+                'split': split_name,
+                'target_text': target_text,
+                'bounded_choice_target_label': bounded_choice_target,
+                'target_token_id': target_token_id,
+                'full_vocab_top1_token_id': full_top1_id,
+                'full_vocab_top1_text': full_top1_text,
+                'full_vocab_top1_match': full_match,
+                'target_rank_full_vocab': target_rank,
+                'constrained_choice_top1_label': constrained_top1_label,
+                'constrained_choice_match': constrained_match,
+                'option_labels': [label for label, _ in option_pairs],
+            })
+
+    card = {
+        'split': split_name,
+        'rows': len(rows),
+        'full_vocab_top1_accuracy': full_hits / len(rows) if rows else None,
+        'constrained_choice_rows': constrained_rows,
+        'constrained_choice_unscored_rows': len(rows) - constrained_rows,
+        'constrained_choice_coverage': constrained_rows / len(rows) if rows else None,
+        'constrained_choice_correct': constrained_hits,
+        'constrained_choice_top1_accuracy': constrained_hits / constrained_rows if constrained_rows else None,
+        'constrained_choice_coverage_corrected_top1_accuracy': constrained_hits / len(rows) if rows else None,
+        'rows_with_target_rank_1': sum(1 for row in row_cards if row.get('target_rank_full_vocab') == 1),
+        'row_cards': row_cards,
+    }
+    _write_json(output_dir / f'bounded_choice_eval_audit_{split_name}.json', card)
+    return card
 
 
 def _write_generation_audits(
@@ -606,7 +2449,7 @@ def _write_generation_audits(
         if not row["short_or_junk"]
         and not row["internal_token_leak"]
         and not row["degenerate_repetition"]
-        and row["stopped_on_eos"]
+        and (row["stopped_on_eos"] or row.get("compact_choice_contract"))
     ]
     prefix_rows = [row for row in samples if row["target_prefix_match"]]
     primed_rows = [row for row in samples if row.get("prefix_primed")]
@@ -946,6 +2789,19 @@ def _target_text(row: dict[str, Any]) -> str:
     return str(target.get("decoder_text") or row.get("decoder_text") or row.get("target_text") or target.get("target_ref") or row.get("target_ref") or "")
 
 
+def _bounded_choice_target_label(row: dict[str, Any]) -> str:
+    target = row.get("target") if isinstance(row.get("target"), dict) else {}
+    return str(
+        target.get("bounded_choice_target_label")
+        or row.get("bounded_choice_target_label")
+        or target.get("target_text")
+        or row.get("target_text")
+        or target.get("target_ref")
+        or row.get("target_ref")
+        or ""
+    )
+
+
 def _episode_step_value(row: dict[str, Any], field: str) -> str | None:
     transition = row.get("episode_transition") if isinstance(row.get("episode_transition"), dict) else {}
     observation = transition.get("observation_t") if isinstance(transition.get("observation_t"), dict) else {}
@@ -1170,6 +3026,7 @@ def run_bounded_decoder_ce_probe(
     model_config: Path | None = None,
     tokenizer_json: Path | None = None,
     tokenizer_config: Path | None = None,
+    initialize_from_runtime_model: Path | None = None,
     model_override: torch.nn.Module | None = None,
     tokenizer_override: Any | None = None,
     implementation_card_override: dict[str, Any] | None = None,
@@ -1181,6 +3038,21 @@ def run_bounded_decoder_ce_probe(
     generation_audit_splits: str = "eval,strict_eval",
     generation_repetition_guard: bool = False,
     generation_repetition_guard_top_k: int = 16,
+    decoder_ce_weight: float = 1.0,
+    bounded_choice_aux_weight: float = 0.0,
+    bounded_choice_aux_source: str = "decoder_first_step",
+    bounded_choice_contrast_weight: float = 0.0,
+    bounded_choice_contrast_margin: float = 0.05,
+    bounded_choice_verifier_value_listwise_weight: float = 0.0,
+    bounded_choice_same_role_listwise_weight: float = 0.0,
+    bounded_choice_root_group_aux_weight: float = 0.0,
+    bounded_decoder_train_sampler: str = "cyclic",
+    bounded_choice_train_head_only: bool = False,
+    preservation_reference_runtime_model: Path | None = None,
+    preservation_kl_weight: float = 0.0,
+    preservation_exempt_flag: str = "preservation_exempt",
+    runtime_model_save_dir: Path | None = None,
+    runtime_model_save_metadata: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run a tiny bounded decoder CE probe with native interpretability telemetry."""
     random.seed(seed)
@@ -1197,6 +3069,8 @@ def run_bounded_decoder_ce_probe(
     from .training_data import load_tokenizer
 
     tokenizer = tokenizer_override if tokenizer_override is not None else load_tokenizer(tokenizer_json, tokenizer_config)
+    preservation_model: torch.nn.Module | None = None
+    preservation_card: dict[str, Any] | None = None
     if model_override is None:
         model, implementation_card = _build_probe_model(
             implementation,
@@ -1204,11 +3078,37 @@ def run_bounded_decoder_ce_probe(
             probe_scale=probe_scale,
             model_config=model_config,
         )
+        if initialize_from_runtime_model is not None:
+            implementation_card = dict(implementation_card)
+            implementation_card["runtime_initialization"] = _load_runtime_model_bundle(
+                initialize_from_runtime_model,
+                model=model,
+            )
+        if preservation_reference_runtime_model is not None and preservation_kl_weight > 0:
+            preservation_model, preservation_card = _build_probe_model(
+                implementation,
+                vocab_size=tokenizer.vocab_size,
+                probe_scale=probe_scale,
+                model_config=model_config,
+            )
+            preservation_card = dict(preservation_card)
+            preservation_card["runtime_initialization"] = _load_runtime_model_bundle(
+                preservation_reference_runtime_model,
+                model=preservation_model,
+            )
+            preservation_model.eval()
+            for parameter in preservation_model.parameters():
+                parameter.requires_grad_(False)
     else:
         model = model_override
         implementation_card = implementation_card_override or {"implementation": implementation, "probe_scale": probe_scale, "model_reused_in_memory": True}
         for parameter in model.parameters():
             parameter.requires_grad_(True)
+    execution_device = _preferred_execution_device()
+    model.to(execution_device)
+    if preservation_model is not None:
+        preservation_model.to(execution_device)
+
     tokenizer_card = {
         "tokenizer_kind": getattr(tokenizer, "tokenizer_kind", "unknown"),
         "vocab_size": int(getattr(tokenizer, "vocab_size", 0)),
@@ -1218,17 +3118,180 @@ def run_bounded_decoder_ce_probe(
         "tokenizer_json": str(tokenizer_json) if tokenizer_json else None,
         "tokenizer_config": str(tokenizer_config) if tokenizer_config else None,
     }
+    if bounded_choice_aux_source == "encoder_pooled_untied_head" and not hasattr(model, "bounded_choice_probe_head"):
+        hidden_dim = int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        vocab_dim = int(getattr(tokenizer, "vocab_size", 0) or 0)
+        if hidden_dim <= 0 or vocab_dim <= 0:
+            raise ValueError("encoder_pooled_untied_head requires valid model hidden dim and tokenizer vocab size")
+        model.bounded_choice_probe_head = nn.Linear(hidden_dim, vocab_dim, bias=False).to(next(model.parameters()).device)
+    if bounded_choice_aux_source == "encoder_option_retrieval_role_bias" and not hasattr(model, "bounded_choice_role_head"):
+        hidden_dim = int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_role_bias requires valid model hidden dim")
+        model.bounded_choice_role_head = nn.Linear(hidden_dim, 3, bias=True).to(next(model.parameters()).device)
+    if bounded_choice_aux_source in {"encoder_option_retrieval_pairwise", "encoder_option_retrieval_evidence_pairwise_gated"} and not hasattr(model, "bounded_choice_pair_head"):
+        pair_input_dim = _bounded_choice_pairwise_feature_dim(model)
+        pair_hidden_dim = int(getattr(getattr(model, "config", None), "retrieval_head_dim", 0) or 0) or int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if pair_input_dim <= 0 or pair_hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_pairwise requires valid retrieval or model hidden dim")
+        model.bounded_choice_pair_head = nn.Sequential(
+            nn.Linear(pair_input_dim, pair_hidden_dim, bias=True),
+            nn.SiLU(),
+            nn.Linear(pair_hidden_dim, 1, bias=True),
+        ).to(next(model.parameters()).device)
+    if bounded_choice_aux_source == "encoder_option_retrieval_evidence_ledger_head" and not hasattr(model, "bounded_choice_evidence_ledger_head"):
+        evidence_input_dim = _bounded_choice_evidence_ledger_feature_dim(model)
+        evidence_hidden_dim = int(getattr(getattr(model, "config", None), "retrieval_head_dim", 0) or 0) or int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if evidence_input_dim <= 0 or evidence_hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_evidence_ledger_head requires valid retrieval or model hidden dim")
+        model.bounded_choice_evidence_ledger_head = nn.Sequential(
+            nn.Linear(evidence_input_dim, evidence_hidden_dim, bias=True),
+            nn.SiLU(),
+            nn.Linear(evidence_hidden_dim, 1, bias=True),
+        ).to(next(model.parameters()).device)
+    if bounded_choice_aux_source == "encoder_option_retrieval_evidence_fact_pairwise" and not hasattr(model, "bounded_choice_evidence_fact_pair_head"):
+        evidence_input_dim = _bounded_choice_evidence_ledger_feature_dim(model)
+        evidence_hidden_dim = int(getattr(getattr(model, "config", None), "retrieval_head_dim", 0) or 0) or int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if evidence_input_dim <= 0 or evidence_hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_evidence_fact_pairwise requires valid retrieval or model hidden dim")
+        model.bounded_choice_evidence_fact_pair_head = nn.Sequential(
+            nn.Linear(evidence_input_dim, evidence_hidden_dim, bias=True),
+            nn.SiLU(),
+            nn.Linear(evidence_hidden_dim, 1, bias=True),
+        ).to(next(model.parameters()).device)
+    if bounded_choice_aux_source == "encoder_option_retrieval_evidence_role_head" and not hasattr(model, "bounded_choice_evidence_role_head"):
+        hidden_dim = int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_evidence_role_head requires valid model hidden dim")
+        model.bounded_choice_evidence_role_head = nn.Linear(hidden_dim, _EVIDENCE_LEDGER_ROLE_COUNT, bias=True).to(next(model.parameters()).device)
+    if bounded_choice_aux_source == "encoder_option_retrieval_evidence_judgment_head" and not hasattr(model, "bounded_choice_evidence_judgment_head"):
+        hidden_dim = int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_evidence_judgment_head requires valid model hidden dim")
+        model.bounded_choice_evidence_judgment_head = nn.Linear(hidden_dim, _EVIDENCE_JUDGMENT_COUNT, bias=True).to(next(model.parameters()).device)
+    if bounded_choice_aux_source in {"encoder_option_retrieval_semantic_candidate_head", "encoder_option_retrieval_semantic_plus_transition_candidate_head"} and not hasattr(model, "bounded_choice_semantic_candidate_head"):
+        semantic_input_dim = _bounded_choice_semantic_candidate_feature_dim(model)
+        semantic_hidden_dim = int(getattr(getattr(model, "config", None), "retrieval_head_dim", 0) or 0) or int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if semantic_input_dim <= 0 or semantic_hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_semantic_candidate_head requires valid retrieval or model hidden dim")
+        model.bounded_choice_semantic_candidate_head = nn.Sequential(
+            nn.Linear(semantic_input_dim, semantic_hidden_dim, bias=True),
+            nn.SiLU(),
+            nn.Linear(semantic_hidden_dim, 1, bias=True),
+        ).to(next(model.parameters()).device)
+    if bounded_choice_aux_source == "encoder_option_retrieval_web_task_candidate_head" and not hasattr(model, "bounded_choice_web_task_candidate_head"):
+        web_input_dim = _bounded_choice_semantic_candidate_feature_dim(model)
+        web_hidden_dim = int(getattr(getattr(model, "config", None), "retrieval_head_dim", 0) or 0) or int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if web_input_dim <= 0 or web_hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_web_task_candidate_head requires valid retrieval or model hidden dim")
+        model.bounded_choice_web_task_candidate_head = nn.Sequential(
+            nn.Linear(web_input_dim, web_hidden_dim, bias=True),
+            nn.SiLU(),
+            nn.Linear(web_hidden_dim, 1, bias=True),
+        ).to(next(model.parameters()).device)
+    if bounded_choice_aux_source in {"encoder_option_retrieval_transition_candidate_head", "encoder_option_retrieval_semantic_plus_transition_candidate_head"} and not hasattr(model, "bounded_choice_transition_candidate_head"):
+        transition_input_dim = _bounded_choice_transition_candidate_feature_dim(model)
+        transition_hidden_dim = int(getattr(getattr(model, "config", None), "retrieval_head_dim", 0) or 0) or int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if transition_input_dim <= 0 or transition_hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_transition_candidate_head requires valid retrieval or model hidden dim")
+        model.bounded_choice_transition_candidate_head = nn.Sequential(
+            nn.Linear(transition_input_dim, transition_hidden_dim, bias=True),
+            nn.SiLU(),
+            nn.Linear(transition_hidden_dim, 1, bias=True),
+        ).to(next(model.parameters()).device)
+    if bounded_choice_aux_source in {"encoder_option_retrieval_transition_status_head", "encoder_option_retrieval_semantic_plus_transition_status_head"} and not hasattr(model, "bounded_choice_transition_status_head"):
+        status_input_dim = _bounded_choice_transition_candidate_feature_dim(model)
+        status_hidden_dim = int(getattr(getattr(model, "config", None), "retrieval_head_dim", 0) or 0) or int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if status_input_dim <= 0 or status_hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_transition_status_head requires valid retrieval or model hidden dim")
+        model.bounded_choice_transition_status_head = nn.Sequential(
+            nn.Linear(status_input_dim, status_hidden_dim, bias=True),
+            nn.SiLU(),
+            nn.Linear(status_hidden_dim, 1, bias=True),
+        ).to(next(model.parameters()).device)
+    head_only_trainable_prefix: str | None = None
+    if bounded_choice_train_head_only:
+        source_to_head_prefix = {
+            "encoder_pooled_untied_head": "bounded_choice_probe_head",
+            "encoder_option_retrieval_role_bias": "bounded_choice_role_head",
+            "encoder_option_retrieval_pairwise": "bounded_choice_pair_head",
+            "encoder_option_retrieval_evidence_pairwise_gated": "bounded_choice_pair_head",
+            "encoder_option_retrieval_evidence_ledger_head": "bounded_choice_evidence_ledger_head",
+            "encoder_option_retrieval_evidence_fact_pairwise": "bounded_choice_evidence_fact_pair_head",
+            "encoder_option_retrieval_evidence_role_head": "bounded_choice_evidence_role_head",
+            "encoder_option_retrieval_evidence_judgment_head": "bounded_choice_evidence_judgment_head",
+            "encoder_option_retrieval_semantic_candidate_head": "bounded_choice_semantic_candidate_head",
+            "encoder_option_retrieval_web_task_candidate_head": "bounded_choice_web_task_candidate_head",
+            "encoder_option_retrieval_transition_candidate_head": "bounded_choice_transition_candidate_head",
+            "encoder_option_retrieval_transition_status_head": "bounded_choice_transition_status_head",
+            "encoder_option_retrieval_semantic_plus_transition_candidate_head": (
+                "bounded_choice_semantic_candidate_head",
+                "bounded_choice_transition_candidate_head",
+            ),
+            "encoder_option_retrieval_semantic_plus_transition_status_head": (
+                "bounded_choice_semantic_candidate_head",
+                "bounded_choice_transition_status_head",
+            ),
+        }
+        head_only_trainable_prefix = source_to_head_prefix.get(str(bounded_choice_aux_source))
+        if not head_only_trainable_prefix:
+            raise ValueError(f"bounded_choice_train_head_only does not support source: {bounded_choice_aux_source}")
+        trainable_prefixes = (head_only_trainable_prefix,) if isinstance(head_only_trainable_prefix, str) else tuple(head_only_trainable_prefix)
+        missing_prefixes = [prefix for prefix in trainable_prefixes if not hasattr(model, prefix)]
+        if missing_prefixes:
+            raise ValueError(f"bounded_choice_train_head_only missing head(s): {missing_prefixes}")
+        for name, parameter in model.named_parameters():
+            parameter.requires_grad_(any(name.startswith(prefix + ".") for prefix in trainable_prefixes))
+        trainable_parameters = [parameter for parameter in model.parameters() if parameter.requires_grad]
+        if not trainable_parameters:
+            raise ValueError(f"bounded_choice_train_head_only found no trainable parameters for {trainable_prefixes}")
+    else:
+        trainable_parameters = list(model.parameters())
     before = {name: value.detach().clone() for name, value in model.state_dict().items()}
-    optimizer = AdamW(model.parameters(), lr=learning_rate)
+    optimizer = AdamW(trainable_parameters, lr=learning_rate)
     model.train()
     row_dynamics: dict[str, dict[str, Any]] = {}
 
     for step in range(1, max_steps + 1):
-        batch_rows = [train_rows[(step * batch_size + i) % len(train_rows)] for i in range(batch_size)]
+        batch_rows = _bounded_decoder_train_batch_rows(
+            train_rows,
+            step=step,
+            batch_size=batch_size,
+            sampler=bounded_decoder_train_sampler,
+        )
         batch = build_batch(batch_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
+        batch = _move_manifest_batch(batch, execution_device)
         optimizer.zero_grad(set_to_none=True)
         out = model(batch.input_ids, batch.decoder_input_ids)
-        loss = _decoder_ce_loss(
+        preservation_loss = None
+        preservation_choice_loss = None
+        preservation_choice_card = None
+        preservation_exempt_rows = torch.tensor([bool(row.get(preservation_exempt_flag, False)) for row in batch_rows], device=batch.input_ids.device, dtype=torch.bool)
+        if preservation_model is not None and preservation_kl_weight > 0:
+            with torch.no_grad():
+                reference_out = preservation_model(batch.input_ids, batch.decoder_input_ids)
+            preservation_loss = _preservation_kl_loss(
+                out["decoder_logits"],
+                reference_out["decoder_logits"],
+                batch.labels,
+                batch.loss_mask.get("decoder_ce"),
+                exempt_rows=preservation_exempt_rows,
+            )
+            preservation_choice_loss, preservation_choice_card = _bounded_choice_preservation_loss(
+                current_first_step_logits=(out["decoder_logits"][:, 0, :] if "decoder_logits" in out else None),
+                current_pooled=out.get("pooled"),
+                reference_first_step_logits=(reference_out["decoder_logits"][:, 0, :] if "decoder_logits" in reference_out else None),
+                reference_pooled=reference_out.get("pooled"),
+                rows=batch_rows,
+                tokenizer=tokenizer,
+                source=bounded_choice_aux_source,
+                current_model=model,
+                reference_model=preservation_model,
+                current_untied_head=getattr(model, "bounded_choice_probe_head", None),
+                reference_untied_head=getattr(preservation_model, "bounded_choice_probe_head", None),
+                exempt_rows=preservation_exempt_rows,
+            )
+        decoder_ce_loss = _decoder_ce_loss(
             model,
             out["decoder_logits"],
             batch.labels,
@@ -1236,6 +3299,67 @@ def run_bounded_decoder_ce_probe(
             eos_id=int(getattr(tokenizer, "eos_id", 2)),
             eos_loss_weight=eos_loss_weight,
         )
+        bounded_choice_aux_loss, bounded_choice_aux_card = _bounded_choice_aux_loss(
+            first_step_logits=out["decoder_logits"][:, 0, :] if "decoder_logits" in out else None,
+            pooled=out.get("pooled"),
+            rows=batch_rows,
+            tokenizer=tokenizer,
+            source=bounded_choice_aux_source,
+            model=model,
+            untied_head=getattr(model, "bounded_choice_probe_head", None),
+        )
+        bounded_choice_contrast_loss, bounded_choice_contrast_card = _bounded_choice_contrastive_margin_loss(
+            first_step_logits=out["decoder_logits"][:, 0, :] if "decoder_logits" in out else None,
+            pooled=out.get("pooled"),
+            rows=batch_rows,
+            tokenizer=tokenizer,
+            source=bounded_choice_aux_source,
+            model=model,
+            untied_head=getattr(model, "bounded_choice_probe_head", None),
+            margin=bounded_choice_contrast_margin,
+        )
+        bounded_choice_verifier_value_listwise_loss, bounded_choice_verifier_value_listwise_card = _bounded_choice_verifier_value_listwise_loss(
+            first_step_logits=out["decoder_logits"][:, 0, :] if "decoder_logits" in out else None,
+            pooled=out.get("pooled"),
+            rows=batch_rows,
+            tokenizer=tokenizer,
+            source=bounded_choice_aux_source,
+            model=model,
+            untied_head=getattr(model, "bounded_choice_probe_head", None),
+        )
+        bounded_choice_same_role_listwise_loss, bounded_choice_same_role_listwise_card = _bounded_choice_same_role_listwise_loss(
+            first_step_logits=out["decoder_logits"][:, 0, :] if "decoder_logits" in out else None,
+            pooled=out.get("pooled"),
+            rows=batch_rows,
+            tokenizer=tokenizer,
+            source=bounded_choice_aux_source,
+            model=model,
+            untied_head=getattr(model, "bounded_choice_probe_head", None),
+        )
+        bounded_choice_root_group_aux_loss, bounded_choice_root_group_aux_card = _bounded_choice_root_group_aux_loss(
+            first_step_logits=out["decoder_logits"][:, 0, :] if "decoder_logits" in out else None,
+            pooled=out.get("pooled"),
+            rows=batch_rows,
+            tokenizer=tokenizer,
+            source=bounded_choice_aux_source,
+            model=model,
+            untied_head=getattr(model, "bounded_choice_probe_head", None),
+        )
+        loss = decoder_ce_loss * float(decoder_ce_weight)
+        if bounded_choice_aux_loss is not None and bounded_choice_aux_weight > 0:
+            loss = loss + (bounded_choice_aux_weight * bounded_choice_aux_loss)
+        if bounded_choice_contrast_loss is not None and bounded_choice_contrast_weight > 0:
+            loss = loss + (bounded_choice_contrast_weight * bounded_choice_contrast_loss)
+        if bounded_choice_verifier_value_listwise_loss is not None and bounded_choice_verifier_value_listwise_weight > 0:
+            loss = loss + (bounded_choice_verifier_value_listwise_weight * bounded_choice_verifier_value_listwise_loss)
+        if bounded_choice_same_role_listwise_loss is not None and bounded_choice_same_role_listwise_weight > 0:
+            loss = loss + (bounded_choice_same_role_listwise_weight * bounded_choice_same_role_listwise_loss)
+        if bounded_choice_root_group_aux_loss is not None and bounded_choice_root_group_aux_weight > 0:
+            loss = loss + (bounded_choice_root_group_aux_weight * bounded_choice_root_group_aux_loss)
+        if preservation_loss is not None and preservation_kl_weight > 0:
+            loss = loss + (float(preservation_kl_weight) * preservation_loss)
+        if preservation_choice_loss is not None and preservation_kl_weight > 0:
+            loss = loss + (float(preservation_kl_weight) * preservation_choice_loss)
         loss.backward()
         for row_id in batch.row_ids:
             grad_card = _gradient_norm_card(row_id, model, losses_enabled=["decoder_ce"])
@@ -1254,6 +3378,35 @@ def run_bounded_decoder_ce_probe(
             {
                 "step": step,
                 "loss": float(loss.detach().item()),
+                "decoder_ce_loss": float(decoder_ce_loss.detach().item()),
+                "decoder_ce_weight": float(decoder_ce_weight),
+                "bounded_choice_aux_loss": float(bounded_choice_aux_loss.detach().item()) if bounded_choice_aux_loss is not None else None,
+                "bounded_choice_aux_weight": float(bounded_choice_aux_weight),
+                "bounded_choice_aux_source": str(bounded_choice_aux_source),
+                "bounded_choice_aux_card": bounded_choice_aux_card,
+                "bounded_choice_contrast_loss": float(bounded_choice_contrast_loss.detach().item()) if bounded_choice_contrast_loss is not None else None,
+                "bounded_choice_contrast_weight": float(bounded_choice_contrast_weight),
+                "bounded_choice_contrast_margin": float(bounded_choice_contrast_margin),
+                "bounded_choice_contrast_card": bounded_choice_contrast_card,
+                "bounded_choice_verifier_value_listwise_loss": float(bounded_choice_verifier_value_listwise_loss.detach().item()) if bounded_choice_verifier_value_listwise_loss is not None else None,
+                "bounded_choice_verifier_value_listwise_weight": float(bounded_choice_verifier_value_listwise_weight),
+                "bounded_choice_verifier_value_listwise_card": bounded_choice_verifier_value_listwise_card,
+                "bounded_choice_same_role_listwise_loss": float(bounded_choice_same_role_listwise_loss.detach().item()) if bounded_choice_same_role_listwise_loss is not None else None,
+                "bounded_choice_same_role_listwise_weight": float(bounded_choice_same_role_listwise_weight),
+                "bounded_choice_same_role_listwise_card": bounded_choice_same_role_listwise_card,
+                "bounded_choice_root_group_aux_loss": float(bounded_choice_root_group_aux_loss.detach().item()) if bounded_choice_root_group_aux_loss is not None else None,
+                "bounded_choice_root_group_aux_weight": float(bounded_choice_root_group_aux_weight),
+                "bounded_choice_root_group_aux_card": bounded_choice_root_group_aux_card,
+                "bounded_decoder_train_sampler": str(bounded_decoder_train_sampler),
+                "bounded_choice_train_head_only": bool(bounded_choice_train_head_only),
+                "bounded_choice_trainable_head_prefix": head_only_trainable_prefix,
+                "preservation_loss": float(preservation_loss.detach().item()) if preservation_loss is not None else None,
+                "preservation_choice_loss": float(preservation_choice_loss.detach().item()) if preservation_choice_loss is not None else None,
+                "preservation_choice_card": preservation_choice_card,
+                "preservation_kl_weight": float(preservation_kl_weight),
+                "preservation_reference_runtime_model": str(preservation_reference_runtime_model) if preservation_reference_runtime_model is not None else None,
+                "preservation_exempt_flag": str(preservation_exempt_flag),
+                "preservation_exempt_rows": int(preservation_exempt_rows.sum().item()),
                 "grad_norm": pre_clip_grad_norm,
                 "pre_clip_grad_norm": pre_clip_grad_norm,
                 "post_clip_grad_norm": post_clip_grad_norm,
@@ -1265,25 +3418,31 @@ def run_bounded_decoder_ce_probe(
         if not split_rows:
             return {"split": name, "rows": 0, "loss": None}
         model.eval()
-        with torch.no_grad():
-            batch = build_batch(split_rows, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
-            out = model(batch.input_ids, batch.decoder_input_ids)
-            loss = _decoder_ce_loss(
-                model,
-                out["decoder_logits"],
-                batch.labels,
-                batch.loss_mask.get("decoder_ce"),
-                eos_id=int(getattr(tokenizer, "eos_id", 2)),
-                eos_loss_weight=eos_loss_weight,
-            )
-            token_rows = _token_loss_rows(row_ids=batch.row_ids, logits=out["decoder_logits"], labels=batch.labels, tokenizer=tokenizer)
-        for token_row in token_rows:
-            token_row.update({"split": name, "step": None})
-            _append_jsonl(output_dir / "row_token_loss.jsonl", token_row)
-            dyn = row_dynamics.setdefault(token_row["row_id"], {"row_id": token_row["row_id"], "loss_history": [], "confidence_history": [], "correct_history": []})
-            dyn["loss_history"].append(token_row["mean_loss"])
-        _write_jsonl_rows(output_dir / "activation_summary.jsonl", _activation_summary(batch.row_ids, out, split=name, step=None))
-        record = {"split": name, "rows": len(split_rows), "loss": float(loss.item())}
+        total_loss = 0.0
+        total_rows = 0
+        for row_batch in _iter_row_batches(split_rows, max(1, min(8, batch_size * 4))):
+            with torch.no_grad():
+                batch = build_batch(row_batch, max_encoder_tokens=max_encoder_tokens, max_decoder_tokens=max_decoder_tokens, tokenizer=tokenizer)
+                batch = _move_manifest_batch(batch, execution_device)
+                out = model(batch.input_ids, batch.decoder_input_ids)
+                loss = _decoder_ce_loss(
+                    model,
+                    out["decoder_logits"],
+                    batch.labels,
+                    batch.loss_mask.get("decoder_ce"),
+                    eos_id=int(getattr(tokenizer, "eos_id", 2)),
+                    eos_loss_weight=eos_loss_weight,
+                )
+                token_rows = _token_loss_rows(row_ids=batch.row_ids, logits=out["decoder_logits"], labels=batch.labels, tokenizer=tokenizer)
+            for token_row in token_rows:
+                token_row.update({"split": name, "step": None})
+                _append_jsonl(output_dir / "row_token_loss.jsonl", token_row)
+                dyn = row_dynamics.setdefault(token_row["row_id"], {"row_id": token_row["row_id"], "loss_history": [], "confidence_history": [], "correct_history": []})
+                dyn["loss_history"].append(token_row["mean_loss"])
+            _write_jsonl_rows(output_dir / "activation_summary.jsonl", _activation_summary(batch.row_ids, out, split=name, step=None))
+            total_loss += float(loss.item()) * len(row_batch)
+            total_rows += len(row_batch)
+        record = {"split": name, "rows": len(split_rows), "loss": (total_loss / total_rows) if total_rows else None}
         _append_jsonl(output_dir / "eval_loss_by_checkpoint.jsonl", record)
         return record
 
@@ -1291,7 +3450,12 @@ def run_bounded_decoder_ce_probe(
     after = {name: value.detach().clone() for name, value in model.state_dict().items()}
     _write_json(output_dir / "module_delta_norms.json", _module_delta_norm_card(before, after))
 
-    token_records = [json.loads(line) for line in (output_dir / "row_token_loss.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    token_loss_path = output_dir / "row_token_loss.jsonl"
+    token_records = [
+        json.loads(line)
+        for line in (token_loss_path.read_text(encoding="utf-8").splitlines() if token_loss_path.exists() else [])
+        if line.strip()
+    ]
     _write_json(
         output_dir / "internal_token_logit_summary.json",
         {
@@ -1338,6 +3502,38 @@ def run_bounded_decoder_ce_probe(
             "length_buckets": length_buckets,
         },
     )
+    bounded_choice_eval_eval = _write_bounded_choice_eval_audit(
+        output_dir,
+        model=model,
+        rows=eval_rows,
+        tokenizer=tokenizer,
+        max_encoder_tokens=max_encoder_tokens,
+        max_decoder_tokens=max_decoder_tokens,
+        split_name="eval",
+        bounded_choice_aux_source=bounded_choice_aux_source,
+    )
+    runtime_model_bundle = None
+    if runtime_model_save_dir is not None:
+        runtime_model_bundle = _save_runtime_model_bundle(
+            runtime_model_save_dir,
+            model=model,
+            metadata=runtime_model_save_metadata,
+        )
+    bounded_choice_eval_strict = _write_bounded_choice_eval_audit(
+        output_dir,
+        model=model,
+        rows=strict_rows,
+        tokenizer=tokenizer,
+        max_encoder_tokens=max_encoder_tokens,
+        max_decoder_tokens=max_decoder_tokens,
+        split_name="strict_eval",
+        bounded_choice_aux_source=bounded_choice_aux_source,
+    )
+    bounded_choice_eval_card = {
+        "eval": bounded_choice_eval_eval,
+        "strict_eval": bounded_choice_eval_strict,
+    }
+
     if enable_generation_audit:
         generation_card = _write_generation_audits(
             output_dir,
@@ -1374,6 +3570,7 @@ def run_bounded_decoder_ce_probe(
         "implementation": implementation_card,
         "tokenizer": tokenizer_card,
         "eval": eval_card,
+        "bounded_choice_eval": bounded_choice_eval_card,
         "final_checkpoint_exported": False,
         "runtime_executed": True,
         "gemma_executed": False,
@@ -1384,6 +3581,23 @@ def run_bounded_decoder_ce_probe(
         "contentful_generation_rate": generation_card.get("contentful_rate"),
         "generation_repetition_guard": bool(generation_repetition_guard),
         "generation_repetition_guard_top_k": int(generation_repetition_guard_top_k),
+        "decoder_ce_weight": float(decoder_ce_weight),
+        "bounded_choice_aux_weight": float(bounded_choice_aux_weight),
+        "bounded_choice_aux_source": str(bounded_choice_aux_source),
+        "bounded_choice_contrast_weight": float(bounded_choice_contrast_weight),
+        "bounded_choice_contrast_margin": float(bounded_choice_contrast_margin),
+        "bounded_choice_verifier_value_listwise_weight": float(bounded_choice_verifier_value_listwise_weight),
+        "bounded_choice_same_role_listwise_weight": float(bounded_choice_same_role_listwise_weight),
+        "bounded_choice_root_group_aux_weight": float(bounded_choice_root_group_aux_weight),
+        "bounded_decoder_train_sampler": str(bounded_decoder_train_sampler),
+        "bounded_choice_train_head_only": bool(bounded_choice_train_head_only),
+        "bounded_choice_trainable_head_prefix": head_only_trainable_prefix,
+        "preservation_kl_weight": float(preservation_kl_weight),
+        "preservation_reference_runtime_model": str(preservation_reference_runtime_model) if preservation_reference_runtime_model is not None else None,
+        "preservation_exempt_flag": str(preservation_exempt_flag),
+        "preservation_reference_card": preservation_card,
+        "runtime_model_saved": runtime_model_bundle is not None,
+        "runtime_model_bundle": runtime_model_bundle,
         "generation_repetition_guard_events": int(generation_card.get("generation_repetition_guard_events") or 0),
         "generation_repetition_guard_event_rows": int(generation_card.get("generation_repetition_guard_event_rows") or 0),
         "eos_loss_weight": eos_loss_weight,
@@ -1438,6 +3652,8 @@ def run_denoise_repair_probe(
     from .training_data import load_tokenizer
 
     tokenizer = tokenizer_override if tokenizer_override is not None else load_tokenizer(tokenizer_json, tokenizer_config)
+    preservation_model: torch.nn.Module | None = None
+    preservation_card: dict[str, Any] | None = None
     if model_override is None:
         model, implementation_card = _build_probe_model(
             implementation,
@@ -1445,6 +3661,27 @@ def run_denoise_repair_probe(
             probe_scale=probe_scale,
             model_config=model_config,
         )
+        if initialize_from_runtime_model is not None:
+            implementation_card = dict(implementation_card)
+            implementation_card["runtime_initialization"] = _load_runtime_model_bundle(
+                initialize_from_runtime_model,
+                model=model,
+            )
+        if preservation_reference_runtime_model is not None and preservation_kl_weight > 0:
+            preservation_model, preservation_card = _build_probe_model(
+                implementation,
+                vocab_size=tokenizer.vocab_size,
+                probe_scale=probe_scale,
+                model_config=model_config,
+            )
+            preservation_card = dict(preservation_card)
+            preservation_card["runtime_initialization"] = _load_runtime_model_bundle(
+                preservation_reference_runtime_model,
+                model=preservation_model,
+            )
+            preservation_model.eval()
+            for parameter in preservation_model.parameters():
+                parameter.requires_grad_(False)
     else:
         model = model_override
         implementation_card = implementation_card_override or {"implementation": implementation, "probe_scale": probe_scale, "model_reused_in_memory": True}
@@ -1539,7 +3776,12 @@ def run_denoise_repair_probe(
     after = {name: value.detach().clone() for name, value in model.state_dict().items()}
     _write_json(output_dir / "module_delta_norms.json", _module_delta_norm_card(before, after))
 
-    token_records = [json.loads(line) for line in (output_dir / "row_token_loss.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    token_loss_path = output_dir / "row_token_loss.jsonl"
+    token_records = [
+        json.loads(line)
+        for line in (token_loss_path.read_text(encoding="utf-8").splitlines() if token_loss_path.exists() else [])
+        if line.strip()
+    ]
     for row_id, dyn in sorted(row_dynamics.items()):
         losses = [float(value) for value in dyn.get("loss_history", [])]
         mean = sum(losses) / max(1, len(losses))

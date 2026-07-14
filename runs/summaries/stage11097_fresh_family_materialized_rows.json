@@ -1,0 +1,64 @@
+{
+  "claim_scope": [
+    "Materialize concrete fresh-family support and candidate rows from the stage11096 row-construction manifest.",
+    "Keep scoreable verifier/retrieve packet rows usable immediately while marking fresh evidence rows as candidate-only until review catches up."
+  ],
+  "created_at_utc": "2026-07-13T03:23:35Z",
+  "decision": "fresh_family_rows_materialized",
+  "headline_findings": [
+    "Fresh-family scoreable packet rows are now concrete train-support rows for retrieve_answer_abstain and verifier_outcome.",
+    "Evidence-ledger rows are materialized as explicit bounded candidates with recorded option shuffle, but remain non-promotable until anti-cheat review confirms the heuristic golds.",
+    "Verifier-transition rows are materialized as support-only opaque target competitions with no singleton options."
+  ],
+  "limits": [
+    "Evidence candidate gold values are heuristic at this stage and should not be treated as heldout proof.",
+    "Web rows remain mixed and should stay off the promotable path until selected-test anchoring is stronger."
+  ],
+  "metrics": {
+    "all_rows": 90,
+    "all_rows_by_language": {
+      "c_cpp": 40,
+      "python": 40,
+      "web_js_ts_html": 10
+    },
+    "all_rows_by_repo_family": {
+      "cccl": 10,
+      "cuEmbed": 10,
+      "diffusers": 10,
+      "django": 10,
+      "faiss": 10,
+      "falco": 10,
+      "mem0": 10,
+      "onnxruntime": 10,
+      "openai-agents-python": 10
+    },
+    "all_rows_by_task": {
+      "evidence_citation": 36,
+      "retrieve_answer_abstain": 18,
+      "verifier_outcome": 18,
+      "verifier_outcome_semantic_transition": 18
+    },
+    "evidence_candidate_rows": 36,
+    "heuristic_evidence_rows": 36,
+    "scoreable_support_rows": 36,
+    "verifier_support_rows": 18
+  },
+  "next_best_step": [
+    "Audit the evidence candidate rows for role balance, heuristic label skew, and option-order hygiene.",
+    "Merge the support-eligible rows into the next train package while keeping validation and strict heldout unchanged."
+  ],
+  "outputs": {
+    "all_rows_jsonl": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/all_materialized_rows.jsonl",
+    "evidence_rows_jsonl": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/evidence_candidate_rows.jsonl",
+    "scoreable_rows_jsonl": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/scoreable_support_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/fresh_family_materialized_rows.json",
+    "verifier_rows_jsonl": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/verifier_support_rows.jsonl"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "packet_rows": "runs/local/artifacts/stage11094_fresh_family_materialization_packet/fresh_family_packet_rows.jsonl",
+    "work_items": "runs/local/artifacts/stage11096_fresh_family_row_construction_manifest/fresh_family_row_construction_work_items.jsonl"
+  },
+  "stage": 11097,
+  "stage_name": "stage11097_fresh_family_materialized_rows"
+}

@@ -1,0 +1,1472 @@
+{
+  "created_at_utc": "2026-07-14T16:50:08Z",
+  "decision": "transition_gap_atlas_ready",
+  "gemma_only_by_language": {
+    "c_cpp": 86,
+    "python": 18,
+    "rust": 20
+  },
+  "gemma_only_by_language_task": {
+    "c_cpp | transition_candidate_selection": 18,
+    "c_cpp | transition_continue_or_stop": 15,
+    "c_cpp | transition_next_action": 31,
+    "c_cpp | transition_verifier_transition": 22,
+    "python | transition_candidate_selection": 12,
+    "python | transition_next_action": 6,
+    "rust | transition_candidate_selection": 9,
+    "rust | transition_next_action": 11
+  },
+  "gemma_only_by_task": {
+    "transition_candidate_selection": 39,
+    "transition_continue_or_stop": 15,
+    "transition_next_action": 48,
+    "transition_verifier_transition": 22
+  },
+  "hundred_m_only_by_language": {
+    "c_cpp": 37,
+    "python": 35,
+    "rust": 30
+  },
+  "hundred_m_only_by_task": {
+    "transition_candidate_selection": 48,
+    "transition_continue_or_stop": 1,
+    "transition_next_action": 50,
+    "transition_verifier_transition": 3
+  },
+  "recommended_next_stage": {
+    "name": "stage11944_transition_gap_targeted_data_plan",
+    "requirements": [
+      "Do not train on same-manifest Gemma-win rows as promotable support.",
+      "Create disjoint C/C++ analogues for the largest Gemma-only language-task buckets.",
+      "Balance PASS_CURRENT_BUILD, PASS_CURRENT_BUILD_AND_RUN, PASS_CURRENT_STATE, VERIFIER_REMOVED, CONTINUE, FINISH, ABSTAIN labels.",
+      "Include abstraction-boundary/dependency-contract projection as a separate new maintainer-policy lane, not mixed into this transition scorer recovery."
+    ]
+  },
+  "selected_100m_runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+  "source_comparison": "runs/local/artifacts/stage11926_transition_listwise_same_manifest_comparison/transition_listwise_same_manifest_rows.jsonl",
+  "stage": 11943,
+  "stage_name": "stage11943_transition_gemma_gap_atlas",
+  "summary_counts": {
+    "both_correct": 262,
+    "both_wrong": 152,
+    "gemma_only_correct": 124,
+    "hundred_m_only_correct": 102,
+    "rows": 640
+  },
+  "worklist": [
+    {
+      "gemma_win_100m_miss_rows": 31,
+      "language_family": "c_cpp",
+      "sample_rows": [
+        {
+          "gemma12b_predicted_label": "I",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "allowed_maintenance_action",
+            "value": "RETRIEVE_EVIDENCE"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "c_cpp",
+          "root_id": "stage11754::bitsandbytes::c_cpp::cpu_build_support",
+          "row_id": "stage11897::stage11896::stage11754::bitsandbytes::c_cpp::cpu_build_support::answerable_abstain_rejection::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "target_text": "I",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "I",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "allowed_maintenance_action",
+            "value": "RETRIEVE_EVIDENCE"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "c_cpp",
+          "root_id": "stage11754::bitsandbytes::c_cpp::cpu_build_support",
+          "row_id": "stage11897::stage11896::stage11754::bitsandbytes::c_cpp::cpu_build_support::verifier_removed_abstain::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "target_text": "I",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "I",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "E",
+            "role": "allowed_maintenance_action",
+            "value": "PLAN_PATCH"
+          },
+          "hundred_m_predicted_label": "E",
+          "language_family": "c_cpp",
+          "root_id": "stage11767::faiss::c_cpp::core_build_support",
+          "row_id": "stage11897::stage11896::stage11767::faiss::c_cpp::core_build_support::answerable_abstain_rejection::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "target_text": "I",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "I",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "allowed_maintenance_action",
+            "value": "RETRIEVE_EVIDENCE"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "c_cpp",
+          "root_id": "stage11767::faiss::c_cpp::core_build_support",
+          "row_id": "stage11897::stage11896::stage11767::faiss::c_cpp::core_build_support::verifier_removed_abstain::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "target_text": "I",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "I",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "E",
+            "role": "allowed_maintenance_action",
+            "value": "PLAN_PATCH"
+          },
+          "hundred_m_predicted_label": "E",
+          "language_family": "c_cpp",
+          "root_id": "stage11783::pytorch::c_cpp::simple_torch_test_support",
+          "row_id": "stage11897::stage11896::stage11783::pytorch::c_cpp::simple_torch_test_support::answerable_abstain_rejection::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "I",
+            "role": "allowed_maintenance_action",
+            "value": "ABSTAIN_OR_ROLLBACK"
+          },
+          "target_text": "I",
+          "task_type": "transition_next_action"
+        }
+      ],
+      "task_type": "transition_next_action"
+    },
+    {
+      "gemma_win_100m_miss_rows": 22,
+      "language_family": "c_cpp",
+      "sample_rows": [
+        {
+          "gemma12b_predicted_label": "I",
+          "gemma_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "I",
+            "role": "verifier_transition_status",
+            "value": "VERIFIER_REMOVED"
+          },
+          "hundred_m_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "A",
+            "role": "verifier_transition_status",
+            "value": "PASS_CURRENT_STATE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11754::bitsandbytes::c_cpp::cpu_build_support",
+          "row_id": "stage11897::stage11896::stage11754::bitsandbytes::c_cpp::cpu_build_support::verifier_removed_abstain::verifier_transition",
+          "target_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "I",
+            "role": "verifier_transition_status",
+            "value": "VERIFIER_REMOVED"
+          },
+          "target_text": "I",
+          "task_type": "transition_verifier_transition"
+        },
+        {
+          "gemma12b_predicted_label": "I",
+          "gemma_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "I",
+            "role": "verifier_transition_status",
+            "value": "VERIFIER_REMOVED"
+          },
+          "hundred_m_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "A",
+            "role": "verifier_transition_status",
+            "value": "PASS_CURRENT_STATE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11767::faiss::c_cpp::core_build_support",
+          "row_id": "stage11897::stage11896::stage11767::faiss::c_cpp::core_build_support::verifier_removed_abstain::verifier_transition",
+          "target_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "I",
+            "role": "verifier_transition_status",
+            "value": "VERIFIER_REMOVED"
+          },
+          "target_text": "I",
+          "task_type": "transition_verifier_transition"
+        },
+        {
+          "gemma12b_predicted_label": "I",
+          "gemma_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "I",
+            "role": "verifier_transition_status",
+            "value": "VERIFIER_REMOVED"
+          },
+          "hundred_m_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "A",
+            "role": "verifier_transition_status",
+            "value": "PASS_CURRENT_STATE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11783::pytorch::c_cpp::simple_torch_test_support",
+          "row_id": "stage11897::stage11896::stage11783::pytorch::c_cpp::simple_torch_test_support::verifier_removed_abstain::verifier_transition",
+          "target_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "I",
+            "role": "verifier_transition_status",
+            "value": "VERIFIER_REMOVED"
+          },
+          "target_text": "I",
+          "task_type": "transition_verifier_transition"
+        },
+        {
+          "gemma12b_predicted_label": "I",
+          "gemma_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "I",
+            "role": "verifier_transition_status",
+            "value": "VERIFIER_REMOVED"
+          },
+          "hundred_m_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "A",
+            "role": "verifier_transition_status",
+            "value": "PASS_CURRENT_STATE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11787::pytorch::c_cpp::check_torch_mkl_support",
+          "row_id": "stage11897::stage11896::stage11787::pytorch::c_cpp::check_torch_mkl_support::verifier_removed_abstain::verifier_transition",
+          "target_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V01"
+            ],
+            "label": "I",
+            "role": "verifier_transition_status",
+            "value": "VERIFIER_REMOVED"
+          },
+          "target_text": "I",
+          "task_type": "transition_verifier_transition"
+        },
+        {
+          "gemma12b_predicted_label": "B",
+          "gemma_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V03"
+            ],
+            "label": "B",
+            "role": "verifier_transition_status",
+            "value": "PASS_CURRENT_BUILD_AND_RUN"
+          },
+          "hundred_m_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V03"
+            ],
+            "label": "A",
+            "role": "verifier_transition_status",
+            "value": "PASS_CURRENT_STATE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11803::pytorch::c_cpp::check_torch_xnnpack_support",
+          "row_id": "stage11897::stage11896::stage11803::pytorch::c_cpp::check_torch_xnnpack_support::answerable_patch_impact_xnnpack_surface::verifier_transition",
+          "target_option": {
+            "artifact_type": "verifier_status",
+            "evidence_ids": [
+              "V03"
+            ],
+            "label": "B",
+            "role": "verifier_transition_status",
+            "value": "PASS_CURRENT_BUILD_AND_RUN"
+          },
+          "target_text": "B",
+          "task_type": "transition_verifier_transition"
+        }
+      ],
+      "task_type": "transition_verifier_transition"
+    },
+    {
+      "gemma_win_100m_miss_rows": 18,
+      "language_family": "c_cpp",
+      "sample_rows": [
+        {
+          "gemma12b_predicted_label": "D",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "verifier_and_build_constraint_removed",
+            "semantic_candidate_id": "B",
+            "value": "role=verifier_and_build_constraint_removed; artifact_ref=build evidence unavailable in this variant"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "c_cpp",
+          "root_id": "stage11754::bitsandbytes::c_cpp::cpu_build_support",
+          "row_id": "stage11897::stage11896::stage11754::bitsandbytes::c_cpp::cpu_build_support::verifier_removed_abstain::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "target_text": "D",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "D",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "verifier_and_build_constraint_removed",
+            "semantic_candidate_id": "B",
+            "value": "role=verifier_and_build_constraint_removed; artifact_ref=build evidence unavailable in this variant"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "c_cpp",
+          "root_id": "stage11767::faiss::c_cpp::core_build_support",
+          "row_id": "stage11897::stage11896::stage11767::faiss::c_cpp::core_build_support::verifier_removed_abstain::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "target_text": "D",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "D",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "verifier_and_build_constraint_removed",
+            "semantic_candidate_id": "B",
+            "value": "role=verifier_and_build_constraint_removed; artifact_ref=build/run evidence unavailable in this variant"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "c_cpp",
+          "root_id": "stage11783::pytorch::c_cpp::simple_torch_test_support",
+          "row_id": "stage11897::stage11896::stage11783::pytorch::c_cpp::simple_torch_test_support::verifier_removed_abstain::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "target_text": "D",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "D",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "verifier_and_build_constraint_removed",
+            "semantic_candidate_id": "B",
+            "value": "role=verifier_and_build_constraint_removed; artifact_ref=build/run evidence unavailable in this variant"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "c_cpp",
+          "root_id": "stage11787::pytorch::c_cpp::check_torch_mkl_support",
+          "row_id": "stage11897::stage11896::stage11787::pytorch::c_cpp::check_torch_mkl_support::verifier_removed_abstain::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "target_text": "D",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "D",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "verifier_and_build_constraint_removed",
+            "semantic_candidate_id": "B",
+            "value": "role=verifier_and_build_constraint_removed; artifact_ref=build/run evidence unavailable in this variant"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "c_cpp",
+          "root_id": "stage11803::pytorch::c_cpp::check_torch_xnnpack_support",
+          "row_id": "stage11897::stage11896::stage11803::pytorch::c_cpp::check_torch_xnnpack_support::verifier_removed_abstain::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [],
+            "label": "D",
+            "role": "abstain_insufficient_evidence",
+            "semantic_candidate_id": "D",
+            "value": "role=abstain_insufficient_evidence; artifact_ref=ABSTAIN_INSUFFICIENT_EVIDENCE"
+          },
+          "target_text": "D",
+          "task_type": "transition_candidate_selection"
+        }
+      ],
+      "task_type": "transition_candidate_selection"
+    },
+    {
+      "gemma_win_100m_miss_rows": 15,
+      "language_family": "c_cpp",
+      "sample_rows": [
+        {
+          "gemma12b_predicted_label": "B",
+          "gemma_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "hundred_m_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "episode_control",
+            "value": "CONTINUE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11754::bitsandbytes::c_cpp::cpu_build_support",
+          "row_id": "stage11897::stage11896::stage11754::bitsandbytes::c_cpp::cpu_build_support::verifier_removed_abstain::continue_or_stop",
+          "target_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "target_text": "B",
+          "task_type": "transition_continue_or_stop"
+        },
+        {
+          "gemma12b_predicted_label": "B",
+          "gemma_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "hundred_m_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "episode_control",
+            "value": "CONTINUE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11783::pytorch::c_cpp::simple_torch_test_support",
+          "row_id": "stage11897::stage11896::stage11783::pytorch::c_cpp::simple_torch_test_support::verifier_removed_abstain::continue_or_stop",
+          "target_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "target_text": "B",
+          "task_type": "transition_continue_or_stop"
+        },
+        {
+          "gemma12b_predicted_label": "B",
+          "gemma_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "hundred_m_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "episode_control",
+            "value": "CONTINUE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11787::pytorch::c_cpp::check_torch_mkl_support",
+          "row_id": "stage11897::stage11896::stage11787::pytorch::c_cpp::check_torch_mkl_support::verifier_removed_abstain::continue_or_stop",
+          "target_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "target_text": "B",
+          "task_type": "transition_continue_or_stop"
+        },
+        {
+          "gemma12b_predicted_label": "B",
+          "gemma_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "hundred_m_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "episode_control",
+            "value": "CONTINUE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11803::pytorch::c_cpp::check_torch_xnnpack_support",
+          "row_id": "stage11897::stage11896::stage11803::pytorch::c_cpp::check_torch_xnnpack_support::verifier_removed_abstain::continue_or_stop",
+          "target_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "target_text": "B",
+          "task_type": "transition_continue_or_stop"
+        },
+        {
+          "gemma12b_predicted_label": "B",
+          "gemma_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "hundred_m_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "episode_control",
+            "value": "CONTINUE"
+          },
+          "hundred_m_predicted_label": "A",
+          "language_family": "c_cpp",
+          "root_id": "stage11807::pytorch::c_cpp::check_torch_cuda_support",
+          "row_id": "stage11897::stage11896::stage11807::pytorch::c_cpp::check_torch_cuda_support::verifier_removed_abstain::continue_or_stop",
+          "target_option": {
+            "artifact_type": "control_decision",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "episode_control",
+            "value": "ABSTAIN"
+          },
+          "target_text": "B",
+          "task_type": "transition_continue_or_stop"
+        }
+      ],
+      "task_type": "transition_continue_or_stop"
+    },
+    {
+      "gemma_win_100m_miss_rows": 12,
+      "language_family": "python",
+      "sample_rows": [
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "E02",
+              "V01"
+            ],
+            "label": "A",
+            "role": "candidate_change_surface",
+            "semantic_candidate_id": "A",
+            "value": "role=candidate_change_surface; artifact_ref=src/models/memory.py"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E04"
+            ],
+            "label": "C",
+            "role": "caller_surface",
+            "semantic_candidate_id": "C",
+            "value": "role=caller_surface; artifact_ref=src/models/transformer.py"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "python",
+          "root_id": "stage11745::llm_memory_modules_at_scale::python::product_key_memory_support",
+          "row_id": "stage11897::stage11896::stage11745::llm_memory_modules_at_scale::python::product_key_memory_support::symptom_localization_memory_surface::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "E02",
+              "V01"
+            ],
+            "label": "A",
+            "role": "candidate_change_surface",
+            "semantic_candidate_id": "A",
+            "value": "role=candidate_change_surface; artifact_ref=src/models/memory.py"
+          },
+          "target_text": "A",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E02",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_test_anchor; artifact_ref=tests/test_memory.py"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01"
+            ],
+            "label": "C",
+            "role": "implementation_only_no_verifier",
+            "semantic_candidate_id": "C",
+            "value": "role=implementation_only_no_verifier; artifact_ref=src/models/memory.py"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "python",
+          "root_id": "stage11745::llm_memory_modules_at_scale::python::product_key_memory_support",
+          "row_id": "stage11897::stage11896::stage11745::llm_memory_modules_at_scale::python::product_key_memory_support::verifier_outcome_selected_test::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E02",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_test_anchor; artifact_ref=tests/test_memory.py"
+          },
+          "target_text": "A",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E02",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_test_anchor; artifact_ref=agi_dw/tests/test_ci_assert_safe_edits.py"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01"
+            ],
+            "label": "C",
+            "role": "implementation_only_no_verifier",
+            "semantic_candidate_id": "C",
+            "value": "role=implementation_only_no_verifier; artifact_ref=agi_dw/scripts/eval/ci_assert_safe_edits.py"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "python",
+          "root_id": "stage11763::digital_world_model::python::safe_edit_devtools_support",
+          "row_id": "stage11897::stage11896::stage11763::digital_world_model::python::safe_edit_devtools_support::verifier_outcome_selected_test::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E02",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_test_anchor; artifact_ref=agi_dw/tests/test_ci_assert_safe_edits.py"
+          },
+          "target_text": "A",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "B",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E02",
+              "V01"
+            ],
+            "label": "B",
+            "role": "verifier_and_test_constraint",
+            "semantic_candidate_id": "B",
+            "value": "role=verifier_and_test_constraint; artifact_ref=pytest tests/test_cuda_setup_evaluator.py::test_get_cuda_bnb_library_path"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E02",
+              "V01"
+            ],
+            "label": "C",
+            "role": "sibling_test_constraint",
+            "semantic_candidate_id": "C",
+            "value": "role=sibling_test_constraint; artifact_ref=pytest tests/test_cuda_setup_evaluator.py::test_get_cuda_bnb_library_path_override"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "python",
+          "root_id": "stage11771::bitsandbytes::python::cuda_library_path_support",
+          "row_id": "stage11897::stage11896::stage11771::bitsandbytes::python::cuda_library_path_support::evidence_citation_selected_verifier::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E02",
+              "V01"
+            ],
+            "label": "B",
+            "role": "verifier_and_test_constraint",
+            "semantic_candidate_id": "B",
+            "value": "role=verifier_and_test_constraint; artifact_ref=pytest tests/test_cuda_setup_evaluator.py::test_get_cuda_bnb_library_path"
+          },
+          "target_text": "B",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E02",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_test_anchor; artifact_ref=tests/test_core_layers.py"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01"
+            ],
+            "label": "C",
+            "role": "implementation_only_no_verifier",
+            "semantic_candidate_id": "C",
+            "value": "role=implementation_only_no_verifier; artifact_ref=nncore/core_layers.py"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "python",
+          "root_id": "stage11775::neural_network_building_blocks::python::core_layers_support",
+          "row_id": "stage11897::stage11896::stage11775::neural_network_building_blocks::python::core_layers_support::verifier_outcome_selected_test::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E02",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_test_anchor; artifact_ref=tests/test_core_layers.py"
+          },
+          "target_text": "A",
+          "task_type": "transition_candidate_selection"
+        }
+      ],
+      "task_type": "transition_candidate_selection"
+    },
+    {
+      "gemma_win_100m_miss_rows": 11,
+      "language_family": "rust",
+      "sample_rows": [
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "E",
+            "role": "allowed_maintenance_action",
+            "value": "PLAN_PATCH"
+          },
+          "hundred_m_predicted_label": "E",
+          "language_family": "rust",
+          "root_id": "stage11758::agent_kernel_rust_wasm::rust::1_src_policy",
+          "row_id": "stage11897::stage11896::stage11758::agent_kernel_rust_wasm::rust::1_src_policy::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "E",
+            "role": "allowed_maintenance_action",
+            "value": "PLAN_PATCH"
+          },
+          "hundred_m_predicted_label": "E",
+          "language_family": "rust",
+          "root_id": "stage11758::agent_kernel_rust_wasm::rust::2_src_context",
+          "row_id": "stage11897::stage11896::stage11758::agent_kernel_rust_wasm::rust::2_src_context::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "E",
+            "role": "allowed_maintenance_action",
+            "value": "PLAN_PATCH"
+          },
+          "hundred_m_predicted_label": "E",
+          "language_family": "rust",
+          "root_id": "stage11779::agent_kernel_lite_core::rust::policy",
+          "row_id": "stage11897::stage11896::stage11779::agent_kernel_lite_core::rust::policy::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "E",
+            "role": "allowed_maintenance_action",
+            "value": "PLAN_PATCH"
+          },
+          "hundred_m_predicted_label": "E",
+          "language_family": "rust",
+          "root_id": "stage11799::model_stack_bitnet_wasm::rust::lib",
+          "row_id": "stage11897::stage11896::stage11799::model_stack_bitnet_wasm::rust::lib::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "allowed_maintenance_action",
+            "value": "RETRIEVE_EVIDENCE"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "rust",
+          "root_id": "stage11821::codex_agent_identity::rust::jwks_url_support",
+          "row_id": "stage11897::stage11896::stage11821::codex_agent_identity::rust::jwks_url_support::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        }
+      ],
+      "task_type": "transition_next_action"
+    },
+    {
+      "gemma_win_100m_miss_rows": 9,
+      "language_family": "rust",
+      "sample_rows": [
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_inline_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_inline_test_anchor; artifact_ref=policy::tests::parses_json_decision_with_code_execute"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01"
+            ],
+            "label": "C",
+            "role": "implementation_only_no_verifier",
+            "semantic_candidate_id": "C",
+            "value": "role=implementation_only_no_verifier; artifact_ref=src/policy.rs"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "rust",
+          "root_id": "stage11758::agent_kernel_rust_wasm::rust::1_src_policy",
+          "row_id": "stage11897::stage11896::stage11758::agent_kernel_rust_wasm::rust::1_src_policy::verifier_outcome_selected_inline_test::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_inline_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_inline_test_anchor; artifact_ref=policy::tests::parses_json_decision_with_code_execute"
+          },
+          "target_text": "A",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_inline_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_inline_test_anchor; artifact_ref=context::tests::ranks_title_and_context_matches"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01"
+            ],
+            "label": "C",
+            "role": "implementation_only_no_verifier",
+            "semantic_candidate_id": "C",
+            "value": "role=implementation_only_no_verifier; artifact_ref=src/context.rs"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "rust",
+          "root_id": "stage11758::agent_kernel_rust_wasm::rust::2_src_context",
+          "row_id": "stage11897::stage11896::stage11758::agent_kernel_rust_wasm::rust::2_src_context::verifier_outcome_selected_inline_test::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_inline_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_inline_test_anchor; artifact_ref=context::tests::ranks_title_and_context_matches"
+          },
+          "target_text": "A",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_inline_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_inline_test_anchor; artifact_ref=policy::tests::parses_json_decision_with_code_execute"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01"
+            ],
+            "label": "C",
+            "role": "implementation_only_no_verifier",
+            "semantic_candidate_id": "C",
+            "value": "role=implementation_only_no_verifier; artifact_ref=src/policy.rs"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "rust",
+          "root_id": "stage11779::agent_kernel_lite_core::rust::policy",
+          "row_id": "stage11897::stage11896::stage11779::agent_kernel_lite_core::rust::policy::verifier_outcome_selected_inline_test::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_inline_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_inline_test_anchor; artifact_ref=policy::tests::parses_json_decision_with_code_execute"
+          },
+          "target_text": "A",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_inline_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_inline_test_anchor; artifact_ref=test_unix_executes_script_without_extension"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01"
+            ],
+            "label": "C",
+            "role": "implementation_only_no_verifier",
+            "semantic_candidate_id": "C",
+            "value": "role=implementation_only_no_verifier; artifact_ref=rmcp-client/src/program_resolver.rs"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "rust",
+          "root_id": "stage11833::codex_rmcp_client::rust::program_resolver_support",
+          "row_id": "stage11897::stage11896::stage11833::codex_rmcp_client::rust::program_resolver_support::verifier_outcome_selected_inline_test::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "A",
+            "role": "selected_inline_test_anchor",
+            "semantic_candidate_id": "A",
+            "value": "role=selected_inline_test_anchor; artifact_ref=test_unix_executes_script_without_extension"
+          },
+          "target_text": "A",
+          "task_type": "transition_candidate_selection"
+        },
+        {
+          "gemma12b_predicted_label": "B",
+          "gemma_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "B",
+            "role": "verifier_and_test_constraint",
+            "semantic_candidate_id": "B",
+            "value": "role=verifier_and_test_constraint; artifact_ref=cargo test request_user_input_tool_includes_questions_schema"
+          },
+          "hundred_m_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "V02"
+            ],
+            "label": "C",
+            "role": "nearby_sibling_test_constraint",
+            "semantic_candidate_id": "C",
+            "value": "role=nearby_sibling_test_constraint; artifact_ref=cargo test request_user_input_tool_description_mentions_available_modes"
+          },
+          "hundred_m_predicted_label": "C",
+          "language_family": "rust",
+          "root_id": "stage11837::codex_tools::rust::request_user_input_tool_support",
+          "row_id": "stage11897::stage11896::stage11837::codex_tools::rust::request_user_input_tool_support::evidence_citation_selected_verifier::candidate_selection",
+          "target_option": {
+            "artifact_type": "candidate_action",
+            "evidence_ids": [
+              "E01",
+              "V01"
+            ],
+            "label": "B",
+            "role": "verifier_and_test_constraint",
+            "semantic_candidate_id": "B",
+            "value": "role=verifier_and_test_constraint; artifact_ref=cargo test request_user_input_tool_includes_questions_schema"
+          },
+          "target_text": "B",
+          "task_type": "transition_candidate_selection"
+        }
+      ],
+      "task_type": "transition_candidate_selection"
+    },
+    {
+      "gemma_win_100m_miss_rows": 6,
+      "language_family": "python",
+      "sample_rows": [
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "allowed_maintenance_action",
+            "value": "RETRIEVE_EVIDENCE"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "python",
+          "root_id": "stage11763::digital_world_model::python::safe_edit_devtools_support",
+          "row_id": "stage11897::stage11896::stage11763::digital_world_model::python::safe_edit_devtools_support::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "allowed_maintenance_action",
+            "value": "RETRIEVE_EVIDENCE"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "python",
+          "root_id": "stage11771::bitsandbytes::python::cuda_library_path_support",
+          "row_id": "stage11897::stage11896::stage11771::bitsandbytes::python::cuda_library_path_support::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "allowed_maintenance_action",
+            "value": "RETRIEVE_EVIDENCE"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "python",
+          "root_id": "stage11775::neural_network_building_blocks::python::core_layers_support",
+          "row_id": "stage11897::stage11896::stage11775::neural_network_building_blocks::python::core_layers_support::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "allowed_maintenance_action",
+            "value": "RETRIEVE_EVIDENCE"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "python",
+          "root_id": "stage11791::peft::python::method_comparison_sanitizer_support",
+          "row_id": "stage11897::stage11896::stage11791::peft::python::method_comparison_sanitizer_support::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        },
+        {
+          "gemma12b_predicted_label": "A",
+          "gemma_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "hundred_m_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "B",
+            "role": "allowed_maintenance_action",
+            "value": "RETRIEVE_EVIDENCE"
+          },
+          "hundred_m_predicted_label": "B",
+          "language_family": "python",
+          "root_id": "stage11861::hyper_connections::python::manual_hyper_connection_support",
+          "row_id": "stage11897::stage11896::stage11861::hyper_connections::python::manual_hyper_connection_support::symptom_localization_source_surface::next_action",
+          "target_option": {
+            "artifact_type": "action",
+            "evidence_ids": [],
+            "label": "A",
+            "role": "allowed_maintenance_action",
+            "value": "LOCALIZE_FAILURE"
+          },
+          "target_text": "A",
+          "task_type": "transition_next_action"
+        }
+      ],
+      "task_type": "transition_next_action"
+    }
+  ]
+}

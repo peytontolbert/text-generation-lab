@@ -1,0 +1,329 @@
+{
+  "claim_scope": [
+    "Diagnostic same-manifest comparison on the cleaned 10-row residual successor bank.",
+    "Rows are replacement/clean residual candidates; report root-clustered metrics because one legacy root contributes two rows.",
+    "This does not supersede the clean strict 22/22 canary; it measures unresolved residual evidence/verifier behavior."
+  ],
+  "created_at_utc": "2026-07-13T07:42:27Z",
+  "decision": "clean_residual_successor_same_manifest_compared",
+  "gemma12b": {
+    "by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 3,
+        "exact_accuracy": 1.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    },
+    "by_language": {
+      "c_cpp": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "python": {
+        "correct": 2,
+        "exact_accuracy": 0.6666666666666666,
+        "rows": 3,
+        "scored_rows": 3
+      },
+      "rust": {
+        "correct": 1,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    },
+    "by_task": {
+      "evidence_citation": {
+        "correct": 7,
+        "exact_accuracy": 0.7777777777777778,
+        "rows": 9,
+        "scored_rows": 9
+      },
+      "verifier_outcome_semantic_transition": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "clustered": {
+      "cluster_exact_accuracy": 0.6666666666666666,
+      "clusters": 9,
+      "scored_clusters": 9,
+      "solved_clusters": 6
+    },
+    "model_id": "gemma3:12b",
+    "overall": {
+      "correct": 7,
+      "exact_accuracy": 0.7,
+      "rows": 10,
+      "scored_rows": 10
+    }
+  },
+  "hundred_m": {
+    "by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    },
+    "by_language": {
+      "c_cpp": {
+        "correct": 2,
+        "exact_accuracy": 0.5,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "python": {
+        "correct": 2,
+        "exact_accuracy": 0.6666666666666666,
+        "rows": 3,
+        "scored_rows": 3
+      },
+      "rust": {
+        "correct": 1,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    },
+    "by_task": {
+      "evidence_citation": {
+        "correct": 4,
+        "exact_accuracy": 0.4444444444444444,
+        "rows": 9,
+        "scored_rows": 9
+      },
+      "verifier_outcome_semantic_transition": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "clustered": {
+      "cluster_exact_accuracy": 0.5555555555555556,
+      "clusters": 9,
+      "scored_clusters": 9,
+      "solved_clusters": 5
+    },
+    "model_source": "8a787e143b892333f1e1160c4457faa2fc1ca22a982cdac5fa73a7d4312aef31",
+    "overall": {
+      "correct": 5,
+      "exact_accuracy": 0.5,
+      "rows": 10,
+      "scored_rows": 10
+    }
+  },
+  "outputs": {
+    "combined_rows_jsonl": "runs/local/artifacts/stage11197_clean_residual_successor_gemma_comparison/combined_rows.jsonl",
+    "gemma_rows_jsonl": "runs/local/artifacts/stage11197_clean_residual_successor_gemma_comparison/gemma_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11197_clean_residual_successor_gemma_comparison/clean_residual_successor_gemma_comparison.json"
+  },
+  "paired_row_verdict": {
+    "ties": 6,
+    "wins_100m": 1,
+    "wins_gemma": 3
+  },
+  "passed": true,
+  "rows": [
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "F",
+      "gemma12b_raw_output": "F. verifier_and_test_constraint\n\n**Reasoning:**\n\nThe task emphasizes selecting the *strongest* justification, prioritizing evidence that directly relates to the repair surface. The `verifier_and_test_constraint` evidence explicitly states that the packet names a \"build-specific selected test that directly constrains the intended repair surface.\" This is the most precise and relevant justification for the edit, as it highlights a test specifically designed to validate the changes being made.\n\nLet's look at why the other options are less suitable:\n\n*   **A. candidate_change_surface:** While relevant, it simply describes the file being edited, not *why* the edit is necessary or how it's validated.\n*   **B. nearby_definition_or_usage_context:** This is too general and doesn't provide specific justification for the edit.\n*   **C. external_analogue_reference:** This refers to a copyright notice and unrelated code, making it irrelevant.\n*   **D. algorithmic_background_reference:** This provides background information but doesn't justify the specific edit.\n*   **E. symptom_or_call_path_analogue:** This describes a creative writing task and is completely unrelated to the code change.",
+      "gold_value": "verifier_and_test_constraint",
+      "hundred_m_correct": false,
+      "hundred_m_full_vocab_top1": "F",
+      "hundred_m_predicted_label": "A",
+      "language_family": "python",
+      "repo_family": "repository_library",
+      "root_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python",
+      "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "target_text": "F",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "The most specific and strongest justification is **C. verifier_and_test_constraint**.\n\nHere's why:\n\n*   **Direct Relevance:** The evidence explicitly states that the selected tests are designed to *directly constrain the scan-kernel behavior*. This aligns perfectly with the task of justifying an edit to `causal_machine_scan.cpp`, which is a kernel implementation.\n*   **Stronger than Alternatives:**\n    *   `candidate_change_surface` is the code itself, not a justification *for* a change.\n    *   The other options (B, D, E, F) are all external references or analogies that don't provide a direct reason why the specific code change is necessary or correct. They offer background or context, but not a test-driven justification.\n\nTherefore, the test constraint provides the most targeted and compelling reason for the edit.",
+      "gold_value": "verifier_and_test_constraint",
+      "hundred_m_correct": false,
+      "hundred_m_full_vocab_top1": "C",
+      "hundred_m_predicted_label": "A",
+      "language_family": "c_cpp",
+      "repo_family": "parametergolf",
+      "root_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+      "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "target_text": "C",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "F",
+      "gemma12b_raw_output": "F. verifier_and_test_constraint\n\n**Justification:**\n\nThe edit-target is a C++ file (`causal_machine_scan.cpp`) containing CUDA code. The \"verifier_and_test_constraint\" evidence explicitly states that the selected tests *directly* constrain the behavior of the scan kernel. This makes it the most relevant and strongest justification for any changes made to that file. The other options are either too general (algorithmic background, external analogue), unrelated (symptom/call path), or refer to different code contexts (nearby definition).",
+      "gold_value": "verifier_and_test_constraint",
+      "hundred_m_correct": false,
+      "hundred_m_full_vocab_top1": "C",
+      "hundred_m_predicted_label": "D",
+      "language_family": "c_cpp",
+      "repo_family": "parametergolf",
+      "root_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp",
+      "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "target_text": "F",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "The most relevant verification target is **U2 | FAIL_TO_PASS | hf_temperature overrides generic temperature when both are present**.\n\nHere's why:\n\n*   **Evidence Alignment:** The provided evidence (E4.1 and E4.2) explicitly mentions that `hf_local` should prefer `hf_temperature` over the generic `temperature` parameter provided by the orchestrator. This directly relates to the verification target U2. The tests are designed to confirm this behavior.\n*   **Direct Impact of Repair:** If the repair focuses on ensuring that `hf_local` correctly prioritizes `hf_temperature`, the verification target U2 is the most likely to flip from FAIL to PASS.\n*   **Other Options:**\n    *   U1: While related to `hf_local`, the evidence doesn't directly address CUDA configuration.\n    *   U3: This is a more specific edge case and less likely to be the primary focus of a general repair.\n    *   U4: This target is about runner path configuration, which isn't mentioned in the provided evidence.\n\nTherefore, U2 is the most directly connected to the described behavior and the expected outcome of the repair.",
+      "gold_value": null,
+      "hundred_m_correct": true,
+      "hundred_m_full_vocab_top1": "A",
+      "hundred_m_predicted_label": "A",
+      "language_family": "python",
+      "repo_family": "code_assist",
+      "root_id": "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python",
+      "row_id": "stage10900::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "target_text": "A",
+      "task_type": "verifier_outcome_semantic_transition"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "The most decisive support for the maintainer's decision is **B. candidate_change_surface**.\n\nHere's why:\n\n*   **Evidence Item E01** explicitly states a modified source surface is present at `CMakeLists.txt` and related files. This directly indicates a change has been made to the project's build system and potentially its core components.  A maintainer would be most interested in understanding and validating changes to the build system.\n*   The other options, while relevant, are less directly indicative of a core change:\n    *   **A (symptom_or_call_path_analogue):**  `cuEmbed.artifacts.jsonl` suggests runtime support, but doesn't necessarily imply a significant change.\n    *   **C (verifier_and_test_constraint):** `test_datagen.cpp` indicates testing, which is important, but not the primary driver of a maintainer's investigation.\n    *   **D (nearby_definition_or_usage_context):** This is a general statement and not as specific as a change to a source surface.\n\nTherefore, the modification to `CMakeLists.txt` (a change surface) is the most crucial piece of evidence for a maintainer to examine.",
+      "gold_value": "candidate_change_surface",
+      "hundred_m_correct": true,
+      "hundred_m_full_vocab_top1": "F",
+      "hundred_m_predicted_label": "B",
+      "language_family": "c_cpp",
+      "repo_family": "cuembed",
+      "root_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::13",
+      "row_id": "stage11190::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::13::replacement_slot_1::candidate_change_surface",
+      "target_text": "B",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "D",
+      "gemma12b_raw_output": "**D. verifier_and_test_constraint**\n\n**Reasoning:**\n\nEvidence E02 explicitly presents a concrete Rust test file (`tests.rs`) with assertions (`assert_eq!`) designed to verify the behavior of the code being modified. This directly demonstrates a constraint or requirement for the code's functionality \u2013 it *must* behave in a way that passes these tests. The test focuses on parsing errors, indicating a specific verification scenario.  The other options are less directly supported:\n\n*   **A. candidate\\_change\\_surface:** E01 describes the modified surface, but doesn't inherently imply a verification or constraint.\n*   **B. symptom\\_or\\_call\\_path\\_analogue:**  E03 provides context, but isn't a direct verification.\n*   **C. nearby\\_definition\\_or\\_usage\\_context:**  E03 provides context, but isn't a direct verification.",
+      "gold_value": "symptom_or_call_path_analogue",
+      "hundred_m_correct": false,
+      "hundred_m_full_vocab_top1": "F",
+      "hundred_m_predicted_label": "A",
+      "language_family": "rust",
+      "repo_family": "rust-analyzer",
+      "root_id": "stage11192::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+      "row_id": "stage11193::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+      "target_text": "B",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "**B. candidate_change_surface**\n\n**Reasoning:**\n\nThe evidence ledger entry E01 directly describes modifications to the implementation surface (`lib.rs`). This makes it the most relevant and direct evidence for understanding the changes being made. The other options are less directly related:\n\n*   **A. nearby\\_definition\\_or\\_usage\\_context:** While potentially relevant, it doesn't pinpoint the specific changes.\n*   **C. verifier\\_and\\_test\\_constraint:** E02 is a test file, but it doesn't describe the changes themselves.\n*   **D. symptom\\_or\\_call\\_path\\_analogue:** E03 provides context, but isn't a direct reflection of the modification.\n\nTherefore, E01, which explicitly mentions the modified implementation surface, best supports the \"candidate\\_change\\_surface\" role.",
+      "gold_value": "symptom_or_call_path_analogue",
+      "hundred_m_correct": false,
+      "hundred_m_full_vocab_top1": "F",
+      "hundred_m_predicted_label": "B",
+      "language_family": "rust",
+      "repo_family": "prusti-dev",
+      "root_id": "stage11192::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue",
+      "row_id": "stage11193::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue",
+      "target_text": "D",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "**C. candidate_change_surface**\n\n**Reasoning:**\n\nThe evidence ledger entry E01 directly describes a modification to `builtin_attrs.rs`, which deals with built-in attributes and `cfg` flag gating. This file represents the *surface* where the change was made.  The other options are less directly relevant:\n\n*   **A. verifier_and_test_constraint:** E02 shows a test, but it's not the primary location of the change.\n*   **B. nearby_definition_or_usage_context:** E03 is related but doesn't pinpoint the modification itself.\n*   **D. symptom_or_call_path_analogue:** This option doesn't apply as we're looking for the location of the change, not a symptom or call path.\n\nTherefore, E01, describing the modification to `builtin_attrs.rs`, best supports the \"candidate\\_change\\_surface\" role.",
+      "gold_value": "candidate_change_surface",
+      "hundred_m_correct": true,
+      "hundred_m_full_vocab_top1": "F",
+      "hundred_m_predicted_label": "C",
+      "language_family": "rust",
+      "repo_family": "rust",
+      "root_id": "stage11192::rust::rust_replacement_slot_3::candidate_change_surface",
+      "row_id": "stage11193::rust::rust_replacement_slot_3::candidate_change_surface",
+      "target_text": "C",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "D",
+      "gemma12b_raw_output": "The most decisive support for the maintainer decision is **D. candidate_change_surface**.\n\nHere's why:\n\n*   **Evidence E01** explicitly states \"a modified source surface is present.\" This directly indicates a change has been made to the codebase, which is a key factor in determining maintainership. The list of files modified further strengthens this.\n*   The other options, while relevant, are less direct:\n    *   **A (verifier_and_test_constraint):**  The presence of tests is good, but doesn't inherently prove maintainership.\n    *   **B (nearby_definition_or_usage_context):** Context is helpful, but not the primary indicator of a change.\n    *   **C (symptom_or_call_path_analogue):**  This suggests support or dependency, not a direct modification.\n*   **E04** acknowledges that context is available, but isn't the *uniquely decisive* item, reinforcing that a specific change is more important.\n\nTherefore, the modification to the source surface (E01) is the strongest evidence supporting a maintainer decision.",
+      "gold_value": "candidate_change_surface",
+      "hundred_m_correct": true,
+      "hundred_m_full_vocab_top1": "F",
+      "hundred_m_predicted_label": "D",
+      "language_family": "python",
+      "repo_family": "optimum",
+      "root_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::62",
+      "row_id": "stage11190::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::62::replacement_slot_2::candidate_change_surface",
+      "target_text": "D",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "The most decisive support for the maintainer's decision is **C. candidate_change_surface**.\n\nHere's why:\n\n*   **Evidence Item E01** explicitly states a modified source surface is present at `CMakeLists.txt` and related files. This directly indicates a change has been made to the project's build system and potentially its core components.  A maintainer would be most interested in understanding and validating changes to the build surface.\n\nLet's look at why the other options are less decisive:\n\n*   **A. verifier_and_test_constraint (E02):** While tests are important, the presence of a test target doesn't inherently explain *why* changes were made. It's a consequence of development, not the primary driver.\n*   **B. symptom_or_call_path_analogue (E03):** Artifacts and entities files suggest supporting data, but don't directly point to the reason for the changes.\n*   **D. nearby_definition_or_usage_context (E04):** This is a general statement and not specific enough to be decisive.\n\n\n\nTherefore, the modification to the CMakeLists.txt and related files (Evidence Item E01) is the most crucial piece of evidence for a maintainer to investigate.",
+      "gold_value": "candidate_change_surface",
+      "hundred_m_correct": true,
+      "hundred_m_full_vocab_top1": "F",
+      "hundred_m_predicted_label": "C",
+      "language_family": "c_cpp",
+      "repo_family": "cuembed",
+      "root_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::10",
+      "row_id": "stage11190::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::10::replacement_slot_3::candidate_change_surface",
+      "target_text": "C",
+      "task_type": "evidence_citation"
+    }
+  ],
+  "source_artifacts": {
+    "bank_rows": "runs/local/artifacts/stage11195_clean_residual_successor_bank/clean_residual_successor_bank.jsonl",
+    "hundred_audit": "runs/local/artifacts/stage11196_clean_residual_successor_100m_score/bounded_choice_eval_audit_clean_residual_successor_encoder_option_retrieval_verifier_conditioned.json",
+    "hundred_summary": "runs/local/artifacts/stage11196_clean_residual_successor_100m_score/clean_residual_successor_100m_score.json"
+  },
+  "stage": 11197,
+  "stage_name": "stage11197_clean_residual_successor_gemma_comparison"
+}

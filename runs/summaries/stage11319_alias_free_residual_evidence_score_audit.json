@@ -1,0 +1,303 @@
+{
+  "best_metric": {
+    "correct": 3,
+    "exact_accuracy": 0.42857142857142855,
+    "rows": 7,
+    "scored_rows": 7
+  },
+  "best_scorer": "encoder_option_retrieval_verifier_conditioned",
+  "created_at_utc": "2026-07-13T11:47:25Z",
+  "decision": "alias_free_residual_evidence_score_audit_complete",
+  "interpretation": [
+    "Alias-free residual replacements are a harder and more honest check than role-alias residual rows.",
+    "Blocked Rust symptom rows should be replaced from fresh source material; the available prompt does not contain alias-free symptom/call-path evidence matching the hidden gold role.",
+    "This audit is not a frontier claim; it determines whether replacement rows are usable for the next eval package."
+  ],
+  "materialization_audit": {
+    "all_rows_have_multiple_options": true,
+    "all_targets_in_options": true,
+    "blocked": [
+      {
+        "blockers": [
+          "gold_role_match_count_0"
+        ],
+        "gold_value": "symptom_or_call_path_analogue",
+        "parsed_items": [
+          {
+            "content": "Modified implementation surface in `source_analyzer.rs` from repo `rust-analyzer`. Snippet lines 1-14: //! Lookup hir elements using positions in the source code. This is a lossy //! transformation: in general, a single source might correspond to several //! modules, functions, etc, due to macros, cfgs and `#[path=]` attributes on //! modules. //! //! So, this modules should not be used during hir construction, it exists //! purely for \"IDE needs\". use std::{ cell::OnceCell, iter::{self, once}, }; use either:",
+            "path": "source_analyzer.rs",
+            "role": "candidate_change_surface"
+          },
+          {
+            "content": "Concrete Rust test/verification file `tests.rs` is available for checking behavior. Snippet lines 1-21: use expect_test::{Expect, expect}; use hir::{FilePosition, FileRange}; use ide_db::{ EditionedFileId, FxHashSet, LocalRoots, base_db::{SourceDatabase, salsa::Setter}, }; use test_utils::RangeOrOffset; use crate::{MatchFinder, SsrRule}; fn parse_error_text(query: &str) -> String { format!(\"{}\", query.parse::<SsrRule>().unwrap_err()) } #[test] fn parser_empty_query() { assert_eq!(parse_error_text(\"\")",
+            "path": "tests.rs",
+            "role": "verifier_and_test_constraint"
+          },
+          {
+            "content": "Related runtime/API path `display.rs` gives independent behavior context distinct from the modified surface. Snippet lines 1-12: //! HirDisplay implementations for various hir types. use either::Either; use hir_def::{ AdtId, BuiltinDeriveImplId, DefWithBodyId, ExpressionStoreOwnerId, FunctionId, GenericDefId, ImplId, ItemContainerId, builtin_derive::BuiltinDeriveImplMethod, expr_store::{Body, ExpressionStore}, hir::generics::{GenericParams, TypeOrConstParamData, TypeParamProvenance, WherePredicate}, item_tree::FieldsSh",
+            "path": "display.rs",
+            "role": "nearby_definition_or_usage_context"
+          },
+          {
+            "content": "General neighboring repository context exists, but no separate snippet is stronger than E01-E03 for this row.",
+            "path": "evidence_04",
+            "role": "background_context"
+          }
+        ],
+        "root_id": "stage11192::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+        "row_id": "stage11193::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue"
+      },
+      {
+        "blockers": [
+          "gold_role_match_count_0"
+        ],
+        "gold_value": "symptom_or_call_path_analogue",
+        "parsed_items": [
+          {
+            "content": "Modified implementation surface in `lib.rs` from repo `prusti-dev`. Snippet lines 1-16: // \u00a9 2019, ETH Zurich // // This Source Code Form is subject to the terms of the Mozilla Public // License, v. 2.0. If a copy of the MPL was not distributed with this // file, You can obtain one at http://mozilla.org/MPL/2.0/. #![deny(unused_must_use)] #![warn(clippy::disallowed_types)] #[rustfmt::skip] #[path = \"../gen/mod.rs\"] pub mod wrappers; use jni::{errors::Result, objects::JObject, JNIEnv}; pub fn get_sys",
+            "path": "lib.rs",
+            "role": "candidate_change_surface"
+          },
+          {
+            "content": "Concrete Rust test/verification file `verify_empty_program.rs` is available for checking behavior. Snippet lines 1-16: use jni::{objects::JObject, InitArgsBuilder, JNIVersion, JavaVM}; use log::debug; use std::{env, fs}; use viper_sys::{get_system_out, wrappers::*}; #[test] fn verify_empty_program() { env_logger::init(); let viper_home = env::var(\"VIPER_HOME\").expect(\"failed to get VIPER_HOME\"); debug!(\"Using Viper home: '{}'\", &viper_home); let z3_path = env::var(\"Z3_EXE\").expect(\"failed to get Z3_EXE\"); debug",
+            "path": "verify_empty_program.rs",
+            "role": "verifier_and_test_constraint"
+          },
+          {
+            "content": "Related runtime/API path `user_provided_type_params.rs` gives independent behavior context distinct from the modified surface. Snippet lines 1-16: use crate::common::HasGenerics; use proc_macro2::TokenStream; use quote::ToTokens; use syn::{spanned::Spanned, TypeParam}; #[derive(Debug)] pub(crate) enum UserAnnotatedTypeParam { /// Something concrete, i.e. `i32` ConcreteType(syn::TypeParam), /// Something non-concrete, i.e. `T` GenericType(syn::TypeParam), } impl UserAnnotatedTypeParam { pub fn try_parse(from: &syn::TypeParam) -> ParserResul",
+            "path": "user_provided_type_params.rs",
+            "role": "nearby_definition_or_usage_context"
+          },
+          {
+            "content": "General neighboring repository context exists, but no separate snippet is stronger than E01-E03 for this row.",
+            "path": "evidence_04",
+            "role": "background_context"
+          }
+        ],
+        "root_id": "stage11192::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue",
+        "row_id": "stage11193::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue"
+      }
+    ],
+    "role_alias_visible_rows": 0
+  },
+  "materialization_counts": {
+    "blocked_rows": 2,
+    "by_gold": {
+      "candidate_change_surface": 4,
+      "verifier_and_test_constraint": 3
+    },
+    "by_language": {
+      "c_cpp": 4,
+      "python": 2,
+      "rust": 1
+    },
+    "by_target_label": {
+      "A": 1,
+      "B": 1,
+      "C": 1,
+      "D": 2,
+      "E": 2
+    },
+    "materialized_rows": 7,
+    "queue_rows": 9,
+    "source_rows": 9
+  },
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11319_alias_free_residual_evidence_score_audit/alias_free_residual_evidence_score_audit.json"
+  },
+  "passed": true,
+  "runtime_initialization": {
+    "attached_bounded_choice_heads": [
+      "bounded_choice_evidence_ledger_head"
+    ],
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval_evidence_ledger_head",
+      "bounded_choice_contrast_margin": 0.05,
+      "bounded_choice_contrast_weight": 0.0,
+      "bounded_decoder_train_sampler": "cyclic",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "bounded_decoder_ce_probe_contract",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 278,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/model_state.pt",
+    "weights_sha256": "1367d9c50d1e0defb9e19afb20e06b1f15e20e43d412310c0f62e31ac241ec7f"
+  },
+  "scored": {
+    "decoder_first_step": {
+      "metric": {
+        "correct": 2,
+        "exact_accuracy": 0.2857142857142857,
+        "rows": 7,
+        "scored_rows": 7
+      },
+      "misses": [
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "C",
+          "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 4,
+          "target_text": "E"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "C",
+          "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 4,
+          "target_text": "D"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "C",
+          "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 3,
+          "target_text": "E"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "C",
+          "row_id": "stage11190::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::62::replacement_slot_2::candidate_change_surface::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 4,
+          "target_text": "A"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "C",
+          "row_id": "stage11190::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::10::replacement_slot_3::candidate_change_surface::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 5,
+          "target_text": "D"
+        }
+      ]
+    },
+    "encoder_option_retrieval": {
+      "metric": {
+        "correct": 3,
+        "exact_accuracy": 0.42857142857142855,
+        "rows": 7,
+        "scored_rows": 7
+      },
+      "misses": [
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 4,
+          "target_text": "D"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "D",
+          "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 3,
+          "target_text": "E"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage11190::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::13::replacement_slot_1::candidate_change_surface::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 1,
+          "target_text": "C"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage11190::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::10::replacement_slot_3::candidate_change_surface::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 5,
+          "target_text": "D"
+        }
+      ]
+    },
+    "encoder_option_retrieval_evidence_judgment_head": {
+      "metric": {
+        "correct": 3,
+        "exact_accuracy": 0.42857142857142855,
+        "rows": 7,
+        "scored_rows": 7
+      },
+      "misses": [
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 4,
+          "target_text": "D"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "D",
+          "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 3,
+          "target_text": "E"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage11190::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::13::replacement_slot_1::candidate_change_surface::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 1,
+          "target_text": "C"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage11190::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::10::replacement_slot_3::candidate_change_surface::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 5,
+          "target_text": "D"
+        }
+      ]
+    },
+    "encoder_option_retrieval_verifier_conditioned": {
+      "metric": {
+        "correct": 3,
+        "exact_accuracy": 0.42857142857142855,
+        "rows": 7,
+        "scored_rows": 7
+      },
+      "misses": [
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 4,
+          "target_text": "D"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "D",
+          "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 3,
+          "target_text": "E"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage11190::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::13::replacement_slot_1::candidate_change_surface::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 1,
+          "target_text": "C"
+        },
+        {
+          "full_vocab_top1_text": "C",
+          "predicted": "A",
+          "row_id": "stage11190::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::10::replacement_slot_3::candidate_change_surface::alias_free_evidence_item_v1",
+          "target_rank_full_vocab": 5,
+          "target_text": "D"
+        }
+      ]
+    }
+  },
+  "source_artifacts": {
+    "frontier_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "materialization": "runs/local/artifacts/stage11318_alias_free_residual_evidence_item_materialization/alias_free_residual_evidence_item_materialization.json",
+    "rows": "runs/local/artifacts/stage11318_alias_free_residual_evidence_item_materialization/alias_free_residual_evidence_item_rows.jsonl"
+  },
+  "stage": 11319,
+  "stage_name": "stage11319_alias_free_residual_evidence_score_audit"
+}

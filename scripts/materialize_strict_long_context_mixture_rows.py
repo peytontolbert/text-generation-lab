@@ -3,9 +3,12 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from long_context_common import write_json, write_jsonl
+
+
+COMPARISON_OPERATORS = ('>=', '<=', '!=', '==', '>', '<')
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -37,6 +40,77 @@ def _read_parquet_rows(directory: Path) -> list[dict[str, Any]]:
     if not rows:
         raise ValueError(f"empty_parquet_rows:{directory}")
     return rows
+
+
+def _coerce_value(value: Any) -> Any:
+    if isinstance(value, str):
+        text = value.strip()
+        lowered = text.lower()
+        if lowered in {'true', 'false'}:
+            return lowered == 'true'
+        try:
+            if '.' in text:
+                return float(text)
+            return int(text)
+        except ValueError:
+            return text
+    return value
+
+
+def _numeric_value(value: Any) -> float:
+    coerced = _coerce_value(value)
+    if isinstance(coerced, bool):
+        return 1.0 if coerced else 0.0
+    if isinstance(coerced, (int, float)):
+        return float(coerced)
+    raise ValueError(f'non_numeric_filter_value:{value}')
+
+
+def _matches_clause(row: dict[str, Any], clause: str) -> bool:
+    clause = clause.strip()
+    if not clause:
+        return True
+    if ' contains ' in clause:
+        key, expected = clause.split(' contains ', 1)
+        actual = str(row.get(key.strip()) or '')
+        return expected.strip() in actual
+    for operator in COMPARISON_OPERATORS:
+        if operator not in clause:
+            continue
+        key, expected = clause.split(operator, 1)
+        actual = row.get(key.strip())
+        expected_value = _coerce_value(expected.strip())
+        actual_value = _coerce_value(actual)
+        if operator == '==':
+            return actual_value == expected_value
+        if operator == '!=':
+            return actual_value != expected_value
+        if actual is None:
+            return False
+        actual_numeric = _numeric_value(actual_value)
+        expected_numeric = _numeric_value(expected_value)
+        if operator == '>=':
+            return actual_numeric >= expected_numeric
+        if operator == '<=':
+            return actual_numeric <= expected_numeric
+        if operator == '>':
+            return actual_numeric > expected_numeric
+        if operator == '<':
+            return actual_numeric < expected_numeric
+    raise ValueError(f'unsupported_filter_clause:{clause}')
+
+
+def _matches_filter(row: dict[str, Any], filter_expr: str | None) -> bool:
+    if not filter_expr:
+        return True
+    or_groups = [part.strip() for part in str(filter_expr).split(' or ') if part.strip()]
+    if not or_groups:
+        return True
+    for group in or_groups:
+        and_clauses = [part.strip() for part in group.split(' and ') if part.strip()]
+        if and_clauses and all(_matches_clause(row, clause) for clause in and_clauses):
+            return True
+    return False
 
 
 def _iter_surface_rows(path: Path, *, storage_format: str) -> list[dict[str, Any]]:
@@ -75,6 +149,12 @@ def materialize_strict_long_context_mixture_rows(
         weight = float(manifest_row.get('weight') or 0.0)
         dataset_card_path = str(manifest_row.get('dataset_card_path') or '').strip()
         include_audit_only_direct = bool(manifest_row.get('include_audit_only_direct'))
+        filter_expr = str(manifest_row.get('filter_expr') or '').strip() or None
+        manifest_filter_expr = str(manifest_row.get('manifest_filter_expr') or '').strip() or None
+        state_delta_ready_fraction = float(manifest_row.get('state_delta_ready_fraction') or 0.0)
+        evidence_anchor_ready_fraction = float(manifest_row.get('evidence_anchor_ready_fraction') or 0.0)
+        min_state_delta_ready_fraction = float(manifest_row.get('min_state_delta_ready_fraction') or 0.0)
+        min_evidence_anchor_ready_fraction = float(manifest_row.get('min_evidence_anchor_ready_fraction') or 0.0)
 
         if not surface or not task_family or not storage_format or not str(source_path):
             raise ValueError(f'incomplete_mixture_manifest_row:{manifest_row}')
@@ -83,11 +163,35 @@ def materialize_strict_long_context_mixture_rows(
         if weight <= 0.0:
             raise ValueError(f'invalid_weight:{surface}:{weight}')
 
+        manifest_accepted = _matches_filter(manifest_row, manifest_filter_expr)
+        if not manifest_accepted:
+            surface_cards.append(
+                {
+                    'surface': surface,
+                    'task_family': task_family,
+                    'storage_format': storage_format,
+                    'path': str(source_path),
+                    'expected_row_count': expected_row_count,
+                    'actual_row_count': 0,
+                    'materialized_row_count': 0,
+                    'weight': weight,
+                    'filter_expr': filter_expr,
+                    'manifest_filter_expr': manifest_filter_expr,
+                    'manifest_accepted': False,
+                    'state_delta_ready_fraction': state_delta_ready_fraction,
+                    'evidence_anchor_ready_fraction': evidence_anchor_ready_fraction,
+                    'min_state_delta_ready_fraction': min_state_delta_ready_fraction,
+                    'min_evidence_anchor_ready_fraction': min_evidence_anchor_ready_fraction,
+                }
+            )
+            continue
+
         source_rows = _iter_surface_rows(source_path, storage_format=storage_format)
         if len(source_rows) != expected_row_count:
             raise ValueError(f'row_count_mismatch:{surface}:expected={expected_row_count}:actual={len(source_rows)}')
 
-        for row in source_rows:
+        kept_rows = [row for row in source_rows if _matches_filter(row, filter_expr)]
+        for row in kept_rows:
             row_id = str(row.get('row_id') or '').strip()
             if not row_id:
                 raise ValueError(f'missing_row_id:{surface}:{source_path}')
@@ -103,6 +207,12 @@ def materialize_strict_long_context_mixture_rows(
             row_copy['mixture_storage_format'] = storage_format
             row_copy['mixture_dataset_card_path'] = dataset_card_path
             row_copy['mixture_include_audit_only_direct'] = include_audit_only_direct
+            row_copy['mixture_filter_expr'] = filter_expr
+            row_copy['mixture_manifest_filter_expr'] = manifest_filter_expr
+            row_copy['mixture_state_delta_ready_fraction'] = state_delta_ready_fraction
+            row_copy['mixture_evidence_anchor_ready_fraction'] = evidence_anchor_ready_fraction
+            row_copy['mixture_min_state_delta_ready_fraction'] = min_state_delta_ready_fraction
+            row_copy['mixture_min_evidence_anchor_ready_fraction'] = min_evidence_anchor_ready_fraction
             materialized_rows.append(row_copy)
 
         surface_cards.append(
@@ -113,9 +223,20 @@ def materialize_strict_long_context_mixture_rows(
                 'path': str(source_path),
                 'expected_row_count': expected_row_count,
                 'actual_row_count': len(source_rows),
+                'materialized_row_count': len(kept_rows),
                 'weight': weight,
+                'filter_expr': filter_expr,
+                'manifest_filter_expr': manifest_filter_expr,
+                'manifest_accepted': True,
+                'state_delta_ready_fraction': state_delta_ready_fraction,
+                'evidence_anchor_ready_fraction': evidence_anchor_ready_fraction,
+                'min_state_delta_ready_fraction': min_state_delta_ready_fraction,
+                'min_evidence_anchor_ready_fraction': min_evidence_anchor_ready_fraction,
             }
         )
+
+    if not materialized_rows:
+        raise ValueError('empty_materialized_rows')
 
     output_dir.mkdir(parents=True, exist_ok=True)
     rows_path = output_dir / 'strict_long_context_mixture_rows.jsonl'

@@ -1,10 +1,10 @@
 {
   "challenge_lines": {
-    "candidate_position_or_id_bias": null,
-    "changed_path_signature_leakage": null,
-    "cross_repo_analogue_surface_leakage": null,
-    "review_scope_matches_prompt_visible_evidence_only": null,
-    "template_specific_surface_prior": null
+    "candidate_position_or_id_bias": true,
+    "changed_path_signature_leakage": true,
+    "cross_repo_analogue_surface_leakage": false,
+    "review_scope_matches_prompt_visible_evidence_only": true,
+    "template_specific_surface_prior": false
   },
   "language_family": "python",
   "machine_context": {
@@ -21,8 +21,9 @@
   },
   "passed": false,
   "required_human_action": "Check whether the visible prompt still proxies the answer via template priors, snippet asymmetry, candidate order, or cross-repo analogue cues rather than real maintenance reasoning.",
-  "reviewer_notes": "",
+  "reviewer_id": "codex-gpt5-ai-review",
+  "reviewer_notes": "Fail for shortcut risk and missing maintainer-grade evidence. Raw changed paths are hidden, but the prompt still collapses to a weak template: unrelated analogue snippets plus direct candidate previews. The selected test set exists only in hidden metadata, so the visible prompt cannot support a clean implementation-vs-config decision from maintainer-visible evidence alone.",
   "row_id": "stage10110::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t13_13_10_019bff96_2dc5_7162_88f8_83eb_src_code_assist_orchestrator_cognitive_perfection_py_src_code_assist_orchestrato_3a0f6d8311_aug_1500000_8b46e7f662::python_implementation_vs_config",
-  "status": "pending_human_review",
+  "status": "completed",
   "successor_template": "python_implementation_vs_config"
 }

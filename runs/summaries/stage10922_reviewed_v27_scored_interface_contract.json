@@ -1,0 +1,151 @@
+{
+  "approved_scoring_contract": {
+    "default_policy": "current_retrieval",
+    "explicit_non_overrides": {
+      "abstention_insufficient_evidence": "current_retrieval",
+      "evidence_citation": "current_retrieval",
+      "minimal_fix_selection": "current_retrieval",
+      "patch_impact": "current_retrieval",
+      "symptom_localization": "current_retrieval",
+      "verifier_outcome": "current_retrieval"
+    },
+    "task_policy_overrides": {
+      "verifier_outcome_semantic_transition": "decoder_on_transition_only"
+    }
+  },
+  "blocked_policy_changes": {
+    "evidence_citation": {
+      "decision": "no_honest_multilingual_evidence_policy_candidate_yet",
+      "fresh_slice_status": "fresh_evidence_successors_confirm_multilingual_b_vs_f_gap",
+      "reason": "Role-mapped evidence retrieval helps fresh Python/C++ F rows but is not safe to promote because it breaks the clean web B control, and no fresh pure-web verifier-anchored control family exists.",
+      "status": "blocked"
+    },
+    "web_multilingual_promotion": {
+      "broad_source_search": "No fresh pure-web verifier-anchored source family was found in the scanned refinery inventories.",
+      "decision": "evidence_policy_still_blocked_by_missing_pure_web_control",
+      "reason": "Current refinery inventories contain no fresh pure-web selected-test source family, so multilingual evidence-policy promotion remains web-blocked.",
+      "status": "blocked"
+    }
+  },
+  "claim_scope": [
+    "Freeze the approved bounded-choice scoring interface for the current honest reviewed-v2.7 standalone frontier.",
+    "Adopt only task-scoped policy changes that have explicit anti-cheat support and leave broader multilingual evidence policy blocked until fresh web controls exist."
+  ],
+  "created_at_utc": "2026-07-12T19:29:36Z",
+  "current_honest_boundary": {
+    "alias_safe_baseline_metrics": {
+      "blocked_row_count": 8,
+      "blocked_row_ids": [
+        "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_00",
+        "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_01",
+        "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_02",
+        "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_03",
+        "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_04",
+        "stage10126::candle::candle-core::rust::evidence_citation::reviewed_v27_compact",
+        "stage10126::tokenizers::tokenizers::rust::evidence_citation::reviewed_v27_compact",
+        "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact"
+      ],
+      "stress_rows": 7,
+      "strict_rows": 23,
+      "train_rows": 187,
+      "validation_rows": 23
+    },
+    "cleaned_canary_eval_accuracy_under_default_policy": 0.9130434782608695,
+    "fresh_python_transition_slice_after_override": {
+      "gemma12b_accuracy": 0.0,
+      "gemma12b_correct": 0,
+      "hundred_m_after_accuracy": 1.0,
+      "hundred_m_after_correct": 2,
+      "hundred_m_before_accuracy": 0.5,
+      "hundred_m_before_correct": 1,
+      "rows": 2
+    },
+    "web_source_supply_metrics": {
+      "fresh_pure_web_selected_test_rows": 0,
+      "fresh_selected_test_rows": 0,
+      "fresh_web_rows": 0
+    }
+  },
+  "decision": "reviewed_v27_scored_interface_contract_ready",
+  "evidence_for_approved_override": {
+    "cleaned_canary_regression_check": {
+      "candidate_eval_accuracy_on_canary_check_surface": 0.9130434782608695,
+      "current_eval_accuracy_on_canary_check_surface": 0.9130434782608695,
+      "semantic_transition_rows_present": 0,
+      "surface_rows": 23
+    },
+    "fresh_python_verifier_slice_before_after": {
+      "gemma12b_accuracy": 0.0,
+      "gemma12b_correct": 0,
+      "hundred_m_after_accuracy": 1.0,
+      "hundred_m_after_correct": 2,
+      "hundred_m_before_accuracy": 0.5,
+      "hundred_m_before_correct": 1,
+      "rows": 2
+    },
+    "slice_comparison_overall": {
+      "gemma12b": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "hundred_m_current_retrieval": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "hundred_m_policy_candidate": {
+        "correct": 2,
+        "exact_accuracy": 1.0,
+        "rows": 2,
+        "scored_rows": 2
+      }
+    },
+    "strict_transition_rows_under_current_retrieval": {
+      "accuracy": 0.5,
+      "by_task": {
+        "verifier_outcome_semantic_transition": {
+          "accuracy": 0.5,
+          "correct": 1,
+          "rows": 2
+        }
+      },
+      "correct": 1,
+      "misses": [
+        {
+          "correct": false,
+          "decoder_pred": "A",
+          "pred": "B",
+          "retrieval_pred": "B",
+          "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+          "split": "strict_eval",
+          "target": "A",
+          "task_type": "verifier_outcome_semantic_transition"
+        }
+      ],
+      "rows": 2
+    }
+  },
+  "findings": [
+    "A narrow verifier-transition override is now justified: decoder_on_transition_only lifts the fresh Python semantic-transition slice from 1/2 to 2/2 while Gemma stays at 0/2.",
+    "That override does not change the cleaned multilingual canary check surface because no verifier_outcome_semantic_transition rows are present there.",
+    "Evidence citation remains the main blocked multilingual family: the fresh Python/C++ successor slice still confirms the B-vs-F gap and no honest multilingual evidence scorer candidate exists yet.",
+    "Web remains a hard anti-cheat blocker for evidence-policy promotion because the broader acquisition atlas still finds zero fresh pure-web selected-test roots in current inventories."
+  ],
+  "next_best_step": "Use this scored-interface contract for future standalone 100M-vs-Gemma comparisons, then keep dataset work focused on fresh Python/C++ evidence successors and new pure-web source acquisition rather than new global scorer changes.",
+  "passed": true,
+  "source_artifacts": {
+    "alias_safe_baseline": "runs/local/artifacts/stage10881_evidence_alias_quarantine_successor/evidence_alias_quarantine_successor.json",
+    "evidence_policy_decision": "runs/local/artifacts/stage10912_current_evidence_policy_decision/current_evidence_policy_decision.json",
+    "evidence_slice_decision": "runs/local/artifacts/stage10917_evidence_successor_slice_decision/evidence_successor_slice_decision.json",
+    "verifier_policy_audit": "runs/local/artifacts/stage10908_verifier_transition_policy_audit/verifier_transition_policy_audit.json",
+    "verifier_policy_candidate_comparison": "runs/local/artifacts/stage10909_verifier_transition_policy_candidate_comparison/verifier_transition_policy_candidate_comparison.json",
+    "verifier_policy_slice_comparison": "runs/local/artifacts/stage10910_python_verifier_transition_policy_slice_comparison/python_verifier_transition_policy_slice_comparison.json",
+    "web_acquisition_atlas": "runs/local/artifacts/stage10921_broad_pure_web_source_acquisition_atlas/broad_pure_web_source_acquisition_atlas.json",
+    "web_blocker_decision": "runs/local/artifacts/stage10919_evidence_policy_and_web_blocker_decision/evidence_policy_and_web_blocker_decision.json"
+  },
+  "stage": 10922,
+  "stage_name": "stage10922_reviewed_v27_scored_interface_contract"
+}

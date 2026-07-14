@@ -1,0 +1,129 @@
+{
+  "audits": {
+    "all_rows_missing_gold_value": [],
+    "clean_overlap_violations": [],
+    "clean_rows_missing_selected_test_anchor": [],
+    "duplicate_row_ids": [],
+    "overlap_bucket_mismatches": []
+  },
+  "claim_scope": [
+    "Verify that the combined reviewed evidence-role curriculum really separates clean train-support rows from overlap/stress-only rows.",
+    "Measure whether the package materially expands support geometry beyond the micro-replenishment branch without smuggling heldout overlap into the clean subset."
+  ],
+  "created_at_utc": "2026-07-12T22:08:04Z",
+  "decision": "reviewed_evidence_role_curriculum_audit_passed",
+  "headline_findings": [
+    "The package is only useful if the clean subset is genuinely overlap-free and selected-test-backed enough to support the next evidence-role branch honestly.",
+    "A mixed semantic-plus-bounded curriculum is now available, which is a more meaningful data step than another scorer-margin tweak."
+  ],
+  "metrics": {
+    "all_rows": 36,
+    "all_rows_by_language": {
+      "c_cpp": 12,
+      "python": 8,
+      "rust": 14,
+      "web_js_ts_html": 2
+    },
+    "all_rows_by_objective": {
+      "bounded_decoder_ce": 24,
+      "semantic_evidence_role_generation": 6,
+      "semantic_evidence_role_pairwise_contrast": 6
+    },
+    "bounded_rows": 30,
+    "clean_rows": 6,
+    "clean_rows_by_language": {
+      "rust": 6
+    },
+    "clean_rows_by_target": {
+      "symptom_or_call_path_analogue": 6
+    },
+    "clean_unique_source_roots": 1,
+    "overlap_rows": 30,
+    "overlap_rows_by_language": {
+      "c_cpp": 12,
+      "python": 8,
+      "rust": 8,
+      "web_js_ts_html": 2
+    },
+    "package_snapshot": {
+      "all_rows": 36,
+      "all_rows_by_language": {
+        "c_cpp": 12,
+        "python": 8,
+        "rust": 14,
+        "web_js_ts_html": 2
+      },
+      "all_rows_by_objective": {
+        "bounded_decoder_ce": 24,
+        "semantic_evidence_role_generation": 6,
+        "semantic_evidence_role_pairwise_contrast": 6
+      },
+      "all_rows_by_target": {
+        "candidate_change_surface": 12,
+        "symptom_or_call_path_analogue": 10,
+        "verifier_and_test_constraint": 14
+      },
+      "clean_rows_by_language": {
+        "rust": 6
+      },
+      "clean_rows_by_objective": {
+        "bounded_decoder_ce": 4,
+        "semantic_evidence_role_generation": 1,
+        "semantic_evidence_role_pairwise_contrast": 1
+      },
+      "clean_rows_with_selected_test_anchor": 6,
+      "clean_train_support_rows": 6,
+      "overlap_or_stress_rows": 30,
+      "overlap_rows_by_language": {
+        "c_cpp": 12,
+        "python": 8,
+        "rust": 8,
+        "web_js_ts_html": 2
+      },
+      "overlap_rows_with_selected_test_anchor": 26,
+      "replenishment_snapshot": {
+        "all_rows": 30,
+        "candidate_by_language": {
+          "c_cpp": 2,
+          "python": 1,
+          "rust": 3
+        },
+        "candidate_rows": 6,
+        "gold_values_candidate_rows": {
+          "candidate_change_surface": 2,
+          "symptom_or_call_path_analogue": 2,
+          "verifier_and_test_constraint": 2
+        },
+        "support_by_language": {
+          "c_cpp": 8,
+          "python": 4,
+          "rust": 12
+        },
+        "support_rows": 24
+      },
+      "rows_by_source_stage": {
+        "stage10925_semantic": 12,
+        "stage10974_replenishment": 24
+      },
+      "semantic_snapshot": {
+        "c_cpp": 4,
+        "python": 4,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "unique_source_roots_all": 8,
+      "unique_source_roots_clean": 1
+    },
+    "semantic_rows": 6
+  },
+  "next_best_step": "Feed the clean subset into the next support package and keep the overlap subset explicitly quarantined unless the stage is marked diagnostic or stress-only.",
+  "passed": true,
+  "source_artifacts": {
+    "all_rows": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/support_rows_all.jsonl",
+    "clean_rows": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/support_rows_clean.jsonl",
+    "overlap_rows": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/support_rows_overlap_or_stress.jsonl",
+    "package_summary": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/reviewed_evidence_role_curriculum_package.json"
+  },
+  "stage": 10980,
+  "stage_name": "stage10980_reviewed_evidence_role_curriculum_audit"
+}

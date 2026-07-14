@@ -1,0 +1,70 @@
+{
+  "anti_leak_status": {
+    "selected_test_path_only_inside_candidate_options": true,
+    "strict_smoke_root_replay": false,
+    "train_support_only": true
+  },
+  "created_at_utc": "2026-07-14T08:19:25Z",
+  "decision": "first_python_verifier_support_root_materialized",
+  "feasibility_result": {
+    "admit_recommendation": "candidate_for_row_materialization",
+    "candidate_id": "stage11743::python::llm_memory_modules_at_scale",
+    "command": [
+      "conda",
+      "run",
+      "-n",
+      "trellis",
+      "pytest",
+      "-q",
+      "-o",
+      "addopts=",
+      "tests/test_character_assistant.py",
+      "tests/test_memory.py"
+    ],
+    "finished_at_utc": "2026-07-14T08:14:21Z",
+    "passed": true,
+    "repo_family": "llm_memory_modules_at_scale",
+    "repo_path": "/data/parametergolf/helpful_repos/llm_memory_modules_at_scale",
+    "returncode": 0,
+    "sample_sources": [
+      "chat_with_sherlock.py",
+      "example.py",
+      "examples/character_assistant.py",
+      "examples/chat_with_sherlock.py",
+      "examples/train_qa.py",
+      "setup.py"
+    ],
+    "selected_tests": [
+      "tests/test_character_assistant.py",
+      "tests/test_memory.py"
+    ],
+    "source_snapshot_id": "ad6f5ea441bb5c948cabcfe8ec9799b5f5b27b1c",
+    "started_at_utc": "2026-07-14T08:14:09Z",
+    "stderr_log": "runs/local/artifacts/stage11744_python_verifier_feasibility_probe/logs/llm_memory_modules_at_scale.stderr.log",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_tail": "",
+    "stdout_log": "runs/local/artifacts/stage11744_python_verifier_feasibility_probe/logs/llm_memory_modules_at_scale.stdout.log",
+    "stdout_sha256": "026e792bf1cbf6cd439b4d18289c28e238d471edc29c8096fae60c06a7664298",
+    "stdout_tail": "..........                                                               [100%]\n=============================== warnings summary ===============================\n../../../../home/peyton/miniconda3/envs/trellis/lib/python3.10/site-packages/transformers/utils/hub.py:110\n  /home/peyton/miniconda3/envs/trellis/lib/python3.10/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.\n    warnings.warn(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n10 passed, 1 warning in 6.65s\n\n",
+    "support_lane": "python_verifier_outcome_selected_test_support",
+    "timed_out": false
+  },
+  "interpretation": [
+    "This is the first disjoint executable Python support root for the verifier_outcome selected-test lane.",
+    "It does not satisfy the Stage11742 quota by itself; 11 more Python support roots are still required for the requested package shape.",
+    "Rows are train-support-only and must not be used as strict evaluation rows."
+  ],
+  "outputs": {
+    "rows": "runs/local/artifacts/stage11745_python_verifier_support_rows/python_verifier_support_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11745_python_verifier_support_rows/python_verifier_support_rows.json"
+  },
+  "passed": true,
+  "repo_family": "llm_memory_modules_at_scale",
+  "root_count": 1,
+  "row_count": 4,
+  "source_artifacts": {
+    "feasibility": "runs/local/artifacts/stage11744_python_verifier_feasibility_probe/python_verifier_feasibility_results.jsonl"
+  },
+  "stage": 11745,
+  "stage_name": "stage11745_python_verifier_support_rows"
+}

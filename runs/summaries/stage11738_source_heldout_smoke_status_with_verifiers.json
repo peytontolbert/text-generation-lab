@@ -1,0 +1,110 @@
+{
+  "claim_boundary": [
+    "Supported: source-heldout smoke roots now have real verifier execution evidence.",
+    "Not supported: source-heldout 100M over Gemma claim for Python/C++/Rust smoke roots.",
+    "Not supported: full-product patch/verifier repair claim."
+  ],
+  "created_at_utc": "2026-07-14T07:59:57Z",
+  "decision": "source_heldout_smoke_verifiers_attached_but_claim_not_ready",
+  "gates": {
+    "all_100m_smoke_rows_correct": false,
+    "all_executable_verifiers_attached": true,
+    "all_full_product_ready": false,
+    "all_gemma_same_manifest_attached": false,
+    "has_c_cpp_smoke": true,
+    "has_python_smoke": true,
+    "has_rust_smoke": true,
+    "still_all_100m_smoke_rows_correct": false,
+    "still_all_gemma_same_manifest_attached": false,
+    "still_full_product_ready": false,
+    "web_compact_policy_frozen": true
+  },
+  "interpretation": [
+    "Python, C/C++ and Rust smoke roots now have executable verifier logs attached.",
+    "The verifier observations are current-state PASS results, not fail-to-pass repair episodes.",
+    "This upgrades evidence quality for the smoke roots but does not change the 100M compact smoke scores.",
+    "The C++ 0/4 scorer failure and Python/Rust verifier_outcome misses remain the immediate model/scorer weaknesses."
+  ],
+  "language_status": {
+    "c_cpp": {
+      "admitted_source_heldout_smoke": true,
+      "compact_admission": "admitted",
+      "decision": "admitted_source_heldout_smoke_failed_by_current_100m_preserve_as_failure_canary",
+      "executable_verifier_attached": true,
+      "full_product": "not_ready",
+      "gemma_same_manifest": "not_run_gpu2_safe_backend_required",
+      "hundred_m_source_heldout_smoke": "0/4",
+      "miss_tasks": [],
+      "source_artifact": "runs/local/artifacts/stage11724_sentencepiece_cpp_source_heldout_decision/sentencepiece_cpp_source_heldout_decision.json",
+      "verifier_stderr_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/c_cpp.stderr.log",
+      "verifier_stdout_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/c_cpp.stdout.log",
+      "verifier_transition": {
+        "observed_transition": "PASS_CURRENT_STATE",
+        "result": "spm_test passed 135 tests including BPEModelTest cases",
+        "selected_verifier": "src/bpe_model_test.cc inside spm_test"
+      }
+    },
+    "python": {
+      "admitted_source_heldout_smoke": true,
+      "compact_admission": "admitted",
+      "decision": "python_source_heldout_smoke_partial_pass_verifier_outcome_canary",
+      "executable_verifier_attached": true,
+      "full_product": "not_ready",
+      "gemma_same_manifest": "not_run_gpu2_safe_backend_required",
+      "hundred_m_source_heldout_smoke": "3/4",
+      "miss_tasks": [
+        "verifier_outcome"
+      ],
+      "source_artifact": "runs/local/artifacts/stage11731_bigram_python_source_heldout_decision/bigram_python_source_heldout_decision.json",
+      "verifier_stderr_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/python.stderr.log",
+      "verifier_stdout_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/python.stdout.log",
+      "verifier_transition": {
+        "observed_transition": "PASS_CURRENT_STATE",
+        "result": "5 passed",
+        "selected_verifier": "tests/test_model.py"
+      }
+    },
+    "rust": {
+      "admitted_source_heldout_smoke": true,
+      "compact_admission": "admitted",
+      "decision": "rust_source_heldout_smoke_partial_pass_verifier_outcome_canary",
+      "executable_verifier_attached": true,
+      "full_product": "not_ready",
+      "gemma_same_manifest": "not_run_gpu2_safe_backend_required",
+      "hundred_m_source_heldout_smoke": "3/4",
+      "miss_tasks": [
+        "verifier_outcome"
+      ],
+      "source_artifact": "runs/local/artifacts/stage11735_tokenizers_rust_source_heldout_decision/tokenizers_rust_source_heldout_decision.json",
+      "verifier_stderr_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/rust.stderr.log",
+      "verifier_stdout_log": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/logs/rust.stdout.log",
+      "verifier_transition": {
+        "observed_transition": "PASS_CURRENT_STATE",
+        "result": "1 passed",
+        "selected_verifier": "src/pre_tokenizers/whitespace.rs::tests::basic"
+      }
+    }
+  },
+  "next_actions": [
+    "Run Gemma same-manifest on these exact smoke rows through a GPU2-safe backend.",
+    "Use verifier logs to rebuild verifier_outcome candidate geometry for Python and Rust.",
+    "Repair C++ sentencepiece geometry with verifier-grounded non-abstain/abstain counterfactual analogues.",
+    "Add harness_run_id, tool_trace_spans, and patch_minimality_or_abstain_scores only after task-pack execution exists."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11738_source_heldout_smoke_status_with_verifiers/source_heldout_smoke_status_with_verifiers.json"
+  },
+  "passed": true,
+  "selected_frontier": {
+    "compact_frontier": "stage11507 + encoder_option_retrieval_evidence_judgment_head",
+    "freeze_card": "runs/local/artifacts/stage11711_product_policy_freeze_and_claim_boundary/product_policy_freeze_and_claim_boundary.json",
+    "web_product_policy": "stage11709 routed compact web policy"
+  },
+  "source_artifacts": {
+    "previous_status": "runs/local/artifacts/stage11736_source_heldout_smoke_status/source_heldout_smoke_status.json",
+    "verifier_execution": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/source_heldout_verifier_execution.json"
+  },
+  "stage": 11738,
+  "stage_name": "stage11738_source_heldout_smoke_status_with_verifiers",
+  "verifier_artifact": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/source_heldout_verifier_execution.json"
+}

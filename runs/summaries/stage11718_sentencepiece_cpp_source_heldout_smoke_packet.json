@@ -1,0 +1,28 @@
+{
+  "admission_status": "pending_no_train_overlap_audit",
+  "claim_boundary": [
+    "Rows are source-backed and maintainer-visible, but not admitted as source-heldout yet.",
+    "No model or Gemma scoring should use these rows for claims until Stage11714-style preflight and no-train overlap audit pass.",
+    "Verifier transition is a static selected-test anchor, not an executed fail/pass result."
+  ],
+  "created_at_utc": "2026-07-14T06:59:23.749636+00:00",
+  "decision": "sentencepiece_cpp_smoke_packet_materialized_pending_admission",
+  "next_stage_acceptance": [
+    "run no-train/root overlap audit against ROOT_ID and source_snapshot_id",
+    "if clean, set source_heldout_admissible=true in a derived admitted packet",
+    "run same-manifest 100M and Gemma scoring only after admission",
+    "extend with executable harness writeback before full-product claims"
+  ],
+  "outputs": {
+    "artifact": "runs/local/artifacts/stage11718_sentencepiece_cpp_source_heldout_smoke_packet/sentencepiece_cpp_source_heldout_smoke_packet.json",
+    "evidence_json": "runs/local/artifacts/stage11718_sentencepiece_cpp_source_heldout_smoke_packet/sentencepiece_cpp_evidence_ledger.json",
+    "rows_jsonl": "runs/local/artifacts/stage11718_sentencepiece_cpp_source_heldout_smoke_packet/sentencepiece_cpp_smoke_rows.jsonl",
+    "summary": "runs/summaries/stage11718_sentencepiece_cpp_source_heldout_smoke_packet.json"
+  },
+  "passed": true,
+  "root_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke",
+  "row_count": 4,
+  "source_snapshot_id": "sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186",
+  "stage": 11718,
+  "stage_name": "sentencepiece_cpp_source_heldout_smoke_packet"
+}

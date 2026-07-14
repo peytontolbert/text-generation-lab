@@ -1,0 +1,911 @@
+{
+  "created_at_utc": "2026-07-14T02:45:47Z",
+  "decision": "web_transfer_failure_explained_by_schema_and_option_geometry_mismatch",
+  "findings": [
+    "train_options_are_mostly_path_or_symbol_handles",
+    "heldout_contains_natural_language_evidence_sentence_options_absent_or_underrepresented_in_train",
+    "train_prompts_have_explicit_decision_criterion_marker_not_present_in_heldout",
+    "train_prompts_use_observed_transition_marker_while_heldout_uses_execution_evidence_text",
+    "head_memorizes_or_fits_train_geometry_without_heldout_transfer",
+    "root_sets_are_disjoint_so_transfer_failure_is_not_from_root_overlap"
+  ],
+  "heldout_summary": {
+    "anti_cheat_true_counts": {
+      "deterministic_option_shuffle": 66,
+      "diagnostic_heldout_not_train": 6,
+      "do_not_train": 42,
+      "executed_verifier_output_attached": 66,
+      "gold_value_not_used_as_label": 24,
+      "needs_final_eval_admission": 18,
+      "not_from_sourcebot_or_mcp_family": 18,
+      "not_train_support": 18,
+      "root_not_in_train": 42,
+      "root_not_used_in_stage11347_or_stage11354_training": 6,
+      "semantic_target_not_visible_before_options": 42,
+      "source_and_verifier_snippets_visible": 24,
+      "target_label_not_visible_before_options": 66
+    },
+    "miss_examples": [
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "candidate_change_surface",
+          "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "verifier_and_test_constraint",
+          "candidate_change_surface",
+          "candidate_change_surface"
+        ],
+        "option_styles": [
+          "path_or_symbol_handle",
+          "semantic_role_literal",
+          "path_or_symbol_handle",
+          "path_or_symbol_handle",
+          "path_or_symbol_handle"
+        ],
+        "predicted": "A",
+        "repo_family": "llama_stack_ui",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+        "target_label": "D",
+        "target_role": "candidate_change_surface",
+        "task_type": "symptom_localization"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "unknown",
+          "unknown",
+          "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "unknown",
+          "unknown"
+        ],
+        "option_styles": [
+          "short_text_or_unknown",
+          "short_text_or_unknown",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence",
+          "short_text_or_unknown"
+        ],
+        "predicted": "E",
+        "repo_family": "llama_stack_ui",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+        "target_label": "D",
+        "target_role": "unknown",
+        "task_type": "minimal_fix_selection"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "unknown"
+        ],
+        "option_styles": [
+          "semantic_role_literal",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "C",
+        "repo_family": "llama_stack_ui",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+        "target_label": "B",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "alternative_hypothesis_elimination"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "verifier_and_test_constraint",
+          "candidate_change_surface",
+          "unknown"
+        ],
+        "option_styles": [
+          "semantic_role_literal",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "C",
+        "repo_family": "llama_stack_ui",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+        "target_label": "B",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "abstention_insufficient_evidence"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "candidate_change_surface",
+          "symptom_or_call_path_analogue",
+          "verifier_and_test_constraint",
+          "unknown"
+        ],
+        "option_styles": [
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_websocket_url::evidence_citation",
+        "target_label": "C",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "evidence_citation"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "abstain_insufficient_evidence"
+        ],
+        "option_styles": [
+          "short_text_or_unknown",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "abstain_literal"
+        ],
+        "predicted": "C",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_websocket_url::verifier_outcome",
+        "target_label": "A",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "distractor_or_unrelated_surface",
+          "candidate_change_surface",
+          "verifier_and_test_constraint",
+          "candidate_change_surface"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "path_or_symbol_handle",
+          "short_text_or_unknown",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_websocket_url::minimal_fix_selection",
+        "target_label": "B",
+        "target_role": "candidate_change_surface",
+        "task_type": "minimal_fix_selection"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "candidate_change_surface",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "candidate_change_surface"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_websocket_url::alternative_hypothesis_elimination",
+        "target_label": "B",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "alternative_hypothesis_elimination"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "unknown",
+          "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "verifier_and_test_constraint"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_websocket_url::abstention_insufficient_evidence",
+        "target_label": "A",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "abstention_insufficient_evidence"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "distractor_or_unrelated_surface",
+          "unknown"
+        ],
+        "option_styles": [
+          "path_or_symbol_handle",
+          "path_or_symbol_handle",
+          "short_text_or_unknown",
+          "short_text_or_unknown"
+        ],
+        "predicted": "A",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_parse_pr_url::symptom_localization",
+        "target_label": "B",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "symptom_localization"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "option_roles": [
+          "candidate_change_surface",
+          "symptom_or_call_path_analogue",
+          "verifier_and_test_constraint",
+          "unknown"
+        ],
+        "option_styles": [
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_parse_pr_url::evidence_citation",
+        "target_label": "C",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "evidence_citation"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "abstain_insufficient_evidence"
+        ],
+        "option_styles": [
+          "short_text_or_unknown",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "abstain_literal"
+        ],
+        "predicted": "C",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_parse_pr_url::verifier_outcome",
+        "target_label": "A",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "option_roles": [
+          "candidate_change_surface",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "candidate_change_surface"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_parse_pr_url::alternative_hypothesis_elimination",
+        "target_label": "B",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "alternative_hypothesis_elimination"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "unknown",
+          "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "verifier_and_test_constraint"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_parse_pr_url::abstention_insufficient_evidence",
+        "target_label": "A",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "abstention_insufficient_evidence"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "distractor_or_unrelated_surface",
+          "unknown"
+        ],
+        "option_styles": [
+          "path_or_symbol_handle",
+          "path_or_symbol_handle",
+          "short_text_or_unknown",
+          "short_text_or_unknown"
+        ],
+        "predicted": "A",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_input_validation::symptom_localization",
+        "target_label": "B",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "symptom_localization"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "option_roles": [
+          "candidate_change_surface",
+          "symptom_or_call_path_analogue",
+          "verifier_and_test_constraint",
+          "unknown"
+        ],
+        "option_styles": [
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_input_validation::evidence_citation",
+        "target_label": "C",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "evidence_citation"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "abstain_insufficient_evidence"
+        ],
+        "option_styles": [
+          "short_text_or_unknown",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "abstain_literal"
+        ],
+        "predicted": "C",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_input_validation::verifier_outcome",
+        "target_label": "A",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "option_roles": [
+          "distractor_or_unrelated_surface",
+          "candidate_change_surface",
+          "verifier_and_test_constraint",
+          "candidate_change_surface"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "path_or_symbol_handle",
+          "short_text_or_unknown",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_input_validation::minimal_fix_selection",
+        "target_label": "B",
+        "target_role": "candidate_change_surface",
+        "task_type": "minimal_fix_selection"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "option_roles": [
+          "candidate_change_surface",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "candidate_change_surface"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "C",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_input_validation::alternative_hypothesis_elimination",
+        "target_label": "B",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "alternative_hypothesis_elimination"
+      },
+      {
+        "full_vocab_top1_text": "C",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "unknown",
+          "ABSTAIN_INSUFFICIENT_EVIDENCE",
+          "verifier_and_test_constraint"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "D",
+        "repo_family": "openhands_openhands_frontend",
+        "row_id": "stage11390::openhands_input_validation::abstention_insufficient_evidence",
+        "target_label": "A",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "abstention_insufficient_evidence"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "candidate_change_surface",
+          "symptom_or_call_path_analogue",
+          "verifier_and_test_constraint",
+          "abstain_insufficient_evidence",
+          "verifier_and_test_constraint"
+        ],
+        "option_styles": [
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence",
+          "semantic_role_literal",
+          "semantic_role_literal"
+        ],
+        "predicted": "C",
+        "repo_family": "@modelcontextprotocol/server",
+        "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::symptom_localization::heldout_v1",
+        "target_label": "A",
+        "target_role": "candidate_change_surface",
+        "task_type": "symptom_localization"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "symptom_or_call_path_analogue",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "candidate_change_surface",
+          "abstain_insufficient_evidence"
+        ],
+        "option_styles": [
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence",
+          "semantic_role_literal",
+          "semantic_role_literal"
+        ],
+        "predicted": "C",
+        "repo_family": "@modelcontextprotocol/server",
+        "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::evidence_citation::heldout_v1",
+        "target_label": "B",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "evidence_citation"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "abstain_insufficient_evidence",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "semantic_role_literal",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence",
+          "natural_language_evidence_sentence"
+        ],
+        "predicted": "A",
+        "repo_family": "@modelcontextprotocol/server",
+        "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::verifier_outcome::heldout_v1",
+        "target_label": "C",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "verifier_outcome"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "abstain_insufficient_evidence",
+          "verifier_and_test_constraint",
+          "verifier_and_test_constraint",
+          "candidate_change_surface",
+          "symptom_or_call_path_analogue"
+        ],
+        "option_styles": [
+          "semantic_role_literal",
+          "natural_language_evidence_sentence",
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "semantic_role_literal"
+        ],
+        "predicted": "B",
+        "repo_family": "@modelcontextprotocol/server",
+        "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::patch_impact::heldout_v1",
+        "target_label": "D",
+        "target_role": "candidate_change_surface",
+        "task_type": "patch_impact"
+      },
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "verifier_and_test_constraint",
+          "abstain_insufficient_evidence",
+          "verifier_and_test_constraint",
+          "symptom_or_call_path_analogue",
+          "candidate_change_surface"
+        ],
+        "option_styles": [
+          "natural_language_evidence_sentence",
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "semantic_role_literal",
+          "semantic_role_literal"
+        ],
+        "predicted": "A",
+        "repo_family": "@modelcontextprotocol/server",
+        "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::minimal_fix_selection::heldout_v1",
+        "target_label": "E",
+        "target_role": "candidate_change_surface",
+        "task_type": "minimal_fix_selection"
+      }
+    ],
+    "option_count_counts": {
+      "4": 21,
+      "5": 45
+    },
+    "option_role_counts": {
+      "ABSTAIN_INSUFFICIENT_EVIDENCE": 9,
+      "abstain_insufficient_evidence": 45,
+      "candidate_change_surface": 55,
+      "distractor_or_unrelated_surface": 6,
+      "symptom_or_call_path_analogue": 32,
+      "unknown": 22,
+      "verifier_and_test_constraint": 140
+    },
+    "option_style_counts": {
+      "abstain_literal": 3,
+      "natural_language_evidence_sentence": 131,
+      "path_or_symbol_handle": 13,
+      "semantic_role_literal": 147,
+      "short_text_or_unknown": 15
+    },
+    "prediction_label_counts": {
+      "A": 10,
+      "B": 10,
+      "C": 20,
+      "D": 18,
+      "E": 8
+    },
+    "prompt_marker_counts": {
+      "Choose the implementation target": 4,
+      "Task observation:": 66,
+      "Visible alternative/distractor evidence:": 6,
+      "Visible source evidence:": 66,
+      "Visible verifier execution evidence:": 66,
+      "Visible verifier/test evidence:": 66
+    },
+    "repo_counts": {
+      "@modelcontextprotocol/client": 6,
+      "@modelcontextprotocol/core": 12,
+      "@modelcontextprotocol/server": 12,
+      "llama_stack_ui": 6,
+      "openhands_openhands_frontend": 18,
+      "sep_automation": 12
+    },
+    "rows": 66,
+    "target_label_counts": {
+      "A": 20,
+      "B": 18,
+      "C": 11,
+      "D": 10,
+      "E": 7
+    },
+    "target_role_counts": {
+      "candidate_change_surface": 25,
+      "unknown": 1,
+      "verifier_and_test_constraint": 40
+    },
+    "target_style_counts": {
+      "natural_language_evidence_sentence": 24,
+      "path_or_symbol_handle": 7,
+      "semantic_role_literal": 32,
+      "short_text_or_unknown": 3
+    },
+    "task_accuracy": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 11
+      },
+      "alternative_hypothesis_elimination": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 4
+      },
+      "evidence_citation": {
+        "accuracy": 0.09090909090909091,
+        "correct": 1,
+        "rows": 11
+      },
+      "minimal_fix_selection": {
+        "accuracy": 0.09090909090909091,
+        "correct": 1,
+        "rows": 11
+      },
+      "patch_impact": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 7
+      },
+      "symptom_localization": {
+        "accuracy": 0.09090909090909091,
+        "correct": 1,
+        "rows": 11
+      },
+      "verifier_outcome": {
+        "accuracy": 0.09090909090909091,
+        "correct": 1,
+        "rows": 11
+      }
+    },
+    "task_counts": {
+      "abstention_insufficient_evidence": 11,
+      "alternative_hypothesis_elimination": 4,
+      "evidence_citation": 11,
+      "minimal_fix_selection": 11,
+      "patch_impact": 7,
+      "symptom_localization": 11,
+      "verifier_outcome": 11
+    },
+    "top_option_role_signatures": {
+      "ABSTAIN_INSUFFICIENT_EVIDENCE|candidate_change_surface|candidate_change_surface|candidate_change_surface|verifier_and_test_constraint": 1,
+      "ABSTAIN_INSUFFICIENT_EVIDENCE|candidate_change_surface|symptom_or_call_path_analogue|verifier_and_test_constraint|verifier_and_test_constraint": 1,
+      "ABSTAIN_INSUFFICIENT_EVIDENCE|candidate_change_surface|unknown|verifier_and_test_constraint": 1,
+      "ABSTAIN_INSUFFICIENT_EVIDENCE|unknown|unknown|unknown|unknown": 1,
+      "ABSTAIN_INSUFFICIENT_EVIDENCE|unknown|verifier_and_test_constraint|verifier_and_test_constraint": 4,
+      "ABSTAIN_INSUFFICIENT_EVIDENCE|verifier_and_test_constraint|verifier_and_test_constraint|verifier_and_test_constraint": 1,
+      "abstain_insufficient_evidence|candidate_change_surface|symptom_or_call_path_analogue|verifier_and_test_constraint|verifier_and_test_constraint": 28,
+      "abstain_insufficient_evidence|candidate_change_surface|unknown|verifier_and_test_constraint|verifier_and_test_constraint": 7,
+      "abstain_insufficient_evidence|verifier_and_test_constraint|verifier_and_test_constraint|verifier_and_test_constraint": 3,
+      "abstain_insufficient_evidence|verifier_and_test_constraint|verifier_and_test_constraint|verifier_and_test_constraint|verifier_and_test_constraint": 7,
+      "candidate_change_surface|candidate_change_surface|distractor_or_unrelated_surface|verifier_and_test_constraint": 3,
+      "candidate_change_surface|candidate_change_surface|verifier_and_test_constraint|verifier_and_test_constraint": 3,
+      "candidate_change_surface|symptom_or_call_path_analogue|unknown|verifier_and_test_constraint": 3,
+      "distractor_or_unrelated_surface|unknown|verifier_and_test_constraint|verifier_and_test_constraint": 3
+    },
+    "unique_roots": 11
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11658_web_head_transfer_gap_audit/web_head_transfer_gap_audit.json"
+  },
+  "recommendation": {
+    "decision": "do_not_train_more_on_stage11648_shell_geometry_without_alignment",
+    "minimum_requirements": [
+      "Use the same option-value style as heldout: natural-language evidence/candidate descriptions, not only path handles.",
+      "Use the same prompt markers as heldout or deliberately normalize both train and heldout through one renderer.",
+      "Keep root-disjoint OpenHands/Llama heldout untouched.",
+      "Probe schema-aligned train support before any full-model run.",
+      "Promotion still requires web heldout >38/66 and protected gates preserved."
+    ],
+    "next_intervention": "build_schema_aligned_web_bridge_rows_or_convert_train_rows_to_heldout_style_before_probing"
+  },
+  "root_overlap": {
+    "heldout_roots": 11,
+    "overlap_count": 0,
+    "overlap_examples": [],
+    "train_roots": 20
+  },
+  "source_artifacts": {
+    "heldout_audit": "runs/local/artifacts/stage11657_same_root_grouped_head_only_routed_audit/bounded_choice_eval_audit_web_heldout__encoder_option_retrieval_web_task_candidate_head.json",
+    "heldout_rows": "runs/local/artifacts/stage11548_web_root_heldout_stage11507_score_audit/web_root_heldout_rows.jsonl",
+    "routed_summary": "runs/local/artifacts/stage11657_same_root_grouped_head_only_routed_audit/same_root_grouped_head_only_routed_audit.json",
+    "train_audit": "runs/local/artifacts/stage11657_same_root_grouped_head_only_routed_audit/bounded_choice_eval_audit_grouped_web_gap_train_support__encoder_option_retrieval_web_task_candidate_head.json",
+    "train_rows": "runs/local/artifacts/stage11648_web_gap_grouped_admission_compiler/web_gap_grouped_probe_manifest.jsonl"
+  },
+  "stage": 11658,
+  "stage11657_scores": {
+    "filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "filtered_validation": {
+      "accuracy": 0.9090909090909091,
+      "correct": 20,
+      "rows": 22,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "grouped_web_gap_train_support": {
+      "accuracy": 0.9911504424778761,
+      "correct": 112,
+      "rows": 113,
+      "scorer": "encoder_option_retrieval_web_task_candidate_head"
+    },
+    "old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "old_canary_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "rows": 23,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "residual_bank": {
+      "accuracy": 0.7,
+      "correct": 7,
+      "rows": 10,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "web_heldout": {
+      "accuracy": 0.06060606060606061,
+      "correct": 4,
+      "rows": 66,
+      "scorer": "encoder_option_retrieval_web_task_candidate_head"
+    },
+    "web_successor_strict": {
+      "accuracy": 0.8333333333333334,
+      "correct": 30,
+      "rows": 36,
+      "scorer": "encoder_option_retrieval_web_task_candidate_head"
+    }
+  },
+  "stage_name": "stage11658_web_head_transfer_gap_audit",
+  "train_summary": {
+    "anti_cheat_true_counts": {
+      "abstain_literal_neutralized": 88,
+      "abstention_rows_binary_evidence_vs_abstain": 11,
+      "answerable_non_abstention_rows_remove_abstain": 33,
+      "deterministic_option_shuffle": 113,
+      "fixed_label_role_mapping_removed": 88,
+      "gold_semantic_value_may_appear_in_visible_evidence": 88,
+      "no_gold_label_in_prompt_before_options": 113,
+      "observed_verifier_transition_present": 113,
+      "opaque_labels": 113,
+      "path_headers_removed_before_options": 88,
+      "perspective_specific_instruction": 88,
+      "selected_verifier_path_present": 25,
+      "source_snippets_materialized": 113,
+      "stage11594_repaired_geometry": 88,
+      "stage11597_answerable_geometry": 44,
+      "target_label_not_visible_before_options": 25,
+      "verifier_snippet_materialized": 113
+    },
+    "miss_examples": [
+      {
+        "full_vocab_top1_text": "E",
+        "option_roles": [
+          "candidate_change_surface",
+          "verifier_and_test_constraint",
+          "symptom_or_call_path_analogue",
+          "abstain_insufficient_evidence"
+        ],
+        "option_styles": [
+          "path_or_symbol_handle",
+          "path_or_symbol_handle",
+          "path_or_symbol_handle",
+          "semantic_role_literal"
+        ],
+        "predicted": "B",
+        "repo_family": "llama_stack_ui",
+        "row_id": "stage11576::llama_stack::llama_stack_ui::f35b7270d6bd::abstention_insufficient_evidence::review_shell_v1::repaired_geometry_v1",
+        "target_label": "A",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "abstention_insufficient_evidence"
+      }
+    ],
+    "option_count_counts": {
+      "2": 11,
+      "3": 33,
+      "4": 69
+    },
+    "option_role_counts": {
+      "abstain_insufficient_evidence": 80,
+      "candidate_change_surface": 102,
+      "symptom_or_call_path_analogue": 102,
+      "verifier_and_test_constraint": 113
+    },
+    "option_style_counts": {
+      "abstain_literal": 11,
+      "path_or_symbol_handle": 317,
+      "semantic_role_literal": 69
+    },
+    "prediction_label_counts": {
+      "A": 36,
+      "B": 38,
+      "C": 20,
+      "D": 19
+    },
+    "prompt_marker_counts": {
+      "Decision criterion:": 113,
+      "Observed verifier transition:": 113,
+      "Use only the visible source snippets": 88,
+      "Verifier log excerpt:": 113,
+      "Visible source evidence (opaque source IDs):": 88,
+      "Visible source evidence:": 25,
+      "Visible verifier/test evidence (opaque verifier IDs):": 88,
+      "Visible verifier/test evidence:": 25
+    },
+    "repo_counts": {
+      "@modelcontextprotocol/client": 1,
+      "@modelcontextprotocol/core": 4,
+      "@modelcontextprotocol/server": 4,
+      "llama_stack_ui": 88,
+      "openhands_openhands_frontend": 16
+    },
+    "rows": 113,
+    "target_label_counts": {
+      "A": 37,
+      "B": 37,
+      "C": 20,
+      "D": 19
+    },
+    "target_role_counts": {
+      "candidate_change_surface": 52,
+      "verifier_and_test_constraint": 61
+    },
+    "target_style_counts": {
+      "path_or_symbol_handle": 113
+    },
+    "task_accuracy": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 0.9615384615384616,
+        "correct": 25,
+        "rows": 26
+      },
+      "evidence_citation": {
+        "accuracy": 1.0,
+        "correct": 8,
+        "rows": 8
+      },
+      "minimal_fix_selection": {
+        "accuracy": 1.0,
+        "correct": 26,
+        "rows": 26
+      },
+      "symptom_localization": {
+        "accuracy": 1.0,
+        "correct": 26,
+        "rows": 26
+      },
+      "verifier_outcome": {
+        "accuracy": 1.0,
+        "correct": 27,
+        "rows": 27
+      }
+    },
+    "task_counts": {
+      "abstention_insufficient_evidence": 26,
+      "evidence_citation": 8,
+      "minimal_fix_selection": 26,
+      "symptom_localization": 26,
+      "verifier_outcome": 27
+    },
+    "top_option_role_signatures": {
+      "abstain_insufficient_evidence|candidate_change_surface|symptom_or_call_path_analogue|verifier_and_test_constraint": 69,
+      "abstain_insufficient_evidence|verifier_and_test_constraint": 11,
+      "candidate_change_surface|symptom_or_call_path_analogue|verifier_and_test_constraint": 33
+    },
+    "unique_roots": 20
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "claim_scope": [
+    "Builds a clearly non-promotable diagnostic support package for the stage10591 mixed-contract interface.",
+    "Keeps the original stage10591 train rows and adds only strict roots whose retrieve/verifier targets are non-A so we can test whether missing B/D support caused the stage10594 collapse.",
+    "This package is for diagnosis only and must not be used to upgrade any claim because it reuses same-surface strict roots as training support."
+  ],
+  "created_at_utc": "2026-07-12T04:05:24Z",
+  "inputs": {
+    "strict_rows": "runs/local/artifacts/stage10591_fresh_python_cpp_visible_candidate_mixed_contract_package/strict_eval_rows.jsonl",
+    "support_rows": "runs/local/artifacts/stage10591_fresh_python_cpp_visible_candidate_mixed_contract_package/support_rows.jsonl"
+  },
+  "outputs": {
+    "package_json": "runs/local/artifacts/stage10597_mixed_contract_non_a_diagnostic_support_package/mixed_contract_non_a_diagnostic_support_package.json",
+    "strict_eval_rows": "runs/local/artifacts/stage10597_mixed_contract_non_a_diagnostic_support_package/strict_eval_rows.jsonl",
+    "train_rows": "runs/local/artifacts/stage10597_mixed_contract_non_a_diagnostic_support_package/train_rows.jsonl"
+  },
+  "passed": true,
+  "rows": {
+    "base_support_rows": 108,
+    "diagnostic_added_rows": 42,
+    "strict_eval_rows": 189,
+    "train_rows": 150
+  },
+  "selected_roots": {
+    "count": 14,
+    "language_counts": {
+      "c_cpp": 7,
+      "python": 7
+    },
+    "reasons": {
+      "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q18": "B",
+      "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q19": "B",
+      "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_5c58d03538::q22": "B",
+      "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_a76597fc52::q30": "B",
+      "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_f912751be9::q25": "B",
+      "audited::lcp_pack_1_5500000_lcx_cand_ent_api_reference_413d1b50db_56_3e71c3343a_28_75ac4e8bab_lcx_cand_ent_o_2d1dee5b3a::q12": "D",
+      "audited::lcp_pack_1_5500000_lcx_cand_ent_api_reference_413d1b50db_56_3e71c3343a_28_75ac4e8bab_lcx_cand_ent_o_2d1dee5b3a::q17": "D",
+      "audited::lcp_pack_1_5500000_lcx_cand_ent_api_reference_413d1b50db_56_3e71c3343a_28_75ac4e8bab_lcx_cand_ent_o_2d1dee5b3a::q19": "D",
+      "audited::lcp_pack_1_5500000_lcx_cand_ent_api_reference_413d1b50db_56_3e71c3343a_28_75ac4e8bab_lcx_cand_ent_o_2d1dee5b3a::q27": "D",
+      "audited::lcp_pack_1_5500000_lcx_cand_ent_api_reference_413d1b50db_56_3e71c3343a_28_75ac4e8bab_lcx_cand_ent_o_2d1dee5b3a::q31": "D",
+      "audited::lcp_pack_1_5500000_lcx_cand_ent_api_reference_413d1b50db_56_3e71c3343a_28_75ac4e8bab_lcx_cand_ent_o_2d1dee5b3a::q33": "D",
+      "audited::lcp_pack_1_5500000_lcx_cand_ent_api_reference_413d1b50db_56_3e71c3343a_28_75ac4e8bab_lcx_cand_ent_o_2d1dee5b3a::q6": "D",
+      "audited::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_d979db9b0d::q25": "B",
+      "audited::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q29": "B"
+    }
+  },
+  "stage": 10597,
+  "stage_name": "stage10597_mixed_contract_non_a_diagnostic_support_package",
+  "target_subtype_counts": {
+    "strict_eval": {
+      "decisive_evidence_top1": 63,
+      "retrieve_answer_abstain": 63,
+      "verifier_outcome_masked": 63
+    },
+    "train": {
+      "decisive_evidence_top1": 50,
+      "retrieve_answer_abstain": 50,
+      "verifier_outcome_masked": 50
+    }
+  },
+  "truthful_read": [
+    "This package is intentionally non-promotable because it injects same-surface strict roots back into train support.",
+    "Its only purpose is to answer a narrow question: does the stage10594 collapse come from missing B/D mixed-contract supervision, or does the model fail even when shown those patterns directly?",
+    "If a follow-up probe does not move, the problem is more likely representation or optimization than simple support scarcity."
+  ]
+}

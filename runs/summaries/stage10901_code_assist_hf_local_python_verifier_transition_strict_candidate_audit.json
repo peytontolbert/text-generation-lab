@@ -1,0 +1,35 @@
+{
+  "claim_scope": [
+    "Audit the stage10900 same-test semantic Python verifier candidate for target-path leakage and semantic competition quality.",
+    "Check whether the candidate improves over raw file-choice semantics by forcing assertion-level verifier distinctions inside the same test surface."
+  ],
+  "created_at_utc": "2026-07-12T18:25:58Z",
+  "decision": "code_assist_hf_local_python_verifier_transition_strict_candidate_audited",
+  "interpretation": [
+    "The candidate uses semantic verifier targets inside one unit-test surface rather than relying on multiple visible test-path labels.",
+    "That reduces path-order shortcut pressure, but the shared test-file evidence means the row is only useful if the semantic focus descriptions are genuinely distinguishable from the visible code and assertion text.",
+    "Because the verifier snippet still exposes the shared test file before options, this row is better suited as a follow-on candidate or support root unless a stricter visibility rewrite removes that residual shortcut."
+  ],
+  "metrics": {
+    "candidate_option_count": 4,
+    "explicit_transition_semantics": true,
+    "gold_path_hidden_from_option_values": true,
+    "same_test_semantic_target_competition": true,
+    "target_path_visible_pre_options": false,
+    "visible_test_path_mentions_pre_options": []
+  },
+  "next_best_step": "Use this as a second reviewed candidate only if the heldout slice needs same-test semantic competition; otherwise rewrite the visible verifier snippet to reduce shared test-path exposure before scoring.",
+  "passed": true,
+  "remaining_risks": [
+    "The verifier evidence still visibly names the shared unit-test file, so the anti-cheat gain comes from same-test semantic competition rather than hidden test identity.",
+    "All targets share FAIL_TO_PASS, so the discriminative pressure remains on focus semantics rather than transition diversity.",
+    "A future stronger version should redact or normalize the verifier snippet further if the shared test-path mention proves shortcut-prone."
+  ],
+  "source_artifacts": {
+    "bundle_json": "runs/local/artifacts/stage10900_code_assist_hf_local_python_verifier_transition_strict_candidate/strict_candidate_bundle.json",
+    "row_jsonl": "runs/local/artifacts/stage10900_code_assist_hf_local_python_verifier_transition_strict_candidate/strict_candidate_rows.jsonl",
+    "source_gold": "runs/local/artifacts/stage10813_python_queue_aligned_admission/review_packets/stage10300__localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662__python/perspective_gold_adjudication.json"
+  },
+  "stage": 10901,
+  "stage_name": "stage10901_code_assist_hf_local_python_verifier_transition_strict_candidate_audit"
+}

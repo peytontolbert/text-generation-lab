@@ -1,0 +1,228 @@
+{
+  "contract": {
+    "anti_cheat_requirements": [
+      "no prompt-target leak before options",
+      "deterministic opaque option shuffle declared",
+      "root/repo/time split isolation",
+      "no singleton options in eval",
+      "visible source or verifier evidence for every gold option",
+      "counterfactual rows marked train_support_only"
+    ],
+    "counterfactual_rows_count_for_root_scale": false,
+    "counterfactual_rows_count_for_training_only": true,
+    "minimum_independent_roots": 250,
+    "minimum_language_roots": {
+      "c_cpp": 50,
+      "python": 50,
+      "rust": 50
+    },
+    "minimum_status_records": {
+      "FAIL_TO_PASS": 50,
+      "INSUFFICIENT_EVIDENCE": 40,
+      "NOT_EXERCISED": 40,
+      "PASS_CURRENT_BUILD": 40,
+      "PASS_CURRENT_BUILD_AND_RUN": 40,
+      "PASS_TO_PASS": 100
+    },
+    "promotion_gate": {
+      "old_transition_640": ">=386/640 for Gemma win, >=364/640 for retention",
+      "protected_filtered_strict": "22/22",
+      "protected_old_canary_strict": "23/23",
+      "protected_residual_bank": ">=7/10",
+      "source_heldout_smoke": ">6/12 for real transfer progress",
+      "status_control_validation": "must improve Stage11924 baseline without strict collapse"
+    },
+    "required_record_fields": [
+      "root_id",
+      "root_lineage_key",
+      "repo_id",
+      "language_family",
+      "source_snapshot_or_commit",
+      "state_before",
+      "candidate_actions_or_options",
+      "selected_verifier_path",
+      "observed_verifier_transition",
+      "tool_or_verifier_observation",
+      "state_after_or_state_delta",
+      "continue_stop_label",
+      "anti_cheat",
+      "split_component"
+    ],
+    "required_transition_shape": [
+      "baseline observed",
+      "relevant artifact found",
+      "verifier/test selected",
+      "evidence sufficiency judged",
+      "patch or no-patch decision",
+      "verifier transition predicted",
+      "continue/stop decision"
+    ],
+    "training_runtime_requirements": [
+      "evaluate every 100-200 steps on old 640, v2 validation/strict, source-heldout smoke, and status/control eval",
+      "early stop if old 640 drops below 350",
+      "early stop if train improves while validation drops for two checkpoints",
+      "report confusion by semantic status and task type"
+    ],
+    "verifier_removed_max_fraction_of_records": 0.2,
+    "web_max_fraction_of_roots": 0.4
+  },
+  "created_at_utc": "2026-07-14T18:37:27Z",
+  "current_supply_audit": {
+    "augmented_current_deficits": {
+      "independent_roots_needed": 0,
+      "language_root_deficits": {
+        "c_cpp": 0,
+        "python": 0,
+        "rust": 0
+      },
+      "status_record_deficits": {
+        "FAIL_TO_PASS": 30,
+        "INSUFFICIENT_EVIDENCE": 0,
+        "NOT_EXERCISED": 0,
+        "PASS_CURRENT_BUILD": 34,
+        "PASS_CURRENT_BUILD_AND_RUN": 0,
+        "PASS_TO_PASS": 0
+      },
+      "verifier_removed_record_over_cap": 281,
+      "web_root_over_cap": 0
+    },
+    "augmented_current_records": {
+      "independent_roots": 287,
+      "record_counts_by_language": {
+        "c_cpp": 208,
+        "python": 208,
+        "rust": 237,
+        "web_js_ts_html": 792
+      },
+      "record_counts_by_source_kind": {
+        "base": 615,
+        "counterfactual": 830
+      },
+      "record_counts_by_status": {
+        "FAIL_TO_PASS": 20,
+        "INSUFFICIENT_EVIDENCE": 148,
+        "NOT_EXERCISED": 148,
+        "PASS_CURRENT_BUILD": 6,
+        "PASS_CURRENT_BUILD_AND_RUN": 42,
+        "PASS_CURRENT_STATE": 109,
+        "PASS_TO_PASS": 402,
+        "VERIFIER_REMOVED": 570
+      },
+      "records": 1445,
+      "root_counts_by_language": {
+        "c_cpp": 64,
+        "python": 52,
+        "rust": 63,
+        "web_js_ts_html": 108
+      }
+    },
+    "base_record_deficits": {
+      "independent_roots_needed": 130,
+      "language_root_deficits": {
+        "c_cpp": 34,
+        "python": 37,
+        "rust": 23
+      },
+      "status_record_deficits": {
+        "FAIL_TO_PASS": 30,
+        "INSUFFICIENT_EVIDENCE": 40,
+        "NOT_EXERCISED": 40,
+        "PASS_CURRENT_BUILD": 34,
+        "PASS_CURRENT_BUILD_AND_RUN": 0,
+        "PASS_TO_PASS": 0
+      },
+      "verifier_removed_record_over_cap": 0,
+      "web_root_over_cap": 16
+    },
+    "base_records_only": {
+      "independent_roots": 120,
+      "record_counts_by_language": {
+        "c_cpp": 64,
+        "python": 52,
+        "rust": 93,
+        "web_js_ts_html": 406
+      },
+      "record_counts_by_source_kind": {
+        "base": 615
+      },
+      "record_counts_by_status": {
+        "FAIL_TO_PASS": 20,
+        "PASS_CURRENT_BUILD": 6,
+        "PASS_CURRENT_BUILD_AND_RUN": 42,
+        "PASS_CURRENT_STATE": 109,
+        "PASS_TO_PASS": 402,
+        "VERIFIER_REMOVED": 36
+      },
+      "records": 615,
+      "root_counts_by_language": {
+        "c_cpp": 16,
+        "python": 13,
+        "rust": 27,
+        "web_js_ts_html": 64
+      }
+    },
+    "counterfactual_records_only": {
+      "independent_roots": 167,
+      "record_counts_by_language": {
+        "c_cpp": 144,
+        "python": 156,
+        "rust": 144,
+        "web_js_ts_html": 386
+      },
+      "record_counts_by_source_kind": {
+        "counterfactual": 830
+      },
+      "record_counts_by_status": {
+        "INSUFFICIENT_EVIDENCE": 148,
+        "NOT_EXERCISED": 148,
+        "VERIFIER_REMOVED": 534
+      },
+      "records": 830,
+      "root_counts_by_language": {
+        "c_cpp": 48,
+        "python": 39,
+        "rust": 36,
+        "web_js_ts_html": 44
+      }
+    },
+    "interpretation": [
+      "Stage11958 reaches row scale only by counterfactual augmentation, not independent executable roots.",
+      "Independent root count remains far below the 250-root contract.",
+      "Verifier-removed rows are overrepresented in augmented records and must be capped in the next package."
+    ]
+  },
+  "decision": "transition_root_250_supply_contract_ready",
+  "milestone_decomposition_lane": {
+    "projection_family": "milestone_decomposition_policy",
+    "reason": "Useful for long-horizon maintainer policy, but should not be mixed into transition-status recovery until Stage11924 transition baseline is surpassed or a clean root-scale package exists.",
+    "status": "deferred_separate_lane"
+  },
+  "next_stage_recommendation": {
+    "goal": "Mine/admit executable transition roots until the Stage11967 contract passes before any new transition training.",
+    "priority_order": [
+      "real FAIL_TO_PASS roots",
+      "PASS_CURRENT_BUILD and PASS_CURRENT_BUILD_AND_RUN roots",
+      "NOT_EXERCISED and INSUFFICIENT_EVIDENCE roots with real verifier/test context",
+      "Rust/Python/C++ language deficits",
+      "web roots only under the 40% cap"
+    ],
+    "stage": "stage11968_transition_root_250_candidate_miner"
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11967_transition_root_250_supply_contract/transition_root_250_supply_contract.json"
+  },
+  "source_artifacts": {
+    "base_records": "runs/local/artifacts/stage11955_transition_5k_v1_multisource_package/verified_transition_records_5k_v1.jsonl",
+    "counterfactual_records": "runs/local/artifacts/stage11957_transition_counterfactual_status_augmentation/counterfactual_transition_records.jsonl",
+    "current_records": "runs/local/artifacts/stage11958_transition_5k_v1_augmented_package/verified_transition_records_5k_v1_augmented.jsonl",
+    "current_rows": "runs/local/artifacts/stage11958_transition_5k_v1_augmented_package/transition_projection_rows_5k_v1_augmented.jsonl",
+    "stage11966_decision": "runs/local/artifacts/stage11966_transition_status_control_decision/transition_status_control_decision.json"
+  },
+  "stage": 11967,
+  "stage_name": "stage11967_transition_root_250_supply_contract",
+  "why_now": [
+    "Stage11960 and Stage11964 improved train fit but collapsed transfer, so more augmented rows from the same roots are not the next lever.",
+    "Stage11966 keeps Stage11924 as the selected transition frontier at 364/640, below Gemma 386/640.",
+    "The next valid frontier attempt needs independent executable roots and balanced verifier statuses before training."
+  ]
+}

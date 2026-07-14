@@ -1,0 +1,26 @@
+{
+  "created_at_utc": "2026-07-11T19:18:23Z",
+  "outputs": {
+    "helper_json": "runs/local/artifacts/stage10435_reviewed_v27_strict_leak_rewrite_helper/reviewed_v27_strict_leak_rewrite_helper.json",
+    "overlay_rows": "runs/local/artifacts/stage10435_reviewed_v27_strict_leak_rewrite_helper/reviewed_v27_strict_leak_rewrite_overlays.jsonl",
+    "preview_rows": "runs/local/artifacts/stage10435_reviewed_v27_strict_leak_rewrite_helper/reviewed_v27_strict_leak_rewrite_preview.jsonl"
+  },
+  "passed": true,
+  "post_overlay_next_steps": [
+    "review the rewritten prompts for maintainer answerability",
+    "materialize a repaired strict manifest overlay",
+    "rerun stage10429 eval-hacking audit and stage10431 saved-runtime margin audit on the repaired strict rows"
+  ],
+  "request_source": "runs/local/artifacts/stage10434_reviewed_v27_strict_leak_repair_request/reviewed_v27_strict_leak_repair_request.json",
+  "rewrite_strategy": [
+    "Replace prompt-visible evidence key names with neutral ordered slots such as visible_evidence_1.",
+    "Keep opaque choice options, target label, gold answer, root lineage, and split membership unchanged.",
+    "Use the overlay as a draft repair artifact; do not mutate the live v2.7 package until the repaired rows are reviewed and re-audited."
+  ],
+  "stage": 10435,
+  "stage_name": "stage10435_reviewed_v27_strict_leak_rewrite_helper",
+  "summary": {
+    "repair_targets": 4,
+    "strategy": "neutral_evidence_slots"
+  }
+}

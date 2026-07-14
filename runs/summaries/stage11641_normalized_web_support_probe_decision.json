@@ -1,0 +1,124 @@
+{
+  "created_at_utc": "2026-07-14T00:31:27Z",
+  "decision": "reject_stage11639_objective_scorer_path",
+  "failure_interpretation": [
+    "Stage11639 did not merely fail to generalize; it failed to fit the normalized train-support surface under the product Web scorer.",
+    "The worst support buckets are evidence_citation, verifier_outcome, and abstention_insufficient_evidence.",
+    "PASS_TO_PASS relevance rows fit especially poorly compared with controlled FAIL_TO_PASS rows.",
+    "This falsifies another full-model CE+bounded-aux Web-support probe. Do not repeat this path with the same objective."
+  ],
+  "gates": {
+    "protected_gates_regressed": true,
+    "stage11640_rejected": true,
+    "support_fit_failed": true,
+    "web_heldout_regressed_below_stage11507": true
+  },
+  "next_required_change": [
+    "Train the Web task candidate head directly or head-only first on normalized support until same-support fit is high.",
+    "Alternatively add a task-specific scorer/loss for verifier_outcome, evidence_citation, and abstention before full-model training.",
+    "Only after support fit is demonstrated should a low-LR full-model distillation be attempted.",
+    "Any next probe must still preserve Stage11507 protected gates and remain CUDA_VISIBLE_DEVICES=2 only."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11641_normalized_web_support_probe_decision/normalized_web_support_probe_decision.json"
+  },
+  "source_artifacts": {
+    "stage11640": "runs/local/artifacts/stage11640_normalized_web_support_postrun_audit/normalized_web_support_postrun_audit.json",
+    "support_audit": "runs/local/artifacts/stage11640_normalized_web_support_postrun_audit/bounded_choice_eval_audit_normalized_web_train_support.json",
+    "support_rows": "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_admitted_train_rows.jsonl"
+  },
+  "stage": 11641,
+  "stage11640_compact_results": {
+    "filtered_strict": {
+      "correct": 20,
+      "rows": 22
+    },
+    "filtered_validation": {
+      "correct": 17,
+      "rows": 22
+    },
+    "normalized_web_train_support": {
+      "correct": 16,
+      "rows": 206
+    },
+    "old_canary_strict": {
+      "correct": 21,
+      "rows": 23
+    },
+    "old_canary_validation": {
+      "correct": 18,
+      "rows": 23
+    },
+    "residual_bank": {
+      "correct": 3,
+      "rows": 10
+    },
+    "web_heldout": {
+      "correct": 17,
+      "rows": 66
+    },
+    "web_successor_strict": {
+      "correct": 7,
+      "rows": 36
+    }
+  },
+  "stage_name": "stage11641_normalized_web_support_probe_decision",
+  "support_fit_breakdown": {
+    "by_source": {
+      "stage11580_pass_to_pass": {
+        "accuracy": 0.025,
+        "correct": 4,
+        "rows": 160
+      },
+      "stage11621_fail_to_pass": {
+        "accuracy": 0.2608695652173913,
+        "correct": 12,
+        "rows": 46
+      }
+    },
+    "by_task_type": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 38
+      },
+      "evidence_citation": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 40
+      },
+      "minimal_fix_selection": {
+        "accuracy": 0.15,
+        "correct": 6,
+        "rows": 40
+      },
+      "patch_impact": {
+        "accuracy": 0.5,
+        "correct": 4,
+        "rows": 8
+      },
+      "symptom_localization": {
+        "accuracy": 0.15,
+        "correct": 6,
+        "rows": 40
+      },
+      "verifier_outcome": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 40
+      }
+    },
+    "by_transition": {
+      "FAIL_TO_PASS": {
+        "accuracy": 0.2608695652173913,
+        "correct": 12,
+        "rows": 46
+      },
+      "PASS_TO_PASS": {
+        "accuracy": 0.025,
+        "correct": 4,
+        "rows": 160
+      }
+    }
+  }
+}

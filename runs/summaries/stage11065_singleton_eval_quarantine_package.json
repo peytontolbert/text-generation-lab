@@ -1,0 +1,90 @@
+{
+  "claim_scope": [
+    "Repair the promotable successor overlay by removing singleton-option evaluation rows that cannot measure discriminative maintainer judgment.",
+    "Preserve train and stress surfaces unchanged so this package only narrows the heldout claim surface rather than retuning the task mix."
+  ],
+  "created_at_utc": "2026-07-13T02:04:53Z",
+  "decision": "singleton_eval_rows_quarantined",
+  "findings": [
+    "The stage11061 successor overlay still contained singleton verifier-outcome rows in both validation and strict, which inflated apparent answerability without testing choice discrimination.",
+    "This package quarantines those singleton rows out of promotable eval while keeping the broader successor branch intact.",
+    "The revised heldout surface is smaller but structurally cleaner and is a better target for the next probe or scorer audit."
+  ],
+  "metrics": {
+    "base_support_package_metrics": {
+      "added_by_language": {
+        "c_cpp": 9,
+        "python": 8,
+        "rust": 24
+      },
+      "added_by_repo_family": {
+        "chroma": 8,
+        "dbt-core": 8,
+        "parametergolf": 9,
+        "repository_library": 8,
+        "tiktoken": 8
+      },
+      "added_by_task": {
+        "evidence_citation": 16,
+        "retrieve_answer_abstain": 11,
+        "verifier_outcome": 11,
+        "verifier_outcome_semantic_transition": 3
+      },
+      "base_train_rows_after_stage11051": 286,
+      "evidence_rows_added": 16,
+      "heuristic_support_rows": 12,
+      "rows_added_total": 41,
+      "scoreable_packet_rows_added": 22,
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_rows_after": 327,
+      "train_rows_before": 286,
+      "validation_rows_unchanged": 23,
+      "verifier_rows_added": 3
+    },
+    "quarantined_row_ids": [
+      "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact",
+      "stage10126::tokenizers::tokenizers::rust::verifier_outcome::reviewed_v27_compact"
+    ],
+    "quarantined_rows_by_language": {
+      "python": 1,
+      "rust": 1
+    },
+    "quarantined_rows_by_split": {
+      "eval": 1,
+      "strict_eval": 1
+    },
+    "quarantined_rows_by_task": {
+      "verifier_outcome": 2
+    },
+    "quarantined_rows_total": 2,
+    "stress_rows": 7,
+    "strict_rows_after": 22,
+    "strict_rows_before": 23,
+    "train_rows": 327,
+    "validation_rows_after": 22,
+    "validation_rows_before": 23
+  },
+  "outputs": {
+    "quarantined_rows_jsonl": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/quarantined_singleton_eval_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/singleton_eval_quarantine_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "Any score on this package must be reported against the reduced 22-row validation and 22-row strict surfaces, not compared naively to the older 23-row overlay.",
+    "Quarantined singleton rows may still exist in historical artifacts for continuity, but they are no longer valid promotable heldout evidence."
+  ],
+  "source_artifacts": {
+    "base_package_summary": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/ready_lane_fresh_support_package.json",
+    "base_stress_rows": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "base_strict_rows": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "base_train_rows": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/agentkernel_lite_encdec_train.jsonl",
+    "base_validation_rows": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "stage": 11065,
+  "stage_name": "stage11065_singleton_eval_quarantine_package"
+}

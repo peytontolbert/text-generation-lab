@@ -1,0 +1,37 @@
+{
+  "counts": {
+    "blocked_source_rows": 29,
+    "minimum_new_roots_needed": 10,
+    "repairable_after_materialization": 30,
+    "request_items": 65
+  },
+  "created_at_utc": "2026-07-13T14:59:16Z",
+  "decision": "rust_train_support_materialization_request_ready",
+  "lane_counts": {
+    "blocked_source_row_materialization": 29,
+    "false_or_unmaterialized_rust_source": 31,
+    "repairable_missing_verifier_anchor": 1,
+    "reserved_or_eval_do_not_train": 4
+  },
+  "outputs": {
+    "materialization_requests": "runs/local/artifacts/stage11405_rust_train_support_materialization_request/rust_train_support_materialization_requests.jsonl",
+    "summary": "runs/local/artifacts/stage11405_rust_train_support_materialization_request/rust_train_support_materialization_request.json"
+  },
+  "passed": true,
+  "policy": {
+    "do_not_train_now": true,
+    "train_allowed_only_after": [
+      "at least 10 repaired Rust roots admitted by Stage11404-equivalent gates",
+      "reserved strict replacement rows remain excluded",
+      "tokenizers-family rows remain diagnostic unless fresh non-overlap is proven"
+    ],
+    "why": "Stage11404 admitted zero clean disjoint Rust train-support candidates."
+  },
+  "recommended_next_action": "Materialize the blocked Rust source rows or repair the few Rust-source rows with verifier anchors and anti-cheat contracts. Re-run Stage11404 after repair; only build a support probe if admitted_unique_roots >= 10.",
+  "source_artifacts": {
+    "stage11344_blocker_queue": "runs/local/artifacts/stage11344_rust_web_source_verifier_blocker_audit/source_verifier_blocker_queue.jsonl",
+    "stage11404_rejected": "runs/local/artifacts/stage11404_rust_disjoint_train_support_inventory_audit/rust_disjoint_train_support_rejected_or_diagnostic.jsonl"
+  },
+  "stage": 11405,
+  "stage_name": "stage11405_rust_train_support_materialization_request"
+}

@@ -1,0 +1,137 @@
+{
+  "baseline_verifier_conditioned_metrics": {
+    "clean_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "clean_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.5,
+      "correct": 5,
+      "rows": 10
+    },
+    "residual_by_gold_correct": {
+      "candidate_change_surface": 3,
+      "symptom_or_call_path_analogue": 1,
+      "unknown": 1,
+      "verifier_and_test_constraint": 0
+    },
+    "source_specific_judgment_strict": {
+      "accuracy": 0.28846153846153844,
+      "correct": 30,
+      "rows": 104
+    },
+    "source_specific_judgment_validation": {
+      "accuracy": 0.2222222222222222,
+      "correct": 8,
+      "rows": 36
+    }
+  },
+  "created_at_utc": "2026-07-13T10:20:23Z",
+  "decision": "reject_stage11271_keep_stage11200_frontier",
+  "frontier_runtime_kept": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+  "next_action": [
+    "Do not run another probe on the current Stage11269 package as-is.",
+    "Improve source supply: C/C++ remains zero, Rust/Web absent from admitted source-specific rows, and Python train roots are only 13.",
+    "For evidence judgment, require roots with richer, non-template candidate evidence: actual selected test assertion/result, changed-code excerpt, runtime/trace excerpt, and plausible distractor excerpt.",
+    "Consider pairwise state+candidate training with negative candidates from the same root only after source supply is widened."
+  ],
+  "product_metrics": {
+    "clean_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "clean_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.5,
+      "correct": 5,
+      "rows": 10
+    },
+    "residual_by_gold_correct": {
+      "candidate_change_surface": 3,
+      "symptom_or_call_path_analogue": 1,
+      "unknown": 1,
+      "verifier_and_test_constraint": 0
+    },
+    "source_specific_judgment_strict": {
+      "accuracy": 0.25,
+      "correct": 26,
+      "rows": 104
+    },
+    "source_specific_judgment_validation": {
+      "accuracy": 0.25,
+      "correct": 9,
+      "rows": 36
+    }
+  },
+  "product_scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "reason": [
+    "Stage11269 successfully materialized source-specific evidence rows from real chunk excerpts, but the Stage11271 judgment-head probe did not generalize.",
+    "Clean canary was preserved, but source-specific judgment validation/strict remained at majority-baseline level and residual bank stayed flat.",
+    "Verifier/test-constraint residual remains 0/3; this still blocks the residual frontier versus Gemma."
+  ],
+  "rejected_runtime": "runs/local/artifacts/stage11271_source_specific_evidence_judgment_head_probe/runtime_model/runtime_model_bundle.json",
+  "rejected_runtime_sha256": "9740dd3d964978a94c885f9097217a8f3415af0f21564e82dc35f963bf8eaf24",
+  "source_artifacts": {
+    "stage11269_summary": "runs/local/artifacts/stage11269_source_specific_evidence_item_materialization/source_specific_evidence_item_materialization.json",
+    "stage11270_request": "runs/local/artifacts/stage11270_source_specific_evidence_judgment_head_probe_request/source_specific_evidence_judgment_head_probe_request.json",
+    "stage11272_audit": "runs/local/artifacts/stage11272_source_specific_evidence_judgment_head_postrun_audit/source_specific_evidence_judgment_head_postrun_audit.json"
+  },
+  "stage": 11273,
+  "stage11269_counts": {
+    "blocked_roots": 232,
+    "by_split_language": {
+      "strict_eval": {
+        "python": 104
+      },
+      "train": {
+        "python": 52
+      },
+      "validation": {
+        "python": 36
+      }
+    },
+    "by_split_target": {
+      "strict_eval": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 26,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 26,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 26,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 26
+      },
+      "train": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 13,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 13,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 13,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 13
+      },
+      "validation": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 9,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 9,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 9,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 9
+      }
+    },
+    "c_cpp_gap": {
+      "ready_c_cpp_roots": 0,
+      "reason": "stage11237 found no clean C/C++ verifier-constraint source candidates under current filters"
+    },
+    "materialized_roots": 48,
+    "retrieval_rows_indexed": 729,
+    "source_chunks_indexed": 34229,
+    "source_ready_candidates": 280,
+    "strict_rows": 104,
+    "train_rows": 52,
+    "validation_rows": 36
+  },
+  "stage_name": "stage11273_source_specific_evidence_judgment_decision"
+}

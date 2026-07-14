@@ -1,0 +1,310 @@
+{
+  "created_at_utc": "2026-07-13T10:41:25Z",
+  "decision": "verifier_bias_confirmed_do_not_expand_verifier_positive_only",
+  "finding": {
+    "implication": "The current Stage11276 geometry created a verifier-positive attractor. Adding more verifier_and_test_constraint positives without changed-source hard positives/counterexamples is expected to worsen the residual boundary.",
+    "non_random_failure": true,
+    "summary": "On Stage11276 validation/strict, the scorer is 100% correct on DECISIVE_VERIFIER_TEST_CONSTRAINT rows and 0% correct on SUPPORTING_CANDIDATE_CHANGE_SURFACE rows. Every changed-source miss is predicted as DECISIVE_VERIFIER_TEST_CONSTRAINT."
+  },
+  "next_action": {
+    "recommended_stage": "stage11285_changed_surface_counterweight_package",
+    "requirements": [
+      "Build source-backed changed-source-positive rows where verifier/test snippets are tempting distractors but the judged evidence item is changed-source support.",
+      "Keep matched verifier-positive rows from the same roots so the model must discriminate candidate item content, not root context.",
+      "Score candidate items pairwise within the same root: changed item vs verifier item, with target depending on the candidate under judgment.",
+      "Do not promote until Stage11276 changed-source heldout accuracy is >0 while residual verifier_and_test_constraint does not remain 0/3."
+    ]
+  },
+  "passed": true,
+  "scorer_bias_cards": {
+    "encoder_option_retrieval": {
+      "judgment_strict": {
+        "by_candidate_evidence_kind": {
+          "changed": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 10,
+            "scored_rows": 10
+          },
+          "verifier": {
+            "correct": 10,
+            "exact_accuracy": 1.0,
+            "rows": 10,
+            "scored_rows": 10
+          }
+        },
+        "by_gold_value": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": {
+            "correct": 10,
+            "exact_accuracy": 1.0,
+            "rows": 10,
+            "scored_rows": 10
+          },
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 10,
+            "scored_rows": 10
+          }
+        },
+        "miss_candidate_evidence_kind_counts": {
+          "changed": 10
+        },
+        "miss_count": 10,
+        "miss_gold_value_counts": {
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 10
+        },
+        "miss_predicted_semantic_value_counts": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 10
+        },
+        "row_metric": {
+          "correct": 10,
+          "exact_accuracy": 0.5,
+          "rows": 20,
+          "scored_rows": 20
+        }
+      },
+      "judgment_validation": {
+        "by_candidate_evidence_kind": {
+          "changed": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 11,
+            "scored_rows": 11
+          },
+          "verifier": {
+            "correct": 11,
+            "exact_accuracy": 1.0,
+            "rows": 11,
+            "scored_rows": 11
+          }
+        },
+        "by_gold_value": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": {
+            "correct": 11,
+            "exact_accuracy": 1.0,
+            "rows": 11,
+            "scored_rows": 11
+          },
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 11,
+            "scored_rows": 11
+          }
+        },
+        "miss_candidate_evidence_kind_counts": {
+          "changed": 11
+        },
+        "miss_count": 11,
+        "miss_gold_value_counts": {
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 11
+        },
+        "miss_predicted_semantic_value_counts": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 11
+        },
+        "row_metric": {
+          "correct": 11,
+          "exact_accuracy": 0.5,
+          "rows": 22,
+          "scored_rows": 22
+        }
+      }
+    },
+    "encoder_option_retrieval_evidence_judgment_head": {
+      "judgment_strict": {
+        "by_candidate_evidence_kind": {
+          "changed": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 10,
+            "scored_rows": 10
+          },
+          "verifier": {
+            "correct": 10,
+            "exact_accuracy": 1.0,
+            "rows": 10,
+            "scored_rows": 10
+          }
+        },
+        "by_gold_value": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": {
+            "correct": 10,
+            "exact_accuracy": 1.0,
+            "rows": 10,
+            "scored_rows": 10
+          },
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 10,
+            "scored_rows": 10
+          }
+        },
+        "miss_candidate_evidence_kind_counts": {
+          "changed": 10
+        },
+        "miss_count": 10,
+        "miss_gold_value_counts": {
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 10
+        },
+        "miss_predicted_semantic_value_counts": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 10
+        },
+        "row_metric": {
+          "correct": 10,
+          "exact_accuracy": 0.5,
+          "rows": 20,
+          "scored_rows": 20
+        }
+      },
+      "judgment_validation": {
+        "by_candidate_evidence_kind": {
+          "changed": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 11,
+            "scored_rows": 11
+          },
+          "verifier": {
+            "correct": 11,
+            "exact_accuracy": 1.0,
+            "rows": 11,
+            "scored_rows": 11
+          }
+        },
+        "by_gold_value": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": {
+            "correct": 11,
+            "exact_accuracy": 1.0,
+            "rows": 11,
+            "scored_rows": 11
+          },
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 11,
+            "scored_rows": 11
+          }
+        },
+        "miss_candidate_evidence_kind_counts": {
+          "changed": 11
+        },
+        "miss_count": 11,
+        "miss_gold_value_counts": {
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 11
+        },
+        "miss_predicted_semantic_value_counts": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 11
+        },
+        "row_metric": {
+          "correct": 11,
+          "exact_accuracy": 0.5,
+          "rows": 22,
+          "scored_rows": 22
+        }
+      }
+    },
+    "encoder_option_retrieval_verifier_conditioned": {
+      "judgment_strict": {
+        "by_candidate_evidence_kind": {
+          "changed": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 10,
+            "scored_rows": 10
+          },
+          "verifier": {
+            "correct": 10,
+            "exact_accuracy": 1.0,
+            "rows": 10,
+            "scored_rows": 10
+          }
+        },
+        "by_gold_value": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": {
+            "correct": 10,
+            "exact_accuracy": 1.0,
+            "rows": 10,
+            "scored_rows": 10
+          },
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 10,
+            "scored_rows": 10
+          }
+        },
+        "miss_candidate_evidence_kind_counts": {
+          "changed": 10
+        },
+        "miss_count": 10,
+        "miss_gold_value_counts": {
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 10
+        },
+        "miss_predicted_semantic_value_counts": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 10
+        },
+        "row_metric": {
+          "correct": 10,
+          "exact_accuracy": 0.5,
+          "rows": 20,
+          "scored_rows": 20
+        }
+      },
+      "judgment_validation": {
+        "by_candidate_evidence_kind": {
+          "changed": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 11,
+            "scored_rows": 11
+          },
+          "verifier": {
+            "correct": 11,
+            "exact_accuracy": 1.0,
+            "rows": 11,
+            "scored_rows": 11
+          }
+        },
+        "by_gold_value": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": {
+            "correct": 11,
+            "exact_accuracy": 1.0,
+            "rows": 11,
+            "scored_rows": 11
+          },
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 11,
+            "scored_rows": 11
+          }
+        },
+        "miss_candidate_evidence_kind_counts": {
+          "changed": 11
+        },
+        "miss_count": 11,
+        "miss_gold_value_counts": {
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 11
+        },
+        "miss_predicted_semantic_value_counts": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 11
+        },
+        "row_metric": {
+          "correct": 11,
+          "exact_accuracy": 0.5,
+          "rows": 22,
+          "scored_rows": 22
+        }
+      }
+    }
+  },
+  "source_artifacts": {
+    "postrun_audit": "runs/local/artifacts/stage11282_capped_direct_retrieval_evidence_postrun_audit_fixed_options/capped_direct_retrieval_evidence_postrun_audit_fixed_options.json",
+    "stage11276_package_dir": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package",
+    "stage11283_decision": "runs/local/artifacts/stage11283_capped_direct_retrieval_evidence_decision_fixed_options/capped_direct_retrieval_evidence_decision_fixed_options.json"
+  },
+  "stage": 11284,
+  "stage_name": "stage11284_capped_direct_retrieval_evidence_bias_audit"
+}

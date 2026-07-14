@@ -1,0 +1,66 @@
+{
+  "claim_boundary": [
+    "This slice reserves audited long-context roots for evaluation-safe use by excluding train-only target subtypes.",
+    "Only decisive_evidence and retrieve_answer_abstain projections are included because verifier_outcome is verbatim-leaky in the current audited prompts.",
+    "These roots must be removed from training manifests before any multilingual benchmark claim uses them."
+  ],
+  "created_at_utc": "2026-07-11T23:25:22Z",
+  "failures": [],
+  "metrics": {
+    "candidate_roots_by_language": {
+      "c_cpp": 55,
+      "python": 621,
+      "rust": 6,
+      "web_js_ts_html": 7
+    },
+    "selected_repo_ids_by_language": {
+      "c_cpp": [
+        "cccl",
+        "cuEmbed",
+        "falco",
+        "onnxruntime"
+      ],
+      "python": [
+        "ASAC",
+        "BrowserGym",
+        "CREMA",
+        "DeepSpeed",
+        "EfficientDynamic3DGaussian",
+        "HiLAM"
+      ],
+      "rust": [
+        "chroma",
+        "dbt-core",
+        "tiktoken"
+      ],
+      "web_js_ts_html": [
+        "mem0"
+      ]
+    },
+    "selected_roots_by_language": {
+      "c_cpp": 4,
+      "python": 6,
+      "rust": 4,
+      "web_js_ts_html": 4
+    },
+    "selected_rows": 36,
+    "selected_rows_by_language": {
+      "c_cpp": 8,
+      "python": 12,
+      "rust": 8,
+      "web_js_ts_html": 8
+    },
+    "selected_rows_by_target_subtype": {
+      "decisive_evidence": 18,
+      "retrieve_answer_abstain": 18
+    }
+  },
+  "next_best_step": "Rebuild the bootstrap manifest with these roots removed from train and reclassified as heldout evaluation rows, then rerun the honesty audit to confirm multilingual heldout coverage.",
+  "outputs": {
+    "heldout_eval_safe_rows": "runs/local/artifacts/stage10520_multilingual_eval_safe_heldout_slice/heldout_eval_safe_rows.jsonl",
+    "heldout_root_reservations": "runs/local/artifacts/stage10520_multilingual_eval_safe_heldout_slice/heldout_root_reservations.jsonl"
+  },
+  "passed": true,
+  "stage": 10520,
+  "stage_name": "stage10520_multilingual_eval_safe_heldout_slice"
+}

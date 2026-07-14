@@ -1,0 +1,131 @@
+{
+  "by_task_gemma12b": {
+    "abstention_insufficient_evidence": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "alternative_hypothesis_elimination": {
+      "correct": 1,
+      "exact_accuracy": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "evidence_citation": {
+      "correct": 1,
+      "exact_accuracy": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "minimal_fix_selection": {
+      "correct": 1,
+      "exact_accuracy": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "symptom_localization": {
+      "correct": 1,
+      "exact_accuracy": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "verifier_outcome": {
+      "correct": 1,
+      "exact_accuracy": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    }
+  },
+  "claim_scope": "single disjoint executed Web heldout root; diagnostic only, not a broad Web claim",
+  "created_at_utc": "2026-07-13T13:11:10Z",
+  "decision": "web_llama_stack_same_manifest_gemma_comparison_complete",
+  "delta_hundred_m_minus_gemma": -0.8333333333333334,
+  "gemma12b": {
+    "correct": 5,
+    "exact_accuracy": 0.8333333333333334,
+    "rows": 6,
+    "scored_rows": 6
+  },
+  "gemma_rows": [
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "D",
+      "gemma12b_raw_output": "D",
+      "language_family": "web_js_ts_html",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+      "semantic_target_value": "lib/format-message-content.ts::extractTextFromContentPart/extractDisplayableText",
+      "target_text": "D",
+      "task_type": "symptom_localization"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "D",
+      "gemma12b_raw_output": "D",
+      "language_family": "web_js_ts_html",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+      "semantic_target_value": "verifier_and_test_constraint",
+      "target_text": "D",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "C",
+      "language_family": "web_js_ts_html",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+      "semantic_target_value": "PASS_TARGETED_TEST_SELECTION",
+      "target_text": "C",
+      "task_type": "verifier_outcome"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "D",
+      "gemma12b_raw_output": "D",
+      "language_family": "web_js_ts_html",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+      "semantic_target_value": "edit_format_message_content_extraction_logic",
+      "target_text": "D",
+      "task_type": "minimal_fix_selection"
+    },
+    {
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "B",
+      "language_family": "web_js_ts_html",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+      "semantic_target_value": "logs_table_not_imported_by_targeted_unit_test",
+      "target_text": "B",
+      "task_type": "alternative_hypothesis_elimination"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "A",
+      "gemma12b_raw_output": "A",
+      "language_family": "web_js_ts_html",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+      "semantic_target_value": "ANSWER_WITH_VISIBLE_EVIDENCE",
+      "target_text": "B",
+      "task_type": "abstention_insufficient_evidence"
+    }
+  ],
+  "hundred_m_stage11200_product_scorer": {
+    "correct": 0,
+    "exact_accuracy": 0.0,
+    "rows": 6,
+    "scored_rows": 6
+  },
+  "model_id": "gemma3:12b",
+  "outputs": {
+    "gemma_rows": "runs/local/artifacts/stage11363_web_llama_stack_same_manifest_gemma_comparison/web_llama_stack_gemma_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11363_web_llama_stack_same_manifest_gemma_comparison/web_llama_stack_same_manifest_gemma_comparison.json"
+  },
+  "passed": true,
+  "recommended_next_action": "Use this hard Web root as sealed diagnostic heldout. Do not train on it until there are enough separate Web heldout roots or it is explicitly demoted to support.",
+  "source_artifacts": {
+    "hundred_m_score": "runs/local/artifacts/stage11362_web_llama_stack_heldout_score_audit/web_llama_stack_heldout_score_audit.json",
+    "rows": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/web_llama_stack_executed_heldout_rows.jsonl"
+  },
+  "stage": 11363,
+  "stage_name": "stage11363_web_llama_stack_same_manifest_gemma_comparison"
+}

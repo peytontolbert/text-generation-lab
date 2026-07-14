@@ -1,0 +1,58 @@
+{
+  "claim_scope": [
+    "Recompute the reviewed multilingual v2.7 same-manifest 100M-vs-Gemma comparison after removing aliased evidence rows flagged by the stage10880 anti-cheat audit.",
+    "Preserve the original row-level 100M and Gemma outputs; only the anti-cheat row filter changes."
+  ],
+  "created_at_utc": "2026-07-12T17:26:47Z",
+  "decision": "quarantined_v27_comparison_successor_audited",
+  "metrics": {
+    "language_ties": 0,
+    "language_wins_100m": 4,
+    "language_wins_gemma": 0,
+    "rows_kept": 23,
+    "rows_original": 24,
+    "rows_quarantined": 1,
+    "strict_delta_100m_minus_gemma": 0.6956521739130435,
+    "strict_exact_100m": 0.9565217391304348,
+    "strict_exact_gemma": 0.2608695652173913
+  },
+  "next_best_step": "Use this quarantined comparison as the honest reviewed-v2.7 headline until Rust evidence coverage is replenished with a fresh non-aliased reviewed root, then rerun the same-manifest comparison.",
+  "passed": true,
+  "per_language": {
+    "c_cpp": {
+      "delta_100m_minus_gemma": 0.8333333333333334,
+      "gemma_exact": 0.16666666666666666,
+      "hundred_m_exact": 1.0,
+      "rows": 6,
+      "verdict": "100m_better"
+    },
+    "python": {
+      "delta_100m_minus_gemma": 0.6666666666666667,
+      "gemma_exact": 0.16666666666666666,
+      "hundred_m_exact": 0.8333333333333334,
+      "rows": 6,
+      "verdict": "100m_better"
+    },
+    "rust": {
+      "delta_100m_minus_gemma": 0.4,
+      "gemma_exact": 0.6,
+      "hundred_m_exact": 1.0,
+      "rows": 5,
+      "verdict": "100m_better"
+    },
+    "web_js_ts_html": {
+      "delta_100m_minus_gemma": 0.8333333333333334,
+      "gemma_exact": 0.16666666666666666,
+      "hundred_m_exact": 1.0,
+      "rows": 6,
+      "verdict": "100m_better"
+    }
+  },
+  "quarantined_rows": [
+    "stage10126::tokenizers::tokenizers::rust::evidence_citation::reviewed_v27_compact"
+  ],
+  "source_comparison_rows": "runs/local/artifacts/stage10424_reviewed_multilingual_v27_comparison_audit/reviewed_multilingual_v27_comparison_rows.jsonl",
+  "source_quarantine": "runs/local/artifacts/stage10881_evidence_alias_quarantine_successor/evidence_alias_quarantine_successor.json",
+  "stage": 10882,
+  "stage_name": "stage10882_quarantined_v27_comparison_successor_audit"
+}

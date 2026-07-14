@@ -1,0 +1,51 @@
+{
+  "claim_scope": [
+    "Rewrite fresh-family evidence support rows so answer options are visible evidence ledger items rather than semantic role names.",
+    "Prevent the model/scorer from solving evidence citation by memorizing role aliases such as verifier_and_test_constraint or candidate_change_surface."
+  ],
+  "created_at_utc": "2026-07-13T05:02:14Z",
+  "decision": "evidence_item_option_rows_ready_for_support_package",
+  "metrics": {
+    "blocked": [],
+    "blocked_rows": 0,
+    "by_language": {
+      "c_cpp": 16,
+      "python": 16,
+      "web_js_ts_html": 4
+    },
+    "by_repo_family": {
+      "cccl": 4,
+      "cuEmbed": 4,
+      "diffusers": 4,
+      "django": 4,
+      "faiss": 4,
+      "falco": 4,
+      "mem0": 4,
+      "onnxruntime": 4,
+      "openai-agents-python": 4
+    },
+    "gold_evidence_id_not_visible_rows": [],
+    "option_role_leak_rows": [],
+    "prompt_role_leak_rows": [],
+    "rewritten_rows": 36,
+    "source_rows": 36,
+    "target_label_counts": {
+      "A": 8,
+      "B": 10,
+      "C": 11,
+      "D": 7
+    }
+  },
+  "next_best_step": "Package these rows with stage11114 and run one scorer probe only if the rewrite has zero role-name leaks and no heldout overlap.",
+  "outputs": {
+    "audit_json": "runs/local/artifacts/stage11130_evidence_item_option_rewrite/evidence_item_option_audit.json",
+    "rows_jsonl": "runs/local/artifacts/stage11130_evidence_item_option_rewrite/evidence_item_option_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11130_evidence_item_option_rewrite/evidence_item_option_rewrite.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "source_rows": "runs/local/artifacts/stage11114_fresh_family_support_package_with_trainable_admitted_evidence/added_admitted_evidence_rows_trainable.jsonl"
+  },
+  "stage": 11130,
+  "stage_name": "stage11130_evidence_item_option_rewrite"
+}

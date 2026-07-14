@@ -1,0 +1,202 @@
+{
+  "baseline": {
+    "canonical_heldout": "50/66",
+    "decision": "web_canonical_verifier_value_contrast_improves_canonical_heldout_only",
+    "filtered_strict": "22/22",
+    "filtered_validation": "20/22",
+    "name": "stage11670_verifier_value_contrast",
+    "old_canary_strict": "23/23",
+    "old_canary_validation": "21/23",
+    "original_web_heldout": "27/66",
+    "residual_bank": "7/10",
+    "runtime": "runs/local/artifacts/stage11669_web_canonical_verifier_value_contrast_probe/runtime_model/runtime_model_bundle.json",
+    "telemetry": {
+      "contrast_applicable_rows_total": 9216,
+      "contrast_inactive": false,
+      "contrast_skipped_rows_total": 3072,
+      "latest_step": 1536,
+      "steps": 1536,
+      "steps_with_contrast_applicable": 1248,
+      "train_log_exists": true
+    },
+    "weights_sha256": "7e3bce8e1a670b574acf85acb7db416b37190c01a67c5793b26a0cfe4939d1af"
+  },
+  "created_at_utc": "2026-07-14T03:56:31Z",
+  "decision": "listwise_objective_validated_but_not_promoted",
+  "fixed_canonical_misses": [
+    "stage11361::llama_stack_ui_format_message_content::verifier_outcome::stage11663_canonical"
+  ],
+  "gates": {
+    "canonical_heldout_improved_by_one": true,
+    "canonical_still_below_gemma": true,
+    "no_new_canonical_misses": true,
+    "original_web_still_below_routed_frontier": true,
+    "protected_gates_preserved": true
+  },
+  "interpretation": [
+    "The same-role verifier-value listwise objective fixed one verifier-outcome row with no protected-gate regression.",
+    "This validates the Stage11668 diagnosis that same-role candidate identity was a real blocker.",
+    "It is not promotable as product Web progress because original Web heldout remains 27/66, below the 38/66 routed frontier.",
+    "It is not yet a Gemma Web win because canonical heldout is 51/66, below Gemma's 52/66 same-manifest Web score."
+  ],
+  "listwise": {
+    "canonical_heldout": "51/66",
+    "decision": "web_canonical_verifier_value_listwise_improves_canonical_heldout_only",
+    "filtered_strict": "22/22",
+    "filtered_validation": "20/22",
+    "name": "stage11673_verifier_value_listwise",
+    "old_canary_strict": "23/23",
+    "old_canary_validation": "21/23",
+    "original_web_heldout": "27/66",
+    "residual_bank": "7/10",
+    "runtime": "runs/local/artifacts/stage11672_web_canonical_verifier_value_listwise_probe/runtime_model/runtime_model_bundle.json",
+    "telemetry": {
+      "contrast_applicable_rows_total": 9216,
+      "contrast_inactive": false,
+      "contrast_skipped_rows_total": 3072,
+      "latest_step": 1536,
+      "listwise_applicable_rows_total": 845,
+      "listwise_skipped_rows_total": 11443,
+      "listwise_target_rank1_rate": 0.9408284023668639,
+      "listwise_target_rank1_rows_total": 795,
+      "listwise_target_values": {
+        "pass_targeted_test_selection": 845
+      },
+      "steps": 1536,
+      "steps_with_contrast_applicable": 1248,
+      "steps_with_listwise_applicable": 432,
+      "train_log_exists": true
+    },
+    "weights_sha256": "e46bdda043072223441a5b634b6e6a248339af865966e0dbb702dedd176cc244"
+  },
+  "new_canonical_misses": [],
+  "next_recommended_experiment": {
+    "do_not_claim": [
+      "do not promote Stage11673 as selected product scorer",
+      "do not claim broad Web superiority over Gemma yet"
+    ],
+    "intervention": [
+      "increase same-role verifier candidate identity coverage for MCP/SEP-style verifier rows",
+      "add same-role candidate identity/listwise objectives for symptom_localization and minimal_fix_selection",
+      "keep head-only until original Web heldout beats the routed 38/66 frontier"
+    ],
+    "target": "raise canonical Web heldout above 52/66 and restore original Web transfer above 38/66"
+  },
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11674_web_listwise_frontier_decision",
+    "summary": "runs/local/artifacts/stage11674_web_listwise_frontier_decision/web_listwise_frontier_decision.json"
+  },
+  "remaining_canonical_misses": [
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization::stage11663_canonical",
+      "target": "D",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection::stage11663_canonical",
+      "target": "D",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "C",
+      "row_id": "stage11390::openhands_websocket_url::symptom_localization::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11390::openhands_websocket_url::minimal_fix_selection::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "C",
+      "predicted": "C",
+      "row_id": "stage11390::openhands_parse_pr_url::symptom_localization::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 5
+    },
+    {
+      "full_vocab_top1_text": "C",
+      "predicted": "A",
+      "row_id": "stage11390::openhands_parse_pr_url::minimal_fix_selection::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 5
+    },
+    {
+      "full_vocab_top1_text": "C",
+      "predicted": "C",
+      "row_id": "stage11390::openhands_input_validation::symptom_localization::stage11663_canonical",
+      "target": "B",
+      "target_rank_full_vocab": 5
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 3
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "C",
+      "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::patch_impact::heldout_v1::stage11663_canonical",
+      "target": "D",
+      "target_rank_full_vocab": 6
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "B",
+      "row_id": "stage11540::mcp_typescript_sdk::server_streamable_http_transport::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 2
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11540::mcp_typescript_sdk::client_stdio_transport::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 2
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11540::mcp_typescript_sdk::core_protocol_state_machine::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 3
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "B",
+      "row_id": "stage11540::mcp_typescript_sdk::core_tool_name_validation::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 2
+    },
+    {
+      "full_vocab_top1_text": "C",
+      "predicted": "D",
+      "row_id": "stage11543::sep_automation::transition_handler_state_rules::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 1
+    },
+    {
+      "full_vocab_top1_text": "E",
+      "predicted": "A",
+      "row_id": "stage11543::sep_automation::hook_registry_dispatch_resilience::verifier_outcome::heldout_v1::stage11663_canonical",
+      "target": "C",
+      "target_rank_full_vocab": 3
+    }
+  ],
+  "source_artifacts": {
+    "baseline": "runs/local/artifacts/stage11670_web_canonical_verifier_value_contrast_postrun_audit/web_canonical_verifier_value_contrast_postrun_audit.json",
+    "listwise": "runs/local/artifacts/stage11673_web_canonical_verifier_value_listwise_postrun_audit/web_canonical_verifier_value_listwise_postrun_audit.json"
+  },
+  "stage": 11674,
+  "stage_name": "stage11674_web_listwise_frontier_decision"
+}

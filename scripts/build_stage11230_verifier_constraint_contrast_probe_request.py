@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import time
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+ARTIFACTS = ROOT / "runs/local/artifacts"
+STAGE = 11230
+NAME = "stage11230_verifier_constraint_contrast_probe_request"
+OUT_DIR = ARTIFACTS / NAME
+SUMMARY_JSON = OUT_DIR / "verifier_constraint_contrast_probe_request.json"
+COMMAND_JSON = OUT_DIR / "verifier_constraint_contrast_probe_command.json"
+MANIFEST = OUT_DIR / "verifier_constraint_contrast_probe_manifest.jsonl"
+
+BASE_PACKAGE = ARTIFACTS / "stage11198_role_focused_residual_support_package"
+BASE_TRAIN = BASE_PACKAGE / "agentkernel_lite_encdec_train.jsonl"
+VALIDATION = BASE_PACKAGE / "agentkernel_lite_encdec_validation.jsonl"
+STRICT = BASE_PACKAGE / "agentkernel_lite_encdec_strict_eval.jsonl"
+ADDED = ARTIFACTS / "stage11205_fresh_verifier_constraint_evidence_support/admitted_fresh_verifier_constraint_evidence_rows.jsonl"
+RESIDUAL_BANK = ARTIFACTS / "stage11195_clean_residual_successor_bank/clean_residual_successor_bank.jsonl"
+INIT_RUNTIME = ARTIFACTS / "stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json"
+RUN_DIR = ARTIFACTS / "stage11230_verifier_constraint_contrast_probe"
+PROBE_OUT = RUN_DIR / "bounded_decoder_probe"
+RUNTIME_OUT = RUN_DIR / "runtime_model"
+
+
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()] if path.exists() else []
+
+
+def write_json(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("".join(json.dumps(row, sort_keys=True) + "\n" for row in rows), encoding="utf-8")
+
+
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT))
+
+
+def now_utc() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+
+def root_key(row: dict[str, Any]) -> str:
+    return str(row.get("root_id") or row.get("source_root_id") or row.get("row_id") or "")
+
+
+def contrast_applicable(row: dict[str, Any]) -> bool:
+    options = ((row.get("standalone_projection_source") or {}).get("opaque_options")) or row.get("opaque_options") or []
+    values = {str(option.get("value") or "") for option in options if isinstance(option, dict)}
+    target = str(row.get("target_text") or "")
+    value_by_label = {str(option.get("label") or ""): str(option.get("value") or "") for option in options if isinstance(option, dict)}
+    return (
+        row.get("task_type") == "evidence_citation"
+        and "candidate_change_surface" in values
+        and "verifier_and_test_constraint" in values
+        and value_by_label.get(target) in {"candidate_change_surface", "verifier_and_test_constraint"}
+    )
+
+
+def main() -> None:
+    base_train = load_jsonl(BASE_TRAIN)
+    added = load_jsonl(ADDED)
+    validation = load_jsonl(VALIDATION)
+    strict = load_jsonl(STRICT)
+    residual = load_jsonl(RESIDUAL_BANK)
+
+    eval_roots = {root_key(row) for row in validation + strict + residual}
+    added_roots = {root_key(row) for row in added}
+    overlaps = sorted(added_roots & eval_roots)
+    if overlaps:
+        raise SystemExit(f"added rows overlap eval/residual roots: {overlaps[:5]}")
+
+    train_rows = base_train + added
+    manifest_rows = []
+    for split, rows in (("train", train_rows), ("eval", validation), ("strict_eval", strict)):
+        for row in rows:
+            payload = dict(row)
+            payload["split"] = split
+            manifest_rows.append(payload)
+    write_jsonl(MANIFEST, manifest_rows)
+
+    command = [
+        "env", "CUDA_VISIBLE_DEVICES=2", "PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True", "TMPDIR=/data/tmp", "TEMP=/data/tmp", "TMP=/data/tmp",
+        "conda", "run", "-n", "trellis", "python", str(ROOT / "legacy_src/scripts/train_agentkernel_lite_encdec.py"),
+        "--repo-root", str(ROOT),
+        "--manifest", str(MANIFEST),
+        "--mode", "bounded_decoder_ce_probe",
+        "--probe-scale", "target_100m",
+        "--implementation", "transformer",
+        "--model-config", str(ROOT / "configs/model/agentkernel_100m_seq2seq_recovered_target.json"),
+        "--tokenizer-json", str(ROOT / "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"),
+        "--tokenizer-config", str(ROOT / "configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"),
+        "--tokenizer-hashlock", str(ROOT / "configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json"),
+        "--execution-authorized-for-recovery-probe",
+        "--max-train-rows", str(len(train_rows)),
+        "--max-eval-rows", str(len(validation)),
+        "--max-strict-rows", str(len(strict)),
+        "--max-steps", "128",
+        "--batch-size", "4",
+        "--learning-rate", "8e-6",
+        "--max-encoder-tokens", "768",
+        "--max-decoder-tokens", "16",
+        "--decoder-ce-weight", "0.1",
+        "--bounded-choice-aux-weight", "1.75",
+        "--bounded-choice-aux-source", "encoder_option_retrieval_verifier_conditioned",
+        "--bounded-choice-contrast-weight", "0.5",
+        "--bounded-choice-contrast-margin", "0.10",
+        "--bounded-decoder-train-sampler", "residual_family_balanced",
+        "--structured-aux-weight", "0.0",
+        "--denoise-weight", "0.0",
+        "--eos-loss-weight", "4.0",
+        "--enable-generation-audit",
+        "--max-generation-rows", "12",
+        "--max-generation-tokens", "16",
+        "--require-loss-mask-enforcement-audit",
+        "--allow-runtime-model-save-for-harness",
+        "--runtime-model-save-dir", str(RUNTIME_OUT),
+        "--initialize-from-runtime-model", str(INIT_RUNTIME),
+        "--preservation-reference-runtime-model", str(INIT_RUNTIME),
+        "--preservation-kl-weight", "1.0",
+        "--no-final-checkpoint",
+        "--output-dir", str(PROBE_OUT),
+    ]
+    summary = {
+        "stage": STAGE,
+        "stage_name": NAME,
+        "created_at_utc": now_utc(),
+        "passed": True,
+        "decision": "verifier_constraint_contrast_probe_requested",
+        "rationale": [
+            "Stage11208 showed fresh verifier/test-constraint support can move residuals but regresses strict without preservation.",
+            "Stage11210 preserved strict but lost the residual gain.",
+            "This request keeps preservation but adds the existing candidate-vs-verifier contrastive margin loss to target the exact evidence confusion.",
+        ],
+        "metrics": {
+            "base_train_rows": len(base_train),
+            "added_rows": len(added),
+            "added_contrast_applicable_rows": sum(1 for row in added if contrast_applicable(row)),
+            "train_rows": len(train_rows),
+            "validation_rows": len(validation),
+            "strict_rows": len(strict),
+            "residual_rows_for_postrun": len(residual),
+            "added_unique_roots": len(added_roots),
+            "eval_residual_root_overlaps": overlaps,
+            "bounded_choice_contrast_weight": 0.5,
+            "bounded_choice_contrast_margin": 0.10,
+        },
+        "promotion_gate_for_postrun": {
+            "clean_strict_must_remain": "22/22",
+            "clean_residual_must_improve": ">5/10",
+            "verifier_and_test_constraint_residual_must_improve": ">0/3",
+        },
+        "source_artifacts": {
+            "base_train": rel(BASE_TRAIN),
+            "added_rows": rel(ADDED),
+            "validation": rel(VALIDATION),
+            "strict": rel(STRICT),
+            "residual_bank": rel(RESIDUAL_BANK),
+            "initialize_from_runtime": rel(INIT_RUNTIME),
+        },
+        "outputs": {
+            "summary_json": rel(SUMMARY_JSON),
+            "command_json": rel(COMMAND_JSON),
+            "manifest_jsonl": rel(MANIFEST),
+            "probe_output_dir": rel(PROBE_OUT),
+            "runtime_model_dir": rel(RUNTIME_OUT),
+        },
+        "command": command,
+    }
+    write_json(COMMAND_JSON, {"command": command})
+    write_json(SUMMARY_JSON, summary)
+    print(json.dumps(summary, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

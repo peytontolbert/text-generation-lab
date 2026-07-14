@@ -1,0 +1,106 @@
+{
+  "approved_scoring_contract": {
+    "default_policy": "current_retrieval",
+    "explicit_non_overrides": {
+      "abstention_insufficient_evidence": "current_retrieval",
+      "evidence_citation": "current_retrieval",
+      "minimal_fix_selection": "current_retrieval",
+      "patch_impact": "current_retrieval",
+      "symptom_localization": "current_retrieval",
+      "verifier_outcome": "current_retrieval"
+    },
+    "task_policy_overrides": {
+      "verifier_outcome_semantic_transition": "decoder_on_transition_only"
+    }
+  },
+  "claim_boundaries": [
+    "Any stronger result on the cleaned canary under this contract must be labeled policy-assisted rather than raw constrained-retrieval.",
+    "This contract does not approve evidence-role scorer replacement or any A-prior relief policy on explicit-ledger rows.",
+    "This contract is for standalone same-manifest comparison only and does not upgrade the harness/full-product path."
+  ],
+  "claim_scope": [
+    "Freeze the scored-interface contract for the cleaned 22-row reviewed-v2.7 standalone canary after singleton eval rows were quarantined.",
+    "Permit only the already-audited verifier-transition override and keep every broader evidence-policy change blocked."
+  ],
+  "cleaned_surface_context": {
+    "current_runtime_cleaned_strict_accuracy": 0.9545454545454546,
+    "current_runtime_cleaned_validation_accuracy": 0.8636363636363636,
+    "quarantined_rows_total": 2,
+    "raw_cleaned_strict_accuracy": 0.9545454545454546,
+    "raw_cleaned_validation_accuracy": 0.8636363636363636,
+    "strict_rows": 22,
+    "validation_rows": 22
+  },
+  "created_at_utc": "2026-07-13T02:30:52Z",
+  "decision": "cleaned_v27_scored_interface_contract_refreshed",
+  "evidence_for_override": {
+    "current_cleaned_strict_miss_rows": [
+      "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1"
+    ],
+    "current_semantic_transition_row": {
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "B",
+      "full_vocab_top1_match": true,
+      "full_vocab_top1_text": "A",
+      "full_vocab_top1_token_id": 182,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "split": "strict_eval",
+      "target_rank_full_vocab": 1,
+      "target_text": "A",
+      "target_token_id": 182
+    },
+    "successor_row_prior_audit": {
+      "abstention_heavy": false,
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "C",
+      "full_vocab_top1_match": true,
+      "full_vocab_top1_text": "A",
+      "full_vocab_top1_token_id": 182,
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "The most relevant verification target is **B. T2 | FAIL_TO_PASS | compiled pack carries incident artifact details into the task context**.\n\nHere's why:\n\n* **Evidence Alignment:** The evidence (E1.1, E1.2, E1.3) heavily focuses on the structure of the `failure_bundle` and its inclusion within the compiled pack.  The code explicitly mentions `failure_bundle` and its contents being incorporated into the pack.  This directly relates to the target of carrying incident artifact details.\n* **Direct Impact of Repair:** A repair aimed at improving the compiler's handling of failure bundles (e.g., ensuring correct serialization, filtering, or inclusion) would most directly influence whether this target flips from FAIL to PASS.\n* **Other Targets Less Likely:**\n    * **T1 (Repository Domain-Knowledge):** While related to the pack's contents, the evidence doesn't strongly suggest a problem with *domain knowledge* specifically.\n    * **T3 (User Task-Message Content):** The evidence doesn't mention user task messages or chat history.\n    * **T4 (Ignoring Log References):**  The evidence doesn't focus on log references or their handling.\n\n\n\nTherefore, target T2 is the most directly and logically connected to the visible code and the provided evidence.",
+      "language_family": "python",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "repo_family": "code_assist",
+      "repo_id": "code_assist",
+      "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "selected_test_anchor": true,
+      "source_bundle_id": "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python",
+      "split": "strict_eval_successor",
+      "target_rank_full_vocab": 1,
+      "target_text": "A",
+      "target_token_id": 182,
+      "task_type": "verifier_outcome_semantic_transition",
+      "verifier_anchor": true
+    }
+  },
+  "findings": [
+    "The cleaned canary now has one strict miss, and it is exactly the semantic-transition verifier row that already has the correct decoder top-1 token.",
+    "The verifier-transition override remains the only justified inference-side change because it is task-scoped and directly addresses the surviving miss shape.",
+    "Broader evidence-policy changes remain blocked because previous role-map and hybrid scorer audits improved residual evidence slices but regressed clean strict rows."
+  ],
+  "next_best_step": "Apply this refreshed contract to the cleaned 22-row canary using the current stage11071 runtime, then report raw and policy-assisted results side by side.",
+  "passed": true,
+  "source_artifacts": {
+    "cleaned_audit": "runs/local/artifacts/stage11066_singleton_eval_quarantine_audit/singleton_eval_quarantine_audit.json",
+    "cleaned_package": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/singleton_eval_quarantine_package.json",
+    "current_postrun_audit": "runs/local/artifacts/stage11072_a_prior_and_python_verifier_diagnostic_postrun_audit/a_prior_and_python_verifier_diagnostic_postrun_audit.json",
+    "current_strict_audit": "runs/local/artifacts/stage11071_a_prior_and_python_verifier_diagnostic_probe/bounded_decoder_probe/bounded_choice_eval_audit_strict_eval.json",
+    "successor_comparison": "runs/local/artifacts/stage10899_python_verifier_transition_successor_comparison_audit/python_verifier_transition_successor_comparison_audit.json"
+  },
+  "stage": 11073,
+  "stage_name": "stage11073_cleaned_v27_scored_interface_contract_refresh"
+}

@@ -1,0 +1,78 @@
+{
+  "counts": {
+    "commands_attempted": 3,
+    "failed": 0,
+    "materializable_after_log": 3,
+    "passed": 3,
+    "timed_out": 0,
+    "unique_repo_families": 1
+  },
+  "created_at_utc": "2026-07-13T15:16:08Z",
+  "decision": "non_candle_rust_verifier_logs_captured",
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11412_non_candle_rust_verifier_log_capture/non_candle_rust_verifier_log_capture.json"
+  },
+  "passed": true,
+  "quality_gate": {
+    "actual_verifier_logs_present": true,
+    "enough_repo_breadth_for_probe": false,
+    "enough_roots_for_probe": false,
+    "probe_ready": false
+  },
+  "recommended_next_action": "Materialize non-Candle verifier-log-backed support rows, then combine with Candle partial support and rerun the Rust admission gate.",
+  "results": [
+    {
+      "actual_verifier_log_present": true,
+      "candidate_change_surface_path": "/data/repositories/git/src/lib.rs",
+      "command": "cargo test --manifest-path /data/repositories/git/Cargo.toml",
+      "crate_dir": "/data/repositories/git",
+      "duration_seconds": 0.564,
+      "inline_test_anchor_path": "/data/repositories/git/src/varint.rs",
+      "log_head": "   Compiling gitcore v0.1.0 (/data/repositories/git)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.47s\n     Running unittests src/lib.rs (target/debug/deps/gitcore-b4332fd75d4fc153)\n\nrunning 2 tests\ntest varint::tests::test_decode_varint ... ok\ntest varint::tests::test_encode_varint ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+      "log_path": "runs/local/artifacts/stage11412_non_candle_rust_verifier_log_capture/local_non_candle_inline_rust__data_repositories_git.log",
+      "materialization_allowed_after_log": true,
+      "repo_family": "git",
+      "returncode": 0,
+      "root_id": "local_non_candle_inline_rust::data_repositories_git",
+      "status": "passed",
+      "timed_out": false
+    },
+    {
+      "actual_verifier_log_present": true,
+      "candidate_change_surface_path": "/data/repositories/git/contrib/libgit-rs/src/lib.rs",
+      "command": "cargo test --manifest-path /data/repositories/git/contrib/libgit-rs/Cargo.toml",
+      "crate_dir": "/data/repositories/git/contrib/libgit-rs",
+      "duration_seconds": 140.093,
+      "inline_test_anchor_path": "/data/repositories/git/contrib/libgit-rs/src/config.rs",
+      "log_head": "    Updating crates.io index\n Downloading crates ...\n  Downloaded pkg-config v0.3.30\n  Downloaded make-cmd v0.1.0\n  Downloaded cc v1.1.15\n  Downloaded libc v0.2.158\n  Downloaded libz-sys v1.1.20\n   Compiling shlex v1.3.0\n   Compiling pkg-config v0.3.30\n   Compiling vcpkg v0.2.15\n   Compiling autocfg v1.4.0\n   Compiling make-cmd v0.1.0\n   Compiling libc v0.2.158\n   Compiling cc v1.1.15\n   Compiling libgit-sys v0.1.0 (/data/repositories/git/contrib/libgit-sys)\n   Compiling libgit v0.1.0 (/data/repositories/git/contrib/libgit-rs)\n   Compiling libz-sys v1.1.20\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2m 19s\n     Running unittests src/lib.rs (target/debug/deps/libgit-a1487ebd14b2cdb6)\n\nrunning 1 test\ntest config::tests::load_configs_via_configset ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n   Doc-tests libgit\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+      "log_path": "runs/local/artifacts/stage11412_non_candle_rust_verifier_log_capture/local_non_candle_inline_rust__data_repositories_git_contrib_libgit_rs.log",
+      "materialization_allowed_after_log": true,
+      "repo_family": "git",
+      "returncode": 0,
+      "root_id": "local_non_candle_inline_rust::data_repositories_git_contrib_libgit_rs",
+      "status": "passed",
+      "timed_out": false
+    },
+    {
+      "actual_verifier_log_present": true,
+      "candidate_change_surface_path": "/data/repositories/git/contrib/libgit-sys/src/lib.rs",
+      "command": "cargo test --manifest-path /data/repositories/git/contrib/libgit-sys/Cargo.toml",
+      "crate_dir": "/data/repositories/git/contrib/libgit-sys",
+      "duration_seconds": 3.195,
+      "inline_test_anchor_path": "/data/repositories/git/contrib/libgit-sys/src/lib.rs",
+      "log_head": "   Compiling shlex v1.3.0\n   Compiling pkg-config v0.3.30\n   Compiling vcpkg v0.2.15\n   Compiling libc v0.2.158\n   Compiling make-cmd v0.1.0\n   Compiling autocfg v1.4.0\n   Compiling cc v1.1.15\n   Compiling libgit-sys v0.1.0 (/data/repositories/git/contrib/libgit-sys)\n   Compiling libz-sys v1.1.20\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.06s\n     Running unittests src/lib.rs (target/debug/deps/libgit_sys-a5ab35622dd6d3db)\n\nrunning 2 tests\ntest tests::sanitized_user_agent_starts_with_git ... ok\ntest tests::user_agent_starts_with_git ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n   Doc-tests libgit_sys\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+      "log_path": "runs/local/artifacts/stage11412_non_candle_rust_verifier_log_capture/local_non_candle_inline_rust__data_repositories_git_contrib_libgit_sys.log",
+      "materialization_allowed_after_log": true,
+      "repo_family": "git",
+      "returncode": 0,
+      "root_id": "local_non_candle_inline_rust::data_repositories_git_contrib_libgit_sys",
+      "status": "passed",
+      "timed_out": false
+    }
+  ],
+  "source_artifacts": {
+    "stage11411_queue": "runs/local/artifacts/stage11411_non_candle_inline_rust_verifier_atlas/non_candle_inline_rust_verifier_queue.jsonl"
+  },
+  "stage": 11412,
+  "stage_name": "stage11412_non_candle_rust_verifier_log_capture"
+}

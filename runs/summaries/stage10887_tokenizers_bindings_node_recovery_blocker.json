@@ -1,0 +1,43 @@
+{
+  "claim_scope": [
+    "Prove whether tokenizers::bindings/node can be upgraded further from the current local state into a heldout Rust maintainer eval root.",
+    "Separate missing historical bridge artifacts from the surviving local evidence so the next recovery step is explicit rather than speculative."
+  ],
+  "created_at_utc": "2026-07-12T17:47:06Z",
+  "decision": "bindings_node_needs_new_failure_specific_anchor_for_heldout_use",
+  "headline_findings": [
+    "The bindings/node preview bundle is real and root-disjoint, but the current verifier signal is still only build-anchored.",
+    "The stage5418-era bridge parquet and related local artifacts referenced in old traces are not present in the current workspace, so they cannot be used as authoritative evidence now.",
+    "The surviving session inventory does not contain a concrete bindings/node failing test or execution transition that uniquely narrows the edit surface."
+  ],
+  "metrics": {
+    "bindings_node_failure_specific_trace_matches": 0,
+    "missing_stage5418_related_artifacts_locally": true,
+    "stage5418_related_artifact_count": 0
+  },
+  "missing_artifact_search_results": [],
+  "next_best_steps": [
+    "Treat bindings/node as support/stress or abstention-honesty material for now, not heldout headline evidence.",
+    "Search other external repo/session stores for a real bindings/node failing transition if available.",
+    "Otherwise focus Rust heldout recovery on a different root-disjoint candidate with a stronger verifier anchor."
+  ],
+  "passed": true,
+  "remaining_blockers": [
+    "no local failure-specific bindings/node verifier/test transition",
+    "no surviving authoritative stage5418 bridge artifact in current workspace",
+    "current packet still underdetermines singleton localization and evidence citation"
+  ],
+  "required_recovery_delta": [
+    "recover or generate one concrete failing bindings/node build/test transition tied to a visible candidate path",
+    "store the resulting verifier artifact inside the repo-local artifact tree",
+    "rerun gold adjudication and anti-cheat review after that anchor exists"
+  ],
+  "source_artifacts": {
+    "honesty_audit": "runs/local/artifacts/stage10886_tokenizers_bindings_node_honesty_audit/tokenizers_bindings_node_honesty_audit.json",
+    "preview_summary": "runs/local/artifacts/stage10885_tokenizers_bindings_node_preview/tokenizers_bindings_node_preview.json",
+    "session_inventory": "runs/local/artifacts/session_like_source_inventory_real/current_recent96_session_execution_traces/session_execution_traces.jsonl"
+  },
+  "stage": 10887,
+  "stage_name": "stage10887_tokenizers_bindings_node_recovery_blocker",
+  "surviving_failure_specific_trace_matches": []
+}

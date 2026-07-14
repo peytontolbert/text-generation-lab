@@ -1,0 +1,67 @@
+{
+  "admitted_rows": 69,
+  "by_language_role_counts": {
+    "c_cpp": {
+      "candidate_change_surface": 1,
+      "symptom_or_call_path_analogue": 1,
+      "verifier_and_test_constraint": 1
+    },
+    "python": {
+      "candidate_change_surface": 9,
+      "symptom_or_call_path_analogue": 9,
+      "verifier_and_test_constraint": 9
+    },
+    "rust": {
+      "candidate_change_surface": 6,
+      "symptom_or_call_path_analogue": 6,
+      "verifier_and_test_constraint": 6
+    },
+    "web_js_ts_html": {
+      "candidate_change_surface": 7,
+      "symptom_or_call_path_analogue": 7,
+      "verifier_and_test_constraint": 7
+    }
+  },
+  "created_at": "2026-07-13T06:58:55+00:00",
+  "decision": "train_support_admitted",
+  "failed_materialized_rows": 0,
+  "gold_value_counts": {
+    "candidate_change_surface": 23,
+    "symptom_or_call_path_analogue": 23,
+    "verifier_and_test_constraint": 23
+  },
+  "input_rows": "runs/local/artifacts/stage11178_contract_aware_evidence_rows/contract_aware_evidence_rows.jsonl",
+  "language_counts": {
+    "c_cpp": 3,
+    "python": 27,
+    "rust": 18,
+    "web_js_ts_html": 21
+  },
+  "language_with_all_required_roles": {
+    "c_cpp": true,
+    "python": true,
+    "rust": true,
+    "web_js_ts_html": true
+  },
+  "materialized_blocker_counts": {},
+  "notes": [
+    "This audit admits train-support rows only; it does not create strict/eval rows.",
+    "The package is role-balanced globally but should not be used for a multilingual evidence claim unless each language has role coverage.",
+    "Blocked source rows identify where source materialization, not training, remains the bottleneck."
+  ],
+  "outputs": {
+    "row_cards": "runs/local/artifacts/stage11179_contract_aware_evidence_admission_audit/contract_aware_evidence_admission_cards.jsonl",
+    "summary": "runs/local/artifacts/stage11179_contract_aware_evidence_admission_audit/contract_aware_evidence_admission_audit.json"
+  },
+  "promotion_eligible": false,
+  "required_role_floor": 23,
+  "source_blocked_rows": "runs/local/artifacts/stage11178_contract_aware_evidence_rows/blocked_evidence_materialization_rows.jsonl",
+  "source_blocked_rows_count": 48,
+  "source_blocker_counts": {
+    "missing_retrieval_source_row": 24,
+    "target_requires_verifier_anchor": 8,
+    "verifier_path_duplicates_candidate_surface": 24
+  },
+  "stage": 11179,
+  "train_admission_passed": true
+}

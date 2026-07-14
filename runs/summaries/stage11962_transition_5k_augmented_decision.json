@@ -1,0 +1,219 @@
+{
+  "created_at_utc": "2026-07-14T18:10:58Z",
+  "decision": "reject_stage11960_keep_stage11924_transition_frontier",
+  "deltas_vs_stage11924": {
+    "aug_strict_eval": -64,
+    "aug_train": 1916,
+    "aug_validation": -56,
+    "old_transition_640": -221,
+    "residual_bank": 0,
+    "source_heldout_smoke": 0
+  },
+  "interpretation": [
+    "The augmented package is learnable on train support: Stage11960 improves aug_train from 784/5176 to 2700/5176.",
+    "The gain does not transfer: aug_validation drops from 91/248 to 35/248 and aug_strict drops from 123/356 to 59/356.",
+    "Old transition retention collapses from 364/640 to 143/640.",
+    "Protected compact gates stay preserved, so the damage is isolated to the transition semantic-candidate head.",
+    "Counterfactual status rows over-pushed the head toward train geometry instead of learning robust verifier-status semantics."
+  ],
+  "next_recommendation": [
+    "Do not do another full augmented-head run with this objective.",
+    "Split transition heads by projection family or add task-specific routing before using counterfactual status rows.",
+    "For verifier_transition and continue_or_stop, build direct status-specific candidate heads or a status-balanced sampler; current shared semantic candidate head is too brittle.",
+    "Continue independent root materialization for Python/C++/Rust; the augmented counterfactual package is not a substitute for source-root breadth."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11962_transition_5k_augmented_decision/transition_5k_augmented_decision.json"
+  },
+  "package_readiness": {
+    "counts": {
+      "base_records": 615,
+      "base_rows": 2460,
+      "base_unique_roots": 120,
+      "base_verifier_status_counts": {
+        "FAIL_TO_PASS": 20,
+        "PASS_CURRENT_BUILD": 6,
+        "PASS_CURRENT_BUILD_AND_RUN": 42,
+        "PASS_CURRENT_STATE": 109,
+        "PASS_TO_PASS": 402,
+        "VERIFIER_REMOVED": 36
+      },
+      "counterfactual_records": 830,
+      "counterfactual_rows": 3320,
+      "counterfactual_unique_roots": 167,
+      "counterfactual_verifier_status_counts": {
+        "INSUFFICIENT_EVIDENCE": 148,
+        "NOT_EXERCISED": 148,
+        "VERIFIER_REMOVED": 534
+      },
+      "independent_language_record_counts": {
+        "c_cpp": 64,
+        "python": 52,
+        "rust": 93,
+        "web_js_ts_html": 406
+      },
+      "independent_unique_roots": 120,
+      "record_split_counts": {
+        "strict_eval": 89,
+        "train": 1294,
+        "validation": 62
+      },
+      "row_split_counts": {
+        "strict_eval": 356,
+        "train": 5176,
+        "validation": 248
+      },
+      "total_language_record_counts": {
+        "c_cpp": 208,
+        "python": 208,
+        "rust": 237,
+        "web_js_ts_html": 792
+      },
+      "total_records": 1445,
+      "total_rows": 5780,
+      "total_verifier_status_counts": {
+        "FAIL_TO_PASS": 20,
+        "INSUFFICIENT_EVIDENCE": 148,
+        "NOT_EXERCISED": 148,
+        "PASS_CURRENT_BUILD": 6,
+        "PASS_CURRENT_BUILD_AND_RUN": 42,
+        "PASS_CURRENT_STATE": 109,
+        "PASS_TO_PASS": 402,
+        "VERIFIER_REMOVED": 570
+      },
+      "transition_task_row_counts": {
+        "transition_candidate_selection": 1445,
+        "transition_continue_or_stop": 1445,
+        "transition_next_action": 1445,
+        "transition_verifier_transition": 1445
+      }
+    },
+    "frontier_source_claim_ready": false,
+    "train_support_probe_ready": true
+  },
+  "promotion_gates": {
+    "aug_strict_improves_stage11924": false,
+    "aug_validation_improves_stage11924": false,
+    "filtered_strict_22": true,
+    "filtered_validation_at_least_20": true,
+    "old_canary_strict_23": true,
+    "old_canary_validation_at_least_21": true,
+    "old_transition_at_least_stage11924_364": false,
+    "residual_at_least_7": true,
+    "source_heldout_smoke_at_least_6": true
+  },
+  "rejected_runtime": {
+    "old_transition_640": {
+      "accuracy": 0.2234375,
+      "correct": 143,
+      "coverage": 1.0,
+      "miss_count": 497,
+      "rows": 640
+    },
+    "runtime": "runs/local/artifacts/stage11960_transition_5k_augmented_probe/runtime_model/runtime_model_bundle.json",
+    "weights_sha256": "f7a24a534ca2774a2df41b28ec33de2052a91ddf4fda6632062bf66efe998e6f"
+  },
+  "selected_transition_frontier": {
+    "old_transition_640": {
+      "accuracy": 0.56875,
+      "correct": 364,
+      "coverage": 1.0,
+      "miss_count": 276,
+      "rows": 640
+    },
+    "runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_semantic_candidate_head"
+  },
+  "source_artifacts": {
+    "audit": "runs/local/artifacts/stage11961_transition_5k_augmented_postrun_audit/transition_5k_augmented_postrun_audit.json",
+    "package": "runs/local/artifacts/stage11958_transition_5k_v1_augmented_package/transition_5k_v1_augmented_package.json",
+    "request": "runs/local/artifacts/stage11959_transition_5k_augmented_probe_request/transition_5k_augmented_probe_request.json"
+  },
+  "stage": 11962,
+  "stage_name": "stage11962_transition_5k_augmented_decision",
+  "stop_condition": {
+    "do_not_claim_counterfactual_rows_as_root_scale": true,
+    "do_not_promote_stage11960": true,
+    "do_not_rerun_same_augmented_objective": true
+  },
+  "task_deltas_vs_stage11924": {
+    "aug_strict_eval": {
+      "transition_candidate_selection": {
+        "baseline_correct": 28,
+        "delta": 8,
+        "postrun_correct": 36,
+        "rows": 89
+      },
+      "transition_continue_or_stop": {
+        "baseline_correct": 79,
+        "delta": -69,
+        "postrun_correct": 10,
+        "rows": 89
+      },
+      "transition_next_action": {
+        "baseline_correct": 16,
+        "delta": -6,
+        "postrun_correct": 10,
+        "rows": 89
+      },
+      "transition_verifier_transition": {
+        "baseline_correct": 0,
+        "delta": 3,
+        "postrun_correct": 3,
+        "rows": 89
+      }
+    },
+    "aug_validation": {
+      "transition_candidate_selection": {
+        "baseline_correct": 19,
+        "delta": 5,
+        "postrun_correct": 24,
+        "rows": 62
+      },
+      "transition_continue_or_stop": {
+        "baseline_correct": 57,
+        "delta": -52,
+        "postrun_correct": 5,
+        "rows": 62
+      },
+      "transition_next_action": {
+        "baseline_correct": 8,
+        "delta": -3,
+        "postrun_correct": 5,
+        "rows": 62
+      },
+      "transition_verifier_transition": {
+        "baseline_correct": 7,
+        "delta": -6,
+        "postrun_correct": 1,
+        "rows": 62
+      }
+    },
+    "old_transition_640": {
+      "transition_candidate_selection": {
+        "baseline_correct": 89,
+        "delta": -26,
+        "postrun_correct": 63,
+        "rows": 160
+      },
+      "transition_continue_or_stop": {
+        "baseline_correct": 128,
+        "delta": -96,
+        "postrun_correct": 32,
+        "rows": 160
+      },
+      "transition_next_action": {
+        "baseline_correct": 51,
+        "delta": -19,
+        "postrun_correct": 32,
+        "rows": 160
+      },
+      "transition_verifier_transition": {
+        "baseline_correct": 96,
+        "delta": -80,
+        "postrun_correct": 16,
+        "rows": 160
+      }
+    }
+  }
+}

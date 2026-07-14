@@ -1,0 +1,44 @@
+{
+  "claim_boundary": "Rows are train-support-only; not source-heldout, not strict eval, not a frontier claim.",
+  "created_at_utc": "2026-07-14T20:01:34Z",
+  "decision": "second_batch_admission_complete_train_support_only",
+  "next_stage_recommendation": {
+    "action": "Merge Stage11981 and Stage11986 admitted train-support rows, report remaining floors, but do not train unless the package has enough root/status breadth or is explicitly diagnostic.",
+    "stage": "stage11987_transition_support_rollup_v2"
+  },
+  "outputs": {
+    "admitted": "runs/local/artifacts/stage11986_transition_root_250_second_batch_admission_audit/transition_root_250_second_batch_admitted_rows.jsonl",
+    "rejected": "runs/local/artifacts/stage11986_transition_root_250_second_batch_admission_audit/transition_root_250_second_batch_rejected_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11986_transition_root_250_second_batch_admission_audit/transition_root_250_second_batch_admission_audit.json"
+  },
+  "source_artifact": "runs/local/artifacts/stage11986_transition_root_250_second_batch_admission_audit/transition_root_250_second_batch_admission_audit.json",
+  "stage": 11986,
+  "stage_name": "stage11986_transition_root_250_second_batch_admission_audit",
+  "summary": {
+    "admitted_language_counts": {
+      "c_cpp": 2,
+      "rust": 7
+    },
+    "admitted_repo_family_counts": {
+      "git": 2,
+      "llama-adapter": 2,
+      "perftree": 3,
+      "pytorch": 2
+    },
+    "admitted_rows": 9,
+    "admitted_status_counts": {
+      "PASS_CURRENT_BUILD": 7,
+      "PASS_TO_PASS": 2
+    },
+    "rejected_rows": 18,
+    "rejection_reasons": {
+      "controlled_fixture_duplicate_existing_stage11980": 2,
+      "nonzero_or_timeout::INSUFFICIENT_EVIDENCE": 1,
+      "nonzero_or_timeout::NOT_EXERCISED": 11,
+      "pass_to_pass_without_executed_tests": 3,
+      "pass_to_pass_without_tests_ctest_empty": 1
+    },
+    "review_rows": 27,
+    "unique_admitted_roots": 6
+  }
+}

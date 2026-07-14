@@ -1,0 +1,186 @@
+{
+  "base_scorer_metrics": {
+    "clean_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.9130434782608695,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "judgment_strict": {
+      "correct": 8,
+      "exact_accuracy": 0.4,
+      "rows": 20,
+      "scored_rows": 20
+    },
+    "judgment_strict_by_candidate_evidence_kind": {
+      "changed": {
+        "correct": 1,
+        "exact_accuracy": 0.1,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "verifier": {
+        "correct": 7,
+        "exact_accuracy": 0.7,
+        "rows": 10,
+        "scored_rows": 10
+      }
+    },
+    "judgment_validation": {
+      "correct": 11,
+      "exact_accuracy": 0.5,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "residual": {
+      "correct": 6,
+      "exact_accuracy": 0.6,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 3,
+        "exact_accuracy": 0.75,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 2,
+        "exact_accuracy": 1.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    }
+  },
+  "created_at_utc": "2026-07-13T10:47:17Z",
+  "decision": "reject_stage11287_for_frontier_keep_stage11200_runtime_but_keep_candidate_only_geometry_as_diagnostic",
+  "diagnostic_runtime": "runs/local/artifacts/stage11287_candidate_only_evidence_probe/runtime_model/runtime_model_bundle.json",
+  "diagnostic_runtime_sha256": "777158fc9a4ad04b46eeabb379de669247cc7c75b3ebf93f44b1d19f18003ae6",
+  "frontier_runtime_kept": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+  "frontier_runtime_kept_sha256": "b84dbba9ed525d0139ab867ffbc52d7ce2df702402542e54a1247d8f5dea3eca",
+  "interpretation": [
+    "Removing root-level verifier route/available-role context helped the residual bank by one row without damaging clean strict.",
+    "The hard verifier_and_test_constraint residual class is still 0/3, so the old B-vs-F verifier evidence boundary remains unsolved.",
+    "The product scorer still gets 0/10 changed-source rows in candidate-only strict, so the verifier-positive attractor remains for the judgment head.",
+    "Base/verifier-conditioned scorers get 1/10 changed-source strict, so there is a weak signal but not enough for promotion."
+  ],
+  "next_action": {
+    "recommended_stage": "stage11290_paired_candidate_item_margin_objective_or_changed_surface_hard_positive_expansion",
+    "requirements": [
+      "Do not add more generic verifier-positive support.",
+      "Train/evaluate paired candidates from the same root so changed item and verifier item compete explicitly.",
+      "Add changed-source hard positives whose path/content are real implementation surfaces, not README or low-signal helper text.",
+      "Keep residual verifier_and_test_constraint as a mandatory gate; promotion requires >0/3 there plus no canary regression."
+    ]
+  },
+  "passed": false,
+  "product_metrics": {
+    "clean_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.9130434782608695,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "judgment_strict": {
+      "correct": 10,
+      "exact_accuracy": 0.5,
+      "rows": 20,
+      "scored_rows": 20
+    },
+    "judgment_strict_by_candidate_evidence_kind": {
+      "changed": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "verifier": {
+        "correct": 10,
+        "exact_accuracy": 1.0,
+        "rows": 10,
+        "scored_rows": 10
+      }
+    },
+    "judgment_validation": {
+      "correct": 11,
+      "exact_accuracy": 0.5,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "residual": {
+      "correct": 6,
+      "exact_accuracy": 0.6,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "residual_by_gold_value": {
+      "candidate_change_surface": {
+        "correct": 3,
+        "exact_accuracy": 0.75,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "symptom_or_call_path_analogue": {
+        "correct": 2,
+        "exact_accuracy": 1.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "unknown": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "verifier_and_test_constraint": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    }
+  },
+  "product_scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "promotion_gates": {
+    "product_clean_strict_22_of_22": true,
+    "product_clean_validation_at_least_20_of_23": true,
+    "product_judgment_strict_above_majority": true,
+    "product_judgment_validation_above_majority": true,
+    "product_residual_above_5_of_10": true,
+    "product_verifier_residual_nonzero": false
+  },
+  "reason": "Stage11287 preserves the clean canary and improves the clean residual bank from 5/10 to 6/10, but verifier_and_test_constraint remains 0/3 and candidate-only evidence judgment remains at or below 50%; this is not a promotion-quality breakthrough.",
+  "source_artifacts": {
+    "bias_audit": "runs/local/artifacts/stage11284_capped_direct_retrieval_evidence_bias_audit/capped_direct_retrieval_evidence_bias_audit.json",
+    "candidate_only_package": "runs/local/artifacts/stage11285_candidate_only_evidence_judgment_package/candidate_only_evidence_judgment_package.json",
+    "postrun_audit": "runs/local/artifacts/stage11288_candidate_only_evidence_postrun_audit/candidate_only_evidence_postrun_audit.json",
+    "request": "runs/local/artifacts/stage11286_candidate_only_evidence_probe_request/candidate_only_evidence_probe_request.json"
+  },
+  "stage": 11289,
+  "stage_name": "stage11289_candidate_only_evidence_decision"
+}

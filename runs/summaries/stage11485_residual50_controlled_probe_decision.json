@@ -1,0 +1,60 @@
+{
+  "classification": "controlled_negative_result",
+  "created_at_utc": "2026-07-13T17:55:57Z",
+  "decision": "reject_stage11483_do_not_promote",
+  "next_experiment_contract": {
+    "hypothesis_id": "H_objective_or_sampler_overpush",
+    "kill_condition": "If objective/sampler-only runs preserve strict but keep residual at 5/10 twice, stop training variants and implement a direct same-root listwise scorer objective.",
+    "must_hold_constant": [
+      "Stage11481 Residual-50 data package",
+      "Stage11444 initialization",
+      "product scorer encoder_option_retrieval",
+      "protected validation/strict/residual splits"
+    ],
+    "promotion_requires": [
+      "old canary strict 23/23",
+      "filtered strict 22/22",
+      "filtered validation >=20/22",
+      "old validation >=21/23",
+      "residual bank >=6/10",
+      "full bounded-choice coverage"
+    ],
+    "recommended_intervention": "train a scorer-head-only or lower-LR encoder run on the same Stage11481 package with reduced evidence-role oversampling and explicit preservation weighting for protected evidence-citation B rows",
+    "single_changed_variable": "objective/sampling, not new data"
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11485_residual50_controlled_probe_decision/residual50_controlled_probe_decision.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "postrun": "runs/local/artifacts/stage11484_residual50_controlled_probe_postrun_audit/residual50_controlled_probe_postrun_audit.json",
+    "readiness": "runs/local/artifacts/stage11481_residual50_ready_package_with_rust_counters/residual50_ready_package_with_rust_counters.json",
+    "request": "runs/local/artifacts/stage11482_residual50_controlled_probe_request/residual50_controlled_probe_request.json"
+  },
+  "stage": 11485,
+  "stage_name": "stage11485_residual50_controlled_probe_decision",
+  "what_was_falsified": [
+    "Adding the full Residual-50 train-support analogue package with the current CE+contrast objective is not sufficient to move the frozen residual bank.",
+    "The same intervention over-pushes evidence-citation predictions toward F-like roles and regresses protected strict rows.",
+    "The issue is not solved by semantic-candidate-head scoring or decoder-first-step scoring on this runtime."
+  ],
+  "why_not_progress": {
+    "failed_gates": [
+      "product_filtered_strict_22_of_22",
+      "product_old_canary_strict_23_of_23",
+      "product_residual_above_base_5_of_10"
+    ],
+    "filtered_strict": {
+      "actual": "18/22",
+      "required": "22/22"
+    },
+    "old_canary_strict": {
+      "actual": "19/23",
+      "required": "23/23"
+    },
+    "residual_bank": {
+      "actual": "5/10",
+      "required": ">5/10"
+    }
+  }
+}

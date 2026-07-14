@@ -1,0 +1,38 @@
+{
+  "admitted_rows": 11,
+  "claim_boundary": "Rows are train-support only. No model promotion follows from this artifact.",
+  "decision": "admit_pass_to_pass_expansion_train_support",
+  "language_counts": {
+    "c_cpp": 2,
+    "python": 2,
+    "rust": 4,
+    "web_js_ts_html": 3
+  },
+  "next_stage_recommendation": {
+    "action": "Merge PASS_TO_PASS rows and report remaining Transition-Root-250 floors.",
+    "stage": "stage12034_transition_support_rollup_v24"
+  },
+  "rejected_probe_count": 1,
+  "rejected_probes": [
+    {
+      "command": "env PYTHONPATH=/data/repositories/lastmile-ai__mcp-agent/src python -m pytest -q -c /dev/null -o cache_dir=/data/tmp/stage12033_pytest_cache tests/utils/test_config_preload.py",
+      "reason": "collection failed because pydantic_yaml is missing; not admitted as verifier-backed PASS_TO_PASS",
+      "repo_family": "lastmile-ai__mcp-agent",
+      "returncode": 2
+    }
+  ],
+  "repo_family_counts": {
+    "benchmark": 2,
+    "einops": 1,
+    "lastmile-ai__mcp-agent": 1,
+    "modelcontextprotocol__typescript-sdk": 2,
+    "openclaw__clawhub": 1,
+    "tokenizers": 4
+  },
+  "rows_path": "runs/local/artifacts/stage12033_pass_to_pass_expansion_rows/pass_to_pass_expansion_rows.jsonl",
+  "stage": "stage12033_pass_to_pass_expansion_rows",
+  "status_counts": {
+    "PASS_TO_PASS": 11
+  },
+  "unique_roots": 11
+}

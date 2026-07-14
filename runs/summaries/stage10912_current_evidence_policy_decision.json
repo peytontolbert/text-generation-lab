@@ -1,0 +1,45 @@
+{
+  "approved_candidates": [],
+  "claim_scope": [
+    "Decide whether the current evidence-citation weakness can be improved with a safe scoring-interface change on the cleaned reviewed-v2.7 checked surface.",
+    "Reject interface candidates that improve Python/C++ by regressing the clean web evidence row, because the objective is multilingual maintainer quality rather than per-language patching."
+  ],
+  "created_at_utc": "2026-07-12T18:55:02Z",
+  "decision": "no_honest_multilingual_evidence_policy_candidate_yet",
+  "findings": [
+    "Raw retrieval keeps the web evidence row correct but misses both Python and C/C++ verifier-and-test-constraint rows, giving 1/3 on the checked evidence slice.",
+    "Role-mapped retrieval improves the checked evidence slice to 2/3 by flipping Python and C/C++ to F = verifier_and_test_constraint.",
+    "Role-mapped retrieval is not safe to adopt as a multilingual interface candidate because it regresses the clean web row from B = candidate_change_surface to F = verifier_and_test_constraint.",
+    "Decoder-based evidence policies are strictly worse and collapse away from the correct evidence role labels on all three rows."
+  ],
+  "headline": {
+    "decoder_label_accuracy": 0.0,
+    "encoder_evidence_role_map_accuracy": 0.6666666666666666,
+    "encoder_raw_accuracy": 0.3333333333333333,
+    "hybrid_decoder_on_evidence_accuracy": 0.0
+  },
+  "next_best_step": "Do not adopt an evidence-citation interface change yet. Build fresh multilingual evidence roots, then rerun the same checked-surface policy audit before changing the standalone scoring contract.",
+  "next_root_building_targets": [
+    "Fresh Python evidence-citation roots where candidate_change_surface is tempting but verifier_and_test_constraint is the true decisive fact.",
+    "Fresh C/C++ evidence-citation roots with the same B-versus-F competition from disjoint repo families.",
+    "At least one fresh pure-web evidence-citation root where candidate_change_surface is genuinely correct so any future role-based policy can be audited against a clean web positive."
+  ],
+  "passed": true,
+  "rejected_candidates": [
+    {
+      "policy": "encoder_evidence_role_map",
+      "reason": "Improves Python and C/C++ but introduces a web regression on the checked surface."
+    },
+    {
+      "policy": "decoder_label",
+      "reason": "0/3 on the checked evidence slice."
+    },
+    {
+      "policy": "hybrid_decoder_on_evidence",
+      "reason": "0/3 on the checked evidence slice."
+    }
+  ],
+  "source_audit": "runs/local/artifacts/stage10911_current_evidence_role_policy_audit/current_evidence_role_policy_audit.json",
+  "stage": 10912,
+  "stage_name": "stage10912_current_evidence_policy_decision"
+}

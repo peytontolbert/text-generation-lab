@@ -1,0 +1,44 @@
+{
+  "created_at_utc": "2026-07-14T02:58:42Z",
+  "decision": "schema_alignment_helped_but_head_only_web_bridge_not_promotable",
+  "evidence": {
+    "gemma_web_reference": "52/66",
+    "protected_gates_preserved": true,
+    "routed_product_web_frontier": "38/66",
+    "stage11657_old_schema_web_heldout": "4/66",
+    "stage11661_schema_aligned_train_support": "100/113",
+    "stage11661_schema_aligned_web_heldout": "17/66"
+  },
+  "next_best_intervention": {
+    "name": "web_heldout_style_root_supply_or_task_specific_web_heads",
+    "requirements": [
+      "Add fresh Web train roots rendered in the same schema as the heldout rows, not repaired-shell path-handle rows.",
+      "Cover MCP and OpenHands heldout task families specifically, including symptom_localization, verifier_outcome, minimal_fix_selection, abstention, and patch_impact.",
+      "Prefer task-specific Web heads or routed heads rather than one generic Web task candidate head if aligned support still fails to transfer.",
+      "Keep Stage11507 protected gates as hard promotion requirements.",
+      "Promotion requires Web heldout >38/66 before comparing to Gemma 52/66."
+    ]
+  },
+  "selected_frontier_unchanged": "stage11507 + encoder_option_retrieval_evidence_judgment_head",
+  "source_artifacts": {
+    "bridge_manifest": "runs/local/artifacts/stage11659_web_schema_aligned_bridge_package/web_schema_aligned_bridge_manifest.jsonl",
+    "bridge_package": "runs/local/artifacts/stage11659_web_schema_aligned_bridge_package/web_schema_aligned_bridge_package.json",
+    "bridge_postrun": "runs/local/artifacts/stage11661_web_schema_aligned_bridge_postrun_audit/web_schema_aligned_bridge_postrun_audit.json",
+    "transfer_audit": "runs/local/artifacts/stage11658_web_head_transfer_gap_audit/web_head_transfer_gap_audit.json"
+  },
+  "stage": 11662,
+  "stage11660_runtime": "runs/local/artifacts/stage11660_web_schema_aligned_bridge_head_only_probe/runtime_model/runtime_model_bundle.json",
+  "stage11660_runtime_weights_sha256": "6e0743ed6af0318170821a8ff4a53d4684c8442200654eb894cc0f5d069ea168",
+  "stage_name": "stage11662_web_bridge_decision",
+  "stop_conditions": [
+    "Do not promote Stage11660.",
+    "Do not run another head-only bridge probe on the same 113 roots as a frontier attempt.",
+    "Do not claim Web broad transfer from schema-aligned support fit."
+  ],
+  "what_was_learned": [
+    "Stage11658 confirmed the original Web support package had train/heldout schema and option-value geometry mismatch.",
+    "Stage11659 normalized evidence-citation option values to semantic roles and rerendered prompts in a heldout-like style.",
+    "Stage11661 improved Web heldout from 4/66 to 17/66 under the Web task head while preserving protected routed gates.",
+    "The improvement is real but far below the 38/66 routed frontier and 52/66 Gemma reference."
+  ]
+}

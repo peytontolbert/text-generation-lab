@@ -1,0 +1,92 @@
+{
+  "bundle_index": [
+    {
+      "candidate_row_id": "stage10938::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "gold_answer_value": "symptom_or_call_path_analogue",
+      "queue_id": "rust_reviewed::stage10126__tokenizers__tokenizers__rust",
+      "repo_id": "tokenizers",
+      "selected_tests": [
+        "tokenizers/examples/unstable_wasm/tests/web.rs"
+      ],
+      "source_bundle_id": "stage10126::tokenizers::tokenizers::rust",
+      "support_row_ids": [
+        "stage10934::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::ledger_full_verifier_first",
+        "stage10934::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::ledger_full_candidate_first",
+        "stage10934::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::ledger_contrast_verifier_first",
+        "stage10934::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::ledger_contrast_candidate_first"
+      ]
+    },
+    {
+      "candidate_row_id": "stage10938::rust_reviewed::stage10413__candle__candle-flash-attn__rust::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "gold_answer_value": "symptom_or_call_path_analogue",
+      "queue_id": "rust_reviewed::stage10413__candle__candle-flash-attn__rust",
+      "repo_id": "candle",
+      "selected_tests": [
+        "candle-flash-attn/tests/flash_attn_tests.rs"
+      ],
+      "source_bundle_id": "stage10413::candle::candle-flash-attn::rust",
+      "support_row_ids": [
+        "stage10934::rust_reviewed::stage10413__candle__candle-flash-attn__rust::evidence_citation::ledger_full_verifier_first",
+        "stage10934::rust_reviewed::stage10413__candle__candle-flash-attn__rust::evidence_citation::ledger_full_candidate_first",
+        "stage10934::rust_reviewed::stage10413__candle__candle-flash-attn__rust::evidence_citation::ledger_contrast_verifier_first",
+        "stage10934::rust_reviewed::stage10413__candle__candle-flash-attn__rust::evidence_citation::ledger_contrast_candidate_first"
+      ]
+    },
+    {
+      "candidate_row_id": "stage10938::rust_reviewed::stage10126__candle__candle-core__rust::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "gold_answer_value": "candidate_change_surface",
+      "queue_id": "rust_reviewed::stage10126__candle__candle-core__rust",
+      "repo_id": "candle",
+      "selected_tests": [],
+      "source_bundle_id": "stage10126::candle::candle-core::rust",
+      "support_row_ids": [
+        "stage10934::rust_reviewed::stage10126__candle__candle-core__rust::evidence_citation::ledger_full_verifier_first",
+        "stage10934::rust_reviewed::stage10126__candle__candle-core__rust::evidence_citation::ledger_full_candidate_first",
+        "stage10934::rust_reviewed::stage10126__candle__candle-core__rust::evidence_citation::ledger_contrast_verifier_first",
+        "stage10934::rust_reviewed::stage10126__candle__candle-core__rust::evidence_citation::ledger_contrast_candidate_first"
+      ]
+    }
+  ],
+  "claim_scope": [
+    "Convert already reviewed Rust packets into support-only evidence rows plus explicit-ledger candidate rows.",
+    "Strengthen multilingual evidence-role supervision while keeping the resulting rows outside the promotable strict path until a later review/probe stage."
+  ],
+  "created_at_utc": "2026-07-12T21:51:46Z",
+  "decision": "rust_reviewed_evidence_bundle_ready",
+  "findings": [
+    "Tokenizers and flash-attn contribute reviewed symptom_or_call_path_analogue positives with selected-test anchors.",
+    "Candle-core contributes a reviewed candidate_change_surface control without selected tests.",
+    "This bundle gives Rust real reviewed evidence-role supervision now, even before the newer linux/candle-datasets placeholder scaffolds are materialized."
+  ],
+  "metrics": {
+    "bundle_rows": 15,
+    "candidate_rows": 3,
+    "gold_values": {
+      "candidate_change_surface": 1,
+      "symptom_or_call_path_analogue": 2
+    },
+    "support_rows": 12
+  },
+  "outputs": {
+    "bundle_rows_jsonl": "runs/local/artifacts/stage10972_rust_reviewed_evidence_bundle/bundle_rows.jsonl",
+    "candidate_rows_jsonl": "runs/local/artifacts/stage10972_rust_reviewed_evidence_bundle/strict_candidate_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage10972_rust_reviewed_evidence_bundle/rust_reviewed_evidence_bundle.json",
+    "support_rows_jsonl": "runs/local/artifacts/stage10972_rust_reviewed_evidence_bundle/train_support_rows.jsonl"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "review_packet_dirs": [
+      "runs/local/artifacts/stage10127_true_source_backed_rust_review_packets_and_signoff/review_packets/stage10126__tokenizers__tokenizers__rust",
+      "runs/local/artifacts/stage10415_rust_flash_attn_review_packets/review_packets/stage10413__candle__candle-flash-attn__rust",
+      "runs/local/artifacts/stage10127_true_source_backed_rust_review_packets_and_signoff/review_packets/stage10126__candle__candle-core__rust"
+    ],
+    "source_row_files": [
+      "runs/local/artifacts/stage10828_evidence_role_probe_request/evidence_role_probe_manifest.jsonl",
+      "runs/local/artifacts/stage10782_targeted_residual_support_probe_request/targeted_residual_support_probe_manifest.jsonl",
+      "runs/local/artifacts/stage10423_reviewed_multilingual_v27_same_manifest_gemma_comparison/reviewed_multilingual_v27_same_manifest_gemma_rows.jsonl"
+    ],
+    "specs_jsonl": "runs/local/artifacts/stage10972_rust_reviewed_evidence_bundle/rust_reviewed_specs.jsonl"
+  },
+  "stage": 10972,
+  "stage_name": "stage10972_rust_reviewed_evidence_bundle"
+}

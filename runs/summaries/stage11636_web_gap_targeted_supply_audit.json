@@ -1,0 +1,260 @@
+{
+  "claim_boundary": [
+    "This is a targeting audit, not a model promotion.",
+    "The routed scorer improves Web heldout but still trails Gemma on the same 66 rows.",
+    "New training should be gated on closing these blocker buckets without regressing protected canary/residual gates."
+  ],
+  "created_at_utc": "2026-07-14T00:17:26Z",
+  "decision": "web_gap_worklist_ready_routed_still_loses_to_gemma",
+  "gates": {
+    "openhands_or_llama_blockers_present": true,
+    "routed_beats_gemma": false,
+    "routed_improves_stage11507": true,
+    "same_row_inputs_complete": true,
+    "worklist_nonempty": true
+  },
+  "gemma_correct_routed_wrong_by_repo_family": {
+    "@modelcontextprotocol/client": 1,
+    "@modelcontextprotocol/core": 3,
+    "@modelcontextprotocol/server": 4,
+    "llama_stack_ui": 4,
+    "openhands_openhands_frontend": 10,
+    "sep_automation": 4
+  },
+  "gemma_correct_routed_wrong_by_task_type": {
+    "abstention_insufficient_evidence": 4,
+    "evidence_citation": 8,
+    "minimal_fix_selection": 4,
+    "symptom_localization": 2,
+    "verifier_outcome": 8
+  },
+  "metrics": {
+    "gemma12b": {
+      "accuracy": 0.7878787878787878,
+      "correct": 52,
+      "rows": 66
+    },
+    "gemma_correct_routed_wrong_blockers": 26,
+    "routed": {
+      "accuracy": 0.5757575757575758,
+      "correct": 38,
+      "rows": 66
+    },
+    "routed_recovered_from_stage11507_rows": 10,
+    "routed_regressed_from_stage11507_rows": 7,
+    "stage11507": {
+      "accuracy": 0.5303030303030303,
+      "correct": 35,
+      "rows": 66
+    }
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11636_web_gap_targeted_supply_audit/web_gap_targeted_supply_audit.json",
+    "worklist": "runs/local/artifacts/stage11636_web_gap_targeted_supply_audit/web_gap_targeted_worklist.jsonl"
+  },
+  "recommended_next_stage": {
+    "minimum_admission_gate": {
+      "all_six_task_types_per_root": true,
+      "heldout_overlap_allowed": false,
+      "new_llama_stack_roots": 10,
+      "new_openhands_roots": 10,
+      "selected_verifier_or_executed_transition_required": true
+    },
+    "name": "stage11637_web_gap_root_materialization_request",
+    "promotion_gate_after_training": {
+      "protected_filtered_strict": "22/22",
+      "protected_old_canary_strict": "23/23",
+      "protected_residual_bank": ">=7/10",
+      "same_manifest_gemma_attached": true,
+      "web_heldout": ">38/66 first, then >52/66"
+    }
+  },
+  "routed_by_repo_family": {
+    "@modelcontextprotocol/client": {
+      "accuracy": 0.6666666666666666,
+      "correct": 4,
+      "rows": 6
+    },
+    "@modelcontextprotocol/core": {
+      "accuracy": 0.6666666666666666,
+      "correct": 8,
+      "rows": 12
+    },
+    "@modelcontextprotocol/server": {
+      "accuracy": 0.6666666666666666,
+      "correct": 8,
+      "rows": 12
+    },
+    "llama_stack_ui": {
+      "accuracy": 0.3333333333333333,
+      "correct": 2,
+      "rows": 6
+    },
+    "openhands_openhands_frontend": {
+      "accuracy": 0.4444444444444444,
+      "correct": 8,
+      "rows": 18
+    },
+    "sep_automation": {
+      "accuracy": 0.6666666666666666,
+      "correct": 8,
+      "rows": 12
+    }
+  },
+  "routed_by_task_type": {
+    "abstention_insufficient_evidence": {
+      "accuracy": 0.6363636363636364,
+      "correct": 7,
+      "rows": 11
+    },
+    "alternative_hypothesis_elimination": {
+      "accuracy": 1.0,
+      "correct": 4,
+      "rows": 4
+    },
+    "evidence_citation": {
+      "accuracy": 0.09090909090909091,
+      "correct": 1,
+      "rows": 11
+    },
+    "minimal_fix_selection": {
+      "accuracy": 0.6363636363636364,
+      "correct": 7,
+      "rows": 11
+    },
+    "patch_impact": {
+      "accuracy": 1.0,
+      "correct": 7,
+      "rows": 7
+    },
+    "symptom_localization": {
+      "accuracy": 0.8181818181818182,
+      "correct": 9,
+      "rows": 11
+    },
+    "verifier_outcome": {
+      "accuracy": 0.2727272727272727,
+      "correct": 3,
+      "rows": 11
+    }
+  },
+  "source_artifacts": {
+    "gemma_rows": "runs/local/artifacts/stage11549_web_root_heldout_same_manifest_gemma_comparison/web_root_heldout_gemma_rows.jsonl",
+    "routed_web_audit": "runs/local/artifacts/stage11631_web_head_only_transfer_audit/bounded_choice_eval_audit_web_heldout.json",
+    "stage11507_audit": "runs/local/artifacts/stage11548_web_root_heldout_stage11507_score_audit/bounded_choice_eval_audit_web_root_heldout_encoder_option_retrieval_evidence_judgment_head.json",
+    "stage11635": "runs/local/artifacts/stage11635_routed_product_gemma_comparison_audit/routed_product_gemma_comparison_audit.json",
+    "support_stage11570_semantic_non_evidence": "runs/local/artifacts/stage11570_semantic_web_non_evidence_support_package/semantic_web_non_evidence_train_rows.jsonl",
+    "support_stage11580_verifier_attached": "runs/local/artifacts/stage11580_web_verifier_attached_admission_package/web_verifier_attached_rows.jsonl",
+    "support_stage11594_repaired_geometry": "runs/local/artifacts/stage11594_web_verifier_attached_repaired_geometry_package/web_verifier_attached_repaired_rows.jsonl",
+    "support_stage11621_fail_to_pass_repaired": "runs/local/artifacts/stage11621_web_fail_to_pass_row_geometry_repair/web_fail_to_pass_geometry_repaired_train_support.jsonl",
+    "web_rows": "runs/local/artifacts/stage11548_web_root_heldout_stage11507_score_audit/web_root_heldout_rows.jsonl"
+  },
+  "stage": 11636,
+  "stage_name": "stage11636_web_gap_targeted_supply_audit",
+  "support_inventory": {
+    "gap_repo_root_counts": {
+      "llama_stack_ui": 14,
+      "openhands_openhands_frontend": 22
+    },
+    "gap_repo_task_counts": {
+      "llama_stack_ui": {
+        "abstention_insufficient_evidence": 28,
+        "alternative_hypothesis_elimination": 28,
+        "evidence_citation": 28,
+        "minimal_fix_selection": 28,
+        "symptom_localization": 28,
+        "verifier_outcome": 28
+      },
+      "openhands_openhands_frontend": {
+        "abstention_insufficient_evidence": 40,
+        "alternative_hypothesis_elimination": 40,
+        "evidence_citation": 36,
+        "minimal_fix_selection": 36,
+        "symptom_localization": 36,
+        "verifier_outcome": 40
+      }
+    },
+    "sources": {
+      "stage11570_semantic_non_evidence": {
+        "exists": true,
+        "path": "runs/local/artifacts/stage11570_semantic_web_non_evidence_support_package/semantic_web_non_evidence_train_rows.jsonl",
+        "repo_family_counts": {
+          "backend": 15,
+          "bddy_website": 18,
+          "convex": 40,
+          "modelcontextprotocol_typescript_sdk": 11,
+          "openhands_openhands_frontend": 12,
+          "qa_lab": 1,
+          "sep_automation": 2,
+          "server": 2
+        },
+        "roots": 29,
+        "rows": 101,
+        "task_type_counts": {
+          "abstention_insufficient_evidence": 18,
+          "alternative_hypothesis_elimination": 15,
+          "minimal_fix_selection": 18,
+          "patch_impact": 14,
+          "symptom_localization": 18,
+          "verifier_outcome": 18
+        }
+      },
+      "stage11580_verifier_attached": {
+        "exists": true,
+        "path": "runs/local/artifacts/stage11580_web_verifier_attached_admission_package/web_verifier_attached_rows.jsonl",
+        "repo_family_counts": {
+          "llama_stack_ui": 84,
+          "openhands_openhands_frontend": 108
+        },
+        "roots": 32,
+        "rows": 192,
+        "task_type_counts": {
+          "abstention_insufficient_evidence": 32,
+          "alternative_hypothesis_elimination": 32,
+          "evidence_citation": 32,
+          "minimal_fix_selection": 32,
+          "symptom_localization": 32,
+          "verifier_outcome": 32
+        }
+      },
+      "stage11594_repaired_geometry": {
+        "exists": true,
+        "path": "runs/local/artifacts/stage11594_web_verifier_attached_repaired_geometry_package/web_verifier_attached_repaired_rows.jsonl",
+        "repo_family_counts": {
+          "llama_stack_ui": 84,
+          "openhands_openhands_frontend": 108
+        },
+        "roots": 32,
+        "rows": 192,
+        "task_type_counts": {
+          "abstention_insufficient_evidence": 32,
+          "alternative_hypothesis_elimination": 32,
+          "evidence_citation": 32,
+          "minimal_fix_selection": 32,
+          "symptom_localization": 32,
+          "verifier_outcome": 32
+        }
+      },
+      "stage11621_fail_to_pass_repaired": {
+        "exists": true,
+        "path": "runs/local/artifacts/stage11621_web_fail_to_pass_row_geometry_repair/web_fail_to_pass_geometry_repaired_train_support.jsonl",
+        "repo_family_counts": {
+          "unknown": 48
+        },
+        "roots": 8,
+        "rows": 48,
+        "task_type_counts": {
+          "abstention_insufficient_evidence": 8,
+          "evidence_citation": 8,
+          "minimal_fix_selection": 8,
+          "patch_impact": 8,
+          "symptom_localization": 8,
+          "verifier_outcome": 8
+        }
+      }
+    },
+    "total_roots": 61,
+    "total_rows": 533
+  },
+  "worklist_rows": 15
+}

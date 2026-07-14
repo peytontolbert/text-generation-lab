@@ -1,0 +1,341 @@
+{
+  "claim_scope": [
+    "Package-balance audit for the leak-clean root-based bootstrap manifest and the cleaned strict heldout slice.",
+    "Quantifies language, root, repo, and target-subtype coverage plus decoder-cap pressure.",
+    "This is a dataset/runtime planning artifact, not a model-quality result."
+  ],
+  "created_at_utc": "2026-07-12T00:22:12Z",
+  "gaps": {
+    "strict_missing_language_target_subtypes": {
+      "c_cpp": [
+        "abstain",
+        "evidence_chain",
+        "next_action",
+        "patch_sketch",
+        "repair_intent",
+        "selected_test",
+        "visible_evidence_key"
+      ],
+      "python": [
+        "abstain",
+        "evidence_chain",
+        "next_action",
+        "patch_sketch",
+        "repair_intent",
+        "selected_test",
+        "visible_evidence_key"
+      ],
+      "rust": [
+        "abstain",
+        "evidence_chain",
+        "next_action",
+        "patch_sketch",
+        "repair_intent",
+        "selected_test",
+        "visible_evidence_key"
+      ],
+      "unknown": [
+        "abstain",
+        "decisive_evidence",
+        "evidence_chain",
+        "next_action",
+        "patch_sketch",
+        "repair_intent",
+        "retrieve_answer_abstain",
+        "selected_test",
+        "visible_evidence_key"
+      ],
+      "web_js_ts_html": [
+        "abstain",
+        "evidence_chain",
+        "next_action",
+        "patch_sketch",
+        "repair_intent",
+        "selected_test",
+        "visible_evidence_key"
+      ]
+    },
+    "strict_single_repo_languages": [
+      "web_js_ts_html"
+    ],
+    "train_missing_language_target_subtypes": {
+      "c_cpp": [
+        "abstain",
+        "evidence_chain",
+        "selected_test",
+        "visible_evidence_key"
+      ],
+      "python": [
+        "selected_test",
+        "visible_evidence_key"
+      ],
+      "rust": [
+        "next_action",
+        "patch_sketch"
+      ],
+      "unknown": [
+        "abstain",
+        "evidence_chain",
+        "next_action",
+        "patch_sketch",
+        "repair_intent",
+        "selected_test",
+        "visible_evidence_key"
+      ],
+      "web_js_ts_html": [
+        "abstain",
+        "evidence_chain",
+        "selected_test",
+        "visible_evidence_key"
+      ]
+    }
+  },
+  "languages": [
+    "c_cpp",
+    "python",
+    "rust",
+    "unknown",
+    "web_js_ts_html"
+  ],
+  "next_best_step": "Expand the heldout slice with repo-diverse Rust/Web/Python/C++ roots and add heldout verifier_outcome and patch_sketch targets before treating the root-based seq2seq path as a broad multilingual maintainer benchmark.",
+  "passed": true,
+  "source_artifacts": {
+    "strict_rows": "runs/local/artifacts/stage10528_cleaned_heldout_anticheat_successor/strict_eval_rows.jsonl",
+    "train_rows": "runs/local/artifacts/stage10530_leak_clean_root_based_multitarget_probe_request/leak_clean_root_based_multitarget_probe_manifest.jsonl"
+  },
+  "stage": 10535,
+  "stage_name": "stage10535_bootstrap_package_balance_audit",
+  "strict": {
+    "anti_cheat": {
+      "prompt_target_leak_true": 0,
+      "same_root_train_eval_forbidden_true": 36,
+      "source_heldout_admissible_true": 0
+    },
+    "decoder_cap_1024": {
+      "decisive_evidence": {
+        "max": 684,
+        "p50": 413,
+        "p90": 536,
+        "p95": 684,
+        "rows": 18,
+        "rows_over_cap": 0
+      },
+      "retrieve_answer_abstain": {
+        "max": 28,
+        "p50": 28,
+        "p90": 28,
+        "p95": 28,
+        "rows": 18,
+        "rows_over_cap": 0
+      }
+    },
+    "language_by_target_subtype": {
+      "c_cpp": {
+        "decisive_evidence": 4,
+        "retrieve_answer_abstain": 4
+      },
+      "python": {
+        "decisive_evidence": 6,
+        "retrieve_answer_abstain": 6
+      },
+      "rust": {
+        "decisive_evidence": 4,
+        "retrieve_answer_abstain": 4
+      },
+      "web_js_ts_html": {
+        "decisive_evidence": 4,
+        "retrieve_answer_abstain": 4
+      }
+    },
+    "language_counts": {
+      "c_cpp": 8,
+      "python": 12,
+      "rust": 8,
+      "web_js_ts_html": 8
+    },
+    "repos_by_language": {
+      "c_cpp": 4,
+      "python": 6,
+      "rust": 3,
+      "web_js_ts_html": 1
+    },
+    "roots_by_language": {
+      "c_cpp": 4,
+      "python": 6,
+      "rust": 4,
+      "web_js_ts_html": 4
+    },
+    "rows": 36,
+    "target_subtype_counts": {
+      "decisive_evidence": 18,
+      "retrieve_answer_abstain": 18
+    },
+    "unique_repos": 14,
+    "unique_roots": 18
+  },
+  "target_subtypes": [
+    "abstain",
+    "decisive_evidence",
+    "evidence_chain",
+    "next_action",
+    "patch_sketch",
+    "repair_intent",
+    "retrieve_answer_abstain",
+    "selected_test",
+    "visible_evidence_key"
+  ],
+  "train": {
+    "anti_cheat": {
+      "prompt_target_leak_true": 2,
+      "same_root_train_eval_forbidden_true": 1637,
+      "source_heldout_admissible_true": 0
+    },
+    "decoder_cap_1024": {
+      "abstain": {
+        "max": 25,
+        "p50": 25,
+        "p90": 25,
+        "p95": 25,
+        "rows": 6,
+        "rows_over_cap": 0
+      },
+      "decisive_evidence": {
+        "max": 824,
+        "p50": 407,
+        "p90": 598,
+        "p95": 659,
+        "rows": 729,
+        "rows_over_cap": 0
+      },
+      "evidence_chain": {
+        "max": 136,
+        "p50": 111,
+        "p90": 136,
+        "p95": 136,
+        "rows": 3,
+        "rows_over_cap": 0
+      },
+      "next_action": {
+        "max": 82,
+        "p50": 74,
+        "p90": 79,
+        "p95": 79,
+        "rows": 55,
+        "rows_over_cap": 0
+      },
+      "patch_sketch": {
+        "max": 827,
+        "p50": 457,
+        "p90": 654,
+        "p95": 716,
+        "rows": 55,
+        "rows_over_cap": 0
+      },
+      "repair_intent": {
+        "max": 1628,
+        "p50": 910,
+        "p90": 1286,
+        "p95": 1439,
+        "rows": 58,
+        "rows_over_cap": 17
+      },
+      "retrieve_answer_abstain": {
+        "max": 28,
+        "p50": 28,
+        "p90": 28,
+        "p95": 28,
+        "rows": 729,
+        "rows_over_cap": 0
+      },
+      "selected_test": {
+        "max": 32,
+        "p50": 32,
+        "p90": 32,
+        "p95": 32,
+        "rows": 1,
+        "rows_over_cap": 0
+      },
+      "visible_evidence_key": {
+        "max": 20,
+        "p50": 20,
+        "p90": 20,
+        "p95": 20,
+        "rows": 1,
+        "rows_over_cap": 0
+      }
+    },
+    "language_by_target_subtype": {
+      "c_cpp": {
+        "decisive_evidence": 62,
+        "next_action": 5,
+        "patch_sketch": 5,
+        "repair_intent": 5,
+        "retrieve_answer_abstain": 62
+      },
+      "python": {
+        "abstain": 2,
+        "decisive_evidence": 651,
+        "evidence_chain": 2,
+        "next_action": 49,
+        "patch_sketch": 49,
+        "repair_intent": 51,
+        "retrieve_answer_abstain": 651
+      },
+      "rust": {
+        "abstain": 4,
+        "decisive_evidence": 6,
+        "evidence_chain": 1,
+        "repair_intent": 1,
+        "retrieve_answer_abstain": 6,
+        "selected_test": 1,
+        "visible_evidence_key": 1
+      },
+      "unknown": {
+        "decisive_evidence": 2,
+        "retrieve_answer_abstain": 2
+      },
+      "web_js_ts_html": {
+        "decisive_evidence": 8,
+        "next_action": 1,
+        "patch_sketch": 1,
+        "repair_intent": 1,
+        "retrieve_answer_abstain": 8
+      }
+    },
+    "language_counts": {
+      "c_cpp": 139,
+      "python": 1455,
+      "rust": 20,
+      "unknown": 4,
+      "web_js_ts_html": 19
+    },
+    "repos_by_language": {
+      "c_cpp": 12,
+      "python": 143,
+      "rust": 4,
+      "unknown": 1,
+      "web_js_ts_html": 2
+    },
+    "roots_by_language": {
+      "c_cpp": 67,
+      "python": 702,
+      "rust": 7,
+      "unknown": 2,
+      "web_js_ts_html": 9
+    },
+    "rows": 1637,
+    "target_subtype_counts": {
+      "abstain": 6,
+      "decisive_evidence": 729,
+      "evidence_chain": 3,
+      "next_action": 55,
+      "patch_sketch": 55,
+      "repair_intent": 58,
+      "retrieve_answer_abstain": 729,
+      "selected_test": 1,
+      "visible_evidence_key": 1
+    },
+    "unique_repos": 162,
+    "unique_roots": 787
+  }
+}

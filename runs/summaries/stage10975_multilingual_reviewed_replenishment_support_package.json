@@ -1,0 +1,82 @@
+{
+  "claim_scope": [
+    "Add the audited stage10974 reviewed replenishment rows into the train split while keeping the stage10883 validation/strict/stress heldout surfaces unchanged.",
+    "Provide a clean multilingual support package for one honest next probe against the frozen 23-row overlay."
+  ],
+  "created_at_utc": "2026-07-12T21:58:14Z",
+  "decision": "multilingual_reviewed_replenishment_support_package_ready",
+  "headline_findings": [
+    "This package adds audited reviewed support rows for Python, C/C++, and Rust to the clean 23-row overlay baseline.",
+    "It does not change heldout scoring surfaces, so any movement in the next probe can be attributed to train-support changes rather than eval drift.",
+    "Web remains unchanged and still needs new pure-web selected-test source supply before any stronger multilingual headline claim."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "c_cpp": 8,
+      "python": 4,
+      "rust": 12
+    },
+    "added_reviewed_rows": 24,
+    "base_metrics_snapshot": {
+      "added_repaired_rows": 6,
+      "repaired_duplicate_visible_evidence_groups": 0,
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_rows_after": 193,
+      "train_rows_before": 187,
+      "validation_rows_unchanged": 23
+    },
+    "replenishment_metrics_snapshot": {
+      "all_rows": 30,
+      "candidate_by_language": {
+        "c_cpp": 2,
+        "python": 1,
+        "rust": 3
+      },
+      "candidate_rows": 6,
+      "gold_values_candidate_rows": {
+        "candidate_change_surface": 2,
+        "symptom_or_call_path_analogue": 2,
+        "verifier_and_test_constraint": 2
+      },
+      "support_by_language": {
+        "c_cpp": 8,
+        "python": 4,
+        "rust": 12
+      },
+      "support_rows": 24
+    },
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_by_language": {
+      "c_cpp": 117,
+      "python": 54,
+      "rust": 46
+    },
+    "train_rows_after": 217,
+    "train_rows_before": 193,
+    "validation_rows_unchanged": 23
+  },
+  "next_best_step": "Run one multilingual support probe from the clean stage10960 runtime, then audit the unchanged overlay plus the replenishment candidate slice from stage10974.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage10975_multilingual_reviewed_replenishment_support_package/added_reviewed_replenishment_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage10975_multilingual_reviewed_replenishment_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage10975_multilingual_reviewed_replenishment_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage10975_multilingual_reviewed_replenishment_support_package/multilingual_reviewed_replenishment_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage10975_multilingual_reviewed_replenishment_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage10975_multilingual_reviewed_replenishment_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "All added rows remain train_support_only and strict_eval_eligible=false.",
+    "Validation, strict, and stress rows are copied unchanged from stage10883.",
+    "Web remains absent from added support rows and absent from any new headline claim in this stage."
+  ],
+  "source_artifacts": {
+    "base_summary": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_successor_package.json",
+    "replenishment_summary": "runs/local/artifacts/stage10974_multilingual_reviewed_replenishment_package/multilingual_reviewed_replenishment_package.json",
+    "replenishment_support_rows": "runs/local/artifacts/stage10974_multilingual_reviewed_replenishment_package/train_support_rows.jsonl"
+  },
+  "stage": 10975,
+  "stage_name": "stage10975_multilingual_reviewed_replenishment_support_package"
+}

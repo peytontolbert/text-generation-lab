@@ -1,0 +1,1860 @@
+{
+  "baseline_product_metrics": {
+    "canary_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "canary_validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "llama_stack_web_heldout": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 6,
+      "scored_rows": 6
+    },
+    "sourcebot_combined_support": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 18,
+      "scored_rows": 18
+    }
+  },
+  "created_at_utc": "2026-07-13T13:55:47Z",
+  "decision": "reject_stage11385_keep_stage11200_frontier",
+  "gates": {
+    "heldout_improved": false,
+    "sourcebot_improved": true,
+    "strict_preserved": true,
+    "validation_preserved": false
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11386_web_sourcebot_counterfactual_preserved_postrun_audit/web_sourcebot_counterfactual_preserved_postrun_audit.json"
+  },
+  "passed": true,
+  "product_metrics": {
+    "canary_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "canary_validation": {
+      "correct": 19,
+      "exact_accuracy": 0.8260869565217391,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "llama_stack_web_heldout": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 6,
+      "scored_rows": 6
+    },
+    "sourcebot_combined_support": {
+      "correct": 1,
+      "exact_accuracy": 0.05555555555555555,
+      "rows": 18,
+      "scored_rows": 18
+    },
+    "stage11383_train_support": {
+      "correct": 15,
+      "exact_accuracy": 0.4411764705882353,
+      "rows": 41,
+      "scored_rows": 34
+    }
+  },
+  "product_scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "recommended_next_action": "If validation still regresses, stop this support path and mine fresh Web roots; if preserved with transfer, keep runtime diagnostic-only until same-manifest Gemma comparison is refreshed.",
+  "runtime_initialization": {
+    "attached_bounded_choice_heads": [
+      "bounded_choice_evidence_ledger_head",
+      "bounded_choice_evidence_judgment_head"
+    ],
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11385_web_sourcebot_counterfactual_preserved_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval_evidence_judgment_head",
+      "bounded_choice_contrast_margin": 0.08,
+      "bounded_choice_contrast_weight": 0.5,
+      "bounded_decoder_train_sampler": "residual_family_balanced",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "bounded_decoder_ce_probe_contract",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11385_web_sourcebot_counterfactual_preserved_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 280,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11385_web_sourcebot_counterfactual_preserved_probe/runtime_model/model_state.pt",
+    "weights_sha256": "803d7e3c2f8bc952bb5fc024fc72a26dbc5b7def3be03a805705ed20e135e3d7"
+  },
+  "scored": {
+    "decoder_first_step": {
+      "canary_strict": {
+        "metric": {
+          "correct": 4,
+          "exact_accuracy": 0.18181818181818182,
+          "rows": 22,
+          "scored_rows": 22
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::symptom_localization::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::patch_impact::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::minimal_fix_selection::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 8,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::symptom_localization::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::patch_impact::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::verifier_outcome::reviewed_v27_compact",
+            "target_rank_full_vocab": 16,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::minimal_fix_selection::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 12,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+            "target_rank_full_vocab": 4,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 12,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::symptom_localization::reviewed_v27_compact",
+            "target_rank_full_vocab": 8,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::patch_impact::reviewed_v27_compact",
+            "target_rank_full_vocab": 8,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::minimal_fix_selection::reviewed_v27_compact",
+            "target_rank_full_vocab": 7,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 8,
+            "target_text": "G"
+          }
+        ]
+      },
+      "canary_validation": {
+        "metric": {
+          "correct": 2,
+          "exact_accuracy": 0.08695652173913043,
+          "rows": 23,
+          "scored_rows": 23
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::symptom_localization::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::patch_impact::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::verifier_outcome::reviewed_v27_compact",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::minimal_fix_selection::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::symptom_localization::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::patch_impact::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::minimal_fix_selection::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 9,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::symptom_localization::reviewed_v27_compact",
+            "target_rank_full_vocab": 4,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::patch_impact::reviewed_v27_compact",
+            "target_rank_full_vocab": 4,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::minimal_fix_selection::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 20,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10126::candle::candle-core::rust::symptom_localization::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10126::candle::candle-core::rust::patch_impact::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10126::candle::candle-core::rust::verifier_outcome::reviewed_v27_compact",
+            "target_rank_full_vocab": 12,
+            "target_text": "G"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10126::candle::candle-core::rust::minimal_fix_selection::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10126::candle::candle-core::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 11,
+            "target_text": "G"
+          }
+        ]
+      },
+      "llama_stack_web_heldout": {
+        "metric": {
+          "correct": 1,
+          "exact_accuracy": 0.16666666666666666,
+          "rows": 6,
+          "scored_rows": 6
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          }
+        ]
+      },
+      "sourcebot_combined_support": {
+        "metric": {
+          "correct": 6,
+          "exact_accuracy": 0.3333333333333333,
+          "rows": 18,
+          "scored_rows": 18
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11364::sourcebot_backend_utils::symptom_localization",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11364::sourcebot_backend_utils::evidence_citation",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11364::sourcebot_backend_utils::verifier_outcome",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::symptom_localization",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::evidence_citation",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          }
+        ]
+      },
+      "stage11383_train_support": {
+        "metric": {
+          "correct": 9,
+          "exact_accuracy": 0.2647058823529412,
+          "rows": 41,
+          "scored_rows": 34
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11364::sourcebot_backend_utils::symptom_localization",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11364::sourcebot_backend_utils::evidence_citation",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11364::sourcebot_backend_utils::verifier_outcome",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::symptom_localization",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::evidence_citation",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10499::localsess_code_assist_hf_local_multitest_repaired::python::abstention_insufficient_evidence::compact_bounded",
+            "target_rank_full_vocab": 4,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10854::agentkernel::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39fb_c43d_7e62_b055_b00b_agent_kernel_cycle_runner_py_agent_kernel_improvement_py_agent_kernel_learning_c_6a4dce0d0c_aug_1500000_8b46e7f662::abstention_insufficient_evidence::materialized_residual_support",
+            "target_rank_full_vocab": 5,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "E",
+            "row_id": "stage10778::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q20::abstention_insufficient_evidence::support_candidate",
+            "target_rank_full_vocab": 26,
+            "target_text": "J"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10778::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q29::abstention_insufficient_evidence::support_candidate",
+            "target_rank_full_vocab": 33,
+            "target_text": "J"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10778::strict_commit_plus_strict_session_plus_current_recent96_strict_packs_5m_hardened_v2::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_e01f480356::q35::abstention_insufficient_evidence::support_candidate",
+            "target_rank_full_vocab": 29,
+            "target_text": "J"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10733::cccl::q30::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10733::onnxruntime::q13::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 9,
+            "target_text": "J"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10733::parametergolf::q2::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 3,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10733::parametergolf::q6::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10741::cccl::q30::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage10674::linux::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 66,
+            "target_text": "N"
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "E",
+            "row_id": "stage10674::candle::candle-datasets::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 24,
+            "target_text": "H"
+          }
+        ]
+      }
+    },
+    "encoder_option_retrieval": {
+      "canary_strict": {
+        "metric": {
+          "correct": 21,
+          "exact_accuracy": 0.9545454545454546,
+          "rows": 22,
+          "scored_rows": 22
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+            "target_rank_full_vocab": 4,
+            "target_text": "A"
+          }
+        ]
+      },
+      "canary_validation": {
+        "metric": {
+          "correct": 19,
+          "exact_accuracy": 0.8260869565217391,
+          "rows": 23,
+          "scored_rows": 23
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::verifier_outcome::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 20,
+            "target_text": "G"
+          }
+        ]
+      },
+      "llama_stack_web_heldout": {
+        "metric": {
+          "correct": 0,
+          "exact_accuracy": 0.0,
+          "rows": 6,
+          "scored_rows": 6
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "E",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          }
+        ]
+      },
+      "sourcebot_combined_support": {
+        "metric": {
+          "correct": 1,
+          "exact_accuracy": 0.05555555555555555,
+          "rows": 18,
+          "scored_rows": 18
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "E",
+            "row_id": "stage11364::sourcebot_backend_utils::symptom_localization",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::evidence_citation",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage11364::sourcebot_backend_utils::verifier_outcome",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11364::sourcebot_backend_utils::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::symptom_localization",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::evidence_citation",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "C",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          }
+        ]
+      },
+      "stage11383_train_support": {
+        "metric": {
+          "correct": 15,
+          "exact_accuracy": 0.4411764705882353,
+          "rows": 41,
+          "scored_rows": 34
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "E",
+            "row_id": "stage11364::sourcebot_backend_utils::symptom_localization",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::evidence_citation",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage11364::sourcebot_backend_utils::verifier_outcome",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11364::sourcebot_backend_utils::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::symptom_localization",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::evidence_citation",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "C",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "E",
+            "row_id": "stage10674::linux::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 66,
+            "target_text": "N"
+          }
+        ]
+      }
+    },
+    "encoder_option_retrieval_evidence_judgment_head": {
+      "canary_strict": {
+        "metric": {
+          "correct": 22,
+          "exact_accuracy": 1.0,
+          "rows": 22,
+          "scored_rows": 22
+        },
+        "misses": []
+      },
+      "canary_validation": {
+        "metric": {
+          "correct": 19,
+          "exact_accuracy": 0.8260869565217391,
+          "rows": 23,
+          "scored_rows": 23
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::verifier_outcome::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 20,
+            "target_text": "G"
+          }
+        ]
+      },
+      "llama_stack_web_heldout": {
+        "metric": {
+          "correct": 0,
+          "exact_accuracy": 0.0,
+          "rows": 6,
+          "scored_rows": 6
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "E",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          }
+        ]
+      },
+      "sourcebot_combined_support": {
+        "metric": {
+          "correct": 1,
+          "exact_accuracy": 0.05555555555555555,
+          "rows": 18,
+          "scored_rows": 18
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "E",
+            "row_id": "stage11364::sourcebot_backend_utils::symptom_localization",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::evidence_citation",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage11364::sourcebot_backend_utils::verifier_outcome",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11364::sourcebot_backend_utils::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::symptom_localization",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::evidence_citation",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "C",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          }
+        ]
+      },
+      "stage11383_train_support": {
+        "metric": {
+          "correct": 15,
+          "exact_accuracy": 0.4411764705882353,
+          "rows": 41,
+          "scored_rows": 34
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "E",
+            "row_id": "stage11364::sourcebot_backend_utils::symptom_localization",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::evidence_citation",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage11364::sourcebot_backend_utils::verifier_outcome",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11364::sourcebot_backend_utils::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::symptom_localization",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::evidence_citation",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "C",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "E",
+            "row_id": "stage10674::linux::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 66,
+            "target_text": "N"
+          }
+        ]
+      }
+    },
+    "encoder_option_retrieval_verifier_conditioned": {
+      "canary_strict": {
+        "metric": {
+          "correct": 22,
+          "exact_accuracy": 1.0,
+          "rows": 22,
+          "scored_rows": 22
+        },
+        "misses": []
+      },
+      "canary_validation": {
+        "metric": {
+          "correct": 19,
+          "exact_accuracy": 0.8260869565217391,
+          "rows": 23,
+          "scored_rows": 23
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::verifier_outcome::reviewed_v27_compact",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 20,
+            "target_text": "G"
+          }
+        ]
+      },
+      "llama_stack_web_heldout": {
+        "metric": {
+          "correct": 0,
+          "exact_accuracy": 0.0,
+          "rows": 6,
+          "scored_rows": 6
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "E",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          }
+        ]
+      },
+      "sourcebot_combined_support": {
+        "metric": {
+          "correct": 1,
+          "exact_accuracy": 0.05555555555555555,
+          "rows": 18,
+          "scored_rows": 18
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "E",
+            "row_id": "stage11364::sourcebot_backend_utils::symptom_localization",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::evidence_citation",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage11364::sourcebot_backend_utils::verifier_outcome",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11364::sourcebot_backend_utils::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::symptom_localization",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::evidence_citation",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "C",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          }
+        ]
+      },
+      "stage11383_train_support": {
+        "metric": {
+          "correct": 15,
+          "exact_accuracy": 0.4411764705882353,
+          "rows": 41,
+          "scored_rows": 34
+        },
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "E",
+            "row_id": "stage11364::sourcebot_backend_utils::symptom_localization",
+            "target_rank_full_vocab": 3,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::evidence_citation",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "B",
+            "row_id": "stage11364::sourcebot_backend_utils::verifier_outcome",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11364::sourcebot_backend_utils::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11364::sourcebot_backend_utils::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::symptom_localization",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::evidence_citation",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 5,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "D",
+            "row_id": "stage11373::sourcebot_backend_github_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::symptom_localization",
+            "target_rank_full_vocab": 4,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "A",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::verifier_outcome",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "C",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::minimal_fix_selection",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::alternative_hypothesis_elimination",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "B",
+            "row_id": "stage11373::sourcebot_backend_gitlab_exclusion::abstention_insufficient_evidence",
+            "target_rank_full_vocab": 2,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 5,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "predicted": "E",
+            "row_id": "stage10674::linux::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target_rank_full_vocab": 66,
+            "target_text": "N"
+          }
+        ]
+      }
+    }
+  },
+  "source_artifacts": {
+    "baseline": "runs/local/artifacts/stage11374_web_sourcebot_combined_current_score/web_sourcebot_combined_current_score.json",
+    "canary_strict": "runs/local/artifacts/stage11312_deleaked_fail_to_pass_transition_package/deleaked_fail_to_pass_strict_rows.jsonl",
+    "canary_validation": "runs/local/artifacts/stage11312_deleaked_fail_to_pass_transition_package/deleaked_fail_to_pass_validation_rows.jsonl",
+    "llama_stack_web_heldout": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/web_llama_stack_executed_heldout_rows.jsonl",
+    "runtime": "runs/local/artifacts/stage11385_web_sourcebot_counterfactual_preserved_probe/runtime_model/runtime_model_bundle.json",
+    "sourcebot_combined_support": "runs/local/artifacts/stage11374_web_sourcebot_combined_current_score/web_sourcebot_combined_support_rows.jsonl",
+    "stage11383_train_support": "runs/local/artifacts/stage11383_web_sourcebot_abstention_counterfactual_combined_package/web_sourcebot_abstention_counterfactual_combined_rows.jsonl"
+  },
+  "stage": 11386,
+  "stage_name": "stage11386_web_sourcebot_counterfactual_preserved_postrun_audit"
+}

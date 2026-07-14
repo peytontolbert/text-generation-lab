@@ -1,0 +1,52 @@
+{
+  "admitted_rows": 11,
+  "claim_boundary": "Rows are train-support only. Rejected probes are documented but not emitted as training rows.",
+  "decision": "admit_build_status_expansion_train_support",
+  "language_counts": {
+    "c_cpp": 3,
+    "python": 2,
+    "rust": 3,
+    "web_js_ts_html": 3
+  },
+  "next_stage_recommendation": {
+    "action": "Merge build-status rows and report remaining Transition-Root-250 floors.",
+    "stage": "stage12024_transition_support_rollup_v19"
+  },
+  "rejected_probe_count": 3,
+  "rejected_probes": [
+    {
+      "command": "pnpm --dir /data/repositories/openclaw__clawhub run check",
+      "reason": "missing bun runtime, not admissible as PASS_CURRENT_BUILD",
+      "repo_family": "openclaw__clawhub",
+      "returncode": 1
+    },
+    {
+      "command": "cargo check --manifest-path /data/repositories/git/contrib/libgit-rs/Cargo.toml --quiet",
+      "reason": "libgit-sys build failed under warnings-as-errors, not a current build pass",
+      "repo_family": "git",
+      "returncode": 101
+    },
+    {
+      "command": "cargo check --manifest-path /data/repositories/tokenizers/tokenizers/Cargo.toml --no-default-features --quiet",
+      "reason": "invalid feature surface requires onig or fancy-regex, not a current build pass",
+      "repo_family": "tokenizers",
+      "returncode": 101
+    }
+  ],
+  "repo_family_counts": {
+    "benchmark": 2,
+    "einops": 1,
+    "lastmile-ai__mcp-agent": 1,
+    "modelcontextprotocol__typescript-sdk": 3,
+    "perftree": 2,
+    "sentencepiece": 1,
+    "tokenizers": 1
+  },
+  "rows_path": "runs/local/artifacts/stage12023_build_status_expansion_rows/build_status_expansion_rows.jsonl",
+  "stage": "stage12023_build_status_expansion_rows",
+  "status_counts": {
+    "PASS_CURRENT_BUILD": 10,
+    "PASS_CURRENT_BUILD_AND_RUN": 1
+  },
+  "unique_roots": 11
+}

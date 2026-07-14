@@ -1,0 +1,37 @@
+{
+  "admitted_rows": 5,
+  "claim_boundary": "Rows are train-support only. No model promotion follows from this artifact.",
+  "decision": "admit_buildrun_pair_expansion_train_support",
+  "language_counts": {
+    "c_cpp": 1,
+    "python": 2,
+    "rust": 1,
+    "web_js_ts_html": 1
+  },
+  "next_stage_recommendation": {
+    "action": "Merge build+run rows and run readiness audit.",
+    "stage": "stage12032_transition_support_rollup_v23"
+  },
+  "rejected_probe_count": 1,
+  "rejected_probes": [
+    {
+      "command": "cargo check --manifest-path /data/repositories/perftree/perftree/Cargo.toml --quiet && cargo test --manifest-path /data/repositories/perftree/perftree/Cargo.toml --lib --quiet",
+      "reason": "cargo test ran 0 tests, so it is not paired build+run evidence",
+      "repo_family": "perftree",
+      "returncode": 0
+    }
+  ],
+  "repo_family_counts": {
+    "benchmark": 1,
+    "einops": 1,
+    "lastmile-ai__mcp-agent": 1,
+    "modelcontextprotocol__typescript-sdk": 1,
+    "tokenizers": 1
+  },
+  "rows_path": "runs/local/artifacts/stage12031_buildrun_pair_expansion_rows/buildrun_pair_expansion_rows.jsonl",
+  "stage": "stage12031_buildrun_pair_expansion_rows",
+  "status_counts": {
+    "PASS_CURRENT_BUILD_AND_RUN": 5
+  },
+  "unique_roots": 5
+}

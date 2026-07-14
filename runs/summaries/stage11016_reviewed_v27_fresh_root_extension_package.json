@@ -1,0 +1,68 @@
+{
+  "stage": 11016,
+  "stage_name": "reviewed_v27_fresh_root_extension_package",
+  "source_artifacts": {
+    "base_package": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10881_evidence_alias_quarantine_successor/evidence_alias_quarantine_successor.json",
+    "fresh_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11015_ai_adjudicated_fresh_root_package/ai_adjudicated_fresh_root_rows.jsonl"
+  },
+  "preserved_baseline": {
+    "train_rows": 187,
+    "validation_rows": 23,
+    "strict_eval_rows": 23,
+    "stress_eval_rows": 7
+  },
+  "extension_additions": {
+    "train_support_rows_added": 13,
+    "successor_eval_rows_added": 2,
+    "quarantined_extension_rows": 22
+  },
+  "support_extension_breakdown": {
+    "language_counts": {
+      "python": 8,
+      "c_cpp": 4,
+      "web_js_ts_html": 1
+    },
+    "repo_family_counts": {
+      "agentkernel": 8,
+      "parametergolf": 4,
+      "code_assist": 1
+    }
+  },
+  "successor_eval_breakdown": {
+    "language_counts": {
+      "rust": 2
+    },
+    "task_type_counts": {
+      "symptom_localization": 1,
+      "evidence_citation": 1
+    }
+  },
+  "fresh_usage_class_counts": {
+    "ai_adjudicated_abstention_support": 8,
+    "abstention_or_support_only": 4,
+    "fresh_rust_scoreable": 21,
+    "fresh_rust_abstention_capable": 3,
+    "support_only_overlap": 1
+  },
+  "claim_scope": {
+    "preserve_current_v27_headline": true,
+    "fresh_multilingual_support_added_to_train_only": true,
+    "fresh_scoreable_successor_eval_is_currently_rust_only": true,
+    "python_successor_rows_converted_to_abstention_support": true
+  },
+  "next_best_step": "Run one bounded probe from this extension package, report baseline 24-row overlay unchanged, and evaluate the separate rust successor slice without mixing it into train or headline strict.",
+  "outputs": {
+    "package_json": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11016_reviewed_v27_fresh_root_extension_package/reviewed_v27_fresh_root_extension_package.json",
+    "train_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11016_reviewed_v27_fresh_root_extension_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11016_reviewed_v27_fresh_root_extension_package/agentkernel_lite_encdec_validation.jsonl",
+    "strict_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11016_reviewed_v27_fresh_root_extension_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "stress_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11016_reviewed_v27_fresh_root_extension_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "successor_eval_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11016_reviewed_v27_fresh_root_extension_package/agentkernel_lite_encdec_successor_eval.jsonl",
+    "quarantined_extension_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11016_reviewed_v27_fresh_root_extension_package/quarantined_extension_rows.jsonl"
+  },
+  "notes": [
+    "This package adds only honest abstention-safe fresh support rows to train.",
+    "Fresh reviewed Rust localization/evidence rows are kept as a separate successor-eval slice to avoid contaminating train or overstating a multilingual strict upgrade.",
+    "Python fresh-root supply exists but is still not promotable because selected-test evidence remains hidden from the prompt and review artifacts do not establish unique identifiability."
+  ]
+}

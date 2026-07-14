@@ -1,0 +1,189 @@
+{
+  "anticheat_audit": "runs/local/artifacts/stage10958_explicit_ledger_anticheat_audit/explicit_ledger_anticheat_audit.json",
+  "base_runtime_weights_sha256": "683dbd2d710fd06c01da5104f7882b69d122746c6c4aaa81607997cac17842de",
+  "claim_scope": [
+    "Train a richer bounded-choice scorer that augments retrieval similarity with an evidence-role bias head.",
+    "Test whether explicit role-aware scoring plus contrast loss can move the remaining evidence blocker while preserving the frozen overlay."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10967_role_bias_probe_request/role_bias_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "205",
+    "--max-eval-rows",
+    "23",
+    "--max-strict-rows",
+    "23",
+    "--max-steps",
+    "96",
+    "--batch-size",
+    "2",
+    "--learning-rate",
+    "5e-6",
+    "--max-encoder-tokens",
+    "768",
+    "--max-decoder-tokens",
+    "8",
+    "--decoder-ce-weight",
+    "0.2",
+    "--bounded-choice-aux-weight",
+    "1.0",
+    "--bounded-choice-aux-source",
+    "encoder_option_retrieval_role_bias",
+    "--bounded-choice-contrast-weight",
+    "0.5",
+    "--bounded-choice-contrast-margin",
+    "0.08",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "4.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "12",
+    "--max-generation-tokens",
+    "8",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10968_role_bias_support_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10960_clean_explicit_ledger_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10960_clean_explicit_ledger_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "0.0",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10968_role_bias_support_probe/bounded_decoder_probe",
+    "--run-id",
+    "stage10968_role_bias_support_probe"
+  ],
+  "created_at_utc": "2026-07-12T21:35:07Z",
+  "decision": "role_bias_probe_ready",
+  "diagnostic_intent": {
+    "focus": [
+      "role_bias_scorer_head",
+      "candidate_surface_vs_verifier_ledger_pairwise_signal"
+    ],
+    "heldout_claim_changed": false,
+    "preservation_reference_runtime": "runs/local/artifacts/stage10960_clean_explicit_ledger_support_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "initialize_from_runtime_model": "runs/local/artifacts/stage10960_clean_explicit_ledger_support_probe/runtime_model/runtime_model_bundle.json",
+  "language_counts_by_split": {
+    "eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "strict_eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "train": {
+      "c_cpp": 117,
+      "python": 54,
+      "rust": 34
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10967_role_bias_probe_request/role_bias_probe_manifest.jsonl",
+  "next_best_step": "Run the probe, then audit the saved runtime on the frozen 23-row overlay, the 3-row successor slice, and the expanded 24-row successor family.",
+  "output_dir": "runs/local/artifacts/stage10968_role_bias_support_probe/bounded_decoder_probe",
+  "package_metrics_snapshot": {
+    "added_by_language": {
+      "c_cpp": 8,
+      "python": 4
+    },
+    "added_by_target_label": {
+      "A": 3,
+      "C": 4,
+      "D": 2,
+      "E": 2,
+      "F": 1
+    },
+    "added_by_variant": {
+      "ledger_contrast_candidate_first": 3,
+      "ledger_contrast_verifier_first": 3,
+      "ledger_full_candidate_first": 3,
+      "ledger_full_verifier_first": 3
+    },
+    "base_metrics_snapshot": {
+      "added_repaired_rows": 6,
+      "repaired_duplicate_visible_evidence_groups": 0,
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_rows_after": 193,
+      "train_rows_before": 187,
+      "validation_rows_unchanged": 23
+    },
+    "explicit_rows_added": 12,
+    "queue_ids": [
+      "python_repository_library_evidence_b_vs_f_replenishment",
+      "cpp_parametergolf_evidence_b_vs_f_replenishment",
+      "cpp_agentkernel_counterfamily_evidence_replenishment"
+    ],
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_by_language": {
+      "c_cpp": 117,
+      "python": 54,
+      "rust": 34
+    },
+    "train_rows_after": 205,
+    "train_rows_before": 193,
+    "validation_rows_unchanged": 23
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "The stage10958 anti-cheat audit must remain passed.",
+    "All explicit-ledger rows remain train_support_only and never enter eval or strict.",
+    "Validation and strict rows remain unchanged from the cleaned 23-row overlay.",
+    "The probe is diagnostic-only until a fresh postrun audit verifies the frozen overlay and successor families."
+  ],
+  "rows": 251,
+  "run_id": "stage10968_role_bias_support_probe",
+  "runtime_model_save_dir": "runs/local/artifacts/stage10968_role_bias_support_probe/runtime_model",
+  "source_package": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/explicit_verifier_ledger_support_package.json",
+  "split_counts": {
+    "eval": 23,
+    "strict_eval": 23,
+    "train": 205
+  },
+  "stage": 10967,
+  "stage_name": "stage10967_role_bias_probe_request",
+  "stress_rows_excluded_from_manifest": 7
+}

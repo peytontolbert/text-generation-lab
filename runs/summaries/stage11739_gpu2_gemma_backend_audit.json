@@ -1,0 +1,56 @@
+{
+  "claim_boundary": [
+    "This stage does not run Gemma on the smoke rows.",
+    "It prevents comparator drift by refusing to mix incomplete HF Gemma-4 assets with prior Ollama gemma3:12b claims."
+  ],
+  "created_at_utc": "2026-07-14T08:03:01Z",
+  "decision": "gpu2_safe_gemma_same_manifest_backend_not_ready",
+  "gates": {
+    "bitsandbytes_available": false,
+    "comparator_matches_existing_ollama_gemma3_12b": false,
+    "hf_gemma4_12b_snapshot_complete": false,
+    "transformers_available": true,
+    "trellis_torch_cuda_available": true,
+    "vllm_available": false
+  },
+  "hf_cache_probe": {
+    "exists": true,
+    "file_count": 1,
+    "files_sample": [
+      "refs/main"
+    ],
+    "path": "/data/.cache/huggingface/hub/models--google--gemma-4-12B-it"
+  },
+  "interpretation": [
+    "The trellis environment has CUDA-visible torch and transformers under CUDA_VISIBLE_DEVICES=2.",
+    "The local HF google/gemma-4-12B-it cache appears incomplete and is not the same comparator as the existing Ollama gemma3:12b baseline.",
+    "Existing same-manifest comparison scripts use Ollama gemma3:12b, so switching to HF gemma-4-12B-it would change the baseline.",
+    "Because Ollama is currently reserved on GPU1, a source-heldout Gemma smoke comparison should wait for a GPU2-pinned Ollama service or an exact local gemma3:12b-compatible backend."
+  ],
+  "next_actions": [
+    "Start or recover a GPU2-pinned Ollama gemma3:12b endpoint on a separate host/port before running smoke Gemma comparisons.",
+    "Alternatively materialize an exact local gemma3:12b-compatible HF snapshot and record the comparator change explicitly.",
+    "Do not use google/gemma-4-12B-it outputs as a drop-in replacement for existing gemma3:12b same-manifest claims."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11739_gpu2_gemma_backend_audit/gpu2_gemma_backend_audit.json"
+  },
+  "passed": true,
+  "stage": 11739,
+  "stage_name": "stage11739_gpu2_gemma_backend_audit",
+  "trellis_check": {
+    "command": [
+      "conda",
+      "run",
+      "-n",
+      "trellis",
+      "python",
+      "-c",
+      "import importlib.util, torch, transformers; print('torch', torch.__version__, 'cuda', torch.cuda.is_available(), 'devices', torch.cuda.device_count()); print('transformers', transformers.__version__); print('vllm', importlib.util.find_spec('vllm') is not None); print('accelerate', importlib.util.find_spec('accelerate') is not None); print('bitsandbytes', importlib.util.find_spec('bitsandbytes') is not None)"
+    ],
+    "passed": true,
+    "returncode": 0,
+    "stderr": "/home/peyton/miniconda3/envs/trellis/lib/python3.10/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.\n  warnings.warn(\n\n",
+    "stdout": "torch 2.6.0+cu124 cuda True devices 1\ntransformers 4.57.6\nvllm False\naccelerate True\nbitsandbytes False\n\n"
+  }
+}

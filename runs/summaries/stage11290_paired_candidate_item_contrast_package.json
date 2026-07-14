@@ -1,0 +1,94 @@
+{
+  "audit": {
+    "duplicate_row_ids": 0,
+    "leaks": {},
+    "root_balance": {
+      "strict_eval": {
+        "roots": 3,
+        "unpaired_roots": []
+      },
+      "train": {
+        "roots": 40,
+        "unpaired_roots": []
+      },
+      "validation": {
+        "roots": 5,
+        "unpaired_roots": []
+      }
+    },
+    "root_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    }
+  },
+  "counts": {
+    "strict_eval": {
+      "by_candidate_kind": {
+        "changed": 3,
+        "verifier": 3
+      },
+      "by_language": {
+        "python": 4,
+        "web_js_ts_html": 2
+      },
+      "by_target": {
+        "candidate_change_surface": 3,
+        "verifier_and_test_constraint": 3
+      },
+      "roots": 3,
+      "rows": 6
+    },
+    "train": {
+      "by_candidate_kind": {
+        "changed": 40,
+        "verifier": 40
+      },
+      "by_language": {
+        "c_cpp": 8,
+        "python": 56,
+        "rust": 4,
+        "web_js_ts_html": 12
+      },
+      "by_target": {
+        "candidate_change_surface": 40,
+        "verifier_and_test_constraint": 40
+      },
+      "roots": 40,
+      "rows": 80
+    },
+    "validation": {
+      "by_candidate_kind": {
+        "changed": 5,
+        "verifier": 5
+      },
+      "by_language": {
+        "c_cpp": 4,
+        "python": 4,
+        "web_js_ts_html": 2
+      },
+      "by_target": {
+        "candidate_change_surface": 5,
+        "verifier_and_test_constraint": 5
+      },
+      "roots": 5,
+      "rows": 10
+    }
+  },
+  "created_at_utc": "2026-07-13T10:49:44Z",
+  "decision": "paired_candidate_item_contrast_package_ready",
+  "outputs": {
+    "strict_jsonl": "runs/local/artifacts/stage11290_paired_candidate_item_contrast_package/paired_candidate_item_contrast_strict_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11290_paired_candidate_item_contrast_package/paired_candidate_item_contrast_package.json",
+    "train_jsonl": "runs/local/artifacts/stage11290_paired_candidate_item_contrast_package/paired_candidate_item_contrast_train_rows.jsonl",
+    "validation_jsonl": "runs/local/artifacts/stage11290_paired_candidate_item_contrast_package/paired_candidate_item_contrast_validation_rows.jsonl"
+  },
+  "passed": true,
+  "rationale": "Keep only same-root changed/verifier evidence pairs where changed-source is an implementation-like file, then express targets as legacy evidence_citation contrast values so bounded-choice margin loss applies.",
+  "source_artifacts": {
+    "stage11285_package": "runs/local/artifacts/stage11285_candidate_only_evidence_judgment_package/candidate_only_evidence_judgment_package.json",
+    "stage11289_decision": "runs/local/artifacts/stage11289_candidate_only_evidence_decision/candidate_only_evidence_decision.json"
+  },
+  "stage": 11290,
+  "stage_name": "stage11290_paired_candidate_item_contrast_package"
+}

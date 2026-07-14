@@ -1,0 +1,161 @@
+{
+  "created_at_utc": "2026-07-13T11:51:15Z",
+  "dataset_progress": {
+    "stage11317_alias_audit": "9/9 evidence residual rows alias-blocked for maintainer-grade eval",
+    "stage11318_materialized_alias_free_rows": {
+      "by_gold": {
+        "candidate_change_surface": 4,
+        "verifier_and_test_constraint": 3
+      },
+      "by_language": {
+        "c_cpp": 4,
+        "python": 2,
+        "rust": 1
+      },
+      "by_target_label": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 2,
+        "E": 2
+      },
+      "roots": 6,
+      "rows": 7
+    },
+    "stage11320_package_counts": {
+      "strict": {
+        "by_gold": {
+          "candidate_change_surface": 10,
+          "verifier_and_test_constraint": 10
+        },
+        "by_language": {
+          "c_cpp": 2,
+          "python": 14,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "by_target_label": {
+          "A": 11,
+          "B": 9
+        },
+        "roots": 10,
+        "rows": 20
+      },
+      "train": {
+        "by_gold": {
+          "background_context": 4,
+          "candidate_change_surface": 62,
+          "verifier_and_test_constraint": 62
+        },
+        "by_language": {
+          "c_cpp": 36,
+          "python": 76,
+          "rust": 4,
+          "web_js_ts_html": 12
+        },
+        "by_target_label": {
+          "A": 50,
+          "B": 72,
+          "C": 6
+        },
+        "roots": 62,
+        "rows": 128
+      },
+      "validation": {
+        "by_gold": {
+          "candidate_change_surface": 11,
+          "verifier_and_test_constraint": 11
+        },
+        "by_language": {
+          "c_cpp": 12,
+          "python": 6,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "by_target_label": {
+          "A": 9,
+          "B": 13
+        },
+        "roots": 11,
+        "rows": 22
+      }
+    }
+  },
+  "decision": "reject_stage11322_keep_stage11200_frontier",
+  "frontier_kept": {
+    "runtime_bundle": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "runtime_bundle_sha256": "b84dbba9ed525d0139ab867ffbc52d7ce2df702402542e54a1247d8f5dea3eca",
+    "stage": "stage11200_role_focused_residual_probe"
+  },
+  "gates": {
+    "alias_diagnostic_above_3_of_7": true,
+    "alias_strict_at_least_14_of_20": false,
+    "alias_validation_at_least_15_of_22": false,
+    "canary_residual_above_5_of_10": false,
+    "canary_strict_22_of_22": true,
+    "canary_validation_at_least_20_of_23": true
+  },
+  "interpretation": [
+    "Current old evidence residual bank should be treated as scorer diagnostic, not maintainer-grade eval, because it exposes role aliases.",
+    "Alias-free item-selection format is viable and trainable: diagnostic improved 3/7 -> 5/7 after one small probe.",
+    "Generalization is not sufficient: heldout alias-free validation/strict are around 55%, so scale/balance this format before any claim.",
+    "Fresh Rust symptom/call-path anchors remain needed; two Rust residual rows could not be materialized without contradicting hidden gold."
+  ],
+  "next_action": "scale alias-free evidence-item selection roots and replenish valid Rust symptom/call-path anchors; do not promote Stage11322",
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11324_alias_free_evidence_item_selection_decision/alias_free_evidence_item_selection_decision.json"
+  },
+  "reason": "Stage11322 improves alias-free diagnostic from 3/7 to 5/7 and preserves canary, but alias-free validation/strict are ~55% and old residual remains 5/10. Not a frontier upgrade.",
+  "rejected_runtime": {
+    "runtime_bundle": "runs/local/artifacts/stage11322_alias_free_evidence_item_selection_probe/runtime_model/runtime_model_bundle.json",
+    "runtime_bundle_sha256": "a7041aa4c416c83c21991bc1da6881c8ee50e03a11060c456151f29def994f1f",
+    "stage": "stage11322_alias_free_evidence_item_selection_probe",
+    "weights_sha256": "ad7f904a2645b0394ad4bca2f6df802c13c255c7fb915723534253ef277137c1"
+  },
+  "scores": {
+    "alias_diagnostic": {
+      "correct": 5,
+      "exact_accuracy": 0.7142857142857143,
+      "rows": 7,
+      "scored_rows": 7
+    },
+    "alias_strict": {
+      "correct": 11,
+      "exact_accuracy": 0.55,
+      "rows": 20,
+      "scored_rows": 20
+    },
+    "alias_validation": {
+      "correct": 12,
+      "exact_accuracy": 0.5454545454545454,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "canary_residual": {
+      "correct": 5,
+      "exact_accuracy": 0.5,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "canary_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "canary_validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    }
+  },
+  "source_artifacts": {
+    "stage11317": "runs/local/artifacts/stage11317_residual_evidence_alias_audit/residual_evidence_alias_audit.json",
+    "stage11318": "runs/local/artifacts/stage11318_alias_free_residual_evidence_item_materialization/alias_free_residual_evidence_item_materialization.json",
+    "stage11320": "runs/local/artifacts/stage11320_alias_free_evidence_item_selection_package/alias_free_evidence_item_selection_package.json",
+    "stage11323": "runs/local/artifacts/stage11323_alias_free_evidence_item_selection_postrun_audit/alias_free_evidence_item_selection_postrun_audit.json"
+  },
+  "stage": 11324,
+  "stage_name": "stage11324_alias_free_evidence_item_selection_decision"
+}

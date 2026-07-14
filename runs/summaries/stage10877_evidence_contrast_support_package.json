@@ -1,0 +1,100 @@
+{
+  "anti_cheat_contract": [
+    "All contrast rows are train-support only and remain non-promotable.",
+    "Rows use only visible row-local evidence values already present in the original options.",
+    "No heldout row is modified; validation and strict stay frozen."
+  ],
+  "claim_scope": [
+    "Add pairwise evidence-contrast supervision that directly pits scarce gold evidence roles against candidate_change_surface as a hard negative.",
+    "Use only a small calibration slice in the opposite direction so train does not drift further toward surface dominance."
+  ],
+  "created_at_utc": "2026-07-12T17:20:21Z",
+  "decision": "evidence_contrast_support_package_ready",
+  "metrics": {
+    "added_rows": 8,
+    "base_evidence_rows": 23,
+    "base_metrics_snapshot": {
+      "evidence_citation_target_distribution": {
+        "A": 2,
+        "B": 11,
+        "C": 2,
+        "D": 6,
+        "E": 2
+      },
+      "new_row_language_counts": {
+        "python": 8
+      },
+      "new_row_task_counts": {
+        "abstention_insufficient_evidence": 1,
+        "alternative_hypothesis_elimination": 1,
+        "evidence_citation": 1,
+        "minimal_fix_selection": 1,
+        "patch_impact": 1,
+        "regression_risk": 1,
+        "symptom_localization": 1,
+        "verifier_outcome": 1
+      },
+      "stress_rows": 7,
+      "strict_rows": 24,
+      "train_by_language": {
+        "c_cpp": 109,
+        "python": 50,
+        "rust": 34
+      },
+      "train_by_task": {
+        "abstention_insufficient_evidence": 18,
+        "alternative_hypothesis_elimination": 1,
+        "cpp_implementation_vs_implementation": 1,
+        "evidence_citation": 23,
+        "evidence_role_classification": 71,
+        "minimal_fix_selection": 17,
+        "patch_impact": 18,
+        "python_implementation_vs_implementation": 2,
+        "regression_risk": 1,
+        "symptom_localization": 18,
+        "verifier_outcome": 23
+      },
+      "train_rows": 193,
+      "validation_rows": 24,
+      "verifier_outcome_target_distribution": {
+        "A": 11,
+        "B": 1,
+        "C": 1,
+        "D": 2,
+        "E": 2,
+        "H": 1,
+        "J": 1,
+        "V1": 4
+      }
+    },
+    "base_train_rows": 193,
+    "merged_train_rows": 201,
+    "rows_by_kind": {
+      "candidate_change_surface_calibration": 2,
+      "symptom_or_call_path_analogue": 2,
+      "verifier_and_test_constraint": 4
+    },
+    "rows_by_language": {
+      "c_cpp": 1,
+      "python": 4,
+      "rust": 3
+    }
+  },
+  "next_best_steps": [
+    "Run a diagnostic probe initialized from the stage10870 runtime so only evidence-contrast geometry changes.",
+    "Track strict Rust evidence_citation and eval Python/C++ verifier-constraint evidence rows separately.",
+    "If this helps, rebuild fresh heldout evidence roots with the same contrast geometry rather than replaying current eval rows."
+  ],
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage10877_evidence_contrast_support_package/added_evidence_contrast_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage10877_evidence_contrast_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage10877_evidence_contrast_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage10877_evidence_contrast_support_package/evidence_contrast_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage10877_evidence_contrast_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage10877_evidence_contrast_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "source_package": "runs/local/artifacts/stage10864_residual_family_support_package_plus_second_python_materialized/residual_family_support_package_plus_second_python_materialized.json",
+  "stage": 10877,
+  "stage_name": "stage10877_evidence_contrast_support_package"
+}

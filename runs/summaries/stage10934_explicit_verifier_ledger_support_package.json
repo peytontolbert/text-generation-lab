@@ -1,0 +1,88 @@
+{
+  "claim_scope": [
+    "Add support-only evidence-citation rows rebuilt from reviewed adjudication packets with explicit selected-test ledger materialization.",
+    "Keep the cleaned 23-row validation and 23-row strict overlays unchanged so any movement can be judged against the same honest heldout surface."
+  ],
+  "created_at_utc": "2026-07-12T21:15:10Z",
+  "decision": "explicit_verifier_ledger_support_package_ready",
+  "interpretation": [
+    "This package directly fixes the audited Python defect where verifier_and_test_constraint was present in the options but absent from the visible evidence body.",
+    "It also strengthens the C/C++ B-vs-F lane by materializing the selected tests and maintainer rationale as the visible verifier ledger rather than leaving candidate_change_surface as the only concrete anchor.",
+    "The agentkernel counter-family is preserved so the model is not trained to always prefer verifier-and-test-constraint over candidate_change_surface."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "c_cpp": 8,
+      "python": 4
+    },
+    "added_by_target_label": {
+      "A": 3,
+      "C": 4,
+      "D": 2,
+      "E": 2,
+      "F": 1
+    },
+    "added_by_variant": {
+      "ledger_contrast_candidate_first": 3,
+      "ledger_contrast_verifier_first": 3,
+      "ledger_full_candidate_first": 3,
+      "ledger_full_verifier_first": 3
+    },
+    "base_metrics_snapshot": {
+      "added_repaired_rows": 6,
+      "repaired_duplicate_visible_evidence_groups": 0,
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_rows_after": 193,
+      "train_rows_before": 187,
+      "validation_rows_unchanged": 23
+    },
+    "explicit_rows_added": 12,
+    "queue_ids": [
+      "python_repository_library_evidence_b_vs_f_replenishment",
+      "cpp_parametergolf_evidence_b_vs_f_replenishment",
+      "cpp_agentkernel_counterfamily_evidence_replenishment"
+    ],
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_by_language": {
+      "c_cpp": 117,
+      "python": 54,
+      "rust": 34
+    },
+    "train_rows_after": 205,
+    "train_rows_before": 193,
+    "validation_rows_unchanged": 23
+  },
+  "next_best_step": "Run a multilingual support probe from the clean stage10928 runtime with these explicit ledger rows, then re-evaluate the unchanged 23-row overlay and the 3-row fresh evidence successor slice.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/added_explicit_verifier_ledger_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/explicit_verifier_ledger_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage10934_explicit_verifier_ledger_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "All added rows remain train_support_only and strict_eval_eligible=false.",
+    "Validation and strict rows are copied unchanged from stage10883.",
+    "The explicit verifier/test ledger is derived only from reviewed packet adjudication plus selected tests already present in the packet.",
+    "This package is support-only and not promotable as a fresh eval surface."
+  ],
+  "source_artifacts": {
+    "base_stress": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "base_strict": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "base_summary": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_successor_package.json",
+    "base_train": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_train.jsonl",
+    "base_validation": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_validation.jsonl",
+    "manifest_rows": "runs/local/artifacts/stage10914_evidence_successor_materialization_manifest/candidate_rows.jsonl",
+    "source_row_files": [
+      "runs/local/artifacts/stage10828_evidence_role_probe_request/evidence_role_probe_manifest.jsonl",
+      "runs/local/artifacts/stage10782_targeted_residual_support_probe_request/targeted_residual_support_probe_manifest.jsonl",
+      "runs/local/artifacts/stage10423_reviewed_multilingual_v27_same_manifest_gemma_comparison/reviewed_multilingual_v27_same_manifest_gemma_rows.jsonl"
+    ]
+  },
+  "stage": 10934,
+  "stage_name": "stage10934_explicit_verifier_ledger_support_package"
+}

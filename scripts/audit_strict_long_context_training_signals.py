@@ -14,6 +14,7 @@ GENERIC_TERMS = {
     'torch', 'tensor', 'attention', 'state', 'loss', 'module', 'python', 'class', 'function', 'value', 'runtime'
 }
 EXEC_ROUTES_REQUIRING_STATE_UPDATES = {'PATCH_PLUS_EXEC'}
+NONTRIVIAL_STATE_KEYS = {'expected_changed_files', 'verification_targets', 'key_symbols', 'external_evidence_terms', 'commit_subject', 'commit_sha'}
 
 
 def _text_tokens(text: str) -> set[str]:
@@ -250,6 +251,19 @@ def _support_row_analysis(target_row: dict[str, Any], context_rows: list[dict[st
     retrieval_probe_ready = external_hits >= 1 and rare_symbol_hits >= 1 and anchored_hits >= 2 and not path_only_support and not overbroad_support
     long_range_join_probe_ready = len(support_source_types) >= 2 and len(support_paths) >= 2 and paper_dataset_hits >= 1 and anchored_hits >= 2 and not overbroad_support
 
+    nontrivial_state_keys = sorted(
+        key for key, value in final_state.items()
+        if key in NONTRIVIAL_STATE_KEYS and value not in ({}, [], '', None)
+    )
+    state_delta_key_count = len(nontrivial_state_keys)
+    retained_constraint_count = sum(
+        1 for values in (changed_files, verification_targets, key_symbols, external_evidence_terms) if values
+    )
+    evidence_anchor_count = len(support_rows)
+    evidence_anchor_source_type_count = len(support_source_types)
+    state_delta_probe_ready = state_delta_key_count >= 2 and retained_constraint_count >= 2
+    evidence_anchor_probe_ready = evidence_anchor_count >= 2 and anchored_hits >= 2 and evidence_anchor_source_type_count >= 2
+
     return {
         'example_id': str(target_row.get('example_id') or ''),
         'program_id': str(target_row.get('program_id') or ''),
@@ -268,6 +282,13 @@ def _support_row_analysis(target_row: dict[str, Any], context_rows: list[dict[st
         'paper_dataset_hits': paper_dataset_hits,
         'support_role_counts': dict(sorted(support_roles.items())),
         'support_source_type_counts': dict(sorted(support_source_types.items())),
+        'nontrivial_state_keys': nontrivial_state_keys,
+        'state_delta_key_count': state_delta_key_count,
+        'retained_constraint_count': retained_constraint_count,
+        'evidence_anchor_count': evidence_anchor_count,
+        'evidence_anchor_source_type_count': evidence_anchor_source_type_count,
+        'state_delta_probe_ready': state_delta_probe_ready,
+        'evidence_anchor_probe_ready': evidence_anchor_probe_ready,
         'locality_probe_ready': locality_probe_ready,
         'retrieval_probe_ready': retrieval_probe_ready,
         'long_range_join_probe_ready': long_range_join_probe_ready,
@@ -287,6 +308,8 @@ def audit_strict_long_context_training_signals(
     min_retrieval_ready_fraction: float = 0.55,
     min_long_range_join_ready_fraction: float = 0.40,
     min_state_update_ready_fraction: float = 0.80,
+    min_state_delta_ready_fraction: float = 0.80,
+    min_evidence_anchor_ready_fraction: float = 0.80,
     min_target_rows_for_lost_state_probe: int = 32,
     min_programs_for_lost_state_probe: int = 8,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
@@ -308,12 +331,16 @@ def audit_strict_long_context_training_signals(
         retrieval_ready_fraction = (sum(1 for row in target_audits if row['retrieval_probe_ready']) / target_count) if target_count else 0.0
         long_range_join_ready_fraction = (sum(1 for row in target_audits if row['long_range_join_probe_ready']) / target_count) if target_count else 0.0
         state_update_ready_fraction = (sum(1 for row in target_audits if row['state_update_probe_ready']) / target_count) if target_count else 0.0
+        state_delta_ready_fraction = (sum(1 for row in target_audits if row['state_delta_probe_ready']) / target_count) if target_count else 0.0
+        evidence_anchor_ready_fraction = (sum(1 for row in target_audits if row['evidence_anchor_probe_ready']) / target_count) if target_count else 0.0
 
         lost_state_probe_ready = target_count >= min_target_rows_for_lost_state_probe and program_count >= min_programs_for_lost_state_probe
         locality_probe_ready = locality_ready_fraction >= min_locality_ready_fraction
         retrieval_probe_ready = retrieval_ready_fraction >= min_retrieval_ready_fraction
         long_range_join_probe_ready = long_range_join_ready_fraction >= min_long_range_join_ready_fraction
         state_update_probe_ready = state_update_ready_fraction >= min_state_update_ready_fraction
+        state_delta_probe_ready = state_delta_ready_fraction >= min_state_delta_ready_fraction
+        evidence_anchor_probe_ready = evidence_anchor_ready_fraction >= min_evidence_anchor_ready_fraction
 
         if locality_probe_ready:
             readiness_counts['locality_probe_ready'] += 1
@@ -325,6 +352,10 @@ def audit_strict_long_context_training_signals(
             readiness_counts['long_range_join_probe_ready'] += 1
         if state_update_probe_ready:
             readiness_counts['state_update_probe_ready'] += 1
+        if state_delta_probe_ready:
+            readiness_counts['state_delta_probe_ready'] += 1
+        if evidence_anchor_probe_ready:
+            readiness_counts['evidence_anchor_probe_ready'] += 1
 
         fatal_reasons: list[str] = []
         if not locality_probe_ready:
@@ -337,6 +368,10 @@ def audit_strict_long_context_training_signals(
             fatal_reasons.append('insufficient_long_range_join_probe_coverage')
         if not state_update_probe_ready:
             fatal_reasons.append('insufficient_state_update_probe_coverage')
+        if not state_delta_probe_ready:
+            fatal_reasons.append('insufficient_state_delta_probe_coverage')
+        if not evidence_anchor_probe_ready:
+            fatal_reasons.append('insufficient_evidence_anchor_probe_coverage')
 
         pack_rows.append({
             'pack_id': str(pack.get('pack_id') or ''),
@@ -348,11 +383,15 @@ def audit_strict_long_context_training_signals(
             'retrieval_ready_fraction': retrieval_ready_fraction,
             'long_range_join_ready_fraction': long_range_join_ready_fraction,
             'state_update_ready_fraction': state_update_ready_fraction,
+            'state_delta_ready_fraction': state_delta_ready_fraction,
+            'evidence_anchor_ready_fraction': evidence_anchor_ready_fraction,
             'locality_probe_ready': locality_probe_ready,
             'retrieval_probe_ready': retrieval_probe_ready,
             'lost_state_probe_ready': lost_state_probe_ready,
             'long_range_join_probe_ready': long_range_join_probe_ready,
             'state_update_probe_ready': state_update_probe_ready,
+            'state_delta_probe_ready': state_delta_probe_ready,
+            'evidence_anchor_probe_ready': evidence_anchor_probe_ready,
             'fatal_reasons': fatal_reasons,
             'accepted': not fatal_reasons,
         })
@@ -367,6 +406,8 @@ def audit_strict_long_context_training_signals(
             'min_retrieval_ready_fraction': float(min_retrieval_ready_fraction),
             'min_long_range_join_ready_fraction': float(min_long_range_join_ready_fraction),
             'min_state_update_ready_fraction': float(min_state_update_ready_fraction),
+            'min_state_delta_ready_fraction': float(min_state_delta_ready_fraction),
+            'min_evidence_anchor_ready_fraction': float(min_evidence_anchor_ready_fraction),
             'min_target_rows_for_lost_state_probe': int(min_target_rows_for_lost_state_probe),
             'min_programs_for_lost_state_probe': int(min_programs_for_lost_state_probe),
         },
@@ -385,6 +426,8 @@ def main() -> None:
     parser.add_argument('--min-retrieval-ready-fraction', type=float, default=0.55)
     parser.add_argument('--min-long-range-join-ready-fraction', type=float, default=0.40)
     parser.add_argument('--min-state-update-ready-fraction', type=float, default=0.80)
+    parser.add_argument('--min-state-delta-ready-fraction', type=float, default=0.80)
+    parser.add_argument('--min-evidence-anchor-ready-fraction', type=float, default=0.80)
     parser.add_argument('--min-target-rows-for-lost-state-probe', type=int, default=32)
     parser.add_argument('--min-programs-for-lost-state-probe', type=int, default=8)
     args = parser.parse_args()
@@ -395,6 +438,8 @@ def main() -> None:
         min_retrieval_ready_fraction=args.min_retrieval_ready_fraction,
         min_long_range_join_ready_fraction=args.min_long_range_join_ready_fraction,
         min_state_update_ready_fraction=args.min_state_update_ready_fraction,
+        min_state_delta_ready_fraction=args.min_state_delta_ready_fraction,
+        min_evidence_anchor_ready_fraction=args.min_evidence_anchor_ready_fraction,
         min_target_rows_for_lost_state_probe=args.min_target_rows_for_lost_state_probe,
         min_programs_for_lost_state_probe=args.min_programs_for_lost_state_probe,
     )

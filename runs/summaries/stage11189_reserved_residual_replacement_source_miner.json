@@ -1,0 +1,59 @@
+{
+  "anti_cheat_policy": {
+    "exclude_consumed_roots_and_root_lineages": true,
+    "exclude_consumed_source_retrieval_rows": true,
+    "exclude_current_quarantined_or_eval_repo_families": [
+      "agentkernel",
+      "bddy_website",
+      "candle",
+      "code_assist",
+      "parametergolf",
+      "repository_library",
+      "tokenizers"
+    ],
+    "require_role_separated_candidate_verifier_symptom_paths": true,
+    "selected_items_are_not_train_rows": true
+  },
+  "counts": {
+    "blocked_candidate_instances": 444,
+    "eligible_candidate_instances": 289,
+    "gaps": 3,
+    "needed_by_language_role": {
+      "c_cpp::candidate_change_surface": 2,
+      "python::candidate_change_surface": 1,
+      "rust::candidate_change_surface": 1,
+      "rust::symptom_or_call_path_analogue": 2
+    },
+    "requirements": 6,
+    "retrieval_rows_scanned": 729,
+    "selected_by_language_role": {
+      "c_cpp::candidate_change_surface": 2,
+      "python::candidate_change_surface": 1
+    },
+    "selected_by_repo": {
+      "cuembed": 2,
+      "optimum": 1
+    },
+    "selected_work_items": 3
+  },
+  "created_at_utc": "2026-07-13T07:21:17Z",
+  "decision": "replacement_source_supply_gap_remains",
+  "next_best_step": "Materialize selected work items into strict-candidate evidence rows and run a stage11175-style anti-cheat/admission audit before any training or comparison.",
+  "outputs": {
+    "candidates_jsonl": "runs/local/artifacts/stage11189_reserved_residual_replacement_source_miner/replacement_source_candidates.jsonl",
+    "gaps_jsonl": "runs/local/artifacts/stage11189_reserved_residual_replacement_source_miner/replacement_source_gaps.jsonl",
+    "summary_json": "runs/local/artifacts/stage11189_reserved_residual_replacement_source_miner/reserved_residual_replacement_source_miner.json",
+    "work_items_jsonl": "runs/local/artifacts/stage11189_reserved_residual_replacement_source_miner/replacement_materialization_work_items.jsonl"
+  },
+  "passed": false,
+  "source_artifacts": {
+    "consumed_train_rows": "runs/local/artifacts/stage11178_contract_aware_evidence_rows/contract_aware_evidence_rows.jsonl",
+    "current_reserved_rows": "runs/local/artifacts/stage11051_successor_residual_support_plus_priority_evidence/reserved_residual_candidates.jsonl",
+    "current_strict_rows": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_strict_eval.jsonl",
+    "current_validation_rows": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_validation.jsonl",
+    "replacement_requirements": "runs/local/artifacts/stage11188_reserved_residual_validity_reconciliation/reserved_residual_replacement_requirements.jsonl",
+    "retrieval_rows": "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/retrieval_rows.jsonl"
+  },
+  "stage": 11189,
+  "stage_name": "stage11189_reserved_residual_replacement_source_miner"
+}

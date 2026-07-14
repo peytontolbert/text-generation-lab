@@ -1,0 +1,124 @@
+{
+  "claim_scope": [
+    "Audit the stage10936 runtime against the unchanged 23-row overlay and the fresh 3-row evidence successor slice.",
+    "Keep Gemma fixed from the prior slice comparison; this artifact measures only whether explicit verifier-ledger support moved the evidence lane."
+  ],
+  "created_at_utc": "2026-07-12T20:06:00Z",
+  "findings": [
+    "This postrun audit is successful only if the fresh 3-row successor slice improves beyond the stage10916 baseline without introducing new overlay regressions.",
+    "If the explicit verifier ledger improves Python/C++ fresh rows while preserving the overlay, it is the first evidence that missing visible verifier material rather than support volume was the dominant blocker."
+  ],
+  "fresh_successor_slice": {
+    "baseline_overall": {
+      "correct": 1,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 3,
+      "scored_rows": 3
+    },
+    "by_language": {
+      "c_cpp": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "python": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "overall": {
+      "correct": 1,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 3,
+      "scored_rows": 3
+    },
+    "rows": [
+      {
+        "baseline_constrained_choice_match": false,
+        "baseline_constrained_choice_top1_label": "A",
+        "baseline_target_rank_full_vocab": 6,
+        "gemma12b_correct": false,
+        "gemma12b_predicted_label": "C",
+        "language_family": "python",
+        "new_constrained_choice_match": false,
+        "new_constrained_choice_top1_label": "A",
+        "new_target_rank_full_vocab": 7,
+        "row_id": "stage10915::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_v1",
+        "target_text": "B",
+        "target_value": "verifier_and_test_constraint"
+      },
+      {
+        "baseline_constrained_choice_match": false,
+        "baseline_constrained_choice_top1_label": "A",
+        "baseline_target_rank_full_vocab": 6,
+        "gemma12b_correct": false,
+        "gemma12b_predicted_label": "A",
+        "language_family": "c_cpp",
+        "new_constrained_choice_match": false,
+        "new_constrained_choice_top1_label": "A",
+        "new_target_rank_full_vocab": 7,
+        "row_id": "stage10915::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_v1",
+        "target_text": "B",
+        "target_value": "verifier_and_test_constraint"
+      },
+      {
+        "baseline_constrained_choice_match": true,
+        "baseline_constrained_choice_top1_label": "B",
+        "baseline_target_rank_full_vocab": 6,
+        "gemma12b_correct": false,
+        "gemma12b_predicted_label": "C",
+        "language_family": "c_cpp",
+        "new_constrained_choice_match": true,
+        "new_constrained_choice_top1_label": "B",
+        "new_target_rank_full_vocab": 6,
+        "row_id": "stage10915::cpp_agentkernel_counterfamily_evidence_replenishment::evidence_citation::strict_candidate_v1",
+        "target_text": "B",
+        "target_value": "candidate_change_surface"
+      }
+    ]
+  },
+  "outputs": {
+    "slice_audit_json": "runs/local/artifacts/stage10937_explicit_verifier_ledger_postrun_audit/fresh_slice_bounded_choice_eval.json",
+    "slice_rows_jsonl": "runs/local/artifacts/stage10937_explicit_verifier_ledger_postrun_audit/fresh_slice_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage10937_explicit_verifier_ledger_postrun_audit/explicit_verifier_ledger_postrun_audit.json"
+  },
+  "overlay": {
+    "eval_accuracy": 0.8695652173913043,
+    "eval_miss_rows": [
+      "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+      "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::verifier_outcome::reviewed_v27_compact",
+      "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact"
+    ],
+    "strict_accuracy": 0.9565217391304348,
+    "strict_miss_rows": [
+      "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact"
+    ]
+  },
+  "passed": true,
+  "runtime_bundle": "runs/local/artifacts/stage10936_explicit_verifier_ledger_support_probe/runtime_model/runtime_model_bundle.json",
+  "runtime_initialization": {
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10936_explicit_verifier_ledger_support_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "stage10936_explicit_verifier_ledger_support_probe",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10936_explicit_verifier_ledger_support_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 274,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10936_explicit_verifier_ledger_support_probe/runtime_model/model_state.pt",
+    "weights_sha256": "d98dd3b95530a17db187f30417d1ac6bb68203993639680d8273600f0a07b7af"
+  },
+  "stage": 10937,
+  "stage_name": "stage10937_explicit_verifier_ledger_postrun_audit"
+}

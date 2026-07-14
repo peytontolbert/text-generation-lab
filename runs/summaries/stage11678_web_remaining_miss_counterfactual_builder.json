@@ -1,0 +1,145 @@
+{
+  "claim_boundary": [
+    "These rows are train-support-only label-shuffled same-role candidate identity counterfactuals from canonical train roots.",
+    "The remaining canonical misses are included only as sealed diagnostics and are not trainable.",
+    "This package is not a frontier result; it is data geometry for a guarded probe."
+  ],
+  "created_at_utc": "2026-07-14T04:46:48Z",
+  "decision": "stage11678_ready_for_probe_request",
+  "gates": {
+    "all_counterfactual_rows_shuffled": true,
+    "all_diag_rows_not_trainable": true,
+    "all_train_rows_support_only": true,
+    "counterfactual_rows_nonzero": true,
+    "no_train_diag_root_overlap": true,
+    "sealed_diag_rows_match_remaining_misses": true
+  },
+  "outputs": {
+    "sealed_diagnostic_rows": "runs/local/artifacts/stage11678_web_remaining_miss_counterfactual_builder/web_remaining_canonical_miss_sealed_diagnostics.jsonl",
+    "summary": "runs/local/artifacts/stage11678_web_remaining_miss_counterfactual_builder/web_remaining_miss_counterfactual_package.json",
+    "train_counterfactual_rows": "runs/local/artifacts/stage11678_web_remaining_miss_counterfactual_builder/web_same_role_identity_counterfactual_train.jsonl"
+  },
+  "protected_remaining_miss_roots": [
+    "stage11361::llama_stack_ui_format_message_content",
+    "stage11390::openhands_input_validation",
+    "stage11390::openhands_parse_pr_url",
+    "stage11390::openhands_websocket_url",
+    "stage11540::mcp_typescript_sdk::client_stdio_transport",
+    "stage11540::mcp_typescript_sdk::core_protocol_state_machine",
+    "stage11540::mcp_typescript_sdk::core_tool_name_validation",
+    "stage11540::mcp_typescript_sdk::server_protocol_registration",
+    "stage11540::mcp_typescript_sdk::server_streamable_http_transport",
+    "stage11543::sep_automation::hook_registry_dispatch_resilience",
+    "stage11543::sep_automation::transition_handler_state_rules"
+  ],
+  "root_overlap": [],
+  "sealed_remaining_miss_diagnostic_rows": 15,
+  "skipped": {
+    "no_nontrivial_same_role_target": 139,
+    "non_target_task": 149
+  },
+  "source_artifacts": {
+    "canonical_heldout": "runs/local/artifacts/stage11663_web_canonical_renderer_package/web_canonical_heldout.jsonl",
+    "canonical_train": "runs/local/artifacts/stage11663_web_canonical_renderer_package/web_canonical_train_support.jsonl",
+    "stage11677_decision": "runs/local/artifacts/stage11677_web_same_role_listwise_decision/web_same_role_listwise_decision.json"
+  },
+  "source_train_rows": 46,
+  "stage": 11678,
+  "stage_name": "stage11678_web_remaining_miss_counterfactual_builder",
+  "train_counterfactual_rows": 92,
+  "train_counts": {
+    "target_label": {
+      "A": 24,
+      "B": 23,
+      "C": 17,
+      "D": 15,
+      "E": 13
+    },
+    "target_same_role": {
+      "candidate_change_surface": 10,
+      "nearby_definition_or_usage_context": 2,
+      "verifier_and_test_constraint": 80
+    },
+    "task_type": {
+      "minimal_fix_selection": 22,
+      "patch_impact": 16,
+      "symptom_localization": 18,
+      "verifier_outcome": 36
+    },
+    "top_roots": [
+      [
+        "stage11535::openclaw_clawhub::convex::skills_versions_public_sanitization_train_support",
+        8
+      ],
+      [
+        "stage11537::openclaw_clawhub::convex::count_public_skills_fallback",
+        8
+      ],
+      [
+        "stage11537::openclaw_clawhub::convex::maintenance_backfill_summary",
+        8
+      ],
+      [
+        "stage11537::openclaw_clawhub::convex::public_moderation_override_sanitization",
+        8
+      ],
+      [
+        "stage11537::openclaw_clawhub::convex::token_touch_throttling",
+        8
+      ],
+      [
+        "stage11545::openclaw_clawhub::convex::http_utils_boolean_query_params",
+        8
+      ],
+      [
+        "stage11545::openclaw_clawhub::convex::package_security_public_blocking",
+        8
+      ],
+      [
+        "stage11545::openclaw_clawhub::convex::skill_slug_validation_rules",
+        8
+      ],
+      [
+        "stage11364::sourcebot_backend_utils",
+        4
+      ],
+      [
+        "stage11373::sourcebot_backend_github_exclusion",
+        4
+      ],
+      [
+        "stage11373::sourcebot_backend_gitlab_exclusion",
+        4
+      ],
+      [
+        "stage11388::mcp_fetch_init_header_merge",
+        4
+      ],
+      [
+        "stage11388::mcp_server_initialize_protocol",
+        2
+      ],
+      [
+        "stage11388::mcp_tool_name_validation",
+        2
+      ],
+      [
+        "stage11394::openhands_extract_next_page",
+        2
+      ],
+      [
+        "stage11394::openhands_format_time_delta",
+        2
+      ],
+      [
+        "stage11394::openhands_shell_tokenize",
+        2
+      ],
+      [
+        "stage11394::openhands_vscode_url_helper",
+        2
+      ]
+    ],
+    "unique_roots": 18
+  }
+}

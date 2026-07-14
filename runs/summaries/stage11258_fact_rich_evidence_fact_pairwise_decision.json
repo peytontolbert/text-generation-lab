@@ -1,0 +1,109 @@
+{
+  "created_at_utc": "2026-07-13T09:48:46Z",
+  "decision": "reject_stage11256_branch_keep_stage11200_frontier",
+  "interpretation": {
+    "current_frontier_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "probable_failure_mode": "The generic retrieval/pairwise scorer variants can be shifted between role priors, but they still do not learn the heldout evidence sufficiency boundary. The remaining blocker is admissible root-level evidence/verifier materialization and a supervised evidence-candidate objective with true positive/negative candidate labels, not more derived role/fact option surfaces from the same inventory.",
+    "stage11256_runtime_status": "diagnostic_negative_do_not_promote"
+  },
+  "key_metrics": {
+    "candidate_runtime_weights_sha256": "bdcdf87e9edb3144d1f30b11d3965a1b3fbba3e5e61c2002d317b1682cb4ffda",
+    "gates": {
+      "product_clean_strict_22_of_22": true,
+      "product_clean_validation_at_least_20_of_23": true,
+      "product_fact_rich_strict_improved_vs_baseline": false,
+      "product_fact_rich_validation_improved_vs_baseline": false,
+      "product_residual_above_5_of_10": false,
+      "product_verifier_residual_nonzero": false
+    },
+    "stage11257_candidate_fact_pairwise": {
+      "clean_strict": {
+        "correct": 22,
+        "exact_accuracy": 1.0,
+        "rows": 22,
+        "scored_rows": 22
+      },
+      "clean_validation": {
+        "correct": 20,
+        "exact_accuracy": 0.8695652173913043,
+        "rows": 23,
+        "scored_rows": 23
+      },
+      "fact_rich_strict": {
+        "correct": 9,
+        "exact_accuracy": 0.2727272727272727,
+        "rows": 33,
+        "scored_rows": 33
+      },
+      "fact_rich_validation": {
+        "correct": 9,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 27,
+        "scored_rows": 27
+      },
+      "residual": {
+        "correct": 4,
+        "exact_accuracy": 0.4,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "residual_by_gold": {
+        "candidate_change_surface": 2,
+        "symptom_or_call_path_analogue": 1,
+        "unknown": 1,
+        "verifier_and_test_constraint": 0
+      }
+    },
+    "stage11257_verifier_conditioned_diagnostic": {
+      "fact_rich_strict": {
+        "correct": 11,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 33,
+        "scored_rows": 33
+      },
+      "fact_rich_validation": {
+        "correct": 9,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 27,
+        "scored_rows": 27
+      },
+      "residual": {
+        "correct": 5,
+        "exact_accuracy": 0.5,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "residual_by_gold": {
+        "candidate_change_surface": 4,
+        "symptom_or_call_path_analogue": 0,
+        "unknown": 1,
+        "verifier_and_test_constraint": 0
+      }
+    }
+  },
+  "next_required_work": [
+    "Stop running Stage11237/11243/11249-derived support probes as promotion candidates; they are diagnostic only and have repeatedly failed residual improvement.",
+    "Build a true evidence-candidate scorer dataset where each state has candidate evidence items labeled decisive/supporting/distractor/contradictory, with only the decisive item(s) gold.",
+    "Prioritize new source-root materialization over option-surface rewrites: fresh C/C++ supply is currently zero under strict filters, Rust/Web remain scarce, and repo-family overlaps make the current fact-rich package non-promotable.",
+    "Keep Stage11200 as the current frontier until a branch achieves residual >5/10 and verifier/test-constraint residual >0/3 while preserving clean strict 22/22."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11258_fact_rich_evidence_fact_pairwise_decision/fact_rich_evidence_fact_pairwise_decision.json"
+  },
+  "passed": true,
+  "reason": [
+    "The corrected fact-pairwise scorer head preserved clean strict but did not improve the residual bank.",
+    "Candidate product scorer fell to 4/10 residual versus the Stage11200/Stage11253 product baseline of 5/10.",
+    "Verifier/test-constraint residual remained 0/3.",
+    "Fact-rich validation and strict did not improve enough for promotion; strict was 9/33 under the candidate scorer.",
+    "The experiment confirms the fact-rich role-bucket bug was real but not sufficient to solve the plateau."
+  ],
+  "source_artifacts": {
+    "stage11254_prior_decision": "runs/local/artifacts/stage11254_fact_rich_evidence_option_decision/fact_rich_evidence_option_decision.json",
+    "stage11255_request": "runs/local/artifacts/stage11255_fact_rich_evidence_fact_pairwise_probe_request/fact_rich_evidence_fact_pairwise_probe_request.json",
+    "stage11256_runtime": "runs/local/artifacts/stage11256_fact_rich_evidence_fact_pairwise_probe/runtime_model/runtime_model_bundle.json",
+    "stage11257_audit": "runs/local/artifacts/stage11257_fact_rich_evidence_fact_pairwise_postrun_audit/fact_rich_evidence_fact_pairwise_postrun_audit.json"
+  },
+  "stage": 11258,
+  "stage_name": "stage11258_fact_rich_evidence_fact_pairwise_decision"
+}

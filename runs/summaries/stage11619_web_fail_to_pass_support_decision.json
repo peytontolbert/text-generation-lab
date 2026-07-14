@@ -1,0 +1,69 @@
+{
+  "claim_boundary": [
+    "Stage11617 is a rejected diagnostic.",
+    "The selected frontier remains Stage11507.",
+    "Controlled mutation rows remain train-support material only, not headline eval."
+  ],
+  "created_at_utc": "2026-07-13T23:32:57Z",
+  "decision": "reject_stage11617_keep_stage11507",
+  "interpretation": [
+    "Controlled FAIL_TO_PASS support rows executed and were anti-cheat admitted, but the Web task-candidate head did not learn them under this objective.",
+    "The run preserved filtered and old canary gates, but residual dropped from the selected frontier 7/10 to 6/10.",
+    "Web heldout dropped from the selected frontier 35/66 to 29/66, so this is not Web generalization progress.",
+    "Controlled support scored 0/36 under the same Web task-candidate scorer, which indicates a scorer/objective/row-geometry mismatch rather than useful absorption of the new data."
+  ],
+  "next_actions": [
+    "Do not run another broad full-model Web task-head probe on the same 36 rows.",
+    "Audit why the Web task-candidate head scores controlled FAIL_TO_PASS rows at 0/36 despite full coverage.",
+    "Before more training, add a row-geometry audit that checks semantic candidate features for each task family and verifies the gold option is the highest-scoring candidate under the initialized Stage11507 feature space only when expected.",
+    "If continuing this lane, try a tiny head-only overfit diagnostic on these 36 rows with no promotion path, solely to verify the head can represent the controlled rows; do not touch the selected frontier.",
+    "Materialize more diverse Web FAIL_TO_PASS roots before another promotable Web run; six OpenHands roots are not enough and Llama remains absent from controlled mutation support."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11619_web_fail_to_pass_support_decision/web_fail_to_pass_support_decision.json"
+  },
+  "promotion_passed": false,
+  "selected_frontier_remains": {
+    "reason": "Stage11617 regressed residual and Web heldout under the Web task-candidate head.",
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head"
+  },
+  "source_artifacts": {
+    "postrun_audit": "runs/local/artifacts/stage11618_web_fail_to_pass_support_postrun_audit/web_fail_to_pass_support_postrun_audit.json",
+    "request": "runs/local/artifacts/stage11617_web_fail_to_pass_support_probe_request/web_fail_to_pass_support_probe_request.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "stage11617_runtime": "runs/local/artifacts/stage11617_web_fail_to_pass_support_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11619,
+  "stage11617_result": {
+    "compact": {
+      "controlled_fail_to_pass_support": "0/36",
+      "filtered_strict": "22/22",
+      "filtered_validation": "20/22",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": "21/23",
+      "residual_bank": "6/10",
+      "web_heldout": "29/66",
+      "web_successor_strict": "2/36"
+    },
+    "failed_gates": [
+      "residual_at_least_7_of_10",
+      "web_heldout_beats_recent_42_of_66",
+      "web_heldout_beats_stage11507_35_of_66"
+    ],
+    "objective_settings": {
+      "batch_size": 4,
+      "bounded_choice_aux_source": "encoder_option_retrieval_web_task_candidate_head",
+      "bounded_choice_contrast_margin": 0.08,
+      "bounded_choice_contrast_weight": 0.5,
+      "bounded_decoder_train_sampler": "web_task_family_balanced",
+      "head_only": false,
+      "learning_rate": "2e-7",
+      "max_steps": 96,
+      "preservation_kl_weight": 8.0
+    },
+    "runtime": "runs/local/artifacts/stage11617_web_fail_to_pass_support_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_web_task_candidate_head"
+  },
+  "stage_name": "stage11619_web_fail_to_pass_support_decision"
+}

@@ -1,0 +1,324 @@
+{
+  "by_language": {
+    "c_cpp": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "python": {
+      "accuracy": 0.75,
+      "correct": 3,
+      "coverage": 1.0,
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "rust": {
+      "accuracy": 0.75,
+      "correct": 3,
+      "coverage": 1.0,
+      "rows": 4,
+      "scored_rows": 4
+    }
+  },
+  "by_task": {
+    "evidence_citation": {
+      "accuracy": 0.6666666666666666,
+      "correct": 2,
+      "coverage": 1.0,
+      "rows": 3,
+      "scored_rows": 3
+    },
+    "patch_impact": {
+      "accuracy": 1.0,
+      "correct": 2,
+      "coverage": 1.0,
+      "rows": 2,
+      "scored_rows": 2
+    },
+    "patch_impact_or_abstain": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "symptom_localization": {
+      "accuracy": 0.6666666666666666,
+      "correct": 2,
+      "coverage": 1.0,
+      "rows": 3,
+      "scored_rows": 3
+    },
+    "verifier_outcome": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "rows": 2,
+      "scored_rows": 2
+    },
+    "verifier_outcome_or_abstain": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    }
+  },
+  "claim_boundary": [
+    "This is a verifier-grounded compact source-heldout successor score for Python, C/C++ and Rust smoke rows.",
+    "It uses current-state pass verifier evidence, not fail-to-pass repair evidence.",
+    "Gemma same-manifest outputs and full-product patch/tool traces are still not attached."
+  ],
+  "created_at_utc": "2026-07-14T08:05:51Z",
+  "decision": "verifier_grounded_source_heldout_successor_scored",
+  "gates": {
+    "full_coverage": true,
+    "hundred_m_all_correct": false,
+    "no_prompt_target_label_leaks": true,
+    "no_prompt_target_value_leaks": true,
+    "stage11737_verifiers_attached": true
+  },
+  "metrics": {
+    "accuracy": 0.5,
+    "correct": 6,
+    "coverage": 1.0,
+    "rows": 12,
+    "scored_rows": 12
+  },
+  "misses": [
+    {
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "E",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "E",
+      "full_vocab_top1_token_id": 186,
+      "language_family": "c_cpp",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "predicted_role": "abstain_insufficient_evidence",
+      "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+      "repo_family": "sentencepiece",
+      "root_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke",
+      "row_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke::symptom_localization::admitted_source_heldout_v1::verifier_grounded_v1",
+      "source_heldout_attestation": "stage11719_pass_no_exact_new_root_train_overlap",
+      "source_row_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke::symptom_localization::admitted_source_heldout_v1",
+      "split": "verifier_grounded_source_heldout_smoke",
+      "target_rank_full_vocab": 2,
+      "target_role": "candidate_change_surface",
+      "target_text": "A",
+      "target_token_id": 182,
+      "target_value": "src/bpe_model.cc",
+      "task_type": "symptom_localization"
+    },
+    {
+      "bounded_choice_target_label": "B",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "E",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "E",
+      "full_vocab_top1_token_id": 186,
+      "language_family": "c_cpp",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "predicted_role": "abstain_insufficient_evidence",
+      "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+      "repo_family": "sentencepiece",
+      "root_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke",
+      "row_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke::evidence_citation::admitted_source_heldout_v1::verifier_grounded_v1",
+      "source_heldout_attestation": "stage11719_pass_no_exact_new_root_train_overlap",
+      "source_row_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke::evidence_citation::admitted_source_heldout_v1",
+      "split": "verifier_grounded_source_heldout_smoke",
+      "target_rank_full_vocab": 4,
+      "target_role": "verifier_and_test_constraint",
+      "target_text": "B",
+      "target_token_id": 183,
+      "target_value": "BPE model selected test anchor",
+      "task_type": "evidence_citation"
+    },
+    {
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "E",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "E",
+      "full_vocab_top1_token_id": 186,
+      "language_family": "c_cpp",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "predicted_role": "abstain_insufficient_evidence",
+      "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+      "repo_family": "sentencepiece",
+      "root_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke",
+      "row_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke::patch_impact_or_abstain::admitted_source_heldout_v1::verifier_grounded_v1",
+      "source_heldout_attestation": "stage11719_pass_no_exact_new_root_train_overlap",
+      "source_row_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke::patch_impact_or_abstain::admitted_source_heldout_v1",
+      "split": "verifier_grounded_source_heldout_smoke",
+      "target_rank_full_vocab": 2,
+      "target_role": "minimal_candidate_change_surface",
+      "target_text": "A",
+      "target_token_id": 182,
+      "target_value": "src/bpe_model.cc",
+      "task_type": "patch_impact_or_abstain"
+    },
+    {
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "E",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "E",
+      "full_vocab_top1_token_id": 186,
+      "language_family": "c_cpp",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "predicted_role": "abstain_insufficient_evidence",
+      "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+      "repo_family": "sentencepiece",
+      "root_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke",
+      "row_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke::verifier_outcome_or_abstain::admitted_source_heldout_v1::verifier_grounded_v1",
+      "source_heldout_attestation": "stage11719_pass_no_exact_new_root_train_overlap",
+      "source_row_id": "stage11718::sentencepiece::0d336b289f5ca773a13c2798b15292ad9795d186::c_cpp::bpe_model_smoke::verifier_outcome_or_abstain::admitted_source_heldout_v1",
+      "split": "verifier_grounded_source_heldout_smoke",
+      "target_rank_full_vocab": 2,
+      "target_role": "selected_test_anchor",
+      "target_text": "A",
+      "target_token_id": 182,
+      "target_value": "src/bpe_model_test.cc",
+      "task_type": "verifier_outcome_or_abstain"
+    },
+    {
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "D",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "E",
+      "full_vocab_top1_token_id": 186,
+      "language_family": "python",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "predicted_role": "implementation_only_no_verifier",
+      "predicted_value": "src/model/bigram_model.py",
+      "repo_family": "bigram_language_model",
+      "root_id": "stage11727::bigram_language_model::bb3837c3437c0a2a86b4e8f72bafa218fcdaab3b::python::bigram_model_smoke",
+      "row_id": "stage11727::bigram_language_model::bb3837c3437c0a2a86b4e8f72bafa218fcdaab3b::python::bigram_model_smoke::verifier_outcome::admitted_source_heldout_v1::verifier_grounded_v1",
+      "source_heldout_attestation": "stage11728_pass_no_exact_new_root_train_overlap",
+      "source_row_id": "stage11727::bigram_language_model::bb3837c3437c0a2a86b4e8f72bafa218fcdaab3b::python::bigram_model_smoke::verifier_outcome::admitted_source_heldout_v1",
+      "split": "verifier_grounded_source_heldout_smoke",
+      "target_rank_full_vocab": 3,
+      "target_role": "selected_test_anchor",
+      "target_text": "A",
+      "target_token_id": 182,
+      "target_value": "tests/test_model.py",
+      "task_type": "verifier_outcome"
+    },
+    {
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "B",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "B",
+      "full_vocab_top1_token_id": 183,
+      "language_family": "rust",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "predicted_role": "nearby_inline_test_distractor",
+      "predicted_value": "src/pre_tokenizers/whitespace.rs::tests::whitespace_split",
+      "repo_family": "tokenizers",
+      "root_id": "stage11732::tokenizers::007fc767ac78fe4ec43c6790afbee5063157fc62::rust::whitespace_pretokenizer_smoke",
+      "row_id": "stage11732::tokenizers::007fc767ac78fe4ec43c6790afbee5063157fc62::rust::whitespace_pretokenizer_smoke::verifier_outcome::admitted_source_heldout_v1::verifier_grounded_v1",
+      "source_heldout_attestation": "stage11733_pass_no_exact_new_root_train_overlap",
+      "source_row_id": "stage11732::tokenizers::007fc767ac78fe4ec43c6790afbee5063157fc62::rust::whitespace_pretokenizer_smoke::verifier_outcome::admitted_source_heldout_v1",
+      "split": "verifier_grounded_source_heldout_smoke",
+      "target_rank_full_vocab": 5,
+      "target_role": "selected_test_anchor",
+      "target_text": "A",
+      "target_token_id": 182,
+      "target_value": "src/pre_tokenizers/whitespace.rs::tests::basic",
+      "task_type": "verifier_outcome"
+    }
+  ],
+  "model_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+  "outputs": {
+    "bounded_choice_audit": "runs/local/artifacts/stage11740_verifier_grounded_source_heldout_successor_score/bounded_choice_eval_audit_verifier_grounded_source_heldout_smoke.json",
+    "rendered_rows": "runs/local/artifacts/stage11740_verifier_grounded_source_heldout_successor_score/verifier_grounded_successor_rows.jsonl",
+    "score_rows": "runs/local/artifacts/stage11740_verifier_grounded_source_heldout_successor_score/verifier_grounded_successor_100m_score_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11740_verifier_grounded_source_heldout_successor_score/verifier_grounded_source_heldout_successor_score.json"
+  },
+  "passed": true,
+  "prompt_leak_audit": {
+    "prompt_target_label_leak_row_ids": [],
+    "prompt_target_label_leaks": 0,
+    "prompt_target_value_leak_row_ids": [],
+    "prompt_target_value_leaks": 0,
+    "rows": 12
+  },
+  "runtime_init_card": {
+    "attached_bounded_choice_heads": [
+      "bounded_choice_evidence_judgment_head",
+      "bounded_choice_semantic_candidate_head"
+    ],
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval_evidence_judgment_head",
+      "bounded_choice_contrast_margin": 0.05,
+      "bounded_choice_contrast_weight": 0.0,
+      "bounded_decoder_train_sampler": "cyclic",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "bounded_decoder_ce_probe_contract",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 280,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/model_state.pt",
+    "weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37"
+  },
+  "scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "source_artifacts": {
+    "row_sources": {
+      "c_cpp": "runs/local/artifacts/stage11720_sentencepiece_cpp_admitted_smoke_packet/sentencepiece_cpp_admitted_smoke_rows.jsonl",
+      "python": "runs/local/artifacts/stage11728_bigram_python_no_train_overlap_and_admission/bigram_python_admitted_smoke_rows.jsonl",
+      "rust": "runs/local/artifacts/stage11733_tokenizers_rust_no_train_overlap_and_admission/tokenizers_rust_admitted_smoke_rows.jsonl"
+    },
+    "runtime_bundle": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "verifier_execution": "runs/local/artifacts/stage11737_source_heldout_verifier_execution/source_heldout_verifier_execution.json"
+  },
+  "stage": 11740,
+  "stage_name": "stage11740_verifier_grounded_source_heldout_successor_score"
+}

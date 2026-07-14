@@ -1,0 +1,107 @@
+{
+  "stage": 10261,
+  "stage_name": "stage10261_raw_web_source_rescue_audit",
+  "created_at_utc": "2026-07-11T00:00:00Z",
+  "passed": true,
+  "decision": "The broader Stage10100 raw source inventory does not contain a hidden fresh web reserve. It contains six web-signaled raw rows, but they collapse to two already-consumed source families: bddy_website and code_assist.",
+  "inputs": {
+    "stage10100_summary": "runs/summaries/stage10100_true_source_backed_multilingual_session_inventory_audit.json",
+    "stage10109_candidates": "runs/local/artifacts/stage10109_real_session_multilingual_replenishment_ledger/real_session_multilingual_replenishment_candidates.jsonl",
+    "stage10175_supply_gap_script": "scripts/build_stage10175_web_root_supply_and_bundle_gap_audit.py",
+    "web_inventory_exhaustion_audit": "runs/summaries/stage10258_web_root_inventory_exhaustion_audit.json"
+  },
+  "raw_inventory_findings": {
+    "best_bootstrap_inventory": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v4_dense_neighbors_realindex/packable_augmented_session_episode_examples.jsonl",
+    "raw_web_signaled_row_count": 6,
+    "distinct_repo_families": [
+      "bddy_website",
+      "code_assist"
+    ],
+    "family_counts": {
+      "bddy_website": 5,
+      "code_assist": 1
+    }
+  },
+  "raw_web_rows": [
+    {
+      "example_id": "localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662",
+      "repo_id": "bddy_website",
+      "seed_paths": [
+        "src/main.js",
+        "index.html"
+      ],
+      "selected_tests_count": 0,
+      "status": "already_consumed_family"
+    },
+    {
+      "example_id": "localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662",
+      "repo_id": "bddy_website",
+      "seed_paths": [
+        "index.html"
+      ],
+      "selected_tests_count": 0,
+      "status": "already_consumed_family"
+    },
+    {
+      "example_id": "localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_30t16_19_06_019ad58f_8ea0_7322_94d6_9c1b_index_html_9d82612639_aug_1500000_8b46e7f662",
+      "repo_id": "bddy_website",
+      "seed_paths": [
+        "index.html"
+      ],
+      "selected_tests_count": 0,
+      "status": "duplicate_bddy_family_not_fresh"
+    },
+    {
+      "example_id": "localsess_bddy_website_sessseed_codex_sessions_rollout_2025_12_02t03_53_55_019add32_0c01_7ad3_8024_1d55_index_html_d97e16ac45_aug_1500000_8b46e7f662",
+      "repo_id": "bddy_website",
+      "seed_paths": [
+        "index.html"
+      ],
+      "selected_tests_count": 0,
+      "status": "duplicate_bddy_family_not_fresh"
+    },
+    {
+      "example_id": "localsess_bddy_website_sessseed_codex_sessions_rollout_2025_12_02t14_11_07_019adf67_1880_7170_8d2e_9578_index_html_24e465dcc6_aug_1500000_8b46e7f662",
+      "repo_id": "bddy_website",
+      "seed_paths": [
+        "index.html"
+      ],
+      "selected_tests_count": 0,
+      "status": "duplicate_bddy_family_not_fresh"
+    },
+    {
+      "example_id": "localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t13_13_10_019bff96_2dc5_7162_88f8_83eb_src_code_assist_orchestrator_cognitive_perfection_py_src_code_assist_orchestrato_3a0f6d8311_aug_1500000_8b46e7f662",
+      "repo_id": "code_assist",
+      "seed_paths": [
+        "src/code_assist/orchestrator/cognitive_perfection.py",
+        "src/code_assist/orchestrator/config.py",
+        "src/code_assist/orchestrator/orchestrator.py",
+        "src/code_assist/ui/dashboard_assets/dashboard.js",
+        "src/code_assist/ui/fastapi_dashboard.py",
+        "src/code_assist/resources/default_config.yml",
+        "src/code_assist/ui/dashboard_assets/dashboard.css"
+      ],
+      "selected_tests_count": 6,
+      "status": "already_consumed_family"
+    }
+  ],
+  "interpretation": {
+    "fresh_raw_web_source_available_in_stage10100_inventory": false,
+    "why_bddy_rows_do_not_help": [
+      "They are the same repo family already used in the current frontier.",
+      "The additional index.html-only rows do not add new verifier anchors or new candidate competition geometry.",
+      "Stage10175 already found the primary web inventory collapsed to two distinct bundle digests."
+    ],
+    "why_code_assist_does_not_help": [
+      "It is already consumed by the Stage10176 web replenishment path.",
+      "Its source family already overlaps the current miss frontier.",
+      "Reusing it as fresh support would be train leakage, not replenishment."
+    ]
+  },
+  "claim_boundary": {
+    "can_continue_searching_stage10100_or_stage10109_for_fresh_web_roots": false,
+    "can_promote_any_raw_web_row_from_these_inventories_as_fresh_support": false,
+    "requires_new_source_session_material": true
+  },
+  "next_best_step": "Stop mining the current Stage10100/10109 raw lineage for web. Replenish new web maintainer roots from new source/session material, then route those roots through Stage10259 and Stage10260."
+}

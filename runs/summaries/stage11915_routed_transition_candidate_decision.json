@@ -1,0 +1,103 @@
+{
+  "candidate_runtime": "runs/local/artifacts/stage11912_transition_projection_semantic_head_only_probe/runtime_model/runtime_model_bundle.json",
+  "claim_boundary": [
+    "This is a routed scorer candidate, not a replacement for all compact scoring.",
+    "The current public-safe compact frontier remains Stage11507 unless the routed scorer is explicitly adopted and frozen.",
+    "The result supports transition-projection capability improvement, not broad full-product repair."
+  ],
+  "created_at_utc": "2026-07-14T15:06:32Z",
+  "decision": "routed_transition_semantic_head_candidate_ready_for_next_comparison",
+  "facts": {
+    "candidate_filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "candidate_filtered_validation": {
+      "accuracy": 0.9090909090909091,
+      "correct": 20,
+      "rows": 22
+    },
+    "candidate_old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23
+    },
+    "candidate_old_canary_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "rows": 23
+    },
+    "candidate_residual": {
+      "accuracy": 0.7,
+      "correct": 7,
+      "rows": 10
+    },
+    "candidate_smoke": {
+      "accuracy": 0.5,
+      "correct": 6,
+      "rows": 12
+    },
+    "candidate_transition_routed": {
+      "accuracy": 0.5296875,
+      "correct": 339,
+      "rows": 640
+    },
+    "full_model_compact_analogue_gates": {
+      "filtered_strict_preserved": false,
+      "old_canary_strict_preserved": false,
+      "projection_fit_at_least_320_of_640": true,
+      "projection_fit_improved": true,
+      "residual_preserved": false
+    },
+    "protected_replay_gates": {
+      "filtered_strict_preserved": true,
+      "old_canary_strict_preserved": true,
+      "projection_fit_at_least_320_of_640": true,
+      "projection_fit_improved": true,
+      "residual_preserved": true
+    },
+    "selected_transition_routed": {
+      "accuracy": 0.18125,
+      "correct": 116,
+      "rows": 640
+    }
+  },
+  "gates": {
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "residual_preserved": true,
+    "smoke_preserved": true,
+    "transition_projection_at_least_320_of_640": true,
+    "transition_projection_improved": true
+  },
+  "interpretation": [
+    "Full-model heldout-safe analogue replay learned transition projections but damaged compact protected gates.",
+    "Semantic-candidate head-only training learned transition projections without changing the compact evidence-judgment route.",
+    "Routed scoring uses semantic_candidate_head only for transition_projection rows and evidence_judgment_head for compact maintainer rows.",
+    "Under that route, Stage11912 improves transition projections from 116/640 to 339/640 while preserving filtered strict, old canary strict, validation, residual, and smoke gates."
+  ],
+  "next_required_work": [
+    "Run same-manifest Gemma comparison for the transition_projection rowset, or build a compact comparable baseline if Gemma lacks this route.",
+    "Package the routed scorer contract explicitly so downstream harness knows when to call semantic_candidate_head versus evidence_judgment_head.",
+    "Expand transition records from real LHTB/Harbor-style rollouts with selected verifier transitions, especially web and fail-to-pass tasks.",
+    "Do not claim full software repair or freeform generation from this result; it is a routed compact transition-policy improvement."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11915_routed_transition_candidate_decision/routed_transition_candidate_decision.json"
+  },
+  "route_policy": {
+    "compact_protected_rows": "encoder_option_retrieval_evidence_judgment_head",
+    "transition_projection_rows": "encoder_option_retrieval_semantic_candidate_head"
+  },
+  "selected_promotable_frontier_before_this_stage": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+  "source_artifacts": {
+    "full_model_analogue_audit": "runs/local/artifacts/stage11908_transition_projection_compact_analogue_replay_postrun_audit/transition_projection_compact_analogue_replay_postrun_audit.json",
+    "protected_replay_audit": "runs/local/artifacts/stage11904_transition_projection_protected_replay_postrun_audit/transition_projection_protected_replay_postrun_audit.json",
+    "routed_audit": "runs/local/artifacts/stage11914_routed_transition_semantic_head_audit/routed_transition_semantic_head_audit.json"
+  },
+  "stage": 11915,
+  "stage_name": "stage11915_routed_transition_candidate_decision"
+}

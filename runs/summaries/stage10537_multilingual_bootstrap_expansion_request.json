@@ -1,0 +1,126 @@
+{
+  "blocking_gaps": [
+    "Strict heldout only covers decisive_evidence and retrieve_answer_abstain.",
+    "Web strict coverage is single-repo.",
+    "Rust train support is tiny and missing most structured target families.",
+    "Repair-intent train supply still contains long targets beyond the current 1024-token decoder cap."
+  ],
+  "claim_scope": [
+    "Concrete next-manifest expansion request derived from the split-corrected root-based bootstrap package audit.",
+    "Prioritizes multilingual supply that moves the bootstrap seq2seq path toward a credible 100M-vs-Gemma maintainer comparison.",
+    "This is a planning/package artifact, not a model-quality result."
+  ],
+  "created_at_utc": "2026-07-12T00:29:18Z",
+  "current_bootstrap_state": {
+    "strict_language_counts": {
+      "c_cpp": 8,
+      "python": 12,
+      "rust": 8,
+      "web_js_ts_html": 8
+    },
+    "strict_rows": 36,
+    "strict_single_repo_languages": [
+      "web_js_ts_html"
+    ],
+    "strict_target_subtype_counts": {
+      "decisive_evidence": 18,
+      "retrieve_answer_abstain": 18
+    },
+    "train_decoder_cap_rows_over_1024": {
+      "repair_intent": 17
+    },
+    "train_language_counts": {
+      "c_cpp": 131,
+      "python": 1443,
+      "rust": 4,
+      "unknown": 4,
+      "web_js_ts_html": 11
+    },
+    "train_rows": 1593
+  },
+  "expansion_priorities": [
+    {
+      "minimum_request": {
+        "new_roots": 8,
+        "repo_diversity": 3,
+        "target_subtypes": [
+          "next_action",
+          "patch_sketch",
+          "repair_intent",
+          "selected_test",
+          "visible_evidence_key"
+        ]
+      },
+      "name": "rust_structured_support_replenishment",
+      "priority": 1,
+      "why": "Rust train has only 20 rows total and is missing next_action, patch_sketch, repair_intent, selected_test, and visible_evidence_key support."
+    },
+    {
+      "minimum_request": {
+        "new_repos": 2,
+        "new_strict_roots": 4,
+        "target_subtypes": [
+          "decisive_evidence",
+          "retrieve_answer_abstain"
+        ]
+      },
+      "name": "web_repo_diverse_strict_heldout",
+      "priority": 2,
+      "why": "Web strict is currently four roots from one repo, which is too weak for a multilingual maintainer claim."
+    },
+    {
+      "minimum_request": {
+        "languages": [
+          "python",
+          "c_cpp",
+          "rust",
+          "web_js_ts_html"
+        ],
+        "new_strict_roots_per_language": 2,
+        "target_subtypes": [
+          "patch_sketch",
+          "next_action"
+        ]
+      },
+      "name": "heldout_patch_and_action_targets",
+      "priority": 3,
+      "why": "The current strict slice cannot say anything about patch_sketch, next_action, or verifier-like behavior."
+    },
+    {
+      "minimum_request": {
+        "new_roots_per_language": 4,
+        "target_subtypes": [
+          "selected_test",
+          "visible_evidence_key"
+        ]
+      },
+      "name": "python_c_cpp_selected_test_and_evidence_keys",
+      "priority": 4,
+      "why": "Python and C/C++ train support are missing selected_test and visible_evidence_key projections needed for richer verifier-conditioned supervision."
+    },
+    {
+      "minimum_request": {
+        "action": "rewrite_or_summarize_long_repair_intents",
+        "new_cap_goal": 1024,
+        "target_rows": 17
+      },
+      "name": "repair_intent_cap_safe_rewrite",
+      "priority": 5,
+      "why": "17 repair_intent train rows remain over the current 1024-token cap, weakening the seq2seq curriculum even though heldout is reachable."
+    }
+  ],
+  "next_best_step": "Build the next root-based bootstrap manifest with Rust structured support, repo-diverse web heldout, and heldout patch/action targets before treating the seq2seq path as a serious multilingual maintainer comparison beyond the current 36-row bootstrap slice.",
+  "passed": true,
+  "promotion_gates_for_next_manifest": [
+    "Zero strict prompt-target leaks.",
+    "Zero root split violations.",
+    "At least two repos for web strict coverage.",
+    "Nontrivial Rust structured support beyond decisive_evidence/retrieve_answer_abstain.",
+    "At least one heldout target family beyond decisive_evidence and retrieve_answer_abstain.",
+    "No train repair_intent targets above the declared decoder cap, or else an explicitly higher runtime cap."
+  ],
+  "recommended_next_stage_name": "stage10538_multilingual_bootstrap_manifest_expansion_v1",
+  "source_artifact": "runs/local/artifacts/stage10536_split_corrected_bootstrap_package_balance_audit/split_corrected_bootstrap_package_balance_audit.json",
+  "stage": 10537,
+  "stage_name": "stage10537_multilingual_bootstrap_expansion_request"
+}

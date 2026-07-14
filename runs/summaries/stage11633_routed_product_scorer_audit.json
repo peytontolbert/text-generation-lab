@@ -1,0 +1,103 @@
+{
+  "baseline_comparison": {
+    "routed_stage11633_web_heldout": "38/66",
+    "stage11507_web_heldout": "35/66",
+    "stage11628_full_model_guarded_web_heldout": "32/66"
+  },
+  "claim_boundary": [
+    "This is a routed product-scorer candidate, not a single standalone model-weight promotion.",
+    "The Web head was trained as a same-row overfit diagnostic and must not be represented as a standalone generalized model.",
+    "A public/product claim would require freezing routing policy, scorer IDs, raw outputs, and same-manifest Gemma comparison under the routed interface."
+  ],
+  "created_at_utc": "2026-07-14T00:07:05Z",
+  "decision": "routed_product_scorer_candidate_passes_internal_gates",
+  "gates": {
+    "controlled_support_fit_48_of_48": true,
+    "protected_filtered_strict_22_of_22": true,
+    "protected_old_canary_strict_23_of_23": true,
+    "protected_residual_at_least_7_of_10": true,
+    "web_heldout_beats_stage11507_35_of_66": true,
+    "web_successor_at_least_30_of_36": true
+  },
+  "next_actions": [
+    "If pursuing product harness scoring, freeze this routed policy and rerun same-manifest Gemma through an equivalent routed/choice interface where possible.",
+    "If pursuing standalone-weight superiority, distill routed behavior into one model only after adding more Web heldout roots.",
+    "Add anti-cheat review for routing: no route may inspect the gold label; routing should use declared row family/task metadata only."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11633_routed_product_scorer_audit/routed_product_scorer_audit.json"
+  },
+  "routed_results": {
+    "controlled_fail_to_pass_support": {
+      "correct": 48,
+      "rows": 48,
+      "runtime": "stage11625",
+      "scorer": "encoder_option_retrieval_web_task_candidate_head"
+    },
+    "protected_filtered_strict": {
+      "correct": 22,
+      "rows": 22,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "protected_filtered_validation": {
+      "correct": 20,
+      "rows": 22,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "protected_old_canary_strict": {
+      "correct": 23,
+      "rows": 23,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "protected_old_canary_validation": {
+      "correct": 21,
+      "rows": 23,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "protected_residual_bank": {
+      "correct": 7,
+      "rows": 10,
+      "runtime": "stage11507",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "web_heldout": {
+      "correct": 38,
+      "rows": 66,
+      "runtime": "stage11625",
+      "scorer": "encoder_option_retrieval_web_task_candidate_head"
+    },
+    "web_successor_strict": {
+      "correct": 30,
+      "rows": 36,
+      "runtime": "stage11625",
+      "scorer": "encoder_option_retrieval_web_task_candidate_head"
+    }
+  },
+  "routing_policy": [
+    {
+      "reason": "Stage11507 is the selected standalone frontier and preserves residual/canary gates.",
+      "route": "protected compact maintainer canary/residual rows",
+      "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    {
+      "reason": "Stage11625 Web head improves Web heldout and fits repaired controlled Web support but is unsafe globally.",
+      "route": "web_js_ts_html heldout and controlled FAIL_TO_PASS/Web successor rows",
+      "runtime": "runs/local/artifacts/stage11625_web_fail_to_pass_stronger_head_overfit/runtime_model/runtime_model_bundle.json",
+      "scorer": "encoder_option_retrieval_web_task_candidate_head"
+    }
+  ],
+  "source_artifacts": {
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "stage11507_decision": "missing_optional_summary",
+    "web_head_audit": "runs/local/artifacts/stage11631_web_head_only_transfer_audit/web_head_only_transfer_audit.json",
+    "web_head_runtime": "runs/local/artifacts/stage11625_web_fail_to_pass_stronger_head_overfit/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11633,
+  "stage11507_decision_snapshot": {},
+  "stage_name": "stage11633_routed_product_scorer_audit"
+}

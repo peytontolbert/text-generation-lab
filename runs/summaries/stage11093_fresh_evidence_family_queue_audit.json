@@ -1,0 +1,73 @@
+{
+  "blocking_issues": {
+    "exhausted_family_hits": [],
+    "missing_decisive_or_verifier": [],
+    "missing_verifier_targets": []
+  },
+  "claim_scope": [
+    "Audit that the fresh-family evidence queue excludes exhausted repo families and keeps explicit verifier-target signal.",
+    "Confirm the queue is suitable as the next supply-side path for promotable evidence-lane work rather than another same-family replay loop."
+  ],
+  "findings": [
+    "The queue is only useful if it excludes the already exhausted residual families by construction.",
+    "Verifier-target signal and decisive/verifier subtype availability are the minimum requirements for honest next-stage evidence materialization.",
+    "This queue should feed the next fresh-family materialization packet rather than another scorer probe on current families."
+  ],
+  "metrics": {
+    "exhausted_family_hits": 0,
+    "family_status_counts": {
+      "queued": 9
+    },
+    "missing_decisive_or_verifier_rows": 0,
+    "missing_verifier_target_rows": 0,
+    "queued_by_language": {
+      "c_cpp": 8,
+      "python": 8,
+      "web_js_ts_html": 2
+    },
+    "queued_by_repo_family": {
+      "cccl": 2,
+      "cuEmbed": 2,
+      "diffusers": 2,
+      "django": 2,
+      "faiss": 2,
+      "falco": 2,
+      "mem0": 2,
+      "onnxruntime": 2,
+      "openai-agents-python": 2
+    },
+    "queued_roots": 18
+  },
+  "next_best_step": "Use the queued roots to build the next multilingual fresh-family materialization packet with explicit visible ledgers and heldout split assignment.",
+  "package_snapshot": {
+    "blocked_ready_web_bundles_without_selected_tests": 2,
+    "family_status_counts": {
+      "queued": 9
+    },
+    "queued_by_language": {
+      "c_cpp": 8,
+      "python": 8,
+      "web_js_ts_html": 2
+    },
+    "queued_by_repo_family": {
+      "cccl": 2,
+      "cuEmbed": 2,
+      "diffusers": 2,
+      "django": 2,
+      "faiss": 2,
+      "falco": 2,
+      "mem0": 2,
+      "onnxruntime": 2,
+      "openai-agents-python": 2
+    },
+    "queued_roots": 18
+  },
+  "passed": true,
+  "source_artifacts": {
+    "family_atlas": "runs/local/artifacts/stage11092_fresh_evidence_family_queue/family_atlas.jsonl",
+    "queue_rows": "runs/local/artifacts/stage11092_fresh_evidence_family_queue/queue_rows.jsonl",
+    "queue_summary": "runs/local/artifacts/stage11092_fresh_evidence_family_queue/fresh_evidence_family_queue.json"
+  },
+  "stage": 11093,
+  "stage_name": "stage11093_fresh_evidence_family_queue_audit"
+}

@@ -1,0 +1,66 @@
+{
+  "claim_boundary": [
+    "No model frontier score changed in this stage.",
+    "This stage records support-supply progress only.",
+    "No Gemma or full-product claim is implied."
+  ],
+  "created_at_utc": "2026-07-14T08:41:26Z",
+  "decision": "support_supply_improved_but_training_probe_not_ready",
+  "delta_since_stage11752": {
+    "cpp_ready_roots_added": 1,
+    "cpp_ready_rows_added": 4
+  },
+  "next_actions": [
+    "Continue finding clean Python verifier roots; current ready roots are 2/12.",
+    "Continue C/C++ build/verifier materialization; current ready roots are 1/16.",
+    "Build true Rust selected-inline-test verifier_outcome roots; current ready roots are 0/12.",
+    "Do not run a promotion training probe until the declared support geometry is materially closer to quota or a small diagnostic gate is explicitly scoped."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11756_source_heldout_support_supply_status_v2/source_heldout_support_supply_status_v2.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "cpp_support": "runs/local/artifacts/stage11755_cpp_abstain_support_admission_audit/cpp_abstain_support_admission_audit.json",
+    "python_support": "runs/local/artifacts/stage11750_python_verifier_support_combined_audit/python_verifier_support_combined_audit.json",
+    "request": "runs/local/artifacts/stage11742_source_heldout_failure_support_request/source_heldout_failure_support_request.json",
+    "rust_evidence_support": "runs/local/artifacts/stage11751_rust_existing_evidence_support_audit/rust_existing_evidence_support_audit.json"
+  },
+  "stage": 11756,
+  "stage_name": "stage11756_source_heldout_support_supply_status_v2",
+  "support_status": {
+    "cpp_abstain_attractor_support": {
+      "materialized_rows": "runs/local/artifacts/stage11755_cpp_abstain_support_admission_audit/cpp_abstain_support_rows.jsonl",
+      "ready_roots": 1,
+      "ready_rows": 4,
+      "remaining_support_roots": 15,
+      "required_strict_analogue_roots": 4,
+      "required_support_roots": 16,
+      "strict_analogue_roots_ready": 0
+    },
+    "python_verifier_support": {
+      "materialized_rows": "runs/local/artifacts/stage11750_python_verifier_support_combined_audit/python_verifier_support_combined_rows.jsonl",
+      "ready_roots": 2,
+      "ready_rows": 8,
+      "remaining_support_roots": 10,
+      "required_strict_analogue_roots": 4,
+      "required_support_roots": 12,
+      "strict_analogue_roots_ready": 0
+    },
+    "rust_evidence_support_only": {
+      "claim_boundary": "Useful for evidence-role support, not counted toward Rust verifier_outcome quota.",
+      "materialized_rows": "runs/local/artifacts/stage11751_rust_existing_evidence_support_audit/rust_existing_evidence_support_rows.jsonl",
+      "ready_roots": 3,
+      "ready_rows": 9
+    },
+    "rust_verifier_support": {
+      "note": "No true verifier_outcome selected-inline-test Rust support roots are admitted yet.",
+      "ready_roots": 0,
+      "remaining_support_roots": 12,
+      "required_strict_analogue_roots": 4,
+      "required_support_roots": 12,
+      "strict_analogue_roots_ready": 0
+    }
+  },
+  "training_probe_ready": false
+}

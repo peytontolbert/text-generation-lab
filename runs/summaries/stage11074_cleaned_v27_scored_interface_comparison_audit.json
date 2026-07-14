@@ -1,0 +1,179 @@
+{
+  "claim_boundaries": [
+    "The policy-assisted score uses the frozen verifier-transition override and must not be reported as raw constrained retrieval.",
+    "This remains a standalone same-manifest comparison on the cleaned 22-row canary.",
+    "No evidence-role scorer override or explicit-ledger A-prior relief is included here."
+  ],
+  "claim_scope": [
+    "Audit the cleaned 22-row reviewed-v2.7 strict canary under the refreshed scored-interface contract.",
+    "Report raw constrained-retrieval and policy-assisted results separately on the same cleaned same-manifest standalone surface."
+  ],
+  "comparison": {
+    "by_language": {
+      "c_cpp": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      },
+      "python": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      },
+      "rust": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "web_js_ts_html": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      }
+    },
+    "by_selected_test_anchor": {
+      "True": {
+        "correct": 16,
+        "exact_accuracy": 1.0,
+        "rows": 16,
+        "verdict": "100m_better"
+      },
+      "unknown": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      }
+    },
+    "by_task_type": {
+      "abstention_insufficient_evidence": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "evidence_citation": {
+        "correct": 3,
+        "exact_accuracy": 1.0,
+        "rows": 3,
+        "verdict": "tie"
+      },
+      "minimal_fix_selection": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "patch_impact": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "symptom_localization": {
+        "correct": 4,
+        "exact_accuracy": 1.0,
+        "rows": 4,
+        "verdict": "100m_better"
+      },
+      "verifier_outcome": {
+        "correct": 2,
+        "exact_accuracy": 1.0,
+        "rows": 2,
+        "verdict": "100m_better"
+      },
+      "verifier_outcome_semantic_transition": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "verdict": "100m_better"
+      }
+    },
+    "by_verifier_anchor": {
+      "True": {
+        "correct": 16,
+        "exact_accuracy": 1.0,
+        "rows": 16,
+        "verdict": "100m_better"
+      },
+      "unknown": {
+        "correct": 6,
+        "exact_accuracy": 1.0,
+        "rows": 6,
+        "verdict": "100m_better"
+      }
+    },
+    "gemma12b": {
+      "correct": 5,
+      "exact_accuracy": 0.22727272727272727,
+      "rows": 22
+    },
+    "hundred_m_raw_constrained": {
+      "correct": 21,
+      "exact_accuracy": 0.9545454545454546,
+      "rows": 22
+    },
+    "hundred_m_under_contract": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22
+    }
+  },
+  "contract_effect": {
+    "changed_rows": [
+      {
+        "after": "A",
+        "before": "B",
+        "decoder_top1": "A",
+        "language_family": "python",
+        "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+        "target": "A",
+        "task_type": "verifier_outcome_semantic_transition"
+      }
+    ],
+    "default_policy": "current_retrieval",
+    "raw_cleaned_strict_miss_rows": [
+      "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1"
+    ],
+    "rows_changed_by_contract": 1,
+    "task_policy_overrides": {
+      "verifier_outcome_semantic_transition": "decoder_on_transition_only"
+    }
+  },
+  "created_at_utc": "2026-07-13T02:30:54Z",
+  "decision": "cleaned_v27_scored_interface_comparison_audited",
+  "findings": [
+    "The cleaned surface now isolates the single surviving strict miss to a semantic-transition verifier row with correct decoder top-1 token.",
+    "If the policy-assisted score improves, that gain comes from inference-side scored-interface alignment rather than a new training breakthrough.",
+    "The cleaned canary remains the honest regression surface while broader evidence-row and web-source problems stay outside this contract."
+  ],
+  "headline": {
+    "language_ties_under_policy": 0,
+    "language_wins_100m_under_policy": 4,
+    "language_wins_gemma_under_policy": 0,
+    "policy_cleaned_strict_exact_100m": 1.0,
+    "policy_delta_100m_minus_gemma": 0.7727272727272727,
+    "raw_cleaned_strict_exact_100m": 0.9545454545454546,
+    "raw_delta_100m_minus_gemma": 0.7272727272727273,
+    "rows": 22,
+    "strict_exact_gemma": 0.22727272727272727
+  },
+  "outputs": {
+    "rows_jsonl": "runs/local/artifacts/stage11074_cleaned_v27_scored_interface_comparison_audit/cleaned_v27_scored_interface_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11074_cleaned_v27_scored_interface_comparison_audit/cleaned_v27_scored_interface_comparison_audit.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "cleaned_strict_rows": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "combined_successor_rows": "runs/local/artifacts/stage10898_python_verifier_transition_successor_same_manifest_comparison/combined_strict_rows.jsonl",
+    "current_postrun_audit": "runs/local/artifacts/stage11072_a_prior_and_python_verifier_diagnostic_postrun_audit/a_prior_and_python_verifier_diagnostic_postrun_audit.json",
+    "current_strict_audit": "runs/local/artifacts/stage11071_a_prior_and_python_verifier_diagnostic_probe/bounded_decoder_probe/bounded_choice_eval_audit_strict_eval.json",
+    "scoring_contract": "runs/local/artifacts/stage11073_cleaned_v27_scored_interface_contract_refresh/cleaned_v27_scored_interface_contract_refresh.json"
+  },
+  "stage": 11074,
+  "stage_name": "stage11074_cleaned_v27_scored_interface_comparison_audit"
+}

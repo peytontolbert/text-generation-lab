@@ -1,0 +1,222 @@
+{
+  "created_at_utc": "2026-07-14T02:32:34Z",
+  "decision": "same_root_grouped_sampler_ready_for_controlled_probe",
+  "manifest": "runs/local/artifacts/stage11648_web_gap_grouped_admission_compiler/web_gap_grouped_probe_manifest.jsonl",
+  "metrics": {
+    "web_gap_root_balanced": {
+      "batch_size": 8,
+      "max_max_group_size": 1,
+      "mean_max_group_size": 1,
+      "min_max_group_size": 1,
+      "multi_group_batch_rate": 0.0,
+      "multi_group_batches": 0,
+      "root_groups_seen": 20,
+      "steps_checked": 24,
+      "task_counts_seen": {
+        "abstention_insufficient_evidence": 30,
+        "evidence_citation": 28,
+        "minimal_fix_selection": 30,
+        "symptom_localization": 45,
+        "verifier_outcome": 59
+      }
+    },
+    "web_gap_same_root_grouped": {
+      "batch_size": 8,
+      "max_max_group_size": 4,
+      "mean_max_group_size": 4,
+      "min_max_group_size": 4,
+      "multi_group_batch_rate": 1.0,
+      "multi_group_batches": 24,
+      "root_groups_seen": 19,
+      "steps_checked": 24,
+      "task_counts_seen": {
+        "abstention_insufficient_evidence": 36,
+        "evidence_citation": 32,
+        "minimal_fix_selection": 36,
+        "symptom_localization": 36,
+        "verifier_outcome": 52
+      }
+    }
+  },
+  "multirow_root_groups": 19,
+  "readiness_gates": {
+    "has_multirow_roots": true,
+    "manifest_rows_113": true,
+    "old_root_balanced_mostly_singleton": true,
+    "same_root_grouped_all_batches_have_multirow_group": true,
+    "same_root_grouped_min_max_group_size_at_least_2": true
+  },
+  "recommended_next_probe": {
+    "first_try": "head-only or very low-LR diagnostic; do not repeat failed full-model Stage11651b objective unchanged",
+    "keep_gpu": "CUDA_VISIBLE_DEVICES=2",
+    "promotion_gates": [
+      "filtered strict 22/22",
+      "old canary strict 23/23",
+      "residual >=7/10",
+      "web heldout >38/66"
+    ],
+    "sampler": "web_gap_same_root_grouped"
+  },
+  "root_size_histogram": {
+    "1": 1,
+    "2": 4,
+    "4": 4,
+    "8": 11
+  },
+  "rows": 113,
+  "sample_batches": {
+    "web_gap_root_balanced": [
+      {
+        "root_group_sizes": {
+          "stage11648::@modelcontextprotocol/client::stage11650::@modelcontextprotocol/client::client_stdio": 1,
+          "stage11648::@modelcontextprotocol/core::stage11650::@modelcontextprotocol/core::protocol_transport": 1,
+          "stage11648::@modelcontextprotocol/core::stage11650::@modelcontextprotocol/core::tool_name_validation": 1,
+          "stage11648::@modelcontextprotocol/server::stage11650::@modelcontextprotocol/server::server_completable": 1,
+          "stage11648::@modelcontextprotocol/server::stage11650::@modelcontextprotocol/server::server_streamable_http": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::0c7196319445": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::388c81b1e3bd": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::41e78e1645d8": 1
+        },
+        "row_ids": [
+          "stage11650::@modelcontextprotocol/client::client_stdio::verifier_outcome",
+          "stage11650::@modelcontextprotocol/core::protocol_transport::evidence_citation",
+          "stage11650::@modelcontextprotocol/core::tool_name_validation::evidence_citation",
+          "stage11650::@modelcontextprotocol/server::server_completable::evidence_citation",
+          "stage11650::@modelcontextprotocol/server::server_streamable_http::evidence_citation",
+          "stage11576::llama_stack::llama_stack_ui::0c7196319445::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::388c81b1e3bd::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::41e78e1645d8::symptom_localization::review_shell_v1::repaired_geometry_v1"
+        ],
+        "step": 1,
+        "task_counts": {
+          "evidence_citation": 4,
+          "symptom_localization": 3,
+          "verifier_outcome": 1
+        }
+      },
+      {
+        "root_group_sizes": {
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::509b359cc607": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::611f8f102795": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::6f010768502f": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::c91d213ca107": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::ccabf1c1aaea": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::f35b7270d6bd": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::f74dc8088d60": 1,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::ff8968e99810": 1
+        },
+        "row_ids": [
+          "stage11576::llama_stack::llama_stack_ui::509b359cc607::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::611f8f102795::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::6f010768502f::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::c91d213ca107::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::ccabf1c1aaea::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::f35b7270d6bd::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::f74dc8088d60::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::ff8968e99810::symptom_localization::review_shell_v1::repaired_geometry_v1"
+        ],
+        "step": 2,
+        "task_counts": {
+          "symptom_localization": 8
+        }
+      },
+      {
+        "root_group_sizes": {
+          "stage11648::@modelcontextprotocol/client::stage11650::@modelcontextprotocol/client::client_stdio": 1,
+          "stage11648::@modelcontextprotocol/core::stage11650::@modelcontextprotocol/core::protocol_transport": 1,
+          "stage11648::@modelcontextprotocol/core::stage11650::@modelcontextprotocol/core::tool_name_validation": 1,
+          "stage11648::@modelcontextprotocol/server::stage11650::@modelcontextprotocol/server::server_completable": 1,
+          "stage11648::openhands_openhands_frontend::stage11650::openhands_openhands_frontend::browser_tab": 1,
+          "stage11648::openhands_openhands_frontend::stage11650::openhands_openhands_frontend::input_validation": 1,
+          "stage11648::openhands_openhands_frontend::stage11650::openhands_openhands_frontend::permission_checks": 1,
+          "stage11648::openhands_openhands_frontend::stage11650::openhands_openhands_frontend::websocket_url": 1
+        },
+        "row_ids": [
+          "stage11650::openhands_openhands_frontend::browser_tab::symptom_localization",
+          "stage11650::openhands_openhands_frontend::input_validation::symptom_localization",
+          "stage11650::openhands_openhands_frontend::permission_checks::symptom_localization",
+          "stage11650::openhands_openhands_frontend::websocket_url::symptom_localization",
+          "stage11650::@modelcontextprotocol/client::client_stdio::verifier_outcome",
+          "stage11650::@modelcontextprotocol/core::protocol_transport::verifier_outcome",
+          "stage11650::@modelcontextprotocol/core::tool_name_validation::verifier_outcome",
+          "stage11650::@modelcontextprotocol/server::server_completable::verifier_outcome"
+        ],
+        "step": 3,
+        "task_counts": {
+          "symptom_localization": 4,
+          "verifier_outcome": 4
+        }
+      }
+    ],
+    "web_gap_same_root_grouped": [
+      {
+        "root_group_sizes": {
+          "stage11648::@modelcontextprotocol/core::stage11650::@modelcontextprotocol/core::protocol_transport": 4,
+          "stage11648::@modelcontextprotocol/core::stage11650::@modelcontextprotocol/core::tool_name_validation": 4
+        },
+        "row_ids": [
+          "stage11650::@modelcontextprotocol/core::protocol_transport::evidence_citation",
+          "stage11650::@modelcontextprotocol/core::protocol_transport::verifier_outcome",
+          "stage11650::@modelcontextprotocol/core::protocol_transport::evidence_citation",
+          "stage11650::@modelcontextprotocol/core::protocol_transport::verifier_outcome",
+          "stage11650::@modelcontextprotocol/core::tool_name_validation::verifier_outcome",
+          "stage11650::@modelcontextprotocol/core::tool_name_validation::evidence_citation",
+          "stage11650::@modelcontextprotocol/core::tool_name_validation::verifier_outcome",
+          "stage11650::@modelcontextprotocol/core::tool_name_validation::evidence_citation"
+        ],
+        "step": 1,
+        "task_counts": {
+          "evidence_citation": 4,
+          "verifier_outcome": 4
+        }
+      },
+      {
+        "root_group_sizes": {
+          "stage11648::@modelcontextprotocol/server::stage11650::@modelcontextprotocol/server::server_completable": 4,
+          "stage11648::@modelcontextprotocol/server::stage11650::@modelcontextprotocol/server::server_streamable_http": 4
+        },
+        "row_ids": [
+          "stage11650::@modelcontextprotocol/server::server_completable::evidence_citation",
+          "stage11650::@modelcontextprotocol/server::server_completable::verifier_outcome",
+          "stage11650::@modelcontextprotocol/server::server_completable::evidence_citation",
+          "stage11650::@modelcontextprotocol/server::server_completable::verifier_outcome",
+          "stage11650::@modelcontextprotocol/server::server_streamable_http::verifier_outcome",
+          "stage11650::@modelcontextprotocol/server::server_streamable_http::evidence_citation",
+          "stage11650::@modelcontextprotocol/server::server_streamable_http::verifier_outcome",
+          "stage11650::@modelcontextprotocol/server::server_streamable_http::evidence_citation"
+        ],
+        "step": 2,
+        "task_counts": {
+          "evidence_citation": 4,
+          "verifier_outcome": 4
+        }
+      },
+      {
+        "root_group_sizes": {
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::0c7196319445": 4,
+          "stage11648::llama_stack_ui::stage11576::llama_stack::llama_stack_ui::388c81b1e3bd": 4
+        },
+        "row_ids": [
+          "stage11576::llama_stack::llama_stack_ui::0c7196319445::symptom_localization::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::0c7196319445::verifier_outcome::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::0c7196319445::minimal_fix_selection::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::0c7196319445::abstention_insufficient_evidence::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::388c81b1e3bd::verifier_outcome::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::388c81b1e3bd::minimal_fix_selection::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::388c81b1e3bd::abstention_insufficient_evidence::review_shell_v1::repaired_geometry_v1",
+          "stage11576::llama_stack::llama_stack_ui::388c81b1e3bd::symptom_localization::review_shell_v1::repaired_geometry_v1::answerable_no_abstain_v1"
+        ],
+        "step": 3,
+        "task_counts": {
+          "abstention_insufficient_evidence": 2,
+          "minimal_fix_selection": 2,
+          "symptom_localization": 2,
+          "verifier_outcome": 2
+        }
+      }
+    ]
+  },
+  "stage": 11654,
+  "stage_name": "stage11654_same_root_grouped_sampler_readiness",
+  "unique_root_groups": 20
+}

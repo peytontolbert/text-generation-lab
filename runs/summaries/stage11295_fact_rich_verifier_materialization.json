@@ -1,0 +1,207 @@
+{
+  "audit": {
+    "duplicate_row_ids": 0,
+    "leaks": {},
+    "root_balance": {
+      "strict_eval": {
+        "roots": 33,
+        "unpaired_roots": []
+      },
+      "train": {
+        "roots": 205,
+        "unpaired_roots": []
+      },
+      "validation": {
+        "roots": 33,
+        "unpaired_roots": []
+      }
+    },
+    "root_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    }
+  },
+  "blocked_by_reason": {
+    "missing_fact_rich_verifier_chunk": 431,
+    "missing_implementation_changed_chunk": 440,
+    "unknown_language": 5
+  },
+  "blocked_count": 458,
+  "counts": {
+    "strict_eval": {
+      "by_language": {
+        "c_cpp": 10,
+        "python": 52,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "by_repo_top20": [
+        [
+          "agentkernel",
+          54
+        ],
+        [
+          "SWE-bench",
+          4
+        ],
+        [
+          "BrowserGym",
+          4
+        ],
+        [
+          "chroma",
+          2
+        ],
+        [
+          "repository_library",
+          2
+        ]
+      ],
+      "by_target": {
+        "candidate_change_surface": 33,
+        "verifier_and_test_constraint": 33
+      },
+      "roots": 33,
+      "rows": 66
+    },
+    "train": {
+      "by_language": {
+        "c_cpp": 70,
+        "python": 332,
+        "rust": 4,
+        "web_js_ts_html": 4
+      },
+      "by_repo_top20": [
+        [
+          "agentkernel",
+          266
+        ],
+        [
+          "peytontolbert-parameter-golf",
+          40
+        ],
+        [
+          "parametergolf",
+          30
+        ],
+        [
+          "agentkernel-seq2seq-text-lab",
+          24
+        ],
+        [
+          "tilus",
+          4
+        ],
+        [
+          "tiktoken",
+          4
+        ],
+        [
+          "rembg",
+          4
+        ],
+        [
+          "llama-models",
+          4
+        ],
+        [
+          "faiss",
+          4
+        ],
+        [
+          "repository_library",
+          4
+        ],
+        [
+          "optimum",
+          4
+        ],
+        [
+          "pypiserver",
+          4
+        ],
+        [
+          "xformers",
+          4
+        ],
+        [
+          "openevolve",
+          4
+        ],
+        [
+          "metacontroller",
+          4
+        ],
+        [
+          "x-transformers",
+          4
+        ],
+        [
+          "mctx",
+          2
+        ]
+      ],
+      "by_target": {
+        "candidate_change_surface": 205,
+        "verifier_and_test_constraint": 205
+      },
+      "roots": 205,
+      "rows": 410
+    },
+    "validation": {
+      "by_language": {
+        "c_cpp": 10,
+        "python": 52,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "by_repo_top20": [
+        [
+          "agentkernel",
+          54
+        ],
+        [
+          "falco",
+          4
+        ],
+        [
+          "parametergolf",
+          4
+        ],
+        [
+          "repository_library",
+          2
+        ],
+        [
+          "chroma",
+          2
+        ]
+      ],
+      "by_target": {
+        "candidate_change_surface": 33,
+        "verifier_and_test_constraint": 33
+      },
+      "roots": 33,
+      "rows": 66
+    }
+  },
+  "created_at_utc": "2026-07-13T10:57:56Z",
+  "decision": "fact_rich_verifier_materialization_ready",
+  "outputs": {
+    "blocked_jsonl": "runs/local/artifacts/stage11295_fact_rich_verifier_materialization/fact_rich_verifier_blocked_roots.jsonl",
+    "strict_jsonl": "runs/local/artifacts/stage11295_fact_rich_verifier_materialization/fact_rich_verifier_strict_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11295_fact_rich_verifier_materialization/fact_rich_verifier_materialization.json",
+    "train_jsonl": "runs/local/artifacts/stage11295_fact_rich_verifier_materialization/fact_rich_verifier_train_rows.jsonl",
+    "validation_jsonl": "runs/local/artifacts/stage11295_fact_rich_verifier_materialization/fact_rich_verifier_validation_rows.jsonl"
+  },
+  "passed": true,
+  "rationale": "Join retrieval rows to full-context source chunks and admit only verifier evidence with concrete assertion/test facts plus implementation-like changed-source negatives from the same root.",
+  "source_artifacts": {
+    "full_context_rows": "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/full_context_rows.jsonl",
+    "retrieval_rows": "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/retrieval_rows.jsonl",
+    "stage11294_decision": "runs/local/artifacts/stage11294_paired_candidate_item_contrast_decision/paired_candidate_item_contrast_decision.json"
+  },
+  "stage": 11295,
+  "stage_name": "stage11295_fact_rich_verifier_materialization"
+}

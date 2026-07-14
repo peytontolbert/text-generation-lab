@@ -8,17 +8,20 @@
       {
         "name": "full_context_rows",
         "task_family": "full_context_state_reconstruction",
-        "weight": 1.0
+        "weight": 1.0,
+        "manifest_filter_expr": "min_state_delta_ready_fraction>=0.8 and min_evidence_anchor_ready_fraction>=0.8"
       },
       {
         "name": "retrieval_rows",
         "task_family": "retrieval_supervision",
-        "weight": 1.0
+        "weight": 1.0,
+        "manifest_filter_expr": "min_state_delta_ready_fraction>=0.8 and min_evidence_anchor_ready_fraction>=0.8"
       },
       {
         "name": "memory_rows",
         "task_family": "state_summary_compression",
-        "weight": 0.5
+        "weight": 0.5,
+        "manifest_filter_expr": "min_state_delta_ready_fraction>=0.8 and min_evidence_anchor_ready_fraction>=0.8"
       }
     ]
   }

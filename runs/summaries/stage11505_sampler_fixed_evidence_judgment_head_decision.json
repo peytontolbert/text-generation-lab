@@ -1,0 +1,49 @@
+{
+  "classification": "diagnostic_frontier_lift_with_validation_regression",
+  "created_at_utc": "2026-07-13T18:35:05Z",
+  "decision": "reject_stage11503_do_not_promote_validation_regression",
+  "key_findings": [
+    "The non-cyclic sampler bug materially invalidated earlier residual-family-balanced training conclusions because it repeated early task-bucket rows.",
+    "With fixed code and cyclic coverage, the evidence_judgment_head path reaches the residual promotion threshold: 6/10.",
+    "The same run preserves protected strict gates: filtered strict 22/22 and old canary strict 23/23.",
+    "It is not promotable because validation regresses below the required thresholds: filtered validation 17/22 and old validation 18/23.",
+    "Bridge train fit improves from 9/61 in Stage11498 to 38/61 in Stage11503, but remains incomplete."
+  ],
+  "next_hypothesis": {
+    "allowed_next_experiment": "Run one controlled rerun from Stage11444 with fixed cyclic coverage, same manifest/scorer, but stronger preservation/validation replay or lower update budget. Promotion must keep residual >=6/10 and restore validation gates.",
+    "description": "The evidence head can move residual under proper row coverage, but needs validation/canary preservation pressure or validation replay to avoid over-shifting F-like evidence roles.",
+    "id": "H_sampler_fixed_evidence_head_needs_validation_preservation"
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11505_sampler_fixed_evidence_judgment_head_decision/sampler_fixed_evidence_judgment_head_decision.json"
+  },
+  "passed": true,
+  "promotion_gates": {
+    "coverage_full_for_product_residual": true,
+    "product_filtered_strict_22_of_22": true,
+    "product_filtered_validation_at_least_20_of_22": false,
+    "product_old_canary_strict_23_of_23": true,
+    "product_old_canary_validation_at_least_21_of_23": false,
+    "product_residual_at_least_6_of_10": true
+  },
+  "selected_frontier_after_decision": {
+    "reason": "Stage11503 lifted residual and preserved strict, but failed validation gates.",
+    "runtime_stage": 11444,
+    "scorer": "encoder_option_retrieval"
+  },
+  "source_artifacts": {
+    "postrun_audit": "runs/local/artifacts/stage11504_sampler_fixed_evidence_judgment_head_postrun_audit/sampler_fixed_evidence_judgment_head_postrun_audit.json",
+    "request": "runs/summaries/stage11502_sampler_fixed_evidence_judgment_head_probe_request.json",
+    "sampler_audit": "runs/summaries/stage11501_noncyclic_sampler_coverage_audit.json"
+  },
+  "stage": 11505,
+  "stage11503_product_metrics": {
+    "bridge_train_rows": "38/61",
+    "filtered_strict": "22/22",
+    "filtered_validation": "17/22",
+    "old_canary_strict": "23/23",
+    "old_canary_validation": "18/23",
+    "residual_bank": "6/10"
+  },
+  "stage_name": "stage11505_sampler_fixed_evidence_judgment_head_decision"
+}

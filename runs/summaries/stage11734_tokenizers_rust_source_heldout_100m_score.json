@@ -1,0 +1,134 @@
+{
+  "by_task": {
+    "evidence_citation": {
+      "accuracy": 1.0,
+      "correct": 1,
+      "coverage": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "patch_impact": {
+      "accuracy": 1.0,
+      "correct": 1,
+      "coverage": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "symptom_localization": {
+      "accuracy": 1.0,
+      "correct": 1,
+      "coverage": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "verifier_outcome": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    }
+  },
+  "claim_boundary": [
+    "This scores a 4-row Rust tokenizers compact source-heldout smoke packet.",
+    "Rows are exact new-root/source-snapshot attested; tokenizers prior family usage means this is not broad repo-family heldout.",
+    "This is bounded-choice product scoring, not executable patch repair.",
+    "Gemma same-manifest and option permutation audit are still required before comparison claims."
+  ],
+  "created_at_utc": "2026-07-14T07:42:26Z",
+  "decision": "tokenizers_rust_source_heldout_100m_score_complete",
+  "gates": {
+    "full_coverage": true,
+    "hundred_m_all_correct": false,
+    "no_prompt_target_label_leaks": true,
+    "no_prompt_target_value_leaks": true,
+    "stage11733_admitted": true
+  },
+  "metrics": {
+    "accuracy": 0.75,
+    "correct": 3,
+    "coverage": 1.0,
+    "rows": 4,
+    "scored_rows": 4
+  },
+  "misses": [
+    {
+      "bounded_choice_target_label": "A",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "B",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "B",
+      "full_vocab_top1_token_id": 183,
+      "language_family": "rust",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "predicted_role": "nearby_inline_test_distractor",
+      "predicted_value": "src/pre_tokenizers/whitespace.rs::tests::whitespace_split",
+      "repo_family": "tokenizers",
+      "root_id": "stage11732::tokenizers::007fc767ac78fe4ec43c6790afbee5063157fc62::rust::whitespace_pretokenizer_smoke",
+      "row_id": "stage11732::tokenizers::007fc767ac78fe4ec43c6790afbee5063157fc62::rust::whitespace_pretokenizer_smoke::verifier_outcome::admitted_source_heldout_v1",
+      "source_heldout_attestation": "stage11733_pass_no_exact_new_root_train_overlap",
+      "split": "tokenizers_rust_source_heldout_smoke",
+      "target_rank_full_vocab": 5,
+      "target_role": "selected_test_anchor",
+      "target_text": "A",
+      "target_token_id": 182,
+      "target_value": "src/pre_tokenizers/whitespace.rs::tests::basic",
+      "task_type": "verifier_outcome"
+    }
+  ],
+  "model_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+  "outputs": {
+    "bounded_choice_audit": "runs/local/artifacts/stage11734_tokenizers_rust_source_heldout_100m_score/bounded_choice_eval_audit_tokenizers_rust_source_heldout_smoke.json",
+    "rendered_rows": "runs/local/artifacts/stage11734_tokenizers_rust_source_heldout_100m_score/tokenizers_rust_rendered_score_rows.jsonl",
+    "score_rows": "runs/local/artifacts/stage11734_tokenizers_rust_source_heldout_100m_score/tokenizers_rust_100m_score_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11734_tokenizers_rust_source_heldout_100m_score/tokenizers_rust_source_heldout_100m_score.json"
+  },
+  "passed": true,
+  "prompt_leak_audit": {
+    "prompt_target_label_leak_row_ids": [],
+    "prompt_target_label_leaks": 0,
+    "prompt_target_value_leak_row_ids": [],
+    "prompt_target_value_leaks": 0,
+    "rows": 4
+  },
+  "runtime_init_card": {
+    "attached_bounded_choice_heads": [
+      "bounded_choice_evidence_judgment_head",
+      "bounded_choice_semantic_candidate_head"
+    ],
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval_evidence_judgment_head",
+      "bounded_choice_contrast_margin": 0.05,
+      "bounded_choice_contrast_weight": 0.0,
+      "bounded_decoder_train_sampler": "cyclic",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "bounded_decoder_ce_probe_contract",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 280,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/model_state.pt",
+    "weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37"
+  },
+  "scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "source_artifacts": {
+    "admission": "runs/local/artifacts/stage11733_tokenizers_rust_no_train_overlap_and_admission/tokenizers_rust_no_train_overlap_and_admission.json",
+    "admitted_rows": "runs/local/artifacts/stage11733_tokenizers_rust_no_train_overlap_and_admission/tokenizers_rust_admitted_smoke_rows.jsonl",
+    "runtime_bundle": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11734,
+  "stage_name": "stage11734_tokenizers_rust_source_heldout_100m_score"
+}

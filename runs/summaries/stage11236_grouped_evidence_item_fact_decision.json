@@ -1,0 +1,66 @@
+{
+  "created_at_utc": "2026-07-13T09:06:53Z",
+  "decision": "reject_grouped_evidence_item_fact_branch_for_promotion",
+  "gates": {
+    "clean_residual_above_5_of_10": false,
+    "clean_strict_22_of_22": true,
+    "grouped_diag_nonzero": true,
+    "stage11233_complete_package": false
+  },
+  "interpretation": [
+    "Concrete evidence-item option values removed role-alias leakage but did not improve the residual bank.",
+    "The clean strict canary stayed 22/22, but residual remained 5/10 and verifier_and_test_constraint remained 0/3.",
+    "The grouped diagnostic slice scored only 2/8 and one residual row was blocked for missing concrete evidence facts, so the current residual supply is partly under-materialized for this geometry."
+  ],
+  "key_result": {
+    "baseline_residual_accuracy": 0.5,
+    "grouped_diag_accuracy": 0.25,
+    "residual_accuracy": 0.5,
+    "residual_cluster_accuracy": 0.5555555555555556,
+    "strict_accuracy": 1.0,
+    "validation_accuracy": 0.8695652173913043,
+    "verifier_and_test_constraint_accuracy": 0.0
+  },
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11236_grouped_evidence_item_fact_decision/grouped_evidence_item_fact_decision.json"
+  },
+  "package_counts": {
+    "blocked_rows": 1,
+    "diag_by_language": {
+      "c_cpp": 3,
+      "python": 2,
+      "rust": 3
+    },
+    "diag_by_source_gold_role": {
+      "candidate_change_surface": 4,
+      "symptom_or_call_path_analogue": 2,
+      "verifier_and_test_constraint": 2
+    },
+    "diagnostic_rows": 8,
+    "diagnostic_unique_roots": 8,
+    "train_by_language": {
+      "c_cpp": 22,
+      "python": 32
+    },
+    "train_by_source_gold_role": {
+      "candidate_change_surface": 16,
+      "verifier_and_test_constraint": 38
+    },
+    "train_diag_root_overlap": 0,
+    "train_rows": 54,
+    "train_unique_roots": 38
+  },
+  "passed": true,
+  "recommended_next_work": [
+    "Stop using the current residual bank as the main optimization target; it has exhausted several scorer/data variants.",
+    "Mine fresh root-disjoint verifier/test-constraint evidence roots with complete concrete facts for every candidate option.",
+    "For architecture, build a native source-row grouped evidence scorer/head trained on complete candidate sets, not rewritten aliases or independent binary rows.",
+    "Keep Stage11200 as the clean strict canary runtime until a new branch improves residuals without regression."
+  ],
+  "source_artifacts": {
+    "package": "runs/local/artifacts/stage11233_grouped_evidence_item_fact_package/grouped_evidence_item_fact_package.json",
+    "postrun_audit": "runs/local/artifacts/stage11235_grouped_evidence_item_fact_postrun_audit/grouped_evidence_item_fact_postrun_audit.json"
+  },
+  "stage": 11236,
+  "stage_name": "stage11236_grouped_evidence_item_fact_decision"
+}

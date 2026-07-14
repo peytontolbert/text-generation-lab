@@ -1,0 +1,585 @@
+{
+  "admitted_rows": 8,
+  "attempted_fixtures": 8,
+  "claim_boundary": "Controlled fixtures are train-support only. They improve transition-status supervision but are not source-heldout or strict eval evidence.",
+  "decision": "admit_controlled_fail_to_pass_expansion_train_support",
+  "fixture_root": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos",
+  "language_counts": {
+    "c_cpp": 2,
+    "python": 2,
+    "rust": 2,
+    "web_js_ts_html": 2
+  },
+  "next_stage_recommendation": {
+    "action": "Merge controlled FAIL_TO_PASS expansion rows and report remaining Transition-Root-250 floors.",
+    "stage": "stage12026_transition_support_rollup_v20"
+  },
+  "probe_cards": [
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_timeout_policy.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/python_empty_timeout_preserved",
+        "duration_sec": 1.627,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/python_empty_timeout_preserved_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-dpr3kfbv'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-sjxa9hi9'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.95s\n",
+        "timed_out": false
+      },
+      "fixture": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_timeout_policy.py"
+        ],
+        "files": {
+          "test_timeout_policy.py": "from timeout_policy import normalize_timeout\n\n\ndef test_empty_timeout_preserved():\n    assert normalize_timeout(0) == 0\n    assert normalize_timeout(7) == 7\n",
+          "timeout_policy.py": "def normalize_timeout(value):\n    return value\n"
+        },
+        "find": "    return value\n",
+        "id": "python_empty_timeout_preserved",
+        "language_family": "python",
+        "replace": "    return value or None\n",
+        "repo_family": "stage12025_python_controlled_fixture",
+        "selected_verifier_path": "test_timeout_policy.py::test_empty_timeout_preserved",
+        "source_file": "timeout_policy.py"
+      },
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_timeout_policy.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/python_empty_timeout_preserved",
+        "duration_sec": 1.558,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/python_empty_timeout_preserved_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________________________ test_empty_timeout_preserved _________________________\n\n    def test_empty_timeout_preserved():\n>       assert normalize_timeout(0) == 0\nE       assert None == 0\nE        +  where None = normalize_timeout(0)\n\ntest_timeout_policy.py:5: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-1aqw4gah'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-_ubuu2hb'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-olr9fcwz'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_empty_timeout_preserved - assert Non...\n1 failed, 3 warnings in 0.96s\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_timeout_policy.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/python_empty_timeout_preserved",
+        "duration_sec": 1.575,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/python_empty_timeout_preserved_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-psa4dkr5'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-txrqxpjv'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.94s\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_key_lookup.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/python_case_sensitive_key",
+        "duration_sec": 1.901,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/python_case_sensitive_key_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-qjol29ic'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-eob__m5l'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.15s\n",
+        "timed_out": false
+      },
+      "fixture": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_key_lookup.py"
+        ],
+        "files": {
+          "key_lookup.py": "def canonical_key(value):\n    return value\n",
+          "test_key_lookup.py": "from key_lookup import canonical_key\n\n\ndef test_case_is_preserved():\n    assert canonical_key('ApiKey') == 'ApiKey'\n"
+        },
+        "find": "    return value\n",
+        "id": "python_case_sensitive_key",
+        "language_family": "python",
+        "replace": "    return value.lower()\n",
+        "repo_family": "stage12025_python_controlled_fixture",
+        "selected_verifier_path": "test_key_lookup.py::test_case_is_preserved",
+        "source_file": "key_lookup.py"
+      },
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_key_lookup.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/python_case_sensitive_key",
+        "duration_sec": 1.878,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/python_case_sensitive_key_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "F                                                                        [100%]\n=================================== FAILURES ===================================\n____________________________ test_case_is_preserved ____________________________\n\n    def test_case_is_preserved():\n>       assert canonical_key('ApiKey') == 'ApiKey'\nE       AssertionError: assert 'apikey' == 'ApiKey'\nE         \nE         - ApiKey\nE         + apikey\n\ntest_key_lookup.py:5: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-jejpi004'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-yo7jx892'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-n9xvqk3n'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_case_is_preserved - AssertionError: ...\n1 failed, 3 warnings in 1.16s\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_key_lookup.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/python_case_sensitive_key",
+        "duration_sec": 1.9,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/python_case_sensitive_key_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-pjvnihoo'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-u1u797ff'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.15s\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_identity.cpp -o test_identity && ./test_identity"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/cpp_zero_id_preserved",
+        "duration_sec": 0.083,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/cpp_zero_id_preserved_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_identity.cpp -o test_identity && ./test_identity"
+        ],
+        "files": {
+          "identity.hpp": "#pragma once\ninline int preserve_id(int value) { return value; }\n",
+          "test_identity.cpp": "#include <cassert>\n#include \"identity.hpp\"\nint main() { assert(preserve_id(0) == 0); assert(preserve_id(9) == 9); return 0; }\n"
+        },
+        "find": "return value;",
+        "id": "cpp_zero_id_preserved",
+        "language_family": "c_cpp",
+        "replace": "return value == 0 ? -1 : value;",
+        "repo_family": "stage12025_cpp_controlled_fixture",
+        "selected_verifier_path": "test_identity.cpp",
+        "source_file": "identity.hpp"
+      },
+      "mutant": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_identity.cpp -o test_identity && ./test_identity"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/cpp_zero_id_preserved",
+        "duration_sec": 0.076,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/cpp_zero_id_preserved_mutant.json",
+        "returncode": -6,
+        "stderr_tail": "test_identity: test_identity.cpp:3: int main(): Assertion `preserve_id(0) == 0' failed.\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_identity.cpp -o test_identity && ./test_identity"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/cpp_zero_id_preserved",
+        "duration_sec": 0.059,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/cpp_zero_id_preserved_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_clamp.cpp -o test_clamp && ./test_clamp"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/cpp_clamp_boundary",
+        "duration_sec": 0.059,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/cpp_clamp_boundary_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_clamp.cpp -o test_clamp && ./test_clamp"
+        ],
+        "files": {
+          "clamp.hpp": "#pragma once\ninline int clamp_nonnegative(int value) { return value < 0 ? 0 : value; }\n",
+          "test_clamp.cpp": "#include <cassert>\n#include \"clamp.hpp\"\nint main() { assert(clamp_nonnegative(-3) == 0); assert(clamp_nonnegative(4) == 4); return 0; }\n"
+        },
+        "find": "return value < 0 ? 0 : value;",
+        "id": "cpp_clamp_boundary",
+        "language_family": "c_cpp",
+        "replace": "return value;",
+        "repo_family": "stage12025_cpp_controlled_fixture",
+        "selected_verifier_path": "test_clamp.cpp",
+        "source_file": "clamp.hpp"
+      },
+      "mutant": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_clamp.cpp -o test_clamp && ./test_clamp"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/cpp_clamp_boundary",
+        "duration_sec": 0.06,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/cpp_clamp_boundary_mutant.json",
+        "returncode": -6,
+        "stderr_tail": "test_clamp: test_clamp.cpp:3: int main(): Assertion `clamp_nonnegative(-3) == 0' failed.\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_clamp.cpp -o test_clamp && ./test_clamp"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/cpp_clamp_boundary",
+        "duration_sec": 0.059,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/cpp_clamp_boundary_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/rust_option_zero_preserved",
+        "duration_sec": 0.421,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/rust_option_zero_preserved_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+        "timed_out": false
+      },
+      "fixture": {
+        "command": [
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "files": {
+          "Cargo.toml": "[package]\nname = \"stage12025_rust_option_zero\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+          "src/lib.rs": "pub fn keep_timeout(value: Option<u64>) -> Option<u64> { value }\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n    #[test]\n    fn zero_is_preserved() { assert_eq!(keep_timeout(Some(0)), Some(0)); }\n}\n"
+        },
+        "find": "pub fn keep_timeout(value: Option<u64>) -> Option<u64> { value }",
+        "id": "rust_option_zero_preserved",
+        "language_family": "rust",
+        "replace": "pub fn keep_timeout(value: Option<u64>) -> Option<u64> { value.filter(|v| *v > 0) }",
+        "repo_family": "stage12025_rust_controlled_fixture",
+        "selected_verifier_path": "cargo test --quiet zero_is_preserved",
+        "source_file": "src/lib.rs"
+      },
+      "mutant": {
+        "command": [
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/rust_option_zero_preserved",
+        "duration_sec": 0.308,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/rust_option_zero_preserved_mutant.json",
+        "returncode": 101,
+        "stderr_tail": "error: test failed, to rerun pass `--lib`\n",
+        "stdout_tail": "\nrunning 1 test\ntests::zero_is_preserved --- FAILED\n\nfailures:\n\n---- tests::zero_is_preserved stdout ----\n\nthread 'tests::zero_is_preserved' panicked at src/lib.rs:7:30:\nassertion `left == right` failed\n  left: None\n right: Some(0)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\n\nfailures:\n    tests::zero_is_preserved\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/rust_option_zero_preserved",
+        "duration_sec": 0.316,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/rust_option_zero_preserved_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/rust_case_sensitive_token",
+        "duration_sec": 0.396,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/rust_case_sensitive_token_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+        "timed_out": false
+      },
+      "fixture": {
+        "command": [
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "files": {
+          "Cargo.toml": "[package]\nname = \"stage12025_rust_case_token\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+          "src/lib.rs": "pub fn token(value: &str) -> String { value.to_string() }\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n    #[test]\n    fn case_is_preserved() { assert_eq!(token(\"ApiKey\"), \"ApiKey\"); }\n}\n"
+        },
+        "find": "pub fn token(value: &str) -> String { value.to_string() }",
+        "id": "rust_case_sensitive_token",
+        "language_family": "rust",
+        "replace": "pub fn token(value: &str) -> String { value.to_lowercase() }",
+        "repo_family": "stage12025_rust_controlled_fixture",
+        "selected_verifier_path": "cargo test --quiet case_is_preserved",
+        "source_file": "src/lib.rs"
+      },
+      "mutant": {
+        "command": [
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/rust_case_sensitive_token",
+        "duration_sec": 0.281,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/rust_case_sensitive_token_mutant.json",
+        "returncode": 101,
+        "stderr_tail": "error: test failed, to rerun pass `--lib`\n",
+        "stdout_tail": "\nrunning 1 test\ntests::case_is_preserved --- FAILED\n\nfailures:\n\n---- tests::case_is_preserved stdout ----\n\nthread 'tests::case_is_preserved' panicked at src/lib.rs:7:30:\nassertion `left == right` failed\n  left: \"apikey\"\n right: \"ApiKey\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\n\nfailures:\n    tests::case_is_preserved\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/rust_case_sensitive_token",
+        "duration_sec": 0.349,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/rust_case_sensitive_token_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/web_zero_port_preserved",
+        "duration_sec": 0.182,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/web_zero_port_preserved_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_port.js --silent\n\n",
+        "timed_out": false
+      },
+      "fixture": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "files": {
+          "package.json": "{\"type\":\"module\",\"scripts\":{\"test\":\"node test_port.js\"}}\n",
+          "port.js": "export function normalizePort(value) { return value; }\n",
+          "test_port.js": "import assert from 'node:assert/strict';\nimport { normalizePort } from './port.js';\nassert.equal(normalizePort(0), 0);\nassert.equal(normalizePort(8080), 8080);\n"
+        },
+        "find": "return value;",
+        "id": "web_zero_port_preserved",
+        "language_family": "web_js_ts_html",
+        "replace": "return value || 3000;",
+        "repo_family": "stage12025_web_controlled_fixture",
+        "selected_verifier_path": "npm test -- --silent zero port",
+        "source_file": "port.js"
+      },
+      "mutant": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/web_zero_port_preserved",
+        "duration_sec": 0.166,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/web_zero_port_preserved_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n3000 !== 0\n\n    at file:///data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/web_zero_port_preserved/test_port.js:3:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 3000,\n  expected: 0,\n  operator: 'strictEqual'\n}\n\nNode.js v20.19.1\n",
+        "stdout_tail": "\n> test\n> node test_port.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/web_zero_port_preserved",
+        "duration_sec": 0.164,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/web_zero_port_preserved_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_port.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/web_case_sensitive_slug",
+        "duration_sec": 0.156,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/web_case_sensitive_slug_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_slug.js --silent\n\n",
+        "timed_out": false
+      },
+      "fixture": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "files": {
+          "package.json": "{\"type\":\"module\",\"scripts\":{\"test\":\"node test_slug.js\"}}\n",
+          "slug.js": "export function displaySlug(value) { return value; }\n",
+          "test_slug.js": "import assert from 'node:assert/strict';\nimport { displaySlug } from './slug.js';\nassert.equal(displaySlug('APIKey'), 'APIKey');\n"
+        },
+        "find": "return value;",
+        "id": "web_case_sensitive_slug",
+        "language_family": "web_js_ts_html",
+        "replace": "return value.toLowerCase();",
+        "repo_family": "stage12025_web_controlled_fixture",
+        "selected_verifier_path": "npm test -- --silent case slug",
+        "source_file": "slug.js"
+      },
+      "mutant": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/web_case_sensitive_slug",
+        "duration_sec": 0.162,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/web_case_sensitive_slug_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'apikey'\n- 'APIKey'\n    at file:///data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/web_case_sensitive_slug/test_slug.js:3:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 'apikey',\n  expected: 'APIKey',\n  operator: 'strictEqual'\n}\n\nNode.js v20.19.1\n",
+        "stdout_tail": "\n> test\n> node test_slug.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/fixture_repos/web_case_sensitive_slug",
+        "duration_sec": 0.159,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/logs/web_case_sensitive_slug_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_slug.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    }
+  ],
+  "repo_family_counts": {
+    "stage12025_cpp_controlled_fixture": 2,
+    "stage12025_python_controlled_fixture": 2,
+    "stage12025_rust_controlled_fixture": 2,
+    "stage12025_web_controlled_fixture": 2
+  },
+  "rows_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12025_controlled_fail_to_pass_expansion_rows/controlled_fail_to_pass_expansion_rows.jsonl",
+  "stage": "stage12025_controlled_fail_to_pass_expansion_rows",
+  "status_counts": {
+    "FAIL_TO_PASS": 8
+  },
+  "unique_roots": 8
+}

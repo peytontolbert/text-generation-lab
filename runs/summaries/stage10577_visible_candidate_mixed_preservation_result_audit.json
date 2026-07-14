@@ -1,0 +1,62 @@
+{
+  "baseline_state": {
+    "stage10558_canary_bounded_accuracy": 0.9166666666666666,
+    "stage10563_decisive_decoder_accuracy": 0.1111111111111111,
+    "stage10563_decoder_first_step_strict_accuracy": 0.6666666666666666,
+    "stage10570_gemma_exact": 0.07407407407407407,
+    "stage10570_hundred_m_decisive_exact": 0.3333333333333333,
+    "stage10570_hundred_m_exact": 0.1111111111111111,
+    "stage10571_strict_bounded_delta_vs_stage10563": -0.537037037037037
+  },
+  "created_at_utc": "2026-07-12T03:10:05Z",
+  "current_state": {
+    "stage10572_support_rows": 352,
+    "stage10574_contentful_generation_rate": 0.7916666666666666,
+    "stage10574_strict_bounded_accuracy": 0.6666666666666666,
+    "stage10574_strict_rows_with_target_rank_1": 36,
+    "stage10575_canary_bounded_accuracy": 0.9166666666666666,
+    "stage10575_canary_greedy_exact_accuracy": 0.041666666666666664,
+    "stage10576_gemma_decisive_exact": 0.2222222222222222,
+    "stage10576_gemma_exact": 0.07407407407407407,
+    "stage10576_hundred_m_decisive_exact": 0.1111111111111111,
+    "stage10576_hundred_m_exact": 0.6666666666666666,
+    "stage10576_hundred_m_retrieve_exact": 1.0,
+    "stage10576_hundred_m_verifier_exact": 0.8888888888888888
+  },
+  "deltas": {
+    "canary_bounded_delta_vs_stage10558": 0.0,
+    "decisive_exact_delta_vs_stage10570": -0.2222222222222222,
+    "greedy_exact_delta_vs_stage10570": 0.5555555555555556,
+    "same_manifest_delta_vs_gemma": 0.5925925925925926,
+    "strict_bounded_delta_vs_stage10563": 0.0
+  },
+  "inputs": {
+    "stage10558_canary_baseline": "runs/local/artifacts/stage10558_masked_projection_successor_with_v27_preservation_canary_audit/masked_projection_successor_with_v27_preservation_canary_audit.json",
+    "stage10563_transition_baseline": "runs/local/artifacts/stage10563_visible_candidate_transition_bounded_audit/visible_candidate_transition_bounded_audit.json",
+    "stage10570_decisive_only_same_manifest": "runs/local/artifacts/stage10570_visible_candidate_successor_same_manifest_comparison/visible_candidate_successor_same_manifest_comparison.json",
+    "stage10571_prior_result_audit": "runs/local/artifacts/stage10571_visible_candidate_probe_result_audit/visible_candidate_probe_result_audit.json",
+    "stage10572_support_package": "runs/local/artifacts/stage10572_visible_candidate_mixed_preservation_support_package/visible_candidate_mixed_preservation_support_package.json",
+    "stage10574_execution_result": "runs/local/artifacts/stage10574_visible_candidate_mixed_preservation_probe/bounded_decoder_probe/execution_result.json",
+    "stage10575_canary_audit": "runs/local/artifacts/stage10575_visible_candidate_mixed_preservation_canary_audit/visible_candidate_mixed_preservation_canary_audit.json",
+    "stage10576_same_manifest_comparison": "runs/local/artifacts/stage10576_visible_candidate_successor_same_manifest_comparison/visible_candidate_successor_same_manifest_comparison.json"
+  },
+  "next_actions": [
+    "Promote stage10574-stage10576 as the current honest rebuilt visible-candidate runtime package, with the scope stated narrowly.",
+    "Target the next support batch at decisive_evidence_top1 only if it preserves the stage10574 bounded baseline and stage10575 canary by construction.",
+    "Stop using greedy exact alone as the repair target. The meaningful gate on this rebuilt slice is bounded strict preservation plus decisive-evidence recovery without reopening verifier/retrieve regressions.",
+    "Expand strict rows with more non-constant retrieve and more answerable decisive-evidence contracts before claiming broader seq2seq frontier progress."
+  ],
+  "outputs": {
+    "audit_json": "runs/local/artifacts/stage10577_visible_candidate_mixed_preservation_result_audit/visible_candidate_mixed_preservation_result_audit.json"
+  },
+  "passed": true,
+  "stage": 10577,
+  "stage_name": "stage10577_visible_candidate_mixed_preservation_result_audit",
+  "truthful_read": [
+    "The mixed-preservation support package recovered the rebuilt 54-row strict bounded behavior instead of damaging it: stage10574 returns to 36/54, matching the stage10563 saved-runtime baseline.",
+    "The repaired v2.7 canary still holds at 22/24 bounded under stage10575, so the mixed package preserved the old reviewed frontier while improving the rebuilt visible-candidate surface.",
+    "On the rebuilt 54-row same-manifest generation comparison, stage10576 rises to 36/54 exact for the 100M model versus Gemma at 4/54, a much larger margin than the earlier decisive-only package.",
+    "The remaining rebuilt-slice weakness is still decisive evidence itself: stage10576 decisive_evidence_top1 exact is only 2/18, while retrieve_answer_abstain is 18/18 and verifier_outcome_masked is 16/18.",
+    "This makes stage10574-stage10576 a real restoration and comparison upgrade for the rebuilt contract, but not yet a decisive evidence repair."
+  ]
+}

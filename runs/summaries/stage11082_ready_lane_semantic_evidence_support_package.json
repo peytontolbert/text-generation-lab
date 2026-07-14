@@ -1,0 +1,66 @@
+{
+  "claim_scope": [
+    "Add semantic evidence-role supervision on top of the clean ready-lane support package without changing validation, strict, or stress rows.",
+    "Move evidence training away from answer-letter dependence by supervising direct role strings and pairwise contrasts against candidate_change_surface."
+  ],
+  "created_at_utc": "2026-07-13T02:54:37Z",
+  "decision": "ready_lane_semantic_evidence_support_ready",
+  "findings": [
+    "The ready-lane evidence roots can now supervise direct semantic evidence-role generation instead of only opaque answer letters.",
+    "Each root also emits a pairwise contrast row against candidate_change_surface unless the gold role already is candidate_change_surface.",
+    "This package is still support-only: it preserves the current heldout contract and canary while changing the training geometry for the blocked evidence lane."
+  ],
+  "limits": [
+    "Gold evidence roles still inherit the current candidate-anchor or heuristic mapping from the ready-lane work items.",
+    "This stage does not alter the scorer architecture; it only improves the supervision surface available to the next probe.",
+    "Rust evidence remains support-only and non-promotable until fresh reviewed non-aliased heldout replacements exist."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "python": 4,
+      "rust": 12
+    },
+    "added_by_repo_family": {
+      "chroma": 4,
+      "dbt-core": 4,
+      "repository_library": 4,
+      "tiktoken": 4
+    },
+    "added_by_target_text": {
+      "candidate_change_surface": 4,
+      "symptom_or_call_path_analogue": 4,
+      "verifier_and_test_constraint": 8
+    },
+    "base_train_rows_after_stage11061": 327,
+    "rows_added_total": 16,
+    "semantic_pairwise_rows": 8,
+    "semantic_role_full_rows": 8,
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_rows_after": 343,
+    "train_rows_before": 327,
+    "validation_rows_unchanged": 23
+  },
+  "next_best_step": "Use this package for the next evidence-focused probe or scorer-head experiment, then re-audit the cleaned canary and reserved residual bank before considering any new promotion claim.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/added_semantic_evidence_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/ready_lane_semantic_evidence_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "Do not report movement on these rows as heldout generalization.",
+    "Keep the current cleaned strict contract unchanged when evaluating any probe that uses this package.",
+    "Treat heuristic gold rows as support-only and keep them out of promotable strict slices."
+  ],
+  "source_artifacts": {
+    "base_support_package": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/ready_lane_fresh_support_package.json",
+    "candidate_rows": "runs/local/artifacts/stage10938_explicit_verifier_ledger_strict_candidates/strict_candidate_rows.jsonl",
+    "work_items": "runs/local/artifacts/stage11060_ready_lane_row_construction_manifest/row_construction_work_items.jsonl"
+  },
+  "stage": 11082,
+  "stage_name": "stage11082_ready_lane_semantic_evidence_support_package"
+}

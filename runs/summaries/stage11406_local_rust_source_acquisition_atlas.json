@@ -1,0 +1,43 @@
+{
+  "blocked_reason_counts": {
+    "known_weak_or_quarantined_repo_family": 4,
+    "missing_readable_source_excerpt": 3,
+    "missing_readable_verifier_excerpt": 16,
+    "missing_src_rs_files": 3,
+    "missing_tests_examples_or_benches": 16
+  },
+  "by_repo_family": {
+    "LLaMA-Adapter": 1,
+    "candle": 11,
+    "git": 3,
+    "perftree": 3,
+    "tokenizers": 4
+  },
+  "candidate_by_repo_family": {
+    "candle": 4
+  },
+  "counts": {
+    "candidate_repo_families": 1,
+    "cargo_roots_examined": 22,
+    "materialization_candidate_roots": 4,
+    "minimum_new_roots_needed_for_rust_support_package": 10,
+    "unique_repo_families": 5
+  },
+  "created_at_utc": "2026-07-13T15:01:57Z",
+  "decision": "local_rust_source_atlas_ready",
+  "interpretation": "Local Rust source snapshots exist, but ready materialization candidates are concentrated in a few repo families. They should be converted into train-support rows only if each row includes real .rs source evidence, a verifier/test anchor, and distinct evidence-role candidates.",
+  "outputs": {
+    "all_roots": "runs/local/artifacts/stage11406_local_rust_source_acquisition_atlas/local_rust_source_roots.jsonl",
+    "candidate_roots": "runs/local/artifacts/stage11406_local_rust_source_acquisition_atlas/local_rust_materialization_candidate_roots.jsonl",
+    "summary": "runs/local/artifacts/stage11406_local_rust_source_acquisition_atlas/local_rust_source_acquisition_atlas.json"
+  },
+  "passed": true,
+  "quality_gate": {
+    "can_build_support_rows_without_more_source_acquisition": false,
+    "enough_repo_breadth_for_stage11404_retry": false,
+    "enough_roots_for_stage11404_retry": false
+  },
+  "recommended_next_action": "Materialize bounded train-support rows from ready local Rust crates, then rerun the Stage11404 admission gate. If repo breadth stays below three, acquire or hydrate more non-tokenizers Rust repositories before training.",
+  "stage": 11406,
+  "stage_name": "stage11406_local_rust_source_acquisition_atlas"
+}

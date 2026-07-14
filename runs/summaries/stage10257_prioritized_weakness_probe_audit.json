@@ -1,0 +1,65 @@
+{
+  "stage": 10257,
+  "created_at_utc": "2026-07-11T00:00:00Z",
+  "summary": "The exposure-prioritized successor probe saw the new disjoint C/C++ abstention rows but regressed the strict holdout sharply, so the current weakness-repair path should not be promoted.",
+  "inputs": {
+    "baseline_probe": "runs/local/artifacts/stage10249_weakness_counterbalance_probe/bounded_decoder_probe/execution_result.json",
+    "successor_probe": "runs/local/artifacts/stage10254_weakness_counterbalance_successor_probe/bounded_decoder_probe/execution_result.json",
+    "prioritized_probe": "runs/local/artifacts/stage10256_prioritized_weakness_counterbalance_probe/bounded_decoder_probe/execution_result.json",
+    "prioritized_request": "runs/local/artifacts/stage10255_prioritized_weakness_counterbalance_execution_request/prioritized_weakness_counterbalance_execution_request.json",
+    "replenishment_inventory": "runs/local/artifacts/stage10251_disjoint_reviewed_replenishment_inventory/disjoint_reviewed_replenishment_inventory.json"
+  },
+  "results": {
+    "stage10249": {
+      "strict_full_vocab_top1_accuracy": 0.23076923076923078,
+      "strict_correct_rows": 3,
+      "rows_with_target_rank_1": 3,
+      "runtime_weights_sha256": "2fe81a165859ad6a7ce67f6524966085ee91067be2040bddf0db8aadc61b4a49",
+      "failure_buckets": {
+        "prefix_miss": 10,
+        "degenerate_repetition": 0,
+        "internal_leak": 0
+      }
+    },
+    "stage10254": {
+      "strict_full_vocab_top1_accuracy": 0.23076923076923078,
+      "strict_correct_rows": 3,
+      "rows_with_target_rank_1": 3,
+      "runtime_weights_sha256": "2fe81a165859ad6a7ce67f6524966085ee91067be2040bddf0db8aadc61b4a49",
+      "comparison_to_stage10249": "identical_result"
+    },
+    "stage10256": {
+      "strict_full_vocab_top1_accuracy": 0.07692307692307693,
+      "strict_correct_rows": 1,
+      "rows_with_target_rank_1": 1,
+      "runtime_weights_sha256": "4ea2167e07c0d5f29f34b5faaf43a46094ee8f35e80fd1475c3d4d2e1a84f558",
+      "comparison_to_stage10254": {
+        "delta_accuracy": -0.15384615384615385,
+        "weights_changed": true
+      }
+    }
+  },
+  "interpretation": {
+    "ordering_hypothesis": "supported only in the narrow sense that the prioritized rows were definitely exposed during training",
+    "improvement_hypothesis": "falsified on the current capped probe; prioritized exposure made the holdout worse",
+    "current_frontier_statement": "The added disjoint C/C++ abstention-only rows are not a direct multilingual repair lever under the current bounded-decoder objective.",
+    "web_status": "Still blocked on fresh source-backed roots. No disjoint reviewed web root remains safe for compact-bounded train support without eval leakage."
+  },
+  "anti_cheat_relevance": [
+    "The web gap is not honestly fixable by replaying reviewed roots because all reviewed web roots overlap the current miss frontier.",
+    "The C/C++ abstention rows came from a rejected underconstrained bundle and are suitable only as train-only honesty support, not same-surface scoring evidence.",
+    "A negative result here is valuable: it shows the 100M was not merely failing because the rows were unseen; the objective/exposure interaction is also misaligned."
+  ],
+  "next_recommendation": {
+    "do_not_promote": [
+      "Do not promote the Stage10256 runtime bundle.",
+      "Do not continue identical short capped replay on this package.",
+      "Do not interpret the C/C++ abstention support as a multilingual win path."
+    ],
+    "do_next": [
+      "Keep Stage10224 as the active saved runtime for current standalone/harness frontier work.",
+      "Generate fresh source-backed web maintainer roots before another multilingual weakness replay.",
+      "If continuing model-improvement work, isolate Python/Rust miss families from C/C++ abstention support rather than mixing them under one short capped objective."
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "created_at_utc": "2026-07-13T17:20:33Z",
+  "decision": "source_heldout_harness_successor_not_ready",
+  "metrics": {
+    "admitted_roots_by_language": {},
+    "admitted_rows": 0,
+    "admitted_rows_by_language": {},
+    "audited_unique_rows": 3209,
+    "counts_by_language": {
+      "c_cpp": 622,
+      "python": 1741,
+      "rust": 340,
+      "web_js_ts_html": 506
+    },
+    "files_seen": 1396,
+    "minimal_successor_ready_one_row_per_language": false,
+    "promotion_successor_ready_two_roots_per_language": false,
+    "raw_rows_seen": 148114,
+    "repair_queue_rows": 3209,
+    "source_heldout_rows_by_language": {
+      "rust": 15
+    },
+    "top_blockers": {
+      "missing_patch_or_abstain_row": 2509,
+      "missing_source_root": 95,
+      "missing_verifier_row_or_transition": 2887,
+      "not_source_heldout_admissible": 3194,
+      "opaque_labels_not_confirmed": 29,
+      "option_shuffle_not_declared": 867,
+      "prompt_target_value_leak": 1085,
+      "singleton_or_missing_options": 75
+    },
+    "unique_roots_by_language": {
+      "c_cpp": 98,
+      "python": 392,
+      "rust": 28,
+      "web_js_ts_html": 43
+    }
+  },
+  "outputs": {
+    "admitted_candidates": "runs/local/artifacts/stage11469_source_heldout_harness_successor_inventory/source_heldout_harness_successor_admitted_candidates.jsonl",
+    "repair_queue": "runs/local/artifacts/stage11469_source_heldout_harness_successor_inventory/source_heldout_harness_successor_repair_queue.jsonl",
+    "row_audit": "runs/local/artifacts/stage11469_source_heldout_harness_successor_inventory/source_heldout_harness_successor_row_audit.jsonl",
+    "summary": "runs/local/artifacts/stage11469_source_heldout_harness_successor_inventory/source_heldout_harness_successor_inventory.json"
+  },
+  "passed": true,
+  "recommended_next_actions": [
+    "If admitted_rows is zero or language-skewed, materialize new rows rather than training on current canary rows.",
+    "Patch row builders to set deterministic_option_shuffle after actually shuffling options.",
+    "Add verifier_row objects for verifier/evidence rows and patch_row or explicit abstain scoring rows for patch/minimal-fix/abstention rows.",
+    "Prioritize web selected-test heldout roots and Rust non-singleton verifier roots, because those are explicit Stage11468 blockers."
+  ],
+  "stage": 11469,
+  "stage_name": "stage11469_source_heldout_harness_successor_inventory",
+  "successor_requirements": {
+    "languages": [
+      "python",
+      "rust",
+      "c_cpp",
+      "web_js_ts_html"
+    ],
+    "minimum_for_next_smoke": "at least one admitted source-heldout row per language",
+    "minimum_for_promotion_candidate": "at least two independent admitted source-heldout roots per language plus deterministic shuffling and verifier/patch-or-abstain rows"
+  }
+}

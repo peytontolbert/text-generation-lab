@@ -1,0 +1,342 @@
+{
+  "claim_boundary": [
+    "This is a supply audit, not a model improvement.",
+    "Existing Web rows are useful but do not yet meet the Stage11527 minimum package gate.",
+    "OpenHands and Llama Stack heldout packets remain valid diagnostics; they should not be trained on."
+  ],
+  "created_at_utc": "2026-07-13T19:39:38Z",
+  "decision": "web_verifier_supply_insufficient_for_stage11527_gate",
+  "metrics": {
+    "admitted_rows": 114,
+    "blocked_reasons": {
+      "deterministic_option_shuffle_missing": 6,
+      "executed_verifier_flag_missing": 6,
+      "target_label_visibility_flag_missing": 6
+    },
+    "blocked_rows": 6,
+    "heldout_repo_families": [
+      "llama_stack_ui",
+      "openhands_openhands_frontend"
+    ],
+    "heldout_roots": 4,
+    "rows_examined": 120,
+    "sources": 9,
+    "train_support_repo_families": [
+      "backend",
+      "modelcontextprotocol_typescript_sdk",
+      "openhands_openhands_frontend",
+      "sep_automation",
+      "server"
+    ],
+    "train_support_roots_executed": 12,
+    "unique_roots": 25
+  },
+  "outputs": {
+    "roots": "runs/local/artifacts/stage11528_web_verifier_root_supply_audit/web_verifier_root_supply_roots.jsonl",
+    "rows": "runs/local/artifacts/stage11528_web_verifier_root_supply_audit/web_verifier_root_supply_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11528_web_verifier_root_supply_audit/web_verifier_root_supply_audit.json",
+    "worklist": "runs/local/artifacts/stage11528_web_verifier_root_supply_audit/web_verifier_root_supply_worklist.jsonl"
+  },
+  "passed": true,
+  "source_cards": [
+    {
+      "quality": "silver_static_verifier",
+      "role": "train_support_static",
+      "rows": 18,
+      "rows_path": "runs/local/artifacts/stage11347_web_static_verifier_maintainer_rows/web_static_verifier_train_support_rows.jsonl",
+      "source_id": "stage11347_static_web",
+      "summary_counts": {
+        "blocked": 0,
+        "bundles": 3,
+        "rows": 18,
+        "rows_by_repo_family": {
+          "qa_lab": 6,
+          "sep_automation": 6,
+          "server": 6
+        },
+        "rows_by_task": {
+          "abstention_insufficient_evidence": 3,
+          "alternative_hypothesis_elimination": 3,
+          "evidence_citation": 3,
+          "minimal_fix_selection": 3,
+          "symptom_localization": 3,
+          "verifier_outcome": 3
+        }
+      },
+      "summary_decision": "web_static_verifier_maintainer_train_support_rows_ready",
+      "summary_passed": true,
+      "summary_path": "runs/summaries/stage11347_web_static_verifier_maintainer_rows.json"
+    },
+    {
+      "quality": "gold_train_support",
+      "role": "train_support",
+      "rows": 12,
+      "rows_path": "runs/local/artifacts/stage11354_web_executed_verifier_support_rows/web_executed_verifier_train_support_rows.jsonl",
+      "source_id": "stage11354_executed_web",
+      "summary_counts": {
+        "blocked_source_rows": 6,
+        "bundles": 2,
+        "executed_roots": 2,
+        "rows": 12,
+        "rows_by_root": {
+          "stage11354::mcp_stdio_transport_lifecycle": 6,
+          "stage11354::sep_transition_validation": 6
+        },
+        "rows_by_task": {
+          "abstention_insufficient_evidence": 2,
+          "alternative_hypothesis_elimination": 2,
+          "evidence_citation": 2,
+          "minimal_fix_selection": 2,
+          "symptom_localization": 2,
+          "verifier_outcome": 2
+        }
+      },
+      "summary_decision": "web_executed_verifier_train_support_rows_ready",
+      "summary_passed": true,
+      "summary_path": "runs/summaries/stage11354_web_executed_verifier_support_rows.json"
+    },
+    {
+      "quality": "gold_train_support",
+      "role": "train_support",
+      "rows": 6,
+      "rows_path": "runs/local/artifacts/stage11364_web_sourcebot_executed_support_rows/web_sourcebot_executed_support_rows.jsonl",
+      "source_id": "stage11364_sourcebot_executed",
+      "summary_counts": {
+        "bundles": 1,
+        "rows": 6,
+        "rows_by_task": {
+          "abstention_insufficient_evidence": 1,
+          "alternative_hypothesis_elimination": 1,
+          "evidence_citation": 1,
+          "minimal_fix_selection": 1,
+          "symptom_localization": 1,
+          "verifier_outcome": 1
+        }
+      },
+      "summary_decision": "web_sourcebot_executed_support_rows_ready",
+      "summary_passed": true,
+      "summary_path": "runs/summaries/stage11364_web_sourcebot_executed_support_rows.json"
+    },
+    {
+      "quality": "gold_train_support",
+      "role": "train_support",
+      "rows": 12,
+      "rows_path": "runs/local/artifacts/stage11373_web_sourcebot_extra_support_rows/web_sourcebot_extra_support_rows.jsonl",
+      "source_id": "stage11373_sourcebot_extra",
+      "summary_counts": {
+        "blocked": 0,
+        "bundles": 2,
+        "rows": 12,
+        "rows_by_task": {
+          "abstention_insufficient_evidence": 2,
+          "alternative_hypothesis_elimination": 2,
+          "evidence_citation": 2,
+          "minimal_fix_selection": 2,
+          "symptom_localization": 2,
+          "verifier_outcome": 2
+        }
+      },
+      "summary_decision": "web_sourcebot_extra_support_rows_ready",
+      "summary_passed": true,
+      "summary_path": "runs/summaries/stage11373_web_sourcebot_extra_support_rows.json"
+    },
+    {
+      "quality": "gold_train_support_counterfactual",
+      "role": "train_support_counterfactual",
+      "rows": 6,
+      "rows_path": "runs/local/artifacts/stage11382_web_sourcebot_true_abstention_counterfactual_rows/web_sourcebot_true_abstention_counterfactual_rows.jsonl",
+      "source_id": "stage11382_sourcebot_true_abstention",
+      "summary_counts": {
+        "counterfactual_rows": 6,
+        "protected_roots": 10,
+        "source_abstention_rows": 3
+      },
+      "summary_decision": "web_true_abstention_counterfactual_train_support_rows_materialized",
+      "summary_passed": true,
+      "summary_path": "runs/summaries/stage11382_web_sourcebot_true_abstention_counterfactual_rows.json"
+    },
+    {
+      "quality": "gold_train_support",
+      "role": "train_support",
+      "rows": 18,
+      "rows_path": "runs/local/artifacts/stage11388_mcp_fresh_web_verifier_support_rows/mcp_fresh_web_verifier_support_rows.jsonl",
+      "source_id": "stage11388_mcp_fresh",
+      "summary_counts": {
+        "blocked_roots": 0,
+        "roots": 3,
+        "rows": 18,
+        "rows_by_target_value": {
+          "ANSWER_WITH_VISIBLE_EVIDENCE": 3,
+          "PASS_TARGETED_TEST_SELECTION": 3,
+          "adjust Server._oninitialize protocol negotiation/transport propagation without changing unrelated transport helpers": 1,
+          "adjust normalizeHeaders/createFetchWithInit merge semantics while preserving call-init override behavior": 1,
+          "adjust validateToolName validation/warning logic while preserving SEP-compatible allowed characters and length bounds": 1,
+          "packages/core/src/shared/toolNameValidation.ts::validateToolName": 1,
+          "packages/core/src/shared/transport.ts::createFetchWithInit": 1,
+          "packages/server/src/server/server.ts::Server._oninitialize": 1,
+          "selected_verifier_exercises_implementation_not_distractor": 3,
+          "verifier_and_test_constraint": 3
+        },
+        "rows_by_task": {
+          "abstention_insufficient_evidence": 3,
+          "alternative_hypothesis_elimination": 3,
+          "evidence_citation": 3,
+          "minimal_fix_selection": 3,
+          "symptom_localization": 3,
+          "verifier_outcome": 3
+        }
+      },
+      "summary_decision": "mcp_fresh_web_verifier_support_rows_ready",
+      "summary_passed": true,
+      "summary_path": "runs/summaries/stage11388_mcp_fresh_web_verifier_support_rows.json"
+    },
+    {
+      "quality": "gold_train_support",
+      "role": "train_support",
+      "rows": 24,
+      "rows_path": "runs/local/artifacts/stage11394_openhands_support_unit_verifier_train_rows/openhands_support_unit_verifier_train_rows.jsonl",
+      "source_id": "stage11394_openhands_support",
+      "summary_counts": {
+        "blocked_roots": 0,
+        "roots": 4,
+        "rows": 24,
+        "rows_by_target_value": {
+          "ANSWER_WITH_VISIBLE_EVIDENCE": 4,
+          "PASS_TARGETED_TEST_SELECTION": 4,
+          "adjust Link-header rel=next page extraction without changing command, time, or VS Code URL helpers": 1,
+          "adjust relative-time delta thresholds or UTC parsing in formatTimeDelta without changing command parsing or URL helpers": 1,
+          "adjust tokenizeCommand/formatCommand quote and whitespace handling without changing unrelated URL or time utilities": 1,
+          "adjust transformVSCodeUrl localhost-hostname replacement and invalid-input handling without changing command, time, or pagination utilities": 1,
+          "selected_verifier_exercises_implementation_not_distractor": 4,
+          "src/utils/extract-next-page-from-link.ts::extractNextPageFromLink": 1,
+          "src/utils/format-time-delta.ts::formatTimeDelta": 1,
+          "src/utils/shell-tokenize.ts::tokenizeCommand": 1,
+          "src/utils/vscode-url-helper.ts::transformVSCodeUrl": 1,
+          "verifier_and_test_constraint": 4
+        },
+        "rows_by_task": {
+          "abstention_insufficient_evidence": 4,
+          "alternative_hypothesis_elimination": 4,
+          "evidence_citation": 4,
+          "minimal_fix_selection": 4,
+          "symptom_localization": 4,
+          "verifier_outcome": 4
+        }
+      },
+      "summary_decision": "openhands_support_unit_verifier_train_rows_ready",
+      "summary_passed": true,
+      "summary_path": "runs/summaries/stage11394_openhands_support_unit_verifier_train_rows.json"
+    },
+    {
+      "quality": "gold_heldout",
+      "role": "sealed_heldout",
+      "rows": 6,
+      "rows_path": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/web_llama_stack_executed_heldout_rows.jsonl",
+      "source_id": "stage11361_llama_stack_heldout",
+      "summary_counts": {
+        "bundles": 1,
+        "rows": 6,
+        "rows_by_task": {
+          "abstention_insufficient_evidence": 1,
+          "alternative_hypothesis_elimination": 1,
+          "evidence_citation": 1,
+          "minimal_fix_selection": 1,
+          "symptom_localization": 1,
+          "verifier_outcome": 1
+        }
+      },
+      "summary_decision": "web_llama_stack_executed_heldout_rows_ready",
+      "summary_passed": true,
+      "summary_path": "runs/summaries/stage11361_web_llama_stack_executed_heldout_rows.json"
+    },
+    {
+      "quality": "gold_heldout_candidate",
+      "role": "sealed_heldout_candidate",
+      "rows": 18,
+      "rows_path": "runs/local/artifacts/stage11390_openhands_unit_verifier_heldout_candidate_rows/openhands_unit_verifier_heldout_candidate_rows.jsonl",
+      "source_id": "stage11390_openhands_heldout",
+      "summary_counts": {
+        "blocked_roots": 0,
+        "roots": 3,
+        "rows": 18,
+        "rows_by_target_value": {
+          "ANSWER_WITH_VISIBLE_EVIDENCE": 3,
+          "PASS_TARGETED_TEST_SELECTION": 3,
+          "adjust PR/MR URL regex extraction and de-duplication in src/utils/parse-pr-url.ts without changing socket or email utilities": 1,
+          "adjust URL host/prefix/protocol construction in src/utils/websocket-url.ts without changing PR parsing or email validation utilities": 1,
+          "adjust email regex/list validation or duplicate normalization in src/utils/input-validation.ts without changing socket or PR URL utilities": 1,
+          "selected_verifier_exercises_implementation_not_distractor": 3,
+          "src/utils/input-validation.ts::isValidEmail": 1,
+          "src/utils/parse-pr-url.ts::extractPRUrls": 1,
+          "src/utils/websocket-url.ts::buildWebSocketUrl": 1,
+          "verifier_and_test_constraint": 3
+        },
+        "rows_by_task": {
+          "abstention_insufficient_evidence": 3,
+          "alternative_hypothesis_elimination": 3,
+          "evidence_citation": 3,
+          "minimal_fix_selection": 3,
+          "symptom_localization": 3,
+          "verifier_outcome": 3
+        }
+      },
+      "summary_decision": "openhands_unit_verifier_heldout_candidate_rows_ready",
+      "summary_passed": true,
+      "summary_path": "runs/summaries/stage11390_openhands_unit_verifier_heldout_candidate_rows.json"
+    }
+  ],
+  "stage": 11528,
+  "stage11527_gate": {
+    "fresh_web_repo_families_required": 3,
+    "heldout_repo_families_available": 2,
+    "heldout_roots_available": 4,
+    "heldout_roots_required": 10,
+    "passes_minimum_next_web_package_gate": false,
+    "task_balance_heldout": {
+      "abstention_insufficient_evidence": 4,
+      "alternative_hypothesis_elimination": 4,
+      "evidence_citation": 4,
+      "minimal_fix_selection": 4,
+      "symptom_localization": 4,
+      "verifier_outcome": 4
+    },
+    "task_balance_train": {
+      "abstention_insufficient_evidence": 12,
+      "alternative_hypothesis_elimination": 12,
+      "evidence_citation": 12,
+      "minimal_fix_selection": 12,
+      "symptom_localization": 12,
+      "verifier_outcome": 12
+    },
+    "train_repo_families_available": 5,
+    "train_roots_available": 12,
+    "train_roots_required": 20
+  },
+  "stage_name": "stage11528_web_verifier_root_supply_audit",
+  "worklist": [
+    {
+      "details": "Need verifier-backed Web train roots beyond OpenHands/Sourcebot/MCP without using sealed heldout roots.",
+      "needed": 8,
+      "priority": 1,
+      "work_item": "materialize_more_executed_web_train_roots"
+    },
+    {
+      "details": "Need sealed source/verifier-backed Web roots from repo families not used for training.",
+      "needed": 6,
+      "priority": 2,
+      "work_item": "materialize_more_sealed_web_heldout_roots"
+    },
+    {
+      "details": "Stage11347 static verifier roots should be rerun with focused test execution before entering gold train support.",
+      "needed": 3,
+      "priority": 3,
+      "work_item": "upgrade_static_web_roots_with_execution"
+    },
+    {
+      "details": "Stage11523/11525 showed OpenHands-only support overfits and regresses canaries; next package must be multi-family.",
+      "needed": 1,
+      "priority": 4,
+      "work_item": "avoid_openhands_only_training"
+    }
+  ]
+}

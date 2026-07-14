@@ -1,0 +1,82 @@
+{
+  "claim_boundary": [
+    "No model frontier score changed in this stage.",
+    "No training, Gemma comparison, or full-product claim is implied."
+  ],
+  "created_at_utc": "2026-07-14T12:02:21Z",
+  "decision": "support_supply_improved_but_training_probe_not_ready",
+  "delta_since_stage11831": {
+    "rust_verifier_ready_roots_added": 6,
+    "rust_verifier_ready_rows_added": 24
+  },
+  "next_actions": [
+    "Continue Python verifier expansion beyond 8/12 roots.",
+    "Continue C/C++ abstain-attractor expansion beyond 7/16 roots.",
+    "Rust verifier support quota is satisfied; preserve it and avoid further Rust-only training probes until the other gates are ready."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11855_source_heldout_support_supply_status_v27/source_heldout_support_supply_status_v27.json"
+  },
+  "passed": true,
+  "quota_satisfied": {
+    "cpp_abstain_attractor_support": false,
+    "python_verifier_support": false,
+    "rust_verifier_support": true
+  },
+  "source_artifacts": {
+    "cpp_support": "runs/local/artifacts/stage11826_cpp_abstain_support_combined_audit_v7/cpp_abstain_support_combined_audit_v7.json",
+    "python_support": "runs/local/artifacts/stage11818_python_verifier_support_combined_audit_v9/python_verifier_support_combined_audit_v9.json",
+    "rust_evidence_support": "runs/local/artifacts/stage11751_rust_existing_evidence_support_audit/rust_existing_evidence_support_audit.json",
+    "rust_support": "runs/local/artifacts/stage11854_rust_verifier_support_combined_audit_v11/rust_verifier_support_combined_audit_v11.json"
+  },
+  "stage": 11855,
+  "stage_name": "stage11855_source_heldout_support_supply_status_v27",
+  "support_status": {
+    "cpp_abstain_attractor_support": {
+      "materialized_rows": "runs/local/artifacts/stage11826_cpp_abstain_support_combined_audit_v7/cpp_abstain_support_rows_v7.jsonl",
+      "ready_roots": 7,
+      "ready_rows": 28,
+      "remaining_support_roots": 9,
+      "repo_families_ready": [
+        "bitsandbytes",
+        "faiss",
+        "pytorch",
+        "whisper_cpp"
+      ],
+      "required_support_roots": 16
+    },
+    "python_verifier_support": {
+      "materialized_rows": "runs/local/artifacts/stage11818_python_verifier_support_combined_audit_v9/python_verifier_support_combined_rows_v9.jsonl",
+      "ready_roots": 8,
+      "ready_rows": 32,
+      "remaining_support_roots": 4,
+      "required_support_roots": 12
+    },
+    "rust_evidence_support_only": {
+      "claim_boundary": "Not counted toward Rust verifier_outcome quota.",
+      "ready_roots": 3,
+      "ready_rows": 9
+    },
+    "rust_verifier_support": {
+      "materialized_rows": "runs/local/artifacts/stage11854_rust_verifier_support_combined_audit_v11/rust_verifier_support_rows_v11.jsonl",
+      "ready_roots": 12,
+      "ready_rows": 48,
+      "remaining_support_roots": 0,
+      "repo_families_ready": [
+        "agent_kernel_lite_core",
+        "agent_kernel_rust_wasm",
+        "codex_agent_identity",
+        "codex_apply_patch",
+        "codex_config",
+        "codex_protocol",
+        "codex_rmcp_client",
+        "codex_tools",
+        "codex_utils_path",
+        "codex_utils_string",
+        "model_stack_bitnet_wasm"
+      ],
+      "required_support_roots": 12
+    }
+  },
+  "training_probe_ready": false
+}

@@ -1,0 +1,103 @@
+{
+  "audits": {
+    "duplicate_record_id_count": 0,
+    "duplicate_record_ids": [],
+    "duplicate_row_id_count": 0,
+    "duplicate_row_ids": [],
+    "pre_options_target_value_leak_count": 0,
+    "pre_options_target_value_leaks": [],
+    "root_split_violation_count": 0,
+    "root_split_violations": {}
+  },
+  "counts": {
+    "base_records": 615,
+    "base_rows": 2460,
+    "base_unique_roots": 120,
+    "base_verifier_status_counts": {
+      "FAIL_TO_PASS": 20,
+      "PASS_CURRENT_BUILD": 6,
+      "PASS_CURRENT_BUILD_AND_RUN": 42,
+      "PASS_CURRENT_STATE": 109,
+      "PASS_TO_PASS": 402,
+      "VERIFIER_REMOVED": 36
+    },
+    "counterfactual_records": 830,
+    "counterfactual_rows": 3320,
+    "counterfactual_unique_roots": 167,
+    "counterfactual_verifier_status_counts": {
+      "INSUFFICIENT_EVIDENCE": 148,
+      "NOT_EXERCISED": 148,
+      "VERIFIER_REMOVED": 534
+    },
+    "independent_language_record_counts": {
+      "c_cpp": 64,
+      "python": 52,
+      "rust": 93,
+      "web_js_ts_html": 406
+    },
+    "independent_unique_roots": 120,
+    "record_split_counts": {
+      "strict_eval": 89,
+      "train": 1294,
+      "validation": 62
+    },
+    "row_split_counts": {
+      "strict_eval": 356,
+      "train": 5176,
+      "validation": 248
+    },
+    "total_language_record_counts": {
+      "c_cpp": 208,
+      "python": 208,
+      "rust": 237,
+      "web_js_ts_html": 792
+    },
+    "total_records": 1445,
+    "total_rows": 5780,
+    "total_verifier_status_counts": {
+      "FAIL_TO_PASS": 20,
+      "INSUFFICIENT_EVIDENCE": 148,
+      "NOT_EXERCISED": 148,
+      "PASS_CURRENT_BUILD": 6,
+      "PASS_CURRENT_BUILD_AND_RUN": 42,
+      "PASS_CURRENT_STATE": 109,
+      "PASS_TO_PASS": 402,
+      "VERIFIER_REMOVED": 570
+    },
+    "transition_task_row_counts": {
+      "transition_candidate_selection": 1445,
+      "transition_continue_or_stop": 1445,
+      "transition_next_action": 1445,
+      "transition_verifier_transition": 1445
+    }
+  },
+  "created_at_utc": "2026-07-14T17:45:54Z",
+  "decision": "transition_5k_v1_augmented_train_support_ready_but_not_frontier_source_supply",
+  "outputs": {
+    "records": "runs/local/artifacts/stage11958_transition_5k_v1_augmented_package/verified_transition_records_5k_v1_augmented.jsonl",
+    "rows": "runs/local/artifacts/stage11958_transition_5k_v1_augmented_package/transition_projection_rows_5k_v1_augmented.jsonl",
+    "summary": "runs/local/artifacts/stage11958_transition_5k_v1_augmented_package/transition_5k_v1_augmented_package.json",
+    "train_manifest": "runs/local/artifacts/stage11958_transition_5k_v1_augmented_package/transition_5k_v1_augmented_train_manifest.jsonl"
+  },
+  "passed_for_frontier_source_claim": false,
+  "passed_for_train_support_probe": true,
+  "readiness": {
+    "independent_language_ready": false,
+    "independent_root_ready": false,
+    "minimum_independent_language_records": 52,
+    "scale_ready": true
+  },
+  "source_artifacts": {
+    "base_records": "runs/local/artifacts/stage11955_transition_5k_v1_multisource_package/verified_transition_records_5k_v1.jsonl",
+    "base_rows": "runs/local/artifacts/stage11955_transition_5k_v1_multisource_package/transition_projection_rows_5k_v1.jsonl",
+    "counterfactual_records": "runs/local/artifacts/stage11957_transition_counterfactual_status_augmentation/counterfactual_transition_records.jsonl",
+    "counterfactual_rows": "runs/local/artifacts/stage11957_transition_counterfactual_status_augmentation/counterfactual_transition_projection_rows.jsonl"
+  },
+  "stage": 11958,
+  "stage_name": "stage11958_transition_5k_v1_augmented_package",
+  "training_use": {
+    "allowed": true,
+    "not_allowed_claim": "Do not claim source-heldout or broad multilingual root-scale improvement from counterfactual rows.",
+    "recommended_scope": "diagnostic train-support probe for verifier-status and abstain/continue supervision"
+  }
+}

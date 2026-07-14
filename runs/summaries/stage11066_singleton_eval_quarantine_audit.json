@@ -1,0 +1,257 @@
+{
+  "claim_scope": [
+    "Recompute the current stage11063 runtime score on the singleton-cleaned heldout package without rerunning training.",
+    "Separate structural heldout cleanup from model-capability change so the next probe has a clean baseline."
+  ],
+  "cleaned_surface_result": {
+    "strict": {
+      "correct": 21,
+      "exact_accuracy": 0.9545454545454546,
+      "miss_rows": [
+        "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1"
+      ],
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "validation": {
+      "correct": 19,
+      "exact_accuracy": 0.8636363636363636,
+      "miss_rows": [
+        "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+        "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::verifier_outcome::reviewed_v27_compact",
+        "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact"
+      ],
+      "rows": 22,
+      "scored_rows": 22
+    }
+  },
+  "created_at_utc": "2026-07-13T02:05:09Z",
+  "delta_vs_stage11064_uncleaned": {
+    "strict_accuracy_delta": -0.0019762845849802257,
+    "validation_accuracy_delta": -0.005928853754940677
+  },
+  "findings": [
+    "The strict and validation surfaces are now structurally free of singleton-option evaluation rows.",
+    "This audit isolates the effect of heldout cleanup from any future training or scorer changes.",
+    "If the next probe moves this cleaned baseline, the gain will be easier to interpret because trivial one-option rows are no longer inflating the eval surface."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11066_singleton_eval_quarantine_audit/singleton_eval_quarantine_audit.json"
+  },
+  "package_metrics": {
+    "base_support_package_metrics": {
+      "added_by_language": {
+        "c_cpp": 9,
+        "python": 8,
+        "rust": 24
+      },
+      "added_by_repo_family": {
+        "chroma": 8,
+        "dbt-core": 8,
+        "parametergolf": 9,
+        "repository_library": 8,
+        "tiktoken": 8
+      },
+      "added_by_task": {
+        "evidence_citation": 16,
+        "retrieve_answer_abstain": 11,
+        "verifier_outcome": 11,
+        "verifier_outcome_semantic_transition": 3
+      },
+      "base_train_rows_after_stage11051": 286,
+      "evidence_rows_added": 16,
+      "heuristic_support_rows": 12,
+      "rows_added_total": 41,
+      "scoreable_packet_rows_added": 22,
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_rows_after": 327,
+      "train_rows_before": 286,
+      "validation_rows_unchanged": 23,
+      "verifier_rows_added": 3
+    },
+    "quarantined_row_ids": [
+      "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact",
+      "stage10126::tokenizers::tokenizers::rust::verifier_outcome::reviewed_v27_compact"
+    ],
+    "quarantined_rows_by_language": {
+      "python": 1,
+      "rust": 1
+    },
+    "quarantined_rows_by_split": {
+      "eval": 1,
+      "strict_eval": 1
+    },
+    "quarantined_rows_by_task": {
+      "verifier_outcome": 2
+    },
+    "quarantined_rows_total": 2,
+    "stress_rows": 7,
+    "strict_rows_after": 22,
+    "strict_rows_before": 23,
+    "train_rows": 327,
+    "validation_rows_after": 22,
+    "validation_rows_before": 23
+  },
+  "passed": true,
+  "quarantine_report": {
+    "quarantined_row_ids": [
+      "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact",
+      "stage10126::tokenizers::tokenizers::rust::verifier_outcome::reviewed_v27_compact"
+    ],
+    "quarantined_rows_by_language": {
+      "python": 1,
+      "rust": 1
+    },
+    "quarantined_rows_by_split": {
+      "eval": 1,
+      "strict_eval": 1
+    },
+    "quarantined_rows_by_task": {
+      "verifier_outcome": 2
+    },
+    "quarantined_rows_total": 2
+  },
+  "reserved_candidate_result_unchanged": {
+    "by_language": {
+      "c_cpp": {
+        "correct": 2,
+        "exact_accuracy": 0.5,
+        "rows": 4,
+        "scored_rows": 4
+      },
+      "python": {
+        "correct": 2,
+        "exact_accuracy": 0.6666666666666666,
+        "rows": 3,
+        "scored_rows": 3
+      },
+      "rust": {
+        "correct": 1,
+        "exact_accuracy": 0.3333333333333333,
+        "rows": 3,
+        "scored_rows": 3
+      }
+    },
+    "by_repo_family": {
+      "agentkernel": {
+        "correct": 2,
+        "exact_accuracy": 1.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "candle": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "code_assist": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "parametergolf": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "repository_library": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "tokenizers": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "by_task_type": {
+      "evidence_citation": {
+        "correct": 4,
+        "exact_accuracy": 0.4444444444444444,
+        "rows": 9,
+        "scored_rows": 9
+      },
+      "verifier_outcome_semantic_transition": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "mismatches": [
+      {
+        "constrained_choice_top1_label": "A",
+        "full_vocab_top1_text": "F",
+        "language_family": "python",
+        "repo_family": "repository_library",
+        "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 1,
+        "target_text": "F",
+        "task_type": "evidence_citation"
+      },
+      {
+        "constrained_choice_top1_label": "A",
+        "full_vocab_top1_text": "C",
+        "language_family": "c_cpp",
+        "repo_family": "parametergolf",
+        "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 1,
+        "target_text": "C",
+        "task_type": "evidence_citation"
+      },
+      {
+        "constrained_choice_top1_label": "C",
+        "full_vocab_top1_text": "F",
+        "language_family": "rust",
+        "repo_family": "tokenizers",
+        "row_id": "stage10938::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 5,
+        "target_text": "A",
+        "task_type": "evidence_citation"
+      },
+      {
+        "constrained_choice_top1_label": "D",
+        "full_vocab_top1_text": "E",
+        "language_family": "rust",
+        "repo_family": "candle",
+        "row_id": "stage10938::rust_reviewed::stage10413__candle__candle-flash-attn__rust::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 3,
+        "target_text": "A",
+        "task_type": "evidence_citation"
+      },
+      {
+        "constrained_choice_top1_label": "D",
+        "full_vocab_top1_text": "C",
+        "language_family": "c_cpp",
+        "repo_family": "parametergolf",
+        "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1",
+        "target_rank_full_vocab": 2,
+        "target_text": "F",
+        "task_type": "evidence_citation"
+      }
+    ],
+    "overall": {
+      "correct": 5,
+      "exact_accuracy": 0.5,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "rows_with_target_rank_1": 3
+  },
+  "source_artifacts": {
+    "cleaned_package_summary": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/singleton_eval_quarantine_package.json",
+    "quarantined_rows_jsonl": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/quarantined_singleton_eval_rows.jsonl",
+    "stage11063_strict_audit": "runs/local/artifacts/stage11063_ready_lane_fresh_support_probe/bounded_decoder_probe/bounded_choice_eval_audit_strict_eval.json",
+    "stage11063_validation_audit": "runs/local/artifacts/stage11063_ready_lane_fresh_support_probe/bounded_decoder_probe/bounded_choice_eval_audit_eval.json",
+    "stage11064_postrun_summary": "runs/local/artifacts/stage11064_ready_lane_fresh_support_postrun_audit/ready_lane_fresh_support_postrun_audit.json"
+  },
+  "stage": 11066,
+  "stage_name": "stage11066_singleton_eval_quarantine_audit"
+}

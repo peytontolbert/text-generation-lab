@@ -1,0 +1,407 @@
+{
+  "created_at_utc": "2026-07-14T17:13:54Z",
+  "decision": "transition_1k_v2_useful_data_gain_but_not_selected_frontier",
+  "interpretation": [
+    "Stage11945 successfully created a larger four-language transition package: 397 records, 1588 projection rows, 120 roots, no projection failures, no pre-option target leaks, no root split violations.",
+    "Stage11947 learned the new Transition-1K-v2 distribution: validation improved from 57/128 to 66/128 and strict improved from 81/220 to 123/220 versus Stage11924.",
+    "Stage11947 is not a selected frontier because it regressed the old 640 transition manifest from 364/640 to 355/640 and remains below Gemma 386/640.",
+    "Protected compact gates stayed preserved, so the failure is transfer/interference on old transition next_action rather than broad catastrophic regression."
+  ],
+  "long_horizon_note": "The Transition-1K-v2 compiler shape is a short-horizon proof. Long-horizon 100+ decision-step roots should be compiled as a separate episode-derived dataset after the replay-balanced transition package proves transfer.",
+  "next_recommended_stage": {
+    "goal": "Train on Transition-1K-v2 while replaying the old 640 transition rows, especially transition_next_action, to keep old-manifest performance >=364/640 while preserving v2 gains.",
+    "name": "stage11951_transition_1k_v2_replay_balanced_request",
+    "requirements": [
+      "old transition manifest >=364/640",
+      "v2 validation >=66/128",
+      "v2 strict >=123/220",
+      "protected filtered strict 22/22",
+      "old canary strict 23/23",
+      "residual >=7/10"
+    ]
+  },
+  "old_transition_manifest_result": {
+    "gemma_reference": {
+      "accuracy": 0.603125,
+      "correct": 386,
+      "rows": 640
+    },
+    "stage11924_selected": {
+      "accuracy": 0.56875,
+      "correct": 364,
+      "coverage": 1.0,
+      "miss_count": 276,
+      "rows": 640
+    },
+    "stage11947_candidate": {
+      "accuracy": 0.5546875,
+      "correct": 355,
+      "coverage": 1.0,
+      "miss_count": 285,
+      "rows": 640
+    }
+  },
+  "package_status": {
+    "audits": {
+      "duplicate_row_id_count": 0,
+      "duplicate_row_ids": [],
+      "old_transition_roots_excluded": 40,
+      "pre_options_target_value_leak_count": 0,
+      "pre_options_target_value_leaks": [],
+      "projection_failure_count": 0,
+      "projection_failures": [],
+      "rejection_reason_counts": {
+        "duplicate_root_task": 214,
+        "duplicate_source_row_id": 1765,
+        "missing_opaque_options": 527,
+        "missing_target_label": 431,
+        "missing_verifier_or_abstain_anchor": 736,
+        "target_label_not_in_options": 527,
+        "unsupported_or_missing_language": 271,
+        "unsupported_or_missing_task_type": 150
+      },
+      "root_split_violation_count": 0,
+      "root_split_violations": {}
+    },
+    "counts": {
+      "admitted_records": 397,
+      "expected_projected_rows": 1588,
+      "language_record_counts": {
+        "c_cpp": 48,
+        "python": 52,
+        "rust": 63,
+        "web_js_ts_html": 234
+      },
+      "language_row_counts": {
+        "c_cpp": 192,
+        "python": 208,
+        "rust": 252,
+        "web_js_ts_html": 936
+      },
+      "projected_rows": 1588,
+      "record_split_counts": {
+        "strict_eval": 55,
+        "train": 310,
+        "validation": 32
+      },
+      "rejected_rows": 2499,
+      "row_split_counts": {
+        "strict_eval": 220,
+        "train": 1240,
+        "validation": 128
+      },
+      "source_files_considered": 103,
+      "task_record_counts": {
+        "abstention_insufficient_evidence": 68,
+        "alternative_hypothesis_elimination": 32,
+        "evidence_candidate_judgment": 15,
+        "evidence_citation": 73,
+        "minimal_fix_selection": 39,
+        "patch_impact": 41,
+        "symptom_localization": 64,
+        "verifier_outcome": 65
+      },
+      "transition_task_row_counts": {
+        "transition_candidate_selection": 397,
+        "transition_continue_or_stop": 397,
+        "transition_next_action": 397,
+        "transition_verifier_transition": 397
+      },
+      "unique_roots": 120,
+      "verifier_status_counts": {
+        "PASS_CURRENT_BUILD": 6,
+        "PASS_CURRENT_BUILD_AND_RUN": 42,
+        "PASS_CURRENT_STATE": 109,
+        "PASS_TO_PASS": 220,
+        "VERIFIER_REMOVED": 20
+      }
+    },
+    "passed": true
+  },
+  "protected_gates": {
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "residual_preserved": true,
+    "smoke_preserved": true
+  },
+  "stage": 11950,
+  "stage_name": "stage11950_transition_1k_v2_decision",
+  "v2_split_result": {
+    "stage11924": {
+      "strict_eval": {
+        "accuracy": 0.36818181818181817,
+        "correct": 81,
+        "coverage": 1.0,
+        "rows": 220
+      },
+      "strict_eval_by_language_family": {
+        "rust": {
+          "accuracy": 0.5,
+          "correct": 2,
+          "rows": 4
+        },
+        "web_js_ts_html": {
+          "accuracy": 0.36574074074074076,
+          "correct": 79,
+          "rows": 216
+        }
+      },
+      "strict_eval_by_task_type": {
+        "transition_candidate_selection": {
+          "accuracy": 0.36363636363636365,
+          "correct": 20,
+          "rows": 55
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 44,
+          "rows": 55
+        },
+        "transition_next_action": {
+          "accuracy": 0.3090909090909091,
+          "correct": 17,
+          "rows": 55
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "rows": 55
+        }
+      },
+      "train": {
+        "accuracy": 0.4991935483870968,
+        "correct": 619,
+        "coverage": 1.0,
+        "rows": 1240
+      },
+      "train_by_language_family": {
+        "c_cpp": {
+          "accuracy": 0.4322916666666667,
+          "correct": 83,
+          "rows": 192
+        },
+        "python": {
+          "accuracy": 0.734375,
+          "correct": 141,
+          "rows": 192
+        },
+        "rust": {
+          "accuracy": 0.6864406779661016,
+          "correct": 162,
+          "rows": 236
+        },
+        "web_js_ts_html": {
+          "accuracy": 0.3758064516129032,
+          "correct": 233,
+          "rows": 620
+        }
+      },
+      "train_by_task_type": {
+        "transition_candidate_selection": {
+          "accuracy": 0.5516129032258065,
+          "correct": 171,
+          "rows": 310
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.832258064516129,
+          "correct": 258,
+          "rows": 310
+        },
+        "transition_next_action": {
+          "accuracy": 0.2838709677419355,
+          "correct": 88,
+          "rows": 310
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.32903225806451614,
+          "correct": 102,
+          "rows": 310
+        }
+      },
+      "validation": {
+        "accuracy": 0.4453125,
+        "correct": 57,
+        "coverage": 1.0,
+        "rows": 128
+      },
+      "validation_by_language_family": {
+        "python": {
+          "accuracy": 0.75,
+          "correct": 12,
+          "rows": 16
+        },
+        "rust": {
+          "accuracy": 0.5,
+          "correct": 6,
+          "rows": 12
+        },
+        "web_js_ts_html": {
+          "accuracy": 0.39,
+          "correct": 39,
+          "rows": 100
+        }
+      },
+      "validation_by_task_type": {
+        "transition_candidate_selection": {
+          "accuracy": 0.53125,
+          "correct": 17,
+          "rows": 32
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.84375,
+          "correct": 27,
+          "rows": 32
+        },
+        "transition_next_action": {
+          "accuracy": 0.1875,
+          "correct": 6,
+          "rows": 32
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.21875,
+          "correct": 7,
+          "rows": 32
+        }
+      }
+    },
+    "stage11947": {
+      "strict_eval": {
+        "accuracy": 0.5590909090909091,
+        "correct": 123,
+        "coverage": 1.0,
+        "rows": 220
+      },
+      "strict_eval_by_language_family": {
+        "rust": {
+          "accuracy": 0.75,
+          "correct": 3,
+          "rows": 4
+        },
+        "web_js_ts_html": {
+          "accuracy": 0.5555555555555556,
+          "correct": 120,
+          "rows": 216
+        }
+      },
+      "strict_eval_by_task_type": {
+        "transition_candidate_selection": {
+          "accuracy": 0.6545454545454545,
+          "correct": 36,
+          "rows": 55
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 44,
+          "rows": 55
+        },
+        "transition_next_action": {
+          "accuracy": 0.3090909090909091,
+          "correct": 17,
+          "rows": 55
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.4727272727272727,
+          "correct": 26,
+          "rows": 55
+        }
+      },
+      "train": {
+        "accuracy": 0.6048387096774194,
+        "correct": 750,
+        "coverage": 1.0,
+        "rows": 1240
+      },
+      "train_by_language_family": {
+        "c_cpp": {
+          "accuracy": 0.4114583333333333,
+          "correct": 79,
+          "rows": 192
+        },
+        "python": {
+          "accuracy": 0.7239583333333334,
+          "correct": 139,
+          "rows": 192
+        },
+        "rust": {
+          "accuracy": 0.7203389830508474,
+          "correct": 170,
+          "rows": 236
+        },
+        "web_js_ts_html": {
+          "accuracy": 0.5838709677419355,
+          "correct": 362,
+          "rows": 620
+        }
+      },
+      "train_by_task_type": {
+        "transition_candidate_selection": {
+          "accuracy": 0.6387096774193548,
+          "correct": 198,
+          "rows": 310
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.832258064516129,
+          "correct": 258,
+          "rows": 310
+        },
+        "transition_next_action": {
+          "accuracy": 0.3064516129032258,
+          "correct": 95,
+          "rows": 310
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6419354838709678,
+          "correct": 199,
+          "rows": 310
+        }
+      },
+      "validation": {
+        "accuracy": 0.515625,
+        "correct": 66,
+        "coverage": 1.0,
+        "rows": 128
+      },
+      "validation_by_language_family": {
+        "python": {
+          "accuracy": 0.75,
+          "correct": 12,
+          "rows": 16
+        },
+        "rust": {
+          "accuracy": 0.6666666666666666,
+          "correct": 8,
+          "rows": 12
+        },
+        "web_js_ts_html": {
+          "accuracy": 0.46,
+          "correct": 46,
+          "rows": 100
+        }
+      },
+      "validation_by_task_type": {
+        "transition_candidate_selection": {
+          "accuracy": 0.65625,
+          "correct": 21,
+          "rows": 32
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.84375,
+          "correct": 27,
+          "rows": 32
+        },
+        "transition_next_action": {
+          "accuracy": 0.28125,
+          "correct": 9,
+          "rows": 32
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.28125,
+          "correct": 9,
+          "rows": 32
+        }
+      }
+    }
+  }
+}

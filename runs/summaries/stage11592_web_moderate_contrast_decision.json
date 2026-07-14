@@ -1,0 +1,98 @@
+{
+  "contrast_training_telemetry": {
+    "contrast_applicable_rows_seen": 384,
+    "contrast_margin_satisfied_rate": 0.0,
+    "contrast_margin_satisfied_rows_seen": 0,
+    "loss_steps": 96
+  },
+  "created_at_utc": "2026-07-13T22:38:24Z",
+  "decision": "reject_stage11590_keep_stage11507_selected_frontier",
+  "next_recommended_work": [
+    "Do not run more weight-only task-aware contrast probes on Stage11580 rows.",
+    "Build an abstain-attractor audit for option D under the selected scorer and remove/reformulate verifier-attached rows where ABSTAIN is a lexical shortcut.",
+    "Next model-side change should be a scorer architecture that uses task-specific candidate metadata or a staged/frozen head, not another shared retrieval CE sweep.",
+    "Keep Stage11507 + encoder_option_retrieval_evidence_judgment_head as selected frontier."
+  ],
+  "objective_settings": {
+    "bounded_choice_contrast_margin": 0.08,
+    "bounded_choice_contrast_weight": 0.5,
+    "bounded_decoder_train_sampler": "web_task_family_balanced",
+    "learning_rate": "3e-7",
+    "max_steps": 96,
+    "preservation_kl_weight": 5.0
+  },
+  "postrun_compact_results": {
+    "filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "filtered_validation": {
+      "accuracy": 0.8181818181818182,
+      "correct": 18,
+      "rows": 22
+    },
+    "old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23
+    },
+    "old_canary_validation": {
+      "accuracy": 0.8260869565217391,
+      "correct": 19,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.6,
+      "correct": 6,
+      "rows": 10
+    },
+    "web_heldout": {
+      "accuracy": 0.4393939393939394,
+      "correct": 29,
+      "rows": 66
+    },
+    "web_successor_strict": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "rows": 36
+    }
+  },
+  "postrun_gates": {
+    "filtered_strict_22_of_22": true,
+    "filtered_validation_at_least_20_of_22": false,
+    "old_canary_strict_23_of_23": true,
+    "old_canary_validation_at_least_21_of_23": false,
+    "residual_at_least_7_of_10": false,
+    "web_heldout_beats_stage11571_42_of_66": false,
+    "web_successor_strict_full_coverage": true
+  },
+  "rejected_runtime": "runs/local/artifacts/stage11590_web_moderate_task_aware_contrast_probe/runtime_model/runtime_model_bundle.json",
+  "rejected_runtime_weights_sha256": "ee930c75c4e665d6c8883e85490c6108f3b247f2dc746d65f728a1fa6ca9beb1",
+  "selected_frontier_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+  "source_artifacts": {
+    "loss_by_step": "runs/local/artifacts/stage11590_web_moderate_task_aware_contrast_probe/bounded_decoder_probe/loss_by_step.jsonl",
+    "postrun": "runs/summaries/stage11591_web_moderate_task_aware_contrast_postrun_audit.json",
+    "request": "runs/summaries/stage11590_web_moderate_task_aware_contrast_probe_request.json",
+    "successor_audit": "runs/local/artifacts/stage11591_web_moderate_task_aware_contrast_postrun_audit/bounded_choice_eval_audit_web_successor_strict.json"
+  },
+  "stage": 11592,
+  "stage_name": "stage11592_web_moderate_contrast_decision",
+  "successor_strict_pattern": {
+    "correct": 0,
+    "prediction_counts": {
+      "D": 36
+    },
+    "rows": 36,
+    "target_counts": {
+      "A": 12,
+      "B": 24
+    }
+  },
+  "why_rejected": [
+    "The request artifact correctly used web_task_family_balanced, contrast weight 0.5, margin 0.08, and preservation KL 5.0.",
+    "Filtered strict and old canary strict were preserved, but validation, residual, web heldout, and successor strict failed promotion gates.",
+    "Web successor strict remained 0/36 with a uniform D/abstain prediction despite A/B targets.",
+    "Contrast was active but never satisfied the requested margin, so same-objective contrast tuning is not sufficient for this row geometry."
+  ]
+}

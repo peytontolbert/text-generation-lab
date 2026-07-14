@@ -1,0 +1,83 @@
+{
+  "claim_boundary": [
+    "This is train-support schema normalization/admission, not a model promotion.",
+    "Rows remain train-support only and must not be used as strict heldout claims.",
+    "The controlled FAIL_TO_PASS rows are synthetic mutation supervision; PASS_TO_PASS rows are verifier relevance supervision."
+  ],
+  "created_at_utc": "2026-07-14T00:22:34Z",
+  "decision": "web_support_schema_normalized_admitted_train_rows_ready",
+  "gates": {
+    "admitted_rows_nonempty": true,
+    "has_complete_six_task_roots": true,
+    "has_fail_to_pass": true,
+    "has_llama": true,
+    "has_openhands": true,
+    "has_pass_to_pass": true,
+    "normalized_rows_nonempty": true,
+    "stage11637_request_ready": true
+  },
+  "metrics": {
+    "admitted_by_repo_family": {
+      "llama_stack_ui": 80,
+      "openhands_openhands_frontend": 126
+    },
+    "admitted_by_source": {
+      "stage11580_pass_to_pass": 160,
+      "stage11621_fail_to_pass": 46
+    },
+    "admitted_by_task_type": {
+      "abstention_insufficient_evidence": 38,
+      "evidence_citation": 40,
+      "minimal_fix_selection": 40,
+      "patch_impact": 8,
+      "symptom_localization": 40,
+      "verifier_outcome": 40
+    },
+    "admitted_by_transition": {
+      "FAIL_TO_PASS": 46,
+      "PASS_TO_PASS": 160
+    },
+    "admitted_complete_six_task_roots": 8,
+    "admitted_repo_task_counts": {
+      "llama_stack_ui::abstention_insufficient_evidence": 14,
+      "llama_stack_ui::evidence_citation": 16,
+      "llama_stack_ui::minimal_fix_selection": 16,
+      "llama_stack_ui::patch_impact": 2,
+      "llama_stack_ui::symptom_localization": 16,
+      "llama_stack_ui::verifier_outcome": 16,
+      "openhands_openhands_frontend::abstention_insufficient_evidence": 24,
+      "openhands_openhands_frontend::evidence_citation": 24,
+      "openhands_openhands_frontend::minimal_fix_selection": 24,
+      "openhands_openhands_frontend::patch_impact": 6,
+      "openhands_openhands_frontend::symptom_localization": 24,
+      "openhands_openhands_frontend::verifier_outcome": 24
+    },
+    "admitted_roots": 32,
+    "admitted_rows": 206,
+    "normalized_rows": 240,
+    "rejected_rows": 34,
+    "rejection_reasons": {
+      "missing_selected_verifier_path": 2,
+      "task_not_required_for_stage11637": 32
+    }
+  },
+  "next_actions": [
+    "Build a guarded probe request only if admitted rows cover the Stage11637 blocker buckets.",
+    "If probing, pin CUDA_VISIBLE_DEVICES=2 and require protected canary/residual preservation.",
+    "Do not claim Web superiority until same-manifest Web heldout exceeds Gemma 52/66."
+  ],
+  "outputs": {
+    "admitted_rows": "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_admitted_train_rows.jsonl",
+    "normalized_rows": "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_rows.jsonl",
+    "rejected_rows": "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_rejected_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_schema_normalization.json"
+  },
+  "source_artifacts": {
+    "source_stage11580_pass_to_pass": "runs/local/artifacts/stage11580_web_verifier_attached_admission_package/web_verifier_attached_rows.jsonl",
+    "source_stage11621_fail_to_pass": "runs/local/artifacts/stage11621_web_fail_to_pass_row_geometry_repair/web_fail_to_pass_geometry_repaired_train_support.jsonl",
+    "stage11637": "runs/local/artifacts/stage11637_web_gap_root_materialization_request/web_gap_root_materialization_request.json",
+    "web_heldout_rows": "runs/local/artifacts/stage11548_web_root_heldout_stage11507_score_audit/web_root_heldout_rows.jsonl"
+  },
+  "stage": 11638,
+  "stage_name": "stage11638_web_support_schema_normalization"
+}

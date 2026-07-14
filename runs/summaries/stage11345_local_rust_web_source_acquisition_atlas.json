@@ -1,0 +1,49 @@
+{
+  "counts": {
+    "blocked_by_language": {
+      "rust": 14,
+      "web_js_ts_html": 22
+    },
+    "blocked_repo_families": 32,
+    "blocked_rows": 36,
+    "blocker_counts": {
+      "missing_candidate_source_path": 5,
+      "missing_selected_test_or_verifier_path": 29,
+      "repo_family_already_in_train_support": 14,
+      "repo_family_overlaps_protected_eval": 14
+    },
+    "candidate_repo_families": 44,
+    "candidate_rows": 47,
+    "candidates_by_language": {
+      "web_js_ts_html": 47
+    },
+    "repo_roots_scanned": 80
+  },
+  "created_at_utc": "2026-07-13T12:35:24Z",
+  "decision": "local_rust_web_source_acquisition_atlas_ready",
+  "outputs": {
+    "blocked": "runs/local/artifacts/stage11345_local_rust_web_source_acquisition_atlas/local_rust_web_source_blocked.jsonl",
+    "candidates": "runs/local/artifacts/stage11345_local_rust_web_source_acquisition_atlas/local_rust_web_source_candidates.jsonl",
+    "summary": "runs/local/artifacts/stage11345_local_rust_web_source_acquisition_atlas/local_rust_web_source_acquisition_atlas.json"
+  },
+  "passed": true,
+  "quality_gate": {
+    "next_required_stage": "materialize reviewed roots from candidates with distinct source/verifier/symptom evidence and recovered verifier output.",
+    "training_rows_emitted": 0,
+    "why": "This stage only identifies local source/test candidates. It does not invent gold labels, verifier transitions, or maintainer roots."
+  },
+  "recommended_next_action": "Review candidate rows with no protected eval overlap, then build source+verifier maintainer roots only where a real task/verifier transition can be recovered.",
+  "source_artifacts": {
+    "canary_strict": "runs/local/artifacts/stage11312_deleaked_fail_to_pass_transition_package/deleaked_fail_to_pass_strict_rows.jsonl",
+    "canary_train": "runs/local/artifacts/stage11312_deleaked_fail_to_pass_transition_package/deleaked_fail_to_pass_train_rows.jsonl",
+    "canary_validation": "runs/local/artifacts/stage11312_deleaked_fail_to_pass_transition_package/deleaked_fail_to_pass_validation_rows.jsonl",
+    "stage11344_summary": "runs/local/artifacts/stage11344_rust_web_source_verifier_blocker_audit/rust_web_source_verifier_blocker_audit.json"
+  },
+  "stage": 11345,
+  "stage_name": "stage11345_local_rust_web_source_acquisition_atlas",
+  "used_family_counts": {
+    "strict": 8,
+    "train": 55,
+    "validation": 6
+  }
+}

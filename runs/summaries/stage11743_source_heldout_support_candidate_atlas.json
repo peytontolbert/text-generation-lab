@@ -1,0 +1,45 @@
+{
+  "by_language": {
+    "c_cpp": 5,
+    "python": 16,
+    "rust": 14
+  },
+  "candidate_count": 35,
+  "claim_boundary": [
+    "This is an atlas only; no new rows are admitted for training yet.",
+    "Counts are supply candidates, not capability scale."
+  ],
+  "counts": {
+    "('c_cpp', 'execution_candidate', 'needs_build_verifier_probe')": 4,
+    "('c_cpp', 'quarantine_strict_smoke_root', 'quarantine_or_non_bpe_only')": 1,
+    "('python', 'execution_candidate', 'needs_pytest_execution')": 15,
+    "('python', 'quarantine_strict_smoke_root', 'quarantine')": 1,
+    "('rust', 'execution_candidate', 'needs_cargo_test_probe')": 3,
+    "('rust', 'partial_support_inventory', 'needs_selected_test_materialization')": 7,
+    "('rust', 'partial_support_inventory', 'usable_for_evidence_role_support')": 3,
+    "('rust', 'quarantine_strict_smoke_root', 'quarantine')": 1
+  },
+  "created_at_utc": "2026-07-14T08:12:14Z",
+  "decision": "source_heldout_failure_support_candidate_atlas_built",
+  "hard_ready_candidate_count": 3,
+  "interpretation": [
+    "Python has multiple local pytest-style execution candidates, but they need verifier execution and anti-leak rendering before admission.",
+    "Rust local Cargo supply is thin; existing 114xx verifier-log-backed rows are useful but mostly partial for the specific selected-test-vs-sibling-test failure.",
+    "C/C++ has source/build candidates, but most need focused build-verifier probes before they can support the abstain-attractor lane.",
+    "Strict smoke roots are explicitly quarantined and must remain eval-only canaries."
+  ],
+  "next_actions": [
+    "Run Stage11744 Python pytest feasibility on the top execution candidates.",
+    "Run a Rust selected-test geometry audit over the existing 114xx rows before using them for verifier_outcome support.",
+    "Run C/C++ build feasibility on faiss or bitsandbytes before creating abstain counterfactual rows."
+  ],
+  "outputs": {
+    "candidates": "runs/local/artifacts/stage11743_source_heldout_support_candidate_atlas/source_heldout_support_candidates.jsonl",
+    "summary": "runs/local/artifacts/stage11743_source_heldout_support_candidate_atlas/source_heldout_support_candidate_atlas.json"
+  },
+  "passed": true,
+  "readyish_candidate_count": 32,
+  "request": "runs/local/artifacts/stage11742_source_heldout_failure_support_request/source_heldout_failure_support_request.json",
+  "stage": 11743,
+  "stage_name": "stage11743_source_heldout_support_candidate_atlas"
+}

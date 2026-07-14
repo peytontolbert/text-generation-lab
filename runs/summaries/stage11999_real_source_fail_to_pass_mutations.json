@@ -1,0 +1,637 @@
+{
+  "admitted_rows": 5,
+  "claim_boundary": "Real local source mutation with baseline/mutant/restored verifier evidence; train-support only, not strict/source-heldout independent task scale.",
+  "created_at_utc": "2026-07-14T20:23:54Z",
+  "decision": "admit_real_source_fail_to_pass_train_support",
+  "language_counts": {
+    "rust": 2,
+    "web_js_ts_html": 3
+  },
+  "next_stage_recommendation": {
+    "action": "Audit restore guards, admit rows, and merge into transition support inventory.",
+    "stage": "stage12000_fail_to_pass_admission_and_rollup"
+  },
+  "probe_cards": [
+    {
+      "admitted": true,
+      "baseline": [
+        {
+          "command": [
+            "cargo",
+            "test",
+            "--quiet",
+            "--no-fail-fast"
+          ],
+          "cwd": "/data/repositories/git/contrib/libgit-sys",
+          "duration_sec": 1.395,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/rust_git_libgit_sys_lib_rs_syntax_guard_baseline_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\nrunning 2 tests\n..\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+          "timed_out": false
+        }
+      ],
+      "baseline_pass": true,
+      "mutant": [
+        {
+          "command": [
+            "cargo",
+            "test",
+            "--quiet",
+            "--no-fail-fast"
+          ],
+          "cwd": "/data/repositories/git/contrib/libgit-sys",
+          "duration_sec": 2.421,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/rust_git_libgit_sys_lib_rs_syntax_guard_mutant_0.json",
+          "returncode": 101,
+          "stderr_tail": "error: this file contains an unclosed delimiter\n  --> src/lib.rs:81:41\n   |\n81 | fn __stage11999_forced_compile_error( {\n   |                                     - -^\n   |                                     | |\n   |                                     | unclosed delimiter\n   |                                     unclosed delimiter\n\nerror: could not compile `libgit-sys` (lib test) due to 1 previous error\nerror: could not compile `libgit-sys` (lib) due to 1 previous error\n",
+          "stdout_tail": "",
+          "timed_out": false
+        }
+      ],
+      "mutant_failed": true,
+      "mutation_applied": true,
+      "restored": [
+        {
+          "command": [
+            "cargo",
+            "test",
+            "--quiet",
+            "--no-fail-fast"
+          ],
+          "cwd": "/data/repositories/git/contrib/libgit-sys",
+          "duration_sec": 2.618,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/rust_git_libgit_sys_lib_rs_syntax_guard_restored_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\nrunning 2 tests\n..\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+          "timed_out": false
+        }
+      ],
+      "restored_matches_original": true,
+      "restored_pass": true,
+      "spec": {
+        "commands": [
+          [
+            "cargo",
+            "test",
+            "--quiet",
+            "--no-fail-fast"
+          ]
+        ],
+        "id": "rust_git_libgit_sys_lib_rs_syntax_guard",
+        "language_family": "rust",
+        "mutation_kind": "source_compile_error",
+        "mutation_text": "\nfn __stage11999_forced_compile_error( {\n",
+        "repo_family": "git",
+        "root": "/data/repositories/git/contrib/libgit-sys",
+        "selected_verifier_path": "cargo test --quiet --no-fail-fast",
+        "source_file": "src/lib.rs"
+      }
+    },
+    {
+      "admitted": true,
+      "baseline": [
+        {
+          "command": [
+            "cargo",
+            "test",
+            "--quiet",
+            "--no-fail-fast"
+          ],
+          "cwd": "/data/repositories/LLaMA-Adapter/gorilla/gorilla-main/eval/eval-scripts/codebleu/parser/tree-sitter-python",
+          "duration_sec": 0.606,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/rust_llama_tree_sitter_python_lib_rs_syntax_guard_baseline_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.48s\n\n",
+          "timed_out": false
+        }
+      ],
+      "baseline_pass": true,
+      "mutant": [
+        {
+          "command": [
+            "cargo",
+            "test",
+            "--quiet",
+            "--no-fail-fast"
+          ],
+          "cwd": "/data/repositories/LLaMA-Adapter/gorilla/gorilla-main/eval/eval-scripts/codebleu/parser/tree-sitter-python",
+          "duration_sec": 0.098,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/rust_llama_tree_sitter_python_lib_rs_syntax_guard_mutant_0.json",
+          "returncode": 101,
+          "stderr_tail": "error: this file contains an unclosed delimiter\n  --> bindings/rust/lib.rs:70:41\n   |\n70 | fn __stage11999_forced_compile_error( {\n   |                                     - -^\n   |                                     | |\n   |                                     | unclosed delimiter\n   |                                     unclosed delimiter\n\nerror: could not compile `tree-sitter-python` (lib test) due to 1 previous error\nerror: could not compile `tree-sitter-python` (lib) due to 1 previous error\n",
+          "stdout_tail": "",
+          "timed_out": false
+        }
+      ],
+      "mutant_failed": true,
+      "mutation_applied": true,
+      "restored": [
+        {
+          "command": [
+            "cargo",
+            "test",
+            "--quiet",
+            "--no-fail-fast"
+          ],
+          "cwd": "/data/repositories/LLaMA-Adapter/gorilla/gorilla-main/eval/eval-scripts/codebleu/parser/tree-sitter-python",
+          "duration_sec": 1.116,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/rust_llama_tree_sitter_python_lib_rs_syntax_guard_restored_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.47s\n\n",
+          "timed_out": false
+        }
+      ],
+      "restored_matches_original": true,
+      "restored_pass": true,
+      "spec": {
+        "commands": [
+          [
+            "cargo",
+            "test",
+            "--quiet",
+            "--no-fail-fast"
+          ]
+        ],
+        "id": "rust_llama_tree_sitter_python_lib_rs_syntax_guard",
+        "language_family": "rust",
+        "mutation_kind": "source_compile_error",
+        "mutation_text": "\nfn __stage11999_forced_compile_error( {\n",
+        "repo_family": "llama-adapter",
+        "root": "/data/repositories/LLaMA-Adapter/gorilla/gorilla-main/eval/eval-scripts/codebleu/parser/tree-sitter-python",
+        "selected_verifier_path": "cargo test --quiet --no-fail-fast",
+        "source_file": "bindings/rust/lib.rs"
+      }
+    },
+    {
+      "admitted": true,
+      "baseline": [
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/core",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 1.439,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_core_index_ts_syntax_guard_baseline_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/core@2.0.0-alpha.1 typecheck /data/repositories/modelcontextprotocol__typescript-sdk/packages/core\n> tsgo -p tsconfig.json --noEmit\n\n",
+          "timed_out": false
+        },
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/core",
+            "run",
+            "test"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 5.138,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_core_index_ts_syntax_guard_baseline_1.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/core@2.0.0-alpha.1 test /data/repositories/modelcontextprotocol__typescript-sdk/packages/core\n> vitest run\n\n\n RUN  v4.1.2 /data/repositories/modelcontextprotocol__typescript-sdk/packages/core\n\n\n Test Files  21 passed (21)\n      Tests  552 passed (552)\n   Start at  20:23:19\n   Duration  4.16s (transform 7.02s, setup 0ms, import 11.44s, tests 3.81s, environment 2ms)\n\n",
+          "timed_out": false
+        }
+      ],
+      "baseline_pass": true,
+      "mutant": [
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/core",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 0.742,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_core_index_ts_syntax_guard_mutant_0.json",
+          "returncode": 2,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/core@2.0.0-alpha.1 typecheck /data/repositories/modelcontextprotocol__typescript-sdk/packages/core\n> tsgo -p tsconfig.json --noEmit\n\nsrc/index.ts(58,50): error TS1109: Expression expected.\n/data/repositories/modelcontextprotocol__typescript-sdk/packages/core:\n\u2009ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL\u2009 @modelcontextprotocol/core@2.0.0-alpha.1 typecheck: `tsgo -p tsconfig.json --noEmit`\nExit status 2\n",
+          "timed_out": false
+        },
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/core",
+            "run",
+            "test"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 5.157,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_core_index_ts_syntax_guard_mutant_1.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/core@2.0.0-alpha.1 test /data/repositories/modelcontextprotocol__typescript-sdk/packages/core\n> vitest run\n\n\n RUN  v4.1.2 /data/repositories/modelcontextprotocol__typescript-sdk/packages/core\n\n\n Test Files  21 passed (21)\n      Tests  552 passed (552)\n   Start at  20:23:25\n   Duration  4.17s (transform 7.05s, setup 0ms, import 11.34s, tests 3.82s, environment 2ms)\n\n",
+          "timed_out": false
+        }
+      ],
+      "mutant_failed": true,
+      "mutation_applied": true,
+      "restored": [
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/core",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 0.682,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_core_index_ts_syntax_guard_restored_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/core@2.0.0-alpha.1 typecheck /data/repositories/modelcontextprotocol__typescript-sdk/packages/core\n> tsgo -p tsconfig.json --noEmit\n\n",
+          "timed_out": false
+        },
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/core",
+            "run",
+            "test"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 5.162,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_core_index_ts_syntax_guard_restored_1.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/core@2.0.0-alpha.1 test /data/repositories/modelcontextprotocol__typescript-sdk/packages/core\n> vitest run\n\n\n RUN  v4.1.2 /data/repositories/modelcontextprotocol__typescript-sdk/packages/core\n\n\n Test Files  21 passed (21)\n      Tests  552 passed (552)\n   Start at  20:23:31\n   Duration  4.18s (transform 6.73s, setup 0ms, import 11.67s, tests 3.80s, environment 3ms)\n\n",
+          "timed_out": false
+        }
+      ],
+      "restored_matches_original": true,
+      "restored_pass": true,
+      "spec": {
+        "commands": [
+          [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/core",
+            "run",
+            "typecheck"
+          ],
+          [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/core",
+            "run",
+            "test"
+          ]
+        ],
+        "id": "web_mcp_core_index_ts_syntax_guard",
+        "language_family": "web_js_ts_html",
+        "mutation_kind": "typescript_compile_error",
+        "mutation_text": "\nexport const __stage11999_forced_compile_error = ;\n",
+        "repo_family": "modelcontextprotocol__typescript-sdk",
+        "root": "/data/repositories/modelcontextprotocol__typescript-sdk",
+        "selected_verifier_path": "@modelcontextprotocol/core typecheck + test",
+        "source_file": "packages/core/src/index.ts"
+      }
+    },
+    {
+      "admitted": true,
+      "baseline": [
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/client",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 1.189,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_client_index_ts_syntax_guard_baseline_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/client@2.0.0-alpha.2 typecheck /data/repositories/modelcontextprotocol__typescript-sdk/packages/client\n> tsgo -p tsconfig.json --noEmit\n\n",
+          "timed_out": false
+        },
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/client",
+            "run",
+            "test"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 2.865,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_client_index_ts_syntax_guard_baseline_1.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/client@2.0.0-alpha.2 test /data/repositories/modelcontextprotocol__typescript-sdk/packages/client\n> vitest run\n\n\n RUN  v4.1.2 /data/repositories/modelcontextprotocol__typescript-sdk/packages/client\n\n\n Test Files  10 passed (10)\n      Tests  364 passed (364)\n   Start at  20:23:37\n   Duration  1.89s (transform 6.75s, setup 372ms, import 10.07s, tests 1.88s, environment 1ms)\n\n",
+          "timed_out": false
+        }
+      ],
+      "baseline_pass": true,
+      "mutant": [
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/client",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 0.645,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_client_index_ts_syntax_guard_mutant_0.json",
+          "returncode": 2,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/client@2.0.0-alpha.2 typecheck /data/repositories/modelcontextprotocol__typescript-sdk/packages/client\n> tsgo -p tsconfig.json --noEmit\n\nsrc/index.ts(83,50): error TS1109: Expression expected.\n/data/repositories/modelcontextprotocol__typescript-sdk/packages/client:\n\u2009ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL\u2009 @modelcontextprotocol/client@2.0.0-alpha.2 typecheck: `tsgo -p tsconfig.json --noEmit`\nExit status 2\n",
+          "timed_out": false
+        },
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/client",
+            "run",
+            "test"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 2.651,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_client_index_ts_syntax_guard_mutant_1.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/client@2.0.0-alpha.2 test /data/repositories/modelcontextprotocol__typescript-sdk/packages/client\n> vitest run\n\n\n RUN  v4.1.2 /data/repositories/modelcontextprotocol__typescript-sdk/packages/client\n\n\n Test Files  10 passed (10)\n      Tests  364 passed (364)\n   Start at  20:23:40\n   Duration  1.79s (transform 6.00s, setup 247ms, import 9.62s, tests 1.59s, environment 1ms)\n\n",
+          "timed_out": false
+        }
+      ],
+      "mutant_failed": true,
+      "mutation_applied": true,
+      "restored": [
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/client",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 0.684,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_client_index_ts_syntax_guard_restored_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/client@2.0.0-alpha.2 typecheck /data/repositories/modelcontextprotocol__typescript-sdk/packages/client\n> tsgo -p tsconfig.json --noEmit\n\n",
+          "timed_out": false
+        },
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/client",
+            "run",
+            "test"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 2.68,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_client_index_ts_syntax_guard_restored_1.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/client@2.0.0-alpha.2 test /data/repositories/modelcontextprotocol__typescript-sdk/packages/client\n> vitest run\n\n\n RUN  v4.1.2 /data/repositories/modelcontextprotocol__typescript-sdk/packages/client\n\n\n Test Files  10 passed (10)\n      Tests  364 passed (364)\n   Start at  20:23:44\n   Duration  1.69s (transform 5.87s, setup 225ms, import 9.20s, tests 1.53s, environment 1ms)\n\n",
+          "timed_out": false
+        }
+      ],
+      "restored_matches_original": true,
+      "restored_pass": true,
+      "spec": {
+        "commands": [
+          [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/client",
+            "run",
+            "typecheck"
+          ],
+          [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/client",
+            "run",
+            "test"
+          ]
+        ],
+        "id": "web_mcp_client_index_ts_syntax_guard",
+        "language_family": "web_js_ts_html",
+        "mutation_kind": "typescript_compile_error",
+        "mutation_text": "\nexport const __stage11999_forced_compile_error = ;\n",
+        "repo_family": "modelcontextprotocol__typescript-sdk",
+        "root": "/data/repositories/modelcontextprotocol__typescript-sdk",
+        "selected_verifier_path": "@modelcontextprotocol/client typecheck + test",
+        "source_file": "packages/client/src/index.ts"
+      }
+    },
+    {
+      "admitted": true,
+      "baseline": [
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/server",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 0.991,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_server_index_ts_syntax_guard_baseline_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/server@2.0.0-alpha.2 typecheck /data/repositories/modelcontextprotocol__typescript-sdk/packages/server\n> tsgo -p tsconfig.json --noEmit\n\n",
+          "timed_out": false
+        },
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/server",
+            "run",
+            "test"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 1.81,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_server_index_ts_syntax_guard_baseline_1.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/server@2.0.0-alpha.2 test /data/repositories/modelcontextprotocol__typescript-sdk/packages/server\n> vitest run\n\n\n RUN  v4.1.2 /data/repositories/modelcontextprotocol__typescript-sdk/packages/server\n\n\n Test Files  6 passed (6)\n      Tests  65 passed (65)\n   Start at  20:23:47\n   Duration  996ms (transform 1.55s, setup 0ms, import 2.94s, tests 267ms, environment 1ms)\n\n",
+          "timed_out": false
+        }
+      ],
+      "baseline_pass": true,
+      "mutant": [
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/server",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 0.748,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_server_index_ts_syntax_guard_mutant_0.json",
+          "returncode": 2,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/server@2.0.0-alpha.2 typecheck /data/repositories/modelcontextprotocol__typescript-sdk/packages/server\n> tsgo -p tsconfig.json --noEmit\n\nsrc/index.ts(54,50): error TS1109: Expression expected.\n/data/repositories/modelcontextprotocol__typescript-sdk/packages/server:\n\u2009ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL\u2009 @modelcontextprotocol/server@2.0.0-alpha.2 typecheck: `tsgo -p tsconfig.json --noEmit`\nExit status 2\n",
+          "timed_out": false
+        },
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/server",
+            "run",
+            "test"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 2.085,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_server_index_ts_syntax_guard_mutant_1.json",
+          "returncode": 1,
+          "stderr_tail": "\n\u23af\u23af\u23af\u23af\u23af\u23af Failed Suites 1 \u23af\u23af\u23af\u23af\u23af\u23af\u23af\n\n FAIL  test/server/mcp.compat.test.ts [ test/server/mcp.compat.test.ts ]\nError: Transform failed with 1 error:\n/data/repositories/modelcontextprotocol__typescript-sdk/packages/server/src/index.ts:54:49: ERROR: Unexpected \";\"\n  Plugin: vite:esbuild\n  File: /data/repositories/modelcontextprotocol__typescript-sdk/packages/server/src/index.ts:54:49\n  \n  Unexpected \";\"\n  52 |  export * from '@modelcontextprotocol/core/public';\n  53 |  \n  54 |  export const __stage11999_forced_compile_error = ;\n     |                                                   ^\n  55 |  \n  \n \u276f failureErrorWithLog ../../node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:1748:15\n \u276f ../../node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:1017:50\n \u276f responseCallbacks.<computed> ../../node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:884:9\n \u276f handleIncomingPacket ../../node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:939:12\n \u276f Socket.readFromStdout ../../node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:862:7\n\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af[1/1]\u23af\n\n",
+          "stdout_tail": "\n> @modelcontextprotocol/server@2.0.0-alpha.2 test /data/repositories/modelcontextprotocol__typescript-sdk/packages/server\n> vitest run\n\n\n RUN  v4.1.2 /data/repositories/modelcontextprotocol__typescript-sdk/packages/server\n\n \u276f test/server/mcp.compat.test.ts (0 test)\n\n Test Files  1 failed | 5 passed (6)\n      Tests  58 passed (58)\n   Start at  20:23:50\n   Duration  1.04s (transform 1.89s, setup 0ms, import 2.38s, tests 193ms, environment 1ms)\n\n/data/repositories/modelcontextprotocol__typescript-sdk/packages/server:\n\u2009ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL\u2009 @modelcontextprotocol/server@2.0.0-alpha.2 test: `vitest run`\nExit status 1\n",
+          "timed_out": false
+        }
+      ],
+      "mutant_failed": true,
+      "mutation_applied": true,
+      "restored": [
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/server",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 0.679,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_server_index_ts_syntax_guard_restored_0.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/server@2.0.0-alpha.2 typecheck /data/repositories/modelcontextprotocol__typescript-sdk/packages/server\n> tsgo -p tsconfig.json --noEmit\n\n",
+          "timed_out": false
+        },
+        {
+          "command": [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/server",
+            "run",
+            "test"
+          ],
+          "cwd": "/data/repositories/modelcontextprotocol__typescript-sdk",
+          "duration_sec": 2.041,
+          "log_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/logs/web_mcp_server_index_ts_syntax_guard_restored_1.json",
+          "returncode": 0,
+          "stderr_tail": "",
+          "stdout_tail": "\n> @modelcontextprotocol/server@2.0.0-alpha.2 test /data/repositories/modelcontextprotocol__typescript-sdk/packages/server\n> vitest run\n\n\n RUN  v4.1.2 /data/repositories/modelcontextprotocol__typescript-sdk/packages/server\n\n\n Test Files  6 passed (6)\n      Tests  65 passed (65)\n   Start at  20:23:53\n   Duration  1.06s (transform 2.03s, setup 0ms, import 3.17s, tests 273ms, environment 1ms)\n\n",
+          "timed_out": false
+        }
+      ],
+      "restored_matches_original": true,
+      "restored_pass": true,
+      "spec": {
+        "commands": [
+          [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/server",
+            "run",
+            "typecheck"
+          ],
+          [
+            "pnpm",
+            "--dir",
+            "/data/repositories/modelcontextprotocol__typescript-sdk",
+            "--filter",
+            "@modelcontextprotocol/server",
+            "run",
+            "test"
+          ]
+        ],
+        "id": "web_mcp_server_index_ts_syntax_guard",
+        "language_family": "web_js_ts_html",
+        "mutation_kind": "typescript_compile_error",
+        "mutation_text": "\nexport const __stage11999_forced_compile_error = ;\n",
+        "repo_family": "modelcontextprotocol__typescript-sdk",
+        "root": "/data/repositories/modelcontextprotocol__typescript-sdk",
+        "selected_verifier_path": "@modelcontextprotocol/server typecheck + test",
+        "source_file": "packages/server/src/index.ts"
+      }
+    }
+  ],
+  "repo_family_counts": {
+    "git": 1,
+    "llama-adapter": 1,
+    "modelcontextprotocol__typescript-sdk": 3
+  },
+  "rows_attempted": 5,
+  "rows_path": "runs/local/artifacts/stage11999_real_source_fail_to_pass_mutations/real_source_fail_to_pass_rows.jsonl",
+  "stage": "stage11999_real_source_fail_to_pass_mutations",
+  "status_counts": {
+    "FAIL_TO_PASS": 5
+  }
+}

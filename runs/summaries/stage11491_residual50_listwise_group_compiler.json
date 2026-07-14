@@ -1,0 +1,61 @@
+{
+  "blocked_training_reason": "No direct listwise training request should be emitted until Residual-50 is rebuilt with explicit non-contradictory candidate_set_id/state_id groups.",
+  "created_at_utc": "2026-07-13T18:08:40Z",
+  "decision": "listwise_group_compiler_blocks_training",
+  "interpretation": [
+    "Stage11491 assigns explicit listwise_group_id values from root plus visible-state hash.",
+    "The compiler refuses to train groups where the same visible state has contradictory singleton target roles.",
+    "The current Residual-50 package still lacks safe multi-row listwise groups; many candidate rows are either singleton or contradictory counterfactual projections."
+  ],
+  "metrics": {
+    "contradictory_groups": 16,
+    "group_size_counts": {
+      "1": 46,
+      "2": 16
+    },
+    "input_rows": 78,
+    "listwise_groups": 62,
+    "protected_overlap_groups": 0,
+    "quarantine_reasons": {
+      "contradictory_targets_same_visible_state": 32,
+      "singleton_group_no_cross_row_signal": 46
+    },
+    "quarantined_rows": 78,
+    "singleton_groups": 46,
+    "target_role_counts": {
+      "candidate_change_surface": 30,
+      "symptom_or_call_path_analogue": 8,
+      "verifier_and_test_constraint": 38
+    },
+    "trainable_grouped_rows": 0,
+    "trainable_groups": 0
+  },
+  "next_stage_contract": {
+    "goal": "recompile Residual-50 into explicit candidate-set groups where each visible state has one gold role and hard negatives are candidate options, not contradictory sibling labels",
+    "recommended_stage": "stage11492_residual50_candidate_set_recompiler",
+    "success_criteria": [
+      "candidate_set_id present on every row",
+      "each candidate_set_id has exactly one singleton gold target or explicit set-valued target",
+      "each group includes candidate_change_surface, verifier_and_test_constraint, symptom_or_call_path_analogue, and insufficient/background where available",
+      "no protected row/root overlap",
+      "at least 30 trainable groups across Python, C/C++, and Rust"
+    ]
+  },
+  "outputs": {
+    "grouped_rows": "runs/local/artifacts/stage11491_residual50_listwise_group_compiler/residual50_listwise_grouped_rows.jsonl",
+    "groups": "runs/local/artifacts/stage11491_residual50_listwise_group_compiler/residual50_listwise_groups.jsonl",
+    "quarantine_rows": "runs/local/artifacts/stage11491_residual50_listwise_group_compiler/residual50_listwise_quarantine_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11491_residual50_listwise_group_compiler/residual50_listwise_group_compiler.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "filtered_strict": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "filtered_validation": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_validation.jsonl",
+    "residual50_rows": "runs/local/artifacts/stage11481_residual50_ready_package_with_rust_counters/residual50_ready_rows.jsonl",
+    "residual_bank": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/semantic_candidate_residual_bank.jsonl",
+    "stage11490_readiness": "runs/local/artifacts/stage11490_same_root_listwise_objective_readiness/same_root_listwise_objective_readiness.json"
+  },
+  "stage": 11491,
+  "stage_name": "stage11491_residual50_listwise_group_compiler",
+  "training_admissible": false
+}

@@ -1,0 +1,126 @@
+{
+  "claim_scope": [
+    "Add candidate-wise evidence-role supervision from the currently trusted selected-test-backed reviewed bundles on top of the stage10926 multilingual support package.",
+    "Move one step closer to the encoder_option_retrieval boundary while leaving the cleaned heldout overlay unchanged."
+  ],
+  "created_at_utc": "2026-07-12T19:52:54Z",
+  "decision": "mixed_evidence_candidate_support_package_ready",
+  "interpretation": [
+    "This package keeps the semantic support from stage10926 but adds the candidate-wise evidence-role rows that are structurally closer to the retrieval decision boundary.",
+    "The added rows are filtered to the same trusted reviewed bundles we are already using for the current evidence successor work, so this does not widen the anti-cheat surface arbitrarily.",
+    "Web remains support-only through code_assist overlap, not promotable pure-web heldout evidence."
+  ],
+  "metrics": {
+    "added_bundle_count": 5,
+    "added_by_language": {
+      "c_cpp": 12,
+      "python": 12,
+      "rust": 5
+    },
+    "added_by_role_label": {
+      "A": 5,
+      "B": 3,
+      "C": 3,
+      "D": 4,
+      "E": 5,
+      "F": 9
+    },
+    "base_metrics_snapshot": {
+      "base_metrics_snapshot": {
+        "added_repaired_rows": 6,
+        "repaired_duplicate_visible_evidence_groups": 0,
+        "stress_rows_unchanged": 7,
+        "strict_rows_unchanged": 23,
+        "train_rows_after": 193,
+        "train_rows_before": 187,
+        "validation_rows_unchanged": 23
+      },
+      "semantic_metrics_snapshot": {
+        "row_count": 12,
+        "rows_by_language": {
+          "c_cpp": 4,
+          "python": 4,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "rows_by_target": {
+          "candidate_change_surface": 4,
+          "symptom_or_call_path_analogue": 2,
+          "verifier_and_test_constraint": 6
+        }
+      },
+      "semantic_row_types_added": {
+        "pairwise_contrast": 6,
+        "semantic_role_full": 6
+      },
+      "semantic_rows_added": 12,
+      "semantic_targets_added": {
+        "candidate_change_surface": 4,
+        "symptom_or_call_path_analogue": 2,
+        "verifier_and_test_constraint": 6
+      },
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_by_language": {
+        "c_cpp": 113,
+        "python": 54,
+        "rust": 36,
+        "web_js_ts_html": 2
+      },
+      "train_by_task": {
+        "abstention_insufficient_evidence": 18,
+        "alternative_hypothesis_elimination": 1,
+        "cpp_implementation_vs_implementation": 1,
+        "evidence_citation": 30,
+        "evidence_role_classification": 76,
+        "minimal_fix_selection": 17,
+        "patch_impact": 18,
+        "python_implementation_vs_implementation": 2,
+        "regression_risk": 1,
+        "symptom_localization": 18,
+        "verifier_outcome": 23
+      },
+      "train_rows_after": 205,
+      "train_rows_before": 193,
+      "validation_rows_unchanged": 23
+    },
+    "candidate_rows_added": 29,
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_by_language": {
+      "c_cpp": 125,
+      "python": 66,
+      "rust": 41,
+      "web_js_ts_html": 2
+    },
+    "train_rows_after": 234,
+    "train_rows_before": 205,
+    "validation_rows_unchanged": 23
+  },
+  "next_best_step": "Run a new multilingual probe from the stage10928 runtime, then compare unchanged overlay behavior and the fresh evidence successor slice to see whether the candidate-wise rows move the actual B-vs-F boundary.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage10930_mixed_evidence_candidate_support_package/added_mixed_evidence_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage10930_mixed_evidence_candidate_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage10930_mixed_evidence_candidate_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage10930_mixed_evidence_candidate_support_package/mixed_evidence_candidate_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage10930_mixed_evidence_candidate_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage10930_mixed_evidence_candidate_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "All added candidate-wise evidence rows remain train_support_only and strict_eval_eligible=false.",
+    "Validation and strict rows are copied unchanged from stage10926.",
+    "Only the currently trusted selected-test-backed reviewed bundles are allowed into the added candidate row set.",
+    "The known alias-risk tokenizers evidence lane remains excluded."
+  ],
+  "source_artifacts": {
+    "base_stress": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "base_strict": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "base_summary": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/semantic_evidence_multilingual_support_package.json",
+    "base_train": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/agentkernel_lite_encdec_train.jsonl",
+    "base_validation": "runs/local/artifacts/stage10926_semantic_evidence_multilingual_support_package/agentkernel_lite_encdec_validation.jsonl",
+    "candidate_rows_source": "runs/local/artifacts/stage10826_evidence_role_support_package/evidence_role_candidate_rows.jsonl"
+  },
+  "stage": 10930,
+  "stage_name": "stage10930_mixed_evidence_candidate_support_package"
+}

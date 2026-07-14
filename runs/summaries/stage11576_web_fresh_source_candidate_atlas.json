@@ -1,0 +1,60 @@
+{
+  "candidate_roots": 34,
+  "claim_boundary": [
+    "This mines local source/test candidates only.",
+    "No verifier commands were executed and no model training was run.",
+    "Rows are not trainable until gold, verifier transition, split, and anti-cheat fields are completed."
+  ],
+  "created_at_utc": "2026-07-13T21:56:58Z",
+  "decision": "fresh_source_candidates_mined_pending_gold_and_anticheat",
+  "lane_counts": {
+    "build_all_supported_evidence_item_judgment_rows_with_decisive_vs_distractor_labels": {
+      "candidate_roots": 2,
+      "repo_families": [
+        "sep_automation",
+        "server"
+      ],
+      "strict_eval_eligible_now": 0,
+      "trainable_now": 0
+    },
+    "materialize_diverse_openhands_transition_roots_with_test_ids_and_fail_pass_labels": {
+      "candidate_roots": 18,
+      "repo_families": [
+        "frontend"
+      ],
+      "strict_eval_eligible_now": 0,
+      "trainable_now": 0
+    },
+    "materialize_llama_stack_train_analogues_with_selected_tests_and_root_disjoint_options": {
+      "candidate_roots": 14,
+      "repo_families": [
+        "llama_stack_ui"
+      ],
+      "strict_eval_eligible_now": 0,
+      "trainable_now": 0
+    }
+  },
+  "next_required_actions": [
+    "Convert candidate roots into reviewed train/heldout rows by adding task descriptions, verifier transitions, gold answers, and anti-cheat decisions.",
+    "Run a Stage11577 admission audit against Stage11574 gates after gold/verifier fields are filled.",
+    "Do not train on Stage11576 rows directly; they are source candidates only."
+  ],
+  "outputs": {
+    "candidate_roots": "runs/local/artifacts/stage11576_web_fresh_source_candidate_atlas/web_fresh_source_candidate_roots.jsonl",
+    "summary": "runs/local/artifacts/stage11576_web_fresh_source_candidate_atlas/web_fresh_source_candidate_atlas.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "stage11529_queue": "runs/local/artifacts/stage11529_web_materialization_queue/web_materialization_work_items.jsonl",
+    "stage11575": "runs/summaries/stage11575_web_remaining_gap_fresh_root_materializer.json"
+  },
+  "stage": 11576,
+  "stage11575_supply_gap_before_atlas": {
+    "admitted_unique_roots_total": 4,
+    "candidate_records_scanned": 501,
+    "fresh_train_root_gap_total": 21,
+    "lane_candidate_records": 49,
+    "required_train_roots_total": 25
+  },
+  "stage_name": "stage11576_web_fresh_source_candidate_atlas"
+}

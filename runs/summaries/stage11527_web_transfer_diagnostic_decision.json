@@ -1,0 +1,107 @@
+{
+  "claim_boundary": [
+    "Stage11507 remains selected for compact canary/harness claims.",
+    "Current 100M does not beat Gemma on executed Web transfer packets.",
+    "Web needs broader source/verifier-backed root supply and balanced training, not another tiny OpenHands-only support probe."
+  ],
+  "created_at_utc": "2026-07-13T19:36:38Z",
+  "decision": "web_transfer_diagnostics_reject_support_probes_keep_stage11507",
+  "decisions": {
+    "reason": [
+      "Stage11523 improves OpenHands from 0/18 to 6/18 but regresses filtered strict to 19/22 and old canary strict to 20/23.",
+      "Stage11525 improves Llama from 0/6 to 1/6 and OpenHands from 0/18 to 4/18, but regresses filtered strict to 16/22 and old canary strict to 17/23.",
+      "Neither support probe beats existing Gemma artifacts on the Web heldout packets.",
+      "The Web gap is real under source/verifier-backed heldout rows; narrow OpenHands support overfits and damages preserved evidence/abstention behavior."
+    ],
+    "reject_stage11523_all_openhands_support": true,
+    "reject_stage11525_non_evidence_support": true,
+    "selected_frontier_remains_stage11507": true
+  },
+  "next_stage_requirements": {
+    "do_not_promote": [
+      "stage11523",
+      "stage11525"
+    ],
+    "minimum_next_web_package": {
+      "fresh_web_repo_families": ">=3, not only OpenHands or Llama Stack",
+      "heldout_roots": ">=10 Web source/verifier-backed roots",
+      "negative_controls": [
+        "candidate_change_surface is sometimes correct and sometimes tempting wrong",
+        "verifier/test constraint is sometimes correct and sometimes tempting wrong",
+        "abstention rows include real insufficient-evidence cases"
+      ],
+      "promotion_gates": [
+        "filtered strict remains 22/22",
+        "old canary strict remains 23/23",
+        "OpenHands heldout improves without repo-family training leakage being used as headline",
+        "Llama Stack heldout improves",
+        "same-manifest Gemma is beaten on a sealed Web slice"
+      ],
+      "task_balance": [
+        "symptom_localization",
+        "evidence_citation",
+        "verifier_outcome",
+        "minimal_fix_selection",
+        "alternative_hypothesis_elimination",
+        "abstention_insufficient_evidence"
+      ],
+      "train_roots": ">=20 Web verifier-backed roots"
+    }
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11527_web_transfer_diagnostic_decision/web_transfer_diagnostic_decision.json"
+  },
+  "passed": true,
+  "scores": {
+    "stage11521_llama_stage11507": {
+      "delta_accuracy": -0.8333333333333334,
+      "gemma_accuracy": 0.8333333333333334,
+      "gemma_correct": 5,
+      "gemma_rows": 6,
+      "hundred_m_accuracy": 0.0,
+      "hundred_m_correct": 0,
+      "hundred_m_rows": 6
+    },
+    "stage11522_openhands_stage11507": {
+      "delta_accuracy": -1.0,
+      "gemma_accuracy": 1.0,
+      "gemma_correct": 18,
+      "gemma_rows": 18,
+      "hundred_m_accuracy": 0.0,
+      "hundred_m_correct": 0,
+      "hundred_m_rows": 18
+    },
+    "stage11524_openhands_all_support": {
+      "filtered_strict": 19,
+      "filtered_validation": 21,
+      "llama_correct": 0,
+      "llama_gemma_correct": 5,
+      "llama_rows": 6,
+      "old_canary_strict": 20,
+      "old_canary_validation": 22,
+      "openhands_correct": 6,
+      "openhands_gemma_correct": 18,
+      "openhands_rows": 18
+    },
+    "stage11526_openhands_non_evidence_support": {
+      "filtered_strict": 16,
+      "filtered_validation": 17,
+      "llama_correct": 1,
+      "llama_gemma_correct": 5,
+      "llama_rows": 6,
+      "old_canary_strict": 17,
+      "old_canary_validation": 18,
+      "openhands_correct": 4,
+      "openhands_gemma_correct": 18,
+      "openhands_rows": 18
+    }
+  },
+  "source_artifacts": {
+    "stage11521_llama_stage11507": "runs/summaries/stage11521_web_llama_stack_stage11507_same_manifest_comparison.json",
+    "stage11522_openhands_stage11507": "runs/summaries/stage11522_openhands_web_stage11507_same_manifest_comparison.json",
+    "stage11524_openhands_all_support": "runs/summaries/stage11524_openhands_from_stage11507_support_postrun_audit.json",
+    "stage11526_openhands_non_evidence_support": "runs/summaries/stage11526_openhands_non_evidence_from_stage11507_postrun_audit.json"
+  },
+  "stage": 11527,
+  "stage_name": "stage11527_web_transfer_diagnostic_decision"
+}

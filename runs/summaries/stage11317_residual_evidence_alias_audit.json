@@ -1,0 +1,44 @@
+{
+  "counts": {
+    "alias_blocked_rows": 9,
+    "blocker_counts": {
+      "evidence_lines_prefixed_by_role_alias": 3,
+      "gold_role_alias_visible_in_prompt": 9,
+      "option_value_alias_visible_in_prompt": 9
+    },
+    "by_gold": {
+      "candidate_change_surface": 4,
+      "symptom_or_call_path_analogue": 2,
+      "verifier_and_test_constraint": 3
+    },
+    "by_language": {
+      "c_cpp": 4,
+      "python": 2,
+      "rust": 3
+    },
+    "evidence_residual_rows": 9,
+    "replacement_queue_rows": 9,
+    "residual_rows": 10,
+    "stage11315_miss_rows": 5
+  },
+  "created_at_utc": "2026-07-13T11:40:25Z",
+  "decision": "residual_evidence_rows_are_scorer_diagnostics_not_maintainer_grade_eval",
+  "interpretation": [
+    "The evidence residual bank exposes explicit role aliases in prompt text, including gold role names and option values.",
+    "These rows remain useful for scorer debugging, but they are not maintainer-grade evidence-citation eval rows because a parser can match role names directly.",
+    "Do not promote frontier claims by optimizing these rows. Replace them with alias-free evidence-item candidate rows using opaque candidates and semantic targets stored out of prompt."
+  ],
+  "next_action": "stage11318_alias_free_residual_evidence_item_materialization",
+  "outputs": {
+    "replacement_queue_jsonl": "runs/local/artifacts/stage11317_residual_evidence_alias_audit/residual_evidence_replacement_queue.jsonl",
+    "row_audit_jsonl": "runs/local/artifacts/stage11317_residual_evidence_alias_audit/residual_evidence_alias_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11317_residual_evidence_alias_audit/residual_evidence_alias_audit.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "residual_rows": "runs/local/artifacts/stage11312_deleaked_fail_to_pass_transition_package/deleaked_fail_to_pass_residual_rows.jsonl",
+    "stage11315_audit": "runs/local/artifacts/stage11315_deleaked_fail_to_pass_postrun_audit/deleaked_fail_to_pass_postrun_audit.json"
+  },
+  "stage": 11317,
+  "stage_name": "stage11317_residual_evidence_alias_audit"
+}

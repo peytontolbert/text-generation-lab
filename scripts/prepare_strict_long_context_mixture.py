@@ -10,6 +10,7 @@ from long_context_common import write_json, write_jsonl
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG_PATH = ROOT / "configs" / "software_maintainer" / "strict_long_context_mixture_launcher_v1.json"
+DEFAULT_BUNDLE_CARD_PATH = ROOT / "runs" / "local" / "artifacts" / "strict_software_maintainer_training_bundle_v1" / "strict_software_maintainer_training_bundle_card.json"
 SURFACE_TO_JSONL_KEY = {
     "full_context_rows": "full_context_rows_jsonl",
     "retrieval_rows": "retrieval_rows_jsonl",
@@ -40,6 +41,31 @@ def _load_config(config_path: Path) -> dict[str, Any]:
     return config
 
 
+def _resolve_dataset_card_path(
+    *,
+    dataset_card_path: Path | None,
+    bundle_card_path: Path | None,
+) -> tuple[Path, Path | None]:
+    if dataset_card_path is not None:
+        resolved_dataset_card_path = dataset_card_path.resolve()
+        if not resolved_dataset_card_path.exists():
+            raise FileNotFoundError(f"missing_dataset_card:{resolved_dataset_card_path}")
+        return resolved_dataset_card_path, bundle_card_path.resolve() if bundle_card_path is not None else None
+    if bundle_card_path is None:
+        raise ValueError("missing_dataset_card_or_bundle_card")
+    resolved_bundle_card_path = bundle_card_path.resolve()
+    if not resolved_bundle_card_path.exists():
+        raise FileNotFoundError(f"missing_bundle_card:{resolved_bundle_card_path}")
+    bundle_card = _read_json(resolved_bundle_card_path)
+    resolved_dataset_card_value = str(bundle_card.get("long_context_training_dataset_card_path") or "").strip()
+    if not resolved_dataset_card_value:
+        raise ValueError(f"missing_long_context_training_dataset_card_path:{resolved_bundle_card_path}")
+    resolved_dataset_card_path = Path(resolved_dataset_card_value).resolve()
+    if not resolved_dataset_card_path.exists():
+        raise FileNotFoundError(f"missing_dataset_card:{resolved_dataset_card_path}")
+    return resolved_dataset_card_path, resolved_bundle_card_path
+
+
 def _surface_parquet_dir(dataset_card: dict[str, Any], surface: str) -> Path | None:
     parquet_summary = dataset_card.get("parquet_summary") or {}
     exports = parquet_summary.get("exports") or {}
@@ -66,7 +92,8 @@ def _surface_jsonl_path(dataset_card: dict[str, Any], surface: str) -> Path:
 
 def build_strict_long_context_mixture_manifest(
     *,
-    dataset_card_path: Path,
+    dataset_card_path: Path | None = None,
+    bundle_card_path: Path | None = DEFAULT_BUNDLE_CARD_PATH,
     config_path: Path = DEFAULT_CONFIG_PATH,
     output_dir: Path | None = None,
     storage_format: str | None = None,
@@ -77,7 +104,10 @@ def build_strict_long_context_mixture_manifest(
     config_dir = config_path.parent
     defaults = dict(config.get("launcher_defaults") or {})
 
-    dataset_card_path = dataset_card_path.resolve()
+    dataset_card_path, resolved_bundle_card_path = _resolve_dataset_card_path(
+        dataset_card_path=dataset_card_path,
+        bundle_card_path=bundle_card_path,
+    )
     dataset_card = _read_json(dataset_card_path)
     resolved_output_dir = output_dir or _resolve_path(config_dir, defaults.get("output_dir"))
     if resolved_output_dir is None:
@@ -94,6 +124,7 @@ def build_strict_long_context_mixture_manifest(
         raise ValueError("no_surfaces_requested")
 
     compile_summary = dataset_card.get("compile_summary") or {}
+    train_ready_audit_summary = dataset_card.get("train_ready_audit_summary") or compile_summary.get("train_ready_audit_summary") or {}
     compile_counts = {
         "full_context_rows": int(compile_summary.get("full_context_rows") or 0),
         "retrieval_rows": int(compile_summary.get("retrieval_rows") or 0),
@@ -118,6 +149,8 @@ def build_strict_long_context_mixture_manifest(
             data_path = parquet_dir.resolve()
         else:
             data_path = jsonl_path.resolve()
+        filter_expr = str(spec.get("filter_expr") or "").strip() or None
+        manifest_filter_expr = str(spec.get("manifest_filter_expr") or "").strip() or None
         rows.append(
             {
                 "row_id": f"strict_longctx_mixture::{surface}",
@@ -129,6 +162,12 @@ def build_strict_long_context_mixture_manifest(
                 "row_count": compile_counts[surface],
                 "dataset_card_path": str(dataset_card_path),
                 "include_audit_only_direct": bool(dataset_card.get("include_audit_only_direct")),
+                "filter_expr": filter_expr,
+                "manifest_filter_expr": manifest_filter_expr,
+                "state_delta_ready_fraction": float(train_ready_audit_summary.get("avg_state_delta_ready_fraction") or 0.0),
+                "evidence_anchor_ready_fraction": float(train_ready_audit_summary.get("avg_evidence_anchor_ready_fraction") or 0.0),
+                "min_state_delta_ready_fraction": float(train_ready_audit_summary.get("min_state_delta_ready_fraction") or 0.0),
+                "min_evidence_anchor_ready_fraction": float(train_ready_audit_summary.get("min_evidence_anchor_ready_fraction") or 0.0),
             }
         )
 
@@ -137,12 +176,14 @@ def build_strict_long_context_mixture_manifest(
     launcher_card = {
         "config_path": str(config_path),
         "dataset_card_path": str(dataset_card_path),
+        "bundle_card_path": str(resolved_bundle_card_path) if resolved_bundle_card_path is not None else None,
         "output_dir": str(resolved_output_dir),
         "storage_format": resolved_storage_format,
         "surfaces": requested_surfaces,
         "mixture_manifest_path": str(mixture_manifest_path),
         "source_dataset_output_dir": dataset_card.get("output_dir"),
         "compile_summary": compile_summary,
+        "train_ready_audit_summary": train_ready_audit_summary,
         "rows": rows,
     }
     write_json(resolved_output_dir / "strict_long_context_mixture_launcher_card.json", launcher_card)
@@ -152,7 +193,8 @@ def build_strict_long_context_mixture_manifest(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a manifest-first mixture launcher for strict long-context training data.")
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG_PATH)
-    parser.add_argument("--dataset-card", type=Path, default=ROOT / "runs" / "local" / "artifacts" / "strict_long_context_train_ready_v1" / "strict_long_context_training_dataset_card.json")
+    parser.add_argument("--bundle-card", type=Path, default=DEFAULT_BUNDLE_CARD_PATH)
+    parser.add_argument("--dataset-card", type=Path)
     parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--storage-format", choices=("jsonl", "parquet"))
     parser.add_argument("--surface", action="append", dest="surfaces")
@@ -163,6 +205,7 @@ def main() -> None:
     args = parse_args()
     build_strict_long_context_mixture_manifest(
         dataset_card_path=args.dataset_card,
+        bundle_card_path=args.bundle_card,
         config_path=args.config,
         output_dir=args.output_dir,
         storage_format=args.storage_format,

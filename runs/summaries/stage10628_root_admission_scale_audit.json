@@ -1,0 +1,1110 @@
+{
+  "claim_boundary": [
+    "This is a root-admission and scaling audit, not a training result.",
+    "The audit scores current compiled roots for quality, leak risk, verifier grounding, and scale-readiness.",
+    "Non-quarantine admission here means fit for further curation, not automatic promotion to headline eval.",
+    "The repaired multilingual v2.7 strict frontier remains a separate Gemma comparison canary."
+  ],
+  "created_at_utc": "2026-07-12T05:20:45Z",
+  "inputs": {
+    "compiled_roots": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_root_records.jsonl",
+    "compiled_rows": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_multitarget_rows.jsonl",
+    "heldout_manifest": "runs/local/artifacts/stage10521_split_aware_multitarget_bootstrap_manifest_with_heldout/split_aware_multitarget_bootstrap_manifest_with_heldout.json",
+    "refinery_inventory": "runs/local/artifacts/stage10510_long_context_refinery_inventory/long_context_refinery_inventory.json"
+  },
+  "language_root_targets": {
+    "c_cpp": 20000,
+    "python": 35000,
+    "rust": 20000,
+    "web_js_ts_html": 20000
+  },
+  "metrics": {
+    "admit_role_counts": {
+      "quarantine": 784
+    },
+    "admitted_non_quarantine_by_language": {},
+    "compiled_root_records": 784,
+    "compiled_row_records": 2407,
+    "direct_target_visible_root_count": 750,
+    "gold_train_by_language": {},
+    "heldout_strict_rows": 36,
+    "opaque_or_empty_bounded_target_root_count": 0,
+    "quarantine_by_language": {
+      "c_cpp": 67,
+      "python": 702,
+      "rust": 6,
+      "web_js_ts_html": 9
+    },
+    "repo_family_top15": [
+      [
+        "agentkernel",
+        203
+      ],
+      [
+        "parametergolf",
+        40
+      ],
+      [
+        "agentkernel-seq2seq-text-lab",
+        16
+      ],
+      [
+        "diffusers",
+        10
+      ],
+      [
+        "faiss",
+        10
+      ],
+      [
+        "DeepSpeed",
+        8
+      ],
+      [
+        "Megatron-LM",
+        8
+      ],
+      [
+        "Model-Optimizer",
+        8
+      ],
+      [
+        "NeMo",
+        8
+      ],
+      [
+        "TensorRT-LLM",
+        8
+      ],
+      [
+        "TransformerEngine",
+        8
+      ],
+      [
+        "agent-framework",
+        8
+      ],
+      [
+        "agent-governance-toolkit",
+        8
+      ],
+      [
+        "autogen",
+        8
+      ],
+      [
+        "axolotl",
+        8
+      ]
+    ],
+    "roots_by_language": {
+      "c_cpp": 67,
+      "python": 702,
+      "rust": 6,
+      "web_js_ts_html": 9
+    },
+    "source_role_counts": {
+      "audited_small_train_ready_reference": 729,
+      "unmapped_source_family": 55
+    }
+  },
+  "next_best_step": "Use this admission audit to drive stage10516_v2 or its successor: expand source-family scanning, materialize verifier-backed compact states, drop direct-visible bounded targets, and replenish Rust/Web/C++ roots until non-quarantine root supply grows by language under repo-family caps.",
+  "outputs": {
+    "audit": "runs/local/artifacts/stage10628_root_admission_scale_audit/root_admission_scale_audit.json",
+    "root_admission_records": "runs/local/artifacts/stage10628_root_admission_scale_audit/root_admission_records.jsonl"
+  },
+  "passed": true,
+  "quality_ratchet": {
+    "current_blockers": [
+      "Python root supply is large but highly concentrated in agentkernel-family and raw bootstrap routes.",
+      "Rust and web root supply are far below any serious multilingual scale target.",
+      "Many current bounded_decision roots use route-token targets such as PASS_TARGETED_TEST_SELECTION, which is a shortcut-prone interface."
+    ],
+    "required_for_next_scale_jump": [
+      "Every new source family must produce root_lineage_key and pass same-root split isolation before row generation.",
+      "No bounded_decision root can enter gold or silver if target_text is empty or visibly copied into the prompt.",
+      "Repo-family caps must prevent one family from dominating any language slice.",
+      "Gold roots should remain verifier-backed and leak-clean; raw long-context refinery families should stay support-only until materialized into compact causal states."
+    ]
+  },
+  "sample_quarantine_roots": [
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "keras_cv_attention_models",
+      "repo_id": "keras_cv_attention_models",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q101",
+      "root_lineage_key": "keras_cv_attention_models::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q101",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_TEST_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "IP-Adapter",
+      "repo_id": "IP-Adapter",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q102",
+      "root_lineage_key": "IP-Adapter::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q102",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_TEST_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "bigram_language_model",
+      "repo_id": "bigram_language_model",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q103",
+      "root_lineage_key": "bigram_language_model::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q103",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_TEST_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "action-transformer-environment",
+      "repo_id": "action-transformer-environment",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q105",
+      "root_lineage_key": "action-transformer-environment::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q105",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_TEST_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "simple-vit",
+      "repo_id": "simple-vit",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q108",
+      "root_lineage_key": "simple-vit::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q108",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "action-transformer",
+      "repo_id": "action-transformer",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q112",
+      "root_lineage_key": "action-transformer::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q112",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "augmentoolkit",
+      "repo_id": "augmentoolkit",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q32",
+      "root_lineage_key": "augmentoolkit::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q32",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "repository_library",
+      "repo_id": "repository_library",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q48",
+      "root_lineage_key": "repository_library::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q48",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_TRACE_VERIFICATION_TARGETS"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "NousResearch__hermes-example-plugins",
+      "repo_id": "NousResearch__hermes-example-plugins",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q51",
+      "root_lineage_key": "NousResearch__hermes-example-plugins::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q51",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "EfficientDynamic3DGaussian",
+      "repo_id": "EfficientDynamic3DGaussian",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q57",
+      "root_lineage_key": "EfficientDynamic3DGaussian::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q57",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "Program_Conditioned_Adapter",
+      "repo_id": "Program_Conditioned_Adapter",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q60",
+      "root_lineage_key": "Program_Conditioned_Adapter::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q60",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "cuopt-examples",
+      "repo_id": "cuopt-examples",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q65",
+      "root_lineage_key": "cuopt-examples::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q65",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "OpenAutoCoder__Agentless",
+      "repo_id": "OpenAutoCoder__Agentless",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q67",
+      "root_lineage_key": "OpenAutoCoder__Agentless::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q67",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_TEST_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "TinyRecursiveModels",
+      "repo_id": "TinyRecursiveModels",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q74",
+      "root_lineage_key": "TinyRecursiveModels::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q74",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "esm",
+      "repo_id": "esm",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q79",
+      "root_lineage_key": "esm::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q79",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_TEST_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "RepairThemAll",
+      "repo_id": "RepairThemAll",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q80",
+      "root_lineage_key": "RepairThemAll::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q80",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "OSWorld",
+      "repo_id": "OSWorld",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q82",
+      "root_lineage_key": "OSWorld::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q82",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_TEST_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "openevolve",
+      "repo_id": "openevolve",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q83",
+      "root_lineage_key": "openevolve::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q83",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_TEST_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "CREMA",
+      "repo_id": "CREMA",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q84",
+      "root_lineage_key": "CREMA::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q84",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "tolbert-brain",
+      "repo_id": "tolbert-brain",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q85",
+      "root_lineage_key": "tolbert-brain::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q85",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "Qwen3-VL-Embedding",
+      "repo_id": "Qwen3-VL-Embedding",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q86",
+      "root_lineage_key": "Qwen3-VL-Embedding::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q86",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "model_zoo",
+      "repo_id": "model_zoo",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q89",
+      "root_lineage_key": "model_zoo::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q89",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "atlas",
+      "repo_id": "atlas",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q90",
+      "root_lineage_key": "atlas::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q90",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "codellama",
+      "repo_id": "codellama",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q93",
+      "root_lineage_key": "codellama::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q93",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_BROAD_VERIFICATION_DISCOVERY"
+    },
+    {
+      "admit_role": "quarantine",
+      "anti_cheat_summary": {
+        "direct_target_visible_rows": 1,
+        "opaque_or_empty_bounded_target_rows": 0,
+        "prompt_target_leak_flags": 0,
+        "route_token_target_rows": 1,
+        "same_root_train_eval_forbidden_rows": 3
+      },
+      "environment_id": "strict_long_context_train_ready_plus_audit_v1",
+      "has_verifier_anchor": true,
+      "language_family": "python",
+      "quality_score": 46,
+      "repo_family": "repository_library",
+      "repo_id": "repository_library",
+      "risk_tags": [
+        "direct_target_visible",
+        "route_token_target"
+      ],
+      "root_id": "audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_a76597fc52::q18",
+      "root_lineage_key": "repository_library::strict_long_context_train_ready_plus_audit_v1::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_a76597fc52::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_a76597fc52::q18",
+      "row_count": 3,
+      "snapshot_id": "lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_a76597fc52",
+      "source_family_id": "strict_long_context_train_ready_plus_audit_v1",
+      "source_quality_tier": "unknown",
+      "source_role": "audited_small_train_ready_reference",
+      "split_component": "audited_train",
+      "target_families": [
+        "bounded_decision"
+      ],
+      "target_subtypes": [
+        "decisive_evidence",
+        "retrieve_answer_abstain",
+        "verifier_outcome"
+      ],
+      "task_family": "retrieval_supervision",
+      "verifier_id": "PASS_TRACE_VERIFICATION_TARGETS"
+    }
+  ],
+  "scale_gap": {
+    "c_cpp": {
+      "additional_roots_needed": 20000,
+      "coverage_ratio": 0.0,
+      "current_non_quarantine_roots": 0,
+      "target_roots": 20000
+    },
+    "python": {
+      "additional_roots_needed": 35000,
+      "coverage_ratio": 0.0,
+      "current_non_quarantine_roots": 0,
+      "target_roots": 35000
+    },
+    "rust": {
+      "additional_roots_needed": 20000,
+      "coverage_ratio": 0.0,
+      "current_non_quarantine_roots": 0,
+      "target_roots": 20000
+    },
+    "web_js_ts_html": {
+      "additional_roots_needed": 20000,
+      "coverage_ratio": 0.0,
+      "current_non_quarantine_roots": 0,
+      "target_roots": 20000
+    }
+  },
+  "stage": 10628,
+  "stage_name": "stage10628_root_admission_scale_audit"
+}

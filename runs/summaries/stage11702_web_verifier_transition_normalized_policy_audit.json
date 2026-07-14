@@ -1,0 +1,400 @@
+{
+  "anti_cheat": {
+    "prompt_label_leak_row_ids": [],
+    "prompt_label_leaks": 0,
+    "prompt_target_value_leak_row_ids": [],
+    "prompt_target_value_leaks": 0,
+    "rows": 66,
+    "singleton_row_ids": [],
+    "singleton_rows": 0
+  },
+  "baselines": {
+    "stage11685_identity_runtime_protected_gates_from_stage11686": {
+      "filtered_strict": "22/22",
+      "old_canary_strict": "23/23",
+      "residual_bank": ">=7/10"
+    },
+    "stage11690_bridged_100m": {
+      "accuracy": 0.803030303030303,
+      "correct": 53,
+      "rows": 66
+    },
+    "stage11691_gemma": {
+      "accuracy": 0.8484848484848485,
+      "correct": 56,
+      "rows": 66
+    },
+    "stage11699_preservation_runtime_protected_gates_from_stage11700": {
+      "filtered_strict": "22/22",
+      "old_canary_strict": "23/23",
+      "residual_bank": "7/10"
+    }
+  },
+  "best": {
+    "accuracy": 0.9090909090909091,
+    "correct": 60,
+    "policy": "visible_pass_only_override",
+    "runtime": "stage11685_identity_semantic_head"
+  },
+  "created_at_utc": "2026-07-14T05:59:07Z",
+  "decision": "transition_policy_candidate_beats_gemma",
+  "gates": {
+    "anti_cheat_no_prompt_label_leaks": true,
+    "anti_cheat_no_singletons": true,
+    "best_at_least_ties_gemma_56_of_66": true,
+    "best_beats_gemma_56_of_66": true,
+    "best_beats_stage11690_100m_53_of_66": true
+  },
+  "interpretation": [
+    "This is an inference-time audit only; no weights are changed.",
+    "The policy only reranks verifier_outcome rows when visible verifier evidence states a canonical transition.",
+    "If promoted later, the policy should be implemented as a product scorer route or replaced by a trainable verifier-transition head."
+  ],
+  "outputs": {
+    "row_cards": "runs/local/artifacts/stage11702_web_verifier_transition_normalized_policy_audit/web_verifier_transition_normalized_policy_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11702_web_verifier_transition_normalized_policy_audit/web_verifier_transition_normalized_policy_audit.json"
+  },
+  "recommended_next": [
+    "Freeze this as a scorer-policy candidate and run protected/product scorer integration audit.",
+    "Then train a small verifier-transition head to learn the same rule instead of relying on a text heuristic."
+  ],
+  "runtime_results": {
+    "stage11685_identity_semantic_head": {
+      "fixed_web_route": {
+        "accuracy": 1.0,
+        "correct": 26,
+        "rows": 26
+      },
+      "policies": {
+        "visible_pass_only_override": {
+          "accuracy": 0.85,
+          "by_route": {
+            "identity": {
+              "accuracy": 0.85,
+              "correct": 34,
+              "rows": 40
+            }
+          },
+          "by_task": {
+            "minimal_fix_selection": {
+              "accuracy": 0.8181818181818182,
+              "correct": 9,
+              "rows": 11
+            },
+            "patch_impact": {
+              "accuracy": 1.0,
+              "correct": 7,
+              "rows": 7
+            },
+            "symptom_localization": {
+              "accuracy": 0.6363636363636364,
+              "correct": 7,
+              "rows": 11
+            },
+            "verifier_outcome": {
+              "accuracy": 1.0,
+              "correct": 11,
+              "rows": 11
+            }
+          },
+          "correct": 34,
+          "policy_reasons": {
+            "fallback_non_verifier": 29,
+            "visible_pass_only::pass_targeted_test_selection": 11
+          },
+          "routed_total": {
+            "accuracy": 0.9090909090909091,
+            "correct": 60,
+            "fixed_web_correct": 26,
+            "fixed_web_rows": 26,
+            "identity_correct": 34,
+            "identity_rows": 40,
+            "rows": 66
+          },
+          "rows": 40
+        },
+        "visible_transition_override": {
+          "accuracy": 0.85,
+          "by_route": {
+            "identity": {
+              "accuracy": 0.85,
+              "correct": 34,
+              "rows": 40
+            }
+          },
+          "by_task": {
+            "minimal_fix_selection": {
+              "accuracy": 0.8181818181818182,
+              "correct": 9,
+              "rows": 11
+            },
+            "patch_impact": {
+              "accuracy": 1.0,
+              "correct": 7,
+              "rows": 7
+            },
+            "symptom_localization": {
+              "accuracy": 0.6363636363636364,
+              "correct": 7,
+              "rows": 11
+            },
+            "verifier_outcome": {
+              "accuracy": 1.0,
+              "correct": 11,
+              "rows": 11
+            }
+          },
+          "correct": 34,
+          "policy_reasons": {
+            "fallback_non_verifier": 29,
+            "visible_transition::pass_targeted_test_selection": 11
+          },
+          "routed_total": {
+            "accuracy": 0.9090909090909091,
+            "correct": 60,
+            "fixed_web_correct": 26,
+            "fixed_web_rows": 26,
+            "identity_correct": 34,
+            "identity_rows": 40,
+            "rows": 66
+          },
+          "rows": 40
+        }
+      },
+      "raw_identity": {
+        "accuracy": 0.675,
+        "correct": 27,
+        "rows": 40
+      },
+      "runtime_path": "runs/local/artifacts/stage11685_counterfactual_identity_semantic_head_fixed_probe/runtime_model/runtime_model_bundle.json",
+      "weights_sha256": "75b6582ad102efc8ce61c1f30978a32d5648056014bd852d6c4a17afcc7fe31e"
+    },
+    "stage11695_identity_gap_topup": {
+      "fixed_web_route": {
+        "accuracy": 1.0,
+        "correct": 26,
+        "rows": 26
+      },
+      "policies": {
+        "visible_pass_only_override": {
+          "accuracy": 0.85,
+          "by_route": {
+            "identity": {
+              "accuracy": 0.85,
+              "correct": 34,
+              "rows": 40
+            }
+          },
+          "by_task": {
+            "minimal_fix_selection": {
+              "accuracy": 0.8181818181818182,
+              "correct": 9,
+              "rows": 11
+            },
+            "patch_impact": {
+              "accuracy": 1.0,
+              "correct": 7,
+              "rows": 7
+            },
+            "symptom_localization": {
+              "accuracy": 0.6363636363636364,
+              "correct": 7,
+              "rows": 11
+            },
+            "verifier_outcome": {
+              "accuracy": 1.0,
+              "correct": 11,
+              "rows": 11
+            }
+          },
+          "correct": 34,
+          "policy_reasons": {
+            "fallback_non_verifier": 29,
+            "visible_pass_only::pass_targeted_test_selection": 11
+          },
+          "routed_total": {
+            "accuracy": 0.9090909090909091,
+            "correct": 60,
+            "fixed_web_correct": 26,
+            "fixed_web_rows": 26,
+            "identity_correct": 34,
+            "identity_rows": 40,
+            "rows": 66
+          },
+          "rows": 40
+        },
+        "visible_transition_override": {
+          "accuracy": 0.85,
+          "by_route": {
+            "identity": {
+              "accuracy": 0.85,
+              "correct": 34,
+              "rows": 40
+            }
+          },
+          "by_task": {
+            "minimal_fix_selection": {
+              "accuracy": 0.8181818181818182,
+              "correct": 9,
+              "rows": 11
+            },
+            "patch_impact": {
+              "accuracy": 1.0,
+              "correct": 7,
+              "rows": 7
+            },
+            "symptom_localization": {
+              "accuracy": 0.6363636363636364,
+              "correct": 7,
+              "rows": 11
+            },
+            "verifier_outcome": {
+              "accuracy": 1.0,
+              "correct": 11,
+              "rows": 11
+            }
+          },
+          "correct": 34,
+          "policy_reasons": {
+            "fallback_non_verifier": 29,
+            "visible_transition::pass_targeted_test_selection": 11
+          },
+          "routed_total": {
+            "accuracy": 0.9090909090909091,
+            "correct": 60,
+            "fixed_web_correct": 26,
+            "fixed_web_rows": 26,
+            "identity_correct": 34,
+            "identity_rows": 40,
+            "rows": 66
+          },
+          "rows": 40
+        }
+      },
+      "raw_identity": {
+        "accuracy": 0.675,
+        "correct": 27,
+        "rows": 40
+      },
+      "runtime_path": "runs/local/artifacts/stage11695_web_identity_gap_topup_probe/runtime_model/runtime_model_bundle.json",
+      "weights_sha256": "e8bfe2887b64f7f97d9613c3af30e5b5a68dd11c0662980277d676fc124f6b10"
+    },
+    "stage11699_transition_preservation": {
+      "fixed_web_route": {
+        "accuracy": 1.0,
+        "correct": 26,
+        "rows": 26
+      },
+      "policies": {
+        "visible_pass_only_override": {
+          "accuracy": 0.85,
+          "by_route": {
+            "identity": {
+              "accuracy": 0.85,
+              "correct": 34,
+              "rows": 40
+            }
+          },
+          "by_task": {
+            "minimal_fix_selection": {
+              "accuracy": 0.8181818181818182,
+              "correct": 9,
+              "rows": 11
+            },
+            "patch_impact": {
+              "accuracy": 1.0,
+              "correct": 7,
+              "rows": 7
+            },
+            "symptom_localization": {
+              "accuracy": 0.6363636363636364,
+              "correct": 7,
+              "rows": 11
+            },
+            "verifier_outcome": {
+              "accuracy": 1.0,
+              "correct": 11,
+              "rows": 11
+            }
+          },
+          "correct": 34,
+          "policy_reasons": {
+            "fallback_non_verifier": 29,
+            "visible_pass_only::pass_targeted_test_selection": 11
+          },
+          "routed_total": {
+            "accuracy": 0.9090909090909091,
+            "correct": 60,
+            "fixed_web_correct": 26,
+            "fixed_web_rows": 26,
+            "identity_correct": 34,
+            "identity_rows": 40,
+            "rows": 66
+          },
+          "rows": 40
+        },
+        "visible_transition_override": {
+          "accuracy": 0.85,
+          "by_route": {
+            "identity": {
+              "accuracy": 0.85,
+              "correct": 34,
+              "rows": 40
+            }
+          },
+          "by_task": {
+            "minimal_fix_selection": {
+              "accuracy": 0.8181818181818182,
+              "correct": 9,
+              "rows": 11
+            },
+            "patch_impact": {
+              "accuracy": 1.0,
+              "correct": 7,
+              "rows": 7
+            },
+            "symptom_localization": {
+              "accuracy": 0.6363636363636364,
+              "correct": 7,
+              "rows": 11
+            },
+            "verifier_outcome": {
+              "accuracy": 1.0,
+              "correct": 11,
+              "rows": 11
+            }
+          },
+          "correct": 34,
+          "policy_reasons": {
+            "fallback_non_verifier": 29,
+            "visible_transition::pass_targeted_test_selection": 11
+          },
+          "routed_total": {
+            "accuracy": 0.9090909090909091,
+            "correct": 60,
+            "fixed_web_correct": 26,
+            "fixed_web_rows": 26,
+            "identity_correct": 34,
+            "identity_rows": 40,
+            "rows": 66
+          },
+          "rows": 40
+        }
+      },
+      "raw_identity": {
+        "accuracy": 0.675,
+        "correct": 27,
+        "rows": 40
+      },
+      "runtime_path": "runs/local/artifacts/stage11699_web_verifier_transition_preservation_probe/runtime_model/runtime_model_bundle.json",
+      "weights_sha256": "098cb7471dd7f6fac2b7a7055e9608b61a95b8ebfc5d651f6edb45f4fe00d65a"
+    }
+  },
+  "source_artifacts": {
+    "bridged_rows": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit/original_web_canonical_bridged_rows.jsonl",
+    "gap_rows": "runs/local/artifacts/stage11692_web_bridged_miss_family_audit/web_bridged_gemma_margin_rows.jsonl",
+    "gemma_rows": "runs/local/artifacts/stage11691_original_web_canonical_bridge_gemma_and_anticheat/original_web_canonical_bridge_gemma_rows.jsonl"
+  },
+  "stage": 11702,
+  "stage_name": "stage11702_web_verifier_transition_normalized_policy_audit"
+}

@@ -1,0 +1,47 @@
+{
+  "claim_boundary": [
+    "Current selected compact frontier remains Stage11507 plus Stage11709.",
+    "Rust source-heldout compact smoke is partially solved but not a clean language win.",
+    "This is bounded-choice source-heldout smoke, not full-product executable repair."
+  ],
+  "created_at_utc": "2026-07-14T07:43:41Z",
+  "decision": "rust_source_heldout_smoke_partial_pass_verifier_outcome_canary",
+  "gates": {
+    "admitted_source_heldout_smoke": true,
+    "full_product_ready": false,
+    "gemma_same_manifest_attached": false,
+    "stage11507_full_coverage": true,
+    "stage11507_three_of_four": true
+  },
+  "interpretation": [
+    "The tokenizers Rust root is exact new-root/source-snapshot attested and leak-clean after rendering.",
+    "Stage11507 solves symptom_localization, evidence_citation, and patch_impact on this smoke packet.",
+    "The remaining failure is verifier_outcome: the product scorer chooses a nearby inline test instead of the selected inline test anchor.",
+    "Because tokenizers has prior family usage, this is a Rust source-heldout smoke canary, not broad Rust heldout proof."
+  ],
+  "next_actions": [
+    "Attach executable cargo test output for the selected inline test and distractor tests.",
+    "Run Gemma same-manifest only through a GPU2-safe backend.",
+    "Build a non-tokenizers Rust source root when local/source supply becomes available.",
+    "Treat verifier_outcome as the shared Python/Rust source-heldout weakness to target next."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11735_tokenizers_rust_source_heldout_decision/tokenizers_rust_source_heldout_decision.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "admission": "runs/local/artifacts/stage11733_tokenizers_rust_no_train_overlap_and_admission/tokenizers_rust_no_train_overlap_and_admission.json",
+    "hundred_m_score": "runs/local/artifacts/stage11734_tokenizers_rust_source_heldout_100m_score/tokenizers_rust_source_heldout_100m_score.json"
+  },
+  "stage": 11735,
+  "stage_name": "stage11735_tokenizers_rust_source_heldout_decision",
+  "status": {
+    "compact_admission": "admitted",
+    "full_product": "not_ready",
+    "gemma_same_manifest": "not_run_gpu2_safe_backend_required",
+    "hundred_m_source_heldout_smoke": "3/4",
+    "miss_tasks": [
+      "verifier_outcome"
+    ]
+  }
+}

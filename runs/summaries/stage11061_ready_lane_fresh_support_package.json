@@ -1,0 +1,74 @@
+{
+  "claim_scope": [
+    "Extend the successor residual support package with concrete fresh-ready-lane support rows built from the stage11060 row-construction work items.",
+    "Reuse already scoreable ready-packet rows directly for retrieve/answer/abstain and verifier-route supervision.",
+    "Add explicit-ledger evidence rows and verifier-transition support rows while keeping validation/strict/stress unchanged."
+  ],
+  "created_at_utc": "2026-07-13T01:49:57Z",
+  "decision": "ready_lane_fresh_support_package_ready",
+  "findings": [
+    "The ready-lane packet is now executable as train support rather than remaining a planning-only packet.",
+    "Python explicit-ledger rows keep the higher-confidence candidate-anchor geometry from the existing strict-candidate family.",
+    "Rust evidence rows are included as heuristic support only and are explicitly marked non-promotable until fresh reviewed evidence candidates exist.",
+    "C/C++ verifier-transition rows are added as support-only semantic-transition training, with opaque verifier IDs and no singleton options."
+  ],
+  "limits": [
+    "Validation and strict are copied unchanged; this stage is support-only and not a new heldout result.",
+    "Rust evidence gold values are partly heuristic because the ready lane lacks fresh reviewed strict-candidate anchors for those roots.",
+    "Multi-target C/C++ verifier roots still need richer reviewed target adjudication before promotion claims."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "c_cpp": 9,
+      "python": 8,
+      "rust": 24
+    },
+    "added_by_repo_family": {
+      "chroma": 8,
+      "dbt-core": 8,
+      "parametergolf": 9,
+      "repository_library": 8,
+      "tiktoken": 8
+    },
+    "added_by_task": {
+      "evidence_citation": 16,
+      "retrieve_answer_abstain": 11,
+      "verifier_outcome": 11,
+      "verifier_outcome_semantic_transition": 3
+    },
+    "base_train_rows_after_stage11051": 286,
+    "evidence_rows_added": 16,
+    "heuristic_support_rows": 12,
+    "rows_added_total": 41,
+    "scoreable_packet_rows_added": 22,
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_rows_after": 327,
+    "train_rows_before": 286,
+    "validation_rows_unchanged": 23,
+    "verifier_rows_added": 3
+  },
+  "next_best_step": "Run one bounded support probe from the latest clean runtime, report the unchanged successor overlay separately, and inspect whether the added ready-lane support changes the reserved residual bank.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/added_ready_lane_support_rows.jsonl",
+    "heuristic_rows_jsonl": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/heuristic_support_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/ready_lane_fresh_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "Do not report movement on any stage11061-added rows as heldout generalization.",
+    "Keep heuristic Rust evidence rows separate from promotable strict successors until reviewed replacements exist.",
+    "Preserve the existing 23-row successor validation/strict overlay unchanged when evaluating any probe from this package."
+  ],
+  "source_artifacts": {
+    "base_support_package": "runs/local/artifacts/stage11051_successor_residual_support_plus_priority_evidence/successor_residual_support_plus_priority_evidence.json",
+    "ready_packet_rows": "runs/local/artifacts/stage11059_ready_lane_materialization_packet/ready_packet_rows.jsonl",
+    "work_items": "runs/local/artifacts/stage11060_ready_lane_row_construction_manifest/row_construction_work_items.jsonl"
+  },
+  "stage": 11061,
+  "stage_name": "stage11061_ready_lane_fresh_support_package"
+}

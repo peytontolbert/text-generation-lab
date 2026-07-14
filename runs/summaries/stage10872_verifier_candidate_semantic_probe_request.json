@@ -1,0 +1,243 @@
+{
+  "base_runtime_weights_sha256": "95f57dbd529a88fb0b40397432a857f1f7d29effc3b7050a4eadcb9bd43e5531",
+  "claim_scope": [
+    "Run a diagnostic probe from the saved stage10870 runtime after adding semantic verifier-candidate supervision to the residual-family support package.",
+    "Keep validation and strict overlays unchanged so any shift is attributable to train-side verifier geometry rather than eval edits."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10872_verifier_candidate_semantic_probe_request/verifier_candidate_semantic_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "265",
+    "--max-eval-rows",
+    "24",
+    "--max-strict-rows",
+    "24",
+    "--max-steps",
+    "96",
+    "--batch-size",
+    "2",
+    "--learning-rate",
+    "8e-6",
+    "--max-encoder-tokens",
+    "768",
+    "--max-decoder-tokens",
+    "8",
+    "--decoder-ce-weight",
+    "0.2",
+    "--bounded-choice-aux-weight",
+    "1.0",
+    "--bounded-choice-aux-source",
+    "encoder_option_retrieval",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "4.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "12",
+    "--max-generation-tokens",
+    "8",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10873_verifier_candidate_semantic_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10870_residual_family_probe_plus_second_python_materialized/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10870_residual_family_probe_plus_second_python_materialized/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "0.25",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10873_verifier_candidate_semantic_probe/bounded_decoder_probe",
+    "--run-id",
+    "stage10873_verifier_candidate_semantic_probe"
+  ],
+  "created_at_utc": "2026-07-12T17:02:22Z",
+  "decision": "verifier_candidate_semantic_probe_ready",
+  "diagnostic_intent": {
+    "focus": [
+      "python_verifier_outcome",
+      "verifier_candidate_semantics"
+    ],
+    "initialize_from_stage10870": true,
+    "reduced_preservation_kl": true
+  },
+  "initialize_from_runtime_model": "runs/local/artifacts/stage10870_residual_family_probe_plus_second_python_materialized/runtime_model/runtime_model_bundle.json",
+  "language_counts_by_split": {
+    "eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 6,
+      "web_js_ts_html": 6
+    },
+    "strict_eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 6,
+      "web_js_ts_html": 6
+    },
+    "train": {
+      "c_cpp": 133,
+      "python": 90,
+      "rust": 42
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10872_verifier_candidate_semantic_probe_request/verifier_candidate_semantic_probe_manifest.jsonl",
+  "next_best_step": "Run the probe as diagnostic-only, then compare the saved runtime on the unchanged strict overlay and inspect whether verifier candidate semantics move the Python residual without creating new regressions.",
+  "output_dir": "runs/local/artifacts/stage10873_verifier_candidate_semantic_probe/bounded_decoder_probe",
+  "package_metrics_snapshot": {
+    "added_rows": 72,
+    "base_metrics_snapshot": {
+      "evidence_citation_target_distribution": {
+        "A": 2,
+        "B": 11,
+        "C": 2,
+        "D": 6,
+        "E": 2
+      },
+      "new_row_language_counts": {
+        "python": 8
+      },
+      "new_row_task_counts": {
+        "abstention_insufficient_evidence": 1,
+        "alternative_hypothesis_elimination": 1,
+        "evidence_citation": 1,
+        "minimal_fix_selection": 1,
+        "patch_impact": 1,
+        "regression_risk": 1,
+        "symptom_localization": 1,
+        "verifier_outcome": 1
+      },
+      "stress_rows": 7,
+      "strict_rows": 24,
+      "train_by_language": {
+        "c_cpp": 109,
+        "python": 50,
+        "rust": 34
+      },
+      "train_by_task": {
+        "abstention_insufficient_evidence": 18,
+        "alternative_hypothesis_elimination": 1,
+        "cpp_implementation_vs_implementation": 1,
+        "evidence_citation": 23,
+        "evidence_role_classification": 71,
+        "minimal_fix_selection": 17,
+        "patch_impact": 18,
+        "python_implementation_vs_implementation": 2,
+        "regression_risk": 1,
+        "symptom_localization": 18,
+        "verifier_outcome": 23
+      },
+      "train_rows": 193,
+      "validation_rows": 24,
+      "verifier_outcome_target_distribution": {
+        "A": 11,
+        "B": 1,
+        "C": 1,
+        "D": 2,
+        "E": 2,
+        "H": 1,
+        "J": 1,
+        "V1": 4
+      }
+    },
+    "base_multi_option_verifier_rows": 23,
+    "base_train_rows": 193,
+    "base_verifier_rows": 23,
+    "merged_train_rows": 265,
+    "rows_by_language": {
+      "c_cpp": 24,
+      "python": 40,
+      "rust": 8
+    },
+    "rows_by_role_label": {
+      "A": 18,
+      "B": 39,
+      "D": 15
+    }
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "strict and validation rows remain frozen",
+    "new verifier candidate rows remain train-support only and non-promotable",
+    "post-run reporting must break out Python verifier_outcome and Rust evidence_citation deltas explicitly",
+    "any improvement remains diagnostic until fresh heldout verifier-transition roots confirm it"
+  ],
+  "rows": 313,
+  "run_id": "stage10873_verifier_candidate_semantic_probe",
+  "runtime_model_save_dir": "runs/local/artifacts/stage10873_verifier_candidate_semantic_probe/runtime_model",
+  "source_package": "runs/local/artifacts/stage10871_verifier_candidate_semantic_support_package/verifier_candidate_semantic_support_package.json",
+  "split_counts": {
+    "eval": 24,
+    "strict_eval": 24,
+    "train": 265
+  },
+  "stage": 10872,
+  "stage_name": "stage10872_verifier_candidate_semantic_probe_request",
+  "stress_rows_excluded_from_manifest": 7,
+  "task_counts_by_split": {
+    "eval": {
+      "abstention_insufficient_evidence": 4,
+      "evidence_citation": 4,
+      "minimal_fix_selection": 4,
+      "patch_impact": 4,
+      "symptom_localization": 4,
+      "verifier_outcome": 4
+    },
+    "strict_eval": {
+      "abstention_insufficient_evidence": 4,
+      "evidence_citation": 4,
+      "minimal_fix_selection": 4,
+      "patch_impact": 4,
+      "symptom_localization": 4,
+      "verifier_outcome": 4
+    },
+    "train": {
+      "abstention_insufficient_evidence": 18,
+      "alternative_hypothesis_elimination": 1,
+      "cpp_implementation_vs_implementation": 1,
+      "evidence_citation": 23,
+      "evidence_role_classification": 71,
+      "minimal_fix_selection": 17,
+      "patch_impact": 18,
+      "python_implementation_vs_implementation": 2,
+      "regression_risk": 1,
+      "symptom_localization": 18,
+      "verifier_candidate_role_classification": 72,
+      "verifier_outcome": 23
+    }
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "claim_boundary": "Planning/support only. No frontier training or Gemma comparison is justified from v4 inventory scale.",
+  "convertible_zero_test_not_exercised_candidates": [
+    {
+      "language_family": "rust",
+      "reason": "pass_to_pass_without_executed_tests",
+      "recommended_status": "NOT_EXERCISED",
+      "repo_family": "perftree",
+      "root_key": "stage11985::perftree::/data/repositories/perftree/perftree",
+      "row_id": "stage11985::perftree::stage11985_candidate_002::cargo_test::Cargo.toml::PASS_TO_PASS::85aa3d4cfc"
+    },
+    {
+      "language_family": "rust",
+      "reason": "pass_to_pass_without_executed_tests",
+      "recommended_status": "NOT_EXERCISED",
+      "repo_family": "perftree",
+      "root_key": "stage11985::perftree::/data/repositories/perftree/perftree-cli",
+      "row_id": "stage11985::perftree::stage11985_candidate_003::cargo_test::Cargo.toml::PASS_TO_PASS::6843a87356"
+    },
+    {
+      "language_family": "rust",
+      "reason": "pass_to_pass_without_executed_tests",
+      "recommended_status": "NOT_EXERCISED",
+      "repo_family": "perftree",
+      "root_key": "stage11985::perftree::/data/repositories/perftree",
+      "row_id": "stage11985::perftree::stage11985_candidate_001::cargo_test::Cargo.toml::PASS_TO_PASS::3fab34f2c7"
+    },
+    {
+      "language_family": "c_cpp",
+      "reason": "pass_to_pass_without_tests_ctest_empty",
+      "recommended_status": "NOT_EXERCISED",
+      "repo_family": "pytorch",
+      "root_key": "stage11985::pytorch::/data/repositories/pytorch/c10/cuda/test",
+      "row_id": "stage11985::pytorch::stage11985_candidate_233::ctest::CMakeLists.txt::PASS_TO_PASS::df3c80cdfd"
+    }
+  ],
+  "decision": "build_not_exercised_negative_admission_before_training",
+  "input_rows_path": "runs/local/artifacts/stage11993_transition_support_rollup_v4/transition_support_rows_v4.jsonl",
+  "language_counts": {
+    "c_cpp": 3,
+    "python": 16,
+    "rust": 10,
+    "web_js_ts_html": 10
+  },
+  "priority_lanes": [
+    {
+      "action": "Convert only successful zero-test/no-test observations into NOT_EXERCISED rows; reject dependency failures/timeouts.",
+      "available_candidates": 4,
+      "lane": "clean_zero_test_to_not_exercised",
+      "next_stage": "stage11995_not_exercised_negative_admission"
+    },
+    {
+      "action": "Generate controlled mutations from clean PASS_TO_PASS/PASS_CURRENT_BUILD_AND_RUN roots; do not count synthetic rows as new root scale.",
+      "lane": "fresh_fail_to_pass",
+      "needed": 46
+    },
+    {
+      "action": "Prioritize small local CMake/CTest roots with executable tests; current C/C++ is the thinnest language lane.",
+      "lane": "fresh_independent_cpp_roots",
+      "needed": 47
+    },
+    {
+      "action": "Prefer pnpm/npm workspace-aware probes with real test counts; avoid static-only web rows for transition claims.",
+      "lane": "fresh_independent_web_roots",
+      "needed": 40
+    }
+  ],
+  "remaining_language_floor": {
+    "c_cpp": 47,
+    "python": 34,
+    "rust": 40,
+    "web_js_ts_html": 40
+  },
+  "remaining_status_floor": {
+    "FAIL_TO_PASS": 46,
+    "INSUFFICIENT_EVIDENCE": 40,
+    "NOT_EXERCISED": 40,
+    "PASS_CURRENT_BUILD": 21,
+    "PASS_CURRENT_BUILD_AND_RUN": 35,
+    "PASS_TO_PASS": 89
+  },
+  "repo_family_counts_top20": {
+    "aider-ai__aider": 1,
+    "camel-ai__camel": 1,
+    "ee-llm": 1,
+    "einx": 2,
+    "git": 3,
+    "gym-pybullet-drones": 2,
+    "huggingface__smolagents": 3,
+    "lastmile-ai__mcp-agent": 1,
+    "llama-adapter": 3,
+    "modelcontextprotocol__typescript-sdk": 9,
+    "nousresearch__hermes-agent": 1,
+    "nousresearch__hermes-agent-self-evolution": 1,
+    "perftree": 3,
+    "pytorch": 2,
+    "stage11978_controlled_fixture": 1,
+    "stage11980_cpp_controlled_fixture": 1,
+    "stage11980_rust_controlled_fixture": 1,
+    "stage11980_web_controlled_fixture": 1,
+    "swe-agent__mini-swe-agent": 1,
+    "unilm": 1
+  },
+  "stage": "stage11994_transition_root_250_supply_plan",
+  "status_counts": {
+    "FAIL_TO_PASS": 4,
+    "PASS_CURRENT_BUILD": 19,
+    "PASS_CURRENT_BUILD_AND_RUN": 5,
+    "PASS_TO_PASS": 11
+  },
+  "total_rows": 39,
+  "underhydrated_negative_candidates_for_quarantine_or_reprobe": [
+    {
+      "language_family": "web_js_ts_html",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "modelcontextprotocol__typescript-sdk",
+      "root_key": "stage11985::modelcontextprotocol__typescript-sdk::/data/repositories/modelcontextprotocol__typescript-sdk/test/helpers",
+      "row_id": "stage11985::modelcontextprotocol__typescript-sdk::stage11985_candidate_025::npm_check::package.json#check::NOT_EXERCISED::5925edd4b8"
+    },
+    {
+      "language_family": "c_cpp",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "faiss",
+      "root_key": "stage11985::faiss::/data/repositories/faiss/perf_tests",
+      "row_id": "stage11985::faiss::stage11985_candidate_291::cmake_configure::CMakeLists.txt::NOT_EXERCISED::b0518a0c92"
+    },
+    {
+      "language_family": "rust",
+      "reason": "nonzero_or_timeout::INSUFFICIENT_EVIDENCE",
+      "recommended_status": "INSUFFICIENT_EVIDENCE",
+      "repo_family": "git",
+      "root_key": "stage11985::git::/data/repositories/git/contrib/libgit-rs",
+      "row_id": "stage11985::git::stage11985_candidate_005::cargo_check::Cargo.toml::INSUFFICIENT_EVIDENCE::5f07fff58c"
+    },
+    {
+      "language_family": "web_js_ts_html",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "modelcontextprotocol__typescript-sdk",
+      "root_key": "stage11985::modelcontextprotocol__typescript-sdk::/data/repositories/modelcontextprotocol__typescript-sdk/test/conformance",
+      "row_id": "stage11985::modelcontextprotocol__typescript-sdk::stage11985_candidate_024::npm_check::package.json#check::NOT_EXERCISED::bf04a41f96"
+    },
+    {
+      "language_family": "c_cpp",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "pytorch",
+      "root_key": "stage11985::pytorch::/data/repositories/pytorch/.ci/pytorch/test_example_code",
+      "row_id": "stage11985::pytorch::stage11985_candidate_236::cmake_configure::CMakeLists.txt::NOT_EXERCISED::3a956c931b"
+    },
+    {
+      "language_family": "web_js_ts_html",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "modelcontextprotocol__servers",
+      "root_key": "stage11985::modelcontextprotocol__servers::/data/repositories/modelcontextprotocol__servers/src/filesystem",
+      "row_id": "stage11985::modelcontextprotocol__servers::stage11985_candidate_184::npm_test::package.json#test::NOT_EXERCISED::a8e424ab74"
+    },
+    {
+      "language_family": "c_cpp",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "pytorch",
+      "root_key": "stage11985::pytorch::/data/repositories/pytorch/test/cpp/aoti_inference",
+      "row_id": "stage11985::pytorch::stage11985_candidate_208::cmake_configure::CMakeLists.txt::NOT_EXERCISED::feae354d04"
+    },
+    {
+      "language_family": "c_cpp",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "flightmare",
+      "root_key": "stage11985::flightmare::/data/repositories/flightmare/flightlib/externals/pybind11-src/tests/test_cmake_build",
+      "row_id": "stage11985::flightmare::stage11985_candidate_251::cmake_configure::CMakeLists.txt::NOT_EXERCISED::d2c52202eb"
+    },
+    {
+      "language_family": "c_cpp",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "flightmare",
+      "root_key": "stage11985::flightmare::/data/repositories/flightmare/flightlib/externals/pybind11-src/tests/test_with_catch",
+      "row_id": "stage11985::flightmare::stage11985_candidate_249::cmake_configure::CMakeLists.txt::NOT_EXERCISED::893a22f917"
+    },
+    {
+      "language_family": "web_js_ts_html",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "modelcontextprotocol__typescript-sdk",
+      "root_key": "stage11985::modelcontextprotocol__typescript-sdk::/data/repositories/modelcontextprotocol__typescript-sdk/test/integration",
+      "row_id": "stage11985::modelcontextprotocol__typescript-sdk::stage11985_candidate_026::npm_check::package.json#check::NOT_EXERCISED::7738f5717a"
+    },
+    {
+      "language_family": "c_cpp",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "pytorch",
+      "root_key": "stage11985::pytorch::/data/repositories/pytorch/test/cpp/lite_interpreter_runtime",
+      "row_id": "stage11985::pytorch::stage11985_candidate_206::cmake_configure::CMakeLists.txt::NOT_EXERCISED::fc94b2dc55"
+    },
+    {
+      "language_family": "c_cpp",
+      "reason": "nonzero_or_timeout::NOT_EXERCISED",
+      "recommended_status": "quarantine_or_reprobe",
+      "repo_family": "pytorch",
+      "root_key": "stage11985::pytorch::/data/repositories/pytorch/test/custom_operator",
+      "row_id": "stage11985::pytorch::stage11985_candidate_195::cmake_configure::CMakeLists.txt::NOT_EXERCISED::2cd2674b98"
+    }
+  ],
+  "unique_roots": 36,
+  "unique_roots_by_language": {
+    "c_cpp": 2,
+    "python": 16,
+    "rust": 8,
+    "web_js_ts_html": 10
+  }
+}

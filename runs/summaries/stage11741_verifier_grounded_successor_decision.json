@@ -1,0 +1,121 @@
+{
+  "by_language": {
+    "c_cpp": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "coverage": 1.0,
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "python": {
+      "accuracy": 0.75,
+      "correct": 3,
+      "coverage": 1.0,
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "rust": {
+      "accuracy": 0.75,
+      "correct": 3,
+      "coverage": 1.0,
+      "rows": 4,
+      "scored_rows": 4
+    }
+  },
+  "claim_boundary": [
+    "Supported: verifier-grounded source-heldout smoke failure surface is now explicit and leak-clean.",
+    "Not supported: 100M source-heldout smoke win over Gemma for Python/C++/Rust.",
+    "Not supported: full-product patch repair or fail-to-pass verifier transition."
+  ],
+  "created_at_utc": "2026-07-14T08:07:09Z",
+  "decision": "verifier_grounding_does_not_break_source_heldout_smoke_plateau",
+  "gates": {
+    "gemma_same_manifest_ready": false,
+    "hundred_m_all_correct": false,
+    "score_lift_over_static_smoke": false,
+    "verifier_execution_attached": true,
+    "verifier_grounded_full_coverage": true,
+    "verifier_grounded_no_prompt_leaks": true
+  },
+  "interpretation": [
+    "Executable verifier evidence is now attached and rendered without target label/value leaks.",
+    "The selected Stage11507 product scorer still scores only 6/12 on the Python/C++/Rust verifier-grounded source-heldout smoke set.",
+    "This is not a prompt-evidence omission problem: adding current-state verifier observations did not fix C++ abstain selection or Python/Rust verifier_outcome selected-test discrimination.",
+    "C++ remains an abstain attractor on all four smoke tasks.",
+    "Python and Rust remain selected-test verifier_outcome failures while preserving their other three smoke rows."
+  ],
+  "metrics": {
+    "accuracy": 0.5,
+    "correct": 6,
+    "coverage": 1.0,
+    "rows": 12,
+    "scored_rows": 12
+  },
+  "misses": [
+    {
+      "language_family": "c_cpp",
+      "predicted_role": "abstain_insufficient_evidence",
+      "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+      "target_role": "candidate_change_surface",
+      "target_value": "src/bpe_model.cc",
+      "task_type": "symptom_localization"
+    },
+    {
+      "language_family": "c_cpp",
+      "predicted_role": "abstain_insufficient_evidence",
+      "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+      "target_role": "verifier_and_test_constraint",
+      "target_value": "BPE model selected test anchor",
+      "task_type": "evidence_citation"
+    },
+    {
+      "language_family": "c_cpp",
+      "predicted_role": "abstain_insufficient_evidence",
+      "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+      "target_role": "minimal_candidate_change_surface",
+      "target_value": "src/bpe_model.cc",
+      "task_type": "patch_impact_or_abstain"
+    },
+    {
+      "language_family": "c_cpp",
+      "predicted_role": "abstain_insufficient_evidence",
+      "predicted_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+      "target_role": "selected_test_anchor",
+      "target_value": "src/bpe_model_test.cc",
+      "task_type": "verifier_outcome_or_abstain"
+    },
+    {
+      "language_family": "python",
+      "predicted_role": "implementation_only_no_verifier",
+      "predicted_value": "src/model/bigram_model.py",
+      "target_role": "selected_test_anchor",
+      "target_value": "tests/test_model.py",
+      "task_type": "verifier_outcome"
+    },
+    {
+      "language_family": "rust",
+      "predicted_role": "nearby_inline_test_distractor",
+      "predicted_value": "src/pre_tokenizers/whitespace.rs::tests::whitespace_split",
+      "target_role": "selected_test_anchor",
+      "target_value": "src/pre_tokenizers/whitespace.rs::tests::basic",
+      "task_type": "verifier_outcome"
+    }
+  ],
+  "next_actions": [
+    "Build targeted train-support analogues for verifier_outcome selected-test discrimination using the newly attached executable verifier logs.",
+    "For C++, create abstain counterfactuals where executable verifier evidence is present versus removed, so abstain is correct only when evidence is genuinely insufficient.",
+    "Keep Stage11740 as a source-heldout smoke failure canary; do not train on these strict rows directly.",
+    "Recover GPU2-safe Gemma3-12B same-manifest backend before making any smoke comparison claim."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11741_verifier_grounded_successor_decision/verifier_grounded_successor_decision.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "gemma_backend_audit": "runs/local/artifacts/stage11739_gpu2_gemma_backend_audit/gpu2_gemma_backend_audit.json",
+    "status_with_verifiers": "runs/local/artifacts/stage11738_source_heldout_smoke_status_with_verifiers/source_heldout_smoke_status_with_verifiers.json",
+    "verifier_grounded_score": "runs/local/artifacts/stage11740_verifier_grounded_source_heldout_successor_score/verifier_grounded_source_heldout_successor_score.json"
+  },
+  "stage": 11741,
+  "stage_name": "stage11741_verifier_grounded_successor_decision"
+}

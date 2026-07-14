@@ -1,0 +1,134 @@
+{
+  "claim_scope": [
+    "Score the anti-cheat-clean stage11045 priority evidence candidate slice with the latest executed 100M runtime.",
+    "Measure whether the new bounded evidence rows are learnable by the current runtime before turning them into a larger training branch."
+  ],
+  "created_at_utc": "2026-07-13T00:50:11Z",
+  "decision": "priority_evidence_candidate_slice_scored",
+  "headline_findings": [
+    "This slice directly tests whether the current 100M runtime can prefer verifier-and-test-constraint over candidate-change-surface on the newly materialized rows.",
+    "It should be interpreted as a candidate-slice check only; these rows are not yet admitted strict eval."
+  ],
+  "metrics": {
+    "by_language": {
+      "c_cpp": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      },
+      "python": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      }
+    },
+    "by_repo_family": {
+      "parametergolf": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 3,
+        "scored_rows": 3
+      },
+      "repository_library": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      }
+    },
+    "overall": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 5,
+      "scored_rows": 5
+    },
+    "rows_with_target_rank_1": 3
+  },
+  "mismatches": [
+    {
+      "constrained_choice_top1_label": "A",
+      "full_vocab_top1_text": "C",
+      "language_family": "c_cpp",
+      "repo_family": "parametergolf",
+      "row_id": "stage11045::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q2::episode0::retrieval_support_state::decisive_evidence::bounded_evidence_role_candidate_v1",
+      "target_rank_full_vocab": 1,
+      "target_text": "C"
+    },
+    {
+      "constrained_choice_top1_label": "D",
+      "full_vocab_top1_text": "C",
+      "language_family": "c_cpp",
+      "repo_family": "parametergolf",
+      "row_id": "stage11045::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q45::episode0::retrieval_support_state::decisive_evidence::bounded_evidence_role_candidate_v1",
+      "target_rank_full_vocab": 1,
+      "target_text": "C"
+    },
+    {
+      "constrained_choice_top1_label": "B",
+      "full_vocab_top1_text": "C",
+      "language_family": "c_cpp",
+      "repo_family": "parametergolf",
+      "row_id": "stage11045::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q69::episode0::retrieval_support_state::decisive_evidence::bounded_evidence_role_candidate_v1",
+      "target_rank_full_vocab": 1,
+      "target_text": "C"
+    },
+    {
+      "constrained_choice_top1_label": "C",
+      "full_vocab_top1_text": "E",
+      "language_family": "python",
+      "repo_family": "repository_library",
+      "row_id": "stage11045::audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q48::episode0::retrieval_support_state::decisive_evidence::bounded_evidence_role_candidate_v1",
+      "target_rank_full_vocab": 4,
+      "target_text": "A"
+    },
+    {
+      "constrained_choice_top1_label": "A",
+      "full_vocab_top1_text": "E",
+      "language_family": "python",
+      "repo_family": "repository_library",
+      "row_id": "stage11045::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_a76597fc52::q18::episode0::retrieval_support_state::decisive_evidence::bounded_evidence_role_candidate_v1",
+      "target_rank_full_vocab": 6,
+      "target_text": "B"
+    }
+  ],
+  "next_best_step": "If the runtime scores well here, compare Gemma on the same 5 rows under the same option-scoring interface; if it fails here, keep these rows candidate-only and use them as the next residual support slice.",
+  "outputs": {
+    "audit_json": "runs/local/artifacts/stage11047_priority_evidence_candidate_runtime_audit/bounded_choice_eval_priority_evidence_candidates.json",
+    "scored_rows_jsonl": "runs/local/artifacts/stage11047_priority_evidence_candidate_runtime_audit/priority_evidence_candidates_scored.jsonl",
+    "summary_json": "runs/local/artifacts/stage11047_priority_evidence_candidate_runtime_audit/priority_evidence_candidate_runtime_audit.json"
+  },
+  "passed": true,
+  "runtime_bundle": {
+    "runtime_bundle": "runs/local/artifacts/stage11037_successor_residual_probe/runtime_model/runtime_model_bundle.json",
+    "runtime_initialization": {
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11037_successor_residual_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval",
+        "bounded_choice_contrast_margin": 0.05,
+        "bounded_choice_contrast_weight": 0.0,
+        "bounded_decoder_train_sampler": "cyclic",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11037_successor_residual_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 274,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11037_successor_residual_probe/runtime_model/model_state.pt",
+      "weights_sha256": "6ae7e7df1dfd6d076f9ccd79265c9435cdea178dd2e8bc3b65e68e28798792fb"
+    }
+  },
+  "source_artifacts": {
+    "candidate_rows": "runs/local/artifacts/stage11045_priority_evidence_bounded_candidate_conversion/bounded_candidate_rows.jsonl"
+  },
+  "stage": 11047,
+  "stage_name": "stage11047_priority_evidence_candidate_runtime_audit"
+}

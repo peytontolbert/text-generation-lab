@@ -1,0 +1,166 @@
+{
+  "admissibility": {
+    "headline_multilingual_claim_ready": false,
+    "train_again_on_stage11338_rows": false,
+    "use_rust_admitted_rows_as_train_support": false,
+    "why": [
+      "Stage11338 rows are support-only snippets without executed verifier output.",
+      "Stage11341 did not improve Web source-snippet support beyond 7/21.",
+      "Rust rows are reserved strict replacements, not disjoint train roots.",
+      "Ready dbt_core Rust candidates are already represented in current train support.",
+      "Blocked Rust/Web roots still need concrete changed+verifier source pairs."
+    ]
+  },
+  "created_at_utc": "2026-07-13T12:29:50Z",
+  "decision": "dataset_repair_required_before_more_support_probes",
+  "inventory": {
+    "blocked_by_language": {
+      "rust": 29,
+      "web_js_ts_html": 36
+    },
+    "blocked_by_language_reason": {
+      "rust": {
+        "missing_local_repo_verifier_or_changed_pair": 29
+      },
+      "web_js_ts_html": {
+        "missing_local_repo_verifier_or_changed_pair": 36
+      }
+    },
+    "blocked_rust_web_source_rows": 65,
+    "ready_rust_candidates_already_in_train": 2,
+    "rust_admitted_by_gold": {
+      "candidate_change_surface": 1,
+      "symptom_or_call_path_analogue": 2
+    },
+    "rust_admitted_reserved_replacement_roots": 3,
+    "rust_admitted_reserved_replacement_rows": 3,
+    "web_ready_candidates_already_in_train": 0,
+    "web_ready_candidates_from_stage11331": 7,
+    "web_source_snippet_by_gold": {
+      "candidate_change_surface": 7,
+      "symptom_or_call_path_analogue": 7,
+      "verifier_and_test_constraint": 7
+    },
+    "web_source_snippet_support_roots": 7,
+    "web_source_snippet_support_rows": 21
+  },
+  "kept_frontier": {
+    "reason": "Stage11343 rejected Stage11341; canary was preserved but Web/Rust target slices did not improve.",
+    "stage": 11200
+  },
+  "next_actions": [
+    {
+      "action": "acquire_locked_sphinx_or_new_pure_web_task_roots_with_executed_verifier_output",
+      "lane": "web_source_backed_verifier_roots",
+      "minimum_acceptance": {
+        "must_include": [
+          "locked_commit",
+          "changed_path",
+          "selected_test_or_fixture",
+          "observed_expected_actual_or_test_result",
+          "source_snippet",
+          "verifier_snippet",
+          "symptom_or_call_path_snippet"
+        ],
+        "new_roots": 10,
+        "split_policy": "root-disjoint before row projection"
+      },
+      "priority": 1,
+      "why": "Stage11338 rows include snippets but no locked historical commit or executed verifier transition; Stage11341 stayed 7/21."
+    },
+    {
+      "action": "materialize_disjoint_rust_evidence_train_roots_instead_of_training_on_reserved_replacements",
+      "lane": "rust_train_support_supply",
+      "minimum_acceptance": {
+        "must_include": [
+          "non_tokenizers_repo_family_or_fresh_time_split",
+          "selected_test_or_verifier_anchor",
+          "distinct_candidate_change_surface",
+          "distinct_symptom_or_call_path",
+          "distinct_verifier_and_test_constraint"
+        ],
+        "new_roots": 10,
+        "split_policy": "train roots must not overlap rust admitted replacement roots"
+      },
+      "priority": 2,
+      "why": "Rust rows are admitted as strict replacements and current runtime scores 1/3; they are not train support."
+    },
+    {
+      "action": "prototype_semantic_evidence_candidate_objective_on_clean_source_verifier_rows",
+      "lane": "scorer_objective",
+      "minimum_acceptance": {
+        "candidate_contract": [
+          "state_text",
+          "candidate_evidence_text",
+          "candidate_role_metadata",
+          "binary_gold_or_pairwise_preference"
+        ],
+        "promotion_gate": [
+          "canary_strict_not_below_stage11200",
+          "web_source_snippet_support_above_7_of_21",
+          "rust_replacements_above_1_of_3_or_no_rust_claim"
+        ]
+      },
+      "priority": 3,
+      "why": "Path-only and snippet Web support preserved canary but did not move target rows; prior scorer heads failed on weak/alias-prone residual geometry."
+    }
+  ],
+  "observed_scores": {
+    "canary_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "rust_admitted_replacements": {
+      "correct": 1,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 3,
+      "scored_rows": 3
+    },
+    "web_source_snippet_support": {
+      "correct": 7,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 21,
+      "scored_rows": 21
+    }
+  },
+  "outputs": {
+    "next_materialization_actions": "runs/local/artifacts/stage11344_rust_web_source_verifier_blocker_audit/next_materialization_actions.jsonl",
+    "source_verifier_blocker_queue": "runs/local/artifacts/stage11344_rust_web_source_verifier_blocker_audit/source_verifier_blocker_queue.jsonl",
+    "summary": "runs/local/artifacts/stage11344_rust_web_source_verifier_blocker_audit/rust_web_source_verifier_blocker_audit.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "rust_admitted_rows": "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/admitted_rust_strict_replacement_rows.jsonl",
+    "rust_web_blocked_queue": "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/rust_web_blocked_source_queue.jsonl",
+    "stage11331_summary": "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/rust_web_gap_recovery_manifest.json",
+    "stage11343_decision": "runs/local/artifacts/stage11343_web_source_snippet_support_decision/web_source_snippet_support_decision.json",
+    "web_ready_queue": "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/web_ready_candidate_queue.jsonl",
+    "web_source_snippet_rows": "runs/local/artifacts/stage11338_web_source_snippet_evidence_materialization/web_source_snippet_evidence_rows.jsonl"
+  },
+  "source_stage11331_counts": {
+    "admitted_rust_strict_replacement_rows": 3,
+    "blocked_rust_replacement_rows": 0,
+    "rust_ready_not_already_materialized": 2,
+    "stage11237_ready_by_language": {
+      "rust": 2,
+      "web_js_ts_html": 7
+    },
+    "stage11237_ready_rust_web_candidates": 9,
+    "stage11275_already_materialized_rust_web_roots": 12,
+    "stage11275_blocked_by_language": {
+      "rust": 29,
+      "web_js_ts_html": 36
+    },
+    "stage11275_blocked_rust_web_roots": 65,
+    "stage11275_materialized_by_language": {
+      "rust": 4,
+      "web_js_ts_html": 8
+    },
+    "web_ready_candidates": 7,
+    "web_ready_not_already_materialized": 7
+  },
+  "stage": 11344,
+  "stage_name": "stage11344_rust_web_source_verifier_blocker_audit"
+}

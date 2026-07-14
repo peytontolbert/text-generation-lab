@@ -1,0 +1,45 @@
+{
+  "claim_scope": [
+    "Turn the stage11047 and stage11049 evidence-slice results into an explicit scorer-policy decision.",
+    "Prevent an unsafe global scorer swap while still preserving the new slice as useful residual support material."
+  ],
+  "decision": "keep_base_scorer_and_use_priority_evidence_rows_as_support",
+  "headline_findings": [
+    "The new 5-row evidence slice is clean and scoreable, so it is valid residual support material.",
+    "encoder_option_retrieval_evidence_role_map solves the new slice but regresses the 23-row successor strict overlay, so it is not safe as a global scorer replacement.",
+    "The honest next move is to keep encoder_option_retrieval as the overlay scorer and use the new rows to train or support the residual evidence lane until a safer scorer or model update exists."
+  ],
+  "inputs": {
+    "candidate_audit": "runs/local/artifacts/stage11046_priority_evidence_bounded_candidate_audit/priority_evidence_bounded_candidate_audit.json",
+    "scorer_policy_comparison": "runs/local/artifacts/stage11049_priority_evidence_scorer_policy_comparison/priority_evidence_scorer_policy_comparison.json",
+    "slice_runtime_audit": "runs/local/artifacts/stage11047_priority_evidence_candidate_runtime_audit/priority_evidence_candidate_runtime_audit.json"
+  },
+  "metrics": {
+    "priority_slice_alt_accuracy": 1.0,
+    "priority_slice_base_accuracy": 0.0,
+    "priority_slice_delta": 1.0,
+    "successor_eval_alt_accuracy": 0.9565217391304348,
+    "successor_eval_base_accuracy": 0.8695652173913043,
+    "successor_eval_delta": 0.08695652173913049,
+    "successor_strict_alt_accuracy": 0.8260869565217391,
+    "successor_strict_base_accuracy": 0.9565217391304348,
+    "successor_strict_delta": -0.13043478260869568
+  },
+  "next_best_step": [
+    "Add the five stage11045 rows as residual support material in the next support package rather than changing the global scorer.",
+    "Keep the 23-row successor overlay scored with encoder_option_retrieval until a scorer alternative wins both the overlay and the slice.",
+    "If scorer work continues, search for a hybrid evidence-only routing policy that preserves strict overlay rows before any promotion."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11050_priority_evidence_policy_decision/priority_evidence_policy_decision.json"
+  },
+  "passed": true,
+  "recommended_policy": {
+    "evidence_role_map_allowed_scope": "diagnostic_or_slice_local_only",
+    "global_scorer_swap_allowed": false,
+    "overlay_scoring_source": "encoder_option_retrieval",
+    "priority_evidence_slice_status": "candidate_only_train_support_or_diagnostic"
+  },
+  "stage": 11050,
+  "stage_name": "stage11050_priority_evidence_policy_decision"
+}

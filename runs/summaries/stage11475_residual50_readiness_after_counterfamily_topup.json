@@ -1,0 +1,91 @@
+{
+  "created_at_utc": "2026-07-13T17:36:12Z",
+  "decision": "python_cpp_residual50_ready_rust_symptom_call_path_missing",
+  "family_status": [
+    {
+      "counter_roots": 10,
+      "family_id": "python_evidence_verifier_constraint_vs_candidate_surface",
+      "language_family": "python",
+      "missing_counter_roots": 0,
+      "missing_positive_roots": 0,
+      "positive_roots": 24,
+      "residual50_ready": true,
+      "roots_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 24
+      },
+      "rows": 34,
+      "rows_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 24
+      }
+    },
+    {
+      "counter_roots": 10,
+      "family_id": "c_cpp_evidence_verifier_constraint_vs_candidate_surface",
+      "language_family": "c_cpp",
+      "missing_counter_roots": 0,
+      "missing_positive_roots": 0,
+      "positive_roots": 14,
+      "residual50_ready": true,
+      "roots_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 14
+      },
+      "rows": 24,
+      "rows_by_role": {
+        "candidate_change_surface": 10,
+        "verifier_and_test_constraint": 14
+      }
+    },
+    {
+      "counter_roots": 19,
+      "family_id": "rust_symptom_call_path_vs_candidate_surface",
+      "language_family": "rust",
+      "missing_counter_roots": 0,
+      "missing_positive_roots": 10,
+      "positive_roots": 0,
+      "repo_families": 7,
+      "reserved_eval_replacement_rows": 3,
+      "reserved_eval_replacements_are_train_forbidden": true,
+      "residual50_ready": false,
+      "train_support_roots": 19
+    }
+  ],
+  "outputs": {
+    "ready_python_cpp_rows": "runs/local/artifacts/stage11475_residual50_readiness_after_counterfamily_topup/residual50_ready_python_cpp_rows.jsonl",
+    "remaining_work_items": "runs/local/artifacts/stage11475_residual50_readiness_after_counterfamily_topup/residual50_remaining_work_items.jsonl",
+    "summary": "runs/local/artifacts/stage11475_residual50_readiness_after_counterfamily_topup/residual50_readiness_after_counterfamily_topup.json"
+  },
+  "passed": true,
+  "readiness": {
+    "can_run_full_residual50_promotable_probe": false,
+    "can_run_python_cpp_controlled_diagnostic": true,
+    "families_ready": 2,
+    "families_total": 3
+  },
+  "source_artifacts": {
+    "rust_root_audit": "runs/local/artifacts/stage11453_rust_materialized_support_readiness_audit_v3/rust_materialized_support_root_audit.jsonl",
+    "rust_strict_replacements": "runs/local/artifacts/stage11193_rust_external_graph_replacement_rows/rust_replacement_strict_candidate_rows.jsonl",
+    "stage11205_admitted": "runs/local/artifacts/stage11205_fresh_verifier_constraint_evidence_support/admitted_fresh_verifier_constraint_evidence_rows.jsonl",
+    "stage11474_admitted": "runs/local/artifacts/stage11474_residual50_python_cpp_counterfamily_topup/admitted_residual50_python_cpp_counterfamily_rows.jsonl"
+  },
+  "stage": 11475,
+  "stage_name": "stage11475_residual50_readiness_after_counterfamily_topup",
+  "work_items": [
+    {
+      "acceptance": [
+        ">=10 train-support Rust roots with exact symptom_or_call_path analogue role",
+        "candidate_change_surface remains present as hard negative",
+        "selected-test/verifier anchor remains present",
+        "no reserved/eval row lineage is used as train support"
+      ],
+      "action": "materialize_exact_symptom_or_call_path_analogue_roots",
+      "candidate_source_pool": "runs/local/artifacts/stage11453_rust_materialized_support_readiness_audit_v3/rust_materialized_support_root_audit.jsonl",
+      "do_not_train_on": "runs/local/artifacts/stage11193_rust_external_graph_replacement_rows/rust_replacement_strict_candidate_rows.jsonl",
+      "family_id": "rust_symptom_call_path_vs_candidate_surface",
+      "needed_roots": 10,
+      "priority": "P0"
+    }
+  ]
+}

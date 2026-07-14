@@ -1,0 +1,74 @@
+{
+  "claim_scope": [
+    "Package the immediate replenishment roots as a fresh evidence branch with separate train-support and strict-candidate slices.",
+    "Keep the existing 23-row overlay alongside the branch so fresh-root progress can be read next to the stable canary rather than replacing it."
+  ],
+  "created_at_utc": "2026-07-12T22:46:43Z",
+  "decision": "fresh_evidence_branch_packaged",
+  "headline_findings": [
+    "The immediate replenishment bundle gives us 3 fresh evidence roots with selected-test-backed candidate rows and 12 matching support rows.",
+    "All three candidates are anti-cheat-audited and root-disjoint from the stale strict overlay path.",
+    "This branch is the cleanest current way to measure whether the standalone runtime can generalize beyond the repaired overlay."
+  ],
+  "metrics": {
+    "candidate_by_language": {
+      "c_cpp": 2,
+      "python": 1
+    },
+    "candidate_rows": 3,
+    "candidate_targets": {
+      "C": 1,
+      "E": 1,
+      "F": 1
+    },
+    "overlay_eval_rows": 23,
+    "overlay_strict_rows": 23,
+    "source_audit_metrics": {
+      "bundle_counts": {
+        "stage10970::cpp_agentkernel_counterfamily_evidence_replenishment::immediate_replenishment": 5,
+        "stage10970::cpp_parametergolf_evidence_b_vs_f_replenishment::immediate_replenishment": 5,
+        "stage10970::python_repository_library_evidence_b_vs_f_replenishment::immediate_replenishment": 5
+      },
+      "duplicate_option_value_rows": 0,
+      "identical_candidate_and_verifier_rows": 0,
+      "missing_gold_evidence_visibility_rows": 0,
+      "missing_selected_test_anchor_rows": 0,
+      "rows": 15
+    },
+    "source_bundle_metrics": {
+      "bundle_rows": 15,
+      "by_language": {
+        "c_cpp": 10,
+        "python": 5
+      },
+      "candidate_rows": 3,
+      "queues": [
+        "python_repository_library_evidence_b_vs_f_replenishment",
+        "cpp_parametergolf_evidence_b_vs_f_replenishment",
+        "cpp_agentkernel_counterfamily_evidence_replenishment"
+      ],
+      "support_rows": 12
+    },
+    "support_by_language": {
+      "c_cpp": 8,
+      "python": 4
+    },
+    "support_rows": 12
+  },
+  "next_best_step": "Score the current best standalone runtime on the fresh strict candidate slice, then decide whether to train on the 12 support rows or hold them back for a cleaner future package.",
+  "outputs": {
+    "overlay_strict_rows_jsonl": "runs/local/artifacts/stage10998_fresh_evidence_branch_package/overlay_strict_rows.jsonl",
+    "overlay_validation_rows_jsonl": "runs/local/artifacts/stage10998_fresh_evidence_branch_package/overlay_validation_rows.jsonl",
+    "strict_candidate_rows_jsonl": "runs/local/artifacts/stage10998_fresh_evidence_branch_package/strict_candidate_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage10998_fresh_evidence_branch_package/fresh_evidence_branch_package.json",
+    "train_support_rows_jsonl": "runs/local/artifacts/stage10998_fresh_evidence_branch_package/train_support_rows.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "Fresh candidate rows remain out of train and retain selected-test-backed anti-cheat metadata.",
+    "Overlay validation and strict rows are copied unchanged from stage10983.",
+    "This package is designed to measure progress on new evidence roots, not to promote a new headline by itself."
+  ],
+  "stage": 10998,
+  "stage_name": "stage10998_fresh_evidence_branch_package"
+}

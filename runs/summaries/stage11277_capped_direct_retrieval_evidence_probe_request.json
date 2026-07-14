@@ -1,0 +1,321 @@
+{
+  "command": [
+    "env",
+    "CUDA_VISIBLE_DEVICES=2",
+    "PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11277_capped_direct_retrieval_evidence_probe_request/capped_direct_retrieval_evidence_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "836",
+    "--max-eval-rows",
+    "23",
+    "--max-strict-rows",
+    "22",
+    "--max-steps",
+    "192",
+    "--batch-size",
+    "4",
+    "--learning-rate",
+    "8e-6",
+    "--max-encoder-tokens",
+    "768",
+    "--max-decoder-tokens",
+    "16",
+    "--decoder-ce-weight",
+    "0.1",
+    "--bounded-choice-aux-weight",
+    "2.0",
+    "--bounded-choice-aux-source",
+    "encoder_option_retrieval_evidence_judgment_head",
+    "--bounded-decoder-train-sampler",
+    "residual_family_balanced",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "4.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "12",
+    "--max-generation-tokens",
+    "16",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11278_capped_direct_retrieval_evidence_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "0.5",
+    "--no-final-checkpoint",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11278_capped_direct_retrieval_evidence_probe/bounded_decoder_probe"
+  ],
+  "created_at_utc": "2026-07-13T10:30:23Z",
+  "decision": "capped_direct_retrieval_evidence_probe_requested",
+  "metrics": {
+    "base_strict_rows": 22,
+    "base_train_rows": 708,
+    "base_validation_rows": 23,
+    "judgment_audit": {
+      "all_source_text_materialized": true,
+      "duplicate_row_ids": 0,
+      "root_overlap": {
+        "train_strict": [],
+        "train_validation": [],
+        "validation_strict": []
+      }
+    },
+    "judgment_package_counts": {
+      "strict_eval": {
+        "by_language": {
+          "c_cpp": 2,
+          "python": 14,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "by_repo_top20": [
+          [
+            "agentkernel",
+            6
+          ],
+          [
+            "SWE-bench",
+            4
+          ],
+          [
+            "BrowserGym",
+            4
+          ],
+          [
+            "cuEmbed",
+            2
+          ],
+          [
+            "chroma",
+            2
+          ],
+          [
+            "agentkernel-seq2seq-text-lab",
+            2
+          ]
+        ],
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 10,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 10
+        },
+        "roots": 10,
+        "rows": 20
+      },
+      "train": {
+        "by_language": {
+          "c_cpp": 36,
+          "python": 76,
+          "rust": 4,
+          "web_js_ts_html": 12
+        },
+        "by_repo_top20": [
+          [
+            "peytontolbert-parameter-golf",
+            20
+          ],
+          [
+            "agentkernel-seq2seq-text-lab",
+            16
+          ],
+          [
+            "parametergolf",
+            16
+          ],
+          [
+            "agentkernel",
+            16
+          ],
+          [
+            "repository_library",
+            8
+          ],
+          [
+            "tilus",
+            4
+          ],
+          [
+            "tiktoken",
+            4
+          ],
+          [
+            "mctx",
+            4
+          ],
+          [
+            "rembg",
+            4
+          ],
+          [
+            "llama-models",
+            4
+          ],
+          [
+            "faiss",
+            4
+          ],
+          [
+            "optimum",
+            4
+          ],
+          [
+            "pypiserver",
+            4
+          ],
+          [
+            "xformers",
+            4
+          ],
+          [
+            "openevolve",
+            4
+          ],
+          [
+            "metacontroller",
+            4
+          ],
+          [
+            "x-transformers",
+            4
+          ],
+          [
+            "hyper-connections",
+            4
+          ]
+        ],
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 62,
+          "DISTRACTOR_BACKGROUND_CONTEXT": 4,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 62
+        },
+        "roots": 62,
+        "rows": 128
+      },
+      "validation": {
+        "by_language": {
+          "c_cpp": 12,
+          "python": 6,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "by_repo_top20": [
+          [
+            "parametergolf",
+            6
+          ],
+          [
+            "agentkernel",
+            6
+          ],
+          [
+            "falco",
+            4
+          ],
+          [
+            "agentkernel-seq2seq-text-lab",
+            2
+          ],
+          [
+            "cuEmbed",
+            2
+          ],
+          [
+            "chroma",
+            2
+          ]
+        ],
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 11,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 11
+        },
+        "roots": 11,
+        "rows": 22
+      }
+    },
+    "judgment_strict_rows_for_postrun": 20,
+    "judgment_train_by_language": {
+      "c_cpp": 36,
+      "python": 76,
+      "rust": 4,
+      "web_js_ts_html": 12
+    },
+    "judgment_train_by_target": {
+      "DECISIVE_VERIFIER_TEST_CONSTRAINT": 62,
+      "DISTRACTOR_BACKGROUND_CONTEXT": 4,
+      "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 62
+    },
+    "judgment_train_rows": 128,
+    "judgment_validation_rows_for_postrun": 22,
+    "protected_root_overlaps": [],
+    "residual_rows_for_postrun": 10,
+    "train_rows": 836
+  },
+  "outputs": {
+    "command_json": "runs/local/artifacts/stage11277_capped_direct_retrieval_evidence_probe_request/capped_direct_retrieval_evidence_probe_command.json",
+    "manifest_jsonl": "runs/local/artifacts/stage11277_capped_direct_retrieval_evidence_probe_request/capped_direct_retrieval_evidence_probe_manifest.jsonl",
+    "probe_output_dir": "runs/local/artifacts/stage11278_capped_direct_retrieval_evidence_probe/bounded_decoder_probe",
+    "runtime_model_dir": "runs/local/artifacts/stage11278_capped_direct_retrieval_evidence_probe/runtime_model",
+    "summary_json": "runs/local/artifacts/stage11277_capped_direct_retrieval_evidence_probe_request/capped_direct_retrieval_evidence_probe_request.json"
+  },
+  "passed": true,
+  "promotion_gate_for_postrun": {
+    "capped_direct_retrieval_validation_or_strict_should_score_above_majority_baseline": true,
+    "clean_residual_must_improve_for_frontier_claim": ">5/10",
+    "clean_strict_must_remain": "22/22",
+    "clean_validation_should_not_regress": ">=20/23",
+    "verifier_and_test_constraint_residual_must_improve": ">0/3"
+  },
+  "rationale": [
+    "Stage11276 provides repo-capped multilingual source-backed verifier-vs-changed evidence rows; this request tests whether the judgment-head scorer can use that cleaner source supply.",
+    "Stage11276 passed source-text, duplicate-id, and root-split audits.",
+    "This is diagnostic: Stage11276 covers C/C++/Python/Rust/Web, but it is verifier-vs-changed evidence-candidate supervision, not a full maintainer-bundle benchmark."
+  ],
+  "source_artifacts": {
+    "base_strict": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "base_train": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_train.jsonl",
+    "base_validation": "runs/local/artifacts/stage11198_role_focused_residual_support_package/agentkernel_lite_encdec_validation.jsonl",
+    "initialize_from_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "judgment_audit": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_package.json",
+    "judgment_package": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_package.json",
+    "judgment_strict": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_strict_rows.jsonl",
+    "judgment_train": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_train_rows.jsonl",
+    "judgment_validation": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_validation_rows.jsonl",
+    "residual_bank": "runs/local/artifacts/stage11195_clean_residual_successor_bank/clean_residual_successor_bank.jsonl"
+  },
+  "stage": 11277,
+  "stage_name": "stage11277_capped_direct_retrieval_evidence_probe_request"
+}

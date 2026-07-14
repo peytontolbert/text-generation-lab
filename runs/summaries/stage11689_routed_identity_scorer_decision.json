@@ -1,0 +1,84 @@
+{
+  "claim_boundary": [
+    "Supported: canonical-renderer same-role routing can improve canonical Web heldout while preserving protected compact maintainer gates.",
+    "Not supported: broad Web heldout improvement, full-product Web generalization, or executable patch/verifier repair improvement."
+  ],
+  "created_at_utc": "2026-07-14T05:01:55Z",
+  "decision": "canonical_renderer_gain_only_not_product_web_frontier",
+  "gates": {
+    "canonical_heldout_improved_over_51": true,
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "original_web_improved_over_routed_38": false,
+    "residual_bank_preserved": true,
+    "sealed_remaining_improved_over_5": false
+  },
+  "interpretation": [
+    "The two-runtime route improves canonical-renderer heldout from the prior 51/66 frontier to 53/66 while preserving protected gates.",
+    "It does not improve the original Web heldout frontier: original Web remains 28/66, below the routed product scorer baseline of 38/66.",
+    "The identity route is not exercised on original Web heldout because those rows do not match the same-role candidate route predicate.",
+    "Treat Stage11688 as evidence that same-role identity scoring is useful inside the canonical renderer, not as a promoted broad Web product scorer."
+  ],
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11689_routed_identity_scorer_decision",
+    "summary": "runs/local/artifacts/stage11689_routed_identity_scorer_decision/routed_identity_scorer_decision.json"
+  },
+  "recommended_next": {
+    "promotion_gate": [
+      "original Web heldout > 38/66",
+      "canonical heldout >= 53/66",
+      "filtered strict 22/22",
+      "old canary strict 23/23",
+      "residual bank >= 7/10",
+      "no heldout-root leakage"
+    ],
+    "stage": "stage11690_canonical_to_original_web_bridge_or_route_expansion",
+    "target": "materialize original Web heldout-style rows into canonical role-typed candidate objects, or broaden routing only after a leak-clean predicate fires on original Web rows"
+  },
+  "route_counts": {
+    "canonical_heldout": {
+      "identity": 40,
+      "web": 26
+    },
+    "filtered_strict": {
+      "protected": 22
+    },
+    "filtered_validation": {
+      "protected": 22
+    },
+    "old_canary_strict": {
+      "protected": 23
+    },
+    "old_canary_validation": {
+      "protected": 23
+    },
+    "original_web_heldout": {
+      "identity": 0,
+      "web": 66
+    },
+    "residual_bank": {
+      "protected": 10
+    },
+    "sealed_remaining_miss_diagnostics": {
+      "identity": 15,
+      "web": 0
+    }
+  },
+  "scores": {
+    "canonical_heldout": "53/66",
+    "filtered_strict": "22/22",
+    "filtered_validation": "20/22",
+    "old_canary_strict": "23/23",
+    "old_canary_validation": "21/23",
+    "original_web_heldout": "28/66",
+    "residual_bank": "7/10",
+    "sealed_remaining_miss_diagnostics": "5/15"
+  },
+  "source_artifacts": {
+    "audit": "runs/local/artifacts/stage11688_routed_web_identity_scorer_audit/routed_web_identity_scorer_audit.json"
+  },
+  "stage": 11689,
+  "stage_name": "stage11689_routed_identity_scorer_decision"
+}

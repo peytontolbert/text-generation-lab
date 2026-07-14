@@ -1,0 +1,221 @@
+{
+  "base_runtime_weights_sha256": "3ecb8c67e90315c7e0738a8dd1e013e7c6bb7c8025f41fe73eb15b28b5e6bfc8",
+  "claim_scope": [
+    "Train a direct scorer-margin repair probe that keeps raw encoder_option_retrieval as the evaluation contract while adding an explicit candidate_change_surface versus verifier_and_test_constraint contrastive loss.",
+    "Test whether direct option-margin shaping can move the explicit-ledger blocker slice where support-package changes, policy gates, and role-map auxiliary training failed."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10951_evidence_contrast_margin_probe_request/evidence_contrast_margin_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "233",
+    "--max-eval-rows",
+    "23",
+    "--max-strict-rows",
+    "23",
+    "--max-steps",
+    "96",
+    "--batch-size",
+    "2",
+    "--learning-rate",
+    "5e-6",
+    "--max-encoder-tokens",
+    "768",
+    "--max-decoder-tokens",
+    "8",
+    "--decoder-ce-weight",
+    "0.2",
+    "--bounded-choice-aux-weight",
+    "1.0",
+    "--bounded-choice-aux-source",
+    "encoder_option_retrieval",
+    "--bounded-choice-contrast-weight",
+    "1.0",
+    "--bounded-choice-contrast-margin",
+    "0.08",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "4.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "12",
+    "--max-generation-tokens",
+    "8",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10952_evidence_contrast_margin_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10943_scorer_margin_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10943_scorer_margin_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "0.1",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10952_evidence_contrast_margin_probe/bounded_decoder_probe",
+    "--run-id",
+    "stage10952_evidence_contrast_margin_probe"
+  ],
+  "created_at_utc": "2026-07-12T20:59:31Z",
+  "decision": "evidence_contrast_margin_probe_ready",
+  "diagnostic_intent": {
+    "focus": [
+      "direct_option_margin_shaping",
+      "candidate_surface_vs_verifier_ledger_separation"
+    ],
+    "heldout_claim_changed": false,
+    "preservation_reference_runtime": "runs/local/artifacts/stage10943_scorer_margin_support_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "initialize_from_runtime_model": "runs/local/artifacts/stage10943_scorer_margin_support_probe/runtime_model/runtime_model_bundle.json",
+  "language_counts_by_split": {
+    "eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "strict_eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "train": {
+      "c_cpp": 133,
+      "python": 62,
+      "rust": 38
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10951_evidence_contrast_margin_probe_request/evidence_contrast_margin_probe_manifest.jsonl",
+  "new_objective": {
+    "bounded_choice_aux_source": "encoder_option_retrieval",
+    "bounded_choice_contrast_margin": 0.08,
+    "bounded_choice_contrast_weight": 1.0,
+    "contrast_family": "evidence_candidate_vs_verifier"
+  },
+  "next_best_step": "Run the probe, then audit the saved runtime on the frozen raw overlay and explicit-ledger slice to see whether direct scorer-margin shaping moves the blocker.",
+  "output_dir": "runs/local/artifacts/stage10952_evidence_contrast_margin_probe/bounded_decoder_probe",
+  "package_metrics_snapshot": {
+    "added_by_language": {
+      "c_cpp": 16,
+      "python": 8,
+      "rust": 4
+    },
+    "added_by_repo_family": {
+      "candle": 4,
+      "cccl": 4,
+      "code_assist": 8,
+      "onnxruntime": 4,
+      "parametergolf": 8
+    },
+    "added_by_target_value": {
+      "candidate_change_surface": 16,
+      "verifier_and_test_constraint": 12
+    },
+    "added_rows": 28,
+    "base_metrics_snapshot": {
+      "added_by_language": {
+        "c_cpp": 8,
+        "python": 4
+      },
+      "added_by_target_label": {
+        "A": 3,
+        "C": 4,
+        "D": 2,
+        "E": 2,
+        "F": 1
+      },
+      "added_by_variant": {
+        "ledger_contrast_candidate_first": 3,
+        "ledger_contrast_verifier_first": 3,
+        "ledger_full_candidate_first": 3,
+        "ledger_full_verifier_first": 3
+      },
+      "base_metrics_snapshot": {
+        "added_repaired_rows": 6,
+        "repaired_duplicate_visible_evidence_groups": 0,
+        "stress_rows_unchanged": 7,
+        "strict_rows_unchanged": 23,
+        "train_rows_after": 193,
+        "train_rows_before": 187,
+        "validation_rows_unchanged": 23
+      },
+      "explicit_rows_added": 12,
+      "queue_ids": [
+        "python_repository_library_evidence_b_vs_f_replenishment",
+        "cpp_parametergolf_evidence_b_vs_f_replenishment",
+        "cpp_agentkernel_counterfamily_evidence_replenishment"
+      ],
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_by_language": {
+        "c_cpp": 117,
+        "python": 54,
+        "rust": 34
+      },
+      "train_rows_after": 205,
+      "train_rows_before": 193,
+      "validation_rows_unchanged": 23
+    },
+    "source_rows_by_gold_value": {
+      "candidate_change_surface": 4,
+      "verifier_and_test_constraint": 3
+    },
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_rows_after": 233,
+    "train_rows_before": 205,
+    "validation_rows_unchanged": 23
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "All train rows remain the stage10941 scorer-margin package; no explicit-ledger candidate rows are copied into train.",
+    "Frozen overlay and explicit-ledger slice must be re-audited using raw encoder_option_retrieval after the run.",
+    "The probe itself is diagnostic and not a headline benchmark run."
+  ],
+  "rows": 279,
+  "run_id": "stage10952_evidence_contrast_margin_probe",
+  "runtime_model_save_dir": "runs/local/artifacts/stage10952_evidence_contrast_margin_probe/runtime_model",
+  "source_package": "runs/local/artifacts/stage10941_scorer_margin_support_package/scorer_margin_support_package.json",
+  "split_counts": {
+    "eval": 23,
+    "strict_eval": 23,
+    "train": 233
+  },
+  "stage": 10951,
+  "stage_name": "stage10951_evidence_contrast_margin_probe_request",
+  "stress_rows_excluded_from_manifest": 7
+}

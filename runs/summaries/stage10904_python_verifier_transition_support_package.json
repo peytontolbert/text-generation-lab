@@ -1,0 +1,131 @@
+{
+  "claim_scope": [
+    "Build a Python-only diagnostic support package aimed at the remaining verifier-transition boundary rather than another multilingual preservation mix.",
+    "Use the cleaned 23-row quarantined reviewed-v2.7 validation set for regression tracking while reserving the fresh 2-row Python verifier-transition slice as the strict target."
+  ],
+  "created_at_utc": "2026-07-12T18:34:57Z",
+  "decision": "python_verifier_transition_support_package_ready",
+  "diagnostic_focus": {
+    "canary_stress_rows": 23,
+    "canary_validation_rows": 23,
+    "primary": "python_verifier_outcome_semantic_transition",
+    "strict_row_ids": [
+      "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+      "stage10900::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1"
+    ],
+    "strict_source_roots": [
+      "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python",
+      "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python"
+    ]
+  },
+  "metrics": {
+    "base_metrics_snapshot": {
+      "evidence_citation_target_distribution": {
+        "A": 2,
+        "B": 11,
+        "C": 2,
+        "D": 6,
+        "E": 2
+      },
+      "new_row_language_counts": {
+        "python": 8
+      },
+      "new_row_task_counts": {
+        "abstention_insufficient_evidence": 1,
+        "alternative_hypothesis_elimination": 1,
+        "evidence_citation": 1,
+        "minimal_fix_selection": 1,
+        "patch_impact": 1,
+        "regression_risk": 1,
+        "symptom_localization": 1,
+        "verifier_outcome": 1
+      },
+      "stress_rows": 7,
+      "strict_rows": 24,
+      "train_by_language": {
+        "c_cpp": 109,
+        "python": 50,
+        "rust": 34
+      },
+      "train_by_task": {
+        "abstention_insufficient_evidence": 18,
+        "alternative_hypothesis_elimination": 1,
+        "cpp_implementation_vs_implementation": 1,
+        "evidence_citation": 23,
+        "evidence_role_classification": 71,
+        "minimal_fix_selection": 17,
+        "patch_impact": 18,
+        "python_implementation_vs_implementation": 2,
+        "regression_risk": 1,
+        "symptom_localization": 18,
+        "verifier_outcome": 23
+      },
+      "train_rows": 193,
+      "validation_rows": 24,
+      "verifier_outcome_target_distribution": {
+        "A": 11,
+        "B": 1,
+        "C": 1,
+        "D": 2,
+        "E": 2,
+        "H": 1,
+        "J": 1,
+        "V1": 4
+      }
+    },
+    "base_python_rows": 50,
+    "derived_candidate_rows": 40,
+    "stress_rows": 23,
+    "strict_rows": 2,
+    "train_by_target": {
+      "A": 27,
+      "B": 26,
+      "C": 9,
+      "D": 16,
+      "E": 6,
+      "F": 1,
+      "J": 1,
+      "V1": 4
+    },
+    "train_by_task": {
+      "abstention_insufficient_evidence": 5,
+      "alternative_hypothesis_elimination": 1,
+      "evidence_citation": 5,
+      "evidence_role_classification": 8,
+      "minimal_fix_selection": 4,
+      "patch_impact": 5,
+      "python_implementation_vs_implementation": 2,
+      "regression_risk": 1,
+      "symptom_localization": 5,
+      "verifier_candidate_role_classification": 40,
+      "verifier_outcome": 14
+    },
+    "train_roots": 10,
+    "train_rows": 90,
+    "validation_rows": 23
+  },
+  "next_best_step": "Run a Python-only diagnostic probe from the current alias-safe runtime, then compare whether the stronger stage10894 verifier-transition row flips without regressing the quarantined canary.",
+  "outputs": {
+    "stress_rows_jsonl": "runs/local/artifacts/stage10904_python_verifier_transition_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage10904_python_verifier_transition_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage10904_python_verifier_transition_support_package/python_verifier_transition_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage10904_python_verifier_transition_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage10904_python_verifier_transition_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "Fresh verifier-transition slice remains strict-only and non-promotable.",
+    "Quarantined 23-row canary remains untouched and is used only for regression tracking.",
+    "All train rows remain train-support only, including derived verifier-candidate semantic rows."
+  ],
+  "source_artifacts": {
+    "base_summary": "runs/local/artifacts/stage10864_residual_family_support_package_plus_second_python_materialized/residual_family_support_package_plus_second_python_materialized.json",
+    "base_train": "runs/local/artifacts/stage10864_residual_family_support_package_plus_second_python_materialized/agentkernel_lite_encdec_train.jsonl",
+    "canary_strict_stress": "runs/local/artifacts/stage10881_evidence_alias_quarantine_successor/agentkernel_lite_encdec_strict_eval.jsonl",
+    "canary_validation": "runs/local/artifacts/stage10881_evidence_alias_quarantine_successor/agentkernel_lite_encdec_validation.jsonl",
+    "candidate_rows": "runs/local/artifacts/stage10871_verifier_candidate_semantic_support_package/added_verifier_candidate_rows.jsonl",
+    "successor_strict": "runs/local/artifacts/stage10902_python_verifier_transition_candidate_slice/strict_candidate_rows.jsonl"
+  },
+  "stage": 10904,
+  "stage_name": "stage10904_python_verifier_transition_support_package"
+}

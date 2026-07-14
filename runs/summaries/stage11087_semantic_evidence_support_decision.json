@@ -1,0 +1,111 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": {
+        "reserved_candidate_accuracy": 0.5,
+        "reserved_candidate_rows": 10,
+        "reserved_evidence_accuracy": 0.4444444444444444
+      },
+      "finding": "Semantic evidence-role supervision did not improve the reserved evidence residual bank."
+    },
+    {
+      "evidence": {
+        "strict_miss_rows": [
+          "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1"
+        ]
+      },
+      "finding": "The main Python verifier strict miss remains unchanged."
+    },
+    {
+      "evidence": {
+        "mismatch_rows": [
+          {
+            "constrained_choice_top1_label": "A",
+            "full_vocab_top1_text": "C",
+            "language_family": "python",
+            "repo_family": "repository_library",
+            "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+            "target_rank_full_vocab": 7,
+            "target_text": "F",
+            "task_type": "evidence_citation"
+          },
+          {
+            "constrained_choice_top1_label": "A",
+            "full_vocab_top1_text": "C",
+            "language_family": "c_cpp",
+            "repo_family": "parametergolf",
+            "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+            "target_rank_full_vocab": 1,
+            "target_text": "C",
+            "task_type": "evidence_citation"
+          },
+          {
+            "constrained_choice_top1_label": "C",
+            "full_vocab_top1_text": "B",
+            "language_family": "rust",
+            "repo_family": "tokenizers",
+            "row_id": "stage10938::rust_reviewed::stage10126__tokenizers__tokenizers__rust::evidence_citation::strict_candidate_explicit_ledger_v1",
+            "target_rank_full_vocab": 4,
+            "target_text": "A",
+            "task_type": "evidence_citation"
+          },
+          {
+            "constrained_choice_top1_label": "D",
+            "full_vocab_top1_text": "E",
+            "language_family": "rust",
+            "repo_family": "candle",
+            "row_id": "stage10938::rust_reviewed::stage10413__candle__candle-flash-attn__rust::evidence_citation::strict_candidate_explicit_ledger_v1",
+            "target_rank_full_vocab": 2,
+            "target_text": "A",
+            "task_type": "evidence_citation"
+          },
+          {
+            "constrained_choice_top1_label": "D",
+            "full_vocab_top1_text": "C",
+            "language_family": "c_cpp",
+            "repo_family": "parametergolf",
+            "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1",
+            "target_rank_full_vocab": 6,
+            "target_text": "F",
+            "task_type": "evidence_citation"
+          }
+        ]
+      },
+      "finding": "Several reserved evidence rows still show decoder/retrieval disagreement or poor target rank."
+    }
+  ],
+  "claim_scope": [
+    "Freeze the outcome of the stage11082 semantic evidence support probe.",
+    "Decide whether the semantic evidence support branch is promotable or whether it remains a negative/diagnostic result."
+  ],
+  "created_at_utc": "2026-07-13T03:01:12.190233+00:00",
+  "decision": {
+    "current_contract_reference": [
+      "runs/local/artifacts/stage11073_cleaned_v27_scored_interface_contract_refresh/cleaned_v27_scored_interface_contract_refresh.json",
+      "runs/local/artifacts/stage11074_cleaned_v27_scored_interface_comparison_audit/cleaned_v27_scored_interface_comparison_audit.json"
+    ],
+    "keep_current_standalone_contract": true,
+    "promote_branch": false,
+    "reason": "The branch preserved the cleaned canary but left the reserved residual bank flat at 0.5, so it does not justify changing the current standalone contract.",
+    "verdict": "semantic_support_preserved_canary_but_did_not_move_reserved_evidence_bank"
+  },
+  "input_audit": "runs/local/artifacts/stage11086_semantic_evidence_support_postrun_audit/semantic_evidence_support_postrun_audit.json",
+  "next_best_moves": [
+    "Do not run more semantic evidence support probes with the same scorer head and same ready-lane geometry.",
+    "Move to a richer scorer objective or architecture, such as pairwise candidate-versus-verifier scoring that is consumed directly by encoder_option_retrieval_pairwise or a new evidence-role-specific head.",
+    "Add fresh non-aliased heldout evidence roots, especially outside the current repository_library/parametergolf/tokenizers families, before the next promotable evidence-lane attempt."
+  ],
+  "passed": true,
+  "result_snapshot": {
+    "clean_strict_accuracy": 0.9565217391304348,
+    "clean_validation_accuracy": 0.8695652173913043,
+    "delta_vs_stage11080_base_policy": {
+      "clean_strict_accuracy": 0.0019762845849802257,
+      "clean_validation_accuracy": 0.005928853754940677,
+      "reserved_candidate_accuracy": 0.0
+    },
+    "reserved_candidate_accuracy": 0.5
+  },
+  "stage": 11087,
+  "stage_name": "stage11087_semantic_evidence_support_decision"
+}

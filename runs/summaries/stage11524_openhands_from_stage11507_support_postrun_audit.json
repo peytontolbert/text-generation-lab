@@ -1,0 +1,2149 @@
+{
+  "claim_boundary": [
+    "Diagnostic Web adaptation probe only.",
+    "OpenHands train support shares repo family with OpenHands heldout; OpenHands heldout improvement alone is not promotable.",
+    "Promotion would require preserving canaries and beating Gemma on heldout Web packets, which this audit checks explicitly."
+  ],
+  "comparison_to_stage11507_web_smokes": {
+    "stage11521_llama_product_correct": 0,
+    "stage11522_openhands_product_correct": 0,
+    "stage11524_llama_product_correct": 0,
+    "stage11524_openhands_product_correct": 6
+  },
+  "created_at_utc": "2026-07-13T19:32:26Z",
+  "decision": "openhands_stage11507_support_diagnostic_only",
+  "gates": {
+    "filtered_strict_preserved_22_of_22": false,
+    "filtered_validation_at_least_stage11507_20_of_22": true,
+    "llama_stack_beats_gemma": false,
+    "llama_stack_heldout_improves_over_stage11507_zero": false,
+    "old_canary_strict_preserved_23_of_23": false,
+    "old_validation_at_least_stage11507_21_of_23": true,
+    "openhands_beats_gemma": false,
+    "openhands_heldout_improves_over_stage11507_zero": true
+  },
+  "gemma_existing_artifacts": {
+    "llama_stack": {
+      "accuracy": 0.8333333333333334,
+      "correct": 5,
+      "rows": 6
+    },
+    "openhands": {
+      "accuracy": 1.0,
+      "correct": 18,
+      "rows": 18
+    }
+  },
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11524_openhands_from_stage11507_support_postrun_audit",
+    "summary": "runs/local/artifacts/stage11524_openhands_from_stage11507_support_postrun_audit/openhands_from_stage11507_support_postrun_audit.json"
+  },
+  "passed": true,
+  "product_scorer": "encoder_option_retrieval_evidence_judgment_head",
+  "request": {
+    "claim_boundary": [
+      "Diagnostic Web transfer support probe only.",
+      "OpenHands support rows share repo family with OpenHands heldout, so a win there would not be a broad Web promotion claim.",
+      "Llama Stack remains a separate Web heldout transfer check.",
+      "Gemma outputs are existing artifacts; this request does not use Ollama."
+    ],
+    "command": [
+      "env",
+      "CUDA_VISIBLE_DEVICES=2",
+      "PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True",
+      "TMPDIR=/data/tmp",
+      "TEMP=/data/tmp",
+      "TMP=/data/tmp",
+      "conda",
+      "run",
+      "-n",
+      "trellis",
+      "python",
+      "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+      "--repo-root",
+      "/data/agentkernel-seq2seq-text-lab",
+      "--manifest",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe_request/openhands_from_stage11507_support_probe_manifest.jsonl",
+      "--mode",
+      "bounded_decoder_ce_probe",
+      "--probe-scale",
+      "target_100m",
+      "--implementation",
+      "transformer",
+      "--model-config",
+      "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "--tokenizer-json",
+      "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+      "--tokenizer-config",
+      "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "--tokenizer-hashlock",
+      "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "--execution-authorized-for-recovery-probe",
+      "--max-train-rows",
+      "24",
+      "--max-eval-rows",
+      "22",
+      "--max-strict-rows",
+      "22",
+      "--max-steps",
+      "64",
+      "--batch-size",
+      "3",
+      "--learning-rate",
+      "2e-6",
+      "--max-encoder-tokens",
+      "768",
+      "--max-decoder-tokens",
+      "16",
+      "--decoder-ce-weight",
+      "0.08",
+      "--bounded-choice-aux-weight",
+      "2.5",
+      "--bounded-choice-aux-source",
+      "encoder_option_retrieval_evidence_judgment_head",
+      "--bounded-decoder-train-sampler",
+      "residual_family_balanced",
+      "--structured-aux-weight",
+      "0.0",
+      "--denoise-weight",
+      "0.0",
+      "--eos-loss-weight",
+      "4.0",
+      "--enable-generation-audit",
+      "--max-generation-rows",
+      "8",
+      "--max-generation-tokens",
+      "16",
+      "--require-loss-mask-enforcement-audit",
+      "--allow-runtime-model-save-for-harness",
+      "--runtime-model-save-dir",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe/runtime_model",
+      "--initialize-from-runtime-model",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+      "--preservation-reference-runtime-model",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+      "--bounded-choice-contrast-weight",
+      "0.75",
+      "--bounded-choice-contrast-margin",
+      "0.08",
+      "--preservation-kl-weight",
+      "1.5",
+      "--no-final-checkpoint-export",
+      "--output-dir",
+      "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe/bounded_decoder_probe"
+    ],
+    "created_at_utc": "2026-07-13T19:29:51Z",
+    "decision": "openhands_stage11507_support_probe_ready",
+    "gates": {
+      "all_train_rows_declared_train_support_only": true,
+      "no_train_openhands_or_llama_heldout_root_overlap": true,
+      "no_train_validation_or_strict_root_overlap": true,
+      "strict_rows_present": true,
+      "train_rows_present": true,
+      "validation_rows_present": true
+    },
+    "metrics": {
+      "llama_stack_heldout_rows": 6,
+      "openhands_heldout_rows": 18,
+      "root_overlaps": {
+        "train_vs_llama_heldout": [],
+        "train_vs_openhands_heldout": [],
+        "train_vs_strict": [],
+        "train_vs_validation": []
+      },
+      "strict_rows": 22,
+      "train_roots": 4,
+      "train_rows": 24,
+      "validation_rows": 22
+    },
+    "outputs": {
+      "command": "runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe_request/openhands_from_stage11507_support_probe_command.json",
+      "manifest": "runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe_request/openhands_from_stage11507_support_probe_manifest.jsonl",
+      "probe_dir": "runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe/bounded_decoder_probe",
+      "runtime_model": "runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe/runtime_model",
+      "summary": "runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe_request/openhands_from_stage11507_support_probe_request.json"
+    },
+    "passed": true,
+    "source_artifacts": {
+      "filtered_strict": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+      "filtered_validation": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_validation.jsonl",
+      "init_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+      "llama_heldout": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/web_llama_stack_executed_heldout_rows.jsonl",
+      "openhands_heldout": "runs/local/artifacts/stage11390_openhands_unit_verifier_heldout_candidate_rows/openhands_unit_verifier_heldout_candidate_rows.jsonl",
+      "train": "runs/local/artifacts/stage11394_openhands_support_unit_verifier_train_rows/openhands_support_unit_verifier_train_rows.jsonl"
+    },
+    "stage": 11523,
+    "stage_name": "stage11523_openhands_from_stage11507_support_probe_request"
+  },
+  "runtime_initialization": {
+    "attached_bounded_choice_heads": [
+      "bounded_choice_evidence_judgment_head",
+      "bounded_choice_semantic_candidate_head"
+    ],
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval_evidence_judgment_head",
+      "bounded_choice_contrast_margin": 0.08,
+      "bounded_choice_contrast_weight": 0.75,
+      "bounded_decoder_train_sampler": "residual_family_balanced",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "bounded_decoder_ce_probe_contract",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 280,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe/runtime_model/model_state.pt",
+    "weights_sha256": "73058cf242169ef3c7cc2ca53e10da1a07ef31258106df32d74222ae265784e8"
+  },
+  "runtime_weights_sha256": "73058cf242169ef3c7cc2ca53e10da1a07ef31258106df32d74222ae265784e8",
+  "scored": {
+    "decoder_first_step": {
+      "filtered_strict": {
+        "accuracy": 0.18181818181818182,
+        "correct": 4,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::symptom_localization::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::patch_impact::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::minimal_fix_selection::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 8
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::symptom_localization::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::patch_impact::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::verifier_outcome::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 19
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::minimal_fix_selection::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 17
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 12
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::symptom_localization::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 9
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::patch_impact::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 8
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::minimal_fix_selection::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 8
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 8
+          }
+        ],
+        "rows": 22,
+        "scored_rows": 22,
+        "unscored_rows": 0
+      },
+      "filtered_validation": {
+        "accuracy": 0.18181818181818182,
+        "correct": 4,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::symptom_localization::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::patch_impact::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::verifier_outcome::reviewed_v27_compact",
+            "target": "D",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::minimal_fix_selection::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "D",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::symptom_localization::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::patch_impact::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::minimal_fix_selection::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 10
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::symptom_localization::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::patch_impact::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::minimal_fix_selection::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 20
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "E",
+            "row_id": "stage10126::candle::candle-core::rust::verifier_outcome::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 12
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "E",
+            "row_id": "stage10126::candle::candle-core::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 10
+          }
+        ],
+        "rows": 22,
+        "scored_rows": 22,
+        "unscored_rows": 0
+      },
+      "llama_stack_heldout": {
+        "accuracy": 0.3333333333333333,
+        "correct": 2,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "E",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "E",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "B",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+            "target": "C",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "E",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          }
+        ],
+        "rows": 6,
+        "scored_rows": 6,
+        "unscored_rows": 0
+      },
+      "old_canary_strict": {
+        "accuracy": 0.21739130434782608,
+        "correct": 5,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::symptom_localization::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::patch_impact::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::minimal_fix_selection::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 8
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::symptom_localization::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::patch_impact::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::verifier_outcome::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 19
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::minimal_fix_selection::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 17
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage10894::code_assist::python::verifier_outcome_semantic_transition::strict_candidate_v1",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 12
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::symptom_localization::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 9
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::patch_impact::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 8
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::minimal_fix_selection::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 8
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10126::tokenizers::tokenizers::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 8
+          }
+        ],
+        "rows": 23,
+        "scored_rows": 23,
+        "unscored_rows": 0
+      },
+      "old_canary_validation": {
+        "accuracy": 0.21739130434782608,
+        "correct": 5,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::symptom_localization::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::patch_impact::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::verifier_outcome::reviewed_v27_compact",
+            "target": "D",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::minimal_fix_selection::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "D",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::symptom_localization::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::patch_impact::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::minimal_fix_selection::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 10
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::symptom_localization::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "F",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::patch_impact::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::minimal_fix_selection::reviewed_v27_compact",
+            "target": "A",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 20
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "E",
+            "row_id": "stage10126::candle::candle-core::rust::verifier_outcome::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 12
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "E",
+            "row_id": "stage10126::candle::candle-core::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            "target": "G",
+            "target_rank_full_vocab": 10
+          }
+        ],
+        "rows": 23,
+        "scored_rows": 23,
+        "unscored_rows": 0
+      },
+      "openhands_heldout": {
+        "accuracy": 0.16666666666666666,
+        "correct": 3,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          }
+        ],
+        "rows": 18,
+        "scored_rows": 18,
+        "unscored_rows": 0
+      },
+      "openhands_train_support": {
+        "accuracy": 0.20833333333333334,
+        "correct": 5,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 24,
+        "scored_rows": 24,
+        "unscored_rows": 0
+      }
+    },
+    "encoder_option_retrieval": {
+      "filtered_strict": {
+        "accuracy": 0.8636363636363636,
+        "correct": 19,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 22,
+        "scored_rows": 22,
+        "unscored_rows": 0
+      },
+      "filtered_validation": {
+        "accuracy": 0.9545454545454546,
+        "correct": 21,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 22,
+        "scored_rows": 22,
+        "unscored_rows": 0
+      },
+      "llama_stack_heldout": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "B",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+            "target": "C",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+            "target": "B",
+            "target_rank_full_vocab": 2
+          }
+        ],
+        "rows": 6,
+        "scored_rows": 6,
+        "unscored_rows": 0
+      },
+      "old_canary_strict": {
+        "accuracy": 0.8695652173913043,
+        "correct": 20,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 23,
+        "scored_rows": 23,
+        "unscored_rows": 0
+      },
+      "old_canary_validation": {
+        "accuracy": 0.9565217391304348,
+        "correct": 22,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 23,
+        "scored_rows": 23,
+        "unscored_rows": 0
+      },
+      "openhands_heldout": {
+        "accuracy": 0.3333333333333333,
+        "correct": 6,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11390::openhands_websocket_url::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_websocket_url::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11390::openhands_parse_pr_url::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_parse_pr_url::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11390::openhands_input_validation::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_input_validation::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          }
+        ],
+        "rows": 18,
+        "scored_rows": 18,
+        "unscored_rows": 0
+      },
+      "openhands_train_support": {
+        "accuracy": 0.375,
+        "correct": 9,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_shell_tokenize::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11394::openhands_shell_tokenize::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_format_time_delta::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11394::openhands_format_time_delta::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_extract_next_page::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_vscode_url_helper::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 24,
+        "scored_rows": 24,
+        "unscored_rows": 0
+      }
+    },
+    "encoder_option_retrieval_evidence_judgment_head": {
+      "filtered_strict": {
+        "accuracy": 0.8636363636363636,
+        "correct": 19,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 22,
+        "scored_rows": 22,
+        "unscored_rows": 0
+      },
+      "filtered_validation": {
+        "accuracy": 0.9545454545454546,
+        "correct": 21,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 22,
+        "scored_rows": 22,
+        "unscored_rows": 0
+      },
+      "llama_stack_heldout": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "B",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+            "target": "C",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+            "target": "B",
+            "target_rank_full_vocab": 2
+          }
+        ],
+        "rows": 6,
+        "scored_rows": 6,
+        "unscored_rows": 0
+      },
+      "old_canary_strict": {
+        "accuracy": 0.8695652173913043,
+        "correct": 20,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 23,
+        "scored_rows": 23,
+        "unscored_rows": 0
+      },
+      "old_canary_validation": {
+        "accuracy": 0.9565217391304348,
+        "correct": 22,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 23,
+        "scored_rows": 23,
+        "unscored_rows": 0
+      },
+      "openhands_heldout": {
+        "accuracy": 0.3333333333333333,
+        "correct": 6,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11390::openhands_websocket_url::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_websocket_url::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11390::openhands_parse_pr_url::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_parse_pr_url::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11390::openhands_input_validation::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_input_validation::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          }
+        ],
+        "rows": 18,
+        "scored_rows": 18,
+        "unscored_rows": 0
+      },
+      "openhands_train_support": {
+        "accuracy": 0.375,
+        "correct": 9,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_shell_tokenize::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11394::openhands_shell_tokenize::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_format_time_delta::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11394::openhands_format_time_delta::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_extract_next_page::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_vscode_url_helper::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 24,
+        "scored_rows": 24,
+        "unscored_rows": 0
+      }
+    },
+    "encoder_option_retrieval_semantic_candidate_head": {
+      "filtered_strict": {
+        "accuracy": 0.8636363636363636,
+        "correct": 19,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 22,
+        "scored_rows": 22,
+        "unscored_rows": 0
+      },
+      "filtered_validation": {
+        "accuracy": 0.9545454545454546,
+        "correct": 21,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 22,
+        "scored_rows": 22,
+        "unscored_rows": 0
+      },
+      "llama_stack_heldout": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "B",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::evidence_citation",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::verifier_outcome",
+            "target": "C",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection",
+            "target": "D",
+            "target_rank_full_vocab": 6
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11361::llama_stack_ui_format_message_content::abstention_insufficient_evidence",
+            "target": "B",
+            "target_rank_full_vocab": 2
+          }
+        ],
+        "rows": 6,
+        "scored_rows": 6,
+        "unscored_rows": 0
+      },
+      "old_canary_strict": {
+        "accuracy": 0.8695652173913043,
+        "correct": 20,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_24t23_41_47_019ab83e_b023_7553_a34c_b93e_src_main_js_index_html_440e122a0f_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 23,
+        "scored_rows": 23,
+        "unscored_rows": 0
+      },
+      "old_canary_validation": {
+        "accuracy": 0.9565217391304348,
+        "correct": 22,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "F",
+            "row_id": "stage10119::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_28t14_11_27_019acacd_f95c_7802_9bfe_7232_index_html_f0be60dc44_aug_1500000_8b46e7f662::web_js_ts_html::evidence_citation::reviewed_v27_compact",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 23,
+        "scored_rows": 23,
+        "unscored_rows": 0
+      },
+      "openhands_heldout": {
+        "accuracy": 0.2777777777777778,
+        "correct": 5,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11390::openhands_websocket_url::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_websocket_url::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_websocket_url::alternative_hypothesis_elimination",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_websocket_url::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11390::openhands_parse_pr_url::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_parse_pr_url::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_parse_pr_url::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11390::openhands_input_validation::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11390::openhands_input_validation::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11390::openhands_input_validation::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          }
+        ],
+        "rows": 18,
+        "scored_rows": 18,
+        "unscored_rows": 0
+      },
+      "openhands_train_support": {
+        "accuracy": 0.375,
+        "correct": 9,
+        "coverage": 1.0,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_shell_tokenize::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11394::openhands_shell_tokenize::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_shell_tokenize::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_format_time_delta::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 3
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "A",
+            "row_id": "stage11394::openhands_format_time_delta::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_format_time_delta::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_extract_next_page::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "A",
+            "row_id": "stage11394::openhands_extract_next_page::minimal_fix_selection",
+            "target": "B",
+            "target_rank_full_vocab": 4
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_extract_next_page::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::symptom_localization",
+            "target": "B",
+            "target_rank_full_vocab": 5
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "D",
+            "row_id": "stage11394::openhands_vscode_url_helper::verifier_outcome",
+            "target": "A",
+            "target_rank_full_vocab": 2
+          },
+          {
+            "full_vocab_top1_text": "E",
+            "predicted": "C",
+            "row_id": "stage11394::openhands_vscode_url_helper::abstention_insufficient_evidence",
+            "target": "A",
+            "target_rank_full_vocab": 4
+          }
+        ],
+        "rows": 24,
+        "scored_rows": 24,
+        "unscored_rows": 0
+      }
+    }
+  },
+  "source_artifacts": {
+    "filtered_strict": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "filtered_validation": "runs/local/artifacts/stage11442_targeted_residual_role_support_package/agentkernel_lite_encdec_validation.jsonl",
+    "llama_gemma": "runs/local/artifacts/stage11363_web_llama_stack_same_manifest_gemma_comparison/web_llama_stack_gemma_rows.jsonl",
+    "llama_heldout": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/web_llama_stack_executed_heldout_rows.jsonl",
+    "old_strict": "runs/local/artifacts/stage11429_selected_test_rust_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "old_validation": "runs/local/artifacts/stage11429_selected_test_rust_support_package/agentkernel_lite_encdec_validation.jsonl",
+    "openhands_gemma": "runs/local/artifacts/stage11392_openhands_web_same_manifest_gemma_comparison/openhands_web_gemma_rows.jsonl",
+    "openhands_heldout": "runs/local/artifacts/stage11390_openhands_unit_verifier_heldout_candidate_rows/openhands_unit_verifier_heldout_candidate_rows.jsonl",
+    "openhands_train": "runs/local/artifacts/stage11394_openhands_support_unit_verifier_train_rows/openhands_support_unit_verifier_train_rows.jsonl",
+    "request": "runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe_request/openhands_from_stage11507_support_probe_request.json",
+    "runtime_bundle": "runs/local/artifacts/stage11523_openhands_from_stage11507_support_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11524,
+  "stage_name": "stage11524_openhands_from_stage11507_support_postrun_audit"
+}

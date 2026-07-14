@@ -1,0 +1,81 @@
+{
+  "contrast_training_telemetry": {
+    "contrast_applicable_rows_seen": 384,
+    "contrast_margin_satisfied_rate": 0.0,
+    "contrast_margin_satisfied_rows_seen": 0,
+    "loss_steps": 96,
+    "sampler": "web_task_family_balanced"
+  },
+  "created_at_utc": "2026-07-13T22:27:16Z",
+  "decision": "reject_stage11586_keep_stage11507_selected_frontier",
+  "next_recommended_work": [
+    "Do not run another same-objective Web support probe.",
+    "Treat Stage11580 verifier-attached rows as useful material but not safe direct train targets under current row-wise CE/aux geometry.",
+    "Next useful code change is a same-root/listwise candidate objective or a row rebuild where successor strict targets are answerable under the selected scorer before training.",
+    "Selected frontier remains Stage11507 + encoder_option_retrieval_evidence_judgment_head."
+  ],
+  "postrun_compact_results": {
+    "filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "filtered_validation": {
+      "accuracy": 0.7727272727272727,
+      "correct": 17,
+      "rows": 22
+    },
+    "old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23
+    },
+    "old_canary_validation": {
+      "accuracy": 0.782608695652174,
+      "correct": 18,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.6,
+      "correct": 6,
+      "rows": 10
+    },
+    "web_heldout": {
+      "accuracy": 0.4393939393939394,
+      "correct": 29,
+      "rows": 66
+    },
+    "web_successor_strict": {
+      "accuracy": 0.0,
+      "correct": 0,
+      "rows": 36
+    }
+  },
+  "postrun_gates": {
+    "filtered_strict_22_of_22": true,
+    "filtered_validation_at_least_20_of_22": false,
+    "old_canary_strict_23_of_23": true,
+    "old_canary_validation_at_least_21_of_23": false,
+    "residual_at_least_7_of_10": false,
+    "web_heldout_beats_stage11571_42_of_66": false,
+    "web_successor_strict_full_coverage": true
+  },
+  "readiness_decision": "task_aware_contrast_ready",
+  "rejected_runtime": "runs/local/artifacts/stage11586_web_task_aware_contrast_probe/runtime_model/runtime_model_bundle.json",
+  "rejected_runtime_weights_sha256": "ea7e421b57e2fae567a7e7a83f6e69471f8e4f8806c6cc20e3b33198c4c66311",
+  "request_decision": "web_task_aware_contrast_probe_ready",
+  "selected_frontier_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+  "source_artifacts": {
+    "loss_by_step": "runs/local/artifacts/stage11586_web_task_aware_contrast_probe/bounded_decoder_probe/loss_by_step.jsonl",
+    "postrun": "runs/summaries/stage11587_web_task_aware_contrast_postrun_audit.json",
+    "readiness": "runs/summaries/stage11585_web_task_aware_contrast_readiness_audit.json",
+    "request": "runs/summaries/stage11586_web_task_aware_contrast_probe_request.json"
+  },
+  "stage": 11588,
+  "stage_name": "stage11588_web_task_aware_contrast_probe_decision",
+  "why_rejected": [
+    "Stage11587 failed promotion gates despite task-aware contrast coverage.",
+    "Filtered strict and old canary strict were preserved, but validation, residual bank, web heldout, and successor strict all failed.",
+    "Contrast was active during training, so the failure is not missing contrast coverage; it is objective/row-geometry mismatch for verifier-attached Web rows."
+  ]
+}

@@ -204,6 +204,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--phase3-max-steps", type=_positive_int, default=0)
     parser.add_argument("--phase3-max-decoder-tokens", type=_positive_int, default=0)
     parser.add_argument("--decoder-ce-weight", type=float, default=0.0)
+    parser.add_argument("--bounded-choice-aux-weight", type=float, default=0.0, help="Optional auxiliary CE over allowed opaque-choice labels for bounded maintainer probes.")
+    parser.add_argument("--bounded-choice-aux-source", choices=["decoder_first_step", "encoder_pooled", "encoder_pooled_untied_head", "encoder_option_retrieval", "encoder_option_retrieval_conditioned", "encoder_option_retrieval_verifier_conditioned", "encoder_option_retrieval_evidence_role_map", "encoder_option_retrieval_dynamic_productized", "encoder_option_retrieval_role_bias", "encoder_option_retrieval_pairwise", "encoder_option_retrieval_evidence_pairwise_gated", "encoder_option_retrieval_evidence_ledger_head", "encoder_option_retrieval_evidence_role_head", "encoder_option_retrieval_evidence_judgment_head", "encoder_option_retrieval_evidence_conditioned_gated", "encoder_option_retrieval_evidence_fact_text", "encoder_option_retrieval_evidence_fact_pairwise", "encoder_option_retrieval_semantic_candidate_head", "encoder_option_retrieval_web_task_candidate_head", "encoder_option_retrieval_transition_candidate_head", "encoder_option_retrieval_transition_status_head", "encoder_option_retrieval_semantic_plus_transition_status_head", "encoder_option_retrieval_semantic_plus_transition_candidate_head"], default="decoder_first_step", help="Source of logits for bounded maintainer opaque-choice auxiliary loss.")
+    parser.add_argument("--bounded-choice-contrast-weight", type=float, default=0.0, help="Optional contrastive margin loss over audited bounded-choice confusions such as candidate_change_surface versus verifier_and_test_constraint.")
+    parser.add_argument("--bounded-choice-contrast-margin", type=float, default=0.05, help="Margin used by the optional bounded-choice contrastive loss.")
+    parser.add_argument("--bounded-choice-verifier-value-listwise-weight", type=float, default=0.0, help="Optional CE over same-role verifier candidate values such as PASS/FAIL/NOT_EXERCISED within verifier_outcome rows.")
+    parser.add_argument("--bounded-choice-same-role-listwise-weight", type=float, default=0.0, help="Optional CE over options sharing the target semantic role, for same-role candidate identity learning across task families.")
+    parser.add_argument("--bounded-choice-root-group-aux-weight", type=float, default=0.0, help="Optional bounded-choice CE averaged by rollout/root group before averaging across groups, for grouped maintainer-root training.")
+    parser.add_argument("--bounded-decoder-train-sampler", choices=("cyclic", "task_balanced", "residual_family_balanced", "web_task_family_balanced", "web_gap_root_balanced", "web_gap_same_root_grouped"), default="cyclic", help="Row sampler used inside bounded decoder CE probes. residual_family_balanced oversamples evidence_citation and verifier_outcome lanes; web_task_family_balanced cycles Web task families; web_gap_root_balanced cycles root/rollout groups one row at a time; web_gap_same_root_grouped packs same-root rows into each batch for listwise pressure.")
+    parser.add_argument("--bounded-choice-train-head-only", action="store_true", help="Freeze the base model and train only the selected bounded-choice scorer head.")
     parser.add_argument("--eos-loss-weight", type=float, default=1.0, help="Optional EOS token CE multiplier for bounded decoder stabilization probes.")
     parser.add_argument("--structured-aux-weight", type=float, default=0.0)
     parser.add_argument("--denoise-weight", type=float, default=0.0)
@@ -213,6 +222,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--no-final-checkpoint-export", action="store_true")
     parser.add_argument("--cleanup-checkpoints-after-probe", action="store_true")
     parser.add_argument("--skip-final-model-save", type=int, choices=(0, 1), default=1)
+    parser.add_argument("--allow-runtime-model-save-for-harness", action="store_true", help="Recovery-only escape hatch: permit writing a local runtime model bundle for harness parity while keeping final checkpoint export disabled.")
+    parser.add_argument("--runtime-model-save-dir", type=Path, default=None, help="Optional output directory for a recovery-only runtime model bundle.")
+    parser.add_argument("--initialize-from-runtime-model", type=Path, default=None, help="Optional saved runtime model bundle or model_state.pt used to initialize bounded decoder CE probes before optimization.")
+    parser.add_argument("--preservation-reference-runtime-model", type=Path, default=None, help="Optional frozen runtime model bundle used as a KL preservation reference during bounded decoder CE probes.")
+    parser.add_argument("--preservation-kl-weight", type=float, default=0.0, help="Optional KL penalty weight that preserves decoder behavior on non-exempt bounded decoder rows.")
+    parser.add_argument("--preservation-exempt-flag", default="preservation_exempt", help="Row field whose truthy value exempts a bounded decoder train row from preservation KL.")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--run-id", default="bounded_decoder_ce_probe_contract")
     parser.add_argument("--batch-size", type=_positive_int, default=2)
@@ -549,12 +564,28 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
     if not implementation_guard["allowed_for_recovered_100m_target"]:
         errors.extend(str(error) for error in implementation_guard["errors"])
     errors.extend(_validate_target_100m_files(args))
-    if args.decoder_ce_weight <= 0:
-        errors.append("bounded decoder CE probe requires --decoder-ce-weight > 0")
+    if args.decoder_ce_weight < 0:
+        errors.append("bounded decoder CE probe requires --decoder-ce-weight >= 0")
+    if args.decoder_ce_weight == 0 and args.bounded_choice_aux_weight <= 0 and args.bounded_choice_root_group_aux_weight <= 0:
+        errors.append("bounded decoder CE probe requires decoder CE, bounded choice aux, or root-group bounded choice aux weight")
     if args.eos_loss_weight < 1.0:
         errors.append("bounded decoder CE probe requires --eos-loss-weight >= 1.0")
     if args.structured_aux_weight != 0:
         errors.append("bounded decoder CE probe requires --structured-aux-weight 0")
+    if args.bounded_choice_aux_weight < 0:
+        errors.append("bounded decoder CE probe requires --bounded-choice-aux-weight >= 0")
+    if args.bounded_choice_contrast_weight < 0:
+        errors.append("bounded decoder CE probe requires --bounded-choice-contrast-weight >= 0")
+    if args.bounded_choice_contrast_margin < 0:
+        errors.append("bounded decoder CE probe requires --bounded-choice-contrast-margin >= 0")
+    if args.bounded_choice_verifier_value_listwise_weight < 0:
+        errors.append("bounded decoder CE probe requires --bounded-choice-verifier-value-listwise-weight >= 0")
+    if args.bounded_choice_same_role_listwise_weight < 0:
+        errors.append("bounded decoder CE probe requires --bounded-choice-same-role-listwise-weight >= 0")
+    if args.bounded_choice_root_group_aux_weight < 0:
+        errors.append("bounded decoder CE probe requires --bounded-choice-root-group-aux-weight >= 0")
+    if args.bounded_choice_aux_source not in {"decoder_first_step", "encoder_pooled", "encoder_pooled_untied_head", "encoder_option_retrieval", "encoder_option_retrieval_conditioned", "encoder_option_retrieval_verifier_conditioned", "encoder_option_retrieval_evidence_role_map", "encoder_option_retrieval_dynamic_productized", "encoder_option_retrieval_role_bias", "encoder_option_retrieval_pairwise", "encoder_option_retrieval_evidence_pairwise_gated", "encoder_option_retrieval_evidence_ledger_head", "encoder_option_retrieval_evidence_role_head", "encoder_option_retrieval_evidence_judgment_head", "encoder_option_retrieval_evidence_conditioned_gated", "encoder_option_retrieval_evidence_fact_text", "encoder_option_retrieval_evidence_fact_pairwise", "encoder_option_retrieval_semantic_candidate_head", "encoder_option_retrieval_web_task_candidate_head", "encoder_option_retrieval_transition_candidate_head", "encoder_option_retrieval_transition_status_head", "encoder_option_retrieval_semantic_plus_transition_status_head", "encoder_option_retrieval_semantic_plus_transition_candidate_head"}:
+        errors.append("bounded decoder CE probe requires supported --bounded-choice-aux-source")
     if args.denoise_weight != 0:
         errors.append("bounded decoder CE probe requires --denoise-weight 0")
     if not args.require_loss_mask_enforcement_audit:
@@ -563,6 +594,12 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         errors.append("--no-final-checkpoint-export is required")
     if args.skip_final_model_save != 1:
         errors.append("--skip-final-model-save 1 is required")
+    if args.runtime_model_save_dir is not None and not args.allow_runtime_model_save_for_harness:
+        errors.append("--runtime-model-save-dir requires --allow-runtime-model-save-for-harness")
+    if args.initialize_from_runtime_model is not None and args.mode != "bounded_decoder_ce_probe":
+        errors.append("--initialize-from-runtime-model is only supported for bounded_decoder_ce_probe")
+    if args.initialize_from_runtime_model is not None and not Path(args.initialize_from_runtime_model).exists():
+        errors.append("--initialize-from-runtime-model path does not exist")
     errors.extend(validate_generation_prefix_contract(args, rows))
     if getattr(args, "generation_repetition_guard", False) and not args.enable_generation_audit:
         errors.append("--generation-repetition-guard requires --enable-generation-audit")
@@ -627,6 +664,9 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "unsafe_loss_row_examples": unsafe_loss_rows[:50],
         "weights": {
             "decoder_ce_weight": args.decoder_ce_weight,
+            "bounded_choice_aux_weight": args.bounded_choice_aux_weight,
+            "bounded_choice_contrast_weight": args.bounded_choice_contrast_weight,
+            "bounded_choice_contrast_margin": args.bounded_choice_contrast_margin,
             "eos_loss_weight": args.eos_loss_weight,
             "structured_aux_weight": args.structured_aux_weight,
             "denoise_weight": args.denoise_weight,
@@ -667,6 +707,10 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         "generation_audit_splits": getattr(args, "generation_audit_splits", "eval,strict_eval"),
         "generation_repetition_guard": bool(getattr(args, "generation_repetition_guard", False)),
         "generation_repetition_guard_top_k": int(getattr(args, "generation_repetition_guard_top_k", 16)),
+        "runtime_model_save_requested": args.runtime_model_save_dir is not None,
+        "runtime_model_save_authorized": bool(args.allow_runtime_model_save_for_harness),
+        "runtime_model_save_dir": str(args.runtime_model_save_dir) if args.runtime_model_save_dir else None,
+        "initialize_from_runtime_model": str(args.initialize_from_runtime_model) if args.initialize_from_runtime_model else None,
         "model_execution_attempted": False,
     }
 
@@ -1422,6 +1466,9 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             generation_audit_splits=args.generation_audit_splits,
             generation_repetition_guard=args.generation_repetition_guard,
             generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
+            decoder_ce_weight=args.decoder_ce_weight,
+            bounded_choice_aux_weight=args.bounded_choice_aux_weight,
+            bounded_choice_aux_source=args.bounded_choice_aux_source,
         )
     elif args.mode == "two_phase_structured_reconnect_probe":
         if args.phase2_manifest is None:
@@ -1499,6 +1546,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             generation_audit_splits=args.generation_audit_splits,
             generation_repetition_guard=args.generation_repetition_guard,
             generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
+            bounded_choice_aux_weight=args.bounded_choice_aux_weight,
         )
     elif args.mode == "bounded_decoder_ce_probe":
         result = run_bounded_decoder_ce_probe(
@@ -1511,6 +1559,39 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             generation_audit_splits=args.generation_audit_splits,
             generation_repetition_guard=args.generation_repetition_guard,
             generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
+            decoder_ce_weight=args.decoder_ce_weight,
+            bounded_choice_aux_weight=args.bounded_choice_aux_weight,
+            bounded_choice_aux_source=args.bounded_choice_aux_source,
+            bounded_choice_contrast_weight=args.bounded_choice_contrast_weight,
+            bounded_choice_contrast_margin=args.bounded_choice_contrast_margin,
+            bounded_choice_verifier_value_listwise_weight=args.bounded_choice_verifier_value_listwise_weight,
+            bounded_choice_same_role_listwise_weight=args.bounded_choice_same_role_listwise_weight,
+            bounded_choice_root_group_aux_weight=args.bounded_choice_root_group_aux_weight,
+            bounded_decoder_train_sampler=args.bounded_decoder_train_sampler,
+            bounded_choice_train_head_only=args.bounded_choice_train_head_only,
+            initialize_from_runtime_model=args.initialize_from_runtime_model,
+            preservation_reference_runtime_model=args.preservation_reference_runtime_model,
+            preservation_kl_weight=args.preservation_kl_weight,
+            preservation_exempt_flag=args.preservation_exempt_flag,
+            runtime_model_save_dir=args.runtime_model_save_dir,
+            runtime_model_save_metadata={
+                "model_config": str(args.model_config) if args.model_config else None,
+                "tokenizer_json": str(args.tokenizer_json) if args.tokenizer_json else None,
+                "tokenizer_config": str(args.tokenizer_config) if args.tokenizer_config else None,
+                "tokenizer_hashlock": str(args.tokenizer_hashlock) if args.tokenizer_hashlock else None,
+                "run_id": str(args.run_id),
+                "mode": str(args.mode),
+                "probe_scale": str(args.probe_scale),
+                "implementation": str(args.implementation),
+                "bounded_choice_aux_source": str(args.bounded_choice_aux_source),
+                "bounded_choice_contrast_weight": float(args.bounded_choice_contrast_weight),
+                "bounded_choice_contrast_margin": float(args.bounded_choice_contrast_margin),
+                "bounded_choice_verifier_value_listwise_weight": float(args.bounded_choice_verifier_value_listwise_weight),
+                "bounded_choice_same_role_listwise_weight": float(args.bounded_choice_same_role_listwise_weight),
+                "bounded_choice_root_group_aux_weight": float(args.bounded_choice_root_group_aux_weight),
+                "bounded_decoder_train_sampler": str(args.bounded_decoder_train_sampler),
+                "bounded_choice_train_head_only": bool(args.bounded_choice_train_head_only),
+            },
         )
     elif args.mode == "denoise_repair_probe":
         result = run_denoise_repair_probe(
@@ -1573,6 +1654,12 @@ def main() -> None:
         args.tokenizer_config = (args.repo_root / args.tokenizer_config).resolve()
     if getattr(args, "tokenizer_hashlock", None) is not None and args.tokenizer_hashlock is not None and not args.tokenizer_hashlock.is_absolute():
         args.tokenizer_hashlock = (args.repo_root / args.tokenizer_hashlock).resolve()
+    if getattr(args, "runtime_model_save_dir", None) is not None and args.runtime_model_save_dir is not None and not args.runtime_model_save_dir.is_absolute():
+        args.runtime_model_save_dir = (args.repo_root / args.runtime_model_save_dir).resolve()
+    if getattr(args, "initialize_from_runtime_model", None) is not None and args.initialize_from_runtime_model is not None and not args.initialize_from_runtime_model.is_absolute():
+        args.initialize_from_runtime_model = (args.repo_root / args.initialize_from_runtime_model).resolve()
+    if getattr(args, "preservation_reference_runtime_model", None) is not None and args.preservation_reference_runtime_model is not None and not args.preservation_reference_runtime_model.is_absolute():
+        args.preservation_reference_runtime_model = (args.repo_root / args.preservation_reference_runtime_model).resolve()
     rows = load_manifest(args.manifest)
     card = validate_contract(args, rows)
     emit_contract_artifacts(args, card)

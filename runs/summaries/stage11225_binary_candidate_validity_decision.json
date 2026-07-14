@@ -1,0 +1,33 @@
+{
+  "created_at_utc": "2026-07-13T08:46:18Z",
+  "decision": "reject_current_binary_candidate_validity_training_interface",
+  "interpretation": [
+    "The 100M scorer achieves high row accuracy by predicting the negative class for every binary candidate.",
+    "Stage11220 binary support did not change the baseline behavior on this diagnostic eval.",
+    "Gemma is lower overall but recognizes decisive positives, so the 100M's binary interface is not yet a credible evidence-validity capability.",
+    "Do not scale this binary formulation without class-balanced positive training and a scorer objective that rewards positive evidence recognition."
+  ],
+  "key_result": {
+    "base_100m_overall": 0.7857142857142857,
+    "base_100m_positive_decisive_accuracy": 0.0,
+    "binary_support_100m_overall": 0.7857142857142857,
+    "binary_support_100m_positive_decisive_accuracy": 0.0,
+    "gemma12b_overall": 0.6190476190476191,
+    "gemma12b_positive_decisive_accuracy": 0.8888888888888888
+  },
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11225_binary_candidate_validity_decision/binary_candidate_validity_decision.json"
+  },
+  "passed": true,
+  "recommended_next_work": [
+    "Build root-disjoint binary candidate-validity rows with balanced positives/negatives per batch.",
+    "Train/evaluate with positive recall and root-solved metrics as hard gates, not overall accuracy alone.",
+    "Keep the clean strict 22/22 canary and residual 5/10 bank as regression gates.",
+    "Do not promote Stage11220 or the current binary candidate-validity interface as a frontier gain."
+  ],
+  "source_artifacts": {
+    "comparison": "runs/local/artifacts/stage11224_binary_candidate_validity_same_manifest_comparison/binary_candidate_validity_same_manifest_comparison.json"
+  },
+  "stage": 11225,
+  "stage_name": "stage11225_binary_candidate_validity_decision"
+}

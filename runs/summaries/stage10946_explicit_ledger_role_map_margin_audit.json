@@ -1,0 +1,137 @@
+{
+  "claim_scope": [
+    "Measure raw retrieval versus role-mapped retrieval margins on the explicit-ledger 3-row blocker slice.",
+    "Determine whether any simple gate can flip the two verifier-ledger positives without also flipping the candidate-surface control."
+  ],
+  "created_at_utc": "2026-07-12T20:40:21Z",
+  "findings": [
+    "Role-mapped retrieval flips all three explicit-ledger rows toward verifier_and_test_constraint, including the agentkernel candidate-surface control.",
+    "The raw candidate-versus-verifier margins on the two positives and the one control are too similar for a clean threshold gate on this slice.",
+    "This makes the explicit-ledger blocker look like a scorer/objective problem rather than a missing-prompt or simple-interface problem."
+  ],
+  "passed": true,
+  "rows": [
+    {
+      "gold_value": "verifier_and_test_constraint",
+      "language_family": "python",
+      "raw_margin_top1_minus_top2": 0.078682541847229,
+      "raw_top2": [
+        {
+          "label": "A",
+          "logit": 0.9920182824134827,
+          "value": "candidate_change_surface"
+        },
+        {
+          "label": "F",
+          "logit": 0.9133357405662537,
+          "value": "verifier_and_test_constraint"
+        }
+      ],
+      "role_top2": [
+        {
+          "label": "F",
+          "logit": 0.9442874193191528,
+          "value": "verifier_and_test_constraint"
+        },
+        {
+          "label": "B",
+          "logit": 0.8697912693023682,
+          "value": "nearby_definition_or_usage_context"
+        }
+      ],
+      "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "selected_test_anchor": true,
+      "target_text": "F",
+      "verifier_anchor": true
+    },
+    {
+      "gold_value": "verifier_and_test_constraint",
+      "language_family": "c_cpp",
+      "raw_margin_top1_minus_top2": 0.08228373527526855,
+      "raw_top2": [
+        {
+          "label": "A",
+          "logit": 0.9837627410888672,
+          "value": "candidate_change_surface"
+        },
+        {
+          "label": "C",
+          "logit": 0.9014790058135986,
+          "value": "verifier_and_test_constraint"
+        }
+      ],
+      "role_top2": [
+        {
+          "label": "C",
+          "logit": 0.9386662244796753,
+          "value": "verifier_and_test_constraint"
+        },
+        {
+          "label": "D",
+          "logit": 0.8781464099884033,
+          "value": "nearby_definition_or_usage_context"
+        }
+      ],
+      "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "selected_test_anchor": true,
+      "target_text": "C",
+      "verifier_anchor": true
+    },
+    {
+      "gold_value": "candidate_change_surface",
+      "language_family": "c_cpp",
+      "raw_margin_top1_minus_top2": 0.08106249570846558,
+      "raw_top2": [
+        {
+          "label": "E",
+          "logit": 0.9898123145103455,
+          "value": "candidate_change_surface"
+        },
+        {
+          "label": "B",
+          "logit": 0.9087498188018799,
+          "value": "verifier_and_test_constraint"
+        }
+      ],
+      "role_top2": [
+        {
+          "label": "B",
+          "logit": 0.9400315284729004,
+          "value": "verifier_and_test_constraint"
+        },
+        {
+          "label": "C",
+          "logit": 0.8752208352088928,
+          "value": "nearby_definition_or_usage_context"
+        }
+      ],
+      "row_id": "stage10938::cpp_agentkernel_counterfamily_evidence_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "selected_test_anchor": true,
+      "target_text": "E",
+      "verifier_anchor": true
+    }
+  ],
+  "runtime_bundle": "runs/local/artifacts/stage10943_scorer_margin_support_probe/runtime_model/runtime_model_bundle.json",
+  "runtime_initialization": {
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10943_scorer_margin_support_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "stage10943_scorer_margin_support_probe",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10943_scorer_margin_support_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 274,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10943_scorer_margin_support_probe/runtime_model/model_state.pt",
+    "weights_sha256": "3ecb8c67e90315c7e0738a8dd1e013e7c6bb7c8025f41fe73eb15b28b5e6bfc8"
+  },
+  "stage": 10946,
+  "stage_name": "stage10946_explicit_ledger_role_map_margin_audit"
+}

@@ -1,0 +1,180 @@
+{
+  "claim_scope": [
+    "Tokenizer-level target reachability audit for the leak-clean manifest and cleaned strict heldout slice.",
+    "Compares the old 256-token decoder cap against the corrected 1024-token cap.",
+    "This is a structural audit, not a model-quality result."
+  ],
+  "created_at_utc": "2026-07-12T00:14:21Z",
+  "decoder_caps": {
+    "stage10530_max_decoder_tokens": 256,
+    "stage10531_max_decoder_tokens": 1024
+  },
+  "next_best_step": "Use stage10531 rather than stage10530 for any heldout comparison claim, because the corrected decoder cap makes all strict targets reachable. After the run finishes, execute stage10532 and stage10533.",
+  "passed": true,
+  "stage": 10534,
+  "stage_name": "stage10534_target_reachability_audit",
+  "strict_reachability": {
+    "by_target_subtype": {
+      "stage10530_cap": {
+        "decisive_evidence": {
+          "gt_cap": 17,
+          "max": 682,
+          "p50": 409,
+          "p90": 515,
+          "p95": 534,
+          "rows": 18
+        },
+        "retrieve_answer_abstain": {
+          "gt_cap": 0,
+          "max": 26,
+          "p50": 26,
+          "p90": 26,
+          "p95": 26,
+          "rows": 18
+        }
+      },
+      "stage10531_cap": {
+        "decisive_evidence": {
+          "gt_cap": 0,
+          "max": 682,
+          "p50": 409,
+          "p90": 515,
+          "p95": 534,
+          "rows": 18
+        },
+        "retrieve_answer_abstain": {
+          "gt_cap": 0,
+          "max": 26,
+          "p50": 26,
+          "p90": 26,
+          "p95": 26,
+          "rows": 18
+        }
+      }
+    },
+    "rows": 36,
+    "rows_over_stage10530_cap": 17,
+    "rows_over_stage10531_cap": 0
+  },
+  "train_reachability": {
+    "by_target_subtype": {
+      "stage10530_cap": {
+        "abstain": {
+          "gt_cap": 0,
+          "max": 23,
+          "p50": 23,
+          "p90": 23,
+          "p95": 23,
+          "rows": 2
+        },
+        "decisive_evidence": {
+          "gt_cap": 708,
+          "max": 822,
+          "p50": 405,
+          "p90": 596,
+          "p95": 657,
+          "rows": 711
+        },
+        "evidence_chain": {
+          "gt_cap": 0,
+          "max": 109,
+          "p50": 96,
+          "p90": 96,
+          "p95": 96,
+          "rows": 2
+        },
+        "next_action": {
+          "gt_cap": 0,
+          "max": 80,
+          "p50": 72,
+          "p90": 76,
+          "p95": 77,
+          "rows": 55
+        },
+        "patch_sketch": {
+          "gt_cap": 54,
+          "max": 825,
+          "p50": 455,
+          "p90": 619,
+          "p95": 710,
+          "rows": 55
+        },
+        "repair_intent": {
+          "gt_cap": 55,
+          "max": 1626,
+          "p50": 908,
+          "p90": 1250,
+          "p95": 1426,
+          "rows": 57
+        },
+        "retrieve_answer_abstain": {
+          "gt_cap": 0,
+          "max": 26,
+          "p50": 26,
+          "p90": 26,
+          "p95": 26,
+          "rows": 711
+        }
+      },
+      "stage10531_cap": {
+        "abstain": {
+          "gt_cap": 0,
+          "max": 23,
+          "p50": 23,
+          "p90": 23,
+          "p95": 23,
+          "rows": 2
+        },
+        "decisive_evidence": {
+          "gt_cap": 0,
+          "max": 822,
+          "p50": 405,
+          "p90": 596,
+          "p95": 657,
+          "rows": 711
+        },
+        "evidence_chain": {
+          "gt_cap": 0,
+          "max": 109,
+          "p50": 96,
+          "p90": 96,
+          "p95": 96,
+          "rows": 2
+        },
+        "next_action": {
+          "gt_cap": 0,
+          "max": 80,
+          "p50": 72,
+          "p90": 76,
+          "p95": 77,
+          "rows": 55
+        },
+        "patch_sketch": {
+          "gt_cap": 0,
+          "max": 825,
+          "p50": 455,
+          "p90": 619,
+          "p95": 710,
+          "rows": 55
+        },
+        "repair_intent": {
+          "gt_cap": 17,
+          "max": 1626,
+          "p50": 908,
+          "p90": 1250,
+          "p95": 1426,
+          "rows": 57
+        },
+        "retrieve_answer_abstain": {
+          "gt_cap": 0,
+          "max": 26,
+          "p50": 26,
+          "p90": 26,
+          "p95": 26,
+          "rows": 711
+        }
+      }
+    },
+    "rows": 1593
+  }
+}

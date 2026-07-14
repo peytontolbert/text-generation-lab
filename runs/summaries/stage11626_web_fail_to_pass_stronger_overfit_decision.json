@@ -1,0 +1,56 @@
+{
+  "claim_boundary": [
+    "Stage11625 is non-promotable by design.",
+    "The exact repaired rows are used for both train and eval.",
+    "No broad Web, harness, or Gemma comparison claim is supported by this diagnostic."
+  ],
+  "comparison": {
+    "stage11507_selected_repaired_rows": "6/36",
+    "stage11623_head_only_256_steps": "24/36",
+    "stage11625_head_only_1024_steps": "36/36"
+  },
+  "created_at_utc": "2026-07-13T23:50:42Z",
+  "decision": "head_capacity_confirmed_no_frontier_promotion",
+  "gates": {
+    "fully_fits_repaired_rows": true,
+    "head_only_non_promotable": true,
+    "improves_over_stage11623": true,
+    "same_row_eval_measured": true,
+    "strict_eval_disabled": true
+  },
+  "interpretation": [
+    "The repaired controlled FAIL_TO_PASS row geometry is representable by the Web task-candidate head.",
+    "Stage11623 underfit at 24/36; Stage11625 reaches 36/36 by increasing optimization strength.",
+    "This supports using repaired geometry and stronger head optimization in a future guarded package, but only with preservation and heldout gates.",
+    "It does not prove Web heldout generalization and does not change the selected frontier."
+  ],
+  "next_actions": [
+    "Build a guarded Web package using repaired FAIL_TO_PASS geometry plus existing heldout/protected sets, but do not use same-row overfit settings directly.",
+    "Materialize additional Llama controlled FAIL_TO_PASS roots before a serious promotable Web run; current repaired roots are OpenHands-only.",
+    "If running a guarded probe before more materialization, use lower LR plus preservation KL and audit Web heldout, residual, filtered strict, and old canary.",
+    "Keep Stage11507 selected until a run preserves residual 7/10 and improves Web heldout above 35/66."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11626_web_fail_to_pass_stronger_overfit_decision/web_fail_to_pass_stronger_overfit_decision.json"
+  },
+  "selected_frontier_remains": {
+    "reason": "Stage11625 is a same-row head-only overfit diagnostic, not a heldout-preserving frontier run.",
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head"
+  },
+  "source_artifacts": {
+    "previous_decision": "runs/local/artifacts/stage11624_web_fail_to_pass_overfit_decision/web_fail_to_pass_overfit_decision.json",
+    "probe_result": "runs/local/artifacts/stage11625_web_fail_to_pass_stronger_head_overfit/bounded_decoder_probe/execution_result.json",
+    "request": "runs/local/artifacts/stage11625_web_fail_to_pass_stronger_head_overfit_request/web_fail_to_pass_stronger_head_overfit_request.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11626,
+  "stage11625_same_row_eval": {
+    "accuracy": 1.0,
+    "correct": 36,
+    "rows": 36,
+    "runtime": "runs/local/artifacts/stage11625_web_fail_to_pass_stronger_head_overfit/runtime_model/runtime_model_bundle.json",
+    "weights_sha256": "2b011c75e0b66542b5a6fc7d58527e8a0d8427f8ad81d534bca35f25949b6bdf"
+  },
+  "stage_name": "stage11626_web_fail_to_pass_stronger_overfit_decision"
+}

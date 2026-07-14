@@ -1,0 +1,55 @@
+{
+  "baselines_on_repaired_rows": {
+    "stage11507_decoder_first_step": 17,
+    "stage11507_selected_evidence_judgment_head": 6,
+    "stage11617_rejected_web_task_candidate_head": 9
+  },
+  "claim_boundary": [
+    "Stage11623 is an overfit diagnostic only.",
+    "The repaired controlled rows remain train-support only, not strict eval.",
+    "No model frontier promotion is authorized by this stage."
+  ],
+  "created_at_utc": "2026-07-13T23:44:38Z",
+  "decision": "diagnostic_success_partial_head_capacity_but_no_promotion",
+  "gates": {
+    "does_not_fully_fit_repaired_rows": true,
+    "improves_over_selected_retrieval_on_repaired_rows": true,
+    "improves_over_stage11617_web_head_on_repaired_rows": true,
+    "non_promotable_by_design": true,
+    "same_row_eval_measured": true
+  },
+  "interpretation": [
+    "Repairing row geometry removed the all-task abstain collapse and made the controlled rows partially learnable.",
+    "Head-only training on the exact same 36 rows improves from 6/36 to 24/36, so the Web task-candidate head has some capacity for this geometry.",
+    "Because it cannot fully fit a tiny same-row diagnostic, the next promotable run should not reuse this head/objective unchanged.",
+    "This is not a frontier improvement and does not affect the selected Stage11507 runtime."
+  ],
+  "next_actions": [
+    "Materialize more diverse controlled Web FAIL_TO_PASS roots, including Llama, before any promotable web run.",
+    "Improve the Web task-candidate head/objective so it can fit repaired controlled rows near-perfectly in head-only mode before combining with preservation.",
+    "Consider task-specific heads or listwise same-root candidate loss for verifier/evidence/minimal-fix instead of one shared Web task head.",
+    "Keep Stage11507 as selected frontier until a run preserves residual 7/10 and improves Web heldout above 35/66."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11624_web_fail_to_pass_overfit_decision/web_fail_to_pass_overfit_decision.json"
+  },
+  "selected_frontier_remains": {
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head"
+  },
+  "source_artifacts": {
+    "geometry_audit": "runs/local/artifacts/stage11622_web_fail_to_pass_repaired_geometry_audit/web_fail_to_pass_repaired_geometry_audit.json",
+    "probe_result": "runs/local/artifacts/stage11623_web_fail_to_pass_head_overfit/bounded_decoder_probe/execution_result.json",
+    "request": "runs/local/artifacts/stage11623_web_fail_to_pass_head_overfit_request/web_fail_to_pass_head_overfit_request.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11624,
+  "stage11623_same_row_eval": {
+    "accuracy": 0.6666666666666666,
+    "correct": 24,
+    "rows": 36,
+    "runtime": "runs/local/artifacts/stage11623_web_fail_to_pass_head_overfit/runtime_model/runtime_model_bundle.json",
+    "weights_sha256": "7d50ad87ef5c46bb3787abc3030ac4e62d28dfd8de5f2df65b8bac64cdd16e0f"
+  },
+  "stage_name": "stage11624_web_fail_to_pass_overfit_decision"
+}

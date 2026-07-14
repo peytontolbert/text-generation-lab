@@ -1,0 +1,103 @@
+{
+  "audit": {
+    "duplicate_row_ids": 0,
+    "internal_support_reason_leak_rows": 0,
+    "role_alias_leak_rows": 0,
+    "root_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    },
+    "target_label_leak_rows": 0
+  },
+  "counts": {
+    "blocked_roots": 228,
+    "by_split_candidate_kind": {
+      "strict_eval": {
+        "changed": 15,
+        "symptom": 19,
+        "verifier": 20
+      },
+      "train": {
+        "changed": 11,
+        "symptom": 11,
+        "verifier": 12
+      },
+      "validation": {
+        "changed": 20,
+        "symptom": 20,
+        "verifier": 16
+      }
+    },
+    "by_split_language": {
+      "strict_eval": {
+        "python": 54
+      },
+      "train": {
+        "python": 34
+      },
+      "validation": {
+        "python": 56
+      }
+    },
+    "by_split_target": {
+      "strict_eval": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 20,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 15,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 19
+      },
+      "train": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 12,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 11,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 11
+      },
+      "validation": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 16,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 20,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 20
+      }
+    },
+    "c_cpp_gap": {
+      "ready_c_cpp_roots": 0,
+      "reason": "stage11237 found no clean C/C++ verifier-constraint source candidates under current filters"
+    },
+    "materialized_roots": 52,
+    "retrieval_rows_indexed": 729,
+    "source_chunks_indexed": 34229,
+    "source_ready_candidates": 280,
+    "strict_rows": 54,
+    "train_rows": 34,
+    "validation_rows": 56
+  },
+  "created_at_utc": "2026-07-13T10:24:39Z",
+  "decision": "partial_source_specific_evidence_item_materialization_ready",
+  "interpretation": {
+    "claim_limit": "Still diagnostic: C/C++ source supply remains absent and Rust/Web supply is small.",
+    "why_this_differs_from_stage11269": "Rows are admitted for every available distinct source-backed evidence role; roots no longer need all four roles. This avoids fabricating sparse distractor evidence and admits Web/Rust source-backed rows."
+  },
+  "outputs": {
+    "blocked_jsonl": "runs/local/artifacts/stage11274_partial_source_specific_evidence_item_materialization/partial_source_specific_evidence_item_blocked_roots.jsonl",
+    "root_splits_jsonl": "runs/local/artifacts/stage11274_partial_source_specific_evidence_item_materialization/partial_source_specific_evidence_item_root_splits.jsonl",
+    "strict_jsonl": "runs/local/artifacts/stage11274_partial_source_specific_evidence_item_materialization/partial_source_specific_evidence_item_strict_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11274_partial_source_specific_evidence_item_materialization/partial_source_specific_evidence_item_materialization.json",
+    "train_jsonl": "runs/local/artifacts/stage11274_partial_source_specific_evidence_item_materialization/partial_source_specific_evidence_item_train_rows.jsonl",
+    "validation_jsonl": "runs/local/artifacts/stage11274_partial_source_specific_evidence_item_materialization/partial_source_specific_evidence_item_validation_rows.jsonl"
+  },
+  "passed": true,
+  "quality_gates": {
+    "has_validation_and_strict": true,
+    "internal_support_reasons_not_visible": true,
+    "role_alias_not_visible_before_options": true,
+    "root_split_disjoint": true,
+    "target_label_not_visible_before_options": true,
+    "unique_row_ids": true,
+    "uses_materialized_chunk_text": true
+  },
+  "source_artifacts": {
+    "full_context_rows": "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/full_context_rows.jsonl",
+    "retrieval_rows": "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1/retrieval_rows.jsonl",
+    "stage11237_candidates": "runs/local/artifacts/stage11237_multilingual_verifier_constraint_source_inventory/verifier_constraint_source_candidates.jsonl"
+  },
+  "stage": 11274,
+  "stage_name": "stage11274_partial_source_specific_evidence_item_materialization"
+}

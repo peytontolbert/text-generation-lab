@@ -1,0 +1,90 @@
+{
+  "counts": {
+    "blocked_roots": 0,
+    "by_split_language": {
+      "strict_eval": {
+        "python": 108,
+        "rust": 4,
+        "web_js_ts_html": 4
+      },
+      "train": {
+        "python": 868,
+        "rust": 4,
+        "web_js_ts_html": 20
+      },
+      "validation": {
+        "python": 108,
+        "web_js_ts_html": 4
+      }
+    },
+    "by_split_target": {
+      "strict_eval": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 29,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 29,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 29,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 29
+      },
+      "train": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 223,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 223,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 223,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 223
+      },
+      "validation": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 28,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 28,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 28,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 28
+      }
+    },
+    "c_cpp_gap": {
+      "ready_c_cpp_roots": 0,
+      "reason": "stage11237 found no clean C/C++ verifier-constraint source candidates under current filters",
+      "stage11237_ready_c_cpp_candidates": 0
+    },
+    "duplicate_row_ids": 0,
+    "filtered_roots": 280,
+    "root_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    },
+    "source_ready_candidates": 280,
+    "strict_roots": 29,
+    "strict_rows": 116,
+    "train_roots": 223,
+    "train_rows": 892,
+    "validation_roots": 28,
+    "validation_rows": 112
+  },
+  "created_at_utc": "2026-07-13T09:54:00Z",
+  "decision": "true_evidence_candidate_judgment_package_ready",
+  "interpretation": {
+    "claim_limit": "No C/C++ source supply is present; Rust/Web supply is small. This package can test scorer-objective alignment, not satisfy the final multilingual Gemma claim alone.",
+    "promotion_status": "diagnostic_training_candidate_not_multilingual_promotion_ready",
+    "why_this_differs_from_stage11249": "Stage11249 asked multiple role targets over the same root-level prompt. Stage11259 asks one candidate-evidence judgment per row, so the label is a property of the visible candidate item rather than a different desired answer over identical evidence."
+  },
+  "outputs": {
+    "blocked_jsonl": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_blocked_roots.jsonl",
+    "root_splits_jsonl": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_root_splits.jsonl",
+    "strict_jsonl": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_strict_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_package.json",
+    "train_jsonl": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_train_rows.jsonl",
+    "validation_jsonl": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_validation_rows.jsonl"
+  },
+  "passed": true,
+  "quality_gates": {
+    "all_rows_are_single_candidate_judgments": true,
+    "all_rows_have_four_options": true,
+    "all_strict_rows_not_train_support_only": true,
+    "root_split_disjoint": true,
+    "target_distribution_balanced_by_root_projection": true,
+    "unique_row_ids": true
+  },
+  "source_artifacts": {
+    "stage11237_candidates": "runs/local/artifacts/stage11237_multilingual_verifier_constraint_source_inventory/verifier_constraint_source_candidates.jsonl",
+    "stage11237_summary": "runs/local/artifacts/stage11237_multilingual_verifier_constraint_source_inventory/multilingual_verifier_constraint_source_inventory.json"
+  },
+  "stage": 11259,
+  "stage_name": "stage11259_true_evidence_candidate_judgment_package"
+}

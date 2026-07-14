@@ -1,0 +1,90 @@
+{
+  "blocker_context": {
+    "gemma_correct_routed_wrong_by_repo_family": {
+      "@modelcontextprotocol/client": 1,
+      "@modelcontextprotocol/core": 3,
+      "@modelcontextprotocol/server": 4,
+      "llama_stack_ui": 4,
+      "openhands_openhands_frontend": 10,
+      "sep_automation": 4
+    },
+    "gemma_correct_routed_wrong_by_task_type": {
+      "abstention_insufficient_evidence": 4,
+      "evidence_citation": 8,
+      "minimal_fix_selection": 4,
+      "symptom_localization": 2,
+      "verifier_outcome": 8
+    },
+    "interpretation": "The current issue is not raw row absence. Existing OpenHands/Llama support exists, but its geometry did not transfer to heldout.",
+    "support_task_counts_for_gap_repos": {
+      "llama_stack_ui": {
+        "abstention_insufficient_evidence": 28,
+        "alternative_hypothesis_elimination": 28,
+        "evidence_citation": 28,
+        "minimal_fix_selection": 28,
+        "symptom_localization": 28,
+        "verifier_outcome": 28
+      },
+      "openhands_openhands_frontend": {
+        "abstention_insufficient_evidence": 40,
+        "alternative_hypothesis_elimination": 40,
+        "evidence_citation": 36,
+        "minimal_fix_selection": 36,
+        "symptom_localization": 36,
+        "verifier_outcome": 40
+      }
+    }
+  },
+  "created_at_utc": "2026-07-14T00:19:03Z",
+  "decision": "web_gap_materialization_request_ready",
+  "gates": {
+    "request_distinguishes_quality_rebuild_from_raw_supply": true,
+    "request_includes_evidence_or_verifier_tasks": true,
+    "request_targets_openhands_or_llama": true,
+    "stage11636_confirms_routed_web_still_loses_to_gemma": true,
+    "stage11636_has_complete_same_row_inputs": true
+  },
+  "high_priority_openhands_llama_requested_roots": 96,
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11637_web_gap_root_materialization_request/web_gap_root_materialization_request.json",
+    "work_items": "runs/local/artifacts/stage11637_web_gap_root_materialization_request/web_gap_root_materialization_work_items.jsonl"
+  },
+  "requested_work_items": 15,
+  "rl_scale_note": {
+    "interpretation": "Do not count optimizer steps as experience. A serious RL stage should count complete scored rollouts per update.",
+    "minimum_before_rl": [
+      "hundreds of executable Web roots, not 66 heldout rows",
+      "root-disjoint train/eval split",
+      "automated verifier scoring",
+      "parallel rollout infrastructure pinned away from GPUs 0 and 1"
+    ]
+  },
+  "source_artifacts": {
+    "stage11636_summary": "runs/local/artifacts/stage11636_web_gap_targeted_supply_audit/web_gap_targeted_supply_audit.json",
+    "stage11636_worklist": "runs/local/artifacts/stage11636_web_gap_targeted_supply_audit/web_gap_targeted_worklist.jsonl"
+  },
+  "stage": 11637,
+  "stage_name": "stage11637_web_gap_root_materialization_request",
+  "total_requested_disjoint_roots": 138,
+  "training_policy_after_materialization": {
+    "do_not_train_until": [
+      "new roots pass anti-cheat admission",
+      "root overlap with web_root_heldout_66 is zero",
+      "all requested task buckets have at least one admitted root",
+      "protected canary/residual replay rows are included"
+    ],
+    "first_probe_should_be": {
+      "contrast": "task-aware hard-negative contrast enabled",
+      "device_constraint": "CUDA_VISIBLE_DEVICES=2 only",
+      "preservation_kl": ">=4.0",
+      "sampler": "web_task_family_balanced_or_root_balanced"
+    },
+    "promotion_gate": {
+      "protected_filtered_strict": "22/22",
+      "protected_old_canary_strict": "23/23",
+      "protected_residual_bank": ">=7/10",
+      "same_manifest_gemma_comparison": "attached",
+      "web_heldout": ">38/66 first; >52/66 for Gemma Web win"
+    }
+  }
+}

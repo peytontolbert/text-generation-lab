@@ -1,0 +1,424 @@
+{
+  "claim_scope": "diagnostic semantic-candidate scorer training/eval package only; not comparable to old 22/23 canary without removed-row disclosure",
+  "created_at_utc": "2026-07-13T16:17:54Z",
+  "decision": "probe_ready_filtered_semantic_candidate_package_created_with_denominator_change_disclosed",
+  "decision_basis": [
+    "Stage11436 proved the residual bank is optioned and semantic-candidate ready, but train has many non-optioned role-classification rows.",
+    "A semantic candidate scorer objective requires rows with multi-option opaque choices and per-option semantic metadata.",
+    "The singleton Rust verifier row is quarantined from validation/strict for this diagnostic package; old canary scores must still be reported separately."
+  ],
+  "gates": {
+    "all_kept_rows_have_full_semantic_candidate_options": true,
+    "residual_nonempty": true,
+    "strict_denominator_changed": true,
+    "strict_nonempty": true,
+    "train_nonempty": true,
+    "validation_denominator_changed": true,
+    "validation_nonempty": true
+  },
+  "inputs": {
+    "audit": "runs/local/artifacts/stage11436_full_coverage_semantic_candidate_package/semantic_candidate_row_audit.jsonl",
+    "residual_bank": "runs/local/artifacts/stage11436_full_coverage_semantic_candidate_package/semantic_candidate_residual_bank.jsonl",
+    "stress_eval": "runs/local/artifacts/stage11436_full_coverage_semantic_candidate_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_eval": "runs/local/artifacts/stage11436_full_coverage_semantic_candidate_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "train": "runs/local/artifacts/stage11436_full_coverage_semantic_candidate_package/agentkernel_lite_encdec_train.jsonl",
+    "validation": "runs/local/artifacts/stage11436_full_coverage_semantic_candidate_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "kept_counts": {
+    "residual_bank": {
+      "by_language": {
+        "c_cpp": 4,
+        "python": 3,
+        "rust": 3
+      },
+      "by_task": {
+        "evidence_citation": 9,
+        "verifier_outcome_semantic_transition": 1
+      },
+      "roots": 9,
+      "rows": 10,
+      "semantic_option_rows": 10,
+      "singleton_or_empty_options": 0
+    },
+    "stress_eval": {
+      "by_language": {
+        "web_js_ts_html": 6
+      },
+      "by_task": {
+        "abstention_insufficient_evidence": 1,
+        "evidence_citation": 1,
+        "minimal_fix_selection": 1,
+        "patch_impact": 1,
+        "symptom_localization": 1,
+        "web_implementation_vs_implementation": 1
+      },
+      "roots": 2,
+      "rows": 6,
+      "semantic_option_rows": 6,
+      "singleton_or_empty_options": 0
+    },
+    "strict_eval": {
+      "by_language": {
+        "c_cpp": 6,
+        "python": 6,
+        "rust": 4,
+        "web_js_ts_html": 6
+      },
+      "by_task": {
+        "abstention_insufficient_evidence": 4,
+        "evidence_citation": 3,
+        "minimal_fix_selection": 4,
+        "patch_impact": 4,
+        "symptom_localization": 4,
+        "verifier_outcome": 2,
+        "verifier_outcome_semantic_transition": 1
+      },
+      "roots": 5,
+      "rows": 22,
+      "semantic_option_rows": 22,
+      "singleton_or_empty_options": 0
+    },
+    "train": {
+      "by_language": {
+        "c_cpp": 70,
+        "python": 41,
+        "rust": 85
+      },
+      "by_task": {
+        "abstention_insufficient_evidence": 18,
+        "alternative_hypothesis_elimination": 1,
+        "cpp_implementation_vs_implementation": 1,
+        "evidence_candidate_judgment": 57,
+        "evidence_citation": 46,
+        "minimal_fix_selection": 17,
+        "patch_impact": 18,
+        "python_implementation_vs_implementation": 2,
+        "regression_risk": 1,
+        "symptom_localization": 18,
+        "verifier_outcome": 17
+      },
+      "roots": 51,
+      "rows": 196,
+      "semantic_option_rows": 196,
+      "singleton_or_empty_options": 0
+    },
+    "validation": {
+      "by_language": {
+        "c_cpp": 6,
+        "python": 5,
+        "rust": 5,
+        "web_js_ts_html": 6
+      },
+      "by_task": {
+        "abstention_insufficient_evidence": 4,
+        "evidence_citation": 3,
+        "minimal_fix_selection": 4,
+        "patch_impact": 4,
+        "symptom_localization": 4,
+        "verifier_outcome": 3
+      },
+      "roots": 4,
+      "rows": 22,
+      "semantic_option_rows": 22,
+      "singleton_or_empty_options": 0
+    }
+  },
+  "outputs": {
+    "quarantine": "runs/local/artifacts/stage11437_semantic_candidate_probe_ready_filtered_package/semantic_candidate_quarantined_rows.jsonl",
+    "residual_bank": "runs/local/artifacts/stage11437_semantic_candidate_probe_ready_filtered_package/semantic_candidate_residual_bank.jsonl",
+    "stress_eval": "runs/local/artifacts/stage11437_semantic_candidate_probe_ready_filtered_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_eval": "runs/local/artifacts/stage11437_semantic_candidate_probe_ready_filtered_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "train": "runs/local/artifacts/stage11437_semantic_candidate_probe_ready_filtered_package/agentkernel_lite_encdec_train.jsonl",
+    "validation": "runs/local/artifacts/stage11437_semantic_candidate_probe_ready_filtered_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "quarantine_counts": {
+    "residual_bank": {
+      "by_language": {},
+      "by_task": {},
+      "roots": 0,
+      "rows": 0,
+      "semantic_option_rows": 0,
+      "singleton_or_empty_options": 0
+    },
+    "stress_eval": {
+      "by_language": {
+        "web_js_ts_html": 1
+      },
+      "by_task": {
+        "verifier_outcome": 1
+      },
+      "roots": 1,
+      "rows": 1,
+      "semantic_option_rows": 0,
+      "singleton_or_empty_options": 1
+    },
+    "strict_eval": {
+      "by_language": {
+        "rust": 1
+      },
+      "by_task": {
+        "verifier_outcome": 1
+      },
+      "roots": 1,
+      "rows": 1,
+      "semantic_option_rows": 0,
+      "singleton_or_empty_options": 1
+    },
+    "train": {
+      "by_language": {
+        "c_cpp": 102,
+        "python": 103,
+        "rust": 20,
+        "web_js_ts_html": 12
+      },
+      "by_task": {
+        "evidence_citation": 61,
+        "evidence_role_classification": 76,
+        "retrieve_answer_abstain": 18,
+        "verifier_candidate_role_classification": 40,
+        "verifier_outcome": 24,
+        "verifier_outcome_semantic_transition": 18
+      },
+      "roots": 43,
+      "rows": 237,
+      "semantic_option_rows": 1,
+      "singleton_or_empty_options": 236
+    },
+    "validation": {
+      "by_language": {
+        "python": 1
+      },
+      "by_task": {
+        "verifier_outcome": 1
+      },
+      "roots": 1,
+      "rows": 1,
+      "semantic_option_rows": 0,
+      "singleton_or_empty_options": 1
+    }
+  },
+  "quarantined_row_ids_by_split": {
+    "residual_bank": [],
+    "stress_eval": [
+      "stage10176::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t13_13_10_019bff96_2dc5_7162_88f8_83eb_src_code_assist_orchestrator_cognitive_perfection_py_src_code_assist_orchestrato_3a0f6d8311_aug_1500000_8b46e7f662::web_js_ts_html::verifier_outcome::reviewed_v27_compact"
+    ],
+    "strict_eval": [
+      "stage10126::tokenizers::tokenizers::rust::verifier_outcome::reviewed_v27_compact"
+    ],
+    "train": [
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10674::linux::rust::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10674::linux::rust::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10674::linux::rust::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10674::linux::rust::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10733::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10733::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10733::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10733::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10733::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10733::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10733::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10733::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10733::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10733::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10733::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10733::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10733::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10733::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10733::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10733::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10733::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10733::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10733::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10733::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10741::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10741::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10741::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10741::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10741::cccl::q30::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10741::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10741::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10741::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10741::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10741::onnxruntime::q13::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10741::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10741::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10741::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10741::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10741::parametergolf::q2::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10741::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10741::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10741::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10741::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10741::parametergolf::q4::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10741::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10741::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10741::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10741::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10741::parametergolf::q6::evidence_citation::reviewed_v27_compact::candidate::E",
+      "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact::candidate::A",
+      "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact::candidate::B",
+      "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact::candidate::C",
+      "stage10300::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_26t23_27_57_019bfca2_aa35_7502_b929_649a_src_code_assist_agents_hf_local_py_src_code_assist_agents_hf_local_planner_py_sr_3fb1ce61a2_aug_1500000_8b46e7f662::python::evidence_citation::reviewed_v27_compact::candidate::D",
+      "stage10499::localsess_code_assist_hf_local_multitest_repaired::python::evidence_citation::compact_bounded",
+      "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::verifier_outcome::compact_bounded",
+      "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q40::python::verifier_outcome::multitarget_abstain_support",
+      "audited::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::q73::python::verifier_outcome::multitarget_abstain_support",
+      "stage10499::localsess_code_assist_hf_local_multitest_repaired::python::verifier_outcome::compact_bounded_repaired::perm_00",
+      "stage10499::localsess_code_assist_hf_local_multitest_repaired::python::verifier_outcome::compact_bounded_repaired::perm_01",
+      "stage10499::localsess_code_assist_hf_local_multitest_repaired::python::verifier_outcome::compact_bounded_repaired::perm_02",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::A",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::B",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::C",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::D",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::E",
+      "stage10934::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::ledger_full_verifier_first",
+      "stage10934::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::ledger_full_candidate_first",
+      "stage10934::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::ledger_contrast_verifier_first",
+      "stage10934::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::ledger_contrast_candidate_first",
+      "stage10934::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::ledger_full_verifier_first",
+      "stage10934::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::ledger_full_candidate_first",
+      "stage10934::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::ledger_contrast_verifier_first",
+      "stage10934::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::ledger_contrast_candidate_first",
+      "stage10934::cpp_agentkernel_counterfamily_evidence_replenishment::evidence_citation::ledger_full_verifier_first",
+      "stage10934::cpp_agentkernel_counterfamily_evidence_replenishment::evidence_citation::ledger_full_candidate_first",
+      "stage10934::cpp_agentkernel_counterfamily_evidence_replenishment::evidence_citation::ledger_contrast_verifier_first",
+      "stage10934::cpp_agentkernel_counterfamily_evidence_replenishment::evidence_citation::ledger_contrast_candidate_first",
+      "stage10925::stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::semantic_role_full_v1",
+      "stage10925::stage10119::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_26t17_53_18_019d2b47_7d2d_7622_8e05_3513_agent_kernel_modeling_ssm_kernels_src_selective_scan_cpp_agent_kernel_modeling_w_5511e7fec6_aug_1500000_8b46e7f662::c_cpp::evidence_citation::semantic_role_pairwise_contrast_v1",
+      "stage10925::stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::semantic_role_full_v1",
+      "stage10925::stage10119::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662::c_cpp::evidence_citation::semantic_role_pairwise_contrast_v1",
+      "stage10925::stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::evidence_citation::semantic_role_full_v1"
+    ],
+    "validation": [
+      "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_26t00_55_44_019abda8_c0d8_7803_8a77_1e0f_scripts_universe_build_py_64d2cf209b_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact"
+    ]
+  },
+  "recommended_next_action": "run one diagnostic semantic-candidate-head probe on this filtered package, then evaluate old 22/23 canary separately with the base scorer to ensure no regression",
+  "source_counts": {
+    "residual_bank": {
+      "by_language": {
+        "c_cpp": 4,
+        "python": 3,
+        "rust": 3
+      },
+      "by_task": {
+        "evidence_citation": 9,
+        "verifier_outcome_semantic_transition": 1
+      },
+      "roots": 9,
+      "rows": 10,
+      "semantic_option_rows": 10,
+      "singleton_or_empty_options": 0
+    },
+    "stress_eval": {
+      "by_language": {
+        "web_js_ts_html": 7
+      },
+      "by_task": {
+        "abstention_insufficient_evidence": 1,
+        "evidence_citation": 1,
+        "minimal_fix_selection": 1,
+        "patch_impact": 1,
+        "symptom_localization": 1,
+        "verifier_outcome": 1,
+        "web_implementation_vs_implementation": 1
+      },
+      "roots": 2,
+      "rows": 7,
+      "semantic_option_rows": 6,
+      "singleton_or_empty_options": 1
+    },
+    "strict_eval": {
+      "by_language": {
+        "c_cpp": 6,
+        "python": 6,
+        "rust": 5,
+        "web_js_ts_html": 6
+      },
+      "by_task": {
+        "abstention_insufficient_evidence": 4,
+        "evidence_citation": 3,
+        "minimal_fix_selection": 4,
+        "patch_impact": 4,
+        "symptom_localization": 4,
+        "verifier_outcome": 3,
+        "verifier_outcome_semantic_transition": 1
+      },
+      "roots": 5,
+      "rows": 23,
+      "semantic_option_rows": 22,
+      "singleton_or_empty_options": 1
+    },
+    "train": {
+      "by_language": {
+        "c_cpp": 172,
+        "python": 144,
+        "rust": 105,
+        "web_js_ts_html": 12
+      },
+      "by_task": {
+        "abstention_insufficient_evidence": 18,
+        "alternative_hypothesis_elimination": 1,
+        "cpp_implementation_vs_implementation": 1,
+        "evidence_candidate_judgment": 57,
+        "evidence_citation": 107,
+        "evidence_role_classification": 76,
+        "minimal_fix_selection": 17,
+        "patch_impact": 18,
+        "python_implementation_vs_implementation": 2,
+        "regression_risk": 1,
+        "retrieve_answer_abstain": 18,
+        "symptom_localization": 18,
+        "verifier_candidate_role_classification": 40,
+        "verifier_outcome": 41,
+        "verifier_outcome_semantic_transition": 18
+      },
+      "roots": 73,
+      "rows": 433,
+      "semantic_option_rows": 197,
+      "singleton_or_empty_options": 236
+    },
+    "validation": {
+      "by_language": {
+        "c_cpp": 6,
+        "python": 6,
+        "rust": 5,
+        "web_js_ts_html": 6
+      },
+      "by_task": {
+        "abstention_insufficient_evidence": 4,
+        "evidence_citation": 3,
+        "minimal_fix_selection": 4,
+        "patch_impact": 4,
+        "symptom_localization": 4,
+        "verifier_outcome": 4
+      },
+      "roots": 4,
+      "rows": 23,
+      "semantic_option_rows": 22,
+      "singleton_or_empty_options": 1
+    }
+  },
+  "source_stage": "stage11436_full_coverage_semantic_candidate_package",
+  "stage": 11437,
+  "stage_name": "stage11437_semantic_candidate_probe_ready_filtered_package"
+}

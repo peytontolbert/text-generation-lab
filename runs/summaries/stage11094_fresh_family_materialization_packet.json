@@ -1,0 +1,86 @@
+{
+  "claim_scope": [
+    "Turn the stage11092 fresh-family queue into a concrete materialization packet with per-family cards, per-root cards, and packet rows.",
+    "Expose exactly which queued roots are immediately scoreable for verifier/retrieve work and which remain blocked only on visible-ledger projection.",
+    "Prepare the next row-construction stage from fresh families rather than looping on repository_library, parametergolf, tokenizers, or candle."
+  ],
+  "created_at_utc": "2026-07-13T03:15:39.583893Z",
+  "decision": "fresh_family_materialization_packet_ready",
+  "headline_findings": [
+    "Prepared 18 fresh-family root cards across 9 repo families with subtype-filtered packet rows for decisive_evidence, verifier_outcome, and retrieve_answer_abstain.",
+    "Every family in the packet carries verifier-target signal and materialization constraints at queue time, which keeps the next build aligned to heldout-safe evidence work.",
+    "The main remaining blocker is still explicit evidence-ledger projection for decisive_evidence; verifier_outcome and retrieve_answer_abstain rows are the immediately scoreable subset."
+  ],
+  "metrics": {
+    "blocked_by_subtype": {
+      "decisive_evidence": 18,
+      "retrieve_answer_abstain": 0,
+      "verifier_outcome": 0
+    },
+    "blocked_rows": 18,
+    "family_count": 9,
+    "packet_row_count": 54,
+    "roots_by_language": {
+      "c_cpp": 8,
+      "python": 8,
+      "web_js_ts_html": 2
+    },
+    "rows_by_language": {
+      "c_cpp": 24,
+      "python": 24,
+      "web_js_ts_html": 6
+    },
+    "scoreable_by_subtype": {
+      "decisive_evidence": 0,
+      "retrieve_answer_abstain": 18,
+      "verifier_outcome": 18
+    },
+    "scoreable_rows": 36,
+    "selected_root_count": 18
+  },
+  "next_best_step": [
+    "Project decisive_evidence rows from this packet into explicit visible candidate ledgers before evidence scoring.",
+    "Construct verifier/test-constraint and candidate-surface counterexamples from at least one Python family and one C/C++ family in this packet.",
+    "Keep mem0 separate until the web selected-test/verifier lane is materialized with the same anti-cheat contract."
+  ],
+  "outputs": {
+    "family_cards_jsonl": "runs/local/artifacts/stage11094_fresh_family_materialization_packet/fresh_family_cards.jsonl",
+    "packet_rows_jsonl": "runs/local/artifacts/stage11094_fresh_family_materialization_packet/fresh_family_packet_rows.jsonl",
+    "root_cards_jsonl": "runs/local/artifacts/stage11094_fresh_family_materialization_packet/fresh_family_root_cards.jsonl",
+    "summary_json": "runs/local/artifacts/stage11094_fresh_family_materialization_packet/fresh_family_materialization_packet.json"
+  },
+  "passed": true,
+  "queue_snapshot": {
+    "blocked_ready_web_bundles_without_selected_tests": 2,
+    "family_status_counts": {
+      "queued": 9
+    },
+    "queued_by_language": {
+      "c_cpp": 8,
+      "python": 8,
+      "web_js_ts_html": 2
+    },
+    "queued_by_repo_family": {
+      "cccl": 2,
+      "cuEmbed": 2,
+      "diffusers": 2,
+      "django": 2,
+      "faiss": 2,
+      "falco": 2,
+      "mem0": 2,
+      "onnxruntime": 2,
+      "openai-agents-python": 2
+    },
+    "queued_roots": 18
+  },
+  "source_artifacts": {
+    "causal_states": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_causal_states.jsonl",
+    "events": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_typed_events.jsonl",
+    "multitarget_rows": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_multitarget_rows.jsonl",
+    "queue_rows": "runs/local/artifacts/stage11092_fresh_evidence_family_queue/queue_rows.jsonl",
+    "queue_summary": "runs/local/artifacts/stage11092_fresh_evidence_family_queue/fresh_evidence_family_queue.json",
+    "root_records": "runs/local/artifacts/stage10516_long_context_root_state_compiler/compiled_root_records.jsonl"
+  },
+  "stage": 11094,
+  "stage_name": "stage11094_fresh_family_materialization_packet"
+}

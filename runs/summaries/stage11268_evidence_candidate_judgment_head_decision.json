@@ -1,0 +1,97 @@
+{
+  "created_at_utc": "2026-07-13T10:08:10Z",
+  "decision": "reject_stage11266_branch_keep_stage11200_frontier",
+  "interpretation": {
+    "current_frontier_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "probable_failure_mode": "The head can fit sampled training rows, but Stage11259 uses templated candidate evidence texts whose root-heldout split does not provide enough real source-specific signal for generalization. The next useful move is to materialize candidate evidence items from actual source snippets, test assertions, trace lines, and verifier outputs, not just path-list templates.",
+    "stage11266_runtime_status": "diagnostic_negative_do_not_promote"
+  },
+  "key_metrics": {
+    "candidate_runtime_weights_sha256": "4759aae41fc4bf22e9227765e3a95ebda78ca9e8b72675249c9a8c1d64cf09ff",
+    "gates": {
+      "product_clean_strict_22_of_22": true,
+      "product_clean_validation_at_least_20_of_23": true,
+      "product_judgment_strict_above_majority": false,
+      "product_judgment_validation_above_majority": false,
+      "product_residual_above_5_of_10": false,
+      "product_verifier_residual_nonzero": false
+    },
+    "product_scorer": "encoder_option_retrieval_evidence_judgment_head",
+    "stage11267_product_postrun": {
+      "clean_strict": {
+        "correct": 22,
+        "exact_accuracy": 1.0,
+        "rows": 22,
+        "scored_rows": 22
+      },
+      "clean_validation": {
+        "correct": 21,
+        "exact_accuracy": 0.9130434782608695,
+        "rows": 23,
+        "scored_rows": 23
+      },
+      "judgment_strict": {
+        "correct": 29,
+        "exact_accuracy": 0.25,
+        "rows": 116,
+        "scored_rows": 116
+      },
+      "judgment_strict_by_gold": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 29,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 0,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 0,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 0
+      },
+      "judgment_validation": {
+        "correct": 28,
+        "exact_accuracy": 0.25,
+        "rows": 112,
+        "scored_rows": 112
+      },
+      "judgment_validation_by_gold": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 28,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 0,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 0,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 0
+      },
+      "residual": {
+        "correct": 5,
+        "exact_accuracy": 0.5,
+        "rows": 10,
+        "scored_rows": 10
+      },
+      "residual_by_gold": {
+        "candidate_change_surface": 3,
+        "symptom_or_call_path_analogue": 1,
+        "unknown": 1,
+        "verifier_and_test_constraint": 0
+      }
+    }
+  },
+  "next_required_work": [
+    "Keep Stage11200 as the current frontier runtime.",
+    "Do not promote Stage11266 or use it for Gemma headline comparison.",
+    "Build Stage11269 as source-specific evidence item materialization: candidate evidence text should include concrete snippet/test/trace/assertion fragments where available, with role aliases hidden.",
+    "Recover C/C++ source supply through a relaxed-but-audited acquisition path because current strict filters have zero C/C++ roots.",
+    "Only rerun the judgment head after the heldout rows contain source-specific evidence rather than generic path-list templates."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11268_evidence_candidate_judgment_head_decision/evidence_candidate_judgment_head_decision.json"
+  },
+  "passed": true,
+  "reason": [
+    "The dedicated evidence-candidate judgment head preserved the clean canary but did not learn the root-heldout judgment surface.",
+    "Clean strict stayed 22/22 and clean validation improved to 21/23 under the fallback path.",
+    "Judgment validation stayed at 28/112 and judgment strict stayed at 29/116, exactly chance for the balanced four-way task.",
+    "Residual stayed flat at 5/10 and verifier/test-constraint residual stayed 0/3.",
+    "Training telemetry reached high bounded-choice aux rank-1 on sampled train rows, so the failure is heldout generalization/data geometry rather than missing runtime head loading."
+  ],
+  "source_artifacts": {
+    "stage11264_prior_decision": "runs/local/artifacts/stage11264_true_evidence_candidate_judgment_decision/true_evidence_candidate_judgment_decision.json",
+    "stage11265_request": "runs/local/artifacts/stage11265_evidence_candidate_judgment_head_probe_request/evidence_candidate_judgment_head_probe_request.json",
+    "stage11266_runtime": "runs/local/artifacts/stage11266_evidence_candidate_judgment_head_probe/runtime_model/runtime_model_bundle.json",
+    "stage11267_audit": "runs/local/artifacts/stage11267_evidence_candidate_judgment_head_postrun_audit/evidence_candidate_judgment_head_postrun_audit.json"
+  },
+  "stage": 11268,
+  "stage_name": "stage11268_evidence_candidate_judgment_head_decision"
+}

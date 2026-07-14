@@ -1,0 +1,115 @@
+{
+  "anti_leak_requirements": [
+    "same root_id never crosses train/validation/strict",
+    "strict smoke roots from Stage11718/11727/11732 remain eval-only canaries",
+    "target label and target value must not appear before candidate options",
+    "candidate labels must be deterministic-shuffled and presentation-only",
+    "selected verifier path/test id may appear only inside candidate options",
+    "each row must include source_snapshot_id and root_lineage_key",
+    "Gemma comparison must use same manifest and same prompt renderer"
+  ],
+  "claim_boundary": [
+    "This is a materialization request, not a training result.",
+    "It exists because verifier grounding alone did not move the source-heldout smoke plateau.",
+    "The requested support rows must be disjoint analogues, not replays of strict smoke rows."
+  ],
+  "created_at_utc": "2026-07-14T08:08:19Z",
+  "decision": "materialize_disjoint_support_for_source_heldout_failure_families",
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11742_source_heldout_failure_support_request/source_heldout_failure_support_request.json",
+    "work_items": "runs/local/artifacts/stage11742_source_heldout_failure_support_request/support_materialization_work_items.jsonl"
+  },
+  "passed": true,
+  "promotion_gate_for_next_probe": {
+    "gemma_requirement": "same-manifest Gemma3-12B backend still required before public comparison claim",
+    "minimum_success": {
+      "c_cpp": ">=2/4",
+      "python_verifier_outcome": "correct",
+      "rust_verifier_outcome": "correct",
+      "verifier_grounded_source_heldout_successor": ">=8/12"
+    },
+    "must_preserve_selected_frontier": "stage11507 protected compact gates",
+    "must_preserve_verifier_grounded_smoke_canary": "score must exceed 6/12 without training on smoke roots"
+  },
+  "source_decision": "runs/local/artifacts/stage11741_verifier_grounded_successor_decision/verifier_grounded_successor_decision.json",
+  "stage": 11742,
+  "stage_name": "stage11742_source_heldout_failure_support_request",
+  "work_item_count": 3,
+  "work_items": [
+    {
+      "candidate_geometry": [
+        "selected_test_anchor",
+        "nearby_test_distractor_same_repo",
+        "integration_test_distractor",
+        "implementation_only_no_verifier"
+      ],
+      "do_not_train_on": "stage11727 bigram_language_model strict smoke root",
+      "failure_family": "verifier_outcome_selected_test_vs_implementation_surface",
+      "language_family": "python",
+      "must_include": [
+        "executable pytest log",
+        "selected test path only inside candidate options",
+        "at least one same-file-family distractor test",
+        "observed verifier transition field"
+      ],
+      "observed_failure_rows": [
+        null
+      ],
+      "priority": 1,
+      "required_strict_analogue_roots": 4,
+      "required_support_roots": 12,
+      "work_item_id": "stage11742_python_verifier_outcome_selected_test_support"
+    },
+    {
+      "candidate_geometry": [
+        "selected_inline_test_anchor",
+        "nearby_inline_test_distractor",
+        "external_integration_test_distractor",
+        "implementation_only_no_verifier"
+      ],
+      "do_not_train_on": "stage11732 tokenizers strict smoke root",
+      "failure_family": "verifier_outcome_selected_inline_test_vs_nearby_inline_test",
+      "language_family": "rust",
+      "must_include": [
+        "executable cargo test log",
+        "selected inline test identifier only inside candidate options",
+        "same module sibling test distractor",
+        "observed verifier transition field"
+      ],
+      "observed_failure_rows": [
+        null
+      ],
+      "priority": 2,
+      "required_strict_analogue_roots": 4,
+      "required_support_roots": 12,
+      "work_item_id": "stage11742_rust_verifier_outcome_selected_test_support"
+    },
+    {
+      "candidate_geometry": [
+        "candidate_change_surface",
+        "verifier_and_test_constraint",
+        "nearby_training_or_factory_surface",
+        "abstain_insufficient_evidence"
+      ],
+      "do_not_train_on": "stage11718 sentencepiece strict smoke root",
+      "failure_family": "abstain_attractor_despite_executable_verifier_evidence",
+      "language_family": "c_cpp",
+      "must_include": [
+        "executable C/C++ verifier log",
+        "paired answerable row with verifier evidence present",
+        "paired insufficient-evidence row with verifier evidence removed",
+        "same library family distractor surface"
+      ],
+      "observed_failure_rows": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "priority": 3,
+      "required_strict_analogue_roots": 4,
+      "required_support_roots": 16,
+      "work_item_id": "stage11742_cpp_abstain_attractor_support"
+    }
+  ]
+}

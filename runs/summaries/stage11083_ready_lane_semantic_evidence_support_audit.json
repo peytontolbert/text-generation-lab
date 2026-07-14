@@ -1,0 +1,80 @@
+{
+  "blocking_issues": [],
+  "claim_scope": [
+    "Audit the semantic evidence-ready-lane support package for row shape, language coverage, and obvious prompt-target leakage in support metadata.",
+    "Confirm that heldout validation/strict remain unchanged while semantic rows only affect train support."
+  ],
+  "created_at_utc": "2026-07-13T02:54:56Z",
+  "findings": [
+    "The package adds semantic evidence-role supervision without touching heldout rows.",
+    "Evidence-role full-target rows and pairwise contrast rows are both present, so the next probe can attack scorer geometry without relying only on opaque letter decoding.",
+    "This remains support-only and still depends on current candidate-anchor or heuristic gold assignments for some roots."
+  ],
+  "inputs": {
+    "package_added_rows": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/added_semantic_evidence_rows.jsonl",
+    "package_strict": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "package_summary": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/ready_lane_semantic_evidence_support_package.json",
+    "package_train": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/agentkernel_lite_encdec_train.jsonl",
+    "package_validation": "runs/local/artifacts/stage11082_ready_lane_semantic_evidence_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "leak_row_ids": [],
+  "metrics": {
+    "obvious_query_target_leak_rows": 0,
+    "semantic_full_rows": 8,
+    "semantic_pairwise_rows": 8,
+    "semantic_root_count": 8,
+    "semantic_rows_by_language": {
+      "python": 4,
+      "rust": 12
+    },
+    "semantic_rows_by_objective_family": {
+      "semantic_evidence_role_generation": 8,
+      "semantic_evidence_role_pairwise_contrast": 8
+    },
+    "semantic_rows_by_repo_family": {
+      "chroma": 4,
+      "dbt-core": 4,
+      "repository_library": 4,
+      "tiktoken": 4
+    },
+    "semantic_rows_by_target_text": {
+      "candidate_change_surface": 4,
+      "symptom_or_call_path_analogue": 4,
+      "verifier_and_test_constraint": 8
+    },
+    "semantic_rows_total": 16,
+    "strict_rows_total": 23,
+    "train_rows_total": 343,
+    "validation_rows_total": 23
+  },
+  "next_best_step": "Use the package in one evidence-focused probe or scorer-head experiment, then measure whether semantic supervision moves the reserved residual bank without regressing the cleaned canary.",
+  "package_snapshot": {
+    "added_by_language": {
+      "python": 4,
+      "rust": 12
+    },
+    "added_by_repo_family": {
+      "chroma": 4,
+      "dbt-core": 4,
+      "repository_library": 4,
+      "tiktoken": 4
+    },
+    "added_by_target_text": {
+      "candidate_change_surface": 4,
+      "symptom_or_call_path_analogue": 4,
+      "verifier_and_test_constraint": 8
+    },
+    "base_train_rows_after_stage11061": 327,
+    "rows_added_total": 16,
+    "semantic_pairwise_rows": 8,
+    "semantic_role_full_rows": 8,
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_rows_after": 343,
+    "train_rows_before": 327,
+    "validation_rows_unchanged": 23
+  },
+  "passed": true,
+  "stage": 11083,
+  "stage_name": "stage11083_ready_lane_semantic_evidence_support_audit"
+}

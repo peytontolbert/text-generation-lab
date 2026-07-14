@@ -1,0 +1,854 @@
+{
+  "counts": {
+    "all": {
+      "by_language": {
+        "python": 1084,
+        "rust": 8,
+        "web_js_ts_html": 28
+      },
+      "by_target": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 280,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 280,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 280,
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH": 280
+      },
+      "by_target_label": {
+        "A": 285,
+        "B": 290,
+        "C": 250,
+        "D": 295
+      },
+      "contract_failed_rows": 0,
+      "contract_passed_rows": 1120,
+      "role_alias_leak_rows": 0,
+      "rows": 1120,
+      "target_label_leak_rows": 0,
+      "target_specific_cue_rows": 1120,
+      "target_value_leak_rows": 0
+    },
+    "by_split": {
+      "strict_eval": {
+        "by_language": {
+          "python": 108,
+          "rust": 4,
+          "web_js_ts_html": 4
+        },
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 29,
+          "DISTRACTOR_BACKGROUND_CONTEXT": 29,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 29,
+          "SUPPORTING_SYMPTOM_OR_CALL_PATH": 29
+        },
+        "by_target_label": {
+          "A": 28,
+          "B": 39,
+          "C": 24,
+          "D": 25
+        },
+        "contract_failed_rows": 0,
+        "contract_passed_rows": 116,
+        "role_alias_leak_rows": 0,
+        "rows": 116,
+        "target_label_leak_rows": 0,
+        "target_specific_cue_rows": 116,
+        "target_value_leak_rows": 0
+      },
+      "train": {
+        "by_language": {
+          "python": 868,
+          "rust": 4,
+          "web_js_ts_html": 20
+        },
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 223,
+          "DISTRACTOR_BACKGROUND_CONTEXT": 223,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 223,
+          "SUPPORTING_SYMPTOM_OR_CALL_PATH": 223
+        },
+        "by_target_label": {
+          "A": 227,
+          "B": 220,
+          "C": 205,
+          "D": 240
+        },
+        "contract_failed_rows": 0,
+        "contract_passed_rows": 892,
+        "role_alias_leak_rows": 0,
+        "rows": 892,
+        "target_label_leak_rows": 0,
+        "target_specific_cue_rows": 892,
+        "target_value_leak_rows": 0
+      },
+      "validation": {
+        "by_language": {
+          "python": 108,
+          "web_js_ts_html": 4
+        },
+        "by_target": {
+          "DECISIVE_VERIFIER_TEST_CONSTRAINT": 28,
+          "DISTRACTOR_BACKGROUND_CONTEXT": 28,
+          "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 28,
+          "SUPPORTING_SYMPTOM_OR_CALL_PATH": 28
+        },
+        "by_target_label": {
+          "A": 30,
+          "B": 31,
+          "C": 21,
+          "D": 30
+        },
+        "contract_failed_rows": 0,
+        "contract_passed_rows": 112,
+        "role_alias_leak_rows": 0,
+        "rows": 112,
+        "target_label_leak_rows": 0,
+        "target_specific_cue_rows": 112,
+        "target_value_leak_rows": 0
+      }
+    },
+    "root_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    },
+    "row_level_failures": 0,
+    "source_row_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    },
+    "target_specific_cue_rows": 1120,
+    "unique_roots_by_split": {
+      "strict_eval": 29,
+      "train": 223,
+      "validation": 28
+    }
+  },
+  "created_at_utc": "2026-07-13T09:55:27Z",
+  "decision": "true_evidence_candidate_judgment_package_admitted_for_diagnostic_probe",
+  "outputs": {
+    "row_cards_jsonl": "runs/local/artifacts/stage11260_true_evidence_candidate_judgment_audit/true_evidence_candidate_judgment_audit_cards.jsonl",
+    "summary_json": "runs/local/artifacts/stage11260_true_evidence_candidate_judgment_audit/true_evidence_candidate_judgment_audit.json"
+  },
+  "passed": true,
+  "quality_gates": {
+    "all_rows_contract_passed": true,
+    "candidate_ids_are_opaque": true,
+    "no_role_alias_leaks_before_options": true,
+    "no_target_label_leaks_before_options": true,
+    "no_target_value_leaks_before_options": true,
+    "package_passed": true,
+    "root_split_disjoint": true,
+    "source_row_split_disjoint": true
+  },
+  "risk_notes": [
+    "Target-specific lexical cues are expected because the candidate item text must expose real evidence semantics; these rows are diagnostic training candidates, not promotable heldout proof by themselves.",
+    "No C/C++ rows are present because Stage11237 found no clean C/C++ source candidates; this package cannot support the final multilingual claim alone.",
+    "The package should be used to test scorer-objective alignment while preserving the Stage11200 clean canary and residual bank."
+  ],
+  "sample_failures": [],
+  "sample_target_specific_cues": [
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT"
+      ],
+      "repo_family": "nousresearch_hermes_agent_self_evolution",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82",
+      "row_id": "stage11259::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82::evidence_candidate_judgment::verifier_and_test_constraint",
+      "source_row_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82",
+      "split": "train",
+      "target_label": "D",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "selected verifier",
+        "test-selection route",
+        "verifier/test target"
+      ],
+      "target_value": "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH"
+      ],
+      "repo_family": "nousresearch_hermes_agent_self_evolution",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82",
+      "row_id": "stage11259::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82::evidence_candidate_judgment::candidate_change_surface",
+      "source_row_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82",
+      "split": "train",
+      "target_label": "B",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "changed source",
+        "changed surface",
+        "edit surface"
+      ],
+      "target_value": "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE"
+      ],
+      "repo_family": "nousresearch_hermes_agent_self_evolution",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82",
+      "row_id": "stage11259::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82::evidence_candidate_judgment::symptom_or_call_path_analogue",
+      "source_row_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82",
+      "split": "train",
+      "target_label": "C",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "symptom/call-path",
+        "execution route"
+      ],
+      "target_value": "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH"
+      ],
+      "repo_family": "nousresearch_hermes_agent_self_evolution",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82",
+      "row_id": "stage11259::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82::evidence_candidate_judgment::nearby_definition_or_usage_context",
+      "source_row_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::82",
+      "split": "train",
+      "target_label": "B",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "nearby context",
+        "background symbols",
+        "not the selected verifier"
+      ],
+      "target_value": "DISTRACTOR_BACKGROUND_CONTEXT",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH"
+      ],
+      "repo_family": "t5x",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40",
+      "row_id": "stage11259::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40::evidence_candidate_judgment::verifier_and_test_constraint",
+      "source_row_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40",
+      "split": "train",
+      "target_label": "B",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "selected verifier",
+        "test-selection route",
+        "verifier/test target"
+      ],
+      "target_value": "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT"
+      ],
+      "repo_family": "t5x",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40",
+      "row_id": "stage11259::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40::evidence_candidate_judgment::candidate_change_surface",
+      "source_row_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40",
+      "split": "train",
+      "target_label": "A",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "changed source",
+        "changed surface",
+        "edit surface"
+      ],
+      "target_value": "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH"
+      ],
+      "repo_family": "t5x",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40",
+      "row_id": "stage11259::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40::evidence_candidate_judgment::symptom_or_call_path_analogue",
+      "source_row_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40",
+      "split": "train",
+      "target_label": "D",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "symptom/call-path",
+        "execution route"
+      ],
+      "target_value": "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH"
+      ],
+      "repo_family": "t5x",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40",
+      "row_id": "stage11259::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40::evidence_candidate_judgment::nearby_definition_or_usage_context",
+      "source_row_id": "retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::40",
+      "split": "train",
+      "target_label": "C",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "nearby context",
+        "background symbols",
+        "not the selected verifier"
+      ],
+      "target_value": "DISTRACTOR_BACKGROUND_CONTEXT",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE"
+      ],
+      "repo_family": "keras_cv_attention_models",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101::evidence_candidate_judgment::verifier_and_test_constraint",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101",
+      "split": "train",
+      "target_label": "A",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "selected verifier",
+        "test-selection route",
+        "verifier/test target"
+      ],
+      "target_value": "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "DISTRACTOR_BACKGROUND_CONTEXT"
+      ],
+      "repo_family": "keras_cv_attention_models",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101::evidence_candidate_judgment::candidate_change_surface",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101",
+      "split": "train",
+      "target_label": "A",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "changed source",
+        "changed surface",
+        "edit surface"
+      ],
+      "target_value": "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT"
+      ],
+      "repo_family": "keras_cv_attention_models",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101::evidence_candidate_judgment::symptom_or_call_path_analogue",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101",
+      "split": "train",
+      "target_label": "A",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "symptom/call-path",
+        "execution route"
+      ],
+      "target_value": "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "DISTRACTOR_BACKGROUND_CONTEXT"
+      ],
+      "repo_family": "keras_cv_attention_models",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101::evidence_candidate_judgment::nearby_definition_or_usage_context",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::101",
+      "split": "train",
+      "target_label": "D",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "nearby context",
+        "background symbols",
+        "not the selected verifier"
+      ],
+      "target_value": "DISTRACTOR_BACKGROUND_CONTEXT",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE"
+      ],
+      "repo_family": "nousresearch_hermes_agent_self_evolution",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58::evidence_candidate_judgment::verifier_and_test_constraint",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58",
+      "split": "train",
+      "target_label": "C",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "selected verifier",
+        "test-selection route",
+        "verifier/test target"
+      ],
+      "target_value": "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT"
+      ],
+      "repo_family": "nousresearch_hermes_agent_self_evolution",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58::evidence_candidate_judgment::candidate_change_surface",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58",
+      "split": "train",
+      "target_label": "B",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "changed source",
+        "changed surface",
+        "edit surface"
+      ],
+      "target_value": "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH"
+      ],
+      "repo_family": "nousresearch_hermes_agent_self_evolution",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58::evidence_candidate_judgment::symptom_or_call_path_analogue",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58",
+      "split": "train",
+      "target_label": "D",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "symptom/call-path",
+        "execution route"
+      ],
+      "target_value": "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH"
+      ],
+      "repo_family": "nousresearch_hermes_agent_self_evolution",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58::evidence_candidate_judgment::nearby_definition_or_usage_context",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::58",
+      "split": "train",
+      "target_label": "A",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "nearby context",
+        "background symbols",
+        "not the selected verifier"
+      ],
+      "target_value": "DISTRACTOR_BACKGROUND_CONTEXT",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT"
+      ],
+      "repo_family": "t5x",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21::evidence_candidate_judgment::verifier_and_test_constraint",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21",
+      "split": "train",
+      "target_label": "D",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "selected verifier",
+        "test-selection route",
+        "verifier/test target"
+      ],
+      "target_value": "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH"
+      ],
+      "repo_family": "t5x",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21::evidence_candidate_judgment::candidate_change_surface",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21",
+      "split": "train",
+      "target_label": "B",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "changed source",
+        "changed surface",
+        "edit surface"
+      ],
+      "target_value": "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH"
+      ],
+      "repo_family": "t5x",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21::evidence_candidate_judgment::symptom_or_call_path_analogue",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21",
+      "split": "train",
+      "target_label": "D",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "symptom/call-path",
+        "execution route"
+      ],
+      "target_value": "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+      "target_value_leaks_before_options": []
+    },
+    {
+      "candidate_evidence_kind_hidden": true,
+      "candidate_id_opaque_present": true,
+      "contract_passed_row_level": true,
+      "has_candidate_text": true,
+      "language_family": "python",
+      "option_count": 4,
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "option_values": [
+        "DISTRACTOR_BACKGROUND_CONTEXT",
+        "SUPPORTING_SYMPTOM_OR_CALL_PATH",
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT",
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE"
+      ],
+      "repo_family": "t5x",
+      "role_alias_leaks_before_options": [],
+      "root_id": "stage11237::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21",
+      "row_id": "stage11259::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21::evidence_candidate_judgment::nearby_definition_or_usage_context",
+      "source_row_id": "retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::21",
+      "split": "train",
+      "target_label": "A",
+      "target_label_leak_before_options": false,
+      "target_specific_cue_hits": [
+        "nearby context",
+        "background symbols",
+        "not the selected verifier"
+      ],
+      "target_value": "DISTRACTOR_BACKGROUND_CONTEXT",
+      "target_value_leaks_before_options": []
+    }
+  ],
+  "source_artifacts": {
+    "package": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_package.json",
+    "strict": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_strict_rows.jsonl",
+    "train": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_train_rows.jsonl",
+    "validation": "runs/local/artifacts/stage11259_true_evidence_candidate_judgment_package/true_evidence_candidate_judgment_validation_rows.jsonl"
+  },
+  "stage": 11260,
+  "stage_name": "stage11260_true_evidence_candidate_judgment_audit"
+}

@@ -1,0 +1,160 @@
+{
+  "created_at_utc": "2026-07-14T18:35:27Z",
+  "decision": "reject_stage11964_keep_stage11924_transition_frontier",
+  "finding": [
+    "A separate transition status/control head fit train support better but failed heldout transfer.",
+    "Old transition score regressed from 364/640 to 188/640.",
+    "Status/control validation regressed from 64/124 to 6/124 and strict from 79/178 to 13/178.",
+    "Compact gates stayed preserved, so the failure is isolated to transition scorer generalization rather than global model damage."
+  ],
+  "milestone_decomposition_note": "Add milestone_decomposition_policy as a separate future projection lane after transition baseline stabilizes; do not mix it into the rejected Stage11964 line.",
+  "next_program": {
+    "goal": "Define and enforce a clean Transition-Root-250 package before any further transition training.",
+    "minimum_requirements": {
+      "c_cpp_roots": 50,
+      "fail_to_pass_records": 50,
+      "independent_roots_total": 250,
+      "insufficient_evidence_records": 40,
+      "not_exercised_records": 40,
+      "pass_current_build_and_run_records": 40,
+      "pass_current_build_records": 40,
+      "pass_to_pass_records": 100,
+      "python_roots": 50,
+      "rust_roots": 50,
+      "verifier_removed_cap": "capped; not allowed to dominate",
+      "web_cap_fraction": 0.4
+    },
+    "required_transition_shape": [
+      "baseline observed",
+      "relevant artifact found",
+      "verifier/test selected",
+      "evidence sufficiency judged",
+      "patch or no-patch decision",
+      "verifier transition predicted",
+      "continue/stop decision"
+    ],
+    "stage": "stage11967_transition_root_250_supply_contract",
+    "training_gate_before_long_run": [
+      "evaluate every 100-200 steps on old 640, v2 validation/strict, source-heldout smoke, and status/control eval",
+      "early stop if old 640 drops below 350",
+      "early stop if train improves while validation drops for two checkpoints",
+      "report confusion by semantic status, not just answer label"
+    ]
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11966_transition_status_control_decision/transition_status_control_decision.json"
+  },
+  "protected_gates_status": {
+    "filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "coverage": 1.0,
+      "miss_count": 0,
+      "rows": 22
+    },
+    "filtered_validation": {
+      "accuracy": 0.9090909090909091,
+      "correct": 20,
+      "coverage": 1.0,
+      "miss_count": 2,
+      "rows": 22
+    },
+    "old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "coverage": 1.0,
+      "miss_count": 0,
+      "rows": 23
+    },
+    "old_canary_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "coverage": 1.0,
+      "miss_count": 2,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.7,
+      "correct": 7,
+      "coverage": 1.0,
+      "miss_count": 3,
+      "rows": 10
+    },
+    "source_heldout_smoke": {
+      "accuracy": 0.5,
+      "correct": 6,
+      "coverage": 1.0,
+      "miss_count": 6,
+      "rows": 12
+    }
+  },
+  "rejected_candidate": {
+    "aug_strict_eval": {
+      "accuracy": 0.1601123595505618,
+      "correct": 57,
+      "coverage": 1.0,
+      "miss_count": 299,
+      "rows": 356
+    },
+    "aug_validation": {
+      "accuracy": 0.13306451612903225,
+      "correct": 33,
+      "coverage": 1.0,
+      "miss_count": 215,
+      "rows": 248
+    },
+    "old_transition_640": {
+      "accuracy": 0.29375,
+      "correct": 188,
+      "coverage": 1.0,
+      "miss_count": 452,
+      "rows": 640
+    },
+    "runtime": "runs/local/artifacts/stage11964_transition_status_control_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_semantic_plus_transition_status_head",
+    "stage": "stage11964_transition_status_control_probe",
+    "status_strict_eval": {
+      "accuracy": 0.07303370786516854,
+      "correct": 13,
+      "coverage": 1.0,
+      "miss_count": 165,
+      "rows": 178
+    },
+    "status_validation": {
+      "accuracy": 0.04838709677419355,
+      "correct": 6,
+      "coverage": 1.0,
+      "miss_count": 118,
+      "rows": 124
+    }
+  },
+  "root_cause_interpretation": [
+    "Counterfactual status augmentation is overpowering real execution evidence and inducing label/status priors.",
+    "The current 120 independent roots are insufficient for status/control transfer despite 5,780 projected rows.",
+    "More head variants on the same augmented rows are unlikely to help without fresh executable roots and stronger validation gating."
+  ],
+  "selected_transition_frontier": {
+    "old_transition_640": {
+      "accuracy": 0.56875,
+      "correct": 364,
+      "coverage": 1.0,
+      "miss_count": 276,
+      "rows": 640
+    },
+    "runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_semantic_candidate_head",
+    "stage": "stage11924_transition_listwise_head_only_probe"
+  },
+  "source_artifacts": {
+    "audit": "runs/local/artifacts/stage11965_transition_status_control_postrun_audit/transition_status_control_postrun_audit.json",
+    "stage11963_request": "runs/local/artifacts/stage11963_transition_status_control_probe_request/transition_status_control_probe_request.json",
+    "stage11964_runtime": "runs/local/artifacts/stage11964_transition_status_control_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11966,
+  "stage_name": "stage11966_transition_status_control_decision",
+  "stop_conditions": [
+    "Do not promote Stage11964.",
+    "Do not rerun status/control head on Stage11958 with only hyperparameter changes.",
+    "Do not count Stage11957 counterfactual rows as independent root scale."
+  ]
+}

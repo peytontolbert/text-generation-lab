@@ -1,0 +1,102 @@
+{
+  "best_scorers_by_split": {
+    "alias_free_residual_diagnostic": {
+      "accuracy": 0.42857142857142855,
+      "correct": 3,
+      "rows": 7,
+      "scorer": "encoder_option_retrieval"
+    },
+    "canary_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "canary_validation": {
+      "accuracy": 0.8695652173913043,
+      "correct": 20,
+      "rows": 23,
+      "scorer": "encoder_option_retrieval"
+    },
+    "rust_admitted_replacements": {
+      "accuracy": 0.3333333333333333,
+      "correct": 1,
+      "rows": 3,
+      "scorer": "decoder_first_step"
+    },
+    "web_alias_free_support": {
+      "accuracy": 0.3333333333333333,
+      "correct": 7,
+      "rows": 21,
+      "scorer": "encoder_option_retrieval"
+    },
+    "web_source_snippet_support": {
+      "accuracy": 0.3333333333333333,
+      "correct": 7,
+      "rows": 21,
+      "scorer": "encoder_option_retrieval"
+    }
+  },
+  "created_at_utc": "2026-07-13T12:20:21Z",
+  "decision": "reject_stage11341_keep_stage11200_frontier",
+  "kept_frontier": {
+    "runtime_model": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "weights_sha256": "1367d9c50d1e0defb9e19afb20e06b1f15e20e43d412310c0f62e31ac241ec7f"
+  },
+  "next_action": "Do not run more 21-row Web support probes. Build a semantic evidence-item objective/paired scorer or acquire larger disjoint Rust/Web snippet+verifier roots with heldout splits.",
+  "product_metrics": {
+    "alias_free_residual_diagnostic": {
+      "correct": 3,
+      "exact_accuracy": 0.42857142857142855,
+      "rows": 7,
+      "scored_rows": 7
+    },
+    "canary_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "canary_validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "rust_admitted_replacements": {
+      "correct": 1,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 3,
+      "scored_rows": 3
+    },
+    "web_alias_free_support": {
+      "correct": 7,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 21,
+      "scored_rows": 21
+    },
+    "web_source_snippet_support": {
+      "correct": 7,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 21,
+      "scored_rows": 21
+    }
+  },
+  "rationale": [
+    "Stage11338 improved Web support data from path-only to real source snippets from a shallow Sphinx clone.",
+    "Stage11341 preserved canary but did not improve targeted Web source-snippet rows: 7/21 remained unchanged from Stage11200.",
+    "Rust admitted replacements remained 1/3 and alias-free residual diagnostic remained 3/7.",
+    "The failure is now scorer/objective/data geometry, not merely missing Web source text."
+  ],
+  "rejected_runtime": {
+    "runtime_model": "runs/local/artifacts/stage11341_web_source_snippet_support_probe/runtime_model/runtime_model_bundle.json",
+    "weights_sha256": "3ee1922ec9d148e447eb3d4216bff216d5bc3d12a6ccfb1cb73f5972d6fdc7b9"
+  },
+  "source_artifacts": {
+    "audit": "runs/local/artifacts/stage11342_web_source_snippet_support_postrun_audit/web_source_snippet_support_postrun_audit.json",
+    "materialization": "runs/local/artifacts/stage11338_web_source_snippet_evidence_materialization/web_source_snippet_evidence_materialization.json",
+    "request": "runs/local/artifacts/stage11340_web_source_snippet_support_probe_request/web_source_snippet_support_probe_request.json"
+  },
+  "stage": 11343,
+  "stage_name": "stage11343_web_source_snippet_support_decision"
+}

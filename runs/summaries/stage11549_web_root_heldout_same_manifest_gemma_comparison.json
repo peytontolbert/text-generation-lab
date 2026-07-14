@@ -1,0 +1,373 @@
+{
+  "by_repo_family_gemma12b": {
+    "@modelcontextprotocol/client": {
+      "accuracy": 0.3333333333333333,
+      "correct": 2,
+      "rows": 6,
+      "scored_rows": 6
+    },
+    "@modelcontextprotocol/core": {
+      "accuracy": 0.75,
+      "correct": 9,
+      "rows": 12,
+      "scored_rows": 12
+    },
+    "@modelcontextprotocol/server": {
+      "accuracy": 0.6666666666666666,
+      "correct": 8,
+      "rows": 12,
+      "scored_rows": 12
+    },
+    "llama_stack_ui": {
+      "accuracy": 1.0,
+      "correct": 6,
+      "rows": 6,
+      "scored_rows": 6
+    },
+    "openhands_openhands_frontend": {
+      "accuracy": 1.0,
+      "correct": 18,
+      "rows": 18,
+      "scored_rows": 18
+    },
+    "sep_automation": {
+      "accuracy": 0.75,
+      "correct": 9,
+      "rows": 12,
+      "scored_rows": 12
+    }
+  },
+  "by_task_gemma12b": {
+    "abstention_insufficient_evidence": {
+      "accuracy": 0.8181818181818182,
+      "correct": 9,
+      "rows": 11,
+      "scored_rows": 11
+    },
+    "alternative_hypothesis_elimination": {
+      "accuracy": 1.0,
+      "correct": 4,
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "evidence_citation": {
+      "accuracy": 0.8181818181818182,
+      "correct": 9,
+      "rows": 11,
+      "scored_rows": 11
+    },
+    "minimal_fix_selection": {
+      "accuracy": 0.6363636363636364,
+      "correct": 7,
+      "rows": 11,
+      "scored_rows": 11
+    },
+    "patch_impact": {
+      "accuracy": 0.7142857142857143,
+      "correct": 5,
+      "rows": 7,
+      "scored_rows": 7
+    },
+    "symptom_localization": {
+      "accuracy": 0.6363636363636364,
+      "correct": 7,
+      "rows": 11,
+      "scored_rows": 11
+    },
+    "verifier_outcome": {
+      "accuracy": 1.0,
+      "correct": 11,
+      "rows": 11,
+      "scored_rows": 11
+    }
+  },
+  "claim_boundary": [
+    "This is a Web/JS/TS/HTML root-heldout diagnostic, not repo-family-heldout broad Web generalization.",
+    "The Ollama host is expected to be the GPU2-pinned service at 127.0.0.1:11435.",
+    "This is compact bounded-choice scoring, not freeform repair or executable patch synthesis."
+  ],
+  "comparison": {
+    "delta_hundred_m_minus_gemma": -0.25757575757575757,
+    "gemma12b_accuracy": 0.7878787878787878,
+    "gemma12b_correct": 52,
+    "gemma12b_rows": 66,
+    "hundred_m_accuracy": 0.5303030303030303,
+    "hundred_m_correct": 35,
+    "hundred_m_rows": 66
+  },
+  "created_at_utc": "2026-07-13T20:48:50Z",
+  "decision": "web_root_heldout_same_manifest_no_100m_win_or_incomplete",
+  "gates": {
+    "gemma_full_coverage": true,
+    "hundred_m_beats_gemma": false,
+    "hundred_m_full_coverage": true,
+    "same_manifest_row_count": true
+  },
+  "gemma12b": {
+    "accuracy": 0.7878787878787878,
+    "correct": 52,
+    "rows": 66,
+    "scored_rows": 66
+  },
+  "gemma_misses": [
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "B",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/server",
+      "root_id": "stage11540::mcp_typescript_sdk::server_protocol_registration",
+      "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::symptom_localization::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "A",
+      "task_type": "symptom_localization"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "C",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/server",
+      "root_id": "stage11540::mcp_typescript_sdk::server_protocol_registration",
+      "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::minimal_fix_selection::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "E",
+      "task_type": "minimal_fix_selection"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "E",
+      "gemma12b_raw_output": "E",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/server",
+      "root_id": "stage11540::mcp_typescript_sdk::server_protocol_registration",
+      "row_id": "stage11540::mcp_typescript_sdk::server_protocol_registration::abstention_insufficient_evidence::heldout_v1",
+      "semantic_target_value": "answer_with_visible_evidence",
+      "target_text": "A",
+      "task_type": "abstention_insufficient_evidence"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "B",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/server",
+      "root_id": "stage11540::mcp_typescript_sdk::server_streamable_http_transport",
+      "row_id": "stage11540::mcp_typescript_sdk::server_streamable_http_transport::patch_impact::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "D",
+      "task_type": "patch_impact"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "B",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/client",
+      "root_id": "stage11540::mcp_typescript_sdk::client_stdio_transport",
+      "row_id": "stage11540::mcp_typescript_sdk::client_stdio_transport::symptom_localization::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "A",
+      "task_type": "symptom_localization"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "A",
+      "gemma12b_raw_output": "A",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/client",
+      "root_id": "stage11540::mcp_typescript_sdk::client_stdio_transport",
+      "row_id": "stage11540::mcp_typescript_sdk::client_stdio_transport::evidence_citation::heldout_v1",
+      "semantic_target_value": "verifier_and_test_constraint",
+      "target_text": "B",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "D",
+      "gemma12b_raw_output": "D",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/client",
+      "root_id": "stage11540::mcp_typescript_sdk::client_stdio_transport",
+      "row_id": "stage11540::mcp_typescript_sdk::client_stdio_transport::minimal_fix_selection::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "E",
+      "task_type": "minimal_fix_selection"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "D",
+      "gemma12b_raw_output": "D",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/client",
+      "root_id": "stage11540::mcp_typescript_sdk::client_stdio_transport",
+      "row_id": "stage11540::mcp_typescript_sdk::client_stdio_transport::abstention_insufficient_evidence::heldout_v1",
+      "semantic_target_value": "answer_with_visible_evidence",
+      "target_text": "A",
+      "task_type": "abstention_insufficient_evidence"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "B",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/core",
+      "root_id": "stage11540::mcp_typescript_sdk::core_protocol_state_machine",
+      "row_id": "stage11540::mcp_typescript_sdk::core_protocol_state_machine::symptom_localization::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "A",
+      "task_type": "symptom_localization"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "A",
+      "gemma12b_raw_output": "A",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/core",
+      "root_id": "stage11540::mcp_typescript_sdk::core_tool_name_validation",
+      "row_id": "stage11540::mcp_typescript_sdk::core_tool_name_validation::evidence_citation::heldout_v1",
+      "semantic_target_value": "verifier_and_test_constraint",
+      "target_text": "B",
+      "task_type": "evidence_citation"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "D",
+      "gemma12b_raw_output": "D",
+      "language_family": "web_js_ts_html",
+      "repo_family": "@modelcontextprotocol/core",
+      "root_id": "stage11540::mcp_typescript_sdk::core_tool_name_validation",
+      "row_id": "stage11540::mcp_typescript_sdk::core_tool_name_validation::minimal_fix_selection::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "E",
+      "task_type": "minimal_fix_selection"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "C",
+      "language_family": "web_js_ts_html",
+      "repo_family": "sep_automation",
+      "root_id": "stage11543::sep_automation::transition_handler_state_rules",
+      "row_id": "stage11543::sep_automation::transition_handler_state_rules::patch_impact::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "D",
+      "task_type": "patch_impact"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "B",
+      "language_family": "web_js_ts_html",
+      "repo_family": "sep_automation",
+      "root_id": "stage11543::sep_automation::hook_registry_dispatch_resilience",
+      "row_id": "stage11543::sep_automation::hook_registry_dispatch_resilience::symptom_localization::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "A",
+      "task_type": "symptom_localization"
+    },
+    {
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "C",
+      "language_family": "web_js_ts_html",
+      "repo_family": "sep_automation",
+      "root_id": "stage11543::sep_automation::hook_registry_dispatch_resilience",
+      "row_id": "stage11543::sep_automation::hook_registry_dispatch_resilience::minimal_fix_selection::heldout_v1",
+      "semantic_target_value": "candidate_change_surface",
+      "target_text": "E",
+      "task_type": "minimal_fix_selection"
+    }
+  ],
+  "hundred_m": {
+    "accuracy": 0.5303030303030303,
+    "by_repo_family": {
+      "@modelcontextprotocol/client": {
+        "accuracy": 0.8333333333333334,
+        "correct": 5,
+        "rows": 6
+      },
+      "@modelcontextprotocol/core": {
+        "accuracy": 0.8333333333333334,
+        "correct": 10,
+        "rows": 12
+      },
+      "@modelcontextprotocol/server": {
+        "accuracy": 0.8333333333333334,
+        "correct": 10,
+        "rows": 12
+      },
+      "llama_stack_ui": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 6
+      },
+      "openhands_openhands_frontend": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 18
+      },
+      "sep_automation": {
+        "accuracy": 0.8333333333333334,
+        "correct": 10,
+        "rows": 12
+      }
+    },
+    "by_task_type": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 0.6363636363636364,
+        "correct": 7,
+        "rows": 11
+      },
+      "alternative_hypothesis_elimination": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 4
+      },
+      "evidence_citation": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "rows": 11
+      },
+      "minimal_fix_selection": {
+        "accuracy": 0.6363636363636364,
+        "correct": 7,
+        "rows": 11
+      },
+      "patch_impact": {
+        "accuracy": 1.0,
+        "correct": 7,
+        "rows": 7
+      },
+      "symptom_localization": {
+        "accuracy": 0.6363636363636364,
+        "correct": 7,
+        "rows": 11
+      },
+      "verifier_outcome": {
+        "accuracy": 0.6363636363636364,
+        "correct": 7,
+        "rows": 11
+      }
+    },
+    "correct": 35,
+    "coverage": 1.0,
+    "coverage_corrected_accuracy": 0.5303030303030303,
+    "rows": 66,
+    "scored_rows": 66,
+    "unscored_rows": 0
+  },
+  "model_id": "gemma3:12b",
+  "ollama_host": "127.0.0.1:11435",
+  "outputs": {
+    "gemma_rows": "runs/local/artifacts/stage11549_web_root_heldout_same_manifest_gemma_comparison/web_root_heldout_gemma_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11549_web_root_heldout_same_manifest_gemma_comparison/web_root_heldout_same_manifest_gemma_comparison.json"
+  },
+  "passed": false,
+  "source_artifacts": {
+    "hundred_m_summary": "runs/local/artifacts/stage11548_web_root_heldout_stage11507_score_audit/web_root_heldout_stage11507_score_audit.json",
+    "rows": "runs/local/artifacts/stage11548_web_root_heldout_stage11507_score_audit/web_root_heldout_rows.jsonl"
+  },
+  "stage": 11549,
+  "stage_name": "stage11549_web_root_heldout_same_manifest_gemma_comparison"
+}

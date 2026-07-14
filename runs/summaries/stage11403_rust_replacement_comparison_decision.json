@@ -1,0 +1,89 @@
+{
+  "admission_policy": {
+    "use_as_diagnostic_strict_candidate": true,
+    "use_as_headline_eval": false,
+    "use_as_train_support": false,
+    "why": [
+      "Rows are reserved strict replacements for quarantined Rust evidence rows.",
+      "n=3 is too small for broad Rust claims.",
+      "Both systems score 1/3, so the slice indicates hard/possibly under-specified evidence-role geometry."
+    ]
+  },
+  "claim_scope": "three reserved Rust evidence-citation replacement rows only",
+  "created_at_utc": "2026-07-13T14:51:44Z",
+  "decision": "keep_rust_replacement_slice_diagnostic",
+  "delta_hundred_m_minus_gemma": 0.0,
+  "gemma12b": {
+    "correct": 1,
+    "exact_accuracy": 0.3333333333333333,
+    "rows": 3,
+    "scored_rows": 3
+  },
+  "hundred_m": {
+    "correct": 1,
+    "exact_accuracy": 0.3333333333333333,
+    "rows": 3,
+    "scored_rows": 3
+  },
+  "interpretation": "The reserved Rust replacement slice is weak for both systems: 100M and Gemma tie at 1/3. This is not evidence of a 100M Rust win, but it also is not a Gemma advantage. Treat the rows as a diagnostic for Rust evidence-role materialization and scorer alignment.",
+  "next_allowed_steps": [
+    "Mine disjoint Rust train-support roots, not these reserved rows.",
+    "Require non-tokenizers repo families or fresh time splits.",
+    "Require distinct candidate_change_surface, symptom_or_call_path_analogue, and verifier_and_test_constraint evidence.",
+    "Re-score 100M and Gemma after adding a larger Rust heldout slice."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11403_rust_replacement_comparison_decision/rust_replacement_comparison_decision.json"
+  },
+  "passed": true,
+  "prior_product_metrics": {
+    "alias_free_residual_diagnostic": {
+      "correct": 3,
+      "exact_accuracy": 0.42857142857142855,
+      "rows": 7,
+      "scored_rows": 7
+    },
+    "canary_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "canary_validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "rust_admitted_replacements": {
+      "correct": 1,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 3,
+      "scored_rows": 3
+    },
+    "web_alias_free_support": {
+      "correct": 7,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 21,
+      "scored_rows": 21
+    }
+  },
+  "promotion_gate": {
+    "beats_gemma": false,
+    "promote_rust_claim": false,
+    "sufficient_n_for_claim": false,
+    "tie_with_gemma": true
+  },
+  "row_ids": [
+    "stage11193::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+    "stage11193::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue",
+    "stage11193::rust::rust_replacement_slot_3::candidate_change_surface"
+  ],
+  "source_artifacts": {
+    "comparison": "runs/local/artifacts/stage11402_rust_replacement_same_manifest_gemma_comparison/rust_replacement_same_manifest_gemma_comparison.json",
+    "current_score": "runs/local/artifacts/stage11333_rust_web_gap_current_runtime_score/rust_web_gap_current_runtime_score.json",
+    "rust_rows": "runs/local/artifacts/stage11331_rust_web_gap_recovery_manifest/admitted_rust_strict_replacement_rows.jsonl"
+  },
+  "stage": 11403,
+  "stage_name": "stage11403_rust_replacement_comparison_decision"
+}

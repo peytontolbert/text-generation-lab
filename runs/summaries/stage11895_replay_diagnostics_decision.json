@@ -1,0 +1,51 @@
+{
+  "created_at_utc": "2026-07-14T13:53:19Z",
+  "decision": "mechanism_proven_build_disjoint_replay_or_transition_record_pipeline_next",
+  "findings": {
+    "stage11884_rendering_fix": {
+      "decision": "rendered_support_probe_package_ready",
+      "pre_options_target_value_leaks": 0,
+      "rendered_support_rows": 160
+    },
+    "stage11891_support_only": {
+      "decision": "support_only_probe_learnable_now_build_guarded_replay",
+      "filtered_strict": "11/22",
+      "interpretation": "Rendered support is learnable, but without replay it catastrophically overwrites protected scorer geometry.",
+      "old_canary_strict": "12/23",
+      "rendered_support_train": "148/160",
+      "residual_bank": "3/10"
+    },
+    "stage11894_protected_replay": {
+      "decision": "support_only_probe_partial_fit_needs_staged_objective",
+      "filtered_strict": "22/22",
+      "filtered_validation": "21/22",
+      "interpretation": "Protected replay preserves gates and improves residual to 9/10 while partially fitting support, but is non-promotable due protected train/eval overlap.",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": "22/23",
+      "rendered_support_train": "92/160",
+      "residual_bank": "9/10",
+      "source_heldout_smoke": "4/12"
+    }
+  },
+  "next_required_work": [
+    "Compile rendered support roots into verified_transition_record_v1 objects so future training targets action/evidence/verifier transitions, not only answer labels.",
+    "Build disjoint protected-analogue replay rows to replace direct protected replay before any promotable guarded run.",
+    "Use the protected-replay recipe as a mechanism template: support rows preservation_exempt=true, analogue replay preservation_exempt=false, high bounded aux, no decoder CE.",
+    "Do not claim source-heldout breadth from the current support rows; C/C++ still includes repeated google_benchmark family roots."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11895_replay_diagnostics_decision/replay_diagnostics_decision.json"
+  },
+  "selected_frontier_status": {
+    "reason": "trained on protected replay copies; source-heldout smoke also remains weak",
+    "selected_frontier_remains": "stage11507 + encoder_option_retrieval_evidence_judgment_head",
+    "stage11893_not_promotable": true
+  },
+  "source_artifacts": {
+    "protected_replay_audit": "runs/local/artifacts/stage11894_protected_replay_postrun_audit/protected_replay_postrun_audit.json",
+    "rendered_package": "runs/local/artifacts/stage11884_rendered_source_heldout_support_probe_package/rendered_source_heldout_support_probe_package.json",
+    "support_only_audit": "runs/local/artifacts/stage11891_support_only_learnability_postrun_audit/support_only_learnability_postrun_audit.json"
+  },
+  "stage": 11895,
+  "stage_name": "stage11895_replay_diagnostics_decision"
+}

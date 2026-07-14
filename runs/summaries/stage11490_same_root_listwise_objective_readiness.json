@@ -1,0 +1,84 @@
+{
+  "blocked_next_training": {
+    "reason": "Naive root_id grouping would train contradictory targets together.",
+    "required_before_training": [
+      "add explicit listwise_group_id or candidate_set_id to Residual-50 rows",
+      "ensure each group has exactly one gold candidate role or an explicit multi-gold/set-valued target",
+      "include at least one hard negative from candidate_change_surface/verifier_and_test_constraint/symptom_or_call_path_analogue per group",
+      "keep protected validation/strict/residual rows outside train groups"
+    ]
+  },
+  "created_at_utc": "2026-07-13T18:06:03Z",
+  "decision": "same_root_listwise_objective_not_ready",
+  "findings": {
+    "duplicate_root_groups": 18,
+    "duplicate_roots_with_target_role_conflict": 18,
+    "residual50_rows": 78,
+    "residual50_unique_roots": 60,
+    "roots_with_candidate_and_verifier_targets": 16,
+    "rows_missing_explicit_candidate_group_id": 78,
+    "rows_with_opaque_options": 78,
+    "train_rows": 504,
+    "train_target_value_counts": {
+      "DECISIVE_BUILD_VERIFIER_CONSTRAINT": 3,
+      "DECISIVE_SELECTED_TEST_CONSTRAINT": 9,
+      "DECISIVE_VERIFIER_TEST_CONSTRAINT": 7,
+      "OBSERVED_VERIFIER_FAILURE_LOG": 3,
+      "OBSERVED_VERIFIER_LOG": 9,
+      "OBSERVED_VERIFIER_PASS_LOG": 7,
+      "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 23,
+      "candidate_change_surface": 20,
+      "symptom_or_call_path_analogue": 8,
+      "verifier_and_test_constraint": 38
+    },
+    "train_task_counts": {
+      "abstention_insufficient_evidence": 18,
+      "alternative_hypothesis_elimination": 1,
+      "cpp_implementation_vs_implementation": 1,
+      "evidence_candidate_judgment": 61,
+      "evidence_citation": 174,
+      "evidence_role_classification": 76,
+      "minimal_fix_selection": 17,
+      "patch_impact": 18,
+      "python_implementation_vs_implementation": 2,
+      "regression_risk": 1,
+      "retrieve_answer_abstain": 18,
+      "symptom_localization": 18,
+      "verifier_candidate_role_classification": 40,
+      "verifier_outcome": 41,
+      "verifier_outcome_semantic_transition": 18
+    }
+  },
+  "interpretation": [
+    "The existing trainer already applies per-row option-softmax CE through bounded_choice_aux_loss.",
+    "A new same-root listwise objective must not group only by root_id because Residual-50 contains counterfactual/projected rows from the same root with different target roles.",
+    "The missing schema field is an explicit candidate_set_id/state_id/listwise_group_id that identifies rows sharing the same visible state and mutually exclusive candidate set."
+  ],
+  "next_stage_contract": {
+    "goal": "compile safe candidate-set groups from Stage11481 without changing training data membership",
+    "recommended_stage": "stage11491_residual50_listwise_group_compiler",
+    "success_criteria": [
+      "all emitted groups have explicit listwise_group_id",
+      "no group has contradictory singleton targets",
+      "no protected row/root overlap",
+      "group audit exposes role margins required for later product scorer comparison"
+    ]
+  },
+  "outputs": {
+    "row_audit": "runs/local/artifacts/stage11490_same_root_listwise_objective_readiness/same_root_listwise_group_audit.jsonl",
+    "summary": "runs/local/artifacts/stage11490_same_root_listwise_objective_readiness/same_root_listwise_objective_readiness.json"
+  },
+  "passed": true,
+  "readiness_passed": false,
+  "source_artifacts": {
+    "residual50_rows": "runs/local/artifacts/stage11481_residual50_ready_package_with_rust_counters/residual50_ready_rows.jsonl",
+    "stage11486_manifest": "runs/local/artifacts/stage11486_residual50_sampler_ablation_probe_request/residual50_sampler_ablation_probe_manifest.jsonl",
+    "stage11489_decision": "runs/local/artifacts/stage11489_residual50_sampler_ablation_decision/residual50_sampler_ablation_decision.json"
+  },
+  "stage": 11490,
+  "stage11489_reference": {
+    "decision": "reject_stage11487_do_not_promote",
+    "next_hypothesis": "H_listwise_same_root_candidate_objective_needed"
+  },
+  "stage_name": "stage11490_same_root_listwise_objective_readiness"
+}

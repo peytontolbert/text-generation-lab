@@ -1,0 +1,83 @@
+{
+  "anti_leak_status": {
+    "paired_answerable_and_abstain_variants": true,
+    "sentencepiece_overlap": false,
+    "strict_smoke_root_replay": false,
+    "train_support_only": true
+  },
+  "created_at_utc": "2026-07-14T08:39:35Z",
+  "decision": "first_cpp_abstain_attractor_support_root_materialized",
+  "feasibility_result": {
+    "admit_recommendation": "candidate_for_row_materialization",
+    "build": {
+      "command": [
+        "cmake",
+        "--build",
+        "/data/tmp/stage11753_bitsandbytes_cpu_build",
+        "--parallel",
+        "2"
+      ],
+      "cwd": "/data/agentkernel-seq2seq-text-lab",
+      "finished_at_utc": "2026-07-14T08:37:32Z",
+      "passed": true,
+      "returncode": 0,
+      "started_at_utc": "2026-07-14T08:37:30Z",
+      "stderr_log": "runs/local/artifacts/stage11753_cpp_bitsandbytes_build_feasibility/logs/build.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_tail": "",
+      "stdout_log": "runs/local/artifacts/stage11753_cpp_bitsandbytes_build_feasibility/logs/build.stdout.log",
+      "stdout_sha256": "fe1a2ee8c2efe55ad0ed7c4d738840532ab891b1e8e3866ae79518737862b5c3",
+      "stdout_tail": "[ 25%] Building CXX object CMakeFiles/bitsandbytes.dir/csrc/common.cpp.o\n[ 50%] Building CXX object CMakeFiles/bitsandbytes.dir/csrc/cpu_ops.cpp.o\n[ 75%] Building CXX object CMakeFiles/bitsandbytes.dir/csrc/pythonInterface.cpp.o\n[100%] Linking CXX shared library /data/parametergolf/helpful_repos/bitsandbytes/bitsandbytes/libbitsandbytes_cpu.so\n[100%] Built target bitsandbytes\n",
+      "timed_out": false
+    },
+    "build_dir": "/data/tmp/stage11753_bitsandbytes_cpu_build",
+    "configure": {
+      "command": [
+        "cmake",
+        "-S",
+        "/data/parametergolf/helpful_repos/bitsandbytes",
+        "-B",
+        "/data/tmp/stage11753_bitsandbytes_cpu_build",
+        "-DCOMPUTE_BACKEND=cpu",
+        "-DCMAKE_BUILD_TYPE=Release"
+      ],
+      "cwd": "/data/agentkernel-seq2seq-text-lab",
+      "finished_at_utc": "2026-07-14T08:37:30Z",
+      "passed": true,
+      "returncode": 0,
+      "started_at_utc": "2026-07-14T08:37:30Z",
+      "stderr_log": "runs/local/artifacts/stage11753_cpp_bitsandbytes_build_feasibility/logs/configure.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_tail": "",
+      "stdout_log": "runs/local/artifacts/stage11753_cpp_bitsandbytes_build_feasibility/logs/configure.stdout.log",
+      "stdout_sha256": "512ba1dca6211e89ba2ccc8b4b47a14044c4608ebfb1f4da453ecff1ee375f87",
+      "stdout_tail": "-- The CXX compiler identification is GNU 12.4.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring bitsandbytes (Backend: cpu)\n-- Configuring done (0.3s)\n-- Generating done (0.0s)\n-- Build files have been written to: /data/tmp/stage11753_bitsandbytes_cpu_build\n",
+      "timed_out": false
+    },
+    "language_family": "c_cpp",
+    "observed_verifier_transition": "PASS_CURRENT_BUILD",
+    "passed": true,
+    "repo_family": "bitsandbytes",
+    "repo_path": "/data/parametergolf/helpful_repos/bitsandbytes",
+    "selected_verifier": "cmake_configure_and_cpu_shared_library_build",
+    "support_lane": "cpp_abstain_attractor_support"
+  },
+  "interpretation": [
+    "This is the first executable C/C++ support root for the abstain-attractor lane.",
+    "It includes paired answerable and verifier-removed abstention variants.",
+    "Rows are train-support-only and do not satisfy the full Stage11742 C/C++ quota by themselves."
+  ],
+  "outputs": {
+    "rows": "runs/local/artifacts/stage11754_cpp_bitsandbytes_abstain_support_rows/cpp_bitsandbytes_abstain_support_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11754_cpp_bitsandbytes_abstain_support_rows/cpp_bitsandbytes_abstain_support_rows.json"
+  },
+  "passed": true,
+  "repo_family": "bitsandbytes",
+  "root_count": 1,
+  "row_count": 4,
+  "source_artifacts": {
+    "feasibility": "runs/local/artifacts/stage11753_cpp_bitsandbytes_build_feasibility/cpp_bitsandbytes_build_feasibility_results.jsonl"
+  },
+  "stage": 11754,
+  "stage_name": "stage11754_cpp_bitsandbytes_abstain_support_rows"
+}

@@ -1,0 +1,55 @@
+{
+  "bundle_count": 6,
+  "claim_scope": [
+    "Convert reviewed selected-test-backed evidence packets into support-only semantic evidence-role rows.",
+    "Directly strengthen evidence-role discrimination without mutating the current standalone or harness scoring contracts."
+  ],
+  "created_at_utc": "2026-07-12T19:41:50Z",
+  "decision": "reviewed_selected_test_backed_semantic_evidence_support_packaged",
+  "excluded_bundle_rows": [
+    {
+      "bundle_id": "stage10126::tokenizers::tokenizers::rust",
+      "reason": "known_alias_risk_from_prior_tokenizers_evidence_lane"
+    }
+  ],
+  "findings": [
+    "The admitted reviewed inventory already contains selected-test-backed evidence gold across Python, C/C++, Rust, and Web, so the immediate bottleneck is train geometry rather than source discovery.",
+    "This package removes opaque answer letters from the supervision target and adds explicit gold-versus-tempting-negative contrasts for the evidence role decision.",
+    "code_assist web is preserved only as train-support stress overlap, not as promotable heldout evidence, while known tokenizers alias-risk evidence remains excluded."
+  ],
+  "inputs": {
+    "atlas": "runs/local/artifacts/stage10417_multilingual_reviewed_scaling_atlas/multilingual_reviewed_scaling_atlas.json",
+    "queue": "runs/local/artifacts/stage10913_multilingual_evidence_root_build_queue/root_build_queue.jsonl",
+    "source_row_files": [
+      "runs/local/artifacts/stage10828_evidence_role_probe_request/evidence_role_probe_manifest.jsonl",
+      "runs/local/artifacts/stage10782_targeted_residual_support_probe_request/targeted_residual_support_probe_manifest.jsonl",
+      "runs/local/artifacts/stage10423_reviewed_multilingual_v27_same_manifest_gemma_comparison/reviewed_multilingual_v27_same_manifest_gemma_rows.jsonl",
+      "runs/local/artifacts/stage10881_evidence_alias_quarantine_successor/agentkernel_lite_encdec_stress_eval.jsonl"
+    ]
+  },
+  "next_best_step": "Use these support rows in the next evidence-focused training package, then re-evaluate the current evidence successor slice and the cleaned v2.7 canary before considering any interface-policy change.",
+  "outputs": {
+    "inventory_jsonl": "runs/local/artifacts/stage10925_reviewed_evidence_role_semantic_support_package/bundle_inventory.jsonl",
+    "rows_jsonl": "runs/local/artifacts/stage10925_reviewed_evidence_role_semantic_support_package/support_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage10925_reviewed_evidence_role_semantic_support_package/reviewed_evidence_role_semantic_support_package.json"
+  },
+  "passed": true,
+  "row_count": 12,
+  "row_types": {
+    "semantic_role_full": 6,
+    "semantic_role_pairwise_contrast": 6
+  },
+  "rows_by_language": {
+    "c_cpp": 4,
+    "python": 4,
+    "rust": 2,
+    "web_js_ts_html": 2
+  },
+  "rows_by_target": {
+    "candidate_change_surface": 4,
+    "symptom_or_call_path_analogue": 2,
+    "verifier_and_test_constraint": 6
+  },
+  "stage": 10925,
+  "stage_name": "stage10925_reviewed_evidence_role_semantic_support_package"
+}

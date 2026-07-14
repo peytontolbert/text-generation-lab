@@ -299,8 +299,100 @@ def _episode_query_terms(row: dict[str, Any], *, max_terms: int) -> list[str]:
     return combined
 
 
-def _chunk_row_from_index(row: dict[str, Any], *, role: str, retrieval_reason: str, retrieval_score: float, distance_from_seed: int) -> dict[str, Any]:
+def _read_source_catalog(path: Path | None) -> dict[str, Any] | None:
+    if path is None:
+        return None
+    if not path.exists():
+        raise FileNotFoundError(f'missing_source_catalog:{path}')
+    payload = json.loads(path.read_text(encoding='utf-8'))
+    if not isinstance(payload, dict):
+        raise ValueError(f'invalid_source_catalog:{path}')
+    return payload
+
+
+def _catalog_entries(catalog: dict[str, Any] | None) -> list[dict[str, Any]]:
+    if catalog is None:
+        return []
+    return [dict(item) for item in catalog.get('sources') or [] if isinstance(item, dict)]
+
+
+def _catalog_defaults(catalog: dict[str, Any] | None, source_type: str) -> dict[str, Any]:
+    if catalog is None:
+        return {}
+    defaults = catalog.get('source_type_defaults') or {}
+    value = defaults.get(str(source_type) or '') if isinstance(defaults, dict) else {}
+    return dict(value) if isinstance(value, dict) else {}
+
+
+def _matches_any(value: str, patterns: list[str]) -> bool:
+    lower = str(value or '').strip().lower()
+    return any(lower == pattern.lower() for pattern in patterns if str(pattern).strip())
+
+
+def _matches_prefix(value: str, patterns: list[str]) -> bool:
+    lower = str(value or '').strip().lower()
+    return any(lower.startswith(pattern.lower()) for pattern in patterns if str(pattern).strip())
+
+
+def _matches_substring(value: str, patterns: list[str]) -> bool:
+    lower = str(value or '').strip().lower()
+    return any(pattern.lower() in lower for pattern in patterns if str(pattern).strip())
+
+
+def _match_source_catalog_entry(
+    *,
+    source_type: str,
+    source_id: str,
+    path: str,
+    catalog: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    norm_path = _norm_path(path).lower()
+    for entry in _catalog_entries(catalog):
+        if str(entry.get('source_type') or '').strip() != str(source_type or '').strip():
+            continue
+        source_id_equals = [str(item) for item in entry.get('source_id_equals') or [] if str(item).strip()]
+        source_id_prefixes = [str(item) for item in entry.get('source_id_prefixes') or [] if str(item).strip()]
+        path_prefixes = [str(item) for item in entry.get('path_prefixes') or [] if str(item).strip()]
+        path_substrings = [str(item) for item in entry.get('path_substrings') or [] if str(item).strip()]
+        has_rules = bool(source_id_equals or source_id_prefixes or path_prefixes or path_substrings)
+        if source_id_equals and _matches_any(source_id, source_id_equals):
+            return entry
+        if source_id_prefixes and _matches_prefix(source_id, source_id_prefixes):
+            return entry
+        if path_prefixes and _matches_prefix(norm_path, path_prefixes):
+            return entry
+        if path_substrings and _matches_substring(norm_path, path_substrings):
+            return entry
+        if not has_rules:
+            return entry
+    return None
+
+
+def _source_catalog_policy(
+    *,
+    source_type: str,
+    source_id: str,
+    path: str,
+    catalog: dict[str, Any] | None,
+) -> tuple[bool, dict[str, Any] | None]:
+    if catalog is None:
+        return True, None
+    entry = _match_source_catalog_entry(source_type=source_type, source_id=source_id, path=path, catalog=catalog)
+    if entry is not None:
+        return bool(entry.get('allow_augmentation', True)), entry
+    defaults = _catalog_defaults(catalog, source_type)
+    return bool(defaults.get('allow_uncataloged', False)), None
+
+
+def _chunk_row_from_index(row: dict[str, Any], *, role: str, retrieval_reason: str, retrieval_score: float, distance_from_seed: int, catalog_entry: dict[str, Any] | None = None) -> dict[str, Any]:
     metadata = _metadata(row)
+    catalog_payload = None
+    if catalog_entry is not None:
+        catalog_payload = {
+            'name': str(catalog_entry.get('name') or ''),
+            'provenance_tier': str(catalog_entry.get('provenance_tier') or ''),
+            'quality_tier': str(catalog_entry.get('quality_tier') or ''),
+        }
     return {
         'chunk_id': str(row.get('chunk_id') or ''),
         'source_type': str(row.get('source_type') or ''),
@@ -314,6 +406,7 @@ def _chunk_row_from_index(row: dict[str, Any], *, role: str, retrieval_reason: s
         'retrieval_reason': retrieval_reason,
         'distance_from_seed': int(distance_from_seed),
         'retrieval_score': float(retrieval_score),
+        'source_catalog': catalog_payload,
     }
 
 
@@ -331,7 +424,10 @@ def _doc_groups(chunk_by_id: dict[str, dict[str, Any]]) -> dict[tuple[str, str, 
     return groups
 
 
-def _role_for_source_type(source_type: str) -> str:
+def _role_for_source_type(source_type: str, *, catalog_entry: dict[str, Any] | None = None) -> str:
+    override = str((catalog_entry or {}).get('role_override') or '').strip()
+    if override:
+        return override
     if source_type == 'paper':
         return 'algorithm_grounding'
     if source_type == 'dataset':
@@ -426,6 +522,7 @@ def _select_augmented_chunks(
     neighbor_window: int,
     max_neighbor_chunks_per_anchor: int,
     min_external_chunks: int,
+    source_catalog: dict[str, Any] | None,
 ) -> list[dict[str, Any]]:
     existing = _existing_chunk_ids(row)
     candidate_scores: dict[str, float] = defaultdict(float)
@@ -460,6 +557,15 @@ def _select_augmented_chunks(
                 continue
             metadata = _metadata(chunk)
             path = _norm_path(str(metadata.get('path') or ''))
+            source_id = str(chunk.get('source_id') or '')
+            allowed_by_catalog, catalog_entry = _source_catalog_policy(
+                source_type=source_type,
+                source_id=source_id,
+                path=path,
+                catalog=source_catalog,
+            )
+            if not allowed_by_catalog:
+                continue
             text = str(chunk.get('text') or '')
             shared = _shared_terms(path=path, text=text, ref_terms=ref_terms)
             strong_shared = shared & strong_ref_terms
@@ -574,6 +680,14 @@ def _select_augmented_chunks(
         source_id = str(chunk.get('source_id') or '')
         metadata = _metadata(chunk)
         path = _norm_path(str(metadata.get('path') or ''))
+        allowed_by_catalog, catalog_entry = _source_catalog_policy(
+            source_type=source_type,
+            source_id=source_id,
+            path=path,
+            catalog=source_catalog,
+        )
+        if not allowed_by_catalog:
+            continue
         path_key = f'{source_type}:{path}'
         if source_type_counts[source_type] >= max_chunks_per_source_type:
             continue
@@ -602,10 +716,11 @@ def _select_augmented_chunks(
                 break
         selected_row = _chunk_row_from_index(
             chunk,
-            role=_role_for_source_type(source_type),
+            role=_role_for_source_type(source_type, catalog_entry=catalog_entry),
             retrieval_reason='|'.join(reason_terms),
             retrieval_score=float(score),
             distance_from_seed=2 if source_type == 'repo' else 3,
+            catalog_entry=catalog_entry,
         )
         selected.append(selected_row)
         selected_chunk_ids.add(chunk_id)
@@ -656,6 +771,14 @@ def _select_augmented_chunks(
             source_id = str(neighbor_chunk.get('source_id') or '')
             metadata = _metadata(neighbor_chunk)
             path = _norm_path(str(metadata.get('path') or ''))
+            allowed_by_catalog, catalog_entry = _source_catalog_policy(
+                source_type=source_type,
+                source_id=source_id,
+                path=path,
+                catalog=source_catalog,
+            )
+            if not allowed_by_catalog:
+                continue
             path_key = f'{source_type}:{path}'
             text = str(neighbor_chunk.get('text') or '')
             shared = _shared_terms(path=path, text=text, ref_terms=ref_terms)
@@ -701,10 +824,11 @@ def _select_augmented_chunks(
             selected.append(
                 _chunk_row_from_index(
                     neighbor_chunk,
-                    role=_role_for_source_type(source_type),
+                    role=_role_for_source_type(source_type, catalog_entry=catalog_entry),
                     retrieval_reason=f'doc_neighbor|anchor:{anchor_chunk_id}|distance:{distance}',
                     retrieval_score=max(0.0, float(anchor_row.get('retrieval_score') or 0.0) - (0.04 * distance)),
                     distance_from_seed=int(anchor_row.get('distance_from_seed') or 0) + distance,
+                    catalog_entry=catalog_entry,
                 )
             )
     return selected
@@ -762,10 +886,12 @@ def augment_session_episode_context(
     neighbor_window: int = 2,
     max_neighbor_chunks_per_anchor: int = 4,
     min_external_chunks: int = 12,
+    source_catalog_path: Path | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     episodes = [json.loads(line) for line in episodes_path.read_text(encoding='utf-8').splitlines() if line.strip()]
     if not episodes:
         raise ValueError('no_episode_rows')
+    source_catalog = _read_source_catalog(source_catalog_path)
     chunk_rows = _read_parquet_rows(index_dir / 'chunks')
     mention_rows = _read_parquet_rows(_mention_dir(index_dir))
     if not chunk_rows:
@@ -786,6 +912,7 @@ def augment_session_episode_context(
     uplift_tokens: list[int] = []
     role_counts: Counter[str] = Counter()
     source_type_counts: Counter[str] = Counter()
+    catalog_source_counts: Counter[str] = Counter()
 
     for row in episodes:
         execution_route = str((row.get('source_metadata') or {}).get('route') or '')
@@ -809,6 +936,7 @@ def augment_session_episode_context(
             neighbor_window=neighbor_window,
             max_neighbor_chunks_per_anchor=max_neighbor_chunks_per_anchor,
             min_external_chunks=min_external_chunks,
+            source_catalog=source_catalog,
         )
         merged_context = _dedupe_context_rows(list(row.get('context_rows') or []) + augmented_context)
         context_role_counts = dict(sorted(Counter(str(context_row.get('role') or '') for context_row in merged_context).items()))
@@ -837,6 +965,9 @@ def augment_session_episode_context(
         for context_row in augmented_context:
             role_counts[str(context_row.get('role') or '')] += 1
             source_type_counts[str(context_row.get('source_type') or '')] += 1
+            catalog_name = str((context_row.get('source_catalog') or {}).get('name') or '')
+            if catalog_name:
+                catalog_source_counts[catalog_name] += 1
         augmented_rows.append(augmented)
 
     summary = {
@@ -851,6 +982,8 @@ def augment_session_episode_context(
         'min_uplift_tokens': min(uplift_tokens) if uplift_tokens else 0,
         'augmented_role_counts': dict(sorted(role_counts.items())),
         'augmented_source_type_counts': dict(sorted(source_type_counts.items())),
+        'catalog_source_counts': dict(sorted(catalog_source_counts.items())),
+        'source_catalog_path': str(source_catalog_path) if source_catalog_path is not None else None,
     }
     return augmented_rows, summary
 
@@ -871,6 +1004,7 @@ def main() -> None:
     parser.add_argument('--neighbor-window', type=int, default=2)
     parser.add_argument('--max-neighbor-chunks-per-anchor', type=int, default=4)
     parser.add_argument('--min-external-chunks', type=int, default=12)
+    parser.add_argument('--source-catalog', type=Path)
     args = parser.parse_args()
     rows, summary = augment_session_episode_context(
         episodes_path=args.episodes,
@@ -885,6 +1019,7 @@ def main() -> None:
         neighbor_window=args.neighbor_window,
         max_neighbor_chunks_per_anchor=args.max_neighbor_chunks_per_anchor,
         min_external_chunks=args.min_external_chunks,
+        source_catalog_path=args.source_catalog,
     )
     write_jsonl(args.output, rows)
     write_json(args.summary_output or args.output.with_name('augmented_session_episode_context_summary.json'), summary)

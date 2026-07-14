@@ -1,0 +1,46 @@
+{
+  "admission": {
+    "strict_eval_eligible_now": false,
+    "trainable_now": false,
+    "why": "The focused verifier passed, but gold perspective answers, split assignment, and anti-cheat signoff are required before admission."
+  },
+  "counts": {
+    "root_packets": 1,
+    "row_shells": 6,
+    "strict_eval_ready_rows": 0,
+    "train_ready_rows": 0
+  },
+  "created_at_utc": "2026-07-13T19:56:34Z",
+  "decision": "openclaw_web_verifier_execution_materialized_pending_gold",
+  "next_actions": [
+    "Adjudicate gold labels for all six perspective shells.",
+    "Assign this root to train or sealed heldout; prefer sealed heldout if Web heldout shortfall remains.",
+    "Run prompt-target leak and root-overlap audit before admitting the rows."
+  ],
+  "outputs": {
+    "packet": "runs/local/artifacts/stage11533_openclaw_web_verifier_execution_artifact/openclaw_web_verifier_execution_packet.json",
+    "row_shells": "runs/local/artifacts/stage11533_openclaw_web_verifier_execution_artifact/openclaw_web_verifier_execution_row_shells.jsonl",
+    "summary": "runs/local/artifacts/stage11533_openclaw_web_verifier_execution_artifact/openclaw_web_verifier_execution_artifact.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "bun_install_log": "runs/local/artifacts/stage11533_openclaw_web_verifier_execution/logs/bun_install_path.log",
+    "focused_test_log": "runs/local/artifacts/stage11533_openclaw_web_verifier_execution/logs/skills_versions_public_test.log",
+    "stage11530_packets": "runs/local/artifacts/stage11530_web_new_family_materialization_packets/web_new_family_root_packets.jsonl"
+  },
+  "stage": 11533,
+  "stage_name": "stage11533_openclaw_web_verifier_execution_artifact",
+  "verifier_execution": {
+    "dependency_hydration_command": "PATH=/data/tmp/npm-cache-stage11533/_npx/.../node_modules/.bin:$PATH bun install --frozen-lockfile",
+    "dependency_hydration_exit_code": 0,
+    "focused_verifier_command": "bun run test -- skills.versions.public.test.ts",
+    "focused_verifier_exit_code": 0,
+    "log_artifacts": {
+      "bun_install": "runs/local/artifacts/stage11533_openclaw_web_verifier_execution/logs/bun_install_path.log",
+      "focused_test": "runs/local/artifacts/stage11533_openclaw_web_verifier_execution/logs/skills_versions_public_test.log"
+    },
+    "observed_transition": "TARGETED_TEST_PASS",
+    "raw_log_excerpt": "$ vitest run skills.versions.public.test.ts\n\n RUN  v4.1.6 /data/repositories/openclaw__clawhub\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  19:55:07\n   Duration  1.72s (transform 770ms, setup 34ms, import 1.52s, tests 10ms, environment 0ms)\n\n",
+    "result_summary": "Vitest: 1 file passed, 3 tests passed."
+  }
+}

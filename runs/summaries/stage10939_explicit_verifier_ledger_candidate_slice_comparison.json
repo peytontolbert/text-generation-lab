@@ -1,0 +1,208 @@
+{
+  "artifacts": {
+    "combined_rows": "runs/local/artifacts/stage10939_explicit_verifier_ledger_candidate_slice_comparison/combined_rows.jsonl",
+    "gemma_rows": "runs/local/artifacts/stage10939_explicit_verifier_ledger_candidate_slice_comparison/gemma_rows.jsonl",
+    "hundred_rows": "runs/local/artifacts/stage10939_explicit_verifier_ledger_candidate_slice_comparison/hundred_m_rows.jsonl",
+    "strict_rows": "runs/local/artifacts/stage10938_explicit_verifier_ledger_strict_candidates/strict_candidate_rows.jsonl"
+  },
+  "claim_scope": [
+    "Diagnostic scoring only on the 3-row explicit-verifier-ledger successor candidate slice.",
+    "This slice remains non-promotable and exists to test whether the prior stage10915 slice was under-materialized rather than whether the model is incapable of the reviewed verifier distinction."
+  ],
+  "created_at_utc": "2026-07-12T20:12:38Z",
+  "gemma12b": {
+    "by_language": {
+      "c_cpp": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "python": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "by_repo": {
+      "agentkernel": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "parametergolf": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "repository_library": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "model_id": "gemma3:12b",
+    "overall": {
+      "correct": 2,
+      "exact_accuracy": 0.6666666666666666,
+      "rows": 3,
+      "scored_rows": 3
+    }
+  },
+  "hundred_m": {
+    "by_language": {
+      "c_cpp": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "python": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "by_repo": {
+      "agentkernel": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "parametergolf": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "repository_library": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "overall": {
+      "correct": 1,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 3,
+      "scored_rows": 3
+    }
+  },
+  "passed": true,
+  "rows": [
+    {
+      "bounded_choice_target_label": "E",
+      "constrained_choice_match": true,
+      "constrained_choice_top1_label": "E",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "F",
+      "full_vocab_top1_token_id": 187,
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "B",
+      "gemma12b_raw_output": "B. verifier_and_test_constraint\n\n**Reasoning:**\n\nThe task prioritizes the \"verifier/test ledger\" when it's the strongest justification. The provided evidence explicitly states that the changed candidate surface \"directly exposes the selective scan kernel among the bounded evidence\" within the test ledger. This means the change is directly tied to a test or verification process, making it the most specific and relevant justification.\n\nLet's look at why the other options are less suitable:\n\n*   **A. algorithmic\\_background\\_reference:** This provides background but doesn't directly justify the specific code change.\n*   **C. nearby\\_definition\\_or\\_usage\\_context:** While helpful for understanding, it's not the primary reason for the change.\n*   **D. external\\_analogue\\_reference:** This is an external comparison and doesn't explain the code modification.\n*   **E. candidate\\_change\\_surface:** While it's the changed code itself, the *reason* for the change is better explained by the test ledger.\n*   **F. symptom\\_or\\_call\\_path\\_analogue:** This is a tangential analogy and not a direct justification.",
+      "language_family": "c_cpp",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "repo_id": "agentkernel",
+      "row_id": "stage10938::cpp_agentkernel_counterfamily_evidence_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "split": "strict_candidate_slice",
+      "target_rank_full_vocab": 3,
+      "target_text": "E",
+      "target_token_id": 186,
+      "target_value": "candidate_change_surface",
+      "task_type": "evidence_citation"
+    },
+    {
+      "bounded_choice_target_label": "C",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "A",
+      "full_vocab_top1_match": true,
+      "full_vocab_top1_text": "C",
+      "full_vocab_top1_token_id": 184,
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "C. verifier_and_test_constraint\n\n**Reasoning:**\n\nThe prompt explicitly states: \"Prefer the verifier/test ledger when the selected tests narrow the repair surface more strongly than the changed file alone.\"  The evidence `verifier_and_test_constraint` directly highlights that the selected tests (`test_muon_cuda.py` and `test_structured_scan_kernels.py`) provide more specific constraints on the scan-kernel behavior compared to the changed file itself. This makes it the most relevant evidence for justifying the edit-target decision.",
+      "language_family": "c_cpp",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "repo_id": "parametergolf",
+      "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "split": "strict_candidate_slice",
+      "target_rank_full_vocab": 1,
+      "target_text": "C",
+      "target_token_id": 184,
+      "target_value": "verifier_and_test_constraint",
+      "task_type": "evidence_citation"
+    },
+    {
+      "bounded_choice_target_label": "F",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "A",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "E",
+      "full_vocab_top1_token_id": 186,
+      "gemma12b_correct": true,
+      "gemma12b_predicted_label": "F",
+      "gemma12b_raw_output": "F. verifier_and_test_constraint\n\n**Reasoning:**\n\nThe prompt explicitly states to prioritize the verifier/test ledger when it narrows the repair surface more strongly. The `verifier_and_test_constraint` evidence specifically mentions a \"build-specific selected test\" that \"directly constrains the intended repair surface.\" This indicates that the test provides the most precise information about the area that needs to be fixed, making it the most relevant evidence for justifying the edit. The other options are less specific and don't offer the same level of targeted guidance.",
+      "language_family": "python",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "repo_id": "repository_library",
+      "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "split": "strict_candidate_slice",
+      "target_rank_full_vocab": 5,
+      "target_text": "F",
+      "target_token_id": 187,
+      "target_value": "verifier_and_test_constraint",
+      "task_type": "evidence_citation"
+    }
+  ],
+  "runtime_bundle": "runs/local/artifacts/stage10936_explicit_verifier_ledger_support_probe/runtime_model/runtime_model_bundle.json",
+  "runtime_initialization": {
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10936_explicit_verifier_ledger_support_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "stage10936_explicit_verifier_ledger_support_probe",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10936_explicit_verifier_ledger_support_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 274,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10936_explicit_verifier_ledger_support_probe/runtime_model/model_state.pt",
+    "weights_sha256": "d98dd3b95530a17db187f30417d1ac6bb68203993639680d8273600f0a07b7af"
+  },
+  "stage": 10939,
+  "stage_name": "stage10939_explicit_verifier_ledger_candidate_slice_comparison"
+}

@@ -1,0 +1,193 @@
+{
+  "counts": {
+    "admitted_rows": 121,
+    "admitted_unique_roots": 50,
+    "lanes": {
+      "minimal_fix_openhands_candidate_surface": 4,
+      "minimal_fix_same_role_candidate_change_surface": 56,
+      "symptom_same_role_candidate_change_surface": 49,
+      "symptom_verifier_linked_vs_candidate_surface": 12
+    },
+    "reject_reasons": {
+      "does_not_match_remaining_miss_geometry": 419,
+      "non_target_task": 295,
+      "prompt_label_leak_before_options": 27,
+      "prompt_target_value_leak_before_options": 170
+    },
+    "rejected_rows": 423,
+    "remaining_misses": 6,
+    "repos": {
+      "bddy_website": 12,
+      "frontend": 36,
+      "llama_stack_ui": 28,
+      "modelcontextprotocol_typescript_sdk": 4,
+      "openclaw_clawhub": 17,
+      "openhands_openhands_frontend": 12,
+      "sourcebot": 12
+    },
+    "sources": {
+      "canonical_train_support": 12,
+      "identity_gap_topup_manifest": 16,
+      "role_normalized_topup": 93
+    },
+    "top_roots": [
+      [
+        "stage11535::openclaw_clawhub::convex::skills_versions_public_sanitization_train_support",
+        8
+      ],
+      [
+        "stage11373::sourcebot_backend_github_exclusion",
+        5
+      ],
+      [
+        "stage11373::sourcebot_backend_gitlab_exclusion",
+        5
+      ],
+      [
+        "stage11388::mcp_fetch_init_header_merge",
+        4
+      ],
+      [
+        "stage11537::openclaw_clawhub::convex::count_public_skills_fallback",
+        3
+      ],
+      [
+        "stage11537::openclaw_clawhub::convex::maintenance_backfill_summary",
+        3
+      ],
+      [
+        "stage11537::openclaw_clawhub::convex::public_moderation_override_sanitization",
+        3
+      ],
+      [
+        "stage11650::openhands_openhands_frontend::input_validation",
+        3
+      ],
+      [
+        "stage11650::openhands_openhands_frontend::websocket_url",
+        3
+      ],
+      [
+        "stage11650::openhands_openhands_frontend::permission_checks",
+        3
+      ],
+      [
+        "stage11650::openhands_openhands_frontend::browser_tab",
+        3
+      ],
+      [
+        "stage11364::sourcebot_backend_utils",
+        2
+      ],
+      [
+        "stage10329::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_11_30t16_19_06_019ad58f_8ea0_7322_94d6_9c1b_index_html_9d82612639_aug_1500000_8b46e7f662::web_js_ts_html",
+        2
+      ],
+      [
+        "stage10329::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_12_02t03_53_55_019add32_0c01_7ad3_8024_1d55_index_html_d97e16ac45_aug_1500000_8b46e7f662::web_js_ts_html",
+        2
+      ],
+      [
+        "stage10329::localsess_bddy_website_sessseed_codex_sessions_rollout_2025_12_02t14_11_07_019adf67_1880_7170_8d2e_9578_index_html_24e465dcc6_aug_1500000_8b46e7f662::web_js_ts_html",
+        2
+      ]
+    ]
+  },
+  "created_at_utc": "2026-07-14T06:06:56Z",
+  "decision": "remaining_nonverifier_support_ready_for_guarded_probe",
+  "gates": {
+    "all_rows_train_support_only": true,
+    "has_same_role_candidate_change_support": true,
+    "has_support_rows": true,
+    "has_symptom_verifier_linked_support": true,
+    "no_heldout_root_overlap": true,
+    "unique_roots_at_least_20": true
+  },
+  "outputs": {
+    "rejected_rows": "runs/local/artifacts/stage11704_web_remaining_nonverifier_support_package/web_remaining_nonverifier_rejected_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11704_web_remaining_nonverifier_support_package/web_remaining_nonverifier_support_package.json",
+    "train_rows": "runs/local/artifacts/stage11704_web_remaining_nonverifier_support_package/web_remaining_nonverifier_support_rows.jsonl",
+    "worklist": "runs/local/artifacts/stage11704_web_remaining_nonverifier_support_package/web_remaining_nonverifier_worklist.jsonl"
+  },
+  "recommended_next": [
+    "Run one guarded head-only probe from this package plus protected replay.",
+    "Promotion requires Stage11703 Web >=60/66, protected gates preserved, and remaining misses fewer than 6."
+  ],
+  "source_artifacts": {
+    "bridged_rows": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit/original_web_canonical_bridged_rows.jsonl",
+    "misses": "runs/local/artifacts/stage11703_web_transition_product_policy_integration_audit/web_transition_product_policy_remaining_misses.jsonl",
+    "sources": {
+      "canonical_train_support": "runs/local/artifacts/stage11663_web_canonical_renderer_package/web_canonical_train_support.jsonl",
+      "grouped_verified_materialization": "runs/local/artifacts/stage11650_web_gap_grouped_verified_materialization/web_gap_grouped_verified_rows.jsonl",
+      "identity_gap_topup_manifest": "runs/local/artifacts/stage11695_web_identity_gap_topup_probe_request/web_identity_gap_topup_train_manifest.jsonl",
+      "role_normalized_topup": "runs/local/artifacts/stage11694_web_gap_role_normalized_topup_package/web_gap_role_normalized_topup_rows.jsonl",
+      "same_role_counterfactual": "runs/local/artifacts/stage11678_web_remaining_miss_counterfactual_builder/web_same_role_identity_counterfactual_train.jsonl"
+    }
+  },
+  "stage": 11704,
+  "stage_name": "stage11704_web_remaining_nonverifier_support_package",
+  "worklist": {
+    "misses": [
+      {
+        "needed_lane": "symptom_same_role_candidate_change_surface",
+        "predicted_role": "candidate_change_surface",
+        "repo_id": "llama_stack",
+        "root_id": "stage11361::llama_stack_ui_format_message_content",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::symptom_localization::stage11690_original_web_canonical_bridge",
+        "target_role": "candidate_change_surface",
+        "task_type": "symptom_localization"
+      },
+      {
+        "needed_lane": "minimal_fix_same_role_candidate_change_surface",
+        "predicted_role": "candidate_change_surface",
+        "repo_id": "llama_stack",
+        "root_id": "stage11361::llama_stack_ui_format_message_content",
+        "row_id": "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection::stage11690_original_web_canonical_bridge",
+        "target_role": "candidate_change_surface",
+        "task_type": "minimal_fix_selection"
+      },
+      {
+        "needed_lane": "symptom_verifier_linked_vs_candidate_surface",
+        "predicted_role": "candidate_change_surface",
+        "repo_id": "openhands_openhands",
+        "root_id": "stage11390::openhands_websocket_url",
+        "row_id": "stage11390::openhands_websocket_url::symptom_localization::stage11690_original_web_canonical_bridge",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "symptom_localization"
+      },
+      {
+        "needed_lane": "symptom_verifier_linked_vs_candidate_surface",
+        "predicted_role": "candidate_change_surface",
+        "repo_id": "openhands_openhands",
+        "root_id": "stage11390::openhands_parse_pr_url",
+        "row_id": "stage11390::openhands_parse_pr_url::symptom_localization::stage11690_original_web_canonical_bridge",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "symptom_localization"
+      },
+      {
+        "needed_lane": "minimal_fix_same_role_candidate_change_surface",
+        "predicted_role": "candidate_change_surface",
+        "repo_id": "openhands_openhands",
+        "root_id": "stage11390::openhands_parse_pr_url",
+        "row_id": "stage11390::openhands_parse_pr_url::minimal_fix_selection::stage11690_original_web_canonical_bridge",
+        "target_role": "candidate_change_surface",
+        "task_type": "minimal_fix_selection"
+      },
+      {
+        "needed_lane": "symptom_verifier_linked_vs_candidate_surface",
+        "predicted_role": "candidate_change_surface",
+        "repo_id": "openhands_openhands",
+        "root_id": "stage11390::openhands_input_validation",
+        "row_id": "stage11390::openhands_input_validation::symptom_localization::stage11690_original_web_canonical_bridge",
+        "target_role": "verifier_and_test_constraint",
+        "task_type": "symptom_localization"
+      }
+    ],
+    "needed_lanes": {
+      "minimal_fix_same_role_candidate_change_surface": 2,
+      "symptom_same_role_candidate_change_surface": 1,
+      "symptom_verifier_linked_vs_candidate_surface": 3
+    },
+    "rows": 6
+  }
+}

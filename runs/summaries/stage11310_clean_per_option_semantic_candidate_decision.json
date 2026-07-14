@@ -1,0 +1,160 @@
+{
+  "created_at_utc": "2026-07-13T11:24:24Z",
+  "decision": "reject_stage11308_keep_stage11200_frontier",
+  "frontier_runtime_kept": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+  "frontier_runtime_kept_sha256": "b84dbba9ed525d0139ab867ffbc52d7ce2df702402542e54a1247d8f5dea3eca",
+  "interpretation": [
+    "Stage11305/11306 resolved a real schema issue by adding candidate-derived per-option semantic metadata and removing non-admitted/overlap train rows.",
+    "The schema repair alone does not solve the model boundary: residual stays below baseline and verifier_and_test_constraint remains 0/3.",
+    "The cleaned train set also weakens fact-rich judgment heldout to 20-21/30, so removed overlap/non-admitted rows carried some local slice support but not promotable residual transfer.",
+    "The bottleneck is now residual data admissibility and verifier-transition materialization, not another scorer wrapper or metadata-only refactor."
+  ],
+  "legacy_judgment_head_metrics_on_same_runtime": {
+    "clean_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "judgment_strict": {
+      "correct": 20,
+      "exact_accuracy": 0.6666666666666666,
+      "rows": 30,
+      "scored_rows": 30
+    },
+    "judgment_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.7,
+      "rows": 30,
+      "scored_rows": 30
+    },
+    "residual": {
+      "correct": 4,
+      "exact_accuracy": 0.4,
+      "rows": 10,
+      "scored_rows": 10
+    }
+  },
+  "legacy_residual_by_gold_value": {
+    "candidate_change_surface": {
+      "correct": 3,
+      "exact_accuracy": 0.75,
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "symptom_or_call_path_analogue": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 2,
+      "scored_rows": 2
+    },
+    "unknown": {
+      "correct": 1,
+      "exact_accuracy": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "verifier_and_test_constraint": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 3,
+      "scored_rows": 3
+    }
+  },
+  "next_action": {
+    "recommended_stage": "stage11311_residual_verifier_transition_admission_completion",
+    "requirements": [
+      "Complete gold/anti-cheat/selected-test anchors for Python verifier-transition residual rows instead of relying on support analogues.",
+      "Materialize Rust selected-test/verifier anchors for fresh non-aliased evidence residuals.",
+      "Keep Stage11305/11306 schema for future rows, but do not rerun it without newly admitted residual roots.",
+      "Preserve Stage11200 as the frontier until residual >5/10 and verifier_and_test_constraint >0/3 with clean strict 22/22."
+    ]
+  },
+  "passed": false,
+  "product_metrics": {
+    "clean_strict": {
+      "correct": 21,
+      "exact_accuracy": 0.9545454545454546,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 20,
+      "exact_accuracy": 0.8695652173913043,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "judgment_strict": {
+      "correct": 20,
+      "exact_accuracy": 0.6666666666666666,
+      "rows": 30,
+      "scored_rows": 30
+    },
+    "judgment_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.7,
+      "rows": 30,
+      "scored_rows": 30
+    },
+    "residual": {
+      "correct": 4,
+      "exact_accuracy": 0.4,
+      "rows": 10,
+      "scored_rows": 10
+    }
+  },
+  "product_residual_by_gold_value": {
+    "candidate_change_surface": {
+      "correct": 3,
+      "exact_accuracy": 0.75,
+      "rows": 4,
+      "scored_rows": 4
+    },
+    "symptom_or_call_path_analogue": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 2,
+      "scored_rows": 2
+    },
+    "unknown": {
+      "correct": 1,
+      "exact_accuracy": 1.0,
+      "rows": 1,
+      "scored_rows": 1
+    },
+    "verifier_and_test_constraint": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 3,
+      "scored_rows": 3
+    }
+  },
+  "product_scorer": "encoder_option_retrieval_semantic_candidate_head",
+  "promotion_gates": {
+    "product_clean_strict_22_of_22": false,
+    "product_clean_validation_at_least_20_of_23": true,
+    "product_judgment_strict_above_majority": true,
+    "product_judgment_validation_above_majority": true,
+    "product_residual_above_5_of_10": false,
+    "product_verifier_residual_nonzero": false
+  },
+  "reason": "Stage11308 is the first run where the semantic candidate head consumed normalized per-option metadata, but it still regressed clean strict to 21/22 and left residual at 4/10 with verifier_and_test_constraint at 0/3.",
+  "rejected_runtime": "runs/local/artifacts/stage11308_clean_per_option_semantic_candidate_probe/runtime_model/runtime_model_bundle.json",
+  "rejected_runtime_bundle_sha256": "da194e02a45bd7a177bc1043e9018b23e0c6779a06bb950094c061ff74f6e2fb",
+  "rejected_runtime_weights_sha256": "8e056d9de796c54faea0d275b80e9ae48b990c1551f10b19ff00bae0eb0d9985",
+  "source_artifacts": {
+    "clean_package": "runs/local/artifacts/stage11306_clean_per_option_semantic_candidate_package/clean_per_option_semantic_candidate_package.json",
+    "postrun_audit": "runs/local/artifacts/stage11309_clean_per_option_semantic_candidate_postrun_audit/clean_per_option_semantic_candidate_postrun_audit.json",
+    "previous_decision": "runs/local/artifacts/stage11304_semantic_candidate_scorer_decision/semantic_candidate_scorer_decision.json",
+    "request": "runs/local/artifacts/stage11307_clean_per_option_semantic_candidate_probe_request/clean_per_option_semantic_candidate_probe_request.json",
+    "schema_package": "runs/local/artifacts/stage11305_per_option_semantic_candidate_schema_package/per_option_semantic_candidate_schema_package.json"
+  },
+  "stage": 11310,
+  "stage_name": "stage11310_clean_per_option_semantic_candidate_decision"
+}

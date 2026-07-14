@@ -1,0 +1,152 @@
+{
+  "anti_cheat": {
+    "prompt_label_leak_row_ids": [],
+    "prompt_label_leaks": 0,
+    "prompt_target_value_leak_row_ids": [],
+    "prompt_target_value_leaks": 0,
+    "rows": 66,
+    "singleton_row_ids": [],
+    "singleton_rows": 0
+  },
+  "baseline_stage11703": {
+    "accuracy": 0.9090909090909091,
+    "correct": 60,
+    "remaining_misses": 6,
+    "rows": 66
+  },
+  "claim_boundary": [
+    "This audits the Stage11705 trained head under the Stage11703 product policy.",
+    "Promotion requires improving the remaining miss count without dropping below 60/66 or protected gates."
+  ],
+  "created_at_utc": "2026-07-14T06:14:06Z",
+  "decision": "stage11705_rejected_or_diagnostic_only",
+  "gates": {
+    "no_prompt_label_leaks": true,
+    "no_prompt_target_value_leaks": true,
+    "no_singletons": true,
+    "product_beats_gemma": true,
+    "product_web_at_least_stage11703_60_of_66": true,
+    "protected_filtered_strict": true,
+    "protected_old_canary_strict": true,
+    "protected_residual": true,
+    "remaining_misses_less_than_stage11703_6": false,
+    "runtime_exists": true
+  },
+  "gemma": {
+    "accuracy": 0.8484848484848485,
+    "correct": 56,
+    "rows": 66
+  },
+  "metrics": {
+    "accuracy": 0.9090909090909091,
+    "by_repo": {
+      "None": {
+        "accuracy": 1.0,
+        "correct": 42,
+        "rows": 42
+      },
+      "llama_stack": {
+        "accuracy": 0.6666666666666666,
+        "correct": 4,
+        "rows": 6
+      },
+      "openhands_openhands": {
+        "accuracy": 0.7777777777777778,
+        "correct": 14,
+        "rows": 18
+      }
+    },
+    "by_route": {
+      "identity": {
+        "accuracy": 0.85,
+        "correct": 34,
+        "rows": 40
+      },
+      "web": {
+        "accuracy": 1.0,
+        "correct": 26,
+        "rows": 26
+      }
+    },
+    "by_task": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "alternative_hypothesis_elimination": {
+        "accuracy": 1.0,
+        "correct": 4,
+        "rows": 4
+      },
+      "evidence_citation": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "minimal_fix_selection": {
+        "accuracy": 0.8181818181818182,
+        "correct": 9,
+        "rows": 11
+      },
+      "patch_impact": {
+        "accuracy": 1.0,
+        "correct": 7,
+        "rows": 7
+      },
+      "symptom_localization": {
+        "accuracy": 0.6363636363636364,
+        "correct": 7,
+        "rows": 11
+      },
+      "verifier_outcome": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      }
+    },
+    "correct": 60,
+    "reason_counts": {
+      "fallback_non_verifier": 29,
+      "stage11690_fixed_web_route_correct": 26,
+      "visible_pass_only::pass_targeted_test_selection": 11
+    },
+    "rows": 66
+  },
+  "outputs": {
+    "remaining_misses": "runs/local/artifacts/stage11706_web_nonverifier_guarded_postrun_audit/web_nonverifier_guarded_remaining_misses.jsonl",
+    "row_cards": "runs/local/artifacts/stage11706_web_nonverifier_guarded_postrun_audit/web_nonverifier_guarded_product_policy_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11706_web_nonverifier_guarded_postrun_audit/web_nonverifier_guarded_postrun_audit.json"
+  },
+  "protected_gates": {
+    "filtered_strict_22_of_22": true,
+    "old_canary_strict_23_of_23": true,
+    "residual_at_least_7_of_10": true,
+    "source": "runs/local/artifacts/stage11686_counterfactual_identity_semantic_head_fixed_postrun_audit/counterfactual_identity_semantic_head_fixed_postrun_audit.json"
+  },
+  "remaining_misses": {
+    "by_repo": {
+      "llama_stack": 2,
+      "openhands_openhands": 4
+    },
+    "by_task": {
+      "minimal_fix_selection": 2,
+      "symptom_localization": 4
+    },
+    "row_ids": [
+      "stage11361::llama_stack_ui_format_message_content::symptom_localization::stage11690_original_web_canonical_bridge",
+      "stage11361::llama_stack_ui_format_message_content::minimal_fix_selection::stage11690_original_web_canonical_bridge",
+      "stage11390::openhands_websocket_url::symptom_localization::stage11690_original_web_canonical_bridge",
+      "stage11390::openhands_parse_pr_url::symptom_localization::stage11690_original_web_canonical_bridge",
+      "stage11390::openhands_parse_pr_url::minimal_fix_selection::stage11690_original_web_canonical_bridge",
+      "stage11390::openhands_input_validation::symptom_localization::stage11690_original_web_canonical_bridge"
+    ],
+    "rows": 6
+  },
+  "runtime": {
+    "probe_runtime": "runs/local/artifacts/stage11705_web_nonverifier_guarded_probe/runtime_model/runtime_model_bundle.json",
+    "weights_sha256": "d1465334d6b4147766dc5ca60a16b67e591686a808a1fac6870ae882b167044f"
+  },
+  "stage": 11706,
+  "stage_name": "stage11706_web_nonverifier_guarded_postrun_audit"
+}

@@ -1,0 +1,51 @@
+{
+  "admissibility": {
+    "diagnostic_heldout": true,
+    "root_disjoint_from_stage11347_and_stage11354_training": true,
+    "strict_eval_eligible": true,
+    "train_support_only": false,
+    "verifier_backed": true
+  },
+  "counts": {
+    "bundles": 1,
+    "rows": 6,
+    "rows_by_task": {
+      "abstention_insufficient_evidence": 1,
+      "alternative_hypothesis_elimination": 1,
+      "evidence_citation": 1,
+      "minimal_fix_selection": 1,
+      "symptom_localization": 1,
+      "verifier_outcome": 1
+    }
+  },
+  "created_at_utc": "2026-07-13T13:07:34Z",
+  "decision": "web_llama_stack_executed_heldout_rows_ready",
+  "outputs": {
+    "bundles": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/web_llama_stack_executed_heldout_bundles.jsonl",
+    "logs": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/logs",
+    "rows": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/web_llama_stack_executed_heldout_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/web_llama_stack_executed_heldout_rows.json"
+  },
+  "passed": true,
+  "recommended_next_action": "Score Stage11200 and diagnostic support runtimes on this disjoint heldout candidate before any training use.",
+  "source_artifacts": {
+    "stage11346_review_queue": "runs/local/artifacts/stage11346_web_source_verifier_review_queue/web_source_verifier_first_wave_review_queue.jsonl"
+  },
+  "stage": 11361,
+  "stage_name": "stage11361_web_llama_stack_executed_heldout_rows",
+  "verifier_execution": {
+    "cmd": [
+      "npm",
+      "test",
+      "--",
+      "lib/format-message-content.test.ts"
+    ],
+    "cwd": "/data/tmp/stage11361_llama_stack_ui",
+    "log": "runs/local/artifacts/stage11361_web_llama_stack_executed_heldout_rows/logs/llama_stack_ui_format_message_content_jest.log",
+    "name": "llama_stack_ui_format_message_content_jest",
+    "returncode": 0,
+    "status": "passed",
+    "stderr_tail": "PASS lib/format-message-content.test.ts\n  extractTextFromContentPart\n    \u2713 should return an empty string for null or undefined input (3 ms)\n    \u2713 should return the string itself if input is a string (1 ms)\n    \u2713 should extract text from an array of text content objects (1 ms)\n    \u2713 should join text from multiple text content objects in an array\n    \u2713 should handle mixed text and image_url types in an array (1 ms)\n    \u2713 should return '[Image]' for an array with only an image_url object (1 ms)\n    \u2713 should return an empty string for an empty array (1 ms)\n    \u2713 should handle arrays with plain strings\n    \u2713 should filter out malformed or unrecognized objects in an array\n    \u2713 should handle an array of mixed valid items and plain strings\n  extractDisplayableText (composite function)\n    \u2713 should return empty string for null or undefined message (1 ms)\n    \u2713 should return only content part if no tool calls (1 ms)\n    \u2713 should return only content part for complex content if no tool calls\n    \u2713 should return only formatted tool call if content is empty or null (1 ms)\n    \u2713 should combine content and formatted tool call (1 ms)\n    \u2713 should handle message with content an array and a tool call\n    \u2713 should return only content if tool_calls array is empty or undefined (8 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       17 passed, 17 total\nSnapshots:   0 total\nTime:        0.576 s, estimated 1 s\nRan all test suites matching lib/format-message-content.test.ts.\n",
+    "stdout_tail": "\n> ui@0.1.0 test\n> jest lib/format-message-content.test.ts\n\n"
+  }
+}

@@ -1,0 +1,707 @@
+{
+  "created_at_utc": "2026-07-13T09:34:24Z",
+  "decision": "fact_rich_baseline_audit_complete",
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11250_fact_rich_evidence_option_baseline_audit/fact_rich_evidence_option_baseline_audit.json"
+  },
+  "package_counts": {
+    "by_split_language": {
+      "strict": {
+        "python": 24,
+        "rust": 3,
+        "web_js_ts_html": 6
+      },
+      "train": {
+        "python": 144,
+        "rust": 3,
+        "web_js_ts_html": 9
+      },
+      "validation": {
+        "python": 24,
+        "web_js_ts_html": 3
+      }
+    },
+    "by_split_role": {
+      "strict": {
+        "candidate_change_surface": 11,
+        "symptom_or_call_path_analogue": 11,
+        "verifier_and_test_constraint": 11
+      },
+      "train": {
+        "candidate_change_surface": 52,
+        "symptom_or_call_path_analogue": 52,
+        "verifier_and_test_constraint": 52
+      },
+      "validation": {
+        "candidate_change_surface": 9,
+        "symptom_or_call_path_analogue": 9,
+        "verifier_and_test_constraint": 9
+      }
+    },
+    "c_cpp_gap": {
+      "blocked_c_cpp_reason": "inventory found no clean C/C++ candidates; available C/C++ rows are path-overlap or already-consumed cuembed roots",
+      "ready_c_cpp_candidates": 0
+    },
+    "root_overlaps": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    },
+    "source_repo_family_split_overlaps": {
+      "alphageometry": [
+        "train",
+        "validation"
+      ],
+      "browsergym": [
+        "train",
+        "validation"
+      ],
+      "dbt_core": [
+        "strict",
+        "train"
+      ],
+      "llama_models": [
+        "train",
+        "validation"
+      ],
+      "sphinx": [
+        "strict",
+        "train",
+        "validation"
+      ],
+      "tolbert": [
+        "train",
+        "validation"
+      ]
+    },
+    "strict_roots": 11,
+    "strict_rows": 33,
+    "train_roots": 52,
+    "train_rows": 156,
+    "validation_roots": 9,
+    "validation_rows": 27
+  },
+  "passed": true,
+  "runtime_initialization": {
+    "attached_bounded_choice_heads": [
+      "bounded_choice_evidence_ledger_head"
+    ],
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval_evidence_ledger_head",
+      "bounded_choice_contrast_margin": 0.05,
+      "bounded_choice_contrast_weight": 0.0,
+      "bounded_decoder_train_sampler": "cyclic",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "bounded_decoder_ce_probe_contract",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 278,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/model_state.pt",
+    "weights_sha256": "1367d9c50d1e0defb9e19afb20e06b1f15e20e43d412310c0f62e31ac241ec7f"
+  },
+  "scored": {
+    "encoder_option_retrieval_verifier_conditioned": {
+      "residual": {
+        "by_gold_value": {
+          "candidate_change_surface": {
+            "correct": 4,
+            "exact_accuracy": 1.0,
+            "rows": 4,
+            "scored_rows": 4
+          },
+          "symptom_or_call_path_analogue": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 2,
+            "scored_rows": 2
+          },
+          "unknown": {
+            "correct": 1,
+            "exact_accuracy": 1.0,
+            "rows": 1,
+            "scored_rows": 1
+          },
+          "verifier_and_test_constraint": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 3,
+            "scored_rows": 3
+          }
+        },
+        "by_language": {
+          "c_cpp": {
+            "correct": 2,
+            "exact_accuracy": 0.5,
+            "rows": 4,
+            "scored_rows": 4
+          },
+          "python": {
+            "correct": 2,
+            "exact_accuracy": 0.6666666666666666,
+            "rows": 3,
+            "scored_rows": 3
+          },
+          "rust": {
+            "correct": 1,
+            "exact_accuracy": 0.3333333333333333,
+            "rows": 3,
+            "scored_rows": 3
+          }
+        },
+        "miss_count": 5,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "A",
+            "repo_family": "repository_library",
+            "row_id": "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+            "target_rank_full_vocab": 14,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "c_cpp",
+            "predicted": "A",
+            "repo_family": "parametergolf",
+            "row_id": "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "c_cpp",
+            "predicted": "D",
+            "repo_family": "parametergolf",
+            "row_id": "stage10938::reviewed_next::stage10119__localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_28t16_56_21_019d3560_1014_7761_9ea7_5638_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_a018ca0b43_aug_1500000_8b46e7f662__c_cpp::evidence_citation::strict_candidate_explicit_ledger_v1",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "B",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "rust",
+            "predicted": "A",
+            "repo_family": "rust-analyzer",
+            "row_id": "stage11193::rust-analyzer::rust_replacement_slot_1::symptom_or_call_path_analogue",
+            "target_rank_full_vocab": 1,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "rust",
+            "predicted": "B",
+            "repo_family": "prusti-dev",
+            "row_id": "stage11193::prusti-dev::rust_replacement_slot_2::symptom_or_call_path_analogue",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          }
+        ],
+        "row_metric": {
+          "correct": 5,
+          "exact_accuracy": 0.5,
+          "rows": 10,
+          "scored_rows": 10
+        }
+      },
+      "strict": {
+        "by_gold_value": {
+          "candidate_change_surface": {
+            "correct": 9,
+            "exact_accuracy": 0.8181818181818182,
+            "rows": 11,
+            "scored_rows": 11
+          },
+          "symptom_or_call_path_analogue": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 11,
+            "scored_rows": 11
+          },
+          "verifier_and_test_constraint": {
+            "correct": 2,
+            "exact_accuracy": 0.18181818181818182,
+            "rows": 11,
+            "scored_rows": 11
+          }
+        },
+        "by_language": {
+          "python": {
+            "correct": 8,
+            "exact_accuracy": 0.3333333333333333,
+            "rows": 24,
+            "scored_rows": 24
+          },
+          "rust": {
+            "correct": 1,
+            "exact_accuracy": 0.3333333333333333,
+            "rows": 3,
+            "scored_rows": 3
+          },
+          "web_js_ts_html": {
+            "correct": 2,
+            "exact_accuracy": 0.3333333333333333,
+            "rows": 6,
+            "scored_rows": 6
+          }
+        },
+        "miss_count": 22,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "F",
+            "repo_family": "open_instruct",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::9::verifier_and_test_constraint::0184",
+            "target_rank_full_vocab": 4,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "B",
+            "repo_family": "open_instruct",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::9::symptom_or_call_path_analogue::0185",
+            "target_rank_full_vocab": 5,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "F",
+            "repo_family": "open_instruct",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::9::verifier_and_test_constraint::0187",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "C",
+            "repo_family": "open_instruct",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::9::symptom_or_call_path_analogue::0188",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "C",
+            "repo_family": "tilus",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::7::verifier_and_test_constraint::0190",
+            "target_rank_full_vocab": 6,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "F",
+            "repo_family": "tilus",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::7::symptom_or_call_path_analogue::0191",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "A",
+            "repo_family": "tilus",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::6::verifier_and_test_constraint::0193",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "B",
+            "repo_family": "tilus",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::6::symptom_or_call_path_analogue::0194",
+            "target_rank_full_vocab": 4,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "F",
+            "repo_family": "hyper_connections",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::103::verifier_and_test_constraint::0196",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "E",
+            "repo_family": "hyper_connections",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::103::symptom_or_call_path_analogue::0197",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "B",
+            "repo_family": "mkdocs",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::70::verifier_and_test_constraint::0199",
+            "target_rank_full_vocab": 8,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "E",
+            "repo_family": "mkdocs",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::70::symptom_or_call_path_analogue::0200",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "C",
+            "repo_family": "hyper_connections",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::98::verifier_and_test_constraint::0202",
+            "target_rank_full_vocab": 8,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "D",
+            "repo_family": "hyper_connections",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::98::symptom_or_call_path_analogue::0203",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "E",
+            "repo_family": "mkdocs",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::36::verifier_and_test_constraint::0205",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "D",
+            "repo_family": "mkdocs",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::36::symptom_or_call_path_analogue::0206",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "rust",
+            "predicted": "F",
+            "repo_family": "dbt_core",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::27::verifier_and_test_constraint::0208",
+            "target_rank_full_vocab": 4,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "rust",
+            "predicted": "C",
+            "repo_family": "dbt_core",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::27::symptom_or_call_path_analogue::0209",
+            "target_rank_full_vocab": 5,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "candidate_change_surface",
+            "language_family": "web_js_ts_html",
+            "predicted": "C",
+            "repo_family": "sphinx",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_d979db9b0d::38::candidate_change_surface::0210",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "web_js_ts_html",
+            "predicted": "C",
+            "repo_family": "sphinx",
+            "row_id": "stage11249::strict_eval::retrieval::lcp_pack_1_5500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_d979db9b0d::38::symptom_or_call_path_analogue::0212",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          }
+        ],
+        "row_metric": {
+          "correct": 11,
+          "exact_accuracy": 0.3333333333333333,
+          "rows": 33,
+          "scored_rows": 33
+        }
+      },
+      "validation": {
+        "by_gold_value": {
+          "candidate_change_surface": {
+            "correct": 8,
+            "exact_accuracy": 0.8888888888888888,
+            "rows": 9,
+            "scored_rows": 9
+          },
+          "symptom_or_call_path_analogue": {
+            "correct": 0,
+            "exact_accuracy": 0.0,
+            "rows": 9,
+            "scored_rows": 9
+          },
+          "verifier_and_test_constraint": {
+            "correct": 1,
+            "exact_accuracy": 0.1111111111111111,
+            "rows": 9,
+            "scored_rows": 9
+          }
+        },
+        "by_language": {
+          "python": {
+            "correct": 8,
+            "exact_accuracy": 0.3333333333333333,
+            "rows": 24,
+            "scored_rows": 24
+          },
+          "web_js_ts_html": {
+            "correct": 1,
+            "exact_accuracy": 0.3333333333333333,
+            "rows": 3,
+            "scored_rows": 3
+          }
+        },
+        "miss_count": 18,
+        "misses": [
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "D",
+            "repo_family": "llama_models",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::39::verifier_and_test_constraint::0157",
+            "target_rank_full_vocab": 20,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "F",
+            "repo_family": "llama_models",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::39::symptom_or_call_path_analogue::0158",
+            "target_rank_full_vocab": 4,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "C",
+            "repo_family": "browsergym",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_4500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_1a5abe62c7::5::verifier_and_test_constraint::0160",
+            "target_rank_full_vocab": 4,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "B",
+            "repo_family": "browsergym",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_4500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_1a5abe62c7::5::symptom_or_call_path_analogue::0161",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "A",
+            "repo_family": "tolbert",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_4500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_1a5abe62c7::8::verifier_and_test_constraint::0163",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "D",
+            "repo_family": "tolbert",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_4500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_1a5abe62c7::8::symptom_or_call_path_analogue::0164",
+            "target_rank_full_vocab": 5,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "A",
+            "repo_family": "x_transformers",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::104::verifier_and_test_constraint::0166",
+            "target_rank_full_vocab": 5,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "D",
+            "repo_family": "x_transformers",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::104::symptom_or_call_path_analogue::0167",
+            "target_rank_full_vocab": 8,
+            "target_text": "F"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "E",
+            "repo_family": "hilam",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_4500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_1a5abe62c7::10::verifier_and_test_constraint::0169",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "E",
+            "repo_family": "hilam",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_4500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_1a5abe62c7::10::symptom_or_call_path_analogue::0170",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "F",
+            "repo_family": "x_transformers",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::94::verifier_and_test_constraint::0172",
+            "target_rank_full_vocab": 3,
+            "target_text": "D"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "C",
+            "repo_family": "x_transformers",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_10000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_7917fe7d0c::94::symptom_or_call_path_analogue::0173",
+            "target_rank_full_vocab": 4,
+            "target_text": "A"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "A",
+            "repo_family": "alphageometry",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::38::verifier_and_test_constraint::0175",
+            "target_rank_full_vocab": 1,
+            "target_text": "C"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "D",
+            "repo_family": "alphageometry",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::38::symptom_or_call_path_analogue::0176",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "verifier_and_test_constraint",
+            "language_family": "python",
+            "predicted": "A",
+            "repo_family": "esm",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::34::verifier_and_test_constraint::0178",
+            "target_rank_full_vocab": 5,
+            "target_text": "E"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "python",
+            "predicted": "D",
+            "repo_family": "esm",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_8500000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_314d88e084::34::symptom_or_call_path_analogue::0179",
+            "target_rank_full_vocab": 2,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "candidate_change_surface",
+            "language_family": "web_js_ts_html",
+            "predicted": "A",
+            "repo_family": "sphinx",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_a76597fc52::42::candidate_change_surface::0180",
+            "target_rank_full_vocab": 5,
+            "target_text": "B"
+          },
+          {
+            "full_vocab_top1_text": "C",
+            "gold_value": "symptom_or_call_path_analogue",
+            "language_family": "web_js_ts_html",
+            "predicted": "C",
+            "repo_family": "sphinx",
+            "row_id": "stage11249::validation::retrieval::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_30t00_31_53_019d3c_a76597fc52::42::symptom_or_call_path_analogue::0182",
+            "target_rank_full_vocab": 19,
+            "target_text": "F"
+          }
+        ],
+        "row_metric": {
+          "correct": 9,
+          "exact_accuracy": 0.3333333333333333,
+          "rows": 27,
+          "scored_rows": 27
+        }
+      }
+    }
+  },
+  "source_artifacts": {
+    "package_summary": "runs/local/artifacts/stage11249_fact_rich_evidence_option_package/fact_rich_evidence_option_package.json",
+    "residual_bank": "runs/local/artifacts/stage11195_clean_residual_successor_bank/clean_residual_successor_bank.jsonl",
+    "runtime_bundle": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "strict_rows": "runs/local/artifacts/stage11249_fact_rich_evidence_option_package/fact_rich_evidence_option_strict_rows.jsonl",
+    "validation_rows": "runs/local/artifacts/stage11249_fact_rich_evidence_option_package/fact_rich_evidence_option_validation_rows.jsonl"
+  },
+  "stage": 11250,
+  "stage_name": "stage11250_fact_rich_evidence_option_baseline_audit"
+}

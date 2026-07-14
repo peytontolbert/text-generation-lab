@@ -1,0 +1,206 @@
+{
+  "audit": {
+    "all_source_text_materialized": true,
+    "duplicate_row_ids": 0,
+    "root_overlap": {
+      "train_strict": [],
+      "train_validation": [],
+      "validation_strict": []
+    }
+  },
+  "counts": {
+    "strict_eval": {
+      "by_language": {
+        "c_cpp": 2,
+        "python": 14,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "by_repo_top20": [
+        [
+          "agentkernel",
+          6
+        ],
+        [
+          "SWE-bench",
+          4
+        ],
+        [
+          "BrowserGym",
+          4
+        ],
+        [
+          "cuEmbed",
+          2
+        ],
+        [
+          "chroma",
+          2
+        ],
+        [
+          "agentkernel-seq2seq-text-lab",
+          2
+        ]
+      ],
+      "by_target": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 10,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 10
+      },
+      "roots": 10,
+      "rows": 20
+    },
+    "train": {
+      "by_language": {
+        "c_cpp": 36,
+        "python": 76,
+        "rust": 4,
+        "web_js_ts_html": 12
+      },
+      "by_repo_top20": [
+        [
+          "peytontolbert-parameter-golf",
+          20
+        ],
+        [
+          "agentkernel-seq2seq-text-lab",
+          16
+        ],
+        [
+          "parametergolf",
+          16
+        ],
+        [
+          "agentkernel",
+          16
+        ],
+        [
+          "repository_library",
+          8
+        ],
+        [
+          "tilus",
+          4
+        ],
+        [
+          "tiktoken",
+          4
+        ],
+        [
+          "mctx",
+          4
+        ],
+        [
+          "rembg",
+          4
+        ],
+        [
+          "llama-models",
+          4
+        ],
+        [
+          "faiss",
+          4
+        ],
+        [
+          "optimum",
+          4
+        ],
+        [
+          "pypiserver",
+          4
+        ],
+        [
+          "xformers",
+          4
+        ],
+        [
+          "openevolve",
+          4
+        ],
+        [
+          "metacontroller",
+          4
+        ],
+        [
+          "x-transformers",
+          4
+        ],
+        [
+          "hyper-connections",
+          4
+        ]
+      ],
+      "by_target": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 62,
+        "DISTRACTOR_BACKGROUND_CONTEXT": 4,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 62
+      },
+      "roots": 62,
+      "rows": 128
+    },
+    "validation": {
+      "by_language": {
+        "c_cpp": 12,
+        "python": 6,
+        "rust": 2,
+        "web_js_ts_html": 2
+      },
+      "by_repo_top20": [
+        [
+          "parametergolf",
+          6
+        ],
+        [
+          "agentkernel",
+          6
+        ],
+        [
+          "falco",
+          4
+        ],
+        [
+          "agentkernel-seq2seq-text-lab",
+          2
+        ],
+        [
+          "cuEmbed",
+          2
+        ],
+        [
+          "chroma",
+          2
+        ]
+      ],
+      "by_target": {
+        "DECISIVE_VERIFIER_TEST_CONSTRAINT": 11,
+        "SUPPORTING_CANDIDATE_CHANGE_SURFACE": 11
+      },
+      "roots": 11,
+      "rows": 22
+    }
+  },
+  "created_at_utc": "2026-07-13T10:34:56Z",
+  "decision": "capped_direct_retrieval_evidence_package_ready",
+  "interpretation": {
+    "claim_limit": "Diagnostic evidence-candidate package only; not a full maintainer-bundle benchmark.",
+    "why": "Stage11275 proved direct retrieval mining has multilingual source-backed verifier/change evidence, but was repo-dominated. Stage11276 caps roots per repo family while preserving scarce Rust/Web rows."
+  },
+  "outputs": {
+    "root_selection_jsonl": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_root_selection.jsonl",
+    "strict_jsonl": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_strict_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_package.json",
+    "train_jsonl": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_train_rows.jsonl",
+    "validation_jsonl": "runs/local/artifacts/stage11276_capped_direct_retrieval_evidence_package/capped_direct_retrieval_evidence_validation_rows.jsonl"
+  },
+  "passed": true,
+  "root_caps": {
+    "strict_eval": 3,
+    "train": 8,
+    "validation": 3
+  },
+  "source_artifacts": {
+    "stage11275_summary": "runs/local/artifacts/stage11275_direct_retrieval_multilingual_evidence_materialization/direct_retrieval_multilingual_evidence_materialization.json"
+  },
+  "stage": 11276,
+  "stage_name": "stage11276_capped_direct_retrieval_evidence_package"
+}

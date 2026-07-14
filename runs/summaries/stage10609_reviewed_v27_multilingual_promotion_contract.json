@@ -1,0 +1,105 @@
+{
+  "anti_cheat_findings": {
+    "metadata_majority_baseline_all_rows_repo_and_task": 0.796875,
+    "metadata_majority_baseline_strict_task_type": 0.4583333333333333,
+    "note": "The reviewed package is strong, but metadata/evidence-signature baselines are high enough that anti-cheat audits remain first-class, especially on evidence_citation rows.",
+    "reviewed_v27_raw_strict_leak_rows": 4,
+    "rewrite_strategy": [
+      "Replace prompt-visible evidence key names with neutral ordered slots such as visible_evidence_1.",
+      "Keep opaque choice options, target label, gold answer, root lineage, and split membership unchanged.",
+      "Use the overlay as a draft repair artifact; do not mutate the live v2.7 package until the repaired rows are reviewed and re-audited."
+    ],
+    "strict_leak_languages": [
+      "c_cpp",
+      "python",
+      "rust",
+      "web_js_ts_html"
+    ]
+  },
+  "claim_scope": [
+    "Freezes the honest standalone multilingual v2.7 promotion path for Python, Rust, C/C++, and Web on the reviewed compact bounded maintainer surface.",
+    "Separates the stable repaired-overlay standalone path from the newer semantic-output diagnostic branch.",
+    "Defines what future 100M-vs-Gemma standalone claims may and may not say on v2.7."
+  ],
+  "created_at_utc": "2026-07-12T04:31:58Z",
+  "current_honest_state": {
+    "four_language_win_supported": true,
+    "gemma_same_manifest_strict_accuracy": 0.25,
+    "remaining_known_residual_rows": [
+      {
+        "full_vocab_top1": "A",
+        "pred": "C",
+        "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact",
+        "target": "B",
+        "target_rank_full_vocab": 5
+      },
+      {
+        "full_vocab_top1": "A",
+        "pred": "F",
+        "row_id": "stage10126::tokenizers::tokenizers::rust::evidence_citation::reviewed_v27_compact",
+        "target": "E",
+        "target_rank_full_vocab": 3
+      }
+    ],
+    "same_manifest_only": true,
+    "source_heldout_claim_supported": false,
+    "standalone_target100m_constrained_choice_accuracy": 0.9166666666666666,
+    "standalone_target100m_full_vocab_accuracy": 0.16666666666666666,
+    "strict_rows": 24,
+    "target100m_vs_gemma_delta": 0.6666666666666666
+  },
+  "inputs": {
+    "baseline_execution": "runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/bounded_decoder_probe/execution_result.json",
+    "comparison_audit": "runs/local/artifacts/stage10424_reviewed_multilingual_v27_comparison_audit/reviewed_multilingual_v27_comparison_audit.json",
+    "eval_hacking_audit": "runs/local/artifacts/stage10429_reviewed_v27_eval_hacking_audit/reviewed_v27_eval_hacking_audit.json",
+    "gemma_comparison": "runs/local/artifacts/stage10423_reviewed_multilingual_v27_same_manifest_gemma_comparison/reviewed_multilingual_v27_same_manifest_gemma_comparison.json",
+    "leak_cleanup_queue": "runs/local/artifacts/stage10432_reviewed_v27_strict_leak_cleanup_queue/reviewed_v27_strict_leak_cleanup_queue.json",
+    "leak_rewrite_helper": "runs/local/artifacts/stage10435_reviewed_v27_strict_leak_rewrite_helper/reviewed_v27_strict_leak_rewrite_helper.json",
+    "manifest_package": "runs/local/artifacts/stage10420_reviewed_multilingual_v27_manifest_package/reviewed_multilingual_v27_manifest_package.json",
+    "margin_audit": "runs/local/artifacts/stage10431_reviewed_v27_saved_runtime_margin_audit/reviewed_v27_saved_runtime_margin_audit.json",
+    "promotion_gate": "runs/local/artifacts/stage10461_reviewed_v27_residual_promotion_gate/reviewed_v27_residual_promotion_gate.json"
+  },
+  "language_status": {
+    "c_cpp": "supported same-manifest standalone win on the reviewed compact surface",
+    "python": "supported same-manifest standalone win, but one known verifier residual remains in promotion gate history",
+    "rust": "supported same-manifest standalone win, but tokenizers evidence_citation remains the hardest residual family and fresh non-tokenizers reviewed roots are still needed",
+    "web_js_ts_html": "supported same-manifest standalone win, but pure-web verifier-anchored source supply remains a longer-term realism gap"
+  },
+  "next_required_work": [
+    "Finish or rebuild fresh disjoint reviewed roots for the Python verifier and Rust evidence-citation residual families.",
+    "Keep the semantic-output branch diagnostic until exact-sequence or semantic constrained scoring becomes the enforced headline metric there.",
+    "Add fresh source-heldout reviewed roots before upgrading any v2.7 claim beyond same-manifest standalone superiority."
+  ],
+  "outputs": {
+    "promotion_contract_json": "runs/local/artifacts/stage10609_reviewed_v27_multilingual_promotion_contract/reviewed_v27_multilingual_promotion_contract.json"
+  },
+  "passed": true,
+  "promotion_surface": {
+    "blocked_metrics": [
+      "full_vocab_top1_accuracy as primary standalone promotion metric",
+      "any semantic-output first-token metric"
+    ],
+    "primary_metric": "constrained_choice_top1_accuracy",
+    "secondary_metrics": [
+      "per_language_constrained_choice_accuracy",
+      "margin_top1_minus_top2",
+      "abstention_slice_accuracy",
+      "verifier_anchor_slice_accuracy"
+    ],
+    "surface_name": "reviewed_v27_repaired_overlay_compact_bounded_choice"
+  },
+  "required_honesty_gates": [
+    "Strict path must remain stress-excluded and same-manifest only.",
+    "Source-heldout superiority must not be claimed on v2.7 until fresh heldout reviewed roots exist.",
+    "Prompt-target leak rows must remain repaired or excluded; raw pre-repair strict rows are not promotable.",
+    "Residual-support runs cannot upgrade the headline unless they beat 22/24, keep zero regressions, keep overlay leak hygiene clean, and show fresh disjoint-root improvement.",
+    "Standalone v2.7 claims must stay separate from full-product harness claims."
+  ],
+  "stage": 10609,
+  "stage_name": "stage10609_reviewed_v27_multilingual_promotion_contract",
+  "truthful_read": [
+    "The current best honest standalone multilingual v2.7 path is still the reviewed compact bounded-choice surface, not the newer semantic-output path.",
+    "That path already supports a four-language same-manifest standalone win over Gemma, but it does not yet support source-heldout or full-product-harness superiority claims.",
+    "This contract keeps the repo aligned: standalone multilingual wins can still be pursued honestly while the more ambitious semantic-output and harness branches mature."
+  ]
+}

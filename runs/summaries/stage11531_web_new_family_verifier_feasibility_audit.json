@@ -1,0 +1,90 @@
+{
+  "admission": {
+    "strict_eval_eligible_now": false,
+    "trainable_now": false,
+    "why": "Verifier execution evidence is still absent for all new-family packets."
+  },
+  "counts": {
+    "dependency_blocked": 3,
+    "execution_ready_now": 0,
+    "root_packets": 3,
+    "weak_selected_verifier": 1
+  },
+  "created_at_utc": "2026-07-13T19:48:38Z",
+  "decision": "new_web_family_verifier_execution_blocked_by_dependency_hydration",
+  "next_actions": [
+    "Hydrate dependencies in a controlled environment for dspy and openclaw_clawhub, then run the proposed focused verifier commands.",
+    "Replace ai_town/testing.ts with a real selected test or keep ai_town as source-only diagnostic material.",
+    "Do not add Stage11530 row shells to train/eval until a later stage attaches verifier output and gold answers."
+  ],
+  "outputs": {
+    "rows": "runs/local/artifacts/stage11531_web_new_family_verifier_feasibility_audit/web_new_family_verifier_feasibility_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11531_web_new_family_verifier_feasibility_audit/web_new_family_verifier_feasibility_audit.json"
+  },
+  "passed": true,
+  "rows": [
+    {
+      "blockers": [
+        "dependencies_not_hydrated",
+        "selected_verifier_is_helper_not_test"
+      ],
+      "execution_ready_now": false,
+      "git_repo_family": "ai_town",
+      "lockfiles_present": [
+        "package-lock.json"
+      ],
+      "node_modules_present": false,
+      "package_name": "ai-town",
+      "package_root": "/data/repositories/ai-town",
+      "proposed_verifier_command": "npm run build",
+      "recommended_next_action": "hydrate dependencies or choose a stronger selected test before verifier execution",
+      "repo_family": "convex",
+      "repo_path": "/data/repositories/ai-town/convex",
+      "root_id": "stage11530::ai_town::convex::root_candidate_v1",
+      "selected_verifier_path": "testing.ts"
+    },
+    {
+      "blockers": [
+        "dependencies_not_hydrated"
+      ],
+      "execution_ready_now": false,
+      "git_repo_family": "dspy",
+      "lockfiles_present": [
+        "package-lock.json"
+      ],
+      "node_modules_present": false,
+      "package_name": "dsp-app",
+      "package_root": "/data/repositories/dspy/inspect-app/react-app",
+      "proposed_verifier_command": "CI=true npm test -- --watchAll=false src/App.test.js",
+      "recommended_next_action": "hydrate dependencies or choose a stronger selected test before verifier execution",
+      "repo_family": "react_app",
+      "repo_path": "/data/repositories/dspy/inspect-app/react-app",
+      "root_id": "stage11530::dspy::react_app::root_candidate_v1",
+      "selected_verifier_path": "src/App.test.js"
+    },
+    {
+      "blockers": [
+        "dependencies_not_hydrated"
+      ],
+      "execution_ready_now": false,
+      "git_repo_family": "openclaw_clawhub",
+      "lockfiles_present": [
+        "bun.lock"
+      ],
+      "node_modules_present": false,
+      "package_name": "clawhub",
+      "package_root": "/data/repositories/openclaw__clawhub",
+      "proposed_verifier_command": "bun run test -- skills.versions.public.test.ts",
+      "recommended_next_action": "hydrate dependencies or choose a stronger selected test before verifier execution",
+      "repo_family": "convex",
+      "repo_path": "/data/repositories/openclaw__clawhub/convex",
+      "root_id": "stage11530::openclaw_clawhub::convex::root_candidate_v1",
+      "selected_verifier_path": "skills.versions.public.test.ts"
+    }
+  ],
+  "source_artifacts": {
+    "stage11530_packets": "runs/local/artifacts/stage11530_web_new_family_materialization_packets/web_new_family_root_packets.jsonl"
+  },
+  "stage": 11531,
+  "stage_name": "stage11531_web_new_family_verifier_feasibility_audit"
+}

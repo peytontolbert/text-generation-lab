@@ -1,0 +1,77 @@
+{
+  "claim_scope": [
+    "Create a diagnostic-only support package aimed at two surviving failure mechanisms: explicit-ledger evidence rows that collapse to label A and the remaining Python verifier-transition boundary.",
+    "Keep the cleaned 22-row validation and 22-row strict surfaces unchanged as the main canary while explicitly marking the affected reserved candidate rows as contaminated for this diagnostic branch."
+  ],
+  "created_at_utc": "2026-07-13T02:18:19Z",
+  "decision": "a_prior_and_python_verifier_diagnostic_package_ready",
+  "diagnostic_boundaries": {
+    "clean_reserved_bank_after_exclusion": 8,
+    "contaminated_reserved_row_ids": [
+      "stage10938::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1",
+      "stage10938::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_explicit_ledger_v1"
+    ],
+    "python_verifier_source_package": "stage10904_python_verifier_transition_support_package",
+    "same_surface_rows_non_promotable": true
+  },
+  "findings": [
+    "This package deliberately combines the two currently active residual lanes instead of treating evidence and verifier transition as separate sweeps.",
+    "The explicit-ledger evidence additions are same-surface diagnostic clones and cannot support a heldout claim; they exist only to test whether the A-prior defect is trainable.",
+    "The cleaned validation/strict surfaces remain untouched and are still the only promotable canary for this branch."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "c_cpp": 4,
+      "python": 58
+    },
+    "added_by_target": {
+      "A": 12,
+      "B": 26,
+      "C": 3,
+      "D": 12,
+      "E": 2,
+      "F": 2,
+      "J": 1,
+      "V1": 4
+    },
+    "added_by_task": {
+      "evidence_citation": 8,
+      "verifier_candidate_role_classification": 40,
+      "verifier_outcome": 14
+    },
+    "base_train_after_stage11061": 327,
+    "clean_strict_rows": 22,
+    "clean_validation_rows": 22,
+    "python_verifier_rows_added": 54,
+    "rows_added_total": 62,
+    "same_surface_evidence_rows_added": 8,
+    "stress_rows": 7,
+    "train_rows_after": 389,
+    "train_rows_before": 327
+  },
+  "next_best_step": "Run one bounded diagnostic probe from the latest clean runtime, report cleaned validation/strict separately, and score only the uncontaminated reserved subset plus the Python verifier strict row for diagnostic movement.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage11069_a_prior_and_python_verifier_diagnostic_package/added_diagnostic_rows.jsonl",
+    "contaminated_reserved_json": "runs/local/artifacts/stage11069_a_prior_and_python_verifier_diagnostic_package/contaminated_reserved_rows.json",
+    "stress_rows_jsonl": "runs/local/artifacts/stage11069_a_prior_and_python_verifier_diagnostic_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11069_a_prior_and_python_verifier_diagnostic_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11069_a_prior_and_python_verifier_diagnostic_package/a_prior_and_python_verifier_diagnostic_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11069_a_prior_and_python_verifier_diagnostic_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11069_a_prior_and_python_verifier_diagnostic_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "Do not use the two contaminated reserved candidate rows for postrun generalization claims on this branch.",
+    "Any improvement on the same-surface evidence clones is diagnostic only and must not be reported as heldout gain.",
+    "Promotion still requires the cleaned 22/22 canary to hold and uncontaminated heldout rows to improve separately."
+  ],
+  "source_artifacts": {
+    "base_support_package": "runs/local/artifacts/stage11061_ready_lane_fresh_support_package/ready_lane_fresh_support_package.json",
+    "clean_strict": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "clean_validation": "runs/local/artifacts/stage11065_singleton_eval_quarantine_package/agentkernel_lite_encdec_validation.jsonl",
+    "python_verifier_support_train": "runs/local/artifacts/stage10904_python_verifier_transition_support_package/agentkernel_lite_encdec_train.jsonl",
+    "reserved_candidates": "runs/local/artifacts/stage11051_successor_residual_support_plus_priority_evidence/reserved_residual_candidates.jsonl"
+  },
+  "stage": 11069,
+  "stage_name": "stage11069_a_prior_and_python_verifier_diagnostic_package"
+}

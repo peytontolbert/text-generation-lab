@@ -1,0 +1,110 @@
+{
+  "admission_policy": {
+    "emit_rows_before_runtime_recovery": false,
+    "reason": "Maintainer-grade Web rows require executed or recovered verifier output plus selected source/test evidence; current disjoint candidates lack executable verifier logs.",
+    "scoreable_now": false,
+    "trainable_now": false
+  },
+  "blocker_types": [
+    "missing_executable",
+    "pnpm_corepack_dynamic_import_failure",
+    "repo_dependencies_not_installed"
+  ],
+  "created_at_utc": "2026-07-13T14:44:20Z",
+  "current_web_signal": {
+    "gemma_same_manifest_from_stage11392": {
+      "correct": 18,
+      "exact_accuracy": 1.0,
+      "rows": 18,
+      "scored_rows": 18
+    },
+    "heldout_delta_stage11396_minus_stage11200": 0.2777777777777778,
+    "stage11200_openhands_heldout": {
+      "correct": 4,
+      "exact_accuracy": 0.2222222222222222,
+      "full_vocab_top1_accuracy": 0.16666666666666666,
+      "rows": 18,
+      "rows_with_target_rank_1": 3,
+      "scored_rows": 18
+    },
+    "stage11396_openhands_heldout": {
+      "correct": 9,
+      "exact_accuracy": 0.5,
+      "full_vocab_top1_accuracy": 0.2222222222222222,
+      "rows": 18,
+      "rows_with_target_rank_1": 4,
+      "scored_rows": 18
+    }
+  },
+  "decision": "pause_disjoint_web_row_materialization_until_js_runtime_recovered",
+  "frontier_runtime_remains": "stage11200_role_focused_residual_probe",
+  "latest_useful_diagnostic_runtime": "stage11396_openhands_support_diagnostic_probe",
+  "next_allowed_steps": [
+    "Explicitly approve/install Node 22.13+ and/or Bun, then rerun Stage11399 verifier attempts.",
+    "If runtime install is not allowed, find already-hydrated disjoint Web repos with real unit verifier logs.",
+    "After raw verifier logs exist, materialize six-perspective Web rows and run leak/root-overlap audits before training."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11400_disjoint_web_runtime_recovery_decision/disjoint_web_runtime_recovery_decision.json"
+  },
+  "passed": true,
+  "required_runtime_recovery": [
+    {
+      "evidence_needed": "focused Vitest log for extensions/qa-lab/src/model-switch-eval.test.ts or another selected non-trivial QA-lab verifier.",
+      "repo_family": "openclaw_openclaw",
+      "requirement": "Node >=22.13 with pnpm 11.1.0 or an equivalent pinned pnpm runtime that can run the repo lockfile."
+    },
+    {
+      "evidence_needed": "focused Vitest/Bun log for convex/skills.versions.public.test.ts or another selected non-trivial clawhub verifier.",
+      "repo_family": "openclaw_clawhub",
+      "requirement": "Bun runtime or fully installed npm/vitest dependencies for clawhub."
+    }
+  ],
+  "runtime_blockers": [
+    {
+      "attempt_id": "openclaw_qa_lab_pnpm_version",
+      "blocker": "pnpm_corepack_dynamic_import_failure",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_qa_lab_pnpm_version.log",
+      "repo_family": "openclaw_openclaw",
+      "returncode": 1,
+      "status": "failed"
+    },
+    {
+      "attempt_id": "openclaw_qa_lab_vitest_focused",
+      "blocker": "repo_dependencies_not_installed",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_qa_lab_vitest_focused.log",
+      "repo_family": "openclaw_openclaw",
+      "returncode": 1,
+      "status": "failed"
+    },
+    {
+      "attempt_id": "openclaw_clawhub_bun_version",
+      "blocker": "missing_executable",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_clawhub_bun_version.log",
+      "repo_family": "openclaw_clawhub",
+      "returncode": null,
+      "status": "blocked_missing_executable"
+    },
+    {
+      "attempt_id": "openclaw_clawhub_vitest_focused",
+      "blocker": "repo_dependencies_not_installed",
+      "log": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/logs/openclaw_clawhub_vitest_focused.log",
+      "repo_family": "openclaw_clawhub",
+      "returncode": 1,
+      "status": "failed"
+    }
+  ],
+  "source_artifacts": {
+    "stage11397_postrun": "runs/local/artifacts/stage11397_openhands_support_postrun_audit/openhands_support_postrun_audit.json",
+    "stage11398_decision": "runs/local/artifacts/stage11398_openhands_support_diagnostic_decision/openhands_support_diagnostic_decision.json",
+    "stage11399_feasibility": "runs/local/artifacts/stage11399_disjoint_web_runtime_feasibility_and_queue/disjoint_web_runtime_feasibility_and_queue.json"
+  },
+  "stage": 11400,
+  "stage_name": "stage11400_disjoint_web_runtime_recovery_decision",
+  "why_not_more_training_now": [
+    "Stage11396 improved OpenHands heldout from 4/18 to 9/18 but still trails Gemma 18/18.",
+    "The next Web roots must be disjoint from OpenHands/MCP/Sourcebot/Llama Stack to avoid repo-family overfitting.",
+    "Stage11399 identified two priority disjoint OpenClaw candidates but focused verifier execution is blocked by local JS runtime/dependency state.",
+    "No synthetic or static-only rows should be admitted for a Web claim."
+  ]
+}

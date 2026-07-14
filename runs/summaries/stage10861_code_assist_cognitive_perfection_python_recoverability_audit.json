@@ -1,0 +1,59 @@
+{
+  "blocking_findings": [
+    "Prompt-visible evidence does not include selected tests or verifier transition evidence.",
+    "Three visible evidence snippets are unrelated analogue text rather than local maintainer evidence.",
+    "The two locally relevant visible snippets mostly restate the candidate surfaces themselves.",
+    "This geometry supports template-prior or candidate self-matching shortcuts, not clean implementation-vs-config reasoning.",
+    "Even abstention-labeled admission would not help the active Python verifier residual, which needs visible verifier/test contrast."
+  ],
+  "claim_status": "blocked_not_admissible_for_current_python_verifier_recovery_goal",
+  "language_family": "python",
+  "passed": false,
+  "prompt_visible_geometry": {
+    "candidate_choices": [
+      {
+        "candidate_id": "B",
+        "snippet_preview": "from __future__ import annotations from typing import Any from code_assist.orchestrator.models import Task, VerifyProfile, Verdict _GATE_TYPE_TO_SET = { \"cmd\": \"G0\", \"docs_as_te..."
+      },
+      {
+        "candidate_id": "A",
+        "snippet_preview": "from __future__ import annotations import json import os from pathlib import Path from pydantic import BaseModel, Field import importlib.resources as ilr try: import yaml # type..."
+      }
+    ],
+    "candidate_count": 2,
+    "selected_tests": [
+      "tests/e2e/test_orchestrator_agent_driven.py",
+      "tests/e2e/test_orchestrator_e2e.py",
+      "tests/integration/test_orchestrator_budgets_and_policy.py",
+      "tests/unit/test_config_contracts.py",
+      "tests/unit/test_orchestrator_artifact_path_safety.py",
+      "tests/unit/test_orchestrator_artifacts_and_metrics_contracts.py"
+    ],
+    "selected_tests_hidden_metadata_only": true,
+    "task_observation": "A real repository-maintenance session left multiple plausible edit surfaces. Use the visible maintenance clues and candidate snippets to choose the most plausible first surface to inspect or edit.",
+    "visible_evidence_count": 5,
+    "visible_evidence_preview": [
+      "# don't import any costly modules import sys import os is_pypy = '__pypy__' in sys.builtin_module_names def warn_distutils_present(): if 'distutils' not in sys.modules: return if is_pypy and sys.versi",
+      "# This file is part of Hypothesis, which may be found at # https://github.com/HypothesisWorks/hypothesis/ # # Copyright the Hypothesis Authors. # Individual contributors are listed in AUTHORS.rst and the git log. # # Thi",
+      "\"\"\"Allow bash-completion for argparse with argcomplete if installed. Needs argcomplete>=0.5.6 for python 3.2/3.3 (older versions fail to find the magic string, so _ARGCOMPLETE env. var is never set, and this does not ne",
+      "from __future__ import annotations from typing import Any from code_assist.orchestrator.models import Task, VerifyProfile, Verdict _GATE_TYPE_TO_SET = { \"cmd\": \"G0\", \"docs_as_tests\": \"G1\", \"golden_traces\":",
+      "from __future__ import annotations import json import os from pathlib import Path from pydantic import BaseModel, Field import importlib.resources as ilr try: import yaml # type: ignore except Exception: # pragm"
+    ]
+  },
+  "recommended_next_actions": [
+    "Recover real prompt-visible test or verifier snippets for the selected tests and rebuild the row as a maintainer-grade verifier packet.",
+    "If source-backed materialization cannot expose those verifier anchors, quarantine this row and mine a different disjoint Python root.",
+    "Prefer a fresh Python root whose visible prompt directly contrasts plausible tests and transitions rather than implementation-vs-config template priors."
+  ],
+  "repo_id": "code_assist",
+  "review_completed_at_utc": "2026-07-12T16:41:47Z",
+  "review_packet_dir": "runs/local/artifacts/stage10111_real_session_successor_review_packets/review_packets/stage10110__localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t13___c1bb544ab8bd6da7",
+  "row_id": "stage10110::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t13_13_10_019bff96_2dc5_7162_88f8_83eb_src_code_assist_orchestrator_cognitive_perfection_py_src_code_assist_orchestrato_3a0f6d8311_aug_1500000_8b46e7f662::python_implementation_vs_config",
+  "stage": 10861,
+  "stage_name": "stage10861_code_assist_cognitive_perfection_python_recoverability_audit",
+  "successor_template": "python_implementation_vs_config",
+  "updated_reviews": {
+    "anti_cheat_review_card": "runs/local/artifacts/stage10111_real_session_successor_review_packets/review_packets/stage10110__localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t13___c1bb544ab8bd6da7/anti_cheat_review_card.json",
+    "expert_maintainer_rubric_review": "runs/local/artifacts/stage10111_real_session_successor_review_packets/review_packets/stage10110__localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t13___c1bb544ab8bd6da7/expert_maintainer_rubric_review.json"
+  }
+}

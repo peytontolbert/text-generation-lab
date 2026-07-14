@@ -1,0 +1,184 @@
+{
+  "claim_boundary": [
+    "This is a miss-family audit and worklist; it does not train or promote a new runtime.",
+    "Heldout rows remain heldout. Any support package should be built from disjoint analogue roots.",
+    "The Web gap is now 3 rows versus Gemma on the canonical-bridged surface, but the 100M still has 13 absolute misses."
+  ],
+  "created_at_utc": "2026-07-14T05:13:23Z",
+  "decision": "web_bridged_gap_worklist_ready",
+  "gates": {
+    "gemma_count_matches_stage11691": true,
+    "has_gemma_margin_rows": true,
+    "has_worklist_outputs": true,
+    "hundred_m_count_matches_stage11691": true,
+    "same_manifest_joined_66_rows": true
+  },
+  "miss_summary": {
+    "both_miss_rows": 0,
+    "gemma_margin_rows": 13,
+    "gemma_margin_task_counts": {
+      "minimal_fix_selection": 2,
+      "symptom_localization": 4,
+      "verifier_outcome": 7
+    },
+    "hundred_m_miss_rows": 13,
+    "hundred_m_only_correct_rows": 10,
+    "miss_role_confusions": {
+      "candidate_change_surface -> candidate_change_surface": 3,
+      "verifier_and_test_constraint -> candidate_change_surface": 3,
+      "verifier_and_test_constraint -> verifier_and_test_constraint": 7
+    },
+    "miss_task_counts": {
+      "minimal_fix_selection": 2,
+      "symptom_localization": 4,
+      "verifier_outcome": 7
+    },
+    "roots_with_100m_misses": {
+      "llama_stack::8f4c431370fdd566dd7a04910b737ced7e6d5ffe::llama_stack_ui_format_message_content": 2,
+      "openhands_openhands::stage11389_unit_verifier::openhands_input_validation": 2,
+      "openhands_openhands::stage11389_unit_verifier::openhands_parse_pr_url": 3,
+      "openhands_openhands::stage11389_unit_verifier::openhands_websocket_url": 2,
+      "stage11540::mcp_typescript_sdk::client_stdio_transport": 1,
+      "stage11540::mcp_typescript_sdk::core_tool_name_validation": 1,
+      "stage11543::sep_automation::hook_registry_dispatch_resilience": 1,
+      "stage11543::sep_automation::transition_handler_state_rules": 1
+    }
+  },
+  "outputs": {
+    "both_miss_rows": "runs/local/artifacts/stage11692_web_bridged_miss_family_audit/web_bridged_both_miss_rows.jsonl",
+    "gemma_margin_rows": "runs/local/artifacts/stage11692_web_bridged_miss_family_audit/web_bridged_gemma_margin_rows.jsonl",
+    "hundred_m_misses": "runs/local/artifacts/stage11692_web_bridged_miss_family_audit/web_bridged_100m_miss_rows.jsonl",
+    "summary": "runs/local/artifacts/stage11692_web_bridged_miss_family_audit/web_bridged_miss_family_audit.json"
+  },
+  "recommended_next": [
+    "Build disjoint canonical Web analogue roots for task_type=verifier_outcome; Gemma is correct where 100M misses on 7 row(s).",
+    "Build disjoint canonical Web analogue roots for task_type=symptom_localization; Gemma is correct where 100M misses on 4 row(s).",
+    "Build disjoint canonical Web analogue roots for task_type=minimal_fix_selection; Gemma is correct where 100M misses on 2 row(s).",
+    "Add same-role/listwise support for role confusion verifier_and_test_constraint -> verifier_and_test_constraint; observed on 7 bridged 100M miss row(s).",
+    "Add same-role/listwise support for role confusion candidate_change_surface -> candidate_change_surface; observed on 3 bridged 100M miss row(s).",
+    "Add same-role/listwise support for role confusion verifier_and_test_constraint -> candidate_change_surface; observed on 3 bridged 100M miss row(s).",
+    "Do not train on these 66 heldout rows; use this as a worklist for fresh disjoint analogue materialization."
+  ],
+  "scores": {
+    "by_repo_hundred_m": {
+      "llama_stack": {
+        "accuracy": 0.6666666666666666,
+        "correct": 4,
+        "rows": 6
+      },
+      "openhands_openhands": {
+        "accuracy": 0.6111111111111112,
+        "correct": 11,
+        "rows": 18
+      },
+      "unknown": {
+        "accuracy": 0.9047619047619048,
+        "correct": 38,
+        "rows": 42
+      }
+    },
+    "by_route_hundred_m": {
+      "identity": {
+        "accuracy": 0.675,
+        "correct": 27,
+        "rows": 40
+      },
+      "web": {
+        "accuracy": 1.0,
+        "correct": 26,
+        "rows": 26
+      }
+    },
+    "by_task_gemma12b": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "alternative_hypothesis_elimination": {
+        "accuracy": 0.5,
+        "correct": 2,
+        "rows": 4
+      },
+      "evidence_citation": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "minimal_fix_selection": {
+        "accuracy": 0.9090909090909091,
+        "correct": 10,
+        "rows": 11
+      },
+      "patch_impact": {
+        "accuracy": 0.7142857142857143,
+        "correct": 5,
+        "rows": 7
+      },
+      "symptom_localization": {
+        "accuracy": 0.5454545454545454,
+        "correct": 6,
+        "rows": 11
+      },
+      "verifier_outcome": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      }
+    },
+    "by_task_hundred_m": {
+      "abstention_insufficient_evidence": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "alternative_hypothesis_elimination": {
+        "accuracy": 1.0,
+        "correct": 4,
+        "rows": 4
+      },
+      "evidence_citation": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "rows": 11
+      },
+      "minimal_fix_selection": {
+        "accuracy": 0.8181818181818182,
+        "correct": 9,
+        "rows": 11
+      },
+      "patch_impact": {
+        "accuracy": 1.0,
+        "correct": 7,
+        "rows": 7
+      },
+      "symptom_localization": {
+        "accuracy": 0.6363636363636364,
+        "correct": 7,
+        "rows": 11
+      },
+      "verifier_outcome": {
+        "accuracy": 0.36363636363636365,
+        "correct": 4,
+        "rows": 11
+      }
+    },
+    "gemma12b": {
+      "accuracy": 0.8484848484848485,
+      "correct": 56,
+      "rows": 66
+    },
+    "hundred_m": {
+      "accuracy": 0.803030303030303,
+      "correct": 53,
+      "rows": 66
+    }
+  },
+  "source_artifacts": {
+    "bridged_rows": "runs/local/artifacts/stage11690_original_web_canonical_bridge_audit/original_web_canonical_bridged_rows.jsonl",
+    "gemma_rows": "runs/local/artifacts/stage11691_original_web_canonical_bridge_gemma_and_anticheat/original_web_canonical_bridge_gemma_rows.jsonl",
+    "stage11691_summary": "runs/local/artifacts/stage11691_original_web_canonical_bridge_gemma_and_anticheat/original_web_canonical_bridge_gemma_and_anticheat.json"
+  },
+  "stage": 11692,
+  "stage_name": "stage11692_web_bridged_miss_family_audit"
+}

@@ -1,0 +1,91 @@
+{
+  "base_snapshot": {
+    "added_priority_evidence_rows": 5,
+    "added_priority_rows_by_language": {
+      "c_cpp": 3,
+      "python": 2
+    },
+    "added_priority_rows_by_repo_family": {
+      "parametergolf": 3,
+      "repository_library": 2
+    },
+    "added_priority_rows_by_target": {
+      "A": 1,
+      "B": 1,
+      "C": 3
+    },
+    "added_priority_rows_by_task": {
+      "evidence_citation": 5
+    },
+    "base_train_rows_after_stage11035": 281,
+    "priority_slice_rows_with_target_rank_1": 3,
+    "priority_slice_runtime_accuracy": 0.0,
+    "reserved_candidates_retained": 10,
+    "stress_rows": 7,
+    "strict_rows": 23,
+    "train_rows_after": 286,
+    "train_rows_before": 281,
+    "validation_rows": 23
+  },
+  "claim_scope": [
+    "Extend the latest clean support package with support-eligible fresh-family rows only.",
+    "Keep validation, strict, and stress unchanged while adding new train-only retrieve/verifier supervision from the fresh families."
+  ],
+  "created_at_utc": "2026-07-13T03:23:36Z",
+  "decision": "fresh_family_support_package_ready",
+  "headline_findings": [
+    "The fresh-family queue now contributes concrete train support without altering the current heldout surfaces.",
+    "Only scoreable packet rows and verifier-transition support rows are merged; heuristic evidence rows remain outside train on purpose.",
+    "This package is the right next training base if the goal is to widen root supply without contaminating the current strict overlay."
+  ],
+  "limits": [
+    "Evidence candidate rows are deliberately excluded until their heuristic golds are reviewed.",
+    "Web remains support-only and not promotable from this package."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "c_cpp": 24,
+      "python": 24,
+      "web_js_ts_html": 6
+    },
+    "added_by_repo_family": {
+      "cccl": 6,
+      "cuEmbed": 6,
+      "diffusers": 6,
+      "django": 6,
+      "faiss": 6,
+      "falco": 6,
+      "mem0": 6,
+      "onnxruntime": 6,
+      "openai-agents-python": 6
+    },
+    "added_by_task": {
+      "retrieve_answer_abstain": 18,
+      "verifier_outcome": 18,
+      "verifier_outcome_semantic_transition": 18
+    },
+    "rows_added_total": 54,
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_rows_after": 340,
+    "train_rows_before": 286,
+    "validation_rows_unchanged": 23
+  },
+  "next_best_step": "Use this package for the next bounded support probe while keeping the current heldout overlay and reviewed canary unchanged.",
+  "outputs": {
+    "added_rows_jsonl": "runs/local/artifacts/stage11099_fresh_family_support_package/added_fresh_family_support_rows.jsonl",
+    "stress_rows_jsonl": "runs/local/artifacts/stage11099_fresh_family_support_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11099_fresh_family_support_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11099_fresh_family_support_package/fresh_family_support_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11099_fresh_family_support_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11099_fresh_family_support_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "base_support_package": "runs/local/artifacts/stage11051_successor_residual_support_plus_priority_evidence/successor_residual_support_plus_priority_evidence.json",
+    "scoreable_rows": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/scoreable_support_rows.jsonl",
+    "verifier_rows": "runs/local/artifacts/stage11097_fresh_family_materialized_rows/verifier_support_rows.jsonl"
+  },
+  "stage": 11099,
+  "stage_name": "stage11099_fresh_family_support_package"
+}

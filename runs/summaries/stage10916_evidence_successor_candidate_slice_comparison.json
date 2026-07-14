@@ -1,0 +1,208 @@
+{
+  "artifacts": {
+    "combined_rows": "runs/local/artifacts/stage10916_evidence_successor_candidate_slice_comparison/combined_rows.jsonl",
+    "gemma_rows": "runs/local/artifacts/stage10916_evidence_successor_candidate_slice_comparison/gemma_rows.jsonl",
+    "hundred_rows": "runs/local/artifacts/stage10916_evidence_successor_candidate_slice_comparison/hundred_m_rows.jsonl",
+    "strict_rows": "runs/local/artifacts/stage10915_evidence_successor_strict_candidates/strict_candidate_rows.jsonl"
+  },
+  "claim_scope": [
+    "Diagnostic scoring only on the 3-row fresh evidence successor candidate slice.",
+    "This slice is non-promotable and exists to test whether the current multilingual retrieval interface still collapses B-vs-F on fresh Python/C++ reviewed candidates."
+  ],
+  "created_at_utc": "2026-07-12T19:08:57Z",
+  "gemma12b": {
+    "by_language": {
+      "c_cpp": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "python": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "by_repo": {
+      "agentkernel": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "parametergolf": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "repository_library": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "model_id": "gemma3:12b",
+    "overall": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 3,
+      "scored_rows": 3
+    }
+  },
+  "hundred_m": {
+    "by_language": {
+      "c_cpp": {
+        "correct": 1,
+        "exact_accuracy": 0.5,
+        "rows": 2,
+        "scored_rows": 2
+      },
+      "python": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "by_repo": {
+      "agentkernel": {
+        "correct": 1,
+        "exact_accuracy": 1.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "parametergolf": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      },
+      "repository_library": {
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "rows": 1,
+        "scored_rows": 1
+      }
+    },
+    "overall": {
+      "correct": 1,
+      "exact_accuracy": 0.3333333333333333,
+      "rows": 3,
+      "scored_rows": 3
+    }
+  },
+  "passed": true,
+  "rows": [
+    {
+      "bounded_choice_target_label": "B",
+      "constrained_choice_match": true,
+      "constrained_choice_top1_label": "B",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "F",
+      "full_vocab_top1_token_id": 187,
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "**C. algorithmic_background_reference**\n\n**Reasoning:**\n\nThe `algorithmic_background_reference` provides the most specific justification. It points to a function (`fit_...`) within the `src.agentlab.agents.dynamic_prompting` module. This suggests the edit target (`agent_kernel/__init__.py`) is likely interacting with or dependent on this function, making the algorithmic background a direct and relevant context for understanding and justifying the change.\n\nHere's why the other options are less suitable:\n\n*   **A. verifier_and_test_constraint:** While important, this option is not present in the provided evidence.\n*   **B. candidate_change_surface:** This simply identifies the file being edited, which is too general. It doesn't explain *why* the change is needed.\n*   **D. external_analogue_reference:** This refers to S-LoRA, which is a broader concept and not directly related to the specific code being edited.\n*   **E. symptom_or_call_path_analogue:** This describes a project's overall theme and tags, lacking the specific algorithmic context needed.\n*   **F. nearby_definition_or_usage_context:** While helpful, it's less specific than the algorithmic background reference, which points to a particular function.",
+      "language_family": "c_cpp",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "repo_id": "agentkernel",
+      "row_id": "stage10915::cpp_agentkernel_counterfamily_evidence_replenishment::evidence_citation::strict_candidate_v1",
+      "split": "strict_candidate_slice",
+      "target_rank_full_vocab": 6,
+      "target_text": "B",
+      "target_token_id": 183,
+      "target_value": "candidate_change_surface",
+      "task_type": "evidence_citation"
+    },
+    {
+      "bounded_choice_target_label": "B",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "A",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "C",
+      "full_vocab_top1_token_id": 184,
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "A",
+      "gemma12b_raw_output": "The most specific justification is **A. candidate_change_surface**.\n\nHere's why:\n\n*   **The task asks for the evidence that *most specifically* justifies the edit.** The `candidate_change_surface` directly presents the code being edited. This is the most immediate and relevant evidence.\n*   While other options might provide context (algorithmic background, nearby definitions, etc.), they don't directly address *why* the change was made to the specific code in `causal_machine_scan.cpp`. The code itself is the primary evidence for understanding the edit.\n*   There's no verifier/test constraint provided in the evidence, so option B is not applicable.",
+      "language_family": "c_cpp",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "repo_id": "parametergolf",
+      "row_id": "stage10915::cpp_parametergolf_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_v1",
+      "split": "strict_candidate_slice",
+      "target_rank_full_vocab": 6,
+      "target_text": "B",
+      "target_token_id": 183,
+      "target_value": "verifier_and_test_constraint",
+      "task_type": "evidence_citation"
+    },
+    {
+      "bounded_choice_target_label": "B",
+      "constrained_choice_match": false,
+      "constrained_choice_top1_label": "A",
+      "full_vocab_top1_match": false,
+      "full_vocab_top1_text": "C",
+      "full_vocab_top1_token_id": 184,
+      "gemma12b_correct": false,
+      "gemma12b_predicted_label": "C",
+      "gemma12b_raw_output": "**C. algorithmic_background_reference**\n\n**Reasoning:**\n\nThe edit target is a Python script (`scripts/universe_build.py`) that constructs a repository universe. The `algorithmic_background_reference` provides information about a skill related to functions within the `src.agentlab.agents.dynamic_prompting` module. This module likely contains algorithms or functions crucial for the universe-building process, making the algorithmic background reference the most relevant and specific justification for any edits or understanding of the script's functionality.\n\nHere's why the other options are less suitable:\n\n*   **A. candidate_change_surface:** While technically true (it's the file being edited), it's too general. It doesn't explain *why* the edit is needed or what the underlying logic is.\n*   **B. verifier_and_test_constraint:** There's no indication of a specific verifier or test constraint being violated.\n*   **D. external_analogue_reference:** This refers to a copyright notice and import statements from a different project, which is not directly relevant to the universe-building script.\n*   **E. nearby_definition_or_usage_context:** This refers to a different script (`arxiv-public-datasets/analysis/find_graph_stats.py`) and is not directly related to the universe-building task.\n*   **F. symptom_or_call_path_analogue:** This is a creative writing prompt and has no bearing on the code.",
+      "language_family": "python",
+      "option_labels": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "repo_id": "repository_library",
+      "row_id": "stage10915::python_repository_library_evidence_b_vs_f_replenishment::evidence_citation::strict_candidate_v1",
+      "split": "strict_candidate_slice",
+      "target_rank_full_vocab": 6,
+      "target_text": "B",
+      "target_token_id": 183,
+      "target_value": "verifier_and_test_constraint",
+      "task_type": "evidence_citation"
+    }
+  ],
+  "runtime_bundle": "runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+  "runtime_initialization": {
+    "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "metadata": {
+      "bounded_choice_aux_source": "encoder_option_retrieval",
+      "implementation": "transformer",
+      "mode": "bounded_decoder_ce_probe",
+      "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+      "probe_scale": "target_100m",
+      "run_id": "stage10890_flash_attn_alias_safe_multilingual_support_probe",
+      "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+      "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+      "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+    },
+    "missing_keys": [],
+    "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "state_dict_keys": 274,
+    "unexpected_keys": [],
+    "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10890_flash_attn_alias_safe_multilingual_support_probe/runtime_model/model_state.pt",
+    "weights_sha256": "e11a15de598547b3683d867c0181095192b8a6f0578ad6d427d4c1c9b056b8c1"
+  },
+  "stage": 10916,
+  "stage_name": "stage10916_evidence_successor_candidate_slice_comparison"
+}

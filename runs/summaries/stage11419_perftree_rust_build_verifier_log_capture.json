@@ -1,0 +1,93 @@
+{
+  "counts": {
+    "commands_attempted": 3,
+    "failed": 0,
+    "materializable_after_log": 3,
+    "passed": 3,
+    "timed_out": 0,
+    "unique_repo_families": 1,
+    "unique_roots": 3
+  },
+  "created_at_utc": "2026-07-13T15:28:18Z",
+  "decision": "perftree_rust_build_verifier_logs_captured",
+  "limitations": [
+    "Perftree has no selected-test source anchors; these are build-verifier support roots, not selected-test verifier-transition roots.",
+    "Rows materialized from this stage must be tagged build_verifier_only and train_support_only."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11419_perftree_rust_build_verifier_log_capture/perftree_rust_build_verifier_log_capture.json"
+  },
+  "passed": true,
+  "quality_gate": {
+    "actual_verifier_logs_present": true,
+    "build_verifier_anchor_present": true,
+    "probe_ready": false,
+    "selected_test_anchor_present": false,
+    "train_rows_emitted": false
+  },
+  "recommended_next_action": "Materialize build-verifier-backed Perftree support rows with explicit build_verifier_only tags, then rerun the Rust support gate.",
+  "results": [
+    {
+      "actual_verifier_log_present": true,
+      "build_verifier_anchor_present": true,
+      "candidate_change_surface_path": "/data/repositories/perftree/perftree/src/lib.rs",
+      "cargo_toml": "/data/repositories/perftree/Cargo.toml",
+      "command": "cargo test --manifest-path /data/repositories/perftree/Cargo.toml",
+      "crate_dir": "/data/repositories/perftree",
+      "duration_seconds": 2.299,
+      "inferred_verifier_command": "cargo test --manifest-path /data/repositories/perftree/Cargo.toml",
+      "log_head": "    Updating crates.io index\n Downloading crates ...\n  Downloaded atty v0.2.14\n  Downloaded anyhow v1.0.97\n  Downloaded termcolor v1.1.0\n  Downloaded libc v0.2.92\n   Compiling anyhow v1.0.97\n   Compiling libc v0.2.92\n   Compiling termcolor v1.1.0\n   Compiling perftree v0.4.0 (/data/repositories/perftree/perftree)\n   Compiling atty v0.2.14\n   Compiling perftree-cli v0.2.0 (/data/repositories/perftree/perftree-cli)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.13s\n     Running unittests src/lib.rs (target/debug/deps/perftree-2261af913de36cf3)\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n     Running unittests src/bin/perftree.rs (target/debug/deps/perftree-d93c2e016e9b902b)\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n   Doc-tests perftree\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+      "log_path": "runs/local/artifacts/stage11419_perftree_rust_build_verifier_log_capture/local_build_verifier_rust__data_repositories_perftree.log",
+      "materialization_allowed_after_log": true,
+      "repo_family": "perftree",
+      "returncode": 0,
+      "root_id": "local_build_verifier_rust::data_repositories_perftree",
+      "selected_test_anchor_present": false,
+      "status": "passed",
+      "timed_out": false,
+      "verifier_anchor_path": "/data/repositories/perftree/Cargo.toml"
+    },
+    {
+      "actual_verifier_log_present": true,
+      "build_verifier_anchor_present": true,
+      "candidate_change_surface_path": "/data/repositories/perftree/perftree/src/lib.rs",
+      "cargo_toml": "/data/repositories/perftree/perftree/Cargo.toml",
+      "command": "cargo test --manifest-path /data/repositories/perftree/perftree/Cargo.toml",
+      "crate_dir": "/data/repositories/perftree/perftree",
+      "duration_seconds": 0.175,
+      "inferred_verifier_command": "cargo test --manifest-path /data/repositories/perftree/perftree/Cargo.toml",
+      "log_head": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.01s\n     Running unittests src/lib.rs (/data/repositories/perftree/target/debug/deps/perftree-2261af913de36cf3)\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n   Doc-tests perftree\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+      "log_path": "runs/local/artifacts/stage11419_perftree_rust_build_verifier_log_capture/local_build_verifier_rust__data_repositories_perftree_perftree.log",
+      "materialization_allowed_after_log": true,
+      "repo_family": "perftree",
+      "returncode": 0,
+      "root_id": "local_build_verifier_rust::data_repositories_perftree_perftree",
+      "selected_test_anchor_present": false,
+      "status": "passed",
+      "timed_out": false,
+      "verifier_anchor_path": "/data/repositories/perftree/perftree/Cargo.toml"
+    },
+    {
+      "actual_verifier_log_present": true,
+      "build_verifier_anchor_present": true,
+      "candidate_change_surface_path": "/data/repositories/perftree/perftree-cli/src/bin/perftree.rs",
+      "cargo_toml": "/data/repositories/perftree/perftree-cli/Cargo.toml",
+      "command": "cargo test --manifest-path /data/repositories/perftree/perftree-cli/Cargo.toml",
+      "crate_dir": "/data/repositories/perftree/perftree-cli",
+      "duration_seconds": 0.129,
+      "inferred_verifier_command": "cargo test --manifest-path /data/repositories/perftree/perftree-cli/Cargo.toml",
+      "log_head": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.02s\n     Running unittests src/bin/perftree.rs (/data/repositories/perftree/target/debug/deps/perftree-d93c2e016e9b902b)\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+      "log_path": "runs/local/artifacts/stage11419_perftree_rust_build_verifier_log_capture/local_build_verifier_rust__data_repositories_perftree_perftree_cli.log",
+      "materialization_allowed_after_log": true,
+      "repo_family": "perftree",
+      "returncode": 0,
+      "root_id": "local_build_verifier_rust::data_repositories_perftree_perftree_cli",
+      "selected_test_anchor_present": false,
+      "status": "passed",
+      "timed_out": false,
+      "verifier_anchor_path": "/data/repositories/perftree/perftree-cli/Cargo.toml"
+    }
+  ],
+  "stage": 11419,
+  "stage_name": "stage11419_perftree_rust_build_verifier_log_capture"
+}

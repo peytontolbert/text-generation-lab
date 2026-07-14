@@ -1,0 +1,143 @@
+{
+  "contract_summary": {
+    "contract_name": "evidence_role_admission_contract_v1",
+    "reject_if": [
+      "same_path_same_text_under_multiple_roles",
+      "verifier_text_argues_for_candidate_surface_when_candidate_surface_is_gold",
+      "gold_role_absent_from_visible_evidence",
+      "gold_verifier_role_without_selected_test_or_verifier_anchor",
+      "option_label_or_order_is_needed_to_solve_the_row"
+    ]
+  },
+  "counts": {
+    "language_role_counts": {
+      "c_cpp::candidate_change_surface": 12,
+      "c_cpp::symptom_or_call_path_analogue": 12,
+      "c_cpp::verifier_and_test_constraint": 12,
+      "python::candidate_change_surface": 12,
+      "python::symptom_or_call_path_analogue": 12,
+      "python::verifier_and_test_constraint": 12,
+      "rust::candidate_change_surface": 7,
+      "rust::symptom_or_call_path_analogue": 7,
+      "rust::verifier_and_test_constraint": 7,
+      "web_js_ts_html::candidate_change_surface": 8,
+      "web_js_ts_html::symptom_or_call_path_analogue": 8,
+      "web_js_ts_html::verifier_and_test_constraint": 8
+    },
+    "language_root_counts": {
+      "c_cpp": 12,
+      "python": 12,
+      "rust": 7,
+      "web_js_ts_html": 8
+    },
+    "repo_family_counts": {
+      "ASAC": 1,
+      "BrowserGym": 1,
+      "CREMA": 1,
+      "DeepSpeed": 1,
+      "EfficientDynamic3DGaussian": 1,
+      "HiLAM": 1,
+      "IP-Adapter": 1,
+      "Megatron-LM": 1,
+      "Model-Optimizer": 1,
+      "NeMo": 1,
+      "NousResearch__hermes-agent-self-evolution": 1,
+      "NousResearch__hermes-example-plugins": 1,
+      "cand_ent_cache_enabled_d2019abcfd_50_f30d6759c8": 1,
+      "cand_ent_fixed_size_157ebd2bb6_46_89328660a7": 1,
+      "cand_ent_low_rank_04201d143c_11_291afa8a1c": 1,
+      "cand_ent_multi_stage_52c293c2ae_12_17b7a104a9": 1,
+      "cand_ent_non_deterministic_6c8c53f29d_14_218cb20989": 1,
+      "cand_ent_non_linear_ccc83e0172_13_499acbad7d": 1,
+      "cand_ent_non_trivial_e078aa07fe_7_d5ea6d04dc": 1,
+      "cand_ent_one_one_83b3a34858_27_fa5ccf3b07": 1,
+      "cccl": 2,
+      "chroma": 2,
+      "cuEmbed": 1,
+      "dbt-core": 2,
+      "falco": 1,
+      "linux": 1,
+      "mem0": 7,
+      "onnxruntime": 1,
+      "tiktoken": 2
+    },
+    "role_counts": {
+      "candidate_change_surface": 39,
+      "symptom_or_call_path_analogue": 39,
+      "verifier_and_test_constraint": 39
+    },
+    "selected_roots": 39,
+    "selected_test_root_counts": {
+      "c_cpp": 12,
+      "python": 12,
+      "rust": 3,
+      "web_js_ts_html": 5
+    },
+    "undersupplied_languages_vs_target": [],
+    "verifier_root_counts": {
+      "c_cpp": 5,
+      "python": 12,
+      "rust": 7,
+      "web_js_ts_html": 7
+    },
+    "work_items": 117
+  },
+  "created_at_utc": "2026-07-13T06:45:21Z",
+  "decision": "root_disjoint_evidence_materialization_queue_ready",
+  "exclusions": {
+    "excluded_repo_families": [
+      "agentkernel",
+      "bddy_website",
+      "candle",
+      "code_assist",
+      "parametergolf",
+      "repository_library",
+      "tokenizers"
+    ],
+    "excluded_roots": 11
+  },
+  "next_best_step": "Materialize these work items into concrete evidence_citation rows, then run a contract admission audit before training a semantic evidence scorer objective.",
+  "not_yet_trainable": [
+    "These are materialization work items, not admitted train rows.",
+    "Each item must be converted into a concrete visible evidence ledger and pass the stage11175 contract before inclusion in a training package."
+  ],
+  "outputs": {
+    "queue_jsonl": "runs/local/artifacts/stage11177_root_disjoint_evidence_materialization_queue/materialization_work_items.jsonl",
+    "root_cards_jsonl": "runs/local/artifacts/stage11177_root_disjoint_evidence_materialization_queue/selected_root_cards.jsonl",
+    "summary_json": "runs/local/artifacts/stage11177_root_disjoint_evidence_materialization_queue/root_disjoint_evidence_materialization_queue.json"
+  },
+  "passed": true,
+  "selection_policy": {
+    "exclude_current_strict_validation_reserved_roots_and_repo_families": true,
+    "language_target_roots": {
+      "c_cpp": 12,
+      "python": 12,
+      "rust": 7,
+      "web_js_ts_html": 8
+    },
+    "repo_balanced_round_robin_with_quality_sort": true,
+    "require_selected_test_or_verifier_anchor": true,
+    "roles_per_root": [
+      "candidate_change_surface",
+      "verifier_and_test_constraint",
+      "symptom_or_call_path_analogue"
+    ]
+  },
+  "source_artifacts": {
+    "contract": "runs/local/artifacts/stage11175_clean_evidence_role_rewrite_package/evidence_role_admission_contract.json",
+    "current_exclusion_sources": [
+      "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_strict_eval.jsonl",
+      "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_validation.jsonl",
+      "runs/local/artifacts/stage11051_successor_residual_support_plus_priority_evidence/reserved_residual_candidates.jsonl"
+    ],
+    "root_manifest": "runs/local/artifacts/stage10784_root_admission_manifest_v5/root_admission_manifest_v5.jsonl",
+    "trainable_evidence_audit": "runs/local/artifacts/stage11176_trainable_evidence_contract_audit/trainable_evidence_contract_audit.json"
+  },
+  "stage": 11177,
+  "stage_name": "stage11177_root_disjoint_evidence_materialization_queue",
+  "why_this_moves_the_frontier": [
+    "Fills the missing symptom_or_call_path_analogue positive lane that stage11176 found absent from trainable support.",
+    "Adds root-disjoint Rust and Web materialization targets instead of recycling tokenizers/candle/bddy/code_assist heldout/reserved rows.",
+    "Keeps candidate_change_surface positive controls balanced against verifier_and_test_constraint so role-map-style overcorrection can be audited."
+  ]
+}

@@ -623,3 +623,184 @@ def test_augment_session_episode_context_filters_generic_symbol_query_terms(tmp_
     assert 'paper_anchor' in external_ids
     assert 'dataset_anchor' in external_ids
     assert 'repo_generic' not in external_ids
+
+
+def test_augment_session_episode_context_source_catalog_blocks_uncurated_external_datasets(tmp_path: Path) -> None:
+    if importlib.util.find_spec('pyarrow') is None:
+        pytest.skip('pyarrow not installed')
+
+    index_dir = tmp_path / 'index'
+    chunks_dir = index_dir / 'chunks'
+    mentions_dir = index_dir / 'chunk_mentions'
+    chunks_dir.mkdir(parents=True)
+    mentions_dir.mkdir(parents=True)
+
+    chunks = [
+        {
+            'chunk_id': 'repo_chunk_1',
+            'source_type': 'repo',
+            'source_id': 'other_repo',
+            'doc_id': 'other_repo/src/loader.py',
+            'chunk_index': 0,
+            'modality': 'code',
+            'token_count': 40,
+            'text': 'def tensor_loader(shape_error):\n    return shape_error\n',
+            'metadata_json': json.dumps({'path': 'other_repo/src/loader.py'}),
+        },
+        {
+            'chunk_id': 'paper_chunk_1',
+            'source_type': 'paper',
+            'source_id': 'paper_a',
+            'doc_id': 'paper_a/algorithm.txt',
+            'chunk_index': 0,
+            'modality': 'text',
+            'token_count': 35,
+            'text': 'Tensor loader algorithm and verification procedure under execution.',
+            'metadata_json': json.dumps({'path': 'paper_a/algorithm.txt'}),
+        },
+        {
+            'chunk_id': 'dataset_chunk_1',
+            'source_type': 'dataset',
+            'source_id': 'trace_a',
+            'doc_id': 'trace_a/error_trace.txt',
+            'chunk_index': 0,
+            'modality': 'text',
+            'token_count': 25,
+            'text': 'Runtime error trace for loader shape mismatch in tensor pipeline.',
+            'metadata_json': json.dumps({'path': 'trace_a/error_trace.txt'}),
+        },
+        {
+            'chunk_id': 'dataset_chunk_rogue',
+            'source_type': 'dataset',
+            'source_id': 'rogue_ds',
+            'doc_id': 'rogue_ds/error_trace.txt',
+            'chunk_index': 0,
+            'modality': 'text',
+            'token_count': 26,
+            'text': 'Runtime error trace for loader shape mismatch in tensor pipeline.',
+            'metadata_json': json.dumps({'path': 'rogue_ds/error_trace.txt'}),
+        },
+    ]
+    mentions = [
+        {'term': 'tensor', 'chunk_id': 'repo_chunk_1', 'source_type': 'repo', 'source_id': 'other_repo', 'doc_id': 'other_repo/src/loader.py'},
+        {'term': 'loader', 'chunk_id': 'repo_chunk_1', 'source_type': 'repo', 'source_id': 'other_repo', 'doc_id': 'other_repo/src/loader.py'},
+        {'term': 'shape_error', 'chunk_id': 'repo_chunk_1', 'source_type': 'repo', 'source_id': 'other_repo', 'doc_id': 'other_repo/src/loader.py'},
+        {'term': 'tensor', 'chunk_id': 'paper_chunk_1', 'source_type': 'paper', 'source_id': 'paper_a', 'doc_id': 'paper_a/algorithm.txt'},
+        {'term': 'loader', 'chunk_id': 'paper_chunk_1', 'source_type': 'paper', 'source_id': 'paper_a', 'doc_id': 'paper_a/algorithm.txt'},
+        {'term': 'verification', 'chunk_id': 'paper_chunk_1', 'source_type': 'paper', 'source_id': 'paper_a', 'doc_id': 'paper_a/algorithm.txt'},
+        {'term': 'loader', 'chunk_id': 'dataset_chunk_1', 'source_type': 'dataset', 'source_id': 'trace_a', 'doc_id': 'trace_a/error_trace.txt'},
+        {'term': 'trace', 'chunk_id': 'dataset_chunk_1', 'source_type': 'dataset', 'source_id': 'trace_a', 'doc_id': 'trace_a/error_trace.txt'},
+        {'term': 'tensor', 'chunk_id': 'dataset_chunk_1', 'source_type': 'dataset', 'source_id': 'trace_a', 'doc_id': 'trace_a/error_trace.txt'},
+        {'term': 'loader', 'chunk_id': 'dataset_chunk_rogue', 'source_type': 'dataset', 'source_id': 'rogue_ds', 'doc_id': 'rogue_ds/error_trace.txt'},
+        {'term': 'trace', 'chunk_id': 'dataset_chunk_rogue', 'source_type': 'dataset', 'source_id': 'rogue_ds', 'doc_id': 'rogue_ds/error_trace.txt'},
+        {'term': 'tensor', 'chunk_id': 'dataset_chunk_rogue', 'source_type': 'dataset', 'source_id': 'rogue_ds', 'doc_id': 'rogue_ds/error_trace.txt'},
+    ]
+    write_parquet_shard(shard_path(chunks_dir, 'chunks', 0), chunks)
+    write_parquet_shard(shard_path(mentions_dir, 'chunk_mentions', 0), mentions)
+
+    episodes = tmp_path / 'episodes.jsonl'
+    episodes.write_text(
+        json.dumps(
+            {
+                'episode_id': 'ep1',
+                'repo_id': 'local_repo',
+                'goal': 'Modify repository files to preserve behavior under execution-backed maintenance.\nChanged files: src/loader.py\nVerification targets: tests/test_loader.py\nKey symbols: tensor_loader\nExecution route: PATCH_PLUS_EXEC',
+                'seed_paths': ['src/loader.py'],
+                'seed_symbols': ['tensor_loader', 'shape_error'],
+                'selected_tests': ['tests/test_loader.py'],
+                'context_token_count': 30,
+                'context_rows': [
+                    {
+                        'chunk_id': 'local_seed_1',
+                        'source_type': 'local_repo',
+                        'source_id': 'local_repo',
+                        'path': 'src/loader.py',
+                        'chunk_index': 0,
+                        'token_count': 30,
+                        'text': 'def tensor_loader(x):\n    return x\n',
+                        'role': 'seed_change',
+                        'retrieval_reason': 'resolved_session_change',
+                        'distance_from_seed': 0,
+                        'retrieval_score': 1.0,
+                    },
+                    {
+                        'chunk_id': 'local_test_1',
+                        'source_type': 'local_repo',
+                        'source_id': 'local_repo',
+                        'path': 'tests/test_loader.py',
+                        'chunk_index': 0,
+                        'token_count': 20,
+                        'text': 'def test_loader():\n    assert tensor_loader(1) == 1\n',
+                        'role': 'verification_constraint',
+                        'retrieval_reason': 'targeted_test_selection',
+                        'distance_from_seed': 1,
+                        'retrieval_score': 1.5,
+                    }
+                ],
+                'context_role_counts': {'seed_change': 1, 'verification_constraint': 1},
+                'source_metadata': {'route': 'PATCH_PLUS_EXEC'},
+            }
+        ) + '\n',
+        encoding='utf-8',
+    )
+
+    source_catalog = tmp_path / 'source_catalog.json'
+    source_catalog.write_text(
+        json.dumps(
+            {
+                'source_type_defaults': {
+                    'repo': {'allow_uncataloged': True},
+                    'paper': {'allow_uncataloged': False},
+                    'dataset': {'allow_uncataloged': False},
+                },
+                'sources': [
+                    {
+                        'name': 'paper_support',
+                        'source_type': 'paper',
+                        'source_id_equals': ['paper_a'],
+                        'allow_augmentation': True,
+                        'role_override': 'algorithm_grounding',
+                        'provenance_tier': 'grounded_paper',
+                        'quality_tier': 'high',
+                    },
+                    {
+                        'name': 'trace_support',
+                        'source_type': 'dataset',
+                        'source_id_equals': ['trace_a'],
+                        'allow_augmentation': True,
+                        'role_override': 'trace_analogue',
+                        'provenance_tier': 'grounded_trace',
+                        'quality_tier': 'high',
+                    },
+                ],
+            },
+            sort_keys=True,
+        ),
+        encoding='utf-8',
+    )
+
+    rows, summary = augment_session_episode_context(
+        episodes_path=episodes,
+        index_dir=index_dir,
+        external_token_budget=200,
+        max_query_terms=16,
+        max_term_docfreq=100,
+        max_augmented_chunks=8,
+        max_chunks_per_source_type=4,
+        max_chunks_per_path=2,
+        neighbor_window=1,
+        max_neighbor_chunks_per_anchor=2,
+        min_external_chunks=3,
+        source_catalog_path=source_catalog,
+    )
+
+    row = rows[0]
+    external_rows = [context_row for context_row in row['context_rows'] if context_row['source_type'] != 'local_repo']
+    external_ids = {context_row['chunk_id'] for context_row in external_rows}
+    assert 'dataset_chunk_rogue' not in external_ids
+    assert {'repo_chunk_1', 'paper_chunk_1', 'dataset_chunk_1'}.issubset(external_ids)
+    paper_row = next(context_row for context_row in external_rows if context_row['chunk_id'] == 'paper_chunk_1')
+    dataset_row = next(context_row for context_row in external_rows if context_row['chunk_id'] == 'dataset_chunk_1')
+    assert paper_row['source_catalog']['name'] == 'paper_support'
+    assert dataset_row['source_catalog']['name'] == 'trace_support'
+    assert summary['catalog_source_counts'] == {'paper_support': 1, 'trace_support': 1}

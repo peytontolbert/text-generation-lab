@@ -1,0 +1,78 @@
+{
+  "claim_scope": [
+    "Freezes the valid promotion metrics for semantic-output successors of v2.7 after the stage10605 first-token inflation finding.",
+    "Separates unsafe first-token full-vocab metrics from promotable semantic-output metrics.",
+    "This is the metric contract that future 100M-vs-Gemma comparisons on semantic-output rows must satisfy."
+  ],
+  "created_at_utc": "2026-07-12T04:28:01Z",
+  "current_evidence": {
+    "semantic_decoder_equals_label_rows": 0,
+    "stage10594_full_vocab_top1_accuracy": 0.13756613756613756,
+    "stage10599_full_vocab_top1_accuracy": 0.08465608465608465,
+    "stage10605_constrained_choice_top1_accuracy": 0.544973544973545,
+    "stage10605_dominant_full_vocab_prediction": [
+      "A",
+      189
+    ],
+    "stage10605_full_vocab_top1_accuracy": 0.25925925925925924,
+    "strict_mean_decoder_token_length": 14.666666666666666
+  },
+  "inputs": {
+    "diagnostic_baseline": "runs/local/artifacts/stage10599_mixed_contract_non_a_diagnostic_probe/bounded_decoder_probe/execution_result.json",
+    "interface_audit": "runs/local/artifacts/stage10603_fresh_python_cpp_mixed_contract_semantic_output_audit/fresh_python_cpp_mixed_contract_semantic_output_audit.json",
+    "old_baseline": "runs/local/artifacts/stage10594_fresh_python_cpp_mixed_contract_probe/bounded_decoder_probe/execution_result.json",
+    "prefix_inflation_audit": "runs/local/artifacts/stage10606_semantic_output_probe_prefix_inflation_audit/semantic_output_probe_prefix_inflation_audit.json",
+    "semantic_probe_request": "runs/local/artifacts/stage10604_fresh_python_cpp_mixed_contract_semantic_output_probe_request/fresh_python_cpp_mixed_contract_semantic_output_probe_request.json"
+  },
+  "next_actions": [
+    "Finish stage10607 or an equivalent exact-sequence audit and use it as the headline metric for stage10605-like semantic-output probes.",
+    "If exact semantic-output generation stays poor while constrained choice is useful, switch the main comparison surface to semantic constrained scoring rather than decoder free generation.",
+    "Only after the metric contract is enforced should the next multilingual v2.7 Gemma comparison be run on this path."
+  ],
+  "outputs": {
+    "metric_contract_json": "runs/local/artifacts/stage10608_v27_semantic_output_metric_contract/v27_semantic_output_metric_contract.json"
+  },
+  "passed": true,
+  "promotable_metrics": [
+    {
+      "definition": "Generated semantic output string must exactly match the full target decoder_text after stripping whitespace.",
+      "metric": "exact_semantic_output_match_rate",
+      "status": "required"
+    },
+    {
+      "definition": "Choice scoring must use bounded_choice_target_label or an equivalent semantic-choice target, not decoder_text first-token overlap.",
+      "metric": "constrained_semantic_choice_accuracy",
+      "status": "required"
+    },
+    {
+      "definition": "Report alongside exact match so empty or junk generations cannot masquerade as progress.",
+      "metric": "contentful_generation_rate",
+      "status": "required_context"
+    }
+  ],
+  "required_honesty_gates": [
+    "No semantic-output stage may be promoted or compared to Gemma using first-token full-vocab accuracy alone.",
+    "Any semantic-output Gemma comparison must use the exact same semantic-output target strings and the same exact-match scorer.",
+    "Bounded-choice constrained scoring must remain decoupled from decoder_text via bounded_choice_target_label or an equivalent explicit field.",
+    "If exact semantic-output scoring is unavailable, the stage is diagnostic-only."
+  ],
+  "stage": 10608,
+  "stage_name": "stage10608_v27_semantic_output_metric_contract",
+  "truthful_read": [
+    "The semantic-output interface repair is still valid and worth keeping.",
+    "The stage10605 apparent gain is not promotable because the metric was still gameable at the first-token level.",
+    "This contract prevents that eval-hacking mode from reappearing in future v2.7 promotion candidates."
+  ],
+  "unsafe_metrics": [
+    {
+      "metric": "first_token_full_vocab_top1_accuracy",
+      "reason": "Multi-token semantic outputs can get artificial credit from shared first-token overlap, as demonstrated by stage10605 predicting constant A across all strict rows.",
+      "status": "blocked_for_promotion"
+    },
+    {
+      "metric": "rows_with_target_rank_1_on_first_token",
+      "reason": "This is also first-token based and inherits the same inflation mode.",
+      "status": "blocked_for_promotion"
+    }
+  ]
+}

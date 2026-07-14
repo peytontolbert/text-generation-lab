@@ -1,0 +1,74 @@
+{
+  "stage": 10260,
+  "stage_name": "stage10260_fresh_web_root_standalone_harness_bridge",
+  "created_at_utc": "2026-07-11T00:00:00Z",
+  "passed": true,
+  "decision": "Freeze the promotion path for future fresh web roots so the next standalone and harness runs consume the same admitted source-backed web bundles without leakage, prompt drift, or scoring drift.",
+  "inputs": {
+    "fresh_root_request": "runs/summaries/stage10259_fresh_web_source_backed_root_generation_request.json",
+    "standalone_runtime_contract": "runs/summaries/stage10139_first_wave_bundle_runtime_payload.json",
+    "harness_runtime_contract": "runs/summaries/stage10244_compact_bounded_saved_runtime_harness_payload_successor.json"
+  },
+  "bridge_contract": {
+    "unit_of_independence": "root bundle, not individual perspective row",
+    "promotion_order": [
+      "generate fresh web root bundles",
+      "complete rubric and anti-cheat review",
+      "run root-level leakage scan against current live eval frontier",
+      "compile admitted bundles into standalone prompt rows",
+      "mirror the same admitted bundles into harness payload rows",
+      "compare 100M and Gemma on the same admitted root set"
+    ],
+    "shared_invariants": [
+      "Same root bundle identity must be preserved across standalone and harness payloads.",
+      "Candidate semantics may be reformatted for execution, but gold answer meaning cannot change.",
+      "If a root is abstention-only under standalone review, it remains abstention-only in harness scoring.",
+      "Do not mix exhausted reviewed web roots with fresh web roots in a way that hides source overlap."
+    ]
+  },
+  "standalone_flow": {
+    "payload_shape_anchor": "runs/local/artifacts/stage10139_first_wave_bundle_runtime_payload/first_wave_bundle_runtime_payload.json",
+    "required_fields": [
+      "language_family",
+      "bundle_id",
+      "perspective",
+      "prompt_contract",
+      "candidate_paths",
+      "selected_tests",
+      "gold_answer or abstention policy reference"
+    ],
+    "primary_metric": "root solved rate",
+    "secondary_metrics": [
+      "per-perspective accuracy",
+      "abstention correctness",
+      "evidence-citation correctness",
+      "root-level coherence"
+    ],
+    "training_use_rule": "Fresh admitted web roots may support the standalone 100M frontier only if they remain outside the current live heldout/miss set."
+  },
+  "harness_flow": {
+    "payload_shape_anchor": "runs/local/artifacts/stage10244_compact_bounded_saved_runtime_harness_payload_successor/compact_bounded_saved_runtime_harness_payload_successor.json",
+    "writeback_requirements": [
+      "harness_run_id",
+      "same_task_pack_as_gemma12b",
+      "tool_trace_spans",
+      "verifier_results",
+      "patch_minimality_or_abstain_scores"
+    ],
+    "promotion_rule": "Only admitted fresh web roots with stable prompt/writeback mapping enter the locked task pack.",
+    "comparison_rule": "100M and Gemma must execute the same task-pack rows with the same root identities and evaluator semantics."
+  },
+  "anti_cheat_guards": [
+    "Run candidate-order permutation or equivalent position-invariance checks before claiming a web improvement.",
+    "Track whether selected_tests are absent; zero-test web roots require heightened abstention scrutiny.",
+    "Reject any bridge step that converts a current eval miss root into train support.",
+    "Preserve source provenance fields so future source-heldout claims remain auditable."
+  ],
+  "recommended_next_stage_names": [
+    "stage10261_fresh_web_root_bundle_builder",
+    "stage10262_fresh_web_root_review_packets",
+    "stage10263_admitted_web_replacement_runtime_payload",
+    "stage10264_admitted_web_replacement_same_manifest_comparison"
+  ],
+  "next_best_step": "Use this bridge only after fresh web roots are generated under Stage10259; do not run another multilingual bounded replay until at least one admitted fresh web bundle exists."
+}

@@ -1,0 +1,120 @@
+{
+  "baseline_no_abstain_results": {
+    "successor_strict": {
+      "accuracy": 0.05555555555555555,
+      "correct": 2,
+      "coverage": 1.0,
+      "prediction_counts": {
+        "A": 10,
+        "B": 15,
+        "C": 11
+      },
+      "rows": 36,
+      "target_counts": {
+        "A": 12,
+        "B": 12,
+        "C": 12
+      }
+    },
+    "train": {
+      "accuracy": 0.0641025641025641,
+      "correct": 10,
+      "coverage": 1.0,
+      "prediction_counts": {
+        "A": 61,
+        "B": 53,
+        "C": 42
+      },
+      "rows": 156,
+      "target_counts": {
+        "A": 52,
+        "B": 63,
+        "C": 41
+      }
+    }
+  },
+  "contrast_training_telemetry": {
+    "contrast_applicable_rows_seen": 384,
+    "contrast_margin_satisfied_rate": 0.0,
+    "contrast_margin_satisfied_rows_seen": 0,
+    "loss_steps": 96
+  },
+  "created_at_utc": "2026-07-13T22:51:13Z",
+  "decision": "reject_stage11598_keep_stage11507_selected_frontier",
+  "next_recommended_work": [
+    "Do not run more shared retrieval CE/contrast probes on these Web rows.",
+    "The next useful model change is a task-specific Web candidate scorer head or listwise same-root objective that consumes semantic_role/task_type metadata explicitly.",
+    "Alternatively, build true fail-to-pass Web verifier roots; current PASS_TO_PASS rows only teach selected-test relevance.",
+    "Stage11507 remains the selected frontier until a run beats Web heldout 42/66 while preserving canary/residual gates."
+  ],
+  "objective_settings": {
+    "bounded_choice_contrast_margin": 0.08,
+    "bounded_choice_contrast_weight": 0.5,
+    "bounded_decoder_train_sampler": "web_task_family_balanced",
+    "learning_rate": "2e-7",
+    "max_steps": 96,
+    "preservation_kl_weight": 6.0
+  },
+  "postrun_compact_results": {
+    "filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "filtered_validation": {
+      "accuracy": 0.9090909090909091,
+      "correct": 20,
+      "rows": 22
+    },
+    "old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23
+    },
+    "old_canary_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.7,
+      "correct": 7,
+      "rows": 10
+    },
+    "web_heldout": {
+      "accuracy": 0.5303030303030303,
+      "correct": 35,
+      "rows": 66
+    },
+    "web_successor_strict": {
+      "accuracy": 0.05555555555555555,
+      "correct": 2,
+      "rows": 36
+    }
+  },
+  "postrun_gates": {
+    "filtered_strict_22_of_22": true,
+    "filtered_validation_at_least_20_of_22": true,
+    "old_canary_strict_23_of_23": true,
+    "old_canary_validation_at_least_21_of_23": true,
+    "residual_at_least_7_of_10": true,
+    "web_heldout_beats_stage11571_42_of_66": false,
+    "web_successor_strict_full_coverage": true
+  },
+  "rejected_runtime": "runs/local/artifacts/stage11598_web_no_abstain_geometry_probe/runtime_model/runtime_model_bundle.json",
+  "rejected_runtime_weights_sha256": "b9be743ea15d1b64ec6d4a797a4fbae43315d05cf7a719c66ac4973aae44a6d8",
+  "selected_frontier_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+  "source_artifacts": {
+    "base_audit": "runs/summaries/stage11597_web_answerable_no_abstain_geometry_audit.json",
+    "loss_by_step": "runs/local/artifacts/stage11598_web_no_abstain_geometry_probe/bounded_decoder_probe/loss_by_step.jsonl",
+    "postrun": "runs/summaries/stage11599_web_no_abstain_geometry_postrun_audit.json",
+    "request": "runs/summaries/stage11598_web_no_abstain_geometry_probe_request.json"
+  },
+  "stage": 11600,
+  "stage_name": "stage11600_web_no_abstain_geometry_probe_decision",
+  "why_rejected": [
+    "Stage11598 preserved all selected frontier canary/residual gates but did not improve Web heldout above 35/66.",
+    "No-abstain successor strict remained 2/36, matching the Stage11597 pre-training scorer audit.",
+    "This geometry avoids catastrophic interference but does not teach the current selected scorer the Web A/B task boundary."
+  ]
+}

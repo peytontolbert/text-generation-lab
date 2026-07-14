@@ -1,0 +1,49 @@
+{
+  "claim_boundary": [
+    "This enables grouped/root-balanced training for future materialized rows; it is not itself a model improvement.",
+    "No existing selected frontier changes: Stage11507 remains selected and Stage11634 routed policy remains the current product routing.",
+    "Future promotion still requires Web heldout >38/66 while preserving compact canary/residual gates."
+  ],
+  "created_at_utc": "2026-07-14T01:03:14Z",
+  "decision": "root_group_objective_ready_for_materialized_web_gap_probe",
+  "gates": {
+    "cli_sampler_choice_present": true,
+    "cli_weight_flag_present": true,
+    "focused_test_present": true,
+    "py_compile_passed": true,
+    "root_balanced_sampler_present": true,
+    "root_group_aux_loss_present": true,
+    "root_group_key_helper_present": true,
+    "stage11646_gap_groups_available": true,
+    "stage11646_work_items_available": true,
+    "training_loop_weight_present": true
+  },
+  "new_train_flags": {
+    "recommended_pairing": "keep --bounded-choice-contrast-weight nonzero and preserve Stage11507 gates during selection",
+    "root_group_loss": "--bounded-choice-root-group-aux-weight <nonzero>",
+    "sampler": "--bounded-decoder-train-sampler web_gap_root_balanced"
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11647_root_group_objective_readiness_audit/root_group_objective_readiness_audit.json"
+  },
+  "py_compile": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "source_artifacts": {
+    "focused_test": "tests/test_bounded_choice_root_group_training.py",
+    "stage11646": "runs/local/artifacts/stage11646_web_heldout_gap_rollout_mining/web_heldout_gap_rollout_mining.json",
+    "train_cli": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "training_loop": "legacy_src/agentkernel_lite/training_loop.py"
+  },
+  "stage": 11647,
+  "stage11646_training_scale": {
+    "first_batch_nominal_rollouts": 1664,
+    "first_batch_target_roots": 104,
+    "meaningful_step": "one update over grouped root-local candidate rollouts with verifier grades",
+    "note": "This mirrors the useful part of RL-style coding training: many graded attempts per root before one update, not merely more optimizer steps.",
+    "suggested_group_size": 16
+  },
+  "stage_name": "stage11647_root_group_objective_readiness_audit"
+}

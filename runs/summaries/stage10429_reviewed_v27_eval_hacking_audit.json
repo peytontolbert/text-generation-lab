@@ -1,0 +1,348 @@
+{
+  "claim_boundary": [
+    "The reviewed v2.7 package is materially stronger than the frozen 47-row v2.6 frontier because it is root-split and review-backed.",
+    "It is still not source-heldout promotable; every row remains marked source_heldout_admissible=false.",
+    "Any claim about beating Gemma on the reviewed v2.7 standalone surface should remain same-manifest and standalone-only until fresh heldout roots are added.",
+    "Stress overlap rows must remain excluded from the promotable path and reported separately."
+  ],
+  "created_at_utc": "2026-07-11T19:05:03Z",
+  "evidence_signature_summary": {
+    "distinct_signatures": 4,
+    "top_signatures": [
+      {
+        "distinct_target_values": 2,
+        "evidence_keys": [
+          "Language",
+          "Perspective",
+          "Task",
+          "Evidence",
+          "visible_evidence_1",
+          "visible_evidence_2",
+          "visible_evidence_3",
+          "visible_evidence_4",
+          "visible_evidence_5"
+        ],
+        "majority_accuracy": 0.75,
+        "majority_count": 3,
+        "majority_target_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+        "rows": 4
+      },
+      {
+        "distinct_target_values": 3,
+        "evidence_keys": [
+          "Language",
+          "Perspective",
+          "Task",
+          "Evidence",
+          "algorithmic_background_reference",
+          "candidate_change_surface",
+          "nearby_definition_or_usage_context",
+          "symptom_or_call_path_analogue",
+          "verifier_and_test_constraint"
+        ],
+        "majority_accuracy": 0.6666666666666666,
+        "majority_count": 4,
+        "majority_target_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+        "rows": 6
+      },
+      {
+        "distinct_target_values": 4,
+        "evidence_keys": [
+          "Language",
+          "Perspective",
+          "Task",
+          "Evidence",
+          "candidate_change_surface",
+          "nearby_definition_or_usage_context",
+          "symptom_or_call_path_analogue",
+          "verifier_and_test_constraint"
+        ],
+        "majority_accuracy": 0.5,
+        "majority_count": 3,
+        "majority_target_value": "src/code_assist/ui/fastapi_dashboard.py",
+        "rows": 6
+      },
+      {
+        "distinct_target_values": 16,
+        "evidence_keys": [
+          "Language",
+          "Perspective",
+          "Task",
+          "Evidence",
+          "algorithmic_background_reference",
+          "candidate_change_surface",
+          "external_analogue_reference",
+          "nearby_definition_or_usage_context",
+          "symptom_or_call_path_analogue"
+        ],
+        "majority_accuracy": 0.2916666666666667,
+        "majority_count": 14,
+        "majority_target_value": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+        "rows": 48
+      }
+    ]
+  },
+  "frontier_result": {
+    "gemma_strict_accuracy": 0.25,
+    "strict_delta_vs_gemma": 0.6666666666666666,
+    "target100m_eval_accuracy": 0.9583333333333334,
+    "target100m_strict_accuracy": 0.9166666666666666
+  },
+  "highest_risk_findings": [
+    "Some rows expose the exact target path before the options block; these rows require manual review."
+  ],
+  "label_distribution": {
+    "distinct_target_values": 20,
+    "target_label_counts": {
+      "A": 17,
+      "B": 10,
+      "C": 7,
+      "D": 4,
+      "E": 9,
+      "F": 5,
+      "G": 12
+    }
+  },
+  "metadata_majority_baselines": {
+    "all_rows": {
+      "anchor_profile_and_task": {
+        "accuracy": 0.609375,
+        "correct": 39,
+        "rows": 64,
+        "signature_count": 21
+      },
+      "evidence_key_signature": {
+        "accuracy": 0.375,
+        "correct": 24,
+        "rows": 64,
+        "signature_count": 4
+      },
+      "language_and_task": {
+        "accuracy": 0.625,
+        "correct": 40,
+        "rows": 64,
+        "signature_count": 27
+      },
+      "repo_and_task": {
+        "accuracy": 0.796875,
+        "correct": 51,
+        "rows": 64,
+        "signature_count": 45
+      },
+      "task_type": {
+        "accuracy": 0.4375,
+        "correct": 28,
+        "rows": 64,
+        "signature_count": 9
+      }
+    },
+    "leave_one_out": {
+      "all_rows": {
+        "evidence_key_signature": {
+          "abstained_rows": 0,
+          "accuracy_on_scored_rows": 0.375,
+          "coverage": 1.0,
+          "effective_accuracy": 0.375,
+          "rows": 64,
+          "scored_rows": 64
+        },
+        "language_and_task": {
+          "abstained_rows": 2,
+          "accuracy_on_scored_rows": 0.25806451612903225,
+          "coverage": 0.96875,
+          "effective_accuracy": 0.25,
+          "rows": 64,
+          "scored_rows": 62
+        },
+        "repo_and_task": {
+          "abstained_rows": 26,
+          "accuracy_on_scored_rows": 0.3157894736842105,
+          "coverage": 0.59375,
+          "effective_accuracy": 0.1875,
+          "rows": 64,
+          "scored_rows": 38
+        },
+        "task_type": {
+          "abstained_rows": 2,
+          "accuracy_on_scored_rows": 0.3225806451612903,
+          "coverage": 0.96875,
+          "effective_accuracy": 0.3125,
+          "rows": 64,
+          "scored_rows": 62
+        }
+      },
+      "strict_rows": {
+        "evidence_key_signature": {
+          "abstained_rows": 0,
+          "accuracy_on_scored_rows": 0.3333333333333333,
+          "coverage": 1.0,
+          "effective_accuracy": 0.3333333333333333,
+          "rows": 24,
+          "scored_rows": 24
+        },
+        "language_and_task": {
+          "abstained_rows": 24,
+          "accuracy_on_scored_rows": null,
+          "coverage": 0.0,
+          "effective_accuracy": 0.0,
+          "rows": 24,
+          "scored_rows": 0
+        },
+        "repo_and_task": {
+          "abstained_rows": 24,
+          "accuracy_on_scored_rows": null,
+          "coverage": 0.0,
+          "effective_accuracy": 0.0,
+          "rows": 24,
+          "scored_rows": 0
+        },
+        "task_type": {
+          "abstained_rows": 0,
+          "accuracy_on_scored_rows": 0.2916666666666667,
+          "coverage": 1.0,
+          "effective_accuracy": 0.2916666666666667,
+          "rows": 24,
+          "scored_rows": 24
+        }
+      }
+    },
+    "strict_rows": {
+      "anchor_profile_and_task": {
+        "accuracy": 0.8333333333333334,
+        "correct": 20,
+        "rows": 24,
+        "signature_count": 18
+      },
+      "evidence_key_signature": {
+        "accuracy": 0.3333333333333333,
+        "correct": 8,
+        "rows": 24,
+        "signature_count": 1
+      },
+      "language_and_task": {
+        "accuracy": 1.0,
+        "correct": 24,
+        "rows": 24,
+        "signature_count": 24
+      },
+      "repo_and_task": {
+        "accuracy": 1.0,
+        "correct": 24,
+        "rows": 24,
+        "signature_count": 24
+      },
+      "task_type": {
+        "accuracy": 0.4583333333333333,
+        "correct": 11,
+        "rows": 24,
+        "signature_count": 6
+      }
+    }
+  },
+  "next_best_steps": [
+    "Build fresh source-heldout reviewed roots, especially Python and Rust, rather than replaying the current reviewed-v2.7 misses.",
+    "Prioritize pure-web verifier-anchored roots and non-abstention-heavy Rust roots to strengthen language-specific claims.",
+    "Run future promotion probes against this root-split package while tracking verifier-anchor slices, abstention calibration, and metadata-baseline gaps."
+  ],
+  "outputs": {
+    "audit_json": "runs/local/artifacts/stage10429_reviewed_v27_eval_hacking_audit/reviewed_v27_eval_hacking_audit.json",
+    "row_audit": "runs/local/artifacts/stage10429_reviewed_v27_eval_hacking_audit/reviewed_v27_eval_hacking_rows.jsonl"
+  },
+  "package_metrics": {
+    "abstention_heavy_counts": {
+      "no": 49,
+      "yes": 15
+    },
+    "bounded_rows": 64,
+    "root_language_counts": {
+      "c_cpp": 3,
+      "python": 4,
+      "rust": 3,
+      "web_js_ts_html": 4
+    },
+    "root_records": 14,
+    "root_repo_counts": {
+      "agentkernel": 3,
+      "bddy_website": 2,
+      "candle": 2,
+      "code_assist": 2,
+      "parametergolf": 2,
+      "repository_library": 2,
+      "tokenizers": 1
+    },
+    "row_language_counts": {
+      "c_cpp": 13,
+      "python": 14,
+      "rust": 18,
+      "web_js_ts_html": 19
+    },
+    "row_repo_counts": {
+      "agentkernel": 8,
+      "bddy_website": 12,
+      "candle": 12,
+      "code_assist": 7,
+      "parametergolf": 7,
+      "repository_library": 12,
+      "tokenizers": 6
+    },
+    "row_split_counts": {
+      "stress_eval": 7,
+      "strict_eval": 24,
+      "train": 9,
+      "validation": 24
+    },
+    "row_task_counts": {
+      "abstention_insufficient_evidence": 10,
+      "cpp_implementation_vs_implementation": 1,
+      "evidence_citation": 10,
+      "minimal_fix_selection": 10,
+      "patch_impact": 10,
+      "python_implementation_vs_implementation": 2,
+      "symptom_localization": 10,
+      "verifier_outcome": 10,
+      "web_implementation_vs_implementation": 1
+    },
+    "selected_test_anchor_counts": {
+      "absent": 19,
+      "present": 45
+    },
+    "split_role_counts": {
+      "stress_overlap": 2,
+      "strict_heldout": 4,
+      "train_support": 4,
+      "validation": 4
+    },
+    "stress_rows": 7,
+    "strict_eval_rows": 24,
+    "train_rows": 9,
+    "validation_rows": 24,
+    "verifier_anchor_counts": {
+      "absent": 19,
+      "present": 45
+    }
+  },
+  "passed": true,
+  "prompt_leakage": {
+    "prompt_contains_target_basename_before_options": 25,
+    "prompt_contains_target_basename_before_options_rate": 0.390625,
+    "prompt_contains_target_value_before_options": 25,
+    "prompt_contains_target_value_before_options_rate": 0.390625,
+    "rows": 64
+  },
+  "root_overlap": {
+    "stress_vs_strict_eval": [],
+    "stress_vs_train": [],
+    "train_vs_strict_eval": [],
+    "train_vs_validation": [],
+    "validation_vs_strict_eval": []
+  },
+  "source_artifacts": {
+    "bounded_rows": "runs/local/artifacts/stage10420_reviewed_multilingual_v27_manifest_package/reviewed_multilingual_v27_bounded_rows.jsonl",
+    "gemma_comparison": "runs/local/artifacts/stage10423_reviewed_multilingual_v27_same_manifest_gemma_comparison/reviewed_multilingual_v27_same_manifest_gemma_comparison.json",
+    "package": "runs/local/artifacts/stage10420_reviewed_multilingual_v27_manifest_package/reviewed_multilingual_v27_manifest_package.json",
+    "strict_rows": "runs/local/artifacts/stage10420_reviewed_multilingual_v27_manifest_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "target100m_probe": "runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/bounded_decoder_probe/execution_result.json"
+  },
+  "stage": 10429,
+  "stage_name": "stage10429_reviewed_v27_eval_hacking_audit"
+}

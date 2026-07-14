@@ -1,0 +1,86 @@
+{
+  "claim_boundary": [
+    "Current selected frontier remains Stage11507 for promotable claims.",
+    "Stage11903 is a mechanism proof only.",
+    "The next valid promotion attempt must use disjoint analogue replay or heldout-safe transition supervision, not protected replay."
+  ],
+  "created_at_utc": "2026-07-14T14:38:24Z",
+  "decision": "mechanism_proven_but_nonpromotable_build_disjoint_analogue_replay_next",
+  "facts": {
+    "protected_replay_filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "protected_replay_filtered_validation": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "protected_replay_old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23
+    },
+    "protected_replay_old_canary_validation": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23
+    },
+    "protected_replay_projection": {
+      "accuracy": 0.5328125,
+      "correct": 341,
+      "rows": 640
+    },
+    "protected_replay_residual": {
+      "accuracy": 0.8,
+      "correct": 8,
+      "rows": 10
+    },
+    "protected_replay_smoke": {
+      "accuracy": 0.25,
+      "correct": 3,
+      "rows": 12
+    },
+    "selected_frontier_projection": {
+      "accuracy": 0.1796875,
+      "correct": 115,
+      "rows": 640
+    },
+    "support_only_projection": {
+      "accuracy": 0.66875,
+      "correct": 428,
+      "rows": 640
+    }
+  },
+  "interpretation": [
+    "Stage11897 transition projections expose a real missing interface: selected frontier scores 115/640.",
+    "Stage11900 support-only training proves learnability at 428/640 but destroys protected gates.",
+    "Stage11903 protected replay preserves strict/canary/residual and reaches 341/640, proving coexistence is possible under replay/KL.",
+    "Stage11903 is not promotable because protected rows were trained and source-heldout smoke regressed from 6/12 to 3/12."
+  ],
+  "next_stage_requirements": {
+    "disjoint_analogue_replay_required": true,
+    "minimum_projection_fit_gate": ">= 320/640",
+    "protected_gate_targets": {
+      "filtered_strict": "22/22",
+      "filtered_validation": ">=20/22",
+      "old_canary_strict": "23/23",
+      "old_canary_validation": ">=21/23",
+      "residual_bank": ">=7/10",
+      "verifier_grounded_source_heldout_smoke": ">=6/12"
+    },
+    "replace_protected_replay": true,
+    "source_heldout_smoke_must_not_regress": true
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11905_transition_projection_decision/transition_projection_decision.json"
+  },
+  "source_artifacts": {
+    "baseline": "runs/local/artifacts/stage11898_transition_projection_baseline_audit/transition_projection_baseline_audit.json",
+    "protected_replay": "runs/local/artifacts/stage11904_transition_projection_protected_replay_postrun_audit/transition_projection_protected_replay_postrun_audit.json",
+    "support_only": "runs/local/artifacts/stage11901_transition_projection_support_only_postrun_audit/transition_projection_support_only_postrun_audit.json"
+  },
+  "stage": 11905,
+  "stage_name": "stage11905_transition_projection_decision"
+}

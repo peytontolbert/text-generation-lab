@@ -1,0 +1,35 @@
+{
+  "claim_scope": [
+    "Audit the stage10894 strict-heldout Python verifier candidate for direct target-path leakage and semantic readiness.",
+    "Check whether the candidate moves the interface from raw test paths toward opaque verifier IDs plus explicit transition semantics."
+  ],
+  "created_at_utc": "2026-07-12T18:21:11Z",
+  "decision": "code_assist_python_verifier_transition_strict_candidate_audited",
+  "interpretation": [
+    "The strict candidate now hides the raw gold verifier path from the pre-option prompt surface.",
+    "Verifier choices are expressed as opaque IDs with transition semantics, which is closer to the desired heldout interface than file-path letters.",
+    "This is still a single-root candidate and should be review-gated before entering strict scoring or Gemma comparison."
+  ],
+  "metrics": {
+    "candidate_option_count": 4,
+    "explicit_transition_semantics": true,
+    "gold_path_hidden_from_option_values": true,
+    "opaque_test_id_count": 4,
+    "target_path_visible_pre_options": false,
+    "visible_test_path_mentions_pre_options": []
+  },
+  "next_best_step": "Use this audit-passing packet as the seed for a fresh verifier heldout slice, or build a second similarly opaque code_assist/agentkernel verifier candidate before the next training probe.",
+  "passed": true,
+  "remaining_risks": [
+    "All verifier targets still share FAIL_TO_PASS, so the distinguishing pressure comes mainly from focus semantics rather than transition diversity.",
+    "The source root is still same-family code_assist; it improves heldout honesty relative to MirrorMind but does not by itself prove broader verifier generalization.",
+    "Human/AI review should still confirm that the focus descriptions are not merely paraphrases of one test being obviously more specific than the rest."
+  ],
+  "source_artifacts": {
+    "bundle_json": "runs/local/artifacts/stage10894_code_assist_python_verifier_transition_strict_candidate/strict_candidate_bundle.json",
+    "row_jsonl": "runs/local/artifacts/stage10894_code_assist_python_verifier_transition_strict_candidate/strict_candidate_rows.jsonl",
+    "source_gold": "runs/local/artifacts/stage10813_python_queue_aligned_admission/review_packets/stage10236__localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662__python/perspective_gold_adjudication.json"
+  },
+  "stage": 10895,
+  "stage_name": "stage10895_code_assist_python_verifier_transition_strict_candidate_audit"
+}

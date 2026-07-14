@@ -1,0 +1,718 @@
+{
+  "bug": "task_balanced/residual_family_balanced previously reset per-task offsets every step, repeatedly sampling the first rows in each task bucket.",
+  "created_at_utc": "2026-07-13T18:30:44Z",
+  "decision": "noncyclic_sampler_bug_fixed_and_audited",
+  "fixed_behavior": {
+    "batch_size": 4,
+    "bridge_exposures": 0,
+    "bridge_unique_exposed_rows": 0,
+    "legacy_reset_offsets_each_step": false,
+    "manifest_rows": 494,
+    "sampler": "residual_family_balanced",
+    "steps": 192,
+    "task_cards": {
+      "abstention_insufficient_evidence": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10674::linux::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10674::candle::candle-datasets::abstention_insufficient_evidence::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::cccl::q30::abstention_insufficient_evidence::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::onnxruntime::q13::abstention_insufficient_evidence::reviewed_v27_compact",
+            3
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 18
+      },
+      "alternative_hypothesis_elimination": {
+        "manifest_rows": 1,
+        "top_exposed": [
+          [
+            "stage10863::agentkernel::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_24t22_32_18_019d21fa_350b_7401_bd0e_c83e_agent_kernel_config_py_agent_kernel_cycle_runner_py_agent_kernel_improvement_py__28d49f6b85_aug_1500000_8b46e7f662::alternative_hypothesis_elimination::second_materialized_residual_support",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "cpp_implementation_vs_implementation": {
+        "manifest_rows": 1,
+        "top_exposed": [
+          [
+            "stage10110::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_26t02_56_49_019d2812_bb90_78e1_825d_9bc7_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_6b714ae486_aug_1500000_8b46e7f662::cpp_implementation_vs_implementation::reviewed_v27_successor",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "evidence_candidate_judgment": {
+        "manifest_rows": 118,
+        "top_exposed": [
+          [
+            "stage11410::local_rust_root::data_repositories_candle_candle_core::candidate_change_surface",
+            1
+          ],
+          [
+            "stage11410::local_rust_root::data_repositories_candle_candle_core::verifier_test_source",
+            1
+          ],
+          [
+            "stage11410::local_rust_root::data_repositories_candle_candle_core::actual_verifier_log",
+            1
+          ],
+          [
+            "stage11410::local_rust_root::data_repositories_candle_candle_flash_attn::candidate_change_surface",
+            1
+          ],
+          [
+            "stage11410::local_rust_root::data_repositories_candle_candle_flash_attn::verifier_test_source",
+            1
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 45
+      },
+      "evidence_citation": {
+        "manifest_rows": 107,
+        "top_exposed": [
+          [
+            "stage10674::linux::rust::evidence_citation::reviewed_v27_compact",
+            1
+          ],
+          [
+            "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact",
+            1
+          ],
+          [
+            "stage10733::cccl::q30::evidence_citation::reviewed_v27_compact",
+            1
+          ],
+          [
+            "stage10733::onnxruntime::q13::evidence_citation::reviewed_v27_compact",
+            1
+          ],
+          [
+            "stage10733::parametergolf::q2::evidence_citation::reviewed_v27_compact",
+            1
+          ]
+        ],
+        "total_exposures": 92,
+        "unique_exposed_rows": 92
+      },
+      "evidence_role_classification": {
+        "manifest_rows": 76,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::A",
+            1
+          ],
+          [
+            "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::B",
+            1
+          ],
+          [
+            "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::C",
+            1
+          ],
+          [
+            "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::D",
+            1
+          ],
+          [
+            "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::E",
+            1
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 45
+      },
+      "minimal_fix_selection": {
+        "manifest_rows": 17,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::minimal_fix_selection::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10674::linux::rust::minimal_fix_selection::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10674::candle::candle-datasets::minimal_fix_selection::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::cccl::q30::minimal_fix_selection::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::onnxruntime::q13::minimal_fix_selection::reviewed_v27_compact",
+            3
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 17
+      },
+      "patch_impact": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::patch_impact::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10674::linux::rust::patch_impact::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10674::candle::candle-datasets::patch_impact::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::cccl::q30::patch_impact::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::onnxruntime::q13::patch_impact::reviewed_v27_compact",
+            3
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 18
+      },
+      "python_implementation_vs_implementation": {
+        "manifest_rows": 2,
+        "top_exposed": [
+          [
+            "stage10110::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_45_019d39fb_a380_7a30_8790_9d59_agent_kernel_improvement_py_agent_kernel_modeling_adapter_training_py_agent_kern_94b87c02df_aug_1500000_8b46e7f662::python_implementation_vs_implementation::reviewed_v27_successor",
+            23
+          ],
+          [
+            "stage10110::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39fb_c43d_7e62_b055_b00b_agent_kernel_cycle_runner_py_agent_kernel_improvement_py_agent_kernel_learning_c_6a4dce0d0c_aug_1500000_8b46e7f662::python_implementation_vs_implementation::reviewed_v27_successor",
+            22
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 2
+      },
+      "regression_risk": {
+        "manifest_rows": 1,
+        "top_exposed": [
+          [
+            "stage10863::agentkernel::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_24t22_32_18_019d21fa_350b_7401_bd0e_c83e_agent_kernel_config_py_agent_kernel_cycle_runner_py_agent_kernel_improvement_py__28d49f6b85_aug_1500000_8b46e7f662::regression_risk::second_materialized_residual_support",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "retrieve_answer_abstain": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q27::episode0::retrieval_support_state::retrieve_answer_abstain::support",
+            3
+          ],
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q27::episode0::retrieval_support_state::retrieve_answer_abstain::support",
+            3
+          ],
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q40::episode0::retrieval_support_state::retrieve_answer_abstain::support",
+            3
+          ],
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q44::episode0::retrieval_support_state::retrieve_answer_abstain::support",
+            3
+          ],
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q11::episode0::retrieval_support_state::retrieve_answer_abstain::support",
+            3
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 18
+      },
+      "symptom_localization": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::symptom_localization::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10674::linux::rust::symptom_localization::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10674::candle::candle-datasets::symptom_localization::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::cccl::q30::symptom_localization::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::onnxruntime::q13::symptom_localization::reviewed_v27_compact",
+            3
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 18
+      },
+      "verifier_candidate_role_classification": {
+        "manifest_rows": 40,
+        "top_exposed": [
+          [
+            "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact::candidate::A::verifier_role",
+            2
+          ],
+          [
+            "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact::candidate::B::verifier_role",
+            2
+          ],
+          [
+            "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact::candidate::C::verifier_role",
+            2
+          ],
+          [
+            "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact::candidate::D::verifier_role",
+            2
+          ],
+          [
+            "stage10499::localsess_code_assist_hf_local_multitest_repaired::python::verifier_outcome::compact_bounded::candidate::V1::verifier_role",
+            2
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 40
+      },
+      "verifier_outcome": {
+        "manifest_rows": 41,
+        "top_exposed": [
+          [
+            "stage10674::candle::candle-datasets::verifier_outcome::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::cccl::q30::verifier_outcome::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::onnxruntime::q13::verifier_outcome::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::parametergolf::q2::verifier_outcome::reviewed_v27_compact",
+            3
+          ],
+          [
+            "stage10733::parametergolf::q6::verifier_outcome::reviewed_v27_compact",
+            3
+          ]
+        ],
+        "total_exposures": 91,
+        "unique_exposed_rows": 41
+      },
+      "verifier_outcome_semantic_transition": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q27::verifier_outcome_semantic_transition::support",
+            3
+          ],
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q27::verifier_outcome_semantic_transition::support",
+            3
+          ],
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q40::verifier_outcome_semantic_transition::support",
+            3
+          ],
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q44::verifier_outcome_semantic_transition::support",
+            3
+          ],
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q11::verifier_outcome_semantic_transition::support",
+            3
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 18
+      }
+    },
+    "top_exposed": [
+      [
+        "stage10863::agentkernel::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_24t22_32_18_019d21fa_350b_7401_bd0e_c83e_agent_kernel_config_py_agent_kernel_cycle_runner_py_agent_kernel_improvement_py__28d49f6b85_aug_1500000_8b46e7f662::alternative_hypothesis_elimination::second_materialized_residual_support",
+        45
+      ],
+      [
+        "stage10110::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_26t02_56_49_019d2812_bb90_78e1_825d_9bc7_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_6b714ae486_aug_1500000_8b46e7f662::cpp_implementation_vs_implementation::reviewed_v27_successor",
+        45
+      ],
+      [
+        "stage10863::agentkernel::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_24t22_32_18_019d21fa_350b_7401_bd0e_c83e_agent_kernel_config_py_agent_kernel_cycle_runner_py_agent_kernel_improvement_py__28d49f6b85_aug_1500000_8b46e7f662::regression_risk::second_materialized_residual_support",
+        45
+      ],
+      [
+        "stage10110::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_45_019d39fb_a380_7a30_8790_9d59_agent_kernel_improvement_py_agent_kernel_modeling_adapter_training_py_agent_kern_94b87c02df_aug_1500000_8b46e7f662::python_implementation_vs_implementation::reviewed_v27_successor",
+        23
+      ],
+      [
+        "stage10110::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39fb_c43d_7e62_b055_b00b_agent_kernel_cycle_runner_py_agent_kernel_improvement_py_agent_kernel_learning_c_6a4dce0d0c_aug_1500000_8b46e7f662::python_implementation_vs_implementation::reviewed_v27_successor",
+        22
+      ],
+      [
+        "stage10674::candle::candle-datasets::verifier_outcome::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage10733::cccl::q30::verifier_outcome::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage10413::candle::candle-flash-attn::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage10413::candle::candle-flash-attn::rust::minimal_fix_selection::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage10413::candle::candle-flash-attn::rust::patch_impact::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q27::episode0::retrieval_support_state::retrieve_answer_abstain::support",
+        3
+      ],
+      [
+        "stage10413::candle::candle-flash-attn::rust::symptom_localization::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q27::verifier_outcome_semantic_transition::support",
+        3
+      ],
+      [
+        "stage10733::onnxruntime::q13::verifier_outcome::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage10733::parametergolf::q2::verifier_outcome::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage10674::linux::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage10674::linux::rust::minimal_fix_selection::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage10674::linux::rust::patch_impact::reviewed_v27_compact",
+        3
+      ],
+      [
+        "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_f08d748a00::q27::episode0::retrieval_support_state::retrieve_answer_abstain::support",
+        3
+      ],
+      [
+        "stage10674::linux::rust::symptom_localization::reviewed_v27_compact",
+        3
+      ]
+    ],
+    "total_exposures": 768,
+    "unique_exposed_rows": 375
+  },
+  "impact_summary": {
+    "fixed_bridge_exposures": 0,
+    "fixed_bridge_unique_exposed_rows": 0,
+    "fixed_unique_exposed_rows": 375,
+    "legacy_bridge_exposures": 0,
+    "legacy_bridge_unique_exposed_rows": 0,
+    "legacy_unique_exposed_rows": 17
+  },
+  "legacy_behavior": {
+    "batch_size": 4,
+    "bridge_exposures": 0,
+    "bridge_unique_exposed_rows": 0,
+    "legacy_reset_offsets_each_step": true,
+    "manifest_rows": 494,
+    "sampler": "residual_family_balanced",
+    "steps": 192,
+    "task_cards": {
+      "abstention_insufficient_evidence": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "alternative_hypothesis_elimination": {
+        "manifest_rows": 1,
+        "top_exposed": [
+          [
+            "stage10863::agentkernel::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_24t22_32_18_019d21fa_350b_7401_bd0e_c83e_agent_kernel_config_py_agent_kernel_cycle_runner_py_agent_kernel_improvement_py__28d49f6b85_aug_1500000_8b46e7f662::alternative_hypothesis_elimination::second_materialized_residual_support",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "cpp_implementation_vs_implementation": {
+        "manifest_rows": 1,
+        "top_exposed": [
+          [
+            "stage10110::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_26t02_56_49_019d2812_bb90_78e1_825d_9bc7_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_6b714ae486_aug_1500000_8b46e7f662::cpp_implementation_vs_implementation::reviewed_v27_successor",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "evidence_candidate_judgment": {
+        "manifest_rows": 118,
+        "top_exposed": [
+          [
+            "stage11410::local_rust_root::data_repositories_candle_candle_core::candidate_change_surface",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "evidence_citation": {
+        "manifest_rows": 107,
+        "top_exposed": [
+          [
+            "stage10674::linux::rust::evidence_citation::reviewed_v27_compact",
+            68
+          ],
+          [
+            "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact",
+            24
+          ]
+        ],
+        "total_exposures": 92,
+        "unique_exposed_rows": 2
+      },
+      "evidence_role_classification": {
+        "manifest_rows": 76,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::A",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "minimal_fix_selection": {
+        "manifest_rows": 17,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::minimal_fix_selection::reviewed_v27_compact",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "patch_impact": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::patch_impact::reviewed_v27_compact",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "python_implementation_vs_implementation": {
+        "manifest_rows": 2,
+        "top_exposed": [
+          [
+            "stage10110::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_45_019d39fb_a380_7a30_8790_9d59_agent_kernel_improvement_py_agent_kernel_modeling_adapter_training_py_agent_kern_94b87c02df_aug_1500000_8b46e7f662::python_implementation_vs_implementation::reviewed_v27_successor",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "regression_risk": {
+        "manifest_rows": 1,
+        "top_exposed": [
+          [
+            "stage10863::agentkernel::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_24t22_32_18_019d21fa_350b_7401_bd0e_c83e_agent_kernel_config_py_agent_kernel_cycle_runner_py_agent_kernel_improvement_py__28d49f6b85_aug_1500000_8b46e7f662::regression_risk::second_materialized_residual_support",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "retrieve_answer_abstain": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q27::episode0::retrieval_support_state::retrieve_answer_abstain::support",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "symptom_localization": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage10413::candle::candle-flash-attn::rust::symptom_localization::reviewed_v27_compact",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "verifier_candidate_role_classification": {
+        "manifest_rows": 40,
+        "top_exposed": [
+          [
+            "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact::candidate::A::verifier_role",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      },
+      "verifier_outcome": {
+        "manifest_rows": 41,
+        "top_exposed": [
+          [
+            "stage10674::candle::candle-datasets::verifier_outcome::reviewed_v27_compact",
+            68
+          ],
+          [
+            "stage10733::cccl::q30::verifier_outcome::reviewed_v27_compact",
+            23
+          ]
+        ],
+        "total_exposures": 91,
+        "unique_exposed_rows": 2
+      },
+      "verifier_outcome_semantic_transition": {
+        "manifest_rows": 18,
+        "top_exposed": [
+          [
+            "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q27::verifier_outcome_semantic_transition::support",
+            45
+          ]
+        ],
+        "total_exposures": 45,
+        "unique_exposed_rows": 1
+      }
+    },
+    "top_exposed": [
+      [
+        "stage10674::linux::rust::evidence_citation::reviewed_v27_compact",
+        68
+      ],
+      [
+        "stage10674::candle::candle-datasets::verifier_outcome::reviewed_v27_compact",
+        68
+      ],
+      [
+        "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact::candidate::A",
+        45
+      ],
+      [
+        "stage10236::localsess_code_assist_sessseed_codex_sessions_rollout_2026_01_27t02_21_48_019bfd41_d2a6_7672_9873_81f8_src_code_assist_orchestrator_config_py_src_code_assist_orchestrator_context_pack_acd5ccc9c1_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact::candidate::A::verifier_role",
+        45
+      ],
+      [
+        "stage10413::candle::candle-flash-attn::rust::abstention_insufficient_evidence::reviewed_v27_compact",
+        45
+      ],
+      [
+        "stage10863::agentkernel::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_24t22_32_18_019d21fa_350b_7401_bd0e_c83e_agent_kernel_config_py_agent_kernel_cycle_runner_py_agent_kernel_improvement_py__28d49f6b85_aug_1500000_8b46e7f662::alternative_hypothesis_elimination::second_materialized_residual_support",
+        45
+      ],
+      [
+        "stage10110::localsess_parametergolf_sessseed_codex_sessions_rollout_2026_03_26t02_56_49_019d2812_bb90_78e1_825d_9bc7_parameter_golf_records_track_10min_16mb_2026_03_26_statespace_causalmachine_cuda_6b714ae486_aug_1500000_8b46e7f662::cpp_implementation_vs_implementation::reviewed_v27_successor",
+        45
+      ],
+      [
+        "stage11410::local_rust_root::data_repositories_candle_candle_core::candidate_change_surface",
+        45
+      ],
+      [
+        "stage10413::candle::candle-flash-attn::rust::minimal_fix_selection::reviewed_v27_compact",
+        45
+      ],
+      [
+        "stage10413::candle::candle-flash-attn::rust::patch_impact::reviewed_v27_compact",
+        45
+      ],
+      [
+        "stage10110::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_45_019d39fb_a380_7a30_8790_9d59_agent_kernel_improvement_py_agent_kernel_modeling_adapter_training_py_agent_kern_94b87c02df_aug_1500000_8b46e7f662::python_implementation_vs_implementation::reviewed_v27_successor",
+        45
+      ],
+      [
+        "stage10863::agentkernel::localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_24t22_32_18_019d21fa_350b_7401_bd0e_c83e_agent_kernel_config_py_agent_kernel_cycle_runner_py_agent_kernel_improvement_py__28d49f6b85_aug_1500000_8b46e7f662::regression_risk::second_materialized_residual_support",
+        45
+      ],
+      [
+        "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q27::episode0::retrieval_support_state::retrieve_answer_abstain::support",
+        45
+      ],
+      [
+        "stage10413::candle::candle-flash-attn::rust::symptom_localization::reviewed_v27_compact",
+        45
+      ],
+      [
+        "stage11097::audited::lcp_pack_1_5000000_localsess_agentkernel_sessseed_codex_sessions_rollout_2026_03_29t14_24_54_019d39_2cbc5e9f5b::q27::verifier_outcome_semantic_transition::support",
+        45
+      ],
+      [
+        "stage10674::candle::candle-datasets::evidence_citation::reviewed_v27_compact",
+        24
+      ],
+      [
+        "stage10733::cccl::q30::verifier_outcome::reviewed_v27_compact",
+        23
+      ]
+    ],
+    "total_exposures": 768,
+    "unique_exposed_rows": 17
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11501_noncyclic_sampler_coverage_audit/noncyclic_sampler_coverage_audit.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "manifest": "runs/local/artifacts/stage11497_candidate_set_evidence_judgment_head_probe_request/candidate_set_evidence_judgment_head_probe_manifest.jsonl"
+  },
+  "stage": 11501,
+  "stage_name": "stage11501_noncyclic_sampler_coverage_audit"
+}

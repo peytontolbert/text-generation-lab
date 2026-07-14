@@ -1,0 +1,178 @@
+{
+  "claim_scope": [
+    "Bootstrap training request aligned to the heldout-aware manifest.",
+    "Post-run strict scoring can speak to the 36 eval-safe multilingual heldout rows only.",
+    "Legacy reference rows are excluded from the probe manifest."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10523_root_based_multitarget_bootstrap_probe_request_with_heldout/root_based_multitarget_bootstrap_probe_with_heldout_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "2369",
+    "--max-eval-rows",
+    "8",
+    "--max-strict-rows",
+    "36",
+    "--max-steps",
+    "256",
+    "--batch-size",
+    "2",
+    "--learning-rate",
+    "2e-5",
+    "--max-encoder-tokens",
+    "1024",
+    "--max-decoder-tokens",
+    "256",
+    "--decoder-ce-weight",
+    "1.0",
+    "--bounded-choice-aux-weight",
+    "0.0",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "2.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "24",
+    "--max-generation-tokens",
+    "128",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10523_root_based_multitarget_bootstrap_probe_with_heldout/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10422_reviewed_multilingual_v27_target100m_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "1.0",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10523_root_based_multitarget_bootstrap_probe_with_heldout/bounded_decoder_probe",
+    "--run-id",
+    "stage10523_root_based_multitarget_bootstrap_probe_with_heldout"
+  ],
+  "created_at_utc": "2026-07-11T23:28:19Z",
+  "decision": "root_based_multitarget_bootstrap_probe_with_heldout_ready",
+  "known_limits": [
+    "Strict heldout rows currently cover only evidence/abstention-style targets, not full verifier-outcome generation.",
+    "Rust and web heldout depth remain modest.",
+    "The runtime still uses bounded_decoder_ce_probe as the executable carrier mode for this curriculum."
+  ],
+  "language_counts_by_split": {
+    "eval": {
+      "rust": 8
+    },
+    "strict_eval": {
+      "c_cpp": 8,
+      "python": 12,
+      "rust": 8,
+      "web_js_ts_html": 8
+    },
+    "train": {
+      "c_cpp": 194,
+      "python": 2147,
+      "rust": 6,
+      "unknown": 6,
+      "web_js_ts_html": 16
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10523_root_based_multitarget_bootstrap_probe_request_with_heldout/root_based_multitarget_bootstrap_probe_with_heldout_manifest.jsonl",
+  "manifest_snapshot": {
+    "strict_rows_by_language": {
+      "c_cpp": 8,
+      "python": 12,
+      "rust": 8,
+      "web_js_ts_html": 8
+    },
+    "strict_rows_by_target_subtype": {
+      "decisive_evidence": 18,
+      "retrieve_answer_abstain": 18
+    },
+    "train_rows_by_language": {
+      "c_cpp": 194,
+      "python": 2147,
+      "rust": 6,
+      "unknown": 6,
+      "web_js_ts_html": 16
+    }
+  },
+  "next_best_step": "Run this heldout-aware bootstrap probe, then compare 100M and Gemma on the 36 strict eval-safe rows. After that, deepen Rust and web heldout supply and add non-leaky verifier-style rows.",
+  "output_dir": "runs/local/artifacts/stage10523_root_based_multitarget_bootstrap_probe_with_heldout/bounded_decoder_probe",
+  "passed": true,
+  "required_honesty_gates": [
+    "stage10521 root split audit remains zero-violation",
+    "strict_eval_long_context_heldout rows remain out of train",
+    "strict rows are limited to decisive_evidence and retrieve_answer_abstain target subtypes",
+    "post-run Gemma comparison must use the same 36 strict rows"
+  ],
+  "required_runtime_artifacts": [
+    "execution_result.json",
+    "sample_generation_audit.json",
+    "short_output_probe.json",
+    "failure_bucket_card.json",
+    "cleanup_proof.json",
+    "loss_by_step.jsonl",
+    "eval_loss_by_checkpoint.jsonl"
+  ],
+  "rows": 2413,
+  "run_id": "stage10523_root_based_multitarget_bootstrap_probe_with_heldout",
+  "runtime_model_dir": "runs/local/artifacts/stage10523_root_based_multitarget_bootstrap_probe_with_heldout/runtime_model",
+  "source_package": "runs/local/artifacts/stage10521_split_aware_multitarget_bootstrap_manifest_with_heldout/split_aware_multitarget_bootstrap_manifest_with_heldout.json",
+  "split_counts": {
+    "eval": 8,
+    "strict_eval": 36,
+    "train": 2369
+  },
+  "stage": 10523,
+  "stage_name": "stage10523_root_based_multitarget_bootstrap_probe_request_with_heldout",
+  "strict_target_subtypes": {
+    "decisive_evidence": 18,
+    "retrieve_answer_abstain": 18
+  },
+  "target_family_counts_by_split": {
+    "eval": {
+      "bounded_decision": 6,
+      "short_structured_text": 2
+    },
+    "strict_eval": {
+      "bounded_decision": 36
+    },
+    "train": {
+      "bounded_decision": 2200,
+      "constrained_generation": 55,
+      "short_structured_text": 114
+    }
+  }
+}

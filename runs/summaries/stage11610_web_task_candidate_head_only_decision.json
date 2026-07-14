@@ -1,0 +1,136 @@
+{
+  "comparison_to_full_update_stage11605": {
+    "filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "filtered_validation": {
+      "accuracy": 0.9090909090909091,
+      "correct": 20,
+      "rows": 22
+    },
+    "old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23
+    },
+    "old_canary_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.6,
+      "correct": 6,
+      "rows": 10
+    },
+    "web_heldout": {
+      "accuracy": 0.5303030303030303,
+      "correct": 35,
+      "rows": 66
+    },
+    "web_successor_strict": {
+      "accuracy": 0.05555555555555555,
+      "correct": 2,
+      "rows": 36
+    }
+  },
+  "created_at_utc": "2026-07-13T23:12:42Z",
+  "decision": "reject_stage11608_keep_stage11507_selected_frontier",
+  "inference": [
+    "The Web task-candidate head can learn part of the successor row geometry when isolated, so the scorer path is trainable.",
+    "The current Stage11597 no-abstain successor geometry is not a sufficient generalization target; it overfits without improving OpenHands/Llama heldout.",
+    "The next useful work should prioritize better Web root quality and verifier transitions, or add a heldout-aware validation stopper for the head rather than training longer on the same successor-shaped rows."
+  ],
+  "next_recommended_work": [
+    "Keep Stage11507 selected.",
+    "Do not run longer head-only training on the same Stage11597 rows without a validation-stopping criterion; it already overfits successor geometry.",
+    "Materialize real fail-to-pass or behavior-changing Web verifier roots, then train/evaluate with root-heldout OpenHands/Llama rows.",
+    "If testing architecture further, use a heldout-calibrated Web head with early stopping against web_heldout and protected canaries, not fixed-step training."
+  ],
+  "postrun_compact_results": {
+    "filtered_strict": {
+      "accuracy": 0.9545454545454546,
+      "correct": 21,
+      "rows": 22
+    },
+    "filtered_validation": {
+      "accuracy": 0.9090909090909091,
+      "correct": 20,
+      "rows": 22
+    },
+    "old_canary_strict": {
+      "accuracy": 0.9565217391304348,
+      "correct": 22,
+      "rows": 23
+    },
+    "old_canary_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.6,
+      "correct": 6,
+      "rows": 10
+    },
+    "web_heldout": {
+      "accuracy": 0.5151515151515151,
+      "correct": 34,
+      "rows": 66
+    },
+    "web_successor_strict": {
+      "accuracy": 0.3611111111111111,
+      "correct": 13,
+      "rows": 36
+    }
+  },
+  "postrun_gates": {
+    "filtered_strict_22_of_22": false,
+    "filtered_validation_at_least_20_of_22": true,
+    "old_canary_strict_23_of_23": false,
+    "old_canary_validation_at_least_21_of_23": true,
+    "residual_at_least_7_of_10": false,
+    "web_heldout_beats_stage11571_42_of_66": false,
+    "web_successor_strict_full_coverage": true
+  },
+  "rejected_runtime": {
+    "head_only": true,
+    "runtime": "runs/local/artifacts/stage11608_web_task_candidate_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_web_task_candidate_head",
+    "stage": "stage11608_web_task_candidate_head_only_probe",
+    "weights_sha256": "25c691c55713aa61fef6c8af95a195c7ee0c8acd59229b47c98222349910dd04"
+  },
+  "request_objective": {
+    "bounded_choice_aux_source": "encoder_option_retrieval_web_task_candidate_head",
+    "bounded_choice_contrast_margin": 0.08,
+    "bounded_choice_contrast_weight": 0.5,
+    "bounded_choice_train_head_only": true,
+    "bounded_decoder_train_sampler": "web_task_family_balanced",
+    "learning_rate": "3e-5",
+    "max_steps": 256,
+    "preservation_kl_weight": 6.0
+  },
+  "selected_frontier": {
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head",
+    "stage": "stage11507_preservation_strengthened_evidence_judgment_probe",
+    "weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37"
+  },
+  "source_artifacts": {
+    "postrun": "runs/summaries/stage11609_web_task_candidate_head_only_postrun_audit.json",
+    "previous_full_head_decision": "runs/summaries/stage11607_web_task_candidate_head_decision.json",
+    "rejected_runtime": "runs/local/artifacts/stage11608_web_task_candidate_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "request": "runs/summaries/stage11608_web_task_candidate_head_only_probe_request.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11610,
+  "stage_name": "stage11610_web_task_candidate_head_only_decision",
+  "why_rejected": [
+    "Head-only training improved the no-abstain Web successor strict slice to 13/36, compared with 2/36 for the full-update Web head probe.",
+    "The gain did not transfer to the independent Web heldout: 34/66, worse than the selected Stage11507 baseline of 35/66 and below the >42/66 gate.",
+    "Filtered strict regressed to 21/22 and old canary strict regressed to 22/23, so preservation gates failed.",
+    "Residual stayed below the selected frontier at 6/10 rather than the required >=7/10."
+  ]
+}

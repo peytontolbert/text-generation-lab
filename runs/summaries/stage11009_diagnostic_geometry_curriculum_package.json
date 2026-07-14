@@ -1,0 +1,53 @@
+{
+  "claim_scope": [
+    "Build a non-promotable diagnostic package that directly trains on the expanded successor geometry variants.",
+    "Test whether the model can absorb the evidence geometry at all before investing further in fresh-root generation."
+  ],
+  "created_at_utc": "2026-07-12T23:07:48Z",
+  "decision": "diagnostic_geometry_absorption_package_ready",
+  "findings": [
+    "This package is explicitly non-promotable because it trains on same-root expanded geometry variants.",
+    "If this branch still cannot move the wider geometry bank, the remaining issue is unlikely to be solved by more packaging of the same roots.",
+    "A positive result would only justify fresh-root generation with the same geometry, not a benchmark claim."
+  ],
+  "metrics": {
+    "added_by_language": {
+      "c_cpp": 20,
+      "python": 12,
+      "rust": 2,
+      "web_js_ts_html": 2
+    },
+    "added_by_objective": {
+      "bounded_decoder_ce": 24,
+      "semantic_evidence_role_generation": 6,
+      "semantic_evidence_role_pairwise_contrast": 6
+    },
+    "added_by_repo_family": {
+      "agentkernel": 10,
+      "candle": 2,
+      "code_assist": 2,
+      "parametergolf": 10,
+      "repository_library": 12
+    },
+    "diagnostic_added_rows": 36,
+    "strict_rows_unchanged": 23,
+    "train_rows_after": 253,
+    "train_rows_before": 217,
+    "validation_rows_unchanged": 23
+  },
+  "outputs": {
+    "diagnostic_added_rows_jsonl": "runs/local/artifacts/stage11009_diagnostic_geometry_curriculum_package/diagnostic_added_rows.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage11009_diagnostic_geometry_curriculum_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage11009_diagnostic_geometry_curriculum_package/diagnostic_geometry_curriculum_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage11009_diagnostic_geometry_curriculum_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage11009_diagnostic_geometry_curriculum_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "base_support_package": "runs/local/artifacts/stage10975_multilingual_reviewed_replenishment_support_package/multilingual_reviewed_replenishment_support_package.json",
+    "expanded_successor_family": "runs/local/artifacts/stage10963_expanded_evidence_successor_family/expanded_evidence_successor_family.json",
+    "semantic_curriculum": "runs/local/artifacts/stage10979_reviewed_evidence_role_curriculum_package/reviewed_evidence_role_curriculum_package.json"
+  },
+  "stage": 11009,
+  "stage_name": "stage11009_diagnostic_geometry_curriculum_package"
+}

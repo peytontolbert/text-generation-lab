@@ -1,0 +1,76 @@
+{
+  "created_at_utc": "2026-07-13T09:20:48Z",
+  "decision": "reject_stage11240_branch_keep_stage11200_frontier",
+  "interpretation": {
+    "current_frontier_runtime": "runs/local/artifacts/stage11200_role_focused_residual_probe/runtime_model/runtime_model_bundle.json",
+    "probable_failure_mode": "The residual scorer still does not learn verifier/test-constraint evidence from all-positive role rows; it needs contrastive row geometry with candidate_change_surface/symptom positives and verifier positives, plus true C/C++ and Rust/Web clean source supply.",
+    "stage11240_runtime_status": "diagnostic_negative_do_not_promote"
+  },
+  "key_metrics": {
+    "c_cpp_gap": {
+      "blocked_c_cpp_reason": "inventory found no clean C/C++ candidates; available C/C++ rows are path-overlap or already-consumed cuembed roots",
+      "ready_c_cpp_candidates": 0
+    },
+    "clean_residual": {
+      "correct": 5,
+      "exact_accuracy": 0.5,
+      "rows": 10,
+      "scored_rows": 10
+    },
+    "clean_strict": {
+      "correct": 22,
+      "exact_accuracy": 1.0,
+      "rows": 22,
+      "scored_rows": 22
+    },
+    "clean_validation": {
+      "correct": 21,
+      "exact_accuracy": 0.9130434782608695,
+      "rows": 23,
+      "scored_rows": 23
+    },
+    "fresh_strict": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 11,
+      "scored_rows": 11
+    },
+    "fresh_validation": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 8,
+      "scored_rows": 8
+    },
+    "verifier_constraint_residual": {
+      "correct": 0,
+      "exact_accuracy": 0.0,
+      "rows": 3,
+      "scored_rows": 3
+    }
+  },
+  "next_required_work": [
+    "Rebuild the fresh evidence package as balanced semantic-role candidates, not all verifier_and_test_constraint gold rows.",
+    "For every repo family, include positive examples for verifier_and_test_constraint, candidate_change_surface, and symptom_or_call_path_analogue when each is genuinely decisive.",
+    "Add explicit hard-negative pairs where verifier paths are present but not decisive, and candidate surface is correct.",
+    "Recover clean C/C++ verifier-constraint source supply; Stage11237 found none under current strict filters.",
+    "Do not run more probes from Stage11238 as-is."
+  ],
+  "outputs": {
+    "summary_json": "runs/local/artifacts/stage11242_fresh_multilingual_verifier_constraint_decision/fresh_multilingual_verifier_constraint_decision.json"
+  },
+  "passed": true,
+  "reason": [
+    "Stage11240 preserved clean strict but did not improve the clean residual bank.",
+    "Verifier/test-constraint residual stayed 0/3, so the target blocker did not move.",
+    "Fresh Stage11238 validation and strict heldouts both scored 0.0, showing the all-positive verifier-constraint package did not create usable generalization.",
+    "Stage11238 is useful as a source inventory/materialization artifact, but not as a promotion-support package in its current all-gold role geometry."
+  ],
+  "source_artifacts": {
+    "stage11238_package": "runs/local/artifacts/stage11238_fresh_multilingual_verifier_constraint_package/fresh_multilingual_verifier_constraint_package.json",
+    "stage11239_request": "runs/local/artifacts/stage11239_fresh_multilingual_verifier_constraint_probe_request/fresh_multilingual_verifier_constraint_probe_request.json",
+    "stage11240_runtime": "runs/local/artifacts/stage11240_fresh_multilingual_verifier_constraint_probe/runtime_model/runtime_model_bundle.json",
+    "stage11241_audit": "runs/local/artifacts/stage11241_fresh_multilingual_verifier_constraint_postrun_audit/fresh_multilingual_verifier_constraint_postrun_audit.json"
+  },
+  "stage": 11242,
+  "stage_name": "stage11242_fresh_multilingual_verifier_constraint_decision"
+}

@@ -1,0 +1,92 @@
+{
+  "blocking_issues": {
+    "blocked_reasons_not_expected": [],
+    "exhausted_family_hits": [],
+    "missing_compiled_state": [],
+    "roots_missing_required_subtypes": {},
+    "roots_missing_scoreable_retrieve": [],
+    "roots_missing_scoreable_verifier": [],
+    "uneven_family_counts": {}
+  },
+  "claim_scope": [
+    "Audit that the fresh-family materialization packet is actually fresh, subtype-complete, and blocked only for the expected visible-ledger reasons.",
+    "Confirm every queued root is ready for the next row-construction stage with scoreable verifier/retrieve targets already present."
+  ],
+  "findings": [
+    "The fresh-family packet is only useful if every queued root already carries scoreable verifier and terminal-decision targets.",
+    "Blocked decisive_evidence rows are acceptable here only when the blocker is explicit visible-ledger projection, not missing root coverage or unknown subtype handling.",
+    "Two roots per family is the intended starting geometry for this packet; anything else signals skew before row construction begins."
+  ],
+  "metrics": {
+    "blocked_by_reason": {
+      "target_evidence_ids_are_visible_but_still_opaque_handles": 18
+    },
+    "blocked_rows": 18,
+    "family_count": 9,
+    "family_root_counts": {
+      "cccl": 2,
+      "cuEmbed": 2,
+      "diffusers": 2,
+      "django": 2,
+      "faiss": 2,
+      "falco": 2,
+      "mem0": 2,
+      "onnxruntime": 2,
+      "openai-agents-python": 2
+    },
+    "packet_row_count": 54,
+    "root_count": 18,
+    "roots_by_language": {
+      "c_cpp": 8,
+      "python": 8,
+      "web_js_ts_html": 2
+    },
+    "rows_by_language": {
+      "c_cpp": 24,
+      "python": 24,
+      "web_js_ts_html": 6
+    },
+    "scoreable_rows": 36,
+    "scoreable_subtype_coverage": {
+      "retrieve_answer_abstain_roots": 18,
+      "verifier_outcome_roots": 18
+    }
+  },
+  "next_best_step": "Use the packet rows to build explicit visible-ledger bounded rows for decisive_evidence while preserving the existing scoreable verifier and terminal-decision rows.",
+  "packet_snapshot": {
+    "blocked_by_subtype": {
+      "decisive_evidence": 18,
+      "retrieve_answer_abstain": 0,
+      "verifier_outcome": 0
+    },
+    "blocked_rows": 18,
+    "family_count": 9,
+    "packet_row_count": 54,
+    "roots_by_language": {
+      "c_cpp": 8,
+      "python": 8,
+      "web_js_ts_html": 2
+    },
+    "rows_by_language": {
+      "c_cpp": 24,
+      "python": 24,
+      "web_js_ts_html": 6
+    },
+    "scoreable_by_subtype": {
+      "decisive_evidence": 0,
+      "retrieve_answer_abstain": 18,
+      "verifier_outcome": 18
+    },
+    "scoreable_rows": 36,
+    "selected_root_count": 18
+  },
+  "passed": true,
+  "source_artifacts": {
+    "family_cards": "runs/local/artifacts/stage11094_fresh_family_materialization_packet/fresh_family_cards.jsonl",
+    "packet_rows": "runs/local/artifacts/stage11094_fresh_family_materialization_packet/fresh_family_packet_rows.jsonl",
+    "packet_summary": "runs/local/artifacts/stage11094_fresh_family_materialization_packet/fresh_family_materialization_packet.json",
+    "root_cards": "runs/local/artifacts/stage11094_fresh_family_materialization_packet/fresh_family_root_cards.jsonl"
+  },
+  "stage": 11095,
+  "stage_name": "stage11095_fresh_family_materialization_packet_audit"
+}

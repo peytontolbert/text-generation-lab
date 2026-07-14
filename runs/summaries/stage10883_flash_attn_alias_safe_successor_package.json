@@ -1,0 +1,71 @@
+{
+  "claim_scope": [
+    "Repair the admitted Rust flash-attn evidence_citation train-support row after the stage10880 alias audit.",
+    "Restore Rust evidence-family train coverage with source-derived, visibly distinct evidence keys while leaving heldout scoring unchanged."
+  ],
+  "created_at_utc": "2026-07-12T17:37:13Z",
+  "decision": "flash_attn_alias_safe_train_successor_ready",
+  "interpretation": [
+    "This restores a real reviewed Rust root into train support without reviving the aliased tokenizers/candle-core evidence rows.",
+    "The repaired flash-attn evidence prompt now separates build background, runtime candidate surface, FFI context, test call-path, and verifier/test constraint with distinct source-derived spans.",
+    "Heldout multilingual scoring remains the 23-row quarantined baseline until a separate root-disjoint Rust eval bundle is admitted."
+  ],
+  "limitations": [
+    "This is train-support repair only; it does not replenish strict or validation Rust evidence coverage.",
+    "Flash-attn remains abstention-heavy overall and should not be upgraded into a unique-file localization claim."
+  ],
+  "metrics": {
+    "added_repaired_rows": 6,
+    "repaired_duplicate_visible_evidence_groups": 0,
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_rows_after": 193,
+    "train_rows_before": 187,
+    "validation_rows_unchanged": 23
+  },
+  "next_best_step": "Use this successor as the anti-cheat-clean Rust evidence train baseline, then materialize a separate root-disjoint Rust eval bundle before changing the multilingual heldout headline.",
+  "outputs": {
+    "repaired_bundle_json": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_repaired_bundle.json",
+    "repaired_rows_jsonl": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_repaired_rows.jsonl",
+    "root_record_json": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_root_record.json",
+    "stress_rows_jsonl": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_stress_eval.jsonl",
+    "strict_rows_jsonl": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_strict_eval.jsonl",
+    "summary_json": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/flash_attn_alias_safe_successor_package.json",
+    "train_rows_jsonl": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_train.jsonl",
+    "validation_rows_jsonl": "runs/local/artifacts/stage10883_flash_attn_alias_safe_successor_package/agentkernel_lite_encdec_validation.jsonl"
+  },
+  "passed": true,
+  "repaired_rows": [
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::A",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::B",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::C",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::D",
+    "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact_aliassafe::candidate::E"
+  ],
+  "source_artifacts": {
+    "base_quarantine_successor": "runs/local/artifacts/stage10881_evidence_alias_quarantine_successor/evidence_alias_quarantine_successor.json",
+    "flash_attn_anti_cheat_review": "runs/local/artifacts/stage10415_rust_flash_attn_review_packets/review_packets/stage10413__candle__candle-flash-attn__rust/anti_cheat_review_card.json",
+    "flash_attn_gold_adjudication": "runs/local/artifacts/stage10415_rust_flash_attn_review_packets/review_packets/stage10413__candle__candle-flash-attn__rust/perspective_gold_adjudication.json",
+    "flash_attn_preview_bundle": "runs/local/artifacts/stage10413_fresh_rust_flash_attn_preview/fresh_rust_flash_attn_preview_bundle.json"
+  },
+  "stage": 10883,
+  "stage_name": "stage10883_flash_attn_alias_safe_successor_package",
+  "upstream_baseline_metrics": {
+    "blocked_row_count": 8,
+    "blocked_row_ids": [
+      "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_00",
+      "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_01",
+      "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_02",
+      "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_03",
+      "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_04",
+      "stage10126::candle::candle-core::rust::evidence_citation::reviewed_v27_compact",
+      "stage10126::tokenizers::tokenizers::rust::evidence_citation::reviewed_v27_compact",
+      "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact"
+    ],
+    "stress_rows": 7,
+    "strict_rows": 23,
+    "train_rows": 187,
+    "validation_rows": 23
+  }
+}

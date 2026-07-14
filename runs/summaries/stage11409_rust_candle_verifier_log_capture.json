@@ -1,0 +1,79 @@
+{
+  "counts": {
+    "commands_attempted": 3,
+    "failed": 3,
+    "materializable_after_log": 3,
+    "minimum_clean_roots_required_before_probe": 10,
+    "passed": 0,
+    "timed_out": 0
+  },
+  "created_at_utc": "2026-07-13T15:09:43Z",
+  "decision": "rust_candle_verifier_logs_captured",
+  "interpretation": "These logs can support future Rust train-support materialization only as partial Candle-family supply. They are not sufficient for a Rust probe or claim because the root and repo-family thresholds remain unmet.",
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11409_rust_candle_verifier_log_capture/rust_candle_verifier_log_capture.json"
+  },
+  "passed": true,
+  "quality_gate": {
+    "actual_verifier_logs_present": true,
+    "enough_repo_breadth_for_probe": false,
+    "enough_roots_for_probe": false,
+    "probe_ready": false
+  },
+  "recommended_next_action": "Use successful or failed verifier logs to materialize role-distinct Candle support rows, then acquire additional non-candle Rust roots with verifier logs before launching any training probe.",
+  "results": [
+    {
+      "actual_verifier_log_present": true,
+      "candidate_change_surface_path": "/data/repositories/candle/candle-core/src/accelerate.rs",
+      "command": "cargo test --manifest-path /data/repositories/candle/candle-core/Cargo.toml",
+      "crate_dir": "/data/repositories/candle/candle-core",
+      "duration_seconds": 23.564,
+      "log_head": "warning: virtual workspace defaulting to `resolver = \"1\"` despite one or more workspace members being on edition 2021 which implies `resolver = \"2\"`\nnote: to keep the current resolver, specify `workspace.resolver = \"1\"` in the workspace root's manifest\nnote: to use the edition 2021 resolver, specify `workspace.resolver = \"2\"` in the workspace root's manifest\nnote: for more details see https://doc.rust-lang.org/cargo/reference/resolver.html#resolver-versions\n    Updating crates.io index\n     Locking 391 packages to latest compatible versions\n      Adding candle-gemm v0.15.6 (available: v0.16.0)\n      Adding cudarc v0.9.15 (available: v0.19.8)\n      Adding generic-array v0.14.7 (available: v0.14.9)\n      Adding getrandom v0.2.17 (available: v0.4.3)\n      Adding gloo v0.8.1 (available: v0.12.0)\n      Adding hf-hub v0.2.0 (available: v1.0.0)\n      Adding image v0.24.9 (available: v0.25.9)\n      Adding memmap2 v0.7.1 (available: v0.9.11)\n      Adding once_cell v1.19.0 (available: v1.21.4)\n      Adding pyo3 v0.19.2 (available: v0.29.0)\n      Adding pyo3-build-config v0.19.2 (available: v0.29.0)\n      Adding rand v0.8.7 (available: v0.10.2)\n      Adding regex v1.10.6 (available: v1.13.0)\n      Adding safetensors v0.3.3 (available: v0.8.0)\n      Adding thiserror v1.0.69 (available: v2.0.18)\n      Adding tokenizers v0.13.4 (available: v0.23.1)\n      Adding yew v0.20.0 (available: v0.23.0)\n      Adding yew-agent v0.2.0 (available: v0.5.0)\n      Adding zip v0.6.6 (available: v7.2.0)\n Downloading crates ...\n  Downloaded candle-gemm-c64 v0.15.6\n  Downloaded candle-gemm-c32 v0.15.6\n  Downloaded candle-gemm-f64 v0.15.6\n  Downloaded autocfg v1.5.1\n  Downloaded candle-gemm-f16 v0.15.6\n  Downloaded candle-gemm-common v0.15.6\n  Downloaded anyhow v1.0.103\n  Downloaded candle-gemm-f32 v0.15.6\n  Downloaded candle-gemm v0.15.6\n  Downloaded bytemuck v1.25.1\n  Downloaded reborrow v0.5.5\n  Downloaded num_cpus v1.17.0\n  Downloaded dyn-stack v0.9.1\n  Downloaded seq-macro v0.3.6",
+      "log_path": "runs/local/artifacts/stage11409_rust_candle_verifier_log_capture/local_rust_root__data_repositories_candle_candle_core.log",
+      "materialization_allowed_after_log": true,
+      "repo_family": "candle",
+      "returncode": 101,
+      "root_id": "local_rust_root::data_repositories_candle_candle_core",
+      "status": "failed",
+      "timed_out": false,
+      "verifier_or_test_constraint_path": "/data/repositories/candle/candle-core/tests/conv_tests.rs"
+    },
+    {
+      "actual_verifier_log_present": true,
+      "candidate_change_surface_path": "/data/repositories/candle/candle-flash-attn/src/ffi.rs",
+      "command": "cargo test --manifest-path /data/repositories/candle/candle-flash-attn/Cargo.toml",
+      "crate_dir": "/data/repositories/candle/candle-flash-attn",
+      "duration_seconds": 12.521,
+      "log_head": "    Updating crates.io index\n     Locking 71 packages to latest compatible versions\n Downloading crates ...\n  Downloaded glob v0.3.3\n  Downloaded cudarc v0.9.15\n   Compiling proc-macro2 v1.0.106\n   Compiling unicode-ident v1.0.24\n   Compiling quote v1.0.46\n   Compiling libc v0.2.186\n   Compiling crossbeam-utils v0.8.22\n   Compiling crossbeam-epoch v0.9.20\n   Compiling crossbeam-deque v0.8.7\n   Compiling rayon-core v1.13.0\n   Compiling cfg-if v1.0.4\n   Compiling libm v0.2.16\n   Compiling autocfg v1.5.1\n   Compiling either v1.16.0\n   Compiling zerocopy v0.8.54\n   Compiling getrandom v0.3.4\n   Compiling paste v1.0.15\n   Compiling bytemuck v1.25.1\n   Compiling bitflags v1.3.2\n   Compiling reborrow v0.5.5\n   Compiling seq-macro v0.3.6\n   Compiling lazy_static v1.5.0\n   Compiling serde_core v1.0.228\n   Compiling zmij v1.0.23\n   Compiling glob v0.3.3\n   Compiling serde v1.0.228\n   Compiling crc32fast v1.5.0\n   Compiling serde_json v1.0.150\n   Compiling anyhow v1.0.103\n   Compiling thiserror v1.0.69\n   Compiling itoa v1.0.18\n   Compiling cudarc v0.9.15\n   Compiling memchr v2.8.3\n   Compiling byteorder v1.5.0\n   Compiling raw-cpuid v10.7.0\n   Compiling num-traits v0.2.19\n   Compiling dyn-stack v0.9.1",
+      "log_path": "runs/local/artifacts/stage11409_rust_candle_verifier_log_capture/local_rust_root__data_repositories_candle_candle_flash_attn.log",
+      "materialization_allowed_after_log": true,
+      "repo_family": "candle",
+      "returncode": 101,
+      "root_id": "local_rust_root::data_repositories_candle_candle_flash_attn",
+      "status": "failed",
+      "timed_out": false,
+      "verifier_or_test_constraint_path": "/data/repositories/candle/candle-flash-attn/tests/flash_attn_tests.rs"
+    },
+    {
+      "actual_verifier_log_present": true,
+      "candidate_change_surface_path": "/data/repositories/candle/candle-nn/src/activation.rs",
+      "command": "cargo test --manifest-path /data/repositories/candle/candle-nn/Cargo.toml",
+      "crate_dir": "/data/repositories/candle/candle-nn",
+      "duration_seconds": 1.827,
+      "log_head": "warning: virtual workspace defaulting to `resolver = \"1\"` despite one or more workspace members being on edition 2021 which implies `resolver = \"2\"`\nnote: to keep the current resolver, specify `workspace.resolver = \"1\"` in the workspace root's manifest\nnote: to use the edition 2021 resolver, specify `workspace.resolver = \"2\"` in the workspace root's manifest\nnote: for more details see https://doc.rust-lang.org/cargo/reference/resolver.html#resolver-versions\n   Compiling candle-core v0.1.0 (/data/repositories/candle/candle-core)\nerror[E0277]: the trait bound `half::bf16: SampleBorrow<half::bf16>` is not satisfied\n    --> candle-core/src/cpu_backend.rs:2030:55\n     |\n2030 |                     rand::distributions::Uniform::new(bf16::from_f64(min), bf16::from_f64(max));\n     |                     --------------------------------- ^^^^^^^^^^^^^^^^^^^ the trait `SampleUniform` is not implemented for `half::bf16`\n     |                     |\n     |                     required by a bound introduced by this call\n     |\nnote: there are multiple different versions of crate `rand` in the dependency graph\n    --> /home/peyton/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rand-0.8.7/src/distributions/uniform.rs:214:1\n     |\n214  | pub trait SampleUniform: Sized {\n     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ this is the required trait\n     |\n    ::: candle-core/src/cpu_backend.rs:2021:13\n     |\n2021 |         use rand::prelude::*;\n     |             ---- one version of crate `rand` used here, as a direct dependency of the current crate\n     |\n    ::: candle-core/src/convert.rs:3:5\n     |\n3    | use half::{bf16, f16};\n     |     ---- one version of crate `rand` used here, as a dependency of crate `half`\n     |\n    ::: /home/peyton/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/half-2.7.1/src/bfloat.rs:46:1\n     |\n46   | pub struct bf16(u16);\n     | --------------- this type doesn't implement the required trait\n     |\n    ::: /home/peyton/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rand-0.9.5/src/distr/distribution.rs:35:1\n     |\n35   | pub trait Distribution<T> {\n     | ------------------------- this is the found trait\n     = help: you can use `cargo tree` to explore your dependency tree\n     = note: required for `half::bf16` to implement `SampleBorrow<half::bf16>`",
+      "log_path": "runs/local/artifacts/stage11409_rust_candle_verifier_log_capture/local_rust_root__data_repositories_candle_candle_nn.log",
+      "materialization_allowed_after_log": true,
+      "repo_family": "candle",
+      "returncode": 101,
+      "root_id": "local_rust_root::data_repositories_candle_candle_nn",
+      "status": "failed",
+      "timed_out": false,
+      "verifier_or_test_constraint_path": "/data/repositories/candle/candle-nn/tests/group_norm.rs"
+    }
+  ],
+  "source_artifacts": {
+    "stage11408_queue": "runs/local/artifacts/stage11408_rust_verifier_grounding_materialization_audit/rust_verifier_grounding_materialization_queue.jsonl"
+  },
+  "stage": 11409,
+  "stage_name": "stage11409_rust_candle_verifier_log_capture"
+}

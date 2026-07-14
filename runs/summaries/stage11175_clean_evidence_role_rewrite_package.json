@@ -1,0 +1,59 @@
+{
+  "blocked_by_language": {
+    "c_cpp": 2,
+    "python": 1,
+    "rust": 3
+  },
+  "blocked_by_reason": {
+    "duplicated_gold_path": 3,
+    "role_conflict_candidate_vs_verifier": 4,
+    "verifier_gold_with_no_selected_test": 0
+  },
+  "contract": {
+    "contract_name": "evidence_role_admission_contract_v1",
+    "reject_if": [
+      "same_path_same_text_under_multiple_roles",
+      "verifier_text_argues_for_candidate_surface_when_candidate_surface_is_gold",
+      "gold_role_absent_from_visible_evidence",
+      "gold_verifier_role_without_selected_test_or_verifier_anchor",
+      "option_label_or_order_is_needed_to_solve_the_row"
+    ],
+    "required_for_train_or_eval": [
+      "Every evidence role option must correspond to a distinct visible fact, span, or ledger entry.",
+      "candidate_change_surface and symptom_or_call_path_analogue may share a file only if their text spans/facts are materially different and the row asks for that distinction explicitly.",
+      "verifier_and_test_constraint must expose an actual selected test, verifier result, assertion, command, or transition fact; it must not merely restate that the candidate surface is visible.",
+      "Rows with no selected test or insufficient verifier evidence must not force verifier_and_test_constraint as singleton gold.",
+      "Rows where multiple roles are equally supported must become abstain/set-valued rows or remain quarantined.",
+      "Heldout/reserved rows that fail this gate cannot be used as train support; replacements must come from root-disjoint source material."
+    ],
+    "stage": 11175
+  },
+  "counts": {
+    "audited_evidence_rows": 15,
+    "blocked_rewrite_rows": 6,
+    "safe_reference_rows": 9,
+    "trainable_now": 0,
+    "why_trainable_now_zero": "All audited rows are strict/validation/reserved heldout surfaces or blocked rewrite rows; they should guide materialization but not be recycled into train support."
+  },
+  "created_at_utc": "2026-07-13T06:38:17Z",
+  "decision": "evidence_role_rewrite_package_ready_no_training_yet",
+  "next_best_step": "Materialize fresh root-disjoint evidence-role rows satisfying evidence_role_admission_contract_v1, with balanced candidate_change_surface, verifier_and_test_constraint, and symptom_or_call_path_analogue positives; then train/evaluate a semantic evidence scorer objective.",
+  "outputs": {
+    "blocked_rows_jsonl": "runs/local/artifacts/stage11175_clean_evidence_role_rewrite_package/blocked_evidence_rewrite_queue.jsonl",
+    "contract_json": "runs/local/artifacts/stage11175_clean_evidence_role_rewrite_package/evidence_role_admission_contract.json",
+    "safe_rows_jsonl": "runs/local/artifacts/stage11175_clean_evidence_role_rewrite_package/safe_evidence_rows.jsonl",
+    "summary_json": "runs/local/artifacts/stage11175_clean_evidence_role_rewrite_package/clean_evidence_role_rewrite_package.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "quality_audit": "runs/local/artifacts/stage11174_evidence_gate_and_quality_audit/evidence_gate_and_quality_audit.json",
+    "quality_cards": "runs/local/artifacts/stage11174_evidence_gate_and_quality_audit/evidence_quality_row_cards.jsonl",
+    "row_sources": {
+      "clean_strict": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_strict_eval.jsonl",
+      "clean_validation": "runs/local/artifacts/stage11146_singleton_strict_quarantine_successor/agentkernel_lite_encdec_validation.jsonl",
+      "reserved_residual": "runs/local/artifacts/stage11051_successor_residual_support_plus_priority_evidence/reserved_residual_candidates.jsonl"
+    }
+  },
+  "stage": 11175,
+  "stage_name": "stage11175_clean_evidence_role_rewrite_package"
+}

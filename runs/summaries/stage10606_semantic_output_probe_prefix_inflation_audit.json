@@ -1,0 +1,76 @@
+{
+  "anti_cheat_findings": [
+    "If full_vocab predicts one token for nearly every row while constrained_choice remains much lower, the semantic-output headline is inflated by first-token overlap rather than true sequence generation.",
+    "Retrieve rows beginning with ANSWER_WITH_RETRIEVED_EVIDENCE are especially vulnerable because a constant token A can count as a full-vocab top1 match under first-token scoring.",
+    "Promotion should rely on constrained-choice accuracy plus exact sequence generation, not first-token full-vocab accuracy, for multi-token semantic outputs."
+  ],
+  "claim_scope": [
+    "Audits whether the stage10605 semantic-output probe created a genuine sequence-generation improvement or only a first-token metric illusion.",
+    "Compares full-vocab first-token accuracy with constrained-choice accuracy and dominant predicted token patterns.",
+    "This is an anti-cheat metric audit, not a benchmark promotion artifact."
+  ],
+  "created_at_utc": "2026-07-12T04:22:14Z",
+  "current_state": {
+    "semantic_decoder_equals_label_rows": 0,
+    "stage10594_full_vocab_top1_accuracy": 0.13756613756613756,
+    "stage10599_full_vocab_top1_accuracy": 0.08465608465608465,
+    "stage10605_constrained_choice_top1_accuracy": 0.544973544973545,
+    "stage10605_full_vocab_top1_accuracy": 0.25925925925925924,
+    "stage10605_rows": 189,
+    "stage10605_rows_with_target_rank_1": 49
+  },
+  "dominant_predictions": {
+    "constrained_choice": [
+      [
+        "A",
+        189
+      ]
+    ],
+    "full_vocab": [
+      [
+        "A",
+        189
+      ]
+    ]
+  },
+  "inputs": {
+    "baseline_diagnostic": "runs/local/artifacts/stage10599_mixed_contract_non_a_diagnostic_probe/bounded_decoder_probe/execution_result.json",
+    "baseline_old": "runs/local/artifacts/stage10594_fresh_python_cpp_mixed_contract_probe/bounded_decoder_probe/execution_result.json",
+    "execution_result": "runs/local/artifacts/stage10605_fresh_python_cpp_mixed_contract_semantic_output_probe/bounded_decoder_probe/execution_result.json",
+    "interface_audit": "runs/local/artifacts/stage10603_fresh_python_cpp_mixed_contract_semantic_output_audit/fresh_python_cpp_mixed_contract_semantic_output_audit.json"
+  },
+  "outputs": {
+    "audit_json": "runs/local/artifacts/stage10606_semantic_output_probe_prefix_inflation_audit/semantic_output_probe_prefix_inflation_audit.json"
+  },
+  "passed": true,
+  "per_subtype": {
+    "decisive_evidence_top1": {
+      "constrained_choice_top1_accuracy": 0.07936507936507936,
+      "dominant_full_vocab_prediction": "A",
+      "dominant_full_vocab_prediction_fraction": 1.0,
+      "full_vocab_top1_accuracy": 0.0,
+      "rows": 63
+    },
+    "retrieve_answer_abstain": {
+      "constrained_choice_top1_accuracy": 0.7777777777777778,
+      "dominant_full_vocab_prediction": "A",
+      "dominant_full_vocab_prediction_fraction": 1.0,
+      "full_vocab_top1_accuracy": 0.7777777777777778,
+      "rows": 63
+    },
+    "verifier_outcome_masked": {
+      "constrained_choice_top1_accuracy": 0.7777777777777778,
+      "dominant_full_vocab_prediction": "A",
+      "dominant_full_vocab_prediction_fraction": 1.0,
+      "full_vocab_top1_accuracy": 0.0,
+      "rows": 63
+    }
+  },
+  "stage": 10606,
+  "stage_name": "stage10606_semantic_output_probe_prefix_inflation_audit",
+  "truthful_read": [
+    "Stage10605 materially changed the metric surface, but it did not solve the fresh mixed-contract task in a trustworthy way.",
+    "The model predicted the same first token for every strict row, so the apparent full-vocab gain over stage10594/stage10599 is not a real maintainer capability gain.",
+    "The correct next metric change is exact semantic-output sequence scoring or semantic constrained scoring, not promotion of the current first-token result."
+  ]
+}

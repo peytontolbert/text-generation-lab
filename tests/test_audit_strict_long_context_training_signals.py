@@ -106,6 +106,12 @@ def test_audit_strict_long_context_training_signals_accepts_probe_ready_pack(tmp
     assert pack_rows[0]['lost_state_probe_ready'] is True
     assert pack_rows[0]['long_range_join_probe_ready'] is True
     assert pack_rows[0]['state_update_probe_ready'] is True
+    assert pack_rows[0]['state_delta_probe_ready'] is True
+    assert pack_rows[0]['evidence_anchor_probe_ready'] is True
+    assert target_audits[0]['state_delta_probe_ready'] is True
+    assert target_audits[0]['evidence_anchor_probe_ready'] is True
+    assert target_audits[0]['state_delta_key_count'] >= 2
+    assert target_audits[0]['evidence_anchor_count'] >= 2
     assert len(target_audits) == 32
 
 
@@ -147,3 +153,5 @@ def test_audit_strict_long_context_training_signals_rejects_shortcut_pack(tmp_pa
     assert 'insufficient_locality_probe_coverage' in pack_rows[0]['fatal_reasons']
     assert 'insufficient_retrieval_probe_coverage' in pack_rows[0]['fatal_reasons']
     assert 'insufficient_lost_state_probe_coverage' in pack_rows[0]['fatal_reasons']
+    assert 'insufficient_evidence_anchor_probe_coverage' in pack_rows[0]['fatal_reasons']
+    assert pack_rows[0]['state_delta_probe_ready'] is True

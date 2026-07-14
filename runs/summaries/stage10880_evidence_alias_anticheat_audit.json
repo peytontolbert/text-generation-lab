@@ -1,0 +1,161 @@
+{
+  "blocked_rows": [
+    {
+      "duplicate_visible_evidence_groups": [
+        {
+          "keys": [
+            "algorithmic_background_reference",
+            "candidate_change_surface",
+            "symptom_or_call_path_analogue"
+          ],
+          "path": "candle-flash-attn/src/ffi.rs",
+          "text_sha1": "1b73ee5d4d24"
+        }
+      ],
+      "gold_value": "symptom_or_call_path_analogue",
+      "language_family": "rust",
+      "row_id": "stage10413::candle::candle-flash-attn::rust::evidence_citation::reviewed_v27_compact",
+      "split": "train"
+    },
+    {
+      "duplicate_visible_evidence_groups": [
+        {
+          "keys": [
+            "algorithmic_background_reference",
+            "candidate_change_surface"
+          ],
+          "path": "candle-core/src/accelerate.rs",
+          "text_sha1": "44189ff54067"
+        }
+      ],
+      "gold_value": "candidate_change_surface",
+      "language_family": "rust",
+      "row_id": "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_00",
+      "split": "train"
+    },
+    {
+      "duplicate_visible_evidence_groups": [
+        {
+          "keys": [
+            "algorithmic_background_reference",
+            "candidate_change_surface"
+          ],
+          "path": "candle-core/src/accelerate.rs",
+          "text_sha1": "44189ff54067"
+        }
+      ],
+      "gold_value": "candidate_change_surface",
+      "language_family": "rust",
+      "row_id": "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_01",
+      "split": "train"
+    },
+    {
+      "duplicate_visible_evidence_groups": [
+        {
+          "keys": [
+            "algorithmic_background_reference",
+            "candidate_change_surface"
+          ],
+          "path": "candle-core/src/accelerate.rs",
+          "text_sha1": "44189ff54067"
+        }
+      ],
+      "gold_value": "candidate_change_surface",
+      "language_family": "rust",
+      "row_id": "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_02",
+      "split": "train"
+    },
+    {
+      "duplicate_visible_evidence_groups": [
+        {
+          "keys": [
+            "algorithmic_background_reference",
+            "candidate_change_surface"
+          ],
+          "path": "candle-core/src/accelerate.rs",
+          "text_sha1": "44189ff54067"
+        }
+      ],
+      "gold_value": "candidate_change_surface",
+      "language_family": "rust",
+      "row_id": "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_03",
+      "split": "train"
+    },
+    {
+      "duplicate_visible_evidence_groups": [
+        {
+          "keys": [
+            "algorithmic_background_reference",
+            "candidate_change_surface"
+          ],
+          "path": "candle-core/src/accelerate.rs",
+          "text_sha1": "44189ff54067"
+        }
+      ],
+      "gold_value": "candidate_change_surface",
+      "language_family": "rust",
+      "row_id": "stage10126::candle::candle-core::rust::evidence_citation::compact_bounded::perm_04",
+      "split": "train"
+    },
+    {
+      "duplicate_visible_evidence_groups": [
+        {
+          "keys": [
+            "algorithmic_background_reference",
+            "candidate_change_surface",
+            "symptom_or_call_path_analogue"
+          ],
+          "path": "candle-core/src/accelerate.rs",
+          "text_sha1": "44189ff54067"
+        }
+      ],
+      "gold_value": "candidate_change_surface",
+      "language_family": "rust",
+      "row_id": "stage10126::candle::candle-core::rust::evidence_citation::reviewed_v27_compact",
+      "split": "validation"
+    },
+    {
+      "duplicate_visible_evidence_groups": [
+        {
+          "keys": [
+            "algorithmic_background_reference",
+            "candidate_change_surface",
+            "symptom_or_call_path_analogue"
+          ],
+          "path": "tokenizers/examples/unstable_wasm/src/lib.rs",
+          "text_sha1": "d22da9d66529"
+        }
+      ],
+      "gold_value": "symptom_or_call_path_analogue",
+      "language_family": "rust",
+      "row_id": "stage10126::tokenizers::tokenizers::rust::evidence_citation::reviewed_v27_compact",
+      "split": "strict_eval"
+    }
+  ],
+  "claim_scope": [
+    "Audit reviewed v2.7 evidence_citation rows for duplicated visible evidence material assigned to different semantic labels.",
+    "Flag rows where the visible prompt does not support a unique evidence-role distinction because multiple options reuse the same path/text payload."
+  ],
+  "created_at_utc": "2026-07-12T17:24:41Z",
+  "decision": "evidence_alias_anticheat_audited",
+  "diagnosis": [
+    "The current strict Rust tokenizers evidence row is not a clean semantic distinction because candidate_change_surface and symptom_or_call_path_analogue share the same visible file/text span.",
+    "A similar aliasing pattern exists in the validation Rust candle-core evidence row.",
+    "Training rows with the same aliasing pattern should be quarantined from promotable evidence-role claims and ideally removed from support packages that aim to teach those distinctions."
+  ],
+  "metrics": {
+    "blocked_by_language": {
+      "rust": 8
+    },
+    "blocked_by_split": {
+      "strict_eval": 1,
+      "train": 6,
+      "validation": 1
+    },
+    "blocked_rows": 8
+  },
+  "next_best_step": "Build a duplicate-evidence quarantine successor package that removes aliased evidence rows from train/validation/strict, then replenish Rust evidence evaluation with a fresh reviewed root whose visible evidence keys are actually distinguishable.",
+  "passed": true,
+  "stage": 10880,
+  "stage_name": "stage10880_evidence_alias_anticheat_audit"
+}

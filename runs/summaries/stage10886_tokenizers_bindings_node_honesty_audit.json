@@ -1,0 +1,54 @@
+{
+  "blocking_reasons": [
+    "verifier_and_test_constraint is build-anchored rather than tied to a concrete failing maintainer test or execution transition",
+    "symptom_localization remains underdetermined among tokenizer.rs, pre_tokenizers.rs, models.rs, and task flow surfaces",
+    "evidence_citation cannot be promoted cleanly until the chosen target semantics are fixed by either stronger failure evidence or explicit abstention-first gold answers"
+  ],
+  "claim_scope": [
+    "Judge whether the newly materialized tokenizers::bindings/node preview is already honest enough for maintainer-grade heldout scoring.",
+    "Keep the Rust heldout lane honest by separating preview materialization progress from actual promotable evaluation readiness."
+  ],
+  "created_at_utc": "2026-07-12T17:44:54Z",
+  "decision": "bindings_node_preview_not_yet_honest_for_heldout_scoring",
+  "headline_findings": [
+    "The bindings/node bundle is genuinely root-disjoint from the current train package and materially better than a queue-only suggestion.",
+    "It has real source surfaces plus a build anchor, but no failure-specific test or execution trace that uniquely chooses one code surface over the other plausible bindings-node modules.",
+    "As currently materialized, the packet is support/stress-quality preview material, not yet a promotable heldout Rust maintainer eval root."
+  ],
+  "metrics": {
+    "candidate_paths_count": 5,
+    "selected_build_anchor_count": 1,
+    "visible_evidence_key_count": 5
+  },
+  "next_best_steps": [
+    "Recover one failure-specific Node binding behavior trace, test, or cargo-build transition that narrows the candidate surface beyond generic module structure.",
+    "If that cannot be recovered, keep bindings/node as support-only or abstention-honesty material rather than headline heldout Rust evidence.",
+    "Continue searching for a second root-disjoint Rust eval candidate while preserving the quarantined 23-row heldout baseline."
+  ],
+  "passed": true,
+  "readiness_checks": {
+    "has_build_anchor": true,
+    "has_failure_specific_selected_test": false,
+    "has_real_candidate_paths": true,
+    "requires_more_gold_adjudication": true,
+    "root_disjoint_from_current_train_package": true,
+    "supports_honest_abstention_packet": true,
+    "supports_unique_singleton_localization_now": false
+  },
+  "recommended_gold_policy_if_used_now": {
+    "abstention_insufficient_evidence": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+    "alternative_hypothesis_elimination": "support_only_freeform_explanation_allowed",
+    "evidence_citation": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+    "minimal_fix_selection": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+    "patch_impact": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+    "regression_risk": "support_only_freeform_risk_allowed",
+    "symptom_localization": "ABSTAIN_INSUFFICIENT_EVIDENCE",
+    "verifier_outcome": "cargo check --manifest-path bindings/node/Cargo.toml --offline --quiet"
+  },
+  "source_artifacts": {
+    "preview_bundle": "runs/local/artifacts/stage10885_tokenizers_bindings_node_preview/tokenizers_bindings_node_preview_bundle.json",
+    "preview_summary": "runs/local/artifacts/stage10885_tokenizers_bindings_node_preview/tokenizers_bindings_node_preview.json"
+  },
+  "stage": 10886,
+  "stage_name": "stage10886_tokenizers_bindings_node_honesty_audit"
+}

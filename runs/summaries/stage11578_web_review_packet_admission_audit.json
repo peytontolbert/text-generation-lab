@@ -1,0 +1,58 @@
+{
+  "claim_boundary": [
+    "This audit intentionally blocks training on Stage11577 shells.",
+    "The packet is useful as review material, not as supervised data yet.",
+    "No GPU execution or model scoring is performed."
+  ],
+  "created_at_utc": "2026-07-13T21:59:15Z",
+  "decision": "review_packet_not_admitted_verifier_and_leak_review_required",
+  "metrics": {
+    "admitted_strict_rows": 0,
+    "admitted_train_rows": 0,
+    "blockers": {
+      "gold_requires_verifier_transition": 34,
+      "missing_observed_verifier_transition": 204,
+      "missing_verifier_outcome_gold": 34,
+      "prompt_target_leak_review_required": 204
+    },
+    "heldout_candidate_roots": 6,
+    "packets": 34,
+    "rows": 204,
+    "rows_by_gold_status": {
+      "requires_observed_verifier_transition": 34,
+      "static_abstain_option_present_but_final_answer_requires_verifier_review": 34,
+      "static_candidate_change_surface": 68,
+      "static_selected_verifier_rules_out_neighbor": 34,
+      "static_verifier_and_test_constraint": 34
+    },
+    "rows_by_task_type": {
+      "abstention_insufficient_evidence": 34,
+      "alternative_hypothesis_elimination": 34,
+      "evidence_citation": 34,
+      "minimal_fix_selection": 34,
+      "symptom_localization": 34,
+      "verifier_outcome": 34
+    },
+    "train_candidate_roots": 28,
+    "unique_roots": 34
+  },
+  "next_required_actions": [
+    "Install or recover Web repo dependencies in an isolated environment.",
+    "Run focused verifier commands for selected test paths and attach raw logs.",
+    "Finalize verifier_outcome gold labels from observed transitions.",
+    "Run prompt-target leak review after deciding whether paths remain visible evidence or become opaque evidence IDs."
+  ],
+  "outputs": {
+    "row_audit": "runs/local/artifacts/stage11578_web_review_packet_admission_audit/web_review_packet_row_admission_audit.jsonl",
+    "summary": "runs/local/artifacts/stage11578_web_review_packet_admission_audit/web_review_packet_admission_audit.json"
+  },
+  "passed": true,
+  "source_artifacts": {
+    "packets": "runs/local/artifacts/stage11577_web_candidate_review_packet_materializer/web_candidate_review_packets.jsonl",
+    "rows": "runs/local/artifacts/stage11577_web_candidate_review_packet_materializer/web_candidate_review_row_shells.jsonl"
+  },
+  "stage": 11578,
+  "stage_name": "stage11578_web_review_packet_admission_audit",
+  "strict_eval_authorized": false,
+  "training_authorized": false
+}

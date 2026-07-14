@@ -123,7 +123,7 @@ def test_compile_long_context_pack_trainer_rows_filters_audit_only_direct_by_man
     assert summary_with_audit['trainer_rows'] == 2
     assert summary_with_audit['source_summary']['included_shards'] == ['strict_shard', 'audit_shard']
     assert summary_with_audit['source_summary']['excluded_shards'] == []
-    assert [row['pack_id'] for row in buckets_with_audit['full_context_rows']] == ['strict-pack', 'audit-pack']
+    assert [row['pack_id'] for row in buckets_with_audit['full_context_rows']] == ['audit-pack', 'strict-pack']
 
 
 
@@ -214,9 +214,93 @@ def test_compile_long_context_pack_trainer_rows_derives_structured_targets_and_s
     assert retrieval_row['hard_negative_chunk_ids'] == ['c_paper_neg']
     assert retrieval_row['join_type'] == 'repo+test'
     assert retrieval_row['support_scores'][0]['chunk_id'] == 'c_test'
-    assert 'path_hit' in retrieval_row['support_scores'][0]['support_reasons']
+    assert retrieval_row['support_scores'][0]['path'] == 'tests/test_engine.py'
+    assert retrieval_row['support_scores'][0]['ordinal'] == 1
+    assert set(retrieval_row['support_scores'][0]['support_reasons']) & {'path_hit', 'grounded_role_match', 'grounded_verifier_path_match'}
     assert retrieval_row['support_scores'][2]['chunk_id'] == 'c_paper_neg'
+    assert retrieval_row['support_scores'][2]['path'] == 'papers/engine_runner_attention.txt'
     assert retrieval_row['metadata']['canonical_name'] == 'agentkernel'
     assert 'expected_changed_files' in retrieval_row['target_text']
-    assert 'verification_targets' in memory_row['target_text']
-    assert 'agentkernel' in memory_row['target_text']
+    memory_target = json.loads(memory_row['target_text'])
+    assert memory_target['state_variables'] == ['verification_targets']
+    assert memory_target['canonical_names'] == ['agentkernel']
+    assert memory_target['transitions'][0]['state_delta']['asserted_updates']['verification_targets'] == ['tests/test_engine.py']
+    assert memory_target['transitions'][0]['state_delta']['supporting_chunk_ids'] == ['c_test', 'c_repo']
+    assert memory_target['transitions'][0]['evidence_anchors'][0]['chunk_id'] == 'c_test'
+    assert memory_target['transitions'][0]['retained_constraints']['seed_paths'] == ['src/engine.py']
+    assert memory_target['transitions'][0]['unresolved_prior_state']['reason'] == 'prior_state_not_encoded_in_pack_row'
+
+
+def test_compile_long_context_pack_trainer_rows_prefers_grounded_verifier_role_labels(tmp_path: Path) -> None:
+    trainer_rows = tmp_path / 'trainer_rows.jsonl'
+    trainer_rows.write_text(
+        json.dumps(
+            {
+                'pack_id': 'p_grounded',
+                'effective_split': 'train',
+                'trainer_policy_mode': 'family_cluster_constrained_training',
+                'overlap_family_id': 'cluster_grounded',
+                'prompt_text': 'PACK_QUERIES:\n[1] Recreate the verified transition.',
+                'context_rows': [
+                    {
+                        'chunk_id': 'c_verify',
+                        'chunk_ordinal': 1,
+                        'source_type': 'repo',
+                        'source_id': 'demo',
+                        'path': 'tests/test_demo.py',
+                        'role': 'verification_constraint',
+                        'text': 'The verifier target test is tests/test_demo.py.',
+                    },
+                    {
+                        'chunk_id': 'c_trace',
+                        'chunk_ordinal': 2,
+                        'source_type': 'dataset',
+                        'source_id': 'session_trace',
+                        'path': 'tracebacks/demo_trace.txt',
+                        'role': 'trace_analogue',
+                        'text': 'Trace-backed verification points at tests/test_demo.py.',
+                    },
+                    {
+                        'chunk_id': 'c_noise',
+                        'chunk_ordinal': 3,
+                        'source_type': 'paper',
+                        'source_id': 'paper_demo',
+                        'path': 'papers/demo.txt',
+                        'role': 'distractor_context',
+                        'text': 'Unrelated lexical overlap around demo verifier terminology.',
+                    },
+                ],
+                'target_rows': [
+                    {
+                        'query_index': 1,
+                        'example_id': 'ex-grounded',
+                        'program_id': 'demo',
+                        'final_state_json': json.dumps(
+                            {
+                                'execution_route': 'PATCH_PLUS_EXEC',
+                                'test_selection_route': 'PASS_TRACE_VERIFICATION_TARGETS',
+                                'verification_targets': ['tests/test_demo.py'],
+                            },
+                            sort_keys=True,
+                        ),
+                    }
+                ],
+                'pack_token_count': 256,
+                'chunk_count': 3,
+                'candidate_count': 1,
+            },
+            sort_keys=True,
+        ) + '\n',
+        encoding='utf-8',
+    )
+
+    buckets, _summary = compile_long_context_pack_trainer_rows(trainer_rows_path=trainer_rows, max_positive_chunks=4)
+    retrieval_row = buckets['retrieval_rows'][0]
+    assert retrieval_row['positive_chunk_ids'] == ['c_verify', 'c_trace']
+    assert retrieval_row['hard_negative_chunk_ids'] == ['c_noise']
+    assert retrieval_row['metadata']['label_source'] == 'grounded_verifier_route'
+    assert retrieval_row['metadata']['label_leakage_risk'] == 'low'
+    assert retrieval_row['metadata']['grounded_positive_count'] == 2
+    assert retrieval_row['metadata']['grounded_negative_count'] == 1
+    assert retrieval_row['support_scores'][0]['support_reasons'] == ['grounded_verifier_path_match']
+    assert retrieval_row['support_scores'][2]['support_reasons'] == ['grounded_negative_role']

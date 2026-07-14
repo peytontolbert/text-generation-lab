@@ -1,0 +1,235 @@
+{
+  "base_runtime_weights_sha256": "5236b32f759aa06e82b286c4148e7c5f6784d01c36c8f57a3b656b2bd94d55b7",
+  "claim_scope": [
+    "Run the next multilingual support probe from the stage10928 runtime while adding candidate-wise evidence-role rows from the trusted selected-test-backed bundles.",
+    "Keep the cleaned 23-row overlay frozen so any movement can be judged against the same honest heldout surface."
+  ],
+  "command": [
+    "env",
+    "TMPDIR=/data/tmp",
+    "TEMP=/data/tmp",
+    "TMP=/data/tmp",
+    "conda",
+    "run",
+    "-n",
+    "trellis",
+    "python",
+    "/data/agentkernel-seq2seq-text-lab/legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "--repo-root",
+    "/data/agentkernel-seq2seq-text-lab",
+    "--manifest",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10931_mixed_evidence_candidate_probe_request/mixed_evidence_candidate_probe_manifest.jsonl",
+    "--mode",
+    "bounded_decoder_ce_probe",
+    "--probe-scale",
+    "target_100m",
+    "--implementation",
+    "transformer",
+    "--model-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "--tokenizer-json",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "--tokenizer-config",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+    "--tokenizer-hashlock",
+    "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "--execution-authorized-for-recovery-probe",
+    "--max-train-rows",
+    "234",
+    "--max-eval-rows",
+    "23",
+    "--max-strict-rows",
+    "23",
+    "--max-steps",
+    "64",
+    "--batch-size",
+    "2",
+    "--learning-rate",
+    "5e-6",
+    "--max-encoder-tokens",
+    "768",
+    "--max-decoder-tokens",
+    "8",
+    "--decoder-ce-weight",
+    "0.2",
+    "--bounded-choice-aux-weight",
+    "1.0",
+    "--bounded-choice-aux-source",
+    "encoder_option_retrieval",
+    "--structured-aux-weight",
+    "0.0",
+    "--denoise-weight",
+    "0.0",
+    "--eos-loss-weight",
+    "4.0",
+    "--enable-generation-audit",
+    "--max-generation-rows",
+    "12",
+    "--max-generation-tokens",
+    "8",
+    "--require-loss-mask-enforcement-audit",
+    "--allow-runtime-model-save-for-harness",
+    "--runtime-model-save-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10932_mixed_evidence_candidate_support_probe/runtime_model",
+    "--initialize-from-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10928_semantic_evidence_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-reference-runtime-model",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10928_semantic_evidence_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+    "--preservation-kl-weight",
+    "1.0",
+    "--no-final-checkpoint-export",
+    "--skip-final-model-save",
+    "1",
+    "--output-dir",
+    "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage10932_mixed_evidence_candidate_support_probe/bounded_decoder_probe",
+    "--run-id",
+    "stage10932_mixed_evidence_candidate_support_probe"
+  ],
+  "created_at_utc": "2026-07-12T19:53:32Z",
+  "decision": "mixed_evidence_candidate_probe_ready",
+  "diagnostic_intent": {
+    "added_candidate_rows": true,
+    "focus": [
+      "candidate_wise_evidence_role_train_geometry",
+      "heldout_surface_preservation"
+    ],
+    "heldout_claim_changed": false,
+    "preservation_reference_runtime": "runs/local/artifacts/stage10928_semantic_evidence_multilingual_support_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "initialize_from_runtime_model": "runs/local/artifacts/stage10928_semantic_evidence_multilingual_support_probe/runtime_model/runtime_model_bundle.json",
+  "lane_state_notes": {
+    "c_cpp": "adds candidate-wise evidence-role support on trusted agentkernel and parametergolf bundles while keeping heldout rows unchanged",
+    "python": "adds candidate-wise evidence-role support on the trusted reviewed repository_library bundles while keeping heldout rows unchanged",
+    "rust": "keeps alias-safe flash-attn support and adds flash-attn candidate-role rows; tokenizers alias-risk remains excluded",
+    "web": "adds code_assist candidate-role support as train-only overlap material; pure-web heldout remains unresolved"
+  },
+  "language_counts_by_split": {
+    "eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "strict_eval": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "train": {
+      "c_cpp": 125,
+      "python": 66,
+      "rust": 41,
+      "web_js_ts_html": 2
+    }
+  },
+  "manifest": "runs/local/artifacts/stage10931_mixed_evidence_candidate_probe_request/mixed_evidence_candidate_probe_manifest.jsonl",
+  "next_best_step": "Run the probe, then score the saved runtime on the unchanged 23-row overlay and the stage10915 fresh evidence successor slice before considering any scoring-policy change.",
+  "output_dir": "runs/local/artifacts/stage10932_mixed_evidence_candidate_support_probe/bounded_decoder_probe",
+  "package_metrics_snapshot": {
+    "added_bundle_count": 5,
+    "added_by_language": {
+      "c_cpp": 12,
+      "python": 12,
+      "rust": 5
+    },
+    "added_by_role_label": {
+      "A": 5,
+      "B": 3,
+      "C": 3,
+      "D": 4,
+      "E": 5,
+      "F": 9
+    },
+    "base_metrics_snapshot": {
+      "base_metrics_snapshot": {
+        "added_repaired_rows": 6,
+        "repaired_duplicate_visible_evidence_groups": 0,
+        "stress_rows_unchanged": 7,
+        "strict_rows_unchanged": 23,
+        "train_rows_after": 193,
+        "train_rows_before": 187,
+        "validation_rows_unchanged": 23
+      },
+      "semantic_metrics_snapshot": {
+        "row_count": 12,
+        "rows_by_language": {
+          "c_cpp": 4,
+          "python": 4,
+          "rust": 2,
+          "web_js_ts_html": 2
+        },
+        "rows_by_target": {
+          "candidate_change_surface": 4,
+          "symptom_or_call_path_analogue": 2,
+          "verifier_and_test_constraint": 6
+        }
+      },
+      "semantic_row_types_added": {
+        "pairwise_contrast": 6,
+        "semantic_role_full": 6
+      },
+      "semantic_rows_added": 12,
+      "semantic_targets_added": {
+        "candidate_change_surface": 4,
+        "symptom_or_call_path_analogue": 2,
+        "verifier_and_test_constraint": 6
+      },
+      "stress_rows_unchanged": 7,
+      "strict_rows_unchanged": 23,
+      "train_by_language": {
+        "c_cpp": 113,
+        "python": 54,
+        "rust": 36,
+        "web_js_ts_html": 2
+      },
+      "train_by_task": {
+        "abstention_insufficient_evidence": 18,
+        "alternative_hypothesis_elimination": 1,
+        "cpp_implementation_vs_implementation": 1,
+        "evidence_citation": 30,
+        "evidence_role_classification": 76,
+        "minimal_fix_selection": 17,
+        "patch_impact": 18,
+        "python_implementation_vs_implementation": 2,
+        "regression_risk": 1,
+        "symptom_localization": 18,
+        "verifier_outcome": 23
+      },
+      "train_rows_after": 205,
+      "train_rows_before": 193,
+      "validation_rows_unchanged": 23
+    },
+    "candidate_rows_added": 29,
+    "stress_rows_unchanged": 7,
+    "strict_rows_unchanged": 23,
+    "train_by_language": {
+      "c_cpp": 125,
+      "python": 66,
+      "rust": 41,
+      "web_js_ts_html": 2
+    },
+    "train_rows_after": 234,
+    "train_rows_before": 205,
+    "validation_rows_unchanged": 23
+  },
+  "passed": true,
+  "required_honesty_gates": [
+    "Validation and strict rows remain unchanged from stage10930 and therefore unchanged from stage10926 and stage10883.",
+    "All added candidate-wise evidence rows remain train_support_only and never enter eval or strict.",
+    "Stress rows remain excluded from the probe manifest.",
+    "Any post-run evidence improvement must still be reported both on the unchanged 23-row overlay and on the fresh 3-row evidence successor slice."
+  ],
+  "rows": 280,
+  "run_id": "stage10932_mixed_evidence_candidate_support_probe",
+  "runtime_model_save_dir": "runs/local/artifacts/stage10932_mixed_evidence_candidate_support_probe/runtime_model",
+  "source_package": "runs/local/artifacts/stage10930_mixed_evidence_candidate_support_package/mixed_evidence_candidate_support_package.json",
+  "split_counts": {
+    "eval": 23,
+    "strict_eval": 23,
+    "train": 234
+  },
+  "stage": 10931,
+  "stage_name": "stage10931_mixed_evidence_candidate_probe_request",
+  "stress_rows_excluded_from_manifest": 7
+}

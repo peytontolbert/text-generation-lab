@@ -1,0 +1,95 @@
+{
+  "created_at_utc": "2026-07-13T23:06:42Z",
+  "decision": "reject_stage11605_keep_stage11507_selected_frontier",
+  "inference": [
+    "A separate Web task-candidate head by itself is insufficient when trained through the current shared encoder/update path.",
+    "The next useful experiment should isolate whether interference comes from encoder updates or from insufficient Web supervision: freeze the base encoder and train only the new Web head, or build fail-to-pass/verifier-transition Web rows rather than PASS_TO_PASS selected-test relevance rows."
+  ],
+  "next_recommended_work": [
+    "Keep Stage11507 + encoder_option_retrieval_evidence_judgment_head as selected frontier.",
+    "Run a head-only/frozen-base Web task-candidate probe before any more full-model Web probes.",
+    "If head-only also stays at 35/66 and 2/36, stop this row geometry and materialize real fail-to-pass Web verifier roots."
+  ],
+  "postrun_compact_results": {
+    "filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "rows": 22
+    },
+    "filtered_validation": {
+      "accuracy": 0.9090909090909091,
+      "correct": 20,
+      "rows": 22
+    },
+    "old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "rows": 23
+    },
+    "old_canary_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "rows": 23
+    },
+    "residual_bank": {
+      "accuracy": 0.6,
+      "correct": 6,
+      "rows": 10
+    },
+    "web_heldout": {
+      "accuracy": 0.5303030303030303,
+      "correct": 35,
+      "rows": 66
+    },
+    "web_successor_strict": {
+      "accuracy": 0.05555555555555555,
+      "correct": 2,
+      "rows": 36
+    }
+  },
+  "postrun_gates": {
+    "filtered_strict_22_of_22": true,
+    "filtered_validation_at_least_20_of_22": true,
+    "old_canary_strict_23_of_23": true,
+    "old_canary_validation_at_least_21_of_23": true,
+    "residual_at_least_7_of_10": false,
+    "web_heldout_beats_stage11571_42_of_66": false,
+    "web_successor_strict_full_coverage": true
+  },
+  "rejected_runtime": {
+    "runtime": "runs/local/artifacts/stage11605_web_task_candidate_head_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_web_task_candidate_head",
+    "stage": "stage11605_web_task_candidate_head_probe",
+    "weights_sha256": "e37e22a03a4d13dd51cb58b2a8114b43bbb030b748e0629c40e554963368c0cc"
+  },
+  "request_objective": {
+    "bounded_choice_aux_source": "encoder_option_retrieval_web_task_candidate_head",
+    "bounded_choice_contrast_margin": 0.08,
+    "bounded_choice_contrast_weight": 0.5,
+    "bounded_decoder_train_sampler": "web_task_family_balanced",
+    "learning_rate": "2e-7",
+    "max_steps": 96,
+    "preservation_kl_weight": 6.0
+  },
+  "selected_frontier": {
+    "runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_evidence_judgment_head",
+    "stage": "stage11507_preservation_strengthened_evidence_judgment_probe",
+    "weights_sha256": "8bc717e1b3f7cf8321262d1a70f4ee86489a6fb10e6ae3f16eb6646f72b3ad37"
+  },
+  "source_artifacts": {
+    "postrun": "runs/summaries/stage11606_web_task_candidate_head_postrun_audit.json",
+    "rejected_runtime": "runs/local/artifacts/stage11605_web_task_candidate_head_probe/runtime_model/runtime_model_bundle.json",
+    "request": "runs/summaries/stage11605_web_task_candidate_head_probe_request.json",
+    "selected_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": 11607,
+  "stage_name": "stage11607_web_task_candidate_head_decision",
+  "why_rejected": [
+    "The new Web task-candidate scorer source was trained and evaluated successfully, so this is not a runtime-code blocker.",
+    "Filtered strict, old canary strict, filtered validation, and old validation were preserved.",
+    "Residual bank regressed from selected frontier 7/10 to 6/10.",
+    "Web heldout stayed 35/66, below the >42/66 improvement gate and below Gemma's 52/66 reference.",
+    "No-abstain Web successor strict stayed weak at 2/36, matching the earlier no-abstain run and not proving task-family transfer."
+  ]
+}

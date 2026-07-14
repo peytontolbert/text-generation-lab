@@ -1,0 +1,33 @@
+{
+  "created_at_utc": "2026-07-13T16:13:22.532939+00:00",
+  "decision": "core_bounded_choice_eval_now_reports_unscored_rows_and_coverage_corrected_accuracy",
+  "decision_basis": [
+    "Stage11434 showed scorer reported accuracy can be misleading when a scorer covers only a subset of rows.",
+    "The bounded-choice evaluator previously reported constrained_choice_top1_accuracy over scored rows only.",
+    "The patched evaluator preserves the legacy scored-row metric but adds coverage-corrected metrics over all rows.",
+    "No scorer source is promoted by this patch; it only hardens future evaluation reporting."
+  ],
+  "next_recommended_step": "Do not run another generic support probe; build/train a full-coverage semantic candidate scorer objective or repair admitted residual data geometry first.",
+  "passed": true,
+  "patched_fields": [
+    "constrained_choice_unscored_rows",
+    "constrained_choice_coverage",
+    "constrained_choice_correct",
+    "constrained_choice_coverage_corrected_top1_accuracy"
+  ],
+  "source_artifacts": {
+    "coverage_corrected_scorer_audit": "runs/summaries/stage11434_scorer_source_coverage_corrected_audit.json",
+    "patched_file": "legacy_src/agentkernel_lite/training_loop.py"
+  },
+  "stage": 11435,
+  "stage11434_decision": "no_existing_scorer_source_promoted_after_coverage_correction",
+  "stage11434_decision_basis": [
+    "encoder_option_retrieval_evidence_ledger_head reported high reserved accuracy because it scored only one reserved row.",
+    "A deployable scorer must cover all validation, strict, and reserved rows while preserving canary scores and improving reserved residuals.",
+    "The next useful implementation is a real semantic scorer objective/head with full row coverage, not inference-side scorer routing."
+  ],
+  "stage_name": "bounded_choice_eval_coverage_metric_patch_audit",
+  "verification": {
+    "py_compile": "passed: python -m py_compile legacy_src/agentkernel_lite/training_loop.py"
+  }
+}

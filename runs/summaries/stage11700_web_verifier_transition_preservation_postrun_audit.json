@@ -1,0 +1,220 @@
+{
+  "claim_boundary": [
+    "This is a routed two-runtime postrun audit: Stage11675 Web head plus Stage11699 identity head.",
+    "Promotion requires same-manifest comparison against Stage11691 Gemma and all protected gates preserved."
+  ],
+  "created_at_utc": "2026-07-14T05:42:58Z",
+  "decision": "web_verifier_transition_preservation_preserves_but_no_web_gain",
+  "gates": {
+    "bridged_web_beats_gemma_56_of_66": false,
+    "bridged_web_beats_previous_53_of_66": false,
+    "canonical_heldout_at_least_53_of_66": true,
+    "filtered_strict_22_of_22": true,
+    "filtered_validation_at_least_20_of_22": true,
+    "old_canary_strict_23_of_23": true,
+    "old_validation_at_least_21_of_23": true,
+    "residual_at_least_7_of_10": true
+  },
+  "gemma_stage11691": {
+    "delta_hundred_m_minus_gemma": -0.045454545454545525,
+    "gemma12b_accuracy": 0.8484848484848485,
+    "gemma12b_correct": 56,
+    "gemma12b_rows": 66,
+    "hundred_m_accuracy": 0.803030303030303,
+    "hundred_m_correct": 53,
+    "hundred_m_rows": 66
+  },
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage11700_web_verifier_transition_preservation_postrun_audit",
+    "summary": "runs/local/artifacts/stage11700_web_verifier_transition_preservation_postrun_audit/web_verifier_transition_preservation_postrun_audit.json"
+  },
+  "protected_ok": true,
+  "results": {
+    "bridged_original_web": {
+      "accuracy": 0.803030303030303,
+      "correct": 53,
+      "misses": [],
+      "parts": {
+        "identity": {
+          "accuracy": 0.675,
+          "correct": 27,
+          "misses": [],
+          "rows": 40
+        },
+        "web": {
+          "accuracy": 1.0,
+          "correct": 26,
+          "misses": [],
+          "rows": 26
+        }
+      },
+      "route": "identity_if_same_role_else_web",
+      "route_counts": {
+        "identity": 40,
+        "web": 26
+      },
+      "rows": 66
+    },
+    "canonical_heldout": {
+      "accuracy": 0.803030303030303,
+      "correct": 53,
+      "misses": [],
+      "parts": {
+        "identity": {
+          "accuracy": 0.675,
+          "correct": 27,
+          "misses": [],
+          "rows": 40
+        },
+        "web": {
+          "accuracy": 1.0,
+          "correct": 26,
+          "misses": [],
+          "rows": 26
+        }
+      },
+      "route": "identity_if_same_role_else_web",
+      "route_counts": {
+        "identity": 40,
+        "web": 26
+      },
+      "rows": 66
+    },
+    "filtered_strict": {
+      "accuracy": 1.0,
+      "correct": 22,
+      "misses": [],
+      "route": "protected",
+      "rows": 22,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "filtered_validation": {
+      "accuracy": 0.9090909090909091,
+      "correct": 20,
+      "misses": [],
+      "route": "protected",
+      "rows": 22,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "old_canary_strict": {
+      "accuracy": 1.0,
+      "correct": 23,
+      "misses": [],
+      "route": "protected",
+      "rows": 23,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "old_canary_validation": {
+      "accuracy": 0.9130434782608695,
+      "correct": 21,
+      "misses": [],
+      "route": "protected",
+      "rows": 23,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "residual_bank": {
+      "accuracy": 0.7,
+      "correct": 7,
+      "misses": [],
+      "route": "protected",
+      "rows": 10,
+      "scorer": "encoder_option_retrieval_evidence_judgment_head"
+    },
+    "sealed_remaining_miss_diagnostics": {
+      "accuracy": 0.13333333333333333,
+      "correct": 2,
+      "misses": [],
+      "parts": {
+        "identity": {
+          "accuracy": 0.13333333333333333,
+          "correct": 2,
+          "misses": [],
+          "rows": 15
+        },
+        "web": {
+          "accuracy": null,
+          "correct": 0,
+          "misses": [],
+          "rows": 0
+        }
+      },
+      "route": "identity_if_same_role_else_web",
+      "route_counts": {
+        "identity": 15,
+        "web": 0
+      },
+      "rows": 15
+    }
+  },
+  "runtime": {
+    "identity_runtime": "runs/local/artifacts/stage11699_web_verifier_transition_preservation_probe/runtime_model/runtime_model_bundle.json",
+    "identity_runtime_initialization": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11699_web_verifier_transition_preservation_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_semantic_candidate_head",
+        "bounded_choice_contrast_margin": 0.04,
+        "bounded_choice_contrast_weight": 0.05,
+        "bounded_choice_root_group_aux_weight": 2.0,
+        "bounded_choice_same_role_listwise_weight": 1.0,
+        "bounded_choice_train_head_only": true,
+        "bounded_choice_verifier_value_listwise_weight": 1.0,
+        "bounded_decoder_train_sampler": "web_gap_same_root_grouped",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11699_web_verifier_transition_preservation_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 280,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11699_web_verifier_transition_preservation_probe/runtime_model/model_state.pt",
+      "weights_sha256": "098cb7471dd7f6fac2b7a7055e9608b61a95b8ebfc5d651f6edb45f4fe00d65a"
+    },
+    "identity_runtime_weights_sha256": "098cb7471dd7f6fac2b7a7055e9608b61a95b8ebfc5d651f6edb45f4fe00d65a",
+    "web_runtime": "runs/local/artifacts/stage11675_web_canonical_same_role_listwise_probe/runtime_model/runtime_model_bundle.json",
+    "web_runtime_initialization": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head",
+        "bounded_choice_web_task_candidate_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11675_web_canonical_same_role_listwise_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_web_task_candidate_head",
+        "bounded_choice_contrast_margin": 0.08,
+        "bounded_choice_contrast_weight": 0.5,
+        "bounded_choice_root_group_aux_weight": 2.0,
+        "bounded_choice_same_role_listwise_weight": 0.75,
+        "bounded_choice_train_head_only": true,
+        "bounded_choice_verifier_value_listwise_weight": 1.0,
+        "bounded_decoder_train_sampler": "web_gap_same_root_grouped",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11675_web_canonical_same_role_listwise_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 284,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11675_web_canonical_same_role_listwise_probe/runtime_model/model_state.pt",
+      "weights_sha256": "dfadff5c295fc69af8b35ec1f80d99b226ae27382aacc14ce4149a831451906c"
+    },
+    "web_runtime_weights_sha256": "dfadff5c295fc69af8b35ec1f80d99b226ae27382aacc14ce4149a831451906c"
+  },
+  "stage": 11700,
+  "stage_name": "stage11700_web_verifier_transition_preservation_postrun_audit"
+}

@@ -1,0 +1,94 @@
+{
+  "claim_scope": [
+    "Unified residual queue for the remaining repaired-v2.7 strict misses after the non-promotable stage10442 probe.",
+    "This queue is for fresh disjoint support and builder work only; it must not be used to justify same-surface replay promotion."
+  ],
+  "created_at_utc": "2026-07-11T19:40:35Z",
+  "outputs": {
+    "queue_json": "runs/local/artifacts/stage10444_repaired_v27_disjoint_residual_queue/repaired_v27_disjoint_residual_queue.json",
+    "targets_jsonl": "runs/local/artifacts/stage10444_repaired_v27_disjoint_residual_queue/repaired_v27_disjoint_residual_targets.jsonl"
+  },
+  "passed": true,
+  "recommended_stage_sequence": [
+    "Build or admit fresh disjoint Python verifier roots first, because the current saved-runtime replay did not move the MirrorMind miss.",
+    "Build or admit at least one fresh reviewed Rust evidence-citation root with a real candidate-surface-vs-support contrast.",
+    "Re-test the frozen repaired overlay only after the new support roots are available and reviewed."
+  ],
+  "source_artifacts": {
+    "python_residual_probe": "runs/local/artifacts/stage10442_python_verifier_disjoint_support_probe/bounded_decoder_probe/execution_result.json",
+    "python_residual_request": "runs/local/artifacts/stage10439_python_verifier_disjoint_support_request/python_verifier_disjoint_support_request.json",
+    "repaired_overlay_margin_audit": "runs/local/artifacts/stage10438_repaired_v27_strict_overlay_saved_runtime_margin_audit/repaired_v27_strict_overlay_saved_runtime_margin_audit.json",
+    "rust_builder_request": "runs/local/artifacts/stage10441_rust_evidence_citation_fresh_builder_request/rust_evidence_citation_fresh_builder_request.json"
+  },
+  "stage": 10444,
+  "stage_name": "stage10444_repaired_v27_disjoint_residual_queue",
+  "summary": {
+    "python_targets": 1,
+    "remaining_residuals": 2,
+    "rust_targets": 1,
+    "same_surface_replay_fixed_any": false
+  },
+  "targets": [
+    {
+      "baseline_margin_top1_minus_top2": 0.008098363876342773,
+      "baseline_predicted_label": "C",
+      "baseline_target_label": "B",
+      "baseline_top2_label": "B",
+      "honesty_gates": [
+        "No same-root replay from the current strict overlay into train.",
+        "Train rows remain disjoint stage10327 supply only.",
+        "Any improvement claim must reference the repaired strict overlay, not the live package, until promotion is explicit."
+      ],
+      "language_family": "python",
+      "priority": 1,
+      "probe_correct": false,
+      "probe_predicted_label": "C",
+      "probe_target_label": "B",
+      "promotion_boundary": "diagnostic_only_until_disjoint_roots_exist",
+      "required_support_shape": [
+        "new reviewed Python verifier_outcome roots with multiple plausible test-file candidates",
+        "selected-test anchor present but not directly answer-revealing",
+        "contrast between close sibling test targets, not generic verifier rows",
+        "no reuse of the current MirrorMind strict root in train support"
+      ],
+      "residual_family": "verifier_target_disambiguation",
+      "row_id": "stage10119::localsess_repository_library_sessseed_codex_sessions_rollout_2025_11_28t20_02_25_019acc0f_4bd7_77f2_b15f_3b0c_models_mirrormind_init_py_models_mirrormind_context_py_models_mirrormind_coordin_fd8013631e_aug_1500000_8b46e7f662::python::verifier_outcome::reviewed_v27_compact",
+      "same_surface_replay_helped": false,
+      "support_status": "fresh_disjoint_support_needed",
+      "task_type": "verifier_outcome"
+    },
+    {
+      "baseline_margin_top1_minus_top2": 0.0016564726829528809,
+      "baseline_predicted_label": "F",
+      "baseline_target_label": "E",
+      "baseline_top2_label": "B",
+      "builder_requirements": [
+        "Root must be disjoint from the current strict tokenizers root.",
+        "Visible evidence must support a real evidence-citation contrast, not just abstention-heavy localization.",
+        "Target support fact must not appear verbatim before options.",
+        "Selected-test or verifier anchor should be present when possible."
+      ],
+      "language_family": "rust",
+      "priority": 2,
+      "probe_correct": false,
+      "probe_predicted_label": "F",
+      "probe_target_label": "E",
+      "promotion_boundary": "builder_then_review_then_strict_retest",
+      "recommended_candidates": [
+        "linux::rust",
+        "candle::candle-datasets",
+        "candle::candle-transformers"
+      ],
+      "required_support_shape": [
+        "evidence citation rows where candidate_change_surface is a tempting negative",
+        "gold support fact distinct from verifier/test constraint",
+        "selected-test or trace anchor retained without exposing the answer token verbatim"
+      ],
+      "residual_family": "evidence_support_disambiguation",
+      "row_id": "stage10126::tokenizers::tokenizers::rust::evidence_citation::reviewed_v27_compact",
+      "same_surface_replay_helped": false,
+      "support_status": "fresh_support_constrained",
+      "task_type": "evidence_citation"
+    }
+  ]
+}

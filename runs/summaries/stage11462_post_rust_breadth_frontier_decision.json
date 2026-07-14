@@ -1,0 +1,191 @@
+{
+  "created_at_utc": "2026-07-13T17:01:57Z",
+  "decision": "keep_stage11444_as_selected_frontier_after_rust_breadth_diagnostics",
+  "interpretation": [
+    "Rust materialization is no longer the immediate data-supply blocker: Stage11455 made a probe-ready breadth package.",
+    "The aggressive Rust breadth run over-shifted evidence predictions and regressed strict/canary/residual.",
+    "The conservative run preserved residual at 5/10 but still regressed strict and old canary by one row, so it is diagnostic only.",
+    "Do not replace the Stage11444 selected standalone runtime until a run preserves 23/23 old canary, 22/22 filtered strict, and improves residual beyond 5/10."
+  ],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage11462_post_rust_breadth_frontier_decision/post_rust_breadth_frontier_decision.json"
+  },
+  "passed": true,
+  "recommended_next_action": "Treat Rust breadth rows as validated support inventory. The next model-side attempt should target the remaining Python verifier row and residual evidence rows with a scorer/objective change or explicit replay-preservation, not another broad Rust update.",
+  "rejected_runtimes": {
+    "stage11457_aggressive_rust_breadth": {
+      "decision": "rust_breadth_support_probe_rejected_or_diagnostic_only",
+      "product_metrics": {
+        "filtered_strict": 18,
+        "filtered_strict_rows": 22,
+        "filtered_validation": 21,
+        "filtered_validation_rows": 22,
+        "old_canary_strict": 19,
+        "old_canary_strict_rows": 23,
+        "residual_bank": 3,
+        "residual_bank_rows": 10
+      },
+      "promotion_gates": {
+        "coverage_full_for_product_residual": true,
+        "old_canary_strict_preserves_23_of_23": false,
+        "product_filtered_strict_22_of_22": false,
+        "product_filtered_validation_at_least_20_of_22": true,
+        "product_residual_above_base_5_of_10": false
+      },
+      "weights_sha256": "aa0cbeaf895479ccc80cc381951b9b8b430e8410f7eefed45642ee1267e5619f"
+    },
+    "stage11460_conservative_rust_breadth": {
+      "decision": "rust_breadth_support_probe_rejected_or_diagnostic_only",
+      "product_metrics": {
+        "filtered_strict": 21,
+        "filtered_strict_rows": 22,
+        "filtered_validation": 20,
+        "filtered_validation_rows": 22,
+        "old_canary_strict": 22,
+        "old_canary_strict_rows": 23,
+        "residual_bank": 5,
+        "residual_bank_rows": 10
+      },
+      "promotion_gates": {
+        "coverage_full_for_product_residual": true,
+        "old_canary_strict_preserves_23_of_23": false,
+        "product_filtered_strict_22_of_22": false,
+        "product_filtered_validation_at_least_20_of_22": true,
+        "product_residual_above_base_5_of_10": false
+      },
+      "weights_sha256": "e1b8280d2983ae750119b0ae0136e6fc093e83501ca0ee995fab2e166ff76619"
+    }
+  },
+  "rust_breadth_data_status": {
+    "counts": {
+      "added_roots": 6,
+      "added_rows": 18,
+      "admitted_repo_families_stage11453": 7,
+      "admitted_roots_stage11453": 19,
+      "covered_admitted_roots_in_train": 19,
+      "residual_rows": 10,
+      "strict_rows": 22,
+      "train_rows": 237,
+      "validation_rows": 22
+    },
+    "quality_gate": {
+      "covered_minimum_admitted_roots": true,
+      "new_support_roots_present": true,
+      "no_added_root_overlap_residual": true,
+      "no_added_root_overlap_strict": true,
+      "no_added_root_overlap_validation": true,
+      "no_duplicate_train_row_ids": true,
+      "ready_for_probe_request": true,
+      "stage11453_repo_breadth_met": true
+    },
+    "readiness_decision": "rust_breadth_support_probe_request_allowed"
+  },
+  "selected_frontier": {
+    "runtime_bundle": "runs/local/artifacts/stage11444_targeted_residual_role_support_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval",
+    "weights_sha256": "094b2da23adeb46ae8c8be5244902c746962dda96019d1c64c3676b16b77e162"
+  },
+  "selected_frontier_evidence": {
+    "safe_scorer_decision": "select_stage11444_runtime_with_base_encoder_option_retrieval_as_safe_standalone_frontier_candidate",
+    "same_manifest_gemma_comparison": {
+      "by_language": {
+        "c_cpp": {
+          "gemma_accuracy": 0.16666666666666666,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 6,
+          "rows": 6
+        },
+        "python": {
+          "gemma_accuracy": 0.3333333333333333,
+          "gemma_correct": 2,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 6,
+          "rows": 6
+        },
+        "rust": {
+          "gemma_accuracy": 0.6,
+          "gemma_correct": 3,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 5,
+          "rows": 5
+        },
+        "web_js_ts_html": {
+          "gemma_accuracy": 0.16666666666666666,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 6,
+          "rows": 6
+        }
+      },
+      "by_task_type": {
+        "abstention_insufficient_evidence": {
+          "gemma_accuracy": 0.0,
+          "gemma_correct": 0,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 4,
+          "rows": 4
+        },
+        "evidence_citation": {
+          "gemma_accuracy": 1.0,
+          "gemma_correct": 3,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 3,
+          "rows": 3
+        },
+        "minimal_fix_selection": {
+          "gemma_accuracy": 0.25,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 4,
+          "rows": 4
+        },
+        "patch_impact": {
+          "gemma_accuracy": 0.25,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 4,
+          "rows": 4
+        },
+        "symptom_localization": {
+          "gemma_accuracy": 0.0,
+          "gemma_correct": 0,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 4,
+          "rows": 4
+        },
+        "verifier_outcome": {
+          "gemma_accuracy": 0.3333333333333333,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 3,
+          "rows": 3
+        },
+        "verifier_outcome_semantic_transition": {
+          "gemma_accuracy": 1.0,
+          "gemma_correct": 1,
+          "hundred_m_accuracy": 1.0,
+          "hundred_m_correct": 1,
+          "rows": 1
+        }
+      },
+      "delta_accuracy": 0.6956521739130435,
+      "gemma_accuracy": 0.30434782608695654,
+      "gemma_correct": 7,
+      "hundred_m_accuracy": 1.0,
+      "hundred_m_correct": 23,
+      "hundred_m_rows": 23,
+      "matched_rows": 23,
+      "missing_gemma_rows": []
+    }
+  },
+  "source_artifacts": {
+    "aggressive_postrun": "runs/local/artifacts/stage11458_rust_breadth_support_postrun_audit/rust_breadth_support_postrun_audit.json",
+    "conservative_postrun": "runs/local/artifacts/stage11461_conservative_rust_breadth_postrun_audit/conservative_rust_breadth_postrun_audit.json",
+    "rust_breadth_readiness": "runs/local/artifacts/stage11455_rust_breadth_support_probe_readiness_decision/rust_breadth_support_probe_readiness_decision.json",
+    "safe_frontier_decision": "runs/local/artifacts/stage11446_safe_frontier_scorer_selection_decision/stage11446_safe_frontier_scorer_selection_decision.json",
+    "same_manifest_gemma_comparison": "runs/local/artifacts/stage11447_selected_runtime_same_manifest_gemma_comparison/stage11447_selected_runtime_same_manifest_gemma_comparison.json"
+  },
+  "stage": 11462,
+  "stage_name": "stage11462_post_rust_breadth_frontier_decision"
+}

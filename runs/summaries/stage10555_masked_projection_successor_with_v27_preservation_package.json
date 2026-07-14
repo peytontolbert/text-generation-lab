@@ -1,0 +1,86 @@
+{
+  "bounded_choice_support": {
+    "eval_rows_with_standalone_projection_source": 0,
+    "strict_rows_with_standalone_projection_source": 0,
+    "train_rows_with_standalone_projection_source": 33
+  },
+  "claim_scope": [
+    "Corrective successor package that keeps the stage10543 long-context strict slice unchanged while adding non-strict reviewed v2.7 support rows for bounded-choice preservation.",
+    "The added reviewed support rows are train-only and do not overlap the 24-row repaired-v2.7 canary.",
+    "This package is intended to test whether a mixed seq2seq-plus-bounded-choice curriculum can retain old maintainer competence without abandoning the new long-context bootstrap path."
+  ],
+  "created_at_utc": "2026-07-12T02:00:50Z",
+  "inputs": {
+    "canary_overlay": "runs/local/artifacts/stage10436_repaired_v27_strict_overlay/repaired_v27_strict_overlay.jsonl",
+    "reviewed_v27_package": "runs/local/artifacts/stage10420_reviewed_multilingual_v27_manifest_package/reviewed_multilingual_v27_manifest_package.json",
+    "reviewed_v27_train": "runs/local/artifacts/stage10420_reviewed_multilingual_v27_manifest_package/agentkernel_lite_encdec_train.jsonl",
+    "reviewed_v27_validation": "runs/local/artifacts/stage10420_reviewed_multilingual_v27_manifest_package/agentkernel_lite_encdec_validation.jsonl",
+    "successor_package": "runs/local/artifacts/stage10543_masked_projection_successor_package/masked_projection_successor_package.json",
+    "successor_rows": "runs/local/artifacts/stage10543_masked_projection_successor_package/masked_projection_successor_rows.jsonl"
+  },
+  "known_limits": [
+    "The 54-row strict successor slice remains generation-only and still cannot support bounded-choice scoring directly.",
+    "Reviewed v2.7 support rows are small relative to the long-context train supply and are intended as preservation anchors, not a new headline benchmark."
+  ],
+  "language_counts": {
+    "eval": {
+      "rust": 5
+    },
+    "strict_eval": {
+      "c_cpp": 12,
+      "python": 18,
+      "rust": 12,
+      "web_js_ts_html": 12
+    },
+    "train": {
+      "c_cpp": 191,
+      "python": 2045,
+      "rust": 18,
+      "unknown": 6,
+      "web_js_ts_html": 20
+    }
+  },
+  "outputs": {
+    "all_rows": "runs/local/artifacts/stage10555_masked_projection_successor_with_v27_preservation_package/masked_projection_successor_with_v27_preservation_rows.jsonl",
+    "eval_rows": "runs/local/artifacts/stage10555_masked_projection_successor_with_v27_preservation_package/eval_rows.jsonl",
+    "strict_rows": "runs/local/artifacts/stage10555_masked_projection_successor_with_v27_preservation_package/strict_eval_rows.jsonl",
+    "train_rows": "runs/local/artifacts/stage10555_masked_projection_successor_with_v27_preservation_package/train_rows.jsonl"
+  },
+  "passed": true,
+  "rows": {
+    "all": 2339,
+    "eval": 5,
+    "strict_eval": 54,
+    "train": 2280
+  },
+  "stage": 10555,
+  "stage_name": "stage10555_masked_projection_successor_with_v27_preservation_package",
+  "support_mix": {
+    "reviewed_v27_canary_overlap_examples": [],
+    "reviewed_v27_canary_overlap_rows": 0,
+    "reviewed_v27_support_rows": 33,
+    "reviewed_v27_train_rows": 9,
+    "reviewed_v27_validation_rows": 24,
+    "successor_train_rows": 2247
+  },
+  "target_subtypes": {
+    "eval": {
+      "abstain": 4,
+      "evidence_chain": 1
+    },
+    "strict_eval": {
+      "decisive_evidence_top1": 18,
+      "retrieve_answer_abstain": 18,
+      "verifier_outcome_masked": 18
+    },
+    "train": {
+      "": 33,
+      "abstain": 2,
+      "decisive_evidence_top1": 711,
+      "evidence_chain": 2,
+      "next_action": 55,
+      "retrieve_answer_abstain": 711,
+      "verifier_outcome_masked": 766
+    }
+  }
+}
