@@ -1,0 +1,122 @@
+{
+  "allowed_next_steps": [
+    "Build a 4096-vocab tokenizer candidate in a separate diagnostic lane.",
+    "Measure bytes/token, heldout BPB proxy if available, UTF-8 validity, dead-token fraction, decode speed, and downstream bounded maintainer scores.",
+    "Run only contract/preflight or tiny diagnostic unless a full embedding migration plan exists."
+  ],
+  "baseline_metrics": {
+    "dead_or_unseen_fraction_on_sample": 0.4657,
+    "language_summary": {
+      "c_cpp": {
+        "bytes_per_token": {
+          "count": 392,
+          "max": 1.9198,
+          "mean": 1.8344,
+          "median": 1.8444,
+          "min": 1.6948,
+          "p90": 1.8761
+        },
+        "estimated_effective_bytes_at_4096_tokens": 7513.7,
+        "estimated_effective_bytes_at_768_tokens": 1408.8,
+        "non_special_tokens_per_row": {
+          "count": 392,
+          "max": 10236.0,
+          "mean": 3619.9541,
+          "median": 3128.5,
+          "min": 1914.0,
+          "p90": 5660.0
+        },
+        "rows": 392,
+        "rows_over_4096_tokens": 72,
+        "rows_over_768_tokens": 392
+      },
+      "python": {
+        "bytes_per_token": {
+          "count": 334,
+          "max": 1.9445,
+          "mean": 1.8444,
+          "median": 1.858,
+          "min": 1.6902,
+          "p90": 1.8961
+        },
+        "estimated_effective_bytes_at_4096_tokens": 7554.7,
+        "estimated_effective_bytes_at_768_tokens": 1416.5,
+        "non_special_tokens_per_row": {
+          "count": 334,
+          "max": 8962.0,
+          "mean": 3772.2126,
+          "median": 3164.0,
+          "min": 1933.0,
+          "p90": 5433.0
+        },
+        "rows": 334,
+        "rows_over_4096_tokens": 88,
+        "rows_over_768_tokens": 334
+      },
+      "rust": {
+        "bytes_per_token": {
+          "count": 330,
+          "max": 1.945,
+          "mean": 1.8305,
+          "median": 1.8672,
+          "min": 1.6178,
+          "p90": 1.8995
+        },
+        "estimated_effective_bytes_at_4096_tokens": 7497.7,
+        "estimated_effective_bytes_at_768_tokens": 1405.8,
+        "non_special_tokens_per_row": {
+          "count": 330,
+          "max": 9006.0,
+          "mean": 4115.3515,
+          "median": 3086.0,
+          "min": 1891.0,
+          "p90": 7722.0
+        },
+        "rows": 330,
+        "rows_over_4096_tokens": 84,
+        "rows_over_768_tokens": 330
+      },
+      "web_js_ts_html": {
+        "bytes_per_token": {
+          "count": 48,
+          "max": 1.91,
+          "mean": 1.8033,
+          "median": 1.828,
+          "min": 1.6882,
+          "p90": 1.8948
+        },
+        "estimated_effective_bytes_at_4096_tokens": 7386.3,
+        "estimated_effective_bytes_at_768_tokens": 1384.9,
+        "non_special_tokens_per_row": {
+          "count": 48,
+          "max": 8995.0,
+          "mean": 6227.0,
+          "median": 5745.0,
+          "min": 4439.0,
+          "p90": 8027.0
+        },
+        "rows": 48,
+        "rows_over_4096_tokens": 48,
+        "rows_over_768_tokens": 48
+      }
+    },
+    "sampled_rows": 1104
+  },
+  "blocked_actions": [
+    "Do not replace the hashlocked 1506 tokenizer in Stage11507/11924/12099 protected frontier runs.",
+    "Do not compare 4096-tokenizer weights to Gemma as a headline unless retrained/evaluated under matched clean manifests.",
+    "Do not spend GPU training on tokenizer ablations before next_action materialization meets Stage12178 floors unless the run is explicitly marked diagnostic."
+  ],
+  "current_model_contract": "agentkernel_lite_encdec_v1 remains hashlocked to 1506-token tokenizer for protected target_100m frontier runs",
+  "current_tokenizer": "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+  "current_vocab_size": 1506,
+  "decision": "approve_tokenizer_diagnostic_ablation_lane_do_not_change_protected_frontier_tokenizer",
+  "interpretation": [
+    "The current tokenizer is very compact in vocab but expensive in context: roughly 1.8 bytes/token on sampled maintainer rows.",
+    "At 4096 tokens this gives only about 7.4KB effective raw-byte context, so a 4096-vocab diagnostic ablation is technically justified.",
+    "Opaque A-Z labels are already single-token, so tokenizer work targets input compression/context, not bounded label decoding.",
+    "Semantic labels are multi-token and should remain candidate metadata rather than decoder targets for current bounded-choice lanes."
+  ],
+  "stage": "stage12183_tokenizer_baseline_decision",
+  "training_executed": false
+}

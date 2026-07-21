@@ -1,0 +1,226 @@
+{
+  "admission_gates": [
+    "zero train/eval/protected root overlap",
+    "all rows have mirrored standalone_projection_source.opaque_options",
+    "all rows have non-singleton opaque options",
+    "selected_test_anchor present when target is SELECT_TEST or VERIFY_RESULT",
+    "verifier evidence present when target depends on verifier state",
+    "PLAN_PATCH positive rows require enough evidence to patch; PLAN_PATCH negative rows must explicitly show missing prerequisite",
+    "ABSTAIN_OR_ROLLBACK positive rows require concrete insufficiency/safety condition"
+  ],
+  "created_at_utc": "2026-07-14T23:49:53Z",
+  "current_transition_score": {
+    "gemma_same_manifest": "386/640",
+    "stage11924": "364/640",
+    "stage12068_composite": "364/640 retention only"
+  },
+  "do_not_train_yet": true,
+  "miss_analysis": {
+    "by_confusion": [
+      {
+        "count": 24,
+        "pred_value": "PLAN_PATCH",
+        "target_value": "ABSTAIN_OR_ROLLBACK"
+      },
+      {
+        "count": 22,
+        "pred_value": "PLAN_PATCH",
+        "target_value": "RETRIEVE_EVIDENCE"
+      },
+      {
+        "count": 15,
+        "pred_value": "PLAN_PATCH",
+        "target_value": "SELECT_TEST"
+      },
+      {
+        "count": 12,
+        "pred_value": "PLAN_PATCH",
+        "target_value": "LOCALIZE_FAILURE"
+      },
+      {
+        "count": 12,
+        "pred_value": "RETRIEVE_EVIDENCE",
+        "target_value": "LOCALIZE_FAILURE"
+      },
+      {
+        "count": 9,
+        "pred_value": "RETRIEVE_EVIDENCE",
+        "target_value": "SELECT_TEST"
+      },
+      {
+        "count": 8,
+        "pred_value": "RETRIEVE_EVIDENCE",
+        "target_value": "ABSTAIN_OR_ROLLBACK"
+      },
+      {
+        "count": 7,
+        "pred_value": "RETRIEVE_EVIDENCE",
+        "target_value": "PLAN_PATCH"
+      }
+    ],
+    "by_language": {
+      "c_cpp": 43,
+      "python": 32,
+      "rust": 34
+    },
+    "by_observed_status": {
+      "PASS_CURRENT_BUILD": 2,
+      "PASS_CURRENT_BUILD_AND_RUN": 25,
+      "PASS_CURRENT_STATE": 66,
+      "VERIFIER_REMOVED": 16
+    },
+    "by_target_value": {
+      "ABSTAIN_OR_ROLLBACK": 32,
+      "LOCALIZE_FAILURE": 24,
+      "PLAN_PATCH": 7,
+      "RETRIEVE_EVIDENCE": 22,
+      "SELECT_TEST": 24
+    }
+  },
+  "next_stage": {
+    "purpose": "materialize rows from this contract; do not launch training until admission gates pass",
+    "recommended": "stage12073_next_action_support_materializer",
+    "training_after_materialization_gate": {
+      "expected_probe_goal": "old transition >364/640 while preserving compact gates; Gemma win still requires >386/640",
+      "language_roots_each": ">=15",
+      "protected_replay_included": true,
+      "transition_next_action_rows": ">=200",
+      "unique_roots": ">=80"
+    }
+  },
+  "problem_statement": {
+    "current_accuracy": "51/160",
+    "existing_v35_next_action_support": {
+      "all_rows": 311,
+      "language_counts": {},
+      "source": "runs/local/artifacts/stage12056_transition_support_rollup_v35/transition_support_rows_v35.jsonl",
+      "target_counts": {},
+      "transition_next_action_rows": 0,
+      "transition_next_action_unique_roots": 0
+    },
+    "miss_count": 109,
+    "observed_collapse": "All baseline next-action misses predict PLAN_PATCH or RETRIEVE_EVIDENCE.",
+    "weakest_family": "transition_next_action"
+  },
+  "selected_transition_frontier": "stage11924_transition_listwise_head_only_probe",
+  "source_artifacts": {
+    "atlas": "runs/summaries/stage12071_next_action_gap_atlas.json",
+    "miss_rows": "runs/local/artifacts/stage12071_next_action_gap_atlas/transition_next_action_miss_rows.jsonl",
+    "v35_support": "runs/local/artifacts/stage12056_transition_support_rollup_v35/transition_support_rows_v35.jsonl"
+  },
+  "stage": 12072,
+  "stage_name": "stage12072_next_action_support_design",
+  "support_construction_contract": {
+    "generator_specs": [
+      {
+        "fixes_confusions": [
+          "ABSTAIN_OR_ROLLBACK<-PLAN_PATCH",
+          "RETRIEVE_EVIDENCE<-PLAN_PATCH",
+          "SELECT_TEST<-PLAN_PATCH",
+          "LOCALIZE_FAILURE<-PLAN_PATCH"
+        ],
+        "minimum_rows": 80,
+        "name": "premature_patch_negative",
+        "row_shape": "State lacks sufficient verifier/test evidence; PLAN_PATCH is a hard negative and the gold is retrieve/select/localize/abstain."
+      },
+      {
+        "fixes_confusions": [
+          "LOCALIZE_FAILURE<-RETRIEVE_EVIDENCE",
+          "SELECT_TEST<-RETRIEVE_EVIDENCE",
+          "PLAN_PATCH<-RETRIEVE_EVIDENCE"
+        ],
+        "minimum_rows": 45,
+        "name": "premature_retrieve_negative",
+        "row_shape": "State already contains enough evidence for a concrete next action; RETRIEVE_EVIDENCE is a hard negative."
+      },
+      {
+        "fixes_confusions": [
+          "REPAIR_AFTER_FAILURE missing from current miss targets",
+          "VERIFY_RESULT missing from current miss targets"
+        ],
+        "minimum_rows": 45,
+        "name": "post_failure_repair_boundary",
+        "row_shape": "Verifier has failed or patch has been applied; gold alternates between REPAIR_AFTER_FAILURE and VERIFY_RESULT."
+      },
+      {
+        "fixes_confusions": [
+          "ABSTAIN_OR_ROLLBACK<-PLAN_PATCH",
+          "ABSTAIN_OR_ROLLBACK<-RETRIEVE_EVIDENCE"
+        ],
+        "minimum_rows": 30,
+        "name": "completion_gate_abstain_boundary",
+        "row_shape": "Evidence is insufficient, verifier was removed, or state is unsafe; gold is ABSTAIN_OR_ROLLBACK."
+      }
+    ],
+    "language_root_quotas": {
+      "c_cpp": 20,
+      "python": 20,
+      "rust": 20,
+      "web_js_ts_html": 20
+    },
+    "minimum_rows": 200,
+    "minimum_unique_roots": 80,
+    "repo_family_cap": "max(15 rows, 10% of next-action support rows) per repo family",
+    "row_contract": {
+      "anti_cheat_required": {
+        "candidate_values_not_order_shortcut": true,
+        "deterministic_option_shuffle": true,
+        "no_postfix_source_in_preaction_state": true,
+        "root_split_isolated": true,
+        "target_label_not_visible_before_options": true
+      },
+      "candidate_values": [
+        "LOCALIZE_FAILURE",
+        "RETRIEVE_EVIDENCE",
+        "BIND_SYMBOL",
+        "SELECT_TEST",
+        "PLAN_PATCH",
+        "APPLY_PATCH_ABSTRACT",
+        "VERIFY_RESULT",
+        "REPAIR_AFTER_FAILURE",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "loss_mask": {
+        "bounded_choice_aux": true,
+        "decoder_ce": true,
+        "structured_aux": true,
+        "transition_projection": true
+      },
+      "required_fields": [
+        "root_id",
+        "root_lineage_key",
+        "repo_id",
+        "language_family",
+        "task_type=transition_next_action",
+        "milestone_state",
+        "observed_status",
+        "selected_test_anchor",
+        "visible_source_evidence",
+        "visible_verifier_evidence",
+        "opaque_options",
+        "standalone_projection_source.opaque_options",
+        "target.semantic_value",
+        "anti_cheat",
+        "loss_mask"
+      ]
+    },
+    "target_row_quotas": {
+      "ABSTAIN_OR_ROLLBACK": 35,
+      "LOCALIZE_FAILURE": 30,
+      "PLAN_PATCH": 25,
+      "REPAIR_AFTER_FAILURE": 20,
+      "RETRIEVE_EVIDENCE": 30,
+      "SELECT_TEST": 35,
+      "VERIFY_RESULT": 25
+    },
+    "verifier_state_quotas": {
+      "completion_gate_abstain_or_rollback": 25,
+      "post_patch_verify_needed": 25,
+      "pre_verifier_no_selected_test": 30,
+      "selected_test_known_not_run": 30,
+      "verifier_failed_requires_repair": 30,
+      "verifier_pass_current_state": 30,
+      "verifier_removed_or_insufficient": 30
+    }
+  }
+}

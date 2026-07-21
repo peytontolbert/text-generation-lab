@@ -1,0 +1,257 @@
+{
+  "admitted_rows": 4,
+  "attempted_fixtures": 4,
+  "claim_boundary": "Controlled semantic fixtures are train-support only; not source-heldout or strict eval evidence.",
+  "decision": "admit_controlled_semantic_fail_to_pass_supplement_train_support",
+  "fixture_root": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos",
+  "language_counts": {
+    "python": 4
+  },
+  "next_stage_recommendation": {
+    "action": "Merge supplemental FAIL_TO_PASS rows and verify Transition-Root-250 floors.",
+    "stage": "stage12056_transition_support_rollup_v35"
+  },
+  "probe_cards": [
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_8_query_param_preserved",
+        "duration_sec": 1.823,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_8_query_param_preserved_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-iv2pmz16'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-tudiksow'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.12s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_8_query_param_preserved",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_8_query_param_preserved",
+        "duration_sec": 1.835,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_8_query_param_preserved_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "                                                                [100%]\n=================================== FAILURES ===================================\n__________________________ test_query_param_preserved __________________________\n\n    def test_query_param_preserved():\n>       assert serialize([(\"b\",2),(\"a\",1)])==\"b=2&a=1\"\nE       AssertionError: assert 'a=1&b=2' == 'b=2&a=1'\nE         \nE         - b=2&a=1\nE         + a=1&b=2\n\ntest_logic.py:3: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-q889f974'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-jmpp7nm4'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-5ug8ilok'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_query_param_preserved - AssertionErr...\n1 failed, 3 warnings in 1.15s\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_8_query_param_preserved",
+        "duration_sec": 1.807,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_8_query_param_preserved_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-8ud4matg'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-t2wvig4p'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.12s\n",
+        "timed_out": false
+      }
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_9_escape_html",
+        "duration_sec": 1.803,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_9_escape_html_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-b9h_52nf'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-bhg4_ayg'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.13s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_9_escape_html",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_9_escape_html",
+        "duration_sec": 1.861,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_9_escape_html_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "                                                         [100%]\n=================================== FAILURES ===================================\n_______________________________ test_escape_html _______________________________\n\n    def test_escape_html():\n>       assert escape(\"a&<b\")==\"a&amp;&lt;b\"\nE       AssertionError: assert 'a&&lt;b' == 'a&amp;&lt;b'\nE         \nE         - a&amp;&lt;b\nE         ?   ----\nE         + a&&lt;b\n\ntest_logic.py:3: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-1_1vsgko'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-gex_j53d'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-qzgx5if7'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_escape_html - AssertionError: assert...\n1 failed, 3 warnings in 1.15s\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_9_escape_html",
+        "duration_sec": 1.847,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_9_escape_html_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-mnijwdes'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-_zpxgpuj'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.12s\n",
+        "timed_out": false
+      }
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_10_status_mapping",
+        "duration_sec": 1.837,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_10_status_mapping_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-k1hmnbq0'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-eilk_dj4'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.13s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_10_status_mapping",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_10_status_mapping",
+        "duration_sec": 1.884,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_10_status_mapping_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "                                                                [100%]\n=================================== FAILURES ===================================\n_____________________________ test_status_mapping ______________________________\n\n    def test_status_mapping():\n        assert status(429)==\"retry\"\n>       assert status(503)==\"retry\"\nE       AssertionError: assert 'fail' == 'retry'\nE         \nE         - retry\nE         + fail\n\ntest_logic.py:4: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-ukvifypv'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-zbnxvynw'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-2qd4jh3t'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_status_mapping - AssertionError: ass...\n1 failed, 3 warnings in 1.19s\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_10_status_mapping",
+        "duration_sec": 1.845,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_10_status_mapping_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-0m3zlq8_'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-bgafpnnw'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.13s\n",
+        "timed_out": false
+      }
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_11_path_normalization",
+        "duration_sec": 1.799,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_11_path_normalization_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-2qpk8_rd'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-25pk2vea'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.12s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_11_path_normalization",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_11_path_normalization",
+        "duration_sec": 1.831,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_11_path_normalization_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "                                                             [100%]\n=================================== FAILURES ===================================\n___________________________ test_path_normalization ____________________________\n\n    def test_path_normalization():\n>       assert clean(\"/api/v1/\")==\"api/v1\"\nE       AssertionError: assert 'api/v1/' == 'api/v1'\nE         \nE         - api/v1\nE         + api/v1/\nE         ?       +\n\ntest_logic.py:3: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-yoexjbgm'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-t680i136'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-z3bp1rbs'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_path_normalization - AssertionError:...\n1 failed, 3 warnings in 1.15s\n",
+        "timed_out": false
+      },
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/fixture_repos/python_11_path_normalization",
+        "duration_sec": 1.853,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/logs/python_11_path_normalization_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-9ygnh290'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-vfx2v75i'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.18s\n",
+        "timed_out": false
+      }
+    }
+  ],
+  "repo_family_counts": {
+    "stage12055_python_semantic_fixture": 4
+  },
+  "rows_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12055_controlled_semantic_fail_to_pass_supplement_rows/controlled_semantic_fail_to_pass_supplement_rows.jsonl",
+  "stage": "stage12055_controlled_semantic_fail_to_pass_supplement_rows",
+  "status_counts": {
+    "FAIL_TO_PASS": 4
+  },
+  "unique_roots": 4
+}

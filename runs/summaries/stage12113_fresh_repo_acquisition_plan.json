@@ -1,0 +1,90 @@
+{
+  "created_at_utc": "2026-07-15T03:02:11Z",
+  "decision": "fresh_repo_acquisition_plan_ready",
+  "do_not_train": true,
+  "next_stage_recommendation": {
+    "action": "Merge scout outputs into the intake JSONL, deterministically reject conflicts, then request checkout/probe only for clean needs_acquisition/local candidates.",
+    "stage": "stage12114_fresh_repo_acquisition_intake_audit"
+  },
+  "outputs": {
+    "candidate_template": "runs/local/artifacts/stage12113_fresh_repo_acquisition_plan/fresh_repo_acquisition_candidate_template.json",
+    "scout_intake_placeholder": "runs/local/artifacts/stage12113_fresh_repo_acquisition_plan/fresh_repo_acquisition_scout_candidates.jsonl",
+    "summary": "runs/local/artifacts/stage12113_fresh_repo_acquisition_plan/fresh_repo_acquisition_plan.json",
+    "summary_mirror": "runs/summaries/stage12113_fresh_repo_acquisition_plan.json"
+  },
+  "remaining_gap": {
+    "c_cpp": 10,
+    "mixed_build_config_dependency": 0,
+    "python": 0,
+    "rust": 20,
+    "web_js_ts_html": 12
+  },
+  "scout_contract": {
+    "available_evidence": [
+      "manifest/test/build markers if local; expected markers if acquisition target"
+    ],
+    "conflict_reason": "",
+    "exists_locally": false,
+    "language": "rust|c_cpp|web_js_ts_html|mixed_build_config_dependency",
+    "missing_evidence": [
+      "fresh checkout",
+      "verifier execution log",
+      "selected test"
+    ],
+    "repo_family": "canonical_family",
+    "reserved_family_conflict": false,
+    "risk_notes": [
+      "build-only scope",
+      "dependency hydration risk",
+      "repo family cap risk"
+    ],
+    "source_path_or_acquisition_target": "/local/path/or/org/repo",
+    "split_status": "sealed_candidate|needs_acquisition|dev_only",
+    "suggested_commands": [
+      [
+        "cargo",
+        "test",
+        "--locked"
+      ],
+      [
+        "npm",
+        "test"
+      ],
+      [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build"
+      ]
+    ],
+    "verifier_type": "selected_test_anchor|build_config_anchor|static_compile_anchor|dependency_resolution_anchor",
+    "why_valid": "Verifier-grounded transition boundary this root can support."
+  },
+  "source_artifacts": {
+    "stage12112_scout_decision": "runs/summaries/stage12112_subagent_scout_decision.json"
+  },
+  "stage": 12113,
+  "stage_name": "stage12113_fresh_repo_acquisition_plan",
+  "strict_rules": [
+    "Subagents may propose roots, not train/eval rows.",
+    "A needs_acquisition target is not evidence until locally checked out and probed.",
+    "No candidate may count as sealed if canonical repo_family overlaps Stage11897, Stage11943, any Stage120xx transition/support artifact, Stage12105, Stage12107, Stage12109, or Stage12111.",
+    "Build-only roots must be labeled build_config_anchor/static_compile_anchor and cannot be used as selected_test_anchor.",
+    "Every emitted row must use semantic candidate objects and opaque shuffled non-singleton labels.",
+    "Target semantic value must not appear before candidate options.",
+    "Dev-only candidates can be used later for training/representation, never for Stage12104 sealed confirmation."
+  ],
+  "target_acquisition": {
+    "c_cpp": 10,
+    "extra_buffer_factor": "1.5x preferred because verifier hydration will reject some roots",
+    "rust": 20,
+    "web_js_ts_html": 12
+  },
+  "why": [
+    "Stage12103 passed route permutation stability.",
+    "Stage12105-12112 showed local sealed supply is insufficient under strict lineage rules.",
+    "Subagents are now scoped as acquisition scouts, not data generators.",
+    "Only deterministic checkout/execution/admission can promote a candidate into sealed rows."
+  ]
+}

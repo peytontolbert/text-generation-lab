@@ -1,0 +1,97 @@
+{
+  "central_spine_gate_before_training": {
+    "candidate_action_floors_met": false,
+    "cross_source_fabrication_audit_clean": false,
+    "current_gate_pass": false,
+    "languages_min": 3,
+    "leak_and_protected_overlap_audits_clean": false,
+    "level_3_plus_episodes_min": 20,
+    "patch_trace_episodes_min": 8,
+    "repositories_min": 10
+  },
+  "claim_boundary": "Analysis/control artifact only. It admits no rows and authorizes no training.",
+  "dataset_admissibility_status": {
+    "blockers": [
+      "repo_family_unknown_until_cwd_or_repo_join",
+      "raw_session_event_root_requires_causal_review",
+      "transition-local state proof missing",
+      "semantic_rule_id_missing",
+      "transition_function_key_missing",
+      "verifier_run_status_unknown_without_structured_output_class",
+      "patch_ref_not_patch_plan_or_apply_proof",
+      "Rust/C++ selected-test roots missing commit/test/source hashes and executed verifier logs"
+    ],
+    "candidate_records": {
+      "stage12307_rust_cpp_queue_records": 20,
+      "stage12308_h1_rule_feasibility_records": 59,
+      "stage12311_coarse_state_hydration_records": 25,
+      "stage12312_expanded_session_candidates": 100
+    },
+    "level_3_plus_episodes": 0,
+    "level_4_episodes": 0,
+    "patch_trace_episodes": 0,
+    "source_heldout_rows_from_stage12304_to_12312": 0,
+    "strict_eval_rows_from_stage12304_to_12312": 0,
+    "train_support_rows_from_stage12304_to_12312": 0
+  },
+  "decision": "spine_aligned_analysis_complete_training_still_blocked",
+  "model_frontier_status": {
+    "actual_score_progress_since_stage11924": "+11/640 routed candidate only",
+    "best_routed_transition_candidate": {
+      "gemma_same_manifest": "386/640",
+      "score": "375/640",
+      "stage": "stage12099_task_routed_candidate_selection_composite_audit",
+      "status": "route_candidate_only_not_sealed_confirmed"
+    },
+    "not_yet_supported": [
+      "sealed/root-disjoint transition win",
+      "standalone unbounded maintainer training win",
+      "full product repair or patch-generation claim"
+    ],
+    "selected_transition_baseline": {
+      "score": "364/640",
+      "stage": "stage11924_transition_listwise_head_only"
+    }
+  },
+  "next_two_lanes": [
+    {
+      "goal": "Turn Stage12312 candidates into canonical roots by adding repo_family/cwd joins, transition-local state ledgers, verifier status classes, state deltas, and stop/continue proof.",
+      "lane": "session_event_level3_join",
+      "next_stage": "stage12314_session_candidate_repo_and_state_joiner",
+      "success_counter": ">=20 Level-3 candidates across >=10 repos and >=3 languages; no training until quality gate passes"
+    },
+    {
+      "goal": "Hydrate Stage12307 Rust/C++ queue records with commit SHA, source/test hashes, selected verifier commands/logs, and non-singleton semantic candidates.",
+      "lane": "rust_cpp_selected_test_hydration",
+      "next_stage": "stage12315_rust_cpp_selected_test_hydration_worklist",
+      "success_counter": "at least 5 Rust and 5 C/C++ roots upgraded from queue-only to reviewed canonical candidates"
+    }
+  ],
+  "plateau_risks": [
+    "Expanding Stage12312-style session candidates without repo joins creates Python-heavy unadmitted projections.",
+    "Hydrating only coarse window metadata cannot teach transition functions; it cannot distinguish localization, verifier status, patch state, or open questions.",
+    "Training bounded/listwise rows before Level-3 tuple proof repeats the localization/classification plateau.",
+    "Rust/C++ queue records improve coverage planning but do not become canonical roots until selected verifier logs and hashes are materialized."
+  ],
+  "stage": "stage12313_spine_aligned_training_progress_analysis",
+  "trainer_alignment_status": {
+    "can_consume_today": [
+      "serialized prompt/input rows",
+      "bounded/listwise candidate options",
+      "transition_candidate_selection",
+      "transition_next_action",
+      "transition_verifier_transition",
+      "transition_continue_or_stop",
+      "episode pre-action fields as auxiliary inputs"
+    ],
+    "cannot_yet_consume_as_primary_unit": [
+      "root+task closed-loop trajectory tuple",
+      "patch trace with apply/minimality evidence",
+      "verifier feedback targets with structured output class",
+      "state delta targets with facts added/removed/hypotheses invalidated",
+      "stop policy grounded in verifier/task completion"
+    ],
+    "next_trainer_work": "contract-only trajectory_data.py and closed_loop_trajectory_probe after data gates, not GPU training now"
+  },
+  "training_allowed": false
+}

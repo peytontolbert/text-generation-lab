@@ -1,0 +1,80 @@
+{
+  "admission_level_counts": {
+    "level_1_verifier_only_no_patch": 6
+  },
+  "artifact_type": "closed_loop_episode_quality_gate_audit",
+  "decision": "training_blocked_verifier_only_seed_below_floor",
+  "diagnostic_floor_observed": {
+    "gold_leak_count": "not_run_rendered_leak_audit_because_training_blocked",
+    "languages": 3,
+    "level_3_or_higher_episodes": 0,
+    "patch_trace_episodes": 0,
+    "repositories": 6,
+    "verifier_only_no_patch_episodes": 6
+  },
+  "diagnostic_floor_required": {
+    "gold_leak_count": 0,
+    "languages": 3,
+    "level_3_or_higher_episodes": 20,
+    "patch_trace_episodes": 8,
+    "repositories": 10,
+    "verifier_only_no_patch_episodes": 4
+  },
+  "episode_count": 6,
+  "input_stage": "stage12190_same_source_episode_extractor",
+  "language_counts": {
+    "python": 2,
+    "rust": 3,
+    "web_js_ts_html": 1
+  },
+  "level_3_or_higher_episodes": 0,
+  "next_stage": "stage12193_same_source_patch_trace_episode_miner_request",
+  "output_artifacts": {
+    "audit_json": "runs/local/artifacts/stage12192_stage12190_quality_gate_audit/quality_gate_audit.json",
+    "episode_quality_records": "runs/local/artifacts/stage12192_stage12190_quality_gate_audit/episode_quality_records.jsonl",
+    "summary": "runs/summaries/stage12192_stage12190_quality_gate_audit.json"
+  },
+  "patch_trace_episodes": 0,
+  "projection_row_count": 24,
+  "quality_gate": "runs/local/artifacts/stage12191_closed_loop_episode_quality_gate_contract/closed_loop_episode_quality_gate_contract.json",
+  "repository_count": 6,
+  "revision": "corrected_child_linkage_v2",
+  "source_code_modified": false,
+  "stage": "stage12192_stage12190_quality_gate_audit",
+  "stage12193_scope": [
+    "Mine same-source sources with patch diffs plus verifier/test evidence, prioritizing Open-SWE and external commit episodes with verification_constraint context.",
+    "Materialize level_2 patch-context episodes separately from level_1 verifier-only episodes.",
+    "Find or execute same-root verifier logs for patch episodes before promoting to level_3.",
+    "Do not train until at least 20 level_3+ episodes or an explicit level-specific diagnostic request is approved."
+  ],
+  "top_blockers": [
+    [
+      "fewer_than_3_hard_negatives",
+      4
+    ],
+    [
+      "fewer_than_5_candidate_actions",
+      4
+    ],
+    [
+      "missing_repo_commit",
+      1
+    ]
+  ],
+  "top_warnings": [
+    [
+      "candidate_negatives_are_observed_commands_only_not_semantic_hard_negatives",
+      6
+    ]
+  ],
+  "training_allowed": false,
+  "training_executed": false,
+  "verifier_only_no_patch_episodes": 6,
+  "why_training_blocked": [
+    "Stage12190 produced only level_1 verifier-only no-patch episodes, not level_3+ closed-loop action-observation-state episodes.",
+    "Only 6 episodes exist; diagnostic floor requires 20 level_3+ episodes and 10 repositories.",
+    "No patch trace episodes exist; patch-generation and patch-selection training remain blocked.",
+    "Several candidate sets have fewer than 5 actions / 3 hard negatives, and negatives are observed-command alternatives rather than semantic hard negatives.",
+    "One Web episode is missing repo_commit and must be repaired or quarantined."
+  ]
+}

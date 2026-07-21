@@ -1,0 +1,119 @@
+{
+  "claim_boundary": "This contract permits train-support row materialization only. It does not authorize training, strict/eval admission, or promotion claims.",
+  "created_at_utc": "2026-07-15T16:00:41Z",
+  "execute_now": false,
+  "hard_blockers": [
+    "all task families for a root share identical target_semantic_value",
+    "transition_next_action target is selected_test_backed_verifier_candidate or any evidence object",
+    "transition_continue_or_stop target is selected_test_backed_verifier_candidate or any evidence object",
+    "transition_verifier_transition target is selected_test_backed_verifier_candidate or any evidence object",
+    "opaque display labels are not single-token A/B/C-style labels",
+    "standalone_projection_source.opaque_options missing or not equal to top-level options",
+    "target semantic value visible before Options section",
+    "node_modules or dependency cache paths included as project source evidence",
+    "missing commit_sha for hydrated web/npm rows",
+    "strict_eval_eligible true without separate lineage admission"
+  ],
+  "input_supply": "stage12146_selected_test_supply_rollup",
+  "next_stage": "stage12149_corrected_selected_test_row_materialization_package",
+  "purpose": "Prevent selected-test materialization from collapsing all transition task families into the same selected-test-backed evidence candidate target.",
+  "required_audit_outputs": [
+    "counts by language/root/task",
+    "target-role entropy by task family",
+    "per-root target semantic diversity report",
+    "single-token option-label audit",
+    "nested/top-level option mirror audit",
+    "source/test hash provenance excluding dependency directories",
+    "lineage train-support-only decision"
+  ],
+  "row_families": {
+    "transition_candidate_selection": {
+      "allowed_target_roles": [
+        "selected_test_backed_verifier_candidate",
+        "candidate_change_surface",
+        "symptom_or_call_path_analogue",
+        "verifier_and_test_constraint",
+        "insufficient_evidence"
+      ],
+      "required_negatives": [
+        "nearby_source_surface_candidate",
+        "sibling_test_or_unselected_verifier_candidate",
+        "abstain_or_insufficient_evidence_control"
+      ],
+      "target_kind": "candidate_artifact_or_evidence_candidate"
+    },
+    "transition_continue_or_stop": {
+      "allowed_target_roles": [
+        "CONTINUE",
+        "STOP_DONE",
+        "NOT_DONE_MISSING_TESTS",
+        "NOT_DONE_MISSING_VERIFIER",
+        "ABSTAIN_INSUFFICIENT_EVIDENCE"
+      ],
+      "required_negatives": [
+        "STOP_DONE_premature",
+        "CONTINUE_after_full_acceptance",
+        "ABSTAIN_with_sufficient_evidence"
+      ],
+      "target_kind": "episode_control_decision"
+    },
+    "transition_evidence_citation": {
+      "allowed_target_roles": [
+        "verifier_and_test_constraint",
+        "candidate_change_surface",
+        "symptom_or_call_path_analogue",
+        "source_surface",
+        "insufficient_evidence"
+      ],
+      "required_negatives": [
+        "candidate_change_surface_when_verifier_is_decisive",
+        "verifier_constraint_when_only_source_surface_is_present",
+        "symptom_analogue_without_call_path"
+      ],
+      "target_kind": "evidence_role_or_evidence_item"
+    },
+    "transition_next_action": {
+      "allowed_target_roles": [
+        "SELECT_TEST",
+        "RUN_VERIFIER",
+        "RETRIEVE_EVIDENCE",
+        "INSPECT_SOURCE",
+        "PLAN_PATCH",
+        "APPLY_PATCH",
+        "ABSTAIN_OR_ROLLBACK",
+        "FINISH"
+      ],
+      "required_negatives": [
+        "PLAN_PATCH_when_verifier_missing",
+        "FINISH_when_completion_gate_missing",
+        "RETRIEVE_EVIDENCE_when_selected_test_ready",
+        "ABSTAIN_when_evidence_sufficient"
+      ],
+      "target_kind": "maintainer_action"
+    },
+    "transition_verifier_transition": {
+      "allowed_target_roles": [
+        "PASS_TO_PASS",
+        "PASS_CURRENT_STATE",
+        "PASS_CURRENT_BUILD",
+        "PASS_CURRENT_BUILD_AND_RUN",
+        "FAIL_TO_PASS",
+        "FAIL_TO_FAIL",
+        "NOT_EXERCISED",
+        "INSUFFICIENT_EVIDENCE",
+        "VERIFIER_REMOVED"
+      ],
+      "required_negatives": [
+        "PASS_CURRENT_BUILD_when_runtime_test_passed",
+        "PASS_CURRENT_BUILD_AND_RUN_when_only_build_ran",
+        "NOT_EXERCISED_when_selected_test_did_run",
+        "INSUFFICIENT_EVIDENCE_when_log_is_present"
+      ],
+      "target_kind": "verifier_status"
+    }
+  },
+  "source_blocker": "stage12147_selected_test_row_semantics_blocker_audit",
+  "stage": "stage12148_task_specific_selected_test_materialization_contract",
+  "strict_eval_eligible": false,
+  "training_allowed": false
+}

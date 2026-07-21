@@ -1,0 +1,163 @@
+{
+  "claim_boundary": [
+    "Stage12122 merges/audits subagent plans only.",
+    "No checkout, dependency install, verifier execution, training, or eval admission occurs here.",
+    "Any next execution stage must still capture commit SHA, source/test evidence, command logs, anti-cheat metadata, and no train/eval lineage conflicts."
+  ],
+  "counts": {
+    "admitted_for_eval": 0,
+    "admitted_for_training": 0,
+    "input_rows": 40,
+    "next_execution_shortlist_rows": 12,
+    "normalized_rows": 40,
+    "rejected_rows": 0
+  },
+  "counts_by_language": {
+    "c_cpp": 10,
+    "python": 10,
+    "rust": 10,
+    "web_js_ts_html": 10
+  },
+  "created_at_utc": "2026-07-15T14:40:41Z",
+  "failed_stage_lessons": {
+    "active_gate_categories": {
+      "evidence_verifier_mislabeled": 130,
+      "leakage_and_lineage": 166,
+      "schema_renderer_option_geometry": 147,
+      "shared_training_interference": 68,
+      "web_transfer_gap": 133
+    },
+    "available": true,
+    "failure_or_blocker_stage_records": 818,
+    "lesson_category_counts": {
+      "data_scale_quality_gap": 52,
+      "decoder_generation_mismatch": 106,
+      "evidence_verifier_mislabeled": 130,
+      "leakage_and_lineage": 166,
+      "runtime_training_artifact_gap": 148,
+      "schema_renderer_option_geometry": 147,
+      "shared_training_interference": 68,
+      "uncategorized_failure_or_blocker": 221,
+      "web_transfer_gap": 133
+    },
+    "scanned_summary_files": 3044
+  },
+  "input_plan_files": {
+    "c_cpp": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+    "python": "runs/local/artifacts/stage12121_python_verifier_ready_candidate_plan/python_verifier_ready_candidate_plan.jsonl",
+    "rust": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+    "web_js_ts_html": "runs/local/artifacts/stage12121_web_verifier_ready_candidate_plan/web_verifier_ready_candidates.jsonl"
+  },
+  "missing_required_field_counts": {},
+  "next_recommended_stage": "stage12123_verifier_ready_checkout_execution_smoke",
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12122_verifier_ready_plan_merge_audit",
+    "next_execution_shortlist": "runs/local/artifacts/stage12122_verifier_ready_plan_merge_audit/next_execution_shortlist.jsonl",
+    "normalized_jsonl": "runs/local/artifacts/stage12122_verifier_ready_plan_merge_audit/normalized_verifier_ready_candidates.jsonl",
+    "summary": "runs/local/artifacts/stage12122_verifier_ready_plan_merge_audit/summary.json",
+    "summary_mirror": "runs/summaries/stage12122_verifier_ready_plan_merge_audit.json"
+  },
+  "previous_discovery_input": "runs/local/artifacts/stage12120_selected_test_discovery_smoke/selected_test_discovery_results.jsonl",
+  "promotion_decision": "not_promotable_support_planning_only",
+  "queue_input": "runs/local/artifacts/stage12118_maintainer_400_pilot_checkout_probe_request/pilot_checkout_probe_targets.jsonl",
+  "risk_flag_counts": {
+    "dependency_risk_not_low": 6,
+    "install_or_fetch_command_present": 1,
+    "previous_selected_test_execution_blocker_unresolved": 1,
+    "previous_smoke_blocker_present": 1
+  },
+  "shortlist_by_language": {
+    "c_cpp": 3,
+    "python": 3,
+    "rust": 3,
+    "web_js_ts_html": 3
+  },
+  "shortlist_repo_families": [
+    {
+      "dependency_risk": "low: header-only C++ library; main risk is exact CMake option drift or compiler standard requirement.",
+      "language": "c_cpp",
+      "queue_id": "stage12118::c_cpp::002::Neargye_magic_enum",
+      "repo_family": "Neargye/magic_enum",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low_medium: mostly header-only, but old CMake policies or bundled test configuration may need compatibility handling.",
+      "language": "c_cpp",
+      "queue_id": "stage12118::c_cpp::004::Tencent_rapidjson",
+      "repo_family": "Tencent/rapidjson",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low: single-purpose C++ library; main risk is compiler/architecture-specific floating-point behavior or CMake option drift.",
+      "language": "c_cpp",
+      "queue_id": "stage12118::c_cpp::019::fastfloat_fast_float",
+      "repo_family": "fastfloat/fast_float",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low: compact src layout and pytest-present environment; watch for pytest version compatibility only.",
+      "language": "python",
+      "queue_id": "stage12118::python::034::pytest_dev_pluggy",
+      "repo_family": "pytest-dev/pluggy",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low: mostly stdlib plus pytest; terminal behavior can be environment-sensitive but does not require install hydration.",
+      "language": "python",
+      "queue_id": "stage12118::python::016::pallets_click",
+      "repo_family": "pallets/click",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low-to-medium: pure Python but may depend on MarkupSafe availability; do not run full suite initially.",
+      "language": "python",
+      "queue_id": "stage12118::python::018::pallets_jinja",
+      "repo_family": "pallets/jinja",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low-medium: older crate layout or missing Cargo.lock can make --locked fail; expected dependencies are minimal but cache availability is unverified.",
+      "language": "rust",
+      "queue_id": "stage12118::rust::002::BurntSushi_byteorder",
+      "repo_family": "BurntSushi/byteorder",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low-medium: expected small dependency graph, but local cache and lockfile status are unverified until checkout.",
+      "language": "rust",
+      "queue_id": "stage12118::rust::013::bytes_rs_bytes",
+      "repo_family": "bytes-rs/bytes",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low-medium: likely modest dependencies, but local cache status is unverified and env-sensitive dev tests may pull dependencies.",
+      "language": "rust",
+      "queue_id": "stage12118::rust::029::rust_cli_env_logger",
+      "repo_family": "rust-cli/env_logger",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low_to_medium: expected npm workflow and no external services, but branch/version lineage and Node support must be checked after checkout.",
+      "language": "web_js_ts_html",
+      "queue_id": "stage12118::web_js_ts_html::012::expressjs_express",
+      "repo_family": "expressjs/express",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "medium: package is likely npm-based and local, but some tests may be timing-sensitive or depend on Node-version details.",
+      "language": "web_js_ts_html",
+      "queue_id": "stage12118::web_js_ts_html::014::fastify_fastify",
+      "repo_family": "fastify/fastify",
+      "risk_score": 0
+    },
+    {
+      "dependency_risk": "low_to_medium: compact language library with no external services, but package-manager details and test runner flags must be confirmed locally.",
+      "language": "web_js_ts_html",
+      "queue_id": "stage12118::web_js_ts_html::016::graphql_graphql_js",
+      "repo_family": "graphql/graphql-js",
+      "risk_score": 0
+    }
+  ],
+  "stage": 12122,
+  "stage_name": "stage12122_verifier_ready_plan_merge_audit"
+}

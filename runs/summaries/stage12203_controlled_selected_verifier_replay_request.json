@@ -1,0 +1,57 @@
+{
+  "artifact_type": "controlled_execution_request",
+  "decision": "request_only_not_executed",
+  "execution_boundaries": {
+    "gpu_allowed": false,
+    "network_allowed": false,
+    "package_install_allowed": false,
+    "repo_mutation_allowed": false,
+    "repo_worktree_policy": "use throwaway copy or reset-free read-only checkout; do not mutate /arxiv/repositories directly",
+    "training_allowed": false,
+    "write_locations_allowed": [
+      "runs/local/artifacts/stage12203_controlled_selected_verifier_replay",
+      "/data/tmp"
+    ]
+  },
+  "goal": "Turn a small subset of Stage12201 diff-backed records into true level-3 single-step closed-loop examples by executing selected verifier actions under controlled boundaries.",
+  "input_artifacts": {
+    "candidate_action_sets": "runs/local/artifacts/stage12202_level3_readiness_joiner/candidate_action_sets.jsonl",
+    "episode_records": "runs/local/artifacts/stage12201_patch_evidence_recovery/recovered_episode_records.jsonl",
+    "level3_blocked": "runs/local/artifacts/stage12202_level3_readiness_joiner/level3_blocked_candidates.jsonl",
+    "patch_traces": "runs/local/artifacts/stage12201_patch_evidence_recovery/recovered_patch_traces.jsonl"
+  },
+  "level3_admission_requires": [
+    "observed chosen action command",
+    "command output with exit code",
+    "same-root cwd",
+    "verifier status from command result",
+    "state update derived from result",
+    "stop/continue decision",
+    "candidate action set includes observed action",
+    "no network/install/repo mutation"
+  ],
+  "proposed_subset_policy": {
+    "allow_env_blocked_as_observation": true,
+    "exclude_commands_requiring_network_or_install": true,
+    "exclude_large_gpu_or_distributed_tests": true,
+    "max_records_first_pass": 5,
+    "prefer_python_small_pytest_targets": true,
+    "prefer_repos_with_existing_local_repo_root": true
+  },
+  "required_outputs": [
+    "selected_replay_plan.jsonl",
+    "command_results.jsonl",
+    "observations.jsonl",
+    "verifier_transitions.jsonl",
+    "state_updates.jsonl",
+    "stop_decisions.jsonl",
+    "level3_episode_records.jsonl",
+    "blocked_candidates.jsonl",
+    "admission_audit.json",
+    "summary.json"
+  ],
+  "source_stage": "stage12202_level3_readiness_joiner",
+  "stage": "stage12203_controlled_selected_verifier_replay_request",
+  "training_allowed": false,
+  "training_executed": false
+}

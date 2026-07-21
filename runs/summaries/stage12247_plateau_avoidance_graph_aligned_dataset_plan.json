@@ -1,0 +1,206 @@
+{
+  "claim_boundary": "Control/plan artifact only. No training, no row admission, and no frontier claim.",
+  "counters_required_every_stage": {
+    "admitted_auxiliary_roots": 0,
+    "admitted_external_comparable_repair_roots": 0,
+    "admitted_external_fail_to_pass_roots": 0,
+    "admitted_non_python_external_repair_roots": 0,
+    "candidate_roots": 195,
+    "executed_roots": 0,
+    "qc_passed_roots": 0
+  },
+  "decision": "plateau_avoidance_plan_ready_training_still_blocked",
+  "execution_protocol_summary": {
+    "default_policies": {
+      "checkout": "throwaway detached worktree",
+      "gpu": "disabled",
+      "network": "disabled",
+      "raw_logs": "hash and reference, do not treat raw logs as labels"
+    },
+    "observation_only_if": [
+      "only patched run exists",
+      "broad suite without baseline mapping",
+      "different command between phases",
+      "metadata/import/lint only",
+      "all-pass current state without prior failure"
+    ],
+    "phase_order": [
+      "inventory",
+      "checkout_preflight",
+      "baseline_unpatched",
+      "apply_patch",
+      "patched_verifier",
+      "classification",
+      "cleanup"
+    ],
+    "true_fail_to_pass_requires": [
+      "same test identity in baseline and patched",
+      "baseline FAIL",
+      "patched PASS",
+      "same command/dependency/runner policy",
+      "stable evidence artifact hashes"
+    ]
+  },
+  "graph_updates_required": [
+    {
+      "edges": [
+        "attempts_to_satisfy lane:unbounded_software_task_completion_training",
+        "blocked_until_admitted gate:external_comparable_patch_trace_repair_floor",
+        "blocked_until_admitted gate:level3_episode_diagnostic_floor"
+      ],
+      "node": "campaign:maintainer_500_root_stage12241"
+    },
+    {
+      "edges": [
+        "candidate_only_not_admitted ledger:dataset_source"
+      ],
+      "node": "dataset_backlog:maintainer_500_candidate_backlog_stage12242"
+    },
+    {
+      "edges": [
+        "blocks lane:comparable_patch_trace_repair",
+        "blocks lane:unbounded_software_task_completion_training"
+      ],
+      "node": "blocker:zero_admitted_external_repair_roots_stage12243"
+    },
+    {
+      "edges": [
+        "pre_replay_candidate_for lane:comparable_patch_trace_repair",
+        "requires gate:trajectory_replay_validation"
+      ],
+      "node": "request:external_repair_commit_pair_replay_stage12244"
+    },
+    {
+      "edges": [
+        "supports lane:verifier_observation_auxiliary",
+        "not_patch_trace_repair"
+      ],
+      "node": "request:low_risk_verifier_observation_execution_stage12245"
+    },
+    {
+      "edges": [
+        "validates request:external_repair_commit_pair_replay_stage12244",
+        "finds blocker:test_added_only_or_dependency_risk",
+        "no_rows_admitted lane:comparable_patch_trace_repair"
+      ],
+      "node": "audit:replay_target_validation_stage12246"
+    }
+  ],
+  "ledger_deltas_required": {
+    "dataset_source_ledger": [
+      "Stage12241 quotas",
+      "Stage12242 backlog/admission counts",
+      "Stage12244 replay targets",
+      "Stage12245 execution requests",
+      "Stage12246 validation classifications"
+    ],
+    "failure_mechanism_ledger": [
+      "candidate backlog inflation",
+      "test-added-only false positives",
+      "dependency/env masquerade",
+      "zero admitted external repair roots"
+    ],
+    "frontier_ledger": [
+      "external repair floor remains unmet",
+      "Stage12099 route not sealed-confirmed",
+      "backlog counts are not frontier progress"
+    ],
+    "trainer_capability_ledger": [
+      "training_allowed=false for Stage12241-12246",
+      "request_only and validation_audit_only statuses"
+    ]
+  },
+  "next_allowed_stages": [
+    {
+      "purpose": "regenerate/append ledgers so Stage12241-12247 appear in graph queries",
+      "stage": "stage12248_layered_ledger_refresh_request",
+      "training_allowed": false
+    },
+    {
+      "purpose": "run only Stage12246 top preflight checks, not full training",
+      "stage": "stage12249_replay_preflight_execution_request",
+      "training_allowed": false
+    },
+    {
+      "purpose": "execute Stage12245 observation batch and classify as level_1 only",
+      "stage": "stage12250_low_risk_verifier_batch_execution",
+      "training_allowed": false
+    }
+  ],
+  "plateau_risks": [
+    {
+      "detection": "candidate_roots high but admitted roots zero",
+      "prevention": "publish candidate/executed/qc_passed/admitted counters; only admitted root rows count toward 500",
+      "risk": "candidate_backlog_inflation",
+      "severity": "critical"
+    },
+    {
+      "detection": "Stage12238 has 368 auxiliary candidates but no patch traces",
+      "prevention": "train only status/continue/next-action after separate request; never count as repair or DONE",
+      "risk": "verifier_observation_overtraining",
+      "severity": "high"
+    },
+    {
+      "detection": "Stage12246 marks 12/20 replay targets likely test-added-only",
+      "prevention": "require test exists before, behavior fails before, same verifier passes after, diff not test-only",
+      "risk": "test_added_only_false_repair",
+      "severity": "critical"
+    },
+    {
+      "detection": "Stage12246 has 7 high dependency-risk targets",
+      "prevention": "classify env/dependency/cache/network failures as NOT_COMPARABLE_ENV",
+      "risk": "dependency_env_masquerade",
+      "severity": "critical"
+    },
+    {
+      "detection": "external repair acquisition candidates are c_cpp/python only; rust/web zero",
+      "prevention": "non-Python repair floor required before training; repo-family caps enforced",
+      "risk": "repo_language_skew",
+      "severity": "high"
+    },
+    {
+      "detection": "Stage12099 stable but no 100-row sealed slice",
+      "prevention": "no route claim until root-disjoint sealed slice with floors exists",
+      "risk": "sealed_eval_leakage_or_route_overclaim",
+      "severity": "critical"
+    },
+    {
+      "detection": "history shows option/renderer/task interference",
+      "prevention": "freeze renderers; require option permutation, protected gates, task-routed scorer audit",
+      "risk": "bounded_classification_drift",
+      "severity": "high"
+    },
+    {
+      "detection": "same-root projections can inflate scale",
+      "prevention": "semantic lineage root_id is the count unit; variants are child rows",
+      "risk": "row_variants_counted_as_roots",
+      "severity": "high"
+    }
+  ],
+  "spine_alignment": {
+    "admission_levels": {
+      "level_1_verifier_only_no_patch": "Stage12238/12245 verifier observations; auxiliary only",
+      "level_2_patch_context_no_execution": "commit/diff candidates without command-output phase tuples; mining only",
+      "level_3_single_step_closed_loop": "requires ordered action, observation, patch/no-patch, verifier result, state update, stop/continue",
+      "level_4_multi_step_maintainer_episode": "not yet available; requires multi-step causal trace"
+    },
+    "current_level3_status": {
+      "level_3_plus_episodes": 0,
+      "patch_trace_episodes": 0,
+      "training_allowed": false
+    },
+    "source_doc": "docs/UNBOUNDED_SOFTWARE_TASK_COMPLETION_SPINE_STAGE12195.md"
+  },
+  "stage": "stage12247_plateau_avoidance_graph_aligned_dataset_plan",
+  "training_allowed": false,
+  "training_gate": {
+    "current_status": "not_met",
+    "external_comparable_patch_trace_roots": 25,
+    "external_fail_to_pass_roots": 15,
+    "languages": 3,
+    "level_3_plus_episodes": 20,
+    "non_python_external_repair_roots": 10,
+    "patch_trace_episodes": 8,
+    "repositories": 10
+  }
+}

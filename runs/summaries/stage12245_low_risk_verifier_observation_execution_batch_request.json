@@ -1,0 +1,457 @@
+{
+  "claim_boundary": "Execution request only. Rust metadata rows are current-state metadata observations, not selected-test or repair proof. No training authorized.",
+  "decision": "low_risk_execution_batch_ready_not_run",
+  "execution_policy": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "capture_fields": [
+      "repo_family",
+      "local_path",
+      "commit_sha",
+      "command",
+      "cwd",
+      "exit_code",
+      "timeout",
+      "stdout_sha256",
+      "stderr_sha256",
+      "stdout_tail",
+      "stderr_tail",
+      "selected_test_ids",
+      "verifier_scope",
+      "hard_reject_triggered",
+      "source_stage"
+    ],
+    "network": "forbidden",
+    "repo_mutation": "read-only/throwaway only"
+  },
+  "lane_counts": {
+    "rust_metadata_current_state_observation_not_selected_test": 12,
+    "selected_ctest_verifier_observation": 4,
+    "selected_pytest_verifier_observation": 4
+  },
+  "records": [
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "PYTHONPATH=src python -m pytest -q 'tests/unit/test_utils.py::test_normalize_pypi_name[my_plugin-my-plugin]'",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "selected_pytest_verifier_observation",
+      "language_family": "python",
+      "local_path": "/data/tmp/stage12119_maintainer_400_smoke_repos/PyCQA_flake8",
+      "network_allowed": false,
+      "repo_family": "PyCQA/flake8",
+      "request_id": "stage12245_exec_001",
+      "timeout_seconds": 60,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "PYTHONPATH=src python -m pytest -q 'tests/unit/test_violation.py::test_is_inline_ignored[E111-a = 1  # noqa: E111,W123,F821-True]'",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "selected_pytest_verifier_observation",
+      "language_family": "python",
+      "local_path": "/data/tmp/stage12119_maintainer_400_smoke_repos/PyCQA_flake8",
+      "network_allowed": false,
+      "repo_family": "PyCQA/flake8",
+      "request_id": "stage12245_exec_002",
+      "timeout_seconds": 60,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "PYTHONPATH=src python -m pytest -q tests/test_basic.py",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "selected_pytest_verifier_observation",
+      "language_family": "python",
+      "local_path": "/data/tmp/stage12123_verifier_ready_smoke_repos/pallets_click",
+      "network_allowed": false,
+      "repo_family": "pallets/click",
+      "request_id": "stage12245_exec_003",
+      "timeout_seconds": 90,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "PYTHONPATH=src python -m pytest -q tests/test_api.py",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "selected_pytest_verifier_observation",
+      "language_family": "python",
+      "local_path": "/data/tmp/stage12123_verifier_ready_smoke_repos/pallets_jinja",
+      "network_allowed": false,
+      "repo_family": "pallets/jinja",
+      "request_id": "stage12245_exec_004",
+      "timeout_seconds": 90,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "ctest --test-dir build --output-on-failure -R '^test-cpp17$'",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "selected_ctest_verifier_observation",
+      "language_family": "c_cpp",
+      "local_path": "/data/tmp/stage12123_verifier_ready_smoke_repos/Neargye_magic_enum",
+      "network_allowed": false,
+      "repo_family": "Neargye/magic_enum",
+      "request_id": "stage12245_exec_005",
+      "timeout_seconds": 60,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "ctest --test-dir build --output-on-failure -R '^test_flags-cpp17$'",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "selected_ctest_verifier_observation",
+      "language_family": "c_cpp",
+      "local_path": "/data/tmp/stage12123_verifier_ready_smoke_repos/Neargye_magic_enum",
+      "network_allowed": false,
+      "repo_family": "Neargye/magic_enum",
+      "request_id": "stage12245_exec_006",
+      "timeout_seconds": 60,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "ctest --test-dir build --output-on-failure -R '^basictest$'",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "selected_ctest_verifier_observation",
+      "language_family": "c_cpp",
+      "local_path": "/data/tmp/stage12123_verifier_ready_smoke_repos/fastfloat_fast_float",
+      "network_allowed": false,
+      "repo_family": "fastfloat/fast_float",
+      "request_id": "stage12245_exec_007",
+      "timeout_seconds": 60,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "ctest --test-dir build --output-on-failure -R '^json_fmt$'",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "selected_ctest_verifier_observation",
+      "language_family": "c_cpp",
+      "local_path": "/data/tmp/stage12123_verifier_ready_smoke_repos/fastfloat_fast_float",
+      "network_allowed": false,
+      "repo_family": "fastfloat/fast_float",
+      "request_id": "stage12245_exec_008",
+      "timeout_seconds": 60,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12119_maintainer_400_smoke_repos/BurntSushi_aho_corasick",
+      "network_allowed": false,
+      "repo_family": "BurntSushi/aho-corasick",
+      "request_id": "stage12245_exec_009",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__002__BurntSushi_byteorder",
+      "network_allowed": false,
+      "repo_family": "BurntSushi/byteorder",
+      "request_id": "stage12245_exec_010",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__017__dtolnay_anyhow",
+      "network_allowed": false,
+      "repo_family": "dtolnay/anyhow",
+      "request_id": "stage12245_exec_011",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__018__dtolnay_proc_macro2",
+      "network_allowed": false,
+      "repo_family": "dtolnay/proc-macro2",
+      "request_id": "stage12245_exec_012",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__039__smol_rs_async_task",
+      "network_allowed": false,
+      "repo_family": "smol-rs/async-task",
+      "request_id": "stage12245_exec_013",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__014__chronotope_chrono",
+      "network_allowed": false,
+      "repo_family": "chronotope/chrono",
+      "request_id": "stage12245_exec_014",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__048__uuid_rs_uuid",
+      "network_allowed": false,
+      "repo_family": "uuid-rs/uuid",
+      "request_id": "stage12245_exec_015",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__010__assert_rs_predicates_rs",
+      "network_allowed": false,
+      "repo_family": "assert-rs/predicates-rs",
+      "request_id": "stage12245_exec_016",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__032__rust_lang_regex",
+      "network_allowed": false,
+      "repo_family": "rust-lang/regex",
+      "request_id": "stage12245_exec_017",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__028__rayon_rs_rayon",
+      "network_allowed": false,
+      "repo_family": "rayon-rs/rayon",
+      "request_id": "stage12245_exec_018",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12128b_rust_web_smoke_repos/stage12118__rust__044__toml_rs_toml",
+      "network_allowed": false,
+      "repo_family": "toml-rs/toml",
+      "request_id": "stage12245_exec_019",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "admission_status": "pending_execution",
+      "command": "cargo metadata --no-deps --format-version 1",
+      "hard_reject_checks": [
+        "missing path/test/manifest",
+        "no tests collected for selected verifier lanes",
+        "network/dependency install/GPU probe",
+        "timeout",
+        "broad/full-suite fallback",
+        "rust metadata-only misused as selected-test proof"
+      ],
+      "lane": "rust_metadata_current_state_observation_not_selected_test",
+      "language_family": "rust",
+      "local_path": "/data/tmp/stage12123_verifier_ready_smoke_repos/rust_cli_env_logger",
+      "network_allowed": false,
+      "repo_family": "rust-cli/env_logger",
+      "request_id": "stage12245_exec_020",
+      "timeout_seconds": 45,
+      "training_allowed": false
+    }
+  ],
+  "request_count": 20,
+  "source_subagent": "Wegener 019f6ba0-8f89-7740-a049-c71b79846fc9",
+  "stage": "stage12245_low_risk_verifier_observation_execution_batch_request",
+  "training_allowed": false
+}

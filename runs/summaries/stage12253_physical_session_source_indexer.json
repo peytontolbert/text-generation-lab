@@ -1,0 +1,77 @@
+{
+  "artifact_type": "physical_session_source_index",
+  "claim_boundary": "Physical source index only. No raw content, no training rows, no root admission.",
+  "coverage": {
+    "coverage_by_root": {
+      "codex_sessions": {
+        "expected": 758,
+        "matches": true,
+        "observed": 758
+      },
+      "cursor_chats": {
+        "expected": 3,
+        "matches": true,
+        "observed": 3
+      },
+      "cursor_projects": {
+        "expected": 978,
+        "matches": true,
+        "observed": 978
+      }
+    },
+    "coverage_pass": true,
+    "expected_total_files": 1739,
+    "malformed_rows": 0,
+    "observed_physical_source_records": 1739
+  },
+  "decision": "physical_parent_index_ready_for_derivative_view_attachment",
+  "input_files": {
+    "counts_by_root": "runs/local/artifacts/session_like_source_inventory_real/session_inventory_counts_by_root.json",
+    "relative_path_hashes": "runs/local/artifacts/session_like_source_inventory_real/session_inventory_relative_path_hashes.jsonl",
+    "root_card": "runs/local/artifacts/session_like_source_inventory_real/session_inventory_root_card.json"
+  },
+  "next_stage": {
+    "required_invariant": "Every parsed/trace/episode/pack/Stage101xx view must attach to physical_source_id or report unattached_derivative_reason.",
+    "stage": "stage12254_session_derivative_view_attacher",
+    "training_allowed": false
+  },
+  "observed_counts": {
+    "by_root": {
+      "codex_sessions": 758,
+      "cursor_chats": 3,
+      "cursor_projects": 978
+    },
+    "bytes_by_root": {
+      "codex_sessions": 7351192548,
+      "cursor_chats": 1556480,
+      "cursor_projects": 35141306
+    },
+    "extensions_by_root": {
+      "codex_sessions": {
+        ".jsonl": 758
+      },
+      "cursor_chats": {
+        ".db": 3
+      },
+      "cursor_projects": {
+        ".json": 240,
+        ".jsonl": 315,
+        ".log": 1,
+        ".map": 90,
+        ".md": 78,
+        ".png": 6,
+        ".ts": 102,
+        ".tsx": 11,
+        ".txt": 129,
+        "<no_ext>": 6
+      }
+    }
+  },
+  "output_artifacts": {
+    "coverage_audit": "runs/local/artifacts/stage12253_physical_session_source_indexer/coverage_audit.json",
+    "physical_source_records": "runs/local/artifacts/stage12253_physical_session_source_indexer/physical_source_records.jsonl",
+    "summary": "runs/summaries/stage12253_physical_session_source_indexer.json"
+  },
+  "stage": "stage12253_physical_session_source_indexer",
+  "training_allowed": false
+}

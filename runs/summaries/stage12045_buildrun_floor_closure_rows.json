@@ -1,0 +1,50 @@
+{
+  "admitted_rows": 8,
+  "claim_boundary": "Rows are train-support only. No model promotion follows from this artifact.",
+  "decision": "admit_buildrun_floor_closure_train_support",
+  "language_counts": {
+    "c_cpp": 1,
+    "python": 4,
+    "rust": 1,
+    "web_js_ts_html": 2
+  },
+  "next_stage_recommendation": {
+    "action": "Merge build+run floor closure rows and report remaining status floors.",
+    "stage": "stage12046_transition_support_rollup_v30"
+  },
+  "rejected_probe_count": 3,
+  "rejected_probes": [
+    {
+      "command": "python -m py_compile /data/repositories/Python/digital_image_processing/edge_detection.py && pytest digital_image_processing/test_digital_image_processing.py",
+      "reason": "compile path did not exist",
+      "repo_family": "Python",
+      "returncode": 1
+    },
+    {
+      "command": "npm run typecheck -- --pretty false && vitest src/lib/numberFormat.test.ts",
+      "reason": "package has no npm typecheck script",
+      "repo_family": "openclaw__clawhub",
+      "returncode": 1
+    },
+    {
+      "command": "npm run typecheck -- --pretty false && vitest convex/lib/searchText.test.ts",
+      "reason": "package has no npm typecheck script",
+      "repo_family": "openclaw__clawhub",
+      "returncode": 1
+    }
+  ],
+  "repo_family_counts": {
+    "NousResearch__hermes-agent": 2,
+    "Python": 1,
+    "SWE-agent__SWE-ReX": 1,
+    "modelcontextprotocol__typescript-sdk": 2,
+    "sentencepiece": 1,
+    "tokenizers": 1
+  },
+  "rows_path": "runs/local/artifacts/stage12045_buildrun_floor_closure_rows/buildrun_floor_closure_rows.jsonl",
+  "stage": "stage12045_buildrun_floor_closure_rows",
+  "status_counts": {
+    "PASS_CURRENT_BUILD_AND_RUN": 8
+  },
+  "unique_roots": 8
+}

@@ -1,0 +1,1017 @@
+{
+  "aggregate_source_pool_counts_before_dedupe": {
+    "execution_trace_rows_sum": 39678,
+    "normalized_event_rows_sum": 938262,
+    "normalized_parsed_session_count_sum_upper_bound": 128,
+    "note": "These are not deduped. Some pools overlap by source/session/derived variant."
+  },
+  "artifact_type": "session_inventory_coverage_correction",
+  "claim_boundary": "Correction/control artifact only. Counts are source-pool inventory counts, not deduped admitted roots. No training rows are admitted.",
+  "corrected_next_stage_requirements": [
+    "Scan all session-derived pools listed here, not only current_raw.",
+    "Emit source_pool_id and source_variant_id for every candidate to prevent duplicate-derived roots.",
+    "Dedupe by root_lineage_key, repo_family, task signature, changed paths, selected tests, and source session hash.",
+    "Report source-pool coverage before and after dedupe.",
+    "Only after dedupe, split into level_0/1/2/3/4 admission candidates."
+  ],
+  "correction": {
+    "correct_reading": "current_raw is one subset. There are broader parsed, current_recent96, execution-trace, episode, packable, and stage10100 session-derived pools. These must be inventoried and deduped into root candidates before admission.",
+    "incorrect_or_incomplete_reading": "Treating current_raw_parsed_bounded_jsonl_metadata as the whole session corpus.",
+    "stage12250_status": "valid decomposition schema, incomplete observed source census"
+  },
+  "decision": "stage12250_census_was_partial_correct_to_multisource_session_inventory",
+  "quality_invariant": "More session pools should increase candidate-root recall, but admission remains based on same-source evidence and root-level dedupe.",
+  "revised_next_stage_sequence": [
+    {
+      "purpose": "Index all session-derived pools and emit dedupe keys plus raw-source availability.",
+      "stage": "stage12252_multisource_session_pool_indexer",
+      "training_allowed": false
+    },
+    {
+      "purpose": "Collapse overlapping variants into root candidates and report candidate count by source family and language.",
+      "stage": "stage12253_session_root_candidate_deduper",
+      "training_allowed": false
+    },
+    {
+      "purpose": "For high-value candidates, recover raw command output, patch bodies, verifier logs, and state updates.",
+      "stage": "stage12254_raw_session_trace_rehydrator",
+      "training_allowed": false
+    },
+    {
+      "purpose": "Admit candidates by evidence level without counting derived variants as roots.",
+      "stage": "stage12255_multisource_root_admission_rollup",
+      "training_allowed": false
+    }
+  ],
+  "source_pools": [
+    {
+      "label": "current_raw_normalized_events",
+      "line_count": 345487,
+      "rows_path": "runs/local/artifacts/session_like_source_inventory_real/current_raw_parsed_bounded_jsonl_metadata/normalized_session_events.jsonl",
+      "summary": {
+        "guardrails": {
+          "raw_message_text_emitted": false,
+          "raw_patch_body_emitted": false,
+          "raw_tool_output_emitted": false,
+          "training_rows_emitted_now": false
+        },
+        "parsed_event_rows": 345487,
+        "parsed_sessions": 9,
+        "roots_observed": {
+          "codex_sessions": 345487
+        }
+      },
+      "summary_path": "runs/local/artifacts/session_like_source_inventory_real/current_raw_parsed_bounded_jsonl_metadata/session_parse_summary.json"
+    },
+    {
+      "label": "current_recent96_normalized_events",
+      "line_count": 351732,
+      "rows_path": "runs/local/artifacts/session_like_source_inventory_real/current_recent96_parsed_bounded_jsonl_metadata/normalized_session_events.jsonl",
+      "summary": {
+        "guardrails": {
+          "raw_message_text_emitted": false,
+          "raw_patch_body_emitted": false,
+          "raw_tool_output_emitted": false,
+          "training_rows_emitted_now": false
+        },
+        "parsed_event_rows": 351732,
+        "parsed_sessions": 16,
+        "roots_observed": {
+          "codex_sessions": 351732
+        }
+      },
+      "summary_path": "runs/local/artifacts/session_like_source_inventory_real/current_recent96_parsed_bounded_jsonl_metadata/session_parse_summary.json"
+    },
+    {
+      "label": "broad_parsed_normalized_events",
+      "line_count": 241043,
+      "rows_path": "runs/local/artifacts/session_like_source_inventory_real/parsed_bounded_jsonl_metadata/normalized_session_events.jsonl",
+      "summary": {
+        "guardrails": {
+          "raw_message_text_emitted": false,
+          "raw_patch_body_emitted": false,
+          "raw_tool_output_emitted": false,
+          "training_rows_emitted_now": false
+        },
+        "parsed_event_rows": 241043,
+        "parsed_sessions": 103,
+        "roots_observed": {
+          "codex_sessions": 240756,
+          "cursor_projects": 287
+        }
+      },
+      "summary_path": "runs/local/artifacts/session_like_source_inventory_real/parsed_bounded_jsonl_metadata/session_parse_summary.json"
+    },
+    {
+      "label": "current_recent96_execution_traces",
+      "line_count": 19979,
+      "rows_path": "runs/local/artifacts/session_like_source_inventory_real/current_recent96_session_execution_traces/session_execution_traces.jsonl",
+      "summary": {
+        "session_count": 8,
+        "sessions_with_traces": 8,
+        "trace_count": 19979
+      },
+      "summary_path": "runs/local/artifacts/session_like_source_inventory_real/current_recent96_session_execution_traces/session_execution_trace_summary.json"
+    },
+    {
+      "label": "session_execution_traces",
+      "line_count": 19699,
+      "rows_path": "runs/local/artifacts/session_like_source_inventory_real/session_execution_traces/session_execution_traces.jsonl",
+      "summary": {
+        "session_count": 6,
+        "sessions_with_traces": 6,
+        "trace_count": 19699
+      },
+      "summary_path": "runs/local/artifacts/session_like_source_inventory_real/session_execution_traces/session_execution_trace_summary.json"
+    },
+    {
+      "label": "base_local_root_session_episodes",
+      "line_count": 56,
+      "rows_path": "runs/local/artifacts/session_like_source_inventory_real/local_root_session_episodes/local_root_session_episodes.jsonl",
+      "summary": {
+        "episode_count": 56,
+        "input_seed_rows": 79,
+        "route_counts": {
+          "NEEDS_BROAD_TEST_DISCOVERY": 24,
+          "PASS_TARGETED_TEST_SELECTION": 32
+        }
+      },
+      "summary_path": "runs/local/artifacts/session_like_source_inventory_real/local_root_session_episodes/local_root_session_episode_summary.json"
+    },
+    {
+      "label": "best_bootstrap_stage10100",
+      "line_count": 24,
+      "rows_path": "runs/local/artifacts/stage10100_true_source_backed_multilingual_session_inventory_audit/true_source_backed_multilingual_session_inventory_rows.jsonl",
+      "summary": {
+        "artifacts": {
+          "inventory_root": "runs/local/artifacts/session_like_source_inventory_real",
+          "inventory_rows": "runs/local/artifacts/stage10100_true_source_backed_multilingual_session_inventory_audit/true_source_backed_multilingual_session_inventory_rows.jsonl"
+        },
+        "best_bootstrap_inventory": {
+          "bootstrap_score": 274,
+          "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v4_dense_neighbors_realindex/packable_augmented_session_episode_examples.jsonl",
+          "language_row_counts": {
+            "c_cpp": 9,
+            "python": 49,
+            "rust": 0,
+            "web_js_ts_html": 6
+          },
+          "languages_present": [
+            "python",
+            "c_cpp",
+            "web_js_ts_html"
+          ],
+          "route_counts": {},
+          "row_count": 56,
+          "rows_patch_plus_exec": 0,
+          "rows_with_any_target_language": 54,
+          "rows_with_changed_files": 56,
+          "rows_with_code_snippets": 56,
+          "rows_with_multilang_signals": 10,
+          "rows_with_query_text": 56,
+          "rows_with_selected_tests": 32,
+          "rows_with_trace_like_context": 56,
+          "supports_builder_minimum_fields": true,
+          "trace_role_counts": {
+            "repo_graph_neighbor": 47,
+            "seed_change": 56,
+            "trace_analogue": 56,
+            "verification_constraint": 31
+          }
+        },
+        "claim_boundary": {
+          "multilingual_rust_coverage_already_present": false,
+          "rust_replenishment_required_before_four_language_claim": true,
+          "synthetic_stage8765_lineage_still_rejected": true,
+          "true_source_backed_builder_bootstrap_ready_for_python_web_c_cpp": true
+        },
+        "failures": [],
+        "generated_at_utc": "2026-07-10T17:26:28Z",
+        "inventory_summaries": [
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v4_dense_neighbors_realindex/packable_augmented_session_episode_examples.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {},
+            "row_count": 56,
+            "rows_patch_plus_exec": 0,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 56,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v4_dense_neighbors/packable_augmented_session_episode_examples.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {},
+            "row_count": 56,
+            "rows_patch_plus_exec": 0,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v3_git_history_external_git_narrow_v2/packable_augmented_session_episode_examples.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {},
+            "row_count": 56,
+            "rows_patch_plus_exec": 0,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 52,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v3_git_history/packable_augmented_session_episode_examples.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {},
+            "row_count": 56,
+            "rows_patch_plus_exec": 0,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 52,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v3/packable_augmented_session_episode_examples.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {},
+            "row_count": 56,
+            "rows_patch_plus_exec": 0,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 52,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v2/packable_augmented_session_episode_examples.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {},
+            "row_count": 56,
+            "rows_patch_plus_exec": 0,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 52,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples/packable_augmented_session_episode_examples.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {},
+            "row_count": 56,
+            "rows_patch_plus_exec": 0,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 53,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/local_root_session_episodes/local_root_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {
+              "PATCH_ONLY": 15,
+              "PATCH_PLUS_EXEC": 41
+            },
+            "row_count": 56,
+            "rows_patch_plus_exec": 41,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "verification_constraint": 32
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes_v4_dense_neighbors_realindex/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {
+              "PATCH_ONLY": 15,
+              "PATCH_PLUS_EXEC": 41
+            },
+            "row_count": 56,
+            "rows_patch_plus_exec": 41,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 56,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes_v4_dense_neighbors/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {
+              "PATCH_ONLY": 15,
+              "PATCH_PLUS_EXEC": 41
+            },
+            "row_count": 56,
+            "rows_patch_plus_exec": 41,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes_v3_git_history_external_git_narrow_v2/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {
+              "PATCH_ONLY": 15,
+              "PATCH_PLUS_EXEC": 41
+            },
+            "row_count": 56,
+            "rows_patch_plus_exec": 41,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 52,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes_v3_git_history_external_git_narrow/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {
+              "PATCH_ONLY": 15,
+              "PATCH_PLUS_EXEC": 41
+            },
+            "row_count": 56,
+            "rows_patch_plus_exec": 41,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 52,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes_v3_git_history/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {
+              "PATCH_ONLY": 15,
+              "PATCH_PLUS_EXEC": 41
+            },
+            "row_count": 56,
+            "rows_patch_plus_exec": 41,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 52,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes_v3/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {
+              "PATCH_ONLY": 15,
+              "PATCH_PLUS_EXEC": 41
+            },
+            "row_count": 56,
+            "rows_patch_plus_exec": 41,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 52,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes_v2/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {
+              "PATCH_ONLY": 15,
+              "PATCH_PLUS_EXEC": 41
+            },
+            "row_count": 56,
+            "rows_patch_plus_exec": 41,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 52,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 274,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 9,
+              "python": 49,
+              "rust": 0,
+              "web_js_ts_html": 6
+            },
+            "languages_present": [
+              "python",
+              "c_cpp",
+              "web_js_ts_html"
+            ],
+            "route_counts": {
+              "PATCH_ONLY": 15,
+              "PATCH_PLUS_EXEC": 41
+            },
+            "row_count": 56,
+            "rows_patch_plus_exec": 41,
+            "rows_with_any_target_language": 54,
+            "rows_with_changed_files": 56,
+            "rows_with_code_snippets": 56,
+            "rows_with_multilang_signals": 10,
+            "rows_with_query_text": 56,
+            "rows_with_selected_tests": 32,
+            "rows_with_trace_like_context": 56,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 47,
+              "seed_change": 56,
+              "trace_analogue": 53,
+              "verification_constraint": 31
+            }
+          },
+          {
+            "bootstrap_score": 147,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_strict_realindex_pathcap2/packable_augmented_session_episode_examples.jsonl",
+            "language_row_counts": {
+              "c_cpp": 5,
+              "python": 27,
+              "rust": 0,
+              "web_js_ts_html": 0
+            },
+            "languages_present": [
+              "python",
+              "c_cpp"
+            ],
+            "route_counts": {
+              "PATCH_PLUS_EXEC": 27
+            },
+            "row_count": 27,
+            "rows_patch_plus_exec": 27,
+            "rows_with_any_target_language": 27,
+            "rows_with_changed_files": 27,
+            "rows_with_code_snippets": 27,
+            "rows_with_multilang_signals": 5,
+            "rows_with_query_text": 27,
+            "rows_with_selected_tests": 27,
+            "rows_with_trace_like_context": 27,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 27,
+              "seed_change": 27,
+              "trace_analogue": 27,
+              "verification_constraint": 27
+            }
+          },
+          {
+            "bootstrap_score": 147,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/local_root_session_episodes_strict/local_root_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 5,
+              "python": 27,
+              "rust": 0,
+              "web_js_ts_html": 0
+            },
+            "languages_present": [
+              "python",
+              "c_cpp"
+            ],
+            "route_counts": {
+              "PATCH_PLUS_EXEC": 27
+            },
+            "row_count": 27,
+            "rows_patch_plus_exec": 27,
+            "rows_with_any_target_language": 27,
+            "rows_with_changed_files": 27,
+            "rows_with_code_snippets": 27,
+            "rows_with_multilang_signals": 5,
+            "rows_with_query_text": 27,
+            "rows_with_selected_tests": 27,
+            "rows_with_trace_like_context": 27,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 27,
+              "seed_change": 27,
+              "verification_constraint": 27
+            }
+          },
+          {
+            "bootstrap_score": 147,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes_strict_realindex_pathcap2/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 5,
+              "python": 27,
+              "rust": 0,
+              "web_js_ts_html": 0
+            },
+            "languages_present": [
+              "python",
+              "c_cpp"
+            ],
+            "route_counts": {
+              "PATCH_PLUS_EXEC": 27
+            },
+            "row_count": 27,
+            "rows_patch_plus_exec": 27,
+            "rows_with_any_target_language": 27,
+            "rows_with_changed_files": 27,
+            "rows_with_code_snippets": 27,
+            "rows_with_multilang_signals": 5,
+            "rows_with_query_text": 27,
+            "rows_with_selected_tests": 27,
+            "rows_with_trace_like_context": 27,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 27,
+              "seed_change": 27,
+              "trace_analogue": 27,
+              "verification_constraint": 27
+            }
+          },
+          {
+            "bootstrap_score": 147,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/augmented_session_episodes_strict_realindex/augmented_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 5,
+              "python": 27,
+              "rust": 0,
+              "web_js_ts_html": 0
+            },
+            "languages_present": [
+              "python",
+              "c_cpp"
+            ],
+            "route_counts": {
+              "PATCH_PLUS_EXEC": 27
+            },
+            "row_count": 27,
+            "rows_patch_plus_exec": 27,
+            "rows_with_any_target_language": 27,
+            "rows_with_changed_files": 27,
+            "rows_with_code_snippets": 27,
+            "rows_with_multilang_signals": 5,
+            "rows_with_query_text": 27,
+            "rows_with_selected_tests": 27,
+            "rows_with_trace_like_context": 27,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 27,
+              "seed_change": 27,
+              "trace_analogue": 27,
+              "verification_constraint": 27
+            }
+          },
+          {
+            "bootstrap_score": 137,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/local_root_session_episodes_strict_traceback/local_root_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 3,
+              "python": 25,
+              "rust": 0,
+              "web_js_ts_html": 0
+            },
+            "languages_present": [
+              "python",
+              "c_cpp"
+            ],
+            "route_counts": {
+              "PATCH_PLUS_EXEC": 25
+            },
+            "row_count": 25,
+            "rows_patch_plus_exec": 25,
+            "rows_with_any_target_language": 25,
+            "rows_with_changed_files": 25,
+            "rows_with_code_snippets": 25,
+            "rows_with_multilang_signals": 3,
+            "rows_with_query_text": 25,
+            "rows_with_selected_tests": 25,
+            "rows_with_trace_like_context": 25,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 25,
+              "seed_change": 25,
+              "verification_constraint": 25
+            }
+          },
+          {
+            "bootstrap_score": 92,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/local_root_session_episodes_broadverify_recovery_smallbudget_v3/local_root_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 6,
+              "python": 16,
+              "rust": 0,
+              "web_js_ts_html": 0
+            },
+            "languages_present": [
+              "python",
+              "c_cpp"
+            ],
+            "route_counts": {
+              "PATCH_PLUS_EXEC": 16
+            },
+            "row_count": 16,
+            "rows_patch_plus_exec": 16,
+            "rows_with_any_target_language": 16,
+            "rows_with_changed_files": 16,
+            "rows_with_code_snippets": 16,
+            "rows_with_multilang_signals": 6,
+            "rows_with_query_text": 16,
+            "rows_with_selected_tests": 16,
+            "rows_with_trace_like_context": 16,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 14,
+              "seed_change": 16,
+              "verification_constraint": 16
+            }
+          },
+          {
+            "bootstrap_score": 92,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/local_root_session_episodes_broadverify_recovery_smallbudget_v2/local_root_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 6,
+              "python": 16,
+              "rust": 0,
+              "web_js_ts_html": 0
+            },
+            "languages_present": [
+              "python",
+              "c_cpp"
+            ],
+            "route_counts": {
+              "PATCH_PLUS_EXEC": 16
+            },
+            "row_count": 16,
+            "rows_patch_plus_exec": 16,
+            "rows_with_any_target_language": 16,
+            "rows_with_changed_files": 16,
+            "rows_with_code_snippets": 16,
+            "rows_with_multilang_signals": 6,
+            "rows_with_query_text": 16,
+            "rows_with_selected_tests": 16,
+            "rows_with_trace_like_context": 16,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 14,
+              "seed_change": 16,
+              "verification_constraint": 16
+            }
+          },
+          {
+            "bootstrap_score": 92,
+            "inventory_path": "runs/local/artifacts/session_like_source_inventory_real/local_root_session_episodes_broadverify_recovery_smallbudget/local_root_session_episodes.jsonl",
+            "language_row_counts": {
+              "c_cpp": 6,
+              "python": 16,
+              "rust": 0,
+              "web_js_ts_html": 0
+            },
+            "languages_present": [
+              "python",
+              "c_cpp"
+            ],
+            "route_counts": {
+              "PATCH_PLUS_EXEC": 16
+            },
+            "row_count": 16,
+            "rows_patch_plus_exec": 16,
+            "rows_with_any_target_language": 16,
+            "rows_with_changed_files": 16,
+            "rows_with_code_snippets": 16,
+            "rows_with_multilang_signals": 6,
+            "rows_with_query_text": 16,
+            "rows_with_selected_tests": 16,
+            "rows_with_trace_like_context": 16,
+            "supports_builder_minimum_fields": true,
+            "trace_role_counts": {
+              "repo_graph_neighbor": 14,
+              "seed_change": 16,
+              "verification_constraint": 16
+            }
+          }
+        ],
+        "metrics": {
+          "aggregate_language_row_counts": {
+            "c_cpp": 191,
+            "python": 1039,
+            "rust": 0,
+            "web_js_ts_html": 96
+          },
+          "best_bootstrap_inventory": "runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v4_dense_neighbors_realindex/packable_augmented_session_episode_examples.jsonl",
+          "best_bootstrap_row_count": 56,
+          "best_bootstrap_score": 274,
+          "inventories_scanned": 39,
+          "inventories_with_rust_rows": 0
+        },
+        "name": "stage10100_true_source_backed_multilingual_session_inventory_audit",
+        "next_best_step": "Bootstrap the true source-backed maintainer eval builder from runs/local/artifacts/session_like_source_inventory_real/packable_augmented_session_episode_examples_v4_dense_neighbors_realindex/packable_augmented_session_episode_examples.jsonl for python/web/c_cpp, and replenish real Rust session roots before any four-language maintainer claim.",
+        "passed": true,
+        "stage": 10100
+      },
+      "summary_path": "runs/local/artifacts/stage10100_true_source_backed_multilingual_session_inventory_audit/true_source_backed_multilingual_session_inventory_audit.json"
+    }
+  ],
+  "stage": "stage12251_session_inventory_coverage_correction",
+  "training_allowed": false,
+  "why_345k_single_session_pool_looked_wrong": [
+    "The 345k count came only from current_raw_parsed_bounded_jsonl_metadata.",
+    "That file has 9 parsed_sessions and is dominated by one large agentkernel session.",
+    "Broader parsed_bounded_jsonl_metadata reports 103 parsed_sessions.",
+    "current_recent96_parsed_bounded_jsonl_metadata reports 16 parsed_sessions.",
+    "Execution trace pools add about 39.7k trace rows across their own session subsets."
+  ]
+}

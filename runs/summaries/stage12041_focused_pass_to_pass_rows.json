@@ -1,0 +1,76 @@
+{
+  "admitted_rows": 10,
+  "claim_boundary": "Rows are train-support only. No model promotion follows from this artifact.",
+  "decision": "admit_focused_pass_to_pass_train_support",
+  "language_counts": {
+    "python": 6,
+    "web_js_ts_html": 4
+  },
+  "next_stage_recommendation": {
+    "action": "Merge focused PASS_TO_PASS rows and report remaining status floors.",
+    "stage": "stage12042_transition_support_rollup_v28"
+  },
+  "rejected_probe_count": 8,
+  "rejected_probes": [
+    {
+      "command": "python -m pytest lucas_lehmer_primality_test.py",
+      "reason": "no tests collected",
+      "repo_family": "Python",
+      "returncode": 5
+    },
+    {
+      "command": "python -m pytest solovay_strassen_primality_test.py",
+      "reason": "no tests collected",
+      "repo_family": "Python",
+      "returncode": 5
+    },
+    {
+      "command": "python -m pytest tests/test_action_transformer.py",
+      "reason": "missing torch.nn in local environment",
+      "repo_family": "action-transformer",
+      "returncode": 2
+    },
+    {
+      "command": "python -m pytest tests/test_parsing.py",
+      "reason": "missing swerex dependency during conftest import",
+      "repo_family": "SWE-agent__SWE-agent",
+      "returncode": 4
+    },
+    {
+      "command": "python -m pytest tests/test_fire.py",
+      "reason": "missing minisweagent import under raw checkout",
+      "repo_family": "SWE-agent__mini-swe-agent",
+      "returncode": 4
+    },
+    {
+      "command": "python -m pytest tests/test_main.py",
+      "reason": "missing agentlab import under raw checkout",
+      "repo_family": "AgentLab",
+      "returncode": 1
+    },
+    {
+      "command": "./node_modules/.bin/vitest run frontend/__tests__/parse-pr-url.test.ts",
+      "reason": "local vitest binary absent",
+      "repo_family": "OpenHands__OpenHands",
+      "returncode": 127
+    },
+    {
+      "command": "./node_modules/.bin/vitest run frontend/__tests__/build-websocket-url.test.ts",
+      "reason": "local vitest binary absent",
+      "repo_family": "OpenHands__OpenHands",
+      "returncode": 127
+    }
+  ],
+  "repo_family_counts": {
+    "NousResearch__hermes-agent": 2,
+    "Python": 3,
+    "SWE-agent__SWE-ReX": 1,
+    "openclaw__clawhub": 4
+  },
+  "rows_path": "runs/local/artifacts/stage12041_focused_pass_to_pass_rows/focused_pass_to_pass_rows.jsonl",
+  "stage": "stage12041_focused_pass_to_pass_rows",
+  "status_counts": {
+    "PASS_TO_PASS": 10
+  },
+  "unique_roots": 10
+}

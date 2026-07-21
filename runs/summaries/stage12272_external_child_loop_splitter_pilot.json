@@ -1,0 +1,70 @@
+{
+  "caps": {
+    "chat_child_cap": 30,
+    "horizon_caps": {
+      "H1": 80,
+      "H2_3": 80,
+      "H4_8": 40,
+      "H9_PLUS": 10
+    },
+    "python_child_cap": 160,
+    "repo_child_cap": 25
+  },
+  "child_loops_by_chat_top10": [
+    [
+      "codex_chat_e5d0b6e24e7d5f2097c4",
+      19
+    ],
+    [
+      "codex_chat_7e05f84a7583daf1b3c3",
+      6
+    ]
+  ],
+  "child_loops_by_horizon": {
+    "H1": 2,
+    "H2_3": 6,
+    "H4_8": 14,
+    "H9_PLUS": 3
+  },
+  "child_loops_by_language": {
+    "python": 19,
+    "web_js_ts_html": 6
+  },
+  "child_loops_by_repo_family": {
+    "codex_sessions": 25
+  },
+  "counts": {
+    "admitted_rows": 0,
+    "child_loops_emitted": 25,
+    "child_loops_with_observed_post_pass": 0,
+    "child_loops_with_observed_pre_fail": 0,
+    "child_loops_with_post_verifier_refs": 25,
+    "child_loops_with_pre_verifier_refs": 4,
+    "external_comparable_patch_trace_rows": 0,
+    "external_fail_to_pass_rows": 0,
+    "parents_scanned": 2057,
+    "parents_split_eligible": 2057,
+    "training_rows_emitted": 0,
+    "unique_parent_windows": 8
+  },
+  "decision": "external_child_loop_candidates_mined_no_admission_training_blocked",
+  "hard_reject_counts": {
+    "no_post_patch_verifier": 1348
+  },
+  "inputs": {
+    "profiles": "runs/local/artifacts/stage12263_high_value_window_profiler/source_shard_profiles.jsonl",
+    "tool_pairs": "runs/local/artifacts/stage12259_codex_tool_call_observation_pairer/tool_call_observation_pairs.jsonl"
+  },
+  "next_stage": "stage12273_child_loop_status_join_and_external_root_review",
+  "non_admission_rationale": [
+    "paired artifacts contain digests/refs but not raw status needed to prove pre-fail/post-pass",
+    "source-root externality is not proven for broad profiles until cwd/repo manifest join",
+    "same-verifier relation is command-head-only and requires semantic review",
+    "PASS-after-patch without observed pre-fail remains non-countable"
+  ],
+  "quarantine_counts": {
+    "parent_no_child_after_caps_or_post_verifier_gate": 2049,
+    "repo_child_cap_reached": 4906
+  },
+  "stage": "stage12272_external_child_loop_splitter_pilot"
+}

@@ -1,0 +1,198 @@
+{
+  "admission_mapping": {
+    "level_0_context_only": "context/source only; retrieval support only",
+    "level_1_verifier_only_no_patch": "verifier/command evidence but no patch trace",
+    "level_2_patch_context_no_execution": "patch/diff plus verifier intent but no observed command output",
+    "level_3_single_step_closed_loop": "one causal decision state with action, observation, verifier result, state update, stop/continue",
+    "level_4_multi_step_maintainer_episode": "two or more causal decision states with terminal decision"
+  },
+  "artifact_type": "episode_graph_candidate_schema_contract",
+  "claim_boundary": "Schema/control artifact only. Defines source-agnostic episode graph candidates and validation levels. It emits no candidates, admits no roots, and authorizes no training.",
+  "decision": "episode_graph_schema_ready_projection_still_blocked_until_validator_exists",
+  "fail_closed_rules": [
+    "missing source lineage, root, task boundary, event order, or source snapshot",
+    "nonmonotonic event order or ambiguous task span",
+    "raw Codex/Cursor rows directly emitted as train rows",
+    "cross-source patch-command-verifier stitching without explicit handoff evidence",
+    "unpaired tool call/output used as observation evidence",
+    "patch success inferred from commit metadata, assistant prose, or file mention",
+    "verifier success inferred from PASS_CURRENT_BUILD, broad build status, or unrelated later command",
+    "ENV_BLOCKED/dependency/install noise counted as task success",
+    "missing state_before/candidate_actions/chosen_action/observation/state_update/stop_continue for level_3+",
+    "secrets, protected overlap, train/eval leakage, or raw payload leakage",
+    "GPT reviewer disagreement with deterministic gates treated as reject/quarantine; GPT cannot override"
+  ],
+  "next_stage": {
+    "purpose": "Implement schema validation and fail-closed admission-level checks before projecting root candidates.",
+    "stage": "stage12262_episode_graph_candidate_validator_skeleton",
+    "training_allowed": false
+  },
+  "projection_policy_after_admission": {
+    "level_0": [
+      "retrieval/context selection"
+    ],
+    "level_1": [
+      "verifier interpretation",
+      "failure classification",
+      "insufficient-evidence abstain",
+      "limited stop policy"
+    ],
+    "level_2": [
+      "patch judgment",
+      "changed-file prediction",
+      "minimality/localization",
+      "verifier intent"
+    ],
+    "level_3_plus": [
+      "next action",
+      "action ranking",
+      "state update",
+      "verifier feedback",
+      "stop/continue",
+      "counterfactual negatives"
+    ],
+    "level_4": [
+      "multi-step planning",
+      "long-horizon state tracking",
+      "recovery-after-failure",
+      "terminal completion policy"
+    ]
+  },
+  "required_schema": {
+    "canonical_action_grammar": [
+      "inspect",
+      "search",
+      "run",
+      "edit",
+      "patch",
+      "verify",
+      "abstain",
+      "stop",
+      "delegate",
+      "handoff"
+    ],
+    "decision_step": [
+      "step_id",
+      "state_before_ref",
+      "candidate_actions",
+      "chosen_action",
+      "action_grammar_type",
+      "observation_refs",
+      "state_update_ref",
+      "rationale_evidence_refs"
+    ],
+    "root": [
+      "root_id_candidate",
+      "repo_family",
+      "cwd_boundary_ref",
+      "language_family_candidate",
+      "license_security_flags",
+      "split_intent"
+    ],
+    "source_refs": [
+      "snapshot_id",
+      "physical_source_ids",
+      "chat_or_session_ids",
+      "event_span_refs",
+      "tool_pair_refs",
+      "raw_payload_digests",
+      "adapter_payload_refs"
+    ],
+    "top_level": [
+      "schema_version",
+      "candidate_id",
+      "source_adapter",
+      "source_refs",
+      "root",
+      "task",
+      "ordered_events",
+      "states",
+      "decision_steps",
+      "observations",
+      "patch_trace",
+      "verifier_results",
+      "stop_continue",
+      "admission",
+      "privacy_security",
+      "dedupe_lineage",
+      "audit_trail"
+    ]
+  },
+  "source_adapter_boundary": {
+    "codex_inputs": [
+      "stage12258 per-chat source manifests",
+      "stage12259 paired tool call/observation refs",
+      "stage12260 task windows"
+    ],
+    "forbidden": [
+      "raw Codex/Cursor rows as training rows",
+      "source-specific fields required by trainer",
+      "raw message text/tool output/arguments/patch body in candidate graph"
+    ],
+    "generic_output": "episode_graph_candidate",
+    "principle": "Codex chats are a source adapter, not the dataset format."
+  },
+  "stage": "stage12261_episode_graph_candidate_schema_contract",
+  "stage12260_input_status": {
+    "candidate_windows_with_command_observation": 3740,
+    "patch_and_verifier_ref_windows": 2059,
+    "task_windows": 23936
+  },
+  "training_allowed": false,
+  "validation_levels": [
+    {
+      "level": "V0_source_envelope",
+      "requires": [
+        "source lineage",
+        "snapshot id",
+        "root/cwd boundary",
+        "event span refs",
+        "no raw leakage"
+      ]
+    },
+    {
+      "level": "V1_ordering_pairing",
+      "requires": [
+        "monotonic ordered events",
+        "paired tool call/observation where used",
+        "no unpaired execution as evidence"
+      ]
+    },
+    {
+      "level": "V2_task_boundary",
+      "requires": [
+        "coherent root and task window",
+        "no cross-chat/root stitching unless explicit handoff evidence exists"
+      ]
+    },
+    {
+      "level": "V3_causal_tuple",
+      "requires": [
+        "state_before",
+        "candidate_actions",
+        "chosen_action",
+        "observation",
+        "state_update",
+        "stop_continue"
+      ]
+    },
+    {
+      "level": "V4_patch_verifier",
+      "requires": [
+        "same-source patch/edit/no-patch evidence",
+        "verifier command/output",
+        "causal order patch/action before verifier"
+      ]
+    },
+    {
+      "level": "V5_admission_qc",
+      "requires": [
+        "dedupe",
+        "repo caps",
+        "language floors",
+        "leak/protected-overlap clean",
+        "ENV/dependency noise rejected"
+      ]
+    }
+  ]
+}

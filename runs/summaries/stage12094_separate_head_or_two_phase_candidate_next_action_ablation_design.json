@@ -1,0 +1,298 @@
+{
+  "controlled_ablation_matrix": {
+    "A_candidate_head_only_candidate_rows": {
+      "aux_source": "encoder_option_retrieval_transition_candidate_head",
+      "head_only": true,
+      "learning_rate": "7.5e-5",
+      "max_steps": 256,
+      "promotion_status": "diagnostic_only unless routed/composite audit also preserves next_action >=59",
+      "purpose": "Test whether candidate_selection can recover when trained on a transition-specific candidate head, without next_action preservation rows pulling the same scorer.",
+      "sampler": "task_balanced",
+      "success_signal": {
+        "old_transition_640": ">=364/640 preferred; do not accept protected regression",
+        "transition_candidate_selection": ">=89/160",
+        "transition_next_action": ">=51/160"
+      },
+      "train_rows": {
+        "excluded": "Stage12088 transition_next_action rows",
+        "old_replay": 640,
+        "repair_subset": "Stage12088 transition_candidate_selection rows only, expected 85 rows"
+      }
+    },
+    "B_two_phase_candidate_then_next_action": {
+      "phase1": "A_candidate_head_only_candidate_rows",
+      "phase2_aux_source": "encoder_option_retrieval_semantic_plus_transition_candidate_head",
+      "phase2_head_only": true,
+      "phase2_learning_rate": "3e-5",
+      "phase2_max_steps": 192,
+      "phase2_train_rows": {
+        "old_replay": 640,
+        "repair_subset": "Stage12088 transition_next_action rows only, expected 75 rows"
+      },
+      "promotion_status": "first promotable route if protected gates preserve and total improves",
+      "purpose": "If A recovers candidate_selection without damaging baseline next_action, initialize a second phase from A and train only next_action preservation/gain rows.",
+      "success_signal": {
+        "old_transition_640": ">364/640",
+        "transition_candidate_selection": ">=89/160",
+        "transition_next_action": ">=59/160"
+      }
+    },
+    "C_routed_inference_only_composite": {
+      "promotion_status": "diagnostic unless route is simple, declared before eval, and reproducible on sealed rows",
+      "purpose": "Evaluate whether existing Stage11924/Stage12083/Stage12091 signals can be combined by task routing without more training.",
+      "route": {
+        "candidate_selection": "best of Stage11924 semantic route or transition_candidate_head candidate-only runtime if A exists",
+        "continue_or_stop": "Stage11924",
+        "next_action": "Stage12083 only if it preserves selected-verifier losses under row-level guard; otherwise Stage11924",
+        "verifier_transition": "Stage11924"
+      },
+      "success_signal": {
+        "no_row_level_shortcut": true,
+        "old_transition_640": ">364/640",
+        "protected_gates": "preserved"
+      }
+    },
+    "D_more_data_only_stop_condition": {
+      "next_data_target": "Transition-Root-250/Transition-5K with true rollout-derived candidate/next_action examples",
+      "purpose": "Guard against assuming architecture fixes everything. If A/B fail, the next move is new root-derived transition data, not more packet permutations.",
+      "trigger": "A fails candidate_selection >=89 or B fails next_action >=59 while preserving candidate_selection"
+    }
+  },
+  "created_at_utc": "2026-07-15T00:41:53Z",
+  "decision": "ablation_design_ready_do_not_train_same_objective",
+  "do_not_repeat": [
+    "Do not rerun Stage12090 settings with different row order only.",
+    "Do not mix candidate_selection repair and next_action preservation in one shared semantic-head update without isolating the route.",
+    "Do not promote Stage12083 or Stage12091; both fail the transition frontier gate."
+  ],
+  "evidence_used": {
+    "stage12088_packet_audit": {
+      "covered_candidate_selection_gains": 16,
+      "covered_candidate_selection_losses": 24,
+      "covered_next_action_gains": 30,
+      "covered_next_action_losses": 22,
+      "duplicate_source_rows": 56,
+      "hard_negative_role_counts": {
+        "allowed_maintenance_action": 75,
+        "caller_surface": 2,
+        "candidate_change_surface": 39,
+        "change_test_expectation": 4,
+        "implementation_only_no_verifier": 7,
+        "nearby_sibling_test_constraint": 8,
+        "selected_function_test_anchor": 4,
+        "selected_inline_test_anchor": 9,
+        "sibling_function_test_distractor": 3,
+        "verifier_and_build_constraint": 9
+      },
+      "missing_source_row_count": 0,
+      "option_mirror_missing_count": 0,
+      "passes_admission": true,
+      "prompt_target_leak_count": 0,
+      "rows": 160,
+      "singleton_option_count": 0,
+      "subpacket_counts": {
+        "candidate_selection_gain_preservation": 25,
+        "candidate_selection_regression_replay": 60,
+        "next_action_gain_preservation": 45,
+        "selected_verifier_next_action_preservation": 30
+      },
+      "target_role_counts": {
+        "allowed_maintenance_action": 75,
+        "candidate_change_surface": 11,
+        "implementation_only_no_verifier": 13,
+        "minimal_candidate_change_surface": 4,
+        "selected_function_test_anchor": 6,
+        "selected_inline_test_anchor": 4,
+        "verifier_and_build_constraint": 30,
+        "verifier_and_test_constraint": 17
+      },
+      "target_value_counts": {
+        "A": 25,
+        "ABSTAIN_OR_ROLLBACK": 31,
+        "B": 47,
+        "C": 13,
+        "PLAN_PATCH": 18,
+        "RETRIEVE_EVIDENCE": 26
+      },
+      "task_counts": {
+        "transition_candidate_selection": 85,
+        "transition_next_action": 75
+      },
+      "unique_source_rows": 92,
+      "unsafe_loss_mask_count": 0
+    },
+    "stage12090_request_passed": true,
+    "stage12092_decision": "reject_stage12091_keep_stage11924_selected_transition_frontier",
+    "stage12092_gates": {
+      "filtered_strict_preserved": true,
+      "filtered_validation_preserved": true,
+      "old_canary_strict_preserved": true,
+      "old_canary_validation_preserved": true,
+      "residual_preserved": true,
+      "smoke_preserved": true,
+      "transition_candidate_selection_restored_to_stage11924": false,
+      "transition_continue_or_stop_preserved": true,
+      "transition_next_action_preserved_from_stage12083": false,
+      "transition_projection_beats_gemma_386": false,
+      "transition_projection_improves_stage11924": false,
+      "transition_verifier_transition_preserved": true
+    }
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12094_separate_head_or_two_phase_candidate_next_action_ablation_design/separate_head_or_two_phase_ablation_design.json",
+    "summary_mirror": "runs/summaries/stage12094_separate_head_or_two_phase_candidate_next_action_ablation_design.json"
+  },
+  "postrun_gate_for_stage12095": {
+    "old_transition_640": ">=364/640 for useful diagnostic, >364/640 for frontier movement",
+    "protected_filtered_strict": "22/22",
+    "protected_old_canary_strict": "23/23",
+    "residual_bank": ">=7/10",
+    "source_heldout_smoke": ">=6/12",
+    "transition_candidate_selection": ">=89/160",
+    "transition_continue_or_stop": ">=128/160",
+    "transition_next_action": ">=51/160",
+    "transition_verifier_transition": ">=96/160"
+  },
+  "recommended_immediate_next_stage": {
+    "allowed_to_build_request": true,
+    "do_not_launch_without_request_gates": true,
+    "name": "stage12095_candidate_head_only_candidate_selection_request",
+    "reason": "It changes one variable: train a transition-candidate head on candidate_selection rows only, leaving next_action repair out.",
+    "request_gates": {
+      "aux_source": "encoder_option_retrieval_transition_candidate_head",
+      "head_only_enabled": true,
+      "no_next_action_repair_rows": true,
+      "protected_reference": "stage11507",
+      "runtime_init": "stage11924",
+      "train_rows": "640 old replay + 85 Stage12088 candidate_selection rows",
+      "uses_gpu2_mask": true
+    }
+  },
+  "selected_transition_frontier_remains": {
+    "by_task": {
+      "transition_candidate_selection": {
+        "accuracy": 0.55625,
+        "correct": 89,
+        "rows": 160
+      },
+      "transition_continue_or_stop": {
+        "accuracy": 0.8,
+        "correct": 128,
+        "rows": 160
+      },
+      "transition_next_action": {
+        "accuracy": 0.31875,
+        "correct": 51,
+        "rows": 160
+      },
+      "transition_verifier_transition": {
+        "accuracy": 0.6,
+        "correct": 96,
+        "rows": 160
+      }
+    },
+    "runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_semantic_candidate_head",
+    "stage": "stage11924_transition_listwise_head_only_probe",
+    "transition_projection_score": {
+      "accuracy": 0.56875,
+      "correct": 364,
+      "coverage": 1.0,
+      "miss_count": 276,
+      "rows": 640
+    }
+  },
+  "source_artifacts": {
+    "stage12088_packet": "runs/summaries/stage12088_candidate_selection_repair_packet.json",
+    "stage12090_request": "runs/summaries/stage12090_candidate_selection_repair_training_request.json",
+    "stage12092_audit": "runs/summaries/stage12092_candidate_selection_repair_training_postrun_audit.json",
+    "stage12093_decision": "runs/summaries/stage12093_candidate_selection_repair_training_decision.json",
+    "trainer": "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "training_loop": "legacy_src/agentkernel_lite/training_loop.py"
+  },
+  "stage": 12094,
+  "stage_name": "stage12094_separate_head_or_two_phase_candidate_next_action_ablation_design",
+  "trainer_capabilities_verified": {
+    "head_only_available": true,
+    "same_role_listwise_available": true,
+    "semantic_plus_transition_candidate_route_available": true,
+    "task_balanced_sampler_available": true,
+    "transition_candidate_head_available": true,
+    "verifier_value_listwise_available": true
+  },
+  "why_this_stage_exists": {
+    "baseline_by_task": {
+      "transition_candidate_selection": {
+        "accuracy": 0.55625,
+        "correct": 89,
+        "rows": 160
+      },
+      "transition_continue_or_stop": {
+        "accuracy": 0.8,
+        "correct": 128,
+        "rows": 160
+      },
+      "transition_next_action": {
+        "accuracy": 0.31875,
+        "correct": 51,
+        "rows": 160
+      },
+      "transition_verifier_transition": {
+        "accuracy": 0.6,
+        "correct": 96,
+        "rows": 160
+      }
+    },
+    "failure_lesson": "Coverage of the Stage12086 loss/gain rows was not sufficient. The shared task_balanced head-only objective still interferes: candidate-selection repair rows pull against evidence-citation next-action preservation, and the combined packet overcorrects both.",
+    "stage12083": {
+      "by_task": {
+        "transition_candidate_selection": {
+          "accuracy": 0.50625,
+          "correct": 81,
+          "rows": 160
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 128,
+          "rows": 160
+        },
+        "transition_next_action": {
+          "accuracy": 0.36875,
+          "correct": 59,
+          "rows": 160
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6,
+          "correct": 96,
+          "rows": 160
+        }
+      },
+      "interpretation": "next_action diagnostic gain, no total frontier gain"
+    },
+    "stage12091": {
+      "by_task": {
+        "transition_candidate_selection": {
+          "accuracy": 0.5125,
+          "correct": 82,
+          "rows": 160
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 128,
+          "rows": 160
+        },
+        "transition_next_action": {
+          "accuracy": 0.30625,
+          "correct": 49,
+          "rows": 160
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6,
+          "correct": 96,
+          "rows": 160
+        }
+      },
+      "interpretation": "combined candidate-selection repair regressed total and next_action"
+    }
+  }
+}

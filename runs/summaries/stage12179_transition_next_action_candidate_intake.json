@@ -1,0 +1,49 @@
+{
+  "stage": "stage12179_transition_next_action_candidate_intake",
+  "artifact_type": "transition_next_action_candidate_intake",
+  "scout_intake_only": true,
+  "rows_admitted": 0,
+  "training_executed": false,
+  "training_rows_created": false,
+  "source_artifacts_read": [
+    "runs/summaries/stage12177_transition_next_action_gap_worklist.json",
+    "runs/local/artifacts/stage12177_transition_next_action_gap_worklist/next_action_gap_examples.jsonl",
+    "runs/local/artifacts/stage12143_no_install_selected_test_expansion/selected_test_expansion_results.jsonl",
+    "runs/local/artifacts/stage12144_rust_hydrated_selected_test_success_package/rust_hydrated_selected_test_successes.jsonl",
+    "runs/local/artifacts/stage12145_web_hydrated_selected_test_success_package/web_hydrated_selected_test_results.jsonl",
+    "runs/local/artifacts/stage12123_verifier_ready_checkout_execution_smoke/execution_smoke_results.jsonl",
+    "runs/local/artifacts/stage12128b_rust_web_no_install_execution_smoke/rust_web_smoke_results.jsonl"
+  ],
+  "output_artifacts": {
+    "candidate_roots_jsonl": "runs/local/artifacts/stage12179_transition_next_action_candidate_intake/next_action_candidate_roots.jsonl",
+    "summary": "runs/local/artifacts/stage12179_transition_next_action_candidate_intake/summary.json",
+    "summary_mirror": "runs/summaries/stage12179_transition_next_action_candidate_intake.json"
+  },
+  "candidate_count": 25,
+  "counts_by_recommended_role": {
+    "train_support_candidate": 7,
+    "heldout_candidate": 15,
+    "reject": 3
+  },
+  "counts_by_language_family": {
+    "python": 5,
+    "c_cpp": 3,
+    "rust": 7,
+    "web_js_ts_html": 10
+  },
+  "counts_by_blocker_category": {
+    "lineage_audit_required": 7,
+    "selected_test_execution_missing": 5,
+    "dependency_or_cache_missing": 10,
+    "selected_test_anchor_blocked": 3
+  },
+  "stage12177_gap_targets_prioritized": [
+    "SELECT_TEST vs PLAN_PATCH",
+    "RUN_VERIFIER vs FINISH",
+    "RETRIEVE_EVIDENCE vs PLAN_PATCH",
+    "ABSTAIN_OR_ROLLBACK vs CONTINUE",
+    "symptom/localization overprediction of E/I"
+  ],
+  "lineage_statement": "Scout intake only. Candidates reuse local probe/checkouts and existing evidence artifacts; several train_support candidates carry hydrated dependency-fetch or selected-test-package lineage and require separate lineage, source/test hash, anti-cheat, and protected-root audits before any materialization.",
+  "admission_statement": "No task rows were created or admitted, no training rows were written, and no training was executed."
+}

@@ -1,0 +1,65 @@
+{
+  "artifact_type": "inventory_snapshot_drift_audit",
+  "claim_boundary": "Audit/control artifact only. It invalidates a parent-index artifact for attachment use, admits no roots, and authorizes no training.",
+  "decision": "stage12255_invalid_for_attachment_due_to_mixed_stale_inventory_and_live_scan",
+  "finding": {
+    "drift_vs_previous_inventory": {
+      "codex_sessions": {
+        "delta": -479,
+        "live_file_count": 279,
+        "previous_file_count": 758
+      },
+      "cursor_chats": {
+        "delta": 0,
+        "live_file_count": 3,
+        "previous_file_count": 3
+      },
+      "cursor_projects": {
+        "delta": 41,
+        "live_file_count": 1019,
+        "previous_file_count": 978
+      }
+    },
+    "live_codex_session_count": 279,
+    "live_total_files": 1301,
+    "old_codex_session_count": 758,
+    "old_total_files": 1739,
+    "stage12255_coverage_pass": false,
+    "stage12255_decision": "path_hash_attachment_index_incomplete"
+  },
+  "next_stage_sequence": [
+    {
+      "purpose": "Use Stage12256 live inventory records as the canonical parent snapshot and rebuild physical_source_records from it.",
+      "stage": "stage12258_live_inventory_snapshot_indexer",
+      "training_allowed": false
+    },
+    {
+      "purpose": "Attach current derivative pools to the live parent snapshot; report old-snapshot derivatives separately as historical/unattached.",
+      "stage": "stage12259_live_snapshot_derivative_attacher",
+      "training_allowed": false
+    },
+    {
+      "purpose": "Decide whether older 758-file-snapshot derivatives can be salvaged from artifact contents or must remain train-only/historical.",
+      "stage": "stage12260_historical_derivative_salvage_plan",
+      "training_allowed": false
+    }
+  ],
+  "quality_rule": "Parent inventory, path-hash attachment, derivative attachment, and root admission must all use the same snapshot_id.",
+  "required_fix": [
+    "Do not use Stage12255 for derivative attachment.",
+    "Regenerate physical parent inventory from the live filesystem snapshot.",
+    "Rerun physical source indexer from the refreshed inventory, not the stale one.",
+    "Rerun path-hash rehydrator against that same refreshed parent index immediately.",
+    "Modify future rehydrators to report live_uninventoried and inventory_missing_from_live instead of minting synthetic IDs into the parent namespace.",
+    "If attaching derivatives from the old July 8 inventory, restore the exact old physical snapshot or treat old derivatives as historical/unattached views."
+  ],
+  "root_cause": [
+    "The old no-content inventory was internally consistent at 1,739 files, including 758 Codex session JSONLs.",
+    "The live filesystem now has 1,301 files, including 279 Codex session JSONLs and 1,019 Cursor project files.",
+    "Stage12255 mixed old Stage12253 parent records with a fresh live scan, then minted physical_source_ids for live files missing from the stale parent index.",
+    "That artifact is useful as a drift detector, but not valid as the derivative attachment base."
+  ],
+  "stage": "stage12257_inventory_snapshot_drift_audit",
+  "training_allowed": false,
+  "valid_interpretation": "We currently have 279 live Codex session files under /home/peyton/.codex/sessions. We also have older derived artifacts from a previous 758-file snapshot. Those are not the same inventory state."
+}

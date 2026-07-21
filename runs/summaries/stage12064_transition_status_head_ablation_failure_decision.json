@@ -1,0 +1,61 @@
+{
+  "created_at_utc": "2026-07-14T23:29:01Z",
+  "decision": "reject_stage12063_no_runtime_saved_keep_stage11924_selected_transition_frontier",
+  "diagnosis": {
+    "aux_source": "encoder_option_retrieval_transition_status_head",
+    "likely_issue": "The selected status-head-only path can produce a non-differentiable aggregate loss for some batches despite valid row task_type and earlier differentiable batches.",
+    "not_a_model_regression": "No runtime was saved; protected/model gates were not auditable for Stage12063.",
+    "request_passed": true,
+    "request_train_rows": 471
+  },
+  "failed_probe": "stage12063_transition_status_head_ablation_probe",
+  "failure_class": "training_infrastructure_no_grad_under_status_head_only",
+  "next_recommendation": {
+    "action": "Add or run a dry preflight over the exact Stage12062 manifest/sampler/source that checks every planned train batch has a differentiable bounded-choice aux loss before spending GPU training.",
+    "do_not_do": "Do not rerun Stage12063 unchanged; it will likely fail at the same no-grad batch.",
+    "recommended_stage": "stage12065_status_head_batch_differentiability_preflight",
+    "then": "If preflight finds bad batches, either filter/repair row geometry or use a composite scorer with semantic fallback while freezing/guarding Stage11924 product head."
+  },
+  "observed_training": {
+    "last_aux_card": {
+      "applicable_rows": 7,
+      "skipped_rows": 1,
+      "source": "encoder_option_retrieval_transition_status_head",
+      "target_rank_1_rate": 1.0,
+      "target_rank_1_rows": 7
+    },
+    "last_completed_step": 27,
+    "last_loss": 2.972078561782837,
+    "last_row_ids": [
+      "stage11985::modelcontextprotocol__servers::stage11985_candidate_184::npm_test::package.json#test::NOT_EXERCISED::a8e424ab74::stage11997_insufficient_evidence::stage12062_v35_status_support",
+      "stage11985::pytorch::stage11985_candidate_208::cmake_configure::CMakeLists.txt::NOT_EXERCISED::feae354d04::stage11997_insufficient_evidence::stage12062_v35_status_support",
+      "stage11985::flightmare::stage11985_candidate_251::cmake_configure::CMakeLists.txt::NOT_EXERCISED::d2c52202eb::stage11997_insufficient_evidence::stage12062_v35_status_support",
+      "stage11985::flightmare::stage11985_candidate_249::cmake_configure::CMakeLists.txt::NOT_EXERCISED::893a22f917::stage11997_insufficient_evidence::stage12062_v35_status_support",
+      "stage11985::modelcontextprotocol__typescript-sdk::stage11985_candidate_026::npm_check::package.json#check::NOT_EXERCISED::7738f5717a::stage11997_insufficient_evidence::stage12062_v35_status_support",
+      "stage11985::pytorch::stage11985_candidate_206::cmake_configure::CMakeLists.txt::NOT_EXERCISED::fc94b2dc55::stage11997_insufficient_evidence::stage12062_v35_status_support",
+      "stage11985::pytorch::stage11985_candidate_195::cmake_configure::CMakeLists.txt::NOT_EXERCISED::2cd2674b98::stage11997_insufficient_evidence::stage12062_v35_status_support",
+      "stage11999::rust_git_libgit_sys_lib_rs_syntax_guard::b247499171::stage12062_v35_status_support"
+    ],
+    "loss_rows_written": 27,
+    "runtime_model_saved": false
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12064_transition_status_head_ablation_failure_decision/transition_status_head_ablation_failure_decision.json",
+    "summary_mirror": "runs/summaries/stage12064_transition_status_head_ablation_failure_decision.json"
+  },
+  "selected_transition_frontier_after_decision": "stage11924_transition_listwise_head_only_probe",
+  "source_artifacts": {
+    "loss_by_step": "runs/local/artifacts/stage12063_transition_status_head_ablation_probe/bounded_decoder_probe/loss_by_step.jsonl",
+    "probe_dir": "runs/local/artifacts/stage12063_transition_status_head_ablation_probe/bounded_decoder_probe",
+    "request": "runs/local/artifacts/stage12062_transition_status_head_ablation_request/transition_status_head_ablation_request.json",
+    "stage12061_decision": "runs/local/artifacts/stage12061_guarded_transition_training_decision/guarded_transition_training_decision.json"
+  },
+  "stage": 12064,
+  "stage_name": "stage12064_transition_status_head_ablation_failure_decision",
+  "summary": [
+    "Stage12063 passed manifest/loss-mask preflight and began training, but crashed before runtime save.",
+    "The failure was RuntimeError: element 0 of tensors does not require grad and does not have a grad_fn.",
+    "No Stage12063 runtime exists, so there is no model/audit result to promote.",
+    "Stage11924 remains the selected transition frontier at 364/640; Stage12059 remains rejected at 360/640."
+  ]
+}

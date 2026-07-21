@@ -1,0 +1,60 @@
+{
+  "PE2_candidates_across_smoke": 0,
+  "admitted_rows": 0,
+  "after_failed_or_timeout_targets": [
+    "stage12244_replay_001",
+    "stage12244_replay_003",
+    "stage12244_replay_011",
+    "stage12244_replay_012",
+    "stage12244_replay_013"
+  ],
+  "after_passed_targets": [],
+  "after_status_counts_for_patched_fail_targets": {
+    "FAIL": 5
+  },
+  "blockers": [
+    "zero_PE2_candidates_across_smoke_batches",
+    "zero_external_comparable_patch_trace_rows",
+    "zero_external_FAIL_TO_PASS_rows",
+    "patched_fail_targets_also_fail_at_commit_after_target_verifier_not_locally_replayable"
+  ],
+  "decision": "block_stage12244_replay_queue_for_patch_effect_training",
+  "deterministic_checks_to_add": [
+    "preflight_commit_after_must_pass_exact_verifier_before_smoke",
+    "require_before_fail_and_after_pass_before_attempting_before_plus_patch",
+    "require_same_verifier_identity_for_before_after_and_before_plus_patch",
+    "reject_targets_where_commit_after_fails_or_times_out",
+    "record_environment_failure_separately_from_software_failure",
+    "do_not_count_metadata_commit_pairs_as_patch_effect_without_command_output"
+  ],
+  "external_FAIL_TO_PASS_rows": 0,
+  "external_comparable_patch_trace_rows": 0,
+  "next_stage": "stage12291_commit_pair_after_pass_prefilter",
+  "raw_output_emitted": false,
+  "retarget_plan": [
+    {
+      "first_stage": "stage12291_commit_pair_after_pass_prefilter",
+      "lane": "external_repair_commit_pairs_v2",
+      "requirement": "build targets from sources where exact selected verifier is known to fail before and pass after"
+    },
+    {
+      "first_stage": "stage12292_patch_task_source_atlas",
+      "lane": "benchmark_patch_tasks_with_reference_tests",
+      "requirement": "prefer task corpora with explicit failing tests and reference patches over inferred commit-pair selectors"
+    },
+    {
+      "first_stage": "stage12293_horizon_projection_without_repair_claims",
+      "lane": "codex_chat_horizon_training",
+      "requirement": "mine next-action/verifier/continue-stop rows from causal turns, but do not count them as repair proof"
+    }
+  ],
+  "root_cause": "Stage12244 is not currently a dependable patch-effect-proof source under local replay. The smoke executors found no before FAIL -> before+patch PASS targets, and Stage12289 showed every patched-fail smoke target also fails at commit_after. That falsifies the assumption that these target/verifier pairs prove patch effect in this environment.",
+  "smoke_reject_counts": {
+    "before_did_not_fail": 4,
+    "before_plus_patch_did_not_pass": 5
+  },
+  "stage": "stage12290_replay_queue_repair_or_retarget_decision",
+  "targets_attempted_across_smoke": 9,
+  "training_allowed": false,
+  "training_rows_emitted": 0
+}

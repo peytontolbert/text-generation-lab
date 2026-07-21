@@ -1,0 +1,86 @@
+{
+  "batch_policy": {
+    "checkout_root": "/data/tmp/stage12119_maintainer_400_smoke_repos",
+    "clone_depth": 1,
+    "dependency_hydration": "not attempted",
+    "kind": "resource_limited_smoke",
+    "selection": "first queue item per language in Stage12118 order",
+    "targets_per_language": 1
+  },
+  "claim_boundary": [
+    "Stage12118 items are checkout/probe work only, not task rows.",
+    "No rows admitted.",
+    "No eval claims created.",
+    "No selected-test claim without concrete executed verifier logs.",
+    "Build/static evidence remains build_config/static_compile scope.",
+    "GPU not used; GPU0/GPU1 explicitly hidden."
+  ],
+  "created_at_utc": "2026-07-15T14:25:18Z",
+  "do_not_train": true,
+  "early_stop_assessment": {
+    "build_static_only_evidence_found_total": 3,
+    "checkout_failures": 0,
+    "selected_test_evidence_found_total": 0,
+    "setup_failures": 1
+  },
+  "input": "runs/local/artifacts/stage12118_maintainer_400_pilot_checkout_probe_request/pilot_checkout_probe_targets.jsonl",
+  "next_batch_recommendation": "Expand cautiously with a selected-test discovery pass before any admission; current smoke is build/static-only.",
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12119_execute_maintainer_400_pilot_checkout_probe_batch",
+    "command_logs": "runs/local/artifacts/stage12119_execute_maintainer_400_pilot_checkout_probe_batch/command_logs",
+    "results_jsonl": "runs/local/artifacts/stage12119_execute_maintainer_400_pilot_checkout_probe_batch/smoke_probe_results.jsonl",
+    "smoke_targets": "runs/local/artifacts/stage12119_execute_maintainer_400_pilot_checkout_probe_batch/smoke_targets.jsonl",
+    "summary": "runs/local/artifacts/stage12119_execute_maintainer_400_pilot_checkout_probe_batch/summary.json",
+    "summary_mirror": "runs/summaries/stage12119_execute_maintainer_400_pilot_checkout_probe_batch.json"
+  },
+  "scoreboard_by_language": {
+    "c_cpp": {
+      "attempted": 1,
+      "build_static_only_evidence_found": 0,
+      "checkout_succeeded": 1,
+      "manifest_source_markers_found": 1,
+      "rejected_quarantined": 1,
+      "selected_test_evidence_found": 0,
+      "verifier_command_attempted": 1
+    },
+    "python": {
+      "attempted": 1,
+      "build_static_only_evidence_found": 1,
+      "checkout_succeeded": 1,
+      "manifest_source_markers_found": 1,
+      "rejected_quarantined": 0,
+      "selected_test_evidence_found": 0,
+      "verifier_command_attempted": 1
+    },
+    "rust": {
+      "attempted": 1,
+      "build_static_only_evidence_found": 1,
+      "checkout_succeeded": 1,
+      "manifest_source_markers_found": 1,
+      "rejected_quarantined": 0,
+      "selected_test_evidence_found": 0,
+      "verifier_command_attempted": 1
+    },
+    "web_js_ts_html": {
+      "attempted": 1,
+      "build_static_only_evidence_found": 1,
+      "checkout_succeeded": 1,
+      "manifest_source_markers_found": 1,
+      "rejected_quarantined": 0,
+      "selected_test_evidence_found": 0,
+      "verifier_command_attempted": 1
+    }
+  },
+  "stage": 12119,
+  "stage_name": "stage12119_execute_maintainer_400_pilot_checkout_probe_batch",
+  "top_blocker_reasons": [
+    [
+      "static_or_build_only_no_selected_test_execution",
+      3
+    ],
+    [
+      "tool_or_manifest_not_found",
+      1
+    ]
+  ]
+}

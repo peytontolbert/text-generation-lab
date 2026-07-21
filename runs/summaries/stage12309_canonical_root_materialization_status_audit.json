@@ -1,0 +1,80 @@
+{
+  "admission_counts": {
+    "external_fail_to_pass_countable": 0,
+    "external_patch_trace_countable": 0,
+    "level_3_countable": 0,
+    "source_heldout_admissible": 0,
+    "strict_eval_eligible": 0,
+    "train_support_allowed": 0,
+    "training_rows_emitted": 0
+  },
+  "candidate_counts": {
+    "stage12306_episode_graph_candidates": 25,
+    "stage12307_rust_cpp_root_queue_records": 20,
+    "stage12308_h1_rule_feasibility_records": 59,
+    "total_candidate_records": 104
+  },
+  "claim_boundary": "Integration audit only. Candidate queues are useful but none are train/eval/claim admissible yet.",
+  "current_progress_counters_vs_stage12305": {
+    "canonical_root_candidates": 45,
+    "cpp_external_candidates": 10,
+    "languages_in_candidate_queue": [
+      "c_cpp",
+      "python",
+      "rust"
+    ],
+    "level_3_plus_candidates": 0,
+    "patch_trace_candidates": 0,
+    "rust_external_candidates": 10,
+    "semantic_h1_rewrites": 0
+  },
+  "decision": "canonical_root_materialization_candidates_ready_training_blocked",
+  "inputs": {
+    "stage12305_decision": "canonical_root_candidate_materialization_queue_ready_no_training",
+    "stage12306_decision": "candidate_materialization_complete_fail_closed",
+    "stage12307_decision": "rust_cpp_selected_test_root_candidate_queue_emitted_fail_closed",
+    "stage12308_decision": "blocked_no_deterministic_h1_semantic_rule_assignments"
+  },
+  "next_blockers": [
+    "Hydrate explicit pre-action state codes for Stage12306/12308 without raw text leakage.",
+    "Materialize Rust/C++ commit/test/verifier hashes and selected logs from Stage12307 queue.",
+    "Recover repo_family for Stage12306 session candidates from cwd/repo joins.",
+    "Promote no row until semantic_rule_id and transition_function_key exist.",
+    "Build Level-3 tuple proof; current candidates are still source/queue/review records."
+  ],
+  "next_stage": "stage12310_state_code_hydration_design",
+  "stage": "stage12309_canonical_root_materialization_status_audit",
+  "stage12306_audit": {
+    "blocked_reason_counts": {
+      "candidate_only_fail_closed": 25,
+      "raw_session_event_root_requires_causal_review": 25,
+      "repo_family_unknown_until_cwd_or_repo_join": 25,
+      "training_allowed_false": 25
+    },
+    "candidate_action_shortcut_field_counts": {},
+    "guardrail_decision": "pass_model_visible_action_ref_check"
+  },
+  "stage12307_audit": {
+    "language_counts": {
+      "c_cpp": 10,
+      "rust": 10
+    },
+    "ready_for_training": 0,
+    "status_counts": {
+      "next_hydration": 15,
+      "ready_or_seed": 5
+    }
+  },
+  "stage12308_audit": {
+    "hard_reject_reason_counts": {
+      "candidate_count_below_training_floor": 17,
+      "no_tf_h1_rule_matches_explicit_state": 59,
+      "pre_action_state_codes_absent_only_refs_available": 59,
+      "required_pre_action_state_codes_missing": 59,
+      "training_disallowed_fail_closed": 59
+    },
+    "records_training_allowed": 0,
+    "records_with_possible_rule": 0
+  },
+  "training_allowed": false
+}

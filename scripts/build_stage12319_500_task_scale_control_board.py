@@ -1,0 +1,108 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+STAGE = "stage12319_500_task_scale_control_board"
+OUT = ROOT / "runs/local/artifacts" / STAGE
+SUMMARY = ROOT / "runs/summaries" / f"{STAGE}.json"
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    board = {
+        "stage": STAGE,
+        "decision": "500_task_target_control_board_ready_training_blocked",
+        "claim_boundary": "Control artifact only. It does not admit training rows.",
+        "training_allowed": False,
+        "current_accounting": {
+            "admitted_training_tasks": 0,
+            "stage12317_review_candidates": 500,
+            "stage12318_semantic_review_candidates": 325,
+            "stage12318_unique_task_windows": 500,
+            "level3_admitted": 0,
+            "patch_trace_admitted": 0,
+            "strict_eval_rows": 0,
+            "source_heldout_rows": 0,
+        },
+        "subagent_corrections": {
+            "event_local_review": {
+                "immediate_train_support_yield": 0,
+                "reason": "Stage12316/12317 status labels need semantic review; observed action order is not policy gold.",
+                "practical_post_review_yield_from_initial_100": "15-25 rows, not 100",
+            },
+            "session_expansion": {
+                "additional_safe_v4_windows": 98,
+                "reason": "Only remaining Stage12271 V4 patch-verifier parent windows should be treated as high-quality expansion candidates.",
+                "training_rows_now": 0,
+            },
+            "rust_cpp_selected_test": {
+                "fastest_followup_potential": 25,
+                "roots": [
+                    "Neargye/magic_enum",
+                    "fastfloat/fast_float",
+                    "assert-rs/predicates-rs",
+                    "dtolnay/anyhow",
+                    "toml-rs/toml",
+                ],
+                "reason": "Requires canonical rewrite/hash lift/admission; no network-dependent commands needed for these priority roots.",
+            },
+        },
+        "route_to_500_without_quality_regression": [
+            {
+                "lane": "event_local_semantic_review",
+                "next_stage": "stage12320_event_local_semantic_review_admission",
+                "input": "Stage12318 balanced review candidates",
+                "target": ">=50 admitted observation/status train-support tasks from reviewed candidates",
+                "hard_rule": "No next-action policy labels from observed tool order.",
+            },
+            {
+                "lane": "additional_v4_session_candidates",
+                "next_stage": "stage12321_remaining_v4_event_local_candidate_materializer",
+                "input": "98 unused Stage12271 V4 patch-verifier parent windows",
+                "target": "98 more review candidates, then semantic review",
+                "hard_rule": "Max 20 parent windows per chat and one candidate per task_window_id.",
+            },
+            {
+                "lane": "rust_cpp_selected_test_hydration",
+                "next_stage": "stage12322_priority_rust_cpp_canonical_rewrite_hash_lift",
+                "input": "Stage12315 priority roots",
+                "target": "25 selected-test train-support tasks after canonical admission",
+                "hard_rule": "Commit/test/log/source-hash/test-hash anchors required.",
+            },
+            {
+                "lane": "new_source_adapters",
+                "next_stage": "stage12323_multisource_training_task_supply_plan",
+                "input": "long-context, external commit pairs, additional Codex/Cursor sessions, verifier logs",
+                "target": "remaining gap to 500 admitted train-support tasks",
+                "hard_rule": "Do not count candidates, controlled fixtures, or PASS_TO_PASS-only rows as maintainer repair tasks.",
+            },
+        ],
+        "plateau_avoidance_rules": [
+            "Separate candidate discovery, semantic review, and admitted training rows in every summary.",
+            "Do not train Stage12295-style observed-action imitation as next-action policy.",
+            "Do not use model-visible candidate roles like correct/gold/observed/target.",
+            "Do not expand beyond chat dominance caps to hit numeric targets.",
+            "Do not count event-local observation/status tasks as Level-3 repair episodes.",
+            "Report unique roots/task windows and source-family dominance beside row counts.",
+        ],
+        "next_recommended_action": "Run stage12320 on a balanced 100-candidate subset from Stage12318 to admit the first true train-support tasks, while Stage12321/12322 prepare additional supply.",
+    }
+    (OUT / "500_task_scale_control_board.json").write_text(
+        json.dumps(board, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    (OUT / "500_TASK_SCALE_CONTROL_BOARD_STAGE12319.md").write_text(
+        "# Stage12319 500-Task Scale Control Board\n\n"
+        "The current state has 500 review candidates but 0 admitted training tasks. The path to 500 admitted tasks requires semantic review plus additional source lanes.\n",
+        encoding="utf-8",
+    )
+    SUMMARY.parent.mkdir(parents=True, exist_ok=True)
+    SUMMARY.write_text(json.dumps(board, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,43 @@
+{
+  "claim_boundary": [
+    "Stage12118 items are checkout/probe work only, not task rows.",
+    "No selected-test row can be admitted without concrete executed verifier evidence.",
+    "Overflow remains acquisition buffer and must not bypass audit/cap controls."
+  ],
+  "created_at_utc": "2026-07-15T03:34:08Z",
+  "decision": "maintainer_400_pilot_checkout_probe_request_ready",
+  "do_not_train": true,
+  "next_stage_recommendation": {
+    "action": "Execute selected checkout/probe targets in resource-limited batches, then run post-probe admission and row materialization.",
+    "gpu_required": false,
+    "network_required": true,
+    "stage": "stage12119_execute_maintainer_400_pilot_checkout_probe_batch"
+  },
+  "outputs": {
+    "checkout_probe_queue": "runs/local/artifacts/stage12118_maintainer_400_pilot_checkout_probe_request/pilot_checkout_probe_targets.jsonl",
+    "overflow": "runs/local/artifacts/stage12118_maintainer_400_pilot_checkout_probe_request/pilot_checkout_probe_overflow.jsonl",
+    "summary": "runs/local/artifacts/stage12118_maintainer_400_pilot_checkout_probe_request/maintainer_400_pilot_checkout_probe_request.json",
+    "summary_mirror": "runs/summaries/stage12118_maintainer_400_pilot_checkout_probe_request.json"
+  },
+  "overflow_targets": 7,
+  "selected_by_language": {
+    "c_cpp": 50,
+    "python": 50,
+    "rust": 50,
+    "web_js_ts_html": 50
+  },
+  "selected_targets": 200,
+  "stage": 12118,
+  "stage12117_input": {
+    "admitted_by_language": {
+      "c_cpp": 57,
+      "python": 50,
+      "rust": 50,
+      "web_js_ts_html": 50
+    },
+    "admitted_candidates": 207,
+    "summary": "runs/summaries/stage12117_maintainer_400_pilot_candidate_intake_audit.json"
+  },
+  "stage_name": "stage12118_maintainer_400_pilot_checkout_probe_request",
+  "target_per_language": 50
+}

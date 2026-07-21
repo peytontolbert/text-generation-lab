@@ -1,0 +1,64 @@
+{
+  "created_at_utc": "2026-07-15T01:34:33Z",
+  "current_materializable_non_training_supply": {
+    "combined_by_lane": {
+      "c_cpp": 15,
+      "mixed_build_config_dependency": 16,
+      "python": 20,
+      "web_js_ts_html": 8
+    },
+    "combined_work_items": 59,
+    "stage12107_work_items": 40,
+    "stage12109_build_verifier_work_items": 19
+  },
+  "decision": "subagent_scouts_closed_zero_sealed_admissions",
+  "do_not_train": true,
+  "interpretation": [
+    "Subagents were useful for bounded scouting but did not produce deterministic sealed admissions.",
+    "Rust scout confirmed the local Rust supply is dev-only under current lineage rules.",
+    "Web scout confirmed local Web candidates are exact or family overlaps with prior transition stages.",
+    "C/C++ scout found candidate-looking mixed roots, but deterministic audit rejected them because unilm/method_comparison already appear in Stage120 transition support.",
+    "The sealed route claim remains blocked on fresh root acquisition, not row rendering."
+  ],
+  "next_stage_recommendation": {
+    "action": "Acquire or materialize genuinely fresh Rust/Web/C++ roots outside prior transition families before sealed route scoring.",
+    "allowed_dev_only_use": "Dev-only Rust/Web overlap roots may be used for representation training later, but not for Stage12104 sealed confirmation.",
+    "minimum_needed": {
+      "c_cpp": 10,
+      "mixed_build_config_dependency": 0,
+      "python": 0,
+      "rust": 20,
+      "web_js_ts_html": 12
+    },
+    "stage": "stage12113_fresh_repo_acquisition_plan"
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12112_subagent_scout_decision/subagent_scout_decision.json",
+    "summary_mirror": "runs/summaries/stage12112_subagent_scout_decision.json"
+  },
+  "remaining_gap": {
+    "c_cpp": 10,
+    "mixed_build_config_dependency": 0,
+    "python": 0,
+    "rust": 20,
+    "web_js_ts_html": 12
+  },
+  "source_artifacts": {
+    "stage12109_gap_fill_queue": "runs/summaries/stage12109_build_verifier_gap_fill_queue.json",
+    "stage12110_subagent_contract": "runs/summaries/stage12110_subagent_scout_intake_contract.json",
+    "stage12111_subagent_audit": "runs/summaries/stage12111_subagent_scout_intake_audit.json"
+  },
+  "stage": 12112,
+  "stage_name": "stage12112_subagent_scout_decision",
+  "subagent_pipeline_result": {
+    "admitted_by_language": {},
+    "admitted_candidates": 0,
+    "input_candidates": 24,
+    "rejected_candidates": 24,
+    "top_rejection_counts": {
+      "dev_only_not_sealed": 21,
+      "repo_family_overlaps_prior_transition_or_selected_work": 24,
+      "reserved_family_conflict_true": 21
+    }
+  }
+}

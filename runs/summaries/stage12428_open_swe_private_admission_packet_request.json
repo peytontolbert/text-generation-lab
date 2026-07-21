@@ -1,0 +1,461 @@
+{
+  "admission_allowed": false,
+  "admitted_rows": 0,
+  "allowed_private_only_fields": [
+    "raw_dataset_locator",
+    "raw_trajectory",
+    "raw_command",
+    "raw_stdout",
+    "raw_stderr",
+    "raw_diff",
+    "raw_patch",
+    "raw_issue_body",
+    "raw_repo_url",
+    "raw_repo_path",
+    "source_file_text",
+    "checkout_ref",
+    "instance_id",
+    "repo_identifier",
+    "verifier_command",
+    "ordered_event_payloads"
+  ],
+  "blocked_reason_counts": {
+    "dedupe_required_before_any_future_admission": 1,
+    "no_private_raw_locator_packet_in_public_artifact": 1,
+    "no_replay_or_patch_apply_run": 1,
+    "no_same_verifier_before_after_proof": 1,
+    "private_sampler_required": 1,
+    "proof_slots_required_before_any_future_admission": 1,
+    "public_request_only_not_training_data": 1
+  },
+  "bucket_status_counts": {
+    "config_bucket_count_from_stage12427": 4,
+    "metadata_file_count_from_stage12427": 86,
+    "schema_file_count_from_stage12427": 84,
+    "trajectory_shard_count_from_stage12427": 84
+  },
+  "candidate_supply_rows": 207489,
+  "claim_boundary": "Stage12428 emits only a public-safe request/control packet for a later private Open-SWE sampler. It uses Stage12427 safe metadata counters, emits no raw fields, reads no parquet rows, admits no records, and cannot be counted as training data.",
+  "countable_as_new_proof_floor_rows": 0,
+  "countable_as_new_train_support_rows": 0,
+  "countable_new_rows": 0,
+  "countable_rows": 0,
+  "decision": "fail_closed_public_request_only_no_sampling_no_rows_admitted",
+  "dedupe_collapse_policy": {
+    "collapse_equivalent_records_by": [
+      "same_repo_family_hash",
+      "same_issue_or_instance_hash",
+      "same_patch_hash",
+      "same_before_after_state_hash_pair",
+      "same_verifier_identity_hash"
+    ],
+    "dedupe_required_before_private_review": true,
+    "key_material_public_artifact": "hashes_only",
+    "must_dedupe_against_existing_countable_ledgers": [
+      "stage12385",
+      "stage12416",
+      "stage12418",
+      "stage12421"
+    ],
+    "prefer_when_collapsing": [
+      "complete same-source before/after verifier proof",
+      "explicit patch application proof",
+      "explicit stop-or-continue label",
+      "shorter causal event window with all required proof slots",
+      "rarer repo/language/config bucket under quota"
+    ],
+    "private_key_material_allowed_only_inside_private_sampler": [
+      "raw_dataset_locator",
+      "instance_id",
+      "repo_identifier",
+      "base_commit",
+      "patch_hash",
+      "verifier_command_fingerprint",
+      "trajectory_event_window_hash"
+    ],
+    "reject_if_duplicate_of_existing_countable_row": true
+  },
+  "emitted_rows": 0,
+  "emitted_training_rows": 0,
+  "execution_allowed": false,
+  "first_private_sample_quota": {
+    "maximum_candidates_per_language_family": 25,
+    "maximum_candidates_per_repository_family": 10,
+    "maximum_candidates_per_source_config": 25,
+    "maximum_resolved_label_candidates": 50,
+    "maximum_unknown_or_other_label_candidates": 25,
+    "maximum_unresolved_label_candidates": 35,
+    "minimum_absent_from_existing_countable_ledgers": 40,
+    "minimum_before_after_verifier_status_present": 8,
+    "minimum_direct_verifier_anchor_present": 40,
+    "minimum_distinct_language_families": 3,
+    "minimum_distinct_repositories": 10,
+    "minimum_level3_candidates_after_private_replay": 20,
+    "minimum_replayable_patch_trace_candidates": 12,
+    "minimum_state_transition_anchor_present": 30,
+    "minimum_stop_or_continue_anchor_present": 20,
+    "sample_exactly": 100,
+    "target_distinct_language_families": 8
+  },
+  "guardrail_scan": {
+    "issue_count": 0,
+    "issues": [],
+    "overclaim_count": 0,
+    "raw_content_policy_keys_checked": [
+      "locator_values_emitted",
+      "private_only_fields_emitted",
+      "raw_commands_emitted",
+      "raw_diffs_emitted",
+      "raw_issue_bodies_emitted",
+      "raw_outputs_emitted",
+      "raw_patches_emitted",
+      "raw_paths_emitted",
+      "raw_trajectories_emitted",
+      "row_values_emitted",
+      "schema_field_names_emitted",
+      "source_text_emitted",
+      "training_rows_emitted",
+      "urls_emitted"
+    ],
+    "raw_leak_count": 0,
+    "scan_passed": true,
+    "zero_counter_keys_checked": [
+      "admission_allowed",
+      "admitted_rows",
+      "countable_as_new_proof_floor_rows",
+      "countable_as_new_train_support_rows",
+      "countable_new_rows",
+      "countable_rows",
+      "emitted_rows",
+      "emitted_training_rows",
+      "execution_allowed",
+      "patch_apply_attempted_count",
+      "raw_content_emitted",
+      "raw_rows_copied",
+      "raw_rows_inspected",
+      "replay_attempted_count",
+      "sampler_run",
+      "tests_run_count",
+      "training_allowed"
+    ]
+  },
+  "guardrail_scan_passed": true,
+  "input_summary_hashes": {
+    "stage12427_summary": "2afbed3588f284b3ed772dc6",
+    "unbounded_spine": "86c60b75ae9279a369403bc5"
+  },
+  "input_summary_presence": {
+    "stage12427_summary": true,
+    "unbounded_spine": true
+  },
+  "local_artifacts": {
+    "guardrail_scan_name_hash": "fcb65509b4999eac4b96e827",
+    "request_packet_name_hash": "1d3d7c8999cf0beb531fec03",
+    "sampler_contract_name_hash": "e3a376072070a26cfe88a33a"
+  },
+  "next_stage_recommendation": "private_open_swe_admission_packet_sampler_with_raw_material_kept_out_of_public_artifacts",
+  "overclaim_count": 0,
+  "patch_apply_attempted_count": 0,
+  "private_only_fields": [
+    "raw_locator_packet",
+    "private_row_locator",
+    "private_checkout_before_anchor",
+    "private_state_after_anchor",
+    "private_replay_workspace_locator",
+    "private_verifier_invocation_descriptor",
+    "before_status_payload",
+    "after_status_payload",
+    "patch_application_evidence",
+    "ordered_event_payloads",
+    "issue_task_payload",
+    "observation_payload",
+    "stop_continue_label_evidence",
+    "same_source_lineage_material",
+    "reviewer_audit_notes"
+  ],
+  "private_sampler_quotas": {
+    "candidate_supply_rows_are_not_training_rows": true,
+    "candidate_supply_rows_from_metadata": 207489,
+    "max_private_candidates_per_config_initial": 200,
+    "max_private_candidates_per_language_family": 500,
+    "max_private_candidates_per_repo_family": 50,
+    "max_private_candidates_per_result_bucket": 500,
+    "max_private_candidates_to_sample_initial": 2000,
+    "maximum_controlled_fixture_share": 0.0,
+    "minimum_distinct_language_families_before_admission": 3,
+    "minimum_distinct_repo_families_before_admission": 10,
+    "minimum_level3_candidate_floor_before_any_training": 20,
+    "minimum_patch_trace_candidate_floor_before_any_training": 8,
+    "minimum_private_candidates_per_config_when_available": 25,
+    "overclaim_count_required": 0,
+    "raw_leak_count_required": 0,
+    "source_shard_count_from_metadata": 84
+  },
+  "private_sampler_reject_conditions": [
+    "any required proof slot missing",
+    "any raw private-only field appears in public output",
+    "resolved/status metadata is used as repair proof without verifier transition evidence",
+    "patch and verifier co-presence is treated as causality without ordered transition",
+    "dedupe against existing countable ledgers is absent",
+    "repo, language, result, source-family, or config quota would be exceeded",
+    "protected-overlap or raw-leak scan fails",
+    "sampler attempts to mark rows training_allowed in this public request stage"
+  ],
+  "promotion_gate_status": {
+    "artifact_is_public_request_only": "PASS",
+    "no_raw_rows_inspected": "PASS",
+    "no_rows_admitted": "PASS",
+    "no_rows_emitted": "PASS",
+    "private_sampler_not_run": "PASS",
+    "stage12427_safe_metadata_reused_only": "PASS",
+    "training_allowed": "PASS_FALSE"
+  },
+  "proof_slot_requirements": [
+    "direct_source_anchor_present",
+    "direct_verifier_anchor_present",
+    "checkout_before_anchor_present",
+    "patch_apply_evidence_present",
+    "state_after_anchor_present",
+    "before_after_verifier_status_present",
+    "same_verifier_identity_present",
+    "same_source_lineage_present",
+    "causal_linkage_present",
+    "state_transition_anchor_present",
+    "stop_or_continue_anchor_present",
+    "all_required_slots_present"
+  ],
+  "proof_slot_status_counts": {
+    "all_required_slots_present": 0,
+    "causal_transition_present": 0,
+    "checkout_before_anchor_present": 0,
+    "patch_application_proof_present": 0,
+    "protected_overlap_and_leak_audit_present": 0,
+    "same_source_lineage_present": 0,
+    "same_verifier_before_after_present": 0,
+    "stop_or_continue_label_present": 0
+  },
+  "public_safe_output_schema": {
+    "admission_allowed": "boolean_false_until_gate_passes",
+    "admitted_rows": "integer_zero_unless_separate_admission_gate_passes",
+    "bucket_counts": "hash_bucket_to_integer",
+    "candidate_count_private_reviewed": "integer",
+    "dedupe_status_counts": "status_to_integer",
+    "emitted_training_rows": "integer_zero_unless_separate_training_gate_passes",
+    "overclaim_count": "integer",
+    "proof_slot_status_counts": "slot_name_to_status_count",
+    "raw_content_policy": "all_false_public_policy_booleans",
+    "raw_leak_count": "integer",
+    "record_type": "private_open_swe_admission_packet_public_summary_v1",
+    "reject_reason_counts": "reason_to_integer",
+    "safe_row_hashes": "optional_hashes_only_for_admitted_rows_after_gate",
+    "stage": "string",
+    "summary_hash": "hash",
+    "training_allowed": "boolean_false_until_gate_passes"
+  },
+  "public_safe_schema": {
+    "public_material_policy": "hash_boolean_enum_count_only",
+    "record_type": "open_swe_private_admission_public_packet_v1",
+    "required_fields": [
+      "packet_id_hash",
+      "candidate_id_hash",
+      "source_adapter_id",
+      "source_family",
+      "language_family",
+      "repo_family_hash",
+      "root_lineage_hash",
+      "task_ref_hash",
+      "observation_ref_hash",
+      "verifier_ref_hash",
+      "state_before_hash",
+      "state_after_hash",
+      "patch_or_action_hash",
+      "dedupe_key_hash",
+      "collapse_key_hash",
+      "metadata_result_label",
+      "admission_level",
+      "proof_readiness",
+      "source_heldout_split_status",
+      "protected_overlap_status",
+      "raw_leak_count",
+      "overclaim_count",
+      "blocked_reason",
+      "training_allowed",
+      "admission_allowed"
+    ]
+  },
+  "raw_content_emitted": false,
+  "raw_content_policy": {
+    "locator_values_emitted": false,
+    "private_only_fields_emitted": false,
+    "raw_commands_emitted": false,
+    "raw_diffs_emitted": false,
+    "raw_issue_bodies_emitted": false,
+    "raw_outputs_emitted": false,
+    "raw_patches_emitted": false,
+    "raw_paths_emitted": false,
+    "raw_trajectories_emitted": false,
+    "row_values_emitted": false,
+    "schema_field_names_emitted": false,
+    "source_text_emitted": false,
+    "training_rows_emitted": false,
+    "urls_emitted": false
+  },
+  "raw_leak_count": 0,
+  "raw_rows_copied": 0,
+  "raw_rows_inspected": 0,
+  "record_type": "open_swe_private_admission_packet_request_v1",
+  "replay_attempted_count": 0,
+  "required_audit_metrics": {
+    "action_imitation_only_count": "required_in_private_sampler_result",
+    "benchmark_overlap_count": "required_in_private_sampler_result",
+    "candidate_action_present_count": "required_in_private_sampler_result",
+    "config_family_counts": "required_in_private_sampler_result",
+    "correct_policy_proven_count": "required_in_private_sampler_result",
+    "language_floor_count": "required_in_private_sampler_result",
+    "level3_admitted_count": "must_remain_zero_until_separate_admission_gate",
+    "max_duplicate_cluster_size": "required_in_private_sampler_result",
+    "max_model_family_share": "required_in_private_sampler_result",
+    "max_org_share": "required_in_private_sampler_result",
+    "max_repo_share": "required_in_private_sampler_result",
+    "model_family_counts": "required_in_private_sampler_result",
+    "near_duplicate_cluster_count": "required_in_private_sampler_result",
+    "org_counts": "required_hashed_counts",
+    "patch_apply_proven_count": "required_in_private_sampler_result",
+    "patch_trace_admitted_count": "must_remain_zero_until_separate_admission_gate",
+    "raw_command_output_leak_count": "must_be_zero",
+    "raw_diff_leak_count": "must_be_zero",
+    "raw_patch_leak_count": "must_be_zero",
+    "raw_path_url_issue_leak_count": "must_be_zero",
+    "repo_cap_blocked_count": "required_in_private_sampler_result",
+    "repo_counts": "required_hashed_counts",
+    "repo_floor_count": "required_in_private_sampler_result",
+    "resolved_label_shortcut_rate": "required_in_private_sampler_result",
+    "resolved_only_blocked_count": "required_in_private_sampler_result",
+    "resolved_to_repair_claim_count": "must_be_zero",
+    "same_verifier_before_after_count": "required_in_private_sampler_result",
+    "state_before_after_proven_count": "required_in_private_sampler_result",
+    "strict_eval_overlap_count": "must_be_zero",
+    "trajectory_duplicate_rate": "required_in_private_sampler_result",
+    "unknown_provenance_count": "required_in_private_sampler_result",
+    "verifier_causality_pass_count": "required_in_private_sampler_result"
+  },
+  "required_proof_slots": {
+    "causal_transition_not_resolved_metadata": {
+      "private_evidence": [
+        "ordered_events",
+        "chosen_action",
+        "observation",
+        "state_update"
+      ],
+      "public_return": "causal_transition_status",
+      "required": true
+    },
+    "checkout_before_anchor": {
+      "private_evidence": [
+        "checkout_ref",
+        "repo_root",
+        "base_commit"
+      ],
+      "public_return": "checkout_before_anchor_status",
+      "required": true
+    },
+    "patch_application_proof": {
+      "private_evidence": [
+        "patch_text_or_delta",
+        "apply_exit_status",
+        "apply_observation"
+      ],
+      "public_return": "patch_application_status",
+      "required": true
+    },
+    "protected_overlap_and_leak_audit": {
+      "private_evidence": [
+        "protected_split_refs",
+        "overlap_hashes",
+        "leak_scan_report"
+      ],
+      "public_return": "protected_overlap_status",
+      "required": true
+    },
+    "same_source_lineage": {
+      "private_evidence": [
+        "raw_locator",
+        "repo_identity",
+        "commit_before",
+        "state_after_ref"
+      ],
+      "public_return": "same_source_lineage_status",
+      "required": true
+    },
+    "same_verifier_before_after": {
+      "private_evidence": [
+        "verifier_command",
+        "pre_result",
+        "post_result",
+        "verifier_identity"
+      ],
+      "public_return": "same_verifier_before_after_status",
+      "required": true
+    },
+    "stop_or_continue_label": {
+      "private_evidence": [
+        "terminal_decision",
+        "remaining_blockers",
+        "verifier_grounding"
+      ],
+      "public_return": "stop_or_continue_status",
+      "required": true
+    }
+  },
+  "sampler_run": false,
+  "source_adapter_id": "stage12428_public_request_for_private_open_swe_sampler",
+  "source_metadata": {
+    "candidate_count": 207489,
+    "candidate_count_is_admission": false,
+    "candidate_count_is_training_rows": false,
+    "candidate_count_source": "parquet_trajectory_rows_only",
+    "config_count_policy": "hashed_parent_config_labels_only",
+    "config_counts": {
+      "331998b2961f6847": 18,
+      "694a49de3f4c66d2": 23,
+      "7e59e1c3dfa650e6": 20,
+      "a8d83c2b74e07d65": 23
+    },
+    "dataset_family": "open_swe_traces",
+    "extension_counts": {
+      "json": 2,
+      "parquet": 84
+    },
+    "metadata_file_count": 86,
+    "metadata_status_counts": {
+      "json_tool_metadata_container_count_only": 2,
+      "metadata_read": 84
+    },
+    "raw_content_emitted": false,
+    "raw_rows_copied": 0,
+    "raw_rows_inspected": 0,
+    "safe_dataset_root_label": "Open-SWE-Traces",
+    "safe_metadata_available": true,
+    "schema_file_count": 84,
+    "shard_count": 84,
+    "source_decision": "fail_closed_safe_metadata_only_no_rows_admitted",
+    "source_guardrail_scan_passed": true,
+    "source_stage": "stage12427_open_swe_safe_metadata_profiler",
+    "source_training_allowed": false,
+    "trajectory_shard_count": 84
+  },
+  "source_preconditions": {
+    "source_eligible_for_request_only": true,
+    "stage12427_fail_closed": true,
+    "stage12427_guardrail_scan_passed": true,
+    "stage12427_present": true,
+    "stage12427_raw_rows_copied_zero": true,
+    "stage12427_raw_rows_inspected_zero": true,
+    "stage12427_training_allowed_false": true
+  },
+  "stage": "stage12428_open_swe_private_admission_packet_request",
+  "summary_hash": "6ce6f690322403b1ee06f1ef",
+  "tests_run_count": 0,
+  "training_allowed": false,
+  "trajectory_shard_count": 84
+}

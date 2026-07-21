@@ -1,0 +1,537 @@
+{
+  "admission_ladder": {
+    "external_comparable_repair": "before-fail, apply source patch, after-pass under same verifier identity and same root lineage.",
+    "level_0_context_or_state": "Root/task/evidence context without executed verifier or patch. Useful for retrieval/state compression.",
+    "level_1_verifier_observation": "Command/verifier output with no patch trace. Useful for verifier interpretation and stop/continue.",
+    "level_2_patch_context": "Real source diff/patch context with verifier intent but no command output. Useful for patch candidate mining only.",
+    "level_3_single_step_closed_loop": "state_before, chosen action, observation, patch or no-patch reason, verifier result, state_after, stop/continue.",
+    "level_4_multi_step_maintainer_episode": "Two or more linked level_3 transitions under one task/root with terminal decision."
+  },
+  "artifact_type": "multisource_root_decomposition_contract",
+  "canonical_decomposition_schema": {
+    "admission_record": [
+      "root_id",
+      "admission_level",
+      "allowed_training_lanes",
+      "blocked_reason_codes",
+      "strict_eval_eligible",
+      "train_support_eligible",
+      "quality_score",
+      "anti_cheat_status"
+    ],
+    "event_record": [
+      "event_id",
+      "root_id",
+      "episode_id",
+      "order_index",
+      "event_type",
+      "actor",
+      "tool_name",
+      "command",
+      "cwd",
+      "file_refs",
+      "content_ref",
+      "output_ref",
+      "exit_status"
+    ],
+    "evidence_record": [
+      "evidence_id",
+      "root_id",
+      "evidence_type",
+      "artifact_path",
+      "content_digest",
+      "visible_before_action",
+      "role",
+      "lineage_safe"
+    ],
+    "root_record": [
+      "root_id",
+      "root_lineage_key",
+      "repo_id",
+      "repo_family",
+      "language_family",
+      "task_family",
+      "snapshot_before",
+      "snapshot_after",
+      "environment_id",
+      "source_family_id",
+      "split_component_candidate",
+      "admission_level_candidate"
+    ],
+    "source_record": [
+      "source_record_id",
+      "source_family",
+      "source_path",
+      "source_hash",
+      "source_timestamp",
+      "extractor_version"
+    ],
+    "task_record": [
+      "task_id",
+      "root_id",
+      "task_prompt_or_objective",
+      "success_criteria",
+      "selected_verifier_identity",
+      "verifier_evidence_type",
+      "expected_status_family"
+    ],
+    "transition_record": [
+      "transition_id",
+      "root_id",
+      "state_before_ref",
+      "candidate_action_set_ref",
+      "chosen_action_ref",
+      "observation_ref",
+      "patch_trace_ref_or_no_patch_reason",
+      "verifier_result_ref",
+      "state_after_ref",
+      "stop_continue_label"
+    ]
+  },
+  "claim_boundary": "Contract/control artifact only. Defines source decomposition and admission levels. It does not admit roots, create training rows, or authorize model training.",
+  "decision": "build_source_normalization_layer_before_more_scale_claims",
+  "hard_anti_plateau_rules": [
+    "Every extractor reports event_count, candidate_root_count, parsed_root_count, joined_root_count, qc_passed_root_count, and admitted_root_count separately.",
+    "Every training package reports source-family mix and admission-level mix before training.",
+    "No source family may silently dominate a campaign; cap dominant repo/session families or mark train-only.",
+    "Long-context roots and session roots may share schema, but their admission levels must stay separate.",
+    "A raw event without command output is an index entry, not a verifier observation.",
+    "A verifier observation without patch/action state is not a closed-loop episode.",
+    "A patch without before/after verifier evidence is not a comparable repair root."
+  ],
+  "key_interpretation": [
+    "The 345k normalized session events are evidence/action records, not 345k roots.",
+    "The normalized session event file currently has only 9 session IDs and is heavily dominated by one agentkernel session.",
+    "The long-context compiler has 784 useful compiled roots, but they are structural/teacher-state roots, not literal closed-loop repair episodes.",
+    "The correct unit is a normalized source root with attached evidence, task, verifier, events, split lineage, and admission level.",
+    "Every source must emit the same root/task/evidence schema before any training manifest is built."
+  ],
+  "motivation": {
+    "problem": "Raw session/action volume and long-context roots are not flowing into admitted maintainer roots at the needed scale.",
+    "specific_failure": "bottleneck_is_pre_admission_candidate_mining_and_same_source_joining_not_gate_strictness",
+    "target": "Scale toward 500 high-quality root records first, then per-language 1000-root campaigns, without collapsing source quality or admission semantics."
+  },
+  "next_stage_sequence": [
+    {
+      "purpose": "Group normalized session events by session, repo, file refs, commands, patches, and likely task boundaries; emit root candidates with blockers.",
+      "stage": "stage12251_session_event_root_candidate_miner",
+      "training_allowed": false
+    },
+    {
+      "purpose": "Open raw session files for selected candidates and recover full command output, apply_patch bodies, and final state evidence.",
+      "stage": "stage12252_raw_session_trace_rehydrator",
+      "training_allowed": false
+    },
+    {
+      "purpose": "Merge normalized session, long-context, verifier-observation, and commit-pair candidates into one ledger with source-family and admission-level tags.",
+      "stage": "stage12253_multisource_root_ledger_builder",
+      "training_allowed": false
+    },
+    {
+      "purpose": "Report campaign progress by root level and source family; block training until level-specific floors pass.",
+      "stage": "stage12254_root_admission_rollup_v3",
+      "training_allowed": false
+    }
+  ],
+  "observed_source_census": {
+    "session_events": {
+      "command_heads_top": [
+        [
+          "",
+          290134
+        ],
+        [
+          "python",
+          19969
+        ],
+        [
+          "sed",
+          7697
+        ],
+        [
+          "/home/peyton/miniconda3/envs/ai/bin/python",
+          5635
+        ],
+        [
+          "jq",
+          4106
+        ],
+        [
+          "git",
+          3391
+        ],
+        [
+          "rg",
+          2361
+        ],
+        [
+          "find",
+          2022
+        ],
+        [
+          "ls",
+          1587
+        ],
+        [
+          "conda",
+          1481
+        ],
+        [
+          "cat",
+          1226
+        ],
+        [
+          "pytest",
+          831
+        ],
+        [
+          "/home/peyton/miniconda3/envs/trellis/bin/python",
+          476
+        ],
+        [
+          "ps",
+          395
+        ],
+        [
+          "/home/peyton/miniconda3/envs/code_assist_runtime/bin/python",
+          391
+        ],
+        [
+          "tail",
+          318
+        ],
+        [
+          "/usr/bin/env",
+          297
+        ],
+        [
+          "nl",
+          235
+        ],
+        [
+          "perl",
+          209
+        ],
+        [
+          "nvidia-smi",
+          197
+        ],
+        [
+          "npx",
+          197
+        ],
+        [
+          "head",
+          191
+        ],
+        [
+          "cp",
+          169
+        ],
+        [
+          "node",
+          154
+        ],
+        [
+          "du",
+          140
+        ],
+        [
+          "kill",
+          138
+        ],
+        [
+          "CUDA_VISIBLE_DEVICES=1",
+          130
+        ],
+        [
+          "df",
+          129
+        ],
+        [
+          "pwd",
+          121
+        ],
+        [
+          "pgrep",
+          93
+        ],
+        [
+          "for",
+          92
+        ],
+        [
+          "bash",
+          91
+        ],
+        [
+          "npm",
+          89
+        ],
+        [
+          "test",
+          73
+        ],
+        [
+          "env",
+          71
+        ],
+        [
+          "ollama",
+          61
+        ],
+        [
+          "rm",
+          45
+        ],
+        [
+          "cd",
+          45
+        ],
+        [
+          "pkill",
+          44
+        ],
+        [
+          "sqlite3",
+          37
+        ]
+      ],
+      "event_types": [
+        [
+          "commentary_update",
+          113912
+        ],
+        [
+          "response_item",
+          103379
+        ],
+        [
+          "tool_call_exec_command",
+          55354
+        ],
+        [
+          "assistant_message",
+          47157
+        ],
+        [
+          "tool_call_other",
+          14086
+        ],
+        [
+          "patch_applied",
+          4532
+        ],
+        [
+          "user_message",
+          3299
+        ],
+        [
+          "turn_context",
+          3195
+        ],
+        [
+          "compacted",
+          564
+        ],
+        [
+          "session_meta",
+          9
+        ]
+      ],
+      "repo_hints_top": [
+        [
+          "agentkernel-seq2seq-text-lab",
+          323769
+        ],
+        [
+          "bddy",
+          16154
+        ],
+        [
+          "repository_library",
+          5564
+        ]
+      ],
+      "tools_top": [
+        [
+          "",
+          271515
+        ],
+        [
+          "exec_command",
+          55354
+        ],
+        [
+          "write_stdin",
+          8530
+        ],
+        [
+          "update_plan",
+          5388
+        ],
+        [
+          "apply_patch",
+          4532
+        ],
+        [
+          "spawn_agent",
+          66
+        ],
+        [
+          "close_agent",
+          43
+        ],
+        [
+          "wait_agent",
+          28
+        ],
+        [
+          "update_goal",
+          7
+        ],
+        [
+          "send_input",
+          7
+        ],
+        [
+          "get_goal",
+          6
+        ],
+        [
+          "create_goal",
+          3
+        ],
+        [
+          "_get_repo",
+          2
+        ],
+        [
+          "view_image",
+          2
+        ],
+        [
+          "resume_agent",
+          1
+        ],
+        [
+          "_create_pull_request",
+          1
+        ],
+        [
+          "list_mcp_resources",
+          1
+        ],
+        [
+          "list_mcp_resource_templates",
+          1
+        ]
+      ],
+      "top_sessions": [
+        [
+          "rollout-2026-06-12T00-07-50-019eb928-0d9b-7341-8a9f-7c254ae19374",
+          314541
+        ],
+        [
+          "rollout-2026-07-04T15-15-30-019f2db2-f561-7182-baf8-49fe52873de8",
+          16154
+        ],
+        [
+          "rollout-2026-07-05T02-46-53-019f302b-ed9c-7e21-95ae-6404ef7d46de",
+          8066
+        ],
+        [
+          "rollout-2026-07-08T15-10-43-019f4248-03e3-75a1-8f5e-8c3c79ce1e40",
+          3007
+        ],
+        [
+          "rollout-2026-07-08T15-10-43-019f4248-046c-7193-99de-9286c9e7d85e",
+          2557
+        ],
+        [
+          "rollout-2026-07-08T17-05-08-019f42b0-c481-7760-a848-e2deaf1cdf67",
+          483
+        ],
+        [
+          "rollout-2026-07-08T17-05-08-019f42b0-c523-7253-ace1-a55009669a75",
+          363
+        ],
+        [
+          "rollout-2026-07-07T15-44-04-019f3d40-2eef-7cc1-97c8-c1c38e7564e9",
+          168
+        ],
+        [
+          "rollout-2026-07-08T17-39-19-019f42d0-10d0-75a0-874f-bd85f4a8feba",
+          148
+        ]
+      ],
+      "total_events": 345487,
+      "unique_sessions": 9,
+      "unique_source_files": 9
+    },
+    "stage10516_compiled_long_context_roots": 784,
+    "stage10516_compiled_multitarget_rows": 2407,
+    "stage10516_language_counts": {
+      "c_cpp": 67,
+      "python": 702,
+      "rust": 6,
+      "web_js_ts_html": 9
+    }
+  },
+  "scale_targets_without_quality_loss": {
+    "first_campaign": {
+      "candidate_roots": 500,
+      "external_comparable_repair_floor": 25,
+      "languages_min": 3,
+      "level_3_plus_floor": 20,
+      "patch_trace_floor": 8,
+      "repo_families_min": 10
+    },
+    "per_language_campaign": {
+      "c_cpp_roots": 1000,
+      "note": "Counts must be admitted root records by level, not event rows or projections.",
+      "python_roots": 1000,
+      "rust_roots": 1000,
+      "web_js_ts_html_roots": 1000
+    }
+  },
+  "source_routing": [
+    {
+      "input": "runs/local/artifacts/session_like_source_inventory_real/current_raw_parsed_bounded_jsonl_metadata/normalized_session_events.jsonl",
+      "next_extractor": "stage12251_session_event_root_candidate_miner",
+      "not_sufficient_for": "level_3 closed-loop unless raw command output/patch/verifier records are joined from same source",
+      "primary_use": "event/evidence index and candidate root discovery",
+      "source_family": "normalized_codex_session_events"
+    },
+    {
+      "input": "session_like_source_inventory_real raw session files",
+      "next_extractor": "stage12252_same_source_session_trace_parser",
+      "not_sufficient_for": "admission without root/task/verifier identity",
+      "primary_use": "recover full command output, patch bodies, apply_patch events, final responses, and state updates",
+      "source_family": "raw_codex_session_files"
+    },
+    {
+      "input": "stage10516 compiled_root_records / compiled_typed_events / compiled_multitarget_rows",
+      "next_extractor": "stage12254_long_context_root_to_auxiliary_ledger_converter",
+      "not_sufficient_for": "repair-proof or source-heldout closed-loop claims",
+      "primary_use": "level_0/auxiliary root-state curriculum and retrieval/evidence projections",
+      "source_family": "long_context_compiled_roots_stage10516"
+    },
+    {
+      "input": "external_repo_commit_family_v2 and scale_v2 commit pools",
+      "next_extractor": "stage12249_replay_preflight_execution_request",
+      "not_sufficient_for": "admission without before-fail/apply/after-pass command output",
+      "primary_use": "source-bearing diff candidates and potential FAIL_TO_PASS repair roots",
+      "source_family": "external_commit_pair_sources"
+    },
+    {
+      "input": "stage11579/stage11580/stage12123/stage12144/stage12145/stage12206/stage12209 style logs",
+      "next_extractor": "stage12255_verifier_observation_to_level1_ledger_converter",
+      "not_sufficient_for": "patch repair proof unless joined same-lineage with a patch/action tuple",
+      "primary_use": "level_1 verifier interpretation and stop-policy support",
+      "source_family": "verifier_observation_logs"
+    }
+  ],
+  "stage": "stage12250_multisource_root_decomposition_contract",
+  "training_allowed": false
+}

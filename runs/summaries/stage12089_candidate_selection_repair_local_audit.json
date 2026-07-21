@@ -1,0 +1,92 @@
+{
+  "anti_cheat": {
+    "missing_source_metadata_count": 0,
+    "option_mirror_missing_count": 0,
+    "prompt_target_leak_count": 0,
+    "singleton_option_count": 0,
+    "unsafe_loss_mask_count": 0
+  },
+  "candidate_runtime_under_repair": "stage12083_next_action_repair_training_probe",
+  "covered": {
+    "candidate_selection_gains": 16,
+    "candidate_selection_losses": 24,
+    "next_action_gains": 30,
+    "next_action_losses": 22
+  },
+  "created_at_utc": "2026-07-15T00:28:15Z",
+  "decision": "local_audit_passed_training_request_allowed",
+  "next_stage": {
+    "do_not_train_if_failed": false,
+    "recommended": "stage12090_candidate_selection_repair_training_request",
+    "training_allowed": true
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12089_candidate_selection_repair_local_audit/candidate_selection_repair_local_audit.json",
+    "summary_mirror": "runs/summaries/stage12089_candidate_selection_repair_local_audit.json"
+  },
+  "pass_conditions": {
+    "candidate_selection_gains_covered": true,
+    "candidate_selection_losses_covered": true,
+    "next_action_gains_covered": true,
+    "next_action_losses_guarded": true,
+    "no_option_mirror_missing": true,
+    "no_singleton_options": true,
+    "no_target_leak": true,
+    "packet_admitted": true,
+    "rows_160": true,
+    "safe_loss_masks": true,
+    "source_metadata_present": true
+  },
+  "postrun_gate_if_training_request_is_built": {
+    "old_transition_640": ">364/640 required; >386/640 for Gemma win",
+    "protected_filtered_strict": "22/22",
+    "protected_filtered_validation": ">=20/22",
+    "protected_old_canary_strict": "23/23",
+    "protected_old_canary_validation": ">=21/23",
+    "residual_bank": ">=7/10",
+    "source_heldout_smoke": ">=6/12",
+    "transition_candidate_selection": ">=89/160",
+    "transition_continue_or_stop": ">=128/160",
+    "transition_next_action": ">=59/160",
+    "transition_verifier_transition": ">=96/160"
+  },
+  "selected_transition_frontier": "stage11924_transition_listwise_head_only_probe",
+  "source_artifacts": {
+    "design": "runs/summaries/stage12087_candidate_selection_repair_design.json",
+    "packet_rows": "runs/local/artifacts/stage12088_candidate_selection_repair_packet/candidate_selection_repair_rows.jsonl",
+    "packet_summary": "runs/summaries/stage12088_candidate_selection_repair_packet.json",
+    "stage12086_records": "runs/local/artifacts/stage12086_candidate_selection_regression_atlas/candidate_selection_regression_records.jsonl"
+  },
+  "stage": 12089,
+  "stage_name": "stage12089_candidate_selection_repair_local_audit",
+  "subpacket_counts": {
+    "candidate_selection_gain_preservation": 25,
+    "candidate_selection_regression_replay": 60,
+    "next_action_gain_preservation": 45,
+    "selected_verifier_next_action_preservation": 30
+  },
+  "target_value_counts": {
+    "A": 25,
+    "ABSTAIN_OR_ROLLBACK": 31,
+    "B": 47,
+    "C": 13,
+    "PLAN_PATCH": 18,
+    "RETRIEVE_EVIDENCE": 26
+  },
+  "task_counts": {
+    "transition_candidate_selection": 85,
+    "transition_next_action": 75
+  },
+  "thresholds": {
+    "candidate_selection_gains": 12,
+    "candidate_selection_losses": 19,
+    "next_action_gains": 24,
+    "next_action_losses": 13
+  },
+  "totals": {
+    "candidate_selection_gains": 16,
+    "candidate_selection_losses": 24,
+    "next_action_gains": 30,
+    "next_action_losses": 22
+  }
+}

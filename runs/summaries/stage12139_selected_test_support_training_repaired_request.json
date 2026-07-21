@@ -1,0 +1,36 @@
+{
+  "command_json": "runs/local/artifacts/stage12139_selected_test_support_training_repaired_request/training_command.json",
+  "created_at_utc": "2026-07-15T15:45:08Z",
+  "eval_rows": 22,
+  "execute_now": false,
+  "failure_audit": "stage12132a_selected_test_support_training_failure_audit",
+  "gpu_mask_required": [
+    "CUDA_VISIBLE_DEVICES=2",
+    "NVIDIA_VISIBLE_DEVICES=2",
+    "AGENTKERNEL_TRAIN_DEVICE=cuda:0",
+    "AGENTKERNEL_EVAL_DEVICE=cuda:0"
+  ],
+  "manifest": "runs/local/artifacts/stage12137_selected_test_single_token_label_repair/selected_test_support_single_token_label_manifest.jsonl",
+  "manifest_sha256": "cd656efa0345540b9114b57bda87fee10414cb69e5d16e36dfccbebabebf5a52",
+  "max_steps": 192,
+  "output_dir": "runs/local/artifacts/stage12140_selected_test_support_training_repaired_probe/bounded_decoder_probe",
+  "passed": true,
+  "postrun_required": true,
+  "preflight_gates": [
+    "stage12135_step101_batch_schema_preflight passed",
+    "stage12138_step101_single_token_gpu_differentiability_preflight passed"
+  ],
+  "promotion_eligible": false,
+  "runtime_model_save_dir": "runs/local/artifacts/stage12140_selected_test_support_training_repaired_probe/runtime_model",
+  "schema_repairs": [
+    "stage12134_nested_option_schema_repair",
+    "stage12137_single_token_label_repair"
+  ],
+  "source_failed_request": "stage12131_selected_test_support_training_request",
+  "stage": "stage12139_selected_test_support_training_repaired_request",
+  "stage12130_label_failures": [],
+  "stage12130_rows": 25,
+  "strict_rows": 22,
+  "train_rows": 665,
+  "training_gate": "May execute as repaired diagnostic/probe; no promotion without postrun protected/transition audit."
+}

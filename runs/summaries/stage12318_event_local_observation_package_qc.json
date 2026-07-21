@@ -1,0 +1,57 @@
+{
+  "admitted_training_tasks": 0,
+  "blocked_reason_counts": {
+    "missing_rule_or_transition_key": 173,
+    "missing_training_grade_verifier_status": 165,
+    "not_level3_repair_causality": 500,
+    "policy_label_not_reviewed": 500,
+    "repo_family_not_recovered": 500,
+    "state_delta_not_semantically_reviewed": 500
+  },
+  "candidate_bucket_counts": {
+    "MISSING::NO_PATCH_OBSERVED::NO_VERIFIER_OBSERVED": 144,
+    "MISSING::PATCH_APPLIED::NO_VERIFIER_OBSERVED": 19,
+    "MISSING::PATCH_APPLIED::VERIFIER_ENV_BLOCKED_OBSERVED": 6,
+    "MISSING::PATCH_APPLIED::VERIFIER_TIMEOUT_OBSERVED": 4,
+    "RULE_NO_PATCH_VERIFIER_OBSERVATION::NO_PATCH_OBSERVED::VERIFIER_ENV_BLOCKED_OBSERVED": 6,
+    "RULE_NO_PATCH_VERIFIER_OBSERVATION::NO_PATCH_OBSERVED::VERIFIER_FAILURE_OBSERVED": 35,
+    "RULE_NO_PATCH_VERIFIER_OBSERVATION::NO_PATCH_OBSERVED::VERIFIER_PASS_OBSERVED": 94,
+    "RULE_NO_PATCH_VERIFIER_OBSERVATION::NO_PATCH_OBSERVED::VERIFIER_TIMEOUT_OBSERVED": 11,
+    "RULE_PATCH_APPLICATION_FAILED::PATCH_FAILED::NO_VERIFIER_OBSERVED": 2,
+    "RULE_PATCH_APPLICATION_FAILED::PATCH_FAILED::VERIFIER_ENV_BLOCKED_OBSERVED": 2,
+    "RULE_PATCH_APPLICATION_FAILED::PATCH_FAILED::VERIFIER_FAILURE_OBSERVED": 32,
+    "RULE_PATCH_APPLICATION_FAILED::PATCH_FAILED::VERIFIER_PASS_OBSERVED": 36,
+    "RULE_PATCH_APPLICATION_FAILED::PATCH_FAILED::VERIFIER_TIMEOUT_OBSERVED": 3,
+    "RULE_PATCH_APPLIED_THEN_VERIFIER_FAIL::PATCH_APPLIED::VERIFIER_FAILURE_OBSERVED": 48,
+    "RULE_PATCH_APPLIED_THEN_VERIFIER_PASS::PATCH_APPLIED::VERIFIER_PASS_OBSERVED": 58
+  },
+  "claim_boundary": "QC artifact only. Stage12317 produced 500 review candidates, not 500 admitted training tasks.",
+  "decision": "event_local_500_candidate_package_qc_complete_training_blocked",
+  "dominance": {
+    "top_chat_count": 36,
+    "top_chat_fraction": 0.072,
+    "unique_chat_hashes": 138
+  },
+  "input_records": 500,
+  "level3_admitted": 0,
+  "next_stage": {
+    "purpose": "Review a capped, balanced subset of event-local candidates and admit only target-hidden observation/status tasks.",
+    "stage": "stage12319_event_local_semantic_review_materializer",
+    "training_allowed": false
+  },
+  "patch_trace_admitted": 0,
+  "realistic_admission_upper_bound": {
+    "after_semantic_review": "not_more_than_review_candidates_and_likely_less_due_repo/state_delta_policy_checks",
+    "immediate_without_review": 0,
+    "minimum_next_target": "review 100 candidates into >=50 admitted event-local observation train-support tasks before scaling further"
+  },
+  "review_candidates": 325,
+  "risky_candidate_action_field_counts": {},
+  "stage": "stage12318_event_local_observation_package_qc",
+  "status_counts": {
+    "blocked_before_semantic_review": 175,
+    "semantic_review_candidate": 325
+  },
+  "training_allowed": false,
+  "unique_task_windows": 500
+}

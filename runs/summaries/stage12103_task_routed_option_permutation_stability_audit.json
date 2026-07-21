@@ -1,0 +1,517 @@
+{
+  "blocked": [],
+  "created_at_utc": "2026-07-15T01:05:36Z",
+  "decision": "option_permutation_stability_passed",
+  "device": "cuda:0",
+  "missing": [],
+  "outputs": {
+    "audit_dir": "runs/local/artifacts/stage12103_task_routed_option_permutation_stability_audit",
+    "permuted_rows": "runs/local/artifacts/stage12103_task_routed_option_permutation_stability_audit/task_routed_transition_permuted_rows.jsonl",
+    "summary": "runs/local/artifacts/stage12103_task_routed_option_permutation_stability_audit/task_routed_option_permutation_stability_audit.json",
+    "summary_mirror": "runs/summaries/stage12103_task_routed_option_permutation_stability_audit.json"
+  },
+  "permutations_per_row": 3,
+  "permuted_by_task": {
+    "transition_candidate_selection": {
+      "accuracy": 0.575,
+      "correct": 276,
+      "miss_count": 204,
+      "rows": 480
+    },
+    "transition_continue_or_stop": {
+      "accuracy": 0.8,
+      "correct": 384,
+      "miss_count": 96,
+      "rows": 480
+    },
+    "transition_next_action": {
+      "accuracy": 0.36666666666666664,
+      "correct": 176,
+      "miss_count": 304,
+      "rows": 480
+    },
+    "transition_verifier_transition": {
+      "accuracy": 0.6,
+      "correct": 288,
+      "miss_count": 192,
+      "rows": 480
+    }
+  },
+  "permuted_score": {
+    "accuracy": 0.5854166666666667,
+    "correct": 1124,
+    "miss_count": 796,
+    "rows": 1920
+  },
+  "requirements_from_stage12102": {
+    "minimum": {
+      "no_task_rows_missing": true,
+      "permutations_per_row": 3,
+      "routed_correct_under_majority_vote": ">=375/640",
+      "rows": 640,
+      "stable_prediction_rate": ">=0.95 preferred, >=0.90 minimum for diagnostic"
+    },
+    "purpose": "Ensure the routed lift is not option-order/label-position brittle.",
+    "required": true,
+    "route_policy": {
+      "transition_candidate_selection": "stage12096_composite",
+      "transition_continue_or_stop": "stage11924_semantic",
+      "transition_next_action": "stage12083_semantic",
+      "transition_verifier_transition": "stage11924_semantic"
+    }
+  },
+  "route_policy": {
+    "transition_candidate_selection": "stage12096_composite",
+    "transition_continue_or_stop": "stage11924_semantic",
+    "transition_next_action": "stage12083_semantic",
+    "transition_verifier_transition": "stage11924_semantic"
+  },
+  "row_counts": {
+    "base_rows": 640,
+    "blocked_rows": 0,
+    "missing_route_cards": 0,
+    "permuted_rows": 1920
+  },
+  "runtime_initialization": {
+    "stage11924_semantic": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_semantic_candidate_head",
+        "bounded_choice_contrast_margin": 0.08,
+        "bounded_choice_contrast_weight": 0.3,
+        "bounded_choice_root_group_aux_weight": 0.0,
+        "bounded_choice_same_role_listwise_weight": 0.5,
+        "bounded_choice_train_head_only": true,
+        "bounded_choice_verifier_value_listwise_weight": 0.7,
+        "bounded_decoder_train_sampler": "task_balanced",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 280,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/model_state.pt",
+      "weights_sha256": "13bd2cf952d86261593c5044d59018084bdb1675feed57d72b7300fe5d256c88"
+    },
+    "stage12083_semantic": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12083_next_action_repair_training_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_semantic_candidate_head",
+        "bounded_choice_contrast_margin": 0.06,
+        "bounded_choice_contrast_weight": 0.25,
+        "bounded_choice_root_group_aux_weight": 0.0,
+        "bounded_choice_same_role_listwise_weight": 0.5,
+        "bounded_choice_train_head_only": true,
+        "bounded_choice_verifier_value_listwise_weight": 0.7,
+        "bounded_decoder_train_sampler": "task_balanced",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12083_next_action_repair_training_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 280,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12083_next_action_repair_training_probe/runtime_model/model_state.pt",
+      "weights_sha256": "595582d24c1a6d0102558c247708a210aa4c98c7c6b59a75bd3634ce72c32b79"
+    },
+    "stage12096_composite": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head",
+        "bounded_choice_transition_candidate_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12096_candidate_head_only_candidate_selection_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_transition_candidate_head",
+        "bounded_choice_contrast_margin": 0.06,
+        "bounded_choice_contrast_weight": 0.25,
+        "bounded_choice_root_group_aux_weight": 0.0,
+        "bounded_choice_same_role_listwise_weight": 0.5,
+        "bounded_choice_train_head_only": true,
+        "bounded_choice_verifier_value_listwise_weight": 0.7,
+        "bounded_decoder_train_sampler": "task_balanced",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12096_candidate_head_only_candidate_selection_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 284,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12096_candidate_head_only_candidate_selection_probe/runtime_model/model_state.pt",
+      "weights_sha256": "c3247afb47aa9ac8482fce77681436ed4d46c221c2d1d5d248dc432e91351ef7"
+    }
+  },
+  "source_artifacts": {
+    "runtimes": {
+      "stage11924_semantic": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+      "stage12083_semantic": "runs/local/artifacts/stage12083_next_action_repair_training_probe/runtime_model/runtime_model_bundle.json",
+      "stage12096_composite": "runs/local/artifacts/stage12096_candidate_head_only_candidate_selection_probe/runtime_model/runtime_model_bundle.json"
+    },
+    "stage12102_plan": "runs/summaries/stage12102_task_routed_gap_targeted_data_plan.json",
+    "transition_rows": "runs/local/artifacts/stage11897_transition_record_projection_rows/transition_projection_rows.jsonl"
+  },
+  "stability": {
+    "majority_correct_accuracy": 0.5875,
+    "majority_correct_rows": 376,
+    "stable_semantic_prediction_rate": 0.971875,
+    "stable_semantic_prediction_rows": 622,
+    "total_original_rows": 640,
+    "unanimous_correct_accuracy": 0.578125,
+    "unanimous_correct_rows": 370
+  },
+  "stage": 12103,
+  "stage_name": "stage12103_task_routed_option_permutation_stability_audit",
+  "unstable_examples": [
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}"
+      ],
+      "predicted_option_values": [
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH"
+      ],
+      "row_id": "stage11897::stage11896::stage11749::model_stack::python::runtime_activation_support::verifier_outcome_selected_test::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        true,
+        true
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH",
+        "PLAN_PATCH"
+      ],
+      "row_id": "stage11897::stage11896::stage11771::bitsandbytes::python::cuda_library_path_support::patch_impact_source_surface::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11791::peft::python::method_comparison_sanitizer_support::verifier_outcome_selected_function_test::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH"
+      ],
+      "row_id": "stage11897::stage11896::stage11817::repository_library_python_algorithms::python::knapsack_support::evidence_citation_selected_verifier::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11857::einops::python::parsed_expression_support::symptom_localization_source_surface::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}"
+      ],
+      "predicted_option_values": [
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH"
+      ],
+      "row_id": "stage11897::stage11896::stage11861::hyper_connections::python::manual_hyper_connection_support::evidence_citation_selected_verifier::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "PLAN_PATCH",
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11821::codex_agent_identity::rust::jwks_url_support::verifier_outcome_selected_inline_test::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH",
+        "PLAN_PATCH"
+      ],
+      "row_id": "stage11897::stage11896::stage11821::codex_agent_identity::rust::jwks_url_support::evidence_citation_selected_verifier::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11829::codex_apply_patch::rust::apply_patch_hunks_support::verifier_outcome_selected_inline_test::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11837::codex_tools::rust::request_user_input_tool_support::evidence_citation_selected_verifier::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        true,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}"
+      ],
+      "predicted_option_values": [
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH"
+      ],
+      "row_id": "stage11897::stage11896::stage11783::pytorch::c_cpp::simple_torch_test_support::verifier_removed_abstain::next_action"
+    },
+    {
+      "corrects": [
+        true,
+        false,
+        true
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11787::pytorch::c_cpp::check_torch_mkl_support::verifier_removed_abstain::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        false,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH",
+        "PLAN_PATCH"
+      ],
+      "row_id": "stage11897::stage11896::stage11807::pytorch::c_cpp::check_torch_cuda_support::answerable_evidence_citation_build_run_constraint::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        true,
+        true
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11825::whisper_cpp::c_cpp::common_utf8_support::verifier_removed_abstain::next_action"
+    },
+    {
+      "corrects": [
+        true,
+        true,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH"
+      ],
+      "row_id": "stage11897::stage11896::stage11877::google_benchmark::c_cpp::cxx11_support::answerable_abstain_rejection::next_action"
+    },
+    {
+      "corrects": [
+        true,
+        true,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "PLAN_PATCH",
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11877::google_benchmark::c_cpp::basic_support::answerable_patch_impact_candidate_surface::next_action"
+    },
+    {
+      "corrects": [
+        false,
+        true,
+        false
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11877::google_benchmark::c_cpp::repetitions_support::answerable_patch_impact_candidate_surface::next_action"
+    },
+    {
+      "corrects": [
+        true,
+        false,
+        true
+      ],
+      "predicted_option_identities": [
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"PLAN_PATCH\"}",
+        "{\"artifact_type\":\"action\",\"evidence_ids\":[],\"role\":\"allowed_maintenance_action\",\"value\":\"ABSTAIN_OR_ROLLBACK\"}"
+      ],
+      "predicted_option_values": [
+        "ABSTAIN_OR_ROLLBACK",
+        "PLAN_PATCH",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "row_id": "stage11897::stage11896::stage11877::google_benchmark::c_cpp::skip_with_error_support::answerable_abstain_rejection::next_action"
+    }
+  ]
+}

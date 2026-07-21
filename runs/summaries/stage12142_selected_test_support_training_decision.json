@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-07-15T15:49:46Z",
+  "decision": "reject_stage12140_do_not_promote",
+  "next_action": "Do not add more tiny same-shape selected-test support to the same shared semantic head. Build more independent selected-test roots and/or route selected-test rows to task-specific heads, while keeping stage11924/stage12099 selected for scoring.",
+  "promotion_eligible": false,
+  "selected_frontier_unchanged": {
+    "compact_frontier": "stage11507 + encoder_option_retrieval_evidence_judgment_head",
+    "product_routed_candidate": "stage12099 remains separate routed candidate at 375/640 pending broader confirmation",
+    "transition_frontier": "stage11924 + encoder_option_retrieval_semantic_candidate_head"
+  },
+  "source_artifacts": {
+    "postrun_audit": "runs/local/artifacts/stage12141_selected_test_support_training_repaired_postrun_audit/postrun_audit.json",
+    "repaired_manifest": "runs/local/artifacts/stage12137_selected_test_single_token_label_repair/selected_test_support_single_token_label_manifest.jsonl",
+    "runtime": "runs/local/artifacts/stage12140_selected_test_support_training_repaired_probe/runtime_model/runtime_model_bundle.json"
+  },
+  "stage": "stage12142_selected_test_support_training_decision",
+  "stage12140_result": {
+    "gates": {
+      "filtered_strict_preserved": true,
+      "filtered_validation_preserved": true,
+      "old_canary_strict_preserved": true,
+      "old_canary_validation_preserved": true,
+      "residual_preserved": true,
+      "smoke_preserved": true,
+      "transition_projection_beats_gemma_386": false,
+      "transition_projection_improves_stage11924_baseline": false,
+      "transition_projection_retains_stage11924_baseline": false
+    },
+    "protected_gates_preserved": true,
+    "stage11924_transition_projection_correct": 364,
+    "transition_projection_correct": 352
+  },
+  "useful_progress": [
+    "Stage12132 failure root-caused to selected-test row schema/label geometry",
+    "Stage12134 fixed missing nested opaque_options",
+    "Stage12137 fixed multi-token opaque labels",
+    "Stage12138 proved the formerly failing step-101 batch is differentiable",
+    "Stage12140 completed and saved runtime but regressed transition projection"
+  ]
+}

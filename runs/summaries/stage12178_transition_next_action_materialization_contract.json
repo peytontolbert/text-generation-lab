@@ -1,0 +1,122 @@
+{
+  "audit_requirements": [
+    "root_lineage_key absent from protected strict/residual/source-heldout roots",
+    "selected-test anchor is exact when claimed, otherwise verifier_evidence_type must be build_config/dependency/static/insufficient",
+    "target action not recoverable by keyword overlap alone",
+    "option permutation stable on pre-admission smoke",
+    "per-root target diversity >= 3 next_action classes when counterfactual rows are generated"
+  ],
+  "decision": "contract_ready_no_rows_no_training",
+  "minimum_admission_batch": {
+    "heldout_roots_reserved": 8,
+    "languages_minimum": {
+      "c_cpp": 6,
+      "python": 6,
+      "rust": 6,
+      "web_js_ts_html": 6
+    },
+    "rows": 120,
+    "target_action_minimum_per_class": {
+      "FINISH": 15,
+      "PLAN_PATCH": 15,
+      "RETRIEVE_EVIDENCE": 15,
+      "RUN_VERIFIER": 15,
+      "SELECT_TEST": 15
+    },
+    "unique_roots": 30
+  },
+  "required_counterfactuals_per_root": [
+    {
+      "correct_next_action": "SELECT_TEST or RUN_VERIFIER",
+      "hard_negative": "PLAN_PATCH",
+      "state": "localized_no_verifier"
+    },
+    {
+      "correct_next_action": "RUN_VERIFIER",
+      "hard_negative": "FINISH",
+      "state": "verifier_selected_not_run"
+    },
+    {
+      "correct_next_action": "RETRIEVE_EVIDENCE",
+      "hard_negative": "PLAN_PATCH",
+      "state": "source_surface_only"
+    },
+    {
+      "correct_next_action": "FINISH",
+      "hard_negative": "RUN_VERIFIER",
+      "state": "verifier_passed_and_requirement_covered"
+    },
+    {
+      "correct_next_action": "ABSTAIN_OR_ROLLBACK or RETRIEVE_EVIDENCE",
+      "hard_negative": "FINISH",
+      "state": "verifier_removed_or_underhydrated"
+    }
+  ],
+  "row_contract": {
+    "disallowed_source_paths": [
+      "node_modules/",
+      "/target/",
+      ".git/",
+      "__pycache__/",
+      ".venv/"
+    ],
+    "disallowed_target_shortcuts": [
+      "gold label visible before options",
+      "candidate order determines answer",
+      "single-option rows",
+      "all tasks collapsed to selected_test_backed_verifier_candidate"
+    ],
+    "must_include_candidate_metadata": [
+      "action_role",
+      "artifact_type",
+      "evidence_ids",
+      "preconditions",
+      "why_wrong_if_negative"
+    ],
+    "must_include_state_fields": [
+      "observed_source_evidence",
+      "observed_verifier_evidence",
+      "known_hypothesis",
+      "last_action",
+      "last_verifier_transition",
+      "open_question"
+    ],
+    "must_include_verifier_metadata": [
+      "verifier_evidence_type",
+      "verifier_command_or_test_id",
+      "observed_transition_or_missing_reason"
+    ],
+    "recommended_optional_candidates": [
+      "LOCALIZE_FAILURE",
+      "ABSTAIN_OR_ROLLBACK",
+      "ROLLBACK_PATCH",
+      "INSPECT_SYMBOL"
+    ],
+    "required_candidates": [
+      "SELECT_TEST",
+      "RUN_VERIFIER",
+      "RETRIEVE_EVIDENCE",
+      "PLAN_PATCH",
+      "FINISH"
+    ],
+    "required_task_type": "transition_next_action"
+  },
+  "selected_frontiers": {
+    "best_next_action_component": "stage12083:59/160",
+    "gemma_same_manifest": "386/640",
+    "product_route": "stage12099:375/640",
+    "standalone_transition": "stage11924:364/640"
+  },
+  "source_gap_atlas": "runs/summaries/stage12177_transition_next_action_gap_worklist.json",
+  "stage": "stage12178_transition_next_action_materialization_contract",
+  "target_failure_family": "transition_next_action",
+  "training_policy_after_admission": {
+    "first_probe": "head-only or route-only diagnostic, no full shared encoder updates",
+    "promotion_gate": [
+      "product route >375/640",
+      "next_action >59/160",
+      "protected gates preserved",
+      "no option-order brittleness"
+    ]
+  }
+}

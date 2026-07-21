@@ -1,0 +1,224 @@
+{
+  "admission_allowed": false,
+  "admitted_rows": 0,
+  "blocked_next_stage_reason": "policy_label_semantic_review_required_before_level3_or_patch_trace_admission",
+  "blocker_counts": {
+    "level3_control_contract_missing": 185,
+    "mixed_patch_status_repair_transition_rejected": 44,
+    "observed_action_only_not_policy_gold": 94,
+    "patch_failed_repair_transition_rejected": 15,
+    "policy_label_not_admitted": 185,
+    "repo_family_low_confidence": 3,
+    "repo_identity_recovery_required": 185,
+    "repo_identity_review_required": 94,
+    "self_repo_dominated_scale_claim_blocked": 72,
+    "state_delta_semantic_review_required": 185,
+    "verifier_identity_or_transition_missing": 185,
+    "verifier_nonpass_repair_transition_rejected": 34,
+    "verifier_relevance_semantic_review_required": 60,
+    "verifier_status_not_training_grade": 34
+  },
+  "candidate_denominator_after_policy_label_filter": 0,
+  "candidate_denominator_total": 185,
+  "candidate_denominator_with_language": 94,
+  "candidate_denominator_with_repo_family": 94,
+  "candidate_denominator_with_root_id": 94,
+  "canonical_lane_name": "session_like_materializer_upgrade",
+  "claim_boundary": "fail_closed aggregate postrun only; no row admission, no model-facing row emission, no execution, and no policy-gold label claim",
+  "control_gate_status": {
+    "artifact_is_control_only": "PASS",
+    "no_admission": "PASS_FALSE",
+    "no_execution": "PASS_FALSE",
+    "no_model_facing_rows": "PASS_ZERO",
+    "no_training": "PASS_FALSE",
+    "observed_action_not_policy_gold": "PASS_REVIEW_QUEUE",
+    "policy_filter_blocks_all_candidates": "PASS_ZERO",
+    "raw_public_material_absent": "PASS"
+  },
+  "countable_new_rows": 0,
+  "decision": "fail_closed_session_like_materializer_upgrade_postrun_training_still_blocked",
+  "emitted_training_rows": 0,
+  "execution_allowed": false,
+  "guardrail_scan": {
+    "issue_count": 0,
+    "issues": [],
+    "overclaim_count": 0,
+    "raw_content_policy_keys_checked": [
+      "model_facing_rows_emitted",
+      "private_row_values_emitted",
+      "raw_commands_emitted",
+      "raw_outputs_emitted",
+      "raw_patches_or_diffs_emitted",
+      "raw_paths_emitted",
+      "raw_session_text_emitted",
+      "raw_source_text_emitted",
+      "raw_urls_emitted"
+    ],
+    "raw_leak_count": 0,
+    "scan_passed": true,
+    "scan_scope": "stage12438_public_aggregate_control_payload_no_raw_rows",
+    "zero_counter_keys_checked": [
+      "admission_allowed",
+      "admitted_rows",
+      "countable_new_rows",
+      "emitted_training_rows",
+      "execution_allowed",
+      "overclaim_count",
+      "raw_leak_count",
+      "training_allowed"
+    ]
+  },
+  "guardrail_scan_passed": true,
+  "input_status": {
+    "stage12386_transition_local_event_joiner_gap_audit": {
+      "guardrail_status": "legacy_no_scan_fail_closed",
+      "present": true,
+      "record_type": "stage12386_transition_local_event_joiner_gap_audit"
+    },
+    "stage12387_transition_local_materializer_upgrade_worklist": {
+      "guardrail_status": "legacy_no_scan_fail_closed",
+      "present": true,
+      "record_type": "stage12387_transition_local_materializer_upgrade_worklist"
+    },
+    "stage12388_transition_local_candidate_recovery": {
+      "guardrail_status": "legacy_no_scan_fail_closed",
+      "present": true,
+      "record_type": "stage12388_transition_local_candidate_recovery"
+    },
+    "stage12389_transition_candidate_semantic_review": {
+      "guardrail_status": "legacy_no_scan_fail_closed",
+      "present": true,
+      "record_type": "stage12389_transition_candidate_semantic_review"
+    },
+    "stage12436_parallel_two_lane_control_request": {
+      "guardrail_status": "passed",
+      "present": true,
+      "record_type": "stage12436_parallel_two_lane_control_request"
+    }
+  },
+  "language_recovered_count": 94,
+  "level3_candidate_count": 0,
+  "level3_requirements_present_for_all_candidates": false,
+  "manual_review_required_count": 185,
+  "next_stage_recommendation": "Build a raw-private semantic review packet for the 185 session-like candidates, focused on policy-valid chosen_action, verifier relevance, state_delta correctness, and stop_decision correctness. Do not train or admit rows until policy_label_not_observed_action_imitation_count is nonzero and a separate admission gate proves Level-3 completeness without raw leakage.",
+  "observed_action_imitation_policy_label_count": 94,
+  "overclaim_count": 0,
+  "patch_trace_candidate_count": 0,
+  "patch_trace_requirements_complete": false,
+  "policy_label_counters": {
+    "manual_review_required_count": 185,
+    "observed_action_imitation_policy_label_count": 94,
+    "policy_label_not_observed_action_imitation_count": 0,
+    "policy_label_review_queue_count": 185
+  },
+  "policy_label_not_observed_action_imitation_count": 0,
+  "policy_label_review_queue_count": 185,
+  "postrun_public_summary_denominator": 185,
+  "public_artifact_manifest": [
+    {
+      "artifact_file": "stage12438_session_like_materializer_upgrade_postrun.json",
+      "overclaim_count": 0,
+      "public_safe": true,
+      "raw_leak_count": 0,
+      "raw_urls_emitted": false
+    },
+    {
+      "artifact_file": "summary.json",
+      "overclaim_count": 0,
+      "public_safe": true,
+      "raw_leak_count": 0,
+      "raw_urls_emitted": false
+    },
+    {
+      "artifact_file": "public_counter_snapshot.json",
+      "overclaim_count": 0,
+      "public_safe": true,
+      "raw_leak_count": 0,
+      "raw_urls_emitted": false
+    },
+    {
+      "artifact_file": "blocker_counts.json",
+      "overclaim_count": 0,
+      "public_safe": true,
+      "raw_leak_count": 0,
+      "raw_urls_emitted": false
+    },
+    {
+      "artifact_file": "policy_label_counters.json",
+      "overclaim_count": 0,
+      "public_safe": true,
+      "raw_leak_count": 0,
+      "raw_urls_emitted": false
+    },
+    {
+      "artifact_file": "recovered_field_counters.json",
+      "overclaim_count": 0,
+      "public_safe": true,
+      "raw_leak_count": 0,
+      "raw_urls_emitted": false
+    },
+    {
+      "artifact_file": "input_status.json",
+      "overclaim_count": 0,
+      "public_safe": true,
+      "raw_leak_count": 0,
+      "raw_urls_emitted": false
+    },
+    {
+      "artifact_file": "public_artifact_manifest.json",
+      "overclaim_count": 0,
+      "public_safe": true,
+      "raw_leak_count": 0,
+      "raw_urls_emitted": false
+    },
+    {
+      "artifact_file": "guardrail_scan.json",
+      "overclaim_count": 0,
+      "public_safe": true,
+      "raw_leak_count": 0,
+      "raw_urls_emitted": false
+    }
+  ],
+  "raw_content_policy": {
+    "model_facing_rows_emitted": false,
+    "private_row_values_emitted": false,
+    "raw_commands_emitted": false,
+    "raw_outputs_emitted": false,
+    "raw_patches_or_diffs_emitted": false,
+    "raw_paths_emitted": false,
+    "raw_session_text_emitted": false,
+    "raw_source_text_emitted": false,
+    "raw_urls_emitted": false
+  },
+  "raw_leak_count": 0,
+  "record_type": "session_like_materializer_upgrade_postrun_public_control_v1",
+  "recovered_field_counters": {
+    "language_recovered_count": 94,
+    "repo_family_recovered_count": 94,
+    "root_id_recovered_count": 94,
+    "safe_command_result_class_recovered_count": 94,
+    "semantic_rule_id_recovered_count": 94,
+    "state_update_recovered_count": 94,
+    "stop_decision_recovered_count": 94,
+    "transition_function_key_recovered_count": 94,
+    "verifier_transition_recovered_count": 94
+  },
+  "repo_family_recovered_count": 94,
+  "root_id_recovered_count": 94,
+  "safe_command_result_class_recovered_count": 94,
+  "semantic_review_complete": true,
+  "semantic_rule_id_recovered_count": 94,
+  "source_record_counts": {
+    "stage12386_records_audited": 4374,
+    "stage12387_worklist_records": 185,
+    "stage12388_recovery_records": 94,
+    "stage12389_review_records": 94
+  },
+  "stage": "stage12438_session_like_materializer_upgrade_postrun",
+  "state_update_recovered_count": 94,
+  "stop_decision_recovered_count": 94,
+  "summary_hash": "0a1eb6e7b44c3fe725f07278",
+  "training_allowed": false,
+  "transition_function_key_recovered_count": 94,
+  "verifier_transition_recovered_count": 94
+}

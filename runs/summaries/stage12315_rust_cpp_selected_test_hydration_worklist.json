@@ -1,0 +1,80 @@
+{
+  "admitted_roots": 0,
+  "blocker_counts": {
+    "canonical_candidate_set_rewrite": 2,
+    "canonical_candidate_set_rewrite_required": 2,
+    "commit_sha": 15,
+    "executed_selected_test_log_missing": 15,
+    "repo_family_normalization_required": 4,
+    "selected_test_ids": 15,
+    "selected_verifier_command_or_log_ref": 15,
+    "source_hash_refs": 18,
+    "test_hash_refs": 18
+  },
+  "claim_boundary": "Hydration worklist only. No rows admitted, no tests executed, no hashes captured, no training/eval claim.",
+  "decision": "rust_cpp_selected_test_hydration_worklist_ready_training_blocked",
+  "hydration_route_counts": {
+    "canonical_rewrite_from_stage12130": 2,
+    "full_hydration_required": 13,
+    "local_checkout_hash_capture": 3,
+    "offline_selected_test_execution_required": 2
+  },
+  "language_counts": {
+    "c_cpp": 10,
+    "rust": 10
+  },
+  "next_stage": {
+    "purpose": "Execute deterministic no-network hash capture/canonical rewrite for priority 1-2 roots only.",
+    "stage": "stage12317_rust_cpp_hash_capture_and_canonical_rewrite",
+    "training_allowed": false
+  },
+  "priority_counts": {
+    "1": 2,
+    "2": 3,
+    "3": 2,
+    "4": 2,
+    "6": 11
+  },
+  "queue_records": 20,
+  "stage": "stage12315_rust_cpp_selected_test_hydration_worklist",
+  "subagent_findings_encoded": [
+    "magic_enum and fast_float are closest C/C++ roots but require canonical rewrite from Stage12130 metadata.",
+    "anyhow, predicates-rs, and toml are closest Rust roots but need source/test hash capture from recorded local checkouts.",
+    "uuid/aho-corasick/quote/time need repo-family normalization before plan-backed hydration can be trusted."
+  ],
+  "top_priority_items": [
+    {
+      "canonical_repo_family": "Neargye/magic_enum",
+      "language_family": "c_cpp",
+      "repo_family": "Neargye/magic_enum",
+      "route": "canonical_rewrite_from_stage12130"
+    },
+    {
+      "canonical_repo_family": "fastfloat/fast_float",
+      "language_family": "c_cpp",
+      "repo_family": "fastfloat/fast_float",
+      "route": "canonical_rewrite_from_stage12130"
+    },
+    {
+      "canonical_repo_family": "assert-rs/predicates-rs",
+      "language_family": "rust",
+      "repo_family": "assert-rs/predicates-rs",
+      "route": "local_checkout_hash_capture"
+    },
+    {
+      "canonical_repo_family": "dtolnay/anyhow",
+      "language_family": "rust",
+      "repo_family": "dtolnay/anyhow",
+      "route": "local_checkout_hash_capture"
+    },
+    {
+      "canonical_repo_family": "toml-rs/toml",
+      "language_family": "rust",
+      "repo_family": "toml-rs/toml",
+      "route": "local_checkout_hash_capture"
+    }
+  ],
+  "training_allowed": false,
+  "training_rows_emitted": 0,
+  "work_items": 20
+}

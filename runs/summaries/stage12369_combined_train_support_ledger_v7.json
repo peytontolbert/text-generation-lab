@@ -1,0 +1,88 @@
+{
+  "admitted_rows_from_audited_sources": 2,
+  "anti_collapse_failures_should_be_empty": {},
+  "base_ledger_ref": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage12352_combined_train_support_ledger_v4.json",
+  "base_train_support_rows": 166,
+  "claim_boundary": "Ledger/audit artifact. Counts only selected-test candidate-selection rows from collapsed root projections; quarantines non-task-specific projections.",
+  "collapse_groups": {
+    "stage12360_einops_candidate_only": [
+      {
+        "collapsed": true,
+        "root_id": "stage12358::python::einops_parsing",
+        "target_semantic_values": [
+          "candidate_0"
+        ]
+      }
+    ],
+    "stage12362_git_rust_candidate_only": [
+      {
+        "collapsed": true,
+        "root_id": "stage12362::rust::gitcore_varint_decode",
+        "target_semantic_values": [
+          "candidate_0"
+        ]
+      }
+    ]
+  },
+  "current_admitted_train_support_tasks": 178,
+  "decision": "combined_train_support_ledger_v7_ready_500_not_reached",
+  "language_counts": {
+    "c_cpp": 20,
+    "python": 21,
+    "rust": 16,
+    "session_unknown_language": 91,
+    "web_js_ts_html": 30
+  },
+  "quarantined_rows_from_audited_sources": 8,
+  "quarantined_source_counts": {
+    "stage12360_einops_candidate_only": 4,
+    "stage12362_git_rust_candidate_only": 4
+  },
+  "remaining_gap_to_500": 322,
+  "risky_claim_counts_should_be_zero": {},
+  "rule": {
+    "blocked_pattern": "same candidate_0 target reused across 3+ task families for one root",
+    "candidate_selection": "may use selected-test-backed candidate when decoys are real alternatives",
+    "other_transition_families": "must use task-specific targets: action, stop policy, verifier status, or evidence ref/class"
+  },
+  "source_counts": {
+    "stage12320_event_local_observation": 76,
+    "stage12322_rust_cpp_selected_test": 25,
+    "stage12323_v4_event_local": 15,
+    "stage12326_direct_python_selected_test": 20,
+    "stage12331_luxon_web_selected_test": 5,
+    "stage12339_openclaw_web_selected_test": 5,
+    "stage12343_openclaw_access_selected_test": 5,
+    "stage12351_web_fallback_selected_test": 15,
+    "stage12360_einops_candidate_only": 1,
+    "stage12362_git_rust_candidate_only": 1,
+    "stage12368_cpp_task_specific_selected_test": 10
+  },
+  "stage": "stage12369_combined_train_support_ledger_v7",
+  "stage12368_added_rows": 10,
+  "stage12368_target_semantic_values_by_root": {
+    "stage12368::c_cpp::fast_float_basictest": [
+      "action_run_selected_verifier",
+      "candidate_selected_test_backed",
+      "evidence_selected_verifier_log",
+      "policy_stop_selected_verifier_passed",
+      "status_pass_current_state"
+    ],
+    "stage12368::c_cpp::magic_enum_cpp17": [
+      "action_run_selected_verifier",
+      "candidate_selected_test_backed",
+      "evidence_selected_verifier_log",
+      "policy_stop_selected_verifier_passed",
+      "status_pass_current_state"
+    ]
+  },
+  "task_family_or_record_type_counts": {
+    "event_local_transition_observation": 91,
+    "transition_candidate_selection": 19,
+    "transition_continue_or_stop": 17,
+    "transition_evidence_citation": 17,
+    "transition_next_action": 17,
+    "transition_verifier_transition": 17
+  },
+  "training_allowed": false
+}

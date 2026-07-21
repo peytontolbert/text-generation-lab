@@ -1,0 +1,149 @@
+{
+  "audit": {
+    "duplicate_source_rows": 5,
+    "language_counts": {
+      "c_cpp": 34,
+      "python": 77,
+      "rust": 49
+    },
+    "option_mirror_missing_count": 0,
+    "passes_admission": true,
+    "prompt_target_leak_count": 0,
+    "rows": 160,
+    "singleton_option_count": 0,
+    "subfamily_counts": {
+      "answerable_abstain_rejection": 3,
+      "answerable_evidence_citation_build_constraint": 2,
+      "answerable_evidence_citation_build_run_constraint": 16,
+      "answerable_patch_impact_candidate_surface": 4,
+      "answerable_patch_impact_cpu_surface": 1,
+      "answerable_patch_impact_cuda_surface": 1,
+      "answerable_patch_impact_filter_surface": 1,
+      "answerable_patch_impact_indexflat_surface": 1,
+      "answerable_patch_impact_mkl_surface": 1,
+      "answerable_patch_impact_simple_test_surface": 1,
+      "answerable_patch_impact_utf8_surface": 2,
+      "answerable_patch_impact_xnnpack_surface": 1,
+      "evidence_citation_selected_verifier": 41,
+      "patch_impact_activation_surface": 1,
+      "patch_impact_memory_surface": 1,
+      "patch_impact_source_surface": 31,
+      "symptom_localization_activation_surface": 1,
+      "symptom_localization_memory_surface": 1,
+      "symptom_localization_source_surface": 28,
+      "verifier_outcome_selected_function_test": 8,
+      "verifier_outcome_selected_inline_test": 13,
+      "verifier_outcome_selected_test": 1
+    },
+    "subpacket_counts": {
+      "candidate_selection_do_not_regress": 40,
+      "patch_impact_plan_positive": 35,
+      "selected_verifier_retrieval_preservation": 60,
+      "symptom_localization_preservation": 25
+    },
+    "target_counts": {
+      "A": 4,
+      "B": 17,
+      "C": 19,
+      "LOCALIZE_FAILURE": 20,
+      "PLAN_PATCH": 35,
+      "RETRIEVE_EVIDENCE": 45,
+      "SELECT_TEST": 20
+    },
+    "task_counts": {
+      "transition_candidate_selection": 40,
+      "transition_next_action": 120
+    },
+    "unique_source_rows": 155,
+    "unsafe_loss_mask_count": 0
+  },
+  "created_at_utc": "2026-07-15T00:13:32Z",
+  "decision": "repair_packet_admitted_no_training_launched",
+  "design_reference": {
+    "anti_cheat": [
+      "opaque labels shuffled deterministically",
+      "semantic target not visible before options",
+      "standalone_projection_source.opaque_options mirrored",
+      "no singleton options",
+      "root lineage isolated from strict/protected rows unless row is explicitly old-manifest replay"
+    ],
+    "do_not_reuse_stage12073_as_is": true,
+    "packet_name": "stage12080_next_action_subfamily_repair_packet",
+    "required_subpackets": {
+      "candidate_selection_do_not_regress": {
+        "gold_distribution": {
+          "semantic_role_target": 40
+        },
+        "hard_negatives": [
+          "the Stage12075 wrong prediction for each row"
+        ],
+        "purpose": "Protect shared semantic-candidate geometry; Stage12075 also lost candidate-selection rows.",
+        "rows": 40,
+        "source": "Stage12076 candidate-selection lost/gained row analogues"
+      },
+      "patch_impact_plan_positive": {
+        "gold_distribution": {
+          "PLAN_PATCH": 25,
+          "VERIFY_RESULT": 10
+        },
+        "hard_negatives": [
+          "RETRIEVE_EVIDENCE",
+          "ABSTAIN_OR_ROLLBACK"
+        ],
+        "purpose": "Preserve the genuine Stage12075 gains without applying them globally.",
+        "rows": 35,
+        "source": "patch-impact rows where source+verifier evidence is enough to plan a bounded patch"
+      },
+      "selected_verifier_retrieval_preservation": {
+        "gold_distribution": {
+          "RETRIEVE_EVIDENCE": 35,
+          "SELECT_TEST": 15,
+          "VERIFY_RESULT": 10
+        },
+        "hard_negatives": [
+          "PLAN_PATCH",
+          "APPLY_PATCH_ABSTRACT"
+        ],
+        "purpose": "Prevent selected-verifier evidence rows from collapsing to PLAN_PATCH.",
+        "rows": 60,
+        "source": "clone/analogue from Stage12076 lost selected-verifier rows plus disjoint roots when available"
+      },
+      "symptom_localization_preservation": {
+        "gold_distribution": {
+          "LOCALIZE_FAILURE": 15,
+          "RETRIEVE_EVIDENCE": 10
+        },
+        "hard_negatives": [
+          "SELECT_TEST",
+          "PLAN_PATCH"
+        ],
+        "purpose": "Avoid selected-test overcorrection on source-surface localization rows.",
+        "rows": 25,
+        "source": "symptom_localization_source_surface candidate/next-action analogues"
+      }
+    },
+    "routing_rule": "If using the same semantic_candidate_head, include selected-verifier preservation rows in every training epoch before patch-impact positives.",
+    "rows_total_target": 160,
+    "weighting_rule": "Do not let synthetic patch/abstain rows exceed 35% of next-action repair train rows."
+  },
+  "next_stage": {
+    "do_not_skip": true,
+    "purpose": "Evaluate the repair packet against Stage12076 gained/lost rows before any full training probe.",
+    "recommended": "stage12081_next_action_repair_local_audit"
+  },
+  "outputs": {
+    "rows": "runs/local/artifacts/stage12080_next_action_subfamily_repair_packet/next_action_subfamily_repair_rows.jsonl",
+    "summary": "runs/local/artifacts/stage12080_next_action_subfamily_repair_packet/next_action_subfamily_repair_packet.json",
+    "summary_mirror": "runs/summaries/stage12080_next_action_subfamily_repair_packet.json"
+  },
+  "purpose": "Repair Stage12075 overcorrection by preserving selected-verifier RETRIEVE_EVIDENCE behavior while keeping patch-impact PLAN_PATCH positives bounded.",
+  "selected_transition_frontier": "stage11924_transition_listwise_head_only_probe",
+  "source_artifacts": {
+    "design": "runs/summaries/stage12079_next_action_repair_design.json",
+    "loss_gain_records": "runs/local/artifacts/stage12078_next_action_loss_gain_atlas/next_action_loss_gain_records.jsonl",
+    "source_rows": "runs/local/artifacts/stage11897_transition_record_projection_rows/transition_projection_rows.jsonl"
+  },
+  "stage": 12080,
+  "stage_name": "stage12080_next_action_subfamily_repair_packet",
+  "training_allowed": false
+}

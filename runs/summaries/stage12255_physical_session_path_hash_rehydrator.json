@@ -1,0 +1,43 @@
+{
+  "artifact_type": "physical_session_path_hash_rehydrator",
+  "claim_boundary": "No-content path-hash attachment index only. Raw paths and raw contents are not emitted. No root admission or training is authorized.",
+  "coverage": {
+    "blocked_count": 0,
+    "coverage_by_root": {
+      "codex_sessions": {
+        "expected": 758,
+        "matches": false,
+        "observed": 277
+      },
+      "cursor_chats": {
+        "expected": 3,
+        "matches": true,
+        "observed": 3
+      },
+      "cursor_projects": {
+        "expected": 978,
+        "matches": false,
+        "observed": 1019
+      }
+    },
+    "coverage_pass": false,
+    "duplicate_full_path_hash_clusters": 0,
+    "expected_total_files": 1739,
+    "matched_stage12253_parent_records": 979,
+    "observed_path_hash_records": 1299,
+    "stage12253_parent_records": 1739
+  },
+  "decision": "path_hash_attachment_index_incomplete",
+  "next_stage": {
+    "required_join": "derivative.source_file_hash == path_hash_attachment_index.source_file_hash_compat",
+    "stage": "stage12256_session_derivative_view_attacher",
+    "training_allowed": false
+  },
+  "outputs": {
+    "blocked_sources": "runs/local/artifacts/stage12255_physical_session_path_hash_rehydrator/blocked_sources.jsonl",
+    "duplicate_full_path_hash_clusters": "runs/local/artifacts/stage12255_physical_session_path_hash_rehydrator/duplicate_full_path_hash_clusters.jsonl",
+    "path_hash_attachment_index": "runs/local/artifacts/stage12255_physical_session_path_hash_rehydrator/path_hash_attachment_index.jsonl"
+  },
+  "stage": "stage12255_physical_session_path_hash_rehydrator",
+  "training_allowed": false
+}

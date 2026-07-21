@@ -1,0 +1,151 @@
+{
+  "admitted_rows": 0,
+  "current_patch_trace_semantic_qc": {
+    "stage12225_fail_to_pass_floor_count": 0,
+    "stage12225_patch_trace_floor_count": 2,
+    "stage12225_transition_counts": {
+      "PASS_TO_PASS": 2
+    }
+  },
+  "decision": "patch_task_source_adapter_atlas_ready_no_training",
+  "hard_rejects_inherited": [
+    "missing test file or no-tests-collected counted as failure",
+    "ENV/dependency/network/install/GPU failure unless task is explicitly environment repair",
+    "syntax-only or forced compile-error mutation counted as maintainer repair",
+    "commit metadata inferred pass/fail without command output",
+    "selected test added only by the patch",
+    "weak/unrelated verifier that does not exercise changed path",
+    "cross-source joins where diff, command, and verifier evidence come from different lineage",
+    "controlled fixture counted as external repair or source-heldout proof",
+    "PASS_TO_PASS safe refactor counted as FAIL_TO_PASS"
+  ],
+  "minimum_before_training": {
+    "external_comparable_patch_trace_rows": 25,
+    "external_fail_to_pass_rows": 15,
+    "max_repo_family_fraction": 0.2,
+    "non_python_external_rows": 10
+  },
+  "next_stage": "stage12295_local_explicit_patch_task_corpus_inventory",
+  "preferred_batch": {
+    "external_comparable_patch_trace_rows": 60,
+    "external_fail_to_pass_rows": 30,
+    "languages": {
+      "c_cpp": 15,
+      "python": 15,
+      "rust": 15,
+      "web_js_ts_html": 15
+    }
+  },
+  "raw_output_emitted": false,
+  "source_adapters": [
+    {
+      "adapter_id": "explicit_patch_task_corpus_adapter",
+      "admission_gate": [
+        "reference_patch_available_or_exact_commit_after_diff_materializable",
+        "selected_verifier_exists_before_patch",
+        "before_verifier_status_FAIL_behavior_not_missing_test_or_env",
+        "before_plus_reference_patch_status_PASS",
+        "after_status_PASS_when_after_commit_available",
+        "semantic_patch_effect_audit_required_before_counting_external_comparable"
+      ],
+      "counts_now": {
+        "admitted_external_FAIL_TO_PASS_rows": 0,
+        "admitted_external_comparable_patch_trace_rows": 0
+      },
+      "next_stage": "stage12295_local_explicit_patch_task_corpus_inventory",
+      "priority": 1,
+      "status": "needed_not_materialized",
+      "target_sources": [
+        "local benchmark/task corpora with explicit failing tests and reference patches",
+        "repo-local task specs with before/after verifier logs",
+        "SWE-style task records if present locally and reproducible without network"
+      ],
+      "why": "Stage12244 inferred patch effect from commits and failed. Explicit task corpora should provide the failing-test/reference-patch bracket directly."
+    },
+    {
+      "adapter_id": "maintainer500_backlog_after_first_adapter",
+      "admission_gate": [
+        "materialize_full_resolved_repo_and_commit_or_patch_source",
+        "run_after_verifier_first_and_require_PASS",
+        "run_before_verifier_second_and_require_FAIL",
+        "apply_reference_patch_and_require_PASS",
+        "reject_if_command_output_tuple_missing"
+      ],
+      "counts_now": {
+        "admitted_external_comparable_repair_roots": 0,
+        "external_repair_acquisition_candidates": 70
+      },
+      "next_stage": "stage12296_maintainer500_after_first_retarget_batch",
+      "priority": 2,
+      "status": "candidate_backlog_only",
+      "target_sources": [
+        "stage12240_external_repair_acquisition_request_v2",
+        "stage12242_maintainer_500_candidate_intake_rollup"
+      ],
+      "why": "There are 70 reported external repair acquisition candidates, but they are planned/backlog records without command-output tuples."
+    },
+    {
+      "adapter_id": "verifier_observation_join_adapter",
+      "admission_gate": [
+        "same_source_patch_or_reference_diff_join_required",
+        "no_verifier_only_row_may_count_as_repair_proof",
+        "FAIL_TO_PASS_label_must_be_revalidated_with_patch_effect_tuple"
+      ],
+      "counts_now": {
+        "normalized_verifier_rows": 146,
+        "patch_trace_floor_false_count": 146,
+        "runnable_verifier_proof_count": 85
+      },
+      "next_stage": "stage12297_verifier_observation_patch_join_candidates",
+      "priority": 3,
+      "status": "auxiliary_support_only_until_patch_joined",
+      "target_sources": [
+        "stage12216_normalized_verifier_observation_dataset",
+        "stage12143_to_stage12152_selected_test_verifier_roots"
+      ],
+      "why": "These records have runnable verifier evidence and multilingual coverage, but Stage12216 explicitly has no patch-trace floor."
+    },
+    {
+      "adapter_id": "codex_chat_horizon_transition_adapter",
+      "admission_gate": [
+        "derive_canonical_transition_event_v1",
+        "mask_future_observations_from_pre_action_inputs",
+        "split_by_parent_root_lineage",
+        "cap_by_chat_repo_verifier_action_state_delta",
+        "external_repair_countable_only_if_V5_patch_effect_tuple_exists"
+      ],
+      "counts_now": {
+        "external_comparable_patch_trace_rows": 0,
+        "rendered_train_support_rows_from_current_chat_path": 2
+      },
+      "next_stage": "stage12298_horizon_transition_ledger_builder",
+      "priority": 4,
+      "status": "transition_training_source_not_repair_proof_source",
+      "target_sources": [
+        "stage12257_to_stage12279 codex chat/window/horizon artifacts"
+      ],
+      "why": "Large event volume can train next_action, verifier_transition, continue_stop, and milestone policy, but must not be counted as patch-effect proof without V5."
+    },
+    {
+      "adapter_id": "exhausted_commit_pair_adapter_v1",
+      "admission_gate": [
+        "do_not_reuse_without_new_after_first_target_construction"
+      ],
+      "counts_now": {
+        "PE2_candidates_after_filter": 0,
+        "after_pass_eligible": 6,
+        "targets_checked_after": 19
+      },
+      "next_stage": null,
+      "priority": 99,
+      "status": "blocked_exhausted_until_retargeted",
+      "target_sources": [
+        "stage12244_external_repair_commit_pair_replay_request"
+      ],
+      "why": "After-pass filtering and before replay proved the current queue has no PE2 candidates."
+    }
+  ],
+  "stage": "stage12294_patch_task_source_adapter_atlas",
+  "training_allowed": false,
+  "training_rows_emitted": 0
+}

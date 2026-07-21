@@ -1,0 +1,79 @@
+{
+  "created_at_utc": "2026-07-15T00:43:28Z",
+  "decision": "candidate_head_only_candidate_selection_request_ready",
+  "execute_now": false,
+  "gates_before_execution": {
+    "base_manifest_exists": true,
+    "candidate_selection_repair_rows_85": true,
+    "head_only_enabled": true,
+    "init_runtime_exists": true,
+    "no_next_action_repair_rows": true,
+    "old_replay_640": true,
+    "option_mirror_missing_zero": true,
+    "preserve_runtime_exists": true,
+    "repair_rows_exists": true,
+    "splits_expected": true,
+    "stage12094_allows_request": true,
+    "transition_candidate_head_selected": true,
+    "unsafe_loss_zero": true,
+    "uses_gpu2_mask": true
+  },
+  "hypothesis": "Candidate-selection repair should be tested on a transition-specific head without mixing next-action repair rows into the same scorer update.",
+  "next_stage_after_execution": "stage12097_candidate_head_only_candidate_selection_postrun_audit",
+  "next_stage_if_executed": "stage12096_candidate_head_only_candidate_selection_probe",
+  "outputs": {
+    "command": "runs/local/artifacts/stage12095_candidate_head_only_candidate_selection_request/candidate_head_only_candidate_selection_command.json",
+    "manifest": "runs/local/artifacts/stage12095_candidate_head_only_candidate_selection_request/candidate_head_only_candidate_selection_manifest.jsonl",
+    "output_dir": "runs/local/artifacts/stage12096_candidate_head_only_candidate_selection_probe/bounded_decoder_probe",
+    "runtime_dir": "runs/local/artifacts/stage12096_candidate_head_only_candidate_selection_probe/runtime_model",
+    "summary": "runs/local/artifacts/stage12095_candidate_head_only_candidate_selection_request/candidate_head_only_candidate_selection_request.json",
+    "summary_mirror": "runs/summaries/stage12095_candidate_head_only_candidate_selection_request.json"
+  },
+  "passed": true,
+  "postrun_gate": {
+    "old_transition_640": ">=364/640 for useful diagnostic, >364/640 for frontier movement",
+    "protected_filtered_strict": "22/22",
+    "protected_old_canary_strict": "23/23",
+    "residual_bank": ">=7/10",
+    "source_heldout_smoke": ">=6/12",
+    "transition_candidate_selection": ">=89/160",
+    "transition_continue_or_stop": ">=128/160",
+    "transition_next_action": ">=51/160",
+    "transition_verifier_transition": ">=96/160"
+  },
+  "row_counts": {
+    "candidate_selection_repair_rows": 85,
+    "eval_rows": 22,
+    "old_replay_rows": 640,
+    "option_mirror_missing": 0,
+    "repair_subpacket_counts": {
+      "candidate_selection_gain_preservation": 25,
+      "candidate_selection_regression_replay": 60
+    },
+    "repair_target_counts": {
+      "A": 25,
+      "B": 47,
+      "C": 13
+    },
+    "strict_rows": 22,
+    "train_rows": 725,
+    "unsafe_loss": 0
+  },
+  "source_artifacts": {
+    "base_manifest": "runs/local/artifacts/stage11923_transition_listwise_head_only_probe_request/transition_listwise_head_only_manifest.jsonl",
+    "repair_rows": "runs/local/artifacts/stage12088_candidate_selection_repair_packet/candidate_selection_repair_rows.jsonl",
+    "stage12094_design": "runs/summaries/stage12094_separate_head_or_two_phase_candidate_next_action_ablation_design.json"
+  },
+  "stage": 12095,
+  "stage_name": "stage12095_candidate_head_only_candidate_selection_request",
+  "training_controls": {
+    "aux_source": "encoder_option_retrieval_transition_candidate_head",
+    "gpu": "cuda:2 only",
+    "head_only": true,
+    "init_runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "learning_rate": "7.5e-5",
+    "max_steps": 256,
+    "preservation_reference_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "sampler": "task_balanced"
+  }
+}

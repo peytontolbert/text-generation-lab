@@ -1,0 +1,18 @@
+{
+  "artifacts": {
+    "quality_control_doc": "runs/local/artifacts/stage12213_level3_dataset_quality_control/LEVEL3_DATASET_QUALITY_CONTROL_STAGE12213.md",
+    "quality_control_json": "runs/local/artifacts/stage12213_level3_dataset_quality_control/level3_dataset_quality_control.json"
+  },
+  "critical_findings": [
+    "142/142 rows have no language_family field; current rollup uses language instead, which will break language-floor audits unless normalized.",
+    "142/142 rows have no split; these are train-support records, not eval/strict clearance.",
+    "142/142 rows lack visible patch_trace/patch_diff fields; treat them as verifier-observation support unless same-source patch evidence is joined.",
+    "142/142 rows lack ordered_events/events; this weakens the Level-3 claim because causal action ordering is not first-class.",
+    "142/142 rows lack state_before/state_after fields; state_update exists but should not substitute for full causal state."
+  ],
+  "decision": "quality_control_brief_ready_no_training_authorized",
+  "row_count": 142,
+  "source_rollup": "runs/local/artifacts/stage12206_level3_passfail_training_rollup/level3_passfail_train_support_repo_capped.jsonl",
+  "stage": "stage12213_level3_dataset_quality_control",
+  "training_allowed": false
+}

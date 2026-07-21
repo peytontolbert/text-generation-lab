@@ -1,0 +1,35 @@
+{
+  "stage": "stage12194_research_spine_realignment",
+  "decision": "central_research_spine_delta_created_not_training",
+  "training_executed": false,
+  "source_code_modified": false,
+  "purpose": "Refresh the existing Stage8622/CURRENT_RESEARCH_SPINE central graph with post-11500 frontier, transition, eval-integrity, tokenizer, selected-test, and closed-loop episode status.",
+  "canonical_ancestors": [
+    "docs/CURRENT_RESEARCH_SPINE_RECONSTRUCTED.md",
+    "docs/CENTRAL_RESEARCH_GRAPH_STAGE8622.md",
+    "docs/recovery_v27_100m/00_central_research_spine.md",
+    "runs/local/artifacts/stage8622_central_research_graph/central_research_graph.json"
+  ],
+  "outputs": {
+    "control_doc": "runs/local/artifacts/stage12194_research_spine_realignment/research_spine_realignment_control.md",
+    "delta_nodes_jsonl": "runs/local/artifacts/stage12194_research_spine_realignment/central_research_graph_stage12194_delta_nodes.jsonl",
+    "delta_edges_jsonl": "runs/local/artifacts/stage12194_research_spine_realignment/central_research_graph_stage12194_delta_edges.jsonl",
+    "frontier_training_report": "runs/local/artifacts/stage12194_research_spine_realignment/subagent_reports/frontier_training_spine_delta.md",
+    "dataset_episode_report": "runs/local/artifacts/stage12194_research_spine_realignment/subagent_reports/dataset_episode_spine_delta.md",
+    "eval_integrity_report": "runs/local/artifacts/stage12194_research_spine_realignment/subagent_reports/eval_integrity_spine_delta.md"
+  },
+  "delta_counts": {
+    "nodes": 20,
+    "edges": 26
+  },
+  "current_authoritative_state": {
+    "compact_frontier": "stage11507 + encoder_option_retrieval_evidence_judgment_head",
+    "compact_hardened_gemma": "stage11516: 100M 19/19 vs Gemma 3/19, compact same-task only",
+    "transition_standalone": "stage11924: 364/640, below Gemma 386/640",
+    "transition_routed_candidate": "stage12099: 375/640, option permutation passed, route-only and below Gemma",
+    "closed_loop_episode_training": "blocked by stage12192: 0 level_3+ episodes and 0 patch-trace episodes",
+    "tokenizer": "stage12183 diagnostic-only; protected 1506 tokenizer unchanged"
+  },
+  "next_recommended_stage": "stage12195_integrate_stage12194_delta_into_central_research_graph_or_stage12193_same_source_patch_trace_episode_miner_request",
+  "claim_boundary": "Only compact hardened bounded-choice maintainer-selection win is currently supported. Broad source-heldout, freeform repair, executable patch repair, standalone transition Gemma win, and tokenizer-replacement claims remain blocked."
+}

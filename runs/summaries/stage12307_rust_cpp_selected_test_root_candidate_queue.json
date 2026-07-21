@@ -1,0 +1,2388 @@
+{
+  "candidate_set_blocker_counts": {
+    "candidate_set_not_materialized": 15,
+    "canonical_task_specific_semantic_rewrite_required": 2,
+    "hash_refs_not_present_in_stage12144_summary_require_capture_or_stage12150_input_audit_trace": 3,
+    "missing_commit_sha": 15,
+    "missing_executed_selected_test_log": 15,
+    "missing_source_test_hashes": 15,
+    "not_hydrated": 15,
+    "stage12130_train_support_rows_are_not_canonical_roots": 2
+  },
+  "claim_boundary": "Canonical root-candidate queue records only. No training rows are emitted or admitted.",
+  "counts_by_language": {
+    "c_cpp": 10,
+    "rust": 10
+  },
+  "counts_by_readiness_status": {
+    "next_hydration_required": 15,
+    "ready_seed_selected_test_executed_semantic_audit_trace_present": 3,
+    "seed_backed_by_stage12130_requires_canonical_rewrite": 2
+  },
+  "counts_by_status_bucket": {
+    "next_hydration": 15,
+    "ready_or_seed": 5
+  },
+  "created_at_utc": "2026-07-16T23:33:32Z",
+  "decision": "rust_cpp_selected_test_root_candidate_queue_emitted_fail_closed",
+  "eval_claim_allowed": false,
+  "inputs": {
+    "stage12121_rust_cpp_verifier_ready_plans": [
+      "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+      "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl"
+    ],
+    "stage12130_package_audit": [
+      "runs/local/artifacts/stage12130_selected_test_train_support_package/train_support_rows.jsonl",
+      "runs/local/artifacts/stage12130_selected_test_train_support_package/train_support_package_audit.json"
+    ],
+    "stage12144_summary_if_present": "runs/summaries/stage12144_rust_hydrated_selected_test_success_package.json",
+    "stage12146_selected_test_rollup": "runs/local/artifacts/stage12146_selected_test_supply_rollup/selected_test_supply_rollup.jsonl",
+    "stage12150_audit_if_present": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+    "stage12305_queue_source": "runs/summaries/stage12305_canonical_root_candidate_materialization_queue.json"
+  },
+  "missing_field_counts": {
+    "canonical_candidate_set_rewrite": 2,
+    "commit_sha": 15,
+    "selected_test_ids": 15,
+    "selected_verifier_command_or_log_ref": 15,
+    "source_hash_refs": 18,
+    "test_hash_refs": 18
+  },
+  "next_required_stage": "Hydrate blocked repos and rewrite ready/seed records into canonical_root_candidate records only after all required hashes and non-singleton candidate-set gates are explicit.",
+  "record_count": 20,
+  "records": [
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::Tencent__rapidjson",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::c7491e8fbb06124b",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "Tencent/rapidjson",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::004::Tencent_rapidjson",
+            "repo_family": "Tencent/rapidjson"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/Tencent/rapidjson",
+        "dependency_risk": "low_medium: mostly header-only, but old CMake policies or bundled test configuration may need compatibility handling.",
+        "expected_verifier_scope": "selected_test_anchor_candidate if a concrete CTest target executes; build_config_anchor only if configure/build succeeds without executable selected tests.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cpp",
+            "-g",
+            "*.h",
+            "-g",
+            "*.hpp",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DRAPIDJSON_BUILD_TESTS=ON",
+            "-DRAPIDJSON_BUILD_DOC=OFF",
+            "-DRAPIDJSON_BUILD_EXAMPLES=OFF"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "unittest|valuetest|readertest|writertest"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::004::Tencent_rapidjson"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::USCiLab__cereal",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::87414005192260b9",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "USCiLab/cereal",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::005::USCiLab_cereal",
+            "repo_family": "USCiLab/cereal"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/USCiLab/cereal",
+        "dependency_risk": "low_medium: header-only but tests may depend on optional archive backends or branch-specific option names.",
+        "expected_verifier_scope": "selected_test_anchor_candidate for a discovered serialization unit test; static/build scope if only headers or build targets are exercised.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cpp",
+            "-g",
+            "*.hpp",
+            "-g",
+            "*.h",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DJUST_INSTALL_CEREAL=OFF",
+            "-DBUILD_TESTS=ON"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "basic|json|portable|xml|binary"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::005::USCiLab_cereal"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::google__crc32c",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::44bd41be68309c25",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "google/crc32c",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::024::google_crc32c",
+            "repo_family": "google/crc32c"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/google/crc32c",
+        "dependency_risk": "low_medium: compact library, but optional CPU acceleration and bundled test dependency handling can vary by checkout.",
+        "expected_verifier_scope": "selected_test_anchor_candidate for a discovered CRC32C unit test; build_config_anchor only if CPU feature or test dependency issues block execution.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cc",
+            "-g",
+            "*.h",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DCRC32C_BUILD_TESTS=ON",
+            "-DCRC32C_BUILD_BENCHMARKS=OFF"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "crc32c|extend|read"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::024::google_crc32c"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::google__re2",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::c3dcea5ef5e373f4",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "google/re2",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::028::google_re2",
+            "repo_family": "google/re2"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/google/re2",
+        "dependency_risk": "low_medium: focused library, but exact CMake option/test names need checkout confirmation.",
+        "expected_verifier_scope": "selected_test_anchor_candidate for a regex unit target; build_config_anchor if CMake test exposure is absent or option names differ.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cc",
+            "-g",
+            "*.h",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DRE2_BUILD_TESTING=ON"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "re2|regexp|compile|parse"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::028::google_re2"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::google__snappy",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::7900e415f870b846",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "google/snappy",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::029::google_snappy",
+            "repo_family": "google/snappy"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/google/snappy",
+        "dependency_risk": "low_medium: compact build, but benchmark/test dependency toggles and compiler flags must be verified locally.",
+        "expected_verifier_scope": "selected_test_anchor_candidate for unit compression/decompression tests; static_compile_anchor if CTest entries are absent or only build succeeds.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cc",
+            "-g",
+            "*.h",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DSNAPPY_BUILD_TESTS=ON",
+            "-DSNAPPY_BUILD_BENCHMARKS=OFF"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "snappy|compress|uncompress"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::029::google_snappy"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::jarro2783__cxxopts",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::9c2dcd3a67cf3fbb",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "jarro2783/cxxopts",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::032::jarro2783_cxxopts",
+            "repo_family": "jarro2783/cxxopts"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/jarro2783/cxxopts",
+        "dependency_risk": "low: header-only, small target; main risk is exact option/test target naming.",
+        "expected_verifier_scope": "selected_test_anchor_candidate if parser tests execute; static_compile_anchor if only examples/build are available.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cpp",
+            "-g",
+            "*.hpp",
+            "-g",
+            "*.h",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DCXXOPTS_BUILD_TESTS=ON",
+            "-DCXXOPTS_BUILD_EXAMPLES=OFF"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "cxxopts|options|parse"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::032::jarro2783_cxxopts"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::microsoft__GSL",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::0738facb8029bbb3",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "microsoft/GSL",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::042::microsoft_GSL",
+            "repo_family": "microsoft/GSL"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/microsoft/GSL",
+        "dependency_risk": "low_medium: compact header-only project, but recent compiler standard and warning-as-error behavior may affect builds.",
+        "expected_verifier_scope": "selected_test_anchor_candidate for a discovered GSL unit test; static_compile_anchor if warnings/compiler policy prevents test execution.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cpp",
+            "-g",
+            "*.hpp",
+            "-g",
+            "*.h",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DGSL_TEST=ON"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "gsl|span|not_null|owner"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::042::microsoft_GSL"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::p_ranav__argparse",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::7fff0aa722c8584e",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "p-ranav/argparse",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::049::p_ranav_argparse",
+            "repo_family": "p-ranav/argparse"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/p-ranav/argparse",
+        "dependency_risk": "low: small header-only library; main risk is CMake option name drift or absent CTest registration.",
+        "expected_verifier_scope": "selected_test_anchor_candidate for a discovered argparse parser test; static_compile_anchor if tests are unavailable and only headers compile.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cpp",
+            "-g",
+            "*.hpp",
+            "-g",
+            "*.h",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DARGPARSE_BUILD_TESTS=ON",
+            "-DARGPARSE_BUILD_EXAMPLES=OFF"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "argparse|argument|parse|option"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::049::p_ranav_argparse"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "canonical_task_specific_semantic_rewrite_required",
+          "stage12130_train_support_rows_are_not_canonical_roots"
+        ],
+        "canonical_rewrite_required": true,
+        "non_singleton_required": true,
+        "semantic_option_counts": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "semantic_task_count": 5,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::Neargye__magic_enum",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "canonical_candidate_set_rewrite"
+      ],
+      "queue_record_id": "stage12307::df2e0368971a36cb",
+      "readiness_status": "seed_backed_by_stage12130_requires_canonical_rewrite",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "Neargye/magic_enum",
+      "required_hashes": {
+        "commit_sha": "6336b3a8295f9c9ff0522ed37f4f444f2e56c881",
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [
+          "test-cpp17"
+        ],
+        "source_hash_refs": [
+          "include/magic_enum/magic_enum.hpp@0aef092f0f41",
+          "include/magic_enum/magic_enum_all.hpp@f906646d4cf0",
+          "include/magic_enum/magic_enum_containers.hpp@bace72559eff",
+          "include/magic_enum/magic_enum_flags.hpp@bb2758c9c433"
+        ],
+        "test_hash_refs": [
+          "test/test.cpp@2f42b8cc9114",
+          "test/test_helpers.hpp@54b2ed44954c",
+          "test/CMakeLists.txt@bd502a25f1b9"
+        ],
+        "verifier_command_or_log_refs": [
+          "runs/local/artifacts/stage12125_exact_selected_test_refinement/command_logs/stage12118__c_cpp__002__Neargye_magic_enum__exact_selected_ctest.json"
+        ]
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::002::Neargye_magic_enum",
+            "repo_family": "Neargye/magic_enum"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12146_selected_test_supply_rollup/selected_test_supply_rollup.jsonl",
+          "record_selector": {
+            "repo_family": "Neargye/magic_enum",
+            "root_id": "stage12118::c_cpp::002::Neargye_magic_enum"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12130_selected_test_train_support_package/train_support_rows.jsonl",
+          "record_selector": {
+            "repo_family": "Neargye/magic_enum",
+            "root_id": "stage12118::c_cpp::002::Neargye_magic_enum",
+            "row_count": 5
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/Neargye/magic_enum",
+        "dependency_risk": "low: header-only C++ library; main risk is exact CMake option drift or compiler standard requirement.",
+        "expected_verifier_scope": "selected_test_anchor_candidate: execute only after checkout captures commit SHA, ctest manifest, and a concrete passing selected test; otherwise downgrade to static_compile_anchor or insufficient evidence.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cpp",
+            "-g",
+            "*.hpp",
+            "-g",
+            "*.h",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DMAGIC_ENUM_OPT_BUILD_TESTS=ON"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "magic|enum"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::002::Neargye_magic_enum"
+      },
+      "stage12146_rollup": {
+        "root_id": "stage12118::c_cpp::002::Neargye_magic_enum",
+        "selected_test_anchor": true,
+        "status": "already_materialized_train_support_rows",
+        "train_support_only": true,
+        "verifier_anchor": true
+      },
+      "status_bucket": "ready_or_seed"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "canonical_task_specific_semantic_rewrite_required",
+          "stage12130_train_support_rows_are_not_canonical_roots"
+        ],
+        "canonical_rewrite_required": true,
+        "non_singleton_required": true,
+        "semantic_option_counts": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "semantic_task_count": 5,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::c_cpp::fastfloat__fast_float",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "c_cpp",
+      "missing_fields": [
+        "canonical_candidate_set_rewrite"
+      ],
+      "queue_record_id": "stage12307::e3c8ab6f92628280",
+      "readiness_status": "seed_backed_by_stage12130_requires_canonical_rewrite",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "fastfloat/fast_float",
+      "required_hashes": {
+        "commit_sha": "f6df0f29174054bb1ed06a9945416c8946a01292",
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [
+          "basictest"
+        ],
+        "source_hash_refs": [
+          "include/fast_float/ascii_number.h@80de17266427",
+          "include/fast_float/bigint.h@1ed0b598da0b",
+          "include/fast_float/constexpr_feature_detect.h@2dd2dc5f98a8",
+          "include/fast_float/decimal_to_binary.h@82fad8134c27"
+        ],
+        "test_hash_refs": [
+          "tests/basictest.cpp@9d7da40aba67",
+          "tests/CMakeLists.txt@9435a9c2470e"
+        ],
+        "verifier_command_or_log_refs": [
+          "runs/local/artifacts/stage12125_exact_selected_test_refinement/command_logs/stage12118__c_cpp__019__fastfloat_fast_float__exact_selected_ctest.json",
+          "test_hash::tests/basictest.cpp::9d7da40aba6707652044b1a947706149df79f6a56f47d34fe42edd7acaf9c1ee"
+        ]
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::c_cpp::019::fastfloat_fast_float",
+            "repo_family": "fastfloat/fast_float"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12146_selected_test_supply_rollup/selected_test_supply_rollup.jsonl",
+          "record_selector": {
+            "repo_family": "fastfloat/fast_float",
+            "root_id": "stage12118::c_cpp::019::fastfloat_fast_float"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12130_selected_test_train_support_package/train_support_rows.jsonl",
+          "record_selector": {
+            "repo_family": "fastfloat/fast_float",
+            "root_id": "stage12118::c_cpp::019::fastfloat_fast_float",
+            "row_count": 5
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/fastfloat/fast_float",
+        "dependency_risk": "low: single-purpose C++ library; main risk is compiler/architecture-specific floating-point behavior or CMake option drift.",
+        "expected_verifier_scope": "selected_test_anchor_candidate if numeric parser tests execute; static_compile_anchor if only compile/build evidence is captured.",
+        "proposed_no_install_commands": [
+          [
+            "test",
+            "-f",
+            "CMakeLists.txt"
+          ],
+          [
+            "rg",
+            "--files",
+            "-g",
+            "*.cpp",
+            "-g",
+            "*.hpp",
+            "-g",
+            "*.h",
+            "-g",
+            "CMakeLists.txt"
+          ],
+          [
+            "cmake",
+            "-S",
+            ".",
+            "-B",
+            "build",
+            "-DFASTFLOAT_TEST=ON"
+          ],
+          [
+            "cmake",
+            "--build",
+            "build",
+            "--parallel",
+            "2"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "-N"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "build",
+            "--output-on-failure",
+            "-R",
+            "parse|from_chars|fast_float|unit"
+          ]
+        ],
+        "queue_id": "stage12118::c_cpp::019::fastfloat_fast_float"
+      },
+      "stage12146_rollup": {
+        "root_id": "stage12118::c_cpp::019::fastfloat_fast_float",
+        "selected_test_anchor": true,
+        "status": "already_materialized_train_support_rows",
+        "train_support_only": true,
+        "verifier_anchor": true
+      },
+      "status_bucket": "ready_or_seed"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::BurntSushi__byteorder",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::df1701c6f8968170",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "BurntSushi/byteorder",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::rust::002::BurntSushi_byteorder",
+            "repo_family": "BurntSushi/byteorder"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/BurntSushi/byteorder",
+        "dependency_risk": "low-medium: older crate layout or missing Cargo.lock can make --locked fail; expected dependencies are minimal but cache availability is unverified.",
+        "expected_verifier_scope": "selected_test_list_only, then exact parser/endian unit test if --offline list succeeds; otherwise static Cargo manifest/source inventory only.",
+        "proposed_no_install_commands": [
+          "test -f Cargo.toml",
+          "cargo metadata --no-deps --format-version 1",
+          "cargo test --locked --offline -- --list",
+          "cargo test --locked --offline test_read_u16 -- --exact --nocapture"
+        ],
+        "queue_id": "stage12118::rust::002::BurntSushi_byteorder"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::aho_corasick",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::a431c60ea13b775d",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "aho-corasick",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": null,
+        "dependency_risk": null,
+        "expected_verifier_scope": null,
+        "proposed_no_install_commands": [],
+        "queue_id": null
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::bytes_rs__bytes",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::741fc59a29a06e96",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "bytes-rs/bytes",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::rust::013::bytes_rs_bytes",
+            "repo_family": "bytes-rs/bytes"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/bytes-rs/bytes",
+        "dependency_risk": "low-medium: expected small dependency graph, but local cache and lockfile status are unverified until checkout.",
+        "expected_verifier_scope": "selected_test_list_only, then exact unit test execution if offline dependency resolution succeeds.",
+        "proposed_no_install_commands": [
+          "test -f Cargo.toml",
+          "cargo metadata --no-deps --format-version 1",
+          "cargo test --locked --offline -- --list",
+          "cargo test --locked --offline bytes_mut -- --nocapture"
+        ],
+        "queue_id": "stage12118::rust::013::bytes_rs_bytes"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::quote",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::2da587f9723cdf29",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "quote",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": null,
+        "dependency_risk": null,
+        "expected_verifier_scope": null,
+        "proposed_no_install_commands": [],
+        "queue_id": null
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::rust_cli__env_logger",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::b59cd5b584a1b3b7",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "rust-cli/env_logger",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::rust::029::rust_cli_env_logger",
+            "repo_family": "rust-cli/env_logger"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/rust-cli/env_logger",
+        "dependency_risk": "low-medium: likely modest dependencies, but local cache status is unverified and env-sensitive dev tests may pull dependencies.",
+        "expected_verifier_scope": "selected_test_list_only, then exact selected parser/filter test if offline list succeeds.",
+        "proposed_no_install_commands": [
+          "test -f Cargo.toml",
+          "cargo metadata --no-deps --format-version 1",
+          "cargo test --locked --offline -- --list",
+          "cargo test --locked --offline filter -- --nocapture"
+        ],
+        "queue_id": "stage12118::rust::029::rust_cli_env_logger"
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::time",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::0beec4e083f4a19a",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "time",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": null,
+        "dependency_risk": null,
+        "expected_verifier_scope": null,
+        "proposed_no_install_commands": [],
+        "queue_id": null
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "candidate_set_not_materialized",
+          "missing_commit_sha",
+          "missing_executed_selected_test_log",
+          "missing_source_test_hashes",
+          "not_hydrated"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": null
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::uuid",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "commit_sha",
+        "selected_test_ids",
+        "selected_verifier_command_or_log_ref",
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::71066388131cfb9a",
+      "readiness_status": "next_hydration_required",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "uuid",
+      "required_hashes": {
+        "commit_sha": null,
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": []
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": null
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": null,
+        "dependency_risk": null,
+        "expected_verifier_scope": null,
+        "proposed_no_install_commands": [],
+        "queue_id": null
+      },
+      "stage12146_rollup": {
+        "root_id": null,
+        "selected_test_anchor": false,
+        "status": null,
+        "train_support_only": false,
+        "verifier_anchor": false
+      },
+      "status_bucket": "next_hydration"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "hash_refs_not_present_in_stage12144_summary_require_capture_or_stage12150_input_audit_trace"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": {
+          "collapsed": false,
+          "row_count": 5,
+          "target_semantic_values": [
+            "FINISH",
+            "PASS_CURRENT_BUILD_AND_RUN",
+            "STOP_DONE",
+            "selected_test_backed_verifier_candidate",
+            "verifier_and_test_constraint"
+          ],
+          "task_count": 5,
+          "unique_target_semantic_values": 5
+        }
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::assert_rs__predicates_rs",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::579ce9e31218e225",
+      "readiness_status": "ready_seed_selected_test_executed_semantic_audit_trace_present",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "assert-rs/predicates-rs",
+      "required_hashes": {
+        "commit_sha": "011c382ad51567d1612785d580380d78116015a9",
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [
+          "function::str_function"
+        ],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": [
+          "CARGO_HOME=/data/tmp/stage12133b_rust_web_hydration_cache/cargo/assert_rs_predicates_rs CARGO_TARGET_DIR=/data/tmp/stage12133b_rust_web_hydration_cache/target/assert_rs_predicates_rs cargo test --locked --offline str -- --nocapture"
+        ]
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::rust::010::assert_rs_predicates_rs",
+            "repo_family": "assert-rs/predicates-rs"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12146_selected_test_supply_rollup/selected_test_supply_rollup.jsonl",
+          "record_selector": {
+            "repo_family": "assert-rs/predicates-rs",
+            "root_id": "stage12118::rust::010::assert_rs_predicates_rs"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12144_rust_hydrated_selected_test_success_package/rust_hydrated_selected_test_successes.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::rust::010::assert_rs_predicates_rs",
+            "repo_family": "assert-rs/predicates-rs"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": "stage12118::rust::010::assert_rs_predicates_rs"
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/assert-rs/predicates-rs",
+        "dependency_risk": "low-medium: likely modest dependency graph, but workspace layout and cache availability are unknown until checkout.",
+        "expected_verifier_scope": "selected_test_list_only, then exact unit test execution if offline list succeeds.",
+        "proposed_no_install_commands": [
+          "test -f Cargo.toml",
+          "cargo metadata --no-deps --format-version 1",
+          "cargo test --locked --offline -- --list",
+          "cargo test --locked --offline str -- --nocapture"
+        ],
+        "queue_id": "stage12118::rust::010::assert_rs_predicates_rs"
+      },
+      "stage12146_rollup": {
+        "root_id": "stage12118::rust::010::assert_rs_predicates_rs",
+        "selected_test_anchor": false,
+        "status": "ready_for_row_materialization",
+        "train_support_only": true,
+        "verifier_anchor": false
+      },
+      "status_bucket": "ready_or_seed"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "hash_refs_not_present_in_stage12144_summary_require_capture_or_stage12150_input_audit_trace"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": {
+          "collapsed": false,
+          "row_count": 5,
+          "target_semantic_values": [
+            "FINISH",
+            "PASS_CURRENT_BUILD_AND_RUN",
+            "STOP_DONE",
+            "selected_test_backed_verifier_candidate",
+            "verifier_and_test_constraint"
+          ],
+          "task_count": 5,
+          "unique_target_semantic_values": 5
+        }
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::dtolnay__anyhow",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::d1b7cba38ad43a20",
+      "readiness_status": "ready_seed_selected_test_executed_semantic_audit_trace_present",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "dtolnay/anyhow",
+      "required_hashes": {
+        "commit_sha": "5bdb0e24db3994be119d42f18fe2d655e1f68f4a",
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [
+          "test_root_cause"
+        ],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": [
+          "CARGO_HOME=/data/tmp/stage12133b_rust_web_hydration_cache/cargo/dtolnay_anyhow CARGO_TARGET_DIR=/data/tmp/stage12133b_rust_web_hydration_cache/target/dtolnay_anyhow cargo test --offline --test test_context test_root_cause -- --nocapture"
+        ]
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::rust::017::dtolnay_anyhow",
+            "repo_family": "dtolnay/anyhow"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12146_selected_test_supply_rollup/selected_test_supply_rollup.jsonl",
+          "record_selector": {
+            "repo_family": "dtolnay/anyhow",
+            "root_id": "stage12118::rust::017::dtolnay_anyhow"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12144_rust_hydrated_selected_test_success_package/rust_hydrated_selected_test_successes.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::rust::017::dtolnay_anyhow",
+            "repo_family": "dtolnay/anyhow"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": "stage12118::rust::017::dtolnay_anyhow"
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/dtolnay/anyhow",
+        "dependency_risk": "low-medium: crate is small, but dev dependencies and Cargo.lock/cache availability are unknown before checkout.",
+        "expected_verifier_scope": "selected_test_list_only, then exact unit/integration test if cargo offline list succeeds.",
+        "proposed_no_install_commands": [
+          "test -f Cargo.toml",
+          "cargo metadata --no-deps --format-version 1",
+          "cargo test --locked --offline -- --list",
+          "cargo test --locked --offline context -- --nocapture"
+        ],
+        "queue_id": "stage12118::rust::017::dtolnay_anyhow"
+      },
+      "stage12146_rollup": {
+        "root_id": "stage12118::rust::017::dtolnay_anyhow",
+        "selected_test_anchor": false,
+        "status": "ready_for_row_materialization",
+        "train_support_only": true,
+        "verifier_anchor": false
+      },
+      "status_bucket": "ready_or_seed"
+    },
+    {
+      "admission_fields": {
+        "admission_level": "queue_only_no_admission",
+        "canonical_countable": false,
+        "eval_claim_allowed": false,
+        "requires_separate_admission_stage": true,
+        "row_admitted": false,
+        "source_heldout_admissible": false,
+        "strict_eval_eligible": false,
+        "training_allowed": false
+      },
+      "candidate_set": {
+        "blockers": [
+          "hash_refs_not_present_in_stage12144_summary_require_capture_or_stage12150_input_audit_trace"
+        ],
+        "canonical_rewrite_required": false,
+        "non_singleton_required": true,
+        "semantic_option_counts": [],
+        "semantic_task_count": 0,
+        "stage12150_semantic_diversity": {
+          "collapsed": false,
+          "row_count": 5,
+          "target_semantic_values": [
+            "FINISH",
+            "PASS_CURRENT_BUILD_AND_RUN",
+            "STOP_DONE",
+            "selected_test_backed_verifier_candidate",
+            "verifier_and_test_constraint"
+          ],
+          "task_count": 5,
+          "unique_target_semantic_values": 5
+        }
+      },
+      "canonical_root_candidate_id": "stage12307_rust_cpp_selected_test_root_candidate_queue::rust::toml_rs__toml",
+      "claim_boundary": "Queue record only: no training rows, no strict/eval claim, no external performance claim.",
+      "language_family": "rust",
+      "missing_fields": [
+        "source_hash_refs",
+        "test_hash_refs"
+      ],
+      "queue_record_id": "stage12307::6b7d9d3542ec4e69",
+      "readiness_status": "ready_seed_selected_test_executed_semantic_audit_trace_present",
+      "record_type": "canonical_root_candidate_queue_record",
+      "repo_family": "toml-rs/toml",
+      "required_hashes": {
+        "commit_sha": "eb251609a333580bf005cae27df853bb63dffdbe",
+        "required_classes": [
+          "commit_sha",
+          "verifier_command_or_log",
+          "source_hash",
+          "test_hash"
+        ],
+        "selected_test_ids": [
+          "parse::*"
+        ],
+        "source_hash_refs": [],
+        "test_hash_refs": [],
+        "verifier_command_or_log_refs": [
+          "CARGO_HOME=/data/tmp/stage12133b_rust_web_hydration_cache/cargo/toml_rs_toml CARGO_TARGET_DIR=/data/tmp/stage12133b_rust_web_hydration_cache/target/toml_rs_toml cargo test --locked --offline -p toml --test compliance parse -- --nocapture"
+        ]
+      },
+      "source_artifact_refs": [
+        {
+          "artifact": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::rust::044::toml_rs_toml",
+            "repo_family": "toml-rs/toml"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12146_selected_test_supply_rollup/selected_test_supply_rollup.jsonl",
+          "record_selector": {
+            "repo_family": "toml-rs/toml",
+            "root_id": "stage12118::rust::044::toml_rs_toml"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12144_rust_hydrated_selected_test_success_package/rust_hydrated_selected_test_successes.jsonl",
+          "record_selector": {
+            "queue_id": "stage12118::rust::044::toml_rs_toml",
+            "repo_family": "toml-rs/toml"
+          }
+        },
+        {
+          "artifact": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json",
+          "record_selector": {
+            "root_key": "stage12118::rust::044::toml_rs_toml"
+          }
+        }
+      ],
+      "stage12121_plan": {
+        "canonical_remote": "https://github.com/toml-rs/toml",
+        "dependency_risk": "medium: workspace and fixture/dev dependencies may be uncached; still less risky than database or network repos if narrowed by package.",
+        "expected_verifier_scope": "selected_test_list_only for the root or a discovered package; exact selected parser/serializer test only after offline list succeeds.",
+        "proposed_no_install_commands": [
+          "test -f Cargo.toml",
+          "cargo metadata --no-deps --format-version 1",
+          "cargo test --locked --offline -- --list",
+          "cargo test --locked --offline parse -- --nocapture"
+        ],
+        "queue_id": "stage12118::rust::044::toml_rs_toml"
+      },
+      "stage12146_rollup": {
+        "root_id": "stage12118::rust::044::toml_rs_toml",
+        "selected_test_anchor": false,
+        "status": "ready_for_row_materialization",
+        "train_support_only": true,
+        "verifier_anchor": false
+      },
+      "status_bucket": "ready_or_seed"
+    }
+  ],
+  "records_path": "runs/local/artifacts/stage12307_rust_cpp_selected_test_root_candidate_queue/canonical_root_candidate_queue_records.jsonl",
+  "source_heldout_admissible": false,
+  "source_status": {
+    "stage12121_cpp_plan": {
+      "exists": true,
+      "jsonl_rows": 10,
+      "path": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl"
+    },
+    "stage12121_cpp_summary": {
+      "exists": true,
+      "jsonl_rows": null,
+      "path": "runs/summaries/stage12121_cpp_verifier_ready_candidate_plan.json"
+    },
+    "stage12121_rust_plan": {
+      "exists": true,
+      "jsonl_rows": 10,
+      "path": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl"
+    },
+    "stage12121_rust_summary": {
+      "exists": true,
+      "jsonl_rows": null,
+      "path": "runs/summaries/stage12121_rust_verifier_ready_candidate_plan.json"
+    },
+    "stage12130_audit": {
+      "exists": true,
+      "jsonl_rows": null,
+      "path": "runs/local/artifacts/stage12130_selected_test_train_support_package/train_support_package_audit.json"
+    },
+    "stage12130_rows": {
+      "exists": true,
+      "jsonl_rows": 25,
+      "path": "runs/local/artifacts/stage12130_selected_test_train_support_package/train_support_rows.jsonl"
+    },
+    "stage12130_summary": {
+      "exists": true,
+      "jsonl_rows": null,
+      "path": "runs/summaries/stage12130_selected_test_train_support_package.json"
+    },
+    "stage12144_records": {
+      "exists": true,
+      "jsonl_rows": 3,
+      "path": "runs/local/artifacts/stage12144_rust_hydrated_selected_test_success_package/rust_hydrated_selected_test_successes.jsonl"
+    },
+    "stage12144_summary": {
+      "exists": true,
+      "jsonl_rows": null,
+      "path": "runs/summaries/stage12144_rust_hydrated_selected_test_success_package.json"
+    },
+    "stage12146_rollup": {
+      "exists": true,
+      "jsonl_rows": 10,
+      "path": "runs/local/artifacts/stage12146_selected_test_supply_rollup/selected_test_supply_rollup.jsonl"
+    },
+    "stage12146_summary": {
+      "exists": true,
+      "jsonl_rows": null,
+      "path": "runs/summaries/stage12146_selected_test_supply_rollup.json"
+    },
+    "stage12150_audit": {
+      "exists": true,
+      "jsonl_rows": null,
+      "path": "runs/local/artifacts/stage12150_corrected_selected_test_materialization_audit/row_materialization_blocker_audit.json"
+    },
+    "stage12150_summary": {
+      "exists": true,
+      "jsonl_rows": null,
+      "path": "runs/summaries/stage12150_corrected_selected_test_materialization_audit.json"
+    },
+    "stage12305_summary": {
+      "exists": true,
+      "jsonl_rows": null,
+      "path": "runs/summaries/stage12305_canonical_root_candidate_materialization_queue.json"
+    }
+  },
+  "stage": "stage12307_rust_cpp_selected_test_root_candidate_queue",
+  "strict_eval_eligible": false,
+  "training_allowed": false
+}

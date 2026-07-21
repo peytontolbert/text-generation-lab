@@ -1,0 +1,86 @@
+{
+  "admissibility_statement": "Zero rows are admitted for training or evaluation by Stage12123.",
+  "any_row_admissible_for_training": false,
+  "any_row_selected_test_execution_ready_for_later_admission_audit": true,
+  "claim_boundary": [
+    "No training.",
+    "No eval admission.",
+    "No generated task rows.",
+    "No dependency install or package-manager fetch.",
+    "Git clone is checkout only.",
+    "No GPU; CUDA/NVIDIA envs cleared and CPU device envs set.",
+    "Selected-test execution-ready means only a concrete exit-code-0 verifier log exists for later admission audit."
+  ],
+  "counts_by_language": {
+    "c_cpp": {
+      "admissible_for_training": 0,
+      "attempted": 3,
+      "build_static_only_evidence_found": 3,
+      "checkout_succeeded": 3,
+      "selected_test_execution_ready_for_later_admission_audit": 0,
+      "selected_test_execution_succeeded": 0
+    },
+    "python": {
+      "admissible_for_training": 0,
+      "attempted": 3,
+      "build_static_only_evidence_found": 1,
+      "checkout_succeeded": 3,
+      "selected_test_execution_ready_for_later_admission_audit": 2,
+      "selected_test_execution_succeeded": 2
+    },
+    "rust": {
+      "admissible_for_training": 0,
+      "attempted": 3,
+      "build_static_only_evidence_found": 2,
+      "checkout_succeeded": 2,
+      "selected_test_execution_ready_for_later_admission_audit": 0,
+      "selected_test_execution_succeeded": 0
+    },
+    "web_js_ts_html": {
+      "admissible_for_training": 0,
+      "attempted": 3,
+      "build_static_only_evidence_found": 3,
+      "checkout_succeeded": 3,
+      "selected_test_execution_ready_for_later_admission_audit": 0,
+      "selected_test_execution_succeeded": 0
+    }
+  },
+  "created_at_utc": "2026-07-15T14:48:33Z",
+  "do_not_train": true,
+  "final_recommendation": "Send selected-test execution successes to a separate admission audit for lineage/source-hash/anti-cheat review; keep build/static/list-only rows out of selected-test claims.",
+  "input": {
+    "normalized_candidates": "runs/local/artifacts/stage12122_verifier_ready_plan_merge_audit/normalized_verifier_ready_candidates.jsonl",
+    "shortlist": "runs/local/artifacts/stage12122_verifier_ready_plan_merge_audit/next_execution_shortlist.jsonl"
+  },
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12123_verifier_ready_checkout_execution_smoke",
+    "command_logs": "runs/local/artifacts/stage12123_verifier_ready_checkout_execution_smoke/command_logs",
+    "results_jsonl": "runs/local/artifacts/stage12123_verifier_ready_checkout_execution_smoke/execution_smoke_results.jsonl",
+    "runner": "runs/local/artifacts/stage12123_verifier_ready_checkout_execution_smoke/run_verifier_ready_smoke.py",
+    "scratch_checkouts": "/data/tmp/stage12123_verifier_ready_smoke_repos",
+    "summary": "runs/local/artifacts/stage12123_verifier_ready_checkout_execution_smoke/summary.json",
+    "summary_mirror": "runs/summaries/stage12123_verifier_ready_checkout_execution_smoke.json"
+  },
+  "selected_test_execution_ready_count": 2,
+  "stage": 12123,
+  "stage_name": "stage12123_verifier_ready_checkout_execution_smoke",
+  "stopped_early_for_dependency_hydration": false,
+  "top_blocker_reasons": [
+    [
+      "build_static_or_list_only_no_selected_test_success",
+      9
+    ],
+    [
+      "none",
+      2
+    ],
+    [
+      "checkout_failed",
+      1
+    ],
+    [
+      "no_successful_verifier_command",
+      1
+    ]
+  ]
+}

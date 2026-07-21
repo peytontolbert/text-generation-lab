@@ -1,0 +1,76 @@
+{
+  "admitted_rows": 0,
+  "bears_inventory": {
+    "exists": true,
+    "failing_passing_candidates": 19,
+    "language_counts": {
+      "java": 251
+    },
+    "nonrepair_blocked_candidates": 232,
+    "path": "/arxiv/repositories/RepairThemAll/data/benchmarks/bears/bugs.json",
+    "total_records": 251,
+    "type_counts": {
+      "failing_passing": 19,
+      "passing_passing": 232
+    }
+  },
+  "claim_boundary": "Preflight/source-adapter candidates only. Zero training, strict-eval, source-heldout, Level-3, patch-trace, or repair rows admitted.",
+  "decision": "external_adapter_preflight_complete_zero_admission",
+  "hard_guards": [
+    "Open-SWE resolved traces are trace-support only until raw trajectory is converted into safe transition records and causality-audited.",
+    "Bears passing_passing rows are blocked from repair-proof counts.",
+    "Bears failing_passing rows are still preflight only until command output, checkout lineage, and same-source patch-verifier causality pass.",
+    "No raw diff body, raw verifier output, raw issue text, or raw test failure detail emitted in preflight artifacts.",
+    "No Stage12327 artifact may satisfy the 500 train-support counter without a later admission stage."
+  ],
+  "next_stage_recommendation": {
+    "bears": "Hydrate failing_passing candidates with authoritative command/build/test output refs; reject passing_passing as repair proof.",
+    "open_swe": "Run capped trace extraction into safe transition-record review candidates; keep as trace-support unless verifier causality and state deltas pass.",
+    "stage": "stage12328_external_adapter_qc_materialization_request"
+  },
+  "open_swe_import_artifact": {
+    "candidate_type_counts": {
+      "trace_support_patch_plus_verify": 250
+    },
+    "exists": false,
+    "language_counts": {
+      "go": 42,
+      "java": 13,
+      "javascript": 23,
+      "php": 14,
+      "python": 103,
+      "rust": 18,
+      "typescript": 37
+    },
+    "path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/open_swe_trace_episodes_v1/open_swe_trace_episodes.jsonl",
+    "priority_capped_candidates": 50,
+    "priority_contract": "Python bug-fix traces, 1-3 changed paths, <=80 modified lines, selected test present, failure+pass markers present; still zero admission.",
+    "priority_language_counts": {
+      "python": 50
+    },
+    "sampled_preflight_candidates": 250
+  },
+  "open_swe_inventory": {
+    "exists": true,
+    "parquet_file_count": 84,
+    "root": "/arxiv/datasets/nvidia--Open-SWE-Traces",
+    "sample_files": [
+      "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_openhands_trajectories/train-00000-of-00020.parquet",
+      "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_openhands_trajectories/train-00001-of-00020.parquet",
+      "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_openhands_trajectories/train-00002-of-00020.parquet",
+      "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_openhands_trajectories/train-00003-of-00020.parquet",
+      "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_openhands_trajectories/train-00004-of-00020.parquet",
+      "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_openhands_trajectories/train-00005-of-00020.parquet",
+      "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_openhands_trajectories/train-00006-of-00020.parquet",
+      "/arxiv/datasets/nvidia--Open-SWE-Traces/data/minimax_m25_openhands_trajectories/train-00007-of-00020.parquet"
+    ],
+    "trajectory_family_counts": {
+      "minimax_m25_openhands_trajectories": 20,
+      "minimax_m25_sweagent_trajectories": 23,
+      "qwen35_openhands_trajectories": 23,
+      "qwen35_sweagent_trajectories": 18
+    }
+  },
+  "stage": "stage12327_external_adapter_preflight",
+  "training_allowed": false
+}

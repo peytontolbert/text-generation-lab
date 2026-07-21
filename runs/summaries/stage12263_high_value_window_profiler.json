@@ -1,0 +1,90 @@
+{
+  "artifact_type": "high_value_window_profiler",
+  "claim_boundary": "Metadata/digest profiler only. No raw content, no episode admission, no root admission, no training rows.",
+  "counts": {
+    "eligible_profiles": 2057,
+    "eligible_top_chats": [
+      [
+        "codex_chat_e5d0b6e24e7d5f2097c4",
+        1167
+      ],
+      [
+        "codex_chat_94178e3cbe26fad56b1d",
+        757
+      ],
+      [
+        "codex_chat_7e05f84a7583daf1b3c3",
+        51
+      ],
+      [
+        "codex_chat_d6bf338eaa50fc67225b",
+        32
+      ],
+      [
+        "codex_chat_a0d8350c4bd166c6d2a0",
+        20
+      ],
+      [
+        "codex_chat_235a1dbd061049453f69",
+        3
+      ],
+      [
+        "codex_chat_fae47acf81bd857835f6",
+        3
+      ],
+      [
+        "codex_chat_44fa8561b9c36bba31cc",
+        3
+      ],
+      [
+        "codex_chat_f227640ba431ea8816df",
+        2
+      ],
+      [
+        "codex_chat_37d0a4499e2ec57a6c74",
+        2
+      ]
+    ],
+    "excluded_profiles": 2,
+    "input_level2_patch_verifier_windows": 2059,
+    "max_per_chat": 3,
+    "selected_audit_windows": 25,
+    "selected_language_family_counts": {
+      "python": 25
+    },
+    "selected_per_chat": {
+      "codex_chat_235a1dbd061049453f69": 1,
+      "codex_chat_23a247014a9601072026": 1,
+      "codex_chat_30b20c1d39bff9c44e66": 1,
+      "codex_chat_44fa8561b9c36bba31cc": 1,
+      "codex_chat_7e05f84a7583daf1b3c3": 3,
+      "codex_chat_94178e3cbe26fad56b1d": 3,
+      "codex_chat_a0d8350c4bd166c6d2a0": 3,
+      "codex_chat_d6bf338eaa50fc67225b": 3,
+      "codex_chat_e5d0b6e24e7d5f2097c4": 3,
+      "codex_chat_e7709e45b05c07e83ca9": 1,
+      "codex_chat_f227640ba431ea8816df": 2,
+      "codex_chat_fae47acf81bd857835f6": 3
+    }
+  },
+  "decision": "capped_audit_set_ready_no_admission",
+  "guardrails": {
+    "raw_message_text_emitted": false,
+    "raw_patch_body_emitted": false,
+    "raw_tool_arguments_emitted": false,
+    "raw_tool_output_emitted": false,
+    "root_admission_emitted": false,
+    "training_rows_emitted_now": false
+  },
+  "input": {
+    "stage12258_chats": "runs/local/artifacts/stage12258_live_codex_chat_reconstruction_index/per_chat_manifest.jsonl",
+    "stage12260_windows": "runs/local/artifacts/stage12260_codex_chat_task_boundary_miner/codex_task_windows.jsonl"
+  },
+  "next_stage": {
+    "scope": "convert only capped audit windows into candidate skeletons and validate, no admission",
+    "stage": "stage12264_small_episode_graph_candidate_projection_audit",
+    "training_allowed": false
+  },
+  "stage": "stage12263_high_value_window_profiler",
+  "training_allowed": false
+}

@@ -1,0 +1,70 @@
+{
+  "artifact_type": "small_episode_graph_candidate_projection_audit",
+  "claim_boundary": "Projection audit only. Candidate skeletons use metadata/digest refs from the capped Stage12263 set. They are not admitted roots, not training rows, and not Level-3 closed-loop examples.",
+  "counts": {
+    "blocker_counts": {
+      "v3_candidate_actions_missing": 25,
+      "v3_chosen_action_missing": 25,
+      "v3_state_after_missing": 25,
+      "v3_state_before_missing": 25,
+      "v3_stop_continue_missing": 25,
+      "v4_verifier_relevance_not_materialized": 25,
+      "v5_no_admission_in_stage12264": 25
+    },
+    "candidate_skeletons": 25,
+    "highest_validated_level_counts": {
+      "V2_task_boundary": 25
+    },
+    "max_per_chat": 3,
+    "per_chat": {
+      "codex_chat_235a1dbd061049453f69": 1,
+      "codex_chat_23a247014a9601072026": 1,
+      "codex_chat_30b20c1d39bff9c44e66": 1,
+      "codex_chat_44fa8561b9c36bba31cc": 1,
+      "codex_chat_7e05f84a7583daf1b3c3": 3,
+      "codex_chat_94178e3cbe26fad56b1d": 3,
+      "codex_chat_a0d8350c4bd166c6d2a0": 3,
+      "codex_chat_d6bf338eaa50fc67225b": 3,
+      "codex_chat_e5d0b6e24e7d5f2097c4": 3,
+      "codex_chat_e7709e45b05c07e83ca9": 1,
+      "codex_chat_f227640ba431ea8816df": 2,
+      "codex_chat_fae47acf81bd857835f6": 3
+    },
+    "per_language_family_candidate": {
+      "python": 25
+    }
+  },
+  "decision": "candidate_skeletons_emitted_no_admission_training_blocked",
+  "guardrails": {
+    "raw_message_text_emitted": false,
+    "raw_patch_body_emitted": false,
+    "raw_tool_arguments_emitted": false,
+    "raw_tool_output_emitted": false,
+    "root_admission_emitted": false,
+    "training_rows_emitted_now": false
+  },
+  "input": {
+    "paired_call_observation_index": "runs/local/artifacts/stage12259_codex_tool_call_observation_pairer/tool_call_observation_pairs.jsonl",
+    "top25_audit_set": "runs/local/artifacts/stage12263_high_value_window_profiler/top25_audit_set.jsonl"
+  },
+  "next_stage": {
+    "scope": "bounded subagent review of 25 candidate skeletons for segmentation, causal relevance, and state fields; no admission",
+    "stage": "stage12265_gpt_review_packet_for_capped_episode_graph_candidates",
+    "training_allowed": false
+  },
+  "quality_decision": {
+    "admission_allowed": false,
+    "gpt_review_allowed": true,
+    "gpt_review_scope": "segmentation/causal/state-distillation review only; cannot admit rows",
+    "reason_training_blocked": [
+      "state_before/state_after not materialized",
+      "candidate actions/chosen action not materialized",
+      "verifier relevance/status not materialized",
+      "repo/cwd boundary not joined",
+      "selected audit set is all inferred Python"
+    ],
+    "source_root_repair_required_before_gpt_review": "satisfied_for_stage12263_top25_via_chat_manifest"
+  },
+  "stage": "stage12264_small_episode_graph_candidate_projection_audit",
+  "training_allowed": false
+}

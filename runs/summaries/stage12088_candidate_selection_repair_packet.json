@@ -1,0 +1,128 @@
+{
+  "audit": {
+    "covered_candidate_selection_gains": 16,
+    "covered_candidate_selection_losses": 24,
+    "covered_next_action_gains": 30,
+    "covered_next_action_losses": 22,
+    "duplicate_source_rows": 56,
+    "hard_negative_role_counts": {
+      "allowed_maintenance_action": 75,
+      "caller_surface": 2,
+      "candidate_change_surface": 39,
+      "change_test_expectation": 4,
+      "implementation_only_no_verifier": 7,
+      "nearby_sibling_test_constraint": 8,
+      "selected_function_test_anchor": 4,
+      "selected_inline_test_anchor": 9,
+      "sibling_function_test_distractor": 3,
+      "verifier_and_build_constraint": 9
+    },
+    "missing_source_row_count": 0,
+    "option_mirror_missing_count": 0,
+    "passes_admission": true,
+    "prompt_target_leak_count": 0,
+    "rows": 160,
+    "singleton_option_count": 0,
+    "subpacket_counts": {
+      "candidate_selection_gain_preservation": 25,
+      "candidate_selection_regression_replay": 60,
+      "next_action_gain_preservation": 45,
+      "selected_verifier_next_action_preservation": 30
+    },
+    "target_role_counts": {
+      "allowed_maintenance_action": 75,
+      "candidate_change_surface": 11,
+      "implementation_only_no_verifier": 13,
+      "minimal_candidate_change_surface": 4,
+      "selected_function_test_anchor": 6,
+      "selected_inline_test_anchor": 4,
+      "verifier_and_build_constraint": 30,
+      "verifier_and_test_constraint": 17
+    },
+    "target_value_counts": {
+      "A": 25,
+      "ABSTAIN_OR_ROLLBACK": 31,
+      "B": 47,
+      "C": 13,
+      "PLAN_PATCH": 18,
+      "RETRIEVE_EVIDENCE": 26
+    },
+    "task_counts": {
+      "transition_candidate_selection": 85,
+      "transition_next_action": 75
+    },
+    "unique_source_rows": 92,
+    "unsafe_loss_mask_count": 0
+  },
+  "created_at_utc": "2026-07-15T00:27:00Z",
+  "decision": "candidate_selection_repair_packet_admitted_no_training_launched",
+  "design_reference": {
+    "do_not_train_from_design_only": true,
+    "normalization_requirements": [
+      "Every row must carry opaque_options and standalone_projection_source.opaque_options.",
+      "Every row must retain semantic target value and role metadata.",
+      "Every replay row must declare source_row_id and source_stage12086_direction.",
+      "No singleton-option rows.",
+      "No semantic target value visible before candidates.",
+      "Deterministic option shuffle must be asserted or inherited from the source row."
+    ],
+    "packet_shape": {
+      "candidate_selection_gain_preservation": {
+        "hard_negative": "Stage11924 base_pred_role/base_pred_value for the same row",
+        "minimum_unique_source_rows": 16,
+        "primary_sources": "Stage12086 candidate-selection gains",
+        "purpose": "Avoid undoing genuine candidate-selection gains while repairing losses.",
+        "rows": 25
+      },
+      "candidate_selection_regression_replay": {
+        "hard_negative": "Stage12083 post_pred_role/post_pred_value for the same row",
+        "minimum_unique_source_rows": 24,
+        "primary_sources": "all Stage12086 candidate-selection losses, cycled only after full coverage",
+        "priority_roles": {
+          "losses_to_candidate_change_surface": 17,
+          "rust_inline_anchor_losses": 3,
+          "verifier_constraint_losses": 19
+        },
+        "purpose": "Recover candidate-selection rows lost by Stage12083, especially verifier/build-vs-surface cases.",
+        "rows": 60
+      },
+      "next_action_gain_preservation": {
+        "hard_negative": "Stage11924 wrong base prediction",
+        "minimum_unique_source_rows": 30,
+        "primary_sources": "Stage12086 next-action gains",
+        "purpose": "Preserve the Stage12083 next-action improvement of 51/160 -> 59/160.",
+        "rows": 45
+      },
+      "selected_verifier_next_action_preservation": {
+        "hard_negative": "Stage12083 wrong post prediction, commonly PLAN_PATCH",
+        "minimum_unique_source_rows": 22,
+        "primary_sources": "Stage12086 next-action losses with verifier/retrieval targets",
+        "purpose": "Prevent the repair from repeating Stage12075/12083 selected-verifier overcorrection.",
+        "rows": 30
+      }
+    },
+    "recommended_stage": "stage12088_candidate_selection_repair_packet",
+    "rows_total_target": 160,
+    "sampling_rule": "Coverage first, cycling second: cover all 24 candidate-selection losses before duplicating any loss row. Do not allow next-action preservation rows to exceed 50% of the packet."
+  },
+  "next_stage": {
+    "do_not_skip": true,
+    "purpose": "Verify coverage and anti-cheat gates before any guarded training request.",
+    "recommended": "stage12089_candidate_selection_repair_local_audit"
+  },
+  "outputs": {
+    "rows": "runs/local/artifacts/stage12088_candidate_selection_repair_packet/candidate_selection_repair_rows.jsonl",
+    "summary": "runs/local/artifacts/stage12088_candidate_selection_repair_packet/candidate_selection_repair_packet.json",
+    "summary_mirror": "runs/summaries/stage12088_candidate_selection_repair_packet.json"
+  },
+  "purpose": "Restore Stage12083 candidate-selection losses while preserving next-action gains.",
+  "selected_transition_frontier": "stage11924_transition_listwise_head_only_probe",
+  "source_artifacts": {
+    "design": "runs/summaries/stage12087_candidate_selection_repair_design.json",
+    "source_rows": "runs/local/artifacts/stage11897_transition_record_projection_rows/transition_projection_rows.jsonl",
+    "stage12086_records": "runs/local/artifacts/stage12086_candidate_selection_regression_atlas/candidate_selection_regression_records.jsonl"
+  },
+  "stage": 12088,
+  "stage_name": "stage12088_candidate_selection_repair_packet",
+  "training_allowed": false
+}

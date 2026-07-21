@@ -1,0 +1,79 @@
+{
+  "artifact_refs": {
+    "demoted_rows": "runs/local/artifacts/stage12536_stage12535_semantic_risk_audit/stage12535_demoted_semantic_risk_rows.jsonl",
+    "repair_requirements": "runs/local/artifacts/stage12536_stage12535_semantic_risk_audit/stage12535_exact_repair_requirements.json",
+    "semantic_grounding_audit": "runs/local/artifacts/stage12536_stage12535_semantic_risk_audit/stage12535_semantic_grounding_audit.json"
+  },
+  "claim_boundary": "Stage12536 is a hash/class-only semantic risk gate over Stage12535. It grants no training, Level3, patch-trace, repair, fail-to-pass, strict-eval, source-heldout, Gemma/product, or training-progress claim.",
+  "countable_train_support": false,
+  "countable_train_support_count": 0,
+  "decision": "stage12535_blocked_demoted_semantically_weak_metadata_inventory",
+  "demotion": {
+    "blocked_row_count": 373,
+    "blocked_rows_ref": "runs/local/artifacts/stage12536_stage12535_semantic_risk_audit/stage12535_demoted_semantic_risk_rows.jsonl",
+    "stage12535_rows_demoted_from_training_claims": true
+  },
+  "fail_to_pass_claim_admitted_rows": 0,
+  "gemma_or_product_claims": 0,
+  "guardrail_scan_passed": true,
+  "level3_admitted_rows": 0,
+  "new_countable_train_support_count": 0,
+  "next_stage": "repair_stage12535_with_real_command_output_verifier_observations_then_rerun_stage12534_and_semantic_review",
+  "patch_trace_admitted_rows": 0,
+  "raw_leak_count": 0,
+  "record_type": "stage12535_semantic_risk_audit_v1",
+  "repair_claim_admitted_rows": 0,
+  "repair_requirements_ref": "runs/local/artifacts/stage12536_stage12535_semantic_risk_audit/stage12535_exact_repair_requirements.json",
+  "semantic_grounding": {
+    "deterministic_label_rotation_signal": true,
+    "metadata_only_source_signal": true,
+    "risky_claim_row_count": 0,
+    "row_count": 373,
+    "rows_missing_command_output_observation": 373,
+    "rows_with_command_output_observation": 0,
+    "semantically_grounded": false,
+    "weak_reasons": [
+      "stage12535_declares_public_local_repo_metadata_hash_only_source",
+      "stage12535_rows_lack_real_command_output_observation_hashes",
+      "stage12535_target_labels_match_deterministic_rotation_pattern"
+    ]
+  },
+  "source_heldout_admissible_count": 0,
+  "source_inventory": {
+    "language_counts": {
+      "c_cpp": 26,
+      "python": 347
+    },
+    "projection_counts": {
+      "transition_continue_or_stop": 186,
+      "transition_verifier_transition": 187
+    },
+    "stage12535_manifest_emitted_row_count": 373,
+    "stage12535_row_count": 373,
+    "target_counts": {
+      "CONTINUE_SINGLE_VERIFIER_EVIDENCE": 62,
+      "FAIL_CURRENT_STATE": 62,
+      "INSUFFICIENT_EVIDENCE": 62,
+      "NOT_EXERCISED": 62,
+      "PASS_CURRENT_STATE": 63,
+      "STOP_NO_MORE_VERIFIER_EVIDENCE": 62
+    }
+  },
+  "stage": "stage12536_stage12535_semantic_risk_audit",
+  "stage12534_decision": "fresh_hydratable_verifier_observation_supply_gate_prepared_no_rows_admitted",
+  "stage12535_input_hashes": {
+    "manifest": "1505ebf2916611120d6c1a6f",
+    "rows": "bd19ee15c0df62c92da36789",
+    "summary": "56197e06ada7ade0d9c03ae4"
+  },
+  "stage12535_record_type": "deterministic_public_local_repo_verifier_observation_supply_manifest_v1",
+  "strict_eval_eligible_count": 0,
+  "training_allowed": false,
+  "training_blockers": [
+    "separate_semantic_review_not_passed",
+    "stage12535_declares_public_local_repo_metadata_hash_only_source",
+    "stage12535_rows_lack_real_command_output_observation_hashes",
+    "stage12535_target_labels_match_deterministic_rotation_pattern",
+    "training_allowed_remains_false_by_stage12536_policy"
+  ]
+}

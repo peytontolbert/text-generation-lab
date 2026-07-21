@@ -1,0 +1,86 @@
+{
+  "created_at_utc": "2026-07-15T00:15:35Z",
+  "decision": "next_action_repair_training_request_ready",
+  "execute_now": false,
+  "gates_before_execution": {
+    "base_manifest_exists": true,
+    "head_only_enabled": true,
+    "init_runtime_exists": true,
+    "lower_steps_than_stage12075": true,
+    "option_mirror_missing_zero": true,
+    "preserve_runtime_exists": true,
+    "repair_rows_160": true,
+    "repair_rows_exists": true,
+    "splits_expected": true,
+    "stage12081_passed": true,
+    "unsafe_loss_zero": true,
+    "uses_gpu2_mask": true
+  },
+  "hypothesis": "A smaller subfamily-aware repair packet can recover selected-verifier RETRIEVE_EVIDENCE rows without erasing patch-impact PLAN_PATCH gains.",
+  "next_stage_after_execution": "stage12084_next_action_repair_training_postrun_audit",
+  "next_stage_if_executed": "stage12083_next_action_repair_training_probe",
+  "outputs": {
+    "command": "runs/local/artifacts/stage12082_next_action_repair_training_request/next_action_repair_training_command.json",
+    "manifest": "runs/local/artifacts/stage12082_next_action_repair_training_request/next_action_repair_training_manifest.jsonl",
+    "output_dir": "runs/local/artifacts/stage12083_next_action_repair_training_probe/bounded_decoder_probe",
+    "runtime_dir": "runs/local/artifacts/stage12083_next_action_repair_training_probe/runtime_model",
+    "summary": "runs/local/artifacts/stage12082_next_action_repair_training_request/next_action_repair_training_request.json",
+    "summary_mirror": "runs/summaries/stage12082_next_action_repair_training_request.json"
+  },
+  "passed": true,
+  "promotion_gate": {
+    "old_transition_640": ">364/640",
+    "protected_filtered_strict": "22/22",
+    "protected_old_canary_strict": "23/23",
+    "residual_bank": ">=7/10",
+    "source_heldout_smoke": ">=6/12",
+    "transition_candidate_selection": ">=89/160",
+    "transition_next_action": ">51/160"
+  },
+  "row_counts": {
+    "eval_rows": 22,
+    "old_replay_rows": 640,
+    "option_mirror_missing": 0,
+    "repair_rows": 160,
+    "repair_subpacket_counts": {
+      "candidate_selection_do_not_regress": 40,
+      "patch_impact_plan_positive": 35,
+      "selected_verifier_retrieval_preservation": 60,
+      "symptom_localization_preservation": 25
+    },
+    "repair_target_counts": {
+      "A": 4,
+      "B": 17,
+      "C": 19,
+      "LOCALIZE_FAILURE": 20,
+      "PLAN_PATCH": 35,
+      "RETRIEVE_EVIDENCE": 45,
+      "SELECT_TEST": 20
+    },
+    "strict_rows": 22,
+    "train_rows": 800,
+    "train_task_counts": {
+      "transition_candidate_selection": 200,
+      "transition_continue_or_stop": 160,
+      "transition_next_action": 280,
+      "transition_verifier_transition": 160
+    },
+    "unsafe_loss": 0
+  },
+  "source_artifacts": {
+    "base_manifest": "runs/local/artifacts/stage11923_transition_listwise_head_only_probe_request/transition_listwise_head_only_manifest.jsonl",
+    "repair_rows": "runs/local/artifacts/stage12080_next_action_subfamily_repair_packet/next_action_subfamily_repair_rows.jsonl",
+    "stage12081_audit": "runs/summaries/stage12081_next_action_repair_local_audit.json"
+  },
+  "stage": 12082,
+  "stage_name": "stage12082_next_action_repair_training_request",
+  "training_controls": {
+    "contrast_weight": 0.25,
+    "gpu": "cuda:2 only",
+    "head_only": true,
+    "init_runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "learning_rate": "5e-5",
+    "max_steps": 384,
+    "preservation_reference_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json"
+  }
+}

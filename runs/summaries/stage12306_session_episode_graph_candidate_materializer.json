@@ -1,0 +1,66 @@
+{
+  "admission_allowed": false,
+  "admission_level_counts": {
+    "candidate_only_v3_unadmitted": 17,
+    "candidate_only_v4_unadmitted": 8
+  },
+  "blocked_reason_counts": {
+    "candidate_only_fail_closed": 25,
+    "raw_session_event_root_requires_causal_review": 25,
+    "repo_family_unknown_until_cwd_or_repo_join": 25,
+    "training_allowed_false": 25
+  },
+  "candidate_only": true,
+  "caps": {
+    "emitted_candidates": 25,
+    "max_candidates": 25,
+    "max_per_chat_or_session": 3,
+    "skipped_by_per_chat_or_session_cap": 166
+  },
+  "decision": "candidate_materialization_complete_fail_closed",
+  "guardrails": {
+    "candidate_only": true,
+    "command_text_emitted": false,
+    "raw_message_text_emitted": false,
+    "raw_patch_body_emitted": false,
+    "raw_source_paths_emitted": false,
+    "raw_tool_arguments_emitted": false,
+    "raw_tool_output_emitted": false,
+    "training_allowed": false
+  },
+  "input_artifact_status": {
+    "stage12256_live_physical_source_records": {
+      "exists": true,
+      "records_indexed_by_hash": 1301,
+      "source_paths_emitted": false
+    },
+    "stage12260_codex_task_windows": {
+      "exists": true,
+      "records_indexed_by_task_window": 23936
+    },
+    "stage12262_blocked_task_windows": {
+      "exists": true,
+      "records_indexed_by_task_window": 0
+    },
+    "stage12271_horizon_slice_candidates": {
+      "exists": true,
+      "task_windows_with_candidates": 200
+    }
+  },
+  "output_artifacts": [
+    {
+      "artifact_id": "stage12306_episode_graph_candidates_jsonl",
+      "artifact_rel": "stage12306_session_episode_graph_candidate_materializer/stage12306_session_episode_graph_candidate_materializer.jsonl",
+      "candidate_only": true,
+      "record_count": 25,
+      "record_type": "episode_graph_candidate",
+      "training_allowed": false
+    }
+  ],
+  "record_type": "stage_summary",
+  "selection_source_counts": {
+    "stage12271_horizon_slice": 25
+  },
+  "stage": "stage12306_session_episode_graph_candidate_materializer",
+  "training_allowed": false
+}

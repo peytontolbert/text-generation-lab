@@ -1,0 +1,431 @@
+{
+  "canonical_schema": {
+    "claim_gates": [
+      "train_support_allowed",
+      "strict_eval_eligible",
+      "source_heldout_admissible",
+      "external_comparable_patch_trace_countable",
+      "external_fail_to_pass_countable",
+      "level_3_countable",
+      "level_4_countable"
+    ],
+    "episode": [
+      "episode_id",
+      "task_window_id",
+      "ordered_events_ref",
+      "task_intent_ref",
+      "horizon_level",
+      "same_source_join_proof"
+    ],
+    "root": [
+      "canonical_root_id",
+      "repo_family",
+      "language_family",
+      "source_root_label",
+      "root_lineage_key",
+      "split_group_id",
+      "source_pool_id",
+      "admission_level"
+    ],
+    "transition": [
+      "transition_id",
+      "state_before_ref",
+      "candidate_action_set",
+      "chosen_action_target_only",
+      "observation_target_only",
+      "verifier_result_target_only",
+      "state_after_or_update_target_only",
+      "stop_continue_target_only",
+      "semantic_rule_id",
+      "transition_function_key"
+    ]
+  },
+  "central_spine_facts": {
+    "current_level_3_plus_episode_supply": 0,
+    "current_patch_trace_episode_supply": 0,
+    "level_3_floor_from_spine": {
+      "languages": 3,
+      "level_3_plus_episodes": 20,
+      "patch_trace_episodes": 8,
+      "repositories": 10
+    },
+    "valid_unit": "root+task -> ordered_events -> state_before -> candidate_actions -> chosen_action -> observation -> verifier_result -> state_after -> stop_continue"
+  },
+  "claim_boundary": "This stage aligns source pools to the central unbounded spine. It admits no rows and emits no training request.",
+  "current_blockers": {
+    "stage12237_decision": "training_blocked_but_audit_and_conversion_work_allowed",
+    "stage12248_decision": "bottleneck_is_pre_admission_candidate_mining_and_same_source_joining_not_gate_strictness",
+    "stage12302_decision": "stage12301_candidate_only_semantic_reconstruction_required",
+    "stage12303_decision": "semantic_reconstruction_worklist_ready_no_training_rows"
+  },
+  "decision": "canonical_root_mining_spine_aligned_training_still_blocked",
+  "ledger_profile": {
+    "dataset_source_ledger": {
+      "late_stage_transition_source_examples": [
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11901,
+          "stage_name": "stage11901_transition_projection_support_only_postrun_audit",
+          "status": "support_only",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab",
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+          ],
+          "stage": 11902,
+          "stage_name": "stage11902_transition_projection_protected_replay_probe_request",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11904,
+          "stage_name": "stage11904_transition_projection_protected_replay_postrun_audit",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "runs/local/artifacts/stage11898_transition_projection_baseline_audit/transition_projection_baseline_audit.json",
+            "runs/local/artifacts/stage11901_transition_projection_support_only_postrun_audit/transition_projection_support_only_postrun_audit.json",
+            "runs/local/artifacts/stage11904_transition_projection_protected_replay_postrun_audit/transition_projection_protected_replay_postrun_audit.json"
+          ],
+          "stage": 11905,
+          "stage_name": "stage11905_transition_projection_decision",
+          "status": "support_only",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab",
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+          ],
+          "stage": 11906,
+          "stage_name": "stage11906_transition_projection_compact_analogue_replay_probe_request",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11908,
+          "stage_name": "stage11908_transition_projection_compact_analogue_replay_postrun_audit",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab",
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+          ],
+          "stage": 11909,
+          "stage_name": "stage11909_transition_projection_head_only_compact_analogue_probe_request",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab",
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+          ],
+          "stage": 11911,
+          "stage_name": "stage11911_transition_projection_semantic_head_only_probe_request",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11913,
+          "stage_name": "stage11913_transition_projection_semantic_head_only_postrun_audit",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11914,
+          "stage_name": "stage11914_routed_transition_semantic_head_audit",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+            "runs/local/artifacts/stage11904_transition_projection_protected_replay_postrun_audit/transition_projection_protected_replay_postrun_audit.json",
+            "runs/local/artifacts/stage11908_transition_projection_compact_analogue_replay_postrun_audit/transition_projection_compact_analogue_replay_postrun_audit.json"
+          ],
+          "stage": 11915,
+          "stage_name": "stage11915_routed_transition_candidate_decision",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab",
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+          ],
+          "stage": 11918,
+          "stage_name": "stage11918_transition_projection_contrast_head_only_probe_request",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11920,
+          "stage_name": "stage11920_transition_contrast_routed_postrun_audit",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab",
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+          ],
+          "stage": 11923,
+          "stage_name": "stage11923_transition_listwise_head_only_probe_request",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11925,
+          "stage_name": "stage11925_transition_listwise_routed_postrun_audit",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab",
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+          ],
+          "stage": 11928,
+          "stage_name": "stage11928_cpp_transition_recovery_probe_request",
+          "status": "eval_or_heldout_related",
+          "train_authority": "review_required"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11930,
+          "stage_name": "stage11930_cpp_transition_recovery_routed_audit",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11932,
+          "stage_name": "stage11932_transition_bucket_remap_inference_audit",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab",
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+          ],
+          "stage": 11934,
+          "stage_name": "stage11934_transition_candidate_head_probe_request",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        },
+        {
+          "artifact_paths": [
+            "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+            "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"
+          ],
+          "stage": 11936,
+          "stage_name": "stage11936_transition_candidate_head_routed_audit",
+          "status": "eval_or_heldout_related",
+          "train_authority": "eval_related_check_lineage"
+        }
+      ],
+      "late_stage_transition_source_records": 133,
+      "record_count": 2981,
+      "status_counts_top": {
+        "blocked_or_quarantine": 673,
+        "eval_or_heldout_related": 1135,
+        "support_only": 281,
+        "unknown": 892
+      },
+      "train_authority_counts_top": {
+        "eval_related_check_lineage": 1288,
+        "not_trainable": 74,
+        "review_required": 1551,
+        "support_only": 68
+      }
+    },
+    "stage12198_record_counts": {
+      "dataset_source_ledger": 2981,
+      "failure_mechanism_ledger": 7505,
+      "frontier_ledger": 3073,
+      "raw_stage_index": 3126,
+      "trainer_capability_ledger": 2740
+    }
+  },
+  "next_stage": "stage12305_canonical_root_candidate_materialization_queue",
+  "next_subagent_work_orders": [
+    {
+      "name": "source_pool_materializer",
+      "task": "For each source pool, emit 25 canonical_root_candidate records with level labels and missing fields, not training rows."
+    },
+    {
+      "name": "semantic_rule_assigner",
+      "task": "Assign deterministic semantic_rule_id and state code only when pre-action state supports it; otherwise block."
+    },
+    {
+      "name": "language_gap_miner",
+      "task": "Find Rust and C/C++ canonical roots with ordered events and verifier outputs; do not reuse protected heldout roots."
+    },
+    {
+      "name": "episode_graph_join_auditor",
+      "task": "Check same-source ordering and causality for patch/action/verifier/state joins; reject co-presence."
+    }
+  ],
+  "source_pools": [
+    {
+      "admission_level_today": "level_1_to_level_2_auxiliary_transition_projection",
+      "blockers": [
+        "raw observed action labels must be replaced with maintainer semantic labels",
+        "candidate role markers must not enter model-visible fields",
+        "state_update labels require semantic review",
+        "non-Python/non-Web roots are currently missing in the admitted reconstruction set"
+      ],
+      "canonical_root_potential": "medium",
+      "current_language_mix": {
+        "python": 29,
+        "web_js_ts_html": 30
+      },
+      "current_volume": {
+        "stage12295_ledger_records": 120314,
+        "stage12300_root_repaired_candidates": 1614,
+        "stage12303_reconstruction_work_items": 59
+      },
+      "expansion_value": "High-volume short-horizon transition functions after semantic state/rule assignment.",
+      "next_action": "stage12304/12305 semantic rule assignment, then root-balanced train-support package only if floors pass",
+      "pool_id": "codex_horizon_transition_graph",
+      "primary_artifacts": [
+        "runs/local/artifacts/stage12295_transition_function_ledger/transition_function_ledger.jsonl",
+        "runs/local/artifacts/stage12300_root_repaired_horizon_projection_candidates/root_repaired_horizon_projection_candidates.jsonl",
+        "runs/local/artifacts/stage12303_semantic_transition_function_reconstruction/semantic_transition_reconstruction_work_items.jsonl"
+      ]
+    },
+    {
+      "admission_level_today": "candidate_source_only_until_episode_graph_join",
+      "blockers": [
+        "task windows are not episode graphs",
+        "source_root_label and de-overlap must be enforced",
+        "patch/verifier co-presence is not causality",
+        "session dominance caps required"
+      ],
+      "canonical_root_potential": "high",
+      "current_volume": {
+        "normalized_session_events_reported": 345487,
+        "patch_verifier_ref_windows_reported": 2059,
+        "physical_session_like_files": 1739
+      },
+      "expansion_value": "Best route to Level-3/Level-4 roots if same-source patch/action/verifier/state joins are recovered.",
+      "next_action": "profile capped windows, materialize episode_graph_candidate records, then quality-gate Level-3 tuples",
+      "pool_id": "session_like_source_inventory_real",
+      "primary_artifacts": [
+        "runs/local/artifacts/stage12256_live_physical_session_inventory_refresh/live_physical_source_records.jsonl",
+        "runs/local/artifacts/stage12260_codex_chat_task_boundary_miner"
+      ]
+    },
+    {
+      "admission_level_today": "auxiliary_transition_support_or_diagnostic",
+      "blockers": [
+        "older support rows may not have ordered events/state updates",
+        "some rows are projections rather than same-source episodes",
+        "must avoid reusing protected/heldout roots"
+      ],
+      "canonical_root_potential": "medium",
+      "expansion_value": "Useful for task-family balance and replay, but must be re-rooted and anti-cheat checked before canonical claims.",
+      "next_action": "mine only root-disjoint rows with candidate sets and verifier/status fields, then route as auxiliary unless Level-3 tuple exists",
+      "pool_id": "transition_root_250_and_transition_support_rollups",
+      "primary_artifacts": [
+        "runs/local/artifacts/stage11975_transition_root_250_probe_expansion/transition_root_250_probe_expansion_review_rows.jsonl",
+        "runs/local/artifacts/stage12056_transition_support_rollup_v35/transition_support_rows_v35.jsonl"
+      ]
+    },
+    {
+      "admission_level_today": "level_0_to_level_1_context_or_retrieval_support",
+      "blockers": [
+        "must recover ordered actions/observations/verifier outputs",
+        "heldout/source split must be root-level",
+        "avoid opaque handle reconstruction and target leaks"
+      ],
+      "canonical_root_potential": "medium",
+      "expansion_value": "Good for root/task/state scaffolding and evidence ledgers, not enough alone for closed-loop maintainer episodes.",
+      "next_action": "join with verifier/action logs before claiming Level-3; otherwise use for context/evidence projections only",
+      "pool_id": "long_context_compiled_sources",
+      "primary_artifacts": [
+        "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1",
+        "runs/local/artifacts/stage10516_long_context_root_state_compiler",
+        "runs/local/artifacts/stage10521_split_aware_multitarget_bootstrap_manifest_with_heldout"
+      ]
+    },
+    {
+      "admission_level_today": "level_2_patch_context_candidate",
+      "blockers": [
+        "current smoke queue exhausted with before_did_not_fail cases",
+        "needs real before-fail/after-pass verifier proof",
+        "non-Python supply still weak"
+      ],
+      "canonical_root_potential": "high_if_verifier_logs_exist",
+      "expansion_value": "Best path to comparable FAIL_TO_PASS repair roots, but current replay queue found zero PE2 rows.",
+      "next_action": "retarget to sources with authoritative verifier logs or executable local tests, not broad commit pairs",
+      "pool_id": "external_commit_patch_corpora",
+      "primary_artifacts": [
+        "external_repo_commit_family_v2",
+        "stage12244_commit_pair_replay_queue",
+        "stage12290_to_stage12293_patch_effect_replay_exhaustion"
+      ]
+    }
+  ],
+  "stage": "stage12304_canonical_root_mining_spine_alignment",
+  "training_allowed": false
+}

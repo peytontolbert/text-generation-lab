@@ -1,0 +1,176 @@
+{
+  "adapter_acceptance_quotas": {
+    "maximum_controlled_fixture_share": 0.1,
+    "maximum_single_source_family_share": 0.25,
+    "minimum_distinct_language_families": 3,
+    "minimum_distinct_source_families": 10,
+    "minimum_external_verifier_train_support_rows_for_next_miner": 40,
+    "minimum_patch_trace_records_with_before_after_verifier_status": 8,
+    "minimum_records_absent_from_existing_countable_ledgers": 40,
+    "minimum_records_with_direct_verifier_anchor": 40,
+    "minimum_records_with_state_transition_anchor": 30,
+    "minimum_records_with_stop_or_continue_anchor": 20,
+    "minimum_replayable_patch_trace_candidates_for_next_miner": 12,
+    "minimum_unbounded_level3_candidates_for_next_miner": 20,
+    "overclaim_count_required": 0,
+    "raw_leak_count_required": 0,
+    "training_allowed_required": false
+  },
+  "admitted_rows": 0,
+  "candidate_adapter_families": [
+    {
+      "adapter_family": "codex_session_episode_graphs",
+      "countability_warning": "short-horizon projections can count only after dedupe and safe semantic extraction; not raw observed-action imitation",
+      "must_prove": [
+        "source_root_label",
+        "ordered_events",
+        "state_before",
+        "chosen_action",
+        "observation",
+        "state_update",
+        "stop_continue"
+      ],
+      "purpose": "mine task-window transition functions from long Codex sessions after source-root and event-state hydration"
+    },
+    {
+      "adapter_family": "open_swe_replay_micro_pilot",
+      "countability_warning": "executor output is candidate evidence only; later admission gate required",
+      "must_prove": [
+        "checkout_before",
+        "patch_apply",
+        "state_after",
+        "same_verifier_before_after",
+        "causal_linkage"
+      ],
+      "purpose": "turn two Stage12422 hash-only proof-gap requests into candidate Level-3/patch-trace evidence if replay proves all slots"
+    },
+    {
+      "adapter_family": "external_benchmark_patch_logs",
+      "countability_warning": "metadata-only issue/commit records are not enough",
+      "must_prove": [
+        "patch_diff_hash",
+        "pre_status",
+        "post_status",
+        "same_verifier_identity",
+        "repo_lineage"
+      ],
+      "purpose": "ingest existing authoritative fail/pass repair logs from local benchmark artifacts if same-source patch/verifier lineage exists"
+    },
+    {
+      "adapter_family": "locally_hydratable_repo_tasks",
+      "countability_warning": "build-only/pass-current rows help policy but do not count as repair proof",
+      "must_prove": [
+        "commit_before",
+        "command_result",
+        "selected_verifier",
+        "state_update",
+        "stop_continue"
+      ],
+      "purpose": "generate fresh executable verifier observations and patch-effect proofs from local repos under controlled checkout workspaces"
+    }
+  ],
+  "claim_boundary": "Stage12424 requests new source-adapter scouting because Stage12421 proved the old Stage122 pool is exhausted under strict accounting. It emits no rows and admits nothing.",
+  "countable_as_new_proof_floor_rows": 0,
+  "countable_as_new_train_support_rows": 0,
+  "countable_new_rows": 0,
+  "decision": "control_artifact_only_fail_closed_no_rows_admitted",
+  "emitted_rows": 0,
+  "emitted_training_rows": 0,
+  "guardrail_scan_passed": true,
+  "input_inventory": {
+    "stage12419_control": {
+      "present": true,
+      "sha256": "812a7e7c31c9d8a82c78b01ca0b2739d16e677e57ec1a9ea55b0c8bcfc79b56f"
+    },
+    "stage12420_summary": {
+      "present": true,
+      "sha256": "cd6976a067c4eb53043fcff79114d8b9d58b05368c2a9f2edb31881b6c4cc1b0"
+    },
+    "stage12421_summary": {
+      "present": true,
+      "sha256": "72b82e253d3ccff3bd3bfce9abc0ac971018f0bfde5d818df4c070bb7bac87c5"
+    },
+    "stage12422_summary": {
+      "present": true,
+      "sha256": "b2f67202d9ce2b75bd8614e981b80582d137203d951c3cb01be33ad7f2962999"
+    },
+    "unbounded_spine": {
+      "present": true,
+      "sha256": "86c60b75ae9279a369403bc5996f7fc2003ab40bb1b2f0e771c87e7721e73539"
+    }
+  },
+  "next_stage_recommendation": "stage12425_source_adapter_feasibility_miner",
+  "overclaim_count": 0,
+  "promotion_gate_status": {
+    "artifact_is_control_only": "PASS",
+    "new_adapter_miner_required": "PASS",
+    "no_rows_admitted": "PASS",
+    "stage12421_bottleneck_encoded": "PASS",
+    "training_allowed": "PASS_FALSE"
+  },
+  "raw_content_policy": {
+    "commands_emitted": false,
+    "diffs_emitted": false,
+    "input_text_emitted": false,
+    "issue_bodies_emitted": false,
+    "outputs_emitted": false,
+    "patches_emitted": false,
+    "paths_emitted": false,
+    "source_text_emitted": false,
+    "urls_emitted": false
+  },
+  "raw_leak_count": 0,
+  "record_type": "new_source_adapter_scouting_request_control_v2",
+  "reject_conditions": [
+    "adapter counts derivative/projection/control artifacts as new source supply",
+    "adapter emits raw commands, outputs, paths, URLs, source text, diffs, patches, or issue bodies",
+    "adapter lacks exact dedupe against Stage12385/12416/12418/12421",
+    "adapter counts controlled fixtures above quota as high-quality external rows",
+    "adapter claims Level-3 or patch-trace without all proof slots",
+    "adapter claims source-heldout or strict eligibility without split/root/protected-overlap proof"
+  ],
+  "required_top_level_fields": [
+    "stage",
+    "decision",
+    "claim_boundary",
+    "training_allowed",
+    "admitted_rows",
+    "emitted_rows",
+    "emitted_training_rows",
+    "countable_new_rows",
+    "countable_as_new_train_support_rows",
+    "countable_as_new_proof_floor_rows",
+    "source_adapter_id",
+    "source_family_counts",
+    "language_counts",
+    "repo_family_counts",
+    "root_count",
+    "dedupe_key_policy",
+    "direct_vs_derived_counts",
+    "target_semantic_counts",
+    "proof_slot_status_counts",
+    "raw_content_policy",
+    "guardrail_scan_passed",
+    "raw_leak_count",
+    "overclaim_count",
+    "strict_source_heldout_status",
+    "dominance_report",
+    "blocked_reason_counts",
+    "promotion_gate_status",
+    "next_stage_recommendation"
+  ],
+  "stage": "stage12424_new_source_adapter_scouting_request_control_artifact",
+  "stage12421_bottleneck": {
+    "current_countable_after_stage12421": 192,
+    "current_countable_before_stage12421": 190,
+    "diagnosis": "same-pool mining is exhausted; strict accounting converted 26 emitted projections into only 2 countable external rows",
+    "remaining_gap_to_500": 308,
+    "stage12421_auxiliary_controlled_fixture_rows": 24,
+    "stage12421_countable_external_rows": 2,
+    "stage12421_emitted_sanitized_projection_rows": 26,
+    "stage12422_replay_attempted_count": 0,
+    "stage12422_replay_requests_preflighted": 2
+  },
+  "summary_hash": "e867b486f067f5d9dcb3eeba",
+  "training_allowed": false
+}

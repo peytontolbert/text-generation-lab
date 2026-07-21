@@ -1,0 +1,174 @@
+{
+  "admission_levels": {
+    "V0_source": "source/session/task refs only",
+    "V1_action_observation": "paired action and observation refs",
+    "V2_task_boundary": "coherent task window with root/cwd lineage",
+    "V3_horizon_slice": "state_before, candidate actions, chosen action, observation, state_update, stop_continue when applicable",
+    "V4_patch_verifier_loop": "same-source patch/action plus verifier sequence and semantic relevance",
+    "V5_external_comparable_repair": "external root, same-verifier pre-fail/post-pass, no leakage, no cross-source joins"
+  },
+  "artifact_type": "horizon_task_mining_contract",
+  "claim_boundary": "Contract/control artifact only. No root admission, no training rows, no raw content.",
+  "current_funnel": {
+    "command_observation_windows": 3740,
+    "patch_verifier_windows": 2059,
+    "source_chats": 283,
+    "stage12263_audit_cap": 25,
+    "stage12269_external_comparable_repair_rows": 0,
+    "stage12269_external_fail_to_pass_rows": 0,
+    "task_windows": 23936
+  },
+  "decision": "horizon_task_mining_contract_ready_training_blocked",
+  "dedupe_and_caps": {
+    "max_child_loops_per_task_window": 8,
+    "max_horizon_slices_per_child_loop": 4,
+    "max_same_action_type_per_parent": 8,
+    "max_same_state_delta_class_per_parent": 5,
+    "max_same_verifier_shape_per_parent": 5,
+    "max_task_windows_per_chat_for_training": 20,
+    "root_counting_rule": "count parent repo/root/task, not horizon slices",
+    "train_eval_split_rule": "all descendants of a source_session/task_window/root lineage stay in one split"
+  },
+  "diagnosis": {
+    "new_unit": "horizon_slice_inside_task_episode",
+    "reason": "Long windows are multi-loop traces; semantic review found split_required/quarantine rather than admissible repair rows.",
+    "twenty_five_is_audit_cap_not_total_supply": true,
+    "whole_window_as_repair_row_failed": true
+  },
+  "guardrails": {
+    "raw_message_text_emitted": false,
+    "raw_patch_body_emitted": false,
+    "raw_tool_arguments_emitted": false,
+    "raw_tool_output_emitted": false,
+    "root_admission_emitted": false,
+    "training_rows_emitted_now": false
+  },
+  "hierarchy": [
+    "source_session",
+    "task_window",
+    "episode_graph",
+    "child_loop",
+    "horizon_slice",
+    "projection_row_after_admission"
+  ],
+  "horizon_levels": {
+    "H100_plus_long_arc": {
+      "allowed_targets": [
+        "long_horizon_state_tracking",
+        "stale_assumption_invalidation",
+        "milestone_decomposition"
+      ],
+      "forbidden_targets": [
+        "direct SFT on raw transcript",
+        "one-row whole-chat repair label"
+      ],
+      "requires": [
+        "parent_session_lineage",
+        "task boundary",
+        "child loop graph",
+        "summary state ledger"
+      ],
+      "span": "long session/task arc spanning many loops or days"
+    },
+    "H10_patch_verifier_loop": {
+      "allowed_targets": [
+        "patch_selection",
+        "verifier_transition",
+        "repair_vs_continue",
+        "failure_origin"
+      ],
+      "forbidden_targets": [
+        "FAIL_TO_PASS unless same-verifier pre-fail and post-pass are proven"
+      ],
+      "requires": [
+        "same_source_patch_or_action",
+        "post_action_verifier",
+        "no_intervening_patch_for_selected_loop"
+      ],
+      "span": "one selected patch/action and bounded post-action verifier sequence"
+    },
+    "H1_next_action": {
+      "allowed_targets": [
+        "next_action",
+        "candidate_action_rank",
+        "retrieve_or_act",
+        "stop_continue_if_terminal"
+      ],
+      "forbidden_targets": [
+        "repair_success",
+        "FAIL_TO_PASS",
+        "patch_generation"
+      ],
+      "requires": [
+        "state_before_ref",
+        "candidate_action_set",
+        "chosen_action_ref",
+        "observation_ref"
+      ],
+      "span": "one decision boundary"
+    },
+    "H3_micro_loop": {
+      "allowed_targets": [
+        "state_update",
+        "verifier_interpretation",
+        "continue_or_stop",
+        "evidence_role"
+      ],
+      "forbidden_targets": [
+        "external_repair_claim_without_pre_post_verifier"
+      ],
+      "requires": [
+        "state_before_ref",
+        "chosen_action_ref",
+        "observation_ref",
+        "state_update_ref"
+      ],
+      "span": "inspect/search/run/patch plus immediate observation"
+    },
+    "H50_task_episode": {
+      "allowed_targets": [
+        "milestone_selection",
+        "replan_after_failure",
+        "completion_gate",
+        "trajectory_value"
+      ],
+      "forbidden_targets": [
+        "counting child slices as independent roots"
+      ],
+      "requires": [
+        "multiple child loops",
+        "state ledger",
+        "terminal stop_continue"
+      ],
+      "span": "multi-step local task with hypotheses, edits, verifier feedback, terminal decision"
+    }
+  },
+  "next_stage": {
+    "scope": "mine a capped pilot of horizon slices from command-observation and patch-verifier windows; no training rows",
+    "stage": "stage12271_horizon_slice_miner_pilot",
+    "training_allowed": false
+  },
+  "required_lineage_fields": [
+    "source_session_id",
+    "task_window_id",
+    "episode_id",
+    "child_loop_id",
+    "horizon_slice_id",
+    "parent_horizon_id",
+    "snapshot_id",
+    "source_file_hash_compat",
+    "line_start",
+    "line_end",
+    "event_start_id",
+    "event_end_id",
+    "repo_cwd_digest",
+    "state_prefix_hash",
+    "candidate_action_set_hash",
+    "chosen_action_hash",
+    "observation_digest",
+    "state_delta_hash",
+    "verifier_ref_hash"
+  ],
+  "stage": "stage12270_horizon_task_mining_contract",
+  "training_allowed": false
+}

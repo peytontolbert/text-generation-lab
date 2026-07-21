@@ -1,0 +1,69 @@
+{
+  "audited_stage": "stage12132_selected_test_support_training_probe",
+  "contract_summary": {
+    "errors": [],
+    "passed": true,
+    "runtime_model_save_dir": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12132_selected_test_support_training_probe/runtime_model",
+    "runtime_model_save_requested": true,
+    "split_counts": {
+      "eval": 22,
+      "other": 0,
+      "strict_eval": 22,
+      "train": 665
+    },
+    "unsafe_loss_rows": 0,
+    "weights": {
+      "bounded_choice_aux_weight": 3.0,
+      "bounded_choice_contrast_margin": 0.06,
+      "bounded_choice_contrast_weight": 0.25,
+      "decoder_ce_weight": 0.0,
+      "denoise_weight": 0.0,
+      "eos_loss_weight": 1.0,
+      "eval_interval": 0,
+      "structured_aux_weight": 0.0
+    }
+  },
+  "created_at_utc": "2026-07-15T15:35:14Z",
+  "decision": "reject_incomplete_no_runtime_no_postrun",
+  "hard_gates_for_repair": [
+    "GPU2-only mask present",
+    "no GPU0/GPU1 training",
+    "runtime save path exercised on a tiny diagnostic before 192-step run",
+    "postrun audit required before any progress claim",
+    "protected gates must be evaluated if a runtime is saved"
+  ],
+  "loss_summary": {
+    "first_step": 1,
+    "last_bounded_choice_aux_loss": 3.3587615489959717,
+    "last_contrast_loss": 2.4465672969818115,
+    "last_grad_norm": 11.73986530303955,
+    "last_loss": 14.719034194946289,
+    "last_post_clip_grad_norm": 0.9999999280695876,
+    "last_pre_clip_grad_norm": 11.73986530303955,
+    "last_same_role_listwise_loss": 3.345733642578125,
+    "last_step": 100,
+    "last_verifier_value_listwise_loss": 3.3689165115356445,
+    "loss_rows": 100
+  },
+  "model_progress_claim_allowed": false,
+  "next_required_action": "Do not rerun a long probe. Build Stage12133 as a short differentiability/completion preflight that reaches at least the prior failure boundary or runs a small checkpoint/save path before any promotion-style training.",
+  "observed_failure_mode": "training_exited_nonzero_after_partial_gradient_steps",
+  "postrun_audit_present": false,
+  "previous_assumption_correction": "The run did not fail on the first batch. It produced 100 loss rows with non-null gradient norms before failing or aborting without runtime save.",
+  "promotion_eligible": false,
+  "request_summary": {
+    "argv_format": "list",
+    "argv_len": 93,
+    "batch_size": "8",
+    "bounded_choice_aux_source": "encoder_option_retrieval_semantic_candidate_head",
+    "bounded_choice_train_head_only": true,
+    "decoder_ce_weight": "0.0",
+    "gpu_mask_observed_in_command": true,
+    "max_steps": "192",
+    "trainable_head_prefix_from_loss": "bounded_choice_semantic_candidate_head"
+  },
+  "runtime_saved": false,
+  "source_request": "stage12131_selected_test_support_training_request",
+  "stage": "stage12132a_selected_test_support_training_failure_audit",
+  "training_executed": true
+}

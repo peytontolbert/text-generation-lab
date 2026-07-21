@@ -1,0 +1,46 @@
+{
+  "blocked_reason_counts": {
+    "ordered_patch_and_verifier_refs_missing": 7,
+    "patch_applicability_or_no_patch_reason_missing": 100,
+    "repo_family_not_semantically_recovered": 100,
+    "semantic_rule_id_missing": 100,
+    "state_delta_proof_missing": 100,
+    "stop_continue_proof_missing": 100,
+    "transition_function_key_missing": 100,
+    "transition_local_state_ledger_missing": 100,
+    "verifier_status_class_missing": 100
+  },
+  "candidate_records": 100,
+  "claim_boundary": "Repo/state join artifact only. It emits no raw paths, raw text, raw commands, raw outputs, patch bodies, train rows, or eval rows.",
+  "decision": "session_candidates_join_enriched_training_still_blocked",
+  "join_true_counts": {
+    "chat_manifest_joined": 100,
+    "cwd_or_workspace_hint_available": 100,
+    "ordered_patch_and_verifier_refs": 93,
+    "path_hash_joined": 100,
+    "physical_source_joined": 100,
+    "snapshot_match": 100,
+    "source_hash_match": 100,
+    "task_window_joined": 100
+  },
+  "language_counts": {
+    "python": 93,
+    "unknown_from_metadata": 7
+  },
+  "level3_admitted": 0,
+  "next_stage": {
+    "purpose": "Use event/tool indices within each joined window to classify verifier status, patch/no-patch proof, state delta, and stop/continue without raw text leakage.",
+    "stage": "stage12316_transition_local_event_joiner",
+    "training_allowed": false
+  },
+  "patch_trace_admitted": 0,
+  "stage": "stage12314_session_candidate_repo_and_state_joiner",
+  "subagent_findings_encoded": [
+    "100/100 candidates should join to task windows/manifests/source hashes when indexes are present.",
+    "Cwd/workspace hints may be hashed for routing but raw paths must not be emitted.",
+    "Patch+verifier co-presence is not proof of verifier status, patch applicability, or state delta."
+  ],
+  "training_allowed": false,
+  "training_rows_emitted": 0,
+  "unique_cwd_or_workspace_hint_hashes": 30
+}

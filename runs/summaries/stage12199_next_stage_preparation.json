@@ -1,0 +1,165 @@
+{
+  "stage": "stage12199_next_stage_preparation",
+  "artifact_type": "next_stage_control_packet",
+  "created_at_utc": "2026-07-15T21:35:20.488201+00:00",
+  "training_executed": false,
+  "training_allowed": false,
+  "gpu_required": false,
+  "stage_numbering_correction": {
+    "reason": "Subagent plans used logical stage names 12193/12197/12198, but those IDs are already occupied or ambiguous in the current run history.",
+    "normalized_next_sequence": [
+      "stage12200_same_source_patch_trace_episode_miner",
+      "stage12201_closed_loop_trajectory_trainer_contract",
+      "stage12202_closed_loop_action_only_tiny_diagnostic_request"
+    ]
+  },
+  "current_selected_baselines": {
+    "compact_frontier": "stage11507 + encoder_option_retrieval_evidence_judgment_head",
+    "compact_hardened": {
+      "score_100m": "19/19",
+      "score_gemma": "3/19",
+      "source": "stage11516"
+    },
+    "transition_standalone": {
+      "stage": "stage11924",
+      "score": "364/640",
+      "gemma": "386/640"
+    },
+    "transition_routed_candidate": {
+      "stage": "stage12099",
+      "score": "375/640",
+      "permutation_stable": true,
+      "source": "stage12103"
+    }
+  },
+  "next_stage_order": [
+    {
+      "stage": "stage12200_same_source_patch_trace_episode_miner",
+      "purpose": "Mine same-source tool-trace / patch-trace / verifier-transition evidence from existing artifacts without executing code or training.",
+      "implementation": "scripts/build_stage12200_same_source_patch_trace_episode_miner.py",
+      "training_executed": false,
+      "execution_forbidden": [
+        "training",
+        "test execution",
+        "repo mutation",
+        "dependency install",
+        "repo clone",
+        "verifier rehydration"
+      ],
+      "primary_inputs": [
+        "runs/local/artifacts/session_like_source_inventory_real/current_raw_local_root_session_episodes_traceback_strict_v2/local_root_session_episodes.jsonl",
+        "runs/local/artifacts/session_like_source_inventory_real/current_raw_parsed_bounded_jsonl_metadata/normalized_session_events.jsonl",
+        "runs/local/artifacts/session_like_source_inventory_real/current_raw_session_episode_seed_candidates_traceback_strict_v2/session_episode_seed_candidates.jsonl",
+        "runs/local/artifacts/session_like_source_inventory_real/current_raw_resolved_session_episode_seeds_local_roots_traceback_strict_v2/resolved_session_episode_seeds_local_roots.jsonl",
+        "runs/local/artifacts/session_like_source_inventory_real/local_root_session_episodes_broadverify_recovery_smallbudget_v4/local_root_session_episodes.jsonl",
+        "runs/local/artifacts/external_repo_commit_family_scale_v2/selected_repo_commit_episodes_next40_v6_grounded_localroots_nopapers_sharded/shards/episodes_*.jsonl",
+        "runs/local/artifacts/stage12190_same_source_episode_extractor",
+        "runs/local/artifacts/stage12191_closed_loop_episode_quality_gate_contract/closed_loop_episode_quality_gate_contract.json"
+      ],
+      "required_outputs": [
+        "episode_records.jsonl",
+        "typed_events.jsonl",
+        "causal_states.jsonl",
+        "candidate_action_sets.jsonl",
+        "observations.jsonl",
+        "patch_traces.jsonl",
+        "verifier_transitions.jsonl",
+        "state_updates.jsonl",
+        "stop_decisions.jsonl",
+        "blocked_candidates.jsonl",
+        "admission_audit.json",
+        "summary.json"
+      ],
+      "data_success_floor": {
+        "level_3_or_higher_episodes": 20,
+        "level_3_patch_trace_episodes": 8,
+        "repositories": 10,
+        "languages": 3,
+        "candidate_actions_per_decision_min": 5,
+        "semantic_hard_negatives_per_decision_min": 3,
+        "schema_validation_pass_rate": 1.0,
+        "episode_replay_pass_rate": 1.0,
+        "gold_leak_count": 0,
+        "protected_overlap_count": 0
+      },
+      "allowed_claim_if_partial": "Same-source patch/context supply visibility improved; training remains blocked unless diagnostic floors pass."
+    },
+    {
+      "stage": "stage12201_closed_loop_trajectory_trainer_contract",
+      "purpose": "Add a contract-only trajectory trainer path that validates schema/replay/leak/protected-overlap without running a model.",
+      "training_executed": false,
+      "must_be_contract_only": true,
+      "implementation_files": [
+        "legacy_src/agentkernel_lite/trajectory_data.py",
+        "scripts/validate_closed_loop_trajectory_manifest.py",
+        "scripts/build_closed_loop_trajectory_training_manifest.py",
+        "docs/CLOSED_LOOP_TRAJECTORY_TRAINER_CONTRACT.md",
+        "legacy_src/scripts/train_agentkernel_lite_encdec.py",
+        "legacy_src/agentkernel_lite/training_loop.py"
+      ],
+      "contract_mode": "closed_loop_trajectory_probe",
+      "required_flags": [
+        "--contract-only",
+        "--max-steps 0",
+        "--decoder-ce-weight 0",
+        "--structured-aux-weight 0",
+        "--denoise-weight 0",
+        "--no-final-checkpoint-export",
+        "--skip-final-model-save 1"
+      ],
+      "hard_blockers": [
+        "contract-only mode constructs optimizer or runs forward pass",
+        "primary row admission_level below level_3",
+        "pre-action renderer exposes observation/verifier/state_after/future action/patch target",
+        "verifier success inferred from metadata instead of same-root command output",
+        "candidate action set has fewer than 5 candidates or 3 semantic hard negatives",
+        "gold leak or protected overlap nonzero"
+      ],
+      "allowed_claim": "Closed-loop trajectory trainer contract validates data/audits without training."
+    },
+    {
+      "stage": "stage12202_closed_loop_action_only_tiny_diagnostic_request",
+      "purpose": "Only after stage12200 data floors and stage12201 contract pass, run a tiny action-only decoder CE diagnostic on typed action records.",
+      "training_allowed_before_gates": false,
+      "initial_objective": "action-only decoder CE over serialized typed action targets",
+      "forbidden_initial_objectives": [
+        "patch text generation",
+        "multi-loss expansion",
+        "target_100m run",
+        "tokenizer replacement",
+        "architecture change"
+      ],
+      "gpu_policy_if_authorized": "CUDA_VISIBLE_DEVICES=2 only; leave GPUs 0 and 1 unused",
+      "promotion_requires": [
+        "trajectory eval/strict improves on named objective",
+        "action grammar valid",
+        "replay pass rate remains 1.0",
+        "gold/protected audits remain clean",
+        "compact protected gates preserved",
+        "transition routed gates preserved",
+        "no short-output or repetition collapse"
+      ]
+    }
+  ],
+  "protected_gates": {
+    "compact_filtered_strict": "22/22",
+    "compact_filtered_validation_min": "20/22",
+    "compact_old_strict": "23/23",
+    "compact_old_validation_min": "21/23",
+    "compact_residual_min": "7/10 preferred, below 7/10 is regression; below 6/10 is hard fail",
+    "hardened_compact_subset": "19/19",
+    "transition_routed_total_min": "375/640",
+    "transition_routed_candidate_selection_min": "92/160",
+    "transition_routed_next_action_min": "59/160",
+    "transition_routed_continue_stop_min": "128/160",
+    "transition_routed_verifier_transition_min": "96/160",
+    "transition_permutation_stability_min": "0.95 for promotion"
+  },
+  "subagent_reports_integrated": [
+    "runs/local/artifacts/stage12199_next_stage_preparation/subagent_reports/stage12193_implementation_plan.md",
+    "runs/local/artifacts/stage12199_next_stage_preparation/subagent_reports/stage12197_trainer_contract_plan.md",
+    "runs/local/artifacts/stage12199_next_stage_preparation/subagent_reports/next_stage_gate_scoreboard_plan.md"
+  ],
+  "decision": "prepare_stage12200_implementation_next",
+  "why": "The current blocker is absence of real same-source closed-loop trajectory records. More bounded support-row training would repeat known plateau modes."
+}

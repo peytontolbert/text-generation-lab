@@ -1,0 +1,141 @@
+{
+  "admission_decision": "verifier_only_support_artifacts_ready_no_training_patch_generation_blocked",
+  "artifact_type": "same_source_episode_extractor_artifacts",
+  "blocked_by_source": {
+    "external_repo_commit_family_scale_v2_localroots": 40,
+    "external_repo_commit_family_scale_v2_smoke_packable": 4,
+    "external_repo_commit_family_v2_packable": 2,
+    "external_repo_commit_family_v2_strict": 2,
+    "open_swe_trace_episodes_smoke_v1": 1,
+    "session_like_non_agentkernel_patch_plus_exec": 2,
+    "session_like_recovery_patch_plus_exec_missing_tests": 16,
+    "stage12123_verifier_ready_checkout_execution_smoke": 10,
+    "stage12145_web_hydrated_selected_test_success_package": 1,
+    "stage9756_full_product_harness_review_packets": 36
+  },
+  "contracts_used": [
+    "stage12187_phase_correct_trace_source_atlas",
+    "stage12188_phase_correct_episode_joiner_contract",
+    "stage12189_phase_correct_join_feasibility_audit"
+  ],
+  "counts": {
+    "blocked_candidates": 114,
+    "candidate_action_sets": 6,
+    "causal_states": 12,
+    "observations": 20,
+    "patch_traces": 6,
+    "projection_rows_auxiliary": 24,
+    "ready_episode_records": 6,
+    "ready_languages": {
+      "python": 2,
+      "rust": 3,
+      "web_js_ts_html": 1
+    },
+    "ready_repositories": 6,
+    "sources_seen": 120,
+    "state_updates": 6,
+    "stop_decisions": 6,
+    "typed_events": 20,
+    "verifier_transitions": 6
+  },
+  "created_at_utc": "2026-07-15T00:00:00Z",
+  "notes": [
+    "Ready rows are no-patch verifier-only graphs from same-source selected-test smoke records.",
+    "Open-SWE/commit/session/harness candidates were not cross-joined and remain blocked where command output or patch diff is absent.",
+    "Stage9756 completed bundle verifier metadata was not treated as repository command/test output."
+  ],
+  "outputs": {
+    "admission_audit.json": "runs/local/artifacts/stage12190_same_source_episode_extractor/admission_audit.json",
+    "blocked_candidates.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/blocked_candidates.jsonl",
+    "candidate_action_sets.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/candidate_action_sets.jsonl",
+    "causal_states.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/causal_states.jsonl",
+    "episode_records.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/episode_records.jsonl",
+    "observations.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/observations.jsonl",
+    "patch_traces.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/patch_traces.jsonl",
+    "projection_rows_auxiliary.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/projection_rows_auxiliary.jsonl",
+    "state_updates.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/state_updates.jsonl",
+    "stop_decisions.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/stop_decisions.jsonl",
+    "summary_mirror": "runs/summaries/stage12190_same_source_episode_extractor.json",
+    "typed_events.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/typed_events.jsonl",
+    "verifier_transitions.jsonl": "runs/local/artifacts/stage12190_same_source_episode_extractor/verifier_transitions.jsonl"
+  },
+  "policy": {
+    "cross_join_unrelated_repo_families": false,
+    "missing_command_output_blocks_candidate": true,
+    "patch_generation_rows_excluded_when_patch_diff_missing": true,
+    "same_source_only": true
+  },
+  "projection_counts": {
+    "no_patch_classification": 6,
+    "state_update": 6,
+    "stop_decision": 6,
+    "verifier_transition": 6
+  },
+  "ready_by_source": {
+    "stage12123_verifier_ready_checkout_execution_smoke": 2,
+    "stage12144_rust_hydrated_selected_test_success_package": 3,
+    "stage12145_web_hydrated_selected_test_success_package": 1
+  },
+  "source_code_modified": false,
+  "stage": "stage12190_same_source_episode_extractor",
+  "top_blocker_reasons": [
+    [
+      "command_output_missing",
+      103
+    ],
+    [
+      "patch_diff_missing",
+      103
+    ],
+    [
+      "ordered_raw_tool_trace_missing",
+      18
+    ],
+    [
+      "missing_tests_by_source_contract",
+      16
+    ],
+    [
+      "build_static_or_list_only_no_selected_test_success",
+      9
+    ],
+    [
+      "packable_projection_not_primary_trace",
+      6
+    ],
+    [
+      "tool_trace_is_model_or_bundle_metadata_not_repo_command_output",
+      4
+    ],
+    [
+      "verifier_results_are_opaque_choice_bundle_scores_not_repo_test_output",
+      4
+    ],
+    [
+      "verifier_test_identity_missing",
+      2
+    ],
+    [
+      "checkout_failed",
+      1
+    ],
+    [
+      "no_successful_verifier_command",
+      1
+    ],
+    [
+      "missing_build_artifact_index_js",
+      1
+    ],
+    [
+      "node_engine_warnings",
+      1
+    ],
+    [
+      "build_script_not_authorized_in_this_stage",
+      1
+    ]
+  ],
+  "training_allowed": false,
+  "training_executed": false
+}

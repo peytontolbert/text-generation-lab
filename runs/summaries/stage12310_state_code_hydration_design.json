@@ -1,0 +1,93 @@
+{
+  "claim_boundary": "Design/control artifact only. It admits no rows and authorizes no training.",
+  "decision": "state_code_hydration_design_ready_no_rows_admitted",
+  "expected_yield": {
+    "level_3_plus": 0,
+    "stage12306_episode_candidates": "coarse source_evidence_present/patch_exists/verifier_selected may be derivable for some rows",
+    "stage12308_h1_items": "still zero deterministic TF-H1 labels until state refs are hydrated with transition-local facts",
+    "training_rows": 0
+  },
+  "hydratable_state_codes_from_current_metadata": {
+    "env_blocked": {
+      "claim_limit": "must remain unknown unless a prior stage emits structured env/dependency failure class",
+      "confidence": "not_hydratable_without_observation_classifier",
+      "rule": "not reliably derivable from current metadata because raw output and failure class are hidden"
+    },
+    "patch_exists": {
+      "claim_limit": "cannot prove patch applies to current transition without ordered event join",
+      "confidence": "coarse_window_level",
+      "rule": "true when patch_pair_count > 0 before or inside the task window"
+    },
+    "source_evidence_present": {
+      "claim_limit": "cannot prove exact evidence relevance",
+      "confidence": "coarse_window_level",
+      "rule": "true when command_family_counts.read_or_search > 0 or paired_tool_call_count > 0 before the candidate transition"
+    },
+    "verifier_selected": {
+      "claim_limit": "cannot prove selected verifier targets changed behavior",
+      "confidence": "coarse_window_level",
+      "rule": "true when verifier_like_pair_count > 0 or command_family_counts.verifier_or_execution > 0"
+    }
+  },
+  "input_artifacts": {
+    "episode_candidates": "runs/local/artifacts/stage12306_session_episode_graph_candidate_materializer/stage12306_session_episode_graph_candidate_materializer.jsonl",
+    "h1_feasibility": "runs/local/artifacts/stage12308_h1_semantic_rule_feasibility_audit/h1_semantic_rule_feasibility_records.jsonl",
+    "horizon_slices": "runs/local/artifacts/stage12271_horizon_slice_miner_pilot/horizon_slice_candidates.jsonl",
+    "task_windows": "runs/local/artifacts/stage12260_codex_chat_task_boundary_miner/codex_task_windows.jsonl",
+    "transition_ledger": "runs/local/artifacts/stage12295_transition_function_ledger/transition_function_ledger.jsonl"
+  },
+  "not_hydratable_without_new_joiner": {
+    "S0_to_S10_lifecycle_state": "requires ordered transition-local facts; current refs are insufficient",
+    "failure_localized": "requires source/evidence role state or explicit localization event, not just command counts",
+    "open_question": "requires state ledger or hypothesis tracking",
+    "requirement_covered": "requires task requirement mapping and final verifier relation",
+    "verifier_run_status": "requires structured command exit/failure/pass class, not output digest alone"
+  },
+  "problem": "Stage12306/12308 candidates have refs and aggregate window metadata, but no explicit pre-action semantic state codes. Without state codes, semantic labels would be observed-action imitation.",
+  "safe_derivation_policy": {
+    "model_visible": [
+      "boolean/coarse state codes",
+      "candidate semantic action labels",
+      "redacted refs and digests",
+      "semantic_rule_id only after deterministic derivation"
+    ],
+    "never_emit": [
+      "raw tool output",
+      "raw tool args",
+      "raw source path",
+      "raw patch body",
+      "full command text",
+      "chosen/gold/correct markers"
+    ],
+    "target_only": [
+      "chosen_action_ref",
+      "observation_ref",
+      "output_digest",
+      "state_update_ref",
+      "stop_continue label",
+      "verifier linkage"
+    ]
+  },
+  "stage": "stage12310_state_code_hydration_design",
+  "stage12311_required_extractor": {
+    "fail_closed_rules": [
+      "Do not assign exact TF-H1 semantic rule from coarse window metadata alone.",
+      "Only emit coarse state codes with confidence labels unless transition-local ordered event proof exists.",
+      "Do not use observed chosen action to infer state code.",
+      "Do not infer verifier pass/fail from output digest or terminal task_complete.",
+      "Do not admit train rows; emit candidates for semantic review only."
+    ],
+    "inputs": [
+      "stage12260 task-window aggregate metadata",
+      "stage12306 episode graph candidate refs",
+      "stage12295 transition ledger coarse semantic families"
+    ],
+    "name": "stage12311_task_window_state_code_hydrator",
+    "outputs": [
+      "state_code_hydration_candidates.jsonl",
+      "blocked_state_code_hydration_records.jsonl",
+      "summary with yield by state code and task family"
+    ]
+  },
+  "training_allowed": false
+}

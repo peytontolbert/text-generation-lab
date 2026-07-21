@@ -1,0 +1,47 @@
+{
+  "checkout_targets": 39,
+  "checkout_targets_by_language": {
+    "c_cpp": 7,
+    "rust": 20,
+    "web_js_ts_html": 12
+  },
+  "created_at_utc": "2026-07-15T03:15:41Z",
+  "decision": "checkout_probe_request_ready",
+  "do_not_train": true,
+  "local_probe_targets": 2,
+  "local_probe_targets_by_language": {
+    "c_cpp": 1,
+    "mixed_build_config_dependency": 1
+  },
+  "next_stage_recommendation": {
+    "action": "Execute checkout/probe in a resource-limited batch, then run a post-probe admission audit before row materialization.",
+    "gpu_required": false,
+    "network_required": true,
+    "stage": "stage12116_execute_checkout_probe_batch"
+  },
+  "outputs": {
+    "checkout_queue": "runs/local/artifacts/stage12115_checkout_probe_request/checkout_targets.jsonl",
+    "local_probe_queue": "runs/local/artifacts/stage12115_checkout_probe_request/local_probe_targets.jsonl",
+    "summary": "runs/local/artifacts/stage12115_checkout_probe_request/checkout_probe_request.json",
+    "summary_mirror": "runs/summaries/stage12115_checkout_probe_request.json"
+  },
+  "stage": 12115,
+  "stage12114_input": {
+    "admitted_acquisition_targets": 39,
+    "admitted_local_candidates": 2,
+    "rejected_candidates": 1,
+    "summary": "runs/summaries/stage12114_fresh_repo_acquisition_intake_audit.json"
+  },
+  "stage_name": "stage12115_checkout_probe_request",
+  "strict_claim_boundary": [
+    "No Stage12115 item is a training row.",
+    "No Stage12115 item is a sealed confirmation row.",
+    "GitHub acquisition targets are only leads until checkout and verifier logs exist.",
+    "Build/static anchors must not be counted as selected-test anchors unless a concrete selected verifier is discovered and executed."
+  ],
+  "why": [
+    "Stage12114 admitted acquisition targets, not train/eval rows.",
+    "Checkout/probe is required to turn leads into source-backed verifier evidence.",
+    "Local build/config candidates require the same post-probe row admission gates."
+  ]
+}

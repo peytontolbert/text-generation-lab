@@ -1,0 +1,69 @@
+{
+  "campaign_metrics": {
+    "accepted_root_rows": 0,
+    "blocked_root_rows": 0,
+    "pending_review_root_rows": 0,
+    "training_allowed": false
+  },
+  "claim_boundary": "Campaign contract only. This does not admit rows or authorize training.",
+  "decision": "maintainer_500_root_campaign_open_training_blocked_until_admission",
+  "hard_rejects": [
+    "missing-test or no-tests-collected counted as failure",
+    "ENV/dependency/network/install/GPU failure unless explicit environment repair",
+    "syntax-only or forced compile-error mutation counted as maintainer repair",
+    "commit metadata inferred PASS/FAIL without command output",
+    "selected test added only by patch",
+    "weak/unrelated verifier",
+    "cross-source joins for diff/command/verifier",
+    "controlled fixture counted as external or source-heldout",
+    "PASS_TO_PASS counted as FAIL_TO_PASS",
+    "row variants counted as independent roots"
+  ],
+  "lane_quotas": {
+    "comparable_patch_trace_repair": {
+      "minimum_before_training": 25,
+      "status": "hardest_lane_primary_frontier_blocker",
+      "target_roots": 100
+    },
+    "negative_abstain_or_not_comparable": {
+      "status": "useful_for_stop_abstain_calibration_not_repair_proof",
+      "target_roots": 50
+    },
+    "safe_refactor_or_pass_to_pass_patch_trace": {
+      "status": "useful_for_no_regression_and_patch_apply_not_repair_floor",
+      "target_roots": 50
+    },
+    "sealed_transition_eval_candidates": {
+      "minimum_before_scoring_stage12099": 100,
+      "status": "required_to_confirm_route_generalization",
+      "target_roots": 150
+    },
+    "verifier_observation_auxiliary": {
+      "current_safe_candidate_rows": 368,
+      "status": "auxiliary_only_loss_disabled_until_request",
+      "target_roots": 150
+    }
+  },
+  "next_stage": {
+    "purpose": "Normalize subagent/local scout outputs into root records and enforce caps/rejects.",
+    "stage": "stage12242_maintainer_500_candidate_intake_rollup",
+    "training_allowed": false
+  },
+  "stage": "stage12241_maintainer_500_root_campaign_contract",
+  "target": {
+    "languages": {
+      "c_cpp": 125,
+      "python": 125,
+      "rust": 125,
+      "web_js_ts_html": 125
+    },
+    "minimum_external_repair_subset": {
+      "external_comparable_patch_trace_rows": 25,
+      "external_fail_to_pass_rows": 15,
+      "non_python_external_rows": 10
+    },
+    "root_rows": 500,
+    "root_rows_definition": "one root-level candidate with repo lineage, task family, verifier evidence status, split eligibility, and admission decision; not row variants"
+  },
+  "training_allowed": false
+}

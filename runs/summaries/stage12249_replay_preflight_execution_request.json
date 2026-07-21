@@ -1,0 +1,296 @@
+{
+  "artifact_type": "replay_preflight_execution_request",
+  "claim_boundary": "Execution request only. It may create command-output evidence, but no training rows are admitted until a follow-up QC stage proves before-fail/apply/after-pass same-verifier tuples.",
+  "decision": "execute_shortlist_preflight_before_more_candidate_rollups",
+  "execution_policy": {
+    "count_build_only_as_selected_test_repair": false,
+    "count_current_state_pass_as_repair": false,
+    "count_syntax_error_mutation_as_semantic_repair": false,
+    "gpu_allowed": false,
+    "network_allowed": false,
+    "repo_mutation_allowed": "throwaway_checkout_only",
+    "training_allowed": false
+  },
+  "input_stage": "stage12246_replay_target_validation_audit",
+  "minimum_admission_for_next_training_discussion": {
+    "external_comparable_repair_roots": 25,
+    "fail_to_pass_roots": 15,
+    "languages": 3,
+    "non_python_repair_roots": 10,
+    "repo_families": 10
+  },
+  "parent_diagnosis": {
+    "decision": "bottleneck_is_pre_admission_candidate_mining_and_same_source_joining_not_gate_strictness",
+    "main_flaw": "The project has high raw action/session volume, but much of it is either structural/teacher-state supervision or bounded projection rows. The current 500-root campaign sees only already-surfaced candidates, while many raw session events are not converted into root-candidate records with repo lineage, patch/action/verifier joins, and candidate-action sets. The volume is lost before admission, not because the final gates are incorrectly strict.",
+    "source": "stage12248_root_supply_discrepancy_audit"
+  },
+  "preflight_checks": [
+    {
+      "check_id": "pre_patch_verifier_exists",
+      "command_requirement": "The exact selected verifier command can run or be proven runnable in the before checkout.",
+      "hard_fail_if": [
+        "test file/path does not exist before patch",
+        "command requires network/GPU/unknown secret"
+      ]
+    },
+    {
+      "check_id": "diff_is_source_bearing",
+      "command_requirement": "The patch changes production/source behavior, not only tests, docs, snapshots, generated files, or dependency locks.",
+      "hard_fail_if": [
+        "test_added_only",
+        "docs_only",
+        "snapshot_only",
+        "dependency_lock_only"
+      ]
+    },
+    {
+      "check_id": "before_state_falsifies",
+      "command_requirement": "The before checkout produces a real behavioral fail for the selected verifier, not dependency/env/setup failure.",
+      "hard_fail_if": [
+        "ENV_BLOCKED",
+        "DEPENDENCY_BLOCKED",
+        "NO_TESTS_COLLECTED",
+        "PASS_BEFORE_PATCH"
+      ]
+    },
+    {
+      "check_id": "apply_patch_clean",
+      "command_requirement": "The candidate patch applies cleanly to the before checkout with recorded changed paths and diff digest.",
+      "hard_fail_if": [
+        "patch_does_not_apply",
+        "cross_repo_patch",
+        "changed_path_not_in_repo"
+      ]
+    },
+    {
+      "check_id": "after_state_passes_same_verifier",
+      "command_requirement": "The patched checkout passes the same selected verifier command with command output captured.",
+      "hard_fail_if": [
+        "after_fails_same_verifier",
+        "after_uses_different_test_identity",
+        "after_only_builds_without_selected_verifier"
+      ]
+    }
+  ],
+  "shortlist_slots_requested": 8,
+  "stage": "stage12249_replay_preflight_execution_request",
+  "success_outputs_required": [
+    "preflight_results.jsonl",
+    "command_logs/",
+    "patch_apply_logs/",
+    "admission_candidates_level3.jsonl",
+    "blocked_candidates.jsonl",
+    "summary.json"
+  ],
+  "training_allowed": false,
+  "work_items": [
+    {
+      "admit_only_if_all_checks_pass": [
+        "pre_patch_verifier_exists",
+        "diff_is_source_bearing",
+        "before_state_falsifies",
+        "apply_patch_clean",
+        "after_state_passes_same_verifier"
+      ],
+      "candidate_selector": "top_shortlist_by_low_dependency_risk_and_not_test_added_only",
+      "required_tuple": [
+        "repo_family",
+        "commit_before",
+        "candidate_patch_diff",
+        "selected_verifier_command",
+        "before_command_output",
+        "patch_apply_output",
+        "after_command_output",
+        "state_before",
+        "state_after",
+        "stop_continue_label"
+      ],
+      "slot": 1,
+      "source_stage": "stage12246_replay_target_validation_audit",
+      "training_allowed": false,
+      "work_item_id": "stage12249_preflight_slot_01"
+    },
+    {
+      "admit_only_if_all_checks_pass": [
+        "pre_patch_verifier_exists",
+        "diff_is_source_bearing",
+        "before_state_falsifies",
+        "apply_patch_clean",
+        "after_state_passes_same_verifier"
+      ],
+      "candidate_selector": "top_shortlist_by_low_dependency_risk_and_not_test_added_only",
+      "required_tuple": [
+        "repo_family",
+        "commit_before",
+        "candidate_patch_diff",
+        "selected_verifier_command",
+        "before_command_output",
+        "patch_apply_output",
+        "after_command_output",
+        "state_before",
+        "state_after",
+        "stop_continue_label"
+      ],
+      "slot": 2,
+      "source_stage": "stage12246_replay_target_validation_audit",
+      "training_allowed": false,
+      "work_item_id": "stage12249_preflight_slot_02"
+    },
+    {
+      "admit_only_if_all_checks_pass": [
+        "pre_patch_verifier_exists",
+        "diff_is_source_bearing",
+        "before_state_falsifies",
+        "apply_patch_clean",
+        "after_state_passes_same_verifier"
+      ],
+      "candidate_selector": "top_shortlist_by_low_dependency_risk_and_not_test_added_only",
+      "required_tuple": [
+        "repo_family",
+        "commit_before",
+        "candidate_patch_diff",
+        "selected_verifier_command",
+        "before_command_output",
+        "patch_apply_output",
+        "after_command_output",
+        "state_before",
+        "state_after",
+        "stop_continue_label"
+      ],
+      "slot": 3,
+      "source_stage": "stage12246_replay_target_validation_audit",
+      "training_allowed": false,
+      "work_item_id": "stage12249_preflight_slot_03"
+    },
+    {
+      "admit_only_if_all_checks_pass": [
+        "pre_patch_verifier_exists",
+        "diff_is_source_bearing",
+        "before_state_falsifies",
+        "apply_patch_clean",
+        "after_state_passes_same_verifier"
+      ],
+      "candidate_selector": "top_shortlist_by_low_dependency_risk_and_not_test_added_only",
+      "required_tuple": [
+        "repo_family",
+        "commit_before",
+        "candidate_patch_diff",
+        "selected_verifier_command",
+        "before_command_output",
+        "patch_apply_output",
+        "after_command_output",
+        "state_before",
+        "state_after",
+        "stop_continue_label"
+      ],
+      "slot": 4,
+      "source_stage": "stage12246_replay_target_validation_audit",
+      "training_allowed": false,
+      "work_item_id": "stage12249_preflight_slot_04"
+    },
+    {
+      "admit_only_if_all_checks_pass": [
+        "pre_patch_verifier_exists",
+        "diff_is_source_bearing",
+        "before_state_falsifies",
+        "apply_patch_clean",
+        "after_state_passes_same_verifier"
+      ],
+      "candidate_selector": "top_shortlist_by_low_dependency_risk_and_not_test_added_only",
+      "required_tuple": [
+        "repo_family",
+        "commit_before",
+        "candidate_patch_diff",
+        "selected_verifier_command",
+        "before_command_output",
+        "patch_apply_output",
+        "after_command_output",
+        "state_before",
+        "state_after",
+        "stop_continue_label"
+      ],
+      "slot": 5,
+      "source_stage": "stage12246_replay_target_validation_audit",
+      "training_allowed": false,
+      "work_item_id": "stage12249_preflight_slot_05"
+    },
+    {
+      "admit_only_if_all_checks_pass": [
+        "pre_patch_verifier_exists",
+        "diff_is_source_bearing",
+        "before_state_falsifies",
+        "apply_patch_clean",
+        "after_state_passes_same_verifier"
+      ],
+      "candidate_selector": "top_shortlist_by_low_dependency_risk_and_not_test_added_only",
+      "required_tuple": [
+        "repo_family",
+        "commit_before",
+        "candidate_patch_diff",
+        "selected_verifier_command",
+        "before_command_output",
+        "patch_apply_output",
+        "after_command_output",
+        "state_before",
+        "state_after",
+        "stop_continue_label"
+      ],
+      "slot": 6,
+      "source_stage": "stage12246_replay_target_validation_audit",
+      "training_allowed": false,
+      "work_item_id": "stage12249_preflight_slot_06"
+    },
+    {
+      "admit_only_if_all_checks_pass": [
+        "pre_patch_verifier_exists",
+        "diff_is_source_bearing",
+        "before_state_falsifies",
+        "apply_patch_clean",
+        "after_state_passes_same_verifier"
+      ],
+      "candidate_selector": "top_shortlist_by_low_dependency_risk_and_not_test_added_only",
+      "required_tuple": [
+        "repo_family",
+        "commit_before",
+        "candidate_patch_diff",
+        "selected_verifier_command",
+        "before_command_output",
+        "patch_apply_output",
+        "after_command_output",
+        "state_before",
+        "state_after",
+        "stop_continue_label"
+      ],
+      "slot": 7,
+      "source_stage": "stage12246_replay_target_validation_audit",
+      "training_allowed": false,
+      "work_item_id": "stage12249_preflight_slot_07"
+    },
+    {
+      "admit_only_if_all_checks_pass": [
+        "pre_patch_verifier_exists",
+        "diff_is_source_bearing",
+        "before_state_falsifies",
+        "apply_patch_clean",
+        "after_state_passes_same_verifier"
+      ],
+      "candidate_selector": "top_shortlist_by_low_dependency_risk_and_not_test_added_only",
+      "required_tuple": [
+        "repo_family",
+        "commit_before",
+        "candidate_patch_diff",
+        "selected_verifier_command",
+        "before_command_output",
+        "patch_apply_output",
+        "after_command_output",
+        "state_before",
+        "state_after",
+        "stop_continue_label"
+      ],
+      "slot": 8,
+      "source_stage": "stage12246_replay_target_validation_audit",
+      "training_allowed": false,
+      "work_item_id": "stage12249_preflight_slot_08"
+    }
+  ]
+}

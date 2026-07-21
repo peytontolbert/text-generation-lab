@@ -1,0 +1,64 @@
+{
+  "stage": 12121,
+  "stage_name": "stage12121_rust_verifier_ready_candidate_plan",
+  "created_at_utc": "2026-07-15T00:00:00Z",
+  "do_not_train": true,
+  "no_admission_statement": "No rows are admitted by this plan; outputs are candidate selection and verifier discovery planning only, with no training, no eval claim, no GPU use, and no network dependency fetch.",
+  "inputs_read": [
+    "runs/local/artifacts/stage12119_refined_takeover_subagent_brief/refined_v27_takeover_subagent_brief.md",
+    "runs/local/artifacts/stage12118_maintainer_400_pilot_checkout_probe_request/pilot_checkout_probe_targets.jsonl",
+    "runs/summaries/stage12119_execute_maintainer_400_pilot_checkout_probe_batch.json",
+    "runs/summaries/stage12120_failed_stage_lessons_atlas.json",
+    "runs/local/artifacts/stage12120_selected_test_discovery_smoke/selected_test_discovery_results.jsonl",
+    "runs/local/artifacts/stage12120_selected_test_discovery_smoke/summary.json"
+  ],
+  "selection_policy": {
+    "source_pool": "Stage12118 Rust acquisition/probe leads plus already checked-out Stage12119/12120 Rust smoke evidence",
+    "positive_filters": [
+      "simple crate or narrowly scoped workspace",
+      "Cargo manifest expected or already confirmed",
+      "test names likely visible in source",
+      "candidate cargo metadata --no-deps and cargo test --offline -- --list commands available",
+      "no external service, browser, GPU, or network dependency hydration needed for the proposed probe"
+    ],
+    "negative_filters": [
+      "large workspaces with expensive all-workspace tests",
+      "database-backed tests",
+      "network/server timing-sensitive tests",
+      "coverage/toolchain bootstrap projects",
+      "snapshot/fixture-heavy repos unless narrowed",
+      "repos where selected-test claims would depend on install or uncached dependency fetch"
+    ]
+  },
+  "selected_count": 10,
+  "selected_queue_ids": [
+    "stage12118::rust::001::BurntSushi_aho_corasick",
+    "stage12118::rust::002::BurntSushi_byteorder",
+    "stage12118::rust::013::bytes_rs_bytes",
+    "stage12118::rust::017::dtolnay_anyhow",
+    "stage12118::rust::019::dtolnay_quote",
+    "stage12118::rust::029::rust_cli_env_logger",
+    "stage12118::rust::043::time_rs_time",
+    "stage12118::rust::044::toml_rs_toml",
+    "stage12118::rust::048::uuid_rs_uuid",
+    "stage12118::rust::010::assert_rs_predicates_rs"
+  ],
+  "top_10_candidate_summary": [
+    {"rank": 1, "queue_id": "stage12118::rust::001::BurntSushi_aho_corasick", "repo_family": "BurntSushi/aho-corasick", "summary": "Already checked out; cargo metadata --no-deps succeeded and concrete test names were discovered, but offline list needs cached dependencies."},
+    {"rank": 2, "queue_id": "stage12118::rust::002::BurntSushi_byteorder", "repo_family": "BurntSushi/byteorder", "summary": "Small endian conversion crate with likely deterministic tests and low external dependency risk."},
+    {"rank": 3, "queue_id": "stage12118::rust::013::bytes_rs_bytes", "repo_family": "bytes-rs/bytes", "summary": "Focused buffer crate; likely selected tests for Bytes/BytesMut invariants without services."},
+    {"rank": 4, "queue_id": "stage12118::rust::017::dtolnay_anyhow", "repo_family": "dtolnay/anyhow", "summary": "Small error-handling crate; prefer context/source/downcast tests and avoid backtrace-sensitive cases."},
+    {"rank": 5, "queue_id": "stage12118::rust::019::dtolnay_quote", "repo_family": "dtolnay/quote", "summary": "Smaller macro crate with token formatting tests; less risky than syn/trybuild-heavy surfaces."},
+    {"rank": 6, "queue_id": "stage12118::rust::029::rust_cli_env_logger", "repo_family": "rust-cli/env_logger", "summary": "Logging/filter parser crate; choose deterministic parser tests with environment captured."},
+    {"rank": 7, "queue_id": "stage12118::rust::043::time_rs_time", "repo_family": "time-rs/time", "summary": "Date/time crate with deterministic arithmetic/formatting tests if locale/timezone cases are avoided."},
+    {"rank": 8, "queue_id": "stage12118::rust::044::toml_rs_toml", "repo_family": "toml-rs/toml", "summary": "Parser/serializer tests are likely abundant; narrow by package/test to avoid fixture sweep cost."},
+    {"rank": 9, "queue_id": "stage12118::rust::048::uuid_rs_uuid", "repo_family": "uuid-rs/uuid", "summary": "Focused UUID parser/formatter crate; avoid random generation feature tests."},
+    {"rank": 10, "queue_id": "stage12118::rust::010::assert_rs_predicates_rs", "repo_family": "assert-rs/predicates-rs", "summary": "Pure predicate behavior tests likely avoid subprocess-heavy assert_cmd/trycmd risks."}
+  ],
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan",
+    "plan_jsonl": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+    "summary": "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/summary.json",
+    "summary_mirror": "runs/summaries/stage12121_rust_verifier_ready_candidate_plan.json"
+  }
+}

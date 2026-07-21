@@ -1,0 +1,51 @@
+{
+  "admitted_rows": 11,
+  "claim_boundary": "Rows are train-support only. They close build-status coverage, not model promotion.",
+  "decision": "admit_python_build_only_train_support",
+  "language_counts": {
+    "python": 11
+  },
+  "next_stage_recommendation": {
+    "action": "Merge PASS_CURRENT_BUILD rows and report remaining status floors.",
+    "stage": "stage12040_transition_support_rollup_v27"
+  },
+  "rejected_probe_count": 3,
+  "rejected_probes": [
+    {
+      "command": "python -m py_compile /data/repositories/pydantic__pydantic-ai/pydantic_ai_slim/pydantic_ai/agent.py",
+      "reason": "path did not exist",
+      "repo_family": "pydantic__pydantic-ai",
+      "returncode": 1
+    },
+    {
+      "command": "python -m py_compile /data/repositories/llama-stack/llama_stack/core/server/server.py",
+      "reason": "path did not exist",
+      "repo_family": "llama-stack",
+      "returncode": 1
+    },
+    {
+      "command": "cmake --build /data/tmp/sentencepiece_stage11737_build --target sentencepiece -j2",
+      "reason": "invalid target name; valid replacement was probed but not needed for this batch",
+      "repo_family": "sentencepiece",
+      "returncode": 2
+    }
+  ],
+  "repo_family_counts": {
+    "AgentLab": 1,
+    "Aider-AI__aider": 1,
+    "SWE-agent__mini-swe-agent": 1,
+    "camel-ai__camel": 1,
+    "huggingface__smolagents": 1,
+    "llama-stack": 1,
+    "modelcontextprotocol__python-sdk": 1,
+    "openai__openai-agents-python": 2,
+    "pydantic__pydantic-ai": 1,
+    "stanfordnlp__dspy": 1
+  },
+  "rows_path": "runs/local/artifacts/stage12039_python_build_only_rows/python_build_only_rows.jsonl",
+  "stage": "stage12039_python_build_only_rows",
+  "status_counts": {
+    "PASS_CURRENT_BUILD": 11
+  },
+  "unique_roots": 11
+}

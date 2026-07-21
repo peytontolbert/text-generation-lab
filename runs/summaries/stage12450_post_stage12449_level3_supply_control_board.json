@@ -1,0 +1,83 @@
+{
+  "admission_allowed": false,
+  "claim_boundary": "This is a scoreboard/control artifact. It records a validated candidate delta after Stage12445 but emits no training/eval rows and does not authorize training.",
+  "decision": "validated_level3_candidate_delta_recorded_remaining_returns_incomplete_training_blocked",
+  "effective_supply_after_validated_delta": 230,
+  "emitted_training_rows": 0,
+  "execution_allowed": false,
+  "execution_performed_by_stage": false,
+  "external_fail_to_pass_floor": 15,
+  "external_fail_to_pass_remaining_floor_gap": 15,
+  "external_fail_to_pass_validated_delta": 0,
+  "guardrail_scan": {
+    "issue_count": 0,
+    "issues": [],
+    "raw_leak_count": 0,
+    "scan_passed": true,
+    "scan_scope": "stage12450_public_safe_control_board"
+  },
+  "guardrail_scan_passed": true,
+  "next_actions": [
+    {
+      "action": "produce_or_block_remaining_stage12445_return_files",
+      "priority": 1,
+      "reason": "remaining Stage12445 return slots are missing or empty-blocked; no further training should occur until nonempty proof-complete returns are materialized and ingested"
+    },
+    {
+      "action": "expand_external_fail_to_pass_source_supply",
+      "priority": 2,
+      "reason": "Stage12449 found zero proof-complete external FAIL_TO_PASS rows; external FAIL_TO_PASS floor still needs fifteen more before the minimum gate"
+    },
+    {
+      "action": "materialize_non_web_selected_test_transition_returns",
+      "priority": 3,
+      "reason": "Rust/C/C++/Python selected-test transition lane is the best non-web path toward balanced maintainer tasks"
+    }
+  ],
+  "prior_countable_supply_from_stage12448": 190,
+  "raw_leak_count": 0,
+  "record_type": "post_stage12449_level3_supply_control_board_v1",
+  "remaining_gap_to_500_after_validated_delta": 270,
+  "schema_issue_count": 0,
+  "sealed_eval_rows_emitted": 0,
+  "selected_test_verifier_observation_validated_delta": 40,
+  "source_fingerprints": {
+    "stage12445_candidates_sha256_24": "3a1eba32cda8095fd947ead4",
+    "stage12445_summary_sha256_24": "483a6d877c2638f8f0a08f41",
+    "stage12448_summary_sha256_24": "06c3893358aa11cda631e4a5",
+    "stage12449_blocked_sha256_24": "b2038b9b989fdf7699937129",
+    "stage12449_summary_sha256_24": "1e2d18b51e94962b5d5bb443"
+  },
+  "stage": "stage12450_post_stage12449_level3_supply_control_board",
+  "stage12445_admitted_return_row_count": 40,
+  "stage12445_empty_return_count_by_kind": {
+    "source_adapter_materialization": 1
+  },
+  "stage12445_empty_return_file_count": 1,
+  "stage12445_expected_return_count": 7,
+  "stage12445_found_return_file_count": 1,
+  "stage12445_missing_return_count_by_kind": {
+    "open_swe_authoritative_replay_micro_pilot": 2,
+    "private_semantic_review": 1,
+    "source_adapter_materialization": 2
+  },
+  "stage12445_missing_return_file_count": 5,
+  "stage12445_present_return_file_count": 2,
+  "stage12445_return_row_count": 40,
+  "stage12445_validated_level3_candidate_delta": 40,
+  "stage12448_feasibility_status": "requires_private_executor_source_capacity_proof_before_interpreting_requested_floor_as_supply",
+  "stage12448_requested_floor_exceeds_known_public_denominator": true,
+  "stage12449_blocked_reason_counts": {
+    "before_status_not_fail_current_state": 1,
+    "before_verifier_not_runnable_or_not_found": 1,
+    "fail_to_pass_floor_status_not_true": 1,
+    "false_fail_to_pass_proof": 1,
+    "policy_label_independence_not_proven_from_stage12223_summary": 2,
+    "transition_not_fail_to_pass": 1
+  },
+  "stage12449_blocked_record_count": 2,
+  "stage12449_projected_return_row_count": 0,
+  "summary_hash": "f0640fe15bcf05cf4706c6eb",
+  "target_countable_supply": 500,
+  "training_allowed": false
+}

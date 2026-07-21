@@ -1,0 +1,144 @@
+{
+  "candidate_count_counts": {
+    "1": 13,
+    "2": 4,
+    "3": 42
+  },
+  "claim_boundary": "Stage12308 emits audit records only. No training row is admitted unless a work item contains explicit deterministic pre-action state-code evidence that selects exactly one TF-H1 rule without using observed raw action.",
+  "decision": "blocked_no_deterministic_h1_semantic_rule_assignments",
+  "feasibility_records": 59,
+  "hard_reject_reason_counts": {
+    "candidate_count_below_training_floor": 17,
+    "no_tf_h1_rule_matches_explicit_state": 59,
+    "pre_action_state_codes_absent_only_refs_available": 59,
+    "required_pre_action_state_codes_missing": 59,
+    "training_disallowed_fail_closed": 59
+  },
+  "input": "runs/local/artifacts/stage12303_semantic_transition_function_reconstruction/semantic_transition_reconstruction_work_items.jsonl",
+  "language_counts": {
+    "python": 29,
+    "web_js_ts_html": 30
+  },
+  "missing_state_code_counts": {
+    "env_blocked": 59,
+    "failure_localized": 59,
+    "open_question": 59,
+    "patch_exists": 59,
+    "requirement_covered": 59,
+    "source_evidence_present": 59,
+    "verifier_run_status": 59,
+    "verifier_selected": 59
+  },
+  "possible_rule_id_counts": {},
+  "records_training_allowed": 0,
+  "records_with_deterministic_single_rule": 0,
+  "records_with_possible_rule": 0,
+  "repo_family_counts": {
+    "bddy": 20,
+    "clone": 4,
+    "repository_library": 5,
+    "staticpeytonsite": 10,
+    "transformer_10": 20
+  },
+  "rule_assignment_policy": {
+    "fail_closed_default_training_allowed": false,
+    "observed_raw_action_used": false,
+    "requires_explicit_pre_action_state_codes": true,
+    "state_refs_count_as_evidence": false,
+    "target_only_refs_used": false
+  },
+  "source_heldout_admissible": 0,
+  "stage": "stage12308_h1_semantic_rule_feasibility_audit",
+  "strict_eval_eligible": 0,
+  "tf_h1_rule_table": [
+    {
+      "requires": {
+        "env_blocked": false,
+        "source_evidence_present": false
+      },
+      "rule_id": "TF-H1-001",
+      "semantic_action": "RETRIEVE_EVIDENCE"
+    },
+    {
+      "requires": {
+        "failure_localized": false,
+        "source_evidence_present": true
+      },
+      "rule_id": "TF-H1-002",
+      "semantic_action": "LOCALIZE_FAILURE"
+    },
+    {
+      "requires": {
+        "env_blocked": false,
+        "failure_localized": true,
+        "patch_exists": false
+      },
+      "rule_id": "TF-H1-003",
+      "semantic_action": "PLAN_PATCH"
+    },
+    {
+      "requires": {
+        "env_blocked": false,
+        "patch_exists": true
+      },
+      "rule_id": "TF-H1-004",
+      "semantic_action": "APPLY_PATCH"
+    },
+    {
+      "requires": {
+        "env_blocked": false,
+        "patch_exists": true,
+        "verifier_selected": false
+      },
+      "rule_id": "TF-H1-005",
+      "semantic_action": "SELECT_TEST"
+    },
+    {
+      "requires": {
+        "env_blocked": false,
+        "patch_exists": true,
+        "verifier_run_status": "not_run",
+        "verifier_selected": true
+      },
+      "rule_id": "TF-H1-006",
+      "semantic_action": "RUN_VERIFIER"
+    },
+    {
+      "requires": {
+        "verifier_run_status": [
+          "passed",
+          "failed"
+        ]
+      },
+      "rule_id": "TF-H1-007",
+      "semantic_action": "INTERPRET_VERIFIER"
+    },
+    {
+      "requires": {
+        "requirement_covered": false,
+        "verifier_run_status": "failed"
+      },
+      "rule_id": "TF-H1-008",
+      "semantic_action": "REPAIR_AFTER_FAILURE"
+    },
+    {
+      "requires": {
+        "env_blocked": true
+      },
+      "rule_id": "TF-H1-009",
+      "semantic_action": "ROLLBACK_OR_ABSTAIN"
+    },
+    {
+      "requires": {
+        "open_question": false,
+        "requirement_covered": true,
+        "verifier_run_status": "passed"
+      },
+      "rule_id": "TF-H1-010",
+      "semantic_action": "FINISH"
+    }
+  ],
+  "training_allowed": false,
+  "training_rows_emitted": 0,
+  "work_items_inspected": 59
+}

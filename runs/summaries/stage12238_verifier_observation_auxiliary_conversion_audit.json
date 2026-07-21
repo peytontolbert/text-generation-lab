@@ -1,0 +1,176 @@
+{
+  "allowed_projection_families": [
+    "execution_trace_interpretation",
+    "transition_continue_or_stop",
+    "transition_next_action",
+    "transition_verifier_transition"
+  ],
+  "artifact_paths": {
+    "blocked_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12238_verifier_observation_auxiliary_conversion_audit/blocked_verifier_observation_auxiliary_conversion.jsonl",
+    "candidate_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12238_verifier_observation_auxiliary_conversion_audit/verifier_observation_auxiliary_candidates.jsonl",
+    "summary": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage12238_verifier_observation_auxiliary_conversion_audit.json"
+  },
+  "blocked_reason_counts": {
+    "command_or_verifier_result.stdout_or_stderr_hash": 54
+  },
+  "claim_boundary": "Conversion audit only. These candidates can support future verifier/status auxiliary training after a separate trainer request, but they are not Level-3 patch traces or repair proof.",
+  "decision": "verifier_observation_auxiliary_candidates_ready_loss_disabled",
+  "disallowed_projection_families": [
+    "patch_apply",
+    "patch_generation",
+    "patch_judgment",
+    "final_acceptance",
+    "level_3_patch_trace",
+    "source_heldout_eval"
+  ],
+  "hard_rules": [
+    "loss_mask_enabled remains false for all emitted candidates",
+    "patch_trace.has_patch_trace must be false",
+    "counts_toward_unbounded_patch_trace_floor must be false",
+    "strict_eval_eligible and source_heldout_admissible must be false",
+    "PASS_CURRENT_BUILD is build-only verifier-status support, not runnable repair proof",
+    "single verifier observations train CONTINUE only, never DONE/final acceptance",
+    "prompt renderer must hide chosen_action_id, is_chosen, negative_kind, command_result, verifier_result, state_after, and stop_decision until target time"
+  ],
+  "language_family_counts": {
+    "c_cpp": 27,
+    "python": 47,
+    "rust": 27,
+    "web_js_ts_html": 45
+  },
+  "projection_by_transition": {
+    "execution_trace_interpretation": {
+      "FAIL_CURRENT_STATE": 1,
+      "FAIL_TO_PASS": 39,
+      "PASS_CURRENT_BUILD_AND_RUN": 10,
+      "PASS_CURRENT_STATE": 12,
+      "PASS_TO_PASS": 30
+    },
+    "transition_continue_or_stop": {
+      "FAIL_CURRENT_STATE": 1,
+      "FAIL_TO_PASS": 39,
+      "PASS_CURRENT_BUILD_AND_RUN": 10,
+      "PASS_CURRENT_STATE": 12,
+      "PASS_TO_PASS": 30
+    },
+    "transition_next_action": {
+      "FAIL_CURRENT_STATE": 1,
+      "FAIL_TO_PASS": 39,
+      "PASS_CURRENT_BUILD_AND_RUN": 10,
+      "PASS_CURRENT_STATE": 12,
+      "PASS_TO_PASS": 30
+    },
+    "transition_verifier_transition": {
+      "FAIL_CURRENT_STATE": 1,
+      "FAIL_TO_PASS": 39,
+      "PASS_CURRENT_BUILD_AND_RUN": 10,
+      "PASS_CURRENT_STATE": 12,
+      "PASS_TO_PASS": 30
+    }
+  },
+  "projection_candidate_counts": {
+    "execution_trace_interpretation": 92,
+    "transition_continue_or_stop": 92,
+    "transition_next_action": 92,
+    "transition_verifier_transition": 92
+  },
+  "repo_family_counts_top20": [
+    [
+      "stage12053_controlled_semantic_fail_to_pass_floor_closure_rows",
+      16
+    ],
+    [
+      "openhands_openhands",
+      16
+    ],
+    [
+      "llama_stack",
+      14
+    ],
+    [
+      "benchmark",
+      13
+    ],
+    [
+      "tokenizers",
+      10
+    ],
+    [
+      "modelcontextprotocol__typescript-sdk",
+      10
+    ],
+    [
+      "Python",
+      5
+    ],
+    [
+      "stage12055_controlled_semantic_fail_to_pass_supplement_rows",
+      4
+    ],
+    [
+      "stage11999_real_source_fail_to_pass_mutations",
+      4
+    ],
+    [
+      "sentencepiece",
+      3
+    ],
+    [
+      "stage11980_controlled_multilingual_fail_to_pass_fixtures",
+      3
+    ],
+    [
+      "NousResearch__hermes-agent",
+      3
+    ],
+    [
+      "agent_kernel_rust_wasm",
+      3
+    ],
+    [
+      "stage12025_cpp_controlled_fixture",
+      2
+    ],
+    [
+      "Aider-AI__aider",
+      2
+    ],
+    [
+      "PyCQA/flake8",
+      2
+    ],
+    [
+      "camel-ai__camel",
+      2
+    ],
+    [
+      "einops",
+      2
+    ],
+    [
+      "lastmile-ai__mcp-agent",
+      2
+    ],
+    [
+      "openai__openai-agents-python",
+      2
+    ]
+  ],
+  "source_counts": {
+    "conversion_blocked_rows": 54,
+    "conversion_candidate_rows": 368,
+    "input_rows": 146,
+    "source_blocked_rows": 3
+  },
+  "source_stage": "stage12216_normalized_verifier_observation_dataset",
+  "stage": "stage12238_verifier_observation_auxiliary_conversion_audit",
+  "training_allowed": false,
+  "verifier_transition_counts": {
+    "FAIL_CURRENT_STATE": 1,
+    "FAIL_TO_PASS": 39,
+    "PASS_CURRENT_BUILD": 21,
+    "PASS_CURRENT_BUILD_AND_RUN": 36,
+    "PASS_CURRENT_STATE": 19,
+    "PASS_TO_PASS": 30
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "artifact_type": "live_physical_session_inventory_refresh",
+  "blocked_count": 0,
+  "claim_boundary": "Live parent inventory only. Emits hashed path metadata, no raw content, no row admission, no training.",
+  "counts_by_root": {
+    "codex_sessions": {
+      "extension_counts": {
+        ".jsonl": 279
+      },
+      "file_count": 279,
+      "mtime_range_utc": {
+        "max": "2026-07-16T17:04:43Z",
+        "min": "2026-07-08T17:35:18Z"
+      },
+      "root_exists": true,
+      "root_path_hash": "633ec3005a444fc86fa1ef916f19ddb74e738630",
+      "total_bytes": 1805113296,
+      "total_bytes_by_extension": {
+        ".jsonl": 1805113296
+      }
+    },
+    "cursor_chats": {
+      "extension_counts": {
+        ".db": 3
+      },
+      "file_count": 3,
+      "mtime_range_utc": {
+        "max": "2026-05-05T04:43:32Z",
+        "min": "2026-05-04T19:53:22Z"
+      },
+      "root_exists": true,
+      "root_path_hash": "7c711142d6a064b967ebfcb0cfbdc24e7cc78084",
+      "total_bytes": 1556480,
+      "total_bytes_by_extension": {
+        ".db": 1556480
+      }
+    },
+    "cursor_projects": {
+      "extension_counts": {
+        ".json": 247,
+        ".jsonl": 315,
+        ".log": 1,
+        ".map": 105,
+        ".md": 79,
+        ".png": 6,
+        ".ts": 119,
+        ".tsx": 11,
+        ".txt": 129,
+        "<no_ext>": 7
+      },
+      "file_count": 1019,
+      "mtime_range_utc": {
+        "max": "2026-07-16T17:04:43Z",
+        "min": "2025-12-07T16:57:57Z"
+      },
+      "root_exists": true,
+      "root_path_hash": "765f8298b0f75e362a3357709b86d7d5be686ccb",
+      "total_bytes": 35119928,
+      "total_bytes_by_extension": {
+        ".json": 227537,
+        ".jsonl": 25219468,
+        ".log": 92079,
+        ".map": 182044,
+        ".md": 302696,
+        ".png": 1238840,
+        ".ts": 541890,
+        ".tsx": 76770,
+        ".txt": 7238156,
+        "<no_ext>": 448
+      }
+    }
+  },
+  "decision": "live_parent_inventory_refreshed_training_still_blocked",
+  "drift_vs_previous_inventory": {
+    "codex_sessions": {
+      "delta": -479,
+      "live_file_count": 279,
+      "previous_file_count": 758
+    },
+    "cursor_chats": {
+      "delta": 0,
+      "live_file_count": 3,
+      "previous_file_count": 3
+    },
+    "cursor_projects": {
+      "delta": 41,
+      "live_file_count": 1019,
+      "previous_file_count": 978
+    }
+  },
+  "next_stage": {
+    "required_join": "derivative.source_file_hash == live_physical_source_records.source_file_hash_compat",
+    "stage": "stage12257_session_derivative_view_attacher",
+    "training_allowed": false
+  },
+  "output_artifacts": {
+    "live_physical_source_records": "runs/local/artifacts/stage12256_live_physical_session_inventory_refresh/live_physical_source_records.jsonl",
+    "live_session_inventory_counts_by_root": "runs/local/artifacts/stage12256_live_physical_session_inventory_refresh/live_session_inventory_counts_by_root.json",
+    "live_session_inventory_root_card": "runs/local/artifacts/stage12256_live_physical_session_inventory_refresh/live_session_inventory_root_card.json"
+  },
+  "root_card": {
+    "generated_at_utc": "2026-07-16T17:04:44Z",
+    "path_policy": "hashed_path_only_no_raw_content",
+    "root_count": 3,
+    "roots_missing": 0,
+    "roots_present": 3,
+    "source_root_labels": [
+      "codex_sessions",
+      "cursor_chats",
+      "cursor_projects"
+    ],
+    "total_bytes": 1841789704,
+    "total_files": 1301
+  },
+  "stage": "stage12256_live_physical_session_inventory_refresh",
+  "training_allowed": false
+}

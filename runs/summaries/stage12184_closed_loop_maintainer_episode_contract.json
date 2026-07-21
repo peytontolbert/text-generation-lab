@@ -1,0 +1,86 @@
+{
+  "stage": "stage12184_closed_loop_maintainer_episode_contract",
+  "artifact_type": "closed_loop_maintainer_episode_contract_summary",
+  "decision": "contract_ready_no_rows_no_training",
+  "created_at_utc": "2026-07-15T00:00:00Z",
+  "training_executed": false,
+  "source_code_modified": false,
+  "output_artifacts": {
+    "contract": "runs/local/artifacts/stage12184_closed_loop_maintainer_episode_contract/closed_loop_episode_contract.json",
+    "schema": "runs/local/artifacts/stage12184_closed_loop_maintainer_episode_contract/episode_contract_schema.json",
+    "subagent_instructions": "runs/local/artifacts/stage12184_closed_loop_maintainer_episode_contract/subagent_scaling_instructions.json",
+    "readme": "runs/local/artifacts/stage12184_closed_loop_maintainer_episode_contract/README.md",
+    "summary_mirror": "runs/summaries/stage12184_closed_loop_maintainer_episode_contract.json"
+  },
+  "pivot": "bounded pre-action classification is demoted to projection/eval support; the primary target is a replayable closed-loop maintainer episode",
+  "episode_flow": [
+    "root",
+    "episode",
+    "typed_events",
+    "causal_states",
+    "candidate_actions",
+    "command_test_patch_observations",
+    "verifier_transitions",
+    "state_updates",
+    "stop_decisions"
+  ],
+  "projection_families": [
+    "episode_state_next_action",
+    "candidate_action_ranking",
+    "verifier_transition_prediction",
+    "causal_state_update",
+    "stop_or_continue",
+    "patch_observation_alignment",
+    "episode_replay_consistency"
+  ],
+  "minimum_floors_before_training": {
+    "high_quality_tasks_per_language": 1000,
+    "languages": [
+      "python",
+      "c_cpp",
+      "rust",
+      "web_js_ts_html"
+    ],
+    "minimum_total_tasks": 4000,
+    "minimum_episode_rows": 24000,
+    "minimum_candidate_actions_per_decision_state": 5,
+    "minimum_hard_negatives_per_decision_state": 3,
+    "schema_validation_pass_rate": 1.0,
+    "episode_replay_pass_rate": 0.98,
+    "manual_audit_pass_rate": 0.95
+  },
+  "anti_cheat_gates": [
+    "lineage disjoint from protected strict/residual/source-heldout roots and Stage11507/Stage11924/Stage12099/Gemma comparison manifests",
+    "gold labels and terminal states not rendered in inputs",
+    "candidate option order randomized and permutation-stability audited",
+    "verifier claims backed by command/test/patch observations or explicit blocked reason",
+    "same-manifest comparisons require identical rendered inputs and missing-row accounting"
+  ],
+  "gpu2_only_training_policy": {
+    "training_allowed_now": false,
+    "allowed_device_when_unblocked": "GPU2 only",
+    "required_preflight": [
+      "CUDA_VISIBLE_DEVICES pins physical GPU2",
+      "manifest and tokenizer hashes recorded",
+      "first run is tiny diagnostic or head-only preflight",
+      "kill if process lands on non-GPU2"
+    ]
+  },
+  "promotion_gates": {
+    "stage11507": "preserve protected bounded product gates including old-canary strict 23/23, filtered strict 22/22, and residual at least 6/10",
+    "stage11924": "beat Stage12099-reported standalone transition baseline >364/640 while preserving continue_or_stop 128/160 and verifier_transition 96/160",
+    "stage12099": "beat task-routed bounded transition composite >375/640 and exceed candidate_selection 92/160 plus next_action 59/160",
+    "gemma": "beat same-manifest Gemma reference >386/640 where applicable and include exact missing-row accounting",
+    "episode_eval": "also pass full-episode heldout gates for replay, state update, verifier transition, stop decision, and candidate ranking"
+  },
+  "subagent_scaling": {
+    "scout": "collect 1500 candidate roots per language to yield 1000 final audited tasks",
+    "builder": "materialize full episode graphs with typed events, observations, verifier transitions, state updates, and hard-negative candidate sets",
+    "auditor": "enforce schema, replay, split hygiene, anti-cheat, verifier evidence, and manual quality gates"
+  },
+  "audit_notes": [
+    "No rows, model checkpoints, tokenizer files, trainer requests, or source files were created or modified.",
+    "This contract is intentionally stricter than Stage12178 because it requires command/test/patch observations and replayable state transitions, not only next-action labels.",
+    "Training remains blocked until floors and audits pass and a separate GPU2-only training request is produced."
+  ]
+}

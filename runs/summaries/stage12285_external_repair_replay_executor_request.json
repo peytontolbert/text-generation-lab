@@ -1,0 +1,51 @@
+{
+  "admission_after_execution": "none; PE3/PE4 semantic audit required",
+  "admitted_rows": 0,
+  "decision": "executor_request_ready_smoke_subset_reviewed",
+  "default_smoke_request_ids": [
+    "stage12244_replay_003",
+    "stage12244_replay_005",
+    "stage12244_replay_013",
+    "stage12244_replay_018"
+  ],
+  "default_smoke_target_count": 4,
+  "execution_policy": {
+    "gpu_visible": false,
+    "max_smoke_targets": 5,
+    "network": "forbidden",
+    "phases": [
+      "before_fail_behavior",
+      "before_plus_patch_pass",
+      "after_pass"
+    ],
+    "stop_after_first_env_tooling_failure_per_repo": true,
+    "timeout_seconds_per_phase": 120,
+    "training_allowed": false,
+    "write_root": "/data/tmp/stage12285_external_repair_replay"
+  },
+  "hard_rejects": [
+    "repo_clone_or_checkout_failed",
+    "patch_apply_failed",
+    "before_did_not_fail",
+    "before_failure_env_or_tooling",
+    "before_plus_patch_did_not_pass",
+    "after_did_not_pass",
+    "post_failure_remains",
+    "raw_log_or_patch_body_emitted"
+  ],
+  "next_stage": "stage12286_external_repair_replay_smoke_executor",
+  "outputs_expected": [
+    "phase_status_records.jsonl",
+    "replay_execution_summary.json",
+    "patch_effect_candidates_PE2_or_rejects.jsonl"
+  ],
+  "phase_success_required_for_PE2": {
+    "after_pass": "PASS",
+    "before_fail_behavior": "FAIL",
+    "before_plus_patch_pass": "PASS"
+  },
+  "ready_target_count": 19,
+  "source_preflight": "runs/summaries/stage12284_external_repair_commit_pair_preflight.json",
+  "stage": "stage12285_external_repair_replay_executor_request",
+  "training_rows_emitted": 0
+}

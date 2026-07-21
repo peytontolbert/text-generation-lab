@@ -1,0 +1,99 @@
+{
+  "blocked_reasons": [
+    "bears_submodule_uninitialized_no_local_git",
+    "bears_git_commands_fall_back_to_parent_repo"
+  ],
+  "claim_boundary": "Fail-closed local preflight only. No Bears checkout, verifier command, train-support row, Level-3 row, patch-trace row, repair row, or sealed eval row is admitted.",
+  "decision": "bears_local_hydration_blocked_fail_closed",
+  "hard_rejects": [
+    "run RepairThemAll checkout.py while Bears submodule is uninitialized",
+    "treat parent RepairThemAll refs as Bears refs",
+    "admit metadata-only Bears rows",
+    "admit rows without buggy failure reproduction and fixed selected-test pass",
+    "emit raw diff or raw verifier output into model-facing rows"
+  ],
+  "next_stage": "stage123xx_bears_hydration_executor_only_after_submodule_initialization",
+  "probe_results": {
+    "bears_dot_git_exists": false,
+    "bears_revparse": {
+      "args": [
+        "git",
+        "-C",
+        "/arxiv/repositories/RepairThemAll/benchmarks/bears",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "/arxiv/repositories/RepairThemAll"
+    },
+    "bears_submodule_path_exists": true,
+    "bears_tree_entry": {
+      "args": [
+        "git",
+        "ls-tree",
+        "HEAD",
+        "benchmarks/bears"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "160000 commit 0c8be2c0e217d819e84f8342a6c592893db1538a\tbenchmarks/bears"
+    },
+    "repair_them_all_exists": true,
+    "submodule_status": {
+      "args": [
+        "git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "-ef280eac8ee5e62f862b958986653714d0b9023b benchmarks/Bug-dot-jar\n-aec9de3495e2b588f1cb803d90892ee1a0ca6b41 benchmarks/IntroclassJava\n-b11cde571c412600e21fa60ad9f784e81e63b546 benchmarks/QuixBugs\n-0c8be2c0e217d819e84f8342a6c592893db1538a benchmarks/bears\n-fcf6b9bb030e0f5f03ebab112eb4d4b622f2f315 benchmarks/defects4j\n-b02c69828419e792c67876f7beecfabe73196aac libs/z3"
+    }
+  },
+  "requested_branches": [
+    {
+      "branch_id": "CorfuDB-CorfuDB-330246430-330267605",
+      "bug_id": "Bears_157",
+      "buggy_commit_sha": "49b3ef96623130164fa1f88c00431ed5a473add0",
+      "fixer_commit_sha": "2ddc9ce680e726f8f8485c1b3c317fe665cda42d"
+    },
+    {
+      "branch_id": "aicis-fresco-330883035-330923179",
+      "bug_id": "Bears_144",
+      "buggy_commit_sha": "cb5ed623b9d9af706ffaf30f2f17163832f0836e",
+      "fixer_commit_sha": "5f1d1d639b0f90445b6e2d34efc175e5f698a77f"
+    },
+    {
+      "branch_id": "webfirmframework-wff-453188520-453188718",
+      "bug_id": "Bears_251",
+      "buggy_commit_sha": "34c9f8a312131bd56d934f44d10c0630238f94e8",
+      "fixer_commit_sha": "75520f56bba7a0561a037cb728812c15d8b498ea"
+    },
+    {
+      "branch_id": "DmitriiSerikov-money-transfer-service-446104441-446106577",
+      "bug_id": "Bears_209",
+      "buggy_commit_sha": "953154b15baf0ff4fd15d17ddcf6c9b40d943ee2",
+      "fixer_commit_sha": "e5d2df4a4d4a99932d8e2c2dbdc7a0f2ac02e685"
+    },
+    {
+      "branch_id": "traccar-traccar-188473748-188474474",
+      "bug_id": "Bears_98",
+      "buggy_commit_sha": "e512848dc07145664f3c5d0adff7a9f88b2f17b6",
+      "fixer_commit_sha": "7bd6551a2f5712d63bea7e8711944fbeb78323c8"
+    }
+  ],
+  "requested_candidate_count": 5,
+  "requirements_before_next_execution_attempt": [
+    "benchmarks/bears is an initialized Bears repository",
+    "requested branch IDs resolve inside the Bears repository",
+    "buggy and fixed checkout SHAs match metadata",
+    "buggy selected test fails with command output captured",
+    "fixed selected test passes with command output captured",
+    "same-source patch-verifier causality audit passes"
+  ],
+  "source_stage": "stage12333_bears_hydration_request",
+  "stage": "stage12336_bears_local_hydration_blocker_audit",
+  "training_allowed": false
+}

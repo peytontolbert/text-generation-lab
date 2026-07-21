@@ -1,0 +1,109 @@
+{
+  "claim_boundary": [
+    "This is a request artifact only, not model progress.",
+    "Stage12073 rows are train-support-only; promotion requires postrun routed audit.",
+    "The selected transition frontier remains Stage11924 until a runtime beats 364/640 and preserves gates."
+  ],
+  "created_at_utc": "2026-07-14T23:57:21Z",
+  "decision": "next_action_guarded_training_request_ready",
+  "execute_now": false,
+  "gates_before_execution": {
+    "base_manifest_exists": true,
+    "head_only_enabled": true,
+    "init_runtime_exists": true,
+    "next_action_gate_passed": true,
+    "next_action_rows_exists": true,
+    "option_mirror_missing_zero": true,
+    "preservation_runtime_exists": true,
+    "splits_expected": true,
+    "unsafe_loss_masks_zero": true,
+    "uses_gpu2_mask": true,
+    "v35_floor_audit_train_ready": true,
+    "v35_rows_exists": true
+  },
+  "hypothesis": "Adding admitted next-action support to old transition replay and v35 verifier-status support can improve the 51/160 next-action bottleneck without losing protected compact gates.",
+  "next_stage_after_execution": "stage12076_next_action_guarded_training_postrun_audit",
+  "next_stage_if_executed": "stage12075_next_action_guarded_training_probe",
+  "outputs": {
+    "command": "runs/local/artifacts/stage12074_next_action_guarded_training_request/next_action_guarded_training_command.json",
+    "manifest": "runs/local/artifacts/stage12074_next_action_guarded_training_request/next_action_guarded_training_manifest.jsonl",
+    "output_dir": "runs/local/artifacts/stage12075_next_action_guarded_training_probe/bounded_decoder_probe",
+    "runtime_dir": "runs/local/artifacts/stage12075_next_action_guarded_training_probe/runtime_model",
+    "summary": "runs/local/artifacts/stage12074_next_action_guarded_training_request/next_action_guarded_training_request.json",
+    "summary_mirror": "runs/summaries/stage12074_next_action_guarded_training_request.json"
+  },
+  "passed": true,
+  "promotion_gate": {
+    "old_transition_manifest_correct": ">364/640 for progress; >386/640 for same-manifest Gemma win",
+    "protected_filtered_strict": "22/22",
+    "protected_filtered_validation": ">=20/22",
+    "protected_old_canary_strict": "23/23",
+    "protected_old_canary_validation": ">=21/23",
+    "protected_residual_bank": ">=7/10",
+    "source_heldout_smoke": ">=6/12 retained; >6/12 for transfer progress",
+    "transition_next_action": ">51/160 required for targeted improvement"
+  },
+  "row_counts": {
+    "eval_rows": 22,
+    "next_action_support_language_counts": {
+      "c_cpp": 41,
+      "python": 61,
+      "rust": 63,
+      "web_js_ts_html": 35
+    },
+    "old_transition_replay_train_rows": 640,
+    "option_mirror_missing": 0,
+    "stage12073_next_action_support_rows": 200,
+    "strict_rows": 22,
+    "train_rows": 1151,
+    "train_target_counts_top20": {
+      "A": 44,
+      "ABSTAIN": 32,
+      "ABSTAIN_OR_ROLLBACK": 67,
+      "B": 56,
+      "C": 44,
+      "CONTINUE": 128,
+      "D": 16,
+      "FAIL_TO_PASS": 51,
+      "INSUFFICIENT_EVIDENCE": 40,
+      "LOCALIZE_FAILURE": 54,
+      "NOT_EXERCISED": 40,
+      "PASS_CURRENT_BUILD": 46,
+      "PASS_CURRENT_BUILD_AND_RUN": 82,
+      "PASS_CURRENT_STATE": 96,
+      "PASS_TO_PASS": 100,
+      "PLAN_PATCH": 65,
+      "REPAIR_AFTER_FAILURE": 20,
+      "RETRIEVE_EVIDENCE": 70,
+      "SELECT_TEST": 59,
+      "VERIFY_RESULT": 25
+    },
+    "train_task_counts": {
+      "transition_candidate_selection": 160,
+      "transition_continue_or_stop": 160,
+      "transition_next_action": 360,
+      "transition_verifier_transition": 471
+    },
+    "unsafe_loss_masks": 0,
+    "v35_verifier_support_rows": 311
+  },
+  "source_artifacts": {
+    "base_stage11923_manifest": "runs/local/artifacts/stage11923_transition_listwise_head_only_probe_request/transition_listwise_head_only_manifest.jsonl",
+    "stage12073_audit": "runs/summaries/stage12073_next_action_support_materializer.json",
+    "stage12073_next_action_rows": "runs/local/artifacts/stage12073_next_action_support_materializer/next_action_support_rows.jsonl",
+    "v35_audit": "runs/local/artifacts/stage12057_transition_support_v35_audit/transition_support_v35_audit.json",
+    "v35_support_rows": "runs/local/artifacts/stage12056_transition_support_rollup_v35/transition_support_rows_v35.jsonl"
+  },
+  "stage": 12074,
+  "stage_name": "stage12074_next_action_guarded_training_request",
+  "training_controls": {
+    "bounded_choice_aux_source": "encoder_option_retrieval_semantic_candidate_head",
+    "environment": "conda run -n trellis",
+    "gpu": "cuda:2 only via CUDA_VISIBLE_DEVICES=2/NVIDIA_VISIBLE_DEVICES=2 and AGENTKERNEL_*_DEVICE=cuda:0",
+    "head_only": true,
+    "init_runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "preservation_kl_weight": 4.0,
+    "preservation_reference_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "sampler": "task_balanced"
+  }
+}

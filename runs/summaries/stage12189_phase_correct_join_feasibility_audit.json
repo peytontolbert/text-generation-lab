@@ -1,0 +1,54 @@
+{
+  "additional_sources_from_subagent": {
+    "stage11364_web_sourcebot_executed_support_rows": "Concrete verifier output exists but already projected to bounded prompts; use only as evidence extraction, not primary trajectory.",
+    "stage9756_full_product_harness_review_packets": "Harness review packets include tool trace spans, verifier_results, and patch minimality/abstain scores; useful for evaluation/review metadata and possible same-packet episode extraction."
+  },
+  "artifact_type": "phase_correct_join_feasibility_audit",
+  "decision": "do_not_join_unrelated_sources_training_blocked",
+  "input_atlas": "runs/local/artifacts/stage12187_phase_correct_trace_source_atlas/phase_correct_trace_source_atlas.json",
+  "input_contract": "runs/local/artifacts/stage12188_phase_correct_episode_joiner_contract/phase_correct_episode_joiner_contract.json",
+  "next_builder_scope": "stage12190_same_source_episode_extractor_request",
+  "output_artifacts": {
+    "audit_json": "runs/local/artifacts/stage12189_phase_correct_join_feasibility_audit/join_feasibility_audit.json",
+    "summary": "runs/summaries/stage12189_phase_correct_join_feasibility_audit.json"
+  },
+  "repo_overlap_result": {
+    "command_verifier_sources": [
+      "stage12123_verifier_ready_checkout_execution_smoke",
+      "stage12144_rust_hydrated_selected_test_success_package",
+      "stage12145_web_hydrated_selected_test_success_package",
+      "stage11364_web_sourcebot_executed_support_rows"
+    ],
+    "diff_context_sources": [
+      "open_swe_trace_episodes_smoke_v1",
+      "external_repo_commit_family_v2_strict",
+      "external_repo_commit_family_scale_v2_localroots"
+    ],
+    "interpretation": "No safe repo-family overlap was found between sampled diff/context episode sources and command/verifier smoke sources. Cross-source joining would fabricate closed-loop episodes.",
+    "overlap_pairs_found": 0
+  },
+  "safe_join_strategies": [
+    "same_source_open_swe_or_commit_episode: use patch/context/selected_tests from the same episode and mark command_output_missing unless verifier logs are present",
+    "same_source_harness_packet: extract tool_trace_spans, verifier_results, patch_minimality_or_abstain_scores, and task pack from one review packet only",
+    "same_source_selected_test_smoke: create verifier-only no_patch episodes from one repo smoke record with explicit no_patch_reason, not patch-generation rows",
+    "session_seed_rehydration: use session_like patch+exec seeds only after the raw session parser provides ordered tool calls, patch content, and verifier/test output"
+  ],
+  "source_code_modified": false,
+  "stage": "stage12189_phase_correct_join_feasibility_audit",
+  "stage12190_required_outputs": [
+    "extract same-source harness packet candidates from stage9756 with trace/verifier/minimality files",
+    "extract same-source Open-SWE/commit candidates with patch/context/selected_tests and explicit missing_command_output blocker",
+    "extract same-source selected-test verifier-only no_patch episodes from stage12123/12144/12145",
+    "do not cross-join unrelated repo families",
+    "report ready episode count separately from blocked/incomplete count"
+  ],
+  "training_allowed": false,
+  "training_executed": false,
+  "unsafe_join_strategies_rejected": [
+    "joining Open-SWE/commit diff context to unrelated Stage12123 command logs by language only",
+    "treating selected-test success as proof of patch correctness",
+    "using Stage11955 transition records as full episodes when materialized_patch_ref and next_state_ref are null",
+    "promoting harness review packets without checking whether tool_trace_spans contain ordered commands and observations"
+  ],
+  "why_training_blocked": "No verified same-root/same-source closed-loop episode bundle has been materialized yet. Current evidence is split across context/diff sources and command/verifier sources without safe overlap."
+}

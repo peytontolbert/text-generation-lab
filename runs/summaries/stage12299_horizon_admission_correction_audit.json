@@ -1,0 +1,44 @@
+{
+  "admitted_rows": 0,
+  "blocked_prior_outputs": {
+    "stage12297_previous_admitted_train_support_rows": 118,
+    "stage12298_previous_package_rows": 527
+  },
+  "corrected_interpretation": "Stage12297 repaired source-root lineage, but lineage repair alone is not sufficient to admit horizon rows for training. Stage12271 horizon labels remain candidate/weak projection labels. They require projection QC and semantic/causal review before any training package can use them.",
+  "decision": "block_stage12297_and_stage12298_training_admission",
+  "proof_counts": {
+    "external_comparable_patch_trace_countable": 0,
+    "external_fail_to_pass_countable": 0,
+    "source_heldout_admissible": 0,
+    "strict_eval_eligible": 0
+  },
+  "raw_output_emitted": false,
+  "replacement_contract": {
+    "add_repaired_fields": [
+      "source_root_label_present",
+      "root_recovery",
+      "repaired_split_group_id",
+      "repaired_root_lineage_key"
+    ],
+    "admitted_rows": 0,
+    "block_reason": "requires_projection_qc_and_semantic_causal_review",
+    "emit_all_root_repaired_projection_candidates": true,
+    "next_stage": "stage12300_root_repaired_horizon_projection_candidates",
+    "preserve_original_ids": [
+      "horizon_slice_id",
+      "lineage.transition_id",
+      "source_refs.task_window_id"
+    ],
+    "training_rows_emitted": 0
+  },
+  "stage": "stage12299_horizon_admission_correction_audit",
+  "training_allowed": false,
+  "training_rows_emitted": 0,
+  "why_blocked": [
+    "root hints prove repo-family lineage, not semantic verifier/action correctness",
+    "Stage12271 stop/state labels are weak or placeholder labels",
+    "next_action/rank rows still need projection QC to avoid observed-action imitation shortcuts",
+    "self-research dominates the raw horizon pool and must not leak into claims",
+    "patch/verifier temporal rows still lack exact causal proof"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "accepted_input_schema": {
+    "anti_cheat_notes": {
+      "build_only_not_selected_test": true,
+      "must_use_opaque_shuffled_options": true,
+      "no_singleton_options": true,
+      "target_not_visible_before_options": true
+    },
+    "available_evidence": [
+      "manifest path",
+      "source path",
+      "test/build marker",
+      "command/log availability"
+    ],
+    "candidate_task_family": "transition_next_action|transition_candidate_selection|transition_verifier_transition|transition_continue_or_stop",
+    "conflict_reason": "",
+    "language": "rust|c_cpp|web_js_ts_html|mixed_build_config_dependency",
+    "missing_evidence": [
+      "selected test if absent",
+      "runtime log if not executed yet"
+    ],
+    "repo_family": "example_repo_family",
+    "reserved_family_conflict": false,
+    "source_path": "/absolute/local/source/path",
+    "split_status": "sealed_candidate|dev_only",
+    "suggested_commands": [
+      [
+        "command",
+        "arg"
+      ]
+    ],
+    "verifier_type": "selected_test_anchor|build_config_anchor|static_compile_anchor|dependency_resolution_anchor",
+    "why_valid": "One sentence explaining the verifier-grounded decision boundary."
+  },
+  "created_at_utc": "2026-07-15T01:27:20Z",
+  "current_remaining_gap": {
+    "c_cpp": 10,
+    "mixed_build_config_dependency": 0,
+    "python": 0,
+    "rust": 20,
+    "web_js_ts_html": 12
+  },
+  "decision": "subagent_scout_intake_contract_ready",
+  "deterministic_promotion_gates": [
+    "source_path exists locally",
+    "language is one of rust/c_cpp/web_js_ts_html/mixed_build_config_dependency",
+    "repo_family and canonical lineage are disjoint from Stage11897, Stage11943, Stage120xx, Stage12105, Stage12107, Stage12109",
+    "reserved_family_conflict is false for sealed eligibility",
+    "verifier_type is correctly scoped: build_config_anchor cannot be counted as selected_test_anchor",
+    "available_evidence includes manifest plus source/build/test marker appropriate to verifier_type",
+    "suggested_commands are non-destructive and local",
+    "candidate_task_family targets a remaining gap lane or transition family",
+    "anti_cheat notes require opaque shuffled non-singleton candidates",
+    "target semantic value must not appear before options in any emitted row"
+  ],
+  "do_not_train": true,
+  "next_stage_recommendation": {
+    "action": "Paste or materialize scout outputs into a JSONL intake file, then run deterministic lineage/evidence gates before row building.",
+    "stage": "stage12111_subagent_scout_intake_audit"
+  },
+  "outputs": {
+    "candidate_template": "runs/local/artifacts/stage12110_subagent_scout_intake_contract/subagent_scout_candidate_template.json",
+    "summary": "runs/local/artifacts/stage12110_subagent_scout_intake_contract/subagent_scout_intake_contract.json",
+    "summary_mirror": "runs/summaries/stage12110_subagent_scout_intake_contract.json"
+  },
+  "scout_roles": {
+    "c_cpp": {
+      "claim_boundary": "Build/config/static compile roots allowed when labeled honestly.",
+      "target_roots": 10
+    },
+    "rust": {
+      "claim_boundary": "Fresh Rust roots only; consumed candle/tokenizers/git/perftree-like families are dev_only unless lineage audit proves otherwise.",
+      "target_roots": 20
+    },
+    "web_js_ts_html": {
+      "claim_boundary": "Build/dependency roots allowed, but no selected-test claim without real tests.",
+      "target_roots": 12
+    }
+  },
+  "source_artifacts": {
+    "stage12109_gap_fill_queue": "runs/summaries/stage12109_build_verifier_gap_fill_queue.json"
+  },
+  "stage": 12110,
+  "stage_name": "stage12110_subagent_scout_intake_contract",
+  "why": "Subagents may propose roots and draft row materialization metadata, but deterministic lineage, evidence, and anti-cheat gates decide admission."
+}

@@ -1,0 +1,146 @@
+{
+  "created_at_utc": "2026-07-15T00:52:29Z",
+  "decision": "reject_stage12096_keep_stage11924_selected_transition_frontier",
+  "diagnostic_findings": {
+    "pure_transition_candidate_head": {
+      "by_task": {
+        "transition_candidate_selection": {
+          "accuracy": 0.36875,
+          "correct": 59,
+          "rows": 160
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.2,
+          "correct": 32,
+          "rows": 160
+        },
+        "transition_next_action": {
+          "accuracy": 0.25,
+          "correct": 40,
+          "rows": 160
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6,
+          "correct": 96,
+          "rows": 160
+        }
+      },
+      "interpretation": "transition-candidate head alone is not usable; it scores 227/640 and fails candidate_selection.",
+      "score": {
+        "accuracy": 0.3546875,
+        "correct": 227,
+        "coverage": 1.0,
+        "miss_count": 413,
+        "rows": 640
+      }
+    },
+    "semantic_plus_transition_candidate_head": {
+      "by_task": {
+        "transition_candidate_selection": {
+          "accuracy": 0.575,
+          "correct": 92,
+          "rows": 160
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 128,
+          "rows": 160
+        },
+        "transition_next_action": {
+          "accuracy": 0.25625,
+          "correct": 41,
+          "rows": 160
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6,
+          "correct": 96,
+          "rows": 160
+        }
+      },
+      "interpretation": "composite route improves candidate_selection to 92/160 but damages next_action to 41/160, total 357/640.",
+      "score": {
+        "accuracy": 0.5578125,
+        "correct": 357,
+        "coverage": 1.0,
+        "miss_count": 283,
+        "rows": 640
+      }
+    }
+  },
+  "lesson": "Separate transition-candidate head training can supply candidate-selection signal when added to the semantic route, but it also pushes next_action in the wrong direction. The next ablation must route candidate_selection only, or add a second next_action-preserving phase initialized from Stage12096 with explicit next_action gates.",
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12098_candidate_head_only_decision/candidate_head_only_decision.json",
+    "summary_mirror": "runs/summaries/stage12098_candidate_head_only_decision.json"
+  },
+  "recommended_next_stage": {
+    "do_not_train_yet": true,
+    "hypothesis": "A task-routed inference policy can use Stage12096 composite only for candidate_selection while retaining Stage11924 or Stage12083 for next_action.",
+    "name": "stage12099_task_routed_candidate_selection_composite_audit",
+    "promotion_gate": {
+      "candidate_selection": ">=92/160 preferred, >=89 required",
+      "next_action": ">=59/160 preferred, >=51 required",
+      "old_transition_640": ">364",
+      "protected_gates": "preserved",
+      "route_declared_before_eval": true
+    },
+    "route_to_test_before_more_training": {
+      "candidate_selection": "stage12096 semantic_plus_transition_candidate_head",
+      "continue_or_stop": "stage11924 semantic_candidate_head",
+      "next_action": "stage12083 semantic_candidate_head if it preserves selected-verifier rows, otherwise stage11924 semantic_candidate_head",
+      "verifier_transition": "stage11924 semantic_candidate_head"
+    }
+  },
+  "selected_transition_frontier": {
+    "by_task": {
+      "transition_candidate_selection": {
+        "accuracy": 0.55625,
+        "correct": 89,
+        "rows": 160
+      },
+      "transition_continue_or_stop": {
+        "accuracy": 0.8,
+        "correct": 128,
+        "rows": 160
+      },
+      "transition_next_action": {
+        "accuracy": 0.31875,
+        "correct": 51,
+        "rows": 160
+      },
+      "transition_verifier_transition": {
+        "accuracy": 0.6,
+        "correct": 96,
+        "rows": 160
+      }
+    },
+    "score": {
+      "accuracy": 0.56875,
+      "correct": 364,
+      "coverage": 1.0,
+      "miss_count": 276,
+      "rows": 640
+    },
+    "scorer": "encoder_option_retrieval_semantic_candidate_head",
+    "stage": "stage11924_transition_listwise_head_only_probe"
+  },
+  "source_artifacts": {
+    "stage12094_design": "runs/summaries/stage12094_separate_head_or_two_phase_candidate_next_action_ablation_design.json",
+    "stage12097_audit": "runs/summaries/stage12097_candidate_head_only_candidate_selection_postrun_audit.json"
+  },
+  "stage": 12098,
+  "stage_name": "stage12098_candidate_head_only_decision",
+  "what_was_preserved": {
+    "filtered_strict": true,
+    "filtered_validation": true,
+    "old_canary_strict": true,
+    "old_canary_validation": true,
+    "residual_bank": true,
+    "source_heldout_smoke": true
+  },
+  "why_rejected": [
+    "composite total 357/640 is below selected Stage11924 364/640",
+    "composite next_action 41/160 is below Stage11924 51/160 and Stage12083 59/160",
+    "pure transition-candidate head total 227/640 is far below usable",
+    "promotion gate required old_transition >364, candidate_selection >=89, next_action >=51; next_action and total failed"
+  ]
+}

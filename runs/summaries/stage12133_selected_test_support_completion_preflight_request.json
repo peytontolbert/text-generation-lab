@@ -1,0 +1,38 @@
+{
+  "command_json": "runs/local/artifacts/stage12133_selected_test_support_completion_preflight_request/completion_preflight_command.json",
+  "created_at_utc": "2026-07-15T15:37:36Z",
+  "execute_now": false,
+  "expected_output_dir": "runs/local/artifacts/stage12133_selected_test_support_completion_preflight/bounded_decoder_probe",
+  "expected_runtime_dir": "runs/local/artifacts/stage12133_selected_test_support_completion_preflight/runtime_model",
+  "fail_conditions": [
+    "nonzero process exit",
+    "runtime not saved",
+    "loss becomes non-differentiable",
+    "CUDA mask missing or changed"
+  ],
+  "guardrails": {
+    "gpu_mask_required": [
+      "CUDA_VISIBLE_DEVICES=2",
+      "NVIDIA_VISIBLE_DEVICES=2",
+      "AGENTKERNEL_TRAIN_DEVICE=cuda:0",
+      "AGENTKERNEL_EVAL_DEVICE=cuda:0"
+    ],
+    "no_gpu0_or_gpu1": true,
+    "promotion_eligible": false,
+    "runtime_save_required_for_preflight_pass": true,
+    "same_manifest_as_stage12132": true,
+    "same_objective_as_stage12132": true,
+    "small_max_steps": 16
+  },
+  "pass_conditions": [
+    "process exits 0",
+    "loss_by_step.jsonl has 16 rows",
+    "runtime_model/runtime_model_bundle.json exists",
+    "bounded choice eval artifacts exist",
+    "no GPU0/GPU1 usage by this command"
+  ],
+  "prior_failure_audit": "stage12132a_selected_test_support_training_failure_audit",
+  "purpose": "Complete a short same-objective run to test differentiability, eval path, and runtime save before any long rerun.",
+  "source_request": "stage12131_selected_test_support_training_request",
+  "stage": "stage12133_selected_test_support_completion_preflight_request"
+}

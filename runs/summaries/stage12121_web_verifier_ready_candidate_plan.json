@@ -1,0 +1,76 @@
+{
+  "stage": 12121,
+  "stage_name": "stage12121_web_verifier_ready_candidate_plan",
+  "created_at_utc": "2026-07-15T00:00:00Z",
+  "input_artifacts": [
+    "runs/local/artifacts/stage12119_refined_takeover_subagent_brief/refined_v27_takeover_subagent_brief.md",
+    "runs/local/artifacts/stage12118_maintainer_400_pilot_checkout_probe_request/pilot_checkout_probe_targets.jsonl",
+    "runs/summaries/stage12119_execute_maintainer_400_pilot_checkout_probe_batch.json",
+    "runs/summaries/stage12120_failed_stage_lessons_atlas.json"
+  ],
+  "output_artifacts": {
+    "artifact_dir": "runs/local/artifacts/stage12121_web_verifier_ready_candidate_plan",
+    "candidates_jsonl": "runs/local/artifacts/stage12121_web_verifier_ready_candidate_plan/web_verifier_ready_candidates.jsonl",
+    "summary": "runs/local/artifacts/stage12121_web_verifier_ready_candidate_plan/summary.json",
+    "summary_mirror": "runs/summaries/stage12121_web_verifier_ready_candidate_plan.json"
+  },
+  "candidate_count": 10,
+  "language": "web_js_ts_html",
+  "selection_policy": {
+    "source": "Stage12118 Web/JS/TS/HTML checkout/probe leads only",
+    "preferred": [
+      "small or mid-sized package roots",
+      "package.json with expected npm/yarn/pnpm scripts",
+      "clear unit-test or package-level verifier surfaces",
+      "no external service, browser binary, database, or full monorepo hydration requirement"
+    ],
+    "penalized": [
+      "huge framework/workspace monorepos",
+      "browser-heavy or integration-heavy suites",
+      "database/service-backed test requirements",
+      "fixture/snapshot-heavy surfaces where target leakage is hard to control"
+    ]
+  },
+  "top_10_queue_ids": [
+    "stage12118::web_js_ts_html::008::chaijs_chai",
+    "stage12118::web_js_ts_html::012::expressjs_express",
+    "stage12118::web_js_ts_html::014::fastify_fastify",
+    "stage12118::web_js_ts_html::016::graphql_graphql_js",
+    "stage12118::web_js_ts_html::020::koajs_koa",
+    "stage12118::web_js_ts_html::023::mochajs_mocha",
+    "stage12118::web_js_ts_html::024::moment_luxon",
+    "stage12118::web_js_ts_html::027::node_fetch_node_fetch",
+    "stage12118::web_js_ts_html::030::pmndrs_zustand",
+    "stage12118::web_js_ts_html::037::sinonjs_sinon"
+  ],
+  "top_10_repo_families": [
+    "chaijs/chai",
+    "expressjs/express",
+    "fastify/fastify",
+    "graphql/graphql-js",
+    "koajs/koa",
+    "mochajs/mocha",
+    "moment/luxon",
+    "node-fetch/node-fetch",
+    "pmndrs/zustand",
+    "sinonjs/sinon"
+  ],
+  "excluded_high_risk_examples": [
+    "angular/angular",
+    "facebook/react",
+    "cypress-io/cypress",
+    "microsoft/playwright",
+    "vercel/next.js",
+    "prisma/prisma",
+    "typeorm/typeorm",
+    "storybookjs/storybook"
+  ],
+  "claim_boundary": [
+    "No repositories were cloned.",
+    "No dependency hydration was performed.",
+    "No tests, training, GPU work, or admissions were run.",
+    "These are verifier-discovery candidates only.",
+    "Selected-test labels require concrete executed verifier logs; otherwise evidence must remain build/static, not-exercised, or insufficient."
+  ],
+  "next_step": "For each candidate, checkout in a resource-limited batch, capture canonical remote and commit SHA, inspect package scripts and lockfiles, run only no-install discovery first, and execute selected tests only if dependencies are already present or a separate approved hydration stage is created."
+}

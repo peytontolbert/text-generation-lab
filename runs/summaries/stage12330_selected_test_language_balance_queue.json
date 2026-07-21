@@ -1,0 +1,41 @@
+{
+  "blocked_reason_counts": {
+    "already_admitted_in_stage12322_or_stage12326": 9,
+    "not_ready_for_row_materialization": 5,
+    "selected_tests_missing": 5
+  },
+  "blocked_records": 9,
+  "claim_boundary": "Queue/control artifact only. No rows admitted. Web Luxon requires visible-source cleanup before row materialization.",
+  "current_train_support_ledger": {
+    "admitted_train_support": 136,
+    "language_counts": {
+      "c_cpp": 10,
+      "python": 20,
+      "rust": 15,
+      "session_unknown_language": 91
+    },
+    "source_counts": {
+      "stage12320_event_local_observation": 76,
+      "stage12322_rust_cpp_selected_test": 25,
+      "stage12323_v4_event_local": 15,
+      "stage12326_direct_python_selected_test": 20
+    }
+  },
+  "decision": "selected_test_language_balance_queue_ready_training_still_blocked",
+  "language_balance_gap": {
+    "c_cpp": "thin but current selected-test roots already admitted; need new hydration roots",
+    "rust": "thin but current ready selected-test roots already admitted; need stage12315 hydration worklist follow-through",
+    "session_unknown_language": "must not grow; needs attribution or cap enforcement",
+    "web_js_ts_html": "critical: only one queued web selected-test root and zero admitted web rows in Stage12324 ledger"
+  },
+  "next_recommended_stage": "stage12331_web_selected_test_materialization_or_stage12332_repair_hydration_probe",
+  "queued_candidates": 1,
+  "queued_language_counts": {
+    "web_js_ts_html": 1
+  },
+  "queued_proposed_rows": 5,
+  "stage": "stage12330_selected_test_language_balance_queue",
+  "training_allowed": false,
+  "web_hydration_candidates": 4,
+  "web_hydration_expected_rows_if_all_pass": 20
+}

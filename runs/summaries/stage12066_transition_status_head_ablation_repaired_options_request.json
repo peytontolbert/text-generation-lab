@@ -1,0 +1,83 @@
+{
+  "claim_boundary": [
+    "Diagnostic only until a routed postrun audit proves old 640 retention and protected gates.",
+    "This does not replace the Stage11924 selected frontier unless composite routing beats 364/640 and preserves protected gates."
+  ],
+  "created_at_utc": "2026-07-14T23:34:22Z",
+  "decision": "transition_status_head_ablation_repaired_options_request_ready",
+  "execute_now": false,
+  "gates_before_execution": {
+    "base_manifest_exists": true,
+    "eval_rows_22": true,
+    "head_only_enabled": true,
+    "init_runtime_exists": true,
+    "old_verifier_replay_rows_160": true,
+    "preservation_runtime_exists": true,
+    "status_head_enabled": true,
+    "strict_rows_22": true,
+    "train_rows_471": true,
+    "uses_gpu2_mask": true,
+    "v35_audit_train_ready": true,
+    "v35_rows_exists": true,
+    "v35_support_rows_311": true
+  },
+  "hypothesis": "Stage12063 failed because 256 v35 rows lacked standalone_projection_source.opaque_options, causing option-retrieval scorers to skip whole batches. Mirror top-level opaque_options into standalone_projection_source, then train a separate transition-status head only on old verifier-transition replay plus repaired v35 status rows.",
+  "next_stage_after_execution": "stage12069_transition_status_head_repaired_options_composite_routed_audit",
+  "next_stage_if_executed": "stage12068_transition_status_head_ablation_repaired_options_probe",
+  "outputs": {
+    "command": "runs/local/artifacts/stage12066_transition_status_head_ablation_repaired_options_request/transition_status_head_ablation_repaired_options_command.json",
+    "manifest": "runs/local/artifacts/stage12066_transition_status_head_ablation_repaired_options_request/transition_status_head_ablation_repaired_options_manifest.jsonl",
+    "output_dir": "runs/local/artifacts/stage12068_transition_status_head_ablation_repaired_options_probe/bounded_decoder_probe",
+    "runtime_dir": "runs/local/artifacts/stage12068_transition_status_head_ablation_repaired_options_probe/runtime_model",
+    "summary": "runs/local/artifacts/stage12066_transition_status_head_ablation_repaired_options_request/transition_status_head_ablation_repaired_options_request.json",
+    "summary_mirror": "runs/summaries/stage12066_transition_status_head_ablation_repaired_options_request.json"
+  },
+  "passed": true,
+  "postrun_required_route": {
+    "compact_protected": "encoder_option_retrieval_evidence_judgment_head from Stage11507/Stage11924 routing",
+    "other_transition_tasks": "encoder_option_retrieval_semantic_candidate_head from Stage11924",
+    "transition_verifier_transition": "encoder_option_retrieval_transition_status_head from Stage12063"
+  },
+  "promotion_gate": {
+    "old_transition_640_composite": ">=364 retention, >386 Gemma win",
+    "protected_filtered_strict": "22/22",
+    "protected_old_canary_strict": "23/23",
+    "residual": ">=7/10",
+    "source_heldout_smoke": ">=6/12",
+    "transition_verifier_transition_subset": "must improve over Stage11924"
+  },
+  "row_counts": {
+    "eval_rows": 22,
+    "old_verifier_replay_rows": 160,
+    "strict_rows": 22,
+    "train_language_counts": {
+      "c_cpp": 124,
+      "python": 158,
+      "rust": 107,
+      "web_js_ts_html": 82
+    },
+    "train_rows": 471,
+    "train_status_counts": {
+      "FAIL_TO_PASS": 51,
+      "INSUFFICIENT_EVIDENCE": 40,
+      "NOT_EXERCISED": 40,
+      "PASS_CURRENT_BUILD": 46,
+      "PASS_CURRENT_BUILD_AND_RUN": 82,
+      "PASS_CURRENT_STATE": 96,
+      "PASS_TO_PASS": 100,
+      "VERIFIER_REMOVED": 16
+    },
+    "v35_support_rows": 311
+  },
+  "source_artifacts": {
+    "base_stage11923_manifest": "runs/local/artifacts/stage11923_transition_listwise_head_only_probe_request/transition_listwise_head_only_manifest.jsonl",
+    "init_runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "preservation_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "stage12061_decision": "runs/summaries/stage12061_guarded_transition_training_decision.json",
+    "stage12065_preflight": "runs/summaries/stage12065_status_head_batch_differentiability_preflight.json",
+    "v35_audit": "runs/local/artifacts/stage12057_transition_support_v35_audit/transition_support_v35_audit.json",
+    "v35_support_rows": "runs/local/artifacts/stage12056_transition_support_rollup_v35/transition_support_rows_v35.jsonl"
+  },
+  "stage": 12066,
+  "stage_name": "stage12066_transition_status_head_ablation_repaired_options_request"
+}

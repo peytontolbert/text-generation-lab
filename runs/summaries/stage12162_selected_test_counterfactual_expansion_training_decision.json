@@ -1,0 +1,68 @@
+{
+  "by_task_delta": {
+    "transition_candidate_selection": {
+      "base_correct": 89,
+      "delta": 0,
+      "post_correct": 89,
+      "rows": 160
+    },
+    "transition_continue_or_stop": {
+      "base_correct": 128,
+      "delta": 0,
+      "post_correct": 128,
+      "rows": 160
+    },
+    "transition_next_action": {
+      "base_correct": 51,
+      "delta": -11,
+      "post_correct": 40,
+      "rows": 160
+    },
+    "transition_verifier_transition": {
+      "base_correct": 96,
+      "delta": 0,
+      "post_correct": 96,
+      "rows": 160
+    }
+  },
+  "created_at_utc": "2026-07-15T16:32:00Z",
+  "decision": "reject_stage12160_keep_stage11924_standalone_and_stage12099_route",
+  "do_not_train_more_same_objective": true,
+  "next_required_stage": "stage12163_next_action_interference_atlas",
+  "protected_gates": {
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "residual_preserved": true,
+    "smoke_preserved": true,
+    "transition_projection_beats_gemma_386": false,
+    "transition_projection_beats_stage12099_route_375": false,
+    "transition_projection_improves_stage11924_baseline": false,
+    "transition_projection_retains_stage11924_baseline": false
+  },
+  "protected_ok": true,
+  "reason": "Stage12160 preserved compact/protected gates but regressed transition projection from 364/640 to 353/640; next_action alone fell 51/160 to 40/160.",
+  "recommended_next_interventions": [
+    "Audit lost next_action rows by source family and target action.",
+    "Do not train Stage12155 next_action rows into the shared semantic head again without task-specific isolation.",
+    "Try task-routed next_action head/adaptor or next_action-only scorer with protected next_action replay, not broad shared-head training.",
+    "Keep Stage12155 as clean train-support data, but mark Stage12160 runtime rejected."
+  ],
+  "selected_product_route_remains": "stage12099_task_routed_candidate_selection_composite_audit",
+  "selected_standalone_frontier_remains": "stage11924_transition_listwise_head_only_probe",
+  "source_artifacts": {
+    "stage12155_rows": "runs/local/artifacts/stage12155_selected_test_counterfactual_expansion_package/expanded_counterfactual_rows.jsonl",
+    "stage12160_runtime": "runs/local/artifacts/stage12160_selected_test_counterfactual_expansion_training_probe/runtime_model/runtime_model_bundle.json",
+    "stage12161_postrun": "runs/summaries/stage12161_selected_test_counterfactual_expansion_training_postrun_audit.json"
+  },
+  "stage": "stage12162_selected_test_counterfactual_expansion_training_decision",
+  "stage12160_runtime_status": "diagnostic_rejected_do_not_promote",
+  "transition_score": {
+    "gemma_same_manifest": 386,
+    "stage11924": 364,
+    "stage12099_route": 375,
+    "stage12160": 353
+  },
+  "useful_result": "Stage12155 data passed safety/utility and exercised richer losses, but current shared semantic candidate head training converts the added counterfactual next_action rows into negative transfer on old next_action rows."
+}

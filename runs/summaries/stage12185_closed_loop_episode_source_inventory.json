@@ -1,0 +1,49 @@
+{
+  "artifact_type": "closed_loop_episode_source_inventory",
+  "bounded_auxiliary_only_sources": [
+    "stage12149_corrected_selected_test_row_materialization_package",
+    "stage11897_transition_record_projection_rows"
+  ],
+  "contract_reference": "runs/local/artifacts/stage12184_closed_loop_maintainer_episode_contract/closed_loop_episode_contract.json",
+  "decision": "inventory_ready_no_training",
+  "episode_builder_candidate_sources": [
+    "stage12119_execute_maintainer_400_pilot_checkout_probe_batch",
+    "stage12123_verifier_ready_checkout_execution_smoke",
+    "stage12144_rust_hydrated_selected_test_success_package",
+    "stage12145_web_hydrated_selected_test_success_package"
+  ],
+  "hard_blockers": [
+    "No training until at least one source produces replayable closed-loop episode records with observations and state updates.",
+    "No promotion claims from selected-test rows or transition projection rows alone.",
+    "No GPU use from this inventory stage."
+  ],
+  "immediate_next_stage": "stage12186_closed_loop_episode_materialization_preflight",
+  "output_artifacts": {
+    "inventory_json": "runs/local/artifacts/stage12185_closed_loop_episode_source_inventory/closed_loop_episode_source_inventory.json",
+    "inventory_jsonl": "runs/local/artifacts/stage12185_closed_loop_episode_source_inventory/source_inventory_records.jsonl",
+    "summary": "runs/summaries/stage12185_closed_loop_episode_source_inventory.json"
+  },
+  "source_code_modified": false,
+  "source_count": 10,
+  "sources_by_admission": {
+    "bounded_auxiliary_only": 1,
+    "bounded_auxiliary_only_until_episode_joined": 1,
+    "contract_only": 1,
+    "episode_builder_candidate": 3,
+    "episode_builder_candidate_with_hygiene_risk": 1,
+    "support_context_only": 1,
+    "transition_record_source_needs_episode_completeness_audit": 2
+  },
+  "stage": "stage12185_closed_loop_episode_source_inventory",
+  "stage12186_required_actions": [
+    "join real command/verifier observations with root/state/episode ids",
+    "produce episode_records.jsonl, typed_events.jsonl, causal_states.jsonl, observations.jsonl, transitions.jsonl, projection_rows.jsonl",
+    "audit non-null state_after, command/test evidence, patch_trace or explicit no-patch reason",
+    "block training if only bounded projections are produced"
+  ],
+  "training_executed": false,
+  "transition_sources_needing_completeness_audit": [
+    "stage11945_transition_1k_v2_multisource_package",
+    "stage11955_transition_5k_v1_multisource_package"
+  ]
+}

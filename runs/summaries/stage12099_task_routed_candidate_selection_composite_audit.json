@@ -1,0 +1,133 @@
+{
+  "claim_boundary": [
+    "This is inference-only task routing from declared prior runtimes; it is not a new trained model.",
+    "It cannot replace a single-runtime product scorer unless product routing is explicitly accepted and sealed-confirmed.",
+    "Promotion requires a follow-up sealed/source-heldout confirmation and same-manifest Gemma comparison under the same route contract."
+  ],
+  "created_at_utc": "2026-07-15T00:53:56Z",
+  "decision": "task_routed_transition_frontier_candidate_requires_sealed_confirmation",
+  "gates": {
+    "beats_gemma_386": false,
+    "candidate_selection_ge_89": true,
+    "candidate_selection_ge_92": true,
+    "continue_or_stop_ge_128": true,
+    "next_action_ge_51": true,
+    "next_action_ge_59": true,
+    "no_missing_routed_rows": true,
+    "old_transition_gt_364": true,
+    "protected_filtered_strict_preserved_for_candidate_runtime": true,
+    "protected_old_canary_strict_preserved_for_candidate_runtime": true,
+    "protected_residual_preserved_for_candidate_runtime": true,
+    "protected_smoke_preserved_for_candidate_runtime": true,
+    "route_declared_before_eval": true,
+    "verifier_transition_ge_96": true
+  },
+  "missing_routed_rows": [],
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12099_task_routed_candidate_selection_composite_audit/task_routed_candidate_selection_composite_audit.json",
+    "summary_mirror": "runs/summaries/stage12099_task_routed_candidate_selection_composite_audit.json"
+  },
+  "route_counts": {
+    "stage11924_semantic": 320,
+    "stage12083_semantic": 160,
+    "stage12096_composite": 160
+  },
+  "route_policy": {
+    "transition_candidate_selection": "stage12096_composite",
+    "transition_continue_or_stop": "stage11924_semantic",
+    "transition_next_action": "stage12083_semantic",
+    "transition_verifier_transition": "stage11924_semantic"
+  },
+  "route_policy_source": {
+    "do_not_train_yet": true,
+    "hypothesis": "A task-routed inference policy can use Stage12096 composite only for candidate_selection while retaining Stage11924 or Stage12083 for next_action.",
+    "name": "stage12099_task_routed_candidate_selection_composite_audit",
+    "promotion_gate": {
+      "candidate_selection": ">=92/160 preferred, >=89 required",
+      "next_action": ">=59/160 preferred, >=51 required",
+      "old_transition_640": ">364",
+      "protected_gates": "preserved",
+      "route_declared_before_eval": true
+    },
+    "route_to_test_before_more_training": {
+      "candidate_selection": "stage12096 semantic_plus_transition_candidate_head",
+      "continue_or_stop": "stage11924 semantic_candidate_head",
+      "next_action": "stage12083 semantic_candidate_head if it preserves selected-verifier rows, otherwise stage11924 semantic_candidate_head",
+      "verifier_transition": "stage11924 semantic_candidate_head"
+    }
+  },
+  "routed_by_task": {
+    "transition_candidate_selection": {
+      "accuracy": 0.575,
+      "correct": 92,
+      "miss_count": 68,
+      "rows": 160
+    },
+    "transition_continue_or_stop": {
+      "accuracy": 0.8,
+      "correct": 128,
+      "miss_count": 32,
+      "rows": 160
+    },
+    "transition_next_action": {
+      "accuracy": 0.36875,
+      "correct": 59,
+      "miss_count": 101,
+      "rows": 160
+    },
+    "transition_verifier_transition": {
+      "accuracy": 0.6,
+      "correct": 96,
+      "miss_count": 64,
+      "rows": 160
+    }
+  },
+  "routed_transition_score": {
+    "accuracy": 0.5859375,
+    "correct": 375,
+    "miss_count": 265,
+    "rows": 640
+  },
+  "selected_transition_frontier_baseline": {
+    "by_task": {
+      "transition_candidate_selection": {
+        "accuracy": 0.55625,
+        "correct": 89,
+        "rows": 160
+      },
+      "transition_continue_or_stop": {
+        "accuracy": 0.8,
+        "correct": 128,
+        "rows": 160
+      },
+      "transition_next_action": {
+        "accuracy": 0.31875,
+        "correct": 51,
+        "rows": 160
+      },
+      "transition_verifier_transition": {
+        "accuracy": 0.6,
+        "correct": 96,
+        "rows": 160
+      }
+    },
+    "score": {
+      "accuracy": 0.56875,
+      "correct": 364,
+      "coverage": 1.0,
+      "miss_count": 276,
+      "rows": 640
+    },
+    "scorer": "encoder_option_retrieval_semantic_candidate_head",
+    "stage": "stage11924_transition_listwise_head_only_probe"
+  },
+  "source_artifacts": {
+    "stage11924_semantic_card": "runs/local/artifacts/stage12097_candidate_head_only_candidate_selection_postrun_audit/stage11924_transition_listwise_head_only/bounded_choice_eval_audit_transition_projection__semantic_candidate_head.json",
+    "stage12083_semantic_card": "runs/local/artifacts/stage12097_candidate_head_only_candidate_selection_postrun_audit/stage12083_next_action_repair_training/bounded_choice_eval_audit_transition_projection__semantic_candidate_head.json",
+    "stage12096_composite_card": "runs/local/artifacts/stage12097_candidate_head_only_candidate_selection_postrun_audit/stage12096_candidate_head_only_candidate_selection/bounded_choice_eval_audit_transition_projection__semantic_plus_transition_candidate_head.json",
+    "stage12097_summary": "runs/summaries/stage12097_candidate_head_only_candidate_selection_postrun_audit.json",
+    "stage12098_decision": "runs/summaries/stage12098_candidate_head_only_decision.json"
+  },
+  "stage": 12099,
+  "stage_name": "stage12099_task_routed_candidate_selection_composite_audit"
+}

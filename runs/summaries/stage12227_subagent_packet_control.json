@@ -1,0 +1,90 @@
+{
+  "active_subagents": {
+    "019f6b5e-a93e-7d63-a359-1319ad1b57e2": "comparable_fail_to_pass_patch_scout",
+    "019f6b5e-c362-7421-9e44-4606ca128de1": "non_python_hydratable_patch_scout",
+    "019f6b5e-da5d-7bc3-babe-2cbf68244a73": "patch_trace_schema_integrator"
+  },
+  "claim_boundary": "Control artifact only. Subagents can propose candidates/contracts; deterministic scripts must admit or reject rows.",
+  "common_hard_rejects": [
+    "ENV_BLOCKED_or_dependency_install_required",
+    "network_required",
+    "gpu_required_or_uses_cuda_device",
+    "test_added_before_patch_so_before_command_missing_test",
+    "pytest_no_tests_ran_or_usage_error_counted_as_failure",
+    "weak_anchor_tests_init_or_placeholder_test",
+    "verifier_unrelated_to_changed_files",
+    "build_only_result_counted_as_runnable_selected_verifier",
+    "patch_diff_not_same_source_or_not_apply_checked",
+    "strict_or_source_heldout_claim_without lineage audit"
+  ],
+  "decision": "subagent_packets_active_training_blocked",
+  "packets": [
+    {
+      "must_return_schema": [
+        "repo_family",
+        "language_family",
+        "episode_or_root_id",
+        "repo_commit_before_or_source_ref",
+        "repo_commit_after_or_source_ref",
+        "patch_diff_ref",
+        "verifier_command",
+        "verifier_cwd",
+        "verifier_env",
+        "why_before_failure_is_behavioral_and_comparable",
+        "why_patch_should_pass_same_verifier",
+        "risk_flags"
+      ],
+      "name": "comparable_fail_to_pass_patch_scout",
+      "success_floor": {
+        "candidate_count": 5,
+        "must_exclude_test_added_before_missing": true,
+        "must_include_same_verifier_before_patch_after": true,
+        "non_python_count": 2
+      }
+    },
+    {
+      "must_return_schema": [
+        "repo_family",
+        "language_family",
+        "episode_or_root_id",
+        "repo_commit_before_or_source_ref",
+        "repo_commit_after_or_source_ref",
+        "patch_diff_ref",
+        "verifier_command",
+        "verifier_cwd",
+        "verifier_env",
+        "verifier_relation_to_changed_files",
+        "risk_or_blocker"
+      ],
+      "name": "non_python_hydratable_patch_scout",
+      "success_floor": {
+        "allow_exhausted_pool_report": true,
+        "languages": [
+          "c_cpp",
+          "rust",
+          "web_js_ts_html"
+        ],
+        "per_language_candidate_target": 3
+      }
+    },
+    {
+      "must_return_schema": [
+        "projection_families",
+        "required_fields",
+        "hard_reject_rules",
+        "before_before_plus_patch_after_representation",
+        "trainer_or_dataset_scripts_to_change",
+        "known_schema_flaws"
+      ],
+      "name": "patch_trace_schema_integrator",
+      "success_floor": {
+        "must_include_patch_apply_and_verifier_observation_fields": true,
+        "must_keep_training_blocked_until_semantic_qc": true,
+        "must_prevent_flattening_to_stage12206_verifier_only": true
+      }
+    }
+  ],
+  "source_stage": "stage12226_level3_next_blocker_decision",
+  "stage": "stage12227_subagent_packet_control",
+  "training_allowed": false
+}

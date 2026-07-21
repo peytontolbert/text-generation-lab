@@ -1,0 +1,64 @@
+{
+  "any_training_admitted": false,
+  "claim_boundary": [
+    "Admission audit only.",
+    "No train rows generated.",
+    "No eval promotion claimed.",
+    "No GPU, no network, no dependency install, no tests rerun.",
+    "Rows marked admission_ready_for_row_materialization still require later row rendering and anti-cheat validation."
+  ],
+  "counts": {
+    "admissible_for_training": 0,
+    "admission_ready_for_row_materialization": 2,
+    "blocked": 0,
+    "candidates_audited": 2
+  },
+  "created_at_utc": "2026-07-15T14:52:25Z",
+  "do_not_train": true,
+  "final_recommendation": "Materialize candidate rows only for admission-ready repos, then run a separate anti-cheat/lineage/renderer audit before any training use.",
+  "input": "runs/local/artifacts/stage12123_verifier_ready_checkout_execution_smoke/execution_smoke_results.jsonl",
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12124_selected_test_admission_audit",
+    "results_jsonl": "runs/local/artifacts/stage12124_selected_test_admission_audit/admission_audit_results.jsonl",
+    "summary": "runs/local/artifacts/stage12124_selected_test_admission_audit/summary.json",
+    "summary_mirror": "runs/summaries/stage12124_selected_test_admission_audit.json"
+  },
+  "row_materialization_ready_candidates": [
+    "pallets/click",
+    "pallets/jinja"
+  ],
+  "stage": 12124,
+  "stage_name": "stage12124_selected_test_admission_audit",
+  "top_blockers": [
+    [
+      "none",
+      2
+    ]
+  ],
+  "top_warnings": [
+    [
+      "lineage_not_conclusively_discoverable_from_summary_scan_review_required",
+      2
+    ],
+    [
+      "pre_action_only_ok_for_this_audit_no_prompt_or_options_material_generated",
+      2
+    ],
+    [
+      "later_rows_must_have_non_singleton_options",
+      2
+    ],
+    [
+      "later_rows_must_use_deterministic_option_shuffle",
+      2
+    ],
+    [
+      "later_rows_must_use_opaque_labels",
+      2
+    ],
+    [
+      "later_rows_must_not_show_target_semantic_value_before_options",
+      2
+    ]
+  ]
+}

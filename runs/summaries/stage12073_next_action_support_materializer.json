@@ -1,0 +1,174 @@
+{
+  "audit": {
+    "language_root_counts": {
+      "c_cpp": 41,
+      "python": 61,
+      "rust": 63,
+      "web_js_ts_html": 35
+    },
+    "language_row_counts": {
+      "c_cpp": 41,
+      "python": 61,
+      "rust": 63,
+      "web_js_ts_html": 35
+    },
+    "observed_status_counts": {
+      "FAIL_TO_PASS": 57,
+      "INSUFFICIENT_EVIDENCE": 54,
+      "NOT_EXERCISED": 18,
+      "PASS_CURRENT_BUILD": 28,
+      "PASS_CURRENT_BUILD_AND_RUN": 4,
+      "PASS_TO_PASS": 39
+    },
+    "option_mirror_missing_count": 0,
+    "passes_minimum_training_gate": true,
+    "prompt_target_leak_count": 0,
+    "prompt_target_leak_rows": [],
+    "repo_family_cap": 20,
+    "repo_family_cap_violations": {},
+    "rows": 200,
+    "singleton_option_count": 0,
+    "target_counts": {
+      "ABSTAIN_OR_ROLLBACK": 35,
+      "LOCALIZE_FAILURE": 30,
+      "PLAN_PATCH": 25,
+      "REPAIR_AFTER_FAILURE": 20,
+      "RETRIEVE_EVIDENCE": 30,
+      "SELECT_TEST": 35,
+      "VERIFY_RESULT": 25
+    },
+    "unique_lineage_roots": 122,
+    "unique_roots": 200
+  },
+  "created_at_utc": "2026-07-14T23:54:56Z",
+  "decision": "materialized_next_action_support_train_rows_no_training_launched",
+  "design_minimums": {
+    "generator_specs": [
+      {
+        "fixes_confusions": [
+          "ABSTAIN_OR_ROLLBACK<-PLAN_PATCH",
+          "RETRIEVE_EVIDENCE<-PLAN_PATCH",
+          "SELECT_TEST<-PLAN_PATCH",
+          "LOCALIZE_FAILURE<-PLAN_PATCH"
+        ],
+        "minimum_rows": 80,
+        "name": "premature_patch_negative",
+        "row_shape": "State lacks sufficient verifier/test evidence; PLAN_PATCH is a hard negative and the gold is retrieve/select/localize/abstain."
+      },
+      {
+        "fixes_confusions": [
+          "LOCALIZE_FAILURE<-RETRIEVE_EVIDENCE",
+          "SELECT_TEST<-RETRIEVE_EVIDENCE",
+          "PLAN_PATCH<-RETRIEVE_EVIDENCE"
+        ],
+        "minimum_rows": 45,
+        "name": "premature_retrieve_negative",
+        "row_shape": "State already contains enough evidence for a concrete next action; RETRIEVE_EVIDENCE is a hard negative."
+      },
+      {
+        "fixes_confusions": [
+          "REPAIR_AFTER_FAILURE missing from current miss targets",
+          "VERIFY_RESULT missing from current miss targets"
+        ],
+        "minimum_rows": 45,
+        "name": "post_failure_repair_boundary",
+        "row_shape": "Verifier has failed or patch has been applied; gold alternates between REPAIR_AFTER_FAILURE and VERIFY_RESULT."
+      },
+      {
+        "fixes_confusions": [
+          "ABSTAIN_OR_ROLLBACK<-PLAN_PATCH",
+          "ABSTAIN_OR_ROLLBACK<-RETRIEVE_EVIDENCE"
+        ],
+        "minimum_rows": 30,
+        "name": "completion_gate_abstain_boundary",
+        "row_shape": "Evidence is insufficient, verifier was removed, or state is unsafe; gold is ABSTAIN_OR_ROLLBACK."
+      }
+    ],
+    "language_root_quotas": {
+      "c_cpp": 20,
+      "python": 20,
+      "rust": 20,
+      "web_js_ts_html": 20
+    },
+    "minimum_rows": 200,
+    "minimum_unique_roots": 80,
+    "repo_family_cap": "max(15 rows, 10% of next-action support rows) per repo family",
+    "row_contract": {
+      "anti_cheat_required": {
+        "candidate_values_not_order_shortcut": true,
+        "deterministic_option_shuffle": true,
+        "no_postfix_source_in_preaction_state": true,
+        "root_split_isolated": true,
+        "target_label_not_visible_before_options": true
+      },
+      "candidate_values": [
+        "LOCALIZE_FAILURE",
+        "RETRIEVE_EVIDENCE",
+        "BIND_SYMBOL",
+        "SELECT_TEST",
+        "PLAN_PATCH",
+        "APPLY_PATCH_ABSTRACT",
+        "VERIFY_RESULT",
+        "REPAIR_AFTER_FAILURE",
+        "ABSTAIN_OR_ROLLBACK"
+      ],
+      "loss_mask": {
+        "bounded_choice_aux": true,
+        "decoder_ce": true,
+        "structured_aux": true,
+        "transition_projection": true
+      },
+      "required_fields": [
+        "root_id",
+        "root_lineage_key",
+        "repo_id",
+        "language_family",
+        "task_type=transition_next_action",
+        "milestone_state",
+        "observed_status",
+        "selected_test_anchor",
+        "visible_source_evidence",
+        "visible_verifier_evidence",
+        "opaque_options",
+        "standalone_projection_source.opaque_options",
+        "target.semantic_value",
+        "anti_cheat",
+        "loss_mask"
+      ]
+    },
+    "target_row_quotas": {
+      "ABSTAIN_OR_ROLLBACK": 35,
+      "LOCALIZE_FAILURE": 30,
+      "PLAN_PATCH": 25,
+      "REPAIR_AFTER_FAILURE": 20,
+      "RETRIEVE_EVIDENCE": 30,
+      "SELECT_TEST": 35,
+      "VERIFY_RESULT": 25
+    },
+    "verifier_state_quotas": {
+      "completion_gate_abstain_or_rollback": 25,
+      "post_patch_verify_needed": 25,
+      "pre_verifier_no_selected_test": 30,
+      "selected_test_known_not_run": 30,
+      "verifier_failed_requires_repair": 30,
+      "verifier_pass_current_state": 30,
+      "verifier_removed_or_insufficient": 30
+    }
+  },
+  "next_recommendation": {
+    "if_gate_fails": "repair materializer/admission gaps before any training",
+    "if_gate_passes": "build stage12074 next-action support rollup/probe request with protected replay, then train only if command preserves GPU2 mask",
+    "training_probe_goal": "old transition >364/640, protected compact gates preserved, residual >=7/10; Gemma win requires >386/640"
+  },
+  "outputs": {
+    "rows": "runs/local/artifacts/stage12073_next_action_support_materializer/next_action_support_rows.jsonl",
+    "summary": "runs/local/artifacts/stage12073_next_action_support_materializer/next_action_support_materialization_summary.json",
+    "summary_mirror": "runs/summaries/stage12073_next_action_support_materializer.json"
+  },
+  "source_artifacts": {
+    "design": "runs/summaries/stage12072_next_action_support_design.json",
+    "v35_support": "runs/local/artifacts/stage12056_transition_support_rollup_v35/transition_support_rows_v35.jsonl"
+  },
+  "stage": 12073,
+  "stage_name": "stage12073_next_action_support_materializer"
+}

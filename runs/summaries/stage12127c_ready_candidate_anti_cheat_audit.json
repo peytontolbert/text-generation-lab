@@ -1,0 +1,37 @@
+{
+  "stage": "12127c",
+  "stage_name": "stage12127c_ready_candidate_anti_cheat_audit",
+  "created_at_utc": "2026-07-15T00:00:00Z",
+  "artifact_dir": "runs/local/artifacts/stage12127c_ready_candidate_anti_cheat_audit",
+  "results_jsonl": "runs/local/artifacts/stage12127c_ready_candidate_anti_cheat_audit/anti_cheat_audit_results.jsonl",
+  "summary": "runs/local/artifacts/stage12127c_ready_candidate_anti_cheat_audit/summary.json",
+  "counts": {
+    "candidates_audited": 5,
+    "blueprint_only_pass": 5,
+    "blueprint_only_blocked": 0,
+    "train_admission_pass": 0,
+    "train_admission_blocked": 5,
+    "lineage_review_required": 5,
+    "protected_overlap_hit_candidates": 0,
+    "single_selected_test_candidates": 2
+  },
+  "decision": "pass_for_stage12127_materialization_blueprints_only_block_train_admission_and_block_any_rendered_row_use_until_renderer_anti_cheat_audit_passes",
+  "blockers_for_stage12127_materialization_blueprints": [],
+  "blockers_for_train_admission": [
+    "lineage_review_required_for_all_5_candidates"
+  ],
+  "required_later_renderer_controls": [
+    "opaque_labels",
+    "deterministic_option_shuffle",
+    "non_singleton_candidates",
+    "semantic_candidate_ids",
+    "target_not_visible_before_options"
+  ],
+  "claim_boundary": [
+    "Anti-cheat audit only.",
+    "No training.",
+    "No eval promotion.",
+    "No row rendering.",
+    "Blueprint-only pass is not train admission."
+  ]
+}

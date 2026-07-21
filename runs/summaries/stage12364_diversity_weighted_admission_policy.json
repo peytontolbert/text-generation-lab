@@ -1,0 +1,84 @@
+{
+  "admission_accounting_fields_required": [
+    "raw_row_count",
+    "weighted_progress_count",
+    "repo_family",
+    "source_adapter",
+    "language_family",
+    "task_family",
+    "verifier_evidence_type",
+    "diversity_weight",
+    "concentration_warnings",
+    "hard_rejects"
+  ],
+  "claim_boundary": "Control artifact only. No rows are admitted by this stage.",
+  "current_ledger_ref": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage12363_combined_train_support_ledger_v6.json",
+  "current_remaining_gap_to_500": 324,
+  "current_train_support_rows": 176,
+  "decision": "diversity_weighted_admission_policy_supersedes_hard_org_caps",
+  "hard_rejects_that_remain": [
+    "target/gold semantic value visible in model input before opaque options",
+    "raw source, raw verifier output, or raw trace text emitted in model-facing fields",
+    "missing commit_sha, source_hash_refs, test_hash_refs, or selected verifier command/log refs",
+    "cross-source patch/action/verifier joins",
+    "patch/test co-presence without causal ordering or verifier relevance when claiming Level-3/repair",
+    "PASS_TO_PASS or PASS_CURRENT_BUILD counted as repair proof",
+    "strict/source-heldout/Level-3/patch/repair claims set true for support-only rows",
+    "singleton options or answer-position shortcuts",
+    "dependency/vendor/generated paths used as primary visible source evidence",
+    "same root or root_lineage_key crossing train/eval/sealed splits"
+  ],
+  "next_actions": [
+    "reconsider MCP core as train-support under this policy, not Stage12355 hard org cap",
+    "keep tokenizers deferred; use non-tokenizers Rust selected-test roots first",
+    "move Open-SWE QC candidates through safe semantic extraction only",
+    "prioritize non-web selected-test roots and real transition-function rows before more PASS-only web volume"
+  ],
+  "policy_correction": {
+    "new_rule": "Do not hard-block solely because a row comes from a repeated org/source adapter. Admit only if lineage, evidence, anti-leak, and task semantics pass; apply diversity weights and warnings for concentration.",
+    "old_problem": "Stage12355 single-org/single-repo caps were too blunt and could block clean transformed internal data such as MCP core.",
+    "reason": "Caps are anti-overfit/eval-hacking guardrails, not user-level volume limits. The dataset may scale from a source when transformed into diverse, same-source, verifier-backed roots."
+  },
+  "previous_stage12355_plateau_caps": {
+    "current_web_selected_test_rows": 30,
+    "open_swe_priority_qc_max_per_repo": 3,
+    "single_org_family_cap_without_repair_grade_evidence": 10,
+    "single_repo_family_cap_without_repair_grade_evidence": 5,
+    "web_selected_test_pass_rows_total_cap_for_500_push": 50,
+    "web_stop_condition": "Stop Web mining after two consecutive PASS/PASS_TO_PASS-only batches with no FAIL_TO_PASS, no patch-effect proof, and no new repo family."
+  },
+  "required_transformation_for_source_adapters": {
+    "MCP_or_other_local_repos": [
+      "focused local verifier command must execute or have authoritative same-source log",
+      "source/test hash refs must be concrete and non-vendor",
+      "candidate roles must be task-specific, not generic selected-test-anchor reuse",
+      "language/repo/source-family concentration must be visible in the ledger"
+    ],
+    "Open_SWE": [
+      "parse trace into ordered events",
+      "recover source_root_label and lineage key",
+      "extract safe state_before/state_after codes without raw text leakage",
+      "join chosen action to command/tool observation",
+      "verify same-source command/output evidence",
+      "render internal opaque candidate actions",
+      "run deterministic anti-leak and split checks",
+      "admit only train-support unless Level-3/repair proof is complete"
+    ]
+  },
+  "stage": "stage12364_diversity_weighted_admission_policy",
+  "supersedes": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage12355_selected_test_materializer_and_plateau_control.json",
+  "training_allowed": false,
+  "weighted_warnings_not_hard_rejects": {
+    "MCP_core": "eligible for train-support reconsideration if distinct package/root/verifier/source/test hashes pass and all stronger claims remain false.",
+    "OpenHands_or_other_prior_risk_family": "defer only when prior heldout/support leakage or overfit risk is specific and documented; do not block solely by org.",
+    "Open_SWE": "source adapter only; raw traces must become internal episode_graph_candidate records and then safe semantic train-support rows. No direct trace-to-training admission.",
+    "same_org_or_source_adapter_repeat": {
+      "additional_distinct_repo_family_with_distinct_verifier": 0.75,
+      "first_distinct_repo_family": 1.0,
+      "note": "Weights affect progress accounting and sampling priority, not row validity.",
+      "repair_grade_fail_to_pass_with_same_source_proof": 1.0,
+      "same_repo_distinct_package_or_subsystem": 0.5,
+      "same_repo_same_task_family_PASS_only": 0.25
+    }
+  }
+}

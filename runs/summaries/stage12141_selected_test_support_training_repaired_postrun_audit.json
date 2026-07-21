@@ -1,0 +1,294 @@
+{
+  "created_at_utc": "2026-07-15T15:49:14Z",
+  "decision": "reject_stage12140_keep_stage11924_or_stage12099_selected",
+  "device": "cuda:0",
+  "gates": {
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "residual_preserved": true,
+    "smoke_preserved": true,
+    "transition_projection_beats_gemma_386": false,
+    "transition_projection_improves_stage11924_baseline": false,
+    "transition_projection_retains_stage11924_baseline": false
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12141_selected_test_support_training_repaired_postrun_audit/postrun_audit.json",
+    "summary_mirror": "runs/summaries/stage12141_selected_test_support_training_repaired_postrun_audit.json"
+  },
+  "results": {
+    "stage11924_transition_listwise_head_only": {
+      "protected::filtered_strict": {
+        "accuracy": 1.0,
+        "correct": 22,
+        "coverage": 1.0,
+        "miss_count": 0,
+        "rows": 22
+      },
+      "protected::filtered_validation": {
+        "accuracy": 0.9090909090909091,
+        "correct": 20,
+        "coverage": 1.0,
+        "miss_count": 2,
+        "rows": 22
+      },
+      "protected::old_canary_strict": {
+        "accuracy": 1.0,
+        "correct": 23,
+        "coverage": 1.0,
+        "miss_count": 0,
+        "rows": 23
+      },
+      "protected::old_canary_validation": {
+        "accuracy": 0.9130434782608695,
+        "correct": 21,
+        "coverage": 1.0,
+        "miss_count": 2,
+        "rows": 23
+      },
+      "protected::residual_bank": {
+        "accuracy": 0.7,
+        "correct": 7,
+        "coverage": 1.0,
+        "miss_count": 3,
+        "rows": 10
+      },
+      "protected::verifier_grounded_source_heldout_smoke": {
+        "accuracy": 0.5,
+        "correct": 6,
+        "coverage": 1.0,
+        "miss_count": 6,
+        "rows": 12
+      },
+      "transition_by_language": {
+        "unknown": {
+          "accuracy": 0.56875,
+          "correct": 364,
+          "rows": 640
+        }
+      },
+      "transition_by_task": {
+        "transition_candidate_selection": {
+          "accuracy": 0.55625,
+          "correct": 89,
+          "rows": 160
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 128,
+          "rows": 160
+        },
+        "transition_next_action": {
+          "accuracy": 0.31875,
+          "correct": 51,
+          "rows": 160
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6,
+          "correct": 96,
+          "rows": 160
+        }
+      },
+      "transition_projection_routed": {
+        "accuracy": 0.56875,
+        "correct": 364,
+        "coverage": 1.0,
+        "miss_count": 276,
+        "rows": 640
+      }
+    },
+    "stage12140_selected_test_support_training_repaired": {
+      "protected::filtered_strict": {
+        "accuracy": 1.0,
+        "correct": 22,
+        "coverage": 1.0,
+        "miss_count": 0,
+        "rows": 22
+      },
+      "protected::filtered_validation": {
+        "accuracy": 0.9090909090909091,
+        "correct": 20,
+        "coverage": 1.0,
+        "miss_count": 2,
+        "rows": 22
+      },
+      "protected::old_canary_strict": {
+        "accuracy": 1.0,
+        "correct": 23,
+        "coverage": 1.0,
+        "miss_count": 0,
+        "rows": 23
+      },
+      "protected::old_canary_validation": {
+        "accuracy": 0.9130434782608695,
+        "correct": 21,
+        "coverage": 1.0,
+        "miss_count": 2,
+        "rows": 23
+      },
+      "protected::residual_bank": {
+        "accuracy": 0.7,
+        "correct": 7,
+        "coverage": 1.0,
+        "miss_count": 3,
+        "rows": 10
+      },
+      "protected::verifier_grounded_source_heldout_smoke": {
+        "accuracy": 0.5,
+        "correct": 6,
+        "coverage": 1.0,
+        "miss_count": 6,
+        "rows": 12
+      },
+      "transition_by_language": {
+        "unknown": {
+          "accuracy": 0.55,
+          "correct": 352,
+          "rows": 640
+        }
+      },
+      "transition_by_task": {
+        "transition_candidate_selection": {
+          "accuracy": 0.55,
+          "correct": 88,
+          "rows": 160
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 128,
+          "rows": 160
+        },
+        "transition_next_action": {
+          "accuracy": 0.25,
+          "correct": 40,
+          "rows": 160
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6,
+          "correct": 96,
+          "rows": 160
+        }
+      },
+      "transition_projection_routed": {
+        "accuracy": 0.55,
+        "correct": 352,
+        "coverage": 1.0,
+        "miss_count": 288,
+        "rows": 640
+      }
+    }
+  },
+  "runtime_initialization": {
+    "stage11924_transition_listwise_head_only": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_semantic_candidate_head",
+        "bounded_choice_contrast_margin": 0.08,
+        "bounded_choice_contrast_weight": 0.3,
+        "bounded_choice_root_group_aux_weight": 0.0,
+        "bounded_choice_same_role_listwise_weight": 0.5,
+        "bounded_choice_train_head_only": true,
+        "bounded_choice_verifier_value_listwise_weight": 0.7,
+        "bounded_decoder_train_sampler": "task_balanced",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 280,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/model_state.pt",
+      "weights_sha256": "13bd2cf952d86261593c5044d59018084bdb1675feed57d72b7300fe5d256c88"
+    },
+    "stage12140_selected_test_support_training_repaired": {
+      "attached_bounded_choice_heads": [
+        "bounded_choice_evidence_judgment_head",
+        "bounded_choice_semantic_candidate_head"
+      ],
+      "bundle_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12140_selected_test_support_training_repaired_probe/runtime_model/runtime_model_bundle.json",
+      "metadata": {
+        "bounded_choice_aux_source": "encoder_option_retrieval_semantic_candidate_head",
+        "bounded_choice_contrast_margin": 0.06,
+        "bounded_choice_contrast_weight": 0.25,
+        "bounded_choice_root_group_aux_weight": 0.0,
+        "bounded_choice_same_role_listwise_weight": 0.5,
+        "bounded_choice_train_head_only": true,
+        "bounded_choice_verifier_value_listwise_weight": 0.7,
+        "bounded_decoder_train_sampler": "task_balanced",
+        "implementation": "transformer",
+        "mode": "bounded_decoder_ce_probe",
+        "model_config": "/data/agentkernel-seq2seq-text-lab/configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+        "probe_scale": "target_100m",
+        "run_id": "bounded_decoder_ce_probe_contract",
+        "tokenizer_config": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json",
+        "tokenizer_hashlock": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+        "tokenizer_json": "/data/agentkernel-seq2seq-text-lab/configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"
+      },
+      "missing_keys": [],
+      "source_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12140_selected_test_support_training_repaired_probe/runtime_model/runtime_model_bundle.json",
+      "state_dict_keys": 280,
+      "unexpected_keys": [],
+      "weights_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12140_selected_test_support_training_repaired_probe/runtime_model/model_state.pt",
+      "weights_sha256": "0c73b73b241057888913e6761a478f33f16c84c553d38fa0ddee7951eccf38e4"
+    }
+  },
+  "source_artifacts": {
+    "stage11924_runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "stage12140_runtime": "runs/local/artifacts/stage12140_selected_test_support_training_repaired_probe/runtime_model/runtime_model_bundle.json",
+    "transition_rows": "runs/local/artifacts/stage11897_transition_record_projection_rows/transition_projection_rows.jsonl"
+  },
+  "stage": 12141,
+  "stage_name": "stage12141_selected_test_support_training_repaired_postrun_audit",
+  "transition_changes_vs_stage11924": {
+    "gain_count": 10,
+    "gained": [
+      "stage11897::stage11896::stage11745::llm_memory_modules_at_scale::python::product_key_memory_support::patch_impact_memory_surface::candidate_selection",
+      "stage11897::stage11896::stage11749::model_stack::python::runtime_activation_support::patch_impact_activation_surface::next_action",
+      "stage11897::stage11896::stage11763::digital_world_model::python::safe_edit_devtools_support::patch_impact_source_surface::next_action",
+      "stage11897::stage11896::stage11775::neural_network_building_blocks::python::core_layers_support::patch_impact_source_surface::next_action",
+      "stage11897::stage11896::stage11791::peft::python::method_comparison_sanitizer_support::patch_impact_source_surface::next_action",
+      "stage11897::stage11896::stage11817::repository_library_python_algorithms::python::knapsack_support::patch_impact_source_surface::next_action",
+      "stage11897::stage11896::stage11861::hyper_connections::python::manual_hyper_connection_support::patch_impact_source_surface::next_action",
+      "stage11897::stage11896::stage11869::tolbert::python::hierarchical_decode_support::patch_impact_source_surface::next_action",
+      "stage11897::stage11896::stage11849::codex_utils_string::rust::find_uuids_support::verifier_outcome_selected_inline_test::candidate_selection",
+      "stage11897::stage11896::stage11877::google_benchmark::c_cpp::skip_with_error_support::answerable_patch_impact_candidate_surface::candidate_selection"
+    ],
+    "loss_count": 22,
+    "lost": [
+      "stage11897::stage11896::stage11749::model_stack::python::runtime_activation_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11763::digital_world_model::python::safe_edit_devtools_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11771::bitsandbytes::python::cuda_library_path_support::verifier_outcome_selected_function_test::candidate_selection",
+      "stage11897::stage11896::stage11771::bitsandbytes::python::cuda_library_path_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11775::neural_network_building_blocks::python::core_layers_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11791::peft::python::method_comparison_sanitizer_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11795::selfplay_arena::python::prompt_pipeline_generation_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11817::repository_library_python_algorithms::python::knapsack_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11857::einops::python::parsed_expression_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11861::hyper_connections::python::manual_hyper_connection_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11865::simple_moe::python::router_runtime_topk_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11869::tolbert::python::hierarchical_decode_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11799::model_stack_bitnet_wasm::rust::lib::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11821::codex_agent_identity::rust::jwks_url_support::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11849::codex_utils_string::rust::find_uuids_support::symptom_localization_source_surface::candidate_selection",
+      "stage11897::stage11896::stage11754::bitsandbytes::c_cpp::cpu_build_support::answerable_evidence_citation_build_constraint::next_action",
+      "stage11897::stage11896::stage11767::faiss::c_cpp::core_build_support::answerable_evidence_citation_build_constraint::next_action",
+      "stage11897::stage11896::stage11787::pytorch::c_cpp::check_torch_mkl_support::answerable_evidence_citation_build_run_constraint::next_action",
+      "stage11897::stage11896::stage11803::pytorch::c_cpp::check_torch_xnnpack_support::answerable_evidence_citation_build_run_constraint::next_action",
+      "stage11897::stage11896::stage11807::pytorch::c_cpp::check_torch_cuda_support::answerable_evidence_citation_build_run_constraint::next_action",
+      "stage11897::stage11896::stage11877::google_benchmark::c_cpp::skip_with_error_support::answerable_evidence_citation_build_run_constraint::candidate_selection",
+      "stage11897::stage11896::stage11877::google_benchmark::c_cpp::skip_with_error_support::answerable_abstain_rejection::candidate_selection"
+    ],
+    "net": -12
+  }
+}

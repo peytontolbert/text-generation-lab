@@ -1,0 +1,197 @@
+{
+  "created_at_utc": "2026-07-15T01:13:40Z",
+  "current_evidence": {
+    "stage12103_route_permutation": {
+      "blocked_rows": 0,
+      "decision": "option_permutation_stability_passed",
+      "majority_correct_accuracy": 0.5875,
+      "majority_correct_rows": 376,
+      "missing_route_cards": 0,
+      "passed": true,
+      "permutations_per_row": 3,
+      "permuted_correct": 1124,
+      "permuted_rows": 1920,
+      "stable_semantic_prediction_rate": 0.971875,
+      "stable_semantic_prediction_rows": 622,
+      "unanimous_correct_rows": 370
+    },
+    "stage12105_admitted_counts": {
+      "by_language": {
+        "python": 72,
+        "rust": 142,
+        "web_js_ts_html": 2248
+      },
+      "by_task": {
+        "transition_candidate_selection": 540,
+        "transition_continue_or_stop": 691,
+        "transition_next_action": 540,
+        "transition_verifier_transition": 691
+      },
+      "top_repo_family": {
+        "agent_kernel_lite_core": 4,
+        "codex-rs": 138,
+        "llm_memory_modules_at_scale::local_git_snapshot": 72,
+        "modelcontextprotocol_typescript_sdk": 18,
+        "openclaw_clawhub": 36,
+        "openhands_openhands": 18,
+        "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_rejected_rows.jsonl": 24,
+        "runs/local/artifacts/stage11638_web_support_schema_normalization/web_support_normalized_rows.jsonl": 274,
+        "runs/local/artifacts/stage11639_normalized_web_support_guarded_probe_request/normalized_web_support_train_rows.jsonl": 918,
+        "runs/local/artifacts/stage11693_web_gap_targeted_support_inventory/web_gap_targeted_support_rows.jsonl": 606,
+        "runs/local/artifacts/stage11704_web_remaining_nonverifier_support_package/web_remaining_nonverifier_support_rows.jsonl": 350,
+        "sourcebot": 4
+      }
+    },
+    "stage12105_admitted_rows": 2462,
+    "stage12105_decision": "fresh_sealed_roots_required",
+    "stage12105_remaining_to_minimum": {
+      "by_language": {
+        "c_cpp": 20,
+        "mixed_build_config_dependency": 10,
+        "python": 0,
+        "rust": 0,
+        "web_js_ts_html": 0
+      },
+      "by_task": {
+        "transition_candidate_selection": 0,
+        "transition_continue_or_stop": 0,
+        "transition_next_action": 0,
+        "transition_verifier_transition": 0
+      },
+      "rows": 0,
+      "unique_roots": 75
+    },
+    "stage12105_unique_admitted_roots": 25
+  },
+  "decision": "fresh_sealed_root_materialization_required_before_route_claim",
+  "do_not_train": true,
+  "fresh_root_materialization_contract": {
+    "minimum_candidate_contract_per_root": [
+      "task instruction",
+      "visible source evidence",
+      "visible verifier/test/build evidence",
+      "semantic candidate objects with role/artifact_type/value/evidence_ids",
+      "deterministic opaque option shuffle",
+      "no singleton rows",
+      "no target semantic value visible before options",
+      "root_id, root_lineage_key, repo_family, snapshot_id, language_family"
+    ],
+    "new_roots_by_language_or_lane": {
+      "c_cpp": 25,
+      "mixed_build_config_dependency": 15,
+      "python": 20,
+      "rust": 20,
+      "web_js_ts_html": 20
+    },
+    "preferred_projection_rows": {
+      "transition_candidate_selection": 65,
+      "transition_continue_or_stop": 40,
+      "transition_next_action": 90,
+      "transition_verifier_transition": 65
+    },
+    "repo_family_cap": "No repo family may contribute more than 10% of a task family or 15% of total sealed roots.",
+    "required_language_floor_at_100": {
+      "c_cpp": 20,
+      "mixed_build_config_dependency": 10,
+      "python": 20,
+      "rust": 15,
+      "web_js_ts_html": 15
+    },
+    "required_task_mix": {
+      "transition_candidate_selection": {
+        "minimum_rows_at_100": 25,
+        "preferred_rows_at_250": 62,
+        "target_fraction": 0.25
+      },
+      "transition_continue_or_stop": {
+        "minimum_rows_at_100": 15,
+        "preferred_rows_at_250": 38,
+        "target_fraction": 0.15
+      },
+      "transition_next_action": {
+        "minimum_rows_at_100": 35,
+        "preferred_rows_at_250": 88,
+        "target_fraction": 0.35
+      },
+      "transition_verifier_transition": {
+        "minimum_rows_at_100": 25,
+        "preferred_rows_at_250": 62,
+        "target_fraction": 0.25
+      }
+    },
+    "root_lineage_exclusions": [
+      "Stage11897 transition projection roots",
+      "Stage11943 Gemma-gap atlas roots",
+      "All Stage120xx transition discovery, repair, and training roots",
+      "Any root already admitted in Stage12105 unless explicitly marked diagnostic-only"
+    ],
+    "split": "sealed_confirm_only; never train/support/adapt on these rows before confirmation scoring",
+    "target_new_unique_roots": 100
+  },
+  "next_stage_recommendation": {
+    "action": "Materialize fresh sealed roots to this contract, then run an admission audit before any route/Gemma scoring.",
+    "minimum_to_score": {
+      "all_anti_cheat_gates": true,
+      "all_task_minimums": true,
+      "c_cpp_roots": 20,
+      "mixed_build_config_dependency_roots": 10,
+      "unique_roots": 100
+    },
+    "stage": "stage12107_fresh_sealed_transition_root_materializer"
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12106_fresh_sealed_transition_root_materialization_request/fresh_sealed_transition_root_materialization_request.json",
+    "summary_mirror": "runs/summaries/stage12106_fresh_sealed_transition_root_materialization_request.json"
+  },
+  "source_artifacts": {
+    "stage12104_request": "runs/summaries/stage12104_sealed_transition_slice_request.json",
+    "stage12105_atlas": "runs/summaries/stage12105_sealed_transition_candidate_atlas.json"
+  },
+  "stage": 12106,
+  "stage_name": "stage12106_fresh_sealed_transition_root_materialization_request",
+  "task_family_generation_guidance": {
+    "transition_candidate_selection": {
+      "hard_negatives": [
+        "candidate_change_surface vs verifier_and_build_constraint",
+        "selected test anchor vs implementation-only candidate",
+        "symptom/call-path analogue vs decisive verifier evidence"
+      ],
+      "root_count_hint": 30
+    },
+    "transition_continue_or_stop": {
+      "hard_negatives": [
+        "premature DONE after focused test only when clean replay required",
+        "CONTINUE after verifier removed without enough evidence",
+        "STOP when unresolved regression remains"
+      ],
+      "root_count_hint": 20
+    },
+    "transition_next_action": {
+      "hard_negatives": [
+        "PLAN_PATCH when SELECT_TEST is correct",
+        "PLAN_PATCH when RETRIEVE_EVIDENCE is correct",
+        "FINISH when VERIFY_RESULT is correct",
+        "RETRIEVE_EVIDENCE when localized enough and verifier selection is next",
+        "ABSTAIN when evidence is sufficient"
+      ],
+      "priority": "highest",
+      "root_count_hint": 40
+    },
+    "transition_verifier_transition": {
+      "hard_negatives": [
+        "PASS_CURRENT_BUILD vs PASS_CURRENT_BUILD_AND_RUN",
+        "PASS_CURRENT_STATE vs PASS_TO_PASS",
+        "NOT_EXERCISED vs PASS_TO_PASS",
+        "VERIFIER_REMOVED vs INSUFFICIENT_EVIDENCE",
+        "FAIL_TO_PASS vs syntax-only compile recovery"
+      ],
+      "root_count_hint": 30
+    }
+  },
+  "why": [
+    "Stage12103 passed semantic option-permutation stability, so the routed policy is stable enough to test.",
+    "Stage12105 found 2462 admitted row projections but only 25 unique roots.",
+    "Existing admitted candidates have no C/C++ roots and no mixed build/config/dependency roots.",
+    "The Stage12104 sealed contract requires at least 100 root-disjoint rows/roots before treating the route as confirmed."
+  ]
+}

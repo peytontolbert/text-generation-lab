@@ -1,0 +1,67 @@
+{
+  "stage": 12121,
+  "stage_name": "stage12121_cpp_verifier_ready_candidate_plan",
+  "created_at_utc": "2026-07-15T00:00:00Z",
+  "input_artifacts": [
+    "runs/local/artifacts/stage12119_refined_takeover_subagent_brief/refined_v27_takeover_subagent_brief.md",
+    "runs/local/artifacts/stage12118_maintainer_400_pilot_checkout_probe_request/pilot_checkout_probe_targets.jsonl",
+    "runs/summaries/stage12119_execute_maintainer_400_pilot_checkout_probe_batch.json",
+    "runs/summaries/stage12120_selected_test_discovery_smoke.json",
+    "runs/summaries/stage12120_failed_stage_lessons_atlas.json"
+  ],
+  "output_artifacts": {
+    "artifact_dir": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan",
+    "candidate_plan_jsonl": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+    "summary": "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/summary.json",
+    "summary_mirror": "runs/summaries/stage12121_cpp_verifier_ready_candidate_plan.json"
+  },
+  "claim_boundary": [
+    "Candidate planning only.",
+    "No checkout, clone, dependency install, training, evaluation, GPU use, row materialization, or row admission was performed.",
+    "Selected-test status remains candidate-only until a concrete no-network verifier command executes and logs are captured.",
+    "Build/static evidence must remain build_config_anchor or static_compile_anchor if ctest execution is absent."
+  ],
+  "selection_policy": {
+    "language": "c_cpp",
+    "candidate_count": 10,
+    "source_scope": "Stage12118 C/C++ pilot checkout/probe targets",
+    "positive_signals": [
+      "small or header-only C/C++ project",
+      "simple CMake/CTest surface",
+      "explicit Stage12118 selected-test intent",
+      "single-package verifier likely possible without dependency hydration",
+      "obvious no-network discovery and test commands"
+    ],
+    "penalties": [
+      "large monorepo or broad build matrix",
+      "graphics/audio/display/system service dependencies",
+      "network/integration test dominance",
+      "codec/image dependency stacks",
+      "submodule or third-party hydration likely required"
+    ]
+  },
+  "selected_candidates": [
+    {"rank": 1, "queue_id": "stage12118::c_cpp::002::Neargye_magic_enum", "repo_family": "Neargye/magic_enum", "dependency_risk": "low"},
+    {"rank": 2, "queue_id": "stage12118::c_cpp::032::jarro2783_cxxopts", "repo_family": "jarro2783/cxxopts", "dependency_risk": "low"},
+    {"rank": 3, "queue_id": "stage12118::c_cpp::049::p_ranav_argparse", "repo_family": "p-ranav/argparse", "dependency_risk": "low"},
+    {"rank": 4, "queue_id": "stage12118::c_cpp::019::fastfloat_fast_float", "repo_family": "fastfloat/fast_float", "dependency_risk": "low"},
+    {"rank": 5, "queue_id": "stage12118::c_cpp::029::google_snappy", "repo_family": "google/snappy", "dependency_risk": "low_medium"},
+    {"rank": 6, "queue_id": "stage12118::c_cpp::024::google_crc32c", "repo_family": "google/crc32c", "dependency_risk": "low_medium"},
+    {"rank": 7, "queue_id": "stage12118::c_cpp::028::google_re2", "repo_family": "google/re2", "dependency_risk": "low_medium"},
+    {"rank": 8, "queue_id": "stage12118::c_cpp::004::Tencent_rapidjson", "repo_family": "Tencent/rapidjson", "dependency_risk": "low_medium"},
+    {"rank": 9, "queue_id": "stage12118::c_cpp::005::USCiLab_cereal", "repo_family": "USCiLab/cereal", "dependency_risk": "low_medium"},
+    {"rank": 10, "queue_id": "stage12118::c_cpp::042::microsoft_GSL", "repo_family": "microsoft/GSL", "dependency_risk": "low_medium"}
+  ],
+  "deprioritized_examples": [
+    {"repo_family": "AcademySoftwareFoundation/OpenImageIO", "reason": "heavy codec/image dependency surface and prior Stage12119 C/C++ smoke did not yield selected-test evidence"},
+    {"repo_family": "llvm/llvm-project", "reason": "very large monorepo/build scope"},
+    {"repo_family": "opencv/opencv", "reason": "large module matrix and dependency-heavy tests"},
+    {"repo_family": "grpc/grpc", "reason": "submodules and third-party dependency hydration risk"},
+    {"repo_family": "SFML/SFML", "reason": "graphics/audio/system dependency risk"},
+    {"repo_family": "facebook/folly", "reason": "heavy dependency chain"},
+    {"repo_family": "facebook/rocksdb", "reason": "large build and optional compression dependency surface"}
+  ],
+  "do_not_train": true,
+  "any_row_admitted": false,
+  "no_admission_statement": "Stage12121 produced a bounded C/C++ verifier-ready candidate plan only; no task rows were created, admitted, trained on, or evaluated."
+}

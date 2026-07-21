@@ -1,0 +1,42 @@
+{
+  "artifact_type": "codex_chat_task_boundary_miner",
+  "claim_boundary": "Task boundary/source-window artifact only. No raw chat content, no raw tool output, no patch bodies, no root admission, and no training rows.",
+  "counts": {
+    "blocked_chats": 0,
+    "boundary_confidence_counts": {
+      "fallback_or_partial": 8,
+      "lifecycle_exact": 23928
+    },
+    "candidate_windows_with_command_observation": 3740,
+    "complete_task_windows": 23847,
+    "patch_and_verifier_ref_windows": 2059,
+    "source_chats": 283,
+    "task_windows": 23936,
+    "terminal_status_counts": {
+      "no_terminal_event": 8,
+      "task_complete": 23847,
+      "turn_aborted": 81
+    },
+    "training_potential_counts": {
+      "level_0_boundary_only": 20188,
+      "level_1_action_observation_index": 1689,
+      "level_2_patch_and_verifier_refs_needs_state_join": 2059
+    }
+  },
+  "decision": "task_boundaries_ready_for_candidate_root_projection_training_blocked",
+  "guardrails": {
+    "raw_message_text_emitted": false,
+    "raw_patch_body_emitted": false,
+    "raw_tool_arguments_emitted": false,
+    "raw_tool_output_emitted": false,
+    "root_admission_emitted": false,
+    "training_rows_emitted_now": false
+  },
+  "next_stage": {
+    "purpose": "Project root candidates from task windows, grouped by repo/workdir/evidence availability, still without admission.",
+    "stage": "stage12261_codex_task_window_root_candidate_projector",
+    "training_allowed": false
+  },
+  "stage": "stage12260_codex_chat_task_boundary_miner",
+  "training_allowed": false
+}

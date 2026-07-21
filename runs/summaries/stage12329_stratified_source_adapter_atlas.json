@@ -1,0 +1,260 @@
+{
+  "adapters": [
+    {
+      "adapter_id": "codex_chat_episode_graphs",
+      "can_move": [
+        "train_support_observation_status",
+        "transition_function_coverage"
+      ],
+      "cannot_move_yet": [
+        "Level3",
+        "patch_trace",
+        "repair_claim",
+        "sealed_eval"
+      ],
+      "current_status": "Some event-local train-support admitted; Level-3 still blocked by state/action/observation/state_delta gaps.",
+      "first_batch_cap": 75,
+      "hard_gate": "No observed-action imitation as next-action policy; require safe state codes and semantic rule IDs.",
+      "path_status": {
+        "runs/local/artifacts/stage12260_codex_chat_task_boundary_miner": true,
+        "runs/local/artifacts/stage12306_session_episode_graph_candidate_materializer": true,
+        "runs/local/artifacts/stage12316_transition_local_event_joiner": true,
+        "runs/local/artifacts/stage12320_event_local_semantic_review_admission": true
+      },
+      "primary_paths": [
+        "runs/local/artifacts/stage12260_codex_chat_task_boundary_miner",
+        "runs/local/artifacts/stage12306_session_episode_graph_candidate_materializer",
+        "runs/local/artifacts/stage12316_transition_local_event_joiner",
+        "runs/local/artifacts/stage12320_event_local_semantic_review_admission"
+      ]
+    },
+    {
+      "adapter_id": "selected_test_roots",
+      "can_move": [
+        "train_support_selected_test",
+        "verifier_transition_support"
+      ],
+      "cannot_move_yet": [
+        "repair_claim",
+        "Level3"
+      ],
+      "current_status": "45 selected-test train-support rows admitted across Python/Rust/C++; web still thin.",
+      "first_batch_cap": 75,
+      "hard_gate": "Every row needs selected-test/verifier refs, non-singleton opaque options, deterministic shuffle, no target value leak.",
+      "path_status": {
+        "runs/local/artifacts/stage12307_rust_cpp_selected_test_root_candidate_queue": true,
+        "runs/local/artifacts/stage12322_priority_rust_cpp_selected_test_admission": true,
+        "runs/local/artifacts/stage12326_direct_python_selected_test_admission": true
+      },
+      "primary_paths": [
+        "runs/local/artifacts/stage12322_priority_rust_cpp_selected_test_admission",
+        "runs/local/artifacts/stage12326_direct_python_selected_test_admission",
+        "runs/local/artifacts/stage12307_rust_cpp_selected_test_root_candidate_queue"
+      ]
+    },
+    {
+      "adapter_id": "open_swe_traces",
+      "can_move": [
+        "trace_support_train_support_after_qc"
+      ],
+      "cannot_move_yet": [
+        "repair_claim",
+        "external_fail_to_pass_floor",
+        "sealed_eval"
+      ],
+      "current_status": "50 priority capped Python trace-support candidates plus 250 broad inventory candidates; zero admitted.",
+      "first_batch_cap": 50,
+      "hard_gate": "Resolved/model_patch is priority signal only; recover safe semantic transition records and same-source verifier causality before admission.",
+      "path_status": {
+        "runs/local/artifacts/stage12327_external_adapter_preflight/open_swe_priority_capped_trace_support_candidates.jsonl": true,
+        "runs/local/artifacts/stage12327_external_adapter_preflight/open_swe_trace_support_candidates.jsonl": true
+      },
+      "primary_paths": [
+        "runs/local/artifacts/stage12327_external_adapter_preflight/open_swe_priority_capped_trace_support_candidates.jsonl",
+        "runs/local/artifacts/stage12327_external_adapter_preflight/open_swe_trace_support_candidates.jsonl"
+      ]
+    },
+    {
+      "adapter_id": "repairthem_all_bears",
+      "can_move": [
+        "external_repair_candidate_after_hydration",
+        "java_patch_trace_after_verifier_qc"
+      ],
+      "cannot_move_yet": [
+        "train_support",
+        "repair_claim",
+        "Level3"
+      ],
+      "current_status": "19 failing_passing metadata candidates; 232 passing_passing blocked; zero admitted.",
+      "first_batch_cap": 19,
+      "hard_gate": "Need local or authoritative checkout/content plus before/after command output; passing_passing never counts as repair proof.",
+      "path_status": {
+        "/arxiv/repositories/RepairThemAll/data/benchmarks/bears/bugs.json": true,
+        "runs/local/artifacts/stage12327_external_adapter_preflight/bears_failing_passing_candidates.jsonl": true
+      },
+      "primary_paths": [
+        "runs/local/artifacts/stage12327_external_adapter_preflight/bears_failing_passing_candidates.jsonl",
+        "/arxiv/repositories/RepairThemAll/data/benchmarks/bears/bugs.json"
+      ]
+    },
+    {
+      "adapter_id": "repairthem_all_defects4j_quixbugs",
+      "can_move": [
+        "external_repair_candidate_preflight",
+        "java_patch_trace_after_verifier_qc"
+      ],
+      "cannot_move_yet": [
+        "train_support_without_checkout_verifier_qc"
+      ],
+      "current_status": "Local metadata/scripts exist; not yet profiled into current spine counters.",
+      "first_batch_cap": 50,
+      "hard_gate": "Do not admit metadata-only bug IDs; require exact buggy/fixed refs, test command/output, and patch lineage.",
+      "path_status": {
+        "/arxiv/repositories/RepairThemAll/data/benchmarks/QuixBugs": true,
+        "/arxiv/repositories/RepairThemAll/data/benchmarks/defects4j": true
+      },
+      "primary_paths": [
+        "/arxiv/repositories/RepairThemAll/data/benchmarks/defects4j",
+        "/arxiv/repositories/RepairThemAll/data/benchmarks/QuixBugs"
+      ]
+    },
+    {
+      "adapter_id": "swe_bench_live_local",
+      "can_move": [
+        "source_heldout_candidate",
+        "patch_trace_candidate_after_lineage_qc"
+      ],
+      "cannot_move_yet": [
+        "train_support_without_instance_materialization"
+      ],
+      "current_status": "Local repository/artifact traces exist; not yet normalized into Stage12328-style QC.",
+      "first_batch_cap": 50,
+      "hard_gate": "Need instance spec, patch diff, verifier command/output, and train/eval lineage separation.",
+      "path_status": {
+        "/arxiv/repositories/SWE-bench-Live": true,
+        "/arxiv/root-cleanup/agentkernel_space_reclaimed_20260513/verified_leaderboard": true
+      },
+      "primary_paths": [
+        "/arxiv/repositories/SWE-bench-Live",
+        "/arxiv/root-cleanup/agentkernel_space_reclaimed_20260513/verified_leaderboard"
+      ]
+    },
+    {
+      "adapter_id": "strict_long_context_traces",
+      "can_move": [
+        "retrieval_evidence_support",
+        "state_summary_support",
+        "transition_support_after_event_join"
+      ],
+      "cannot_move_yet": [
+        "repair_claim_without_patch_verifier_trace"
+      ],
+      "current_status": "Good refinery material; must remain source adapter, not raw transcript imitation.",
+      "first_batch_cap": 75,
+      "hard_gate": "Compile to typed state/action/verifier records; no raw long-context continuation targets as maintainer proof.",
+      "path_status": {
+        "runs/local/artifacts/strict_long_context_retrieval_mixture_v1": true,
+        "runs/local/artifacts/strict_long_context_step_judgment_datasets_v1": true,
+        "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1": true
+      },
+      "primary_paths": [
+        "runs/local/artifacts/strict_long_context_train_ready_plus_audit_v1",
+        "runs/local/artifacts/strict_long_context_retrieval_mixture_v1",
+        "runs/local/artifacts/strict_long_context_step_judgment_datasets_v1"
+      ]
+    }
+  ],
+  "cap_policy": {
+    "any_language_family_cap": 150,
+    "any_repo_family_train_support_cap": 25,
+    "any_source_adapter_or_lane_new_addition_cap": 75,
+    "any_source_adapter_or_lane_train_support_cap": 125,
+    "any_task_family_cap": 110,
+    "bears_repair_admitted_current_cap": 0,
+    "candidate_rows": "track separately; never count toward 500",
+    "counter_separation": [
+      "candidate",
+      "materialized",
+      "qc_passed",
+      "train_support_admitted",
+      "Level3_admitted",
+      "patch_trace_admitted",
+      "repair_claim_admitted",
+      "sealed_eval_admitted"
+    ],
+    "event_local_observation_status_cap": 100,
+    "external_trace_adapter_cap_until_two_adapters_pass_qc": 100,
+    "first_external_batch_repo_cap": "10 rows or 20%, whichever is stricter",
+    "open_swe_train_support_cap_until_second_source_validation": 50,
+    "per_selected_test_root_cap": 5,
+    "python_cap": 140,
+    "qc_passed_rows": "track separately; train-support only after explicit admission gate",
+    "selected_test_roots_cap": 175,
+    "session_unknown_language_cap": 100,
+    "total_admitted_train_support_target": 500
+  },
+  "claim_boundary": "Control/atlas artifact only. It prevents Open-SWE localization and defines capped multi-source routes toward 500 high-quality train-support tasks.",
+  "current_ledger": {
+    "admitted_train_support": 136,
+    "language_counts": {
+      "c_cpp": 10,
+      "python": 20,
+      "rust": 15,
+      "session_unknown_language": 91
+    },
+    "remaining_to_500": 364,
+    "source_counts": {
+      "stage12320_event_local_observation": 76,
+      "stage12322_rust_cpp_selected_test": 25,
+      "stage12323_v4_event_local": 15,
+      "stage12326_direct_python_selected_test": 20
+    },
+    "stage12327_bears_failing_passing": 19,
+    "stage12327_open_swe_priority": 50,
+    "stage12328_training_allowed": false
+  },
+  "decision": "stratified_source_adapter_atlas_ready_training_still_blocked",
+  "hard_reject_rules": [
+    "Reject any row counted in more than one of candidate, QC-passed, train-support, Level-3, repair, sealed-eval.",
+    "Reject candidate/review rows as train-support until explicit admission stage passes.",
+    "Reject raw observed-action imitation as next-action policy.",
+    "Reject rows with model-visible chosen/gold/correct/target role markers.",
+    "Reject event-local observation/status rows as Level-3, repair, strict-eval, or source-heldout.",
+    "Reject external adapter rows without same-source event ordering, source/test hashes, verifier identity class, and anti-leak rendering.",
+    "Reject Bears passing_passing as repair proof; reject Bears failing_passing unless command output, checkout lineage, patch diff/apply proof, and before/after verifier classes are materialized.",
+    "Reject Open-SWE rows that expose raw trajectory/verifier text or treat resolved/patch-test co-presence as fail-to-pass proof.",
+    "Reject any admission that exceeds repo, language, adapter, source-lane, or task-family caps."
+  ],
+  "near_term_allocation": {
+    "codex_chat_episode_graphs": 50,
+    "open_swe_traces": 50,
+    "repair_datasets": "candidate/QC only until verifier hydration passes",
+    "selected_test_roots": 75,
+    "strict_long_context_traces": 50,
+    "web_specific_roots": "must be prioritized because current selected-test supply is Python/Rust/C++ heavy"
+  },
+  "plateau_risks": [
+    "Open-SWE sorted-order scanning over-centers one trace family/language.",
+    "Counting metadata candidates as training rows.",
+    "Counting PASS_TO_PASS or passing_passing as repair proof.",
+    "Using observed action telemetry as next-action policy.",
+    "Letting session_unknown_language dominate the 500-task target.",
+    "Training before Level-3/state-delta fields exist."
+  ],
+  "recommended_next_stages": [
+    {
+      "purpose": "Recover language-family attribution and select enough Rust/C++/Web selected-test roots to meet floors.",
+      "stage": "stage12330_selected_test_and_language_balance_queue"
+    },
+    {
+      "purpose": "Convert the 50 priority Open-SWE candidates into safe semantic transition review records, not train rows.",
+      "stage": "stage12331_open_swe_priority_safe_transition_extractor"
+    },
+    {
+      "purpose": "Attempt Bears/Defects4J/SWE-bench local hydration with explicit before/after verifier output requirements.",
+      "stage": "stage12332_repair_dataset_hydration_probe"
+    }
+  ],
+  "stage": "stage12329_stratified_source_adapter_atlas",
+  "training_allowed": false
+}

@@ -1,0 +1,104 @@
+{
+  "admissible_for_training": false,
+  "approval_boundaries_short": "Approval must be per command class and first-wave repo set; caches isolated under /data/tmp; no global writes, no secrets, no GPU, no training, no admission; selected-test evidence only after exit-code-0 logs and later audit.",
+  "artifact_type": "summary",
+  "claim_boundary": "Stage12129B is a controlled hydration request only and performed no dependency install, no network access, no training, and no row admission.",
+  "do_not_admit_rows": true,
+  "do_not_train": true,
+  "exact_command_classes_requiring_future_user_approval": [
+    "cargo fetch or any cargo dependency-resolution command without --offline",
+    "cargo generate-lockfile or lockfile creation for lockless Rust repos",
+    "npm ci / npm install / pnpm install / yarn install",
+    "any package-manager command that downloads dependencies or writes node_modules/vendor/cache content",
+    "any lifecycle script, build script, browser/headless/cloud test, or service-backed test not explicitly named in the approved command",
+    "any network access beyond crates.io/npm registry scopes needed for the approved repo"
+  ],
+  "hydration_candidates_by_language": {
+    "rust": 5,
+    "web_js_ts_html": 5
+  },
+  "hydration_candidates_total": 10,
+  "input_artifacts": [
+    "runs/local/artifacts/stage12128b_rust_web_no_install_execution_smoke/rust_web_smoke_results.jsonl",
+    "runs/summaries/stage12128b_rust_web_no_install_execution_smoke.json",
+    "runs/local/artifacts/stage12120_failed_stage_lessons_atlas/"
+  ],
+  "no_dependency_install_now": true,
+  "no_gpu": true,
+  "no_network_now": true,
+  "request_plan_only": true,
+  "selected_test_successes_now": 0,
+  "stage": "stage12129b_rust_web_controlled_hydration_request",
+  "top_10_hydration_candidates": [
+    {
+      "language": "rust",
+      "lockfile_status": "lockfile_present",
+      "package_manager": "cargo",
+      "priority": 1,
+      "repo_family": "assert-rs/predicates-rs"
+    },
+    {
+      "language": "rust",
+      "lockfile_status": "lockfile_present",
+      "package_manager": "cargo",
+      "priority": 2,
+      "repo_family": "toml-rs/toml"
+    },
+    {
+      "language": "rust",
+      "lockfile_status": "no_cargo_lock_observed_stage12128b",
+      "package_manager": "cargo",
+      "priority": 3,
+      "repo_family": "dtolnay/anyhow"
+    },
+    {
+      "language": "rust",
+      "lockfile_status": "no_cargo_lock_observed_stage12128b",
+      "package_manager": "cargo",
+      "priority": 4,
+      "repo_family": "dtolnay/proc-macro2"
+    },
+    {
+      "language": "rust",
+      "lockfile_status": "no_cargo_lock_observed_stage12128b",
+      "package_manager": "cargo",
+      "priority": 5,
+      "repo_family": "uuid-rs/uuid"
+    },
+    {
+      "language": "web_js_ts_html",
+      "lockfile_status": "package-lock.json_present",
+      "package_manager": "npm",
+      "priority": 6,
+      "repo_family": "moment/luxon"
+    },
+    {
+      "language": "web_js_ts_html",
+      "lockfile_status": "package-lock.json_present",
+      "package_manager": "npm",
+      "priority": 7,
+      "repo_family": "graphql/graphql-js"
+    },
+    {
+      "language": "web_js_ts_html",
+      "lockfile_status": "package-lock.json_present",
+      "package_manager": "npm",
+      "priority": 8,
+      "repo_family": "chaijs/chai"
+    },
+    {
+      "language": "web_js_ts_html",
+      "lockfile_status": "package-lock.json_present",
+      "package_manager": "npm",
+      "priority": 9,
+      "repo_family": "sinonjs/sinon"
+    },
+    {
+      "language": "web_js_ts_html",
+      "lockfile_status": "package-lock.json_present",
+      "package_manager": "npm",
+      "priority": 10,
+      "repo_family": "mochajs/mocha"
+    }
+  ]
+}

@@ -1,0 +1,427 @@
+{
+  "admitted_rows": 0,
+  "artifact_manifest": {
+    "jsonl_outputs": [],
+    "primary_plan": "next_step_spine_aligned_execution_plan.json",
+    "summary": "runs/summaries/stage12420_next_step_spine_aligned_execution_plan.json",
+    "training_package_outputs": []
+  },
+  "claim_boundary": "Stage12420 is a machine-readable next-step execution plan. It separates countable root/task supply, derived projection training data, replay/proof-gap work, and legacy selected-test sanitizer work. It emits no training rows and changes no admission state.",
+  "countable_as_new_proof_floor_rows": 0,
+  "countable_as_new_train_support_rows": 0,
+  "countable_new_rows": 0,
+  "decision": "control_artifact_only_training_blocked_no_rows_admitted",
+  "emitted_rows": 0,
+  "emitted_training_rows": 0,
+  "execution_lanes": [
+    {
+      "current_state": {
+        "current_countable_train_support_tasks": 190,
+        "derived_stage12418_rows_counted_here": 0,
+        "language_counts_countable": {
+          "c_cpp": 10,
+          "python": 41,
+          "rust": 22,
+          "session_unknown_language": 91,
+          "web_js_ts_html": 26
+        },
+        "remaining_gap_to_target": 310,
+        "stage12385_baseline_tasks": 172,
+        "stage12416_net_new_direct_real_log_rows": 18,
+        "target_train_support_rows": 500,
+        "task_counts_countable": {
+          "event_local_transition_observation": 91,
+          "transition_candidate_selection": 17,
+          "transition_continue_or_stop": 25,
+          "transition_evidence_citation": 16,
+          "transition_next_action": 16,
+          "transition_verifier_transition": 25
+        }
+      },
+      "lane_id": "countable_root_task_supply",
+      "next_actions": [
+        "mine genuinely new direct real verifier observations not already normalized or counted",
+        "dedupe by stable root/task/source/verifier lineage before any future admission stage",
+        "prefer source stages with exact command_result_id, verifier_anchor_id, state_update_id, and stop_decision_id"
+      ],
+      "promotion_gates_exact": [
+        "current_countable_train_support_tasks >= 500",
+        "remaining_gap_to_target == 0",
+        "every promoted row has exact non-derived root/task identity and direct real verifier-log lineage",
+        "every promoted row has stable dedupe key absent from the existing countable ledger",
+        "raw_leak_count == 0 and overclaim_count == 0 in the admission artifact",
+        "training_allowed may remain false until downstream trainer and protected-overlap gates also pass"
+      ],
+      "purpose": "increase genuine root/task train-support supply only from non-derivative direct evidence",
+      "reject_conditions_exact": [
+        "source is a derived projection lane such as Stage12216/Stage12418",
+        "source is a control board, request, hash inventory, or blocked lineage audit",
+        "row lacks exact root_lineage_key_hash or exact task/root identity",
+        "row lacks direct real verifier observation anchors",
+        "row duplicates an already countable root/task/training target",
+        "row claims repair, source-heldout, strict-eval, or level3 evidence without the required proof slots"
+      ],
+      "training_allowed": false
+    },
+    {
+      "current_state": {
+        "allowed_projections": [
+          "transition_verifier_transition",
+          "transition_continue_or_stop"
+        ],
+        "countable_as_new_proof_floor_rows": 0,
+        "countable_as_new_train_support_rows": 0,
+        "emitted_sanitized_projection_rows": 292,
+        "guardrail_scan_passed": true,
+        "legacy_input_text_copied_rows": 0,
+        "source_row_count": 146,
+        "source_stage": "stage12216_normalized_verifier_observation_dataset",
+        "target_semantic_counts": {
+          "CONTINUE_DIAGNOSE_FAILURE": 40,
+          "CONTINUE_SINGLE_VERIFIER_EVIDENCE": 106,
+          "FAIL_CURRENT_STATE": 1,
+          "FAIL_TO_PASS": 39,
+          "PASS_CURRENT_BUILD": 21,
+          "PASS_CURRENT_BUILD_AND_RUN": 36,
+          "PASS_CURRENT_STATE": 19,
+          "PASS_TO_PASS": 30
+        },
+        "task_projection_counts": {
+          "transition_continue_or_stop": 146,
+          "transition_verifier_transition": 146
+        }
+      },
+      "lane_id": "derived_projection_training_data",
+      "next_actions": [
+        "keep Stage12418 rows in a derived projection lane with explicit lineage back to Stage12216",
+        "use only sanitized fields and compact target semantics",
+        "do not merge derived rows into countable supply ledgers"
+      ],
+      "promotion_gates_exact": [
+        "guardrail_scan_passed is true",
+        "legacy_input_text_copied_rows == 0",
+        "raw_command_rows == 0 and raw_leak_count == 0 and overclaim_count == 0",
+        "countable_as_new_train_support_rows == 0",
+        "countable_as_new_proof_floor_rows == 0",
+        "allowed_projections are exactly transition_verifier_transition and transition_continue_or_stop"
+      ],
+      "purpose": "sanitized auxiliary objective/projection rows only; no root-supply or proof-floor accounting",
+      "reject_conditions_exact": [
+        "artifact copies raw input_text, command, path, URL, stdout/stderr, diff, patch, or source text",
+        "artifact claims new root/task supply",
+        "artifact claims fail-to-pass repair, patch-trace, source-heldout, strict-eval, level3, or level4 admission",
+        "artifact emits transition_next_action without an explicit later authorization gate",
+        "artifact converts PASS_TO_PASS or PASS_CURRENT_STATE into repair proof"
+      ],
+      "training_allowed": false
+    },
+    {
+      "current_state": {
+        "admitted_rows": 0,
+        "blocked_rows": 14,
+        "causal_linkage_status_counts": {
+          "patch_and_verifier_co_present_ordered_not_causal_proof": 10,
+          "verifier_before_patch_not_causal_proof": 4
+        },
+        "input_rows": 14,
+        "micro_pilot_limit": 2,
+        "micro_pilot_request_count": 2,
+        "replay_attempted_count": 0,
+        "replay_requirements": [
+          "checkout_authoritative_state_before",
+          "apply_patch",
+          "hash_state_after",
+          "run_same_verifier_before_after_if_feasible",
+          "emit_safe_hashes_status_codes_only"
+        ],
+        "required_missing_proof_slots": [
+          "state_before",
+          "state_after",
+          "patch_application",
+          "verifier_relevance",
+          "causal_linkage",
+          "stop_continue",
+          "correct_next_action_policy"
+        ],
+        "safe_return_schema": [
+          "row_ref_hash",
+          "state_before_checkout_status",
+          "state_before_identity_hash",
+          "patch_application_status",
+          "state_after_identity_hash",
+          "verifier_identity_hash",
+          "verifier_before_status_code",
+          "verifier_after_status_code",
+          "verifier_relevance_status",
+          "causal_linkage_status",
+          "stop_continue_status",
+          "correct_next_action_policy_status",
+          "raw_content_policy"
+        ]
+      },
+      "lane_id": "replay_proof_gap_work",
+      "next_actions": [
+        "execute only the bounded Stage12413 micro-pilot requests first",
+        "return safe hashes/status codes only through the Stage12414 safe schema",
+        "promote no proof claim until replay establishes state_before, patch_application, state_after, verifier_relevance, causal_linkage, stop_continue, and correct_next_action_policy"
+      ],
+      "promotion_gates_exact": [
+        "replay_attempted_count > 0 in the replay executor artifact",
+        "state_before_checkout_status == PASS",
+        "patch_application_status == PASS or explicit_no_patch_reason_status == PASS for no-patch rows",
+        "state_before_identity_hash and state_after_identity_hash are present and non-empty",
+        "verifier_before_status_code and verifier_after_status_code are present",
+        "verifier_relevance_status == PASS",
+        "causal_linkage_status == PASS",
+        "stop_continue_status == PASS",
+        "correct_next_action_policy_status == PASS",
+        "raw_content_policy emits no raw commands, paths, locators, outputs, diffs, patches, URLs, issue bodies, or source text"
+      ],
+      "purpose": "turn hash-only proof-gap requests into replay-backed proof, or keep them blocked",
+      "reject_conditions_exact": [
+        "hash-only raw inspection is the only evidence",
+        "verifier_before_patch_not_causal_proof",
+        "patch_and_verifier_co_present_ordered_not_causal_proof",
+        "any required proof slot remains missing or blocked_required_safe_evidence_missing",
+        "FAIL_TO_PASS is claimed without before/after verifier causality",
+        "PASS_TO_PASS or PASS_CURRENT_STATE is treated as repair proof",
+        "raw replay content is emitted into public/model-facing artifacts"
+      ],
+      "training_allowed": false
+    },
+    {
+      "current_state": {
+        "admitted_rows": 0,
+        "decision": "zero_admission_required_schema_fix",
+        "missing_join_key_counts": {
+          "command_result_id": 8,
+          "episode_id": 8,
+          "real_log_record_id": 8,
+          "real_log_stage": 8,
+          "repo_family_hash": 8,
+          "root_lineage_key_hash": 8,
+          "selected_test_anchor_hash": 8,
+          "source_or_test_hash": 8,
+          "state_update_id": 8,
+          "stop_decision_id": 8,
+          "verifier_anchor_id": 8,
+          "verifier_output_class": 8,
+          "verifier_status": 8
+        },
+        "repairable_items": 0,
+        "required_upstream_fields": {
+          "stage12203_12207_12215_real_verifier_logs": [
+            "stable_real_log_record_id",
+            "episode_id",
+            "command_result_id",
+            "verifier_anchor_id",
+            "selected_test_anchor_hash",
+            "source_or_test_hash",
+            "repo_family_hash",
+            "root_lineage_key_hash",
+            "verifier_status",
+            "verifier_output_class",
+            "state_update_id",
+            "stop_decision_id"
+          ],
+          "stage12322_12326_12355_12360_selected_test_sources": [
+            "row_id",
+            "source_row_id",
+            "repo_family_hash",
+            "root_lineage_key_hash",
+            "selected_test_anchor_hash",
+            "source_or_test_hash",
+            "real_log_stage",
+            "real_log_record_id",
+            "episode_id",
+            "command_result_id",
+            "verifier_anchor_id",
+            "verifier_status",
+            "verifier_output_class",
+            "state_update_id",
+            "stop_decision_id"
+          ],
+          "stage12406_source_adapter_candidates": [
+            "source_ref_hash_to_exact_upstream_row_id",
+            "source_ref_hash_to_real_log_stage",
+            "source_ref_hash_to_real_log_record_id",
+            "source_ref_hash_to_episode_id",
+            "source_ref_hash_to_command_result_id",
+            "source_ref_hash_to_verifier_anchor_id",
+            "selected_test_anchor_hash",
+            "source_or_test_hash"
+          ],
+          "stage12407_prioritized_adapter_materialization_worklist": [
+            "work_item_id",
+            "source_adapter_ref_hash",
+            "exact_upstream_row_id",
+            "real_log_stage",
+            "real_log_record_id",
+            "episode_id",
+            "command_result_id",
+            "verifier_anchor_id",
+            "selected_test_anchor_hash",
+            "verifier_output_class"
+          ]
+        },
+        "unrepaired_selected_test_items": 8
+      },
+      "lane_id": "legacy_selected_test_sanitizer_work",
+      "next_actions": [
+        "build a sanitizer/control pass for legacy selected-test model-facing text, or keep these rows legacy-only",
+        "attempt exact joins to Stage12203/Stage12207/Stage12215 real verifier-log records before any future row emission",
+        "preserve a fail-closed path for rows sourced only from adapters, requests, summaries, or hash inventories"
+      ],
+      "promotion_gates_exact": [
+        "one exact Stage12203/Stage12207/Stage12215 real verifier-log record is joined for each promoted item",
+        "stable_real_log_record_id, episode_id, command_result_id, and verifier_anchor_id are present",
+        "selected_test_anchor_hash and source_or_test_hash are present",
+        "repo_family_hash and root_lineage_key_hash are present",
+        "verifier_status and verifier_output_class are present",
+        "state_update_id and stop_decision_id are present",
+        "raw_leak_count == 0 and overclaim_count == 0",
+        "sanitized model-facing projection contains no raw legacy input_text"
+      ],
+      "purpose": "repair or quarantine legacy selected-test rows before any model-facing reuse",
+      "reject_conditions_exact": [
+        "source_ref_hash is not joined to an exact upstream real verifier-log row",
+        "source stage is selected-test adapter/control/review material rather than a direct real verifier-log stage",
+        "row is derived only from Stage12406/Stage12407 hashes",
+        "target_semantic_id is null or blindly reused from legacy selected-test material",
+        "any required join key is missing",
+        "raw legacy input_text, selected-test text, command output, path, diff, or source text would be emitted"
+      ],
+      "training_allowed": false
+    }
+  ],
+  "global_promotion_gates_exact": [
+    "countable train-support supply reaches 500 before general training promotion",
+    "unbounded closed-loop promotion requires at least 20 level_3+ episodes",
+    "unbounded closed-loop promotion requires at least 8 patch-trace episodes",
+    "unbounded closed-loop promotion requires at least 10 repositories",
+    "unbounded closed-loop promotion requires at least 3 languages",
+    "candidate-action floors are met by a later episode quality gate",
+    "no cross-source episode fabrication",
+    "raw leak, overclaim, protected-overlap, and shortcut audits are clean",
+    "trainer changes are contract-only until data gates pass"
+  ],
+  "global_reject_conditions_exact": [
+    "any Stage12420 artifact emits jsonl training rows",
+    "training_allowed is true in any Stage12420 artifact",
+    "admitted_rows or emitted_training_rows is non-zero",
+    "raw commands, outputs, paths, URLs, source text, diffs, patches, or legacy input_text are emitted",
+    "derived projection rows are counted as new root/task supply",
+    "hash-only proof-gap requests are counted as replay proof",
+    "legacy selected-test rows are reused without the required real verifier-log joins and sanitizer pass"
+  ],
+  "input_inventory": {
+    "central_graph_realignment_doc": {
+      "path": "docs/CENTRAL_RESEARCH_GRAPH_WITH_STAGE12194_REALIGNMENT_STAGE12195.md",
+      "present": true,
+      "sha256": "569570543fe2dba0c1278d9c596bec27a083d535fbe700ec2311b8c13a3aba72"
+    },
+    "current_research_spine_doc": {
+      "path": "docs/CURRENT_RESEARCH_SPINE_RECONSTRUCTED.md",
+      "present": true,
+      "sha256": "4a7e728c5c62e6ebbb6230e7d5d5c34d123cf1fc71989a12efa06b14d29aad85"
+    },
+    "research_graph_layering_doc": {
+      "path": "docs/RESEARCH_GRAPH_LAYERING_STAGE12197.md",
+      "present": true,
+      "sha256": "aea2f6ce0347f611897525e28a982386c6eefaff3aa7f1f6575de0ab118da219"
+    },
+    "stage12413_summary": {
+      "path": "runs/summaries/stage12413_open_swe_level3_proof_gap_replay_manifest.json",
+      "present": true,
+      "sha256": "e4930fa3a1aecb3649deac46bed7bdebb34b528cf9a0a4126c3bb170e67d237d"
+    },
+    "stage12415_summary": {
+      "path": "runs/summaries/stage12415_selected_test_lineage_repair_audit.json",
+      "present": true,
+      "sha256": "8ad4f3e917320c67a429f704c4d94a70ecf868e160191758ef2ca2ce75a440fb"
+    },
+    "stage12418_summary": {
+      "path": "runs/summaries/stage12418_normalized_verifier_observation_sanitized_canonicalizer.json",
+      "present": true,
+      "sha256": "23f651f629493f344a4854d09a2a556861b6ea11ae409c22b36d85372301442a"
+    },
+    "stage12419_control": {
+      "path": "runs/local/artifacts/stage12419_current_dataset_control_board_v17/current_dataset_control_board_v17.json",
+      "present": true,
+      "sha256": "812a7e7c31c9d8a82c78b01ca0b2739d16e677e57ec1a9ea55b0c8bcfc79b56f"
+    },
+    "unbounded_task_spine_doc": {
+      "path": "docs/UNBOUNDED_SOFTWARE_TASK_COMPLETION_SPINE_STAGE12195.md",
+      "present": true,
+      "sha256": "86c60b75ae9279a369403bc5996f7fc2003ab40bb1b2f0e771c87e7721e73539"
+    }
+  },
+  "next_stage_recommendation": "stage12421_new_direct_real_verifier_observation_miner",
+  "next_stage_sequence": [
+    "stage12421_new_direct_real_verifier_observation_miner",
+    "stage12422_open_swe_replay_micro_pilot",
+    "stage12423_legacy_selected_test_sanitizer_if_needed"
+  ],
+  "plan_hash": "d1ee8b6e6191e6ced10fa35d",
+  "priority_order": [
+    "stage12421_new_direct_real_verifier_observation_miner",
+    "stage12422_open_swe_replay_micro_pilot",
+    "stage12423_legacy_selected_test_sanitizer_if_needed"
+  ],
+  "promotion_gates": [
+    "countable train-support supply reaches 500 before general training promotion",
+    "unbounded closed-loop promotion requires at least 20 level_3+ episodes",
+    "unbounded closed-loop promotion requires at least 8 patch-trace episodes",
+    "unbounded closed-loop promotion requires at least 10 repositories",
+    "unbounded closed-loop promotion requires at least 3 languages",
+    "candidate-action floors are met by a later episode quality gate",
+    "no cross-source episode fabrication",
+    "raw leak, overclaim, protected-overlap, and shortcut audits are clean",
+    "trainer changes are contract-only until data gates pass"
+  ],
+  "record_type": "spine_aligned_next_step_execution_plan_v1",
+  "reject_conditions": [
+    "any Stage12420 artifact emits jsonl training rows",
+    "training_allowed is true in any Stage12420 artifact",
+    "admitted_rows or emitted_training_rows is non-zero",
+    "raw commands, outputs, paths, URLs, source text, diffs, patches, or legacy input_text are emitted",
+    "derived projection rows are counted as new root/task supply",
+    "hash-only proof-gap requests are counted as replay proof",
+    "legacy selected-test rows are reused without the required real verifier-log joins and sanitizer pass"
+  ],
+  "spine_alignment": {
+    "active_rules": [
+      "control spine artifacts carry current authority for blockers, gates, claim boundaries, and next plans",
+      "bounded transition rows and selected-test rows are auxiliary/projection lanes unless exact verifier-log lineage and proof gates pass",
+      "full task-completion training requires verified episode supervision, not raw freeform imitation",
+      "raw summaries are evidence, not authority"
+    ],
+    "control_spine_used_as_current_authority": "stage12419_control",
+    "present_core_spine_docs": [
+      "central_graph_realignment_doc",
+      "current_research_spine_doc",
+      "research_graph_layering_doc",
+      "unbounded_task_spine_doc"
+    ],
+    "unbounded_episode_floor": {
+      "candidate_action_floors": "must_be_met_by_a_later_episode_quality_gate",
+      "languages": 3,
+      "leak_and_protected_overlap_audits": "must_be_clean",
+      "level3_plus_episodes": 20,
+      "patch_trace_episodes": 8,
+      "repositories": 10
+    }
+  },
+  "stage": "stage12420_next_step_spine_aligned_execution_plan",
+  "stage12420_self_counters": {
+    "admitted_rows": 0,
+    "countable_as_new_proof_floor_rows": 0,
+    "countable_as_new_train_support_rows": 0,
+    "emitted_training_rows": 0,
+    "patch_apply_attempted_count": 0,
+    "replay_attempted_count": 0,
+    "tests_run_count": 0,
+    "training_allowed": false
+  },
+  "training_allowed": false
+}

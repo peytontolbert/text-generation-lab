@@ -1,0 +1,92 @@
+{
+  "by_task_delta": {
+    "transition_candidate_selection": {
+      "base_correct": 89,
+      "delta": 0,
+      "post_correct": 89,
+      "rows": 160
+    },
+    "transition_continue_or_stop": {
+      "base_correct": 128,
+      "delta": 0,
+      "post_correct": 128,
+      "rows": 160
+    },
+    "transition_next_action": {
+      "base_correct": 51,
+      "delta": 1,
+      "post_correct": 52,
+      "rows": 160
+    },
+    "transition_verifier_transition": {
+      "base_correct": 96,
+      "delta": 0,
+      "post_correct": 96,
+      "rows": 160
+    }
+  },
+  "candidate_runtime": "stage12170_transition_next_action_head_diagnostic_probe",
+  "decision": "record_stage12170_as_tiny_standalone_transition_gain_not_product_promotion",
+  "gemma_same_manifest": "386/640",
+  "interpretation": [
+    "The task-specific next_action residual head avoided the Stage12160/12165 broad regression mode.",
+    "The effect is real but tiny: transition_next_action improved from 51/160 to 52/160 and total transition projection from 364/640 to 365/640.",
+    "Candidate_selection, continue_or_stop, and verifier_transition were unchanged under the corrected routed audit.",
+    "The result is below the existing Stage12099 product route at 375/640 and below Gemma at 386/640, so it is diagnostic only."
+  ],
+  "next_recommended_experiment": {
+    "rationale": "Stage12083 already provides the best known next_action semantic base at 59/160. Initialize from that runtime, freeze its semantic head, train only bounded_choice_transition_next_action_head, then evaluate a product route that uses the new source only for transition_next_action.",
+    "required_gates": [
+      "next_action > 59/160 to improve the Stage12099 route component",
+      "candidate_selection/continue/verifier retained through routing from existing selected components",
+      "protected compact gates preserved",
+      "option permutation stable before promotion"
+    ],
+    "stage_hint": "stage12173_transition_next_action_head_from_stage12083_request"
+  },
+  "promotion_status": {
+    "beats_gemma": false,
+    "beats_stage12099_route": false,
+    "promote_as_product_route": false,
+    "protected_gates_preserved": true,
+    "standalone_stage11924_improved": true
+  },
+  "protected_gates": {
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "residual_preserved": true,
+    "smoke_preserved": true,
+    "transition_next_action_improves_stage11924_51": true,
+    "transition_next_action_retains_stage11924_51": true,
+    "transition_projection_beats_gemma_386": false,
+    "transition_projection_beats_stage12099_route_375": false,
+    "transition_projection_improves_stage11924_baseline": true,
+    "transition_projection_retains_stage11924_baseline": true
+  },
+  "scores": {
+    "gemma_transition_correct": 386,
+    "rows": 640,
+    "stage11924_transition_correct": 364,
+    "stage12099_routed_transition_correct": 375,
+    "stage12170_transition_correct": 365
+  },
+  "selected_product_route_before": "stage12099_routed_transition_composite:375/640",
+  "selected_standalone_frontier_before": "stage11924_transition_listwise_head_only:364/640",
+  "stage": "stage12172_transition_next_action_head_diagnostic_decision",
+  "transition_changes_vs_stage11924": {
+    "gain_count": 3,
+    "gained": [
+      "stage11897::stage11896::stage11775::neural_network_building_blocks::python::core_layers_support::patch_impact_source_surface::next_action",
+      "stage11897::stage11896::stage11791::peft::python::method_comparison_sanitizer_support::patch_impact_source_surface::next_action",
+      "stage11897::stage11896::stage11861::hyper_connections::python::manual_hyper_connection_support::patch_impact_source_surface::next_action"
+    ],
+    "loss_count": 2,
+    "lost": [
+      "stage11897::stage11896::stage11799::model_stack_bitnet_wasm::rust::lib::evidence_citation_selected_verifier::next_action",
+      "stage11897::stage11896::stage11787::pytorch::c_cpp::check_torch_mkl_support::answerable_evidence_citation_build_run_constraint::next_action"
+    ],
+    "net": 1
+  }
+}

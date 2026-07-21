@@ -1,0 +1,60 @@
+{
+  "artifact_type": "phase_correct_episode_joiner_contract_summary",
+  "automatic_reject_conditions": [
+    "row contains only operator label or suffix-repair label",
+    "missing command/test/tool observation for verifier claims",
+    "missing state_after for a non-terminal action",
+    "missing patch_trace and no explicit no_patch_reason",
+    "gold target appears in input rendering",
+    "candidate actions are fewer than five or hard negatives fewer than three for a decision state",
+    "source is dependency cache/node_modules/build output rather than project source",
+    "root overlaps protected Stage11507/Stage11924/Stage12099/Gemma heldout/eval lineage"
+  ],
+  "decision": "contract_ready_no_training",
+  "input_atlas": "runs/local/artifacts/stage12187_phase_correct_trace_source_atlas/phase_correct_trace_source_atlas.json",
+  "next_stage": "stage12189_phase_correct_episode_joiner_preflight_or_builder",
+  "output_artifacts": {
+    "contract": "runs/local/artifacts/stage12188_phase_correct_episode_joiner_contract/phase_correct_episode_joiner_contract.json",
+    "readme": "runs/local/artifacts/stage12188_phase_correct_episode_joiner_contract/README.md",
+    "summary": "runs/summaries/stage12188_phase_correct_episode_joiner_contract.json"
+  },
+  "required_outputs": [
+    "episode_records.jsonl",
+    "typed_events.jsonl",
+    "causal_states.jsonl",
+    "candidate_action_sets.jsonl",
+    "observations.jsonl",
+    "patch_traces.jsonl",
+    "verifier_transitions.jsonl",
+    "state_updates.jsonl",
+    "stop_decisions.jsonl",
+    "projection_rows_auxiliary.jsonl",
+    "admission_audit.json",
+    "blocked_candidates.jsonl"
+  ],
+  "scale_floor": {
+    "maximum_single_repo_fraction": 0.03,
+    "maximum_single_template_fraction": 0.05,
+    "minimum_abstain_or_blocked_episodes_per_language": 100,
+    "minimum_fail_to_pass_or_real_repair_episodes_per_language": 250,
+    "minimum_patch_trace_episodes_per_language": 400,
+    "minimum_replayable_episodes_per_language": 1000,
+    "minimum_repositories_per_language": 25
+  },
+  "source_code_modified": false,
+  "stage": "stage12188_phase_correct_episode_joiner_contract",
+  "starter_floor": {
+    "bounded_aux_only_count_allowed_as_primary": 0,
+    "episode_replay_pass_rate": 1.0,
+    "gold_leak_count": 0,
+    "minimum_episodes_with_explicit_no_patch_reason": 4,
+    "minimum_episodes_with_patch_trace": 8,
+    "minimum_languages": 3,
+    "minimum_replayable_episodes": 20,
+    "minimum_repositories": 10,
+    "minimum_stop_decisions": 20,
+    "minimum_verifier_transitions": 20,
+    "schema_validation_pass_rate": 1.0
+  },
+  "training_executed": false
+}

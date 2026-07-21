@@ -1,0 +1,116 @@
+{
+  "chosen_action_type_counts": {
+    "inspect": 9,
+    "patch": 201,
+    "run": 97,
+    "verify": 231
+  },
+  "counts": {
+    "admitted_rows": 0,
+    "horizon_slice_candidates": 538,
+    "max_parent_windows_per_chat_in_selection": 20,
+    "max_slices_per_parent": 4,
+    "raw_guardrail_violations": 0,
+    "selected_parent_windows": 200,
+    "training_rows_emitted": 0,
+    "unique_parent_task_windows": 200
+  },
+  "decision": "horizon_slice_candidates_mined_training_blocked",
+  "guardrails": {
+    "candidate_only": true,
+    "raw_message_text_emitted": false,
+    "raw_patch_body_emitted": false,
+    "raw_tool_arguments_emitted": false,
+    "raw_tool_output_emitted": false,
+    "training_allowed": false
+  },
+  "horizon_counts": {
+    "H10_patch_verifier_loop": 178,
+    "H1_next_action": 200,
+    "H3_micro_loop": 160
+  },
+  "inputs": {
+    "task_windows": "runs/local/artifacts/stage12260_codex_chat_task_boundary_miner/codex_task_windows.jsonl",
+    "tool_pairs": "runs/local/artifacts/stage12259_codex_tool_call_observation_pairer/tool_call_observation_pairs.jsonl"
+  },
+  "known_limitations": [
+    "source_root_label remains missing for inherited stage12260 windows until source-root repair runs",
+    "state_update labels are safe placeholders pending semantic review",
+    "stop_continue labels are weak lifecycle labels, not gold completion labels",
+    "patch-followed-by-verifier is temporal evidence only, not sufficient repair causality",
+    "future actions are masked from candidate_action_set; observation/state_update are target-only for pre-action projections"
+  ],
+  "next_stage": "stage12272_horizon_slice_qc_and_projection_plan",
+  "selection_policy": {
+    "max_parent_windows": 200,
+    "max_parent_windows_per_chat": 20,
+    "max_slices_per_parent": 4,
+    "priority": [
+      "level_2_patch_and_verifier_refs_needs_state_join",
+      "paired_tool_call_count_desc"
+    ]
+  },
+  "stage": "stage12271_horizon_slice_miner_pilot",
+  "top_chat_slice_counts": [
+    [
+      "codex_chat_94178e3cbe26fad56b1d",
+      73
+    ],
+    [
+      "codex_chat_e5d0b6e24e7d5f2097c4",
+      72
+    ],
+    [
+      "codex_chat_a0d8350c4bd166c6d2a0",
+      66
+    ],
+    [
+      "codex_chat_d6bf338eaa50fc67225b",
+      66
+    ],
+    [
+      "codex_chat_7e05f84a7583daf1b3c3",
+      64
+    ],
+    [
+      "codex_chat_fae47acf81bd857835f6",
+      19
+    ],
+    [
+      "codex_chat_f227640ba431ea8816df",
+      11
+    ],
+    [
+      "codex_chat_235a1dbd061049453f69",
+      11
+    ],
+    [
+      "codex_chat_44fa8561b9c36bba31cc",
+      10
+    ],
+    [
+      "codex_chat_9fe6f90341c3a1389ced",
+      9
+    ]
+  ],
+  "validation_level_counts": {
+    "V3_horizon_slice_candidate": 360,
+    "V4_patch_verifier_candidate": 178
+  },
+  "visibility_masks": {
+    "future_actions_visible_to_model": false,
+    "pre_action_input_fields": [
+      "source_refs",
+      "lineage",
+      "state_before",
+      "candidate_action_set"
+    ],
+    "target_or_post_action_fields": [
+      "chosen_action",
+      "observation",
+      "state_update",
+      "stop_continue",
+      "verifier_linkage"
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "stage": "stage12208_level3_expansion_decision",
+  "decision": "use_stage12206_repo_capped_rollup_for_next_training_design_no_more_web_expansion_this_pass",
+  "selected_train_support_artifact": "runs/local/artifacts/stage12206_level3_passfail_training_rollup/level3_passfail_train_support_repo_capped.jsonl",
+  "selected_train_support_count": 67,
+  "full_train_support_artifact": "runs/local/artifacts/stage12206_level3_passfail_training_rollup/level3_passfail_train_support_full.jsonl",
+  "full_train_support_count": 69,
+  "diagnostic_non_passfail_artifact": "runs/local/artifacts/stage12206_level3_passfail_training_rollup/level3_non_passfail_diagnostic.jsonl",
+  "diagnostic_non_passfail_count": 3,
+  "counts": {
+    "repo_capped_language_counts": {
+      "c_cpp": 10,
+      "python": 12,
+      "rust": 11,
+      "web_js_ts_html": 34
+    },
+    "repo_capped_transition_counts": {
+      "FAIL_CURRENT_STATE": 1,
+      "FAIL_TO_PASS": 11,
+      "PASS_CURRENT_BUILD_AND_RUN": 10,
+      "PASS_CURRENT_STATE": 15,
+      "PASS_TO_PASS": 30
+    }
+  },
+  "quality_gates_passed": {
+    "all_records_have_command_result": true,
+    "all_records_have_state_update": true,
+    "all_records_have_stop_decision": true,
+    "visibility_hides_target_control_fields": true,
+    "strict_eval_eligible": false,
+    "train_support_only": true,
+    "env_blocked_excluded_from_main_rollup": true
+  },
+  "accepted_new_sources_this_pass": [
+    "stage12025_controlled_fail_to_pass_expansion_rows via stage12205",
+    "stage12143 PyCQA/flake8 no-install selected-test logs via stage12207",
+    "stage12125 pytest-dev/pluggy and C++ exact selected CTest logs via stage12207"
+  ],
+  "rejected_or_deferred_sources": [
+    {
+      "source": "stage12144 rust hydrated selected-test successes",
+      "reason": "lacks command log files/source-test hash capture/lineage audit; prior dependency hydration provenance; keep as materialization candidate not admitted"
+    },
+    {
+      "source": "stage11535/stage11537 OpenClaw web rows",
+      "reason": "would worsen one-family web concentration and lacks normalized Level-3 episode schema"
+    },
+    {
+      "source": "stage11540/stage11541/stage11543 MCP/SEP web rows",
+      "reason": "heldout-only/do_not_train; do not violate split intent"
+    },
+    {
+      "source": "stage12145 moment/luxon",
+      "reason": "blocked by dependency-path hygiene and prior hydration provenance"
+    }
+  ],
+  "next_recommended_action": "Build a guarded training request that consumes only stage12206 repo-capped pass/fail records as transition-head replay support, with protected canary/residual gates. Separately build new source-clean web roots rather than converting heldout or blocked web artifacts.",
+  "claim_boundary": "This is a data expansion/quality decision only. No training, eval, or model improvement claim."
+}

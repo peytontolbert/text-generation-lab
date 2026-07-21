@@ -1,0 +1,97 @@
+{
+  "accepted_causal_campaign_gap_to_500": 500,
+  "accepted_causal_campaign_root_count": 0,
+  "admission_allowed": false,
+  "artifact_refs": {
+    "canonical_root_ledger": "runs/local/artifacts/stage12547_authoritative_independent_root_ledger/authoritative_independent_root_ledger.jsonl",
+    "claimed_counter_discrepancies": "runs/local/artifacts/stage12547_authoritative_independent_root_ledger/claimed_counter_discrepancies.json",
+    "legacy_demotion_reaudit": "runs/local/artifacts/stage12547_authoritative_independent_root_ledger/legacy_demotion_reaudit.jsonl",
+    "non_root_control_rows": "runs/local/artifacts/stage12547_authoritative_independent_root_ledger/non_root_control_rows.jsonl",
+    "source_native_alias_audit": "runs/local/artifacts/stage12547_authoritative_independent_root_ledger/source_native_alias_audit.jsonl",
+    "unresolved_identity_rows": "runs/local/artifacts/stage12547_authoritative_independent_root_ledger/unresolved_identity_rows.jsonl"
+  },
+  "canonical_candidate_gap_to_500": 474,
+  "canonical_materialized_candidate_root_count": 26,
+  "claim_boundary": "Metadata-only reconciliation. Materialized candidate roots, legacy countable flags, demotion re-audit, and accepted causal campaign roots are separate counters. No projection, inherited scalar, work order, or requested floor grants root admission.",
+  "counter_discrepancies": [
+    {
+      "authoritative_unique_root_count": 26,
+      "claimed_counter": "stage12241.verifier_observation_auxiliary.current_safe_candidate_rows",
+      "claimed_minus_authoritative": 342,
+      "claimed_value": 368,
+      "materialized_surviving_row_count": 101,
+      "reason": "candidate_rows_not_independent_roots"
+    },
+    {
+      "authoritative_unique_root_count": 26,
+      "claimed_counter": "stage12248.headline.stage12242_candidate_backlog_total_reported",
+      "claimed_minus_authoritative": 169,
+      "claimed_value": 195,
+      "materialized_surviving_row_count": 101,
+      "reason": "inherited_backlog_counter_not_materialized_identity_count"
+    },
+    {
+      "authoritative_unique_root_count": 26,
+      "claimed_counter": "stage12448.current_countable_supply_before_future_ingest",
+      "claimed_minus_authoritative": 164,
+      "claimed_value": 190,
+      "materialized_surviving_row_count": 101,
+      "reason": "inherited_supply_counter_not_materialized_identity_count"
+    },
+    {
+      "authoritative_unique_root_count": 26,
+      "claimed_counter": "stage12533.countable_train_support.current_countable_total",
+      "claimed_minus_authoritative": 101,
+      "claimed_value": 127,
+      "materialized_surviving_row_count": 101,
+      "reason": "row_projection_counter_not_independent_root_count"
+    },
+    {
+      "authoritative_unique_root_count": 26,
+      "claimed_counter": "stage12533.source_train_support_rows",
+      "claimed_minus_authoritative": 75,
+      "claimed_value": 101,
+      "materialized_surviving_row_count": 101,
+      "reason": "materialized_row_counter_not_independent_root_count"
+    }
+  ],
+  "coverage": {
+    "category": {
+      "causal_repair_patch_trace": 0,
+      "negative": 3,
+      "safe_refactor": 0,
+      "sealed_transition": 0,
+      "verifier_observation_auxiliary": 23
+    },
+    "language": {
+      "c_cpp": 2,
+      "python": 13,
+      "rust": 5,
+      "web_js_ts_html": 6
+    },
+    "split": {
+      "train_support_only": 26
+    }
+  },
+  "decision": "training_blocked_zero_accepted_causal_roots_and_legacy_accounting_superseded",
+  "input_complete": true,
+  "legacy_demoted_only_root_count_pending_reaudit": 13,
+  "legacy_demotion_false_positive_candidate_root_count": 13,
+  "legacy_demotion_restoration_authorized": false,
+  "legacy_flagged_countable_auxiliary_root_count": 13,
+  "level3_repair_credit_count": 0,
+  "materialized_projection_row_count": 101,
+  "missing_inputs": [],
+  "next_acquisition_lane": "fresh_non_bears_non_python_external_patch_effect_roots_with_same_verifier_before_fail_patch_apply_after_pass_proof",
+  "non_root_control_row_count": 7,
+  "projection_rows_removed_by_canonical_identity_deduplication": 75,
+  "record_type": "authoritative_independent_root_progress_ledger_v2",
+  "same_row_causal_proof_rule": "state_before + observed_action + observation + state_delta/after + same_source proof must coexist on one materialized source row",
+  "source_native_alias_merge_count": 1,
+  "stage": "stage12547_authoritative_independent_root_ledger",
+  "stage_local_identifiable_root_count": 27,
+  "summary_hash": "172d22f2f21a754f8ab96725",
+  "target_unique_roots": 500,
+  "training_allowed": false,
+  "unresolved_identity_row_count": 0
+}

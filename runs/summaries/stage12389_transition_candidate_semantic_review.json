@@ -1,0 +1,252 @@
+{
+  "claim_boundary": "Audit-only semantic review of Stage12388 recovered transition candidates. No Level-3 admission, no patch-trace admission, no strict/source-heldout admission, no scale-progress claim, and no training rows.",
+  "counts_by_repo_family": {
+    "agentkernel-seq2seq-text-lab": {
+      "recommendation_counts": {
+        "needs_manual_review": 24,
+        "rejected_for_stage12390": 48
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 48,
+        "manual_semantic_review_required": 24
+      },
+      "review_status_counts": {
+        "reviewed_blocked": 24,
+        "reviewed_rejected": 48
+      },
+      "total": 72
+    },
+    "bddy": {
+      "recommendation_counts": {
+        "rejected_for_stage12390": 4
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 4
+      },
+      "review_status_counts": {
+        "reviewed_rejected": 4
+      },
+      "total": 4
+    },
+    "clone": {
+      "recommendation_counts": {
+        "rejected_for_stage12390": 3
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 3
+      },
+      "review_status_counts": {
+        "reviewed_rejected": 3
+      },
+      "total": 3
+    },
+    "repository_library": {
+      "recommendation_counts": {
+        "rejected_for_stage12390": 4
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 4
+      },
+      "review_status_counts": {
+        "reviewed_rejected": 4
+      },
+      "total": 4
+    },
+    "staticpeytonsite": {
+      "recommendation_counts": {
+        "rejected_for_stage12390": 7
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 7
+      },
+      "review_status_counts": {
+        "reviewed_rejected": 7
+      },
+      "total": 7
+    },
+    "transformer_10": {
+      "recommendation_counts": {
+        "rejected_for_stage12390": 4
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 4
+      },
+      "review_status_counts": {
+        "reviewed_rejected": 4
+      },
+      "total": 4
+    }
+  },
+  "counts_by_transition_candidate": {
+    "MIXED_PATCH_STATUS_WITH_VERIFIER_FAILURE_OBSERVED_REVIEW": {
+      "recommendation_counts": {
+        "rejected_for_stage12390": 20
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 20
+      },
+      "review_status_counts": {
+        "reviewed_rejected": 20
+      },
+      "total": 20
+    },
+    "MIXED_PATCH_STATUS_WITH_VERIFIER_PASS_OBSERVED_REVIEW": {
+      "recommendation_counts": {
+        "rejected_for_stage12390": 24
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 24
+      },
+      "review_status_counts": {
+        "reviewed_rejected": 24
+      },
+      "total": 24
+    },
+    "PATCH_APPLICATION_FAILED_REVIEW": {
+      "recommendation_counts": {
+        "rejected_for_stage12390": 15
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 15
+      },
+      "review_status_counts": {
+        "reviewed_rejected": 15
+      },
+      "total": 15
+    },
+    "PATCH_APPLIED_WITH_VERIFIER_FAIL_REVIEW": {
+      "recommendation_counts": {
+        "rejected_for_stage12390": 11
+      },
+      "review_status_class_counts": {
+        "hard_rule_rejected": 11
+      },
+      "review_status_counts": {
+        "reviewed_rejected": 11
+      },
+      "total": 11
+    },
+    "PATCH_APPLIED_WITH_VERIFIER_PASS_REVIEW": {
+      "recommendation_counts": {
+        "needs_manual_review": 24
+      },
+      "review_status_class_counts": {
+        "manual_semantic_review_required": 24
+      },
+      "review_status_counts": {
+        "reviewed_blocked": 24
+      },
+      "total": 24
+    }
+  },
+  "decision": "fail_closed_semantic_review_complete_no_training_rows",
+  "global_admission_boundary": {
+    "emit_training_rows": false,
+    "per_row_training_allowed_required": false,
+    "source_heldout_admission_allowed": false,
+    "stage12390_repair_transition_auto_admission_allowed": false,
+    "strict_eval_admission_allowed": false,
+    "training_allowed": false
+  },
+  "hard_rule_counts": {
+    "mixed_patch_status_repair_transition_rejected": 44,
+    "patch_failed_repair_transition_rejected": 15,
+    "self_repo_dominated_scale_claim_blocked": 72,
+    "verifier_nonpass_repair_transition_rejected": 34
+  },
+  "level3_admitted": 0,
+  "new_training_rows_emitted": 0,
+  "next_materialization_action_counts": {
+    "build_manual_semantic_review_packet_before_stage12390": 24,
+    "do_not_emit_training_rows": 94,
+    "exclude_from_stage12390_repair_transition_materialization": 70,
+    "manual_policy_label_review": 24,
+    "manual_repo_identity_review": 24,
+    "manual_state_delta_review": 24,
+    "manual_verifier_relevance_review": 24,
+    "preserve_training_allowed_false": 94
+  },
+  "next_stage": {
+    "allowed_input_from_stage12389": "reviewed audit records only",
+    "auto_admission_allowed": false,
+    "required_before_materialization": [
+      "resolve_repo_identity_semantic_review",
+      "resolve_policy_label_review",
+      "resolve_verifier_relevance_review",
+      "resolve_state_delta_review",
+      "exclude_mixed_patch_status_rows",
+      "exclude_patch_failed_or_verifier_nonpass_rows",
+      "block_self_repo_rows_from_scale_claims"
+    ],
+    "stage": "stage12390",
+    "training_allowed": false
+  },
+  "patch_trace_admitted": 0,
+  "recommendation_counts": {
+    "needs_manual_review": 24,
+    "rejected_for_stage12390": 70
+  },
+  "records_reviewed": 94,
+  "remaining_blocker_counts": {
+    "level3_control_contract_missing": 94,
+    "mixed_patch_status_repair_transition_rejected": 44,
+    "observed_action_only_not_policy_gold": 94,
+    "patch_failed_repair_transition_rejected": 15,
+    "policy_label_not_admitted": 94,
+    "repo_family_low_confidence": 3,
+    "repo_identity_recovery_required": 94,
+    "repo_identity_semantic_review_required": 94,
+    "self_repo_dominated_scale_claim_blocked": 72,
+    "state_delta_semantic_review_required": 94,
+    "verifier_nonpass_repair_transition_rejected": 34,
+    "verifier_relevance_semantic_review_required": 60,
+    "verifier_status_not_training_grade": 34,
+    "verifier_transition_semantic_review_required": 94
+  },
+  "repo_family_counts": {
+    "agentkernel-seq2seq-text-lab": 72,
+    "bddy": 4,
+    "clone": 3,
+    "repository_library": 4,
+    "staticpeytonsite": 7,
+    "transformer_10": 4
+  },
+  "review_status_class_counts": {
+    "hard_rule_rejected": 70,
+    "manual_semantic_review_required": 24
+  },
+  "review_status_counts": {
+    "reviewed_blocked": 24,
+    "reviewed_rejected": 70
+  },
+  "rule_id_counts": {
+    "STAGE12389_GLOBAL_NO_TRAINING_ALLOWED": 94,
+    "STAGE12389_LEVEL3_CONTROL_CONTRACT_STILL_BLOCKED": 94,
+    "STAGE12389_MIXED_PATCH_STATUS_REPAIR_TRANSITION_REJECT": 44,
+    "STAGE12389_PATCH_FAILED_REPAIR_TRANSITION_REJECT": 15,
+    "STAGE12389_POLICY_LABEL_REVIEW_REQUIRED": 94,
+    "STAGE12389_REPO_IDENTITY_SEMANTIC_REVIEW_REQUIRED": 94,
+    "STAGE12389_ROW_TRAINING_ALLOWED_FALSE": 94,
+    "STAGE12389_SELF_REPO_DOMINATED_SCALE_CLAIM_BLOCK": 72,
+    "STAGE12389_STATE_DELTA_REVIEW_REQUIRED": 94,
+    "STAGE12389_STRICT_OR_SOURCE_HELDOUT_NEVER_ADMIT": 94,
+    "STAGE12389_VERIFIER_NONPASS_REPAIR_TRANSITION_REJECT": 34,
+    "STAGE12389_VERIFIER_RELEVANCE_REVIEW_REQUIRED": 94
+  },
+  "scale_progress_claim_allowed": false,
+  "self_repo_dominated_qc_scaffold": true,
+  "source_diversity_claim_allowed": false,
+  "source_heldout_admissible": 0,
+  "source_records": 94,
+  "source_stage": "stage12388_transition_local_candidate_recovery",
+  "stage": "stage12389_transition_candidate_semantic_review",
+  "strict_eval_eligible": 0,
+  "training_allowed": false,
+  "transition_candidate_counts": {
+    "MIXED_PATCH_STATUS_WITH_VERIFIER_FAILURE_OBSERVED_REVIEW": 20,
+    "MIXED_PATCH_STATUS_WITH_VERIFIER_PASS_OBSERVED_REVIEW": 24,
+    "PATCH_APPLICATION_FAILED_REVIEW": 15,
+    "PATCH_APPLIED_WITH_VERIFIER_FAIL_REVIEW": 11,
+    "PATCH_APPLIED_WITH_VERIFIER_PASS_REVIEW": 24
+  }
+}

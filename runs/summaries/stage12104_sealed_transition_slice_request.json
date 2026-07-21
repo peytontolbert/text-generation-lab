@@ -1,0 +1,182 @@
+{
+  "confirmation_metrics": {
+    "failure_interpretation": {
+      "route_above_gemma": "product routing deserves promotion candidate status; standalone consolidation remains separate",
+      "route_below_stage11924": "routing gain was same-manifest brittle",
+      "route_between_stage11924_and_gemma": "routing is useful but not enough; build task-specific heads/adapters from disjoint analogues"
+    },
+    "minimum_to_treat_route_as_real": {
+      "accuracy": ">= Stage11924 selected standalone on same sealed slice",
+      "coverage": "100%",
+      "option_permutation_stable": true,
+      "protected_compact_gates": "unchanged"
+    },
+    "primary": "frozen Stage12099 route accuracy on sealed slice",
+    "strong_confirmation": {
+      "accuracy": "beats Gemma on same sealed slice",
+      "transition_candidate_selection": "retains Stage12096 routed gain",
+      "transition_next_action": "improves relative to Stage11924 and Stage12083 single-runtime baselines"
+    }
+  },
+  "created_at_utc": "2026-07-15T01:08:39Z",
+  "current_scores": {
+    "gemma_same_manifest_target": {
+      "correct": 386,
+      "rows": 640
+    },
+    "product_route_delta_vs_gemma": -11,
+    "product_routed_stage12099": {
+      "accuracy": 0.5859375,
+      "correct": 375,
+      "miss_count": 265,
+      "rows": 640
+    },
+    "standalone_selected_stage11924": {
+      "accuracy": 0.56875,
+      "correct": 364,
+      "coverage": 1.0,
+      "miss_count": 276,
+      "rows": 640
+    }
+  },
+  "decision": "sealed_transition_slice_requested_after_permutation_pass",
+  "do_not_train": true,
+  "frozen_route_under_test": {
+    "transition_candidate_selection": "stage12096_composite",
+    "transition_continue_or_stop": "stage11924_semantic",
+    "transition_next_action": "stage12083_semantic",
+    "transition_verifier_transition": "stage11924_semantic"
+  },
+  "next_data_build_request": {
+    "allocations": {
+      "transition_candidate_selection": {
+        "hard_negatives": [
+          "candidate_change_surface vs verifier_and_build_constraint",
+          "selected_inline_test_anchor vs implementation_only_no_verifier"
+        ],
+        "rows": 60,
+        "why": "Still 68 routed misses and 35 Gemma-only rows despite candidate route lift."
+      },
+      "transition_continue_or_stop": {
+        "hard_negatives": [
+          "premature DONE after targeted test only",
+          "CONTINUE after verifier removed",
+          "ABSTAIN when evidence is sufficient"
+        ],
+        "rows": 30,
+        "why": "Strongest family but still 15 Gemma-only rows and 32 routed misses."
+      },
+      "transition_next_action": {
+        "hard_negatives": [
+          "PLAN_PATCH when RETRIEVE_EVIDENCE is correct",
+          "FINISH when CONTINUE is correct",
+          "ABSTAIN_OR_ROLLBACK when SELECT_TEST is correct"
+        ],
+        "rows": 80,
+        "why": "Largest routed miss family: 101/160 misses; 25 Gemma-only rows remain."
+      },
+      "transition_verifier_transition": {
+        "hard_negatives": [
+          "PASS_CURRENT_BUILD vs PASS_CURRENT_BUILD_AND_RUN",
+          "PASS_CURRENT_STATE vs PASS_TO_PASS",
+          "VERIFIER_REMOVED vs INSUFFICIENT_EVIDENCE"
+        ],
+        "rows": 50,
+        "why": "Plateaued at 96/160 with 22 Gemma-only rows."
+      }
+    },
+    "do_not_train_on_same_manifest_gemma_only_rows": true,
+    "language_balance": {
+      "c_cpp": ">=45 roots",
+      "python": ">=45 roots",
+      "repo_family_cap": "<=10% of any task family",
+      "rust": ">=35 roots",
+      "web_js_ts_html": ">=35 roots"
+    },
+    "row_requirements": [
+      "source/test/verifier evidence visible before candidates",
+      "opaque shuffled labels",
+      "semantic candidate objects with role/artifact/evidence_ids",
+      "no singleton options",
+      "no target string leak before candidates",
+      "root lineage disjoint from the 640-row discovery manifest for strict confirmation"
+    ],
+    "target_total_disjoint_analogues": 220
+  },
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12104_sealed_transition_slice_request/sealed_transition_slice_request.json",
+    "summary_mirror": "runs/summaries/stage12104_sealed_transition_slice_request.json"
+  },
+  "reason": "Stage12099 routed product candidate passed semantic option-permutation stability; next evidence must come from root-disjoint sealed rows.",
+  "sealed_slice_contract": {
+    "language_floor_at_100_rows": {
+      "c_cpp": 20,
+      "mixed_build_config_dependency": 10,
+      "python": 20,
+      "rust": 15,
+      "web_js_ts_html": 15
+    },
+    "minimum_rows": 100,
+    "preferred_rows": 250,
+    "quality_gates": [
+      "visible source/test/verifier evidence before candidates",
+      "semantic candidate objects with role, artifact_type, value, evidence_ids",
+      "deterministic opaque option shuffle asserted",
+      "no singleton option rows",
+      "no target semantic value visible before candidates",
+      "no prompt-target leakage",
+      "no same-root or same-lineage train/eval overlap",
+      "candidate labels are presentation only; evaluation by semantic candidate identity",
+      "all rows runnable through the frozen Stage12099 route"
+    ],
+    "root_lineage": [
+      "root_id disjoint from Stage11897 transition projection rows",
+      "root_lineage_key disjoint from Stage11897/11943/120xx discovery and repair rows",
+      "repo_family overlap allowed only with explicit time/snapshot boundary and audit flag"
+    ],
+    "split": "strict sealed confirmation only; no training/support rows from this slice",
+    "task_balance": {
+      "transition_candidate_selection": {
+        "minimum_rows_at_100": 25,
+        "preferred_rows_at_250": 62,
+        "target_fraction": 0.25
+      },
+      "transition_continue_or_stop": {
+        "minimum_rows_at_100": 15,
+        "preferred_rows_at_250": 38,
+        "target_fraction": 0.15
+      },
+      "transition_next_action": {
+        "minimum_rows_at_100": 35,
+        "preferred_rows_at_250": 88,
+        "target_fraction": 0.35
+      },
+      "transition_verifier_transition": {
+        "minimum_rows_at_100": 25,
+        "preferred_rows_at_250": 62,
+        "target_fraction": 0.25
+      }
+    }
+  },
+  "source_artifacts": {
+    "gap_targeted_data_plan": "runs/summaries/stage12102_task_routed_gap_targeted_data_plan.json",
+    "option_permutation_audit": "runs/summaries/stage12103_task_routed_option_permutation_stability_audit.json",
+    "route_decision": "runs/summaries/stage12100_task_routed_transition_decision.json"
+  },
+  "stage": 12104,
+  "stage12103_permutation_gate": {
+    "blocked_rows": 0,
+    "decision": "option_permutation_stability_passed",
+    "majority_correct_accuracy": 0.5875,
+    "majority_correct_rows": 376,
+    "missing_route_cards": 0,
+    "passed": true,
+    "permutations_per_row": 3,
+    "permuted_correct": 1124,
+    "permuted_rows": 1920,
+    "stable_semantic_prediction_rate": 0.971875,
+    "stable_semantic_prediction_rows": 622,
+    "unanimous_correct_rows": 370
+  },
+  "stage_name": "stage12104_sealed_transition_slice_request"
+}

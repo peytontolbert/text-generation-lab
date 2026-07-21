@@ -1,0 +1,140 @@
+{
+  "blocked_or_request_lanes": {
+    "stage12415_repairable_items": 0,
+    "stage12415_required_upstream_fields": {
+      "stage12203_12207_12215_real_verifier_logs": [
+        "stable_real_log_record_id",
+        "episode_id",
+        "command_result_id",
+        "verifier_anchor_id",
+        "selected_test_anchor_hash",
+        "source_or_test_hash",
+        "repo_family_hash",
+        "root_lineage_key_hash",
+        "verifier_status",
+        "verifier_output_class",
+        "state_update_id",
+        "stop_decision_id"
+      ],
+      "stage12322_12326_12355_12360_selected_test_sources": [
+        "row_id",
+        "source_row_id",
+        "repo_family_hash",
+        "root_lineage_key_hash",
+        "selected_test_anchor_hash",
+        "source_or_test_hash",
+        "real_log_stage",
+        "real_log_record_id",
+        "episode_id",
+        "command_result_id",
+        "verifier_anchor_id",
+        "verifier_status",
+        "verifier_output_class",
+        "state_update_id",
+        "stop_decision_id"
+      ],
+      "stage12406_source_adapter_candidates": [
+        "source_ref_hash_to_exact_upstream_row_id",
+        "source_ref_hash_to_real_log_stage",
+        "source_ref_hash_to_real_log_record_id",
+        "source_ref_hash_to_episode_id",
+        "source_ref_hash_to_command_result_id",
+        "source_ref_hash_to_verifier_anchor_id",
+        "selected_test_anchor_hash",
+        "source_or_test_hash"
+      ],
+      "stage12407_prioritized_adapter_materialization_worklist": [
+        "work_item_id",
+        "source_adapter_ref_hash",
+        "exact_upstream_row_id",
+        "real_log_stage",
+        "real_log_record_id",
+        "episode_id",
+        "command_result_id",
+        "verifier_anchor_id",
+        "selected_test_anchor_hash",
+        "verifier_output_class"
+      ]
+    },
+    "stage12415_unrepaired_selected_test_items": 8
+  },
+  "claim_boundary": "Countable train-support tasks are separated from derived sanitized projections and blocked proof-gap requests. Do not train or claim frontier progress until the 500 task target and QC gates are met.",
+  "countable_train_support": {
+    "remaining_gap_to_500": 310,
+    "stage12385_baseline_tasks": 172,
+    "stage12416_net_new_direct_real_log_rows": 18,
+    "stage12417_current_admitted_train_support_tasks": 190,
+    "training_allowed": false
+  },
+  "decision": "control_board_training_blocked_countable_supply_190_derived_projection_lane_available",
+  "derived_projection_lane": {
+    "stage12418_countable_as_new_train_support_rows": 0,
+    "stage12418_guardrail_scan_passed": true,
+    "stage12418_sanitized_projection_rows": 292,
+    "stage12418_source_record_count": 146,
+    "usage": "objective-shaping/projection-training candidate only; not root-supply accounting and not proof-floor accounting"
+  },
+  "derived_source_overlap_counts": {
+    "stage12205_authoritative_verifier_log_level3_joiner": 59,
+    "stage12207_no_install_selected_test_log_level3_joiner": 5,
+    "stage12210_controlled_triple_level3_joiner": 28,
+    "stage12211_v35_buildrun_level3_converter": 26,
+    "stage12212_v35_buildonly_level3_converter": 21,
+    "stage12215_hydratable_selected_verifier_reexecution": 7,
+    "stage12216_normalized_verifier_observation_dataset": 146
+  },
+  "derived_target_counts": {
+    "CONTINUE_DIAGNOSE_FAILURE": 40,
+    "CONTINUE_SINGLE_VERIFIER_EVIDENCE": 106,
+    "FAIL_CURRENT_STATE": 1,
+    "FAIL_TO_PASS": 39,
+    "PASS_CURRENT_BUILD": 21,
+    "PASS_CURRENT_BUILD_AND_RUN": 36,
+    "PASS_CURRENT_STATE": 19,
+    "PASS_TO_PASS": 30
+  },
+  "guardrail_status": {
+    "known_legacy_model_facing_selected_test_text_present_in_stage12417_rows": true,
+    "recommended_training_source": "use sanitized Stage12416/12418-style projections for new objectives; do not blindly train on raw legacy selected-test input_text",
+    "stage12416_overclaim_count": 0,
+    "stage12416_raw_leak_count": 0,
+    "stage12417_overclaim_count": 0,
+    "stage12417_raw_leak_count": 0,
+    "stage12418_overclaim_count": 0,
+    "stage12418_raw_leak_count": 0
+  },
+  "hard_rules_for_subagents": [
+    "do not count derivative Stage12216 projections as new root supply",
+    "do not count Stage12414/12415 blocked selected-test hashes as rows",
+    "do not count PASS_TO_PASS or PASS_CURRENT_STATE as repair proof",
+    "do not count FAIL_TO_PASS as repair proof unless pre/post patch causality is proven",
+    "do not emit raw command/output/path/source/diff in model-facing artifacts",
+    "do not merge raw legacy input_text into the central sanitized graph without a sanitization pass"
+  ],
+  "language_counts_countable": {
+    "c_cpp": 10,
+    "python": 41,
+    "rust": 22,
+    "session_unknown_language": 91,
+    "web_js_ts_html": 26
+  },
+  "next_stage_plan": {
+    "stage12420": "sanitize selected-test legacy ledger into model-facing central projection rows, or keep it as legacy-only if not needed",
+    "stage12421": "find genuinely new direct real verifier observations, prioritizing Stage12204/12205 source rows not already normalized/countable, with strict dedupe",
+    "stage12422": "execute replay micro-pilot for Stage12413 Open-SWE proof-gap requests to create non-derivative Level-3/patch-effect evidence"
+  },
+  "stage": "stage12419_current_dataset_control_board_v17",
+  "task_counts_countable": {
+    "event_local_transition_observation": 91,
+    "transition_candidate_selection": 17,
+    "transition_continue_or_stop": 25,
+    "transition_evidence_citation": 16,
+    "transition_next_action": 16,
+    "transition_verifier_transition": 25
+  },
+  "training_allowed": false,
+  "training_blockers": [
+    "500_countable_train_support_target_not_reached",
+    "central_sanitized_projection_ledger_not_yet_complete"
+  ]
+}

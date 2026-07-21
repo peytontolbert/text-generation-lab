@@ -1,0 +1,83 @@
+{
+  "admission_levels": {
+    "level_1_verifier_only_no_patch": "command/verifier evidence without patch; auxiliary verifier/stop/state-update support only",
+    "level_3_single_step_closed_loop": "state_before + candidate actions + chosen action + command/tool observation + verifier result + state_update + stop/continue",
+    "level_4_multi_step_maintainer_episode": "two or more causal decision states with evidence updates, patch/verifier transitions, terminal decision"
+  },
+  "central_spine_reference": "docs/UNBOUNDED_SOFTWARE_TASK_COMPLETION_SPINE_STAGE12195.md",
+  "claim_boundary": "This stage controls data expansion; current rollup remains train-support only and does not prove unbounded software task completion.",
+  "current_rollup_counts": {
+    "language_counts": {
+      "c_cpp": 27,
+      "python": 44,
+      "rust": 26,
+      "web_js_ts_html": 45
+    },
+    "repo_capped_rows": 142,
+    "source_heldout_true": 0,
+    "strict_eval_true": 0,
+    "transition_counts": {
+      "FAIL_CURRENT_STATE": 1,
+      "FAIL_TO_PASS": 39,
+      "PASS_CURRENT_BUILD": 21,
+      "PASS_CURRENT_BUILD_AND_RUN": 36,
+      "PASS_CURRENT_STATE": 15,
+      "PASS_TO_PASS": 30
+    }
+  },
+  "current_rollup_reference": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12206_level3_passfail_training_rollup/level3_passfail_train_support_repo_capped.jsonl",
+  "decision": "spine_grounded_expansion_control_ready",
+  "hard_exclusions": [
+    "ENV_BLOCKED as pass/fail training",
+    "ModuleNotFoundError / ImportError / missing dependency as current-state failure",
+    "offline missing crate/package as current-state failure",
+    "collection-only as runnable verifier success",
+    "build-only as selected-test proof",
+    "bounded classifier rows treated as closed-loop episodes",
+    "cross-source patch/verifier joins without same-root lineage proof",
+    "heldout/do_not_train roots in train-support materialization"
+  ],
+  "ledger_reference": "runs/local/artifacts/stage12198_layered_research_ledgers",
+  "next_subagent_work_packets": [
+    {
+      "goal": "increase FAIL_CURRENT_STATE/FAIL_TO_FAIL with real source/test failures, excluding env failures",
+      "output": "candidate list only; main agent materializes deterministic rows",
+      "packet_id": "real_current_state_failure_supply",
+      "required_evidence": [
+        "repo/root path",
+        "command",
+        "cwd",
+        "returncode",
+        "stdout/stderr tail",
+        "why source/test failure not environment failure",
+        "not represented in Stage12206"
+      ]
+    },
+    {
+      "goal": "find patch/diff records with same-root verifier logs to reach level_2/level_3+ episode supply",
+      "output": "classify as level_2, possible_level_3_if_joined, or blocked_cross_source",
+      "packet_id": "same_source_patch_trace_join",
+      "required_evidence": [
+        "diff or patch digest/body",
+        "repo/root lineage",
+        "verifier command/log same root",
+        "state_before/state_after source or what is missing"
+      ]
+    },
+    {
+      "goal": "rank local roots likely to produce PASS/FAIL verifier observations without network/install work",
+      "output": "ranked queue for a separate guarded execution stage",
+      "packet_id": "hydratable_root_reexecution_queue",
+      "required_evidence": [
+        "repo path exists",
+        "deps likely available",
+        "exact CPU command",
+        "expected transition",
+        "risks",
+        "GPU requirement none/cuda:2 only"
+      ]
+    }
+  ],
+  "stage": "stage12214_spine_grounded_expansion_control",
+  "training_authorization": "no training authorized by this control stage"
+}

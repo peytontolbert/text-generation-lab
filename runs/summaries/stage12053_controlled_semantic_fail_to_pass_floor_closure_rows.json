@@ -1,0 +1,1430 @@
+{
+  "admitted_rows": 22,
+  "attempted_fixtures": 25,
+  "claim_boundary": "Controlled semantic fixtures are train-support only. They close verifier-status floor coverage but are not source-heldout or strict eval evidence.",
+  "decision": "admit_controlled_semantic_fail_to_pass_floor_closure_train_support",
+  "fixture_root": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos",
+  "language_counts": {
+    "c_cpp": 6,
+    "python": 6,
+    "rust": 4,
+    "web_js_ts_html": 6
+  },
+  "next_stage_recommendation": {
+    "action": "Merge semantic FAIL_TO_PASS floor-closure rows and run anti-cheat/split audits before any training.",
+    "stage": "stage12054_transition_support_rollup_v34"
+  },
+  "probe_cards": [
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_1_zero_timeout_preserved",
+        "duration_sec": 1.922,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_1_zero_timeout_preserved_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-6tvisjb1'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-fgk3ffd0'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.19s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_1_zero_timeout_preserved",
+      "language_family": "python",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_1_zero_timeout_preserved",
+        "duration_sec": 1.86,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_1_zero_timeout_preserved_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________________________ test_zero_timeout_preserved __________________________\n\n    def test_zero_timeout_preserved():\n>       assert normalize_timeout(0)==0\nE       assert None == 0\nE        +  where None = normalize_timeout(0)\n\ntest_logic.py:3: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-svjh4kkh'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-tosywe9e'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-ls9rn_ns'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_zero_timeout_preserved - assert None...\n1 failed, 3 warnings in 1.18s\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_python_semantic_fixture",
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_1_zero_timeout_preserved",
+        "duration_sec": 1.87,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_1_zero_timeout_preserved_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-_p5eznsl'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-isvwn0jh'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.14s\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_2_case_preserved",
+        "duration_sec": 1.531,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_2_case_preserved_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-us9xc4w7'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-w9emqrfm'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.92s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_2_case_preserved",
+      "language_family": "python",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_2_case_preserved",
+        "duration_sec": 1.418,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_2_case_preserved_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_____________________________ test_case_preserved ______________________________\n\n    def test_case_preserved():\n>       assert key(\"ApiKey\")==\"ApiKey\"\nE       AssertionError: assert 'apikey' == 'ApiKey'\nE         \nE         - ApiKey\nE         + apikey\n\ntest_logic.py:3: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-rjguqewr'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-_dvsk8ot'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-56r_0ewx'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_case_preserved - AssertionError: ass...\n1 failed, 3 warnings in 0.91s\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_python_semantic_fixture",
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_2_case_preserved",
+        "duration_sec": 1.418,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_2_case_preserved_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-umpftlgq'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-pvwcf2gf'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.90s\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_3_negative_clamped",
+        "duration_sec": 1.423,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_3_negative_clamped_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-ff3j8qst'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-diren3_g'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.91s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_3_negative_clamped",
+      "language_family": "python",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_3_negative_clamped",
+        "duration_sec": 1.433,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_3_negative_clamped_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "F                                                                        [100%]\n=================================== FAILURES ===================================\n____________________________ test_negative_clamped _____________________________\n\n    def test_negative_clamped():\n>       assert clamp(-4)==0\nE       assert -4 == 0\nE        +  where -4 = clamp(-4)\n\ntest_logic.py:3: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-sdvdkvfl'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-ujgr_fza'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-wj1t2_xa'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_negative_clamped - assert -4 == 0\n1 failed, 3 warnings in 0.91s\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_python_semantic_fixture",
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_3_negative_clamped",
+        "duration_sec": 1.408,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_3_negative_clamped_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-knvopgwe'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-9ma4spho'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.89s\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_4_none_distinct_from_empty",
+        "duration_sec": 1.433,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_4_none_distinct_from_empty_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-l6vzgb9a'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-9ztrt9yq'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.92s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_4_none_distinct_from_empty",
+      "language_family": "python",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_4_none_distinct_from_empty",
+        "duration_sec": 1.465,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_4_none_distinct_from_empty_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "F                                                                        [100%]\n=================================== FAILURES ===================================\n________________________ test_none_distinct_from_empty _________________________\n\n    def test_none_distinct_from_empty():\n        assert normalize(None)==\"missing\"\n>       assert normalize(\"\")==\"\"\nE       AssertionError: assert 'missing' == ''\nE         \nE         + missing\n\ntest_logic.py:4: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-cinkgubt'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-id9shvyd'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-f8txb_89'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_none_distinct_from_empty - Assertion...\n1 failed, 3 warnings in 0.92s\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_python_semantic_fixture",
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_4_none_distinct_from_empty",
+        "duration_sec": 1.445,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_4_none_distinct_from_empty_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-llvl6jvd'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-883bdn3s'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.91s\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_5_dedupe_order_preserved",
+        "duration_sec": 1.44,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_5_dedupe_order_preserved_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-zsx7s57d'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-yyglvt4h'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.91s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_5_dedupe_order_preserved",
+      "language_family": "python",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_5_dedupe_order_preserved",
+        "duration_sec": 1.457,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_5_dedupe_order_preserved_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________________________ test_dedupe_order_preserved __________________________\n\n    def test_dedupe_order_preserved():\n>       assert dedupe([3,1,3,2])==[3,1,2]\nE       assert [1, 2, 3] == [3, 1, 2]\nE         \nE         At index 0 diff: 1 != 3\nE         Use -v to get more diff\n\ntest_logic.py:3: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-thmy678j'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-s18ismv6'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-p3xaw_58'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_dedupe_order_preserved - assert [1, ...\n1 failed, 3 warnings in 0.93s\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_python_semantic_fixture",
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_5_dedupe_order_preserved",
+        "duration_sec": 1.421,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_5_dedupe_order_preserved_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-3ls859o4'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-smbbk5ex'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.90s\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_6_boundary_inclusive",
+        "duration_sec": 1.42,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_6_boundary_inclusive_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-ufiznafk'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-v8y9u_h8'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.91s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_6_boundary_inclusive",
+      "language_family": "python",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_6_boundary_inclusive",
+        "duration_sec": 1.444,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_6_boundary_inclusive_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "F                                                                        [100%]\n=================================== FAILURES ===================================\n___________________________ test_boundary_inclusive ____________________________\n\n    def test_boundary_inclusive():\n>       assert in_window(10)\nE       assert False\nE        +  where False = in_window(10)\n\ntest_logic.py:3: AssertionError\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-5w2d_14_'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/dev/pytest-cache-files-3px5jib4'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-q56n0crw'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../../../dev::test_boundary_inclusive - assert False\n1 failed, 3 warnings in 0.93s\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_python_semantic_fixture",
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_6_boundary_inclusive",
+        "duration_sec": 1.514,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_6_boundary_inclusive_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-1l39oxea'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-1wccoz_y'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 0.92s\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": false,
+      "baseline": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_7_prefix_checked",
+        "duration_sec": 1.78,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_7_prefix_checked_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-vds0ufzn'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-jwr7xmkx'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.05s\n",
+        "timed_out": false
+      },
+      "fixture_id": "python_7_prefix_checked",
+      "language_family": "python",
+      "mutant": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_7_prefix_checked",
+        "duration_sec": 1.871,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_7_prefix_checked_mutant.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-swa0gmvl'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-5wg8421e'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.13s\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_python_semantic_fixture",
+      "restored": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "-c",
+          "/dev/null",
+          "test_logic.py"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/python_7_prefix_checked",
+        "duration_sec": 1.819,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/python_7_prefix_checked_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": ".                                                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/dev/pytest-cache-files-inz57e60'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n../../../../../../../../home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51\n  /home/peyton/miniconda3/lib/python3.12/site-packages/_pytest/stepwise.py:51: PytestCacheWarning: could not create cache path /dev/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/dev/pytest-cache-files-65k2eepe'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 2 warnings in 1.12s\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_1_zero_id",
+        "duration_sec": 0.081,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_1_zero_id_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture_id": "cpp_1_zero_id",
+      "language_family": "c_cpp",
+      "mutant": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_1_zero_id",
+        "duration_sec": 0.074,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_1_zero_id_mutant.json",
+        "returncode": -6,
+        "stderr_tail": "test_logic: test_logic.cpp:3: int main(): Assertion `keep(0)==0' failed.\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_cpp_semantic_fixture",
+      "restored": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_1_zero_id",
+        "duration_sec": 0.074,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_1_zero_id_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_2_clamp",
+        "duration_sec": 0.075,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_2_clamp_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture_id": "cpp_2_clamp",
+      "language_family": "c_cpp",
+      "mutant": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_2_clamp",
+        "duration_sec": 0.076,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_2_clamp_mutant.json",
+        "returncode": -6,
+        "stderr_tail": "test_logic: test_logic.cpp:3: int main(): Assertion `clamp(-2)==0' failed.\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_cpp_semantic_fixture",
+      "restored": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_2_clamp",
+        "duration_sec": 0.075,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_2_clamp_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_3_inclusive",
+        "duration_sec": 0.077,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_3_inclusive_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture_id": "cpp_3_inclusive",
+      "language_family": "c_cpp",
+      "mutant": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_3_inclusive",
+        "duration_sec": 0.075,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_3_inclusive_mutant.json",
+        "returncode": -6,
+        "stderr_tail": "test_logic: test_logic.cpp:3: int main(): Assertion `in_range(3)' failed.\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_cpp_semantic_fixture",
+      "restored": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_3_inclusive",
+        "duration_sec": 0.074,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_3_inclusive_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_4_case_token",
+        "duration_sec": 0.345,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_4_case_token_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture_id": "cpp_4_case_token",
+      "language_family": "c_cpp",
+      "mutant": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_4_case_token",
+        "duration_sec": 0.327,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_4_case_token_mutant.json",
+        "returncode": -6,
+        "stderr_tail": "test_logic: test_logic.cpp:3: int main(): Assertion `token(\"ApiKey\")==\"ApiKey\"' failed.\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_cpp_semantic_fixture",
+      "restored": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_4_case_token",
+        "duration_sec": 0.333,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_4_case_token_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_5_or_policy",
+        "duration_sec": 0.076,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_5_or_policy_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture_id": "cpp_5_or_policy",
+      "language_family": "c_cpp",
+      "mutant": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_5_or_policy",
+        "duration_sec": 0.076,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_5_or_policy_mutant.json",
+        "returncode": -6,
+        "stderr_tail": "test_logic: test_logic.cpp:3: int main(): Assertion `allowed(true,false)' failed.\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_cpp_semantic_fixture",
+      "restored": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_5_or_policy",
+        "duration_sec": 0.077,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_5_or_policy_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_6_min_len",
+        "duration_sec": 0.326,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_6_min_len_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture_id": "cpp_6_min_len",
+      "language_family": "c_cpp",
+      "mutant": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_6_min_len",
+        "duration_sec": 0.325,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_6_min_len_mutant.json",
+        "returncode": -6,
+        "stderr_tail": "test_logic: test_logic.cpp:3: int main(): Assertion `valid(\"abc\")' failed.\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_cpp_semantic_fixture",
+      "restored": {
+        "command": [
+          "bash",
+          "-lc",
+          "g++ -std=c++17 test_logic.cpp -o test_logic && ./test_logic"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/cpp_6_min_len",
+        "duration_sec": 0.33,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/cpp_6_min_len_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_1_zero_timeout",
+        "duration_sec": 3.617,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_1_zero_timeout_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "rust_1_zero_timeout",
+      "language_family": "rust",
+      "mutant": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_1_zero_timeout",
+        "duration_sec": 3.526,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_1_zero_timeout_mutant.json",
+        "returncode": 101,
+        "stderr_tail": "error: test failed, to rerun pass `--lib`\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "\nrunning 1 test\ntests::zero_timeout --- FAILED\n\nfailures:\n\n---- tests::zero_timeout stdout ----\n\nthread 'tests::zero_timeout' panicked at src/lib.rs:2:64:\nassertion `left == right` failed\n  left: None\n right: Some(0)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\n\nfailures:\n    tests::zero_timeout\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_rust_semantic_fixture",
+      "restored": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_1_zero_timeout",
+        "duration_sec": 3.543,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_1_zero_timeout_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_2_case_token",
+        "duration_sec": 3.68,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_2_case_token_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "rust_2_case_token",
+      "language_family": "rust",
+      "mutant": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_2_case_token",
+        "duration_sec": 3.578,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_2_case_token_mutant.json",
+        "returncode": 101,
+        "stderr_tail": "error: test failed, to rerun pass `--lib`\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "\nrunning 1 test\ntests::case_token --- FAILED\n\nfailures:\n\n---- tests::case_token stdout ----\n\nthread 'tests::case_token' panicked at src/lib.rs:2:62:\nassertion `left == right` failed\n  left: \"apikey\"\n right: \"ApiKey\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\n\nfailures:\n    tests::case_token\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_rust_semantic_fixture",
+      "restored": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_2_case_token",
+        "duration_sec": 3.659,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_2_case_token_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": false,
+      "baseline": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_3_clamp",
+        "duration_sec": 3.446,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_3_clamp_baseline.json",
+        "returncode": 101,
+        "stderr_tail": "warning: unused import: `super::*`\n --> src/lib.rs:2:28\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                            ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` on by default\n\nerror[E0061]: this function takes 0 arguments but 1 argument was supplied\n --> src/lib.rs:2:68\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                    ^^^^^ -- unexpected argument of type `{integer}`\n  |\nnote: function defined here\n --> src/lib.rs:2:49\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                 ^^^^^\nhelp: remove the extra argument\n  |\n2 - #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n2 + #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(),0); assert_eq!(clamp(4),4);}}\n  |\n\nerror[E0308]: mismatched types\n --> src/lib.rs:2:78\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                              ^ expected `()`, found integer\n\nerror[E0061]: this function takes 0 arguments but 1 argument was supplied\n --> src/lib.rs:2:93\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                                             ^^^^^ - unexpected argument of type `{integer}`\n  |\nnote: function defined here\n --> src/lib.rs:2:49\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                 ^^^^^\nhelp: remove the extra argument\n  |\n2 - #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n2 + #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(),4);}}\n  |\n\nerror[E0308]: mismatched types\n --> src/lib.rs:2:102\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                                                      ^ expected `()`, found integer\n\nSome errors have detailed explanations: E0061, E0308.\nFor more information about an error, try `rustc --explain E0061`.\nerror: could not compile `stage12053_rust_3` (lib test) due to 4 previous errors; 1 warning emitted\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture_id": "rust_3_clamp",
+      "language_family": "rust",
+      "mutant": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_3_clamp",
+        "duration_sec": 3.401,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_3_clamp_mutant.json",
+        "returncode": 101,
+        "stderr_tail": "warning: unused import: `super::*`\n --> src/lib.rs:2:28\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                            ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` on by default\n\nerror[E0061]: this function takes 0 arguments but 1 argument was supplied\n --> src/lib.rs:2:68\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                    ^^^^^ -- unexpected argument of type `{integer}`\n  |\nnote: function defined here\n --> src/lib.rs:2:49\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                 ^^^^^\nhelp: remove the extra argument\n  |\n2 - #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n2 + #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(),0); assert_eq!(clamp(4),4);}}\n  |\n\nerror[E0308]: mismatched types\n --> src/lib.rs:2:78\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                              ^ expected `()`, found integer\n\nerror[E0061]: this function takes 0 arguments but 1 argument was supplied\n --> src/lib.rs:2:93\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                                             ^^^^^ - unexpected argument of type `{integer}`\n  |\nnote: function defined here\n --> src/lib.rs:2:49\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                 ^^^^^\nhelp: remove the extra argument\n  |\n2 - #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n2 + #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(),4);}}\n  |\n\nerror[E0308]: mismatched types\n --> src/lib.rs:2:102\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                                                      ^ expected `()`, found integer\n\nSome errors have detailed explanations: E0061, E0308.\nFor more information about an error, try `rustc --explain E0061`.\nerror: could not compile `stage12053_rust_3` (lib test) due to 4 previous errors; 1 warning emitted\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_rust_semantic_fixture",
+      "restored": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_3_clamp",
+        "duration_sec": 3.155,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_3_clamp_restored.json",
+        "returncode": 101,
+        "stderr_tail": "warning: unused import: `super::*`\n --> src/lib.rs:2:28\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                            ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` on by default\n\nerror[E0061]: this function takes 0 arguments but 1 argument was supplied\n --> src/lib.rs:2:68\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                    ^^^^^ -- unexpected argument of type `{integer}`\n  |\nnote: function defined here\n --> src/lib.rs:2:49\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                 ^^^^^\nhelp: remove the extra argument\n  |\n2 - #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n2 + #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(),0); assert_eq!(clamp(4),4);}}\n  |\n\nerror[E0308]: mismatched types\n --> src/lib.rs:2:78\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                              ^ expected `()`, found integer\n\nerror[E0061]: this function takes 0 arguments but 1 argument was supplied\n --> src/lib.rs:2:93\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                                             ^^^^^ - unexpected argument of type `{integer}`\n  |\nnote: function defined here\n --> src/lib.rs:2:49\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                 ^^^^^\nhelp: remove the extra argument\n  |\n2 - #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n2 + #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(),4);}}\n  |\n\nerror[E0308]: mismatched types\n --> src/lib.rs:2:102\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn clamp(){assert_eq!(clamp(-2),0); assert_eq!(clamp(4),4);}}\n  |                                                                                                      ^ expected `()`, found integer\n\nSome errors have detailed explanations: E0061, E0308.\nFor more information about an error, try `rustc --explain E0061`.\nerror: could not compile `stage12053_rust_3` (lib test) due to 4 previous errors; 1 warning emitted\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_4_inclusive",
+        "duration_sec": 3.054,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_4_inclusive_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "rust_4_inclusive",
+      "language_family": "rust",
+      "mutant": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_4_inclusive",
+        "duration_sec": 3.413,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_4_inclusive_mutant.json",
+        "returncode": 101,
+        "stderr_tail": "error: test failed, to rerun pass `--lib`\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "\nrunning 1 test\ntests::inclusive --- FAILED\n\nfailures:\n\n---- tests::inclusive stdout ----\n\nthread 'tests::inclusive' panicked at src/lib.rs:2:61:\nassertion failed: in_range(3)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\n\nfailures:\n    tests::inclusive\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_rust_semantic_fixture",
+      "restored": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_4_inclusive",
+        "duration_sec": 3.598,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_4_inclusive_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": false,
+      "baseline": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_5_dedupe",
+        "duration_sec": 3.591,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_5_dedupe_baseline.json",
+        "returncode": 101,
+        "stderr_tail": "warning: unused import: `super::*`\n --> src/lib.rs:2:28\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                            ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` on by default\n\nerror[E0061]: this function takes 0 arguments but 1 argument was supplied\n --> src/lib.rs:2:69\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                                                                     ^^^^^^ ---------- unexpected argument of type `&[{integer}; 4]`\n  |\nnote: function defined here\n --> src/lib.rs:2:49\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                                                 ^^^^^^\nhelp: remove the extra argument\n  |\n2 - #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n2 + #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(), vec![3,1,2]);}}\n  |\n\nerror[E0308]: mismatched types\n --> src/lib.rs:2:89\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                                                                                         ^^^^^^^^^^^ expected `()`, found `Vec<{integer}>`\n  |\n  = note: expected unit type `()`\n                found struct `Vec<{integer}>`\n  = note: this error originates in the macro `vec` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nSome errors have detailed explanations: E0061, E0308.\nFor more information about an error, try `rustc --explain E0061`.\nerror: could not compile `stage12053_rust_5` (lib test) due to 2 previous errors; 1 warning emitted\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "fixture_id": "rust_5_dedupe",
+      "language_family": "rust",
+      "mutant": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_5_dedupe",
+        "duration_sec": 2.546,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_5_dedupe_mutant.json",
+        "returncode": 101,
+        "stderr_tail": "warning: unused import: `super::*`\n --> src/lib.rs:2:28\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                            ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` on by default\n\nerror[E0282]: type annotations needed for `HashSet<_>`\n --> src/lib.rs:1:71\n  |\n1 | use std::collections::HashSet; pub fn dedupe(xs:&[i32])->Vec<i32>{let mut seen=HashSet::new(); { let mut v:Vec<i32>=xs.iter().copied().co...\n  |                                                                       ^^^^^^^^ -------------- type must be known at this point\n  |\nhelp: consider giving `seen` an explicit type, where the type for type parameter `T` is specified\n  |\n1 | use std::collections::HashSet; pub fn dedupe(xs:&[i32])->Vec<i32>{let mut seen: HashSet<T>=HashSet::new(); { let mut v:Vec<i32>=xs.iter().copied().collect(); v.sort(); v.dedup(); v }}\n  |                                                                               ++++++++++++\n\nFor more information about this error, try `rustc --explain E0282`.\nerror[E0061]: this function takes 0 arguments but 1 argument was supplied\n --> src/lib.rs:2:69\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                                                                     ^^^^^^ ---------- unexpected argument of type `&[{integer}; 4]`\n  |\nnote: function defined here\n --> src/lib.rs:2:49\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                                                 ^^^^^^\nhelp: remove the extra argument\n  |\n2 - #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n2 + #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(), vec![3,1,2]);}}\n  |\n\nerror: could not compile `stage12053_rust_5` (lib) due to 1 previous error\nerror[E0308]: mismatched types\n --> src/lib.rs:2:89\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                                                                                         ^^^^^^^^^^^ expected `()`, found `Vec<{integer}>`\n  |\n  = note: expected unit type `()`\n                found struct `Vec<{integer}>`\n  = note: this error originates in the macro `vec` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nSome errors have detailed explanations: E0061, E0282, E0308.\nFor more information about an error, try `rustc --explain E0061`.\nerror: could not compile `stage12053_rust_5` (lib test) due to 3 previous errors; 1 warning emitted\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_rust_semantic_fixture",
+      "restored": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_5_dedupe",
+        "duration_sec": 2.36,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_5_dedupe_restored.json",
+        "returncode": 101,
+        "stderr_tail": "warning: unused import: `super::*`\n --> src/lib.rs:2:28\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                            ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` on by default\n\nerror[E0061]: this function takes 0 arguments but 1 argument was supplied\n --> src/lib.rs:2:69\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                                                                     ^^^^^^ ---------- unexpected argument of type `&[{integer}; 4]`\n  |\nnote: function defined here\n --> src/lib.rs:2:49\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                                                 ^^^^^^\nhelp: remove the extra argument\n  |\n2 - #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n2 + #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(), vec![3,1,2]);}}\n  |\n\nerror[E0308]: mismatched types\n --> src/lib.rs:2:89\n  |\n2 | #[cfg(test)] mod tests{use super::*; #[test] fn dedupe(){assert_eq!(dedupe(&[3,1,3,2]), vec![3,1,2]);}}\n  |                                                                                         ^^^^^^^^^^^ expected `()`, found `Vec<{integer}>`\n  |\n  = note: expected unit type `()`\n                found struct `Vec<{integer}>`\n  = note: this error originates in the macro `vec` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nSome errors have detailed explanations: E0061, E0308.\nFor more information about an error, try `rustc --explain E0061`.\nerror: could not compile `stage12053_rust_5` (lib test) due to 2 previous errors; 1 warning emitted\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_6_prefix",
+        "duration_sec": 2.573,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_6_prefix_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "rust_6_prefix",
+      "language_family": "rust",
+      "mutant": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_6_prefix",
+        "duration_sec": 2.528,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_6_prefix_mutant.json",
+        "returncode": 101,
+        "stderr_tail": "error: test failed, to rerun pass `--lib`\n\nERROR conda.cli.main_run:execute(127): `conda run cargo test --quiet` failed. (See above for error)\n",
+        "stdout_tail": "\nrunning 1 test\ntests::prefix --- FAILED\n\nfailures:\n\n---- tests::prefix stdout ----\n\nthread 'tests::prefix' panicked at src/lib.rs:2:90:\nassertion failed: !has_prefix(\"bad_clh_abc\")\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\n\nfailures:\n    tests::prefix\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_rust_semantic_fixture",
+      "restored": {
+        "command": [
+          "conda",
+          "run",
+          "-n",
+          "trellis",
+          "cargo",
+          "test",
+          "--quiet"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/rust_6_prefix",
+        "duration_sec": 2.621,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/rust_6_prefix_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_1_zero_port",
+        "duration_sec": 0.185,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_1_zero_port_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "web_1_zero_port",
+      "language_family": "web_js_ts_html",
+      "mutant": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_1_zero_port",
+        "duration_sec": 0.189,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_1_zero_port_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n3000 !== 0\n\n    at file:///data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_1_zero_port/test_logic.js:1:82\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 3000,\n  expected: 0,\n  operator: 'strictEqual'\n}\n\nNode.js v20.19.1\n",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_web_semantic_fixture",
+      "restored": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_1_zero_port",
+        "duration_sec": 0.182,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_1_zero_port_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_2_case_slug",
+        "duration_sec": 0.183,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_2_case_slug_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "web_2_case_slug",
+      "language_family": "web_js_ts_html",
+      "mutant": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_2_case_slug",
+        "duration_sec": 0.19,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_2_case_slug_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'apikey'\n- 'APIKey'\n    at file:///data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_2_case_slug/test_logic.js:1:82\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 'apikey',\n  expected: 'APIKey',\n  operator: 'strictEqual'\n}\n\nNode.js v20.19.1\n",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_web_semantic_fixture",
+      "restored": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_2_case_slug",
+        "duration_sec": 0.184,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_2_case_slug_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_3_clamp",
+        "duration_sec": 0.189,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_3_clamp_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "web_3_clamp",
+      "language_family": "web_js_ts_html",
+      "mutant": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_3_clamp",
+        "duration_sec": 0.18,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_3_clamp_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n-2 !== 0\n\n    at file:///data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_3_clamp/test_logic.js:1:83\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: -2,\n  expected: 0,\n  operator: 'strictEqual'\n}\n\nNode.js v20.19.1\n",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_web_semantic_fixture",
+      "restored": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_3_clamp",
+        "duration_sec": 0.178,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_3_clamp_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_4_inclusive",
+        "duration_sec": 0.153,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_4_inclusive_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "web_4_inclusive",
+      "language_family": "web_js_ts_html",
+      "mutant": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_4_inclusive",
+        "duration_sec": 0.157,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_4_inclusive_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nfalse !== true\n\n    at file:///data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_4_inclusive/test_logic.js:1:85\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: 'strictEqual'\n}\n\nNode.js v20.19.1\n",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_web_semantic_fixture",
+      "restored": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_4_inclusive",
+        "duration_sec": 0.164,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_4_inclusive_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_5_dedupe",
+        "duration_sec": 0.153,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_5_dedupe_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "web_5_dedupe",
+      "language_family": "web_js_ts_html",
+      "mutant": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_5_dedupe",
+        "duration_sec": 0.157,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_5_dedupe_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   1,\n+   2,\n+   3\n-   3,\n-   1,\n-   2\n  ]\n    at file:///data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_5_dedupe/test_logic.js:1:84\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: [ 1, 2, 3 ],\n  expected: [ 3, 1, 2 ],\n  operator: 'deepStrictEqual'\n}\n\nNode.js v20.19.1\n",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_web_semantic_fixture",
+      "restored": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_5_dedupe",
+        "duration_sec": 0.152,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_5_dedupe_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    },
+    {
+      "admitted": true,
+      "baseline": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_6_prefix",
+        "duration_sec": 0.156,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_6_prefix_baseline.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "fixture_id": "web_6_prefix",
+      "language_family": "web_js_ts_html",
+      "mutant": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_6_prefix",
+        "duration_sec": 0.188,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_6_prefix_mutant.json",
+        "returncode": 1,
+        "stderr_tail": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at file:///data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_6_prefix/test_logic.js:1:128\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: true,\n  expected: false,\n  operator: 'strictEqual'\n}\n\nNode.js v20.19.1\n",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "repo_family": "stage12053_web_semantic_fixture",
+      "restored": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--silent"
+        ],
+        "cwd": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/fixture_repos/web_6_prefix",
+        "duration_sec": 0.182,
+        "log_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/logs/web_6_prefix_restored.json",
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "\n> test\n> node test_logic.js --silent\n\n",
+        "timed_out": false
+      },
+      "restored_matches_original": true
+    }
+  ],
+  "repo_family_counts": {
+    "stage12053_cpp_semantic_fixture": 6,
+    "stage12053_python_semantic_fixture": 6,
+    "stage12053_rust_semantic_fixture": 4,
+    "stage12053_web_semantic_fixture": 6
+  },
+  "rows_path": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12053_controlled_semantic_fail_to_pass_floor_closure_rows/controlled_semantic_fail_to_pass_floor_closure_rows.jsonl",
+  "stage": "stage12053_controlled_semantic_fail_to_pass_floor_closure_rows",
+  "status_counts": {
+    "FAIL_TO_PASS": 22
+  },
+  "unique_roots": 22
+}

@@ -1,0 +1,443 @@
+{
+  "acceptance_floor_status": {
+    "admission_floor": "BLOCKED_FAIL_CLOSED",
+    "causal_transition_scope_accounting": "BLOCKED",
+    "checkout_before_anchor_scope_accounting": "BLOCKED",
+    "patch_application_proof_scope_accounting": "BLOCKED",
+    "pilot_level3_floor": "BLOCKED",
+    "pilot_patch_trace_floor": "BLOCKED",
+    "private_reconstruction_not_performed_by_public_artifact": "PASS",
+    "same_verifier_before_after_scope_accounting": "BLOCKED",
+    "stage12431_public_accounting_floor": "PASS",
+    "state_after_scope_accounting": "BLOCKED",
+    "stop_continue_scope_accounting": "BLOCKED",
+    "training_floor": "BLOCKED_FAIL_CLOSED"
+  },
+  "acceptance_floors": {
+    "admitted_rows_must_equal_until_private_summary_passes": 0,
+    "countable_new_rows_must_equal_until_private_summary_passes": 0,
+    "minimum_all_required_slots_complete_for_pilot_pass": 20,
+    "minimum_checkout_before_anchor_present_for_scope_accounting": 100,
+    "minimum_level3_candidates_after_private_replay_for_pilot_pass": 20,
+    "minimum_patch_trace_candidates_for_pilot_pass": 12,
+    "minimum_same_verifier_before_after_for_pilot_pass": 8,
+    "minimum_same_verifier_before_after_present_for_scope_accounting": 100,
+    "minimum_state_transition_anchor_for_pilot_pass": 30,
+    "minimum_stop_continue_anchor_for_pilot_pass": 20,
+    "minimum_stop_continue_present_for_scope_accounting": 100,
+    "overclaim_count_must_equal": 0,
+    "private_dedupe_survivors_must_equal": 100,
+    "private_sampled_rows_must_equal": 100,
+    "protected_split_overlap_count_must_equal": 0,
+    "raw_leak_count_must_equal": 0,
+    "reconstruction_scope_should_attempt_all_dedupe_survivors": 100
+  },
+  "admission_allowed": false,
+  "admitted_rows": 0,
+  "blocker_counts": {
+    "candidate_slots_incomplete": 100,
+    "causal_transition_missing": 100,
+    "checkout_before_anchor_missing": 100,
+    "no_raw_rows_read": 1,
+    "no_replay_execution_in_public_artifact": 1,
+    "no_rows_admitted": 1,
+    "patch_application_proof_missing": 100,
+    "private_reconstruction_not_executed_here": 1,
+    "proof_complete_candidates_zero": 1,
+    "public_artifact_request_only": 1,
+    "same_verifier_before_after_missing": 100,
+    "stage12431_summary_missing_or_invalid": 0,
+    "state_after_missing": 100,
+    "stop_continue_missing": 100,
+    "training_gate_forced_closed": 1
+  },
+  "candidate_supply_rows_are_not_training_rows": true,
+  "claim_boundary": "Stage12432 reads only the Stage12431 public summary and requests private proof-slot reconstruction. It emits no row values and performs no replay, checkout, patch application, verifier, test, admission, or training execution.",
+  "countable_as_new_proof_floor_rows": 0,
+  "countable_as_new_train_support_rows": 0,
+  "countable_new_rows": 0,
+  "countable_rows": 0,
+  "decision": "fail_closed_public_safe_proof_slot_reconstruction_request_no_rows_admitted",
+  "emitted_rows": 0,
+  "emitted_training_rows": 0,
+  "execution_allowed_by_public_artifact": false,
+  "guardrail_scan": {
+    "issue_count": 0,
+    "issues": [],
+    "overclaim_count": 0,
+    "raw_content_policy_keys_checked": [
+      "locator_values_emitted",
+      "private_slot_values_emitted",
+      "raw_commands_emitted",
+      "raw_diffs_emitted",
+      "raw_issue_bodies_emitted",
+      "raw_outputs_emitted",
+      "raw_patches_emitted",
+      "raw_paths_emitted",
+      "raw_trajectories_emitted",
+      "raw_urls_emitted",
+      "row_values_emitted",
+      "schema_field_names_emitted",
+      "source_text_emitted",
+      "training_rows_emitted"
+    ],
+    "raw_leak_count": 0,
+    "scan_passed": true,
+    "scan_scope": "public_request_payload_stage12431_summary_only",
+    "zero_counter_keys_checked": [
+      "admission_allowed",
+      "admitted_rows",
+      "countable_as_new_proof_floor_rows",
+      "countable_as_new_train_support_rows",
+      "countable_new_rows",
+      "countable_rows",
+      "emitted_rows",
+      "emitted_training_rows",
+      "execution_allowed_by_public_artifact",
+      "patch_apply_attempted_count",
+      "raw_content_emitted",
+      "raw_rows_copied",
+      "raw_rows_inspected",
+      "reconstruction_executed_by_public_artifact",
+      "replay_attempted_count",
+      "tests_run_count",
+      "training_allowed"
+    ]
+  },
+  "guardrail_scan_passed": true,
+  "input_summary_hashes": {
+    "stage12431_summary": "cd60bbbd1c5bbc609fc4f86a"
+  },
+  "input_summary_presence": {
+    "stage12431_summary": true
+  },
+  "level3_candidates_after_private_replay": 0,
+  "metadata_candidate_supply_rows": 207489,
+  "next_stage_recommendation": "run_private_proof_slot_reconstruction_for_stage12431_dedupe_survivors_and_emit_public_safe_summary_only",
+  "overclaim_count": 0,
+  "patch_apply_attempted_count": 0,
+  "patch_trace_candidates": 0,
+  "private_dedupe_survivors": 100,
+  "private_only_fields": [
+    "raw_row_identifier",
+    "raw_task_payload",
+    "raw_event_sequence",
+    "raw_locator_value",
+    "raw_command_value",
+    "raw_command_result",
+    "raw_patch_value",
+    "raw_diff_value",
+    "raw_file_path_value",
+    "raw_web_address_value",
+    "raw_issue_text",
+    "raw_source_text",
+    "private_repository_identity",
+    "private_commit_identity",
+    "private_before_anchor_identifier",
+    "private_after_state_identifier",
+    "private_verifier_identity",
+    "private_before_observation",
+    "private_after_observation",
+    "private_stop_or_continue_label"
+  ],
+  "private_reconstruction_request": {
+    "candidate_scope": "stage12431_private_dedupe_survivors",
+    "candidate_scope_count": 100,
+    "private_runner_must_not_return_private_values_to_public": true,
+    "private_runner_output_must_be_public_safe_summary_only": true,
+    "public_artifact_can_execute": false,
+    "public_artifact_reads_stage12431_summary_only": true,
+    "request_status": "REQUESTED_FOR_PRIVATE_RUNNER_ONLY",
+    "required_tasks": [
+      "checkout_before_anchor",
+      "patch_application_proof",
+      "same_verifier_before_after",
+      "causal_transition",
+      "state_after",
+      "stop_continue"
+    ]
+  },
+  "private_reconstruction_tasks": {
+    "causal_transition": {
+      "candidate_scope_count": 100,
+      "failure_policy": "missing_or_incomparable_private_evidence_blocks_candidate",
+      "private_artifacts_required": [
+        "private_failure_before_evidence",
+        "private_success_after_evidence",
+        "private_patch_effect_linkage",
+        "private_non_patch_confounder_check"
+      ],
+      "public_artifact_executes_task": false,
+      "public_summary_counts_required": [
+        "causal_transition_present_count",
+        "causal_transition_missing_count"
+      ],
+      "public_value_policy": "counts_hashes_and_normalized_status_only",
+      "request_status": "private_reconstruction_required",
+      "task": "causal_transition"
+    },
+    "checkout_before_anchor": {
+      "candidate_scope_count": 100,
+      "failure_policy": "missing_or_incomparable_private_evidence_blocks_candidate",
+      "private_artifacts_required": [
+        "private_repository_locator",
+        "private_before_anchor_identifier",
+        "private_checkout_result",
+        "private_workspace_cleanliness_attestation"
+      ],
+      "public_artifact_executes_task": false,
+      "public_summary_counts_required": [
+        "checkout_before_anchor_present_count",
+        "checkout_before_anchor_missing_count"
+      ],
+      "public_value_policy": "counts_hashes_and_normalized_status_only",
+      "request_status": "private_reconstruction_required",
+      "task": "checkout_before_anchor"
+    },
+    "patch_application_proof": {
+      "candidate_scope_count": 100,
+      "failure_policy": "missing_or_incomparable_private_evidence_blocks_candidate",
+      "private_artifacts_required": [
+        "private_patch_payload",
+        "private_application_command",
+        "private_application_exit_status",
+        "private_changed_state_attestation"
+      ],
+      "public_artifact_executes_task": false,
+      "public_summary_counts_required": [
+        "patch_application_proof_present_count",
+        "patch_application_proof_missing_count"
+      ],
+      "public_value_policy": "counts_hashes_and_normalized_status_only",
+      "request_status": "private_reconstruction_required",
+      "task": "patch_application_proof"
+    },
+    "same_verifier_before_after": {
+      "candidate_scope_count": 100,
+      "failure_policy": "missing_or_incomparable_private_evidence_blocks_candidate",
+      "private_artifacts_required": [
+        "private_verifier_identity",
+        "private_before_observation",
+        "private_after_observation",
+        "private_comparable_environment_attestation"
+      ],
+      "public_artifact_executes_task": false,
+      "public_summary_counts_required": [
+        "same_verifier_before_after_present_count",
+        "same_verifier_before_after_missing_count"
+      ],
+      "public_value_policy": "counts_hashes_and_normalized_status_only",
+      "request_status": "private_reconstruction_required",
+      "task": "same_verifier_before_after"
+    },
+    "state_after": {
+      "candidate_scope_count": 100,
+      "failure_policy": "missing_or_incomparable_private_evidence_blocks_candidate",
+      "private_artifacts_required": [
+        "private_after_state_identifier",
+        "private_after_state_cleanliness_attestation",
+        "private_after_state_reproducibility_attestation"
+      ],
+      "public_artifact_executes_task": false,
+      "public_summary_counts_required": [
+        "state_after_present_count",
+        "state_after_missing_count"
+      ],
+      "public_value_policy": "counts_hashes_and_normalized_status_only",
+      "request_status": "private_reconstruction_required",
+      "task": "state_after"
+    },
+    "stop_continue": {
+      "candidate_scope_count": 100,
+      "failure_policy": "missing_or_incomparable_private_evidence_blocks_candidate",
+      "private_artifacts_required": [
+        "private_stop_or_continue_label",
+        "private_label_basis",
+        "private_terminal_or_next_action_attestation"
+      ],
+      "public_artifact_executes_task": false,
+      "public_summary_counts_required": [
+        "stop_continue_present_count",
+        "stop_continue_missing_count"
+      ],
+      "public_value_policy": "counts_hashes_and_normalized_status_only",
+      "request_status": "private_reconstruction_required",
+      "task": "stop_continue"
+    }
+  },
+  "private_sampled_rows": 100,
+  "proof_complete_candidates": 0,
+  "proof_slot_status_counts": {
+    "all_required_slots_complete": 0,
+    "all_required_slots_missing": 100,
+    "candidate_scope_count": 100,
+    "causal_transition_missing": 100,
+    "causal_transition_present": 0,
+    "checkout_before_anchor_missing": 100,
+    "checkout_before_anchor_present": 0,
+    "patch_application_proof_missing": 100,
+    "patch_application_proof_present": 0,
+    "same_verifier_before_after_missing": 100,
+    "same_verifier_before_after_present": 0,
+    "state_after_missing": 100,
+    "state_after_present": 0,
+    "stop_continue_missing": 100,
+    "stop_continue_present": 0
+  },
+  "public_safe_output_schema": {
+    "aggregate_only": true,
+    "allowed_top_level_fields": [
+      "stage",
+      "record_type",
+      "decision",
+      "training_allowed",
+      "admission_allowed",
+      "admitted_rows",
+      "emitted_rows",
+      "countable_new_rows",
+      "metadata_candidate_supply_rows",
+      "private_sampled_rows",
+      "private_dedupe_survivors",
+      "proof_complete_candidates",
+      "proof_slot_status_counts",
+      "blocker_counts",
+      "acceptance_floor_status",
+      "stop_condition_counts",
+      "guardrail_scan_passed",
+      "raw_leak_count",
+      "overclaim_count",
+      "next_stage_recommendation"
+    ],
+    "counts_allowed": true,
+    "forbidden_public_values": [
+      "raw row values",
+      "raw locators",
+      "commands",
+      "command outputs",
+      "patch or diff content",
+      "file path values",
+      "web addresses",
+      "repository identities",
+      "commit identities",
+      "issue body text",
+      "source text",
+      "private proof-slot values"
+    ],
+    "hashes_allowed": true,
+    "normalized_status_allowed": true,
+    "required_public_counts_after_private_reconstruction": [
+      "checkout_before_anchor_present_count",
+      "patch_application_proof_present_count",
+      "same_verifier_before_after_present_count",
+      "causal_transition_present_count",
+      "state_after_present_count",
+      "stop_continue_present_count",
+      "all_required_slots_complete_count",
+      "drop_reason_counts"
+    ]
+  },
+  "raw_content_emitted": false,
+  "raw_content_policy": {
+    "locator_values_emitted": false,
+    "private_slot_values_emitted": false,
+    "raw_commands_emitted": false,
+    "raw_diffs_emitted": false,
+    "raw_issue_bodies_emitted": false,
+    "raw_outputs_emitted": false,
+    "raw_patches_emitted": false,
+    "raw_paths_emitted": false,
+    "raw_trajectories_emitted": false,
+    "raw_urls_emitted": false,
+    "row_values_emitted": false,
+    "schema_field_names_emitted": false,
+    "source_text_emitted": false,
+    "training_rows_emitted": false
+  },
+  "raw_leak_count": 0,
+  "raw_rows_copied": 0,
+  "raw_rows_inspected": 0,
+  "reconstruction_executed_by_public_artifact": false,
+  "record_type": "open_swe_pilot_100_proof_slot_reconstruction_request_control_v1",
+  "replay_attempted_count": 0,
+  "required_private_reconstruction_tasks": [
+    "checkout_before_anchor",
+    "patch_application_proof",
+    "same_verifier_before_after",
+    "causal_transition",
+    "state_after",
+    "stop_continue"
+  ],
+  "source_accounting_table": {
+    "metadata_candidate_supply_rows": 207489,
+    "private_dedupe_survivors": 100,
+    "private_sampled_rows": 100,
+    "proof_complete_candidates": 0
+  },
+  "source_preconditions": {
+    "source_eligible_for_private_reconstruction_request_only": true,
+    "stage12431_admission_allowed_false": true,
+    "stage12431_countable_new_rows_zero": true,
+    "stage12431_expected_public_accounting_present": true,
+    "stage12431_guardrail_scan_passed": true,
+    "stage12431_no_rows_admitted_or_emitted": true,
+    "stage12431_overclaim_count_zero": true,
+    "stage12431_raw_leak_count_zero": true,
+    "stage12431_summary_present": true,
+    "stage12431_training_allowed_false": true
+  },
+  "source_summary": {
+    "source_accounting_table_hash": "5ae857d1b1163c71afbedcc3",
+    "source_admission_allowed": false,
+    "source_admitted_rows": 0,
+    "source_countable_new_rows": 0,
+    "source_decision_hash": "d19bb09ab0197f5d",
+    "source_emitted_rows": 0,
+    "source_guardrail_scan_passed": true,
+    "source_level3_candidates_after_private_replay": 0,
+    "source_metadata_candidate_supply_rows": 207489,
+    "source_overclaim_count": 0,
+    "source_patch_trace_candidates": 0,
+    "source_private_dedupe_survivors": 100,
+    "source_private_sampled_rows": 100,
+    "source_proof_complete_candidates": 0,
+    "source_raw_leak_count": 0,
+    "source_record_type": "open_swe_private_pilot_100_postrun_summary_v1",
+    "source_stage": "stage12431_open_swe_private_pilot_100_postrun_summary",
+    "source_training_allowed": false
+  },
+  "stage": "stage12432_open_swe_pilot_100_proof_slot_reconstruction_request",
+  "stop_condition_counts": {
+    "all_required_slots_incomplete": 100,
+    "candidate_scope_count_mismatch": 0,
+    "causal_transition_missing": 100,
+    "checkout_before_anchor_missing": 100,
+    "patch_application_proof_missing": 100,
+    "private_reconstruction_not_executed_by_public_artifact": 1,
+    "same_verifier_before_after_missing": 100,
+    "stage12431_summary_missing_or_guardrail_not_clean": 0,
+    "state_after_missing": 100,
+    "stop_continue_missing": 100
+  },
+  "stop_conditions": [
+    "stage12431_summary_missing_or_guardrail_not_clean",
+    "stage12431_public_accounting_mismatch",
+    "private_runner_attempts_to_return_private_values_to_public",
+    "any_public_raw_leak_count_nonzero",
+    "any_public_overclaim_count_nonzero",
+    "protected_split_overlap_count_nonzero",
+    "candidate_scope_count_mismatch",
+    "checkout_before_anchor_missing",
+    "patch_application_proof_missing",
+    "same_verifier_before_after_missing",
+    "causal_transition_missing",
+    "state_after_missing",
+    "stop_continue_missing",
+    "same_verifier_before_after_incomparable",
+    "causal_transition_not_attributable_to_patch",
+    "public_summary_contains_private_field_values",
+    "public_postrun_accounting_table_missing_or_incomplete"
+  ],
+  "summary_hash": "95c400d6e4426485e83e8a15",
+  "tests_run_count": 0,
+  "training_allowed": false
+}

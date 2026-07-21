@@ -1,0 +1,169 @@
+{
+  "admissible_for_training": false,
+  "claim_boundary": [
+    "Rendered rows are bounded row candidates, not final train rows.",
+    "Renderer anti-cheat checks pass locally, but lineage review remains a train-admission blocker.",
+    "Source selected-test scopes are preserved; pallets/click uses 102 collected selected IDs consistently.",
+    "No target semantic value, target label, or gold candidate id is placed before the options in prompts."
+  ],
+  "counts": {
+    "blueprints_input": 5,
+    "rendered_rows": 25,
+    "renderer_anti_cheat_failed_rows": 0,
+    "renderer_anti_cheat_pass_rows": 25,
+    "train_admission_ready_rows": 0,
+    "train_admission_rejected_rows": 25
+  },
+  "counts_by_language": {
+    "c_cpp": 10,
+    "python": 15
+  },
+  "counts_by_language_task_family": {
+    "c_cpp": {
+      "candidate_selection": 2,
+      "continue_or_stop": 2,
+      "evidence_citation": 2,
+      "next_action": 2,
+      "verifier_transition": 2
+    },
+    "python": {
+      "candidate_selection": 3,
+      "continue_or_stop": 3,
+      "evidence_citation": 3,
+      "next_action": 3,
+      "verifier_transition": 3
+    }
+  },
+  "counts_by_task_family": {
+    "candidate_selection": 5,
+    "continue_or_stop": 5,
+    "evidence_citation": 5,
+    "next_action": 5,
+    "verifier_transition": 5
+  },
+  "created_at_utc": "2026-07-15T15:13:36Z",
+  "do_not_train": true,
+  "final_decision": "renderer_rows_created_but_not_train_admissible_lineage_review_required",
+  "fixed_seed_string": "stage12128_deterministic_renderer_seed_v1",
+  "hard_rule_compliance": {
+    "deterministic_shuffle_all_rows": true,
+    "non_singleton_all_rows": true,
+    "opaque_display_options_do_not_include_semantic_roles_or_ids": true,
+    "rendered_five_task_families_per_root": true,
+    "semantic_option_uniqueness_all_rows": true,
+    "target_not_visible_before_options_all_rows": true
+  },
+  "inputs": [
+    "runs/local/artifacts/stage12127_selected_test_row_materialization_request/row_blueprints.jsonl",
+    "runs/local/artifacts/stage12127c_ready_candidate_anti_cheat_audit/anti_cheat_audit_results.jsonl",
+    "runs/local/artifacts/stage12120_failed_stage_lessons_atlas/enhanced_failed_stage_lessons_for_subagents.md"
+  ],
+  "no_training_statement": "Stage12128 rendered bounded row candidates and local anti-cheat audit records only; no training, eval promotion, GPU use, network use, dependency install, or test execution was performed.",
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12128_deterministic_renderer_anti_cheat",
+    "rendered_rows": "runs/local/artifacts/stage12128_deterministic_renderer_anti_cheat/rendered_rows.jsonl",
+    "renderer_audit_results": "runs/local/artifacts/stage12128_deterministic_renderer_anti_cheat/renderer_audit_results.jsonl",
+    "summary": "runs/local/artifacts/stage12128_deterministic_renderer_anti_cheat/summary.json",
+    "summary_mirror": "runs/summaries/stage12128_deterministic_renderer_anti_cheat.json"
+  },
+  "pallets_click_selected_test_count_reconciled_to_collected_ids": 102,
+  "renderer_pass_train_admission": false,
+  "stage": 12128,
+  "stage_name": "stage12128_deterministic_renderer_anti_cheat",
+  "top_train_admission_blockers": [
+    [
+      "not_train_admissible_lineage_review_required",
+      25
+    ]
+  ],
+  "top_warnings": [
+    [
+      "later_rows_must_have_non_singleton_candidate_options",
+      25
+    ],
+    [
+      "later_rows_must_have_non_singleton_options",
+      25
+    ],
+    [
+      "later_rows_must_not_expose_target_semantic_value_before_options",
+      25
+    ],
+    [
+      "later_rows_must_not_show_target_semantic_value_before_options",
+      25
+    ],
+    [
+      "later_rows_must_use_deterministic_option_shuffle",
+      25
+    ],
+    [
+      "later_rows_must_use_opaque_labels",
+      25
+    ],
+    [
+      "later_rows_must_use_semantic_candidate_ids_not_answer_letters_only",
+      25
+    ],
+    [
+      "lineage_not_conclusively_discoverable_from_summary_scan_review_required",
+      25
+    ],
+    [
+      "lineage_review_required_blocks_train_admission",
+      25
+    ],
+    [
+      "lineage_review_still_required_do_not_mark_training_admissible",
+      25
+    ],
+    [
+      "source_blueprint_audit_blockers_preserved",
+      25
+    ],
+    [
+      "structured_inputs_do_not_prove_protected_lineage_clean",
+      25
+    ],
+    [
+      "summary_scan_found_no_candidate_specific_protected_overlap_hits_but_absence_is_not_proof",
+      25
+    ],
+    [
+      "single_ctest_id_must_not_be_rendered_as_singleton_or_obvious_test_name_shortcut",
+      10
+    ],
+    [
+      "pre_action_only_ok_for_this_audit_no_prompt_or_options_material_generated",
+      10
+    ],
+    [
+      "stage12124_pre_action_only_no_prompt_or_options_material_generated",
+      10
+    ],
+    [
+      "selected_test_scope_must_remain_ctest_regex_^test-cpp17$_and_not_full_suite_claim",
+      5
+    ],
+    [
+      "selected_test_scope_must_remain_ctest_regex_^basictest$_and_not_full_suite_claim",
+      5
+    ],
+    [
+      "selected_test_id_count_differs_from_audit_count:ids=102;audit=80;renderer_must_reconcile_before_rows",
+      5
+    ],
+    [
+      "selected_test_scope_must_remain_tests/test_basic.py_and_not_full_suite_claim",
+      5
+    ],
+    [
+      "selected_test_scope_must_remain_tests/test_api.py_and_not_full_suite_claim",
+      5
+    ],
+    [
+      "selected_test_scope_must_remain_testing/test_details.py_selected_ids_and_not_full_suite_claim",
+      5
+    ]
+  ]
+}

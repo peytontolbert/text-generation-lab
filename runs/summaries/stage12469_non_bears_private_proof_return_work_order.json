@@ -1,0 +1,263 @@
+{
+  "active_lane_refs": [
+    "lane_ref_non_bears_external_benchmark_patch_log_preflight",
+    "lane_ref_non_bears_private_review_pivot_preflight",
+    "lane_ref_non_bears_trace_transition_repair_proof_preflight"
+  ],
+  "admission_allowed": false,
+  "allowed_lane_refs": [
+    "lane_ref_non_bears_external_benchmark_patch_log_preflight",
+    "lane_ref_non_bears_private_review_pivot_preflight",
+    "lane_ref_non_bears_trace_transition_repair_proof_preflight"
+  ],
+  "allowed_return_top_level_keys": [
+    "admission_after_return_allowed",
+    "anti_leak_pass",
+    "blocker_codes",
+    "execution_performed_by_stage",
+    "external_repair_credit_after_return_allowed",
+    "hydration_performed_by_stage",
+    "lane_ref",
+    "language_family_label",
+    "packaging_after_return_allowed",
+    "proof_complete",
+    "proof_request_id",
+    "replay_performed_by_stage",
+    "requested_status_family",
+    "slot_hashes",
+    "slot_statuses",
+    "training_after_return_allowed"
+  ],
+  "artifact_hashes": {
+    "guardrail_scan": "8f02f7e742d99f8ccbb9c8ee",
+    "private_return_work_items": "27a2bfb3ef8e14ee490d2401",
+    "shards": "dc5afdc9840b870921101c33"
+  },
+  "artifact_refs": {
+    "guardrail_scan": "stage12469_guardrail_scan_json",
+    "private_return_work_items": "stage12469_private_return_work_items_jsonl",
+    "shards": [
+      "stage12469_private_return_work_order_shard_01.json",
+      "stage12469_private_return_work_order_shard_02.json",
+      "stage12469_private_return_work_order_shard_03.json",
+      "stage12469_private_return_work_order_shard_04.json"
+    ],
+    "summary": "stage12469_summary_json",
+    "work_order_manifest": "stage12469_work_order_manifest_json"
+  },
+  "blockers": [],
+  "claim_boundary": "Work-order artifact only. Stage12469 produces hash-only private return instructions and performs no private execution, hydration, replay, network access, admission, packaging, or training.",
+  "decision": "fail_closed_private_return_work_order_ready_zero_credit",
+  "emitted_training_rows": 0,
+  "execution_performed_by_stage": false,
+  "executor_contract": {
+    "language_priority_hint_is_not_verified_language_evidence": true,
+    "proof_complete_must_fail_closed_unless_all_required_slots_are_present": true,
+    "return_rows_must_include_all_required_common_and_lane_specific_slots": true,
+    "return_rows_must_use_literal_present_for_required_slot_statuses": true,
+    "return_rows_must_use_non_placeholder_hashes_for_required_slot_hashes": true,
+    "return_rows_must_use_only_allowed_top_level_keys": true,
+    "return_rows_must_use_only_valid_language_labels": true,
+    "stage12468_validator_must_validate_before_any_credit_claim": true,
+    "write_return_rows_to_expected_return_path": true
+  },
+  "expected_return_path": "runs/local/artifacts/stage12467_non_bears_trace_transition_repair_proof_request_preflight/private_proof_slot_returns.jsonl",
+  "expected_return_path_is_exact_stage12468_validator_input": true,
+  "external_comparable_repair_credit_count": 0,
+  "guardrail_scan_passed": true,
+  "hydration_performed_by_stage": false,
+  "lane_specific_required_slots": {
+    "lane_ref_non_bears_external_benchmark_patch_log_preflight": [
+      "patch_diff_ref_hash",
+      "pre_status_fail_ref",
+      "post_status_pass_ref",
+      "same_verifier_identity_ref",
+      "same_source_lineage_ref",
+      "anti_leak_public_rendering_pass"
+    ],
+    "lane_ref_non_bears_private_review_pivot_preflight": [
+      "non_self_identity_ref",
+      "safe_semantic_extraction_ref",
+      "selected_verifier_relevance_ref",
+      "state_delta_semantics_ref",
+      "unique_patch_verifier_binding_ref",
+      "anti_leak_public_rendering_pass"
+    ],
+    "lane_ref_non_bears_trace_transition_repair_proof_preflight": [
+      "safe_transition_record_refs",
+      "checkout_before_ref_hash",
+      "patch_apply_ref_hash",
+      "same_verifier_before_after_ref_hash",
+      "before_status_fail",
+      "after_or_before_plus_patch_status_pass",
+      "causal_linkage_ref",
+      "anti_leak_public_rendering_pass"
+    ]
+  },
+  "language_counts": {
+    "c_cpp": 6,
+    "python": 5,
+    "rust": 6,
+    "web_js_ts_html": 5
+  },
+  "non_actions": [
+    "does_not_execute_tests",
+    "does_not_hydrate_sources",
+    "does_not_apply_patches",
+    "does_not_checkout_repositories",
+    "does_not_admit_rows",
+    "does_not_package_rows",
+    "does_not_emit_training_rows",
+    "does_not_train",
+    "does_not_use_network"
+  ],
+  "packaging_allowed": false,
+  "placeholder_hash_rejection_rules": {
+    "dummy_repeated_hashes_rejected": true,
+    "malformed_hash_candidates_rejected": "must_match_24_32_40_64_hex_or_sha256_colon_64_hex",
+    "non_hex_or_unapproved_ref_shapes_rejected": true,
+    "non_string_hashes_rejected": true,
+    "placeholder_values_rejected": [
+      "",
+      "blocked",
+      "claim",
+      "claimed",
+      "claimed_only",
+      "equivalent",
+      "fail",
+      "false",
+      "missing",
+      "n_a",
+      "na",
+      "no",
+      "none",
+      "not_applicable",
+      "null",
+      "ok",
+      "pass",
+      "passed",
+      "placeholder",
+      "present",
+      "proven",
+      "redacted",
+      "tbd",
+      "todo",
+      "true",
+      "unknown",
+      "yes"
+    ],
+    "whitespace_hashes_rejected": true
+  },
+  "public_safe_policy": "no raw paths/urls/commands/shas/repo names/diffs/stdout/stderr/source in public artifacts except the exact declared private return artifact path",
+  "raw_leak_count": 0,
+  "record_type": "stage12469_non_bears_private_proof_return_work_order_summary_v1",
+  "remaining_external_fail_to_pass_gap": 15,
+  "replay_performed_by_stage": false,
+  "request_count": 22,
+  "request_count_bucket": "10-24",
+  "request_count_matches_stage12467": true,
+  "requested_status_family": "external_comparable_fail_to_pass",
+  "required_common_slots": [
+    "source_root_label_hash",
+    "language_family_label",
+    "buggy_state_ref_hash",
+    "fixed_or_patch_state_ref_hash",
+    "checkout_before_ref_hash",
+    "checkout_after_or_solution_ref_hash",
+    "patch_ref_hash",
+    "patch_diff_ref_hash",
+    "patch_apply_result_ref_hash",
+    "same_source_verifier_identity_hash",
+    "same_verifier_identity_ref_hash",
+    "before_verifier_command_ref_hash",
+    "before_verifier_output_ref_hash",
+    "verifier_output_ref_hashes",
+    "before_verifier_status_fail",
+    "before_status_fail",
+    "after_or_before_plus_patch_verifier_command_ref_hash",
+    "after_or_before_plus_patch_verifier_output_ref_hash",
+    "after_or_before_plus_patch_verifier_status_pass",
+    "after_or_before_plus_patch_status_pass",
+    "verifier_relevance_ref_hash",
+    "ordered_patch_before_pass_causality_ref_hash",
+    "state_before_semantic_codes_ref_hash",
+    "state_after_semantic_codes_ref_hash",
+    "candidate_action_set_ref_hash",
+    "stop_continue_label_ref_hash",
+    "anti_leak_public_rendering_pass",
+    "protected_overlap_audit_pass"
+  ],
+  "required_explicit_present_slots": [
+    "before_verifier_status_fail",
+    "before_status_fail",
+    "after_or_before_plus_patch_verifier_status_pass",
+    "after_or_before_plus_patch_status_pass",
+    "anti_leak_public_rendering_pass",
+    "protected_overlap_audit_pass"
+  ],
+  "schema_issue_count": 0,
+  "sealed_eval_rows": 0,
+  "shard_policy": {
+    "enabled": true,
+    "max_requests_per_shard": 6,
+    "shard_count": 4,
+    "shards": [
+      {
+        "request_count": 6,
+        "shard_artifact_ref": "stage12469_private_return_work_order_shard_01.json",
+        "shard_hash": "c318d6d134b781715f99f9dd",
+        "shard_id": "stage12469_non_bears_private_return_shard_01"
+      },
+      {
+        "request_count": 6,
+        "shard_artifact_ref": "stage12469_private_return_work_order_shard_02.json",
+        "shard_hash": "5f2ea7d52c319bf135603b6b",
+        "shard_id": "stage12469_non_bears_private_return_shard_02"
+      },
+      {
+        "request_count": 6,
+        "shard_artifact_ref": "stage12469_private_return_work_order_shard_03.json",
+        "shard_hash": "81a4f8485c2dfd81bef10ce5",
+        "shard_id": "stage12469_non_bears_private_return_shard_03"
+      },
+      {
+        "request_count": 4,
+        "shard_artifact_ref": "stage12469_private_return_work_order_shard_04.json",
+        "shard_hash": "76ef5bd3f82be693e276205b",
+        "shard_id": "stage12469_non_bears_private_return_shard_04"
+      }
+    ]
+  },
+  "slot_acceptance_rules": [
+    "every_stage12467_required_proof_slot_status_must_equal_literal_present",
+    "every_stage12467_required_proof_slot_hash_must_be_24_32_40_64_hex_or_sha256_colon_64_hex_and_non_placeholder",
+    "missing_not_applicable_blocked_unknown_claimed_todo_na_true_pass_and_equivalents_rejected",
+    "before_fail_and_after_or_before_plus_patch_pass_slots_must_be_present",
+    "anti_leak_public_rendering_pass_and_protected_overlap_audit_pass_must_be_present",
+    "lane_ref_must_be_one_of_stage12467_request_item_lane_refs",
+    "requested_status_family_must_be_external_comparable_fail_to_pass",
+    "pass_to_pass_metadata_co_presence_control_and_selected_test_only_reasons_rejected",
+    "raw_public_keys_or_raw_string_patterns_rejected"
+  ],
+  "source_input_hashes": {
+    "stage12467_request_items": "e94f03748cdfe0db060cb7c4",
+    "stage12467_summary": "3ef7b60a7454e02e26d68a95",
+    "stage12468_summary": "12a954eaad40c889abf4d3c8",
+    "stage12468_validator_contract": "db7261eaf5c080eeb4a2338b"
+  },
+  "source_stage_refs": [
+    "stage12467_non_bears_trace_transition_repair_proof_request_preflight",
+    "stage12468_non_bears_patch_effect_private_return_validator"
+  ],
+  "stage": "stage12469_non_bears_private_proof_return_work_order",
+  "stage12467_request_item_count": 22,
+  "summary_hash": "9ddd1e8d115efee595c48b95",
+  "training_allowed": false,
+  "valid_language_labels": [
+    "c_cpp",
+    "python",
+    "rust",
+    "web_js_ts_html"
+  ],
+  "work_order_manifest_hash": "5c0837495cecbf329ff20dc6"
+}

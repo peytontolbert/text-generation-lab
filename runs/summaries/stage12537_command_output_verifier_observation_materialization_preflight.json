@@ -1,0 +1,57 @@
+{
+  "artifact_refs": {
+    "blocker_worklist": "runs/local/artifacts/stage12537_command_output_verifier_observation_materialization_preflight/real_command_output_verifier_observation_blocker_worklist.jsonl",
+    "candidate_rows": "runs/local/artifacts/stage12537_command_output_verifier_observation_materialization_preflight/real_command_output_verifier_observation_candidate_rows.jsonl",
+    "provenance_audit": "runs/local/artifacts/stage12537_command_output_verifier_observation_materialization_preflight/command_output_observation_provenance_audit.json",
+    "summary": "runs/summaries/stage12537_command_output_verifier_observation_materialization_preflight.json"
+  },
+  "blocked_reason_counts": {
+    "controlled_fixture_like_not_materialized": 36,
+    "derived_sanitized_projection_lacks_independent_command_output_hash_provenance": 292,
+    "missing_actual_verifier_command_output_observation_provenance": 54,
+    "projection_rows_lack_stdout_stderr_digest_fields_required_by_stage12537": 26,
+    "unsupported_or_forbidden_target_status_for_stage12537_preflight": 126
+  },
+  "blocker_worklist_row_count": 451,
+  "candidate_language_counts": {
+    "c_cpp": 2,
+    "python": 5,
+    "rust": 6
+  },
+  "candidate_row_count": 13,
+  "candidate_status_counts": {
+    "FAIL_CURRENT_STATE": 1,
+    "PASS_CURRENT_STATE": 12
+  },
+  "claim_boundary": "Stage12537 only materializes sanitized command-output verifier-observation candidate rows from existing local artifacts. It grants no training admission, no repair credit, no patch-trace credit, no strict-eval/source-heldout eligibility, no Level3/Level4 admission, and no product-progress claim.",
+  "countable_train_support": false,
+  "decision": "real_command_output_verifier_observation_candidates_materialized_preflight_only",
+  "fail_to_pass_claim_admitted_rows": 0,
+  "guardrail_scan_passed": true,
+  "input_hashes": {
+    "stage12216_rows": "3a44c97b917f02a8183d7688",
+    "stage12418_rows": "c3a315baf0597f420fbdc1b6",
+    "stage12421_rows": "da4d26a6ae21fc821bb92b31",
+    "stage12534_schema": "92593573bcb778533e4943b8",
+    "stage12536_repair_requirements": "56612c928f8f74c451b68ada"
+  },
+  "level3_admitted_rows": 0,
+  "new_countable_train_support_count": 0,
+  "next_stage": "run_stage12534_validate_supply_on_stage12537_candidate_rows_then_separate_semantic_review",
+  "patch_trace_admitted_rows": 0,
+  "raw_leak_count": 0,
+  "record_type": "real_command_output_verifier_observation_materialization_preflight_v1",
+  "repair_claim_admitted_rows": 0,
+  "source_heldout_admissible_count": 0,
+  "stage": "stage12537_command_output_verifier_observation_materialization_preflight",
+  "stage12216_rows_scanned": 146,
+  "stage12216_rows_with_actual_command_output_observation_provenance": 92,
+  "strict_eval_eligible_count": 0,
+  "training_allowed": false,
+  "training_blockers": [
+    "stage12537_is_materialization_preflight_only",
+    "stage12534_cli_validation_not_run_to_preserve_stage12537_file_ownership",
+    "separate_semantic_review_not_passed",
+    "500_countable_train_support_floor_not_reached"
+  ]
+}

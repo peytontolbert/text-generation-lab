@@ -1,0 +1,92 @@
+{
+  "claim_boundary": "Route confirmation audit only. Stage12099 is permutation-stable but lacks sealed/root-disjoint confirmation.",
+  "decision": "stage12099_route_permutation_stable_but_not_sealed_confirmed",
+  "minimum_sealed_slice_gate": {
+    "language_floors_at_100": {
+      "c_cpp": 20,
+      "mixed_build_config_dependency": 10,
+      "python": 20,
+      "rust": 15,
+      "web_js_ts_html": 15
+    },
+    "lineage": [
+      "root-disjoint from Stage11897",
+      "root-disjoint from Stage11943",
+      "root-disjoint from all Stage120xx discovery/repair/training roots",
+      "root-disjoint from prior admitted diagnostic roots"
+    ],
+    "preferred_rows": 250,
+    "rows": 100,
+    "task_floors_at_100": {
+      "transition_candidate_selection": 25,
+      "transition_continue_or_stop": 15,
+      "transition_next_action": 35,
+      "transition_verifier_transition": 25
+    }
+  },
+  "next_allowed_stage": {
+    "purpose": "Acquire/admit root-disjoint sealed transition rows before scoring Stage12099 as a product route.",
+    "stage": "stage12241_sealed_transition_slice_acquisition_request",
+    "training_allowed": false
+  },
+  "option_permutation_status": {
+    "exists": true,
+    "gate": "passes >=375/640 majority and >=0.95 preferred stability",
+    "majority_correct": "376/640",
+    "permutations_per_row": 3,
+    "source_stage": "stage12103",
+    "stable_semantic_prediction_rate": 0.971875,
+    "stable_semantic_predictions": "622/640"
+  },
+  "routed_candidate": {
+    "accuracy": 0.5859375,
+    "delta_vs_gemma": -11,
+    "delta_vs_stage11924": 11,
+    "route_components": {
+      "transition_candidate_selection": {
+        "runtime": "stage12096_composite",
+        "score": "92/160"
+      },
+      "transition_continue_or_stop": {
+        "runtime": "stage11924_semantic",
+        "score": "128/160"
+      },
+      "transition_next_action": {
+        "runtime": "stage12083_semantic",
+        "score": "59/160"
+      },
+      "transition_verifier_transition": {
+        "runtime": "stage11924_semantic",
+        "score": "96/160"
+      }
+    },
+    "score": "375/640",
+    "stage": "stage12099_routed_product_candidate",
+    "status": "candidate_route_only"
+  },
+  "sealed_confirmation_status": {
+    "exists": false,
+    "known_blockers": [
+      "stage12105 could not materialize minimum sealed 100 from existing rows",
+      "stage12119 admitted no rows",
+      "stage12129 cleared rendered rows for train-support only",
+      "stage12130 strict_eval_rows=0 and strict_eval_eligible=false"
+    ],
+    "requested_stage": "stage12104"
+  },
+  "selected_transition_baseline": {
+    "accuracy": 0.56875,
+    "score": "364/640",
+    "stage": "stage11924_transition_listwise_head_only",
+    "status": "selected_transition_baseline_not_gemma_win"
+  },
+  "source_artifact_presence": {
+    "stage11924_summary_present": false,
+    "stage12099_summary_present": false,
+    "stage12103_summary_present": false,
+    "stage12104_summary_present": true,
+    "stage12130_summary_present": true
+  },
+  "stage": "stage12239_stage12099_route_confirmation_audit",
+  "training_allowed": false
+}

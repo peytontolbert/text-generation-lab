@@ -1,0 +1,133 @@
+{
+  "claim_boundary": "Control/probe artifact only. No repair dataset rows admitted. Bears and SWE-bench Live are viable next QC candidates; Defects4J/QuixBugs are blocked earlier.",
+  "decision": "repair_dataset_hydration_probe_ready_training_still_blocked",
+  "minimum_to_admit_any_repair_row": [
+    "same-source checkout/content lineage",
+    "patch diff/apply proof or authoritative patch lineage",
+    "exact verifier command",
+    "pre-patch failing output class",
+    "post-patch passing output class",
+    "source/test/verifier hash refs",
+    "anti-leak renderer pass",
+    "repo-family cap pass"
+  ],
+  "recommended_order": [
+    "Bears failing_passing checkout/content hydration attempt",
+    "SWE-bench Live patch/log normalization attempt only after before/after verifier logs are found or regenerated",
+    "Defects4J only after benchmark checkout/runtime is materialized",
+    "QuixBugs only after full corpus/refs/logs exist"
+  ],
+  "sources": [
+    {
+      "blocked_reasons": [
+        "benchmark_submodule_uninitialized_or_empty",
+        "missing_authoritative_before_after_command_output",
+        "missing_checkout_content_lineage",
+        "requires_same_source_patch_verifier_causality_qc"
+      ],
+      "can_move_now": [
+        "candidate",
+        "materialized_if_checkout_hydrated",
+        "qc_passed_if_logs_joined"
+      ],
+      "candidate_count": 19,
+      "cannot_move_now": [
+        "train_support",
+        "Level3",
+        "patch_trace",
+        "repair_claim",
+        "sealed_eval"
+      ],
+      "commit_refs_available": true,
+      "local_bug_specs": true,
+      "patches_available": "embedded_diff_hashes_only_in_stage12327; raw diff in source metadata",
+      "source_id": "repairthem_all_bears",
+      "status": "candidate_qc_only",
+      "verifier_command_available": "Bears.py maven full-test command exists, but no raw before/after output materialized"
+    },
+    {
+      "blocked_reasons": [
+        "benchmark_submodule_uninitialized_or_empty",
+        "missing_exact_buggy_fixed_refs",
+        "missing_patch_lineage",
+        "missing_before_after_defects4j_output",
+        "legacy_runtime_guardrails_needed"
+      ],
+      "can_move_now": [
+        "candidate_preflight_only"
+      ],
+      "candidate_count": 395,
+      "cannot_move_now": [
+        "train_support",
+        "Level3",
+        "patch_trace",
+        "repair_claim",
+        "sealed_eval"
+      ],
+      "commit_refs_available": "weak_bug_ids_only",
+      "local_bug_specs": true,
+      "patches_available": false,
+      "source_id": "repairthem_all_defects4j",
+      "status": "blocked_before_qc",
+      "verifier_command_available": "Defects4J.py commands exist, but local logs/checkouts absent"
+    },
+    {
+      "blocked_reasons": [
+        "benchmark_submodule_uninitialized_or_empty",
+        "missing_java_programs_corpus",
+        "missing_buggy_fixed_refs",
+        "missing_patch_lineage",
+        "missing_before_after_maven_output"
+      ],
+      "can_move_now": [],
+      "candidate_count": 0,
+      "cannot_move_now": [
+        "candidate",
+        "train_support",
+        "Level3",
+        "patch_trace",
+        "repair_claim",
+        "sealed_eval"
+      ],
+      "commit_refs_available": false,
+      "local_bug_specs": "partial_only",
+      "patches_available": false,
+      "source_id": "repairthem_all_quixbugs",
+      "status": "blocked_before_qc",
+      "verifier_command_available": "QuixBugs.py maven commands exist, but corpus/checkouts/logs absent"
+    },
+    {
+      "blocked_reasons": [
+        "missing_normalized_verifier_command",
+        "missing_pre_patch_failing_output",
+        "missing_post_patch_passing_output",
+        "missing_patch_apply_lineage",
+        "top_level_harness_failed_return_minus_9",
+        "patch_apply_validation_is_not_before_after_test_proof"
+      ],
+      "can_move_now": [
+        "candidate",
+        "materialized_if_patch_and_log_refs_joined",
+        "qc_passed_if_verifier_artifacts_normalized"
+      ],
+      "candidate_count": 499,
+      "cannot_move_now": [
+        "train_support",
+        "Level3",
+        "patch_trace",
+        "repair_claim",
+        "sealed_eval"
+      ],
+      "commit_refs_available": true,
+      "local_bug_specs": true,
+      "patch_apply_validation_checkpoints": 255,
+      "patch_diff_candidates": 336,
+      "patches_available": true,
+      "source_id": "swe_bench_live_local",
+      "status": "candidate_qc_only",
+      "verifier_command_available": "partial progress/checkpoint artifacts; top-level harness failed at drain_patch_jobs return -9"
+    }
+  ],
+  "stage": "stage12332_repair_dataset_hydration_probe",
+  "training_allowed": false
+}

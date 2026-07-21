@@ -1,0 +1,100 @@
+{
+  "claim_boundary": "All-four-language intake rollup. These are candidate/backlog roots, not admitted training rows; comparable external repair roots remain zero.",
+  "decision": "candidate_backlog_created_all_four_languages_no_repair_admission_yet",
+  "hard_rejects_enforced": [
+    "missing-test/no-tests failure",
+    "ENV/dependency/network/install/GPU failure",
+    "syntax-only mutation as repair",
+    "commit metadata without command output",
+    "selected test added only by patch",
+    "weak/unrelated verifier",
+    "controlled fixture as external",
+    "row variants as roots"
+  ],
+  "language_notes": {
+    "c_cpp": {
+      "best_next": "prioritize low-risk CMake/CTest repos: magic_enum, cxxopts, fast_float, crc32c, snappy, re2, GSL, cereal, jsoncpp",
+      "risk": "planned build/test commands are not evidence until executed",
+      "status": "50 acquisition candidates, 2 current-state CTest roots, no repair"
+    },
+    "python": {
+      "best_next": "execute low-risk planned pytest subsets, then seek real commit/diff same-verifier triples",
+      "risk": "many are planned commands with no logs yet",
+      "status": "useful backlog, no admitted repair"
+    },
+    "rust": {
+      "best_next": "materialize new external Rust repair commits; keep cargo current-state roots auxiliary",
+      "risk": "many roots are PASS_CURRENT/PASS_TO_PASS or dependency/GPU-sensitive",
+      "status": "current-state and sealed transition supply only, no repair"
+    },
+    "web_js_ts_html": {
+      "best_next": "ingest Stage11580/11579/11387/11389 logs as verifier-observation or sealed transition candidates; run new Stage12240 acquisition for Web FAIL_TO_PASS triples",
+      "risk": "old web artifacts are mostly PASS_TO_PASS/support rows; dependency/Corepack/Playwright failures remain hard rejects",
+      "status": "48 verifier-backed support/eval candidates, no repair"
+    }
+  },
+  "next_stage_queue": [
+    {
+      "purpose": "ingest Darwin web scout output into this rollup",
+      "stage": "stage12243_web_maintainer_500_candidate_intake",
+      "training_allowed": false
+    },
+    {
+      "purpose": "execute a small no-network/no-GPU batch from Python+C/C++ acquisition backlogs to turn planned commands into verifier observations",
+      "stage": "stage12244_low_risk_checkout_execution_batch_request",
+      "training_allowed": false
+    },
+    {
+      "purpose": "find actual commit pairs/diffs for comparable FAIL_TO_PASS repair triples",
+      "stage": "stage12245_external_repair_commit_pair_miner_request",
+      "training_allowed": false
+    }
+  ],
+  "rollup_counts": {
+    "admitted_external_comparable_repair_roots": 0,
+    "admitted_external_fail_to_pass_roots": 0,
+    "admitted_non_python_external_repair_roots": 0,
+    "auxiliary_or_current_state_candidates": {
+      "c_cpp": 2,
+      "python": 15,
+      "rust": 18,
+      "web_js_ts_html": 30
+    },
+    "auxiliary_or_current_state_total": 65,
+    "candidate_backlog_roots_reported": {
+      "c_cpp": 52,
+      "python": 50,
+      "rust": 45,
+      "web_js_ts_html": 48
+    },
+    "candidate_backlog_total_reported": 195,
+    "external_repair_acquisition_candidates": {
+      "c_cpp": 50,
+      "python": 20,
+      "rust": 0,
+      "web_js_ts_html": 0
+    },
+    "external_repair_acquisition_total": 70,
+    "sealed_transition_candidates": {
+      "c_cpp": 0,
+      "python": 15,
+      "rust": 27,
+      "web_js_ts_html": 18
+    },
+    "sealed_transition_total": 60,
+    "training_allowed": false
+  },
+  "source_stages": [
+    "stage12241_maintainer_500_root_campaign_contract",
+    "stage12240_external_repair_acquisition_request_v2",
+    "stage12238_verifier_observation_auxiliary_conversion_audit"
+  ],
+  "stage": "stage12242_maintainer_500_candidate_intake_rollup",
+  "subagent_sources": {
+    "c_cpp": "Cicero 019f6b98-b5d0-7390-b243-76dd0dfe311b",
+    "python": "Parfit 019f6b98-783a-74b0-b6c0-0935e1d2e8e8",
+    "rust": "Carver 019f6b98-94f0-7c33-bd90-7a8d3ed66c36",
+    "web_js_ts_html": "Darwin 019f6b9d-16bc-7643-89a1-ad72b657b7d4"
+  },
+  "training_allowed": false
+}

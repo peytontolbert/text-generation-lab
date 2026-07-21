@@ -1,0 +1,55 @@
+{
+  "admissible_for_training_support_only": true,
+  "blocker_counts": [],
+  "blockers": [],
+  "claim_boundary": [
+    "Rows are train-support-only schema rows, not validation or strict eval rows.",
+    "Lineage resolver clears these roots only for train support; strict eval remains explicitly not cleared.",
+    "All rows preserve selected-test and verifier anchors from Stage12128."
+  ],
+  "counts": {
+    "input_rendered_rows": 25,
+    "strict_eval_rows": 0,
+    "train_support_only_rows": 25,
+    "train_support_rows": 25,
+    "validation_rows": 0
+  },
+  "counts_by_language_family": {
+    "c_cpp": 10,
+    "python": 15
+  },
+  "counts_by_repo_family": {
+    "Neargye/magic_enum": 5,
+    "fastfloat/fast_float": 5,
+    "pallets/click": 5,
+    "pallets/jinja": 5,
+    "pytest-dev/pluggy": 5
+  },
+  "counts_by_task_type": {
+    "transition_candidate_selection": 5,
+    "transition_continue_or_stop": 5,
+    "transition_evidence_citation": 5,
+    "transition_next_action": 5,
+    "transition_verifier_transition": 5
+  },
+  "created_at_utc": "2026-07-15T15:23:29Z",
+  "do_not_train": true,
+  "inputs": [
+    "runs/local/artifacts/stage12128_deterministic_renderer_anti_cheat/rendered_rows.jsonl",
+    "runs/local/artifacts/stage12128_deterministic_renderer_anti_cheat/renderer_audit_results.jsonl",
+    "runs/local/artifacts/stage12129_rendered_row_lineage_resolver/lineage_resolution_results.jsonl"
+  ],
+  "no_training_statement": "Stage12130 converts rendered rows into train-support-only schema rows; no training, GPU use, validation/strict rows, eval promotion, network use, dependency install, or test execution was performed.",
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12130_selected_test_train_support_package",
+    "summary": "runs/local/artifacts/stage12130_selected_test_train_support_package/summary.json",
+    "summary_mirror": "runs/summaries/stage12130_selected_test_train_support_package.json",
+    "train_support_package_audit": "runs/local/artifacts/stage12130_selected_test_train_support_package/train_support_package_audit.json",
+    "train_support_rows": "runs/local/artifacts/stage12130_selected_test_train_support_package/train_support_rows.jsonl"
+  },
+  "package_audit_pass": true,
+  "source_heldout_admissible": false,
+  "stage": 12130,
+  "stage_name": "stage12130_selected_test_train_support_package",
+  "strict_eval_eligible": false
+}

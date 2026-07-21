@@ -1,0 +1,57 @@
+{
+  "artifact_type": "capped_episode_graph_review_result_ingest",
+  "claim_boundary": "Safe materialization audit only. It derives refs, digests, action categories, cwd digests, and outcome classes. It emits no raw commands, outputs, patch bodies, root admissions, or training rows.",
+  "counts": {
+    "admissible_after_stage12266": 0,
+    "hard_reject_counts": {
+      "candidate_level_cwd_root_not_proven": 3,
+      "self_research_repo_not_external_comparable_repair": 13,
+      "state_update_safe_summary_requires_review": 25,
+      "verifier_relevance_ambiguous_without_semantic_review": 25
+    },
+    "input_review_packets": 25,
+    "post_last_verifier_outcome_status_counts": {
+      "fail": 33,
+      "pass": 314,
+      "unknown": 28
+    },
+    "repo_kind_counts": {
+      "external_or_other_repo": 12,
+      "self_research_repo": 13
+    },
+    "root_recovery_status": {
+      "candidate_proven": 22,
+      "chat_hint_only": 3
+    },
+    "v3_like_tuple_materialized": 25,
+    "v4_ordering_materialized": 25
+  },
+  "decision": "safe_materialization_complete_no_admission_training_blocked",
+  "guardrails": {
+    "raw_message_text_emitted": false,
+    "raw_patch_body_emitted": false,
+    "raw_tool_arguments_emitted": false,
+    "raw_tool_output_emitted": false,
+    "root_admission_emitted": false,
+    "training_rows_emitted_now": false
+  },
+  "next_stage": {
+    "scope": "review verifier relevance and external-comparable repair eligibility for materialized V3-like candidates",
+    "stage": "stage12267_semantic_verifier_relevance_and_external_filter_audit",
+    "training_allowed": false
+  },
+  "quality_decision": {
+    "decisive_counter_progress": {
+      "external_comparable_patch_trace_repair_rows": 0,
+      "external_fail_to_pass_rows": 0,
+      "level3_same_source_closed_loop_admitted": 0,
+      "level3_same_source_closed_loop_candidates": 25,
+      "non_python_external_repair_rows": 0,
+      "sealed_transition_eval_rows": 0
+    },
+    "reason": "Rows still require semantic verifier relevance review, external-comparable repair filtering, and deterministic revalidation.",
+    "training_allowed": false
+  },
+  "stage": "stage12266_capped_episode_graph_review_result_ingest",
+  "training_allowed": false
+}

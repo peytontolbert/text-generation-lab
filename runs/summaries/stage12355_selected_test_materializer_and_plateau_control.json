@@ -1,0 +1,99 @@
+{
+  "claim_boundary": "Control artifact only. No train-support, strict eval, Level-3, patch-trace, repair, or sealed eval row is admitted.",
+  "current_language_counts": {
+    "c_cpp": 10,
+    "python": 20,
+    "rust": 15,
+    "session_unknown_language": 91,
+    "web_js_ts_html": 30
+  },
+  "current_ledger_ref": "/data/agentkernel-seq2seq-text-lab/runs/summaries/stage12352_combined_train_support_ledger_v4.json",
+  "current_remaining_gap_to_500": 334,
+  "current_source_counts": {
+    "stage12320_event_local_observation": 76,
+    "stage12322_rust_cpp_selected_test": 25,
+    "stage12323_v4_event_local": 15,
+    "stage12326_direct_python_selected_test": 20,
+    "stage12331_luxon_web_selected_test": 5,
+    "stage12339_openclaw_web_selected_test": 5,
+    "stage12343_openclaw_access_selected_test": 5,
+    "stage12351_web_fallback_selected_test": 15
+  },
+  "current_train_support_rows": 166,
+  "decision": "selected_test_materializer_contract_and_plateau_caps_ready",
+  "hard_separation": {
+    "level3_closed_loop_rows": "must include state_before, action, observation/verifier, state_delta, stop/continue with same-source lineage",
+    "qc_candidates": "candidate records only; cannot count toward 500",
+    "repair_rows": "must prove buggy/failing and fixed/passing under same verifier",
+    "sealed_eval_rows": "root-disjoint evaluation rows; not train-support",
+    "train_support_rows": "admitted bounded/structured support only; not proof of frontier or repair"
+  },
+  "next_source_priority": [
+    "non-Web selected-test roots with local focused verifier proof",
+    "Open-SWE QC candidates only after safe semantic extraction and deterministic admission",
+    "repair-grade before/fail after/pass triples when same-source proof exists",
+    "sealed transition slice construction separate from train-support ledger"
+  ],
+  "plateau_caps": {
+    "current_web_selected_test_rows": 30,
+    "open_swe_priority_qc_max_per_repo": 3,
+    "single_org_family_cap_without_repair_grade_evidence": 10,
+    "single_repo_family_cap_without_repair_grade_evidence": 5,
+    "web_selected_test_pass_rows_total_cap_for_500_push": 50,
+    "web_stop_condition": "Stop Web mining after two consecutive PASS/PASS_TO_PASS-only batches with no FAIL_TO_PASS, no patch-effect proof, and no new repo family."
+  },
+  "reusable_materializer_contract": {
+    "known_pitfalls_to_eliminate": [
+      "per-root copy-paste script drift",
+      "executor-level blockers diverging from row-level blockers",
+      "stdout_sha256::None or stderr_sha256::None evidence refs",
+      "command_hash_only refs that are raw commands rather than hashes",
+      "root_index modulo balancing without target-position audit",
+      "dependency paths visible in source/test evidence",
+      "PASS_TO_PASS selected-test support counted as repair proof",
+      "silent skip of missing configured source/test files"
+    ],
+    "required_config_sections": [
+      "stage",
+      "tasks",
+      "option_template",
+      "roots"
+    ],
+    "required_modules": [
+      "config_loader",
+      "evidence_adapter",
+      "option_renderer",
+      "row_renderer",
+      "admission_gate",
+      "summary_writer"
+    ],
+    "required_root_fields": [
+      "root_id",
+      "repo_family",
+      "language_family",
+      "repo_path",
+      "focused_verifier_command",
+      "stdout_path",
+      "stderr_path",
+      "source_files",
+      "test_files",
+      "selected_summary",
+      "labels_by_task"
+    ],
+    "row_invariants": [
+      "all stronger claims false: strict_eval_eligible/source_heldout_admissible/level3_admitted/patch_trace_admitted/repair_claim_admitted",
+      "non-empty commit_sha",
+      "non-empty source_hash_refs excluding dependency/vendor/generated paths",
+      "non-empty full-length test_hash_refs excluding dependency/vendor/generated paths",
+      "exactly three opaque options",
+      "unique option labels",
+      "exactly one semantic_id candidate_0",
+      "bounded_choice_target_label == decoder_text == label for candidate_0",
+      "input_text exposes only opaque option labels, not semantic ids or target values",
+      "row_id and root_lineage_key globally stable",
+      "missing evidence routes to blocked_rows, not partial admission"
+    ]
+  },
+  "stage": "stage12355_selected_test_materializer_and_plateau_control",
+  "training_allowed": false
+}

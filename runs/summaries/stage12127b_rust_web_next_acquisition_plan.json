@@ -1,0 +1,36 @@
+{
+  "acquisition_plan_only": true,
+  "admissible_for_training": false,
+  "artifact_type": "summary",
+  "blocker_counts": {
+    "checkout_failed": 1,
+    "node_modules_missing": 3,
+    "offline_cache_missing": 2
+  },
+  "claim_boundary": "All Stage12127B outputs are acquisition-plan-only and cannot be used as selected-test evidence, training rows, or eval admission.",
+  "do_not_admit_rows": true,
+  "do_not_train": true,
+  "exact_next_recommendation": "Run a no-install Stage12128 smoke on these 20 candidates with two phases: first checkout plus manifest/cache hydration discovery only; second execute at most one narrow selected-test command per repo only when prerequisites are already local. For Rust, prefer package/lib-scoped cargo test --locked --offline commands and immediately classify offline_cache_missing on registry resolution failures. For Web, first run test -d node_modules and package-script/filter discovery; execute npm/yarn/pnpm tests only when node_modules already exists, otherwise classify node_modules_missing. Do not train, do not admit rows, do not report selected-test evidence unless the selected command exits 0 and its verifier log is retained.",
+  "input_artifacts": [
+    "runs/local/artifacts/stage12123_verifier_ready_checkout_execution_smoke/execution_smoke_results.jsonl",
+    "runs/local/artifacts/stage12121_rust_verifier_ready_candidate_plan/rust_verifier_ready_candidate_plan.jsonl",
+    "runs/local/artifacts/stage12121_web_verifier_ready_candidate_plan/web_verifier_ready_candidates.jsonl",
+    "runs/local/artifacts/stage12120_failed_stage_lessons_atlas/enhanced_failed_stage_lessons_for_subagents.md",
+    "runs/local/artifacts/stage12118_maintainer_400_pilot_checkout_probe_request/pilot_checkout_probe_targets.jsonl"
+  ],
+  "next_candidates_by_language": {
+    "rust": 10,
+    "web_js_ts_html": 10
+  },
+  "next_candidates_total": 20,
+  "no_dependency_install_or_fetch": true,
+  "no_gpu": true,
+  "rust_web_misses_reviewed": 6,
+  "stage": "stage12127b_rust_web_next_acquisition_plan",
+  "top_blockers": [
+    "node_modules_missing for Web smoke attempts: package scripts were visible but tests were gated off because no pre-existing node_modules was present.",
+    "offline_cache_missing for Rust cargo tests: --offline selected/list commands failed on uncached registry packages such as quickcheck.",
+    "checkout_failed for bytes-rs/bytes prevented any verifier attempt.",
+    "list/static evidence must remain non-selected-test and non-admissible."
+  ]
+}

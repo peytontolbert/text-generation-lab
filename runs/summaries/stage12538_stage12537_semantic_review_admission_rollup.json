@@ -1,0 +1,155 @@
+{
+  "actual_command_output_provenance_required": true,
+  "admission_counts": {
+    "semantic_review_admitted_train_support_only_rows": 0,
+    "semantic_review_rejected_rows": 13,
+    "stage12534_validation_passed_rows": 13
+  },
+  "artifact_refs": {
+    "admitted_rows": "runs/local/artifacts/stage12538_stage12537_semantic_review_admission_rollup/stage12537_semantic_review_admitted_train_support_rows.jsonl",
+    "rejected_rows": "runs/local/artifacts/stage12538_stage12537_semantic_review_admission_rollup/stage12537_semantic_review_rejected_rows.jsonl",
+    "remaining_gap_worklist": "runs/local/artifacts/stage12538_stage12537_semantic_review_admission_rollup/remaining_gap_source_expansion_worklist.jsonl",
+    "rollup": "runs/local/artifacts/stage12538_stage12537_semantic_review_admission_rollup/stage12537_semantic_review_admission_rollup.json",
+    "summary": "runs/summaries/stage12538_stage12537_semantic_review_admission_rollup.json",
+    "validation_audit": "runs/local/artifacts/stage12538_stage12537_semantic_review_admission_rollup/stage12537_semantic_review_validation_audit.json"
+  },
+  "batch_block_reasons": [
+    "stage12538_command_observation_join_hash_missing",
+    "stage12538_duplicate_output_hash_requires_collapse_or_block",
+    "stage12538_selected_test_scope_not_countable_without_explicit_policy",
+    "stage12538_target_balance_failed"
+  ],
+  "claim_boundary": "Stage12538 is a semantic review/admission rollup for Stage12537 command-output verifier-observation candidates. Accepted rows are train-support-only below the 500 floor. This stage grants no training run permission, no Level3/Level4 admission, no patch-trace credit, no repair or fail-to-pass credit, no strict-eval/source-heldout eligibility, and no Gemma/product progress claim.",
+  "command_observation_join_audit": {
+    "missing_candidate_ref_hashes": [
+      "e3569068dc83920efab11e4d",
+      "4998b2e03a970f91fe0cb790",
+      "6a177a6efdf80a98650fcfdf",
+      "23b8b04a00a2ddc3a0c02229",
+      "cf55bf6aaacc2ffec26f1452",
+      "40197a26ad02245e09d70183",
+      "1300223133e8e935c21e6454",
+      "785e42dc5eded5a9171456ae",
+      "1d8414b075060b4d626a4591",
+      "6c0e9afe0d44ed36fa4c6ecc",
+      "bbe859e1a0d3014c8bf1869c",
+      "4d80b02e605f94e2fac854bd",
+      "fc291ed5d1902f100331afe2"
+    ],
+    "missing_command_observation_join_hash_count": 13,
+    "passed": false
+  },
+  "countable_only_language_counts": {},
+  "countable_only_projection_counts": {},
+  "countable_only_target_counts": {},
+  "countable_train_support": {
+    "admitted_stage12538_train_support_only_rows": 0,
+    "current_countable_total": 127,
+    "prior_stage12533_countable_total": 127,
+    "remaining_gap_to_500": 373,
+    "target_floor": 500
+  },
+  "countable_train_support_count": 127,
+  "countable_train_support_only": false,
+  "decision": "fail_closed_no_stage12537_rows_admitted",
+  "duplicate_observation_or_command_conflict_count": 0,
+  "duplicate_same_target_output_count": 2,
+  "fail_to_pass_claim_admitted_rows": 0,
+  "gemma_or_product_claims": 0,
+  "guardrail_scan_passed": true,
+  "input_hashes": {
+    "stage12534_summary": "91f97d05e5642902a2a3dedf",
+    "stage12536_repair_requirements": "56612c928f8f74c451b68ada",
+    "stage12536_summary": "732f4c18feceed7603c45f0a",
+    "stage12537_blockers": "ab1089bc805272f64a3bf38f",
+    "stage12537_candidates": "425c0be57fbd3444f2a3972f",
+    "stage12537_summary": "c6cacf63b0e53bfa008c18a3"
+  },
+  "level3_admitted_rows": 0,
+  "new_countable_train_support_count": 0,
+  "next_stage": "expand_command_output_verifier_observation_sources_from_remaining_gap_worklist",
+  "patch_trace_admitted_rows": 0,
+  "post_admission_collapse_group_count": 0,
+  "raw_leak_count": 0,
+  "record_type": "stage12537_semantic_review_admission_rollup_v1",
+  "remaining_gap_to_500": 373,
+  "remaining_gap_worklist": {
+    "top_blocker_reasons": [
+      {
+        "blocked_row_count": 373,
+        "reason": "stage12535_declares_public_local_repo_metadata_hash_only_source"
+      },
+      {
+        "blocked_row_count": 373,
+        "reason": "stage12535_rows_lack_real_command_output_observation_hashes"
+      },
+      {
+        "blocked_row_count": 373,
+        "reason": "stage12535_target_labels_match_deterministic_rotation_pattern"
+      },
+      {
+        "blocked_row_count": 292,
+        "reason": "derived_sanitized_projection_lacks_independent_command_output_hash_provenance"
+      },
+      {
+        "blocked_row_count": 126,
+        "reason": "unsupported_or_forbidden_target_status_for_stage12537_preflight"
+      }
+    ],
+    "work_item_count": 8,
+    "worklist_ref": "runs/local/artifacts/stage12538_stage12537_semantic_review_admission_rollup/remaining_gap_source_expansion_worklist.jsonl"
+  },
+  "repair_claim_admitted_rows": 0,
+  "selected_test_scope_audit": {
+    "passed": false,
+    "selected_test_scoped_candidate_ref_hashes": [
+      "e3569068dc83920efab11e4d",
+      "4998b2e03a970f91fe0cb790",
+      "6a177a6efdf80a98650fcfdf",
+      "23b8b04a00a2ddc3a0c02229",
+      "40197a26ad02245e09d70183",
+      "6c0e9afe0d44ed36fa4c6ecc",
+      "4d80b02e605f94e2fac854bd"
+    ],
+    "selected_test_scoped_row_count": 7
+  },
+  "source_heldout_admissible_count": 0,
+  "source_inventory": {
+    "stage12536_demoted_rows": 373,
+    "stage12537_blocker_rows": 451,
+    "stage12537_candidate_rows": 13
+  },
+  "stage": "stage12538_stage12537_semantic_review_admission_rollup",
+  "stage12534_validation_passed": true,
+  "strict_eval_eligible_count": 0,
+  "target_balance_audit": {
+    "max_target_share": 0.923077,
+    "min_target_class_count": 1,
+    "passed": false,
+    "required_max_target_share": 0.5,
+    "required_min_target_class_count": 2,
+    "required_target_class_count": 3,
+    "row_count": 13,
+    "target_class_count": 2,
+    "target_counts": {
+      "FAIL_CURRENT_STATE": 1,
+      "PASS_CURRENT_STATE": 12
+    }
+  },
+  "target_binding_required": "target_semantic_value_from_observed_verifier_result_status",
+  "training_allowed": false,
+  "training_blockers": [
+    "training_allowed_false_until_500_countable_train_support_floor",
+    "remaining_gap_to_500_not_closed",
+    "no_level3_patch_trace_repair_strict_sourceheldout_or_product_claims_by_stage12538_policy",
+    "stage12538_command_observation_join_hash_missing",
+    "stage12538_duplicate_output_hash_requires_collapse_or_block",
+    "stage12538_selected_test_scope_not_countable_without_explicit_policy",
+    "stage12538_target_balance_failed"
+  ],
+  "upstream_decisions": {
+    "stage12534": "fresh_hydratable_verifier_observation_supply_gate_prepared_no_rows_admitted",
+    "stage12536": "stage12535_blocked_demoted_semantically_weak_metadata_inventory",
+    "stage12537": "real_command_output_verifier_observation_candidates_materialized_preflight_only"
+  }
+}

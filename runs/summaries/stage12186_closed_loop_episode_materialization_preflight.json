@@ -1,0 +1,113 @@
+{
+  "artifact_type": "closed_loop_episode_materialization_preflight",
+  "candidate_count": 681,
+  "classification_by_language": {
+    "c_cpp": {
+      "bounded_aux_only": 256,
+      "needs_join": 4
+    },
+    "python": {
+      "bounded_aux_only": 197,
+      "needs_join": 4
+    },
+    "rust": {
+      "bounded_aux_only": 207,
+      "needs_join": 4
+    },
+    "unknown": {
+      "needs_join": 5
+    },
+    "web_js_ts_html": {
+      "needs_join": 4
+    }
+  },
+  "classification_by_source": {
+    "stage11897_transition_record_projection_rows": {
+      "bounded_aux_only": 640
+    },
+    "stage12119_execute_maintainer_400_pilot_checkout_probe_batch": {
+      "needs_join": 4
+    },
+    "stage12123_verifier_ready_checkout_execution_smoke": {
+      "needs_join": 12
+    },
+    "stage12144_rust_hydrated_selected_test_success_package": {
+      "needs_join": 3
+    },
+    "stage12145_web_hydrated_selected_test_success_package": {
+      "needs_join": 2
+    },
+    "stage12149_corrected_selected_test_row_materialization_package": {
+      "bounded_aux_only": 20
+    }
+  },
+  "classification_counts": {
+    "bounded_aux_only": 660,
+    "needs_join": 21
+  },
+  "contract_reference": "runs/local/artifacts/stage12184_closed_loop_maintainer_episode_contract/closed_loop_episode_contract.json",
+  "decision": "training_blocked_materialization_incomplete",
+  "episode_record_ready_count": 0,
+  "inventory_reference": "runs/local/artifacts/stage12185_closed_loop_episode_source_inventory/closed_loop_episode_source_inventory.json",
+  "needs_join_count": 21,
+  "next_stage": "stage12187_closed_loop_episode_joiner_request",
+  "output_artifacts": {
+    "blockers": "runs/local/artifacts/stage12186_closed_loop_episode_materialization_preflight/blockers.jsonl",
+    "candidates": "runs/local/artifacts/stage12186_closed_loop_episode_materialization_preflight/episode_materialization_candidates.jsonl",
+    "summary": "runs/local/artifacts/stage12186_closed_loop_episode_materialization_preflight/preflight_summary.json",
+    "summary_mirror": "runs/summaries/stage12186_closed_loop_episode_materialization_preflight.json"
+  },
+  "source_code_modified": false,
+  "stage": "stage12186_closed_loop_episode_materialization_preflight",
+  "stage12187_minimum_scope": [
+    "For each needs_join candidate, synthesize an episode graph only from existing evidence refs: root, state_before, command/test observation, verifier_result, state_after, stop decision.",
+    "Add explicit no_patch_reason for verifier-only episodes; otherwise require patch_trace with diff digest and before/after verifier states.",
+    "Produce at least 20 replayable episodes across at least 3 languages before any diagnostic training request is allowed.",
+    "Keep patch-generation/patch-selection targets separate from no-patch verifier-only episodes."
+  ],
+  "top_blockers": [
+    [
+      "missing_state_before",
+      681
+    ],
+    [
+      "missing_state_after",
+      681
+    ],
+    [
+      "missing_patch_trace_or_explicit_no_patch_reason",
+      681
+    ],
+    [
+      "missing_candidate_actions",
+      681
+    ],
+    [
+      "missing_command_or_tool_observation",
+      664
+    ],
+    [
+      "missing_verifier_or_selected_test_evidence",
+      660
+    ],
+    [
+      "bounded_projection_not_full_episode",
+      660
+    ],
+    [
+      "missing_commit_sha",
+      643
+    ],
+    [
+      "missing_repo_family",
+      640
+    ]
+  ],
+  "training_allowed": false,
+  "training_executed": false,
+  "why_training_blocked": [
+    "No candidate passes the full closed-loop episode contract if state_before, state_after, candidate actions, and patch/no-patch policy are mandatory.",
+    "Most available real evidence is command/verifier smoke or selected-test success, not replayable action-observation-state episodes.",
+    "Bounded transition rows remain auxiliary only and cannot be used as the primary training unit."
+  ]
+}

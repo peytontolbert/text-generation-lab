@@ -1,0 +1,143 @@
+{
+  "created_at_utc": "2026-07-15T00:38:37Z",
+  "decision": "reject_stage12091_keep_stage11924_selected_transition_frontier",
+  "diagnostic_result": {
+    "stage12083": {
+      "by_task": {
+        "transition_candidate_selection": {
+          "accuracy": 0.50625,
+          "correct": 81,
+          "rows": 160
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 128,
+          "rows": 160
+        },
+        "transition_next_action": {
+          "accuracy": 0.36875,
+          "correct": 59,
+          "rows": 160
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6,
+          "correct": 96,
+          "rows": 160
+        }
+      },
+      "status": "diagnostic_next_action_lane_gain_no_total_gain",
+      "transition_projection_score": {
+        "accuracy": 0.56875,
+        "correct": 364,
+        "coverage": 1.0,
+        "miss_count": 276,
+        "rows": 640
+      }
+    },
+    "stage12091": {
+      "by_task": {
+        "transition_candidate_selection": {
+          "accuracy": 0.5125,
+          "correct": 82,
+          "rows": 160
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 128,
+          "rows": 160
+        },
+        "transition_next_action": {
+          "accuracy": 0.30625,
+          "correct": 49,
+          "rows": 160
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6,
+          "correct": 96,
+          "rows": 160
+        }
+      },
+      "status": "rejected_candidate_selection_repair_regressed_total_and_next_action",
+      "transition_projection_score": {
+        "accuracy": 0.5546875,
+        "correct": 355,
+        "coverage": 1.0,
+        "miss_count": 285,
+        "rows": 640
+      }
+    }
+  },
+  "lesson": "Coverage of the Stage12086 loss/gain rows was not sufficient. The shared task_balanced head-only objective still interferes: candidate-selection repair rows pull against evidence-citation next-action preservation, and the combined packet overcorrects both.",
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12093_candidate_selection_repair_training_decision/candidate_selection_repair_training_decision.json",
+    "summary_mirror": "runs/summaries/stage12093_candidate_selection_repair_training_decision.json"
+  },
+  "recommended_next_stage": {
+    "do_not_launch_more_same_objective_training": true,
+    "hypotheses_to_test": [
+      "candidate_selection repair requires scorer-head-only training on candidate_selection rows first, then next_action preservation as a second phase",
+      "next_action and candidate_selection need separate routed heads or separate loss weights, not one shared semantic candidate head update",
+      "evidence-citation selected-verifier next_action rows should be frozen/replayed with stronger preservation before patch-impact positives"
+    ],
+    "minimum_gate": {
+      "old_transition_640": ">364",
+      "protected_gates": "preserved",
+      "transition_candidate_selection": ">=89",
+      "transition_next_action": ">=59"
+    },
+    "name": "stage12094_separate_head_or_two_phase_candidate_next_action_ablation_design"
+  },
+  "selected_transition_frontier": {
+    "by_task": {
+      "transition_candidate_selection": {
+        "accuracy": 0.55625,
+        "correct": 89,
+        "rows": 160
+      },
+      "transition_continue_or_stop": {
+        "accuracy": 0.8,
+        "correct": 128,
+        "rows": 160
+      },
+      "transition_next_action": {
+        "accuracy": 0.31875,
+        "correct": 51,
+        "rows": 160
+      },
+      "transition_verifier_transition": {
+        "accuracy": 0.6,
+        "correct": 96,
+        "rows": 160
+      }
+    },
+    "runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "scorer": "encoder_option_retrieval_semantic_candidate_head",
+    "stage": "stage11924_transition_listwise_head_only_probe",
+    "transition_projection_score": {
+      "accuracy": 0.56875,
+      "correct": 364,
+      "coverage": 1.0,
+      "miss_count": 276,
+      "rows": 640
+    }
+  },
+  "source_artifacts": {
+    "stage12092_audit": "runs/summaries/stage12092_candidate_selection_repair_training_postrun_audit.json"
+  },
+  "stage": 12093,
+  "stage_name": "stage12093_candidate_selection_repair_training_decision",
+  "what_was_preserved": {
+    "filtered_strict": true,
+    "filtered_validation": true,
+    "old_canary_strict": true,
+    "old_canary_validation": true,
+    "residual_bank": true,
+    "source_heldout_smoke": true
+  },
+  "why_rejected": [
+    "old transition projection dropped from 364/640 to 355/640",
+    "next_action dropped from Stage12083 59/160 to 49/160",
+    "candidate_selection only reached 82/160, still below Stage11924 baseline 89/160",
+    "Gemma same-manifest target remains 386/640"
+  ]
+}

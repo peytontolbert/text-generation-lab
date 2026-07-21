@@ -1,0 +1,177 @@
+{
+  "confirmation_before_claim": {
+    "stage12103_option_permutation_stability_audit": {
+      "minimum": {
+        "no_task_rows_missing": true,
+        "permutations_per_row": 3,
+        "routed_correct_under_majority_vote": ">=375/640",
+        "rows": 640,
+        "stable_prediction_rate": ">=0.95 preferred, >=0.90 minimum for diagnostic"
+      },
+      "purpose": "Ensure the routed lift is not option-order/label-position brittle.",
+      "required": true,
+      "route_policy": {
+        "transition_candidate_selection": "stage12096_composite",
+        "transition_continue_or_stop": "stage11924_semantic",
+        "transition_next_action": "stage12083_semantic",
+        "transition_verifier_transition": "stage11924_semantic"
+      }
+    },
+    "stage12104_sealed_transition_slice_request": {
+      "minimum_rows": 100,
+      "preferred_rows": 250,
+      "purpose": "Confirm Stage12099 route on rows not used to discover the route.",
+      "required": true,
+      "split": "root-disjoint from Stage11897/11943/120xx transition projection rows",
+      "task_balance": {
+        "transition_candidate_selection": "25%",
+        "transition_continue_or_stop": "15%",
+        "transition_next_action": "35%",
+        "transition_verifier_transition": "25%"
+      }
+    }
+  },
+  "created_at_utc": "2026-07-15T01:00:57Z",
+  "current_state": {
+    "gap_counts": {
+      "both_correct": 27,
+      "delta_vs_gemma": -11,
+      "gemma_correct_from_stage11943_summary": 386,
+      "gemma_only_correct": 97,
+      "gemma_row_labels_are_gemma_only_subset": true,
+      "gemma_row_labels_materialized": 124,
+      "gemma_row_not_materialized": 516,
+      "routed_correct": 375,
+      "rows": 640
+    },
+    "product_routed_candidate": {
+      "by_task": {
+        "transition_candidate_selection": {
+          "accuracy": 0.575,
+          "correct": 92,
+          "miss_count": 68,
+          "rows": 160
+        },
+        "transition_continue_or_stop": {
+          "accuracy": 0.8,
+          "correct": 128,
+          "miss_count": 32,
+          "rows": 160
+        },
+        "transition_next_action": {
+          "accuracy": 0.36875,
+          "correct": 59,
+          "miss_count": 101,
+          "rows": 160
+        },
+        "transition_verifier_transition": {
+          "accuracy": 0.6,
+          "correct": 96,
+          "miss_count": 64,
+          "rows": 160
+        }
+      },
+      "delta_vs_gemma_386": -11,
+      "delta_vs_stage11924": 11,
+      "route_policy": {
+        "transition_candidate_selection": "stage12096_composite",
+        "transition_continue_or_stop": "stage11924_semantic",
+        "transition_next_action": "stage12083_semantic",
+        "transition_verifier_transition": "stage11924_semantic"
+      },
+      "score": {
+        "accuracy": 0.5859375,
+        "correct": 375,
+        "miss_count": 265,
+        "rows": 640
+      },
+      "stage": "stage12099_task_routed_candidate_selection_composite_audit",
+      "status": "frontier candidate for product routing only; requires sealed confirmation"
+    },
+    "standalone_selected": {
+      "score": {
+        "accuracy": 0.56875,
+        "correct": 364,
+        "coverage": 1.0,
+        "miss_count": 276,
+        "rows": 640
+      },
+      "scorer": "encoder_option_retrieval_semantic_candidate_head",
+      "stage": "stage11924_transition_listwise_head_only_probe",
+      "status": "remains selected standalone transition runtime"
+    }
+  },
+  "decision": "route_confirmation_and_gap_data_plan_ready_no_training_launched",
+  "outputs": {
+    "summary": "runs/local/artifacts/stage12102_task_routed_gap_targeted_data_plan/task_routed_gap_targeted_data_plan.json",
+    "summary_mirror": "runs/summaries/stage12102_task_routed_gap_targeted_data_plan.json"
+  },
+  "source_artifacts": {
+    "stage12100_route_decision": "runs/summaries/stage12100_task_routed_transition_decision.json",
+    "stage12101_gap_atlas": "runs/summaries/stage12101_task_routed_transition_gap_atlas.json"
+  },
+  "stage": 12102,
+  "stage_name": "stage12102_task_routed_gap_targeted_data_plan",
+  "targeted_data_plan": {
+    "allocations": {
+      "transition_candidate_selection": {
+        "hard_negatives": [
+          "candidate_change_surface vs verifier_and_build_constraint",
+          "selected_inline_test_anchor vs implementation_only_no_verifier"
+        ],
+        "rows": 60,
+        "why": "Still 68 routed misses and 35 Gemma-only rows despite candidate route lift."
+      },
+      "transition_continue_or_stop": {
+        "hard_negatives": [
+          "premature DONE after targeted test only",
+          "CONTINUE after verifier removed",
+          "ABSTAIN when evidence is sufficient"
+        ],
+        "rows": 30,
+        "why": "Strongest family but still 15 Gemma-only rows and 32 routed misses."
+      },
+      "transition_next_action": {
+        "hard_negatives": [
+          "PLAN_PATCH when RETRIEVE_EVIDENCE is correct",
+          "FINISH when CONTINUE is correct",
+          "ABSTAIN_OR_ROLLBACK when SELECT_TEST is correct"
+        ],
+        "rows": 80,
+        "why": "Largest routed miss family: 101/160 misses; 25 Gemma-only rows remain."
+      },
+      "transition_verifier_transition": {
+        "hard_negatives": [
+          "PASS_CURRENT_BUILD vs PASS_CURRENT_BUILD_AND_RUN",
+          "PASS_CURRENT_STATE vs PASS_TO_PASS",
+          "VERIFIER_REMOVED vs INSUFFICIENT_EVIDENCE"
+        ],
+        "rows": 50,
+        "why": "Plateaued at 96/160 with 22 Gemma-only rows."
+      }
+    },
+    "do_not_train_on_same_manifest_gemma_only_rows": true,
+    "language_balance": {
+      "c_cpp": ">=45 roots",
+      "python": ">=45 roots",
+      "repo_family_cap": "<=10% of any task family",
+      "rust": ">=35 roots",
+      "web_js_ts_html": ">=35 roots"
+    },
+    "row_requirements": [
+      "source/test/verifier evidence visible before candidates",
+      "opaque shuffled labels",
+      "semantic candidate objects with role/artifact/evidence_ids",
+      "no singleton options",
+      "no target string leak before candidates",
+      "root lineage disjoint from the 640-row discovery manifest for strict confirmation"
+    ],
+    "target_total_disjoint_analogues": 220
+  },
+  "training_policy_after_confirmation": {
+    "if_route_beats_gemma_on_sealed": "Then build a single product routing contract and separately pursue standalone consolidation.",
+    "if_route_fails_permutation_or_sealed": "Do not consolidate; build better data first.",
+    "if_route_holds_but_still_below_gemma": "Train task-specific heads/adapters from disjoint analogues; keep task routing explicit.",
+    "standalone_weight_requirement": "Still unmet; routed product candidate does not satisfy standalone weights better than Gemma."
+  }
+}

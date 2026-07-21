@@ -1,0 +1,147 @@
+{
+  "claim_boundary": [
+    "This stage is a trainer/tokenizer experiment contract only.",
+    "It does not authorize tokenizer replacement in the selected 100M frontier.",
+    "It does not authorize training or promotion.",
+    "Recent paper claims were checked against arXiv pages, but this artifact does not reproduce their experiments."
+  ],
+  "created_at_utc": "2026-07-15T16:24:00Z",
+  "current_target": {
+    "d_model": 640,
+    "embedding_structure": "enc_embed and dec_embed are separate; lm_head is tied to enc_embed.weight",
+    "max_position_embeddings": 4096,
+    "model_config": "configs/model/agentkernel_100m_seq2seq_recovered_target.json",
+    "model_family": "agentkernel_lite_encdec_v1",
+    "parameter_count": 102654362,
+    "tokenizer_hashlock": "configs/tokenizer/agentkernel_bpe_1506_recovered_pointer.json",
+    "tokenizer_json": "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json",
+    "tokenizer_kind": "agentkernel_bytelevel_bpe_v1",
+    "vocab_size": 1506
+  },
+  "decision": "tokenizer_ablation_contract_ready_no_frontier_training_authorized",
+  "hard_rules": [
+    "Do not replace the hashlocked 1506 tokenizer in target_100m frontier or protected-gate runs.",
+    "Tokenizer/vocab/overencoding experiments must run in a separate diagnostic lane with no promotion claims.",
+    "Compare tokenizers by raw UTF-8 bytes, BPB where decoder CE is meaningful, downstream bounded-maintainer scores, latency, and effective byte context, not token perplexity alone.",
+    "Hold raw train bytes, byte-level context coverage, optimizer, data order, and wallclock/FLOP budget fixed across tokenizer comparisons.",
+    "For current bounded-choice maintainer heads, tokenizer changes are secondary to row semantics; do not use tokenizer work to bypass Stage12151 blockers."
+  ],
+  "literature_basis": [
+    {
+      "repo_relevance": "Use raw bytes and compression rate; tokenizer optimum is non-monotonic.",
+      "title": "Compute Optimal Tokenization",
+      "url": "https://arxiv.org/html/2605.01188v1"
+    },
+    {
+      "repo_relevance": "Motivates richer encoder/input vocabulary while preserving small output softmax.",
+      "title": "Over-Tokenized Transformer",
+      "url": "https://arxiv.org/html/2501.16975v2"
+    },
+    {
+      "repo_relevance": "Two-phase superword compression is worth testing at 4K, not as a 1506 drop-in.",
+      "title": "SuperBPE",
+      "url": "https://arxiv.org/html/2503.13423v1"
+    },
+    {
+      "repo_relevance": "BoundlessBPE-style faster training may make 4K superword probes practical.",
+      "title": "Faster Superword Tokenization",
+      "url": "https://arxiv.org/html/2604.05192v1"
+    },
+    {
+      "repo_relevance": "Same-vocab 1506 comparison can isolate BPE objective quality.",
+      "title": "MinGram",
+      "url": "https://arxiv.org/abs/2606.27019"
+    },
+    {
+      "repo_relevance": "Add UTF-8 output validity audit for any decoder generation branch.",
+      "title": "UTF-8 validity in byte-aware models",
+      "url": "https://arxiv.org/html/2606.14122v1"
+    }
+  ],
+  "near_term_advice_for_current_blockers": "Do not spend GPU training tokenizer variants until Stage12149 corrected selected-test rows exist and Stage12150 passes. Tokenizer diagnostics can run CPU/read-only now, but model training should wait for correct maintainer supervision.",
+  "parameter_costs_agentkernel_seq2seq": {
+    "formula": "delta_params = 2 * (new_vocab - 1506) * 640 because encoder and decoder embeddings both grow; lm_head is tied to encoder embedding",
+    "note": "This is nontrivial but acceptable as a diagnostic branch for a 102.65M target; it is not a drop-in compatible runtime with existing checkpoints.",
+    "v4096_delta_params": 3315200,
+    "v8192_delta_params": 8558080
+  },
+  "purpose": "Formalize recent tokenizer/compression advice for the agentkernel_lite_encdec_v1 seq2seq trainer without destabilizing the current selected-test maintainer frontier.",
+  "recommended_experiment_order": [
+    {
+      "description": "Measure compression, dead-token fraction, label tokenization, and effective context bytes for current manifests.",
+      "kind": "no_training",
+      "name": "tokenizer_metrics_only_current_1506",
+      "rank": 1
+    },
+    {
+      "description": "Keep 1506-way output and hashlocked decoder vocabulary; add encoder-only byte-token bigram/trigram hashed features or learned ngram embeddings. This is the lowest-risk new idea because it avoids an 8K softmax.",
+      "kind": "trainer_architecture_probe",
+      "name": "fixed_output_input_overencoding_probe",
+      "rank": 2
+    },
+    {
+      "description": "Train a from-scratch diagnostic 1506-vocab tokenizer alternative on the same corpus to test BPE objective vs vocabulary size.",
+      "kind": "tokenizer_swap_diagnostic",
+      "name": "same_vocab_mingram_or_unigram_static_probe",
+      "rank": 3
+    },
+    {
+      "description": "If current bytes/token is too low, train a 4096 byte-BPE tokenizer and compare at fixed raw bytes and compute.",
+      "kind": "tokenizer_swap_diagnostic",
+      "name": "bpe_4096_static_probe",
+      "rank": 4
+    },
+    {
+      "description": "Only after basic metrics, test two-phase subword-first/superword-second tokenization at 4096. Useful mainly if prompt text has repeated phrases and long structured fields.",
+      "kind": "tokenizer_training_diagnostic",
+      "name": "superword_or_boundless_4096_probe",
+      "rank": 5
+    },
+    {
+      "description": "Run only if 4096 improves BPB/downstream enough to justify +8.56M embedding params in this seq2seq model.",
+      "kind": "conditional",
+      "name": "bpe_8192_probe",
+      "rank": 6
+    },
+    {
+      "description": "Requires architecture rewrite; not appropriate until static tokenizer and input-overencoding lanes are exhausted.",
+      "kind": "defer",
+      "name": "hnet_blt_style_architecture",
+      "rank": 7
+    }
+  ],
+  "required_measurements_before_training": [
+    "heldout_encoder_utf8_bytes",
+    "heldout_encoder_token_count",
+    "heldout_encoder_bytes_per_token",
+    "heldout_decoder_utf8_bytes",
+    "heldout_decoder_token_count",
+    "heldout_decoder_bytes_per_token",
+    "tokens_per_language_family for python/rust/c_cpp/web_js_ts_html",
+    "effective_context_bytes_at_max_encoder_tokens_768_and_4096",
+    "dead_or_rare_token_fraction on maintainer manifests",
+    "single_token_rate_for bounded labels/options such as A/B/C or opaque X8 labels",
+    "UTF8_generation_validity for any decoder/generation audit branch"
+  ],
+  "stage": "stage12152_tokenizer_ablation_contract",
+  "trainer_surface_recommendations": {
+    "gating": "Any tokenizer experiment must emit the artifacts above and must be evaluated against unchanged Stage11924/Stage12099/Stage11507 protected gates before any claim.",
+    "new_artifacts": [
+      "tokenizer_compression_audit.json",
+      "tokenizer_language_family_stats.json",
+      "tokenizer_dead_token_report.json",
+      "effective_context_bytes.json",
+      "utf8_generation_validity.json",
+      "tokenizer_ablation_scorecard.json"
+    ],
+    "new_contract_flags": [
+      "--tokenizer-ablation-id",
+      "--tokenizer-metrics-output-dir",
+      "--require-tokenizer-compression-audit",
+      "--input-ngram-overencoding {none,hash_bigram,hash_bigram_trigram,learned_bigram_trigram}",
+      "--input-ngram-buckets",
+      "--input-ngram-dim",
+      "--utf8-generation-validity-audit"
+    ]
+  }
+}

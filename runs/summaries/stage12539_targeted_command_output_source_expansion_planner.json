@@ -1,0 +1,62 @@
+{
+  "artifact_refs": {
+    "blocked_existing_candidate_gates": "runs/local/artifacts/stage12539_targeted_command_output_source_expansion_planner/stage12539_existing_candidate_gate_blocked_rows.jsonl",
+    "gate_audit": "runs/local/artifacts/stage12539_targeted_command_output_source_expansion_planner/stage12539_materialization_gate_audit.json",
+    "preflight_candidate_rows": "runs/local/artifacts/stage12539_targeted_command_output_source_expansion_planner/stage12539_gate_ready_preflight_candidate_rows.jsonl",
+    "prioritized_source_expansion_worklist": "runs/local/artifacts/stage12539_targeted_command_output_source_expansion_planner/stage12539_prioritized_source_expansion_worklist.jsonl",
+    "summary": "runs/summaries/stage12539_targeted_command_output_source_expansion_planner.json"
+  },
+  "claim_boundary": "Stage12539 only plans or preflights source expansion for real command-output verifier observations. It does not admit training rows or count support.",
+  "command_observation_join_hash_present_on_all_prepared_rows": true,
+  "countable_train_support": false,
+  "decision": "fail_closed_prioritized_source_expansion_worklist_emitted_no_preflight_rows",
+  "duplicate_output_audit": {
+    "duplicate_conflicting_output_groups": 0,
+    "duplicate_same_target_output_rows_collapsed": 1
+  },
+  "existing_candidate_gate_blocked_rows": 13,
+  "gate_ready_preflight_candidate_rows": 0,
+  "input_hashes": {
+    "stage12537_blockers": "ab1089bc805272f64a3bf38f",
+    "stage12537_candidates": "425c0be57fbd3444f2a3972f",
+    "stage12537_summary": "c6cacf63b0e53bfa008c18a3",
+    "stage12538_summary": "6b2d345c0e81e9442a4f1a2c",
+    "stage12538_worklist": "b15d273ce4bd243aa2ff8825"
+  },
+  "new_countable_train_support_count": 0,
+  "next_safe_action": "execute_or_mine_underrepresented_direct_verifier_status_command_outputs_then_rerun_join_collapse_scope_materializer",
+  "prioritized_worklist_rows": 14,
+  "record_type": "stage12539_targeted_source_expansion_planner_summary_v1",
+  "selected_test_scope_blocked_rows": 7,
+  "stage": "stage12539_targeted_command_output_source_expansion_planner",
+  "stage12537_candidate_rows_scanned": 13,
+  "stage12538_batch_block_reasons": [
+    "stage12538_command_observation_join_hash_missing",
+    "stage12538_duplicate_output_hash_requires_collapse_or_block",
+    "stage12538_selected_test_scope_not_countable_without_explicit_policy",
+    "stage12538_target_balance_failed"
+  ],
+  "stage12538_remaining_gap_to_500": 373,
+  "target_balance_audit": {
+    "max_target_share": 0.8,
+    "min_target_class_count": 1,
+    "missing_target_classes": [
+      "INSUFFICIENT_EVIDENCE"
+    ],
+    "passed": false,
+    "required_max_target_share": 0.5,
+    "required_min_target_class_count": 2,
+    "required_target_class_count": 3,
+    "row_count": 5,
+    "target_class_count": 2,
+    "target_counts": {
+      "FAIL_CURRENT_STATE": 1,
+      "PASS_CURRENT_STATE": 4
+    }
+  },
+  "target_status_shortfall": {
+    "FAIL_CURRENT_STATE": 1,
+    "INSUFFICIENT_EVIDENCE": 2
+  },
+  "training_allowed": false
+}

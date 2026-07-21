@@ -1,0 +1,60 @@
+{
+  "blockers": [
+    "patch_trace_train_support_after_semantic_qc_has_only_2_rows",
+    "patch_trace_train_support_is_python_only",
+    "valid_fail_to_pass_patch_repair_floor_is_0",
+    "stage12201_stage12217_pool_exhausted_for_non_python_without_installs_or_gpu",
+    "normalized_verifier_observation_rows_are_not_patch_trace_training_rows"
+  ],
+  "claim_boundary": "Progress is dataset-hygiene and first patch replay plumbing. No model training should run from this patch-trace lane until comparable repair supply exists across languages.",
+  "decision": "do_not_train_build_new_comparable_patch_trace_supply",
+  "evidence": {
+    "non_python_scout_result": "no accepted C/C++/Rust/Web Stage12201/12217 patch-trace candidates; current pool is blocked by missing node_modules, missing build dirs, CUDA dependency, weak anchors, or no Rust rows",
+    "normalized_verifier_observation_rows": 146,
+    "normalized_verifier_training_allowed": false,
+    "raw_patch_trace_rollup": {
+      "admitted_count": 3,
+      "fail_to_pass_floor_count": 1,
+      "language_counts": {
+        "python": 3
+      },
+      "patch_trace_floor_count": 3
+    },
+    "semantic_qc_patch_trace": {
+      "admitted_count": 2,
+      "downgraded_count": 1,
+      "fail_to_pass_floor_count": 0,
+      "patch_trace_floor_count": 2,
+      "repo_family_counts": {
+        "agent-governance-toolkit": 1,
+        "unsloth": 1
+      },
+      "transition_counts": {
+        "PASS_TO_PASS": 2
+      }
+    },
+    "stage12223_invalid_repair_catch": {
+      "raw_fail_to_pass_floor_count": 1,
+      "reason_removed": "mem0 before verifier failed because selected test file was absent; not comparable behavior failure"
+    }
+  },
+  "next_subagent_packets": [
+    {
+      "minimum_acceptance": "5 candidates, at least 2 non-Python, no test-added-before-missing failures, command output available or rehydratable.",
+      "name": "comparable_fail_to_pass_patch_scout",
+      "objective": "Find roots where the exact same selected verifier exists before and after, fails before for a behavior/source reason, passes after applying patch, and can run locally without installs/network/GPU."
+    },
+    {
+      "minimum_acceptance": "3 candidates per language family or explicit hard-blocker report with repo/source evidence.",
+      "name": "non_python_hydratable_patch_scout",
+      "objective": "Find C/C++/Rust/Web roots with existing local build/test artifacts or lightweight no-install commands tied to changed files."
+    },
+    {
+      "minimum_acceptance": "No training request until semantic QC passes and patch_trace rows are projected as action/patch/verifier/stop records.",
+      "name": "patch_trace_schema_integrator",
+      "objective": "Define how admitted patch-trace records become training projections without flattening multi-command ordered_events into verifier-only rows."
+    }
+  ],
+  "stage": "stage12226_level3_next_blocker_decision",
+  "training_allowed": false
+}

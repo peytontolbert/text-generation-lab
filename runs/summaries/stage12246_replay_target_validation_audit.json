@@ -1,0 +1,130 @@
+{
+  "admitted_rows": 0,
+  "claim_boundary": "Validation audit only. Replay targets remain candidates until command-output phase tuples prove behavior fail/pass.",
+  "decision": "replay_targets_validated_no_rows_admitted",
+  "dependency_risk": [
+    "stage12244_replay_011",
+    "stage12244_replay_012",
+    "stage12244_replay_013",
+    "stage12244_replay_014",
+    "stage12244_replay_015",
+    "stage12244_replay_017",
+    "stage12244_replay_019"
+  ],
+  "hard_rejected": [
+    "stage12244_replay_020"
+  ],
+  "hard_rejects": [
+    "before command passes already",
+    "no tests collected/missing test",
+    "env/dependency/install/network/GPU failure",
+    "test added only by patch",
+    "syntax-only failure",
+    "weak/unrelated verifier"
+  ],
+  "likely_test_added_only": [
+    "stage12244_replay_001",
+    "stage12244_replay_002",
+    "stage12244_replay_003",
+    "stage12244_replay_004",
+    "stage12244_replay_005",
+    "stage12244_replay_006",
+    "stage12244_replay_007",
+    "stage12244_replay_008",
+    "stage12244_replay_009",
+    "stage12244_replay_010",
+    "stage12244_replay_016",
+    "stage12244_replay_018"
+  ],
+  "next_execution_policy": {
+    "do_not_run_without_cache_proof": [
+      "eslint targets 011-014",
+      "biome targets 015,017"
+    ],
+    "reject_immediately": [
+      "stage12244_replay_020"
+    ],
+    "run_first": [
+      "stage12244_replay_019 path-existence and before verifier only",
+      "stage12244_replay_005 cheap before verifier falsification"
+    ]
+  },
+  "source_stage": "stage12244_external_repair_commit_pair_replay_request",
+  "source_subagent": "Beauvoir 019f6ba4-64d8-7b90-8804-97aa172dd696",
+  "stage": "stage12246_replay_target_validation_audit",
+  "top_shortlist": [
+    {
+      "admission_status": "pre_replay_only_not_admitted",
+      "classification": "HIGH_DEPENDENCY_RISK",
+      "first_check": "git cat-file test existence, then before pytest in throwaway checkout",
+      "language_family": "python_web",
+      "repo_family": "BrowserGym",
+      "request_id": "stage12244_replay_019",
+      "why": "best static comparability; test exists before and was modified, not added"
+    },
+    {
+      "admission_status": "pre_replay_only_not_admitted",
+      "classification": "HIGH_DEPENDENCY_RISK",
+      "first_check": "prove cargo cache/no network before cargo test -p biome_js_analyze",
+      "language_family": "rust",
+      "repo_family": "biome",
+      "request_id": "stage12244_replay_017",
+      "why": "existing fixtures modified, not pure new test file"
+    },
+    {
+      "admission_status": "pre_replay_only_not_admitted",
+      "classification": "HIGH_DEPENDENCY_RISK",
+      "first_check": "git diff name-status, then cargo test only if cache hydrated",
+      "language_family": "rust",
+      "repo_family": "biome",
+      "request_id": "stage12244_replay_015",
+      "why": "source-bearing diff and existing lint.rs modified"
+    },
+    {
+      "admission_status": "pre_replay_only_not_admitted",
+      "classification": "HIGH_DEPENDENCY_RISK",
+      "first_check": "prove local dependencies before npm test",
+      "language_family": "web_js_ts_html",
+      "repo_family": "eslint",
+      "request_id": "stage12244_replay_014",
+      "why": "source changes match selected rule tests but broad verifier/no node_modules"
+    },
+    {
+      "admission_status": "pre_replay_only_not_admitted",
+      "classification": "HIGH_DEPENDENCY_RISK",
+      "first_check": "cat-file path exists before, then before verifier",
+      "language_family": "web_js_ts_html",
+      "repo_family": "eslint",
+      "request_id": "stage12244_replay_011",
+      "why": "exact rule file exists but likely added-only cases"
+    },
+    {
+      "admission_status": "pre_replay_only_not_admitted",
+      "classification": "HIGH_DEPENDENCY_RISK",
+      "first_check": "cat-file path exists before, then before verifier",
+      "language_family": "web_js_ts_html",
+      "repo_family": "eslint",
+      "request_id": "stage12244_replay_012",
+      "why": "exact rule file exists but likely added-only cases"
+    },
+    {
+      "admission_status": "pre_replay_only_not_admitted",
+      "classification": "HIGH_DEPENDENCY_RISK",
+      "first_check": "cat-file path exists before, then before verifier",
+      "language_family": "web_js_ts_html",
+      "repo_family": "eslint",
+      "request_id": "stage12244_replay_013",
+      "why": "exact rule file exists but likely added-only invalid autofix cases"
+    },
+    {
+      "admission_status": "pre_replay_only_not_admitted",
+      "classification": "LIKELY_TEST_ADDED_ONLY",
+      "first_check": "run before pytest; reject if passes or no-tests/env",
+      "language_family": "python",
+      "repo_family": "sympy",
+      "request_id": "stage12244_replay_005",
+      "why": "cheap falsification check; tiny source/test diff"
+    }
+  ],
+  "training_allowed": false
+}

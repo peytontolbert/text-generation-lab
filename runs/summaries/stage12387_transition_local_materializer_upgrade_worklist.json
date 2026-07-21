@@ -1,0 +1,138 @@
+{
+  "artifact_paths": {
+    "blocker_class_counts": "runs/local/artifacts/stage12387_transition_local_materializer_upgrade_worklist/blocker_class_counts.json",
+    "markdown": "runs/local/artifacts/stage12387_transition_local_materializer_upgrade_worklist/TRANSITION_LOCAL_MATERIALIZER_UPGRADE_WORKLIST_STAGE12387.md",
+    "required_recovery_operation_counts": "runs/local/artifacts/stage12387_transition_local_materializer_upgrade_worklist/required_recovery_operation_counts.json",
+    "worklist_jsonl": "runs/local/artifacts/stage12387_transition_local_materializer_upgrade_worklist/transition_local_materializer_upgrade_worklist.jsonl"
+  },
+  "blocker_class_counts": {
+    "level3_control_contract_missing": 185,
+    "observation_status_support_only": 91,
+    "observed_action_only_not_policy_gold": 94,
+    "policy_label_not_admitted": 185,
+    "repo_identity_recovery_required": 185,
+    "state_delta_semantic_review_required": 185,
+    "verifier_identity_or_transition_missing": 185,
+    "verifier_status_not_training_grade": 1
+  },
+  "claim_boundary": "Worklist only. No training package, no Level-3 admission, no patch-trace admission, and no strict eval claim.",
+  "decision": "fail_closed_transition_local_upgrade_worklist_ready",
+  "input_counts": {
+    "stage12206_control_rows_loaded": 149,
+    "stage12316_transition_local_event_join_records": 100,
+    "stage12386_audit_records": 4374
+  },
+  "inputs": {
+    "stage12206_control_schema_source": "runs/local/artifacts/stage12206_level3_passfail_training_rollup/level3_passfail_train_support_repo_capped.jsonl",
+    "stage12316_transition_local_event_join_records": "runs/local/artifacts/stage12316_transition_local_event_joiner/transition_local_event_join_records.jsonl",
+    "stage12386_audit_records": "runs/local/artifacts/stage12386_transition_local_event_joiner_gap_audit/transition_local_gap_audit_records.jsonl"
+  },
+  "level3_admitted": 0,
+  "missing_level3_control_field_counts": {
+    "command_result": 185,
+    "language": 185,
+    "observed_action": 185,
+    "repo_family": 185,
+    "root_id": 185,
+    "state_update": 185,
+    "stop_decision": 185,
+    "verifier_transition": 185
+  },
+  "missing_transition_local_field_counts": {
+    "chosen_action": 91,
+    "state_delta_codes": 1,
+    "stop_continue_label": 91,
+    "verifier_identity": 92,
+    "verifier_transition": 185
+  },
+  "new_training_rows_emitted": 0,
+  "patch_trace_admitted": 0,
+  "priority_policy": {
+    "deprioritize": [
+      "observed-action-only rows without policy label review",
+      "repo-unrecovered rows until recovery path is known",
+      "observation-status support rows that are not causal transition records"
+    ],
+    "prefer": [
+      "semantic_rule_id and transition_function_key present",
+      "patch_apply_status present",
+      "verifier status present",
+      "fewer blocker classes and missing control fields"
+    ]
+  },
+  "recovery_safety_counts": {
+    "raw_session_rehydration_safe": 94,
+    "semantic_review_only": 185
+  },
+  "required_recovery_operation_counts": {
+    "derive_nontraining_verifier_transition_candidate_from_patch_and_verifier_status_for_review": 94,
+    "derive_or_recover_verifier_identity_and_transition_without_emitting_raw_command_output": 185,
+    "do_not_promote_observation_support_row_to_causal_transition_without_new_review": 91,
+    "keep_training_admission_false_and_emit_worklist_only": 185,
+    "manual_policy_label_review_before_any_chosen_action_or_observed_action_target": 185,
+    "recover_root_id_repo_family_language_from_stage12314_join_or_raw_session_metadata": 185,
+    "rehydrate_command_result_state_update_stop_decision_to_stage12206_control_shape": 185,
+    "semantic_review_state_delta_codes_against_safe_command_and_verifier_observations": 185
+  },
+  "stage": "stage12387_transition_local_materializer_upgrade_worklist",
+  "stage12206_control_contract": {
+    "allowed_prompt_fields": [
+      "root_id",
+      "repo_family",
+      "language",
+      "candidate_action_set with opaque labels and no is_chosen/negative_kind",
+      "pre-action state/evidence rendered by downstream compiler"
+    ],
+    "control_claim_boundary": "Train-support rollup only. No eval claim. ENV_BLOCKED/non-passfail rows are diagnostic by default.",
+    "control_rows_loaded": 149,
+    "control_summary_decision": "level3_passfail_rollup_ready",
+    "hide_fields_from_model_prompt": [
+      "candidate_action_set.candidate_actions[].is_chosen",
+      "candidate_action_set.candidate_actions[].negative_kind",
+      "candidate_action_set.chosen_action_id",
+      "observed_action",
+      "command_result",
+      "observation",
+      "verifier_status",
+      "verifier_transition",
+      "state_update",
+      "stop_decision",
+      "anti_cheat",
+      "projection_permissions",
+      "repo_commit_after",
+      "source_extra"
+    ],
+    "required_level3_control_fields": [
+      "root_id",
+      "repo_family",
+      "language",
+      "candidate_action_set",
+      "observed_action",
+      "command_result",
+      "state_update",
+      "stop_decision",
+      "verifier_transition"
+    ],
+    "sample_schema_presence": {
+      "candidate_action_set": true,
+      "command_result": true,
+      "language": true,
+      "observed_action": true,
+      "repo_family": true,
+      "root_id": true,
+      "state_update": true,
+      "stop_decision": true,
+      "verifier_transition": true
+    },
+    "source_path": "runs/local/artifacts/stage12206_level3_passfail_training_rollup/level3_passfail_train_support_repo_capped.jsonl",
+    "summary_path": "runs/summaries/stage12206_level3_passfail_training_rollup.json"
+  },
+  "strict_eval_eligible_rows": 0,
+  "training_allowed": false,
+  "worklist_count": 185,
+  "worklist_source_counts": {
+    "stage12316_transition_local_join": 94,
+    "stage12320_event_local_observation_support": 76,
+    "stage12323_v4_event_local_observation_support": 15
+  }
+}

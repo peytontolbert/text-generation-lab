@@ -1,0 +1,96 @@
+{
+  "admission_ready_roots": [
+    "PyCQA/flake8"
+  ],
+  "blockers": [
+    {
+      "blocker": "missing_local_dependency_docutils; no install attempted",
+      "repo_family": "sphinx-doc/sphinx"
+    },
+    {
+      "blocker": "no CTest entries and no built test executables found in existing local build; exact selected-test anchor unavailable without further build repair",
+      "repo_family": "Tencent/rapidjson"
+    }
+  ],
+  "candidates_attempted": [
+    {
+      "blocker": null,
+      "exit_codes": [
+        0,
+        0,
+        0
+      ],
+      "language": "python",
+      "repo_family": "PyCQA/flake8",
+      "selected_test_ids": [
+        "tests/unit/test_utils.py::test_normalize_pypi_name[my_plugin-my-plugin]",
+        "tests/unit/test_violation.py::test_is_inline_ignored[E111-a = 1  # noqa: E111,W123,F821-True]"
+      ]
+    },
+    {
+      "blocker": "missing_local_dependency_docutils; no install attempted",
+      "exit_codes": [
+        4
+      ],
+      "language": "python",
+      "repo_family": "sphinx-doc/sphinx",
+      "selected_test_ids": []
+    },
+    {
+      "blocker": "no CTest entries and no built test executables found in existing local build; exact selected-test anchor unavailable without further build repair",
+      "exit_codes": [
+        0,
+        0
+      ],
+      "language": "c_cpp",
+      "repo_family": "Tencent/rapidjson",
+      "selected_test_ids": []
+    }
+  ],
+  "claim_boundary": [
+    "Python and C/C++ only.",
+    "No network.",
+    "No dependency install.",
+    "No training.",
+    "Rust/Web intentionally untouched.",
+    "Strict/eval eligibility is not claimed.",
+    "Admission-ready means train-support row-materialization readiness only until lineage audit."
+  ],
+  "counts": {
+    "admission_ready_roots": 1,
+    "blocked": 2,
+    "candidates_attempted": 3,
+    "strict_eval_eligible": 0,
+    "training_admitted": 0
+  },
+  "counts_by_language": {
+    "c_cpp": {
+      "attempted": 1,
+      "ready": 0
+    },
+    "python": {
+      "attempted": 2,
+      "ready": 1
+    }
+  },
+  "created_at_utc": "2026-07-15T15:54:15Z",
+  "do_not_train": true,
+  "inputs": [
+    "runs/local/artifacts/stage12121_python_verifier_ready_candidate_plan/python_verifier_ready_candidate_plan.jsonl",
+    "runs/local/artifacts/stage12121_cpp_verifier_ready_candidate_plan/cpp_verifier_ready_candidate_plan.jsonl",
+    "runs/local/artifacts/stage12123_verifier_ready_checkout_execution_smoke/execution_smoke_results.jsonl",
+    "runs/local/artifacts/stage12125_exact_selected_test_refinement/exact_selected_test_refinement_results.jsonl",
+    "runs/local/artifacts/stage12126_refined_selected_test_admission_audit/admission_audit_results.jsonl",
+    "/data/tmp already-checked-out repos from prior stages"
+  ],
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12143_no_install_selected_test_expansion",
+    "command_logs": "runs/local/artifacts/stage12143_no_install_selected_test_expansion/command_logs",
+    "results_jsonl": "runs/local/artifacts/stage12143_no_install_selected_test_expansion/selected_test_expansion_results.jsonl",
+    "summary": "runs/local/artifacts/stage12143_no_install_selected_test_expansion/summary.json",
+    "summary_mirror": "runs/summaries/stage12143_no_install_selected_test_expansion.json"
+  },
+  "stage": 12143,
+  "stage_name": "stage12143_no_install_selected_test_expansion",
+  "train_support_only_until_lineage_audit": true
+}

@@ -1,0 +1,63 @@
+{
+  "admitted_rows": 0,
+  "decision": "stage12244_commit_pair_queue_exhausted_for_patch_effect_proof",
+  "evidence": {
+    "stage12290": {
+      "PE2_candidates_across_smoke": 0,
+      "after_failed_or_timeout_targets": 5,
+      "targets_attempted_across_smoke": 9
+    },
+    "stage12291": {
+      "after_status_counts": {
+        "FAIL": 10,
+        "PASS": 6,
+        "TIMEOUT": 3
+      },
+      "eligible_after_pass": 6,
+      "eligible_by_language": {
+        "python": 5,
+        "rust": 1
+      },
+      "targets_checked": 19
+    },
+    "stage12292": {
+      "PE2_candidates": 0,
+      "reject_counts": {
+        "before_did_not_fail": 6
+      },
+      "targets_attempted": 6
+    }
+  },
+  "external_FAIL_TO_PASS_rows": 0,
+  "external_comparable_patch_trace_rows": 0,
+  "hard_rules_for_next_source_adapter": [
+    "build_target_only_if_exact_after_verifier_passes",
+    "then_require_exact_before_verifier_fails",
+    "then_require_before_plus_reference_patch_passes",
+    "use_full_resolved_commit_ids_not_symbolic_parent_or_short_ref_only",
+    "emit_no_raw_source_patch_command_or_output_payloads",
+    "count_as_external_comparable_only_after_semantic_patch_effect_audit"
+  ],
+  "next_source_priority": [
+    {
+      "next_stage": "stage12294_patch_task_source_adapter_atlas",
+      "source": "benchmark_task_corpora_with_explicit_failing_tests_and_reference_patches",
+      "why": "these sources encode fail/pass semantics directly instead of inferring from arbitrary commits"
+    },
+    {
+      "next_stage": "stage12295_maintainer500_after_first_retarget_request",
+      "source": "maintainer_500_external_backlog_retargeted_with_after_first_gate",
+      "why": "has external roots but must be rebuilt with executable verifier brackets before replay"
+    },
+    {
+      "next_stage": "stage12296_horizon_transition_projection_ledger",
+      "source": "codex_chat_horizon_transition_rows",
+      "why": "valuable for next_action/verifier/continue_stop, but not counted as patch-effect proof unless V5"
+    }
+  ],
+  "raw_output_emitted": false,
+  "root_cause": "The initial commit-pair queue mixed two invalid shapes: targets whose exact verifier fails even at commit_after, and targets whose exact verifier already passes at commit_before. Neither shape proves patch effect. The queue therefore cannot supply external comparable repair rows without retargeting its source construction.",
+  "stage": "stage12293_commit_pair_queue_exhaustion_and_next_source_decision",
+  "training_allowed": false,
+  "training_rows_emitted": 0
+}

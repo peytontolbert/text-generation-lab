@@ -1,0 +1,73 @@
+{
+  "admissibility_statement": "Zero rows are admissible for training from this stage; outputs are discovery inventory only pending a separate admission audit.",
+  "any_row_admissible_for_training": false,
+  "artifact_repair_note": "Added bounded C++ testsuite run.py inventory command log after initial discovery; no repo writes, no admission.",
+  "claim_boundary": [
+    "Stage12120 is selected-test discovery over already checked-out Stage12119 smoke repos only.",
+    "No dependency install and no network fetch.",
+    "No repo scripts edited.",
+    "No GPU used.",
+    "No training/eval rows admitted."
+  ],
+  "counts_by_language": {
+    "c_cpp": {
+      "admissible_for_training": 0,
+      "attempted": 1,
+      "selected_test_candidate_found": 1,
+      "selected_test_execution_attempted": 0,
+      "selected_test_execution_succeeded": 0
+    },
+    "python": {
+      "admissible_for_training": 0,
+      "attempted": 1,
+      "selected_test_candidate_found": 1,
+      "selected_test_execution_attempted": 1,
+      "selected_test_execution_succeeded": 0
+    },
+    "rust": {
+      "admissible_for_training": 0,
+      "attempted": 1,
+      "selected_test_candidate_found": 1,
+      "selected_test_execution_attempted": 1,
+      "selected_test_execution_succeeded": 0
+    },
+    "web_js_ts_html": {
+      "admissible_for_training": 0,
+      "attempted": 1,
+      "selected_test_candidate_found": 1,
+      "selected_test_execution_attempted": 0,
+      "selected_test_execution_succeeded": 0
+    }
+  },
+  "created_at_utc": "2026-07-15T14:31:19Z",
+  "do_not_train": true,
+  "final_recommendation": "Next run should execute a narrower selected-test command only for repos with discovered candidates and local dependencies/cache available; do not train or admit yet.",
+  "input": "runs/local/artifacts/stage12119_execute_maintainer_400_pilot_checkout_probe_batch/smoke_probe_results.jsonl",
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12120_selected_test_discovery_smoke",
+    "command_logs": "runs/local/artifacts/stage12120_selected_test_discovery_smoke/command_logs",
+    "results_jsonl": "runs/local/artifacts/stage12120_selected_test_discovery_smoke/selected_test_discovery_results.jsonl",
+    "summary": "runs/local/artifacts/stage12120_selected_test_discovery_smoke/summary.json",
+    "summary_mirror": "runs/summaries/stage12120_selected_test_discovery_smoke.json"
+  },
+  "stage": 12120,
+  "stage_name": "stage12120_selected_test_discovery_smoke",
+  "top_blockers": [
+    [
+      "prior_cmake_configure_failed_no_ctest_manifest",
+      1
+    ],
+    [
+      "missing_runtime_dependency_no_install",
+      1
+    ],
+    [
+      "missing_cargo_cache_no_network_fetch",
+      1
+    ],
+    [
+      "node_modules_missing_no_install_no_test_execution",
+      1
+    ]
+  ]
+}

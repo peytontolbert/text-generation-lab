@@ -1,0 +1,29 @@
+{
+  "changed_files": [
+    "legacy_src/agentkernel_lite/training_loop.py",
+    "legacy_src/scripts/train_agentkernel_lite_encdec.py"
+  ],
+  "design": {
+    "existing_source_behavior_changed": false,
+    "feature_function": "_bounded_choice_transition_candidate_features",
+    "head_name": "bounded_choice_transition_next_action_head",
+    "head_only_training_support": true,
+    "saved_runtime_loading": true,
+    "semantic_candidate_head_updates_under_new_semantic_plus_source": false,
+    "semantic_plus_head_only_trainable_prefix": "bounded_choice_transition_next_action_head",
+    "task_gate": "task_type == transition_next_action"
+  },
+  "motivation": "Stage12160 and Stage12165 showed selected-test expansion preserves protected gates but damages transition_next_action through shared scorer/head interference. The next intervention isolates next_action scoring instead of adding more rows to the shared semantic head.",
+  "new_aux_sources": [
+    "encoder_option_retrieval_transition_next_action_head",
+    "encoder_option_retrieval_semantic_plus_transition_next_action_head"
+  ],
+  "next_gate": "Build a next_action-only diagnostic request using the new head, then audit routed use only for transition_next_action while preserving Stage11924/Stage12099 behavior elsewhere.",
+  "stage": "stage12168_transition_next_action_head_implementation",
+  "status": "implemented_and_syntax_checked",
+  "verification": {
+    "command": "python -m py_compile legacy_src/agentkernel_lite/training_loop.py legacy_src/scripts/train_agentkernel_lite_encdec.py",
+    "py_compile": "passed",
+    "py_compile_after_head_only_mapping_tightening": "passed"
+  }
+}

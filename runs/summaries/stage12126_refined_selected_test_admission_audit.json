@@ -1,0 +1,74 @@
+{
+  "any_training_admitted": false,
+  "claim_boundary": [
+    "Admission audit only.",
+    "No train rows generated.",
+    "No eval rows generated.",
+    "No promotion claims.",
+    "No network, no dependency install, no test reruns, no GPU.",
+    "Rows marked admission_ready_for_row_materialization still require row rendering and anti-cheat validation before any training use."
+  ],
+  "counts": {
+    "admissible_for_training": 0,
+    "blocked": 0,
+    "candidates_audited": 3,
+    "ready": 3
+  },
+  "counts_by_language": {
+    "c_cpp": {
+      "audited": 2,
+      "blocked": 0,
+      "ready": 2
+    },
+    "python": {
+      "audited": 1,
+      "blocked": 0,
+      "ready": 1
+    }
+  },
+  "created_at_utc": "2026-07-15T14:59:17Z",
+  "do_not_train": true,
+  "final_recommendation": "Materialize candidate rows only for ready repos, then run renderer/anti-cheat/lineage audit before training.",
+  "input": "runs/local/artifacts/stage12125_exact_selected_test_refinement/exact_selected_test_refinement_results.jsonl",
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12126_refined_selected_test_admission_audit",
+    "results_jsonl": "runs/local/artifacts/stage12126_refined_selected_test_admission_audit/admission_audit_results.jsonl",
+    "summary": "runs/local/artifacts/stage12126_refined_selected_test_admission_audit/summary.json",
+    "summary_mirror": "runs/summaries/stage12126_refined_selected_test_admission_audit.json"
+  },
+  "ready_candidates": [
+    "Neargye/magic_enum",
+    "fastfloat/fast_float",
+    "pytest-dev/pluggy"
+  ],
+  "stage": 12126,
+  "stage_name": "stage12126_refined_selected_test_admission_audit",
+  "top_blockers": [
+    [
+      "none",
+      3
+    ]
+  ],
+  "top_warnings": [
+    [
+      "lineage_not_conclusively_discoverable_from_summary_scan_review_required",
+      3
+    ],
+    [
+      "later_rows_must_have_non_singleton_options",
+      3
+    ],
+    [
+      "later_rows_must_use_deterministic_option_shuffle",
+      3
+    ],
+    [
+      "later_rows_must_use_opaque_labels",
+      3
+    ],
+    [
+      "later_rows_must_not_show_target_semantic_value_before_options",
+      3
+    ]
+  ]
+}

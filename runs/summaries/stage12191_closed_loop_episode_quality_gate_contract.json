@@ -1,0 +1,44 @@
+{
+  "artifact_type": "closed_loop_episode_quality_gate_contract_summary",
+  "automatic_rejects": [
+    "episode has fewer than one observation record",
+    "episode has no state_after or state update",
+    "verifier transition lacks command/test output or explicit blocked reason",
+    "patch-generation projection requested for no_patch or missing patch_trace episode",
+    "source path is dependency cache or build artifact",
+    "candidate action set is missing or has fewer than 5 actions for decision training",
+    "hard negatives are implausible or all same role",
+    "one-span harness metadata is promoted above level_1 without ordered commands/observations",
+    "Open-SWE/commit context is promoted above level_2 without command output",
+    "selected-test smoke is promoted above level_1 without patch or state sequence"
+  ],
+  "decision": "contract_ready_no_training",
+  "minimum_for_any_diagnostic_training": {
+    "candidate_actions_per_decision_state_min": 5,
+    "episode_replay_pass_rate": 1.0,
+    "gold_leak_count": 0,
+    "hard_negatives_per_decision_state_min": 3,
+    "languages": 3,
+    "level_3_or_higher_episodes": 20,
+    "patch_trace_episodes": 8,
+    "repositories": 10,
+    "root_overlap_with_protected_count": 0,
+    "schema_validation_pass_rate": 1.0,
+    "verifier_only_no_patch_episodes": 4
+  },
+  "minimum_for_frontier_training": {
+    "abstain_or_blocked_episodes_per_language": 100,
+    "level_4_episodes_per_language": 1000,
+    "patch_trace_episodes_per_language": 400,
+    "real_fail_to_pass_or_repair_episodes_per_language": 250,
+    "repositories_per_language": 25
+  },
+  "output_artifacts": {
+    "contract": "runs/local/artifacts/stage12191_closed_loop_episode_quality_gate_contract/closed_loop_episode_quality_gate_contract.json",
+    "summary": "runs/summaries/stage12191_closed_loop_episode_quality_gate_contract.json"
+  },
+  "source_code_modified": false,
+  "stage": "stage12191_closed_loop_episode_quality_gate_contract",
+  "training_executed": false,
+  "training_policy": "No trainer request may be emitted unless Stage12190 output is re-audited by this gate and meets minimum_for_any_diagnostic_training. Frontier training requires minimum_for_frontier_training."
+}

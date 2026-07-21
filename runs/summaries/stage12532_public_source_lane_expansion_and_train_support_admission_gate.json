@@ -1,0 +1,132 @@
+{
+  "anti_collapse": {
+    "fixture_curriculum_only": {
+      "collapse_group_count": 1,
+      "max_target_share": 0.296875,
+      "target_dominance_passed": true
+    },
+    "train_support_only": {
+      "collapse_group_count": 13,
+      "max_target_share": 0.128713,
+      "target_dominance_passed": true
+    }
+  },
+  "artifact_refs": {
+    "anti_collapse_audit": "runs/local/artifacts/stage12532_public_source_lane_expansion_and_train_support_admission_gate/anti_collapse_audit.json",
+    "duplicates": "runs/local/artifacts/stage12532_public_source_lane_expansion_and_train_support_admission_gate/duplicate_train_support_rows.jsonl",
+    "fixture_curriculum_only": "runs/local/artifacts/stage12532_public_source_lane_expansion_and_train_support_admission_gate/fixture_curriculum_only_rows.jsonl",
+    "guardrail_scan": "runs/local/artifacts/stage12532_public_source_lane_expansion_and_train_support_admission_gate/guardrail_scan.json",
+    "proof_candidate_only": "runs/local/artifacts/stage12532_public_source_lane_expansion_and_train_support_admission_gate/proof_candidate_only_lanes.jsonl",
+    "train_support_only": "runs/local/artifacts/stage12532_public_source_lane_expansion_and_train_support_admission_gate/train_support_only_public_source_lane_rows.jsonl"
+  },
+  "baseline_countable_train_support_count": 190,
+  "bucket_counts": {
+    "fixture_curriculum_only": 64,
+    "proof_candidate_only": 2,
+    "train_support_only": 101
+  },
+  "bucket_language_counts": {
+    "fixture_curriculum_only": {
+      "c_cpp": 10,
+      "python": 26,
+      "rust": 16,
+      "web_js_ts_html": 12
+    },
+    "train_support_only": {
+      "c_cpp": 10,
+      "python": 43,
+      "rust": 22,
+      "web_js_ts_html": 26
+    }
+  },
+  "bucket_projection_counts": {
+    "fixture_curriculum_only": {
+      "transition_continue_or_stop": 12,
+      "transition_verifier_transition": 12,
+      "unknown": 40
+    },
+    "train_support_only": {
+      "transition_candidate_selection": 17,
+      "transition_continue_or_stop": 26,
+      "transition_evidence_citation": 16,
+      "transition_next_action": 16,
+      "transition_verifier_transition": 26
+    }
+  },
+  "checks": {
+    "fixture_rows_excluded_from_500": true,
+    "no_duplicate_train_rows": true,
+    "no_raw_leak": true,
+    "no_train_collapse_groups": false,
+    "proof_candidate_lane_dedupe_passed": true,
+    "proof_candidates_excluded_from_500": true,
+    "train_target_dominance_passed": true,
+    "zero_level3_patch_trace_repair_credit": true
+  },
+  "claim_boundary": "Metadata-only public/local source-lane consolidation. Adds only Stage12421 non-fixture direct verifier-observation rows to train-support accounting; keeps selected-test/verifier observations and controlled fixtures out of Level3, patch-trace, repair-proof, source-heldout, strict-eval, and external repair credit accounting.",
+  "collapse_group_count": 13,
+  "countable_train_support": {
+    "current_countable_total": 192,
+    "duplicate_train_rows_removed": 0,
+    "new_countable_public_local_rows_from_stage12421": 2,
+    "previous_countable_total_from_stage12417": 190,
+    "remaining_gap_to_500": 308,
+    "target_floor": 500
+  },
+  "countable_train_support_count": 192,
+  "decision": "public_source_lane_expanded_training_blocked_500_floor_and_collapse_gate_not_passed",
+  "duplicate_train_row_count": 0,
+  "external_repair_credit_count": 0,
+  "fail_to_pass_claim_admitted_rows": 0,
+  "guardrail_scan_passed": true,
+  "input_hashes": {
+    "stage12417_ledger": "7cc422af0dca4f0912441acc",
+    "stage12417_rows": "065923de4ef183501b5f528d",
+    "stage12421_rows": "da4d26a6ae21fc821bb92b31",
+    "stage12421_summary": "72b82e253d3ccff3bd3bfce9",
+    "stage12457_rows": "f30b2d05fa08d5caae325481",
+    "stage12457_summary": "b447331bdf0930aaa4743476",
+    "stage12459_summary": "09cbbf8b56d1a44289306982",
+    "stage12459_worklist": "d3359b928de077bed56e48cd"
+  },
+  "level3_admitted": 0,
+  "level3_admitted_rows": 0,
+  "new_countable_train_support_count": 2,
+  "next_stage": "expand_public_local_train_support_and_repair_legacy_collapse_groups_before_training",
+  "patch_trace_admitted": 0,
+  "patch_trace_admitted_rows": 0,
+  "patch_trace_rows": 0,
+  "proof_candidate_external_credit_count": 0,
+  "raw_leak_count": 0,
+  "record_type": "public_source_lane_expansion_and_train_support_admission_gate_v1",
+  "remaining_gap_to_500": 308,
+  "repair_claim_admitted_rows": 0,
+  "required_buckets": {
+    "fixture_curriculum_only": 64,
+    "proof_candidate_only": 2,
+    "train_support_only": 101
+  },
+  "source_heldout_admissible_count": 0,
+  "source_heldout_rows": 0,
+  "source_inventory": {
+    "stage12417_row_index_rows": 99,
+    "stage12421_countable_summary": 2,
+    "stage12421_emitted_rows": 26,
+    "stage12457_fixture_control_rows": 40,
+    "stage12459_proof_candidate_lanes": 2
+  },
+  "stage": "stage12532_public_source_lane_expansion_and_train_support_admission_gate",
+  "strict_eval_eligible_count": 0,
+  "strict_eval_rows": 0,
+  "training_allowed": false,
+  "training_blockers": [
+    "500_countable_train_support_floor_not_reached",
+    "legacy_train_support_collapse_groups_present",
+    "separate_training_gate_not_passed"
+  ],
+  "upstream_guardrails": {
+    "stage12421_guardrail_scan_passed": true,
+    "stage12457_guardrail_scan_passed": true,
+    "stage12459_guardrail_scan_passed": true
+  }
+}

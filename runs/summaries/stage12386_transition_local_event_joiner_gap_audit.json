@@ -1,0 +1,316 @@
+{
+  "claim_boundary": "This stage audits existing pools only. It emits no training package and admits no new Level-3 or patch-trace rows.",
+  "classification_counts": {
+    "candidate_only": 4034,
+    "level3_control_complete": 149,
+    "transition_local_incomplete": 185,
+    "verifier_observation_support": 6
+  },
+  "decision": "transition_local_gap_audit_complete_training_still_blocked",
+  "language_counts": {
+    "c_cpp": 37,
+    "python": 261,
+    "rust": 47,
+    "unknown": 3944,
+    "unknown_from_metadata": 14,
+    "web_js_ts_html": 71
+  },
+  "missing_level3_baseline_field_counts": {
+    "candidate_action_set": 181,
+    "command_result": 4225,
+    "language": 4225,
+    "observed_action": 4225,
+    "repo_family": 4144,
+    "root_id": 4144,
+    "state_update": 4225,
+    "stop_decision": 4225,
+    "verifier_transition": 4225
+  },
+  "missing_transition_local_field_counts": {
+    "candidate_action_set": 181,
+    "chosen_action": 4125,
+    "observation_status_class": 4034,
+    "patch_apply_status": 4183,
+    "semantic_rule_id": 4189,
+    "state_before_summary_codes": 4183,
+    "state_delta_codes": 4035,
+    "stop_continue_label": 4125,
+    "transition_function_key": 4189,
+    "verifier_identity": 4281,
+    "verifier_transition": 4225
+  },
+  "new_training_rows_emitted": 0,
+  "next_stage": {
+    "must_not_train_on": [
+      "candidate_only",
+      "transition_local_incomplete",
+      "verifier_observation_support_as_level3"
+    ],
+    "purpose": "Upgrade the stage12316/stage12260 raw-index path against the Stage12206 control contract: recover repo_family, safe command_result, state_update, stop_decision, and policy-valid candidate labels.",
+    "stage": "stage12387_transition_local_materializer_upgrade",
+    "training_allowed": false
+  },
+  "records_audited": 4374,
+  "source_summaries": [
+    {
+      "blocked_reason_counts": {},
+      "classification_counts": {
+        "level3_control_complete": 149
+      },
+      "expected_role": "level3_control",
+      "language_counts": {
+        "c_cpp": 27,
+        "python": 50,
+        "rust": 27,
+        "web_js_ts_html": 45
+      },
+      "missing_level3_baseline_field_counts": {},
+      "missing_transition_local_field_counts": {
+        "patch_apply_status": 149,
+        "semantic_rule_id": 149,
+        "state_before_summary_codes": 149,
+        "transition_function_key": 149,
+        "verifier_identity": 149
+      },
+      "path": "runs/local/artifacts/stage12206_level3_passfail_training_rollup/level3_passfail_train_support_repo_capped.jsonl",
+      "recommendation": "use_as_level3_control_exemplar_not_new_claim",
+      "rows": 149,
+      "source_name": "stage12206_level3_repo_capped_control",
+      "source_status": "present"
+    },
+    {
+      "blocked_reason_counts": {
+        "ordered_patch_and_verifier_refs_missing": 7,
+        "patch_applicability_or_no_patch_reason_missing": 100,
+        "repo_family_not_semantically_recovered": 100,
+        "semantic_rule_id_missing": 100,
+        "state_delta_proof_missing": 100,
+        "stop_continue_proof_missing": 100,
+        "transition_function_key_missing": 100,
+        "transition_local_state_ledger_missing": 100,
+        "verifier_status_class_missing": 100
+      },
+      "classification_counts": {
+        "candidate_only": 100
+      },
+      "expected_role": "join_seed",
+      "language_counts": {
+        "python": 93,
+        "unknown_from_metadata": 7
+      },
+      "missing_level3_baseline_field_counts": {
+        "candidate_action_set": 100,
+        "command_result": 100,
+        "language": 100,
+        "observed_action": 100,
+        "repo_family": 100,
+        "root_id": 100,
+        "state_update": 100,
+        "stop_decision": 100,
+        "verifier_transition": 100
+      },
+      "missing_transition_local_field_counts": {
+        "candidate_action_set": 100,
+        "chosen_action": 100,
+        "observation_status_class": 100,
+        "patch_apply_status": 100,
+        "semantic_rule_id": 100,
+        "state_before_summary_codes": 100,
+        "state_delta_codes": 100,
+        "stop_continue_label": 100,
+        "transition_function_key": 100,
+        "verifier_identity": 100,
+        "verifier_transition": 100
+      },
+      "path": "runs/local/artifacts/stage12314_session_candidate_repo_and_state_joiner/session_candidate_repo_state_join_records.jsonl",
+      "recommendation": "candidate_or_join_audit_only",
+      "rows": 100,
+      "source_name": "stage12314_repo_state_join_seed",
+      "source_status": "present"
+    },
+    {
+      "blocked_reason_counts": {
+        "chosen_action_policy_label_not_admitted_from_observed_order": 100,
+        "repo_family_still_not_semantically_recovered": 100,
+        "semantic_rule_id_not_deterministically_assignable": 6,
+        "state_delta_needs_semantic_review_before_training": 100,
+        "transition_function_key_not_deterministically_assignable": 6,
+        "verifier_status_not_training_grade": 7
+      },
+      "classification_counts": {
+        "transition_local_incomplete": 94,
+        "verifier_observation_support": 6
+      },
+      "expected_role": "transition_local_audit",
+      "language_counts": {
+        "python": 93,
+        "unknown_from_metadata": 7
+      },
+      "missing_level3_baseline_field_counts": {
+        "command_result": 100,
+        "language": 100,
+        "observed_action": 100,
+        "repo_family": 100,
+        "root_id": 100,
+        "state_update": 100,
+        "stop_decision": 100,
+        "verifier_transition": 100
+      },
+      "missing_transition_local_field_counts": {
+        "semantic_rule_id": 6,
+        "transition_function_key": 6,
+        "verifier_identity": 7,
+        "verifier_transition": 100
+      },
+      "path": "runs/local/artifacts/stage12316_transition_local_event_joiner/transition_local_event_join_records.jsonl",
+      "recommendation": "use_as_materialization_seed_not_training_rows",
+      "rows": 100,
+      "source_name": "stage12316_transition_local_join",
+      "source_status": "present"
+    },
+    {
+      "blocked_reason_counts": {},
+      "classification_counts": {
+        "transition_local_incomplete": 76
+      },
+      "expected_role": "verifier_observation_support",
+      "language_counts": {
+        "unknown": 76
+      },
+      "missing_level3_baseline_field_counts": {
+        "command_result": 76,
+        "language": 76,
+        "observed_action": 76,
+        "repo_family": 76,
+        "root_id": 76,
+        "state_update": 76,
+        "stop_decision": 76,
+        "verifier_transition": 76
+      },
+      "missing_transition_local_field_counts": {
+        "chosen_action": 76,
+        "state_delta_codes": 1,
+        "stop_continue_label": 76,
+        "verifier_identity": 76,
+        "verifier_transition": 76
+      },
+      "path": "runs/local/artifacts/stage12320_event_local_semantic_review_admission/event_local_observation_train_support_admitted_rows.jsonl",
+      "recommendation": "use_as_materialization_seed_not_training_rows",
+      "rows": 76,
+      "source_name": "stage12320_event_local_observation_support",
+      "source_status": "present"
+    },
+    {
+      "blocked_reason_counts": {},
+      "classification_counts": {
+        "transition_local_incomplete": 15
+      },
+      "expected_role": "verifier_observation_support",
+      "language_counts": {
+        "unknown": 15
+      },
+      "missing_level3_baseline_field_counts": {
+        "command_result": 15,
+        "language": 15,
+        "observed_action": 15,
+        "repo_family": 15,
+        "root_id": 15,
+        "state_update": 15,
+        "stop_decision": 15,
+        "verifier_transition": 15
+      },
+      "missing_transition_local_field_counts": {
+        "chosen_action": 15,
+        "stop_continue_label": 15,
+        "verifier_identity": 15,
+        "verifier_transition": 15
+      },
+      "path": "runs/local/artifacts/stage12323_v4_event_local_review_admission/v4_event_local_train_support_admitted_rows.jsonl",
+      "recommendation": "use_as_materialization_seed_not_training_rows",
+      "rows": 15,
+      "source_name": "stage12323_v4_event_local_observation_support",
+      "source_status": "present"
+    },
+    {
+      "blocked_reason_counts": {},
+      "classification_counts": {
+        "candidate_only": 3853
+      },
+      "expected_role": "action_observation_taxonomy",
+      "language_counts": {
+        "unknown": 3853
+      },
+      "missing_level3_baseline_field_counts": {
+        "command_result": 3853,
+        "language": 3853,
+        "observed_action": 3853,
+        "repo_family": 3853,
+        "root_id": 3853,
+        "state_update": 3853,
+        "stop_decision": 3853,
+        "verifier_transition": 3853
+      },
+      "missing_transition_local_field_counts": {
+        "chosen_action": 3853,
+        "observation_status_class": 3853,
+        "patch_apply_status": 3853,
+        "semantic_rule_id": 3853,
+        "state_before_summary_codes": 3853,
+        "state_delta_codes": 3853,
+        "stop_continue_label": 3853,
+        "transition_function_key": 3853,
+        "verifier_identity": 3853,
+        "verifier_transition": 3853
+      },
+      "path": "runs/local/artifacts/stage12295_transition_function_ledger/transition_function_train_support_rows.jsonl",
+      "recommendation": "candidate_or_join_audit_only",
+      "rows": 3853,
+      "source_name": "stage12295_transition_function_support",
+      "source_status": "present"
+    },
+    {
+      "blocked_reason_counts": {},
+      "classification_counts": {
+        "candidate_only": 81
+      },
+      "expected_role": "selected_test_support",
+      "language_counts": {
+        "c_cpp": 10,
+        "python": 25,
+        "rust": 20,
+        "web_js_ts_html": 26
+      },
+      "missing_level3_baseline_field_counts": {
+        "candidate_action_set": 81,
+        "command_result": 81,
+        "language": 81,
+        "observed_action": 81,
+        "state_update": 81,
+        "stop_decision": 81,
+        "verifier_transition": 81
+      },
+      "missing_transition_local_field_counts": {
+        "candidate_action_set": 81,
+        "chosen_action": 81,
+        "observation_status_class": 81,
+        "patch_apply_status": 81,
+        "semantic_rule_id": 81,
+        "state_before_summary_codes": 81,
+        "state_delta_codes": 81,
+        "stop_continue_label": 81,
+        "transition_function_key": 81,
+        "verifier_identity": 81,
+        "verifier_transition": 81
+      },
+      "path": "runs/local/artifacts/stage12385_combined_train_support_ledger_v15_dedup/combined_selected_test_rows_v15_dedup.jsonl",
+      "recommendation": "candidate_or_join_audit_only",
+      "rows": 81,
+      "source_name": "stage12385_selected_test_support",
+      "source_status": "present"
+    }
+  ],
+  "sources_audited": 7,
+  "stage": "stage12386_transition_local_event_joiner_gap_audit",
+  "training_allowed": false,
+  "true_new_transition_rows_available_without_manual_review": 0
+}

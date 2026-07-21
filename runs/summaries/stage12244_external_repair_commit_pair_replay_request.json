@@ -1,0 +1,500 @@
+{
+  "admission_gate": {
+    "hard_rejects": [
+      "missing-test/no-tests failure",
+      "dependency/install/network/GPU failure",
+      "syntax-only failure",
+      "selected test added only by patch",
+      "weak/unrelated verifier",
+      "PASS_TO_PASS only",
+      "cross-lineage diff/command/verifier"
+    ],
+    "required_successes": [
+      "before selected verifier fails for behavior",
+      "patch applies cleanly to before",
+      "before_plus_patch same verifier passes",
+      "after same verifier passes or authoritative after verifier passes",
+      "stdout/stderr/exit captured for all phases"
+    ]
+  },
+  "claim_boundary": "Replay request only. No rows admitted until command-output phase tuples pass QC.",
+  "decision": "external_repair_commit_pair_replay_request_ready_preflight_required",
+  "execution_policy": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "network": "forbidden",
+    "repo_mutation": "throwaway checkout only",
+    "timeout_seconds_per_phase": 120,
+    "write_root": "/data/tmp/stage12244_external_repair_replay"
+  },
+  "language_counts": {
+    "python": 12,
+    "rust": 4,
+    "web_js_ts_html": 4
+  },
+  "records": [
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "3fdbf0b",
+      "commit_before": "b939cb4",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "pytest",
+      "repo_path": "/arxiv/repositories/pytest",
+      "request_id": "stage12244_replay_001",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest testing/test_assertrewrite.py -q",
+      "why_likely_behavior_repair": "Fix recursive find_spec crash"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "f36b07a",
+      "commit_before": "680f9f3",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "pytest",
+      "repo_path": "/arxiv/repositories/pytest",
+      "request_id": "stage12244_replay_002",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest testing/test_conftest.py -q",
+      "why_likely_behavior_repair": "conftest initialization regression"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "c24de88",
+      "commit_before": "974ed48",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "pytest",
+      "repo_path": "/arxiv/repositories/pytest",
+      "request_id": "stage12244_replay_003",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest testing/python/raises_group.py -q",
+      "why_likely_behavior_repair": "stale loop variable behavior"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "47ed628",
+      "commit_before": "62ca642",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "pytest",
+      "repo_path": "/arxiv/repositories/pytest",
+      "request_id": "stage12244_replay_004",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest testing/test_monkeypatch.py -q",
+      "why_likely_behavior_repair": "monkeypatch teardown crash"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "1d66a54",
+      "commit_before": "6fcc30b",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "sympy",
+      "repo_path": "/arxiv/repositories/sympy",
+      "request_id": "stage12244_replay_005",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest sympy/ntheory/tests/test_elliptic_curve.py -q",
+      "why_likely_behavior_repair": "elliptic curve bug fix"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "301aa35",
+      "commit_before": "ba8647d",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "sympy",
+      "repo_path": "/arxiv/repositories/sympy",
+      "request_id": "stage12244_replay_006",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest sympy/logic/tests/test_inference.py -q",
+      "why_likely_behavior_repair": "negated predicate inference bug"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "e09d940",
+      "commit_before": "06f6e3a",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "sympy",
+      "repo_path": "/arxiv/repositories/sympy",
+      "request_id": "stage12244_replay_007",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest sympy/solvers/tests/test_solveset.py -q",
+      "why_likely_behavior_repair": "nonlinsolve NotInvertible repair"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "8b97062",
+      "commit_before": "e4742ca",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "sympy",
+      "repo_path": "/arxiv/repositories/sympy",
+      "request_id": "stage12244_replay_008",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest sympy/matrices/tests/test_eigen.py -q",
+      "why_likely_behavior_repair": "numeric eigenvals behavior"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "66ee6e0",
+      "commit_before": "6a968f7",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "sympy",
+      "repo_path": "/arxiv/repositories/sympy",
+      "request_id": "stage12244_replay_009",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest sympy/solvers/tests/test_simplex.py -q",
+      "why_likely_behavior_repair": "simplex omitted input error"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "42747cd",
+      "commit_before": "5e79aab",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "sympy",
+      "repo_path": "/arxiv/repositories/sympy",
+      "request_id": "stage12244_replay_010",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest sympy/polys/tests/test_puiseux.py -q",
+      "why_likely_behavior_repair": "puiseux canonicalization bug"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "63d52d2",
+      "commit_before": "bea49f7",
+      "language_family": "web_js_ts_html",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "eslint",
+      "repo_path": "/arxiv/repositories/eslint",
+      "request_id": "stage12244_replay_011",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "npm test -- tests/lib/rules/max-classes-per-file.js",
+      "why_likely_behavior_repair": "rule report range behavior"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "7feaff0",
+      "commit_before": "865d76e",
+      "language_family": "web_js_ts_html",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "eslint",
+      "repo_path": "/arxiv/repositories/eslint",
+      "request_id": "stage12244_replay_012",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "npm test -- tests/lib/rules/max-nested-callbacks.js",
+      "why_likely_behavior_repair": "callback detection logic"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "4025b10",
+      "commit_before": "8890c2d",
+      "language_family": "web_js_ts_html",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "eslint",
+      "repo_path": "/arxiv/repositories/eslint",
+      "request_id": "stage12244_replay_013",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "npm test -- tests/lib/rules/prefer-exponentiation-operator.js",
+      "why_likely_behavior_repair": "invalid autofix behavior"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "bf4ea97",
+      "commit_before": "b565783",
+      "language_family": "web_js_ts_html",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "eslint",
+      "repo_path": "/arxiv/repositories/eslint",
+      "request_id": "stage12244_replay_014",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "npm test -- tests/lib/rules/complexity.js tests/lib/rules/max-depth.js tests/lib/rules/max-nested-callbacks.js tests/lib/rules/max-params.js tests/lib/rules/max-statements.js",
+      "why_likely_behavior_repair": "option-zero semantic bug across rules"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "04ec281",
+      "commit_before": "f719af6",
+      "language_family": "rust",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "biome",
+      "repo_path": "/arxiv/repositories/biome",
+      "request_id": "stage12244_replay_015",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "cargo test -p biome_cli --test commands lint",
+      "why_likely_behavior_repair": "analyzer filter behavior"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "5f7d0e6",
+      "commit_before": "f719af6",
+      "language_family": "rust",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "biome",
+      "repo_path": "/arxiv/repositories/biome",
+      "request_id": "stage12244_replay_016",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "cargo test -p biome_html_parser",
+      "why_likely_behavior_repair": "HTML processing instruction parser repair"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "3694a13",
+      "commit_before": "39e4fd5",
+      "language_family": "rust",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "biome",
+      "repo_path": "/arxiv/repositories/biome",
+      "request_id": "stage12244_replay_017",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "cargo test -p biome_js_analyze",
+      "why_likely_behavior_repair": "a11y useAnchorContent false-positive"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "5f837df",
+      "commit_before": "c1dfb43",
+      "language_family": "rust",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "biome",
+      "repo_path": "/arxiv/repositories/biome",
+      "request_id": "stage12244_replay_018",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "cargo test -p biome_migrate",
+      "why_likely_behavior_repair": "ruleMover trailing comma migration"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "d9d2dd4",
+      "commit_before": "parent",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "BrowserGym",
+      "repo_path": "/arxiv/repositories/BrowserGym",
+      "request_id": "stage12244_replay_019",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest tests/core/test_gym_envs.py -q",
+      "why_likely_behavior_repair": "manifest selected test candidate"
+    },
+    {
+      "admission_status": "pending_replay_not_admitted",
+      "commit_after": "fa79f3a",
+      "commit_before": "parent",
+      "language_family": "python",
+      "preflight_checks": [
+        "test path exists at commit_before",
+        "git diff commit_before..commit_after contains source change and not only test addition",
+        "git apply --check succeeds at commit_before",
+        "verifier command does not require network/GPU/install",
+        "failure is not no-tests/missing file/syntax-only"
+      ],
+      "repo_family": "SWE-bench",
+      "repo_path": "/arxiv/repositories/SWE-bench",
+      "request_id": "stage12244_replay_020",
+      "required_phases": [
+        "before_fail_behavior",
+        "before_plus_patch_pass",
+        "after_pass"
+      ],
+      "verifier_command": "python -m pytest tests/test_log_parsers_java.py -q",
+      "why_likely_behavior_repair": "java log parser flaky eval fix"
+    }
+  ],
+  "source_subagent": "Ptolemy 019f6ba0-ac4c-7643-a44d-51fb495b910a",
+  "stage": "stage12244_external_repair_commit_pair_replay_request",
+  "target_count": 20,
+  "training_allowed": false
+}

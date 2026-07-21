@@ -1,0 +1,89 @@
+{
+  "created_at_utc": "2026-07-15T00:30:15Z",
+  "decision": "candidate_selection_repair_training_request_ready",
+  "execute_now": false,
+  "gates_before_execution": {
+    "base_manifest_exists": true,
+    "candidate_selection_repair_rows_85": true,
+    "head_only_enabled": true,
+    "init_runtime_exists": true,
+    "local_audit_passed": true,
+    "next_action_preservation_rows_75": true,
+    "option_mirror_missing_zero": true,
+    "preserve_runtime_exists": true,
+    "repair_rows_160": true,
+    "repair_rows_exists": true,
+    "splits_expected": true,
+    "unsafe_loss_zero": true,
+    "uses_gpu2_mask": true
+  },
+  "hypothesis": "Candidate-selection regression replay plus next-action preservation can move total transition score above 364/640 while keeping next_action >=59/160 and restoring candidate_selection >=89/160.",
+  "next_stage_after_execution": "stage12092_candidate_selection_repair_training_postrun_audit",
+  "next_stage_if_executed": "stage12091_candidate_selection_repair_training_probe",
+  "outputs": {
+    "command": "runs/local/artifacts/stage12090_candidate_selection_repair_training_request/candidate_selection_repair_training_command.json",
+    "manifest": "runs/local/artifacts/stage12090_candidate_selection_repair_training_request/candidate_selection_repair_training_manifest.jsonl",
+    "output_dir": "runs/local/artifacts/stage12091_candidate_selection_repair_training_probe/bounded_decoder_probe",
+    "runtime_dir": "runs/local/artifacts/stage12091_candidate_selection_repair_training_probe/runtime_model",
+    "summary": "runs/local/artifacts/stage12090_candidate_selection_repair_training_request/candidate_selection_repair_training_request.json",
+    "summary_mirror": "runs/summaries/stage12090_candidate_selection_repair_training_request.json"
+  },
+  "passed": true,
+  "promotion_gate": {
+    "old_transition_640": ">364/640",
+    "protected_filtered_strict": "22/22",
+    "protected_old_canary_strict": "23/23",
+    "residual_bank": ">=7/10",
+    "source_heldout_smoke": ">=6/12",
+    "transition_candidate_selection": ">=89/160",
+    "transition_continue_or_stop": ">=128/160",
+    "transition_next_action": ">=59/160",
+    "transition_verifier_transition": ">=96/160"
+  },
+  "row_counts": {
+    "eval_rows": 22,
+    "old_replay_rows": 640,
+    "option_mirror_missing": 0,
+    "repair_rows": 160,
+    "repair_subpacket_counts": {
+      "candidate_selection_gain_preservation": 25,
+      "candidate_selection_regression_replay": 60,
+      "next_action_gain_preservation": 45,
+      "selected_verifier_next_action_preservation": 30
+    },
+    "repair_target_counts": {
+      "A": 25,
+      "ABSTAIN_OR_ROLLBACK": 31,
+      "B": 47,
+      "C": 13,
+      "PLAN_PATCH": 18,
+      "RETRIEVE_EVIDENCE": 26
+    },
+    "strict_rows": 22,
+    "train_rows": 800,
+    "train_task_counts": {
+      "transition_candidate_selection": 245,
+      "transition_continue_or_stop": 160,
+      "transition_next_action": 235,
+      "transition_verifier_transition": 160
+    },
+    "unsafe_loss": 0
+  },
+  "source_artifacts": {
+    "base_manifest": "runs/local/artifacts/stage11923_transition_listwise_head_only_probe_request/transition_listwise_head_only_manifest.jsonl",
+    "repair_rows": "runs/local/artifacts/stage12088_candidate_selection_repair_packet/candidate_selection_repair_rows.jsonl",
+    "stage12089_audit": "runs/summaries/stage12089_candidate_selection_repair_local_audit.json"
+  },
+  "stage": 12090,
+  "stage_name": "stage12090_candidate_selection_repair_training_request",
+  "training_controls": {
+    "contrast_weight": 0.25,
+    "gpu": "cuda:2 only",
+    "head_only": true,
+    "init_runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "learning_rate": "5e-5",
+    "max_steps": 384,
+    "preservation_reference_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "sampler": "task_balanced"
+  }
+}

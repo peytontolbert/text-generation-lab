@@ -1,0 +1,153 @@
+{
+  "artifact_type": "episode_graph_validator_skeleton_preflight",
+  "claim_boundary": "Validator/preflight artifact only. It validates task-window readiness against episode-graph levels. It emits no episode_graph_candidate records, no root admissions, and no training rows.",
+  "counts": {
+    "all_window_top_chats": [
+      [
+        "codex_chat_6f64d1438ee4d97dcac6",
+        5901
+      ],
+      [
+        "codex_chat_d6f1900b8bd562af2c30",
+        4563
+      ],
+      [
+        "codex_chat_458578265e1d728a2a82",
+        2352
+      ],
+      [
+        "codex_chat_e5d0b6e24e7d5f2097c4",
+        1921
+      ],
+      [
+        "codex_chat_dcb82a465e9bbe6969fd",
+        1521
+      ],
+      [
+        "codex_chat_94178e3cbe26fad56b1d",
+        1014
+      ],
+      [
+        "codex_chat_36b19ca704b7bf681420",
+        989
+      ],
+      [
+        "codex_chat_c8caab5ff6670f867b94",
+        949
+      ],
+      [
+        "codex_chat_e42ca9f6d7d32eedd65c",
+        577
+      ],
+      [
+        "codex_chat_f1e3476f24fe1f617c20",
+        426
+      ]
+    ],
+    "blocked_reason_counts": {
+      "level2_only_patch_and_verifier_copresent_state_join_missing": 2059,
+      "level2_pool_session_dominance_top2_gt_50pct": 1,
+      "non_lifecycle_boundary": 8,
+      "patch_verifier_causality_not_proven": 2059,
+      "source_root_label_missing": 23936,
+      "terminal_event_missing": 8
+    },
+    "blocked_window_rows": 23936,
+    "dominance_blocked": true,
+    "level2_patch_verifier_total": 2059,
+    "level2_top2_share": 0.9354055366682856,
+    "level2_top_chats": [
+      [
+        "codex_chat_e5d0b6e24e7d5f2097c4",
+        1168
+      ],
+      [
+        "codex_chat_94178e3cbe26fad56b1d",
+        758
+      ],
+      [
+        "codex_chat_7e05f84a7583daf1b3c3",
+        51
+      ],
+      [
+        "codex_chat_d6bf338eaa50fc67225b",
+        32
+      ],
+      [
+        "codex_chat_a0d8350c4bd166c6d2a0",
+        20
+      ],
+      [
+        "codex_chat_fae47acf81bd857835f6",
+        3
+      ],
+      [
+        "codex_chat_44fa8561b9c36bba31cc",
+        3
+      ],
+      [
+        "codex_chat_235a1dbd061049453f69",
+        3
+      ],
+      [
+        "codex_chat_f227640ba431ea8816df",
+        2
+      ],
+      [
+        "codex_chat_37d0a4499e2ec57a6c74",
+        2
+      ]
+    ],
+    "task_window_overlap_count": 0,
+    "warning_window_rows": 0
+  },
+  "decision": "validator_ready_stage12260_not_admissible_training_blocked",
+  "input": {
+    "task_windows": 23936,
+    "task_windows_path": "runs/local/artifacts/stage12260_codex_chat_task_boundary_miner/codex_task_windows.jsonl"
+  },
+  "must_fix_before_candidate_projection": [
+    "Repair Stage12260 or Stage12261 projection to carry source_root_label/source adapter fields.",
+    "Do not promote patch+verifier co-presence to causality.",
+    "Add candidate state_before/chosen_action/observation/state_update/stop_continue materialization.",
+    "Apply max-per-chat/session caps before GPT review or admission.",
+    "Separate broad build/generic python execution from selected verifier evidence."
+  ],
+  "recommended_next_stage": {
+    "constraints": {
+      "max_per_chat_for_audit": 3,
+      "require_source_root_repair": true,
+      "training_allowed": false
+    },
+    "scope": "profile/cap the 2059 patch+verifier-ref windows, no admission",
+    "stage": "stage12263_high_value_window_profiler"
+  },
+  "stage": "stage12262_episode_graph_validator_skeleton",
+  "training_allowed": false,
+  "validation_levels": {
+    "V0_source_envelope": {
+      "reason": "source_root_label_missing_on_current_stage12260_windows",
+      "status": "fail"
+    },
+    "V1_ordering_pairing": {
+      "overlap_count": 0,
+      "status": "pass_with_warnings"
+    },
+    "V2_task_boundary": {
+      "note": "Lifecycle boundaries exist, but they are not admitted episode graphs.",
+      "status": "pass_as_boundary_candidates_only"
+    },
+    "V3_causal_tuple": {
+      "reason": "state_before/candidate_actions/chosen_action/state_update/stop_continue not materialized.",
+      "status": "fail"
+    },
+    "V4_patch_verifier": {
+      "reason": "patch and verifier refs are co-present only; causal ordering and same-source verifier relevance are not proven.",
+      "status": "fail"
+    },
+    "V5_admission_qc": {
+      "reason": "dominance, dedupe, source-root repair, leak/protected-overlap, and repo/language caps not complete.",
+      "status": "fail"
+    }
+  }
+}

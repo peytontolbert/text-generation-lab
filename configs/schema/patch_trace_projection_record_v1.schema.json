@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "patch_trace_projection_record_v1",
+  "type": "object",
+  "required": [
+    "row_id",
+    "source_record_id",
+    "episode_id",
+    "root_id",
+    "repo_family",
+    "language_family",
+    "split",
+    "projection_family",
+    "task_type",
+    "prompt_text",
+    "input_text",
+    "target",
+    "decoder_text",
+    "bounded_choice_target_label",
+    "opaque_options",
+    "standalone_projection_source",
+    "state_before",
+    "state_before_plus_patch",
+    "state_after",
+    "ordered_events",
+    "patch_trace",
+    "verifier_result_by_phase",
+    "anti_cheat",
+    "loss_mask",
+    "train_support_only",
+    "strict_eval_eligible",
+    "source_heldout_admissible",
+    "training_allowed"
+  ],
+  "properties": {
+    "row_id": {"type": "string"},
+    "source_record_id": {"type": "string"},
+    "episode_id": {"type": "string"},
+    "root_id": {"type": "string"},
+    "repo_family": {"type": "string"},
+    "language_family": {"type": "string"},
+    "split": {"const": "train_support"},
+    "projection_family": {
+      "enum": ["patch_apply", "verifier_transition", "stop_continue", "next_action", "patch_judgment"]
+    },
+    "task_type": {"type": "string"},
+    "prompt_text": {"type": "string"},
+    "input_text": {"type": "string"},
+    "target": {"type": "string"},
+    "decoder_text": {"type": "string"},
+    "bounded_choice_target_label": {"type": "string"},
+    "opaque_options": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["label", "value", "semantic_role", "is_target"],
+        "properties": {
+          "label": {"type": "string"},
+          "value": {"type": "string"},
+          "semantic_role": {"type": "string"},
+          "is_target": {"type": "boolean"}
+        }
+      }
+    },
+    "standalone_projection_source": {
+      "type": "object",
+      "required": ["opaque_options"]
+    },
+    "ordered_events": {"type": "array", "minItems": 3},
+    "patch_trace": {"type": "object"},
+    "verifier_result_by_phase": {"type": "object"},
+    "anti_cheat": {"type": "object"},
+    "loss_mask": {"type": "object"},
+    "train_support_only": {"const": true},
+    "strict_eval_eligible": {"const": false},
+    "source_heldout_admissible": {"const": false},
+    "training_allowed": {"const": false}
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "artifact_type": "external_semantic_review_result_ingest",
+  "claim_boundary": "Review-result ingest only. No roots admitted and no training rows emitted.",
+  "counts": {
+    "external_comparable_patch_trace_countable": 0,
+    "external_task_validity_counts": {
+      "private_site_unclear": 4,
+      "valid_external": 7
+    },
+    "fail_to_pass_countable": 0,
+    "hard_reject_counts": {
+      "LAST_PATCH_VERIFIER_SEMANTIC_MISMATCH": 1,
+      "MIXED_POST_VERIFIER_OUTCOMES": 2,
+      "MULTI_LOOP_WINDOW": 1,
+      "MULTI_PATCH_MULTI_VERIFIER_WINDOW": 1,
+      "MULTI_PATCH_WINDOW": 1,
+      "NOT_FAIL_TO_PASS": 4,
+      "NO_OBSERVED_PRE_PATCH_FAILURE": 5,
+      "PASS_ONLY_POST_VERIFIER": 2,
+      "POST_VERIFIER_FAILURES_REMAIN": 1,
+      "POST_VERIFIER_REF_JOIN_MISSING": 1,
+      "PRE_AND_POST_PASS_ONLY": 1,
+      "VERIFIERS_ATTACH_TO_PRIOR_CODE_PATCHES": 1,
+      "VERIFIER_RELEVANCE_UNPROVEN": 1,
+      "effective_edit_unmaterialized_as_patch": 5,
+      "fail_to_pass_not_established": 1,
+      "fail_to_pass_status_not_observed": 5,
+      "failure_origin_not_classifiable_from_safe_materialization": 1,
+      "multi_loop_split_required": 1,
+      "multi_loop_window_split_required": 1,
+      "post_unknown_status_present": 2,
+      "pre_patch_fail_missing": 5,
+      "private_site_externality_unclear": 4,
+      "same_verifier_pre_post_not_proven": 1,
+      "selected_patch_ref_not_effective": 5,
+      "semantic_verifier_relevance_not_proven": 1
+    },
+    "review_decision_counts": {
+      "quarantine": 7,
+      "split_required": 4
+    },
+    "reviewed_candidates": 11,
+    "semantic_relevance_counts": {
+      "ambiguous": 2,
+      "not_relevant": 1,
+      "not_relevant_to_materialized_chosen_patch": 5,
+      "relevant": 3
+    },
+    "split_required": 10
+  },
+  "decision": "semantic_reviews_ingested_all_external_candidates_blocked_training_blocked",
+  "decisive_counter_progress": {
+    "external_comparable_patch_trace_repair_rows": 0,
+    "external_fail_to_pass_rows": 0,
+    "level3_same_source_closed_loop_admitted": 0,
+    "level3_same_source_closed_loop_candidates": 25,
+    "non_python_external_repair_rows": 0,
+    "sealed_transition_eval_rows": 0
+  },
+  "guardrails": {
+    "raw_message_text_emitted": false,
+    "raw_patch_body_emitted": false,
+    "raw_tool_arguments_emitted": false,
+    "raw_tool_output_emitted": false,
+    "root_admission_emitted": false,
+    "training_rows_emitted_now": false
+  },
+  "next_stage": {
+    "scope": "split selected multi-loop external windows into child patch-verifier loops, then re-run semantic relevance and pre/post filters",
+    "stage": "stage12270_child_loop_splitter_for_external_candidates",
+    "training_allowed": false
+  },
+  "quality_decision": {
+    "admission_allowed": false,
+    "reason": "All reviewed external candidates are split-required or quarantined; none prove comparable FAIL_TO_PASS repair.",
+    "training_allowed": false
+  },
+  "stage": "stage12269_external_semantic_review_result_ingest",
+  "training_allowed": false
+}

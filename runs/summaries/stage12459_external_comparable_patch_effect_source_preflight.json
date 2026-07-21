@@ -1,0 +1,211 @@
+{
+  "admission_allowed": false,
+  "claim_boundary": "Public-safe source-lane control only. No rows are admitted, no training rows are emitted, no tests are executed, and no sensitive locators, execution logs, change bodies, or exact tiny source identifiers are exposed.",
+  "decision": "fail_closed_source_preflight_ready_for_private_proof_slot_materialization",
+  "emitted_training_rows": 0,
+  "external_comparable_repair_credit_count": 0,
+  "external_fail_to_pass_remaining_floor_gap": 15,
+  "guardrail_scan": {
+    "issues": [],
+    "raw_leak_count": 0,
+    "scan_passed": true,
+    "scan_scope": "stage12459_public_summary_and_lane_ref_worklist"
+  },
+  "guardrail_scan_passed": true,
+  "next_execution_or_materialization_request": {
+    "admission_after_next_stage_allowed": false,
+    "minimum_success_condition": "materialize at least external_fail_to_pass_remaining_floor_gap proof-complete FAIL_TO_PASS comparable patch-effect records in private artifacts before any later admission stage may request credit",
+    "request_type": "private_proof_slot_materialization_only",
+    "required_proof_slots": [
+      "buggy_state_ref_hash",
+      "fixed_or_patch_state_ref_hash",
+      "patch_ref_hash",
+      "same_source_verifier_identity_hash",
+      "before_verifier_status_fail",
+      "after_or_before_plus_patch_verifier_status_pass",
+      "verifier_output_ref_hashes",
+      "ordered_patch_effect_causality_ref",
+      "anti_leak_public_rendering_pass"
+    ],
+    "required_proof_slots_ref": "stage12459_required_repair_proof_slots_v1",
+    "safe_next_stage_name": "stage12460_external_comparable_patch_effect_private_proof_slot_materialization_request",
+    "scope": "ranked_lane_refs_only_no_broad_mining",
+    "training_after_next_stage_allowed": false
+  },
+  "packaging_allowed": false,
+  "raw_leak_count": 0,
+  "record_type": "external_comparable_patch_effect_source_preflight_public_safe_v1",
+  "rejected_lane_inventory": [
+    {
+      "candidate_count_bucket": "5-9",
+      "reason": "controlled_or_mutation_support_is_not_external_comparable_repair_proof",
+      "rejection_class": "controlled mutation",
+      "source_stage_refs": [
+        "stage12458_balance_and_external_repair_gate"
+      ]
+    },
+    {
+      "candidate_count_bucket": "25-74",
+      "reason": "selected_test_observation_support_cannot_close_external_repair_credit_floor",
+      "rejection_class": "selected-test verifier observation",
+      "source_stage_refs": [
+        "stage12458_balance_and_external_repair_gate"
+      ]
+    },
+    {
+      "candidate_count_bucket": "1",
+      "reason": "pass_to_pass_is_not_fail_to_pass_patch_effect",
+      "rejection_class": "PASS_TO_PASS",
+      "source_stage_refs": [
+        "stage12449_external_repair_trace_fail_to_pass_projection"
+      ]
+    },
+    {
+      "candidate_count_bucket": "250-plus",
+      "reason": "patch_and_verifier_co_presence_without_replay_causality_is_insufficient",
+      "rejection_class": "co-presence-only",
+      "source_stage_refs": [
+        "stage12327_external_adapter_preflight",
+        "stage12328_external_adapter_qc_materialization_request"
+      ]
+    },
+    {
+      "candidate_count_bucket": "10-24",
+      "reason": "verifier_identity_without_before_fail_and_after_pass_statuses_is_insufficient",
+      "rejection_class": "normalized verifier identity-only",
+      "source_stage_refs": [
+        "stage12290_replay_queue_repair_or_retarget_decision",
+        "stage12449_external_repair_trace_fail_to_pass_projection"
+      ]
+    }
+  ],
+  "sealed_eval_rows": 0,
+  "source_fingerprint_hashes": {
+    "stage12284": "17deb4153b8af7b5ae5298a4",
+    "stage12284_ready": "3b839f6fd2e79022d711dc19",
+    "stage12285": "5cfaecf303e61f05429d4699",
+    "stage12286": "1ec28b2ca471e86f729d3e4a",
+    "stage12286_pe2": "e3b0c44298fc1c149afbf4c8",
+    "stage12287": "bdb0733ebeebafc7190e337c",
+    "stage12288": "5c1dd602e979ba6be2b6354b",
+    "stage12288_pe2": "e3b0c44298fc1c149afbf4c8",
+    "stage12289": "dbd57d1d30e09ed1821ae469",
+    "stage12290": "3e9be1cada1802a4954eaea5",
+    "stage12327": "6d20730f55e635798f5373c6",
+    "stage12327_bears_failing_passing": "1ee2d918c77d1eb5e68a421e",
+    "stage12327_bears_nonrepair": "d754598cf4fbd311e5279eaf",
+    "stage12327_open_swe_all": "7846a1213f2936292b8499f7",
+    "stage12327_open_swe_priority": "6534194e81696b545ce542e0",
+    "stage12328": "ad4ec6b7903dcb4e7f59ac81",
+    "stage12392": "97d362d9d68f8ed5a62d459e",
+    "stage12392_pivot_worklist": "e76ae1ad08d5c15d6eae4d02",
+    "stage12449": "1e2d18b51e94962b5d5bb443",
+    "stage12458": "02185cd43c39e2c1a289d32f"
+  },
+  "source_lane_inventory": [
+    {
+      "can_satisfy_external_repair_credit_if_hydrated": true,
+      "candidate_count_bucket": "10-24",
+      "lane_id": "lane_ref_bears_failing_passing_private_hydration",
+      "language_bucket": "single_jvm",
+      "missing_proof_slots": [
+        "buggy_state_ref_hash",
+        "fixed_or_patch_state_ref_hash",
+        "patch_ref_hash",
+        "same_source_verifier_identity_hash",
+        "before_verifier_status_fail",
+        "after_or_before_plus_patch_verifier_status_pass",
+        "verifier_output_ref_hashes",
+        "ordered_patch_effect_causality_ref",
+        "anti_leak_public_rendering_pass"
+      ],
+      "rank": 1,
+      "source_stage_refs": [
+        "stage12327_external_adapter_preflight",
+        "stage12328_external_adapter_qc_materialization_request"
+      ]
+    },
+    {
+      "can_satisfy_external_repair_credit_if_hydrated": true,
+      "candidate_count_bucket": "2-4",
+      "lane_id": "lane_ref_external_root_private_review_pivot",
+      "language_bucket": "unknown_or_not_public",
+      "missing_proof_slots": [
+        "buggy_state_ref_hash",
+        "fixed_or_patch_state_ref_hash",
+        "patch_ref_hash",
+        "same_source_verifier_identity_hash",
+        "before_verifier_status_fail",
+        "after_or_before_plus_patch_verifier_status_pass",
+        "verifier_output_ref_hashes",
+        "ordered_patch_effect_causality_ref",
+        "anti_leak_public_rendering_pass"
+      ],
+      "rank": 2,
+      "source_stage_refs": [
+        "stage12392_raw_visible_review_packet_builder_or_external_root_pivot"
+      ]
+    },
+    {
+      "can_satisfy_external_repair_credit_if_hydrated": false,
+      "candidate_count_bucket": "25-74",
+      "lane_id": "lane_ref_open_swe_trace_support_private_qc",
+      "language_bucket": "single_python",
+      "missing_proof_slots": [
+        "independent_before_fail_after_pass_replay",
+        "same_source_verifier_identity_hash",
+        "patch_effect_causality_beyond_trace_co_presence",
+        "anti_leak_public_rendering_pass"
+      ],
+      "rank": 3,
+      "source_stage_refs": [
+        "stage12327_external_adapter_preflight",
+        "stage12328_external_adapter_qc_materialization_request"
+      ]
+    },
+    {
+      "blocking_observation_ref": "stage12290_replay_queue_repair_or_retarget_decision",
+      "can_satisfy_external_repair_credit_if_hydrated": false,
+      "candidate_count_bucket": "10-24",
+      "lane_id": "lane_ref_commit_pair_retarget_after_pass_prefilter",
+      "language_bucket": "systems_mixed",
+      "missing_proof_slots": [
+        "after_state_must_pass_exact_verifier",
+        "before_state_must_fail_exact_verifier",
+        "before_plus_patch_must_pass_exact_verifier",
+        "same_verifier_identity_across_states",
+        "environment_failure_separated_from_software_failure"
+      ],
+      "rank": 4,
+      "source_stage_refs": [
+        "stage12284_external_repair_commit_pair_preflight",
+        "stage12285_external_repair_replay_executor_request",
+        "stage12286_external_repair_replay_smoke_executor",
+        "stage12287_external_repair_replay_second_smoke_request",
+        "stage12288_external_repair_replay_second_smoke_executor",
+        "stage12289_replay_failure_after_phase_diagnostic",
+        "stage12290_replay_queue_repair_or_retarget_decision"
+      ]
+    },
+    {
+      "can_satisfy_external_repair_credit_if_hydrated": false,
+      "candidate_count_bucket": "2-4",
+      "lane_id": "lane_ref_stage12449_projection_repair_trace_returns",
+      "language_bucket": "unknown_or_not_public",
+      "missing_proof_slots": [
+        "proof_complete_fail_to_pass_row",
+        "before_verifier_runnable_or_authoritative",
+        "transition_status_fail_to_pass_only",
+        "policy_label_independence_proof"
+      ],
+      "rank": 5,
+      "source_stage_refs": [
+        "stage12449_external_repair_trace_fail_to_pass_projection"
+      ]
+    }
+  ],
+  "stage": "stage12459_external_comparable_patch_effect_source_preflight",
+  "summary_hash": "84da95709873220a16a5dda5",
+  "training_allowed": false,
+  "worklist_artifact_ref": "stage12459_public_lane_ref_worklist_jsonl"
+}

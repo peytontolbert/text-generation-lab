@@ -221,6 +221,16 @@ def _ensure_saved_bounded_choice_heads(model: torch.nn.Module, state_dict: dict[
             nn.Linear(int(first.shape[0]), output_dim, bias=True),
         )
         attached.append("bounded_choice_transition_status_head")
+    if "bounded_choice_transition_next_action_head.0.weight" in state_dict and not hasattr(model, "bounded_choice_transition_next_action_head"):
+        first = state_dict["bounded_choice_transition_next_action_head.0.weight"]
+        last = state_dict.get("bounded_choice_transition_next_action_head.2.weight")
+        output_dim = int(last.shape[0]) if last is not None else 1
+        model.bounded_choice_transition_next_action_head = nn.Sequential(
+            nn.Linear(int(first.shape[1]), int(first.shape[0]), bias=True),
+            nn.SiLU(),
+            nn.Linear(int(first.shape[0]), output_dim, bias=True),
+        )
+        attached.append("bounded_choice_transition_next_action_head")
     return attached
 
 
@@ -722,6 +732,11 @@ def _transition_status_control_task(row: dict[str, Any]) -> bool:
     return task in {"transition_verifier_transition", "transition_continue_or_stop"}
 
 
+def _transition_next_action_task(row: dict[str, Any]) -> bool:
+    task = str(row.get("task_type") or _prompt_perspective(row)).strip()
+    return task == "transition_next_action"
+
+
 def _bounded_choice_transition_candidate_features(
     row: dict[str, Any],
     query: torch.Tensor,
@@ -1019,8 +1034,10 @@ def _bounded_choice_option_logits(
         "encoder_option_retrieval_web_task_candidate_head",
         "encoder_option_retrieval_transition_candidate_head",
         "encoder_option_retrieval_transition_status_head",
+        "encoder_option_retrieval_transition_next_action_head",
         "encoder_option_retrieval_semantic_plus_transition_status_head",
         "encoder_option_retrieval_semantic_plus_transition_candidate_head",
+        "encoder_option_retrieval_semantic_plus_transition_next_action_head",
     }:
         if source == "encoder_option_retrieval_evidence_judgment_head":
             task = str(row.get("task_type") or _prompt_perspective(row))
@@ -1091,6 +1108,12 @@ def _bounded_choice_option_logits(
                 return None, option_pairs, "missing_semantic_candidate_head"
             semantic_features = _bounded_choice_semantic_candidate_features(row, query, option_vectors, option_values, option_records)
             logits = logits + semantic_head(semantic_features).squeeze(-1)
+        if source == "encoder_option_retrieval_semantic_plus_transition_next_action_head":
+            semantic_head = getattr(model, "bounded_choice_semantic_candidate_head", None)
+            if semantic_head is None:
+                return None, option_pairs, "missing_semantic_candidate_head"
+            semantic_features = _bounded_choice_semantic_candidate_features(row, query, option_vectors, option_values, option_records)
+            logits = logits + semantic_head(semantic_features).squeeze(-1)
         if source == "encoder_option_retrieval_web_task_candidate_head":
             web_head = getattr(model, "bounded_choice_web_task_candidate_head", None)
             if web_head is None:
@@ -1115,6 +1138,12 @@ def _bounded_choice_option_logits(
                 return None, option_pairs, "missing_transition_candidate_head"
             transition_features = _bounded_choice_transition_candidate_features(row, query, option_vectors, option_values, option_records)
             logits = logits + transition_head(transition_features).squeeze(-1)
+        if source in {"encoder_option_retrieval_transition_next_action_head", "encoder_option_retrieval_semantic_plus_transition_next_action_head"} and _transition_next_action_task(row):
+            next_action_head = getattr(model, "bounded_choice_transition_next_action_head", None)
+            if next_action_head is None:
+                return None, option_pairs, "missing_transition_next_action_head"
+            next_action_features = _bounded_choice_transition_candidate_features(row, query, option_vectors, option_values, option_records)
+            logits = logits + next_action_head(next_action_features).squeeze(-1)
         if source == "encoder_option_retrieval_evidence_ledger_head" and str(row.get("task_type") or _prompt_perspective(row)) == "evidence_citation":
             evidence_head = getattr(model, "bounded_choice_evidence_ledger_head", None)
             if evidence_head is None:
@@ -3209,6 +3238,16 @@ def run_bounded_decoder_ce_probe(
             nn.SiLU(),
             nn.Linear(status_hidden_dim, 1, bias=True),
         ).to(next(model.parameters()).device)
+    if bounded_choice_aux_source in {"encoder_option_retrieval_transition_next_action_head", "encoder_option_retrieval_semantic_plus_transition_next_action_head"} and not hasattr(model, "bounded_choice_transition_next_action_head"):
+        next_action_input_dim = _bounded_choice_transition_candidate_feature_dim(model)
+        next_action_hidden_dim = int(getattr(getattr(model, "config", None), "retrieval_head_dim", 0) or 0) or int(getattr(getattr(model, "config", None), "d_model", 0) or 0)
+        if next_action_input_dim <= 0 or next_action_hidden_dim <= 0:
+            raise ValueError("encoder_option_retrieval_transition_next_action_head requires valid retrieval or model hidden dim")
+        model.bounded_choice_transition_next_action_head = nn.Sequential(
+            nn.Linear(next_action_input_dim, next_action_hidden_dim, bias=True),
+            nn.SiLU(),
+            nn.Linear(next_action_hidden_dim, 1, bias=True),
+        ).to(next(model.parameters()).device)
     head_only_trainable_prefix: str | None = None
     if bounded_choice_train_head_only:
         source_to_head_prefix = {
@@ -3224,6 +3263,7 @@ def run_bounded_decoder_ce_probe(
             "encoder_option_retrieval_web_task_candidate_head": "bounded_choice_web_task_candidate_head",
             "encoder_option_retrieval_transition_candidate_head": "bounded_choice_transition_candidate_head",
             "encoder_option_retrieval_transition_status_head": "bounded_choice_transition_status_head",
+            "encoder_option_retrieval_transition_next_action_head": "bounded_choice_transition_next_action_head",
             "encoder_option_retrieval_semantic_plus_transition_candidate_head": (
                 "bounded_choice_semantic_candidate_head",
                 "bounded_choice_transition_candidate_head",
@@ -3232,6 +3272,9 @@ def run_bounded_decoder_ce_probe(
                 "bounded_choice_semantic_candidate_head",
                 "bounded_choice_transition_status_head",
             ),
+            # Keep the semantic scorer as a frozen base for the next-action diagnostic;
+            # only the task-specific residual head should update.
+            "encoder_option_retrieval_semantic_plus_transition_next_action_head": "bounded_choice_transition_next_action_head",
         }
         head_only_trainable_prefix = source_to_head_prefix.get(str(bounded_choice_aux_source))
         if not head_only_trainable_prefix:

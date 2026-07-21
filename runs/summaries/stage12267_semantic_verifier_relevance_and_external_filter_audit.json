@@ -1,0 +1,59 @@
+{
+  "artifact_type": "semantic_verifier_relevance_and_external_filter_audit",
+  "claim_boundary": "Filter/audit artifact only. It counts external-comparable candidates and FAIL_TO_PASS candidates, but no row is admitted because semantic verifier relevance is not proven.",
+  "counts": {
+    "blocker_counts": {
+      "candidate_root_not_proven": 3,
+      "pre_patch_fail_missing": 22,
+      "self_research_repo": 13,
+      "semantic_review_required": 25,
+      "state_update_review_required": 25,
+      "verifier_relevance_not_semantically_proven": 25
+    },
+    "external_comparable_patch_trace_candidates": 0,
+    "external_fail_to_pass_candidates": 0,
+    "external_review_queue": 11,
+    "input_candidates": 25,
+    "repo_kind_counts": {
+      "external_or_other_repo": 12,
+      "self_research_repo": 13
+    },
+    "root_status_counts": {
+      "candidate_proven": 22,
+      "chat_hint_only": 3
+    },
+    "status_shape_counts": {
+      "pass_after_patch_without_observed_pre_fail": 22,
+      "potential_fail_to_pass": 3
+    }
+  },
+  "decision": "external_filter_complete_no_admission_training_blocked",
+  "decisive_counter_progress": {
+    "external_comparable_patch_trace_repair_rows": 0,
+    "external_fail_to_pass_rows": 0,
+    "level3_same_source_closed_loop_admitted": 0,
+    "level3_same_source_closed_loop_candidates": 25,
+    "non_python_external_repair_rows": 0,
+    "sealed_transition_eval_rows": 0
+  },
+  "guardrails": {
+    "raw_message_text_emitted": false,
+    "raw_patch_body_emitted": false,
+    "raw_tool_arguments_emitted": false,
+    "raw_tool_output_emitted": false,
+    "root_admission_emitted": false,
+    "training_rows_emitted_now": false
+  },
+  "next_stage": {
+    "scope": "bounded semantic review of external candidate-proven rows only; no admission until verifier relevance and pre/post status pass",
+    "stage": "stage12268_external_candidate_semantic_review_shortlist",
+    "training_allowed": false
+  },
+  "quality_decision": {
+    "admission_allowed": false,
+    "reason": "All rows still require semantic verifier relevance proof; PASS-after-patch without observed pre-fail is not FAIL_TO_PASS repair proof.",
+    "training_allowed": false
+  },
+  "stage": "stage12267_semantic_verifier_relevance_and_external_filter_audit",
+  "training_allowed": false
+}

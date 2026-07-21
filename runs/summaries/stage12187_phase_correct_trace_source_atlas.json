@@ -1,0 +1,52 @@
+{
+  "artifact_type": "phase_correct_trace_source_atlas",
+  "auxiliary_or_weak_sources": [
+    "stage11955_transition_5k_v1_multisource_package"
+  ],
+  "decision": "atlas_ready_no_training",
+  "hard_rejections_for_next_joiner": [
+    "suffix continuation repair rows without repo commands/tests/diffs",
+    "patch_operator rows that only contain operator labels and feature dictionaries",
+    "verifier_repair rows without concrete command/test output",
+    "bounded transition projections with null materialized_patch_ref and null next_state_ref unless joined to richer trace evidence"
+  ],
+  "next_stage": "stage12188_phase_correct_episode_joiner_contract",
+  "output_artifacts": {
+    "atlas_json": "runs/local/artifacts/stage12187_phase_correct_trace_source_atlas/phase_correct_trace_source_atlas.json",
+    "source_cards_jsonl": "runs/local/artifacts/stage12187_phase_correct_trace_source_atlas/trace_source_cards.jsonl",
+    "summary": "runs/summaries/stage12187_phase_correct_trace_source_atlas.json"
+  },
+  "phase_correct_row_requirements": [
+    "task prompt and repo identity",
+    "visible source/test context",
+    "ordered command/tool trace before action",
+    "action type and exact command or edit",
+    "unified diff or explicit no-edit/abstain/no-patch reason",
+    "verifier command and output",
+    "pass/fail/flaky/env-failure classification",
+    "next state with facts added/removed and hypotheses retired",
+    "stop/continue decision",
+    "patch minimality or too-broad judgment where patch exists",
+    "heldout sibling test result where available"
+  ],
+  "readiness_counts": {
+    "auxiliary_projection_only": 1,
+    "trace_source_candidate_needs_join": 8
+  },
+  "reason_for_stage": "Prevent misleading episode/patch/verifier names from being treated as real closed-loop maintainer trajectories.",
+  "source_code_modified": false,
+  "source_count": 9,
+  "stage": "stage12187_phase_correct_trace_source_atlas",
+  "stage12188_instruction": "Join stronger trace candidates into replayable episode records; reject rows that only have labels or summaries; emit no training request.",
+  "stronger_trace_candidates": [
+    "open_swe_trace_episodes_smoke_v1",
+    "external_repo_commit_family_v2_strict",
+    "external_repo_commit_family_scale_v2_localroots",
+    "session_like_non_agentkernel_patch_plus_exec",
+    "session_like_recovery_patch_plus_exec_missing_tests",
+    "stage12123_verifier_ready_checkout_execution_smoke",
+    "stage12144_rust_hydrated_selected_test_success_package",
+    "stage12145_web_hydrated_selected_test_success_package"
+  ],
+  "training_executed": false
+}

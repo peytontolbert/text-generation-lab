@@ -1,0 +1,198 @@
+{
+  "admission_allowed": false,
+  "admitted_rows": 0,
+  "countable_new_rows": 0,
+  "decision": "fail_closed_preflight_only_no_replay_no_admission",
+  "emitted_rows": 0,
+  "execution_run": false,
+  "executor_next_required_action": "Run a separate bounded replay executor for exactly the enumerated micro-pilot hash references, using the required safe return schema and returning only hashes/status codes; keep all rows blocked unless every required proof slot passes.",
+  "guardrail_scan": {
+    "issue_count": 0,
+    "issues": [],
+    "raw_content_policy": {
+      "command_descriptors_only": true,
+      "diffs_emitted": false,
+      "issue_bodies_emitted": false,
+      "raw_commands_emitted": false,
+      "raw_locator_values_emitted": false,
+      "raw_paths_emitted": false,
+      "raw_row_content_emitted": false,
+      "source_text_emitted": false,
+      "stdout_stderr_emitted": false,
+      "urls_emitted": false
+    },
+    "scan_passed": true
+  },
+  "input_summary_hashes": {
+    "stage12413_summary": "e4930fa3a1aecb3649deac46",
+    "stage12420_summary": "cd6976a067c4eb53043fcff7"
+  },
+  "input_summary_presence": {
+    "stage12413_summary": true,
+    "stage12420_summary": true
+  },
+  "local_artifacts": {
+    "guardrail_scan_name_hash": "fcb65509b4999eac4b96e827",
+    "preflight_workbook_name_hash": "893a4e77272a69338aa6a81e"
+  },
+  "micro_pilot": {
+    "bounded": true,
+    "expected_request_count": 2,
+    "limit": 2,
+    "request_count": 2,
+    "requests": [
+      {
+        "admission_status": "not_admitted_preflight_only",
+        "pilot_rank": 1,
+        "priority_bucket": 0,
+        "priority_reason_code": "patch_and_verifier_co_present_ordered_not_causal_proof",
+        "replay_scope": "bounded_micro_pilot_hash_only_reference",
+        "request_index": 1,
+        "safe_hash_refs": {
+          "instance_ref_hash": "57393cb6beeb7501",
+          "repo_family_hash": "b53abc6032b27381",
+          "row_ref_hash": "1f8602fe0c47c2f10f2bde99",
+          "stage12411_request_hash": "92dc0d9112bd3776eaef8c8b",
+          "stage12411_request_row_hash": "62ba2a73e96b8eca593347a0",
+          "trajectory_ref_hash": "56d6e00dfa25d6c9"
+        }
+      },
+      {
+        "admission_status": "not_admitted_preflight_only",
+        "pilot_rank": 2,
+        "priority_bucket": 0,
+        "priority_reason_code": "patch_and_verifier_co_present_ordered_not_causal_proof",
+        "replay_scope": "bounded_micro_pilot_hash_only_reference",
+        "request_index": 2,
+        "safe_hash_refs": {
+          "instance_ref_hash": "33ff64b87b1209dd",
+          "repo_family_hash": "683f32e33dccc549",
+          "row_ref_hash": "2c0f0f90b424f09212eba8a6",
+          "stage12411_request_hash": "105d93e4e03daf35516a988e",
+          "stage12411_request_row_hash": "b0af4c00ddc81a63b8c00e24",
+          "trajectory_ref_hash": "829b6dd8b9255d66"
+        }
+      }
+    ]
+  },
+  "micro_pilot_expected_request_count": 2,
+  "micro_pilot_request_count": 2,
+  "next_required_action": "Run a separate bounded replay executor for exactly the enumerated micro-pilot hash references, using the required safe return schema and returning only hashes/status codes; keep all rows blocked unless every required proof slot passes.",
+  "patch_apply_attempted_count": 0,
+  "proof_acceptance_gate": {
+    "all_required_slots_must_pass": true,
+    "allowed_return_material": "row hashes, state hashes, verifier hashes, status codes, and boolean policy flags only",
+    "fail_closed_if_missing_any_required_slot": true,
+    "promotion_before_executor_result": false
+  },
+  "proof_slot_status_counts": {
+    "causal_linkage": "missing_executor_result",
+    "correct_next_action_policy": "missing_executor_result",
+    "patch_application": "missing_executor_result",
+    "state_after": "missing_executor_result",
+    "state_before": "missing_executor_result",
+    "stop_continue": "missing_executor_result",
+    "verifier_relevance": "missing_executor_result"
+  },
+  "raw_content_guardrail": {
+    "command_descriptors_only": true,
+    "diffs_emitted": false,
+    "issue_bodies_emitted": false,
+    "raw_commands_emitted": false,
+    "raw_locator_values_emitted": false,
+    "raw_paths_emitted": false,
+    "raw_row_content_emitted": false,
+    "source_text_emitted": false,
+    "stdout_stderr_emitted": false,
+    "urls_emitted": false
+  },
+  "raw_content_policy": {
+    "command_descriptors_only": true,
+    "diffs_emitted": false,
+    "issue_bodies_emitted": false,
+    "raw_commands_emitted": false,
+    "raw_locator_values_emitted": false,
+    "raw_paths_emitted": false,
+    "raw_row_content_emitted": false,
+    "source_text_emitted": false,
+    "stdout_stderr_emitted": false,
+    "urls_emitted": false
+  },
+  "record_type": "open_swe_replay_micro_pilot_preflight",
+  "replay_attempted_count": 0,
+  "replay_command_descriptors": [
+    {
+      "command_material": "redacted_not_emitted",
+      "descriptor_id": "redacted_replay_step_01",
+      "executor_output_contract": "safe_status_codes_and_hashes_only",
+      "path_material": "redacted_not_emitted",
+      "requirement": "checkout_authoritative_state_before",
+      "url_material": "redacted_not_emitted"
+    },
+    {
+      "command_material": "redacted_not_emitted",
+      "descriptor_id": "redacted_replay_step_02",
+      "executor_output_contract": "safe_status_codes_and_hashes_only",
+      "path_material": "redacted_not_emitted",
+      "requirement": "apply_patch",
+      "url_material": "redacted_not_emitted"
+    },
+    {
+      "command_material": "redacted_not_emitted",
+      "descriptor_id": "redacted_replay_step_03",
+      "executor_output_contract": "safe_status_codes_and_hashes_only",
+      "path_material": "redacted_not_emitted",
+      "requirement": "hash_state_after",
+      "url_material": "redacted_not_emitted"
+    },
+    {
+      "command_material": "redacted_not_emitted",
+      "descriptor_id": "redacted_replay_step_04",
+      "executor_output_contract": "safe_status_codes_and_hashes_only",
+      "path_material": "redacted_not_emitted",
+      "requirement": "run_same_verifier_before_after_if_feasible",
+      "url_material": "redacted_not_emitted"
+    },
+    {
+      "command_material": "redacted_not_emitted",
+      "descriptor_id": "redacted_replay_step_05",
+      "executor_output_contract": "safe_status_codes_and_hashes_only",
+      "path_material": "redacted_not_emitted",
+      "requirement": "emit_safe_hashes_status_codes_only",
+      "url_material": "redacted_not_emitted"
+    }
+  ],
+  "required_proof_slots": [
+    "state_before",
+    "state_after",
+    "patch_application",
+    "verifier_relevance",
+    "causal_linkage",
+    "stop_continue",
+    "correct_next_action_policy"
+  ],
+  "required_safe_return_schema": [
+    "row_ref_hash",
+    "state_before_checkout_status",
+    "state_before_identity_hash",
+    "patch_application_status",
+    "state_after_identity_hash",
+    "verifier_identity_hash",
+    "verifier_before_status_code",
+    "verifier_after_status_code",
+    "verifier_relevance_status",
+    "causal_linkage_status",
+    "stop_continue_status",
+    "correct_next_action_policy_status",
+    "raw_content_policy"
+  ],
+  "source_controls": {
+    "stage12413_boundary": "stage12413_hash_only_proof_gap_manifest_no_replay_no_admission",
+    "stage12413_decision": "fail_closed_no_replay_proof_gap_manifest_zero_admission",
+    "stage12420_replay_lane_id": "replay_proof_gap_work",
+    "stage12420_replay_lane_training_allowed": false
+  },
+  "stage": "stage12422_open_swe_replay_micro_pilot_preflight",
+  "tests_run_count": 0,
+  "training_allowed": false
+}

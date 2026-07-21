@@ -1,0 +1,119 @@
+{
+  "admissible_for_training": false,
+  "blockers": [],
+  "checkout_root": "/data/tmp/stage12123_verifier_ready_smoke_repos",
+  "claim_boundary": [
+    "Request package only, not final train rows.",
+    "Every included candidate has selected-test evidence from Stage12124 or Stage12126 audits and referenced local logs where needed.",
+    "Lineage review remains required for every candidate.",
+    "A deterministic anti-cheat renderer/audit must assign opaque labels, enforce non-singleton options, shuffle options, and prove no target semantic value is visible before options.",
+    "Do not mark final training-admissible from this package."
+  ],
+  "counts": {
+    "admissible_for_training": 0,
+    "blocked_candidates": 0,
+    "blueprint_records": 5,
+    "candidate_records": 5,
+    "ready_for_deterministic_anti_cheat_renderer_request": 5
+  },
+  "counts_by_language": {
+    "c_cpp": 2,
+    "python": 3
+  },
+  "counts_by_language_task_family": {
+    "c_cpp": {
+      "candidate_selection": 2,
+      "continue_or_stop": 2,
+      "evidence_citation": 2,
+      "next_action": 2,
+      "verifier_transition": 2
+    },
+    "python": {
+      "candidate_selection": 3,
+      "continue_or_stop": 3,
+      "evidence_citation": 3,
+      "next_action": 3,
+      "verifier_transition": 3
+    }
+  },
+  "counts_by_repo_family": {
+    "Neargye/magic_enum": 1,
+    "fastfloat/fast_float": 1,
+    "pallets/click": 1,
+    "pallets/jinja": 1,
+    "pytest-dev/pluggy": 1
+  },
+  "counts_by_task_family": {
+    "candidate_selection": 5,
+    "continue_or_stop": 5,
+    "evidence_citation": 5,
+    "next_action": 5,
+    "verifier_transition": 5
+  },
+  "created_at_utc": "2026-07-15T15:08:47Z",
+  "do_not_train": true,
+  "hard_rule_compliance": {
+    "deterministic_shuffle_required_for_all_blueprints": true,
+    "from_only_stage12124_and_stage12126_ready_candidates": true,
+    "non_singleton_required_for_all_blueprints": true,
+    "rendered_prompt_is_null_for_all_blueprints": true,
+    "selected_test_evidence_missing_rows_included": 0,
+    "target_not_visible_before_options_required_for_all_blueprints": true
+  },
+  "inputs": [
+    "runs/local/artifacts/stage12124_selected_test_admission_audit/admission_audit_results.jsonl",
+    "runs/local/artifacts/stage12126_refined_selected_test_admission_audit/admission_audit_results.jsonl"
+  ],
+  "lessons_input": "runs/local/artifacts/stage12120_failed_stage_lessons_atlas/enhanced_failed_stage_lessons_for_subagents.md",
+  "no_training_statement": "Stage12127 emits materialization candidates and row blueprints only; no train rows, eval rows, promotion claims, GPU use, network use, dependency install, or test execution were performed.",
+  "outputs": {
+    "artifact_dir": "runs/local/artifacts/stage12127_selected_test_row_materialization_request",
+    "materialization_candidates": "runs/local/artifacts/stage12127_selected_test_row_materialization_request/materialization_candidates.jsonl",
+    "row_blueprints": "runs/local/artifacts/stage12127_selected_test_row_materialization_request/row_blueprints.jsonl",
+    "summary": "runs/local/artifacts/stage12127_selected_test_row_materialization_request/summary.json",
+    "summary_mirror": "runs/summaries/stage12127_selected_test_row_materialization_request.json"
+  },
+  "ready_for_deterministic_anti_cheat_renderer_audit": true,
+  "stage": 12127,
+  "stage_name": "stage12127_selected_test_row_materialization_request",
+  "top_blockers": [
+    [
+      "none",
+      5
+    ]
+  ],
+  "top_warnings": [
+    [
+      "later_rows_must_have_non_singleton_options",
+      5
+    ],
+    [
+      "later_rows_must_not_show_target_semantic_value_before_options",
+      5
+    ],
+    [
+      "later_rows_must_use_deterministic_option_shuffle",
+      5
+    ],
+    [
+      "later_rows_must_use_opaque_labels",
+      5
+    ],
+    [
+      "lineage_not_conclusively_discoverable_from_summary_scan_review_required",
+      5
+    ],
+    [
+      "lineage_review_still_required_do_not_mark_training_admissible",
+      5
+    ],
+    [
+      "pre_action_only_ok_for_this_audit_no_prompt_or_options_material_generated",
+      2
+    ],
+    [
+      "selected_test_id_count_differs_from_audit_count:ids=102;audit=80;renderer_must_reconcile_before_rows",
+      1
+    ]
+  ]
+}

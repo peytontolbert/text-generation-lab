@@ -1,0 +1,500 @@
+{
+  "admission_allowed": false,
+  "admitted_rows": 0,
+  "checkout_execution_attempted_count": 0,
+  "claim_boundary": "Stage12435 reconciles next execution path only. It reads public-safe summaries, emits no private row material, performs no replay or materialization, admits no rows, and cannot be counted as training data.",
+  "countable_as_new_proof_floor_rows": 0,
+  "countable_as_new_train_support_rows": 0,
+  "countable_new_rows": 0,
+  "countable_rows": 0,
+  "decision": "fail_closed_select_parallel_two_lane_control",
+  "emitted_rows": 0,
+  "emitted_training_rows": 0,
+  "execution_allowed": false,
+  "guardrail_scan": {
+    "issue_count": 0,
+    "issues": [],
+    "overclaim_count": 0,
+    "raw_content_policy_keys_checked": [
+      "locator_values_emitted",
+      "private_slot_values_emitted",
+      "raw_commands_emitted",
+      "raw_diffs_emitted",
+      "raw_issue_bodies_emitted",
+      "raw_outputs_emitted",
+      "raw_patches_emitted",
+      "raw_paths_emitted",
+      "raw_trajectories_emitted",
+      "raw_urls_emitted",
+      "row_values_emitted",
+      "schema_field_names_emitted",
+      "source_text_emitted",
+      "training_rows_emitted"
+    ],
+    "raw_leak_count": 0,
+    "scan_passed": true,
+    "scan_scope": "stage12435_public_reconciliation_payload_no_private_rows",
+    "zero_counter_keys_checked": [
+      "admission_allowed",
+      "admitted_rows",
+      "checkout_execution_attempted_count",
+      "countable_as_new_proof_floor_rows",
+      "countable_as_new_train_support_rows",
+      "countable_new_rows",
+      "countable_rows",
+      "emitted_rows",
+      "emitted_training_rows",
+      "execution_allowed",
+      "new_training_rows_emitted",
+      "patch_apply_attempted_count",
+      "raw_content_emitted",
+      "raw_rows_copied",
+      "raw_rows_inspected",
+      "replay_attempted_count",
+      "tests_run_count",
+      "training_allowed",
+      "verifier_execution_attempted_count"
+    ]
+  },
+  "guardrail_scan_passed": true,
+  "hard_blocker_counts": {
+    "open_swe_no_checkout_patch_verifier_execution": 1,
+    "open_swe_zero_complete_proof_candidates": 100,
+    "session_like_level3_controls_are_exemplars_not_new_rows": 149,
+    "session_like_rows_not_admission_grade": 4225,
+    "training_and_admission_must_remain_closed": 1
+  },
+  "hard_blockers": [
+    {
+      "blocker": "session_like_rows_not_admission_grade",
+      "count": 4225,
+      "evidence": "Stage12386 candidate/incomplete/support classifications cannot be promoted without materializer upgrade and review.",
+      "lane": "session_like_materializer_upgrade"
+    },
+    {
+      "blocker": "session_like_level3_controls_are_exemplars_not_new_rows",
+      "count": 149,
+      "evidence": "Existing Level-3 control rows are controls, not new Stage12435 admissions.",
+      "lane": "session_like_materializer_upgrade"
+    },
+    {
+      "blocker": "open_swe_no_checkout_patch_verifier_execution",
+      "count": 1,
+      "evidence": "Stage12433/12434 show zero replay, checkout, patch-apply, verifier, and test execution attempts.",
+      "lane": "open_swe_replay_executor_pilot_20"
+    },
+    {
+      "blocker": "open_swe_zero_complete_proof_candidates",
+      "count": 100,
+      "evidence": "Sampled Open-SWE rows have zero proof-complete, patch-trace, or Level-3 candidates after private structure inspection.",
+      "lane": "open_swe_replay_executor_pilot_20"
+    },
+    {
+      "blocker": "training_and_admission_must_remain_closed",
+      "count": 1,
+      "evidence": "This artifact is reconciliation/control only and emits no rows.",
+      "lane": "both"
+    }
+  ],
+  "input_inventory": {
+    "stage12316_session_like_joiner": {
+      "present": true,
+      "sha256_24": "b9499630f212baddfd6d67d8"
+    },
+    "stage12386_session_like_gap_audit": {
+      "present": true,
+      "sha256_24": "1474a25c43bcd62d6c5ad029"
+    },
+    "stage12433_open_swe_proof_slot_postrun": {
+      "present": true,
+      "sha256_24": "f64677c4328fe8a75bbaa346"
+    },
+    "stage12434_open_swe_adapter_decision": {
+      "present": true,
+      "sha256_24": "a5f640f185aae276129437cb"
+    }
+  },
+  "input_summary_hashes": {
+    "stage12316_session_like_joiner": "b9499630f212baddfd6d67d8",
+    "stage12386_session_like_gap_audit": "1474a25c43bcd62d6c5ad029",
+    "stage12433_open_swe_proof_slot_postrun": "f64677c4328fe8a75bbaa346",
+    "stage12434_open_swe_adapter_decision": "a5f640f185aae276129437cb"
+  },
+  "lane_top_level_counts": {
+    "open_swe_replay_executor_pilot_20": {
+      "actual_execution_attempt_counts": {
+        "causal_transition": 0,
+        "checkout_before_anchor": 0,
+        "patch_application_proof": 0,
+        "same_verifier_before_after": 0,
+        "state_after": 0,
+        "stop_continue": 0
+      },
+      "admitted_rows": 0,
+      "checkout_execution_attempted_count": 0,
+      "dataset_root_hit_count": 2,
+      "execution_attempted_by_stage12435": false,
+      "lane": "open_swe_replay_executor_pilot_20",
+      "level3_candidates_after_private_replay": 0,
+      "metadata_candidate_supply_rows": 207489,
+      "metadata_rows_observed_private": 207489,
+      "parquet_shard_count": 84,
+      "patch_apply_attempted_count": 0,
+      "patch_trace_candidates": 0,
+      "private_dedupe_survivors": 100,
+      "private_rows_inspected": 100,
+      "private_sampled_rows": 100,
+      "proof_complete_candidates": 0,
+      "proof_slot_missing_counts": {
+        "causal_transition": 100,
+        "checkout_before_anchor": 100,
+        "patch_application_proof": 100,
+        "same_verifier_before_after": 100,
+        "state_after": 100,
+        "stop_continue": 0
+      },
+      "proof_slot_present_counts": {
+        "causal_transition": 0,
+        "checkout_before_anchor": 0,
+        "patch_application_proof": 0,
+        "same_verifier_before_after": 0,
+        "state_after": 0,
+        "stop_continue": 100
+      },
+      "proof_slot_recoverable_counts": {
+        "causal_transition": 0,
+        "checkout_before_anchor": 0,
+        "patch_application_proof": 100,
+        "same_verifier_before_after": 0,
+        "state_after": 71,
+        "stop_continue": 100
+      },
+      "replay_attempted_count": 0,
+      "stage12434_rank1_option_hash": "29e940f0145e44e2",
+      "training_allowed": false,
+      "verifier_execution_attempted_count": 0
+    },
+    "session_like_materializer_upgrade": {
+      "admitted_rows": 0,
+      "candidate_only_rows": 4034,
+      "execution_attempted_by_stage12435": false,
+      "lane": "session_like_materializer_upgrade",
+      "level3_control_complete_rows": 149,
+      "stage12316_blocked_reason_counts": {
+        "chosen_action_policy_label_not_admitted_from_observed_order": 100,
+        "repo_family_still_not_semantically_recovered": 100,
+        "semantic_rule_id_not_deterministically_assignable": 6,
+        "state_delta_needs_semantic_review_before_training": 100,
+        "transition_function_key_not_deterministically_assignable": 6,
+        "verifier_status_not_training_grade": 7
+      },
+      "stage12316_level3_admitted": 0,
+      "stage12316_patch_trace_admitted": 0,
+      "stage12316_records": 100,
+      "stage12316_semantic_rule_candidate_records": 93,
+      "stage12316_train_grade_after_policy_label_review": 0,
+      "stage12316_training_rows_emitted": 0,
+      "stage12386_classification_counts": {
+        "candidate_only": 4034,
+        "level3_control_complete": 149,
+        "transition_local_incomplete": 185,
+        "verifier_observation_support": 6
+      },
+      "stage12386_missing_level3_baseline_field_counts": {
+        "candidate_action_set": 181,
+        "command_result": 4225,
+        "language": 4225,
+        "observed_action": 4225,
+        "repo_family": 4144,
+        "root_id": 4144,
+        "state_update": 4225,
+        "stop_decision": 4225,
+        "verifier_transition": 4225
+      },
+      "stage12386_missing_transition_local_field_counts": {
+        "candidate_action_set": 181,
+        "chosen_action": 4125,
+        "observation_status_class": 4034,
+        "patch_apply_status": 4183,
+        "semantic_rule_id": 4189,
+        "state_before_summary_codes": 4183,
+        "state_delta_codes": 4035,
+        "stop_continue_label": 4125,
+        "transition_function_key": 4189,
+        "verifier_identity": 4281,
+        "verifier_transition": 4225
+      },
+      "stage12386_new_training_rows_emitted": 0,
+      "stage12386_records_audited": 4374,
+      "stage12386_true_new_transition_rows_available_without_manual_review": 0,
+      "training_allowed": false,
+      "transition_local_incomplete_rows": 185,
+      "verifier_observation_support_rows": 6
+    }
+  },
+  "new_training_rows_emitted": 0,
+  "next_stage_recommendation": "build_stage12436_parallel_two_lane_control_request; then run public-safe postrun summaries for open_swe_replay_executor_pilot_20 and session_like_materializer_upgrade as separate fail-closed lanes; if parallel execution is unavailable, run the Open-SWE pilot-20 request first and keep the session-like materializer upgrade queued.",
+  "overclaim_count": 0,
+  "patch_apply_attempted_count": 0,
+  "pilot_and_ramp_floors": {
+    "pilot_20": {
+      "admission_release_allowed_by_this_artifact": false,
+      "failure_mode": "remain_fail_closed_and_emit_no_rows",
+      "maximum_duplicate_cluster_share": 0.1,
+      "minimum_causal_transition_proofs": 4,
+      "minimum_checkout_before_anchor_proofs": 6,
+      "minimum_distinct_repositories": 4,
+      "minimum_patch_apply_proofs": 6,
+      "minimum_same_verifier_before_after_proofs": 6,
+      "minimum_state_transition_anchors": 8,
+      "purpose": "executor safety pilot only, not a scale floor and not an admission floor",
+      "target_private_candidates_to_execute": 20,
+      "training_release_allowed_by_this_artifact": false
+    },
+    "ramp_1k": {
+      "admission_release_allowed_by_this_artifact": false,
+      "failure_mode": "remain_fail_closed_and_emit_no_rows",
+      "maximum_duplicate_cluster_share": 0.06,
+      "minimum_causal_transition_proofs": 140,
+      "minimum_checkout_before_anchor_proofs": 250,
+      "minimum_distinct_repositories": 50,
+      "minimum_patch_apply_proofs": 220,
+      "minimum_same_verifier_before_after_proofs": 180,
+      "minimum_state_transition_anchors": 350,
+      "purpose": "higher confidence ramp after clean scale-500 postrun",
+      "target_private_candidates_to_execute": 1000,
+      "training_release_allowed_by_this_artifact": false
+    },
+    "scale_500": {
+      "admission_release_allowed_by_this_artifact": false,
+      "failure_mode": "remain_fail_closed_and_emit_no_rows",
+      "maximum_duplicate_cluster_share": 0.08,
+      "minimum_causal_transition_proofs": 60,
+      "minimum_checkout_before_anchor_proofs": 120,
+      "minimum_distinct_repositories": 25,
+      "minimum_patch_apply_proofs": 100,
+      "minimum_same_verifier_before_after_proofs": 80,
+      "minimum_state_transition_anchors": 150,
+      "purpose": "first material ramp after a clean pilot-20 executor postrun",
+      "target_private_candidates_to_execute": 500,
+      "training_release_allowed_by_this_artifact": false
+    },
+    "scale_5k": {
+      "admission_release_allowed_by_this_artifact": false,
+      "failure_mode": "remain_fail_closed_and_emit_no_rows",
+      "maximum_duplicate_cluster_share": 0.04,
+      "minimum_causal_transition_proofs": 800,
+      "minimum_checkout_before_anchor_proofs": 1500,
+      "minimum_distinct_repositories": 150,
+      "minimum_patch_apply_proofs": 1250,
+      "minimum_same_verifier_before_after_proofs": 1000,
+      "minimum_state_transition_anchors": 1800,
+      "purpose": "large ramp only after 1k proof floors and caps pass",
+      "target_private_candidates_to_execute": 5000,
+      "training_release_allowed_by_this_artifact": false
+    }
+  },
+  "promotion_gate_status": {
+    "admission_allowed_false": "PASS",
+    "admission_release_allowed": "PASS_FALSE",
+    "artifact_is_control_only": "PASS",
+    "next_path_selected": "PARALLEL_TWO_LANE_CONTROL",
+    "no_rows_admitted": "PASS",
+    "no_rows_emitted": "PASS",
+    "serial_fallback_path": "OPEN_SWE_REPLAY_EXECUTOR_PILOT_20",
+    "stage12316_summary_present": "PASS",
+    "stage12386_summary_present": "PASS",
+    "stage12433_summary_present": "PASS",
+    "stage12434_summary_present": "PASS",
+    "training_allowed_false": "PASS",
+    "training_release_allowed": "PASS_FALSE"
+  },
+  "ranked_decision": [
+    {
+      "admission_allowed_by_this_artifact": false,
+      "decision": "selected_fail_closed",
+      "open_swe_lane_enabled_for_private_pilot_20_request": true,
+      "path": "parallel_two_lane_control",
+      "rank": 1,
+      "required_first_control_stage": "stage12436_parallel_two_lane_control_request",
+      "session_like_lane_enabled_for_materializer_upgrade_request": true,
+      "training_allowed_by_this_artifact": false,
+      "why_ranked_here": "The Open-SWE lane has large candidate supply but needs real proof-slot execution, while the session-like lane has useful materializer seeds but needs field recovery and review. Running both under one fail-closed controller reduces serial path risk without releasing admission."
+    },
+    {
+      "admission_allowed_by_this_artifact": false,
+      "candidate_supply_rows": 207489,
+      "decision": "serial_fallback_if_parallel_control_is_not_available",
+      "path": "open_swe_replay_executor_pilot_20",
+      "rank": 2,
+      "training_allowed_by_this_artifact": false,
+      "why_ranked_here": "Stage12434 already selected the Open-SWE private replay pilot-20 as the strongest single next execution path because supply exists and the blocker is missing execution proof rather than source volume."
+    },
+    {
+      "admission_allowed_by_this_artifact": false,
+      "decision": "parallel_lane_or_serial_fallback_after_open_swe_pilot_request",
+      "path": "session_like_materializer_upgrade",
+      "rank": 3,
+      "records_audited": 4374,
+      "training_allowed_by_this_artifact": false,
+      "why_ranked_here": "Stage12386 points to materializer upgrade as necessary, but current session-like rows remain blocked by missing command result, state update, stop decision, verifier identity, and policy-label review."
+    }
+  ],
+  "ranked_decision_selected_path": "parallel_two_lane_control",
+  "raw_content_emitted": false,
+  "raw_content_policy": {
+    "locator_values_emitted": false,
+    "private_slot_values_emitted": false,
+    "raw_commands_emitted": false,
+    "raw_diffs_emitted": false,
+    "raw_issue_bodies_emitted": false,
+    "raw_outputs_emitted": false,
+    "raw_patches_emitted": false,
+    "raw_paths_emitted": false,
+    "raw_trajectories_emitted": false,
+    "raw_urls_emitted": false,
+    "row_values_emitted": false,
+    "schema_field_names_emitted": false,
+    "source_text_emitted": false,
+    "training_rows_emitted": false
+  },
+  "raw_leak_count": 0,
+  "raw_rows_copied": 0,
+  "raw_rows_inspected": 0,
+  "record_type": "proof_slot_execution_path_reconciliation_v1",
+  "replay_attempted_count": 0,
+  "required_next_stages": [
+    {
+      "admitted_rows": 0,
+      "lane": "control",
+      "must_emit": [
+        "lane_contracts",
+        "shared_stop_conditions",
+        "dedupe_and_protected_split_gate_plan",
+        "public_summary_guardrail_plan"
+      ],
+      "purpose": "Freeze lane ownership, public-safe outputs, and no-admission gates before either lane produces a postrun.",
+      "required": true,
+      "stage": "stage12436_parallel_two_lane_control_request",
+      "training_allowed": false
+    },
+    {
+      "admitted_rows": 0,
+      "lane": "open_swe_replay_executor_pilot_20",
+      "must_emit": [
+        "checkout_before_anchor_proof_count",
+        "patch_application_proof_count",
+        "same_verifier_before_after_proof_count",
+        "causal_transition_proof_count",
+        "state_after_anchor_count",
+        "raw_leak_count_zero_guardrail"
+      ],
+      "purpose": "Execute at most 20 private Open-SWE candidates and emit aggregate proof-slot counts only.",
+      "required": true,
+      "stage": "stage12437_open_swe_replay_executor_pilot_20_postrun",
+      "training_allowed": false
+    },
+    {
+      "admitted_rows": 0,
+      "lane": "session_like_materializer_upgrade",
+      "must_emit": [
+        "repo_family_recovered_count",
+        "safe_command_result_recovered_count",
+        "state_update_recovered_count",
+        "stop_decision_recovered_count",
+        "policy_label_review_queue_count",
+        "manual_review_required_count"
+      ],
+      "purpose": "Upgrade Stage12316/12386 materialization seeds against the Level-3 control contract without admitting rows.",
+      "required": true,
+      "stage": "stage12438_session_like_materializer_upgrade_postrun",
+      "training_allowed": false
+    }
+  ],
+  "source_controls": {
+    "stage12316_session_like_joiner": {
+      "admission_allowed": false,
+      "admitted_rows": 0,
+      "decision_hash": "00c7a9569f4c5e1c",
+      "emitted_training_rows": 0,
+      "guardrail_scan_passed": false,
+      "overclaim_count": 0,
+      "present": true,
+      "raw_leak_count": 0,
+      "stage_hash": "37e92f9ee429538b",
+      "training_allowed": false
+    },
+    "stage12386_session_like_gap_audit": {
+      "admission_allowed": false,
+      "admitted_rows": 0,
+      "decision_hash": "729a712a89706989",
+      "emitted_training_rows": 0,
+      "guardrail_scan_passed": false,
+      "overclaim_count": 0,
+      "present": true,
+      "raw_leak_count": 0,
+      "stage_hash": "2230d82bdc8d0c9d",
+      "training_allowed": false
+    },
+    "stage12433_open_swe_proof_slot_postrun": {
+      "admission_allowed": false,
+      "admitted_rows": 0,
+      "decision_hash": "792da9f679915e2f",
+      "emitted_training_rows": 0,
+      "guardrail_scan_passed": true,
+      "overclaim_count": 0,
+      "present": true,
+      "raw_leak_count": 0,
+      "stage_hash": "7d3240cb74e8ffd5",
+      "training_allowed": false
+    },
+    "stage12434_open_swe_adapter_decision": {
+      "admission_allowed": false,
+      "admitted_rows": 0,
+      "decision_hash": "9cb92ae1fcd2da9c",
+      "emitted_training_rows": 0,
+      "guardrail_scan_passed": true,
+      "overclaim_count": 0,
+      "present": true,
+      "raw_leak_count": 0,
+      "stage_hash": "be6f7dbba476acae",
+      "training_allowed": false
+    }
+  },
+  "stage": "stage12435_proof_slot_execution_path_reconciliation",
+  "stop_conditions": [
+    "any_public_raw_leak_count_nonzero",
+    "any_public_overclaim_count_nonzero",
+    "stage12435_or_successor_training_allowed_not_false",
+    "stage12435_or_successor_admitted_rows_nonzero_before_explicit_admission_gate",
+    "raw_locator_values_or_private_slot_values_escape_public_artifacts",
+    "open_swe_executor_cannot_bind_checkout_before_anchor_to_same_source_lineage",
+    "open_swe_executor_cannot_record_patch_apply_status_hash",
+    "open_swe_executor_cannot_record_same_verifier_before_after_status_classes",
+    "resolved_metadata_used_as_repair_success_shortcut",
+    "pilot_20_has_zero_causal_transition_proofs",
+    "session_like_materializer_cannot_recover_command_result_state_update_stop_decision",
+    "session_like_observed_action_used_as_policy_gold_without_review",
+    "dedupe_or_protected_split_overlap_gate_not_run",
+    "single_repo_or_duplicate_cluster_exceeds_cap"
+  ],
+  "summary_hash": "6b2a36e4a24caa9ccfc58a57",
+  "tests_run_count": 0,
+  "top_level_counts": {
+    "admitted_rows": 0,
+    "open_swe_execution_attempts_total": 0,
+    "open_swe_level3_candidates_after_private_replay": 0,
+    "open_swe_metadata_candidate_supply_rows": 207489,
+    "open_swe_patch_trace_candidates": 0,
+    "open_swe_private_dedupe_survivors": 100,
+    "open_swe_private_sampled_rows": 100,
+    "open_swe_proof_complete_candidates": 0,
+    "session_like_candidate_or_incomplete_or_support_rows": 4225,
+    "session_like_level3_control_complete_rows": 149,
+    "session_like_new_training_rows_emitted": 0,
+    "session_like_records_audited": 4374,
+    "training_allowed": false
+  },
+  "training_allowed": false,
+  "verifier_execution_attempted_count": 0
+}

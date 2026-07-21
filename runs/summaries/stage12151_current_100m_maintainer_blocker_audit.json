@@ -1,0 +1,90 @@
+{
+  "blockers": [
+    {
+      "evidence": "stage12150 row_count=0, rows_present=false; stage12149_corrected_selected_test_row_materialization_package directory/file is absent",
+      "id": "corrected_rows_missing",
+      "required_fix": "Materialize Stage12149 rows from Stage12146 supply under the Stage12148 task-specific contract, then rerun Stage12150 audit and require row_count > 0.",
+      "severity": "critical",
+      "source": "runs/summaries/stage12150_corrected_selected_test_materialization_audit.json",
+      "why_it_blocks_100m_maintainer": "The pipeline has a correction contract but no corrected supervision rows. Any training request now would either reuse bad Stage12130 rows or train on nothing."
+    },
+    {
+      "evidence": "stage12147 all_task_families_share_same_target_semantics=true; all five transition task families target selected_test_backed_verifier_candidate",
+      "id": "stage12130_semantic_collapse_must_remain_quarantined",
+      "required_fix": "Hard-exclude Stage12130 rows from future training manifests unless regenerated under task-specific targets.",
+      "severity": "critical",
+      "source": "runs/summaries/stage12147_selected_test_row_semantics_blocker_audit.json",
+      "why_it_blocks_100m_maintainer": "It teaches artifact/evidence-anchor picking instead of maintainer policy: next_action, continue_or_stop, verifier_transition, evidence_citation, and candidate_selection become the same task."
+    },
+    {
+      "evidence": "stage12146 has 5 already_materialized_stage12130_roots plus only 5 new_ready_for_materialization_roots",
+      "id": "supply_rollup_mixes_bad_old_rows_with_new_ready_roots",
+      "required_fix": "Split supply into quarantined_existing_bad_rows, regenerate_existing_roots, and fresh_ready_roots; only corrected rows may enter manifests.",
+      "severity": "high",
+      "source": "runs/summaries/stage12146_selected_test_supply_rollup.json",
+      "why_it_blocks_100m_maintainer": "The rollup can accidentally treat known-bad materialized roots as usable supply. The old roots are roots only, not acceptable rows."
+    },
+    {
+      "evidence": "stage12146 totals 10 root records: c_cpp=2, python=4, rust=3, web=1; only 5 new ready roots",
+      "id": "scale_still_tiny_and_unbalanced",
+      "required_fix": "Continue selected-test acquisition/hydration, especially Web and C/C++, but do not train until corrected materialization exists.",
+      "severity": "high",
+      "source": "runs/summaries/stage12146_selected_test_supply_rollup.json",
+      "why_it_blocks_100m_maintainer": "The target contract is 4000 tasks, 1000 per language, at least 250 roots/language. Current selected-test supply is pilot-scale and web is especially thin."
+    },
+    {
+      "evidence": "stage12148 explicitly blocks missing commit_sha for hydrated web/npm rows and node_modules/dependency cache paths as source evidence; stage12145 Luxon has no commit_sha in summary and visible_source_files includes node_modules/highlight.js",
+      "id": "web_lineage_and_source_hygiene_incomplete",
+      "required_fix": "Record Luxon commit SHA, exclude node_modules from source evidence, hash project source/test files only, and preserve TZ verifier env.",
+      "severity": "high",
+      "source": "runs/summaries/stage12145_web_hydrated_selected_test_success_package.json and runs/summaries/stage12148_task_specific_selected_test_materialization_contract.json",
+      "why_it_blocks_100m_maintainer": "A maintainer model needs reproducible pre-action source/test evidence. Dependency cache material is not project source and missing commit identity weakens lineage."
+    },
+    {
+      "evidence": "stage12145 Luxon selected_test_ids is only test/datetime/create.test.js while selected_test_count=93; stage12144 toml selected_test_ids is parse::* with count=28",
+      "id": "selected_test_scope_is_sometimes_suite_or_pattern_level",
+      "required_fix": "Capture exact test cases where possible, or explicitly label as selected-test-suite/pattern anchor rather than exact selected-test id.",
+      "severity": "medium",
+      "source": "runs/summaries/stage12144_rust_hydrated_selected_test_success_package.json and runs/summaries/stage12145_web_hydrated_selected_test_success_package.json",
+      "why_it_blocks_100m_maintainer": "Suite/file/pattern-level anchors are weaker than exact selected tests and can drift across dependency/runtime versions."
+    },
+    {
+      "evidence": "stage12138 made aux differentiable, but contrast/same-role/verifier-value listwise components had applicable_rows=0",
+      "id": "richer_loss_geometry_not_exercised_by_bad_rows",
+      "required_fix": "Corrected rows must include candidate sets/metadata that make contrast, same-role, and verifier-value losses applicable, or set their weights to zero honestly.",
+      "severity": "medium",
+      "source": "runs/summaries/stage12138_step101_single_token_gpu_differentiability_preflight.json",
+      "why_it_blocks_100m_maintainer": "The training command claims richer objective geometry, but the selected-test rows only activated the simple aux path."
+    }
+  ],
+  "created_at_utc": "2026-07-15T16:12:00Z",
+  "decision": "current_blockers_identified_no_training_allowed",
+  "do_not_do": [
+    "Do not train on Stage12130 rows again.",
+    "Do not treat Stage12146 already_materialized rows as usable rows.",
+    "Do not audit Stage12149 again until the package exists and contains corrected rows.",
+    "Do not claim selected-test exactness from file/pattern-level test anchors without explicit scope labeling.",
+    "Do not include node_modules or dependency caches as project source evidence."
+  ],
+  "frontier_status": {
+    "latest_training_attempt": "stage12140 rejected: 352/640, next_action 40/160",
+    "product_routed_candidate": "stage12099_task_routed_candidate_selection_composite_audit at 375/640, still below Gemma 386/640 and pending broader confirmation",
+    "selected_transition_frontier": "stage11924_transition_listwise_head_only_probe at 364/640"
+  },
+  "next_required_actions": [
+    "Build the missing Stage12149 corrected row materialization package from Stage12146 supply using Stage12148 target-kind rules.",
+    "Require Stage12150 rerun to pass with nonzero row_count, per-root target diversity, and target-role entropy by task.",
+    "Only after that, run a differentiability preflight that confirms all intended weighted loss components have applicable rows.",
+    "Then create a guarded training request; keep Stage11924/Stage12099 as selected scoring frontiers until postrun beats them."
+  ],
+  "promotion_eligible": false,
+  "source_summaries": [
+    "runs/summaries/stage12142_selected_test_support_training_decision.json",
+    "runs/summaries/stage12146_selected_test_supply_rollup.json",
+    "runs/summaries/stage12147_selected_test_row_semantics_blocker_audit.json",
+    "runs/summaries/stage12148_task_specific_selected_test_materialization_contract.json",
+    "runs/summaries/stage12150_corrected_selected_test_materialization_audit.json"
+  ],
+  "stage": "stage12151_current_100m_maintainer_blocker_audit",
+  "training_allowed": false
+}

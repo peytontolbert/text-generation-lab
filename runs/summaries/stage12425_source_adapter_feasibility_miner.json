@@ -1,0 +1,426 @@
+{
+  "adapter_acceptance_quota_checks": {
+    "maximum_controlled_fixture_share": {
+      "observed_control_only": 0,
+      "passed": true,
+      "status": "pass_by_zero_or_false_control",
+      "threshold": 0.1
+    },
+    "maximum_single_source_family_share": {
+      "observed_control_only": 0,
+      "passed": true,
+      "status": "pass_by_zero_or_false_control",
+      "threshold": 0.25
+    },
+    "minimum_distinct_language_families": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 3
+    },
+    "minimum_distinct_source_families": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 10
+    },
+    "minimum_external_verifier_train_support_rows_for_next_miner": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 40
+    },
+    "minimum_patch_trace_records_with_before_after_verifier_status": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 8
+    },
+    "minimum_records_absent_from_existing_countable_ledgers": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 40
+    },
+    "minimum_records_with_direct_verifier_anchor": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 40
+    },
+    "minimum_records_with_state_transition_anchor": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 30
+    },
+    "minimum_records_with_stop_or_continue_anchor": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 20
+    },
+    "minimum_replayable_patch_trace_candidates_for_next_miner": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 12
+    },
+    "minimum_unbounded_level3_candidates_for_next_miner": {
+      "observed_control_only": 0,
+      "passed": false,
+      "status": "blocked_no_candidate_scan_run",
+      "threshold": 20
+    },
+    "overclaim_count_required": {
+      "observed_control_only": 0,
+      "passed": true,
+      "status": "pass_by_zero_or_false_control",
+      "threshold": 0
+    },
+    "raw_leak_count_required": {
+      "observed_control_only": 0,
+      "passed": true,
+      "status": "pass_by_zero_or_false_control",
+      "threshold": 0
+    },
+    "training_allowed_required": {
+      "observed_control_only": false,
+      "passed": true,
+      "status": "pass_by_zero_or_false_control",
+      "threshold": false
+    }
+  },
+  "adapter_families": [
+    {
+      "adapter_family": "codex_session_episode_graphs",
+      "admission_status": "not_admitted",
+      "feasibility_status": "not_mined_control_only",
+      "known_from_stage12424": true,
+      "raw_content_allowed": false,
+      "required_proof_slots": [
+        "source_root_label",
+        "ordered_events",
+        "state_before",
+        "chosen_action",
+        "observation",
+        "state_update",
+        "stop_continue"
+      ],
+      "safe_scan_mode": "metadata_hashes_and_boolean_slots_only"
+    },
+    {
+      "adapter_family": "open_swe_replay_micro_pilot",
+      "admission_status": "not_admitted",
+      "feasibility_status": "not_mined_control_only",
+      "known_from_stage12424": true,
+      "raw_content_allowed": false,
+      "required_proof_slots": [
+        "checkout_before",
+        "patch_apply",
+        "state_after",
+        "same_verifier_before_after",
+        "causal_linkage"
+      ],
+      "safe_scan_mode": "metadata_hashes_and_boolean_slots_only"
+    },
+    {
+      "adapter_family": "external_benchmark_patch_logs",
+      "admission_status": "not_admitted",
+      "feasibility_status": "not_mined_control_only",
+      "known_from_stage12424": true,
+      "raw_content_allowed": false,
+      "required_proof_slots": [
+        "patch_diff_hash",
+        "pre_status",
+        "post_status",
+        "same_verifier_identity",
+        "repo_lineage"
+      ],
+      "safe_scan_mode": "metadata_hashes_and_boolean_slots_only"
+    },
+    {
+      "adapter_family": "locally_hydratable_repo_tasks",
+      "admission_status": "not_admitted",
+      "feasibility_status": "not_mined_control_only",
+      "known_from_stage12424": true,
+      "raw_content_allowed": false,
+      "required_proof_slots": [
+        "commit_before",
+        "command_result",
+        "selected_verifier",
+        "state_update",
+        "stop_continue"
+      ],
+      "safe_scan_mode": "metadata_hashes_and_boolean_slots_only"
+    }
+  ],
+  "admission_allowed": false,
+  "admitted_rows": 0,
+  "blocked_reason_counts": {
+    "control_artifact_only": 4,
+    "large_dataset_deep_scan_disallowed": 4,
+    "no_admission_gate_run": 4,
+    "no_raw_source_scan_performed": 4
+  },
+  "claim_boundary": "Stage12425 defines feasible source-adapter scan contracts and quotas only. It does not mine, admit, emit, train on, replay, or copy raw source rows.",
+  "countable_as_new_proof_floor_rows": 0,
+  "countable_as_new_train_support_rows": 0,
+  "countable_new_rows": 0,
+  "decision": "fail_closed_feasibility_control_only_no_rows_admitted",
+  "dedupe_key_policy": {
+    "key_material": "hashes_only",
+    "must_dedupe_against": [
+      "stage12385",
+      "stage12416",
+      "stage12418",
+      "stage12421"
+    ],
+    "raw_locator_material_allowed": false,
+    "required": true
+  },
+  "direct_vs_derived_counts": {
+    "controlled_fixture": 0,
+    "derived": 0,
+    "direct": 0,
+    "unknown": 0
+  },
+  "dominance_report": {
+    "controlled_fixture_quota_passed": true,
+    "controlled_fixture_share": 0,
+    "dominant_source_family": null,
+    "dominant_source_family_share": 0,
+    "single_source_family_quota_passed": true
+  },
+  "emitted_rows": 0,
+  "emitted_training_rows": 0,
+  "execution_allowed": false,
+  "guardrail_scan_passed": true,
+  "highest_priority_adapter": "sakana_cuda_engineer_archive",
+  "highest_priority_next_stage": "stage12426_sakana_cuda_safe_metadata_profiler",
+  "input_inventory": {
+    "stage12424_control_artifact": {
+      "present": true,
+      "sha256_24": "38a59816da5e4e2fea0ca0e4"
+    },
+    "stage12424_guardrail_scan": {
+      "present": true,
+      "sha256_24": "ea82fdac38961e9a84e39125"
+    },
+    "stage12424_summary": {
+      "present": true,
+      "sha256_24": "38a59816da5e4e2fea0ca0e4"
+    }
+  },
+  "language_counts": {},
+  "large_dataset_deep_scan_count": 0,
+  "next_stage_recommendation": "stage12426_sakana_cuda_safe_metadata_profiler_then_stage12427_open_swe_safe_metadata_profiler",
+  "overclaim_count": 0,
+  "patch_apply_attempted_count": 0,
+  "promotion_gate_status": {
+    "artifact_is_control_only": "PASS",
+    "no_rows_admitted": "PASS",
+    "no_rows_emitted": "PASS",
+    "promotion_allowed": "PASS_FALSE",
+    "quota_checks_defined": "PASS",
+    "raw_content_policy_declared": "PASS",
+    "safe_scan_fields_defined": "PASS",
+    "training_allowed_false": "PASS"
+  },
+  "proof_slot_status_counts": {
+    "all_required_slots_present": 0,
+    "before_after_verifier_status_present": 0,
+    "direct_source_anchor_present": 0,
+    "direct_verifier_anchor_present": 0,
+    "same_source_lineage_present": 0,
+    "state_transition_anchor_present": 0,
+    "stop_or_continue_anchor_present": 0
+  },
+  "quota_check_summary": {
+    "failed_checks": 10,
+    "passed_checks": 5,
+    "promotion_allowed": false,
+    "total_checks": 15
+  },
+  "ranked_adapter_feasibility": [
+    {
+      "adapter_family": "sakana_cuda_engineer_archive",
+      "best_use": "cuda_c_cpp_verifier_performance_observation_support",
+      "expected_countable_yield_after_admission": "40_to_75_verifier_observation_rows",
+      "metadata_negative_or_error_observation_count": 14116,
+      "metadata_positive_observation_count": 15594,
+      "metadata_row_count": 30615,
+      "missing_proof_slots": [
+        "local_rerun",
+        "patch_lineage",
+        "before_after_causal_repair_transition",
+        "stop_continue"
+      ],
+      "not_claimable_as": [
+        "patch_trace",
+        "level3_closed_loop",
+        "fail_to_pass_repair"
+      ],
+      "rank": 1,
+      "recommended_next_stage": "stage12426_sakana_cuda_safe_metadata_profiler",
+      "safe_dataset_root_label": "SakanaAI--AI-CUDA-Engineer-Archive"
+    },
+    {
+      "adapter_family": "open_swe_traces",
+      "best_use": "high_volume_candidate_transition_and_replay_queue",
+      "expected_countable_yield_after_safe_extraction": "20_to_50_transition_support_rows",
+      "metadata_distinct_repo_count": 2654,
+      "metadata_language_counts": {
+        "c": 683,
+        "cpp": 302,
+        "go": 46834,
+        "java": 13176,
+        "javascript": 29360,
+        "php": 10323,
+        "python": 48179,
+        "rust": 21735,
+        "typescript": 36897
+      },
+      "metadata_result_counts": {
+        "resolved": 65244,
+        "unknown_or_other": 46758,
+        "unresolved": 95487
+      },
+      "metadata_row_count": 207489,
+      "metadata_shard_count": 84,
+      "missing_proof_slots": [
+        "checkout_before",
+        "patch_apply",
+        "same_verifier_before_after",
+        "causal_linkage",
+        "stop_continue"
+      ],
+      "not_claimable_as": [
+        "level3_or_patch_trace_without_replay",
+        "resolved_equals_verifier_proof"
+      ],
+      "rank": 2,
+      "recommended_next_stage": "stage12427_open_swe_safe_metadata_profiler",
+      "safe_dataset_root_label": "Open-SWE-Traces"
+    },
+    {
+      "adapter_family": "swe_hero_zero_trajectory_datasets",
+      "best_use": "state_action_patch_context_candidate_mining",
+      "expected_countable_yield_after_safe_extraction": "candidate_only_until_verifier_or_replay_layer_exists",
+      "metadata_row_counts": {
+        "swe_hero": 34269,
+        "swe_zero": 318115
+      },
+      "missing_proof_slots": [
+        "language_inference",
+        "verifier_result",
+        "same_verifier_before_after",
+        "causal_linkage"
+      ],
+      "not_claimable_as": [
+        "verifier_observation_without_trace_parse_or_replay",
+        "source_heldout_without_split_policy"
+      ],
+      "rank": 3,
+      "safe_dataset_root_label": "SWE-Hero_and_SWE-Zero"
+    },
+    {
+      "adapter_family": "bears_repairthemall",
+      "best_use": "java_patch_trace_after_checkout_hydration",
+      "expected_countable_yield_after_hydration": "0_now_possible_5_to_19_later",
+      "metadata_candidate_counts": {
+        "failing_passing_candidates": 19,
+        "hydration_candidates": 5,
+        "metadata_records": 251
+      },
+      "missing_proof_slots": [
+        "checkout_hydration",
+        "buggy_failure_reproduction",
+        "fixed_pass",
+        "patch_apply_diff_lineage"
+      ],
+      "not_claimable_as": [
+        "current_countable_supply"
+      ],
+      "rank": 4,
+      "safe_dataset_root_label": "Bears_RepairThemAll"
+    },
+    {
+      "adapter_family": "local_external_repair_replay_cache",
+      "best_use": "negative_blocker_telemetry",
+      "expected_countable_yield_after_review": "0_patch_effect_rows",
+      "missing_proof_slots": [
+        "before_fail",
+        "before_plus_patch_pass",
+        "causal_repair_proof"
+      ],
+      "not_claimable_as": [
+        "patch_effect",
+        "fail_to_pass_repair"
+      ],
+      "rank": 5,
+      "safe_dataset_root_label": "Stage12284_12292_replay_cache"
+    }
+  ],
+  "raw_content_policy": {
+    "command_descriptors_only": true,
+    "diffs_emitted": false,
+    "input_text_emitted": false,
+    "issue_bodies_emitted": false,
+    "patches_emitted": false,
+    "raw_commands_emitted": false,
+    "raw_locator_values_emitted": false,
+    "raw_paths_emitted": false,
+    "raw_row_content_emitted": false,
+    "source_text_emitted": false,
+    "stdout_stderr_emitted": false,
+    "urls_emitted": false
+  },
+  "raw_leak_count": 0,
+  "raw_rows_copied": 0,
+  "raw_rows_inspected": 0,
+  "record_type": "source_adapter_feasibility_control_artifact_v1",
+  "replay_attempted_count": 0,
+  "repo_family_counts": {},
+  "required_safe_scan_fields": [
+    "source_adapter_id",
+    "adapter_family",
+    "source_family",
+    "language_family",
+    "repo_family_hash",
+    "root_lineage_hash",
+    "task_ref_hash",
+    "observation_ref_hash",
+    "verifier_ref_hash",
+    "state_before_hash",
+    "state_after_hash",
+    "patch_or_action_hash",
+    "dedupe_key_hash",
+    "direct_source_anchor_present",
+    "direct_verifier_anchor_present",
+    "state_transition_anchor_present",
+    "stop_or_continue_anchor_present",
+    "before_after_verifier_status_present",
+    "same_source_lineage_present",
+    "source_heldout_split_status",
+    "protected_overlap_status",
+    "raw_leak_count",
+    "overclaim_count",
+    "blocked_reason"
+  ],
+  "root_count": 0,
+  "source_adapter_id": "stage12425_control_only_no_adapter_executed",
+  "source_controls": {
+    "stage12424_decision": "control_artifact_only_fail_closed_no_rows_admitted",
+    "stage12424_guardrail_scan_passed": true,
+    "stage12424_next_stage_recommendation": "stage12425_source_adapter_feasibility_miner",
+    "stage12424_training_allowed": false
+  },
+  "source_family_counts": {},
+  "stage": "stage12425_source_adapter_feasibility_miner",
+  "strict_source_heldout_status": "not_claimed_no_scan_run",
+  "summary_hash": "011f2e320f987c3744e63f4c",
+  "target_semantic_counts": {},
+  "tests_run_count": 0,
+  "training_allowed": false
+}

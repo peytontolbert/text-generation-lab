@@ -1,0 +1,31 @@
+{
+  "claim_boundary": [
+    "needs_acquisition targets are leads only, not evidence",
+    "local candidates are not train/eval rows until deterministic verifier probes and anti-cheat row admission pass",
+    "build/static candidates cannot be used as selected-test rows unless a real selected verifier is discovered later"
+  ],
+  "created_at_utc": "2026-07-15T03:12:31Z",
+  "decision": "subagent_acquisition_intake_materialized",
+  "do_not_train": true,
+  "input_source": "second_round_subagent_scout_outputs_normalized_by_main_agent",
+  "normalizations": [
+    "cargo_test_after_acquisition -> selected_test_anchor",
+    "selected_test_anchor_candidate -> selected_test_anchor",
+    "ctest_anchor -> selected_test_anchor",
+    "local build-only candidates retained as static_compile_anchor/build_config_anchor"
+  ],
+  "outputs": {
+    "intake_jsonl": "runs/local/artifacts/stage12113_fresh_repo_acquisition_plan/fresh_repo_acquisition_scout_candidates.jsonl",
+    "summary": "runs/local/artifacts/stage12114_fresh_repo_acquisition_intake_audit/subagent_acquisition_intake_materialization.json",
+    "summary_mirror": "runs/summaries/stage12114_subagent_acquisition_intake_materialization.json"
+  },
+  "rows_by_language": {
+    "c_cpp": 9,
+    "mixed_build_config_dependency": 1,
+    "rust": 20,
+    "web_js_ts_html": 12
+  },
+  "rows_written": 42,
+  "stage": 12114,
+  "stage_name": "stage12114_subagent_acquisition_intake_materialization"
+}

@@ -1,0 +1,67 @@
+{
+  "active_agents": {
+    "commit_pair_miner": "019f6ba0-ac4c-7643-a44d-51fb495b910a",
+    "low_risk_execution_batch": "019f6ba0-8f89-7740-a049-c71b79846fc9"
+  },
+  "claim_boundary": "Campaign status only. Candidate backlog exists, but no admitted training package yet.",
+  "current_counts": {
+    "admitted_external_comparable_repair_roots": 0,
+    "admitted_external_fail_to_pass_roots": 0,
+    "admitted_non_python_external_repair_roots": 0,
+    "auxiliary_or_current_state_candidates": {
+      "c_cpp": 2,
+      "python": 15,
+      "rust": 18,
+      "web_js_ts_html": 30
+    },
+    "auxiliary_or_current_state_total": 65,
+    "candidate_backlog_roots_reported": {
+      "c_cpp": 52,
+      "python": 50,
+      "rust": 45,
+      "web_js_ts_html": 48
+    },
+    "candidate_backlog_total_reported": 195,
+    "external_repair_acquisition_candidates": {
+      "c_cpp": 50,
+      "python": 20,
+      "rust": 0,
+      "web_js_ts_html": 0
+    },
+    "external_repair_acquisition_total": 70,
+    "sealed_transition_candidates": {
+      "c_cpp": 0,
+      "python": 15,
+      "rust": 27,
+      "web_js_ts_html": 18
+    },
+    "sealed_transition_total": 60,
+    "training_allowed": false
+  },
+  "decision": "campaign_has_backlog_but_training_still_blocked_by_zero_admitted_repair_roots",
+  "do_not_do": [
+    "do not train from candidate backlog",
+    "do not count planned commands as verifier evidence",
+    "do not count PASS_TO_PASS/current-state rows as repair proof",
+    "do not weaken Stage12240 hard rejects"
+  ],
+  "next_actions": [
+    "wait for low-risk execution batch plan",
+    "wait for commit-pair mining plan",
+    "then build Stage12244 execution request from the safest 20 roots",
+    "then build Stage12245 commit-pair mining request for real FAIL_TO_PASS triples"
+  ],
+  "progress_toward_500": {
+    "admitted_training_roots": 0,
+    "candidate_backlog_roots_reported": 195,
+    "fraction_backlog_to_target": 0.39,
+    "target_root_rows": 500
+  },
+  "quality_assessment": {
+    "plateau_confirmed": true,
+    "plateau_type": "admission_and_materialization_plateau",
+    "reason": "subagents found candidate supply but not comparable external repair rows; verifier/current-state rows can help auxiliary policy only after conversion/admission"
+  },
+  "stage": "stage12243_maintainer_500_campaign_status",
+  "training_allowed": false
+}

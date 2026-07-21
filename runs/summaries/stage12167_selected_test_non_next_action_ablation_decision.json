@@ -1,0 +1,85 @@
+{
+  "by_task": {
+    "stage11924": {
+      "transition_candidate_selection": {
+        "accuracy": 0.55625,
+        "correct": 89,
+        "rows": 160
+      },
+      "transition_continue_or_stop": {
+        "accuracy": 0.8,
+        "correct": 128,
+        "rows": 160
+      },
+      "transition_next_action": {
+        "accuracy": 0.31875,
+        "correct": 51,
+        "rows": 160
+      },
+      "transition_verifier_transition": {
+        "accuracy": 0.6,
+        "correct": 96,
+        "rows": 160
+      }
+    },
+    "stage12165": {
+      "transition_candidate_selection": {
+        "accuracy": 0.575,
+        "correct": 92,
+        "rows": 160
+      },
+      "transition_continue_or_stop": {
+        "accuracy": 0.8,
+        "correct": 128,
+        "rows": 160
+      },
+      "transition_next_action": {
+        "accuracy": 0.25,
+        "correct": 40,
+        "rows": 160
+      },
+      "transition_verifier_transition": {
+        "accuracy": 0.6,
+        "correct": 96,
+        "rows": 160
+      }
+    }
+  },
+  "decision": "reject_stage12165_keep_stage11924_standalone_and_stage12099_route",
+  "interpretation": [
+    "Dropping Stage12155 next_action rows did not recover the Stage11924 transition baseline.",
+    "Stage12165 improved candidate_selection from 89/160 to 92/160 but damaged transition_next_action from 51/160 to 40/160.",
+    "The failure is consistent with shared scorer/head interference, not just malformed next_action support rows.",
+    "Do not run additional shared semantic-candidate-head support probes from this selected-test expansion package."
+  ],
+  "next_required_intervention": {
+    "do_not_do": "Do not promote Stage12165 and do not continue broad shared-head selected-test training.",
+    "recommendation": "Add or test a task-specific transition_next_action scorer/head, then evaluate it routed only for transition_next_action while preserving Stage11924/Stage12099 behavior for other task families.",
+    "type": "architecture_or_objective_isolation"
+  },
+  "promotion_gates_passed": false,
+  "protected_gates": {
+    "filtered_strict_preserved": true,
+    "filtered_validation_preserved": true,
+    "old_canary_strict_preserved": true,
+    "old_canary_validation_preserved": true,
+    "residual_preserved": true,
+    "smoke_preserved": true,
+    "transition_projection_beats_gemma_386": false,
+    "transition_projection_beats_stage12099_route_375": false,
+    "transition_projection_improves_stage11924_baseline": false,
+    "transition_projection_retains_stage11924_baseline": false
+  },
+  "reason": "Non-next-action ablation preserved protected gates but failed to retain or improve the transition frontier; next_action still regressed and total transition score remained below Stage11924.",
+  "rejected_runtime": "stage12165_selected_test_non_next_action_ablation_training_probe",
+  "scores": {
+    "gemma_transition_correct": 386,
+    "rows": 640,
+    "stage11924_transition_correct": 364,
+    "stage12099_routed_transition_correct": 375,
+    "stage12165_transition_correct": 356
+  },
+  "selected_product_route": "stage12099_routed_transition_composite",
+  "selected_standalone_frontier": "stage11924_transition_listwise_head_only",
+  "stage": "stage12167_selected_test_non_next_action_ablation_decision"
+}

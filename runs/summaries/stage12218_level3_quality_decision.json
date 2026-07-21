@@ -1,0 +1,153 @@
+{
+  "artifacts": {
+    "blocked_normalization_rows": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12216_normalized_verifier_observation_dataset/blocked_normalization_rows.jsonl",
+    "normalized_records": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12216_normalized_verifier_observation_dataset/normalized_verifier_observation_records.jsonl",
+    "patch_rehydration_queue": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12217_patch_trace_verifier_rehydration_queue/patch_trace_verifier_rehydration_queue.jsonl",
+    "patch_rehydration_top10": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12217_patch_trace_verifier_rehydration_queue/top10_patch_trace_verifier_rehydration_queue.jsonl"
+  },
+  "claim_boundary": [
+    "Stage12216 is normalized verifier-observation train-support only.",
+    "Stage12216 must not be counted as patch-trace or full unbounded maintainer training supply.",
+    "Stage12217 is a verifier rehydration queue only; Stage12201 remains level_2 until same-root commands execute and pass admission."
+  ],
+  "current_status": {
+    "stage12206_repo_capped_passfail_rows": 149,
+    "stage12216_blocked_rows": 3,
+    "stage12216_normalized_rows": 146,
+    "stage12216_patch_trace_floor_rows": 0,
+    "stage12217_rehydration_queue_count": 25,
+    "stage12217_top10_count": 10
+  },
+  "decision": "normalize_verifier_observation_support_and_prepare_patch_rehydration_next",
+  "hard_guards": null,
+  "inputs": {
+    "normalized_verifier_observation": "runs/summaries/stage12216_normalized_verifier_observation_dataset.json",
+    "passfail_rollup": "runs/summaries/stage12206_level3_passfail_training_rollup.json",
+    "patch_rehydration_queue": "runs/summaries/stage12217_patch_trace_verifier_rehydration_queue.json",
+    "quality_control": "runs/summaries/stage12213_level3_dataset_quality_control.json"
+  },
+  "minimum_gate": null,
+  "next_stage_sequence": [
+    "stage12219_patch_trace_rehydration_smoke_request: execute 3-5 CPU-only commands from Stage12217 top queue, no mutation, no network, short timeout.",
+    "stage12220_patch_trace_rehydration_admission: admit only rows with same-root command output, verifier_result, state_before/state_after, stop decision, and patch diff/apply evidence.",
+    "stage12221_level3_patch_trace_gate_audit: require >=8 patch-trace rows before any closed-loop trajectory training request."
+  ],
+  "normalized_dataset_audit": {
+    "bad_action_grammar_count": 0,
+    "bad_pass_current_build_runnable_count": 0,
+    "bad_status_consistency_count": 0,
+    "blocked_rows": {},
+    "build_only_count": 21,
+    "controlled_fixture_like_count": 36,
+    "effective_admission_counts": {
+      "level_3_single_step_closed_loop_no_patch_verifier_observation": 146
+    },
+    "env_blocked_count": 0,
+    "env_blocked_distractor_candidate_sets": 0,
+    "language_family_counts": {
+      "c_cpp": 27,
+      "python": 47,
+      "rust": 27,
+      "web_js_ts_html": 45
+    },
+    "missing_required_fields": {},
+    "patch_trace_floor_false_count": 146,
+    "repo_family_counts_top20": [
+      [
+        "stage12053_controlled_semantic_fail_to_pass_floor_closure_rows",
+        16
+      ],
+      [
+        "openhands_openhands",
+        16
+      ],
+      [
+        "llama_stack",
+        14
+      ],
+      [
+        "benchmark",
+        13
+      ],
+      [
+        "tokenizers",
+        10
+      ],
+      [
+        "modelcontextprotocol__typescript-sdk",
+        10
+      ],
+      [
+        "Python",
+        5
+      ],
+      [
+        "stage12055_controlled_semantic_fail_to_pass_supplement_rows",
+        4
+      ],
+      [
+        "stage11999_real_source_fail_to_pass_mutations",
+        4
+      ],
+      [
+        "sentencepiece",
+        3
+      ],
+      [
+        "stage11980_controlled_multilingual_fail_to_pass_fixtures",
+        3
+      ],
+      [
+        "NousResearch__hermes-agent",
+        3
+      ],
+      [
+        "agent_kernel_rust_wasm",
+        3
+      ],
+      [
+        "stage12025_cpp_controlled_fixture",
+        2
+      ],
+      [
+        "Aider-AI__aider",
+        2
+      ],
+      [
+        "PyCQA/flake8",
+        2
+      ],
+      [
+        "camel-ai__camel",
+        2
+      ],
+      [
+        "einops",
+        2
+      ],
+      [
+        "lastmile-ai__mcp-agent",
+        2
+      ],
+      [
+        "openai__openai-agents-python",
+        2
+      ]
+    ],
+    "runnable_verifier_proof_count": 85,
+    "singleton_candidate_sets": 0,
+    "split_counts": {
+      "train_support": 146
+    },
+    "transition_counts": {
+      "FAIL_CURRENT_STATE": 1,
+      "FAIL_TO_PASS": 39,
+      "PASS_CURRENT_BUILD": 21,
+      "PASS_CURRENT_BUILD_AND_RUN": 36,
+      "PASS_CURRENT_STATE": 19,
+      "PASS_TO_PASS": 30
+    }
+  },
+  "stage": "stage12218_level3_quality_decision",
+  "training_allowed": false
+}

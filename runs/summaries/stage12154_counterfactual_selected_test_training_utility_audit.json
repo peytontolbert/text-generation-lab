@@ -1,0 +1,157 @@
+{
+  "blockers": [
+    "root_count_below_training_floor:4<8",
+    "language_count_below_training_floor:2<3"
+  ],
+  "created_at_utc": "2026-07-15T16:17:27Z",
+  "decision": "block_training_request_until_counterfactual_diverse_rows_added",
+  "input_stage": "stage12153_counterfactual_selected_test_transition_rows",
+  "language_counts": {
+    "python": 20,
+    "rust": 60
+  },
+  "passed": false,
+  "promotion_eligible": false,
+  "required_next_action": "Add counterfactual state variants and more roots before any training. Needed examples include RUN_VERIFIER/CONTINUE before verifier execution, INSUFFICIENT_EVIDENCE or VERIFIER_REMOVED when verifier evidence is absent, and candidate_change_surface/source_surface positives where appropriate.",
+  "root_count": 4,
+  "root_report": {
+    "stage12118::rust::010::assert_rs_predicates_rs": {
+      "row_count": 20,
+      "target_counts": {
+        "CONTINUE": 3,
+        "FINISH": 1,
+        "INSUFFICIENT_EVIDENCE": 2,
+        "PASS_CURRENT_BUILD_AND_RUN": 1,
+        "RETRIEVE_EVIDENCE": 1,
+        "RUN_VERIFIER": 1,
+        "SELECT_TEST": 1,
+        "STOP_DONE": 1,
+        "VERIFIER_REMOVED": 1,
+        "candidate_change_surface": 1,
+        "insufficient_evidence": 1,
+        "selected_test_backed_verifier_candidate": 1,
+        "source_surface": 2,
+        "verifier_and_test_constraint": 3
+      },
+      "unique_targets": 14
+    },
+    "stage12118::rust::017::dtolnay_anyhow": {
+      "row_count": 20,
+      "target_counts": {
+        "CONTINUE": 3,
+        "FINISH": 1,
+        "INSUFFICIENT_EVIDENCE": 2,
+        "PASS_CURRENT_BUILD_AND_RUN": 1,
+        "RETRIEVE_EVIDENCE": 1,
+        "RUN_VERIFIER": 1,
+        "SELECT_TEST": 1,
+        "STOP_DONE": 1,
+        "VERIFIER_REMOVED": 1,
+        "candidate_change_surface": 1,
+        "insufficient_evidence": 1,
+        "selected_test_backed_verifier_candidate": 1,
+        "source_surface": 2,
+        "verifier_and_test_constraint": 3
+      },
+      "unique_targets": 14
+    },
+    "stage12118::rust::044::toml_rs_toml": {
+      "row_count": 20,
+      "target_counts": {
+        "CONTINUE": 3,
+        "FINISH": 1,
+        "INSUFFICIENT_EVIDENCE": 2,
+        "PASS_CURRENT_BUILD_AND_RUN": 1,
+        "RETRIEVE_EVIDENCE": 1,
+        "RUN_VERIFIER": 1,
+        "SELECT_TEST": 1,
+        "STOP_DONE": 1,
+        "VERIFIER_REMOVED": 1,
+        "candidate_change_surface": 1,
+        "insufficient_evidence": 1,
+        "selected_test_backed_verifier_candidate": 1,
+        "source_surface": 2,
+        "verifier_and_test_constraint": 3
+      },
+      "unique_targets": 14
+    },
+    "stage12143__python__PyCQA_flake8": {
+      "row_count": 20,
+      "target_counts": {
+        "CONTINUE": 3,
+        "FINISH": 1,
+        "INSUFFICIENT_EVIDENCE": 2,
+        "PASS_CURRENT_STATE": 1,
+        "RETRIEVE_EVIDENCE": 1,
+        "RUN_VERIFIER": 1,
+        "SELECT_TEST": 1,
+        "STOP_DONE": 1,
+        "VERIFIER_REMOVED": 1,
+        "candidate_change_surface": 1,
+        "insufficient_evidence": 1,
+        "selected_test_backed_verifier_candidate": 1,
+        "source_surface": 2,
+        "verifier_and_test_constraint": 3
+      },
+      "unique_targets": 14
+    }
+  },
+  "row_count": 80,
+  "stage": "stage12154_counterfactual_selected_test_training_utility_audit",
+  "strict_eval_eligible": false,
+  "task_report": {
+    "transition_candidate_selection": {
+      "entropy_bits": 2.0,
+      "row_count": 16,
+      "target_counts": {
+        "candidate_change_surface": 4,
+        "selected_test_backed_verifier_candidate": 4,
+        "source_surface": 4,
+        "verifier_and_test_constraint": 4
+      },
+      "unique_targets": 4
+    },
+    "transition_continue_or_stop": {
+      "entropy_bits": 0.8112781244591328,
+      "row_count": 16,
+      "target_counts": {
+        "CONTINUE": 12,
+        "STOP_DONE": 4
+      },
+      "unique_targets": 2
+    },
+    "transition_evidence_citation": {
+      "entropy_bits": 1.5,
+      "row_count": 16,
+      "target_counts": {
+        "insufficient_evidence": 4,
+        "source_surface": 4,
+        "verifier_and_test_constraint": 8
+      },
+      "unique_targets": 3
+    },
+    "transition_next_action": {
+      "entropy_bits": 2.0,
+      "row_count": 16,
+      "target_counts": {
+        "FINISH": 4,
+        "RETRIEVE_EVIDENCE": 4,
+        "RUN_VERIFIER": 4,
+        "SELECT_TEST": 4
+      },
+      "unique_targets": 4
+    },
+    "transition_verifier_transition": {
+      "entropy_bits": 1.7028195311147831,
+      "row_count": 16,
+      "target_counts": {
+        "INSUFFICIENT_EVIDENCE": 8,
+        "PASS_CURRENT_BUILD_AND_RUN": 3,
+        "PASS_CURRENT_STATE": 1,
+        "VERIFIER_REMOVED": 4
+      },
+      "unique_targets": 4
+    }
+  },
+  "training_allowed": false
+}

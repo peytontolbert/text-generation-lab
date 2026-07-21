@@ -1,0 +1,172 @@
+{
+  "active_control": {
+    "active_subagents": {
+      "019f6b5e-a93e-7d63-a359-1319ad1b57e2": "comparable_fail_to_pass_patch_scout",
+      "019f6b5e-c362-7421-9e44-4606ca128de1": "non_python_hydratable_patch_scout",
+      "019f6b5e-da5d-7bc3-babe-2cbf68244a73": "patch_trace_schema_integrator"
+    },
+    "claim_boundary": "Control artifact only. Subagents can propose candidates/contracts; deterministic scripts must admit or reject rows.",
+    "common_hard_rejects": [
+      "ENV_BLOCKED_or_dependency_install_required",
+      "network_required",
+      "gpu_required_or_uses_cuda_device",
+      "test_added_before_patch_so_before_command_missing_test",
+      "pytest_no_tests_ran_or_usage_error_counted_as_failure",
+      "weak_anchor_tests_init_or_placeholder_test",
+      "verifier_unrelated_to_changed_files",
+      "build_only_result_counted_as_runnable_selected_verifier",
+      "patch_diff_not_same_source_or_not_apply_checked",
+      "strict_or_source_heldout_claim_without lineage audit"
+    ],
+    "decision": "subagent_packets_active_training_blocked",
+    "packets": [
+      {
+        "must_return_schema": [
+          "repo_family",
+          "language_family",
+          "episode_or_root_id",
+          "repo_commit_before_or_source_ref",
+          "repo_commit_after_or_source_ref",
+          "patch_diff_ref",
+          "verifier_command",
+          "verifier_cwd",
+          "verifier_env",
+          "why_before_failure_is_behavioral_and_comparable",
+          "why_patch_should_pass_same_verifier",
+          "risk_flags"
+        ],
+        "name": "comparable_fail_to_pass_patch_scout",
+        "success_floor": {
+          "candidate_count": 5,
+          "must_exclude_test_added_before_missing": true,
+          "must_include_same_verifier_before_patch_after": true,
+          "non_python_count": 2
+        }
+      },
+      {
+        "must_return_schema": [
+          "repo_family",
+          "language_family",
+          "episode_or_root_id",
+          "repo_commit_before_or_source_ref",
+          "repo_commit_after_or_source_ref",
+          "patch_diff_ref",
+          "verifier_command",
+          "verifier_cwd",
+          "verifier_env",
+          "verifier_relation_to_changed_files",
+          "risk_or_blocker"
+        ],
+        "name": "non_python_hydratable_patch_scout",
+        "success_floor": {
+          "allow_exhausted_pool_report": true,
+          "languages": [
+            "c_cpp",
+            "rust",
+            "web_js_ts_html"
+          ],
+          "per_language_candidate_target": 3
+        }
+      },
+      {
+        "must_return_schema": [
+          "projection_families",
+          "required_fields",
+          "hard_reject_rules",
+          "before_before_plus_patch_after_representation",
+          "trainer_or_dataset_scripts_to_change",
+          "known_schema_flaws"
+        ],
+        "name": "patch_trace_schema_integrator",
+        "success_floor": {
+          "must_include_patch_apply_and_verifier_observation_fields": true,
+          "must_keep_training_blocked_until_semantic_qc": true,
+          "must_prevent_flattening_to_stage12206_verifier_only": true
+        }
+      }
+    ],
+    "source_stage": "stage12226_level3_next_blocker_decision",
+    "stage": "stage12227_subagent_packet_control",
+    "training_allowed": false
+  },
+  "blockers_remaining": [
+    "external_comparable_fail_to_pass_patch_trace_supply_zero",
+    "non_python_patch_trace_supply_zero",
+    "projection_rows_training_disabled_until_supply_and_task_routing",
+    "controlled_fixture_rows_need_separate_curriculum_labeling_if_used"
+  ],
+  "claim_boundary": "Subagent round improved clarity and schema; it did not create enough external patch-trace data for training.",
+  "decision": "subagent_round_complete_next_acquisition_required",
+  "next_subagent_packets": [
+    {
+      "hard_rejects": [
+        "test file absent before patch",
+        "syntax-only compile error",
+        "dependency/network/GPU required",
+        "verifier unrelated to changed files",
+        "build-only proof without runnable test or command output"
+      ],
+      "name": "external_repair_root_acquisition_scout",
+      "objective": "Find new local or easily hydratable external repos/commits with comparable fail-before/pass-after selected verifier evidence across Python/C++/Rust/Web."
+    },
+    {
+      "hard_rejects": [
+        "mix controlled fixtures into external patch-trace rollup",
+        "mark as strict_eval_or_source_heldout",
+        "enable training loss before separate curriculum gate"
+      ],
+      "name": "controlled_fixture_projection_materializer",
+      "objective": "Convert Stage12025 controlled fixtures into patch-trace projection rows marked controlled_curriculum_only, preserving language diversity without source-heldout claims."
+    }
+  ],
+  "source_stage": "stage12227_subagent_packet_control",
+  "stage": "stage12230_subagent_result_audit",
+  "subagent_result_summary": {
+    "comparable_fail_to_pass_patch_scout": {
+      "controlled_fixture_candidates_found": 8,
+      "decision": "use_only_as_curriculum_or_projection_path_test_not_source_heldout_progress",
+      "external_candidates_found": 0
+    },
+    "non_python_hydratable_patch_scout": {
+      "accepted_candidates_found": 0,
+      "decision": "current_stage12201_stage12217_non_python_pool_exhausted"
+    },
+    "patch_trace_schema_integrator": {
+      "contract_implemented_as": [
+        "configs/schema/patch_trace_projection_record_v1.schema.json",
+        "scripts/build_stage12228_patch_trace_projection_rows.py",
+        "scripts/build_stage12229_patch_trace_projection_qc.py"
+      ],
+      "qc_result": {
+        "admitted_count": 7,
+        "artifact_paths": {
+          "admitted": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12229_patch_trace_projection_qc/admitted_patch_trace_projection_rows.jsonl",
+          "blocked": "/data/agentkernel-seq2seq-text-lab/runs/local/artifacts/stage12229_patch_trace_projection_qc/blocked_patch_trace_projection_rows.jsonl"
+        },
+        "blocked_count": 0,
+        "blocker_counts": {},
+        "claim_boundary": "Projection QC only. Passing rows still have disabled loss masks and cannot trigger training until source supply and trainer task routing gates are met.",
+        "decision": "projection_qc_passed_training_still_blocked",
+        "projection_counts": {
+          "next_action": 1,
+          "patch_apply": 2,
+          "patch_judgment": 2,
+          "stop_continue": 1,
+          "verifier_transition": 1
+        },
+        "source_stage": "stage12228_patch_trace_projection_rows",
+        "stage": "stage12229_patch_trace_projection_qc",
+        "target_counts": {
+          "CONTINUE_WEAK_OR_PASS_TO_PASS": 1,
+          "PASS_TO_PASS": 1,
+          "PASS_TO_PASS_SAFE_REFACTOR": 1,
+          "PATCH_APPLIES_CLEANLY": 2,
+          "RUN_BEFORE_PLUS_PATCH_VERIFIER": 1,
+          "TEST_ADDED_NOT_COMPARABLE": 1
+        },
+        "training_allowed": false
+      }
+    }
+  },
+  "training_allowed": false
+}

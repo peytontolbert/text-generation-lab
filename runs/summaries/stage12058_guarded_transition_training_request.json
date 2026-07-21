@@ -1,0 +1,119 @@
+{
+  "claim_boundary": [
+    "This is a guarded diagnostic training request, not model progress.",
+    "Stage12056 v35 rows are train-support-only and do not establish source-heldout or strict-eval superiority.",
+    "Promotion requires a postrun routed audit against old transition 640, protected compact gates, residual bank, source-heldout smoke, and same-manifest Gemma if the transition score exceeds baseline."
+  ],
+  "created_at_utc": "2026-07-14T23:15:51Z",
+  "decision": "guarded_transition_training_request_ready",
+  "execute_now": false,
+  "gates_before_execution": {
+    "base_manifest_exists": true,
+    "contrast_enabled": true,
+    "eval_rows_22": true,
+    "head_only_enabled": true,
+    "init_runtime_exists": true,
+    "listwise_enabled": true,
+    "preservation_runtime_exists": true,
+    "strict_rows_22": true,
+    "train_rows_expected_951": true,
+    "uses_gpu2_mask": true,
+    "v35_audit_exists": true,
+    "v35_floor_audit_train_ready": true,
+    "v35_hard_blockers_zero": true,
+    "v35_rows_exists": true
+  },
+  "hypothesis": "The Stage11924 transition listwise head can absorb floor-complete verifier-status support if old 640 replay and preservation KL protect the selected transition/compact gates.",
+  "intervention": "Continue from Stage11924, train semantic candidate head only on old 640 transition replay plus Stage12056 v35 support rows, using task-balanced sampling, contrast, and same-role/verifier-value listwise losses.",
+  "next_stage_after_execution": "stage12060_guarded_transition_training_postrun_audit",
+  "next_stage_if_executed": "stage12059_guarded_transition_training_probe",
+  "outputs": {
+    "command": "runs/local/artifacts/stage12058_guarded_transition_training_request/guarded_transition_training_command.json",
+    "manifest": "runs/local/artifacts/stage12058_guarded_transition_training_request/guarded_transition_training_manifest.jsonl",
+    "output_dir": "runs/local/artifacts/stage12059_guarded_transition_training_probe/bounded_decoder_probe",
+    "runtime_dir": "runs/local/artifacts/stage12059_guarded_transition_training_probe/runtime_model",
+    "summary": "runs/local/artifacts/stage12058_guarded_transition_training_request/guarded_transition_training_request.json",
+    "summary_mirror": "runs/summaries/stage12058_guarded_transition_training_request.json"
+  },
+  "passed": true,
+  "promotion_gate": {
+    "breakdown_required": [
+      "transition_next_action",
+      "transition_candidate_selection",
+      "transition_verifier_transition",
+      "transition_continue_or_stop"
+    ],
+    "coverage": "100% routed audit coverage, no skipped rows",
+    "old_transition_manifest_correct": ">=364/640 for retention; >386/640 for same-manifest Gemma win",
+    "protected_filtered_strict": "22/22",
+    "protected_filtered_validation": ">=20/22",
+    "protected_old_canary_strict": "23/23",
+    "protected_old_canary_validation": ">=21/23",
+    "protected_residual_bank": ">=7/10",
+    "source_heldout_smoke": ">=6/12 retained; >6/12 for transfer progress"
+  },
+  "row_counts": {
+    "eval_rows": 22,
+    "old_transition_replay_train_rows": 640,
+    "strict_rows": 22,
+    "train_rows": 951,
+    "train_task_counts": {
+      "transition_candidate_selection": 160,
+      "transition_continue_or_stop": 160,
+      "transition_next_action": 160,
+      "transition_verifier_transition": 471
+    },
+    "v35_language_counts": {
+      "c_cpp": 60,
+      "python": 110,
+      "rust": 59,
+      "web_js_ts_html": 82
+    },
+    "v35_status_counts": {
+      "FAIL_TO_PASS": 51,
+      "INSUFFICIENT_EVIDENCE": 40,
+      "NOT_EXERCISED": 40,
+      "PASS_CURRENT_BUILD": 40,
+      "PASS_CURRENT_BUILD_AND_RUN": 40,
+      "PASS_TO_PASS": 100
+    },
+    "v35_support_train_rows": 311,
+    "v35_unique_root_keys": 304
+  },
+  "source_artifacts": {
+    "base_stage11923_manifest": "runs/local/artifacts/stage11923_transition_listwise_head_only_probe_request/transition_listwise_head_only_manifest.jsonl",
+    "initialize_from_runtime_model": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "preservation_reference_runtime_model": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "v35_audit": "runs/local/artifacts/stage12057_transition_support_v35_audit/transition_support_v35_audit.json",
+    "v35_support_rows": "runs/local/artifacts/stage12056_transition_support_rollup_v35/transition_support_rows_v35.jsonl"
+  },
+  "stage": 12058,
+  "stage_name": "stage12058_guarded_transition_training_request",
+  "training_controls": {
+    "bounded_choice_aux_source": "encoder_option_retrieval_semantic_candidate_head",
+    "environment": "conda run -n trellis",
+    "gpu": "cuda:2 only via CUDA_VISIBLE_DEVICES=2/NVIDIA_VISIBLE_DEVICES=2 and AGENTKERNEL_EVAL_DEVICE=cuda:0",
+    "head_only": true,
+    "init_runtime": "runs/local/artifacts/stage11924_transition_listwise_head_only_probe/runtime_model/runtime_model_bundle.json",
+    "preservation_kl_weight": 4.0,
+    "preservation_reference_runtime": "runs/local/artifacts/stage11507_preservation_strengthened_evidence_judgment_probe/runtime_model/runtime_model_bundle.json",
+    "sampler": "task_balanced"
+  },
+  "v35_audit_summary": {
+    "controlled_fixture_ratio": 0.1222,
+    "controlled_fixture_rows": 38,
+    "hard_blocker_count": 0,
+    "issue_counts": {
+      "duplicate_root_key_group": 6
+    },
+    "repo_family_over_10pct": {
+      "benchmark": 35,
+      "modelcontextprotocol__typescript-sdk": 36,
+      "openclaw__clawhub": 35
+    },
+    "repo_family_over_15pct": {},
+    "top_repo_share": 0.1158,
+    "train_ready_against_floor_and_hard_audit": true,
+    "warning_count": 6
+  }
+}

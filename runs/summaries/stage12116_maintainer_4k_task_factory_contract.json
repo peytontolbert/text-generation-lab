@@ -1,0 +1,183 @@
+{
+  "created_at_utc": "2026-07-15T03:25:17Z",
+  "decision": "maintainer_4k_task_factory_contract_ready",
+  "do_not_train": true,
+  "first_milestone": {
+    "minimum_distinct_roots_by_language": {
+      "c_cpp": 25,
+      "python": 25,
+      "rust": 25,
+      "web_js_ts_html": 25
+    },
+    "name": "Maintainer-400 pilot",
+    "purpose": "prove subagent factory, deterministic audits, row quality, and training response before generating all 4K tasks",
+    "tasks": 400,
+    "tasks_by_language": {
+      "c_cpp": 100,
+      "python": 100,
+      "rust": 100,
+      "web_js_ts_html": 100
+    }
+  },
+  "language_contracts": {
+    "c_cpp": {
+      "avoid_overfit_families": [
+        "parametergolf",
+        "agentkernel",
+        "cccl",
+        "onnxruntime"
+      ],
+      "compatibility_note": "Stage12114/12115 are directly compatible; selected-test claims require concrete ctest/unit-test evidence.",
+      "minimum_distinct_roots": 250,
+      "packet_count": 10,
+      "preferred_verifiers": [
+        "ctest",
+        "cmake --build",
+        "make test",
+        "ninja test"
+      ],
+      "repo_family_cap": 50,
+      "target_tasks": 1000
+    },
+    "python": {
+      "avoid_overfit_families": [
+        "MirrorMind",
+        "code_assist",
+        "repository_library"
+      ],
+      "compatibility_note": "Stage12114 does not admit language=python; Python needs a successor audit with the same gates plus python in VALID_LANGS.",
+      "minimum_distinct_roots": 250,
+      "packet_count": 10,
+      "preferred_verifiers": [
+        "pytest",
+        "tox",
+        "nox",
+        "ruff/mypy as static-only anchors"
+      ],
+      "repo_family_cap": 50,
+      "target_tasks": 1000
+    },
+    "rust": {
+      "avoid_overfit_families": [
+        "tokenizers",
+        "candle",
+        "perftree",
+        "git/libgit-rs unless lineage-clean"
+      ],
+      "compatibility_note": "Stage12114/12115 are directly compatible after checkout/probe evidence exists.",
+      "minimum_distinct_roots": 250,
+      "packet_count": 10,
+      "preferred_verifiers": [
+        "cargo test",
+        "cargo test --workspace",
+        "cargo check as static-only anchor"
+      ],
+      "repo_family_cap": 50,
+      "target_tasks": 1000
+    },
+    "web_js_ts_html": {
+      "avoid_overfit_families": [
+        "OpenHands",
+        "LlamaStack",
+        "code_assist",
+        "OpenClaw unless heldout-clean"
+      ],
+      "compatibility_note": "Stage12114/12115 are directly compatible; avoid OpenHands/Llama schema overfit and preserve renderer parity.",
+      "minimum_distinct_roots": 250,
+      "packet_count": 10,
+      "preferred_verifiers": [
+        "npm test",
+        "pnpm test",
+        "yarn test",
+        "vitest",
+        "playwright test",
+        "build/typecheck as scoped anchors"
+      ],
+      "repo_family_cap": 50,
+      "target_tasks": 1000
+    }
+  },
+  "objective": "Create 1000 high-quality verifier-grounded maintainer transition tasks per primary language before broad model-claim training.",
+  "outputs": {
+    "deterministic_admission_audit_contract": "runs/local/artifacts/stage12116_maintainer_4k_task_factory_contract/deterministic_admission_audit_contract.json",
+    "root_task_candidate_template": "runs/local/artifacts/stage12116_maintainer_4k_task_factory_contract/root_task_candidate_template.json",
+    "subagent_work_packets": "runs/local/artifacts/stage12116_maintainer_4k_task_factory_contract/subagent_work_packets.jsonl",
+    "summary": "runs/local/artifacts/stage12116_maintainer_4k_task_factory_contract/maintainer_4k_task_factory_contract.json",
+    "summary_mirror": "runs/summaries/stage12116_maintainer_4k_task_factory_contract.json",
+    "verified_transition_record_template": "runs/local/artifacts/stage12116_maintainer_4k_task_factory_contract/verified_transition_record_template.json"
+  },
+  "scale_guardrails": [
+    "Scale by independent roots, not permutations.",
+    "Every root stays in exactly one split.",
+    "Every candidate has semantic object identity; answer letters are display only.",
+    "Every selected-test claim requires an executed selected verifier log.",
+    "Build/config/static anchors are useful but must be labeled as such.",
+    "Every packet is useful only if it improves root breadth, verifier-status balance, or named failure-family coverage.",
+    "No package proceeds to training if quality or leak gates fail."
+  ],
+  "second_milestone": {
+    "minimum_distinct_roots_by_language": {
+      "c_cpp": 250,
+      "python": 250,
+      "rust": 250,
+      "web_js_ts_html": 250
+    },
+    "name": "Maintainer-4K",
+    "promotion_use": "source-heldout training/eval substrate, not a same-surface residual patch packet",
+    "tasks": 4000,
+    "tasks_by_language": {
+      "c_cpp": 1000,
+      "python": 1000,
+      "rust": 1000,
+      "web_js_ts_html": 1000
+    }
+  },
+  "stage": 12116,
+  "stage_name": "stage12116_maintainer_4k_task_factory_contract",
+  "subagent_control_model": {
+    "auditor": "red-team the draft, but deterministic scripts decide admission",
+    "builder": "draft schema-complete root/task/transition records",
+    "main_agent": "owns schema, deterministic audits, integration, and promotion decisions",
+    "scout": "find candidate roots only"
+  },
+  "target_scale": {
+    "long_horizon_upgrade_path": "After the 4K root factory is clean, expand selected roots into 50-200-step rollout episodes.",
+    "max_tasks_per_root": 4,
+    "minimum_distinct_roots": 1000,
+    "minimum_distinct_roots_by_language": {
+      "c_cpp": 250,
+      "python": 250,
+      "rust": 250,
+      "web_js_ts_html": 250
+    },
+    "minimum_projected_rows": 24000,
+    "preferred_projected_rows": 48000,
+    "tasks_by_language": {
+      "c_cpp": 1000,
+      "python": 1000,
+      "rust": 1000,
+      "web_js_ts_html": 1000
+    },
+    "total_tasks": 4000
+  },
+  "task_family_quotas": {
+    "abstraction_boundary_or_dependency_contract": 0.05,
+    "evidence_role_boundary": 0.1,
+    "repair_intent_or_patch_sketch": 0.05,
+    "transition_candidate_selection": 0.2,
+    "transition_continue_or_stop": 0.15,
+    "transition_next_action": 0.25,
+    "transition_verifier_transition": 0.2
+  },
+  "verifier_status_floors_per_language": {
+    "FAIL_TO_FAIL_OR_STILL_BROKEN": 100,
+    "FAIL_TO_PASS": 120,
+    "INSUFFICIENT_EVIDENCE": 120,
+    "NOT_EXERCISED": 120,
+    "PASS_CURRENT_BUILD": 100,
+    "PASS_CURRENT_BUILD_AND_RUN": 100,
+    "PASS_CURRENT_STATE": 100,
+    "PASS_TO_PASS": 180,
+    "VERIFIER_REMOVED": 60
+  }
+}
