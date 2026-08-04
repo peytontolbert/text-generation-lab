@@ -3,6 +3,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import stat
 import sys
 from pathlib import Path
 from typing import Any
@@ -16,6 +18,11 @@ from loss_mask_card import LOSS_KEYS, normalize_loss_mask, read_jsonl, validate_
 from counterfactual_obligation_audit import audit_rows as audit_counterfactual_rows
 from safe_cleanup import safe_cleanup_checkpoints
 from safe_paths import UnsafePathError
+from source_lineage_guard import (
+    assert_future_eval_identity_allowed,
+    canonicalize_row_split,
+    load_future_eval_identity_denylist,
+)
 from target_implementation_guard import evaluate_implementation_selection
 
 
@@ -27,6 +34,7 @@ SUPPORTED_MODES = (
     "patch_operator_probe",
     "verifier_repair_probe",
     "bounded_decoder_ce_probe",
+    "foundational_code_ce",
     "denoise_repair_probe",
     "episode_step_denoise_contract_only",
     "episode_step_structured_probe",
@@ -34,6 +42,38 @@ SUPPORTED_MODES = (
     "two_phase_suffix_denoise_reconnect_probe",
     "tri_phase_suffix_phrase_residual_reconnect_probe",
 )
+
+SEMANTIC_NONADMISSION_DIR = REPO_ROOT / "runs/local/artifacts/stage12686_deterministic_training_data_semantic_quarantine/private"
+SEMANTIC_NONADMISSION_LEDGER_CONTRACT = {
+    "semantic_quarantine_ledger.jsonl": {
+        "rows": 136_371,
+        "sha256": "990aa75ba1bec31412375b398952f522ab4d7975fa31aa37d05d2484ee47772f",
+    },
+    "semantic_review_candidate_ledger.jsonl": {
+        "rows": 17_508,
+        "sha256": "90eb65bde505363063ccfc6b379e427943faa80b867a2e802e4259ff196b0fc2",
+    },
+}
+_SEMANTIC_NONADMISSION_HASHES: frozenset[str] | None = None
+
+FOUNDATIONAL_STAGE12687_ROOT = REPO_ROOT / "runs/local/artifacts/stage12687_source_backed_python_foundational_corpus"
+FOUNDATIONAL_STAGE12687_MANIFEST = FOUNDATIONAL_STAGE12687_ROOT / "private/594cbbdc08af0cc409eceda1/foundational_train_eval_manifest.jsonl"
+FOUNDATIONAL_STAGE12687_CONTRACT = {
+    "generation_id": "594cbbdc08af0cc409eceda1",
+    "summary_sha256": "cfdecb3effa698c5631b52689819f299820ca945fb27b169bf4ac625d96b194a",
+    "manifest_sha256": "3f677fb3d9108632a208b34f9eb98b2ee2a6687b3a401cd5229d653e71ae5994",
+    "provenance_sha256": "f5b3c921035ea6d5d77c5f3bc06576be3ea556bc8ea49c4669e69fd28664a5c8",
+    "catalog_sha256": "ec8e5eee9bc7cb366ca3c0f844913ca52ee72fecd920be4fdde764b7b3431b09",
+    "tokenizer_json_sha256": "c268a145d01e26047d7773d9888c13902ab0cbf0e59da333ba2b686fec4ae324",
+    "tokenizer_config_sha256": "0987f58448a3163615eb167d93973fa209d7ccb12dd5c7a35c1e8ab166299be0",
+    "train_rows": 16_000,
+    "eval_rows": 2_000,
+}
+FOUNDATIONAL_STAGE12687_PROVENANCE = FOUNDATIONAL_STAGE12687_MANIFEST.with_name("train_eval_source_provenance_ledger.jsonl")
+FOUNDATIONAL_STAGE12687_CATALOG = FOUNDATIONAL_STAGE12687_MANIFEST.with_name("train_eval_source_catalog.jsonl")
+FOUNDATIONAL_STAGE12687_OBSOLETE_STRICT = FOUNDATIONAL_STAGE12687_ROOT / "private/4ea398bcbd0d26ea17e77943/foundational_strict_eval_manifest.jsonl"
+FOUNDATIONAL_TRAINING_RECIPE = REPO_ROOT / "configs/training/foundational_code_ce_optimizer_v1.json"
+FOUNDATIONAL_TRAINING_RECIPE_SHA256 = "36d64f5e1448cfe8d3f24ffa9087598b74ecb4a83741520c45a65a489d7b6125"
 
 AUTHORITY_FLAGS = (
     "model_execution_authorized_next",
@@ -47,6 +87,47 @@ AUTHORITY_FLAGS = (
     "controller_complete_merge_authorized_next",
     "promotion_ready",
 )
+
+DETERMINISTIC_PLACEHOLDER_BOUNDED_CHOICE_AUX_SOURCES = frozenset({
+    "encoder_option_retrieval_conditioned",
+    "encoder_option_retrieval_verifier_conditioned",
+    "encoder_option_retrieval_evidence_role_map",
+    "encoder_option_retrieval_dynamic_productized",
+    "encoder_option_retrieval_evidence_conditioned_gated",
+    "encoder_option_retrieval_evidence_fact_text",
+    "encoder_option_retrieval_role_bias",
+    "encoder_option_retrieval_pairwise",
+    "encoder_option_retrieval_evidence_pairwise_gated",
+    "encoder_option_retrieval_evidence_ledger_head",
+    "encoder_option_retrieval_evidence_role_head",
+    "encoder_option_retrieval_evidence_judgment_head",
+    "encoder_option_retrieval_evidence_fact_pairwise",
+    "encoder_option_retrieval_semantic_candidate_head",
+    "encoder_option_retrieval_web_task_candidate_head",
+    "encoder_option_retrieval_transition_candidate_head",
+    "encoder_option_retrieval_transition_status_head",
+    "encoder_option_retrieval_transition_next_action_head",
+    "encoder_option_retrieval_semantic_plus_transition_status_head",
+    "encoder_option_retrieval_semantic_plus_transition_candidate_head",
+    "encoder_option_retrieval_semantic_plus_transition_next_action_head",
+})
+
+LEARNED_BOUNDED_CHOICE_AUX_SOURCES = (
+    "decoder_first_step",
+    "encoder_pooled",
+    "encoder_pooled_untied_head",
+    "encoder_option_biencoder",
+    "encoder_option_cross_encoder",
+)
+
+def _validate_runtime_initialization_provenance(path: Path) -> None:
+    legacy_src = REPO_ROOT / "legacy_src"
+    if str(legacy_src) not in sys.path:
+        sys.path.insert(0, str(legacy_src))
+    from agentkernel_lite.training_loop import validate_runtime_model_bundle_provenance
+
+    validate_runtime_model_bundle_provenance(path)
+
 
 REQUIRED_BOUNDED_ARTIFACTS = (
     "loss_by_step.jsonl",
@@ -185,6 +266,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
     parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--foundational-training-contract", type=Path, default=None)
     parser.add_argument("--phase2-manifest", type=Path, default=None, help="Second manifest for audited two-phase probes; currently used by suffix-choice -> residual-denoise reconnect.")
     parser.add_argument("--phase3-manifest", type=Path, default=None, help="Third manifest for audited tri-phase probes; currently used by suffix-choice -> phrase warm-up -> residual reconnect.")
     parser.add_argument("--mode", choices=SUPPORTED_MODES, required=True)
@@ -205,7 +287,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--phase3-max-decoder-tokens", type=_positive_int, default=0)
     parser.add_argument("--decoder-ce-weight", type=float, default=0.0)
     parser.add_argument("--bounded-choice-aux-weight", type=float, default=0.0, help="Optional auxiliary CE over allowed opaque-choice labels for bounded maintainer probes.")
-    parser.add_argument("--bounded-choice-aux-source", choices=["decoder_first_step", "encoder_pooled", "encoder_pooled_untied_head", "encoder_option_retrieval", "encoder_option_retrieval_conditioned", "encoder_option_retrieval_verifier_conditioned", "encoder_option_retrieval_evidence_role_map", "encoder_option_retrieval_dynamic_productized", "encoder_option_retrieval_role_bias", "encoder_option_retrieval_pairwise", "encoder_option_retrieval_evidence_pairwise_gated", "encoder_option_retrieval_evidence_ledger_head", "encoder_option_retrieval_evidence_role_head", "encoder_option_retrieval_evidence_judgment_head", "encoder_option_retrieval_evidence_conditioned_gated", "encoder_option_retrieval_evidence_fact_text", "encoder_option_retrieval_evidence_fact_pairwise", "encoder_option_retrieval_semantic_candidate_head", "encoder_option_retrieval_web_task_candidate_head", "encoder_option_retrieval_transition_candidate_head", "encoder_option_retrieval_transition_status_head", "encoder_option_retrieval_transition_next_action_head", "encoder_option_retrieval_semantic_plus_transition_status_head", "encoder_option_retrieval_semantic_plus_transition_candidate_head", "encoder_option_retrieval_semantic_plus_transition_next_action_head"], default="decoder_first_step", help="Source of logits for bounded maintainer opaque-choice auxiliary loss.")
+    parser.add_argument("--bounded-choice-aux-source", choices=LEARNED_BOUNDED_CHOICE_AUX_SOURCES, default="decoder_first_step", help="Learned source of logits for bounded maintainer opaque-choice auxiliary loss.")
     parser.add_argument("--bounded-choice-contrast-weight", type=float, default=0.0, help="Optional contrastive margin loss over audited bounded-choice confusions such as candidate_change_surface versus verifier_and_test_constraint.")
     parser.add_argument("--bounded-choice-contrast-margin", type=float, default=0.05, help="Margin used by the optional bounded-choice contrastive loss.")
     parser.add_argument("--bounded-choice-verifier-value-listwise-weight", type=float, default=0.0, help="Optional CE over same-role verifier candidate values such as PASS/FAIL/NOT_EXERCISED within verifier_outcome rows.")
@@ -304,10 +386,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def _row_split(row: dict[str, Any]) -> str:
-    split = row.get("split") or row.get("package_split") or "train"
-    if split == "strict":
-        return "strict_eval"
-    return str(split)
+    return canonicalize_row_split(row)
 
 
 def _row_authority(row: dict[str, Any]) -> dict[str, bool]:
@@ -387,6 +466,97 @@ def _sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _read_regular_file_nofollow(path: Path) -> bytes:
+    flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
+    fd = os.open(path, flags)
+    try:
+        metadata = os.fstat(fd)
+        if not stat.S_ISREG(metadata.st_mode):
+            raise ValueError(f"artifact is not a regular file: {path}")
+        chunks: list[bytes] = []
+        while True:
+            chunk = os.read(fd, 1024 * 1024)
+            if not chunk:
+                break
+            chunks.append(chunk)
+        return b"".join(chunks)
+    finally:
+        os.close(fd)
+
+
+def _stable_payload_sha256(value: Any) -> str:
+    payload = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(payload.encode("ascii")).hexdigest()
+
+
+def _stable_row_sha256(row: dict[str, Any]) -> str:
+    payload = json.dumps(row, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(payload.encode("ascii")).hexdigest()
+
+
+def _semantic_nonadmission_hashes() -> frozenset[str]:
+    global _SEMANTIC_NONADMISSION_HASHES
+    if _SEMANTIC_NONADMISSION_HASHES is not None:
+        return _SEMANTIC_NONADMISSION_HASHES
+    hashes: set[str] = set()
+    classified_rows = 0
+    for name, contract in SEMANTIC_NONADMISSION_LEDGER_CONTRACT.items():
+        path = SEMANTIC_NONADMISSION_DIR / name
+        if not path.is_file():
+            raise ValueError(f"semantic nonadmission ledger missing: {path}")
+        if _sha256_file(path) != contract["sha256"]:
+            raise ValueError(f"semantic nonadmission ledger hash mismatch: {path}")
+        ledger_rows = read_jsonl(path)
+        if len(ledger_rows) != contract["rows"]:
+            raise ValueError(f"semantic nonadmission ledger row-count mismatch: {path}")
+        classified_rows += len(ledger_rows)
+        for ledger_row in ledger_rows:
+            digest = ledger_row.get("source_row_sha256")
+            if not isinstance(digest, str) or len(digest) != 64:
+                raise ValueError(f"invalid semantic nonadmission digest in {path}")
+            if ledger_row.get("training_admitted") is not False:
+                raise ValueError(f"semantic nonadmission authority drift in {path}")
+            hashes.add(digest)
+    if classified_rows != 153_879 or len(hashes) != classified_rows:
+        raise ValueError("semantic nonadmission ledger completeness or uniqueness failure")
+    _SEMANTIC_NONADMISSION_HASHES = frozenset(hashes)
+    return _SEMANTIC_NONADMISSION_HASHES
+
+
+def _semantic_nonadmission_lineage(row: dict[str, Any]) -> str | None:
+    provenance = row.get("source_provenance") if isinstance(row.get("source_provenance"), dict) else {}
+    if str(row.get("row_id") or "").startswith("stage12687_") or provenance.get("source_stage") == "stage12687_source_backed_python_foundational_corpus":
+        return "stage12687_release_review_required"
+    if row.get("quarantine_reason") and row.get("source_row_digest"):
+        return "explicit_quarantine_provenance"
+    markers = (
+        str(row.get("example_id") or ""),
+        str(row.get("source_admission_stage") or ""),
+        str(row.get("row_id") or ""),
+        str(row.get("source_row_id") or ""),
+        str(provenance.get("source_stage") or ""),
+    )
+    for marker in markers:
+        if marker.startswith(("stage12656_", "stage12661_", "stage12678_", "stage12680_")):
+            return marker
+    if row.get("training_stage") == "repo_and_code_knowledge.precise_semantic_links":
+        return str(row["training_stage"])
+    return None
+
+
+def assert_semantic_training_data_admitted(
+    row: dict[str, Any], *, allow_reviewed_stage12687: bool = False
+) -> None:
+    digest = _stable_row_sha256(row)
+    if digest in _semantic_nonadmission_hashes():
+        raise ValueError(f"row is blocked by Stage12686 semantic nonadmission: {digest}")
+    lineage = _semantic_nonadmission_lineage(row)
+    if lineage == "stage12687_release_review_required" and allow_reviewed_stage12687:
+        return
+    if lineage is not None:
+        raise ValueError(f"row lineage is blocked by Stage12686 semantic nonadmission: {lineage}")
+
+
 def _validate_target_100m_files(args: argparse.Namespace) -> list[str]:
     errors: list[str] = []
     if args.probe_scale != "target_100m":
@@ -419,10 +589,56 @@ def _validate_target_100m_files(args: argparse.Namespace) -> list[str]:
     return errors
 
 
-def load_manifest(path: Path) -> list[dict[str, Any]]:
-    if not path.is_file():
-        raise ProbeContractError(f"manifest does not exist: {path}")
-    return read_jsonl(path)
+def _canonical_foundational_artifact_errors(path: Path, *, manifest_bytes: bytes | None = None) -> list[str]:
+    contract = FOUNDATIONAL_STAGE12687_CONTRACT
+    errors: list[str] = []
+    if path != FOUNDATIONAL_STAGE12687_MANIFEST:
+        return ["foundational_code_ce requires the exact canonical Stage12687 manifest path"]
+    checks = (
+        (path, contract["manifest_sha256"], "manifest", manifest_bytes),
+        (FOUNDATIONAL_STAGE12687_ROOT / "summary.json", contract["summary_sha256"], "summary", None),
+        (FOUNDATIONAL_STAGE12687_PROVENANCE, contract["provenance_sha256"], "provenance", None),
+        (FOUNDATIONAL_STAGE12687_CATALOG, contract["catalog_sha256"], "catalog", None),
+    )
+    for artifact, expected, label, supplied_bytes in checks:
+        try:
+            payload = supplied_bytes if supplied_bytes is not None else _read_regular_file_nofollow(artifact)
+        except (OSError, ValueError) as exc:
+            errors.append(f"canonical Stage12687 {label} artifact is unavailable: {exc}")
+            continue
+        if hashlib.sha256(payload).hexdigest() != expected:
+            errors.append(f"canonical Stage12687 {label} artifact hash mismatch")
+    return errors
+
+
+def load_manifest(path: Path, *, mode: str | None = None) -> list[dict[str, Any]]:
+    try:
+        if mode == "foundational_code_ce":
+            manifest_bytes = _read_regular_file_nofollow(path)
+            foundational_errors = _canonical_foundational_artifact_errors(path, manifest_bytes=manifest_bytes)
+            if foundational_errors:
+                raise ValueError("; ".join(foundational_errors))
+            rows = [json.loads(line) for line in manifest_bytes.decode("utf-8").splitlines() if line.strip()]
+        else:
+            if not path.is_file():
+                raise ValueError(f"manifest does not exist: {path}")
+            rows = read_jsonl(path)
+        allow_reviewed_stage12687 = mode == "foundational_code_ce"
+        denylist = load_future_eval_identity_denylist()
+        for index, row in enumerate(rows):
+            if not isinstance(row, dict):
+                raise ValueError(f"manifest row {index} is not an object")
+            split = canonicalize_row_split(row)
+            row["split"] = split
+            if "package_split" in row:
+                row["package_split"] = split
+            assert_future_eval_identity_allowed(row, split, denylist)
+            assert_semantic_training_data_admitted(
+                row, allow_reviewed_stage12687=allow_reviewed_stage12687
+            )
+        return rows
+    except (OSError, UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
+        raise ProbeContractError(f"manifest identity enforcement failed for {path}: {exc}") from exc
 
 
 def _edit_localization_safe_signature(row: dict[str, Any]) -> tuple[Any, ...]:
@@ -551,6 +767,188 @@ def assess_multilingual_surface_readiness(mode: str, rows: list[dict[str, Any]])
     }
 
 
+def validate_foundational_code_ce(args: argparse.Namespace, rows: list[dict[str, Any]]) -> dict[str, Any]:
+    errors = _canonical_foundational_artifact_errors(args.manifest)
+    summary: dict[str, Any] = {}
+    try:
+        summary_payload = _read_regular_file_nofollow(FOUNDATIONAL_STAGE12687_ROOT / "summary.json")
+        if hashlib.sha256(summary_payload).hexdigest() != FOUNDATIONAL_STAGE12687_CONTRACT["summary_sha256"]:
+            raise ValueError("authoritative summary hash mismatch")
+        summary = json.loads(summary_payload)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"foundational authoritative summary is unreadable: {exc}")
+    summary_authority = summary.get("authority") if isinstance(summary.get("authority"), dict) else {}
+    if summary_authority and any(value is not False for value in summary_authority.values()):
+        errors.append("foundational authoritative summary contains an unexpected true authority flag")
+    if summary and summary.get("training_eligible_rows") != 0:
+        errors.append("foundational authoritative summary training_eligible_rows must remain zero")
+    production_contract: dict[str, Any] | None = None
+    production_contract_sha256: str | None = None
+    production_contract_validated = False
+    production_bound_artifacts: dict[str, str] | None = None
+    if args.foundational_training_contract is None:
+        errors.append("--foundational-training-contract is required")
+    elif args.foundational_training_contract != FOUNDATIONAL_TRAINING_RECIPE:
+        errors.append("foundational training contract must use the exact canonical recipe path")
+    else:
+        legacy_src = REPO_ROOT / "legacy_src"
+        if str(legacy_src) not in sys.path:
+            sys.path.insert(0, str(legacy_src))
+        from agentkernel_lite.foundational_training_contract import load_recipe, validate_bound_artifacts
+        try:
+            production_contract, production_contract_sha256 = load_recipe(args.foundational_training_contract)
+            if production_contract_sha256 != FOUNDATIONAL_TRAINING_RECIPE_SHA256:
+                errors.append("foundational training contract SHA-256 mismatch")
+            else:
+                production_bound_artifacts = validate_bound_artifacts(production_contract, REPO_ROOT)
+                production_contract_validated = True
+        except (OSError, ValueError) as exc:
+            errors.append(f"foundational training contract invalid: {exc}")
+    obsolete_strict_accessible = FOUNDATIONAL_STAGE12687_OBSOLETE_STRICT.is_file()
+    execution_blockers = [
+        "authoritative Stage12687 training/model authority remains false",
+    ]
+    if not production_contract_validated:
+        execution_blockers.append("a production optimizer/checkpoint contract has not been validated")
+    if obsolete_strict_accessible:
+        execution_blockers.append("obsolete Stage12687 strict plaintext remains accessible to the trainer process")
+    implementation_guard = evaluate_implementation_selection(str(args.implementation))
+    if not implementation_guard["allowed_for_recovered_100m_target"]:
+        errors.extend(str(error) for error in implementation_guard["errors"])
+    expected_keys = {
+        "authority", "input_text", "language_family", "loss_mask", "objective_family",
+        "row_id", "source_provenance", "split", "target",
+    }
+    split_counts = {"train": 0, "eval": 0, "strict_eval": 0, "other": 0}
+    schema_errors: list[str] = []
+    for index, row in enumerate(rows):
+        split = _row_split(row)
+        split_counts[split if split in split_counts else "other"] += 1
+        row_id = str(row.get("row_id") or f"row_{index}")
+        provenance = row.get("source_provenance")
+        target = row.get("target")
+        if set(row) != expected_keys:
+            schema_errors.append(f"{row_id}:top_level_schema")
+        if row.get("language_family") != "python" or row.get("objective_family") != "python_parser_source_span_infilling":
+            schema_errors.append(f"{row_id}:objective")
+        if row.get("loss_mask") != {"decoder_ce": True}:
+            schema_errors.append(f"{row_id}:loss_mask")
+        if not isinstance(row.get("input_text"), str) or row["input_text"].count("<MASKED_SOURCE_SPAN>") != 1:
+            schema_errors.append(f"{row_id}:input_text")
+        if not isinstance(target, dict) or not isinstance(target.get("decoder_text"), str) or not target["decoder_text"].strip():
+            schema_errors.append(f"{row_id}:target")
+        if not isinstance(provenance, dict) or provenance.get("source_stage") != "stage12687_source_backed_python_foundational_corpus":
+            schema_errors.append(f"{row_id}:provenance")
+        authority = row.get("authority")
+        if not isinstance(authority, dict) or not authority or any(value is not False for value in authority.values()):
+            schema_errors.append(f"{row_id}:authority")
+    contract = FOUNDATIONAL_STAGE12687_CONTRACT
+    if split_counts != {"train": contract["train_rows"], "eval": contract["eval_rows"], "strict_eval": 0, "other": 0}:
+        errors.append(f"foundational split counts mismatch: {split_counts}")
+    if schema_errors:
+        errors.append(f"foundational schema rows invalid: {len(schema_errors)}")
+    if not (0 < args.max_train_rows <= contract["train_rows"]):
+        errors.append("--max-train-rows must be within 1..16000")
+    if not (0 < args.max_eval_rows <= contract["eval_rows"]):
+        errors.append("--max-eval-rows must be within 1..2000")
+    if args.max_strict_rows != 0:
+        errors.append("foundational_code_ce requires --max-strict-rows 0")
+    exact_zero = {
+        "bounded_choice_aux_weight": args.bounded_choice_aux_weight,
+        "bounded_choice_contrast_weight": args.bounded_choice_contrast_weight,
+        "bounded_choice_verifier_value_listwise_weight": args.bounded_choice_verifier_value_listwise_weight,
+        "bounded_choice_same_role_listwise_weight": args.bounded_choice_same_role_listwise_weight,
+        "bounded_choice_root_group_aux_weight": args.bounded_choice_root_group_aux_weight,
+        "structured_aux_weight": args.structured_aux_weight,
+        "denoise_weight": args.denoise_weight,
+        "preservation_kl_weight": args.preservation_kl_weight,
+    }
+    if args.decoder_ce_weight != 1.0:
+        errors.append("foundational_code_ce requires --decoder-ce-weight 1.0")
+    for name, value in exact_zero.items():
+        if value != 0.0:
+            errors.append(f"foundational_code_ce requires --{name.replace('_', '-')} 0")
+    if args.bounded_choice_train_head_only:
+        errors.append("foundational_code_ce rejects --bounded-choice-train-head-only")
+    if args.bounded_decoder_train_sampler != "cyclic":
+        errors.append("foundational_code_ce requires cyclic row sampling")
+    if args.eos_loss_weight < 1.0:
+        errors.append("foundational_code_ce requires --eos-loss-weight >= 1.0")
+    if not args.require_loss_mask_enforcement_audit:
+        errors.append("--require-loss-mask-enforcement-audit is required")
+    if not args.no_final_checkpoint_export or args.skip_final_model_save != 1:
+        errors.append("foundational integration requires checkpoint export disabled")
+    if args.runtime_model_save_dir is not None or args.initialize_from_runtime_model is not None or args.preservation_reference_runtime_model is not None:
+        errors.append("foundational integration smoke rejects runtime model save, initialization, and preservation bundles")
+    if args.generation_prefix_field is not None:
+        errors.append("foundational_code_ce rejects generation prefix fields")
+    if args.generation_audit_splits != "eval":
+        errors.append("foundational_code_ce requires --generation-audit-splits eval")
+    if args.tokenizer_json is None or not args.tokenizer_json.is_file() or _sha256_file(args.tokenizer_json) != contract["tokenizer_json_sha256"]:
+        errors.append("foundational_code_ce tokenizer.json hash mismatch")
+    if args.tokenizer_config is None or not args.tokenizer_config.is_file() or _sha256_file(args.tokenizer_config) != contract["tokenizer_config_sha256"]:
+        errors.append("foundational_code_ce tokenizer_config.json hash mismatch")
+
+    max_encoder = 0
+    max_decoder = 0
+    if args.tokenizer_json is not None and args.tokenizer_config is not None and not any("tokenizer" in error for error in errors):
+        legacy_src = REPO_ROOT / "legacy_src"
+        if str(legacy_src) not in sys.path:
+            sys.path.insert(0, str(legacy_src))
+        from agentkernel_lite.training_data import _foundational_row_text, _target_text, load_tokenizer
+        tokenizer = load_tokenizer(args.tokenizer_json, args.tokenizer_config)
+        for row in rows:
+            max_encoder = max(max_encoder, tokenizer.untruncated_length(_foundational_row_text(row)))
+            max_decoder = max(max_decoder, tokenizer.untruncated_length(_target_text(row)))
+        if max_encoder > args.max_encoder_tokens:
+            errors.append(f"foundational encoder token overflow: {max_encoder} > {args.max_encoder_tokens}")
+        if max_decoder > args.max_decoder_tokens:
+            errors.append(f"foundational decoder token overflow: {max_decoder} > {args.max_decoder_tokens}")
+
+    return {
+        "passed": not errors,
+        "errors": errors,
+        "mode": args.mode,
+        "manifest": str(args.manifest),
+        "manifest_sha256": contract["manifest_sha256"],
+        "generation_id": contract["generation_id"],
+        "rows": len(rows),
+        "split_counts": split_counts,
+        "schema_error_count": len(schema_errors),
+        "schema_error_examples": schema_errors[:50],
+        "max_untruncated_encoder_tokens": max_encoder,
+        "max_untruncated_decoder_tokens": max_decoder,
+        "decoder_ce_only": True,
+        "strict_rows_loaded": 0,
+        "strict_eval_accessible_to_process": obsolete_strict_accessible,
+        "obsolete_strict_plaintext_path": str(FOUNDATIONAL_STAGE12687_OBSOLETE_STRICT) if obsolete_strict_accessible else None,
+        "authoritative_summary_authority": summary_authority,
+        "authoritative_training_eligible_rows": summary.get("training_eligible_rows"),
+        "execution_admitted": False,
+        "execution_blockers": execution_blockers,
+        "production_optimizer_checkpoint_contract_validated": production_contract_validated,
+        "production_training_contract_path": str(args.foundational_training_contract) if args.foundational_training_contract else None,
+        "production_training_contract_sha256": production_contract_sha256,
+        "production_training_contract_authority": production_contract.get("authority") if production_contract else None,
+        "production_bound_artifacts": production_bound_artifacts,
+        "deterministic_choice_features_enabled": False,
+        "license_policy": "internal_code_user_waiver_2026_08_02",
+        "partial_data_integration_smoke": (
+            args.max_train_rows < contract["train_rows"] or args.max_eval_rows < contract["eval_rows"]
+        ),
+        "production_data_caps_selected": (
+            args.max_train_rows == contract["train_rows"] and args.max_eval_rows == contract["eval_rows"]
+        ),
+        "final_checkpoint_export_disabled": bool(args.no_final_checkpoint_export),
+        "model_execution_attempted": False,
+        "implementation_contract": {
+            "target_implementation_guard": implementation_guard,
+            "transformer_execution_requires_explicit_authorization": True,
+            "probe_scale": args.probe_scale,
+        },
+    }
+
+
 def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[str, Any]]) -> dict[str, Any]:
     errors: list[str] = []
     split_counts = {"train": 0, "eval": 0, "strict_eval": 0, "other": 0}
@@ -584,8 +982,21 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         errors.append("bounded decoder CE probe requires --bounded-choice-same-role-listwise-weight >= 0")
     if args.bounded_choice_root_group_aux_weight < 0:
         errors.append("bounded decoder CE probe requires --bounded-choice-root-group-aux-weight >= 0")
-    if args.bounded_choice_aux_source not in {"decoder_first_step", "encoder_pooled", "encoder_pooled_untied_head", "encoder_option_retrieval", "encoder_option_retrieval_conditioned", "encoder_option_retrieval_verifier_conditioned", "encoder_option_retrieval_evidence_role_map", "encoder_option_retrieval_dynamic_productized", "encoder_option_retrieval_role_bias", "encoder_option_retrieval_pairwise", "encoder_option_retrieval_evidence_pairwise_gated", "encoder_option_retrieval_evidence_ledger_head", "encoder_option_retrieval_evidence_role_head", "encoder_option_retrieval_evidence_judgment_head", "encoder_option_retrieval_evidence_conditioned_gated", "encoder_option_retrieval_evidence_fact_text", "encoder_option_retrieval_evidence_fact_pairwise", "encoder_option_retrieval_semantic_candidate_head", "encoder_option_retrieval_web_task_candidate_head", "encoder_option_retrieval_transition_candidate_head", "encoder_option_retrieval_transition_status_head", "encoder_option_retrieval_transition_next_action_head", "encoder_option_retrieval_semantic_plus_transition_status_head", "encoder_option_retrieval_semantic_plus_transition_candidate_head", "encoder_option_retrieval_semantic_plus_transition_next_action_head"}:
-        errors.append("bounded decoder CE probe requires supported --bounded-choice-aux-source")
+    if args.bounded_choice_aux_source not in set(LEARNED_BOUNDED_CHOICE_AUX_SOURCES):
+        errors.append("bounded decoder CE probe requires learned --bounded-choice-aux-source")
+    bounded_choice_uses_aux_source = (
+        args.bounded_choice_aux_weight > 0
+        or args.bounded_choice_contrast_weight > 0
+        or args.bounded_choice_verifier_value_listwise_weight > 0
+        or args.bounded_choice_same_role_listwise_weight > 0
+        or args.bounded_choice_root_group_aux_weight > 0
+        or args.bounded_choice_train_head_only
+    )
+    if bounded_choice_uses_aux_source and args.bounded_choice_aux_source in DETERMINISTIC_PLACEHOLDER_BOUNDED_CHOICE_AUX_SOURCES:
+        errors.append(
+            "bounded decoder CE probe rejects deterministic placeholder --bounded-choice-aux-source "
+            f"{args.bounded_choice_aux_source}; replace it with a learned option scorer before training"
+        )
     if args.denoise_weight != 0:
         errors.append("bounded decoder CE probe requires --denoise-weight 0")
     if not args.require_loss_mask_enforcement_audit:
@@ -598,8 +1009,15 @@ def validate_bounded_decoder_ce_probe(args: argparse.Namespace, rows: list[dict[
         errors.append("--runtime-model-save-dir requires --allow-runtime-model-save-for-harness")
     if args.initialize_from_runtime_model is not None and args.mode != "bounded_decoder_ce_probe":
         errors.append("--initialize-from-runtime-model is only supported for bounded_decoder_ce_probe")
-    if args.initialize_from_runtime_model is not None and not Path(args.initialize_from_runtime_model).exists():
-        errors.append("--initialize-from-runtime-model path does not exist")
+    if args.initialize_from_runtime_model is not None:
+        initialization_path = Path(args.initialize_from_runtime_model)
+        if not initialization_path.exists():
+            errors.append("--initialize-from-runtime-model path does not exist")
+        else:
+            try:
+                _validate_runtime_initialization_provenance(initialization_path)
+            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                errors.append(f"--initialize-from-runtime-model rejected: {exc}")
     errors.extend(validate_generation_prefix_contract(args, rows))
     if getattr(args, "generation_repetition_guard", False) and not args.enable_generation_audit:
         errors.append("--generation-repetition-guard requires --enable-generation-audit")
@@ -1279,6 +1697,8 @@ def validate_contract(args: argparse.Namespace, rows: list[dict[str, Any]]) -> d
     out = args.output_dir.resolve()
     if not str(out).startswith(str(repo) + "/"):
         raise ProbeContractError(f"output_dir must be under repo_root: {out} not under {repo}")
+    if args.mode == "foundational_code_ce":
+        return validate_foundational_code_ce(args, rows)
     if args.mode == "bounded_decoder_ce_probe":
         return validate_bounded_decoder_ce_probe(args, rows)
     if args.mode == "tri_phase_suffix_phrase_residual_reconnect_probe":
@@ -1315,7 +1735,7 @@ def emit_contract_artifacts(args: argparse.Namespace, card: dict[str, Any]) -> N
             "output_dir": str(out.resolve()),
         },
     )
-    if args.mode == "bounded_decoder_ce_probe":
+    if args.mode in {"bounded_decoder_ce_probe", "foundational_code_ce"}:
         required_artifacts = REQUIRED_BOUNDED_ARTIFACTS
     elif args.mode == "denoise_repair_probe":
         required_artifacts = REQUIRED_DENOISE_ARTIFACTS
@@ -1396,6 +1816,8 @@ def persist_execution_telemetry(args: argparse.Namespace, card: dict[str, Any], 
 
 
 def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str, Any]], card: dict[str, Any]) -> dict[str, Any]:
+    if args.mode == "foundational_code_ce":
+        raise ProbeContractError("foundational_code_ce execution remains admission-blocked")
     if not card.get("passed"):
         raise ProbeContractError("cannot execute recovery probe because contract did not pass")
     if args.no_final_checkpoint_export is not True or args.skip_final_model_save != 1:
@@ -1403,7 +1825,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
     legacy_src = REPO_ROOT / "legacy_src"
     if str(legacy_src) not in sys.path:
         sys.path.insert(0, str(legacy_src))
-    from agentkernel_lite.training_loop import run_bounded_decoder_ce_probe, run_denoise_repair_probe, run_structured_aux_probe, run_tri_phase_suffix_phrase_residual_reconnect_probe, run_two_phase_structured_reconnect_probe, run_two_phase_suffix_denoise_reconnect_probe
+    from agentkernel_lite.training_loop import run_bounded_decoder_ce_probe, run_denoise_repair_probe, run_foundational_code_ce, run_structured_aux_probe, run_tri_phase_suffix_phrase_residual_reconnect_probe, run_two_phase_structured_reconnect_probe, run_two_phase_suffix_denoise_reconnect_probe
 
     common = dict(
         rows=rows,
@@ -1548,6 +1970,32 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
             generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
             bounded_choice_aux_weight=args.bounded_choice_aux_weight,
         )
+    elif args.mode == "foundational_code_ce":
+        result = run_foundational_code_ce(
+            **common,
+            enable_generation_audit=args.enable_generation_audit,
+            max_generation_rows=args.max_generation_rows,
+            max_generation_tokens=args.max_generation_tokens,
+            eos_loss_weight=args.eos_loss_weight,
+            generation_prefix_field=None,
+            generation_audit_splits="eval",
+            generation_repetition_guard=args.generation_repetition_guard,
+            generation_repetition_guard_top_k=args.generation_repetition_guard_top_k,
+            decoder_ce_weight=1.0,
+            bounded_choice_aux_weight=0.0,
+            bounded_choice_aux_source="decoder_first_step",
+            bounded_choice_contrast_weight=0.0,
+            bounded_choice_contrast_margin=args.bounded_choice_contrast_margin,
+            bounded_choice_verifier_value_listwise_weight=0.0,
+            bounded_choice_same_role_listwise_weight=0.0,
+            bounded_choice_root_group_aux_weight=0.0,
+            bounded_decoder_train_sampler="cyclic",
+            bounded_choice_train_head_only=False,
+            preservation_reference_runtime_model=None,
+            preservation_kl_weight=0.0,
+            preservation_exempt_flag=args.preservation_exempt_flag,
+            runtime_model_save_dir=None,
+        )
     elif args.mode == "bounded_decoder_ce_probe":
         result = run_bounded_decoder_ce_probe(
             **common,
@@ -1616,7 +2064,7 @@ def run_authorized_recovery_probe(args: argparse.Namespace, rows: list[dict[str,
         )
     else:
         raise ProbeContractError(f"execution is not restored for mode: {args.mode}")
-    if args.mode == "bounded_decoder_ce_probe":
+    if args.mode in {"bounded_decoder_ce_probe", "foundational_code_ce"}:
         required_artifacts = REQUIRED_BOUNDED_ARTIFACTS
     elif args.mode == "denoise_repair_probe":
         required_artifacts = REQUIRED_DENOISE_ARTIFACTS
@@ -1642,6 +2090,8 @@ def main() -> None:
     args.output_dir = args.output_dir.resolve()
     if getattr(args, "manifest", None) is not None and not args.manifest.is_absolute():
         args.manifest = (args.repo_root / args.manifest).resolve()
+    if getattr(args, "foundational_training_contract", None) is not None and args.foundational_training_contract is not None and not args.foundational_training_contract.is_absolute():
+        args.foundational_training_contract = (args.repo_root / args.foundational_training_contract).resolve()
     if getattr(args, "phase2_manifest", None) is not None and args.phase2_manifest is not None and not args.phase2_manifest.is_absolute():
         args.phase2_manifest = (args.repo_root / args.phase2_manifest).resolve()
     if getattr(args, "phase3_manifest", None) is not None and args.phase3_manifest is not None and not args.phase3_manifest.is_absolute():
@@ -1660,7 +2110,7 @@ def main() -> None:
         args.initialize_from_runtime_model = (args.repo_root / args.initialize_from_runtime_model).resolve()
     if getattr(args, "preservation_reference_runtime_model", None) is not None and args.preservation_reference_runtime_model is not None and not args.preservation_reference_runtime_model.is_absolute():
         args.preservation_reference_runtime_model = (args.repo_root / args.preservation_reference_runtime_model).resolve()
-    rows = load_manifest(args.manifest)
+    rows = load_manifest(args.manifest, mode=args.mode)
     card = validate_contract(args, rows)
     emit_contract_artifacts(args, card)
     print(json.dumps(card, indent=2, sort_keys=True))
@@ -1668,6 +2118,11 @@ def main() -> None:
         raise SystemExit(1)
     if args.contract_only:
         return
+    if args.mode == "foundational_code_ce":
+        raise SystemExit(
+            "foundational_code_ce execution remains admission-blocked: authoritative Stage12687 "
+            "training/model authority is false and obsolete strict plaintext remains accessible"
+        )
     if not args.execution_authorized_for_recovery_probe:
         raise SystemExit(
             "contract validated, but model execution is disabled unless --execution-authorized-for-recovery-probe is present"

@@ -24,9 +24,25 @@ venv/
 *.npy
 *.npz
 
-# Probe checkpoint directories are never source backups
-runs/local/probes/**/checkpoints/
-runs/local/artifacts/**/checkpoints/
+# Local run outputs are generated data, not Git source. Existing tracked files
+# remain tracked; deliberately curated outputs can still be force-added.
+runs/local/
+tmp/
+
+# Patch/edit leftovers and local compiler products
+*.orig
+*.rej
+*.log
+*.o
+*.d
+*.rmeta
+
+# Accidental empty marker files created by interrupted shell commands
+/bounded
+/retrieval
+/structure
+/structured
+/verifier
 
 # Hugging Face / remote recovered heavy datasets belong on HF or /arxiv, not GitHub
 runs/local/artifacts/remote_recovery/hf_100m_swe_research_timeline/files/*.parquet

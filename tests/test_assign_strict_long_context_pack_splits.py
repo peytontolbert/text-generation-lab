@@ -66,6 +66,31 @@ def test_assign_strict_long_context_pack_splits_creates_heldout_packs(tmp_path: 
     assert set(split_by_pack.values()) == {'train', 'eval', 'strict_eval'}
     assert result['split_cards']['eval']['packs'] >= 1
     assert result['split_cards']['strict_eval']['packs'] >= 1
+    card = json.loads(Path(result['card_path']).read_text(encoding='utf-8'))
+    assert all(pack['source_signature'] for pack in card['pack_stats'])
+
+
+def test_assign_decodes_exported_context_rows_and_rejects_blank_identity(tmp_path: Path) -> None:
+    rows = []
+    for idx in range(5):
+        pack_rows = _rows_for_pack(f"serialized_{idx}", 3, 1000 - idx, source_id=f"repo_{idx}")
+        pack_rows[0]["context_rows"] = json.dumps(pack_rows[0]["context_rows"], sort_keys=True)
+        rows.extend(pack_rows)
+    rows_path = tmp_path / "serialized.jsonl"
+    rows_path.write_text("\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n", encoding="utf-8")
+    result = assign_strict_long_context_pack_splits(
+        rows_path=rows_path, output_dir=tmp_path / "serialized_out", eval_ratio=0.2, strict_ratio=0.2
+    )
+    card = json.loads(Path(result["card_path"]).read_text(encoding="utf-8"))
+    assert all(pack["source_signature"] for pack in card["pack_stats"])
+
+    rows[0]["context_rows"] = json.dumps([{"source_type": "repo"}], sort_keys=True)
+    rows_path.write_text("\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n", encoding="utf-8")
+    import pytest
+    with pytest.raises(ValueError, match="missing_source_identity"):
+        assign_strict_long_context_pack_splits(
+            rows_path=rows_path, output_dir=tmp_path / "bad_out", eval_ratio=0.2, strict_ratio=0.2
+        )
 
 
 def test_assign_strict_long_context_pack_splits_preserves_row_count(tmp_path: Path) -> None:
@@ -84,6 +109,22 @@ def test_assign_strict_long_context_pack_splits_preserves_row_count(tmp_path: Pa
     split_rows = [json.loads(line) for line in Path(result['rows_path']).read_text(encoding='utf-8').splitlines() if line.strip()]
     assert len(split_rows) == len(rows)
     assert sum(card['rows'] for card in result['split_cards'].values()) == len(rows)
+
+
+def test_assign_keeps_shared_source_identity_together_across_different_families(tmp_path: Path) -> None:
+    rows = []
+    for pack_id, source_id in (("alpha", "shared"), ("beta", "shared"), ("gamma", "g"), ("delta", "d"), ("epsilon", "e")):
+        rows.extend(_rows_for_pack(pack_id, 3, 1000, source_id=source_id))
+    rows_path = tmp_path / "shared_source.jsonl"
+    rows_path.write_text("\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n", encoding="utf-8")
+    result = assign_strict_long_context_pack_splits(
+        rows_path=rows_path, output_dir=tmp_path / "out", eval_ratio=0.2, strict_ratio=0.2
+    )
+    split_rows = [json.loads(line) for line in Path(result["rows_path"]).read_text(encoding="utf-8").splitlines() if line.strip()]
+    split_by_pack = {row["pack_id"]: row["effective_split"] for row in split_rows}
+    group_by_pack = {row["pack_id"]: row["pack_group_key"] for row in split_rows}
+    assert split_by_pack["alpha"] == split_by_pack["beta"]
+    assert group_by_pack["alpha"] == group_by_pack["beta"]
 
 
 def test_assign_strict_long_context_pack_splits_keeps_same_family_together(tmp_path: Path) -> None:

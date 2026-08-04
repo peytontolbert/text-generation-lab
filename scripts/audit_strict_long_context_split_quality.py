@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -89,6 +90,10 @@ def audit_strict_long_context_split_quality(*, manifest_path: Path, output_path:
     counts = Counter()
     split_counts: dict[str, Counter[str]] = defaultdict(Counter)
     failed_packs: list[dict[str, Any]] = []
+    source_id_splits: dict[str, set[str]] = defaultdict(set)
+    context_hash_splits: dict[str, set[str]] = defaultdict(set)
+    target_hash_splits: dict[str, set[str]] = defaultdict(set)
+    group_key_splits: dict[str, set[str]] = defaultdict(set)
 
     for pack_id, pack in sorted(packs.items()):
         split = str(pack.get('split') or 'train')
@@ -99,6 +104,25 @@ def audit_strict_long_context_split_quality(*, manifest_path: Path, output_path:
             raise ValueError(f'incomplete_pack:{pack_id}')
 
         context_rows = _as_list(full.get('context_rows'))
+        source_ids = sorted({str(item.get('source_id') or '').strip() for item in context_rows if isinstance(item, dict) and str(item.get('source_id') or '').strip()})
+        if not source_ids:
+            counts['blank_source_identity_packs'] += 1
+            split_counts[split]['blank_source_identity_packs'] += 1
+        for source_id in source_ids:
+            source_id_splits[source_id].add(split)
+        declared_signature = str(full.get('pack_source_signature') or '').strip()
+        if not declared_signature:
+            counts['blank_source_signature_packs'] += 1
+            split_counts[split]['blank_source_signature_packs'] += 1
+        group_key = str(full.get('pack_group_key') or '').strip()
+        if group_key:
+            group_key_splits[group_key].add(split)
+        for item in context_rows:
+            if not isinstance(item, dict):
+                continue
+            normalized_text = " ".join(str(item.get('text') or '').split())
+            if normalized_text:
+                context_hash_splits[hashlib.sha256(normalized_text.encode('utf-8')).hexdigest()].add(split)
         chunk_index = {}
         first_chunk_ids: list[str] = []
         for idx, item in enumerate(context_rows):
@@ -114,7 +138,10 @@ def audit_strict_long_context_split_quality(*, manifest_path: Path, output_path:
             if len(first_chunk_ids) < 3:
                 first_chunk_ids.append(chunk_id)
 
-        target_lines = _split_target_lines(str(full.get('target_text') or ''))
+        full_target_text = str(full.get('target_text') or '')
+        if full_target_text.strip():
+            target_hash_splits[hashlib.sha256(full_target_text.strip().encode('utf-8')).hexdigest()].add(split)
+        target_lines = _split_target_lines(full_target_text)
         nonempty_target_lines = [
             line for line in target_lines
             if str(line.get('state_variable') or '').strip() or bool(line.get('final_state'))
@@ -209,6 +236,11 @@ def audit_strict_long_context_split_quality(*, manifest_path: Path, output_path:
                 'blank_memory_target': not any(state_variables) and not any(canonical_names),
             })
 
+    cross_split_source_ids = sorted(key for key, splits in source_id_splits.items() if len(splits) > 1)
+    cross_split_context_hashes = sorted(key for key, splits in context_hash_splits.items() if len(splits) > 1)
+    cross_split_target_hashes = sorted(key for key, splits in target_hash_splits.items() if len(splits) > 1)
+    cross_split_group_keys = sorted(key for key, splits in group_key_splits.items() if len(splits) > 1)
+
     retrieval_rows = max(1, counts['retrieval_rows'])
     rows_with_signal = counts['rows_with_signal']
     summary = {
@@ -217,6 +249,13 @@ def audit_strict_long_context_split_quality(*, manifest_path: Path, output_path:
         'retrieval_rows': counts['retrieval_rows'],
         'blank_full_target_packs': counts['blank_full_target_packs'],
         'blank_memory_target_packs': counts['blank_memory_target_packs'],
+        'blank_source_identity_packs': counts['blank_source_identity_packs'],
+        'blank_source_signature_packs': counts['blank_source_signature_packs'],
+        'cross_split_source_ids': cross_split_source_ids[:20],
+        'cross_split_source_id_count': len(cross_split_source_ids),
+        'cross_split_context_hash_count': len(cross_split_context_hashes),
+        'cross_split_target_hash_count': len(cross_split_target_hashes),
+        'cross_split_group_key_count': len(cross_split_group_keys),
         'blank_query_rows': counts['blank_query_rows'],
         'fallback_positive_rows': counts['fallback_positive_rows'],
         'blank_target_rows': counts['blank_target_rows'],
@@ -239,6 +278,18 @@ def audit_strict_long_context_split_quality(*, manifest_path: Path, output_path:
         failures.append('blank_full_target_packs_present')
     if counts['blank_memory_target_packs'] > 0:
         failures.append('blank_memory_target_packs_present')
+    if counts['blank_source_identity_packs'] > 0:
+        failures.append('blank_source_identity_packs_present')
+    if counts['blank_source_signature_packs'] > 0:
+        failures.append('blank_source_signature_packs_present')
+    if cross_split_source_ids:
+        failures.append('cross_split_source_identity_overlap')
+    if cross_split_context_hashes:
+        failures.append('cross_split_exact_context_overlap')
+    if cross_split_target_hashes:
+        failures.append('cross_split_exact_target_overlap')
+    if cross_split_group_keys:
+        failures.append('cross_split_group_lineage_overlap')
     if summary['rates']['blank_query_rate'] > 0.05:
         failures.append('blank_query_rate_too_high')
     if summary['rates']['fallback_positive_rate'] > 0.25:

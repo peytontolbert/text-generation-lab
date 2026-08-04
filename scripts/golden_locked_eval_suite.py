@@ -5,6 +5,11 @@ import json
 from pathlib import Path
 from typing import Any
 
+try:
+    from source_lineage_guard import source_ids_from_row
+except ImportError:
+    from scripts.source_lineage_guard import source_ids_from_row  # type: ignore
+
 LOCKED_ROLES = {"locked_regression", "hidden_final", "promotion_only"}
 TRAIN_FORBIDDEN_ROLES = {"locked_regression", "hidden_final", "promotion_only", "holdout_only"}
 
@@ -69,15 +74,7 @@ def validate_suite(packs: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def builder_exclusion_decision(row: dict[str, Any], locked_source_ids: set[str]) -> dict[str, Any]:
-    source_id = str(row.get("source_id") or "")
-    lineage = row.get("source_lineage") if isinstance(row.get("source_lineage"), dict) else {}
-    candidate_ids = {source_id}
-    if isinstance(row.get("source_ids"), list):
-        candidate_ids.update(str(value) for value in row["source_ids"] if value)
-    for key, value in lineage.items():
-        if (key.endswith("source_id") or key in {"source_id", "lineage_hash"}) and value:
-            candidate_ids.add(str(value))
-    candidate_ids.discard("")
+    candidate_ids = source_ids_from_row(row)
     matched_locked_ids = sorted(candidate_ids & locked_source_ids)
     blocked = bool(matched_locked_ids) or row.get("split_role") in TRAIN_FORBIDDEN_ROLES
     return {

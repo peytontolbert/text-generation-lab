@@ -3,10 +3,12 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from state_space_repo_state_compressor import selective_scan_compress
+from state_space_repo_state_compressor import LearnedRepoStateEncoder, selective_scan_compress
 
 
 def test_compressor_emits_fixed_dim_state_and_hints() -> None:
@@ -40,6 +42,54 @@ def test_compressor_is_deterministic_for_same_stream() -> None:
     b = selective_scan_compress(rows, state_dim=40)
     assert a["compressed_repo_state"]["state_vector_hash"] == b["compressed_repo_state"]["state_vector_hash"]
     assert a["state_vector"] == b["state_vector"]
+
+
+class TinyRepoStateTokenizer:
+    pad_id = 0
+
+    def __init__(self) -> None:
+        self.vocab: dict[str, int] = {}
+
+    def encode(self, text: str, max_length: int) -> list[int]:
+        ids: list[int] = []
+        for token in text.lower().split():
+            self.vocab.setdefault(token, len(self.vocab) + 1)
+            ids.append(self.vocab[token])
+        return ids[:max_length]
+
+
+def test_compressor_rejects_model_input_mode_without_learned_encoder() -> None:
+    rows = [{"event_id": "e1", "event_type": "source", "text": "public source"}]
+    try:
+        selective_scan_compress(rows, as_model_input=True)
+    except ValueError as exc:
+        assert "deterministic audit sketch" in str(exc)
+        assert "LearnedRepoStateEncoder" in str(exc)
+    else:
+        raise AssertionError("compressor allowed deterministic sketch as model input")
+
+
+def test_compressor_model_input_uses_learned_repo_state_encoder() -> None:
+    pytest.importorskip("torch.nn")
+    rows = [
+        {"event_id": "e1", "event_type": "source", "text": "public source span"},
+        {"event_id": "e2", "event_type": "test", "text": "assert source span"},
+    ]
+    encoder = LearnedRepoStateEncoder(vocab_size=32, embedding_dim=8, hidden_dim=8, state_dim=12)
+    card = selective_scan_compress(
+        rows,
+        as_model_input=True,
+        learned_encoder=encoder,
+        tokenizer=TinyRepoStateTokenizer(),
+        max_model_events=4,
+        max_model_event_tokens=6,
+    )
+    assert card["passed"] is True
+    assert card["state_vector_kind"] == "learned_repo_state_embedding"
+    assert card["model_visible_state_allowed"] is True
+    assert card["replacement_required_for_training"] is False
+    assert card["events_encoded"] == 2
+    assert len(card["state_vector"]) == 12
 
 
 def test_low_value_events_can_be_budget_dropped() -> None:

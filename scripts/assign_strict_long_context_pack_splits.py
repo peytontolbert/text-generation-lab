@@ -63,17 +63,31 @@ def _normalized_pack_family(pack_id: str) -> str:
     return text or str(pack_id or '').strip()
 
 
+def _structured_list(value: Any, *, field: str) -> list[Any]:
+    if isinstance(value, str):
+        try:
+            value = json.loads(value)
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"malformed_json_field:{field}") from exc
+    if not isinstance(value, list):
+        raise ValueError(f"invalid_structured_field:{field}:expected_list")
+    return value
+
+
 def _context_source_signature(row: dict[str, Any]) -> tuple[str, list[str], list[str]]:
-    context_rows = row.get('context_rows') or []
+    context_rows = _structured_list(row.get('context_rows'), field="context_rows")
     source_ids = sorted({str(item.get('source_id') or '').strip() for item in context_rows if isinstance(item, dict) and str(item.get('source_id') or '').strip()})
     source_types = sorted({str(item.get('source_type') or '').strip() for item in context_rows if isinstance(item, dict) and str(item.get('source_type') or '').strip()})
-    if not source_ids and not source_types:
-        return '', [], []
+    if not source_ids:
+        raise ValueError("full_context_rows_missing_source_identity")
     digest = hashlib.sha1(('|'.join(source_ids) + '||' + '|'.join(source_types)).encode('utf-8')).hexdigest()[:16]
     return digest, source_ids, source_types
 
 
 def _choose_group_key(pack: dict[str, Any]) -> str:
+    connected_group_key = str(pack.get("connected_group_key") or "")
+    if connected_group_key:
+        return connected_group_key
     overlap_families = sorted(value for value in pack.get('overlap_family_ids', set()) if value)
     if overlap_families:
         return 'overlap::' + '|'.join(overlap_families)
@@ -86,6 +100,43 @@ def _choose_group_key(pack: dict[str, Any]) -> str:
     if source_signature:
         return f'source::{source_signature}'
     return f'pack::{pack["pack_id"]}'
+
+
+def _assign_connected_group_keys(pack_stats: dict[str, dict[str, Any]]) -> None:
+    parents = {pack_id: pack_id for pack_id in pack_stats}
+
+    def find(pack_id: str) -> str:
+        while parents[pack_id] != pack_id:
+            parents[pack_id] = parents[parents[pack_id]]
+            pack_id = parents[pack_id]
+        return pack_id
+
+    def union(left: str, right: str) -> None:
+        left_root, right_root = find(left), find(right)
+        if left_root != right_root:
+            parents[max(left_root, right_root)] = min(left_root, right_root)
+
+    identities: dict[tuple[str, str], str] = {}
+    for pack_id, pack in sorted(pack_stats.items()):
+        values = []
+        values.append(("family", str(pack.get("pack_family_key") or "")))
+        values.extend(("overlap", str(value)) for value in pack.get("overlap_family_ids", set()) if value)
+        values.extend(("source", str(value)) for value in pack.get("source_ids", []) if value)
+        for kind, value in values:
+            if not value:
+                continue
+            key = (kind, value)
+            previous = identities.setdefault(key, pack_id)
+            union(pack_id, previous)
+
+    components: dict[str, list[str]] = defaultdict(list)
+    for pack_id in pack_stats:
+        components[find(pack_id)].append(pack_id)
+    for members in components.values():
+        digest = hashlib.sha1("|".join(sorted(members)).encode("utf-8")).hexdigest()[:16]
+        key = f"connected::{digest}"
+        for pack_id in members:
+            pack_stats[pack_id]["connected_group_key"] = key
 
 
 def _build_group_stats(pack_stats: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
@@ -172,6 +223,7 @@ def assign_strict_long_context_pack_splits(
         stats['pack_token_count'] = max(stats['pack_token_count'], _pack_token_count(row))
 
     targets = _resolve_targets(len(pack_rows), eval_ratio=resolved_eval_ratio, strict_ratio=resolved_strict_ratio)
+    _assign_connected_group_keys(pack_stats)
     total_rows = sum(item['row_count'] for item in pack_stats.values())
     groups = _build_group_stats(pack_stats)
 

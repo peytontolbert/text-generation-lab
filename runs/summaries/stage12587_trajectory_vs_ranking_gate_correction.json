@@ -1,0 +1,61 @@
+{
+  "artifacts": {
+    "corrected_gate_contract": "corrected_gate_contract.json",
+    "stage12586_audit_records": "stage12586_corrected_gate_audit.jsonl",
+    "summary": "summary.json"
+  },
+  "candidate_ranking_blocker_counts": {
+    "distinct_candidate_count_below_minimum": 30,
+    "independent_counterfactual_negative_count_below_minimum": 30
+  },
+  "claim_boundary": "Digest-only audit of Stage12586 records. Candidate absence does not invalidate an observed trajectory. No private payloads were reopened and no admissions, training rows, projections, or trainer execution were produced.",
+  "counts": {
+    "both_gates_satisfied": 0,
+    "candidate_cardinality_only": 2,
+    "candidate_ranking_minimum_eligible": 0,
+    "observed_trajectory_valid": 2,
+    "preferred_5_3_geometry_met": 0,
+    "stage12586_records_audited": 30,
+    "substantive_evidence_blocked": 28
+  },
+  "decision": "trajectory_gate_corrected_candidate_geometry_remains_separate",
+  "execution_contract": {
+    "admission_allowed": false,
+    "candidate_alternatives_emitted": false,
+    "conda_environment": "ai",
+    "cpu_only": true,
+    "policy_correctness_evaluated": false,
+    "positive_stop_target_allowed": false,
+    "private_payloads_reopened": false,
+    "projection_allowed": false,
+    "semantic_state_update_claim_emitted": false,
+    "trainer_execution_allowed": false,
+    "training_allowed": false
+  },
+  "gate_contract": {
+    "observed_trajectory_requires_candidate_alternatives": false,
+    "preferred_full_geometry": "5 distinct candidates / 3 independently validated semantic negatives",
+    "provenance_types": [
+      "observed_executed_action",
+      "prospective_pre_outcome_commitment",
+      "independent_counterfactual_negative"
+    ],
+    "ranking_minimum": "2 distinct candidates / 1 independently validated semantic negative"
+  },
+  "input": {
+    "path": "runs/local/artifacts/stage12586_raw_private_observed_window_hydrator/raw_private_observed_windows.jsonl",
+    "sha256": "9f394a7c68252eb4e63963546869cfcc5aeb51336e0f3eca64a8f73b4bfb8a61"
+  },
+  "record_type": "stage12587_trajectory_vs_ranking_gate_correction_summary_v1",
+  "stage": "stage12587_trajectory_vs_ranking_gate_correction",
+  "status": "AUDIT_ONLY_CORRECTED_GATE_APPLIED",
+  "substantive_blocker_counts": {
+    "bound_observation": 5,
+    "completed_relevant_post_edit_verifier": 26,
+    "literal_terminal_observation": 5,
+    "observed_executed_action": 5,
+    "ordered_post_transition_probe": 17,
+    "patch_trace_or_explicit_no_patch": 14,
+    "same_source_frozen_pre_state": 24
+  }
+}

@@ -74,6 +74,19 @@ def test_builder_exclusion_blocks_nested_source_lineage() -> None:
     assert decision["matched_locked_source_ids"] == ["src_locked"]
 
 
+
+def test_builder_exclusion_blocks_deep_mixed_parent_source() -> None:
+    row = {"parents": [{"derived": [{"source_ids": ["src_ok", "src_locked"]}]}]}
+    decision = builder_exclusion_decision(row, {"src_locked"})
+    assert decision["blocked_from_training"] is True
+    assert decision["matched_locked_source_ids"] == ["src_locked"]
+
+
+def test_builder_exclusion_ignores_lineage_hash_as_identity() -> None:
+    decision = builder_exclusion_decision({"source_lineage": {"lineage_hash": "src_locked"}}, {"src_locked"})
+    assert decision["blocked_from_training"] is False
+
+
 def test_load_locked_source_ids_from_exclusions(tmp_path: Path) -> None:
     path = tmp_path / "exclusions.jsonl"
     path.write_text(

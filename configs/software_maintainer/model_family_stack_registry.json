@@ -24,132 +24,480 @@
   ],
   "model_families": {
     "ngram_markov": {
-      "phase": ["observe", "act"],
+      "phase": [
+        "observe",
+        "act"
+      ],
       "role": "Cheap local syntax/style priors and unusual-edit detection.",
-      "inputs": ["repo_local_tokens", "file_extension", "language_family"],
-      "outputs": ["local_transition_prior", "style_anomaly_score"],
-      "not_for": ["global_reasoning", "patch_correctness_claims"]
+      "inputs": [
+        "repo_local_tokens",
+        "file_extension",
+        "language_family"
+      ],
+      "outputs": [
+        "local_transition_prior",
+        "style_anomaly_score"
+      ],
+      "not_for": [
+        "global_reasoning",
+        "patch_correctness_claims"
+      ],
+      "implementation_class": "NGramMarkovPrior",
+      "implementation_status": "wired_non_learned_non_authority_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "linear_tree_mlp_heads": {
-      "phase": ["orient", "verify"],
+      "phase": [
+        "orient",
+        "verify"
+      ],
       "role": "Transparent gates, route decisions, confidence/OOD heads, shortcut baselines, and junk/risk rankers.",
-      "inputs": ["structured_features", "evidence_bits", "budget_bits", "decoder_stats"],
-      "outputs": ["route", "risk_score", "confidence", "ood_score", "abstain_or_continue"]
+      "inputs": [
+        "structured_features",
+        "evidence_bits",
+        "budget_bits",
+        "decoder_stats"
+      ],
+      "outputs": [
+        "route",
+        "risk_score",
+        "confidence",
+        "ood_score",
+        "abstain_or_continue"
+      ],
+      "implementation_class": "LinearTreeMLPHeads",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "rnn_lstm_gru_trace": {
-      "phase": ["orient", "repair", "learn"],
+      "phase": [
+        "orient",
+        "repair",
+        "learn"
+      ],
       "role": "Sequential workflow/log/action-trace state tracking and loop/thrash detection.",
-      "inputs": ["tool_trace", "test_log_sequence", "agent_action_sequence"],
-      "outputs": ["workflow_state", "loop_risk", "next_trace_state"],
-      "placement": "Sidecar trace compressor feeding policy heads, not primary code generator."
+      "inputs": [
+        "tool_trace",
+        "test_log_sequence",
+        "agent_action_sequence"
+      ],
+      "outputs": [
+        "workflow_state",
+        "loop_risk",
+        "next_trace_state"
+      ],
+      "placement": "Sidecar trace compressor feeding policy heads, not primary code generator.",
+      "implementation_class": "RNNTraceCompressor",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "state_space_mamba": {
-      "phase": ["observe", "orient"],
+      "phase": [
+        "observe",
+        "orient"
+      ],
       "role": "Long repo/log/commit-history compression into compact state for attention-limited planners.",
-      "inputs": ["repo_stream", "long_logs", "commit_history", "artifact_history"],
-      "outputs": ["compressed_repo_state", "long_context_summary", "retrieval_hints"],
-      "placement": "Pre-attention compressor. Transformer attention can stay bounded while SSM carries longer context."
+      "inputs": [
+        "repo_stream",
+        "long_logs",
+        "commit_history",
+        "artifact_history"
+      ],
+      "outputs": [
+        "compressed_repo_state",
+        "long_context_summary",
+        "retrieval_hints"
+      ],
+      "placement": "Pre-attention compressor. Transformer attention can stay bounded while SSM carries longer context.",
+      "implementation_class": "MambaRepoStateCompressor",
+      "implementation_status": "wired_cuda_mamba_selective_scan_no_fallback",
+      "runtime_requirements": [
+        "torch.cuda.is_available",
+        "mamba_ssm.modules.mamba_simple.Mamba"
+      ],
+      "fallback_allowed": false,
+      "state_vector_kind": "mamba_selective_scan_embedding",
+      "training_authority": false,
+      "runtime_authority": false
     },
     "gnn_repo_graph": {
-      "phase": ["observe", "orient", "plan"],
+      "phase": [
+        "observe",
+        "orient",
+        "plan"
+      ],
       "role": "Repo/call/import/test/dependency graph reasoning and impact propagation.",
-      "inputs": ["repo_state_graph_v1", "symbol_nodes", "test_nodes", "dependency_edges"],
-      "outputs": ["binding_candidates", "edit_targets", "impacted_tests", "risk_propagation"],
-      "required_schema": ["node_type", "edge_type", "opaque_node_id", "opaque_graph_id", "graph_family"]
+      "inputs": [
+        "repo_state_graph_v1",
+        "symbol_nodes",
+        "test_nodes",
+        "dependency_edges"
+      ],
+      "outputs": [
+        "binding_candidates",
+        "edit_targets",
+        "impacted_tests",
+        "risk_propagation"
+      ],
+      "required_schema": [
+        "node_type",
+        "edge_type",
+        "opaque_node_id",
+        "opaque_graph_id",
+        "graph_family"
+      ],
+      "implementation_class": "GNNRepoGraphEncoder",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "encoder_only_retriever": {
-      "phase": ["observe", "orient"],
+      "phase": [
+        "observe",
+        "orient"
+      ],
       "role": "Evidence retrieval, source grounding, file/symbol/test matching, and reranking.",
-      "inputs": ["query_packet", "repo_index", "symbol_index", "test_index"],
-      "outputs": ["top_k_evidence", "evidence_confidence", "missing_evidence_signal"],
-      "examples": ["BERT-style encoder", "bi-encoder", "cross-encoder reranker"]
+      "inputs": [
+        "query_packet",
+        "repo_index",
+        "symbol_index",
+        "test_index"
+      ],
+      "outputs": [
+        "top_k_evidence",
+        "evidence_confidence",
+        "missing_evidence_signal"
+      ],
+      "examples": [
+        "BERT-style encoder",
+        "bi-encoder",
+        "cross-encoder reranker"
+      ],
+      "implementation_class": "EncoderOnlyRetrieverScorer",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "encoder_decoder_seq2seq": {
-      "phase": ["plan", "act", "repair"],
+      "phase": [
+        "plan",
+        "act",
+        "repair"
+      ],
       "role": "State-to-action, structured repair transforms, bounded argument generation, and controlled text/code transformations.",
-      "inputs": ["structured_state_packet", "evidence_packet", "loss_mask"],
-      "outputs": ["structured_action", "bounded_decoder_args", "repair_transform"],
-      "examples": ["T5-style", "BART-style", "agentkernel_lite_encdec"]
+      "inputs": [
+        "structured_state_packet",
+        "evidence_packet",
+        "loss_mask"
+      ],
+      "outputs": [
+        "structured_action",
+        "bounded_decoder_args",
+        "repair_transform"
+      ],
+      "examples": [
+        "T5-style",
+        "BART-style",
+        "agentkernel_lite_encdec"
+      ],
+      "implementation_class": "AgentKernelLiteTransformerSeq2Seq",
+      "implementation_status": "wired_existing_model_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "decoder_only_causal": {
-      "phase": ["act"],
+      "phase": [
+        "act"
+      ],
       "role": "Bounded candidate generation after gates authorize decode.",
-      "inputs": ["authorized_prompt_packet", "bounded_context", "decode_budget"],
-      "outputs": ["candidate_text", "candidate_patch_hunk"],
-      "not_for": ["authority_decision", "repo_wide_memory", "ungated_body_generation"],
-      "required_gates": ["effective_decode_allowed", "deterministic_budget_ok", "evidence_sufficient"]
+      "inputs": [
+        "authorized_prompt_packet",
+        "bounded_context",
+        "decode_budget"
+      ],
+      "outputs": [
+        "candidate_text",
+        "candidate_patch_hunk"
+      ],
+      "not_for": [
+        "authority_decision",
+        "repo_wide_memory",
+        "ungated_body_generation"
+      ],
+      "required_gates": [
+        "effective_decode_allowed",
+        "deterministic_budget_ok",
+        "evidence_sufficient"
+      ],
+      "implementation_class": "RecurrentGemmaMaintainerModel",
+      "implementation_status": "wired_existing_model_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "denoiser_masked_lm": {
-      "phase": ["repair"],
+      "phase": [
+        "repair"
+      ],
       "role": "Repair malformed, short, leaky, repetitive, or verifier-failed outputs via masked infill/editing.",
-      "inputs": ["bad_output", "mask_plan", "verifier_feedback", "target_schema"],
-      "outputs": ["cleaned_output", "repair_explanation", "denoise_confidence"],
-      "training_route": "USE_FOR_DENOISE_REPAIR"
+      "inputs": [
+        "bad_output",
+        "mask_plan",
+        "verifier_feedback",
+        "target_schema"
+      ],
+      "outputs": [
+        "cleaned_output",
+        "repair_explanation",
+        "denoise_confidence"
+      ],
+      "training_route": "USE_FOR_DENOISE_REPAIR",
+      "implementation_class": "DenoiserMaskedLM",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "diffusion_iterative_repair": {
-      "phase": ["repair", "learn"],
+      "phase": [
+        "repair",
+        "learn"
+      ],
       "role": "Iterative verifier/reward-guided whole-output or patch refinement.",
-      "inputs": ["noisy_candidate", "reward_or_verifier_signal", "mask_schedule"],
-      "outputs": ["refined_candidate", "trajectory_scores"],
-      "placement": "Repair layer after first-pass structured/candidate output, not first-pass maintainer authority."
+      "inputs": [
+        "noisy_candidate",
+        "reward_or_verifier_signal",
+        "mask_schedule"
+      ],
+      "outputs": [
+        "refined_candidate",
+        "trajectory_scores"
+      ],
+      "placement": "Repair layer after first-pass structured/candidate output, not first-pass maintainer authority.",
+      "implementation_class": "DiffusionIterativeRepair",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "autoencoder_compressor": {
-      "phase": ["observe", "learn"],
+      "phase": [
+        "observe",
+        "learn"
+      ],
       "role": "Compress repo states/diffs/logs and detect anomalies or style outliers.",
-      "inputs": ["diff", "repo_style_features", "log_features"],
-      "outputs": ["latent_state", "reconstruction_error", "anomaly_score"]
+      "inputs": [
+        "diff",
+        "repo_style_features",
+        "log_features"
+      ],
+      "outputs": [
+        "latent_state",
+        "reconstruction_error",
+        "anomaly_score"
+      ],
+      "implementation_class": "AutoencoderCompressor",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "energy_reward_model": {
-      "phase": ["verify", "repair", "learn"],
+      "phase": [
+        "verify",
+        "repair",
+        "learn"
+      ],
       "role": "Patch quality, minimality, regression risk, and verifier-backed preference scoring.",
-      "inputs": ["repo_state", "candidate_patch", "test_result", "diff_stats"],
-      "outputs": ["candidate_energy", "reward_score", "preference_pair"],
-      "not_for": ["standalone correctness without verifier evidence"]
+      "inputs": [
+        "repo_state",
+        "candidate_patch",
+        "test_result",
+        "diff_stats"
+      ],
+      "outputs": [
+        "candidate_energy",
+        "reward_score",
+        "preference_pair"
+      ],
+      "not_for": [
+        "standalone correctness without verifier evidence"
+      ],
+      "implementation_class": "EnergyRewardModel",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "gan_adversarial_generator": {
-      "phase": ["learn"],
+      "phase": [
+        "learn"
+      ],
       "role": "Generate hard negative or plausible-bad examples for judge/ranker robustness.",
-      "inputs": ["valid_examples", "failure_taxonomy"],
-      "outputs": ["hard_negative_rows", "adversarial_shortcut_rows"],
-      "required_gates": ["judge_review", "no_target_leakage", "quarantine_if_ambiguous"]
+      "inputs": [
+        "valid_examples",
+        "failure_taxonomy"
+      ],
+      "outputs": [
+        "hard_negative_rows",
+        "adversarial_shortcut_rows"
+      ],
+      "required_gates": [
+        "judge_review",
+        "no_target_leakage",
+        "quarantine_if_ambiguous"
+      ],
+      "implementation_class": "AdversarialHardNegativeGAN",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "crf_hmm_sequence_labeler": {
-      "phase": ["observe", "orient"],
+      "phase": [
+        "observe",
+        "orient"
+      ],
       "role": "Structured sequence labeling for logs, code regions, and workflow states.",
-      "inputs": ["line_sequence", "event_sequence"],
-      "outputs": ["segment_labels", "hidden_workflow_state"]
+      "inputs": [
+        "line_sequence",
+        "event_sequence"
+      ],
+      "outputs": [
+        "segment_labels",
+        "hidden_workflow_state"
+      ],
+      "implementation_class": "CRFHMMSequenceLabeler",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "bayesian_calibration": {
-      "phase": ["verify"],
+      "phase": [
+        "verify"
+      ],
       "role": "Uncertainty, calibration, abstention thresholds, and posterior evidence accounting.",
-      "inputs": ["logits", "margins", "entropy", "evidence_state"],
-      "outputs": ["calibrated_confidence", "abstain_threshold", "risk_interval"]
+      "inputs": [
+        "logits",
+        "margins",
+        "entropy",
+        "evidence_state"
+      ],
+      "outputs": [
+        "calibrated_confidence",
+        "abstain_threshold",
+        "risk_interval"
+      ],
+      "implementation_class": "BayesianCalibration",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "moe_lora_adapters": {
-      "phase": ["plan", "act", "repair"],
+      "phase": [
+        "plan",
+        "act",
+        "repair"
+      ],
       "role": "Specialize by language, repo family, task type, or surface without one monolithic model.",
-      "inputs": ["task_embedding", "language_family", "repo_capability_profile"],
-      "outputs": ["expert_route", "adapter_id", "specialist_logits"]
+      "inputs": [
+        "task_embedding",
+        "language_family",
+        "repo_capability_profile"
+      ],
+      "outputs": [
+        "expert_route",
+        "adapter_id",
+        "specialist_logits"
+      ],
+      "implementation_class": "MoELoRAAdapters",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "rl_bandit_controller": {
-      "phase": ["plan", "act", "learn"],
+      "phase": [
+        "plan",
+        "act",
+        "learn"
+      ],
       "role": "Tool/test/action selection under budget after supervised structured policies are stable.",
-      "inputs": ["state", "available_actions", "cost_budget", "verifier_result"],
-      "outputs": ["next_action_policy", "test_selection", "continue_or_stop"],
-      "not_for": ["raw codegen before verifier-stable SFT"]
+      "inputs": [
+        "state",
+        "available_actions",
+        "cost_budget",
+        "verifier_result"
+      ],
+      "outputs": [
+        "next_action_policy",
+        "test_selection",
+        "continue_or_stop"
+      ],
+      "not_for": [
+        "raw codegen before verifier-stable SFT"
+      ],
+      "implementation_class": "RLBanditController",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "world_model_counterfactual": {
-      "phase": ["orient", "plan", "verify"],
+      "phase": [
+        "orient",
+        "plan",
+        "verify"
+      ],
       "role": "Predict consequences of possible edits/actions before execution.",
-      "inputs": ["repo_state", "candidate_action", "historical_outcomes"],
-      "outputs": ["predicted_failure_modes", "expected_verifier_result", "counterfactual_risk"]
+      "inputs": [
+        "repo_state",
+        "candidate_action",
+        "historical_outcomes"
+      ],
+      "outputs": [
+        "predicted_failure_modes",
+        "expected_verifier_result",
+        "counterfactual_risk"
+      ],
+      "implementation_class": "WorldModelCounterfactual",
+      "implementation_status": "wired_trainable_reference_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     },
     "symbolic_verifiers": {
-      "phase": ["verify"],
+      "phase": [
+        "verify"
+      ],
       "role": "Exact checks: parser, AST, type checker, linter, tests, static analysis, dependency resolver.",
-      "inputs": ["candidate_patch", "repo_state", "test_plan"],
-      "outputs": ["pass_fail", "failure_log", "repair_signal"],
-      "authority_note": "Verifier evidence can support acceptance; learned model confidence alone cannot."
+      "inputs": [
+        "candidate_patch",
+        "repo_state",
+        "test_plan"
+      ],
+      "outputs": [
+        "pass_fail",
+        "failure_log",
+        "repair_signal"
+      ],
+      "authority_note": "Verifier evidence can support acceptance; learned model confidence alone cannot.",
+      "implementation_class": "SymbolicVerifierSuite",
+      "implementation_status": "wired_non_learned_non_authority_component",
+      "fallback_allowed": false,
+      "training_authority": false,
+      "runtime_authority": false
     }
   },
   "fusion_contract": {
@@ -172,14 +520,37 @@
     ],
     "hard_rule": "Learned logits propose; deterministic gates and verifiers authorize."
   },
-  "missing_current_implementation": [
-    "No implemented SSM/Mamba repo-state compressor.",
-    "No implemented GNN repo graph encoder.",
-    "No implemented denoising/diffusion repair model.",
-    "No implemented reward/energy model.",
-    "No implemented MoE/adapter router.",
-    "No implemented RL/bandit controller.",
-    "No formal cross-model forward-pass fusion module.",
-    "No activation/SAE interpretability module, only telemetry contracts."
+  "missing_current_implementation": [],
+  "implementation_registry": {
+    "python_module": "legacy_src.agentkernel_lite.model_families",
+    "factory": "build_model_family",
+    "class_map": {
+      "ngram_markov": "NGramMarkovPrior",
+      "linear_tree_mlp_heads": "LinearTreeMLPHeads",
+      "rnn_lstm_gru_trace": "RNNTraceCompressor",
+      "state_space_mamba": "MambaRepoStateCompressor",
+      "gnn_repo_graph": "GNNRepoGraphEncoder",
+      "encoder_only_retriever": "EncoderOnlyRetrieverScorer",
+      "encoder_decoder_seq2seq": "AgentKernelLiteTransformerSeq2Seq",
+      "decoder_only_causal": "RecurrentGemmaMaintainerModel",
+      "denoiser_masked_lm": "DenoiserMaskedLM",
+      "diffusion_iterative_repair": "DiffusionIterativeRepair",
+      "autoencoder_compressor": "AutoencoderCompressor",
+      "energy_reward_model": "EnergyRewardModel",
+      "gan_adversarial_generator": "AdversarialHardNegativeGAN",
+      "crf_hmm_sequence_labeler": "CRFHMMSequenceLabeler",
+      "bayesian_calibration": "BayesianCalibration",
+      "moe_lora_adapters": "MoELoRAAdapters",
+      "rl_bandit_controller": "RLBanditController",
+      "world_model_counterfactual": "WorldModelCounterfactual",
+      "symbolic_verifiers": "SymbolicVerifierSuite"
+    },
+    "authority_note": "Implementations are wired for construction/tests; training/runtime admission remains controlled by stage gates.",
+    "no_fallback_policy": "state_space_mamba resolves only to MambaRepoStateCompressor and must fail rather than substitute a diagonal SSM fallback."
+  },
+  "remaining_admission_blockers": [
+    "No model-family implementation grants training authority by itself.",
+    "Each learned family still requires source-backed rows, loss binding, calibration, heldout eval, and explicit admission before production use.",
+    "state_space_mamba requires CUDA plus mamba_ssm selective-scan support at runtime and has no fallback."
   ]
 }

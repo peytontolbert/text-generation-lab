@@ -13,6 +13,35 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TRAINER = ROOT / "legacy_src" / "scripts" / "train_agentkernel_lite_encdec.py"
 
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+
+from source_lineage_guard import load_future_eval_identity_denylist
+
+
+def load_trainer_module():
+    spec = importlib.util.spec_from_file_location("recovered_trainer_contract_test", TRAINER)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def copy_manifest_with_safe_identity(source: Path, destination: Path) -> Path:
+    rows = [
+        json.loads(line)
+        for line in source.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    for index, row in enumerate(rows):
+        row.setdefault("repo_family", "fixture-safe-repo")
+        row.setdefault("root_identity", f"fixture-safe-root-{index}")
+    destination.write_text(
+        "".join(json.dumps(row, sort_keys=True) + "\n" for row in rows),
+        encoding="utf-8",
+    )
+    return destination
+
 
 def write_manifest(path: Path, *, rows: int = 3, bad_loss: bool = False, over_cap: bool = False) -> None:
     payloads = []
@@ -22,6 +51,8 @@ def write_manifest(path: Path, *, rows: int = 3, bad_loss: bool = False, over_ca
             {
                 "row_id": f"r{index}",
                 "split": splits[index % len(splits)],
+                "repo_family": "fixture-safe-repo",
+                "root_identity": f"fixture-safe-root-{index}",
                 "decoder_token_len": 900 if over_cap and index == 0 else 128,
                 "target": {"decoder_text": f"Bounded decoder target {index}."},
                 "loss_mask": {"build_mode_ce" if bad_loss and index == 0 else "decoder_ce": True},
@@ -74,6 +105,8 @@ def write_denoise_prefix_manifest(path: Path, *, bad_prefix: bool = False, full_
             {
                 "row_id": f"d{index}",
                 "split": split,
+                "repo_family": "fixture-safe-repo",
+                "root_identity": f"fixture-safe-root-{index}",
                 "language_family": "python",
                 "target": {"decoder_text": target},
                 "corrupted_output": "bad output",
@@ -172,6 +205,33 @@ def base_cmd(tmp_path: Path, manifest: Path) -> list[str]:
         "stage8584",
     ]
 
+
+
+def foundational_cmd(tmp_path: Path, *, contract_only: bool = False) -> list[str]:
+    probe_repo = tmp_path / "foundational-repo"
+    probe_repo.mkdir(exist_ok=True)
+    manifest = (
+        ROOT
+        / "runs/local/artifacts/stage12687_source_backed_python_foundational_corpus"
+        / "private/594cbbdc08af0cc409eceda1/foundational_train_eval_manifest.jsonl"
+    )
+    command = [
+        sys.executable, str(TRAINER), "--repo-root", str(probe_repo),
+        "--manifest", str(manifest), "--mode", "foundational_code_ce",
+        "--foundational-training-contract", str(ROOT / "configs/training/foundational_code_ce_optimizer_v1.json"),
+        "--max-train-rows", "4", "--max-eval-rows", "4", "--max-strict-rows", "0",
+        "--max-steps", "1", "--batch-size", "2", "--decoder-ce-weight", "1.0",
+        "--structured-aux-weight", "0", "--denoise-weight", "0",
+        "--require-loss-mask-enforcement-audit", "--no-final-checkpoint-export",
+        "--skip-final-model-save", "1", "--output-dir", str(probe_repo / "runs" / "foundational"),
+        "--run-id", "foundational-integration-test", "--implementation", "transformer",
+        "--probe-scale", "tiny_transformer",
+        "--tokenizer-json", str(ROOT / "configs/tokenizer/agentkernel_bpe_1506/tokenizer.json"),
+        "--tokenizer-config", str(ROOT / "configs/tokenizer/agentkernel_bpe_1506/tokenizer_config.json"),
+        "--generation-audit-splits", "eval",
+    ]
+    command.append("--contract-only" if contract_only else "--execution-authorized-for-recovery-probe")
+    return command
 
 
 def structured_cmd(tmp_path: Path, manifest: Path, *, mode: str) -> list[str]:
@@ -278,6 +338,9 @@ def write_clean_visible_evidence_manifest(path: Path) -> None:
     spec.loader.exec_module(module)
     rows = module.load_jsonl(module.SOURCE)
     lifted = module.lift_rows(rows)
+    for index, row in enumerate(lifted):
+        row.setdefault("repo_family", "fixture-safe-repo")
+        row.setdefault("root_identity", f"fixture-safe-root-{index}")
     path.write_text("".join(json.dumps(row, sort_keys=True) + "\n" for row in lifted), encoding="utf-8")
 
 
@@ -311,6 +374,51 @@ def test_recovered_trainer_help_exposes_stage8580_flags() -> None:
         "--generation-prefix-field",
     ]:
         assert flag in result.stdout
+
+
+@pytest.mark.parametrize(
+    "bounded_choice_aux_source",
+    [
+        "encoder_option_retrieval_semantic_candidate_head",
+        "encoder_option_retrieval_evidence_role_map",
+    ],
+)
+def test_cli_removes_deterministic_placeholder_bounded_choice_aux_source(
+    tmp_path: Path, bounded_choice_aux_source: str
+) -> None:
+    manifest = tmp_path / "manifest.jsonl"
+    write_manifest(manifest)
+    cmd = base_cmd(tmp_path, manifest) + [
+        "--contract-only",
+        "--decoder-ce-weight",
+        "0.0",
+        "--bounded-choice-aux-weight",
+        "1.0",
+        "--bounded-choice-aux-source",
+        bounded_choice_aux_source,
+    ]
+    result = subprocess.run(cmd, text=True, capture_output=True)
+    assert result.returncode == 2
+    assert "invalid choice" in result.stderr
+    assert bounded_choice_aux_source in result.stderr
+
+
+def test_contract_accepts_learned_cross_encoder_bounded_choice_aux_source(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.jsonl"
+    write_manifest(manifest)
+    cmd = base_cmd(tmp_path, manifest) + [
+        "--contract-only",
+        "--decoder-ce-weight",
+        "0.0",
+        "--bounded-choice-aux-weight",
+        "1.0",
+        "--bounded-choice-aux-source",
+        "encoder_option_cross_encoder",
+    ]
+    result = subprocess.run(cmd, text=True, capture_output=True)
+    assert result.returncode == 0
+    card = json.loads(result.stdout)
+    assert card["passed"] is True
 
 
 def test_contract_only_probe_writes_non_executing_artifacts(tmp_path: Path) -> None:
@@ -502,6 +610,8 @@ def test_authorized_tiny_transformer_generation_audit_writes_quality_cards(tmp_p
         "tiny_transformer",
         "--max-steps",
         "1",
+        "--max-decoder-tokens",
+        "128",
         "--max-generation-rows",
         "2",
         "--max-generation-tokens",
@@ -528,6 +638,137 @@ def test_authorized_tiny_transformer_generation_audit_writes_quality_cards(tmp_p
     assert "post_clip_grad_norm" in loss_rows[0]
     assert (out / "generated_repetition_negative_rows.jsonl").is_file()
 
+
+def test_foundational_mode_rejects_noncanonical_manifest(tmp_path: Path) -> None:
+    module = load_trainer_module()
+    fake = tmp_path / "foundational.jsonl"
+    fake.write_text(
+        json.dumps({
+            "row_id": "stage12687_fake",
+            "split": "train",
+            "source_provenance": {"source_stage": "stage12687_source_backed_python_foundational_corpus"},
+        }) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(module.ProbeContractError, match="canonical Stage12687 manifest path"):
+        module.load_manifest(fake, mode="foundational_code_ce")
+
+
+def test_foundational_contract_validates_but_execution_remains_blocked(tmp_path: Path) -> None:
+    subprocess.run(foundational_cmd(tmp_path, contract_only=True), check=True, text=True, capture_output=True)
+    out = tmp_path / "foundational-repo" / "runs" / "foundational"
+    contract = json.loads((out / "probe_contract_audit.json").read_text())
+    assert contract["passed"] is True
+    assert contract["generation_id"] == "594cbbdc08af0cc409eceda1"
+    assert contract["split_counts"] == {"train": 16000, "eval": 2000, "strict_eval": 0, "other": 0}
+    assert contract["schema_error_count"] == 0
+    assert contract["max_untruncated_encoder_tokens"] == 1278
+    assert contract["max_untruncated_decoder_tokens"] == 411
+    assert contract["decoder_ce_only"] is True
+    assert contract["deterministic_choice_features_enabled"] is False
+    assert contract["strict_eval_accessible_to_process"] is False
+    assert contract["execution_admitted"] is False
+    assert contract["production_optimizer_checkpoint_contract_validated"] is True
+    assert contract["production_training_contract_sha256"] == "36d64f5e1448cfe8d3f24ffa9087598b74ecb4a83741520c45a65a489d7b6125"
+    assert contract["authoritative_training_eligible_rows"] == 0
+    assert contract["license_policy"] == "internal_code_user_waiver_2026_08_02"
+    assert any("authority remains false" in item for item in contract["execution_blockers"])
+    assert all("strict plaintext" not in item for item in contract["execution_blockers"])
+    assert all("optimizer/checkpoint" not in item for item in contract["execution_blockers"])
+    assert not (out / "execution_result.json").exists()
+
+    denied = subprocess.run(foundational_cmd(tmp_path), text=True, capture_output=True)
+    assert denied.returncode != 0
+    assert "execution remains admission-blocked" in (denied.stdout + denied.stderr)
+    assert not (out / "execution_result.json").exists()
+
+
+def test_foundational_runtime_wrapper_is_unconditionally_admission_blocked() -> None:
+    sys.path.insert(0, str(ROOT / "legacy_src"))
+    from agentkernel_lite.training_loop import run_foundational_code_ce
+
+    with pytest.raises(ValueError, match="execution remains admission-blocked"):
+        run_foundational_code_ce(max_strict_rows=0, bounded_choice_aux_weight=0.0)
+
+
+def test_trainer_rejects_stage12686_exact_row_and_lineage_copy(tmp_path: Path) -> None:
+    module = load_trainer_module()
+    source = ROOT / "runs/local/artifacts/stage12662_structured_repo_state_training_admission_preflight_only/private/structured_repo_state_trainer_manifest.jsonl"
+    row = json.loads(next(line for line in source.read_text(encoding="utf-8").splitlines() if line.strip()))
+    exact = tmp_path / "exact_quarantined.jsonl"
+    exact.write_text(json.dumps(row, sort_keys=True) + "\n", encoding="utf-8")
+    with pytest.raises(module.ProbeContractError, match="Stage12686 semantic nonadmission"):
+        module.load_manifest(exact)
+
+    row["unrelated_copy_marker"] = True
+    copied = tmp_path / "copied_quarantined.jsonl"
+    copied.write_text(json.dumps(row, sort_keys=True) + "\n", encoding="utf-8")
+    with pytest.raises(module.ProbeContractError, match="Stage12686 semantic nonadmission"):
+        module.load_manifest(copied)
+
+
+
+def test_trainer_rejects_modified_explicit_stage12680_quarantine_copy(tmp_path: Path) -> None:
+    module = load_trainer_module()
+    source = ROOT / "runs/local/artifacts/stage12680_deep_repo_code_knowledge_adapter_and_shortcut_preflight_only/private/deep_repo_code_knowledge_shortcut_quarantine.jsonl"
+    row = next(
+        json.loads(line)
+        for line in source.read_text(encoding="utf-8").splitlines()
+        if line.strip() and json.loads(line).get("split") == "train"
+    )
+    row["unrelated_copy_marker"] = True
+    copied = tmp_path / "modified_explicit_quarantine.jsonl"
+    copied.write_text(json.dumps(row, sort_keys=True) + "\n", encoding="utf-8")
+    with pytest.raises(module.ProbeContractError, match="Stage12686 semantic nonadmission"):
+        module.load_manifest(copied)
+
+
+def test_trainer_rejects_unreleased_stage12687_rows(tmp_path: Path) -> None:
+    module = load_trainer_module()
+    manifest = tmp_path / "stage12687.jsonl"
+    row = {
+        "row_id": "stage12687_fixture",
+        "split": "train",
+        "root_identity": "fixture-safe-root",
+        "source_provenance": {"source_stage": "stage12687_source_backed_python_foundational_corpus"},
+    }
+    manifest.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    with pytest.raises(module.ProbeContractError, match="stage12687_release_review_required"):
+        module.load_manifest(manifest)
+
+
+def test_semantic_nonadmission_ledger_tamper_fails_closed(tmp_path: Path) -> None:
+    module = load_trainer_module()
+    module.SEMANTIC_NONADMISSION_DIR = tmp_path
+    module._SEMANTIC_NONADMISSION_HASHES = None
+    for name in module.SEMANTIC_NONADMISSION_LEDGER_CONTRACT:
+        (tmp_path / name).write_text("", encoding="utf-8")
+    with pytest.raises(ValueError, match="ledger hash mismatch"):
+        module._semantic_nonadmission_hashes()
+
+
+def test_generation_encoder_row_does_not_mutate_or_supervise_target() -> None:
+    sys.path.insert(0, str(ROOT / "legacy_src"))
+    from agentkernel_lite.training_loop import _generation_encoder_row
+
+    row = {
+        "row_id": "generation-invariant",
+        "target": {"decoder_text": "full supervised target"},
+        "decoder_text": "direct decoder target",
+        "target_text": "direct target text",
+        "target_ref": "direct target ref",
+        "loss_mask": {"decoder_ce": True},
+        "model_input": {"visible": "evidence"},
+    }
+    before = json.loads(json.dumps(row))
+    generation_row = _generation_encoder_row(row)
+    assert row == before
+    assert generation_row["target"] == {"decoder_text": ""}
+    assert generation_row["decoder_text"] == ""
+    assert generation_row["target_text"] == ""
+    assert generation_row["target_ref"] == ""
+    assert generation_row["loss_mask"] == {}
+    assert generation_row["model_input"] == row["model_input"]
 
 
 def test_authorized_tiny_transformer_accepts_eos_loss_weight(tmp_path: Path) -> None:
@@ -634,6 +875,8 @@ def write_episode_step_manifest(path: Path) -> None:
             {
                 "row_id": f"episode_step_{index}",
                 "split": split,
+                "repo_family": "fixture-safe-repo",
+                "root_identity": f"fixture-safe-root-{index}",
                 "transition_schema": "episode_step_suffix_transition_v1",
                 "episode_transition": {
                     "state_t": {"active_generation_prefix_span": "Return the module reference"},
@@ -708,7 +951,8 @@ def test_episode_step_contract_only_accepts_closed_loss_rows(tmp_path: Path) -> 
 
 
 def test_structured_contract_blocks_target_only_edit_localization_manifest(tmp_path: Path) -> None:
-    manifest = ROOT / "runs" / "local" / "artifacts" / "stage9743_multilingual_edit_localization_target_only_package" / "multilingual_edit_localization_target_only.jsonl"
+    source = ROOT / "runs" / "local" / "artifacts" / "stage9743_multilingual_edit_localization_target_only_package" / "multilingual_edit_localization_target_only.jsonl"
+    manifest = copy_manifest_with_safe_identity(source, tmp_path / "target_only.jsonl")
     result = subprocess.run(structured_cmd(tmp_path, manifest, mode="edit_localization_probe") + ["--contract-only"], text=True, capture_output=True)
     assert result.returncode == 1
     card = json.loads(result.stdout)
@@ -731,8 +975,10 @@ def test_structured_contract_allows_visible_evidence_edit_localization_manifest(
 
 
 def test_two_phase_structured_contract_allows_same_task_multilingual_then_web_manifest_pair(tmp_path: Path) -> None:
-    manifest = ROOT / "runs" / "local" / "artifacts" / "stage9790_edit_localization_opaque_choice_surface" / "edit_localization_opaque_choice_surface.jsonl"
-    phase2_manifest = ROOT / "runs" / "local" / "artifacts" / "stage9813_web_isolated_disambiguator_surface" / "web_isolated_disambiguator_surface.jsonl"
+    source = ROOT / "runs" / "local" / "artifacts" / "stage9790_edit_localization_opaque_choice_surface" / "edit_localization_opaque_choice_surface.jsonl"
+    phase2_source = ROOT / "runs" / "local" / "artifacts" / "stage9813_web_isolated_disambiguator_surface" / "web_isolated_disambiguator_surface.jsonl"
+    manifest = copy_manifest_with_safe_identity(source, tmp_path / "phase1.jsonl")
+    phase2_manifest = copy_manifest_with_safe_identity(phase2_source, tmp_path / "phase2.jsonl")
     result = subprocess.run(two_phase_structured_cmd(tmp_path, manifest, phase2_manifest) + ["--contract-only"], check=True, text=True, capture_output=True)
     card = json.loads(result.stdout)
     assert card["passed"] is True
@@ -743,7 +989,8 @@ def test_two_phase_structured_contract_allows_same_task_multilingual_then_web_ma
 
 
 def test_structured_contract_blocks_patch_operator_manifest_without_encoder_visible_evidence(tmp_path: Path) -> None:
-    manifest = ROOT / "runs" / "local" / "artifacts" / "stage9735_multilingual_patch_operator_label_aligned_package" / "multilingual_patch_operator_label_aligned.jsonl"
+    source = ROOT / "runs" / "local" / "artifacts" / "stage9735_multilingual_patch_operator_label_aligned_package" / "multilingual_patch_operator_label_aligned.jsonl"
+    manifest = copy_manifest_with_safe_identity(source, tmp_path / "patch_operator.jsonl")
     result = subprocess.run(structured_cmd(tmp_path, manifest, mode="patch_operator_probe") + ["--contract-only"], text=True, capture_output=True)
     assert result.returncode == 1
     card = json.loads(result.stdout)
@@ -754,7 +1001,8 @@ def test_structured_contract_blocks_patch_operator_manifest_without_encoder_visi
 
 
 def test_structured_contract_blocks_verifier_repair_manifest_without_encoder_visible_evidence(tmp_path: Path) -> None:
-    manifest = ROOT / "runs" / "local" / "artifacts" / "stage9738_multilingual_verifier_repair_label_aligned_package" / "multilingual_verifier_repair_label_aligned.jsonl"
+    source = ROOT / "runs" / "local" / "artifacts" / "stage9738_multilingual_verifier_repair_label_aligned_package" / "multilingual_verifier_repair_label_aligned.jsonl"
+    manifest = copy_manifest_with_safe_identity(source, tmp_path / "verifier_repair.jsonl")
     result = subprocess.run(structured_cmd(tmp_path, manifest, mode="verifier_repair_probe") + ["--contract-only"], text=True, capture_output=True)
     assert result.returncode == 1
     card = json.loads(result.stdout)
@@ -763,3 +1011,200 @@ def test_structured_contract_blocks_verifier_repair_manifest_without_encoder_vis
     assert readiness["passed"] is False
     assert readiness["failed_bucket_count"] == 12
 
+
+def write_identity_gate_manifest(
+    path: Path,
+    *,
+    split: str,
+    repo_family: str | None = "fixture-safe-repo",
+    root_identity: object = "fixture-safe-root",
+) -> None:
+    row: dict[str, object] = {"row_id": path.stem, "split": split}
+    if repo_family is not None:
+        row["repo_family"] = repo_family
+    if root_identity is not None:
+        row["root_identity"] = root_identity
+    path.write_text(json.dumps(row, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def test_denied_unsloth_train_manifest_is_accepted(tmp_path: Path) -> None:
+    manifest = tmp_path / "denied_train.jsonl"
+    write_identity_gate_manifest(manifest, split="training", repo_family="Unsloth")
+    rows = load_trainer_module().load_manifest(manifest)
+    assert rows[0]["split"] == "train"
+    assert rows[0]["repo_family"] == "Unsloth"
+
+
+@pytest.mark.parametrize("split", ["validation", "eval", "strict", "sealed", "source-heldout"])
+def test_denied_unsloth_heldout_aliases_are_rejected(tmp_path: Path, split: str) -> None:
+    manifest = tmp_path / f"denied_{split}.jsonl"
+    write_identity_gate_manifest(manifest, split=split, repo_family="UNSLOTH")
+    with pytest.raises(ValueError, match="denied future-eval identity"):
+        load_trainer_module().load_manifest(manifest)
+
+
+def test_identityless_heldout_manifest_is_rejected(tmp_path: Path) -> None:
+    manifest = tmp_path / "identityless.jsonl"
+    write_identity_gate_manifest(
+        manifest,
+        split="eval",
+        repo_family=None,
+        root_identity=None,
+    )
+    with pytest.raises(ValueError, match="no recognized identity"):
+        load_trainer_module().load_manifest(manifest)
+
+
+def test_unknown_explicit_split_is_rejected(tmp_path: Path) -> None:
+    manifest = tmp_path / "unknown_split.jsonl"
+    write_identity_gate_manifest(manifest, split="test")
+    with pytest.raises(ValueError, match="unknown explicit manifest split"):
+        load_trainer_module().load_manifest(manifest)
+
+
+def test_future_eval_denylist_loader_rejects_missing_file(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="mandatory future-eval identity denylist missing"):
+        load_future_eval_identity_denylist(tmp_path / "missing.json")
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        "{",
+        json.dumps({"schema_version": 1, "record_type": "future_eval_identity_denylist_v1"}),
+        json.dumps(
+            {
+                "schema_version": 1,
+                "record_type": "future_eval_identity_denylist_v1",
+                "deny": {
+                    "repo_family": ["safe"],
+                    "source_path": ["/safe"],
+                    "root_identity": ["safe-root"],
+                    "unknown": ["not-allowed"],
+                },
+            }
+        ),
+    ],
+)
+def test_future_eval_denylist_loader_rejects_malformed_schema(
+    tmp_path: Path,
+    payload: str,
+) -> None:
+    denylist = tmp_path / "denylist.json"
+    denylist.write_text(payload, encoding="utf-8")
+    with pytest.raises(ValueError):
+        load_future_eval_identity_denylist(denylist)
+
+
+@pytest.mark.parametrize("phase_name", ["phase2", "phase3"])
+def test_denied_phase_manifest_cannot_bypass_load_manifest(
+    tmp_path: Path,
+    phase_name: str,
+) -> None:
+    manifest = tmp_path / f"{phase_name}.jsonl"
+    write_identity_gate_manifest(
+        manifest,
+        split="strict_eval",
+        repo_family="Unsloth",
+    )
+    with pytest.raises(ValueError, match="denied future-eval identity"):
+        load_trainer_module().load_manifest(manifest)
+
+
+
+@pytest.mark.parametrize(
+    ("marker", "value"),
+    [
+        ("source_heldout", True),
+        ("strict_eval_eligible", True),
+        ("evaluation_allowed", True),
+    ],
+)
+def test_train_split_cannot_override_heldout_boolean_marker(
+    tmp_path: Path,
+    marker: str,
+    value: bool,
+) -> None:
+    manifest = tmp_path / f"conflict_{marker}.jsonl"
+    row = {"row_id": marker, "split": "train", marker: value, "repo_family": "safe"}
+    manifest.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="train split conflicts with heldout markers"):
+        load_trainer_module().load_manifest(manifest)
+
+
+def test_boolean_only_source_heldout_row_is_not_defaulted_to_train(tmp_path: Path) -> None:
+    manifest = tmp_path / "boolean_only.jsonl"
+    row = {"row_id": "heldout", "source_heldout": True, "repo_family": "safe", "root_identity": "safe-root"}
+    manifest.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    rows = load_trainer_module().load_manifest(manifest)
+    assert rows[0]["split"] == "strict_eval"
+
+
+@pytest.mark.parametrize("value", [False, None, "false", 1])
+def test_ambiguous_marker_only_row_is_rejected(tmp_path: Path, value: object) -> None:
+    manifest = tmp_path / "ambiguous_marker.jsonl"
+    row = {"row_id": "ambiguous", "source_heldout": value, "repo_family": "safe"}
+    manifest.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError):
+        load_trainer_module().load_manifest(manifest)
+
+
+@pytest.mark.parametrize(
+    "identity",
+    [
+        {"RePoSiToRy": "UNSLOTH"},
+        {"SOURCE_REPOSITORY": "/ARXIV/repositories/UNSLOTH"},
+        {"Before_Commit": "420799B61EF35D6CFD87C4F4B02C98152FDF6599"},
+        {"lineage": {"AFTER": "76A2B9EDF160D68208DC30C02C6523BC6551F950"}},
+    ],
+)
+def test_trainer_rejects_case_variant_repository_and_commit_aliases(
+    tmp_path: Path,
+    identity: dict[str, object],
+) -> None:
+    manifest = tmp_path / "case_alias.jsonl"
+    row = {"row_id": "denied", "split": "eval", **identity}
+    manifest.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="denied future-eval identity"):
+        load_trainer_module().load_manifest(manifest)
+
+
+@pytest.mark.parametrize("split_role", ["heldout", "hidden_final", "sealed", "locked-eval"])
+def test_trainer_split_role_heldout_aliases_enforce_identity_gate(
+    tmp_path: Path,
+    split_role: str,
+) -> None:
+    manifest = tmp_path / f"split_role_{split_role}.jsonl"
+    row = {"row_id": split_role, "split_role": split_role, "repo_family": "UNSLOTH"}
+    manifest.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="denied future-eval identity"):
+        load_trainer_module().load_manifest(manifest)
+
+
+@pytest.mark.parametrize("split_role", ["train", "training", "train-support", "train_only"])
+def test_trainer_split_role_train_aliases_canonicalize(
+    tmp_path: Path,
+    split_role: str,
+) -> None:
+    manifest = tmp_path / f"split_role_{split_role}.jsonl"
+    row = {"row_id": split_role, "split_role": split_role, "repo_family": "safe"}
+    manifest.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    rows = load_trainer_module().load_manifest(manifest)
+    assert rows[0]["split"] == "train"
+
+
+def test_trainer_rejects_conflicting_split_role(tmp_path: Path) -> None:
+    manifest = tmp_path / "conflicting_split_role.jsonl"
+    row = {"row_id": "conflict", "split": "train", "split_role": "hidden_final", "repo_family": "safe"}
+    manifest.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="conflicting explicit manifest splits"):
+        load_trainer_module().load_manifest(manifest)
+
+
+@pytest.mark.parametrize("alias", ["commit", "commit_sha", "commit_hash", "revision"])
+def test_trainer_rejects_denied_common_commit_aliases(tmp_path: Path, alias: str) -> None:
+    manifest = tmp_path / f"denied_{alias}.jsonl"
+    row = {"row_id": alias, "split_role": "sealed", alias.swapcase(): "420799B61EF35D6CFD87C4F4B02C98152FDF6599"}
+    manifest.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="denied future-eval identity"):
+        load_trainer_module().load_manifest(manifest)

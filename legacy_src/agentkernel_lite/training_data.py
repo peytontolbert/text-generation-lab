@@ -10,6 +10,36 @@ import torch
 
 MAX_CONTEXT_ROWS_FOR_ENCODER = 64
 MAX_CONTEXT_TEXT_CHARS = 512
+FORBIDDEN_MODEL_KEY_EXACT = frozenset({
+    "answer", "correct", "correct_label", "decoder_text", "expected_output",
+    "expected_patch", "gold", "gold_label", "label", "negative_chunk_ids",
+    "observation", "patch_text", "positive_chunk_ids", "reward", "row_id",
+    "state_t_plus_1", "target", "target_ref", "target_text", "verifier_result",
+})
+FORBIDDEN_MODEL_KEY_PREFIXES = ("answer_", "correct_", "expected_", "gold_", "observation_", "reward_")
+
+
+def _assert_model_visible_key(key: str, *, prefix: str) -> None:
+    normalized = str(key).strip().lower()
+    if (
+        normalized in FORBIDDEN_MODEL_KEY_EXACT
+        or normalized.endswith("_id")
+        or normalized.endswith("_ids")
+        or normalized.endswith("_label")
+        or normalized.startswith(FORBIDDEN_MODEL_KEY_PREFIXES)
+    ):
+        raise ValueError(f"forbidden model-visible field {prefix}.{key}")
+
+
+def _truncate_with_eos(ids: list[int], *, bos_id: int, eos_id: int, max_length: int) -> list[int]:
+    if max_length < 2:
+        raise ValueError("max_length must allow both BOS and EOS")
+    body = list(ids)
+    if not body or body[0] != bos_id:
+        body.insert(0, bos_id)
+    if body[-1] == eos_id:
+        body = body[:-1]
+    return body[: max_length - 1] + [eos_id]
 
 
 class ByteTokenizer:
@@ -24,8 +54,15 @@ class ByteTokenizer:
 
     def encode(self, text: str, *, max_length: int) -> list[int]:
         body = [b + self.offset for b in text.encode("utf-8", errors="replace")]
-        ids = [self.bos_id] + body[: max(0, max_length - 2)] + [self.eos_id]
-        return ids[:max_length]
+        return _truncate_with_eos(
+            [self.bos_id] + body,
+            bos_id=self.bos_id,
+            eos_id=self.eos_id,
+            max_length=max_length,
+        )
+
+    def untruncated_length(self, text: str) -> int:
+        return len(text.encode("utf-8", errors="replace")) + 2
 
     def decode(self, ids: list[int]) -> str:
         values = []
@@ -58,11 +95,15 @@ class AgentKernelBPETokenizer:
 
     def encode(self, text: str, *, max_length: int) -> list[int]:
         encoded = self._tokenizer.encode(text, add_special_tokens=True).ids
-        if not encoded or encoded[0] != self.bos_id:
-            encoded = [self.bos_id] + encoded
-        if encoded[-1] != self.eos_id:
-            encoded = encoded + [self.eos_id]
-        return encoded[:max_length]
+        return _truncate_with_eos(
+            list(encoded),
+            bos_id=self.bos_id,
+            eos_id=self.eos_id,
+            max_length=max_length,
+        )
+
+    def untruncated_length(self, text: str) -> int:
+        return len(self._tokenizer.encode(text, add_special_tokens=True).ids)
 
     def decode(self, ids: list[int]) -> str:
         return self._tokenizer.decode([int(idx) for idx in ids if int(idx) != self.pad_id])
@@ -76,7 +117,8 @@ def load_tokenizer(tokenizer_json: Path | None = None, tokenizer_config: Path | 
 
 def _append_structured(parts: list[str], prefix: str, payload: dict[str, Any]) -> None:
     for key in sorted(payload):
-        if key.endswith("_id") or key in {"row_id", "target", "decoder_text", "source_ref", "path"}:
+        _assert_model_visible_key(str(key), prefix=prefix)
+        if key in {"source_ref", "path"}:
             continue
         value = payload[key]
         if isinstance(value, (str, int, float, bool)):
@@ -97,7 +139,8 @@ def _append_context_rows(parts: list[str], rows: Any) -> None:
         if not isinstance(row, dict):
             continue
         prefix = f"context.{index}"
-        for key in ("role", "source_type", "path", "token_count", "chunk_id", "chunk_ordinal"):
+        # Opaque chunk IDs are loss-side retrieval labels, never model evidence.
+        for key in ("role", "source_type", "path", "token_count", "chunk_ordinal"):
             value = row.get(key)
             if isinstance(value, (str, int, float, bool)):
                 parts.append(f"{prefix}.{key}={value}")
@@ -130,12 +173,6 @@ def _row_text(row: dict[str, Any]) -> str:
         parts.append(f"corrupted_output={row.get('corrupted_output')}")
     if isinstance(row.get("verifier_failure"), str):
         parts.append(f"verifier_failure={row.get('verifier_failure')}")
-    positive_chunk_ids = row.get("positive_chunk_ids")
-    if isinstance(positive_chunk_ids, list) and positive_chunk_ids:
-        parts.append(f"positive_chunk_ids.count={len(positive_chunk_ids)}")
-        for chunk_id in positive_chunk_ids[:12]:
-            if isinstance(chunk_id, (str, int, float, bool)):
-                parts.append(f"positive_chunk_ids.item={chunk_id}")
     _append_structured(parts, "state", state)
     transition = row.get("episode_transition") if isinstance(row.get("episode_transition"), dict) else {}
     # Episode-step rows expose only pre-action state/action context to the encoder.
@@ -166,6 +203,7 @@ def _row_text(row: dict[str, Any]) -> str:
             node_type_counts[node_type] = node_type_counts.get(node_type, 0) + 1
             features = node.get("features") if isinstance(node.get("features"), dict) else {}
             for key, value in features.items():
+                _assert_model_visible_key(str(key), prefix=f"graph.node.{node_type}.features")
                 feature_key = f"{node_type}.{key}.{value}"
                 feature_counts[feature_key] = feature_counts.get(feature_key, 0) + 1
         for key, value in sorted(node_type_counts.items()):
@@ -194,6 +232,14 @@ def _target_text(row: dict[str, Any]) -> str:
     return str(target.get("target_ref") or row.get("target_ref") or target.get("label") or "")
 
 
+def _foundational_row_text(row: dict[str, Any]) -> str:
+    """Render only the source-backed masked code supplied as model evidence."""
+    value = row.get("input_text")
+    if not isinstance(value, str) or not value:
+        raise ValueError("foundational row requires non-empty input_text")
+    return value
+
+
 @dataclass
 class ManifestBatch:
     input_ids: torch.Tensor
@@ -211,10 +257,23 @@ def _pad(seqs: list[list[int]], *, pad_id: int) -> torch.Tensor:
     return out
 
 
-def build_batch(rows: list[dict[str, Any]], *, max_encoder_tokens: int = 2048, max_decoder_tokens: int = 256, tokenizer: ByteTokenizer | AgentKernelBPETokenizer | None = None) -> ManifestBatch:
+def build_batch(rows: list[dict[str, Any]], *, max_encoder_tokens: int = 2048, max_decoder_tokens: int = 256, tokenizer: ByteTokenizer | AgentKernelBPETokenizer | None = None, foundational_code_ce: bool = False) -> ManifestBatch:
     tok = tokenizer or ByteTokenizer()
-    enc = [tok.encode(_row_text(row), max_length=max_encoder_tokens) for row in rows]
-    tgt = [tok.encode(_target_text(row), max_length=max_decoder_tokens) for row in rows]
+    renderer = _foundational_row_text if foundational_code_ce else _row_text
+    enc = [tok.encode(renderer(row), max_length=max_encoder_tokens) for row in rows]
+    tgt = []
+    for index, row in enumerate(rows):
+        target_text = _target_text(row)
+        loss_mask = row.get("loss_mask") if isinstance(row.get("loss_mask"), dict) else {}
+        generative_target = bool(loss_mask.get("decoder_ce") or loss_mask.get("denoise_ce"))
+        if generative_target and not target_text.strip():
+            raise ValueError(f"row {row.get('row_id', index)} has an empty generative target")
+        target_ids = tok.encode(target_text, max_length=max_decoder_tokens + 1)
+        if generative_target and len(target_ids) > max_decoder_tokens:
+            raise ValueError(
+                f"row {row.get('row_id', index)} target exceeds max_decoder_tokens={max_decoder_tokens}"
+            )
+        tgt.append(target_ids if len(target_ids) <= max_decoder_tokens else tok.encode(target_text, max_length=max_decoder_tokens))
     labels = _pad(tgt, pad_id=tok.pad_id)
     decoder_input_ids = labels[:, :-1].contiguous()
     shifted_labels = labels[:, 1:].contiguous()

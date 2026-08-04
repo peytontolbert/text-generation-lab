@@ -1,0 +1,60 @@
+{
+  "authority": {
+    "body_emission_authorized": false,
+    "controller_complete_merge_authorized_next": false,
+    "decoder_ce_training_authorized_next": false,
+    "gemma_execution_authorized_next": false,
+    "harness_execution_authorized_next": false,
+    "model_execution_authorized_next": false,
+    "promotion_ready": false,
+    "runtime_authorized": false,
+    "scoring_authorized_next": false,
+    "source_emission_authorized": false
+  },
+  "claim_boundary": {
+    "counts_toward_100m_parameter_budget": false,
+    "may_replace_existing_gemma3_12b_comparator": false,
+    "reason": "RecurrentGemma-2B-IT is a distinct model and must have separate output artifacts and scores."
+  },
+  "integration": {
+    "deterministic_gates_required": [
+      "effective_decode_allowed",
+      "deterministic_budget_ok",
+      "evidence_sufficient"
+    ],
+    "roles": [
+      "bounded_candidate_decoder",
+      "frozen_structured_feature_backbone",
+      "distillation_teacher"
+    ],
+    "structured_pooling": "last_valid_causal_token"
+  },
+  "model": {
+    "classifier_dropout": 0.0,
+    "freeze_backbone": true,
+    "name_or_path": "google/recurrentgemma-2b-it",
+    "require_recurrent_gemma": true,
+    "revision": "pin_before_claimed_eval",
+    "trust_remote_code": false
+  },
+  "model_family": "recurrent_gemma_decoder_only_sidecar",
+  "purpose": "Pretrained RecurrentGemma sidecar for bounded generation, structured-head experiments, and teacher distillation without replacing the 100M controller.",
+  "runtime": {
+    "default_dtype": "bfloat16",
+    "download_automatically": false,
+    "gated_weights_license_acceptance_required": true,
+    "minimum_transformers_behavior": "native recurrent_gemma model support",
+    "preferred_inference": "dedicated process or service with an explicit GPU assignment"
+  },
+  "tokenizer": {
+    "may_reuse_agentkernel_1506_bpe": false,
+    "name_or_path": "google/recurrentgemma-2b-it",
+    "prompt_format": "checkpoint_chat_template"
+  },
+  "training": {
+    "phase_1": "freeze backbone and train structured heads",
+    "phase_2": "optionally train reviewed parameter-efficient adapters after leakage-safe validation",
+    "phase_3": "distill accepted structured distributions and bounded candidates into the 100M controller",
+    "raw_full_finetune_default": false
+  }
+}

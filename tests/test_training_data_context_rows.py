@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "legacy_src"))
 
 from agentkernel_lite.training_data import (
+    AgentKernelBPETokenizer,
+    ByteTokenizer,
     MAX_CONTEXT_ROWS_FOR_ENCODER,
     MAX_CONTEXT_TEXT_CHARS,
     _row_text,
@@ -129,7 +131,7 @@ def test_build_batch_accepts_long_context_compiled_rows() -> None:
     assert batch.row_ids == ["full::pack1", "retrieval::pack1::1", "memory::pack1"]
 
 
-def test_row_text_includes_long_context_prompt_and_retrieval_fields() -> None:
+def test_row_text_excludes_oracle_retrieval_ids() -> None:
     rendered = _row_text(
         {
             "row_id": "retrieval::pack1::1",
@@ -141,5 +143,91 @@ def test_row_text_includes_long_context_prompt_and_retrieval_fields() -> None:
 
     assert "task_type=retrieval_supervision" in rendered
     assert "query_text=What is the final value of alpha_state?" in rendered
-    assert "positive_chunk_ids.count=2" in rendered
-    assert "positive_chunk_ids.item=c1" in rendered
+    assert "positive_chunk_ids" not in rendered
+
+
+def test_encoder_tokens_are_invariant_to_targets_and_opaque_ids() -> None:
+    base = {
+        "row_id": "row-a",
+        "task_type": "retrieval_supervision",
+        "query_text": "Which evidence supports alpha?",
+        "positive_chunk_ids": ["oracle-a"],
+        "context_rows": [
+            {"chunk_id": "oracle-a", "role": "repo_evidence", "text": "alpha = enabled"},
+        ],
+        "target": {"decoder_text": "enabled"},
+    }
+    mutated = {
+        **base,
+        "row_id": "row-b",
+        "positive_chunk_ids": ["oracle-b"],
+        "context_rows": [
+            {"chunk_id": "oracle-b", "role": "repo_evidence", "text": "alpha = enabled"},
+        ],
+        "target": {"decoder_text": "disabled"},
+    }
+
+    base_batch = build_batch([base], max_encoder_tokens=128, max_decoder_tokens=16)
+    mutated_batch = build_batch([mutated], max_encoder_tokens=128, max_decoder_tokens=16)
+
+    assert base_batch.input_ids.tolist() == mutated_batch.input_ids.tolist()
+    assert base_batch.labels.tolist() != mutated_batch.labels.tolist()
+    assert "chunk_id" not in _row_text(base)
+    assert "oracle-a" not in _row_text(base)
+
+
+def test_nested_target_aliases_fail_closed() -> None:
+    containers = [
+        {"input_state": {"gold_label": "LEAK_SENTINEL"}},
+        {"model_input": {"expected_output": "LEAK_SENTINEL"}},
+        {"query": {"features": {"answer_text": "LEAK_SENTINEL"}}},
+        {"graph_input": {"nodes": [{"node_type": "symbol", "features": {"expected_patch": "LEAK_SENTINEL"}}]}},
+    ]
+    for row in containers:
+        try:
+            _row_text(row)
+        except ValueError as exc:
+            assert "forbidden model-visible field" in str(exc)
+        else:
+            raise AssertionError(f"target alias was serialized: {row}")
+
+
+def test_overlength_generative_target_fails_closed() -> None:
+    row = {
+        "row_id": "too-long",
+        "input_text": "repair this",
+        "target": {"decoder_text": "x" * 40},
+        "loss_mask": {"decoder_ce": True},
+    }
+    try:
+        build_batch([row], max_encoder_tokens=32, max_decoder_tokens=8)
+    except ValueError as exc:
+        assert "too-long" in str(exc)
+        assert "max_decoder_tokens=8" in str(exc)
+    else:
+        raise AssertionError("overlength target was silently truncated")
+
+
+def test_tokenizers_preserve_eos_when_truncating() -> None:
+    byte_tokenizer = ByteTokenizer()
+    assert byte_tokenizer.encode("abcdef", max_length=4)[-1] == byte_tokenizer.eos_id
+
+    class FakeEncoding:
+        ids = [1, 10, 11, 12, 13, 2]
+
+    class FakeTokenizer:
+        def encode(self, text: str, add_special_tokens: bool):
+            return FakeEncoding()
+
+    bpe = AgentKernelBPETokenizer.__new__(AgentKernelBPETokenizer)
+    bpe._tokenizer = FakeTokenizer()
+    bpe.bos_id = 1
+    bpe.eos_id = 2
+    assert bpe.encode("ignored", max_length=4) == [1, 10, 11, 2]
+
+
+def test_tokenizers_reject_caps_that_cannot_hold_bos_and_eos() -> None:
+    import pytest
+
+    with pytest.raises(ValueError, match="BOS and EOS"):
+        ByteTokenizer().encode("x", max_length=1)
